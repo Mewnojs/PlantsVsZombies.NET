@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lawn_PCDX", "Lawn_PCDX\Lawn_PCDX.csproj", "{1E9C7C23-F880-4C37-BB00-B4F048ED4A12}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Lawn_Shared", "Lawn_Shared\Lawn_Shared.shproj", "{1A95301D-4238-4CCD-9B56-38537E891B16}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Lawn_Shared\Lawn_Shared.projitems*{1a95301d-4238-4ccd-9b56-38537e891b16}*SharedItemsImports = 13
+		Lawn_Shared\Lawn_Shared.projitems*{1e9c7c23-f880-4c37-bb00-b4f048ed4a12}*SharedItemsImports = 4
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E9C7C23-F880-4C37-BB00-B4F048ED4A12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E9C7C23-F880-4C37-BB00-B4F048ED4A12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E9C7C23-F880-4C37-BB00-B4F048ED4A12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E9C7C23-F880-4C37-BB00-B4F048ED4A12}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {12C65044-2A42-4A09-A748-A0E3D95D5804}
+	EndGlobalSection
+EndGlobal
