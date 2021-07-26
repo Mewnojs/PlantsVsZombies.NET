@@ -281,7 +281,7 @@ namespace Lawn
 			}
 		}
 
-		public bool SaveToFile(Buffer b)
+		public bool SaveToFile(Sexy.Buffer b)
 		{
 			b.WriteBoolean2DArray(this.mBeghouledEated);
 			b.WriteLong(this.mBeghouledMatchesThisMove);
@@ -306,7 +306,7 @@ namespace Lawn
 			return true;
 		}
 
-		public bool LoadFromFile(Buffer b)
+		public bool LoadFromFile(Sexy.Buffer b)
 		{
 			this.mApp = GlobalStaticVars.gLawnApp;
 			this.mBoard = this.mApp.mBoard;

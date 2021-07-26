@@ -25,7 +25,7 @@ namespace Lawn
 			this.mPosScaled = false;
 		}
 
-		public override bool SaveToFile(Buffer b)
+		public override bool SaveToFile(Sexy.Buffer b)
 		{
 			try
 			{
@@ -51,7 +51,7 @@ namespace Lawn
 			return true;
 		}
 
-		public override bool LoadFromFile(Buffer b)
+		public override bool LoadFromFile(Sexy.Buffer b)
 		{
 			try
 			{
@@ -429,8 +429,8 @@ namespace Lawn
 			}
 			else
 			{
-				int theCelCol = (int)(seedType % (SeedType)AtlasResources.IMAGE_SEEDPACKETS.mNumCols);
-				int theCelRow = (int)(seedType / (SeedType)AtlasResources.IMAGE_SEEDPACKETS.mNumCols);
+				int theCelCol = (int)seedType % AtlasResources.IMAGE_SEEDPACKETS.mNumCols;
+				int theCelRow = (int)seedType / AtlasResources.IMAGE_SEEDPACKETS.mNumCols;
 				TodCommon.TodDrawImageCelScaledF(g, AtlasResources.IMAGE_SEEDPACKETS, x, y, theCelCol, theCelRow, scale, scale);
 			}
 			g.SetColorizeImages(false);

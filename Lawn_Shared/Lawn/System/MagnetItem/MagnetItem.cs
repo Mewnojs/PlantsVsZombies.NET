@@ -11,7 +11,7 @@ namespace Lawn
 			this.mItemType = MagnetItemType.MAGNET_ITEM_NONE;
 		}
 
-		public bool SaveToFile(Buffer b)
+		public bool SaveToFile(Sexy.Buffer b)
 		{
 			b.WriteFloat(this.mDestOffsetX);
 			b.WriteFloat(this.mDestOffsetY);
@@ -21,7 +21,7 @@ namespace Lawn
 			return true;
 		}
 
-		public bool LoadFromFile(Buffer b)
+		public bool LoadFromFile(Sexy.Buffer b)
 		{
 			this.mDestOffsetX = b.ReadFloat();
 			this.mDestOffsetY = b.ReadFloat();

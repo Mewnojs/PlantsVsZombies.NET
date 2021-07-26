@@ -7,7 +7,7 @@ namespace Lawn
 {
 	internal class Board : Widget, ButtonListener
 	{
-		public bool LoadFromFile(Buffer b)
+		public bool LoadFromFile(Sexy.Buffer b)
 		{
 			this.doAddGraveStones = false;
 			this.mLevel = b.ReadLong();
@@ -9622,7 +9622,7 @@ namespace Lawn
 			return true;
 		}
 
-		public bool SaveToFile(Buffer b)
+		public bool SaveToFile(Sexy.Buffer b)
 		{
 			LeaderBoardComm.RecordResult(LeaderboardGameMode.Adventure, (int)this.mApp.mPlayerInfo.mZombiesKilled);
 			try

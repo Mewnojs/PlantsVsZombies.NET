@@ -20,12 +20,12 @@ namespace Lawn
 		{
 		}
 
-		public override bool LoadFromFile(Buffer b)
+		public override bool LoadFromFile(Sexy.Buffer b)
 		{
 			return false;
 		}
 
-		public override bool SaveToFile(Buffer b)
+		public override bool SaveToFile(Sexy.Buffer b)
 		{
 			return false;
 		}

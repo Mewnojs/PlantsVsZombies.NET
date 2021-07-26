@@ -58,7 +58,7 @@ namespace Lawn
 			this.mMotionTrailCount = 0;
 		}
 
-		public bool SaveToFile(Buffer b)
+		public bool SaveToFile(Sexy.Buffer b)
 		{
 			try
 			{
@@ -93,7 +93,7 @@ namespace Lawn
 			return true;
 		}
 
-		public bool LoadFromFile(Buffer b)
+		public bool LoadFromFile(Sexy.Buffer b)
 		{
 			try
 			{

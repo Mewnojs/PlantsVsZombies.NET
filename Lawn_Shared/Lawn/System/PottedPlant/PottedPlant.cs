@@ -19,7 +19,7 @@ namespace Lawn
 			this.mPlantNeed = PottedPlantNeed.PLANTNEED_NONE;
 		}
 
-		public void Save(Buffer b)
+		public void Save(Sexy.Buffer b)
 		{
 			b.WriteLong((int)this.mSeedType);
 			b.WriteLong((int)this.mWhichZenGarden);
@@ -38,7 +38,7 @@ namespace Lawn
 			b.WriteLongArray(this.mFutureAttribute);
 		}
 
-		public void Load(Buffer b)
+		public void Load(Sexy.Buffer b)
 		{
 			this.mSeedType = (SeedType)b.ReadLong();
 			this.mWhichZenGarden = (GardenType)b.ReadLong();

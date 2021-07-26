@@ -3332,7 +3332,7 @@ namespace Lawn
 			{
 				num = 0;
 			}
-			return Board.MakeRenderOrder(theRenderLayer, this.mRow, plant_ORDER * (PLANT_ORDER)5 - (PLANT_ORDER)this.mX + num);
+			return Board.MakeRenderOrder(theRenderLayer, this.mRow, (int)plant_ORDER * 5 - this.mX + num);
 		}
 
 		public void AnimateNuts()
@@ -5436,7 +5436,7 @@ namespace Lawn
 			return GameConstants.gPlantDefs[(int)theSeedtype];
 		}
 
-		public override bool SaveToFile(Buffer b)
+		public override bool SaveToFile(Sexy.Buffer b)
 		{
 			base.SaveToFile(b);
 			b.WriteString(this.lastPlayedBodyReanim_Name);
@@ -5494,7 +5494,7 @@ namespace Lawn
 			return true;
 		}
 
-		public override bool LoadFromFile(Buffer b)
+		public override bool LoadFromFile(Sexy.Buffer b)
 		{
 			base.LoadFromFile(b);
 			this.lastPlayedBodyReanim_Name = b.ReadString();

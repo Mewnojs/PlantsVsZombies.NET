@@ -55,7 +55,7 @@ namespace Lawn
 			this.mY = this.mBoard.mLastToolY;
 		}
 
-		public override bool LoadFromFile(Buffer b)
+		public override bool LoadFromFile(Sexy.Buffer b)
 		{
 			base.LoadFromFile(b);
 			this.mCursorType = (CursorType)b.ReadLong();
@@ -66,7 +66,7 @@ namespace Lawn
 			return true;
 		}
 
-		public override bool SaveToFile(Buffer b)
+		public override bool SaveToFile(Sexy.Buffer b)
 		{
 			base.SaveToFile(b);
 			b.WriteLong((int)this.mCursorType);

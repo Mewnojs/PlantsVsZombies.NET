@@ -30,7 +30,7 @@ namespace Lawn
 			this.mPosScaled = true;
 		}
 
-		public virtual bool SaveToFile(Buffer b)
+		public virtual bool SaveToFile(Sexy.Buffer b)
 		{
 			b.WriteLong(this.id);
 			b.WriteLong(this.mHeight);
@@ -46,7 +46,7 @@ namespace Lawn
 			return true;
 		}
 
-		public virtual bool LoadFromFile(Buffer b)
+		public virtual bool LoadFromFile(Sexy.Buffer b)
 		{
 			this.id = b.ReadLong();
 			this.mHeight = b.ReadLong();
@@ -68,7 +68,7 @@ namespace Lawn
 			this.mBoard = this.mApp.mBoard;
 		}
 
-		protected static void SaveId(GameObject obj, Buffer b)
+		protected static void SaveId(GameObject obj, Sexy.Buffer b)
 		{
 			if (obj != null)
 			{
@@ -78,7 +78,7 @@ namespace Lawn
 			b.WriteLong(-1);
 		}
 
-		protected static int LoadId(Buffer b)
+		protected static int LoadId(Sexy.Buffer b)
 		{
 			return b.ReadLong();
 		}

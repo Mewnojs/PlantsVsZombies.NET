@@ -35,7 +35,7 @@ namespace Lawn
 			Projectile.unusedObjects.Push(this);
 		}
 
-		public override bool SaveToFile(Buffer b)
+		public override bool SaveToFile(Sexy.Buffer b)
 		{
 			base.SaveToFile(b);
 			b.WriteFloat(this.mAccZ);
@@ -67,7 +67,7 @@ namespace Lawn
 			return true;
 		}
 
-		public override bool LoadFromFile(Buffer b)
+		public override bool LoadFromFile(Sexy.Buffer b)
 		{
 			base.LoadFromFile(b);
 			this.mAccZ = b.ReadFloat();

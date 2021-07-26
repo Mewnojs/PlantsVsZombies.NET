@@ -17,7 +17,7 @@ namespace Lawn
 		{
 		}
 
-		[EditorBrowsable(2)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		internal static ResourceManager ResourceManager
 		{
 			get
@@ -31,7 +31,7 @@ namespace Lawn
 			}
 		}
 
-		[EditorBrowsable(2)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		internal static CultureInfo Culture
 		{
 			get

@@ -385,7 +385,7 @@ namespace Lawn
 			}
 		}
 
-		public bool SaveToFile(Buffer b)
+		public bool SaveToFile(Sexy.Buffer b)
 		{
 			b.WriteLong(this.mRow);
 			b.WriteFloat(this.mAltitude);
@@ -405,7 +405,7 @@ namespace Lawn
 			return true;
 		}
 
-		public bool LoadFromFile(Buffer b)
+		public bool LoadFromFile(Sexy.Buffer b)
 		{
 			int theRow = b.ReadLong();
 			this.LawnMowerInitialize(theRow);

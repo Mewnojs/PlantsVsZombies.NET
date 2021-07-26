@@ -84,7 +84,7 @@ namespace Sexy
 				list.Add(new StringBuilder());
 				for (int i = 0; i < theLine.Length; i++)
 				{
-					if (char.IsWhiteSpace(theLine.get_Chars(i)))
+					if (char.IsWhiteSpace(theLine[i]))
 					{
 						int num5 = this.StringWidth(theLine.Substring(num2, i - num2));
 						if (num5 < theRect.mWidth)
@@ -273,13 +273,13 @@ namespace Sexy
 				float num2 = this.mOffsets[i].X * this.mScaleX * FrameworkConstants.Font_Scale;
 				for (int j = 0; j < theString.Length; j++)
 				{
-					if (char.IsWhiteSpace(theString.get_Chars(j)))
+					if (char.IsWhiteSpace(theString[j]))
 					{
 						num2 += (float)this.StringWidth(this.SpaceChar);
 					}
 					else
 					{
-						this.drawStringBuilder.set_Chars(0, theString.get_Chars(j));
+						this.drawStringBuilder[0] = theString[j];
 						num2 += (float)(this.StringWidth(this.drawStringBuilder) - this.characterOffsetMagic);
 					}
 				}
@@ -309,11 +309,11 @@ namespace Sexy
 				int num2 = 0;
 				if (theString.Length <= 1)
 				{
-					if (char.IsWhiteSpace(theString.get_Chars(0)))
+					if (char.IsWhiteSpace(theString[0]))
 					{
 						num2 += this.StringWidth(this.SpaceChar);
 					}
-					else if (this.mCharOffsets.ContainsKey(theString.get_Chars(0)))
+					else if (this.mCharOffsets.ContainsKey(theString[0]))
 					{
 						num2 += (int)(this.mFonts[i].MeasureString(theString).X * this.mScaleX * FrameworkConstants.Font_Scale);
 					}
@@ -322,7 +322,7 @@ namespace Sexy
 				{
 					for (int j = 0; j < theString.Length; j++)
 					{
-						this.drawStringBuilder.set_Chars(0, theString.get_Chars(j));
+						this.drawStringBuilder[0] = theString[j];
 						num2 += this.StringWidth(this.drawStringBuilder);
 					}
 				}
@@ -341,16 +341,16 @@ namespace Sexy
 			{
 				for (int j = 0; j < theString.Length; j++)
 				{
-					if (char.IsWhiteSpace(theString.get_Chars(j)))
+					if (char.IsWhiteSpace(theString[j]))
 					{
-						this.drawStringBuilder.set_Chars(0, this.SpaceChar.get_Chars(0));
+						this.drawStringBuilder[0] = this.SpaceChar[0];
 					}
 					else
 					{
-						this.drawStringBuilder.set_Chars(0, theString.get_Chars(j));
+						this.drawStringBuilder[0] = theString[j];
 					}
 					int num2 = 0;
-					if (this.mCharOffsets.ContainsKey(this.drawStringBuilder.get_Chars(0)))
+					if (this.mCharOffsets.ContainsKey(this.drawStringBuilder[0]))
 					{
 						num2 = (int)this.mFonts[i].MeasureString(this.drawStringBuilder).Y;
 					}
@@ -370,7 +370,7 @@ namespace Sexy
 
 		public int CharWidth(char theChar)
 		{
-			this.drawStringBuilder.set_Chars(0, theChar);
+			this.drawStringBuilder[0] = theChar;
 			return this.StringWidth(this.drawStringBuilder);
 		}
 
@@ -387,22 +387,22 @@ namespace Sexy
 			}
 			Vector2 value = new Vector2((float)theX, (float)theY);
 			Vector2 value2 = value + this.mOffsets[layer] * this.mScaleX * FrameworkConstants.Font_Scale;
-			if (!string.IsNullOrEmpty(theString) && this.mCharOffsets.ContainsKey(theString.get_Chars(0)))
+			if (!string.IsNullOrEmpty(theString) && this.mCharOffsets.ContainsKey(theString[0]))
 			{
-				value2.X -= this.mCharOffsets[theString.get_Chars(0)].X * this.mScaleX * FrameworkConstants.Font_Scale;
+				value2.X -= this.mCharOffsets[theString[0]].X * this.mScaleX * FrameworkConstants.Font_Scale;
 			}
 			for (int i = 0; i < theString.Length; i++)
 			{
-				if (char.IsWhiteSpace(theString.get_Chars(i)))
+				if (char.IsWhiteSpace(theString[i]))
 				{
 					value2.X += (float)this.StringWidth(this.SpaceChar);
 				}
 				else
 				{
-					this.drawStringBuilder.set_Chars(0, theString.get_Chars(i));
-					if (this.mCharOffsets.ContainsKey(theString.get_Chars(i)))
+					this.drawStringBuilder[0] = theString[i];
+					if (this.mCharOffsets.ContainsKey(theString[i]))
 					{
-						Vector2 position = value2 + this.mCharOffsets[theString.get_Chars(i)] * this.mScaleX * FrameworkConstants.Font_Scale;
+						Vector2 position = value2 + this.mCharOffsets[theString[i]] * this.mScaleX * FrameworkConstants.Font_Scale;
 						Graphics.spriteBatch.DrawString(this.mFonts[layer], this.drawStringBuilder, position, theColor, 0f, Vector2.Zero, this.scale, SpriteEffects.None, 1f - (float)layer / (float)this.mFonts.Count);
 						value2.X += (float)(this.StringWidth(this.drawStringBuilder) - this.characterOffsetMagic);
 					}
@@ -438,16 +438,16 @@ namespace Sexy
 					Vector2 value2 = value + this.mOffsets[i] * this.mScaleX * FrameworkConstants.Font_Scale;
 					for (int j = 0; j < theString.Length; j++)
 					{
-						if (char.IsWhiteSpace(theString.get_Chars(j)))
+						if (char.IsWhiteSpace(theString[j]))
 						{
 							value2.X += (float)this.StringWidth(this.SpaceChar);
 						}
 						else
 						{
-							this.drawStringBuilder.set_Chars(0, theString.get_Chars(j));
-							if (this.mCharOffsets.ContainsKey(theString.get_Chars(j)))
+							this.drawStringBuilder[0] = theString[j];
+							if (this.mCharOffsets.ContainsKey(theString[j]))
 							{
-								Vector2 position = value2 + this.mCharOffsets[theString.get_Chars(j)] * this.mScaleX * FrameworkConstants.Font_Scale;
+								Vector2 position = value2 + this.mCharOffsets[theString[j]] * this.mScaleX * FrameworkConstants.Font_Scale;
 								Graphics.spriteBatch.DrawString(this.mFonts[i], this.drawStringBuilder, position, theColor, 0f, Vector2.Zero, this.scale, SpriteEffects.None, 1f - (float)i / (float)this.mFonts.Count);
 								value2.X += (float)(this.StringWidth(this.drawStringBuilder) - this.characterOffsetMagic);
 							}
