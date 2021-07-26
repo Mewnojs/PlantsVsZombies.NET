@@ -13,7 +13,7 @@ namespace Sexy
 {
 	public class Main : Game
 	{
-		public Main()
+		public Main()//test
 		{
 			Main.SetupTileSchedule();
 			Main.graphics = Graphics.GetNew(this);
