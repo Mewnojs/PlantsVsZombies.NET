@@ -18,7 +18,7 @@ namespace Lawn
 					aQuantity = 9;
 				}
 				string text;
-				if (!GlobalMembersStoreScreen.seedNumberUpgradeCache.TryGetValue(aQuantity, ref text))
+				if (!GlobalMembersStoreScreen.seedNumberUpgradeCache.TryGetValue(aQuantity, out text))
 				{
 					text = TodCommon.TodReplaceNumberString("[STORE_UPGRADE_SLOTS]", "{SLOTS}", aQuantity);
 					GlobalMembersStoreScreen.seedNumberUpgradeCache.Add(aQuantity, text);

@@ -62,7 +62,7 @@ namespace Sexy
 			int num = 0;
 			for (int i = 0; i < 8; i++)
 			{
-				char c = theString.get_Chars(i);
+				char c = theString[i];
 				int num2 = 0;
 				if (c >= '0' && c <= '9')
 				{
@@ -82,7 +82,7 @@ namespace Sexy
 			int num4;
 			for (int j = num; j > 0; j -= num4)
 			{
-				char c2 = theString.get_Chars(num3++);
+				char c2 = theString[num3++];
 				int theNum = Buffer.gWebDecodeMap[(int)c2];
 				num4 = Math.Min(j, 6);
 				this.WriteNumBits(theNum, num4);
@@ -283,7 +283,7 @@ namespace Sexy
 		{
 			for (int i = 0; i < theCount; i++)
 			{
-				this.WriteByte((byte)theByte.get_Chars(i));
+				this.WriteByte((byte)theByte[i]);
 			}
 		}
 
@@ -316,7 +316,7 @@ namespace Sexy
 			int num3 = (num + 5) / 6;
 			for (int i = 0; i < num3; i++)
 			{
-				text += Buffer.gWebEncodeMap.get_Chars(this.ReadNumBits(6, false));
+				text += Buffer.gWebEncodeMap[this.ReadNumBits(6, false)];
 			}
 			this.mReadBitPos = num2;
 			return text;

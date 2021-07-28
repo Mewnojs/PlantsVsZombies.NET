@@ -281,7 +281,7 @@ namespace Lawn
 			}
 			if (this.mApp.mPlayerInfo != null)
 			{
-				this.mApp.mPlayerInfo.mLastSeenMoreGames < this.mApp.mProfileMgr.mLastMoreGamesUpdate;
+				bool flag_noUse = this.mApp.mPlayerInfo.mLastSeenMoreGames < this.mApp.mProfileMgr.mLastMoreGamesUpdate;
 			}
 			g.SetColor(new SexyColor(115, 101, 66));
 			g.SetColorizeImages(true);

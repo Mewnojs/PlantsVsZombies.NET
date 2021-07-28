@@ -26,10 +26,10 @@ namespace Sexy.TodLib
 
 		public static string TodStringTranslate(string theString)
 		{
-			if (theString.Length >= 3 && theString.get_Chars(0) == '[')
+			if (theString.Length >= 3 && theString[0] == '[')
 			{
 				string text;
-				if (!TodStringFile.todStringTranslateCache.TryGetValue(theString, ref text))
+				if (!TodStringFile.todStringTranslateCache.TryGetValue(theString, out text))
 				{
 					text = theString.Substring(1, theString.Length - 2);
 					TodStringFile.todStringTranslateCache.Add(theString, text);
@@ -42,7 +42,7 @@ namespace Sexy.TodLib
 		public static bool TodStringListExists(string theString)
 		{
 			int num = theString.length();
-			if (num < 3 || theString.get_Chars(0) != '[')
+			if (num < 3 || theString[0] != '[')
 			{
 				return false;
 			}
@@ -158,7 +158,7 @@ namespace Sexy.TodLib
 				num3 = theValue.IndexOf("%");
 				if (num3 >= 0)
 				{
-					if (!char.IsWhiteSpace(theValue.get_Chars(num3 + 1)))
+					if (!char.IsWhiteSpace(theValue[num3 + 1]))
 					{
 						theValue = theValue.Remove(num3, 2);
 						theValue = theValue.Insert(num3, "{" + num2.ToString() + "}");
@@ -290,7 +290,7 @@ namespace Sexy.TodLib
 			int num2 = 0;
 			for (int i = theOffset; i < theLength; i++)
 			{
-				if (theString.get_Chars(i) == '{')
+				if (theString[i] == '{')
 				{
 					int num3 = num2 + i;
 					int num4 = num3 + 1;
@@ -313,7 +313,7 @@ namespace Sexy.TodLib
 				{
 					if (TodCommon.TestBit(theCurrentFormat.mFormatFlags, 0))
 					{
-						if (TodStringFile.CharIsSpaceInFormat(theString.get_Chars(i), theCurrentFormat))
+						if (TodStringFile.CharIsSpaceInFormat(theString[i], theCurrentFormat))
 						{
 							if (!flag)
 							{
@@ -328,7 +328,7 @@ namespace Sexy.TodLib
 							flag = false;
 						}
 					}
-					TodStringFile.TodWriteStringBuilder.Append(theString.get_Chars(i));
+					TodStringFile.TodWriteStringBuilder.Append(theString[i]);
 				}
 				IL_1AA:;
 			}
@@ -357,7 +357,7 @@ namespace Sexy.TodLib
 			int num = theText.length() - 1;
 			int num2 = 0;
 			theStartPos = (theEndPos = -1);
-			while (num >= num2 && theText.get_Chars(num) != ' ')
+			while (num >= num2 && theText[num] != ' ')
 			{
 				num--;
 			}
@@ -366,7 +366,7 @@ namespace Sexy.TodLib
 				return;
 			}
 			theEndPos = num - num2;
-			while (num >= num2 && theText.get_Chars(num) == ' ')
+			while (num >= num2 && theText[num] == ' ')
 			{
 				num--;
 			}
@@ -407,7 +407,7 @@ namespace Sexy.TodLib
 			}
 			while (i < theText.length())
 			{
-				c = theText.get_Chars(i);
+				c = theText[i];
 				if (c == '{')
 				{
 					int num10 = i;
@@ -461,7 +461,7 @@ namespace Sexy.TodLib
 						i = num5 + 1;
 						if (c != '\n')
 						{
-							while (i < theText.length() && TodStringFile.CharIsSpaceInFormat(theText.get_Chars(i), TodStringFile.aCurrentFormat))
+							while (i < theText.length() && TodStringFile.CharIsSpaceInFormat(theText[i], TodStringFile.aCurrentFormat))
 							{
 								i++;
 							}
@@ -518,7 +518,7 @@ namespace Sexy.TodLib
 			bool flag = false;
 			for (int i = start; i < InputString.Length; i++)
 			{
-				if (!Enumerable.Contains<char>(Mask, InputString.get_Chars(i)))
+				if (!Enumerable.Contains<char>(Mask, InputString[i]))
 				{
 					flag = true;
 					break;

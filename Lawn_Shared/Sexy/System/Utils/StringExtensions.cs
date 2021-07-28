@@ -23,7 +23,7 @@ namespace Sexy
 			bool result = true;
 			for (int i = 0; i < endChar; i++)
 			{
-				if (s.get_Chars(i) != contains.get_Chars(i))
+				if (s[i] != contains[i])
 				{
 					result = false;
 					break;

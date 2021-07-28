@@ -68,13 +68,13 @@ namespace Sexy
 		public Font.CachedStringInfo GetWordWrappedSubStrings(string theLine, TRect theRect)
 		{
 			Dictionary<string, Font.CachedStringInfo> dictionary;
-			if (!Font.allCachedStringWidths.TryGetValue(theRect, ref dictionary))
+			if (!Font.allCachedStringWidths.TryGetValue(theRect, out dictionary))
 			{
 				dictionary = new Dictionary<string, Font.CachedStringInfo>(10);
 				Font.allCachedStringWidths.Add(theRect, dictionary);
 			}
 			Font.CachedStringInfo cachedStringInfo;
-			if (!dictionary.TryGetValue(theLine, ref cachedStringInfo))
+			if (!dictionary.TryGetValue(theLine, out cachedStringInfo))
 			{
 				int num = 0;
 				int num2 = 0;
@@ -247,12 +247,12 @@ namespace Sexy
 			if (this.StringWidthCachingEnabled)
 			{
 				Dictionary<string, int> dictionary = null;
-				if (this.StringWidthCachingEnabled && !this.cachedStringWidths.TryGetValue(this.mScaleX, ref dictionary))
+				if (this.StringWidthCachingEnabled && !this.cachedStringWidths.TryGetValue(this.mScaleX, out dictionary))
 				{
 					dictionary = Font.GetNewStringDictionary();
 					this.cachedStringWidths.Add(this.mScaleX, dictionary);
 				}
-				if (!dictionary.TryGetValue(theString, ref num))
+				if (!dictionary.TryGetValue(theString, out num))
 				{
 					num = this.ComputeStringWidthForCache(theString);
 					dictionary.Add(theString, num);

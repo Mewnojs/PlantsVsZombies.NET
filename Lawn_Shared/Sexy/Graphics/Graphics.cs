@@ -111,7 +111,7 @@ namespace Sexy
 			this.mClipRect = new TRect(0, 0, base.mScreenWidth, base.mScreenHeight);
 		}
 
-		private protected static bool spritebatchBegan { protected get; private set; }
+		private protected static bool spritebatchBegan { get; private set; }
 
 		public GraphicsDevice GraphicsDevice
 		{

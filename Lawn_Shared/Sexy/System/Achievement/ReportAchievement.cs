@@ -54,10 +54,10 @@ namespace Sexy
 						Achievements.AddAchievement(item);
 					}
 				}
-				catch (GameUpdateRequiredException)
+				/*catch (GameUpdateRequiredException)
 				{
 					GlobalStaticVars.gSexyAppBase.ShowUpdateRequiredMessage();
-				}
+				}*/
 				catch (Exception ex)
 				{
 					string message = ex.Message;

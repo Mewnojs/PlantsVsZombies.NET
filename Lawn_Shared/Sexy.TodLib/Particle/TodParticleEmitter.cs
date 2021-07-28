@@ -422,7 +422,7 @@ namespace Sexy.TodLib
 					{
 						return false;
 					}
-					char c = this.mEmitterDef.mOnDuration.get_Chars(0);
+					char c = this.mEmitterDef.mOnDuration[0];
 					if (!this.CrossFadeParticleToName(theParticle, this.mEmitterDef.mOnDuration))
 					{
 						return false;

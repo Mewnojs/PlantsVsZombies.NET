@@ -18,7 +18,7 @@ namespace Lawn
 		{
 			for (int i = 0; i < thePhrase.Length; i++)
 			{
-				this.AddChar(thePhrase.get_Chars(i));
+				this.AddChar(thePhrase[i]);
 			}
 		}
 

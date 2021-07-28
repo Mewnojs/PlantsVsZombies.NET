@@ -24,11 +24,11 @@ namespace Lawn
 		{
 			int num = 0;
 			int num2 = 0;
-			if (theLeftText.Length > 0 && theLeftText.get_Chars(0) == '^')
+			if (theLeftText.Length > 0 && theLeftText[0] == '^')
 			{
 				int num3 = (int)Constants.InvertAndScale(20f);
 				string text;
-				if (!CreditScreen.sectionSubstrings.TryGetValue(theLeftText, ref text))
+				if (!CreditScreen.sectionSubstrings.TryGetValue(theLeftText, out text))
 				{
 					text = theLeftText.Substring(1);
 					CreditScreen.sectionSubstrings.Add(theLeftText, text);
@@ -39,7 +39,7 @@ namespace Lawn
 			else
 			{
 				int num4;
-				if (!CreditScreen.cachedHeightsLeft.TryGetValue(theLeftText, ref num4))
+				if (!CreditScreen.cachedHeightsLeft.TryGetValue(theLeftText, out num4))
 				{
 					num4 = CreditScreen.DrawLeftText(g, theLeftText, theY) - num;
 					CreditScreen.cachedHeightsLeft.Add(theLeftText, num4);
@@ -49,7 +49,7 @@ namespace Lawn
 					num4 = CreditScreen.DrawLeftText(g, theLeftText, theY);
 				}
 				num += num4;
-				if (!CreditScreen.cachedHeightsRight.TryGetValue(theRightText, ref num4))
+				if (!CreditScreen.cachedHeightsRight.TryGetValue(theRightText, out num4))
 				{
 					num4 = CreditScreen.DrawRightText(g, theRightText, theY) - num2;
 					CreditScreen.cachedHeightsRight.Add(theRightText, num4);
@@ -145,7 +145,7 @@ namespace Lawn
 			while (num2 < this.mNumSections && num <= Constants.BOARD_HEIGHT)
 			{
 				num = CreditScreen.DrawSection(g, this.mRoles[num2], this.mNames[num2], num) + (int)(Constants.S * 5f);
-				if (this.mRoles[num2].Length == 0 || this.mRoles[num2].get_Chars(0) != '^')
+				if (this.mRoles[num2].Length == 0 || this.mRoles[num2][0] != '^')
 				{
 					num += (int)(Constants.S * 15f);
 				}
@@ -164,7 +164,7 @@ namespace Lawn
 			for (int i = 0; i < this.mNumSections; i++)
 			{
 				num = CreditScreen.DrawSection(@new, this.mRoles[i], this.mNames[i], num) + (int)(Constants.S * 5f);
-				if (this.mRoles[i].Length == 0 || this.mRoles[i].get_Chars(0) != '^')
+				if (this.mRoles[i].Length == 0 || this.mRoles[i][0] != '^')
 				{
 					num += (int)(Constants.S * 15f);
 				}

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using Microsoft.Phone.Tasks;
+//using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Media;
@@ -257,7 +257,7 @@ namespace Lawn
 				new ReanimationParams(ReanimationType.REANIM_LOADBAR_ZOMBIEHEAD, "reanim/loadbar_zombiehead", 1)
 			};
 			ReanimatorXnaHelpers.ReanimatorLoadDefinitions(ref array, array.Length);
-			TodStringFile.TodStringListLoad("LawnStrings_" + Constants.LanguageSubDir + ".txt");
+			TodStringFile.TodStringListLoad("Content/"+"LawnStrings_" + Constants.LanguageSubDir + ".txt");
 			this.mTitleScreen.mLoaderScreenIsLoaded = true;
 			this.mNumLoadingThreadTasks += this.mResourceManager.GetNumResources("LoadingFonts") * 54;
 			this.mNumLoadingThreadTasks += this.mResourceManager.GetNumResources("LoadingImages") * 9;
@@ -954,10 +954,10 @@ namespace Lawn
 				Guide.ShowMarketplace(PlayerIndex.One);
 				return;
 			}
-			new MarketplaceDetailTask
+			/*new MarketplaceDetailTask
 			{
 				ContentType = 1
-			}.Show();
+			}.Show();*/
 		}
 
 		public void ShowAwardScreen(AwardType theAwardType, bool theShowAchievements)
@@ -1227,7 +1227,7 @@ namespace Lawn
 			this.mKilledYetiAndRestarted = false;
 			base.Init();
 			this.ReadRestoreInfo();
-			if (!this.mResourceManager.ParseResourcesFile("resources.xml"))
+			if (!this.mResourceManager.ParseResourcesFile("Content/resources.xml"))
 			{
 				this.ShowResourceError(true);
 				return;
@@ -1802,7 +1802,7 @@ namespace Lawn
 		public string GetStageString(int theLevel)
 		{
 			string text;
-			if (!this.cachedStageStrings.TryGetValue(theLevel, ref text))
+			if (!this.cachedStageStrings.TryGetValue(theLevel, out text))
 			{
 				int num = TodCommon.ClampInt((theLevel - 1) / 10 + 1, 1, 6);
 				int num2 = theLevel - (num - 1) * 10;
@@ -2447,11 +2447,11 @@ namespace Lawn
 			bool flag3 = false;
 			for (int i = 0; i < theMessage.length(); i++)
 			{
-				if (theMessage.get_Chars(i) == '{')
+				if (theMessage[i] == '{')
 				{
 					flag3 = true;
 				}
-				else if (theMessage.get_Chars(i) == '}')
+				else if (theMessage[i] == '}')
 				{
 					flag3 = false;
 				}
@@ -2656,7 +2656,7 @@ namespace Lawn
 				else if (text.IndexOf("{NO_CLICK}") != -1)
 				{
 					string text2;
-					if (!LawnApp.noClickStringCache.TryGetValue(text, ref text2))
+					if (!LawnApp.noClickStringCache.TryGetValue(text, out text2))
 					{
 						text2 = TodCommon.TodReplaceString(text, "{NO_CLICK}", string.Empty);
 						LawnApp.noClickStringCache.Add(text, text2);
@@ -2974,7 +2974,7 @@ namespace Lawn
 		{
 			int theValue = theAmount * 10;
 			string text;
-			if (!LawnApp.moneyStrings.TryGetValue(theAmount, ref text))
+			if (!LawnApp.moneyStrings.TryGetValue(theAmount, out text))
 			{
 				text = TodCommon.TodReplaceString(TodStringFile.TodStringTranslate("[CURRENCY_STRING]"), "{CURRENCY_SYMBOL}", TodStringFile.TodStringTranslate("[CURRENCY_SYMBOL]"));
 				text = TodCommon.TodReplaceString(text, "{AMOUNT}", Common.CommaSeperate(theValue));
@@ -2986,7 +2986,7 @@ namespace Lawn
 		public static string ToString(int i)
 		{
 			string text;
-			if (!LawnApp.cachedIntToString.TryGetValue(i, ref text))
+			if (!LawnApp.cachedIntToString.TryGetValue(i, out text))
 			{
 				text = i.ToString();
 				LawnApp.cachedIntToString.Add(i, text);

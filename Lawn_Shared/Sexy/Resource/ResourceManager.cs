@@ -392,7 +392,7 @@ namespace Sexy
 			string text = theElement.mAttributes["path"];
 			theRes.mXMLAttributes = theElement.mAttributes;
 			theRes.mFromProgram = false;
-			if (text.Length > 0 && text.get_Chars(0) == '!')
+			if (text.Length > 0 && text[0] == '!')
 			{
 				theRes.mPath = text;
 				if (text == "!program")
@@ -460,24 +460,22 @@ namespace Sexy
 
 		private bool ParseSetDefaults(XMLElement theElement)
 		{
-			foreach (KeyValuePair<string, string> keyValuePair in theElement.mAttributes)
+			Dictionary<string, string>.Enumerator enumerator = theElement.mAttributes.GetEnumerator();
+			while (enumerator.MoveNext())
 			{
-				Dictionary<string, string>.Enumerator enumerator;
-				if (keyValuePair.Key == "path")
+				KeyValuePair<string, string> current = enumerator.Current;
+				if (current.Key == "path")
 				{
-					string resourceDir = this.GetResourceDir();
-					KeyValuePair<string, string> keyValuePair2 = enumerator.Current;
-					this.mDefaultPath = resourceDir + keyValuePair2.Value + "/";
+					this.mDefaultPath = this.GetResourceDir() + enumerator.Current.Value + "/";
 				}
-				KeyValuePair<string, string> keyValuePair3 = enumerator.Current;
-				if (keyValuePair3.Key == "idprefix")
+				if (enumerator.Current.Key == "idprefix")
 				{
-					KeyValuePair<string, string> keyValuePair4 = enumerator.Current;
-					this.mDefaultIdPrefix = keyValuePair4.Value;
+					this.mDefaultIdPrefix = enumerator.Current.Value;
 				}
 			}
 			return true;
 		}
+
 
 		private bool ParseFontResource(XMLElement theElement)
 		{
@@ -500,7 +498,7 @@ namespace Sexy
 			fontRes.mFont = null;
 			foreach (KeyValuePair<string, string> keyValuePair in theElement.mAttributes)
 			{
-				Dictionary<string, string>.Enumerator enumerator;
+				Dictionary<string, string>.Enumerator enumerator = theElement.mAttributes.GetEnumerator();
 				if (keyValuePair.Key == "tags")
 				{
 					FontRes fontRes3 = fontRes;
@@ -600,7 +598,7 @@ namespace Sexy
 			soundRes.mPanning = 0;
 			foreach (KeyValuePair<string, string> keyValuePair in theElement.mAttributes)
 			{
-				Dictionary<string, string>.Enumerator enumerator;
+				Dictionary<string, string>.Enumerator enumerator = theElement.mAttributes.GetEnumerator();
 				if (keyValuePair.Key == "volume")
 				{
 					SoundRes soundRes3 = soundRes;
@@ -1137,26 +1135,23 @@ namespace Sexy
 			this.mTotalResources -= this.GetNumResourcesGroupNameStartsWith("DelayLoad_");
 			this.mLoadedCount = 0;
 			this.mProgress = 0.0;
-			foreach (KeyValuePair<string, List<BaseRes>> keyValuePair in this.mResGroupMap)
+			Dictionary<string, List<BaseRes>>.Enumerator enumerator = this.mResGroupMap.GetEnumerator();
+			while (enumerator.MoveNext())
 			{
-				if (!(keyValuePair.Key == "Levels"))
+				KeyValuePair<string, List<BaseRes>> current = enumerator.Current;
+				if ((current.Key != "Levels") && !enumerator.Current.Key.StartsWith("DelayLoad_"))
 				{
-					Dictionary<string, List<BaseRes>>.Enumerator enumerator;
-					KeyValuePair<string, List<BaseRes>> keyValuePair2 = enumerator.Current;
-					if (!keyValuePair2.Key.StartsWith("DelayLoad_"))
+					this.StartLoadResources(enumerator.Current.Key);
+					this.LoadResources(enumerator.Current.Key);
+					if (this.HadError())
 					{
-						KeyValuePair<string, List<BaseRes>> keyValuePair3 = enumerator.Current;
-						this.StartLoadResources(keyValuePair3.Key);
-						KeyValuePair<string, List<BaseRes>> keyValuePair4 = enumerator.Current;
-						this.LoadResources(keyValuePair4.Key);
-						if (this.HadError())
-						{
-							return;
-						}
+						return;
 					}
 				}
 			}
 		}
+
+
 
 		public void StartLoadResources(string theResGroup)
 		{
@@ -1323,7 +1318,7 @@ namespace Sexy
 		{
 			Texture2D texture2D = null;
 			GraphicsDevice graphicsDevice = GlobalStaticVars.g.GraphicsDevice;
-			using (Stream stream = TitleContainer.OpenStream("Content\\" + filename + "." + format.ToString()))
+			using (Stream stream = TitleContainer.OpenStream("Content/" + filename + "." + format.ToString()))
 			{
 				texture2D = Texture2D.FromStream(graphicsDevice, stream);
 			}
@@ -1475,14 +1470,14 @@ namespace Sexy
 			xmlReader.Read();
 			while (xmlReader.Read())
 			{
-				if (xmlReader.NodeType == 1)
+				if (xmlReader.NodeType == XmlNodeType.Element)
 				{
 					if (xmlReader.Name == "Offsets")
 					{
 						Vector2 zero = Vector2.Zero;
-						while (xmlReader.NodeType != 15 || !(xmlReader.Name == "Offsets"))
+						while (xmlReader.NodeType != XmlNodeType.EndElement || !(xmlReader.Name == "Offsets"))
 						{
-							if (xmlReader.NodeType == 1 && xmlReader.Name == "Offset")
+							if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "Offset")
 							{
 								string text = xmlReader["offsetX"];
 								string text2 = xmlReader["offsetY"];
@@ -1512,9 +1507,9 @@ namespace Sexy
 							font.characterOffsetMagic = 0;
 						}
 						Vector2 zero2 = Vector2.Zero;
-						while (xmlReader.NodeType != 15 || !(xmlReader.Name == "Layers"))
+						while (xmlReader.NodeType != XmlNodeType.EndElement || !(xmlReader.Name == "Layers"))
 						{
-							if (xmlReader.NodeType == 1 && xmlReader.Name == "Layer")
+							if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "Layer")
 							{
 								if (!xmlReader.HasAttributes)
 								{
@@ -1534,7 +1529,7 @@ namespace Sexy
 									}
 								}
 							}
-							if (xmlReader.NodeType == 3)
+							if (xmlReader.NodeType == XmlNodeType.Text)
 							{
 								string value = xmlReader.Value;
 								font.AddLayer(this.mContentManager.Load<SpriteFont>(value), zero2);

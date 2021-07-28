@@ -50,8 +50,8 @@ namespace Lawn
 				y = Constants.Almanac_ImitatorPosition.Y;
 				return;
 			}
-			x = (int)(Constants.Almanac_SeedOffset.X + theSeedType % SeedType.SEED_POTATOMINE * (SeedType)(Constants.SMALL_SEEDPACKET_WIDTH + Constants.Almanac_SeedSpace.X));
-			y = (int)(Constants.Almanac_SeedOffset.X + theSeedType / SeedType.SEED_POTATOMINE * (SeedType)(Constants.SMALL_SEEDPACKET_HEIGHT + Constants.Almanac_SeedSpace.Y));
+			x = (int)(Constants.Almanac_SeedOffset.X + (int)theSeedType % 4 * (Constants.SMALL_SEEDPACKET_WIDTH + Constants.Almanac_SeedSpace.X));
+			y = (int)(Constants.Almanac_SeedOffset.X + (int)theSeedType / 4 * (Constants.SMALL_SEEDPACKET_HEIGHT + Constants.Almanac_SeedSpace.Y));
 		}
 
 		public override void Draw(Graphics g)

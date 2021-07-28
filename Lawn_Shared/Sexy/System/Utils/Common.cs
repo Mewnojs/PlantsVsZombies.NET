@@ -67,7 +67,7 @@ namespace Sexy
 			int i = 0;
 			while (i < theString.Length)
 			{
-				char c = theString.get_Chars(i);
+				char c = theString[i];
 				char c2 = c;
 				if (c2 <= ' ')
 				{
@@ -122,7 +122,7 @@ namespace Sexy
 		public static string StringToUpper(ref string theString)
 		{
 			string text;
-			if (!Common.StringToUpperCache.TryGetValue(theString, ref text))
+			if (!Common.StringToUpperCache.TryGetValue(theString, out text))
 			{
 				text = theString.ToUpper();
 				Common.StringToUpperCache.Add(theString, text);
@@ -133,7 +133,7 @@ namespace Sexy
 		public static string StringToLower(ref string theString)
 		{
 			string text;
-			if (!Common.StringToLowerCache.TryGetValue(theString, ref text))
+			if (!Common.StringToLowerCache.TryGetValue(theString, out text))
 			{
 				text = theString.ToLower();
 				Common.StringToLowerCache.Add(theString, text);
@@ -154,12 +154,12 @@ namespace Sexy
 		public static string Trim(string theString)
 		{
 			int num = 0;
-			while (num < theString.Length && char.IsWhiteSpace(theString.get_Chars(num)))
+			while (num < theString.Length && char.IsWhiteSpace(theString[num]))
 			{
 				num++;
 			}
 			int num2 = theString.Length - 1;
-			while (num2 >= 0 && char.IsWhiteSpace(theString.get_Chars(num2)))
+			while (num2 >= 0 && char.IsWhiteSpace(theString[num2]))
 			{
 				num2--;
 			}
@@ -177,7 +177,7 @@ namespace Sexy
 			int num = 0;
 			for (int i = 0; i < theString.Length; i++)
 			{
-				char result = theString.get_Chars(i);
+				char result = theString[i];
 				if (num == theIndex)
 				{
 					return result;
@@ -361,7 +361,7 @@ namespace Sexy
 		public static string RemoveTrailingSlash(string theDirectory)
 		{
 			int length = theDirectory.Length;
-			if (length > 0 && theDirectory.get_Chars(length - 1) == '/')
+			if (length > 0 && theDirectory[length - 1] == '/')
 			{
 				return theDirectory.Substring(0, length - 1);
 			}
@@ -374,7 +374,7 @@ namespace Sexy
 			{
 				return "";
 			}
-			sbyte b = (sbyte)theDirectory.get_Chars(theDirectory.Length - 1);
+			sbyte b = (sbyte)theDirectory[theDirectory.Length - 1];
 			if (b != 47)
 			{
 				return theDirectory + '/';
@@ -404,7 +404,7 @@ namespace Sexy
 			for (;;)
 			{
 				int num2 = theDir.IndexOf('/', num);
-				userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
+				userStoreForApplication = IsolatedStorageFile.GetUserStoreForAssembly();//GetUserStoreForApplication();
 				if (num2 == -1)
 				{
 					break;
@@ -428,7 +428,7 @@ namespace Sexy
 
 		public static bool DeleteFile(string lpFileName)
 		{
-			IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
+			IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForAssembly();//GetUserStoreForApplication();
 			if (userStoreForApplication.FileExists(lpFileName))
 			{
 				userStoreForApplication.DeleteFile(lpFileName);

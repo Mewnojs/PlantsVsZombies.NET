@@ -59,7 +59,7 @@ namespace Sexy
 			this.mBufferedText.Capacity = length;
 			for (int i = 0; i < length; i++)
 			{
-				this.mBufferedText[i] = theString.get_Chars(length - i - 1);
+				this.mBufferedText[i] = theString[length - i - 1];
 			}
 		}
 

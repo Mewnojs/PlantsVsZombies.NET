@@ -145,7 +145,7 @@ namespace Sexy
 						XMLElement xmlelement = theElement;
 						xmlelement.mInstruction += c;
 						length = theElement.mInstruction.Length;
-						if (c == '>' && length >= 3 && theElement.mInstruction.get_Chars(length - 2) == '-' && theElement.mInstruction.get_Chars(length - 3) == '-')
+						if (c == '>' && length >= 3 && theElement.mInstruction[length - 2] == '-' && theElement.mInstruction[length - 3] == '-')
 						{
 							goto Block_7;
 						}
@@ -167,7 +167,7 @@ namespace Sexy
 							length2 = theElement.mValue.Length;
 							text5 = theElement.mValue;
 						}
-						if (c == '>' && length2 >= 2 && text5.get_Chars(length2 - 2) == '?')
+						if (c == '>' && length2 >= 2 && text5[length2 - 2] == '?')
 						{
 							goto Block_12;
 						}
@@ -359,14 +359,14 @@ namespace Sexy
 						{
 							string text6 = theElement.mAttributes[text3];
 							int length3 = text6.Length;
-							if (length3 > 0 && text6.get_Chars(length3 - 1) == '/')
+							if (length3 > 0 && text6[length3 - 1] == '/')
 							{
 								this.AddAttribute(theElement, text3, this.XMLDecodeString(text6.Substring(0, length3 - 1)));
 								flag7 = true;
 							}
 							text6 = theElement.mAttributesEncoded[text4];
 							length3 = text6.Length;
-							if (length3 > 0 && text6.get_Chars(length3 - 1) == '/')
+							if (length3 > 0 && text6[length3 - 1] == '/')
 							{
 								this.AddAttributeEncoded(theElement, text4, text6.Substring(0, length3 - 1));
 								flag7 = true;
@@ -375,7 +375,7 @@ namespace Sexy
 						else
 						{
 							int length4 = theElement.mValue.Length;
-							if (length4 > 0 && theElement.mValue.get_Chars(length4 - 1) == '/')
+							if (length4 > 0 && theElement.mValue[length4 - 1] == '/')
 							{
 								theElement.mValue = theElement.mValue.Substring(0, length4 - 1);
 								flag7 = true;

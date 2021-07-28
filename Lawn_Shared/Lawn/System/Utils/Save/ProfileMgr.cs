@@ -66,7 +66,7 @@ namespace Lawn
 			try
 			{
 				string saveFile = ProfileMgr.GetSaveFile();
-				Buffer buffer = new Buffer();
+				Sexy.Buffer buffer = new Sexy.Buffer();
 				if (GlobalStaticVars.gSexyAppBase.ReadBufferFromFile(saveFile, ref buffer, false))
 				{
 					int num = buffer.ReadLong();
@@ -103,7 +103,7 @@ namespace Lawn
 			try
 			{
 				string saveFile = ProfileMgr.GetSaveFile();
-				Buffer buffer = new Buffer();
+				Sexy.Buffer buffer = new Sexy.Buffer();
 				buffer.WriteLong(1);
 				buffer.WriteLong(this.mProfileMap.Count);
 				foreach (PlayerInfo playerInfo in this.mProfileMap.Values)

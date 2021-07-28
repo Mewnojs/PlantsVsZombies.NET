@@ -16,7 +16,7 @@ namespace Sexy.TodLib
 				ImageRes imageRes = (ImageRes)keyValuePair.Value;
 				if (imageRes.mImage == theImage)
 				{
-					Dictionary<string, BaseRes>.Enumerator enumerator;
+					Dictionary<string, BaseRes>.Enumerator enumerator = base.mImageMap.GetEnumerator();
 					KeyValuePair<string, BaseRes> keyValuePair2 = enumerator.Current;
 					thePath = keyValuePair2.Key;
 					return true;

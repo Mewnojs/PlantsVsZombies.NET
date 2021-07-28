@@ -2505,7 +2505,7 @@ namespace Lawn
 
 		public bool mIsTutorial;
 
-		public readonly ulong STINKY_BASE_TIME = (ulong)TimeSpan.FromTicks(new DateTime(2010, 1, 1, 0, 0, 0, 0, 1).Ticks).TotalSeconds;
+		public readonly ulong STINKY_BASE_TIME = (ulong)TimeSpan.FromTicks(new DateTime(2010, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).Ticks).TotalSeconds;
 
 		private DateTime aNow;
 

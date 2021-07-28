@@ -82,38 +82,35 @@ namespace Sexy
 
 		public void InsertWidgetHelper(LinkedListNode<Widget> anItr, Widget theWidget)
 		{
-			while (anItr != null)
+			while (true)
 			{
-				Widget value = anItr.Value;
-				if (value.mZOrder >= theWidget.mZOrder)
+				if (anItr != null)
 				{
-					if (anItr.Value != this.mWidgets.First.Value)
+					Widget widget = anItr.Value;
+					if (widget.mZOrder < theWidget.mZOrder)
 					{
-						value = anItr.Value;
-						if (value.mZOrder > theWidget.mZOrder)
-						{
-							IL_94:
-							while (anItr != null && anItr.Value != this.mWidgets.First.Value)
-							{
-								anItr = anItr.Previous;
-								Widget value2 = anItr.Value;
-								if (value2.mZOrder <= theWidget.mZOrder)
-								{
-									anItr = anItr.Next;
-									this.mWidgets.AddBefore(anItr, theWidget);
-									return;
-								}
-							}
-							this.mWidgets.AddLast(theWidget);
-							return;
-						}
+						anItr = anItr.Next;
+						continue;
 					}
-					this.mWidgets.AddAfter(anItr, theWidget);
-					return;
+					if ((anItr.Value == this.mWidgets.First.Value) || (anItr.Value.mZOrder <= theWidget.mZOrder))
+					{
+						this.mWidgets.AddAfter(anItr, theWidget);
+						return;
+					}
 				}
-				anItr = anItr.Next;
+				while ((anItr != null) && (anItr.Value != this.mWidgets.First.Value))
+				{
+					anItr = anItr.Previous;
+					if (anItr.Value.mZOrder <= theWidget.mZOrder)
+					{
+						anItr = anItr.Next;
+						this.mWidgets.AddBefore(anItr, theWidget);
+						return;
+					}
+				}
+				this.mWidgets.AddLast(theWidget);
+				return;
 			}
-			goto IL_94;
 		}
 
 		public WidgetContainer()

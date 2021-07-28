@@ -52,8 +52,7 @@ namespace Lawn
 		public static int GetCurrentDaysSince2000()
 		{
 			DateTime today = DateTime.Today;
-			DateTime dateTime;
-			dateTime..ctor(2010, 1, 1);
+			DateTime dateTime = new DateTime(2010, 1, 1);
 			return (int)today.Subtract(dateTime).TotalDays;
 		}
 

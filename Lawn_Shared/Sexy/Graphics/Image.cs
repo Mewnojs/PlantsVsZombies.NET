@@ -97,7 +97,6 @@ namespace Sexy
 		{
 			this.celWidth = -1;
 			this.celHeight = -1;
-			base..ctor();
 			this.mWidth = 0;
 			this.mHeight = 0;
 			this.mNumRows = 1;
@@ -117,7 +116,6 @@ namespace Sexy
 		{
 			this.celWidth = -1;
 			this.celHeight = -1;
-			base..ctor();
 			this.mNumRows = 1;
 			this.mNumCols = 1;
 			this.mAnimInfo = null;
@@ -143,7 +141,6 @@ namespace Sexy
 		{
 			this.celWidth = -1;
 			this.celHeight = -1;
-			base..ctor();
 			this.Reset(theTexture, s, t, theWidth, theHeight);
 		}
 
@@ -151,7 +148,6 @@ namespace Sexy
 		{
 			this.celWidth = -1;
 			this.celHeight = -1;
-			base..ctor();
 			this.mNumRows = 1;
 			this.mNumCols = 1;
 			this.mAnimInfo = null;

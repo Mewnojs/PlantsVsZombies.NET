@@ -17,8 +17,8 @@ namespace Lawn
 
 		public void GetSeedPosition(SeedType theSeedType, ref int theX, ref int theY)
 		{
-			theX = (int)(theSeedType % SeedType.SEED_POTATOMINE * (SeedType)(Constants.SMALL_SEEDPACKET_WIDTH + Constants.SEED_PACKET_HORIZ_GAP));
-			theY = (int)(theSeedType / SeedType.SEED_POTATOMINE * (SeedType)(Constants.SMALL_SEEDPACKET_HEIGHT + Constants.SEED_PACKET_VERT_GAP));
+			theX = (int)((int)theSeedType % 4 * (Constants.SMALL_SEEDPACKET_WIDTH + Constants.SEED_PACKET_HORIZ_GAP));
+			theY = (int)((int)theSeedType / 4 * (Constants.SMALL_SEEDPACKET_HEIGHT + Constants.SEED_PACKET_VERT_GAP));
 		}
 
 		public override void Dispose()

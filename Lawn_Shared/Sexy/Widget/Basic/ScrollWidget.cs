@@ -346,7 +346,7 @@ namespace Sexy
 			{
 				CGPoint b = this.GetAbsPos() - this.mClientLastDown.GetAbsPos();
 				CGPoint a = new CGPoint(touch.location.X, touch.location.Y);
-				a + b;
+				//a + b;
 				CGMaths.CGPointTranslate(ref touch.location, b.mX, b.mY);
 				CGMaths.CGPointTranslate(ref touch.previousLocation, b.mX, b.mY);
 				this.mClientLastDown.TouchEnded(touch);

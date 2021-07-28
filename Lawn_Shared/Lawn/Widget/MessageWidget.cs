@@ -51,7 +51,7 @@ namespace Lawn
 			this.mLabelStringList.Clear();
 			for (int i = 0; i < this.mLabel.Length; i++)
 			{
-				this.mLabelStringList.Add(this.mLabel.get_Chars(i).ToString());
+				this.mLabelStringList.Add(this.mLabel[i].ToString());
 			}
 			this.mMessageStyle = theMessageStyle;
 			this.mReanimType = ReanimationType.REANIM_NONE;
@@ -409,13 +409,13 @@ namespace Lawn
 			this.mSlideOffTime = 100 + length;
 			for (int i = 0; i <= length; i++)
 			{
-				if (i == length || this.mLabel.get_Chars(i) == '\n')
+				if (i == length || this.mLabel[i] == '\n')
 				{
 					Debug.ASSERT(num < 5);
 					int num4 = i - num3;
 					int num5 = num3;
 					num3 = i + 1;
-					string theString = new string(this.mLabel.get_Chars(num5), num4);
+					string theString = new string(this.mLabel[num5], num4);
 					array[num] = (float)font.StringWidth(theString);
 					num2 = Math.Max(num2, array[num]);
 					num++;
@@ -430,8 +430,8 @@ namespace Lawn
 				reanimation.mIsAttachment = true;
 				reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_enter, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 0f);
 				this.mTextReanimID[j] = this.mApp.ReanimationGetID(reanimation);
-				num6 += (float)font.CharWidth(this.mLabel.get_Chars(j));
-				if (this.mLabel.get_Chars(j) == '\n')
+				num6 += (float)font.CharWidth(this.mLabel[j]);
+				if (this.mLabel[j] == '\n')
 				{
 					num++;
 					Debug.ASSERT(num < 5);

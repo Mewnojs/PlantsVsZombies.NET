@@ -95,14 +95,14 @@ namespace Lawn
 			if (array.Length > 1)
 			{
 				int num3;
-				int.TryParse(array[0], ref num3);
+				int.TryParse(array[0], out num3);
 				int num4;
-				int.TryParse(array[1], ref num4);
+				int.TryParse(array[1], out num4);
 				num = (num3 - 1) * 10 + num4;
 			}
 			else
 			{
-				int.TryParse(text, ref num);
+				int.TryParse(text, out num);
 			}
 			if (num <= 0)
 			{

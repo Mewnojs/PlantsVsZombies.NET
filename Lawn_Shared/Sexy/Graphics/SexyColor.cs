@@ -108,7 +108,7 @@ namespace Sexy
 
 		public SexyColor(string theElements)
 		{
-			this.Color = new Color((int)theElements.get_Chars(0), (int)theElements.get_Chars(1), (int)theElements.get_Chars(2), 255);
+			this.Color = new Color((int)theElements[0], (int)theElements[1], (int)theElements[2], 255);
 		}
 
 		public SexyColor(Color theColor)

@@ -58,7 +58,7 @@ internal static class StringFunctions
 			return null;
 		}
 		StringFunctions.activeposition++;
-		while (StringFunctions.activeposition < StringFunctions.activestring.Length && delimiters.IndexOf(StringFunctions.activestring.get_Chars(StringFunctions.activeposition)) > -1)
+		while (StringFunctions.activeposition < StringFunctions.activestring.Length && delimiters.IndexOf(StringFunctions.activestring[StringFunctions.activeposition]) > -1)
 		{
 			StringFunctions.activeposition++;
 		}
@@ -71,7 +71,7 @@ internal static class StringFunctions
 		{
 			StringFunctions.activeposition++;
 		}
-		while (StringFunctions.activeposition < StringFunctions.activestring.Length && delimiters.IndexOf(StringFunctions.activestring.get_Chars(StringFunctions.activeposition)) == -1);
+		while (StringFunctions.activeposition < StringFunctions.activestring.Length && delimiters.IndexOf(StringFunctions.activestring[StringFunctions.activeposition]) == -1);
 		return StringFunctions.activestring.Substring(num, StringFunctions.activeposition - num);
 	}
 

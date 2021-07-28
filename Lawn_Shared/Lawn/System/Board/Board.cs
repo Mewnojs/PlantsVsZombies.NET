@@ -9202,7 +9202,7 @@ namespace Lawn
 						g.DrawImage(AtlasResources.IMAGE_REANIM_ZENGARDEN_FERTILIZER_BAG2, zenButtonRect.mX + Constants.ZenGardenButton_Fertiliser_Offset.X, zenButtonRect.mY + Constants.ZenGardenButton_Fertiliser_Offset.Y + num);
 						g.SetColorizeImages(false);
 						string text;
-						if (!Board.cachedChargesStringsFertilizer.TryGetValue(num2, ref text))
+						if (!Board.cachedChargesStringsFertilizer.TryGetValue(num2, out text))
 						{
 							text = "x" + num2.ToString();
 							Board.cachedChargesStringsFertilizer.Add(num2, text);
@@ -9220,7 +9220,7 @@ namespace Lawn
 						g.DrawImage(AtlasResources.IMAGE_REANIM_ZENGARDEN_BUGSPRAY_BOTTLE, zenButtonRect.mX + Constants.ZenGardenButton_BugSpray_Offset.X, zenButtonRect.mY + Constants.ZenGardenButton_BugSpray_Offset.Y + num);
 						g.SetColorizeImages(false);
 						string text2;
-						if (!Board.cachedChargesStringsBugSpray.TryGetValue(num3, ref text2))
+						if (!Board.cachedChargesStringsBugSpray.TryGetValue(num3, out text2))
 						{
 							text2 = Common.StrFormat_(TodStringFile.TodStringTranslate("[BUG_SPRAY_MULTIPLIED_X]"), num3);
 							Board.cachedChargesStringsBugSpray.Add(num3, text2);
@@ -9242,7 +9242,7 @@ namespace Lawn
 						g.DrawImage(AtlasResources.IMAGE_CHOCOLATE, zenButtonRect.mX + Constants.ZenGardenButton_Chocolate_Offset.X, zenButtonRect.mY + Constants.ZenGardenButton_Chocolate_Offset.Y + num);
 						g.SetColorizeImages(false);
 						string text3;
-						if (!Board.cachedChargesStringsChocolate.TryGetValue(num4, ref text3))
+						if (!Board.cachedChargesStringsChocolate.TryGetValue(num4, out text3))
 						{
 							text3 = Common.StrFormat_(TodStringFile.TodStringTranslate("[CHOCOLATE_MULTIPLIED_X]"), num4);
 							Board.cachedChargesStringsChocolate.Add(num4, text3);

@@ -4,8 +4,8 @@ using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Threading;
-using Microsoft.Devices;
-using Microsoft.Phone.Tasks;
+//using Microsoft.Devices;
+//using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.GamerServices;
@@ -153,7 +153,7 @@ namespace Sexy
 			bool result;
 			try
 			{
-				IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
+				IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForAssembly();//GetUserStoreForApplication();
 				if (userStoreForApplication.FileExists(theFileName))
 				{
 					userStoreForApplication.DeleteFile(theFileName);
@@ -260,7 +260,7 @@ namespace Sexy
 
 		public bool FileExists(string filename)
 		{
-			IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
+			IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForAssembly();//GetUserStoreForApplication();
 			return userStoreForApplication.FileExists(filename);
 		}
 
@@ -552,14 +552,14 @@ namespace Sexy
 		{
 			try
 			{
-				using (IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication())
+				using (IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForAssembly()/*GetUserStoreForApplication()*/)
 				{
 					string directoryName = Path.GetDirectoryName(theFileName);
 					if (!userStoreForApplication.DirectoryExists(directoryName))
 					{
 						userStoreForApplication.CreateDirectory(directoryName);
 					}
-					using (IsolatedStorageFileStream isolatedStorageFileStream = new IsolatedStorageFileStream(theFileName, 4, userStoreForApplication))
+					using (IsolatedStorageFileStream isolatedStorageFileStream = new IsolatedStorageFileStream(theFileName, FileMode.OpenOrCreate, userStoreForApplication))
 					{
 						isolatedStorageFileStream.Write(theBuffer.Data, 0, theBuffer.Data.Length);
 						isolatedStorageFileStream.Close();
@@ -578,13 +578,13 @@ namespace Sexy
 		{
 			try
 			{
-				using (IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication())
+				using (IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForAssembly()/*GetUserStoreForApplication()*/)
 				{
 					if (!userStoreForApplication.FileExists(theFileName))
 					{
 						return false;
 					}
-					using (IsolatedStorageFileStream isolatedStorageFileStream = userStoreForApplication.OpenFile(theFileName, 4))
+					using (IsolatedStorageFileStream isolatedStorageFileStream = userStoreForApplication.OpenFile(theFileName, FileMode.OpenOrCreate))
 					{
 						byte[] array = new byte[isolatedStorageFileStream.Length];
 						isolatedStorageFileStream.Read(array, 0, (int)isolatedStorageFileStream.Length);
@@ -744,8 +744,9 @@ namespace Sexy
 
 		public void DoVibration()
 		{
-			VibrateController @default = VibrateController.Default;
-			@default.Start(TimeSpan.FromMilliseconds(500.0));
+			Debug.OutputDebug<NotImplementedException>(new NotImplementedException("DoVibration: no vibrator in this platform"));
+			//VibrateController @default = VibrateController.Default;
+			//@default.Start(TimeSpan.FromMilliseconds(500.0));
 		}
 
 		public virtual void Shutdown()
@@ -795,10 +796,10 @@ namespace Sexy
 			{
 				if (video == VideoType.Credits)
 				{
-					SexyAppBase.VideoPlayer.Media = new Uri("Content/video/credits.wmv", 2);
-					SexyAppBase.VideoPlayer.Location = 1;
-					SexyAppBase.VideoPlayer.Controls = 31;
-					SexyAppBase.VideoPlayer.Show();
+					//SexyAppBase.VideoPlayer.Media = new Uri("Content/video/credits.wmv", 2);
+					//SexyAppBase.VideoPlayer.Location = 1;
+					//SexyAppBase.VideoPlayer.Controls = 31;
+					//SexyAppBase.VideoPlayer.Show();
 				}
 			}
 			catch (Exception ex)
@@ -932,7 +933,7 @@ namespace Sexy
 
 		private static Random rand = new Random(DateTime.UtcNow.Millisecond);
 
-		public static MediaPlayerLauncher VideoPlayer = new MediaPlayerLauncher();
+		//public static MediaPlayerLauncher VideoPlayer = new MediaPlayerLauncher();
 
 		protected bool wantToShowUpdateMessage;
 	}

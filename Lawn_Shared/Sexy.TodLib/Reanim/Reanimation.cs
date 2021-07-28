@@ -14,7 +14,7 @@ namespace Sexy.TodLib
 		public static string ToLower(string s)
 		{
 			string text;
-			if (!Reanimation.lowercaseCache.TryGetValue(s, ref text))
+			if (!Reanimation.lowercaseCache.TryGetValue(s, out text))
 			{
 				text = s.ToLower();
 				Reanimation.lowercaseCache.Add(s, text);
@@ -547,12 +547,12 @@ namespace Sexy.TodLib
 			theFrameTime.mAnimFrameBeforeInt = (short)(num3 + 0.5f);
 			if (theFrameTime.mAnimFrameBeforeInt >= this.mFrameStart + this.mFrameCount - 1)
 			{
-				theFrameTime.mAnimFrameBeforeInt = this.mFrameStart + this.mFrameCount - 1;
+				theFrameTime.mAnimFrameBeforeInt = (short)(this.mFrameStart + this.mFrameCount - 1);
 				theFrameTime.mAnimFrameAfterInt = theFrameTime.mAnimFrameBeforeInt;
 			}
 			else
 			{
-				theFrameTime.mAnimFrameAfterInt = theFrameTime.mAnimFrameBeforeInt + 1;
+				theFrameTime.mAnimFrameAfterInt = (short)(theFrameTime.mAnimFrameBeforeInt + 1);
 			}
 			this.mFrameTime = theFrameTime;
 		}
@@ -987,8 +987,8 @@ namespace Sexy.TodLib
 			{
 				mFraction = 0f,
 				mAnimFrameBeforeInt = num,
-				mAnimFrameAfterInt = num + 1
-			}, false);
+				mAnimFrameAfterInt = (short)(num + 1)
+            }, false);
 			Reanimation.MatrixFromTransform(reanimatorTransform, out theBasePoseMatrix.mMatrix);
 			reanimatorTransform.PrepareForReuse();
 		}
@@ -1199,7 +1199,7 @@ namespace Sexy.TodLib
 				}
 				string text = theTransform.mText.Substring(num2 + 1, num4 - num2 - 1);
 				float num5;
-				if (float.TryParse(text, ref num5))
+				if (float.TryParse(text, out num5))
 				{
 					theAttacherInfo.mAnimRate = num5;
 				}

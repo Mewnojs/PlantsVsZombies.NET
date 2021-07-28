@@ -133,9 +133,9 @@ namespace Sexy
 							LeaderBoardComm.gamerImages.Remove(gamer.Gamertag);
 						}
 						GamerProfile gamerProfile = gamer.EndGetProfile(result);
-						Texture2D theTexture = Texture2D.FromStream(GlobalStaticVars.g.GraphicsDevice, gamerProfile.GetGamerPicture());
-						Image image = new Image(theTexture);
-						LeaderBoardComm.gamerImages.Add(gamer.Gamertag, image);
+						//Texture2D theTexture = Texture2D.FromStream(GlobalStaticVars.g.GraphicsDevice, gamerProfile.GetGamerPicture());
+						//Image image = new Image(theTexture);
+						//LeaderBoardComm.gamerImages.Add(gamer.Gamertag, image);
 					}
 				}
 				catch (GameUpdateRequiredException)
@@ -157,7 +157,7 @@ namespace Sexy
 			}
 			lock (LeaderBoardComm.LeaderboardLock)
 			{
-				if (!LeaderBoardComm.gamerImages.TryGetValue(gamer.Gamertag, ref unknownPlayerImage))
+				if (!LeaderBoardComm.gamerImages.TryGetValue(gamer.Gamertag, out unknownPlayerImage))
 				{
 					unknownPlayerImage = LeaderBoardComm.UnknownPlayerImage;
 					LeaderBoardComm.gamerImages.Add(gamer.Gamertag, unknownPlayerImage);
@@ -258,7 +258,7 @@ namespace Sexy
 		{
 			LeaderBoardLoader leaderBoardLoader = LeaderBoardComm.leaderboardLoaders[LeaderBoardHelper.GetLeaderboardNumber(state)];
 			LeaderboardEntry result;
-			if (!leaderBoardLoader.LeaderboardEntries.TryGetValue(index, ref result))
+			if (!leaderBoardLoader.LeaderboardEntries.TryGetValue(index, out result))
 			{
 				leaderBoardLoader.LoadEntry(index);
 			}

@@ -1,0 +1,2 @@
+﻿#define WINDOWS
+#define DIRECTX

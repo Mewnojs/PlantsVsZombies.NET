@@ -81,7 +81,8 @@ namespace Sexy
 
 		public static bool operator ==(AchievementItem a, AchievementItem b)
 		{
-			return (a == null && b == null) || (a != null && b != null && a.Equals(b));
+			return (!(a is null) || !(b is null)) ? (!(a is null) && (!(b is null) && a.Equals(b))) : true;
+
 		}
 
 		public static bool operator !=(AchievementItem a, AchievementItem b)

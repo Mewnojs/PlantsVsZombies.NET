@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using Lawn;
-using Microsoft.Phone.Info;
-using Microsoft.Phone.Shell;
+//using Microsoft.Phone.Info;
+//using Microsoft.Phone.Shell;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
@@ -18,7 +18,7 @@ namespace Sexy
 			Main.SetupTileSchedule();
 			Main.graphics = Graphics.GetNew(this);
 			Main.SetLowMem();
-			Main.graphics.IsFullScreen = true;
+			Main.graphics.IsFullScreen = false;
 			Guide.SimulateTrialMode = false;
 			Main.graphics.PreferredBackBufferWidth = 800;
 			Main.graphics.PreferredBackBufferHeight = 480;
@@ -28,14 +28,15 @@ namespace Sexy
 			GraphicsState.mGraphicsDeviceManager.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(this.mGraphicsDeviceManager_PreparingDeviceSettings);
 			base.TargetElapsedTime = TimeSpan.FromSeconds(0.03333333333333333);
 			base.Exiting += new EventHandler<EventArgs>(this.Main_Exiting);
-			PhoneApplicationService.Current.UserIdleDetectionMode = 0;
-			PhoneApplicationService.Current.Launching += new EventHandler<LaunchingEventArgs>(this.Game_Launching);
-			PhoneApplicationService.Current.Activated += new EventHandler<ActivatedEventArgs>(this.Game_Activated);
-			PhoneApplicationService.Current.Closing += new EventHandler<ClosingEventArgs>(this.Current_Closing);
-			PhoneApplicationService.Current.Deactivated += new EventHandler<DeactivatedEventArgs>(this.Current_Deactivated);
+			//PhoneApplicationService.Current.UserIdleDetectionMode = 0;
+			//PhoneApplicationService.Current.Launching += new EventHandler<LaunchingEventArgs>(this.Game_Launching);
+			//PhoneApplicationService.Current.Activated += new EventHandler<ActivatedEventArgs>(this.Game_Activated);
+			//PhoneApplicationService.Current.Closing += new EventHandler<ClosingEventArgs>(this.Current_Closing);
+			//PhoneApplicationService.Current.Deactivated += new EventHandler<DeactivatedEventArgs>(this.Current_Deactivated);
+			this.IsMouseVisible = true;
 		}
 
-		private void Current_Deactivated(object sender, DeactivatedEventArgs e)
+		/*private void Current_Deactivated(object sender, DeactivatedEventArgs e)
 		{
 			GlobalStaticVars.gSexyAppBase.Tombstoned();
 		}
@@ -52,24 +53,24 @@ namespace Sexy
 		private void Game_Launching(object sender, LaunchingEventArgs e)
 		{
 			PhoneApplicationService.Current.State.Clear();
-		}
+		}*/
 
 		public static bool RunWhenLocked
 		{
-			get
-			{
-				return PhoneApplicationService.Current.ApplicationIdleDetectionMode == 1;
-			}
-			set
-			{
-				try
-				{
-					PhoneApplicationService.Current.ApplicationIdleDetectionMode = (value ? 1 : 0);
-				}
-				catch
-				{
-				}
-			}
+			get;
+			//{
+			//	return PhoneApplicationService.Current.ApplicationIdleDetectionMode == 1;
+			//}
+			set;
+			//{
+			//	try
+			//	{
+			//		PhoneApplicationService.Current.ApplicationIdleDetectionMode = (value ? 1 : 0);
+			//	}
+			//	catch
+			//	{
+			//	}
+			//}
 		}
 
 		private static void SetupTileSchedule()
@@ -123,7 +124,7 @@ namespace Sexy
 
 		public void CompensateForSlowUpdate()
 		{
-			base.ResetElapsedTime();
+			//base.ResetElapsedTime();
 		}
 
 		public static bool LOW_MEMORY_DEVICE { get; private set; }
@@ -165,9 +166,9 @@ namespace Sexy
 
 		private static void SetLowMem()
 		{
-			object obj;
-			DeviceExtendedProperties.TryGetValue("DeviceTotalMemory", ref obj);
-			Main.DO_LOW_MEMORY_OPTIONS = (Main.LOW_MEMORY_DEVICE = ((long)obj / 1024L / 1024L <= 256L));
+			//object obj;
+			//DeviceExtendedProperties.TryGetValue("DeviceTotalMemory", ref obj);
+			Main.DO_LOW_MEMORY_OPTIONS = false;//(Main.LOW_MEMORY_DEVICE = ((long)obj / 1024L / 1024L <= 256L));
 			Main.LOW_MEMORY_DEVICE = false;
 		}
 
@@ -243,6 +244,22 @@ namespace Sexy
 			{
 				return;
 			}
+			MouseState msstate = Mouse.GetState();
+			_Touch mstouch = default(_Touch);
+			mstouch.location = new CGPoint(msstate.Position.X, msstate.Position.Y);
+			if (msstate.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
+			{
+				GlobalStaticVars.gSexyAppBase.TouchBegan(mstouch);
+			}
+			else if (msstate.LeftButton == ButtonState.Pressed && previousMouseState.Position != msstate.Position)
+			{
+				GlobalStaticVars.gSexyAppBase.TouchMoved(mstouch);
+			}
+			else if (msstate.LeftButton == ButtonState.Released && previousMouseState.LeftButton == ButtonState.Pressed)
+			{
+				GlobalStaticVars.gSexyAppBase.TouchEnded(mstouch);
+			}
+
 			GamePadState state = GamePad.GetState(PlayerIndex.One);
 			if (state.Buttons.Back == ButtonState.Pressed && this.previousGamepadState.Buttons.Back == ButtonState.Released)
 			{
@@ -284,6 +301,7 @@ namespace Sexy
 				}
 			}
 			this.previousGamepadState = state;
+			this.previousMouseState = msstate;
 		}
 
 		protected override void OnActivated(object sender, EventArgs args)
@@ -346,12 +364,12 @@ namespace Sexy
 			{
 				Constants.Language = Constants.LanguageIndex.en;
 			}
-			if ((Main.graphics.GraphicsDevice.PresentationParameters.BackBufferWidth == 480 && Main.graphics.GraphicsDevice.PresentationParameters.BackBufferHeight == 800) || (Main.graphics.GraphicsDevice.PresentationParameters.BackBufferWidth == 800 && Main.graphics.GraphicsDevice.PresentationParameters.BackBufferHeight == 480))
-			{
+			//if ((Main.graphics.GraphicsDevice.PresentationParameters.BackBufferWidth == 480 && Main.graphics.GraphicsDevice.PresentationParameters.BackBufferHeight == 800) || (Main.graphics.GraphicsDevice.PresentationParameters.BackBufferWidth == 800 && Main.graphics.GraphicsDevice.PresentationParameters.BackBufferHeight == 480))
+			//{
 				AtlasResources.mAtlasResources = new AtlasResources_480x800();
 				Constants.Load480x800();
 				return;
-			}
+			//}
 			throw new Exception("Unsupported Resolution");
 		}
 
@@ -376,5 +394,6 @@ namespace Sexy
 		private static bool wantToSuppressDraw;
 
 		private GamePadState previousGamepadState = default(GamePadState);
-	}
+        private MouseState previousMouseState = default(MouseState);
+    }
 }
