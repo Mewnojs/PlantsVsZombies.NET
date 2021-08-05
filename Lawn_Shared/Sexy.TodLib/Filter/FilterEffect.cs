@@ -7,6 +7,10 @@ namespace Sexy.TodLib
 	{
 		public static void FilterEffectInitForApp()
 		{
+			for (int i = 0; i < (int)FilterEffectType.NUM_FILTER_EFFECTS; i++) 
+			{
+				gFilterMap.Add(new Dictionary<Image, Image>());
+			}
 		}
 
 		public static void FilterEffectDisposeForApp()
@@ -15,16 +19,26 @@ namespace Sexy.TodLib
 
 		public static Image FilterEffectGetImage(Image theImage, FilterEffectType theFilterEffect)
 		{
-			return theImage;
+			if (theFilterEffect == FilterEffectType.FILTER_EFFECT_NONE)
+				return theImage;
+			else 
+			{
+				if (!gFilterMap[(int)theFilterEffect].ContainsKey(theImage))
+					gFilterMap[(int)theFilterEffect][theImage] = FilterEffectCreateImage(theImage, theFilterEffect);
+				return gFilterMap[(int)theFilterEffect][theImage];
+			}
 		}
 
 		private static Image FilterEffectCreateImage(Image theImage, FilterEffectType theFilterEffect)
 		{
+			theImage = AtlasResources.IMAGE_CACHED_PLANT_00;
 			MemoryImage memoryImage = new MemoryImage();
-			memoryImage.mWidth = theImage.mWidth;
-			memoryImage.mWidth = theImage.mHeight;
+			memoryImage.Create(theImage.mWidth, theImage.mHeight);
+			memoryImage.mNumCols = theImage.mNumCols;
+			memoryImage.mNumRows = theImage.mNumRows;
 			Graphics @new = Graphics.GetNew(memoryImage);
-			@new.DrawImage(theImage, 0, 0);
+			@new.SetRenderTarget(memoryImage.RenderTarget);
+			@new.DrawImage(theImage, 0, 0); // TODO: not working, how to fix it? 
 			switch (theFilterEffect)
 			{
 			case FilterEffectType.FILTER_EFFECT_WASHED_OUT:
@@ -37,8 +51,8 @@ namespace Sexy.TodLib
 				FilterEffect.FilterEffectDoWhite(memoryImage);
 				break;
 			}
-			memoryImage.mNumCols = theImage.mNumCols;
-			memoryImage.mNumRows = theImage.mNumRows;
+			
+			@new.SetRenderTarget(null);
 			@new.PrepareForReuse();
 			return memoryImage;
 		}
@@ -69,13 +83,13 @@ namespace Sexy.TodLib
 
 		private static void FilterEffectDoLumSat(MemoryImage theImage, float aLum, float aSat)
 		{
-			int[] array = new int[theImage.mWidth * theImage.mHeight];
+			int[] array = new int[theImage.Texture.Width * theImage.Texture.Height];
 			theImage.Texture.GetData<int>(array);
 			for (int i = 0; i < theImage.mHeight; i++)
 			{
 				for (int j = 0; j < theImage.mWidth; j++)
 				{
-					int num = array[j + i * theImage.mWidth];
+					int num = array[j + i * theImage.Texture.Width];
 					char c = (char)(num & 255);
 					char c2 = (char)(num >> 8 & 255);
 					char c3 = (char)(num >> 16 & 255);
@@ -93,7 +107,7 @@ namespace Sexy.TodLib
 					int num7 = TodCommon.ClampInt((int)(num2 * 255f), 0, 255);
 					int num8 = TodCommon.ClampInt((int)(num3 * 255f), 0, 255);
 					int num9 = TodCommon.ClampInt((int)(num4 * 255f), 0, 255);
-					array[j + i * theImage.mWidth] = ((int)((int)c4 << 24) | num9 << 16 | num8 << 8 | num7);
+					array[j + i * theImage.Texture.Width] = ((int)((int)c4 << 24) | num9 << 16 | num8 << 8 | num7);
 				}
 			}
 			theImage.Texture.SetData<int>(array);

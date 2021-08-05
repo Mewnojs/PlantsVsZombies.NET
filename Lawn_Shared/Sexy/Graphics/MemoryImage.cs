@@ -46,10 +46,10 @@ namespace Sexy
 			this.mParentWidth = theWidth;
 			this.mHeight = theHeight;
 			this.mParentHeight = theHeight;
-			int num = GraphicsState.GetClosestPowerOf2Above(this.mWidth);
-			int num2 = GraphicsState.GetClosestPowerOf2Above(this.mHeight);
-			num = Math.Max(16, num);
-			num2 = Math.Max(16, num2);
+			int num = this.mWidth;//GraphicsState.GetClosestPowerOf2Above(this.mWidth);
+			int num2 = this.mHeight;//GraphicsState.GetClosestPowerOf2Above(this.mHeight);
+			//num = Math.Max(16, num);
+			//num2 = Math.Max(16, num2);
 			this.mOwnsTexture = true;
 			this.mMaxS = (float)this.mWidth / (float)num;
 			this.mMaxT = (float)this.mHeight / (float)num2;

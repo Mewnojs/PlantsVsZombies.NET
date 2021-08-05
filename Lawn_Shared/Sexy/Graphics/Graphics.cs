@@ -710,6 +710,7 @@ namespace Sexy
 			}
 		}
 
+
 		public void DrawImage(Image theImage, int theX, int theY, TRect theSrcRect)
 		{
 			this.BeginPrimitiveBatch(theImage);

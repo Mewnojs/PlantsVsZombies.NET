@@ -351,6 +351,28 @@ namespace Lawn
 			{
 				Debug.OutputDebug<string>(Common.StrFormat_("Content Update: Failed to parse properties file: {0}\n", propertiesParser.GetErrorText()));
 			}
+
+			// Cached GameObjects
+			/*for (SeedType i = 0; i < SeedType.NUM_SEED_TYPES; i++) 
+			{
+				if (i == SeedType.SEED_SPROUT) continue;
+				mReanimatorCache.MakeCachedPlantFrame(i, DrawVariation.VARIATION_NORMAL);
+			}
+			for (LawnMowerType i = 0; i < LawnMowerType.NUM_MOWER_TYPES ; i++)
+			{
+				mReanimatorCache.MakeCachedMowerFrame(i);
+			}
+			for (ZombieType i = 0; i < ZombieType.NUM_CACHED_ZOMBIE_TYPES; i++)
+			{
+				if (i == ZombieType.NUM_ZOMBIE_TYPES) continue;
+				mReanimatorCache.MakeCachedZombieFrame(i);
+			}
+			for (DrawVariation j = DrawVariation.VARIATION_MARIGOLD_WHITE; j <= DrawVariation.VARIATION_MARIGOLD_LIGHT_GREEN; j++) 
+			{
+				mReanimatorCache.MakeCachedPlantFrame(SeedType.SEED_MARIGOLD, j);
+			}*/
+			//mReanimatorCache.MakeCachedPlantFrame(SeedType.SEED_MARIGOLD, DrawVariation.VARIATION_MARIGOLD_WHITE);
+
 			GC.Collect();
 			SexyAppBase.XnaGame.CompensateForSlowUpdate();
 		}
@@ -1283,6 +1305,7 @@ namespace Lawn
 			this.mSoundSystem = new TodFoley();
 			this.mEffectSystem = new EffectSystem();
 			this.mEffectSystem.EffectSystemInitialize();
+			FilterEffect.FilterEffectInitForApp();
 			this.mKonamiCheck = new TypingCheck();
 			this.mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_UP);
 			this.mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_UP);

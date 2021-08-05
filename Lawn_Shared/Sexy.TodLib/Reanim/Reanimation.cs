@@ -406,6 +406,7 @@ namespace Sexy.TodLib
 			{
 				if (image != null)
 				{
+					//image = FilterEffect.FilterEffectGetImage(image, mFilterEffect);
 					if (reanimatorTrackInstance.mImageOverride != null)
 					{
 						image = reanimatorTrackInstance.mImageOverride;
@@ -448,7 +449,8 @@ namespace Sexy.TodLib
 			return true;
 		}
 
-		public void GetCurrentTransform(int theTrackIndex, out ReanimatorTransform aTransformCurrent, bool nullIfInvalidFrame)
+
+        public void GetCurrentTransform(int theTrackIndex, out ReanimatorTransform aTransformCurrent, bool nullIfInvalidFrame)
 		{
 			ReanimatorFrameTime theFrameTime;
 			this.GetFrameTime(out theFrameTime);
