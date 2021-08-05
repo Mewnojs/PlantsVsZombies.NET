@@ -212,6 +212,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)PerfTimer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RandomNumbers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Resources.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sexy\System\Utils\BlendStates.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\Widget\Achievement\AchievementId.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\Widget\Achievement\AchievementItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\Widget\Achievement\Achievements.cs" />

@@ -1,20 +1,28 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 
 namespace Sexy.TodLib
 {
-	internal class FilterEffect
+	class FilterEffect
 	{
 		public static void FilterEffectInitForApp()
 		{
 			for (int i = 0; i < (int)FilterEffectType.NUM_FILTER_EFFECTS; i++) 
 			{
-				gFilterMap.Add(new Dictionary<Image, Image>());
+				gFilterMap.Add(new Dictionary<Texture2D, Texture2D>());
 			}
 		}
 
 		public static void FilterEffectDisposeForApp()
 		{
+		}
+
+		public static void FilterEffectInitTexture(Texture2D texture, FilterEffectType theFilterEffect) 
+		{
+			if (!gFilterMap[(int)theFilterEffect].ContainsKey(texture))
+				gFilterMap[(int)theFilterEffect][texture] = FilterEffectCreateTexture(texture, theFilterEffect);
 		}
 
 		public static Image FilterEffectGetImage(Image theImage, FilterEffectType theFilterEffect)
@@ -23,22 +31,51 @@ namespace Sexy.TodLib
 				return theImage;
 			else 
 			{
-				if (!gFilterMap[(int)theFilterEffect].ContainsKey(theImage))
-					gFilterMap[(int)theFilterEffect][theImage] = FilterEffectCreateImage(theImage, theFilterEffect);
-				return gFilterMap[(int)theFilterEffect][theImage];
+				FilterEffectInitTexture(theImage.Texture, theFilterEffect);
+				MemoryImage memoryImage = new MemoryImage();
+				memoryImage.mS = theImage.mS;
+				memoryImage.mT = theImage.mT;
+				memoryImage.mWidth = theImage.mWidth;
+				memoryImage.mHeight = theImage.mHeight;
+				memoryImage.mNumCols = theImage.mNumCols;
+				memoryImage.mNumRows = theImage.mNumRows;
+				memoryImage.Texture = gFilterMap[(int)theFilterEffect][theImage.Texture];
+				return memoryImage;
 			}
 		}
 
-		private static Image FilterEffectCreateImage(Image theImage, FilterEffectType theFilterEffect)
+		private static Texture2D FilterEffectCreateTexture(Texture2D theTexture, FilterEffectType theFilterEffect)
 		{
-			theImage = AtlasResources.IMAGE_CACHED_PLANT_00;
 			MemoryImage memoryImage = new MemoryImage();
-			memoryImage.Create(theImage.mWidth, theImage.mHeight);
-			memoryImage.mNumCols = theImage.mNumCols;
-			memoryImage.mNumRows = theImage.mNumRows;
-			Graphics @new = Graphics.GetNew(memoryImage);
-			@new.SetRenderTarget(memoryImage.RenderTarget);
-			@new.DrawImage(theImage, 0, 0); // TODO: not working, how to fix it? 
+			memoryImage.Create(theTexture.Width, theTexture.Height);
+			GraphicsDevice graphicsDevice = GlobalStaticVars.g.GraphicsDevice;
+			graphicsDevice.SetRenderTarget(memoryImage.RenderTarget);
+			SpriteBatch spriteBatch = new SpriteBatch(graphicsDevice);
+
+			BlendState imageLoadBlendAlpha = new BlendState
+			{
+				ColorWriteChannels = ColorWriteChannels.Alpha,
+				AlphaDestinationBlend = Blend.Zero,
+				ColorDestinationBlend = Blend.Zero,
+				AlphaSourceBlend = Blend.One,
+				ColorSourceBlend = Blend.One
+			};
+
+		BlendState blendColorLoadState = new BlendState
+		{
+			AlphaDestinationBlend = Blend.Zero,
+			ColorDestinationBlend = Blend.Zero,
+			AlphaSourceBlend = Blend.SourceAlpha,
+			ColorSourceBlend = Blend.SourceAlpha
+		};
+		graphicsDevice.Clear(Color.Transparent);
+			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+			spriteBatch.Draw(theTexture, theTexture.Bounds, Color.White);
+			spriteBatch.End();
+			//spriteBatch.Begin(SpriteSortMode.Immediate, imageLoadBlendAlpha);
+			//spriteBatch.Draw(theTexture, theTexture.Bounds, Color.White);
+			//spriteBatch.End();
+			graphicsDevice.SetRenderTarget(null);
 			switch (theFilterEffect)
 			{
 			case FilterEffectType.FILTER_EFFECT_WASHED_OUT:
@@ -51,10 +88,8 @@ namespace Sexy.TodLib
 				FilterEffect.FilterEffectDoWhite(memoryImage);
 				break;
 			}
-			
-			@new.SetRenderTarget(null);
-			@new.PrepareForReuse();
-			return memoryImage;
+			Texture2D result = memoryImage.Texture;
+			return result;
 		}
 
 		private static void FilterEffectDoWashedOut(MemoryImage theImage)
@@ -85,9 +120,9 @@ namespace Sexy.TodLib
 		{
 			int[] array = new int[theImage.Texture.Width * theImage.Texture.Height];
 			theImage.Texture.GetData<int>(array);
-			for (int i = 0; i < theImage.mHeight; i++)
+			for (int i = 0; i < theImage.Texture.Height; i++)
 			{
-				for (int j = 0; j < theImage.mWidth; j++)
+				for (int j = 0; j < theImage.Texture.Width; j++)
 				{
 					int num = array[j + i * theImage.Texture.Width];
 					char c = (char)(num & 255);
@@ -202,6 +237,6 @@ namespace Sexy.TodLib
 			}
 		}
 
-		public static List<Dictionary<Image, Image>> gFilterMap = new List<Dictionary<Image, Image>>();
+		public static List<Dictionary<Texture2D, Texture2D>> gFilterMap = new List<Dictionary<Texture2D, Texture2D>>();
 	}
 }

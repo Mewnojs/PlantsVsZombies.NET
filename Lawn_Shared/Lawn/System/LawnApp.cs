@@ -296,6 +296,11 @@ namespace Lawn
 			{
 				bool flag = this.mCloseRequest;
 			}
+			// init filter effects
+			for (int i = 0; i < (int)FilterEffectType.NUM_FILTER_EFFECTS; i++)
+			{
+				FilterEffect.FilterEffectInitTexture(AtlasResources.IMAGE_REANIM_IMITATER_BLINK1.Texture, (FilterEffectType)i);
+			}
 		}
 
 		public virtual void LoadingCompleted()
@@ -351,9 +356,10 @@ namespace Lawn
 			{
 				Debug.OutputDebug<string>(Common.StrFormat_("Content Update: Failed to parse properties file: {0}\n", propertiesParser.GetErrorText()));
 			}
-
+			
+			
 			// Cached GameObjects
-			/*for (SeedType i = 0; i < SeedType.NUM_SEED_TYPES; i++) 
+			for (SeedType i = 0; i < SeedType.NUM_SEED_TYPES; i++) 
 			{
 				if (i == SeedType.SEED_SPROUT) continue;
 				mReanimatorCache.MakeCachedPlantFrame(i, DrawVariation.VARIATION_NORMAL);
@@ -370,7 +376,7 @@ namespace Lawn
 			for (DrawVariation j = DrawVariation.VARIATION_MARIGOLD_WHITE; j <= DrawVariation.VARIATION_MARIGOLD_LIGHT_GREEN; j++) 
 			{
 				mReanimatorCache.MakeCachedPlantFrame(SeedType.SEED_MARIGOLD, j);
-			}*/
+			}
 			//mReanimatorCache.MakeCachedPlantFrame(SeedType.SEED_MARIGOLD, DrawVariation.VARIATION_MARIGOLD_WHITE);
 
 			GC.Collect();

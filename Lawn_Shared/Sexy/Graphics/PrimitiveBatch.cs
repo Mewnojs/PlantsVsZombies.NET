@@ -26,6 +26,13 @@ namespace Sexy
 			this.screenHeight = this.device.PresentationParameters.BackBufferHeight;
 		}
 
+		public void SetupMatrices(int width, int height)
+		{
+			this.basicEffect.View = Matrix.CreateOrthographicOffCenter(0f, width, height, 0f, 0f, 1f);
+			this.screenWidth = width;
+			this.screenHeight = height;
+		}
+
 		public void Draw(Image img, TRect destination, TRect source, Color colour, bool extraOffset, bool sourceOffsetsUsed)
 		{
 			Matrix? matrix = default(Matrix?);
@@ -161,7 +168,7 @@ namespace Sexy
 			}
 			if (this.screenWidth != this.device.PresentationParameters.BackBufferWidth || this.screenHeight != this.device.PresentationParameters.BackBufferHeight)
 			{
-				this.SetupMatrices();
+				//this.SetupMatrices();
 			}
 			if (primitiveType == PrimitiveType.LineStrip || primitiveType == PrimitiveType.TriangleStrip)
 			{

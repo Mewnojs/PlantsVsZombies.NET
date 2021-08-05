@@ -406,7 +406,7 @@ namespace Sexy.TodLib
 			{
 				if (image != null)
 				{
-					//image = FilterEffect.FilterEffectGetImage(image, mFilterEffect);
+					image = FilterEffect.FilterEffectGetImage(image, mFilterEffect);
 					if (reanimatorTrackInstance.mImageOverride != null)
 					{
 						image = reanimatorTrackInstance.mImageOverride;

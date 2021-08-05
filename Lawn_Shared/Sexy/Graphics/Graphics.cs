@@ -82,6 +82,7 @@ namespace Sexy
 				graphics.mDestImage = theDestImage.RenderTarget;
 				graphics.mClipRect = new TRect(0, 0, graphics.mDestImage.Width, graphics.mDestImage.Height);
 				graphics.SetRenderTarget(graphics.mDestImage);
+				graphics.Clear(/*Color.Black*/Color.Transparent);
 				return graphics;
 			}
 			return new Graphics(theDestImage);
@@ -312,6 +313,14 @@ namespace Sexy
 			}
 			this.mDestImage = renderTarget;
 			this.GraphicsDevice.SetRenderTarget(this.mDestImage);
+			if (renderTarget == null)
+			{
+				primitiveBatch.SetupMatrices();
+			}
+			else 
+			{
+				primitiveBatch.SetupMatrices(renderTarget.Width, renderTarget.Height);
+			}
 			this.ClearClipRect();
 			if (spritebatchBegan)
 			{

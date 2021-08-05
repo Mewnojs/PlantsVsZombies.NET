@@ -508,6 +508,34 @@ namespace Lawn
 					this.mInFlowerPot = true;
 				}
 			}
+			if (theImitaterType == SeedType.SEED_IMITATER)
+			{
+				FilterEffectType mFilterEffect = FilterEffectType.FILTER_EFFECT_WASHED_OUT;
+				if (this.mSeedType == SeedType.SEED_HYPNOSHROOM || this.mSeedType == SeedType.SEED_SQUASH || this.mSeedType == SeedType.SEED_POTATOMINE || this.mSeedType == SeedType.SEED_GARLIC || this.mSeedType == SeedType.SEED_LILYPAD)
+				{
+					mFilterEffect = FilterEffectType.FILTER_EFFECT_LESS_WASHED_OUT;
+				}
+				Reanimation reanimation1 = this.mApp.ReanimationTryToGet(mBodyReanimID);
+				if (reanimation != null)
+				{
+					reanimation.mFilterEffect = mFilterEffect;
+				}
+				Reanimation reanimation2 = this.mApp.ReanimationTryToGet(mHeadReanimID);
+				if (reanimation2 != null)
+				{
+					reanimation2.mFilterEffect = mFilterEffect;
+				}
+				Reanimation reanimation3 = this.mApp.ReanimationTryToGet(mHeadReanimID2);
+				if (reanimation3 != null)
+				{
+					reanimation3.mFilterEffect = mFilterEffect;
+				}
+				Reanimation reanimation4 = this.mApp.ReanimationTryToGet(mHeadReanimID3);
+				if (reanimation4 != null)
+				{
+					reanimation4.mFilterEffect = mFilterEffect;
+				}
+			}
 			this.checkForPlantAchievements();
 			this.UpdateReanim();
 		}

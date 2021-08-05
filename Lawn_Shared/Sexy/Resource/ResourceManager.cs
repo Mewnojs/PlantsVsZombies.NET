@@ -1347,10 +1347,10 @@ namespace Sexy
 							}
 							graphicsDevice.SetRenderTarget(renderTarget2D);
 							graphicsDevice.Clear(Color.Black);
-							ResourceManager.imageLoadSpritebatch.Begin(SpriteSortMode.Immediate, this.blendColorLoadState);
+							ResourceManager.imageLoadSpritebatch.Begin(SpriteSortMode.Immediate, BlendStates.blendColorLoadState);
 							ResourceManager.imageLoadSpritebatch.Draw(texture2D, texture2D.Bounds, Color.White);
 							ResourceManager.imageLoadSpritebatch.End();
-							ResourceManager.imageLoadSpritebatch.Begin(SpriteSortMode.Immediate, this.imageLoadBlendAlpha);
+							ResourceManager.imageLoadSpritebatch.Begin(SpriteSortMode.Immediate, BlendStates.imageLoadBlendAlpha);
 							ResourceManager.imageLoadSpritebatch.Draw(texture2D, texture2D.Bounds, Color.White);
 							ResourceManager.imageLoadSpritebatch.End();
 							graphicsDevice.SetRenderTarget(null);
@@ -1763,24 +1763,6 @@ namespace Sexy
 		public static object DrawLocker = new object();
 
 		private static SpriteBatch imageLoadSpritebatch = new SpriteBatch(GlobalStaticVars.g.GraphicsDevice);
-
-		private BlendState imageLoadBlendAlpha = new BlendState
-		{
-			ColorWriteChannels = ColorWriteChannels.Alpha,
-			AlphaDestinationBlend = Blend.Zero,
-			ColorDestinationBlend = Blend.Zero,
-			AlphaSourceBlend = Blend.One,
-			ColorSourceBlend = Blend.One
-		};
-
-		private BlendState blendColorLoadState = new BlendState
-		{
-			ColorWriteChannels = (ColorWriteChannels.Red | ColorWriteChannels.Green | ColorWriteChannels.Blue),
-			AlphaDestinationBlend = Blend.Zero,
-			ColorDestinationBlend = Blend.Zero,
-			AlphaSourceBlend = Blend.SourceAlpha,
-			ColorSourceBlend = Blend.SourceAlpha
-		};
 
 		private ContentManager backDropContentManager;
 
