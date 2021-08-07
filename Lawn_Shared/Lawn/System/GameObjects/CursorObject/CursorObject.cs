@@ -220,9 +220,11 @@ namespace Lawn
                         return;
                     }
                     int xPos = (int)(20 * Constants.S);
-                    int yPos = (int)(60 * Constants.S);
+                    int yPos = (int)(20 * Constants.S);
                     if (Challenge.IsZombieSeedType(mType))
                     {
+                        xPos = (int)(-40 * Constants.S);
+                        yPos = (int)(-90 * Constants.S);
                         ZombieType theZombieType = Challenge.IZombieSeedTypeToZombieType(mType);
                         GlobalStaticVars.gLawnApp.mReanimatorCache.DrawCachedZombie(g, xPos, yPos, theZombieType);
                         return;

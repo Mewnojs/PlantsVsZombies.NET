@@ -307,7 +307,7 @@ namespace Lawn
 				{
 					lawnMowerType = LawnMowerType.LAWNMOWER_SUPER_MOWER;
 				}
-				@new.DrawImage(AtlasResources.GetImageInAtlasById((int)(10285 + lawnMowerType)), -20f * Constants.S, (float)((int)(19f * Constants.S)));
+				GlobalStaticVars.gLawnApp.mReanimatorCache.DrawCachedMower(@new, 0f * Constants.S, 19f * Constants.S, lawnMowerType);
 			}
 			@new.PrepareForReuse();
 		}

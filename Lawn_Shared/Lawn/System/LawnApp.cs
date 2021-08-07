@@ -484,14 +484,14 @@ namespace Lawn
 
 		public void FinishCreateUserDialog(bool isYes)
 		{
-			string text = "coolypf";
+			string gamertag = "Player";//Gamer.SignedInGamers[PlayerIndex.One].Gamertag;
 			string theDialogLines = "[ENTER_NEW_USER]";
-			if (isYes && text.empty() && this.mPlayerInfo != null)
+			if (isYes && gamertag.empty() && this.mPlayerInfo != null)
 			{
 				this.KillDialog(30);
 				return;
 			}
-			if (this.mPlayerInfo == null && (!isYes || text.empty()))
+			if (this.mPlayerInfo == null && (!isYes || gamertag.empty()))
 			{
 				this.DoDialog(33, true, "[ENTER_YOUR_NAME]", theDialogLines, "[DIALOG_BUTTON_OK]", 3);
 				return;
@@ -501,7 +501,7 @@ namespace Lawn
 				this.KillDialog(30);
 				return;
 			}
-			PlayerInfo playerInfo = this.mProfileMgr.AddProfile(text);
+			PlayerInfo playerInfo = this.mProfileMgr.AddProfile(gamertag);
 			if (playerInfo == null)
 			{
 				this.DoDialog(33, true, "[NAME_CONFLICT]", "[ENTER_UNIQUE_PLAYER_NAME]", "[DIALOG_BUTTON_OK]", 3);
