@@ -357,6 +357,13 @@ namespace Sexy
 
 		public bool mTranslateWhenDown = true;
 
+		public enum ButtonPosition
+		{
+			BUTTON_LABEL_LEFT = -1,
+			BUTTON_LABEL_CENTER,
+			BUTTON_LABEL_RIGHT
+		}
+
 		public enum ColorType
 		{
 			COLOR_LABEL,
@@ -366,13 +373,6 @@ namespace Sexy
 			COLOR_MEDIUM_OUTLINE,
 			COLOR_BKG,
 			NUM_COLORS
-		}
-
-		public enum ButtonPosition
-		{
-			BUTTON_LABEL_LEFT = -1,
-			BUTTON_LABEL_CENTER,
-			BUTTON_LABEL_RIGHT
 		}
 	}
 }

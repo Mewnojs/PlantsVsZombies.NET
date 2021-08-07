@@ -82,7 +82,8 @@ namespace Sexy
 				graphics.mDestImage = theDestImage.RenderTarget;
 				graphics.mClipRect = new TRect(0, 0, graphics.mDestImage.Width, graphics.mDestImage.Height);
 				graphics.SetRenderTarget(graphics.mDestImage);
-				graphics.Clear(/*Color.Black*/Color.Transparent);
+				graphics.Clear(Color.Transparent);
+				graphics.Clear(Color.Black);
 				return graphics;
 			}
 			return new Graphics(theDestImage);

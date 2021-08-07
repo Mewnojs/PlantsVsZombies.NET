@@ -12,9 +12,14 @@ namespace Sexy
 
 		public static int MaxGamerScore { get; private set; }
 
-		public static void Initialise()
+		/*public static void Initialise()
 		{
 			SignedInGamer.SignedIn += new EventHandler<SignedInEventArgs>(ReportAchievement.GamerSignedInCallback);
+		}*/
+
+		public static void Initialise()
+		{
+			
 		}
 
 		private static void GamerSignedInCallback(object sender, SignedInEventArgs args)
