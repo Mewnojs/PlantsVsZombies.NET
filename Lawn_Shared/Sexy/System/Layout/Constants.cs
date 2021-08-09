@@ -1116,6 +1116,567 @@ namespace Sexy
 			Constants.GridItem_ScaryPot_Sun_Offset = new Point(42, 62);
 		}
 
+		public static void Load600x1000()
+		{
+			Constants.S = 1.0f;
+			Constants.IS = 1.0f;
+			FrameworkConstants.Font_Scale = 0.8f;
+			Constants.Board_Offset_AspectRatio_Correction = 80;
+			if (Constants.Language == Constants.LanguageIndex.it)
+			{
+				Constants.ReanimTextCenterOffsetX = (int)Constants.InvertAndScale(50f);
+			}
+			else if (Constants.Language == Constants.LanguageIndex.de)
+			{
+				Constants.ReanimTextCenterOffsetX = (int)Constants.InvertAndScale(85f);
+			}
+			else if (Constants.Language == Constants.LanguageIndex.fr)
+			{
+				Constants.ReanimTextCenterOffsetX = (int)Constants.InvertAndScale(85f);
+			}
+			else if (Constants.Language == Constants.LanguageIndex.es)
+			{
+				Constants.ReanimTextCenterOffsetX = -(int)Constants.InvertAndScale(10f);
+			}
+			else
+			{
+				Constants.ReanimTextCenterOffsetX = (int)Constants.InvertAndScale(85f);
+			}
+			Constants.Loaded = true;
+			Constants.BackBufferSize = new Point(600, 1000);
+			Constants.ImageSubPath = "\\480x800\\";
+			Constants.BOARD_WIDTH = 1000;
+			Constants.BOARD_HEIGHT = 600;
+			Constants.BOARD_EDGE = 50;
+			Constants.BOARD_OFFSET = 119;
+			Constants.BOARD_EXTRA_ROOM = 100;
+			Constants.HIGH_GROUND_HEIGHT = 30;
+			Constants.GRIDSIZEX = 9;
+			Constants.MAX_GRIDSIZEY = 6;
+			Constants.MORE_GAMES_ORIGIN_X = 100;
+			Constants.MAIN_MENU_ORIGIN_X = 640;
+			Constants.ACHIEVEMENTS_ORIGIN_X = 640;
+			Constants.QUICKPLAY_ORIGIN_X = 1440;
+			Constants.MORE_GAMES_PLANK_HEIGHT = 100;
+			Constants.MORE_GAMES_PLANK_WIDTH = 320;
+			Constants.MORE_GAMES_ITEM_GAP = 2;
+			Constants.SMALL_SEEDPACKET_WIDTH = 81;
+			Constants.SMALL_SEEDPACKET_HEIGHT = 52;
+			Constants.SEED_CHOOSER_OFFSETSCREEN_OFFSET = 480;
+			Constants.SCROLL_AREA_OFFSET_X = 102;
+			Constants.SCROLL_AREA_OFFSET_Y = (int)Constants.InvertAndScale(28f);
+			Constants.DIALOG_HEADER_OFFSET = 36;
+			Constants.WIDE_BOARD_WIDTH = 900;
+			Constants.BACKGROUND_IMAGE_WIDTH = (int)(Constants.S * 1400f);
+			Constants.LAWN_XMIN = 140;
+			Constants.LAWN_YMIN = 80;
+			Constants.SEED_PACKET_HORIZ_GAP = (int)Constants.InvertAndScale(2f);
+			Constants.SEED_PACKET_VERT_GAP = (int)Constants.InvertAndScale(1f);
+			Constants.SeedPacket_Selector_Pos = new Point(-5, 2);
+			Constants.TitleScreen_ReanimStart_X = 130;
+			Constants.GameSelector_Width = 2348;
+			Constants.GameSelector_Height = (int)Constants.InvertAndScale(640f);
+			Constants.GameSelector_AdventureButton_X = 430;
+			Constants.GameSelector_MiniGameButton_X = Constants.GameSelector_AdventureButton_X + 21;
+			Constants.GameSelector_MiniGameButton_Y = (int)Constants.InvertAndScale(100f);
+			Constants.GameSelector_OptionsButton_X = 662;
+			Constants.GameSelector_OptionsButton_Y = 276;
+			Constants.GameSelector_ZenGardenButton_X = 418;
+			Constants.GameSelector_ZenGardenButton_Y = 349;
+			Constants.GameSelector_AlmanacButton_X = 536;
+			Constants.GameSelector_AlmanacButton_Y = 334;
+			Constants.GameSelector_StoreButton_X = 375;
+			Constants.GameSelector_StoreButton_Y = 273;
+			Constants.GameSelector_LeaderboardButton_X = 0;
+			Constants.GameSelector_LeaderboardButton_Y = (int)Constants.InvertAndScale(200f);
+			Constants.GameSelector_AchievementsButton_X = 211;
+			Constants.GameSelector_AchievementsButton_Y = 429;
+			Constants.GameSelector_AchievementsStatue_X = 212;
+			Constants.GameSelector_AchievementsStatue_Y = 252;
+			Constants.GameSelector_MoreWaysToPlay_MiniGames_X = 236;
+			Constants.GameSelector_MoreWaysToPlay_MiniGames_Y = (int)Constants.InvertAndScale(160f);
+			Constants.GameSelector_MoreWaysToPlay_VaseBreaker_X = 525;
+			Constants.GameSelector_MoreWaysToPlay_VaseBreaker_Y = (int)Constants.InvertAndScale(175f);
+			Constants.GameSelector_MoreWaysToPlay_IZombie_X = 350;
+			Constants.GameSelector_MoreWaysToPlay_IZombie_Y = (int)Constants.InvertAndScale(195f);
+			Constants.GameSelector_MoreWaysToPlay_Back_X = 330;
+			Constants.GameSelector_MoreWaysToPlay_Back_Y = (int)Constants.InvertAndScale(270f);
+			Constants.GameSelector_PlayerName_Pos = new Point(167, -190);
+			Constants.GameSelector_LevelNumber_1_Pos = new Point(553, 32);
+			Constants.GameSelector_LevelNumber_2_Pos = new Point(580, 33);
+			Constants.GameSelector_LevelNumber_3_Pos = new Point(592, 34);
+			Constants.GameSelector_LevelNumber_Bar = new Rectangle(573, 44, 5, 2);
+			Constants.GameSelector_LevelNumber_ButtonDown_Offset = 6;
+			Constants.GameSelector_Update_Offset = 110;
+			Constants.LeaderboardScreen_Vasebreaker_Button_X = 633;
+			Constants.LeaderboardScreen_Vasebreaker_Button_Y = 339;
+			Constants.LeaderboardScreen_IZombie_Button_X = 125;
+			Constants.LeaderboardScreen_IZombie_Button_Y = 306;
+			Constants.LeaderboardScreen_Killed_Button_X = 405;
+			Constants.LeaderboardScreen_Killed_Button_Y = 306;
+			Constants.LeaderboardScreen_PileBase_X = 331;
+			Constants.LeaderboardScreen_PileBase_Y = 53;
+			Constants.Leaderboard_IZombie_Score_X = 198;
+			Constants.Leaderboard_IZombie_Score_Y = 290;
+			Constants.Leaderboard_Vasebreaker_Score_X = 698;
+			Constants.Leaderboard_Vasebreaker_Score_Y = 322;
+			Constants.Leaderboard_Pile_1_X = 297;
+			Constants.LeaderboardDialog_CannotConnect_Rect = new TRect(30, 70, 570, 300);
+			Constants.LeaderboardScreen_EdgeOfSpace_Overlay_Offset = 30;
+			Constants.AchievementWidget_ROW_HEIGHT = 135;
+			Constants.AchievementWidget_ROW_START = 275;
+			Constants.AchievementWidget_HOLE_DEPTH = 128;
+			Constants.AchievementWidget_GAMERSCORE_POS = new Point(217, 345);
+			Constants.AchievementWidget_BackButton_X = 152;
+			Constants.AchievementWidget_BackButton_Y = 6;
+			Constants.AchievementWidget_BackButton_Rect = new TRect(152, 0, 170, 120);
+			Constants.AchievementWidget_Background_Offset_Y = 412;
+			Constants.AchievementWidget_Description_Box = new Rectangle(270, 30, 400, 70);
+			Constants.AchievementWidget_Pipe_Offset = new Point(0, 140);
+			Constants.AchievementWidget_Worm_Offset = new Point(659, -104);
+			Constants.AchievementWidget_ZombieWorm_Offset = new Point(76, -9);
+			Constants.AchievementWidget_GemLeft_Offset = new Point(180, 0);
+			Constants.AchievementWidget_GemRight_Offset = new Point(450, -69);
+			Constants.AchievementWidget_Fossile_Offset = new Point(239, -55);
+			Constants.AchievementWidget_Image_Pos = new Point(200, 10);
+			Constants.AchievementWidget_Image_Size = 64;
+			Constants.AchievementWidget_Name_Pos = new Point(270, 0);
+			Constants.AchievementWidget_Name_MaxWidth = 400;
+			Constants.QuickPlayWidget_Thumb_X = 20;
+			Constants.QuickPlayWidget_Thumb_Y = 15;
+			Constants.QuickPlayWidget_Bungee_Y = -52;
+			Constants.SeedChooserScreen_MenuButton_X = 665;
+			Constants.SeedChooserScreen_Background_Top = new Point(88, 4);
+			Constants.SeedChooserScreen_Background_Middle = new Point(Constants.SeedChooserScreen_Background_Top.X, Constants.SeedChooserScreen_Background_Top.Y + 44);
+			Constants.SeedChooserScreen_Background_Middle_Height = 325;
+			Constants.SeedChooserScreen_Background_Bottom = new Point(Constants.SeedChooserScreen_Background_Top.X, Constants.SeedChooserScreen_Background_Middle.Y + Constants.SeedChooserScreen_Background_Middle_Height);
+			Constants.SeedChooserScreen_Gradient_Top = new Rectangle(0, 40, 336, 22);
+			Constants.SeedChooserScreen_Gradient_Bottom = new Rectangle(0, 362, 336, 22);
+			Constants.SeedPacket_Cost = new Point(42, 26);
+			Constants.SeedPacket_Cost_IZombie = new Point(41, 27);
+			Constants.SeedPacket_CostText_Pos = new Point(74, 22);
+			Constants.SeedPacket_CostText_IZombie_Pos = new Point(73, 23);
+			Constants.ImitaterDialog_Size = new Point(0, 240);
+			Constants.ImitaterDialog_ScrollWidget_Offset_X = 5;
+			Constants.ImitaterDialog_ScrollWidget_Y = 120;
+			Constants.ImitaterDialog_ScrollWidget_ExtraWidth = 20;
+			Constants.ImitaterDialog_Height = 250;
+			Constants.ImitaterDialog_BottomGradient_Y = 235;
+			Constants.CutScene_ReadySetPlant_Pos = new Point(370, 260);
+			Constants.CutScene_LogoEndPos = 350;
+			Constants.CutScene_LogoBackRect_Height = 150;
+			Constants.CutScene_LogoEnd_Particle_Pos = new Point(600, 400);
+			Constants.CutScene_ExtraRoom_1_Particle_Pos = new Point(35, 348);
+			Constants.CutScene_ExtraRoom_2_Particle_Pos = new Point(Constants.CutScene_ExtraRoom_1_Particle_Pos.X, 246);
+			Constants.CutScene_ExtraRoom_3_Particle_Pos = new Point(Constants.CutScene_ExtraRoom_1_Particle_Pos.X, 459);
+			Constants.CutScene_ExtraRoom_4_Particle_Pos = new Point(32, 150);
+			Constants.CutScene_ExtraRoom_5_Particle_Pos = new Point(32, 551);
+			Constants.CutScene_SodRoll_1_Pos = -105;
+			Constants.CutScene_SodRoll_2_Pos = 107;
+			Constants.CutScene_SodRoll_3_Pos = new Point(-6, -205);
+			Constants.CutScene_SodRoll_4_Pos = new Point(-6, 205);
+			Constants.CutScene_Upsell_TerraCotta_Arrow = new Point(733, 360);
+			Constants.CutScene_Upsell_TerraCotta_Pot = new Point(565, 360);
+			Constants.ConveyorBeltClipRect = new TRect(0, 8, 83, 465);
+			Constants.StoreScreen_BackButton_X = 430;
+			Constants.StoreScreen_BackButton_Y = 390;
+			Constants.StoreScreen_Car_X = 260;
+			Constants.StoreScreen_Car_Y = 80;
+			Constants.StoreScreen_PrevButton_X = 317;
+			Constants.StoreScreen_PrevButton_Y = 296;
+			Constants.StoreScreen_NextButton_X = 645;
+			Constants.StoreScreen_NextButton_Y = 296;
+			Constants.StoreScreen_HatchOpen_X = 316;
+			Constants.StoreScreen_HatchOpen_Y = -35;
+			Constants.StoreScreen_HatchClosed_X = 309;
+			Constants.StoreScreen_HatchClosed_Y = 81;
+			Constants.StoreScreen_CarNight_X = 260;
+			Constants.StoreScreen_CarNight_Y = 80;
+			Constants.StoreScreen_StoreSign_X = 450;
+			Constants.StoreScreen_StoreSign_Y_Min = -150;
+			Constants.StoreScreen_StoreSign_Y_Max = -10;
+			Constants.StoreScreen_Coinbank_X = 590;
+			Constants.StoreScreen_Coinbank_Y = 405;
+			Constants.StoreScreen_Coinbank_TextOffset = new Point(180, 8);
+			Constants.StoreScreen_ItemOffset_1_X = 430;
+			Constants.StoreScreen_ItemOffset_1_Y = 102;
+			Constants.StoreScreen_ItemOffset_2_X = 390;
+			Constants.StoreScreen_ItemOffset_2_Y = 190;
+			Constants.StoreScreen_ItemSize = 85;
+			Constants.StoreScreen_ItemSize_Offset = 4;
+			Constants.StoreScreen_PriceTag_X = 3;
+			Constants.StoreScreen_PriceTag_Y = 70;
+			Constants.StoreScreen_PriceTag_Text_Offset_X = 35;
+			Constants.StoreScreen_PriceTag_Text_Offset_Y = 67;
+			Constants.StoreScreen_ComingSoon_X = 100;
+			Constants.StoreScreen_ComingSoon_Y = 70;
+			Constants.StoreScreen_SoldOut_Width = 80;
+			Constants.StoreScreen_SoldOut_Y = 0;
+			Constants.StoreScreen_SoldOut_Height = 100;
+			Constants.StoreScreen_PacketUpgrade_X = 10;
+			Constants.StoreScreen_PacketUpgrade_Y = 5;
+			Constants.StoreScreen_PacketUpgrade_Text_Size = new Rectangle(0, 0, 80, 60);
+			Constants.StoreScreen_RetardedDave_Offset_X = -10;
+			Constants.StoreScreen_FirstAidNut_Offset_Y = 10;
+			Constants.StoreScreen_PoolCleaner_Offset_X = 23;
+			Constants.StoreScreen_PoolCleaner_Offset_Y = 24;
+			Constants.StoreScreen_Rake_Offset_X = -10;
+			Constants.StoreScreen_Rake_Offset_Y = 24;
+			Constants.StoreScreen_RoofCleaner_Offset_X = 15;
+			Constants.StoreScreen_RoofCleaner_Offset_Y = 38;
+			Constants.StoreScreen_Imitater_Offset_X = -1;
+			Constants.StoreScreen_Imitater_Offset_Y = 24;
+			Constants.StoreScreen_Default_Offset_Y = 20;
+			Constants.StoreScreen_MouseRegion = new Point(75, 100);
+			Constants.StoreScreen_Dialog = new Rectangle(200, 50, 400, 450);
+			Constants.StoreScreen_PotPlant_Offset = new Point(40, 70);
+			Constants.StoreScreenMushroomGardenOffsetX = 15;
+			Constants.StoreScreenAquariumGardenOffsetX = 15;
+			Constants.StoreScreenGloveOffsetY = 15;
+			Constants.StoreScreenWheelbarrowOffsetY = 15;
+			Constants.StoreScreenBugSprayOffsetX = 17;
+			Constants.StoreScreenBugSprayOffsetY = 15;
+			Constants.StoreScreenPhonographOffsetY = 15;
+			Constants.StoreScreenPlantFoodOffsetX = 13;
+			Constants.StoreScreenPlantFoodOffsetY = 15;
+			Constants.StoreScreenWateringCanOffsetX = 6;
+			Constants.StoreScreenWateringCanOffsetY = 15;
+			Constants.NewOptionsDialog_FXLabel_X = 340;
+			Constants.NewOptionsDialog_FXLabel_Y = 143;
+			Constants.NewOptionsDialog_MusicLabel_X = 340;
+			Constants.NewOptionsDialog_MusicLabel_On_Y = 97;
+			Constants.NewOptionsDialog_MusicLabel_Off_Y = 103;
+			Constants.NewOptionsDialog_VibrationLabel_X = 340;
+			Constants.NewOptionsDialog_VibrationLabel_Y = 193;
+			Constants.NewOptionsDialog_LockedLabel_Y = 265;
+			Constants.NewOptionsDialog_VibrationLabel_MaxWidth = 300;
+			Constants.NewOptionsDialog_FullScreenOffset = 25;
+			Constants.NewOptionsDialog_FX_Offset = 15;
+			Constants.NewOptionsDialog_Music_Offset = 5;
+			Constants.NewOptionsDialog_Version_Low_Y = 340;
+			Constants.NewOptionsDialog_Version_High_Y = 345;
+			Constants.RetardedDave_Bubble_Tip_Offset = 5;
+			Constants.RetardedDave_Bubble_Offset_Shop = new Point(-280, -117);
+			Constants.RetardedDave_Bubble_Offset_Board = new Point(-200, -60);
+			Constants.RetardedDave_Bubble_Size = 400;
+			Constants.RetardedDave_Bubble_Rect = new TRect(15, 6, 0, 250);
+			Constants.RetardedDave_Bubble_TapToContinue_Y = 230;
+			Constants.PlantGallerySize = new Point(390, 750);
+			Constants.ZombieGallerySize = new Point(415, 1068);
+			Constants.AlmanacHeaderY = 8;
+			Constants.Almanac_PlantsButtonRect = new TRect(67, 150, 300, 240);
+			Constants.Almanac_ZombiesButtonRect = new TRect(450, 150, 300, 240);
+			Constants.Almanac_CloseButtonRect = new TRect(660, 435, 148, 39);
+			Constants.Almanac_IndexButtonRect = new TRect(442, 435, 148, 39);
+			Constants.Almanac_IndexPlantPos = new Point(183, 240);
+			Constants.Almanac_IndexZombiePos = new Point(553, 225);
+			Constants.Almanac_IndexPlantTextPos = new Point(Constants.Almanac_PlantsButtonRect.mX + Constants.Almanac_PlantsButtonRect.mWidth / 2, Constants.Almanac_PlantsButtonRect.mY + Constants.Almanac_PlantsButtonRect.mHeight - 65);
+			Constants.Almanac_IndexZombieTextPos = new Point(Constants.Almanac_ZombiesButtonRect.mX + Constants.Almanac_ZombiesButtonRect.mWidth / 2, Constants.Almanac_ZombiesButtonRect.mY + Constants.Almanac_ZombiesButtonRect.mHeight - 65);
+			Constants.Almanac_PlantScrollRect = new TRect(47, 75, 380, 368);
+			Constants.Almanac_ZombieScrollRect = new TRect(28, 75, 410, 368);
+			Constants.Almanac_DescriptionScrollRect = new TRect(470, 255, 305, 167);
+			Constants.Almanac_PlantTopGradientY = 74;
+			Constants.Almanac_ZombieTopGradientY = 72;
+			Constants.Almanac_BottomGradientY = 432;
+			Constants.Almanac_PlantGradientWidth = 360;
+			Constants.Almanac_ZombieGradientWidth = 390;
+			Constants.Almanac_ZombieStoneRect = new TRect(445, 2, 353, 465);
+			Constants.Almanac_BackgroundPosition = new Point(533, 60);
+			Constants.Almanac_ZombieClipRect = new TRect(-40, -45, 175, 175);
+			Constants.Almanac_NavyRect = new TRect(515, 40, 196, 198);
+			Constants.Almanac_NamePosition = new Point(622, 0);
+			Constants.Almanac_ClayRect = new TRect(450, 6, 340, 465);
+			Constants.Almanac_BrownRect = new TRect(513, 41, 198, 198);
+			Constants.Almanac_ZombieSpace = new Point(137, 117);
+			Constants.Almanac_ZombieOffset = new Point(0, 5);
+			Constants.Almanac_BossPosition = new Point(205, 944);
+			Constants.Almanac_ImpPosition = new Point(68, 944);
+			Constants.Almanac_ImitatorPosition = new Point(Constants.PlantGallerySize.X / 2 - 52, 688);
+			Constants.Almanac_SeedSpace = new Point(4, 4);
+			Constants.Almanac_SeedOffset = new Point(16, 8);
+			Constants.Almanac_ZombiePosition = new Point(700, 120);
+			Constants.Almanac_PlantPosition = new Point(583, 105);
+			Constants.Almanac_Text_Scale = 0.8f;
+			Constants.Almanac_PlantsHeader_Pos = new Point(32, 2);
+			Constants.Almanac_ZombieHeader_Pos = new Point(25, 2);
+			Constants.Almanac_ItemName_MaxWidth = 330;
+			Constants.Zombie_StartOffset = 110f;
+			Constants.Zombie_StartRandom_Offset = 40f;
+			Constants.AwardScreen_Note_Credits_Background = new Rectangle(-500, -170, 1600, 800);
+			Constants.AwardScreen_Note_Credits_Paper = new Point(138, 50);
+			Constants.AwardScreen_Note_Credits_Text = new Rectangle(180, 80, 429, 287);
+			Constants.AwardScreen_Note_Help_Background = new Rectangle(-350, -150, 1700, 700);
+			Constants.AwardScreen_Note_Help_Paper = new Point(138, 50);
+			Constants.AwardScreen_Note_Help_Text = new Point(180, 95);
+			Constants.AwardScreen_Note_1_Background = new Rectangle(-300, -150, 1600, 700);
+			Constants.AwardScreen_Note_1_Paper = new Point(138, 50);
+			Constants.AwardScreen_Note_1_Text = new Point(180, 85);
+			Constants.AwardScreen_Note_Message = new Point(400, 0);
+			Constants.AwardScreen_Note_2_Background = new Rectangle(-300, -150, 1600, 700);
+			Constants.AwardScreen_Note_2_Paper = new Point(138, 50);
+			Constants.AwardScreen_Note_2_Text = new Point(175, 85);
+			Constants.AwardScreen_Note_3_Background = new Rectangle(-300, -150, 1600, 700);
+			Constants.AwardScreen_Note_3_Paper = new Point(138, 50);
+			Constants.AwardScreen_Note_3_Text = new Point(165, 80);
+			Constants.AwardScreen_Note_4_Background = new Rectangle(-300, -150, 1600, 700);
+			Constants.AwardScreen_Note_4_Paper = new Point(138, 50);
+			Constants.AwardScreen_Note_4_Text = new Point(160, 80);
+			Constants.AwardScreen_Note_Final_Background = new Rectangle(-300, -150, 1600, 700);
+			Constants.AwardScreen_Note_Final_Paper = new Point(138, 50);
+			Constants.AwardScreen_Note_Final_Text = new Point(170, 95);
+			Constants.AwardScreen_Bacon = (Constants.AwardScreen_Taco = (Constants.AwardScreen_CarKeys = new Point(191, 210)));
+			Constants.AwardScreen_WateringCan = new Point(180, 210);
+			Constants.AwardScreen_Almanac = new Point(195, 185);
+			Constants.AwardScreen_Trophy = new Point((int)(400f * Constants.S), (int)(137f * Constants.S));
+			Constants.AwardScreen_Shovel = new Point(195, 195);
+			Constants.AwardScreen_MenuButton = new Point(610, 420);
+			Constants.AwardScreen_ClayTablet = new TRect(50, 70, 700, 300);
+			Constants.AwardScreen_TitlePos = new Point(400, 10);
+			Constants.AwardScreen_GroundDay_Pos = new Point(111, 167);
+			Constants.AwardScreen_BrownRect = new TRect(90, 145, 200, 200);
+			Constants.AwardScreen_BottomMessage_Pos = new Point(400, 70);
+			Constants.AwardScreen_BottomText_Rect_Text = new TRect(317, 160, 400, 170);
+			Constants.AwardScreen_BottomText_Rect_NoText = new TRect(150, 120, 500, 200);
+			Constants.AwardScreen_CreditsButton = new TRect(180, 413, 140, 48);
+			Constants.AwardScreen_CreditsButton_Offset = new Point(50, -7);
+			if (Constants.Language == Constants.LanguageIndex.es)
+			{
+				Constants.AwardScreen_CreditsButton_Offset.X = 70;
+			}
+			else if (Constants.Language == Constants.LanguageIndex.it)
+			{
+				Constants.AwardScreen_CreditsButton_Offset.X = 70;
+			}
+			else if (Constants.Language == Constants.LanguageIndex.de)
+			{
+				Constants.AwardScreen_CreditsButton_Offset.X = 60;
+			}
+			Constants.AwardScreen_Seed_Pos = new Point(151, 220);
+			Constants.AwardScreen_ContinueButton_Offset = 35;
+			Constants.AwardScreen_AchievementImage_Pos = new Point(80, 4);
+			Constants.AwardScreen_AchievementName_Pos = new Point(200, 5);
+			Constants.AwardScreen_AchievementDescription_Rect = new Rectangle(200, 30, 400, 60);
+			Constants.CreditScreen_ReplayButton = new Rectangle(100, 400, 200, 48);
+			Constants.CreditScreen_ReplayButton_TextOffset = new Point(-5, -7);
+			Constants.CreditScreen_MainMenu = new Rectangle(500, 400, 200, 50);
+			Constants.CreditScreen_TextStart = 200;
+			Constants.CreditScreen_TextEnd = 400;
+			Constants.CreditScreen_TextClip = 370;
+			Constants.CreditScreen_LeftText_X = 0;
+			Constants.CreditScreen_RightText_X = 390;
+			Constants.CreditScreen_LeftRight_Text_Width = 370;
+			Constants.ConfirmPurchaseDialog_Background = new TRect(38, 100, 312, 250);
+			Constants.ConfirmPurchaseDialog_Item_Pos = new Point(60, 155);
+			Constants.ConfirmPurchaseDialog_Text = new TRect(145, 95, 190, 265);
+			Constants.LawnDialog_Insets = new Insets(60, 20, 70, 35);
+			Constants.UILevelPosition = new Point(793, 445);
+			Constants.UIMenuButtonPosition = new Point(650 - Constants.Board_Offset_AspectRatio_Correction, 3);
+			Constants.UIMenuButtonWidth = 150;
+			Constants.UISunBankPositionX = 95;
+			Constants.UISunBankTextOffset = new Point(92, 3);
+			Constants.UIShovelButtonPosition = new Point(260, 3);
+			Constants.UIProgressMeterPosition = new Point(370, 3);
+			Constants.UIProgressMeterHeadEnd = 220;
+			Constants.UIProgressMeterBarEnd = 225;
+			Constants.UICoinBankPosition = new Point(110 - Constants.Board_Offset_AspectRatio_Correction, 479);
+			Constants.Board_Cutscene_ExtraScroll = 170;
+			Constants.Board_SunCoinRange = 550;
+			Constants.Board_SunCoin_CollectTarget = new Point(115 - (int)((float)Constants.Board_Offset_AspectRatio_Correction * Constants.IS), 5);
+			Constants.Board_Cel_Y_Values_Normal = new int[]
+			{
+				80,
+				177,
+				280,
+				380,
+				470,
+				570,
+				610
+			};
+			Constants.Board_Cel_Y_Values_Pool = new int[]
+			{
+				80,
+				170,
+				275,
+				360,
+				447,
+				522,
+				610
+			};
+			Constants.Board_Cel_Y_Values_ZenGarden = new int[]
+			{
+				125,
+				225,
+				335,
+				455,
+				560,
+				750,
+				750
+			};
+			Constants.Board_GameOver_Interior_Overlay_1 = new Point(-15, 182);
+			Constants.Board_GameOver_Interior_Overlay_2 = new Point(-17, 160);
+			Constants.Board_GameOver_Interior_Overlay_3 = new Point(-60, 178);
+			Constants.Board_GameOver_Interior_Overlay_4 = new Point(-56, 202);
+			Constants.Board_GameOver_Exterior_Overlay_1 = new Point(-22, 142);
+			Constants.Board_GameOver_Exterior_Overlay_2 = new Point(-21, 148);
+			Constants.Board_GameOver_Exterior_Overlay_3 = new Point(-57, 166);
+			Constants.Board_GameOver_Exterior_Overlay_4 = new Point(-58, 105);
+			Constants.Board_GameOver_Exterior_Overlay_5 = new Point(5, 179);
+			Constants.Board_GameOver_Exterior_Overlay_6 = new Point(5, 179);
+			Constants.Board_Ice_Start = 1000;
+			Constants.Board_ProgressBarText_Pos = 1;
+			Constants.MessageWidget_SlotMachine_Y = 518;
+			Constants.LawnMower_Coin_Offset = new Point(20, 5);
+			Constants.DescriptionWidget_ScrollBar_Padding = 10;
+			Constants.Zombie_Bungee_Offset = new Point(61, 15);
+			Constants.Zombie_Bungee_Target_Offset = new Point(5, 40);
+			Constants.ZOMBIE_BACKUP_DANCER_RISE_HEIGHT = -145;
+			Constants.Zombie_Dancer_Dance_Limit_X = 1000;
+			Constants.Zombie_Dancer_Spotlight_Scale = 2.7f;
+			Constants.Zombie_Dancer_Spotlight_Offset = new Point(-45, 50);
+			Constants.Zombie_Dancer_Spotlight_Pos = new Point(2, -560);
+			Constants.Zombie_ClipOffset_Default = 100;
+			Constants.Zombie_ClipOffset_Snorkel = 0;
+			Constants.Zombie_ClipOffset_Snorkel_intoPool_Small = 40;
+			Constants.Zombie_ClipOffset_Snorkel_Dying = 76;
+			Constants.Zombie_ClipOffset_Snorkel_Dying_Small = 65;
+			Constants.Zombie_ClipOffset_Pail = 78;
+			Constants.Zombie_ClipOffset_Normal = 108;
+			Constants.Zombie_ClipOffset_Digger = 75;
+			Constants.Zombie_ClipOffset_Dolphin_Into_Pool = 65;
+			Constants.Zombie_ClipOffset_Snorkel_Grabbed = 75;
+			Constants.Zombie_ClipOffset_PeaHead_InPool = 78;
+			Constants.Zombie_ClipOffset_RisingFromGrave = 20;
+			Constants.Zombie_ClipOffset_RisingFromGrave_Small = -35;
+			Constants.Zombie_ClipOffset_Snorkel_Into_Pool = 80;
+			Constants.Zombie_ClipOffset_Normal_In_Pool = 30;
+			Constants.Zombie_ClipOffset_Flag_In_Pool = 30;
+			Constants.Zombie_ClipOffset_Normal_In_Pool_SMALL = -40;
+			Constants.Zombie_ClipOffset_TrafficCone_In_Pool_SMALL = -55;
+			Constants.Zombie_ClipOffset_Ducky_Dying_In_Pool = 27;
+			Constants.Zombie_GameOver_ClipOffset_1 = 77;
+			Constants.Zombie_GameOver_ClipOffset_2 = 80;
+			Constants.Zombie_GameOver_ClipOffset_3 = 85;
+			Constants.ZombieGalleryWidget_Window_Offset = new Point(3, 7);
+			Constants.ZombieGalleryWidget_Window_Clip = new Rectangle(6, 4, 100, 100);
+			Constants.Coin_AwardSeedpacket_Pos = new Point(500 - Constants.Board_Offset_AspectRatio_Correction, 300);
+			Constants.Coin_Glow_Offset = new Point(8, 6);
+			Constants.Coin_Silver_Offset = 6f;
+			Constants.Coin_MoneyBag_Offset = new Point(-50, -10);
+			Constants.Coin_Shovel_Offset = new Point(5, 30);
+			Constants.Coin_Silver_Award_Offset = new Point(21, 40);
+			Constants.Coin_Almanac_Offset = new Point(0, 0);
+			Constants.Coin_Note_Offset = new Point(0, 10);
+			Constants.Coin_CarKeys_Offset = new Point(10, 20);
+			Constants.Coin_Taco_Offset = new Point(0, 20);
+			Constants.Coin_Bacon_Offset = new Point(0, 20);
+			Constants.Plant_CobCannon_Projectile_Offset = new Point(-30, -160);
+			Constants.Plant_Squished_Offset = new Point(5, 20);
+			Constants.IZombieBrainPosition = 140;
+			Constants.IZombie_SeedOffset = new Point(4, 2);
+			Constants.IZombie_ClipOffset = new Rectangle(0, 0, 80, 50);
+			Constants.ZombieOffsets = new Point[]
+			{
+				new Point(20, 11),
+				new Point(13, 15),
+				new Point(22, -30),
+				new Point(-30, 0),
+				new Point(20, -30),
+				new Point(18, 13),
+				new Point(19, 13),
+				new Point(0, -10),
+				new Point(14, -10),
+				new Point(19, 12),
+				new Point(20, 13),
+				new Point(16, 10),
+				new Point(1, 11),
+				new Point(16, 10),
+				new Point(16, 15),
+				new Point(14, 10),
+				new Point(13, 12),
+				new Point(10, -10),
+				new Point(20, 12),
+				new Point(11, 12),
+				new Point(-20, -10),
+				new Point(15, -10),
+				new Point(4, 12),
+				new Point(18, 10),
+				new Point(23, 23),
+				new Point(1, 15)
+			};
+			Constants.LastStandButtonRect = new TRect(240, 439, 210, 46);
+			Constants.VasebreakerJackInTheBoxOffset = -1;
+			Constants.JackInTheBoxPlantRadius = 100;
+			Constants.JackInTheBoxZombieRadius = 192;
+			Constants.ZenGardenGreenhouseMultiplierX = 1.125f;
+			Constants.ZenGardenGreenhouseMultiplierY = 1.182f;
+			Constants.ZenGardenGreenhouseOffset = new Point(-30, 30);
+			Constants.ZenGardenMushroomGardenOffset = new Point(10, 30);
+			Constants.ZenGardenStoreButtonX = 628;
+			Constants.ZenGardenStoreButtonY = 45;
+			Constants.ZenGardenTopButtonStart = -77;
+			Constants.ZenGardenButtonCounterOffset = new Point(60, 45);
+			Constants.ZenGardenButton_GoldenWateringCan_Offset = new Point(3, 5);
+			Constants.ZenGardenButton_NormalWateringCan_Offset = new Point(3, 5);
+			Constants.ZenGardenButton_Fertiliser_Offset = new Point(9, 4);
+			Constants.ZenGardenButton_BugSpray_Offset = new Point(17, 6);
+			Constants.ZenGardenButton_Phonograph_Offset = new Point(2, 5);
+			Constants.ZenGardenButton_Chocolate_Offset = new Point(12, 10);
+			Constants.ZenGardenButton_Glove_Offset = new Point(5, 5);
+			Constants.ZenGardenButton_MoneySign_Offset = new Point(5, 5);
+			Constants.ZenGardenButton_NextGarden_Offset = new Point(2, 0);
+			Constants.ZenGardenButton_Wheelbarrow_Offset = new Point(2, 2);
+			Constants.ZenGardenButton_WheelbarrowPlant_Offset = new Point(40, 32);
+			Constants.ZenGardenButton_Wheelbarrow_Facing_Offset = 43f;
+			Constants.ZenGarden_Backdrop_X = 95;
+			Constants.ZenGarden_SellDialog_Offset = new Point(214, 90);
+			Constants.ZenGarden_NextGarden_Pos = new Point(500, 0);
+			Constants.ZenGarden_RetardedDaveBubble_Pos = new Point(-250, -120);
+			Constants.ZenGarden_WaterDrop_Pos = new Point(65, 6);
+			Constants.ZenGarden_Fertiliser_Pos = new Point(60, 7);
+			Constants.ZenGarden_Phonograph_Pos = new Point(60, 7);
+			Constants.ZenGarden_BugSpray_Pos = new Point(67, 9);
+			Constants.ZenGarden_PlantSpeechBubble_Pos = new Point(50, 0);
+			Constants.ZenGarden_StinkySpeechBubble_Pos = new Point(50, -20);
+			Constants.ZenGarden_GoldenWater_Pos = new Point(-10, -10);
+			Constants.ZenGarden_Chocolate_Pos = new Point(65, -8);
+			Constants.ZenGarden_MoneyTarget_X = 477;
+			Constants.ZenGarden_TutorialArrow_Offset = 98;
+			Constants.ZEN_XMIN = -50;
+			Constants.ZEN_YMIN = 75;
+			Constants.ZEN_XMAX = 700;
+			Constants.ZEN_YMAX = 500;
+			Constants.ZenGarden_GoldenWater_Size = new Rectangle(-100, -100, 100, 100);
+			Constants.STINKY_SLEEP_POS_Y = 540;
+			Constants.gMushroomGridPlacement = new SpecialGridPlacement[]
+			{
+				new SpecialGridPlacement(80, 435, 0, 0),
+				new SpecialGridPlacement(220, 360, 1, 0),
+				new SpecialGridPlacement(290, 458, 2, 0),
+				new SpecialGridPlacement(355, 296, 3, 0),
+				new SpecialGridPlacement(387, 203, 4, 0),
+				new SpecialGridPlacement(470, 380, 5, 0),
+				new SpecialGridPlacement(500, 472, 6, 0),
+				new SpecialGridPlacement(580, 283, 7, 0)
+			};
+			Constants.ZenGarden_Marigold_Sprout_Offset = new Point(24, 30);
+			Constants.ZenGarden_Aquarium_ShadowOffset = new Point(35, 0);
+			Constants.Challenge_SeeingStars_StarfruitPreview_Offset_Y = 14;
+			Constants.Challenge_SlotMachine_Pos = new Point(210, 425);
+			Constants.Challenge_SlotMachineHandle_Pos = new TRect(672, 425, 100, 80);
+			Constants.Challenge_SlotMachine_Gap = 13;
+			Constants.Challenge_SlotMachine_Offset = 92;
+			Constants.Challenge_SlotMachine_Shadow_Offset = 3;
+			Constants.Challenge_SlotMachine_Y_Offset = 7;
+			Constants.Challenge_SlotMachine_Y_Pos = 3;
+			Constants.Challenge_SlotMachine_ClipHeight = 40;
+			Constants.Challenge_BeghouldedTwist_Offset = new Point(50, 50);
+			Constants.GridItem_ScaryPot_SeedPacket_Offset = new Point(-2, 35);
+			Constants.GridItem_ScaryPot_Zombie_Offset = new Point(23, 30);
+			Constants.GridItem_ScaryPot_ZombieFootball_Offset = new Point(15, 25);
+			Constants.GridItem_ScaryPot_ZombieGargantuar_Offset = new Point(-7, -5);
+			Constants.GridItem_ScaryPot_Sun_Offset = new Point(42, 62);
+		}
+
 		public const int PC_BOARD_WIDTH = 800;
 
 		public const int PC_BOARD_HEIGHT = 600;

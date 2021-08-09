@@ -211,6 +211,7 @@ namespace Lawn
         {
             MemoryImage result = new MemoryImage();
             result.Create(width, height);
+            result.Clear();
             return result;
         }
 
@@ -237,11 +238,12 @@ namespace Lawn
             }
             TRect drawRect = GetPlantImageSize(seedType);
             result = MakeBlankCanvasImage((int)(Constants.S * drawRect.mWidth), (int)(Constants.S * drawRect.mHeight));
-            Graphics g = Graphics.GetNew(result);
-            g.SetLinearBlend(true);
-
             lock (ResourceManager.DrawLocker)
             {
+                Graphics g = Graphics.GetNew(result);
+                g.SetLinearBlend(true);
+
+            
                 PlantDefinition plantDef = Plant.GetPlantDefinition(seedType);
                 ReanimationType reanimationType = plantDef.mReanimationType;
                 int offset;
@@ -303,8 +305,8 @@ namespace Lawn
                 }
                 g.EndFrame();
                 g.SetRenderTarget(null);
+                g.PrepareForReuse();
             }
-            g.PrepareForReuse();
             return result;
         }
 
@@ -315,11 +317,11 @@ namespace Lawn
                 return mCachedMowers[(int)mowerType];
             }
             MemoryImage result = MakeBlankCanvasImage((int)(Constants.S * 90), (int)(Constants.S * 100));
-            Graphics g = Graphics.GetNew(result);
-            g.SetLinearBlend(true);
-
             lock (ResourceManager.DrawLocker)
             {
+                Graphics g = Graphics.GetNew(result);
+                g.SetLinearBlend(true);
+
                 g.BeginFrame();
                 ReanimationType reanimtype = ReanimationType.REANIM_LAWNMOWER;
                 string trackname = null;
@@ -350,8 +352,8 @@ namespace Lawn
 
                 g.EndFrame();
                 g.SetRenderTarget(null);
+                g.PrepareForReuse();
             }
-            g.PrepareForReuse();
             return result;
         }
 
@@ -370,11 +372,12 @@ namespace Lawn
             {
                 result = MakeBlankCanvasImage((int)(Constants.S * 256), (int)(Constants.S * 256));
             }
-            Graphics g = Graphics.GetNew(result);
-            g.SetLinearBlend(true);
-
             lock (ResourceManager.DrawLocker)
             {
+                Graphics g = Graphics.GetNew(result);
+                g.SetLinearBlend(true);
+
+            
                 g.BeginFrame();
                 ZombieType zombieType_reanim = zombieType != ZombieType.ZOMBIE_CACHED_POLEVAULTER_WITH_POLE ? zombieType : ZombieType.ZOMBIE_POLEVAULTER;
                 ZombieDefinition zombieDef = Zombie.GetZombieDefinition(zombieType_reanim);
@@ -452,8 +455,8 @@ namespace Lawn
                 mCachedZombies[(int)zombieType] = result;
                 g.EndFrame();
                 g.SetRenderTarget(null);
+                g.PrepareForReuse();
             }
-            g.PrepareForReuse();
             return result;
         }
 

@@ -48,34 +48,37 @@ namespace Sexy.TodLib
 		{
 			MemoryImage memoryImage = new MemoryImage();
 			memoryImage.Create(theTexture.Width, theTexture.Height);
-			GraphicsDevice graphicsDevice = GlobalStaticVars.g.GraphicsDevice;
-			graphicsDevice.SetRenderTarget(memoryImage.RenderTarget);
-			SpriteBatch spriteBatch = new SpriteBatch(graphicsDevice);
-
-			BlendState imageLoadBlendAlpha = new BlendState
+			lock (ResourceManager.DrawLocker)
 			{
-				ColorWriteChannels = ColorWriteChannels.Alpha,
-				AlphaDestinationBlend = Blend.Zero,
-				ColorDestinationBlend = Blend.Zero,
-				AlphaSourceBlend = Blend.One,
-				ColorSourceBlend = Blend.One
-			};
+				GraphicsDevice graphicsDevice = GlobalStaticVars.g.GraphicsDevice;
+				graphicsDevice.SetRenderTarget(memoryImage.RenderTarget);
+				SpriteBatch spriteBatch = new SpriteBatch(graphicsDevice);
 
-		BlendState blendColorLoadState = new BlendState
-		{
-			AlphaDestinationBlend = Blend.Zero,
-			ColorDestinationBlend = Blend.Zero,
-			AlphaSourceBlend = Blend.SourceAlpha,
-			ColorSourceBlend = Blend.SourceAlpha
-		};
-		graphicsDevice.Clear(Color.Transparent);
-			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-			spriteBatch.Draw(theTexture, theTexture.Bounds, Color.White);
-			spriteBatch.End();
-			//spriteBatch.Begin(SpriteSortMode.Immediate, imageLoadBlendAlpha);
-			//spriteBatch.Draw(theTexture, theTexture.Bounds, Color.White);
-			//spriteBatch.End();
-			graphicsDevice.SetRenderTarget(null);
+				BlendState imageLoadBlendAlpha = new BlendState
+				{
+					ColorWriteChannels = ColorWriteChannels.Alpha,
+					AlphaDestinationBlend = Blend.Zero,
+					ColorDestinationBlend = Blend.Zero,
+					AlphaSourceBlend = Blend.One,
+					ColorSourceBlend = Blend.One
+				};
+
+				BlendState blendColorLoadState = new BlendState
+				{
+					AlphaDestinationBlend = Blend.Zero,
+					ColorDestinationBlend = Blend.Zero,
+					AlphaSourceBlend = Blend.SourceAlpha,
+					ColorSourceBlend = Blend.SourceAlpha
+				};
+				graphicsDevice.Clear(Color.Transparent);
+				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+				spriteBatch.Draw(theTexture, theTexture.Bounds, Color.White);
+				spriteBatch.End();
+				//spriteBatch.Begin(SpriteSortMode.Immediate, imageLoadBlendAlpha);
+				//spriteBatch.Draw(theTexture, theTexture.Bounds, Color.White);
+				//spriteBatch.End();
+				graphicsDevice.SetRenderTarget(null);
+			}
 			switch (theFilterEffect)
 			{
 			case FilterEffectType.FILTER_EFFECT_WASHED_OUT:

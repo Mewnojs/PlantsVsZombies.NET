@@ -1326,23 +1326,23 @@ namespace Lawn
 							{
 								if (num2 < -1)
 								{
-									goto IL_30B;
+									continue;
 								}
 								if (num2 > 1)
 								{
-									goto IL_30B;
+									continue;
 								}
 							}
 							else if (flag)
 							{
 								if (!this.mBoard.mChallenge.CanTargetZombieWithPortals(this, zombie2))
 								{
-									goto IL_30B;
+									continue;
 								}
 							}
 							else if (num2 != 0)
 							{
-								goto IL_30B;
+								continue;
 							}
 						}
 						if (zombie2.EffectedByDamage((uint)damageRangeFlags))
@@ -1361,7 +1361,7 @@ namespace Lawn
 								}
 								if (zombie2.mZombiePhase == ZombiePhase.PHASE_POGO_BOUNCING || (zombie2.mZombieType == ZombieType.ZOMBIE_BUNGEE && zombie2.mTargetCol == this.mPlantCol))
 								{
-									goto IL_30B;
+									continue;
 								}
 								if (zombie2.mIsEating || this.mState == PlantState.STATE_CHOMPER_BITING)
 								{
@@ -1372,16 +1372,16 @@ namespace Lawn
 							{
 								if ((zombie2.mZombieType == ZombieType.ZOMBIE_POGO && zombie2.mHasObject) || zombie2.mZombiePhase == ZombiePhase.PHASE_POLEVAULTER_IN_VAULT || zombie2.mZombiePhase == ZombiePhase.PHASE_POLEVAULTER_PRE_VAULT)
 								{
-									goto IL_30B;
+									continue;
 								}
 								if (zombie2.mZombieType == ZombieType.ZOMBIE_POLEVAULTER)
 								{
 									plantAttackRect.mX += 40;
-									plantAttackRect.mWidth -= 40;
+									plantAttackRect.mWidth -= 40; //原版造成土豆雷不爆炸Bug的机制
 								}
 								if (zombie2.mZombieType == ZombieType.ZOMBIE_BUNGEE && zombie2.mTargetCol != this.mPlantCol)
 								{
-									goto IL_30B;
+									continue;
 								}
 								if (zombie2.mIsEating)
 								{
@@ -1396,7 +1396,7 @@ namespace Lawn
 									int rectOverlap = GameConstants.GetRectOverlap(plantAttackRect, zombieRect);
 									if (rectOverlap < -num3)
 									{
-										goto IL_30B;
+										continue;
 									}
 								}
 								int num4 = -zombieRect.mX;
@@ -1417,7 +1417,6 @@ namespace Lawn
 						}
 					}
 				}
-				IL_30B:;
 			}
 			return zombie;
 		}
