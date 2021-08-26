@@ -261,6 +261,51 @@ namespace Sexy.TodLib
 			return null;
 		}
 
+		public void SaveToFile(Sexy.Buffer b)
+		{
+			b.WriteLong((int)mEffectType);
+			b.WriteLong(mEmitterList.Count);
+			foreach (TodParticleEmitter aEmitter in mEmitterList)
+            {
+				b.WriteLong(mParticleHolder.mEmitters.FindIndex((TodParticleEmitter tpe) => tpe == aEmitter));
+            }
+			b.WriteBoolean(mDead);
+			b.WriteBoolean(mIsAttachment);
+			b.WriteLong(mRenderOrder);
+			b.WriteBoolean(mDontUpdate);
+			b.WriteBoolean(mActive);
+		}
+
+		private int ltEmitterCount;
+		private List<int> ltEmitterIdList = new List<int>();
+
+		public void LoadFromFile(Sexy.Buffer b)
+        {
+			mEffectType = (ParticleEffect)b.ReadLong();
+			ltEmitterCount = b.ReadLong();
+			ltEmitterIdList.Clear();
+			for (int i = 0; i < ltEmitterCount; i++)
+            {
+				ltEmitterIdList.Add(b.ReadLong());
+			}
+			mDead = b.ReadBoolean();
+			mIsAttachment = b.ReadBoolean();
+			mRenderOrder = b.ReadLong();
+			mDontUpdate = b.ReadBoolean();
+			mActive = b.ReadBoolean();
+		}
+
+		public void LoadingComplete()
+        {
+			mParticleDef = TodParticleGlobal.gParticleDefArray[(int)mEffectType];
+			mParticleHolder = EffectSystem.gEffectSystem.mParticleHolder;
+			mEmitterList.Clear();
+			for (int i = 0; i < ltEmitterCount; i++)
+			{
+				mEmitterList.Add(mParticleHolder.mEmitters[ltEmitterIdList[i]]);
+			}
+		}
+
 		public ParticleEffect mEffectType = ParticleEffect.PARTICLE_NONE;
 
 		public TodParticleDefinition mParticleDef;

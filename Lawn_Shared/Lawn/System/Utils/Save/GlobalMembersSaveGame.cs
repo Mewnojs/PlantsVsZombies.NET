@@ -8,18 +8,18 @@ namespace Lawn
 	{
 		public static bool LawnLoadGame(Board mBoard, string theFilePath)
 		{
-			try
-			{
+			//try
+			//{
 				Sexy.Buffer b = new Sexy.Buffer();
 				GlobalStaticVars.gSexyAppBase.ReadBufferFromFile(theFilePath, ref b, false);
 				mBoard.LoadFromFile(b);
-			}
-			catch (Exception ex)
-			{
-				string message = ex.Message;
-				EffectSystem.gEffectSystem.EffectSystemFreeAll();
-				return false;
-			}
+			//}
+			//catch (Exception ex)
+			//{
+			//	string message = ex.Message;
+			//	EffectSystem.gEffectSystem.EffectSystemFreeAll();
+			//	return false;
+			//}
 			return true;
 		}
 

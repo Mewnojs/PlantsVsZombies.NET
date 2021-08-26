@@ -65,6 +65,86 @@ namespace Sexy.TodLib
 			}
 		}
 
+		public void SaveToFile(Sexy.Buffer b)
+        {
+			TodParticleHolder aHolder = mParticleEmitter.mParticleSystem.mParticleHolder;
+			b.WriteLong(aHolder.mEmitters.FindIndex((TodParticleEmitter tpe) => tpe == mParticleEmitter));
+			b.WriteLong(mParticleDuration);
+			b.WriteLong(mParticleAge);
+			b.WriteFloat(mParticleTimeValue);
+			b.WriteFloat(mParticleLastTimeValue);
+			b.WriteFloat(mAnimationTimeValue);
+			b.WriteFloat(mVelocity.x);
+			b.WriteFloat(mVelocity.y);
+			b.WriteFloat(mPosition.x);
+			b.WriteFloat(mPosition.y);
+			b.WriteLong(mImageFrame);
+			b.WriteFloat(mSpinPosition);
+			b.WriteFloat(mSpinVelocity);
+			if (mCrossFadeParticleID == null)
+            {
+				b.WriteLong(-1);
+			}
+			else
+            {
+				b.WriteLong(aHolder.mParticles.FindIndex((TodParticle tp) => tp == mCrossFadeParticleID));
+			}
+			
+			b.WriteLong(mCrossFadeDuration);
+			foreach (float val in mParticleInterp)
+            {
+				b.WriteFloat(val);
+            }
+			foreach (float val in mParticleFieldInterp)
+            {
+				b.WriteFloat(val);
+            }
+		}
+
+		private int ltCrossFadeParticleID;
+
+		public void LoadFromFile(Sexy.Buffer b)
+        {
+			TodParticleHolder aHolder = EffectSystem.gEffectSystem.mParticleHolder;
+			mParticleEmitter = aHolder.mEmitters[b.ReadLong()];
+			mParticleDuration = b.ReadLong();
+			mParticleAge = b.ReadLong();
+			mParticleTimeValue = b.ReadFloat();
+			mParticleLastTimeValue = b.ReadFloat();
+			mAnimationTimeValue = b.ReadFloat();
+			mVelocity = new SexyVector2(b.ReadFloat(), b.ReadFloat());
+			mPosition = new SexyVector2(b.ReadFloat(), b.ReadFloat());
+			mImageFrame = b.ReadLong();
+			mSpinPosition = b.ReadFloat();
+			mSpinVelocity = b.ReadFloat();
+			ltCrossFadeParticleID = b.ReadLong();
+			mCrossFadeDuration = b.ReadLong();
+			for (int i = 0; i < mParticleInterp.Length; i++)
+            {
+				mParticleInterp[i] = b.ReadFloat();
+			}
+			for (int i = 0; i < mParticleFieldInterp.GetLength(0); i++)
+            {
+				for (int j = 0; j < mParticleFieldInterp.GetLength(1); j++)
+                {
+					mParticleFieldInterp[i, j] = b.ReadFloat();
+				}
+            }
+		}
+
+		public void LoadingComplete()
+        {
+			TodParticleHolder aHolder = mParticleEmitter.mParticleSystem.mParticleHolder;
+			if(ltCrossFadeParticleID == -1)
+            {
+				mCrossFadeParticleID = null;
+			}
+			else
+			{
+				mCrossFadeParticleID = aHolder.mParticles[ltCrossFadeParticleID];
+			}
+		}
+
 		public TodParticleEmitter mParticleEmitter;
 
 		public int mParticleDuration;

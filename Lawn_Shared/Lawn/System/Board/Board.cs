@@ -9,6 +9,7 @@ namespace Lawn
 	{
 		public bool LoadFromFile(Sexy.Buffer b)
 		{
+			EffectSystem.gEffectSystem.LoadFromFile(b);
 			this.doAddGraveStones = false;
 			this.mLevel = b.ReadLong();
 			if (this.mApp.mGameMode == GameMode.GAMEMODE_ADVENTURE && this.mLevel != this.mApp.mPlayerInfo.mLevel)
@@ -9627,6 +9628,7 @@ namespace Lawn
 			LeaderBoardComm.RecordResult(LeaderboardGameMode.Adventure, (int)this.mApp.mPlayerInfo.mZombiesKilled);
 			try
 			{
+				EffectSystem.gEffectSystem.SaveToFile(b);
 				b.WriteLong(this.mLevel);
 				b.WriteLong((int)this.mApp.mGameScene);
 				b.WriteLong(Board.mPeashootersPlanted);

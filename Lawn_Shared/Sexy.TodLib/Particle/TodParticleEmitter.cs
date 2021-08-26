@@ -865,6 +865,134 @@ namespace Sexy.TodLib
 				}
 			}
 		}
+		
+		public void SaveToFile(Sexy.Buffer b)
+        {
+			TodParticleHolder aHolder = mParticleSystem.mParticleHolder;
+			b.WriteLong(aHolder.mParticleSystems.FindIndex((TodParticleSystem tps) => tps == mParticleSystem));
+			b.WriteString(mEmitterDef.mName);
+			b.WriteLong(mParticleList.Count);
+			foreach (TodParticle aParticle in mParticleList)
+            {
+				b.WriteLong(aHolder.mParticles.FindIndex((TodParticle tp) => tp == aParticle));
+            }
+			b.WriteFloat(mSpawnAccum);
+			b.WriteFloat(mSystemCenter.x);
+			b.WriteFloat(mSystemCenter.y);
+			b.WriteLong(mParticlesSpawned);
+			b.WriteLong(mSystemAge);
+			b.WriteLong(mSystemDuration);
+			b.WriteFloat(mSystemTimeValue);
+			b.WriteFloat(mSystemLastTimeValue);
+			b.WriteBoolean(mDead);
+			b.WriteLong(mColorOverride.mRed);
+			b.WriteLong(mColorOverride.mGreen);
+			b.WriteLong(mColorOverride.mBlue);
+			b.WriteLong(mColorOverride.mAlpha);
+			b.WriteBoolean(mExtraAdditiveDrawOverride);
+			b.WriteFloat(mScaleOverride);
+			if (mImageOverride == null)
+			{
+				b.WriteLong(-1);
+			}
+			else
+            {
+				b.WriteLong(AtlasResources.GetIdByImageInAtlas(mImageOverride));
+			}
+			if (mCrossFadeEmitterID == null)
+            {
+				b.WriteLong(-1);
+            }
+            else
+            {
+				b.WriteLong(aHolder.mEmitters.FindIndex((TodParticleEmitter tpe) => tpe == mCrossFadeEmitterID));
+            }
+			b.WriteLong(mEmitterCrossFadeCountDown);
+			b.WriteLong(mFrameOverride);
+			b.WriteBoolean(mActive);
+			foreach (float val in mTrackInterp)
+            {
+				b.WriteFloat(val);
+            }
+			foreach (float val in mSystemFieldInterp)
+            {
+				b.WriteFloat(val);
+            }
+		}
+
+		private int ltParticleCount;
+		private List<int> ltParticleIdList = new List<int>();
+		private int ltCrossFadeEmitterID;
+		private string ltParticleSystemName;
+
+		public void LoadFromFile(Sexy.Buffer b)
+        {
+			TodParticleHolder aHolder = EffectSystem.gEffectSystem.mParticleHolder;
+			mParticleSystem = aHolder.mParticleSystems[b.ReadLong()];
+			ltParticleSystemName = b.ReadString();
+			ltParticleCount = b.ReadLong();
+			ltParticleIdList.Clear();
+			for (int i = 0; i < ltParticleCount; i++)
+            {
+				ltParticleIdList.Add(b.ReadLong());
+			}
+			mSpawnAccum = b.ReadFloat();
+			mSystemCenter = new SexyVector2(b.ReadFloat(), b.ReadFloat());
+			mParticlesSpawned = b.ReadLong();
+			mSystemAge = b.ReadLong();
+			mSystemDuration = b.ReadLong();
+			mSystemTimeValue = b.ReadFloat();
+			mSystemLastTimeValue = b.ReadFloat();
+			mDead = b.ReadBoolean();
+			mColorOverride = new SexyColor(b.ReadLong(), b.ReadLong(), b.ReadLong(), b.ReadLong());
+			mExtraAdditiveDrawOverride = b.ReadBoolean();
+			mScaleOverride = b.ReadFloat();
+			int aImageOverrideId = b.ReadLong();
+			if (aImageOverrideId == -1)
+            {
+				mImageOverride = null;
+            }
+            else
+            {
+				mImageOverride = AtlasResources.GetImageInAtlasById(aImageOverrideId);
+			}
+			ltCrossFadeEmitterID = b.ReadLong();
+			mEmitterCrossFadeCountDown = b.ReadLong();
+			mFrameOverride = b.ReadLong();
+			mActive = b.ReadBoolean();
+			for (int i = 0; i < mTrackInterp.Length; i++) 
+            {
+				mTrackInterp[i] = b.ReadFloat();
+			}
+			for (int i = 0; i < mSystemFieldInterp.GetLength(0); i++)
+            {
+				for (int j = 0; j < mSystemFieldInterp.GetLength(1); j++)
+                {
+					mSystemFieldInterp[i, j] = b.ReadFloat();
+				}
+			}
+		}
+
+		public void LoadingComplete()
+        {
+			TodParticleHolder aHolder = mParticleSystem.mParticleHolder;
+			mParticleList.Clear();
+			for (int i = 0; i < ltParticleCount; i++)
+            {
+				mParticleList.Add(aHolder.mParticles[i]);
+			}
+			if (ltCrossFadeEmitterID == -1)
+            {
+				mCrossFadeEmitterID = null;
+			}
+            else
+            {
+				mCrossFadeEmitterID = aHolder.mEmitters[ltCrossFadeEmitterID];
+			}
+
+			
+			mEmitterDef = mParticleSystem.FindEmitterDefByName(ltParticleSystemName);
+		}
 
 		public TodEmitterDefinition mEmitterDef;
 
