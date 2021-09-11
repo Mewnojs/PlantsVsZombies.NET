@@ -1300,52 +1300,51 @@ namespace Lawn
 		{
 			int damageRangeFlags = this.GetDamageRangeFlags(thePlantWeapon);
 			TRect plantAttackRect = this.GetPlantAttackRect(thePlantWeapon);
-			int num = 0;
-			Zombie zombie = null;
-			int count = this.mBoard.mZombies.Count;
-			for (int i = 0; i < count; i++)
+			int distanceMax = 0;
+			Zombie result = null;
+			for (int i = 0; i < this.mBoard.mZombies.Count; i++)
 			{
-				Zombie zombie2 = this.mBoard.mZombies[i];
-				if (!zombie2.mDead)
+				Zombie theZombieItem = this.mBoard.mZombies[i];
+				if (!theZombieItem.mDead)
 				{
-					int num2 = zombie2.mRow - theRow;
-					if (zombie2.mZombieType == ZombieType.ZOMBIE_BOSS)
+					int rowDeviation = theZombieItem.mRow - theRow;
+					if (theZombieItem.mZombieType == ZombieType.ZOMBIE_BOSS)
 					{
-						num2 = 0;
+						rowDeviation = 0;
 					}
-					if ((zombie2.mHasHead && !zombie2.IsTangleKelpTarget()) || (this.mSeedType != SeedType.SEED_POTATOMINE && this.mSeedType != SeedType.SEED_CHOMPER && this.mSeedType != SeedType.SEED_TANGLEKELP))
+					if ((theZombieItem.mHasHead && !theZombieItem.IsTangleKelpTarget()) || (this.mSeedType != SeedType.SEED_POTATOMINE && this.mSeedType != SeedType.SEED_CHOMPER && this.mSeedType != SeedType.SEED_TANGLEKELP))
 					{
-						bool flag = false;
+						bool isPortalCheckNeeded = false;
 						if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_PORTAL_COMBAT && (this.mSeedType == SeedType.SEED_PEASHOOTER || this.mSeedType == SeedType.SEED_CACTUS || this.mSeedType == SeedType.SEED_REPEATER))
 						{
-							flag = true;
+							isPortalCheckNeeded = true;
 						}
 						if (this.mSeedType != SeedType.SEED_CATTAIL)
 						{
 							if (this.mSeedType == SeedType.SEED_GLOOMSHROOM)
 							{
-								if (num2 < -1)
+								if (rowDeviation < -1)
 								{
 									continue;
 								}
-								if (num2 > 1)
+								if (rowDeviation > 1)
 								{
 									continue;
 								}
 							}
-							else if (flag)
+							else if (isPortalCheckNeeded)
 							{
-								if (!this.mBoard.mChallenge.CanTargetZombieWithPortals(this, zombie2))
+								if (!this.mBoard.mChallenge.CanTargetZombieWithPortals(this, theZombieItem))
 								{
 									continue;
 								}
 							}
-							else if (num2 != 0)
+							else if (rowDeviation != 0)
 							{
 								continue;
 							}
 						}
-						if (zombie2.EffectedByDamage((uint)damageRangeFlags))
+						if (theZombieItem.EffectedByDamage((uint)damageRangeFlags))
 						{
 							int num3 = 0;
 							if (this.mSeedType == SeedType.SEED_CATTAIL)
@@ -1354,71 +1353,71 @@ namespace Lawn
 							}
 							if (this.mSeedType == SeedType.SEED_CHOMPER)
 							{
-								if (zombie2.mZombiePhase == ZombiePhase.PHASE_DIGGER_WALKING)
+								if (theZombieItem.mZombiePhase == ZombiePhase.PHASE_DIGGER_WALKING)
 								{
 									plantAttackRect.mX += 20;
 									plantAttackRect.mWidth -= 20;
 								}
-								if (zombie2.mZombiePhase == ZombiePhase.PHASE_POGO_BOUNCING || (zombie2.mZombieType == ZombieType.ZOMBIE_BUNGEE && zombie2.mTargetCol == this.mPlantCol))
+								if (theZombieItem.mZombiePhase == ZombiePhase.PHASE_POGO_BOUNCING || (theZombieItem.mZombieType == ZombieType.ZOMBIE_BUNGEE && theZombieItem.mTargetCol == this.mPlantCol))
 								{
 									continue;
 								}
-								if (zombie2.mIsEating || this.mState == PlantState.STATE_CHOMPER_BITING)
+								if (theZombieItem.mIsEating || this.mState == PlantState.STATE_CHOMPER_BITING)
 								{
 									num3 = 60;
 								}
 							}
 							if (this.mSeedType == SeedType.SEED_POTATOMINE)
 							{
-								if ((zombie2.mZombieType == ZombieType.ZOMBIE_POGO && zombie2.mHasObject) || zombie2.mZombiePhase == ZombiePhase.PHASE_POLEVAULTER_IN_VAULT || zombie2.mZombiePhase == ZombiePhase.PHASE_POLEVAULTER_PRE_VAULT)
+								if ((theZombieItem.mZombieType == ZombieType.ZOMBIE_POGO && theZombieItem.mHasObject) || theZombieItem.mZombiePhase == ZombiePhase.PHASE_POLEVAULTER_IN_VAULT || theZombieItem.mZombiePhase == ZombiePhase.PHASE_POLEVAULTER_PRE_VAULT)
 								{
 									continue;
 								}
-								if (zombie2.mZombieType == ZombieType.ZOMBIE_POLEVAULTER)
+								if (theZombieItem.mZombieType == ZombieType.ZOMBIE_POLEVAULTER)
 								{
 									plantAttackRect.mX += 40;
 									plantAttackRect.mWidth -= 40; //原版造成土豆雷不爆炸Bug的机制
 								}
-								if (zombie2.mZombieType == ZombieType.ZOMBIE_BUNGEE && zombie2.mTargetCol != this.mPlantCol)
+								if (theZombieItem.mZombieType == ZombieType.ZOMBIE_BUNGEE && theZombieItem.mTargetCol != this.mPlantCol)
 								{
 									continue;
 								}
-								if (zombie2.mIsEating)
+								if (theZombieItem.mIsEating)
 								{
 									num3 = 30;
 								}
 							}
-							if ((this.mSeedType != SeedType.SEED_EXPLODE_O_NUT || zombie2.mZombiePhase != ZombiePhase.PHASE_POLEVAULTER_IN_VAULT) && (this.mSeedType != SeedType.SEED_TANGLEKELP || zombie2.mInPool))
+							if ((this.mSeedType != SeedType.SEED_EXPLODE_O_NUT || theZombieItem.mZombiePhase != ZombiePhase.PHASE_POLEVAULTER_IN_VAULT) && (this.mSeedType != SeedType.SEED_TANGLEKELP || theZombieItem.mInPool))
 							{
-								TRect zombieRect = zombie2.GetZombieRect();
-								if (!flag)
+								TRect zombieRect = theZombieItem.GetZombieRect();
+								if (!isPortalCheckNeeded)
 								{
-									int rectOverlap = GameConstants.GetRectOverlap(plantAttackRect, zombieRect);
-									if (rectOverlap < -num3)
+									int theXOverlap = GameConstants.GetRectOverlap(plantAttackRect, zombieRect);
+									if (theXOverlap < -num3)
 									{
 										continue;
 									}
 								}
-								int num4 = -zombieRect.mX;
+								int distance = -zombieRect.mX;
 								if (this.mSeedType == SeedType.SEED_CATTAIL)
 								{
-									num4 = -(int)TodCommon.Distance2D((float)this.mX + 40f, (float)this.mY + 40f, (float)(zombieRect.mX + zombieRect.mWidth / 2), (float)(zombieRect.mY + zombieRect.mHeight / 2));
-									if (zombie2.IsFlying())
+									distance = -(int)TodCommon.Distance2D((float)this.mX + 40f, (float)this.mY + 40f, (float)(zombieRect.mX + zombieRect.mWidth / 2), (float)(zombieRect.mY + zombieRect.mHeight / 2));
+									if (theZombieItem.IsFlying())
 									{
-										num4 += 10000;
+										distance += 10000;	// prority for balloon
 									}
 								}
-								if (zombie == null || num4 > num)
+								if (result == null || distance > distanceMax)
 								{
-									num = num4;
-									zombie = zombie2;
+									distanceMax = distance;
+									result = theZombieItem;
 								}
 							}
 						}
 					}
 				}
 			}
-			return zombie;
+			return result;
 		}
 
 		public void Die()

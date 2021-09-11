@@ -30,8 +30,8 @@ namespace Lawn
 			this.mZenGardenButton.mClip = false;
 			this.mOptionsButton = GameButton.MakeNewButton(109, this, "", null, AtlasResources.IMAGE_SELECTORSCREEN_OPTIONS1, AtlasResources.IMAGE_SELECTORSCREEN_OPTIONS2, AtlasResources.IMAGE_SELECTORSCREEN_OPTIONS2);
 			this.mOptionsButton.Resize(Constants.MAIN_MENU_ORIGIN_X + Constants.GameSelector_OptionsButton_X, Constants.GameSelector_OptionsButton_Y, AtlasResources.IMAGE_SELECTORSCREEN_OPTIONS1.mWidth, AtlasResources.IMAGE_SELECTORSCREEN_OPTIONS1.mHeight + 25);
-			this.mUnlockGameButton = GameButton.MakeNewButton(113, this, string.Empty, null, AtlasResources.IMAGE_BLANK, AtlasResources.IMAGE_BLANK, AtlasResources.IMAGE_BLANK);
-			this.mUnlockGameButton.Resize(Constants.MAIN_MENU_ORIGIN_X, (int)Constants.InvertAndScale(100f), (int)Constants.InvertAndScale(210f), (int)Constants.InvertAndScale(30f));
+			this.mUserDialogButton = GameButton.MakeNewButton(113, this, string.Empty, null, AtlasResources.IMAGE_BLANK, AtlasResources.IMAGE_BLANK, AtlasResources.IMAGE_BLANK);
+			this.mUserDialogButton.Resize(Constants.MAIN_MENU_ORIGIN_X, (int)Constants.InvertAndScale(100f), (int)Constants.InvertAndScale(210f), (int)Constants.InvertAndScale(30f));
 			this.mStoreButton = GameButton.MakeNewButton(112, this, "", null, AtlasResources.IMAGE_SELECTORSCREEN_STORE, AtlasResources.IMAGE_SELECTORSCREEN_STOREHIGHLIGHT, AtlasResources.IMAGE_SELECTORSCREEN_STOREHIGHLIGHT);
 			this.mStoreButton.Resize(Constants.MAIN_MENU_ORIGIN_X + Constants.GameSelector_StoreButton_X, Constants.GameSelector_StoreButton_Y, AtlasResources.IMAGE_SELECTORSCREEN_STORE.mWidth, AtlasResources.IMAGE_SELECTORSCREEN_STORE.mHeight);
 			this.mAlmanacButton = GameButton.MakeNewButton(114, this, "", null, AtlasResources.IMAGE_SELECTORSCREEN_ALMANAC, AtlasResources.IMAGE_SELECTORSCREEN_ALMANACHIGHLIGHT, AtlasResources.IMAGE_SELECTORSCREEN_ALMANACHIGHLIGHT);
@@ -61,6 +61,23 @@ namespace Lawn
 			this.mSelectedQuickplayButtonId = 121;
 			this.ToggleGameButton(this.mSelectedQuickplayButtonId);
 			this.mMoreGamesListWidget = new MoreGamesListWidget(this.mApp);
+
+			//this.mUserButton = /*GameButton.MakeButton(29, this, "[GAMESELECTOR_SWITCH_USER]");*/new NewLawnButton(null,29,this);
+			//this.mUserButton.mDoFinger = true;
+			//this.mUserButton.mLabel = "[GAMESELECTOR_SWITCH_USER]";
+			//this.mUserButton.mFont = Resources.FONT_HOUSEOFTERROR16;
+			////this.mUserButton.mButtonImage = AtlasResources.IMAGE_STORE_MAINMENUBUTTON;
+			////this.mUserButton.mDownImage = AtlasResources.IMAGE_STORE_MAINMENUBUTTONDOWN;
+			//this.mUserButton.mColors[0] = new SexyColor(255, 240, 0);
+			//this.mUserButton.mColors[1] = new SexyColor(200, 200, 255);
+			//mUserButton.Resize(Constants.MAIN_MENU_ORIGIN_X + (int)Constants.InvertAndScale(20f), (int)Constants.InvertAndScale(90f), (int)Constants.InvertAndScale(120f), (int)Constants.InvertAndScale(30f));
+			float limboBtnOffset = 190;
+			this.mChallengePageSurvivalButton = GameButton.MakeButton(126/*(int)GameSelectorButtons.GameSelector_ChallengePageSurvival*/, this, "[GAMESELECTOR_SURVIVAL]");
+			mChallengePageSurvivalButton.Resize(Constants.QUICKPLAY_ORIGIN_X + (int)Constants.InvertAndScale(20f), (int)Constants.InvertAndScale(limboBtnOffset), (int)Constants.InvertAndScale(100f), (int)Constants.InvertAndScale(30f));
+			this.mChallengePageLimboButton = GameButton.MakeButton(127/*(int)GameSelectorButtons.GameSelector_ChallengePageLimbo*/, this, "[GAMESELECTOR_LIMBO]");
+			mChallengePageLimboButton.Resize(Constants.QUICKPLAY_ORIGIN_X + (int)Constants.InvertAndScale(20f), (int)Constants.InvertAndScale(limboBtnOffset + 30f), (int)Constants.InvertAndScale(100f), (int)Constants.InvertAndScale(30f));
+
+
 			this.LoadGames();
 			this.mMoreGamesListWidget.Resize(0, 0, this.mMoreGamesListWidget.mWidth, this.mMoreGamesListWidget.GetPreferredHeight() + (int)Constants.InvertAndScale(20f));
 			this.mMoreGamesScrollWidget = new ScrollWidget();
@@ -96,6 +113,13 @@ namespace Lawn
 			this.AddWidget(this.mAlmanacButton);
 			this.AddWidget(this.mZenGardenButton);
 			this.AddWidget(this.mAchievementsButton);
+
+			if (mApp.mPlayerInfo != null && mApp.mPlayerInfo.mHasUsedCheatKeys)
+			{
+				this.AddWidget(this.mChallengePageSurvivalButton);
+				this.AddWidget(this.mChallengePageLimboButton);
+			}
+
 			if (this.mApp.mPlayerInfo != null && this.mApp.mPlayerInfo.mHasUnlockedPuzzleMode)
 			{
 				this.AddWidget(this.mVaseBreakerButton);
@@ -116,10 +140,10 @@ namespace Lawn
 			Reanimation theReanimation = this.mApp.AddReanimation(theX, theY, 400000, ReanimationType.REANIM_WOODSIGN, false);
 			this.mWoodSignReanimID = this.mApp.ReanimationGetID(theReanimation);
 			this.SetupUnlockFullGameReanim();
-			if (SexyAppBase.IsInTrialMode)
-			{
-				this.AddWidget(this.mUnlockGameButton);
-			}
+			//if (SexyAppBase.IsInTrialMode)
+			//{
+				this.AddWidget(this.mUserDialogButton);
+			//}
 			this.mLeafCounter = 50;
 			this.mSignState = SelectorSignState.SIGN_UP;
 			this.SyncProfile(false);
@@ -130,16 +154,16 @@ namespace Lawn
 
 		private void SetupUnlockFullGameReanim()
 		{
-			if (SexyAppBase.IsInTrialMode)
-			{
+			//if (SexyAppBase.IsInTrialMode)
+			//{
 				this.mWoodSignReanimID.AssignRenderGroupToPrefix("short rope1", -1);
 				this.mWoodSignReanimID.AssignRenderGroupToPrefix("short rope2", -1);
 				return;
-			}
-			this.mWoodSignReanimID.AssignRenderGroupToPrefix("long rope1", -1);
-			this.mWoodSignReanimID.AssignRenderGroupToPrefix("long rope2", -1);
-			this.mWoodSignReanimID.AssignRenderGroupToPrefix("click here", -1);
-			this.mWoodSignReanimID.AssignRenderGroupToPrefix("broken", -1);
+			//}
+			//this.mWoodSignReanimID.AssignRenderGroupToPrefix("long rope1", -1);
+			//this.mWoodSignReanimID.AssignRenderGroupToPrefix("long rope2", -1);
+			//this.mWoodSignReanimID.AssignRenderGroupToPrefix("click here", -1);
+			//this.mWoodSignReanimID.AssignRenderGroupToPrefix("broken", -1);
 		}
 
 		public override void Dispose()
@@ -820,7 +844,7 @@ namespace Lawn
 			this.mMoreWaysToPlayButton.SetDisabled(true);
 			this.mZenGardenButton.SetDisabled(true);
 			this.mOptionsButton.SetDisabled(true);
-			this.mUnlockGameButton.SetDisabled(true);
+			this.mUserDialogButton.SetDisabled(true);
 			this.mStoreButton.SetDisabled(true);
 			this.mAlmanacButton.SetDisabled(true);
 			this.mMoreGamesButton.SetDisabled(true);
@@ -1017,7 +1041,7 @@ namespace Lawn
 
 		public DialogButton mAlmanacButton;
 
-		public DialogButton mUnlockGameButton;
+		public DialogButton mUserDialogButton;
 
 		public DialogButton mAchievementsButton;
 
@@ -1035,11 +1059,14 @@ namespace Lawn
 
 		public DialogButton mMoreWaysBackButton;
 
+		public DialogButton mChallengePageSurvivalButton;
+		public DialogButton mChallengePageLimboButton;
+
 		public int mSelectedQuickplayButtonId;
 
 		public MoreGamesListWidget mMoreGamesListWidget;
-
-		public ScrollWidget mMoreGamesScrollWidget;
+        
+        public ScrollWidget mMoreGamesScrollWidget;
 
 		public string mLexText = string.Empty;
 
@@ -1114,6 +1141,7 @@ namespace Lawn
 		public int mQuickplaySlideCounter;
 
 		public bool mRetractingQuickplay;
+        
 
 		private enum GameSelectorScreenState
 		{
