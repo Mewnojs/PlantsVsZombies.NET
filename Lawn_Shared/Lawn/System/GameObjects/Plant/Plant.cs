@@ -6,7 +6,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class Plant : GameObject
+	public/*internal*/ class Plant : GameObject
 	{
 		public static void PreallocateMemory()
 		{

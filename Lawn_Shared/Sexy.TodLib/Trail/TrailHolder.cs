@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sexy.TodLib
 {
-	internal class TrailHolder
+	public/*internal*/ class TrailHolder
 	{
 		public void Dispose()
 		{

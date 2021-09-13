@@ -404,7 +404,7 @@ namespace Sexy
 			for (;;)
 			{
 				int num2 = theDir.IndexOf('/', num);
-				userStoreForApplication = IsolatedStorageFile.GetUserStoreForAssembly();//GetUserStoreForApplication();
+				userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
 				if (num2 == -1)
 				{
 					break;
@@ -428,7 +428,7 @@ namespace Sexy
 
 		public static bool DeleteFile(string lpFileName)
 		{
-			IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForAssembly();//GetUserStoreForApplication();
+			IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
 			if (userStoreForApplication.FileExists(lpFileName))
 			{
 				userStoreForApplication.DeleteFile(lpFileName);

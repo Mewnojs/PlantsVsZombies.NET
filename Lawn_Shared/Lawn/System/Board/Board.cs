@@ -5,7 +5,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class Board : Widget, ButtonListener
+	public/*internal*/ class Board : Widget, ButtonListener
 	{
 		public bool LoadFromFile(Sexy.Buffer b)
 		{

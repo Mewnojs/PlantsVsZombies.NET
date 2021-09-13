@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
+using System.Threading;
 
 namespace Sexy
 {
@@ -101,7 +102,14 @@ namespace Sexy
 			Main.GamerServicesComp = new GamerServicesComponent(this);
 			base.Components.Add(Main.GamerServicesComp);
 			ReportAchievement.Initialise();
+			IronPyInteractive.Serve();
 			base.Initialize();
+			
+		}
+
+		protected override void OnExiting(object sender, EventArgs args) 
+		{
+			IronPyInteractive.Stop();		
 		}
 
 		protected override void LoadContent()

@@ -4,7 +4,7 @@ using Sexy;
 
 namespace Lawn
 {
-	internal class MoreGamesListWidget : Widget
+	public/*internal*/ class MoreGamesListWidget : Widget
 	{
 		public MoreGamesListWidget(LawnApp theApp)
 		{
@@ -72,7 +72,7 @@ namespace Lawn
 
 		public List<MoreGamesListWidget.GameInfo> mGames = new List<MoreGamesListWidget.GameInfo>();
 
-		internal class GameInfo
+		public/*internal*/ class GameInfo
 		{
 			public Image mImage = new Image();
 

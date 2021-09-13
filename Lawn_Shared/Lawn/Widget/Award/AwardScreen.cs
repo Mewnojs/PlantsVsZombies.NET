@@ -5,7 +5,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class AwardScreen : Widget, AlmanacListener, StoreListener, ButtonListener
+	public/*internal*/ class AwardScreen : Widget, AlmanacListener, StoreListener, ButtonListener
 	{
 		public AwardScreen(LawnApp theApp, AwardType theAwardType, bool theShowAchievements)
 		{
@@ -775,7 +775,7 @@ namespace Lawn
 
 		public bool mShowingAchievements;
 
-		internal class AchievementScreenItem
+		public/*internal*/ class AchievementScreenItem
 		{
 			public AchievementId mId;
 

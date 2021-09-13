@@ -4,7 +4,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class ReanimationWidget : Widget
+	public/*internal*/ class ReanimationWidget : Widget
 	{
 		public ReanimationWidget()
 		{

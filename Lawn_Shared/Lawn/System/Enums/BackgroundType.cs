@@ -2,7 +2,7 @@
 
 namespace Lawn
 {
-	internal enum BackgroundType
+	public/*internal*/ enum BackgroundType
 	{
 		BACKGROUND_1_DAY,
 		BACKGROUND_2_NIGHT,

@@ -4,7 +4,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class TitleScreen : Widget, ButtonListener
+	public/*internal*/ class TitleScreen : Widget, ButtonListener
 	{
 		public void ButtonPress(int theId, int theClickCount)
 		{

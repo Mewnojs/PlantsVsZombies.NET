@@ -42,7 +42,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
+//using System.Runtime.Remoting.Messaging;
 using System.Threading;
 
 using Microsoft.Xna.Framework.GamerServices;
@@ -51,6 +51,14 @@ using Microsoft.Xna.Framework.GamerServices;
 
 namespace Microsoft.Xna.Framework.Net
 {
+	class AsyncResult : IAsyncResult
+	{
+        public WaitHandle AsyncWaitHandle => throw new NotImplementedException();
+        public bool CompletedSynchronously => throw new NotImplementedException();
+        public bool IsCompleted => throw new NotImplementedException();
+        object IAsyncResult.AsyncState => throw new NotImplementedException();
+		public object AsyncDelegate => throw new NotImplementedException();
+	}
 	// The delegate must have the same signature as the method
 	// it will call asynchronously.
 	public delegate NetworkSession NetworkSessionAsynchronousCreate (

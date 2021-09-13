@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sexy.TodLib
 {
-	internal class ReanimatorTransform
+	public/*internal*/ class ReanimatorTransform
 	{
 		public static void PreallocateMemory()
 		{

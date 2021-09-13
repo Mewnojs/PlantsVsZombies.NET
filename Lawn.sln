@@ -7,13 +7,13 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Lawn_Shared", "Lawn_Shared\
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MonoGame.Framework.Net", "MonoGame.Framework.Net\MonoGame.Framework.Net.shproj", "{A0CDBD0E-3A41-42B7-9425-A838BC2C7383}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lawn_PCDX", "Lawn_PCDX\Lawn_PCDX.csproj", "{7AB353B4-582F-478B-9833-76FCCB686A30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lawn_PCDX", "Lawn_PCDX\Lawn_PCDX.csproj", "{7AB353B4-582F-478B-9833-76FCCB686A30}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Lawn_Shared\Lawn_Shared.projitems*{1a95301d-4238-4ccd-9b56-38537e891b16}*SharedItemsImports = 13
-		Lawn_Shared\Lawn_Shared.projitems*{7ab353b4-582f-478b-9833-76fccb686a30}*SharedItemsImports = 4
-		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{7ab353b4-582f-478b-9833-76fccb686a30}*SharedItemsImports = 4
+		Lawn_Shared\Lawn_Shared.projitems*{7ab353b4-582f-478b-9833-76fccb686a30}*SharedItemsImports = 5
+		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{7ab353b4-582f-478b-9833-76fccb686a30}*SharedItemsImports = 5
 		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{a0cdbd0e-3a41-42b7-9425-a838bc2c7383}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

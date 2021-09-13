@@ -2,7 +2,7 @@
 
 namespace Sexy
 {
-	internal class ProxyWidget : Widget
+	public/*internal*/ class ProxyWidget : Widget
 	{
 		public ProxyWidget(ProxyWidgetListener listener)
 		{

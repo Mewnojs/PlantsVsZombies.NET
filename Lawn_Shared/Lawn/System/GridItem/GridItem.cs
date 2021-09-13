@@ -5,7 +5,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class GridItem
+	public/*internal*/ class GridItem
 	{
 		public static GridItem GetNewGridItem()
 		{

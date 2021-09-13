@@ -2,7 +2,7 @@
 
 namespace Lawn
 {
-	internal enum TutorialState
+	public/*internal*/ enum TutorialState
 	{
 		TUTORIAL_OFF,
 		TUTORIAL_LEVEL_1_PICK_UP_PEASHOOTER,

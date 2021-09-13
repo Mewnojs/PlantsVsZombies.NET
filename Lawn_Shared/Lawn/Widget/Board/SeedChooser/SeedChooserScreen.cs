@@ -4,7 +4,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class SeedChooserScreen : Widget, StoreListener, AlmanacListener, LawnMessageBoxListener, SeedPacketsWidgetListener
+	public/*internal*/ class SeedChooserScreen : Widget, StoreListener, AlmanacListener, LawnMessageBoxListener, SeedPacketsWidgetListener
 	{
 		static SeedChooserScreen()
 		{

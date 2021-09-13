@@ -3,7 +3,7 @@ using Sexy;
 
 namespace Lawn
 {
-	internal class MagnetItem
+	public/*internal*/ class MagnetItem
 	{
 		public void Reset()
 		{

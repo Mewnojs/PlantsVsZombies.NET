@@ -4,7 +4,7 @@ using Sexy;
 
 namespace Lawn
 {
-	internal class PlayerInfo
+	public/*internal*/ class PlayerInfo
 	{
 		public int mLevel
 		{

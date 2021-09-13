@@ -10,7 +10,7 @@ using Sexy.TodLib;
 
 namespace Sexy
 {
-	internal class ResourceManager : IDisposable
+	public/*internal*/ class ResourceManager : IDisposable
 	{
 		public ResourceManager(SexyAppBase theApp)
 		{

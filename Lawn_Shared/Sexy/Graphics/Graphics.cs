@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sexy
 {
-	internal class Graphics : GraphicsState
+	public/*internal*/ class Graphics : GraphicsState
 	{
 		public static void PreAllocateMemory()
 		{

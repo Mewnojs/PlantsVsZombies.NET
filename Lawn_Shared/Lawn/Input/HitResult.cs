@@ -2,7 +2,7 @@
 
 namespace Lawn
 {
-	internal struct HitResult
+	public/*internal*/ struct HitResult
 	{
 		public object mObject;
 

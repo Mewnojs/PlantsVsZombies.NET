@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace Sexy.TodLib
 {
-	internal class Attachment
+	public/*internal*/ class Attachment
 	{
 		public static void PreallocateMemory()
 		{

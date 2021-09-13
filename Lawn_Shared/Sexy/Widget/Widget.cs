@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace Sexy
 {
-	internal class Widget : WidgetContainer
+	public/*internal*/ class Widget : WidgetContainer
 	{
 		public void WidgetRemovedHelper()
 		{

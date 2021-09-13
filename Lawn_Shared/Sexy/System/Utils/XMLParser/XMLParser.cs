@@ -4,7 +4,7 @@ using System.Xml;
 
 namespace Sexy
 {
-	internal class XMLParser : EncodingParser
+	public/*internal*/ class XMLParser : EncodingParser
 	{
 		protected void Fail(string theErrorText)
 		{

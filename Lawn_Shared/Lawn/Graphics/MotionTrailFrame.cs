@@ -3,7 +3,7 @@ using Sexy;
 
 namespace Lawn
 {
-	internal class MotionTrailFrame
+	public/*internal*/ class MotionTrailFrame
 	{
 		public void SaveToFile(Sexy.Buffer b)
 		{

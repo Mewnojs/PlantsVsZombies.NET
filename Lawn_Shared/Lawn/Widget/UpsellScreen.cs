@@ -3,7 +3,7 @@ using Sexy;
 
 namespace Lawn
 {
-	internal class UpsellScreen : Dialog
+	public/*internal*/ class UpsellScreen : Dialog
 	{
 		public UpsellScreen(LawnApp theApp) : base(null, null, 54, true, "", "", "", 0)
 		{

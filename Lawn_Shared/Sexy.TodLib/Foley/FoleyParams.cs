@@ -2,7 +2,7 @@
 
 namespace Sexy.TodLib
 {
-	internal class FoleyParams
+	public/*internal*/ class FoleyParams
 	{
 		public FoleyParams(FoleyType aFoleyType, float aPitchRange, int[] aIDs, uint aFoleyFlags)
 		{

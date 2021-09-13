@@ -4,7 +4,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class LeaderboardScreen : Widget
+	public/*internal*/ class LeaderboardScreen : Widget
 	{
 		public LeaderboardScreen(LawnApp theApp)
 		{

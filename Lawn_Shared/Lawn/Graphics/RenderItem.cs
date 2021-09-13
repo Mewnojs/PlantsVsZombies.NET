@@ -4,7 +4,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class RenderItem : IComparable
+	public/*internal*/ class RenderItem : IComparable
 	{
 		public static void PreallocateMemory()
 		{

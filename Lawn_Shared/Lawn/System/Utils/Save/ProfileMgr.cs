@@ -4,7 +4,7 @@ using Sexy;
 
 namespace Lawn
 {
-	internal class ProfileMgr
+	public/*internal*/ class ProfileMgr
 	{
 		protected void DeleteOldestProfile()
 		{

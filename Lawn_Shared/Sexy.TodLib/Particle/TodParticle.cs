@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sexy.TodLib
 {
-	internal class TodParticle
+	public/*internal*/ class TodParticle
 	{
 		public static void PreallocateMemory()
 		{

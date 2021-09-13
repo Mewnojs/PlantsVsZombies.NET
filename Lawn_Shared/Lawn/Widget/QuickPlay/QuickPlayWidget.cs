@@ -4,7 +4,7 @@ using Sexy;
 
 namespace Lawn
 {
-	internal class QuickPlayWidget : Widget
+	public/*internal*/ class QuickPlayWidget : Widget
 	{
 		static QuickPlayWidget()
 		{

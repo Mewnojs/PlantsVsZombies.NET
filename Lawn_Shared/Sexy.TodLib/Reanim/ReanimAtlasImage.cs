@@ -2,7 +2,7 @@
 
 namespace Sexy.TodLib
 {
-	internal class ReanimAtlasImage
+	public/*internal*/ class ReanimAtlasImage
 	{
 		public ReanimAtlasImage()
 		{

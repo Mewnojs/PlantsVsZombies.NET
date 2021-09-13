@@ -2,7 +2,7 @@
 
 namespace Sexy.TodLib
 {
-	internal class FoleyInstance
+	public/*internal*/ class FoleyInstance
 	{
 		public bool mPaused
 		{

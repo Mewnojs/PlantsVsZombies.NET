@@ -2,7 +2,7 @@
 
 namespace Sexy.TodLib
 {
-	internal class EffectSystem
+	public/*internal*/ class EffectSystem
 	{
 		public EffectSystem()
 		{

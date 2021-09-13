@@ -2,7 +2,7 @@
 
 namespace Lawn
 {
-	internal class ChosenSeed
+	public/*internal*/ class ChosenSeed
 	{
 		public int mX;
 

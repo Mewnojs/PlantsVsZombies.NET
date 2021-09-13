@@ -10,7 +10,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class LawnApp : SexyAppBase
+	public/*internal*/ class LawnApp : SexyAppBase
 	{
 		public PlayerInfo mPlayerInfo
 		{
@@ -952,11 +952,11 @@ namespace Lawn
 			{
 				return false;
 			}
-			Guide.BeginShowMessageBox(TodStringFile.TodStringTranslate("[ALLOW_RUN_WHEN_LOCKED_HEADING]"), TodStringFile.TodStringTranslate("[ALLOW_RUN_WHEN_LOCKED]"), new string[]
+			/*Guide.BeginShowMessageBox(TodStringFile.TodStringTranslate("[ALLOW_RUN_WHEN_LOCKED_HEADING]"), TodStringFile.TodStringTranslate("[ALLOW_RUN_WHEN_LOCKED]"), new string[]
 			{
 				TodStringFile.TodStringTranslate("[BUTTON_YES]"),
 				TodStringFile.TodStringTranslate("[BUTTON_NO]")
-			}, 0, MessageBoxIcon.None, new AsyncCallback(this.RunWhenLockedMessageClosed), null);
+			}, 0, MessageBoxIcon.None, new AsyncCallback(this.RunWhenLockedMessageClosed), null);*/
 			return true;
 		}
 

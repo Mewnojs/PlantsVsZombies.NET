@@ -3,7 +3,7 @@ using Sexy;
 
 namespace Lawn
 {
-	internal class TypingCheck
+	public/*internal*/ class TypingCheck
 	{
 		public TypingCheck()
 		{

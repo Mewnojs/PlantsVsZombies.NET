@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sexy
 {
-	internal class BaseRes
+	public/*internal*/ class BaseRes
 	{
 		~BaseRes()
 		{

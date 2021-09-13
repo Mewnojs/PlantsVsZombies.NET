@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sexy.TodLib
 {
-	internal class TodParticleHolder
+	public/*internal*/ class TodParticleHolder
 	{
 		public void Dispose()
 		{

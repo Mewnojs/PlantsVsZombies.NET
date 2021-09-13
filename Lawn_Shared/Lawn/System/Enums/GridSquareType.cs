@@ -2,7 +2,7 @@
 
 namespace Lawn
 {
-	internal enum GridSquareType
+	public/*internal*/ enum GridSquareType
 	{
 		GRIDSQUARE_NONE,
 		GRIDSQUARE_GRASS,

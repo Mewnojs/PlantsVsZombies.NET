@@ -4,7 +4,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-    internal class AchievementsWidget : Widget
+    public/*internal*/ class AchievementsWidget : Widget
     {
         public AchievementsWidget(LawnApp theApp)
         {

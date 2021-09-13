@@ -4,7 +4,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class BungeeDropGrid
+	public/*internal*/ class BungeeDropGrid
 	{
 		public BungeeDropGrid()
 		{

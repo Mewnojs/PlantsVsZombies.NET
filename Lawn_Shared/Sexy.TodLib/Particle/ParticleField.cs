@@ -2,7 +2,7 @@
 
 namespace Sexy.TodLib
 {
-	internal class ParticleField
+	public/*internal*/ class ParticleField
 	{
 		public ParticleField()
 		{

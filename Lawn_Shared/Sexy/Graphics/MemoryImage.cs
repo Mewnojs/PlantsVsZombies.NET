@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sexy
 {
-	internal class MemoryImage : Image, IDisposable
+	public/*internal*/ class MemoryImage : Image, IDisposable
 	{
 		public RenderTarget2D RenderTarget
 		{

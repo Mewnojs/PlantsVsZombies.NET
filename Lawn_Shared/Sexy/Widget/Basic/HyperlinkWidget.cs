@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace Sexy
 {
-	internal class HyperlinkWidget : ButtonWidget
+	public/*internal*/ class HyperlinkWidget : ButtonWidget
 	{
 		public HyperlinkWidget(int theId, ButtonListener theButtonListener) : base(theId, theButtonListener)
 		{

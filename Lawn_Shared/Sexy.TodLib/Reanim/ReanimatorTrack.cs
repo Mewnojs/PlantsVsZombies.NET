@@ -2,7 +2,7 @@
 
 namespace Sexy.TodLib
 {
-	internal class ReanimatorTrack
+	public/*internal*/ class ReanimatorTrack
 	{
 		public string mName
 		{

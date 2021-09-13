@@ -4,7 +4,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class SeedPacket : GameObject
+	public/*internal*/ class SeedPacket : GameObject
 	{
 		public SeedPacket()
 		{

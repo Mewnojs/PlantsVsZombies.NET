@@ -2,7 +2,7 @@
 
 namespace Sexy.TodLib
 {
-	internal class TodSmoothArray
+	public/*internal*/ class TodSmoothArray
 	{
 		public bool SaveToFile(Buffer b)
 		{

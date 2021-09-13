@@ -2,7 +2,7 @@
 
 namespace Sexy.TodLib
 {
-	internal class Trail
+	public/*internal*/ class Trail
 	{
 		public Trail()
 		{

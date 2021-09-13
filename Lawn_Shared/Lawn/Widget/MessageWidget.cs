@@ -6,7 +6,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class MessageWidget
+	public/*internal*/ class MessageWidget
 	{
 		public MessageWidget(LawnApp theApp)
 		{

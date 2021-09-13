@@ -2,7 +2,7 @@
 
 namespace Lawn
 {
-	internal class SpecialGridPlacement
+	public/*internal*/ class SpecialGridPlacement
 	{
 		public SpecialGridPlacement(int aPixelX, int aPixelY, int aGridX, int aGridY)
 		{

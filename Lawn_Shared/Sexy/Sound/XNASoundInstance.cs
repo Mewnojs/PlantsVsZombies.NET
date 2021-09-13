@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace Sexy
 {
-	internal class XNASoundInstance : SoundInstance
+	public/*internal*/ class XNASoundInstance : SoundInstance
 	{
 		public uint SoundId
 		{

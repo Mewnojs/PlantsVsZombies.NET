@@ -2,7 +2,7 @@
 
 namespace Lawn
 {
-	internal class ProjectileDefinition
+	public/*internal*/ class ProjectileDefinition
 	{
 		public ProjectileDefinition(ProjectileType theType, int theRow, int theDamage)
 		{

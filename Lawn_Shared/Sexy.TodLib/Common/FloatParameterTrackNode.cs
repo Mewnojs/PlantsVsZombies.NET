@@ -2,7 +2,7 @@
 
 namespace Sexy.TodLib
 {
-	internal class FloatParameterTrackNode
+	public/*internal*/ class FloatParameterTrackNode
 	{
 		public float mTime;
 

@@ -4,7 +4,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class PlantDefinition
+	public/*internal*/ class PlantDefinition
 	{
 		public PlantDefinition(SeedType aSeedType, Image[] aPlantImage, ReanimationType aReanimationType, int aPacketIndex, int aSeedCost, int aRefreshTime, PlantSubClass aSubClass, int aLaunchRate, string aPlantName)
 		{

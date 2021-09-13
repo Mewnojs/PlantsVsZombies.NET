@@ -2,7 +2,7 @@
 
 namespace Sexy
 {
-	internal interface ScrollWidgetListener
+	public/*internal*/ interface ScrollWidgetListener
 	{
 		void ScrollTargetReached(ScrollWidget scrollWidget);
 

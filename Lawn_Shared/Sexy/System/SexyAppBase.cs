@@ -13,7 +13,7 @@ using Sexy.TodLib;
 
 namespace Sexy
 {
-	internal class SexyAppBase : SexyAppBaseInterface, ButtonListener, DialogListener, IDisposable
+	public/*internal*/ class SexyAppBase : SexyAppBaseInterface, ButtonListener, DialogListener, IDisposable
 	{
 		public static bool UseLiveServers { get; protected set; }
 
@@ -153,7 +153,7 @@ namespace Sexy
 			bool result;
 			try
 			{
-				IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForAssembly();//GetUserStoreForApplication();
+				IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
 				if (userStoreForApplication.FileExists(theFileName))
 				{
 					userStoreForApplication.DeleteFile(theFileName);
@@ -260,7 +260,7 @@ namespace Sexy
 
 		public bool FileExists(string filename)
 		{
-			IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForAssembly();//GetUserStoreForApplication();
+			IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
 			return userStoreForApplication.FileExists(filename);
 		}
 
@@ -552,7 +552,7 @@ namespace Sexy
 		{
 			try
 			{
-				using (IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForAssembly()/*GetUserStoreForApplication()*/)
+				using (IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication())
 				{
 					string directoryName = Path.GetDirectoryName(theFileName);
 					if (!userStoreForApplication.DirectoryExists(directoryName))
@@ -578,7 +578,7 @@ namespace Sexy
 		{
 			try
 			{
-				using (IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForAssembly()/*GetUserStoreForApplication()*/)
+				using (IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication())
 				{
 					if (!userStoreForApplication.FileExists(theFileName))
 					{

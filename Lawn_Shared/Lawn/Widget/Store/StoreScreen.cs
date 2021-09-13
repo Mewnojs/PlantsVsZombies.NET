@@ -4,7 +4,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class StoreScreen : Dialog
+	public/*internal*/ class StoreScreen : Dialog
 	{
 		static StoreScreen()
 		{

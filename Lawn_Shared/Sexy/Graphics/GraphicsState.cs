@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sexy
 {
-	internal class GraphicsState
+	public/*internal*/ class GraphicsState
 	{
 		public Color mColor { get; protected set; }
 

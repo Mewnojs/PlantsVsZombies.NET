@@ -5,7 +5,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class GameSelector : Widget, ButtonListener, StoreListener, AlmanacListener, MiniGamesWidgetListener, QuickPlayWidgetListener
+	public/*internal*/ class GameSelector : Widget, ButtonListener, StoreListener, AlmanacListener, MiniGamesWidgetListener, QuickPlayWidgetListener
 	{
 		public GameSelector(LawnApp theApp)
 		{

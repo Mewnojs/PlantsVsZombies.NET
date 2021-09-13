@@ -2,7 +2,7 @@
 
 namespace Lawn
 {
-	internal enum PlantingReason
+	public/*internal*/ enum PlantingReason
 	{
 		PLANTING_OK,
 		PLANTING_NOT_HERE,

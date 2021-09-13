@@ -4,7 +4,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class DescriptionWidget : Widget
+	public/*internal*/ class DescriptionWidget : Widget
 	{
 		public DescriptionWidget()
 		{

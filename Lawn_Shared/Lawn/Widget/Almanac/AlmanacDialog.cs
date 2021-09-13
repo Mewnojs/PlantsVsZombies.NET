@@ -4,7 +4,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class AlmanacDialog : LawnDialog
+	public/*internal*/ class AlmanacDialog : LawnDialog
 	{
 		public static void AlmanacInitForPlayer()
 		{

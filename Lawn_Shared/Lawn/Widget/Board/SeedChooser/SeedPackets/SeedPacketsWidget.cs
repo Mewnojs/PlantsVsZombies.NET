@@ -3,7 +3,7 @@ using Sexy;
 
 namespace Lawn
 {
-	internal class SeedPacketsWidget : Widget
+	public/*internal*/ class SeedPacketsWidget : Widget
 	{
 		public SeedPacketsWidget(LawnApp theApp, int theNumberOfRows, bool theIsImitaters, SeedPacketsWidgetListener theListener)
 		{

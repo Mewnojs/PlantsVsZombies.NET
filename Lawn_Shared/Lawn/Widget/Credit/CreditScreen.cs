@@ -6,7 +6,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class CreditScreen : Widget, ButtonListener
+	public/*internal*/ class CreditScreen : Widget, ButtonListener
 	{
 		internal static int DrawLeftText(Graphics g, string theText, int theY)
 		{

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace Sexy
 {
-	internal class DialogButton : ButtonWidget
+	public/*internal*/ class DialogButton : ButtonWidget
 	{
 		public DialogButton(Image theComponentImage, int theId, ButtonListener theListener) : base(theId, theListener)
 		{

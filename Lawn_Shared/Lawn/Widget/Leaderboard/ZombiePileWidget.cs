@@ -8,7 +8,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class ZombiePileWidget : Widget, ButtonListener
+	public/*internal*/ class ZombiePileWidget : Widget, ButtonListener
 	{
 		private static int SortGems(ZombiePileObject a, ZombiePileObject b)
 		{

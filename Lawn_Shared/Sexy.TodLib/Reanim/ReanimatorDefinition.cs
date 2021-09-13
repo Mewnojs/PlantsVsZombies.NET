@@ -2,7 +2,7 @@
 
 namespace Sexy.TodLib
 {
-	internal class ReanimatorDefinition
+	public/*internal*/ class ReanimatorDefinition
 	{
 		public ReanimatorDefinition()
 		{

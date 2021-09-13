@@ -4,7 +4,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class ZenGarden : StoreListener
+	public/*internal*/ class ZenGarden : StoreListener
 	{
 		public ZenGarden()
 		{

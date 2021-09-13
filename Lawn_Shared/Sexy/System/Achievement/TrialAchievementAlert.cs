@@ -2,7 +2,7 @@
 
 namespace Sexy
 {
-	internal struct TrialAchievementAlert
+	public/*internal*/ struct TrialAchievementAlert
 	{
 		public TrialAchievementAlert(AchievementId achievement)
 		{

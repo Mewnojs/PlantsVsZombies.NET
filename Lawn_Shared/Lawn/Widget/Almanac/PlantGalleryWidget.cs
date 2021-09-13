@@ -3,7 +3,7 @@ using Sexy;
 
 namespace Lawn
 {
-	internal class PlantGalleryWidget : Widget
+	public/*internal*/ class PlantGalleryWidget : Widget
 	{
 		public PlantGalleryWidget(AlmanacDialog theDialog)
 		{

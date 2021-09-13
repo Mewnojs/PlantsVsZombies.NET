@@ -5,7 +5,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class GameButton
+	public/*internal*/ class GameButton
 	{
 		public string mLabel
 		{

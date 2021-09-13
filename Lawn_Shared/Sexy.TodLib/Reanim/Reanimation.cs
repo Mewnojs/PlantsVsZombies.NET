@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace Sexy.TodLib
 {
-	internal class Reanimation
+	public/*internal*/ class Reanimation
 	{
 		public override string ToString()
 		{

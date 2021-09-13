@@ -2,7 +2,7 @@
 
 namespace Lawn
 {
-	internal enum PlantRowType
+	public/*internal*/ enum PlantRowType
 	{
 		PLANTROW_DIRT,
 		PLANTROW_NORMAL,

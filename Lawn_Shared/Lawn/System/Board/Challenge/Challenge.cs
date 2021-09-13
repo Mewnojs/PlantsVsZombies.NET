@@ -5,7 +5,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class Challenge : StoreListener
+	public/*internal*/ class Challenge : StoreListener
 	{
 		static Challenge()
 		{

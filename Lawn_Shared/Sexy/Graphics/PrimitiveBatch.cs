@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sexy
 {
-	internal class PrimitiveBatch : IDisposable
+	public/*internal*/ class PrimitiveBatch : IDisposable
 	{
 		public PrimitiveBatch(GraphicsDevice graphicsDevice)
 		{

@@ -2,7 +2,7 @@
 
 namespace Sexy.TodLib
 {
-	internal class TodEmitterDefinition
+	public/*internal*/ class TodEmitterDefinition
 	{
 		public TodEmitterDefinition()
 		{

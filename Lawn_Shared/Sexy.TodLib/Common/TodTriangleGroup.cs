@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sexy.TodLib
 {
-	internal class TodTriangleGroup
+	public/*internal*/ class TodTriangleGroup
 	{
 		public static TodTriangleGroup GetNewTodTriangleGroup()
 		{

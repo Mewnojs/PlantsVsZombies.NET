@@ -3,7 +3,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class ZombieDefinition
+	public/*internal*/ class ZombieDefinition
 	{
 		public ZombieDefinition(ZombieType aZombieType, ReanimationType aReanimationType, int aZombieValue, int aStartingLevel, int aFirstAllowedWave, int aPickWeight, string aZombieName)
 		{

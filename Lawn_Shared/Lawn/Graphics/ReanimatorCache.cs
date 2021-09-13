@@ -5,7 +5,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-    internal class ReanimatorCache
+    public/*internal*/ class ReanimatorCache
     {
         public void ReanimatorCacheInitialize()
         {

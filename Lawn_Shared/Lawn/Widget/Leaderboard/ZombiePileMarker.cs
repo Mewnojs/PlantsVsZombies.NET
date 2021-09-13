@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.GamerServices;
 
 namespace Lawn
 {
-	internal class ZombiePileMarker
+	public/*internal*/ class ZombiePileMarker
 	{
 		public ZombiePileMarker()
 		{

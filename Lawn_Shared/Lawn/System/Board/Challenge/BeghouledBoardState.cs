@@ -4,7 +4,7 @@ using Sexy;
 
 namespace Lawn
 {
-	internal class BeghouledBoardState
+	public/*internal*/ class BeghouledBoardState
 	{
 		private BeghouledBoardState()
 		{

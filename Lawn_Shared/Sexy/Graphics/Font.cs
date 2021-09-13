@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sexy
 {
-	internal class Font
+	public/*internal*/ class Font
 	{
 		public int FontId { get; private set; }
 
@@ -502,7 +502,7 @@ namespace Sexy
 
 		private Dictionary<float, Dictionary<char, int>> cachedStringBuilderWidths = new Dictionary<float, Dictionary<char, int>>(5);
 
-		internal class CachedStringInfo
+		public/*internal*/ class CachedStringInfo
 		{
 			public string[] Strings { get; private set; }
 

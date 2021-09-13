@@ -2,7 +2,7 @@
 
 namespace Sexy
 {
-	internal enum AchievementId
+	public/*internal*/ enum AchievementId
 	{
 		ACHIEVEMENT_HOME_SECURITY,
 		ACHIEVEMENT_MORTICULTURALIST,

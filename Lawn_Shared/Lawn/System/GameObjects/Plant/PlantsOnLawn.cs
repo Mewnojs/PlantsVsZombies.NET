@@ -2,7 +2,7 @@
 
 namespace Lawn
 {
-	internal struct PlantsOnLawn
+	public/*internal*/ struct PlantsOnLawn
 	{
 		public Plant mUnderPlant;
 

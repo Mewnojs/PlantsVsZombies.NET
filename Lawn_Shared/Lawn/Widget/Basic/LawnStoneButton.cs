@@ -5,7 +5,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class LawnStoneButton : DialogButton
+	public/*internal*/ class LawnStoneButton : DialogButton
 	{
 		public LawnStoneButton(Image theComponentImage, int theId, ButtonListener theListener) : base(theComponentImage, theId, theListener)
 		{

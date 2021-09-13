@@ -6,7 +6,6 @@ using System.Net.Sockets;
 
 using System.Threading;
 using System.ComponentModel;
-
 using Lidgren.Network;
 
 namespace Microsoft.Xna.Framework.Net

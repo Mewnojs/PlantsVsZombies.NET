@@ -2,7 +2,7 @@
 
 namespace Sexy
 {
-	internal class PageControl : Widget
+	public/*internal*/ class PageControl : Widget
 	{
 		public PageControl(Image partsImage)
 		{

@@ -4,7 +4,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal struct ZombiePileObject
+	public/*internal*/ struct ZombiePileObject
 	{
 		public ZombiePileObject(int aHeight, ZombiePileObjectType aType)
 		{

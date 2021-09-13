@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sexy
 {
-	internal class WidgetOverlayPair
+	public/*internal*/ class WidgetOverlayPair
 	{
 		public static WidgetOverlayPair GetNewWidgetOverlayPair(Widget w, int p)
 		{

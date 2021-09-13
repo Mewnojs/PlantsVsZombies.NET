@@ -2,7 +2,7 @@
 
 namespace Lawn
 {
-	internal class LevelStats
+	public/*internal*/ class LevelStats
 	{
 		public LevelStats()
 		{

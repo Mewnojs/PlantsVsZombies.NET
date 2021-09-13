@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sexy
 {
-	internal class AnimInfo
+	public/*internal*/ class AnimInfo
 	{
 		public AnimInfo()
 		{

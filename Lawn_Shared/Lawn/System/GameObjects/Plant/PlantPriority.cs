@@ -2,7 +2,7 @@
 
 namespace Lawn
 {
-	internal enum PlantPriority
+	public/*internal*/ enum PlantPriority
 	{
 		TOPPLANT_EATING_ORDER,
 		TOPPLANT_DIGGING_ORDER,

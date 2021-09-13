@@ -4,7 +4,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class LawnDialog : Dialog
+	public/*internal*/ class LawnDialog : Dialog
 	{
 		public int GetLeft()
 		{

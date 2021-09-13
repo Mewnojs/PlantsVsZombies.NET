@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sexy
 {
-	internal class XMLElement
+	public/*internal*/ class XMLElement
 	{
 		public XMLElementType mType;
 

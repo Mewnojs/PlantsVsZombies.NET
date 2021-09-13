@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sexy
 {
-	internal class WidgetContainer
+	public/*internal*/ class WidgetContainer
 	{
 		public Widget GetWidgetAtHelper(int x, int y, int theFlags, out bool found, out int theWidgetX, out int theWidgetY)
 		{

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace Sexy
 {
-	internal class EncodingParser
+	public/*internal*/ class EncodingParser
 	{
 		public EncodingParser()
 		{

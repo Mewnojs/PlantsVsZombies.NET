@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sexy.TodLib
 {
-	internal class TodWeightedGridArray
+	public/*internal*/ class TodWeightedGridArray
 	{
 		public static TodWeightedGridArray GetNewTodWeightedGridArray()
 		{

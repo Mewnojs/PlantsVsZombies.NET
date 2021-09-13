@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sexy.TodLib
 {
-	internal class AttachEffect
+	public/*internal*/ class AttachEffect
 	{
 		public static AttachEffect GetNewAttachEffect()
 		{

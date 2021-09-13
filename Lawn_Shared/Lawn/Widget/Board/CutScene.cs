@@ -4,7 +4,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class CutScene
+	public/*internal*/ class CutScene
 	{
 		static CutScene()
 		{

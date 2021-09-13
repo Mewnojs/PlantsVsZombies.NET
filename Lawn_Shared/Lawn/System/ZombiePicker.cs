@@ -2,7 +2,7 @@
 
 namespace Lawn
 {
-	internal class ZombiePicker
+	public/*internal*/ class ZombiePicker
 	{
 		public int mZombieCount;
 

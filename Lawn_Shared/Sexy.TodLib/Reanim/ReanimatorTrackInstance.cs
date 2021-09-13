@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace Sexy.TodLib
 {
-	internal class ReanimatorTrackInstance
+	public/*internal*/ class ReanimatorTrackInstance
 	{
 		public static void PreallocateMemory()
 		{

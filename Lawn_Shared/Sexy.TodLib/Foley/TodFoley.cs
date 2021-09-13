@@ -2,7 +2,7 @@
 
 namespace Sexy.TodLib
 {
-	internal class TodFoley
+	public/*internal*/ class TodFoley
 	{
 		public TodFoley()
 		{

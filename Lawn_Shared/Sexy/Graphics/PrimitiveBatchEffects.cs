@@ -3,7 +3,7 @@
 namespace Sexy
 {
 	[Flags]
-	internal enum PrimitiveBatchEffects
+	public/*internal*/ enum PrimitiveBatchEffects
 	{
 		None = 0,
 		MirrorVertically = 1,

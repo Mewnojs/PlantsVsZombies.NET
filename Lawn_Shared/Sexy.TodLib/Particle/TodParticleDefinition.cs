@@ -2,7 +2,7 @@
 
 namespace Sexy.TodLib
 {
-	internal class TodParticleDefinition
+	public/*internal*/ class TodParticleDefinition
 	{
 		public TodParticleDefinition()
 		{

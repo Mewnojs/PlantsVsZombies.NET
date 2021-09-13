@@ -6,7 +6,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class Zombie : GameObject, IComparable
+	public/*internal*/ class Zombie : GameObject, IComparable
 	{
 		public static void PreallocateMemory()
 		{

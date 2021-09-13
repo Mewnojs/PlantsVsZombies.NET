@@ -2,7 +2,7 @@
 
 namespace Sexy.TodLib
 {
-	internal class AttacherInfo
+	public/*internal*/ class AttacherInfo
 	{
 		public string mReanimName;
 

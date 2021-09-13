@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace Sexy
 {
-	internal class ScrollWidget : Widget, ProxyWidgetListener
+	public/*internal*/ class ScrollWidget : Widget, ProxyWidgetListener
 	{
 		public ScrollWidget(ScrollWidgetListener listener)
 		{

@@ -5,7 +5,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class MiniGamesWidget : Widget
+	public/*internal*/ class MiniGamesWidget : Widget
 	{
 		public MiniGamesWidget(LawnApp theApp, MiniGamesWidgetListener theListener)
 		{

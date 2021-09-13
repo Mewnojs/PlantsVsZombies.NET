@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sexy.TodLib
 {
-	internal class AttachmentHolder
+	public/*internal*/ class AttachmentHolder
 	{
 		public void Dispose()
 		{

@@ -2,7 +2,7 @@
 
 namespace Sexy
 {
-	internal interface ProxyWidgetListener
+	public/*internal*/ interface ProxyWidgetListener
 	{
 		void DrawProxyWidget(Graphics g, ProxyWidget proxyWidget);
 	}

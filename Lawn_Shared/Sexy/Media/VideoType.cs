@@ -2,7 +2,7 @@
 
 namespace Sexy
 {
-	internal enum VideoType
+	public/*internal*/ enum VideoType
 	{
 		Credits
 	}

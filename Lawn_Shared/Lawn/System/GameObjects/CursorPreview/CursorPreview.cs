@@ -3,7 +3,7 @@ using Sexy;
 
 namespace Lawn
 {
-	internal class CursorPreview : GameObject
+	public/*internal*/ class CursorPreview : GameObject
 	{
 		public CursorPreview()
 		{

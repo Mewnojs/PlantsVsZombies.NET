@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace Sexy
 {
-	internal class Dialog : Widget, ButtonListener
+	public/*internal*/ class Dialog : Widget, ButtonListener
 	{
 		public void EnsureFonts()
 		{

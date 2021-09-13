@@ -5,7 +5,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class LawnMower
+	public/*internal*/ class LawnMower
 	{
 		public static LawnMower GetNewLawnMower()
 		{

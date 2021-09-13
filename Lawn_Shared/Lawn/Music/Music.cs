@@ -3,7 +3,7 @@ using Sexy;
 
 namespace Lawn
 {
-	internal class Music
+	public/*internal*/ class Music
 	{
 		public Music()
 		{

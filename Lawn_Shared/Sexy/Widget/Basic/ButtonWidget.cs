@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace Sexy
 {
-	internal class ButtonWidget : Widget
+	public/*internal*/ class ButtonWidget : Widget
 	{
 		public virtual string mLabel
 		{

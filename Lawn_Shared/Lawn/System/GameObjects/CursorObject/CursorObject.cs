@@ -4,7 +4,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-    internal class CursorObject : GameObject
+    public/*internal*/ class CursorObject : GameObject
     {
         public CursorObject()
         {

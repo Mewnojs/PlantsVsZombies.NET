@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sexy
 {
-	internal class Image
+	public/*internal*/ class Image
 	{
 		public int GetCelCount()
 		{

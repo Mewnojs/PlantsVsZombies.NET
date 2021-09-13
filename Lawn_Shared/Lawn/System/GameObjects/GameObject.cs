@@ -3,7 +3,7 @@ using Sexy;
 
 namespace Lawn
 {
-	internal abstract class GameObject
+	public/*internal*/ abstract class GameObject
 	{
 		public virtual void PrepareForReuse()
 		{

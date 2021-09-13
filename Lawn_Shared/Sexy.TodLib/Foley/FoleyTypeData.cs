@@ -2,7 +2,7 @@
 
 namespace Sexy.TodLib
 {
-	internal class FoleyTypeData
+	public/*internal*/ class FoleyTypeData
 	{
 		public FoleyTypeData()
 		{

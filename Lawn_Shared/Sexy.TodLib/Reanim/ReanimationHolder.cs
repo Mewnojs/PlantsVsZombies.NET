@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sexy.TodLib
 {
-	internal class ReanimationHolder
+	public/*internal*/ class ReanimationHolder
 	{
 		public void InitializeHolder()
 		{

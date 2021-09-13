@@ -4,7 +4,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class Coin : GameObject
+	public/*internal*/ class Coin : GameObject
 	{
 		internal static void LoadSeedPacketImage(SeedType theSeedType)
 		{

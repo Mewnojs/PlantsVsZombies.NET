@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sexy
 {
-	internal class PreModalInfo
+	public/*internal*/ class PreModalInfo
 	{
 		public void PrepareForReuse()
 		{

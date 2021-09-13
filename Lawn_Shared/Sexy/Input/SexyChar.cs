@@ -2,7 +2,7 @@
 
 namespace Sexy
 {
-	internal struct SexyChar
+	public/*internal*/ struct SexyChar
 	{
 		public SexyChar(char c)
 		{
