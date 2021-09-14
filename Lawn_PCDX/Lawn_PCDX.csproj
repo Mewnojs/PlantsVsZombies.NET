@@ -23,6 +23,7 @@
     <PackageReference Include="IronPython" Version="2.7.11" />
     <PackageReference Include="Lidgren.Network.Core2" Version="1.0.0" />
     <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.0.1641" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="WebSocketSharp-netstandard" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
