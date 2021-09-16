@@ -5,7 +5,7 @@ using Sexy;
 
 namespace Lawn
 {
-	internal class GlobalContentManager
+	public /*internal*/ class GlobalContentManager
 	{
 		public GlobalContentManager(Main m)
 		{

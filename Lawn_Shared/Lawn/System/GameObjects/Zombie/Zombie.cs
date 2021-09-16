@@ -1451,7 +1451,8 @@ namespace Lawn
 		public static event DieNoLootEventHandler DieNoLootEvent;
 		public void DieNoLoot(bool giveAchievements)
 		{
-			if (!DieNoLootEvent.Invoke(this, giveAchievements)) return;
+			object t = DieNoLootEvent?.Invoke(this, giveAchievements);
+			if ((bool)t == false) return;
 			this.StopZombieSound();
 			GlobalMembersAttachment.AttachmentDie(ref this.mAttachmentID);
 			this.mApp.RemoveReanimation(ref this.mBodyReanimID);

@@ -12,7 +12,7 @@ namespace Sexy
 			if (capabilities.IsConnected)
 			{
 				int maximumTouchCount = capabilities.MaximumTouchCount;
-				Debug.OutputDebug<string, int>("maxPoints", maximumTouchCount);
+				Debug.OutputDebug<string>($"maxPoints:{maximumTouchCount}");
 			}
 		}
 
