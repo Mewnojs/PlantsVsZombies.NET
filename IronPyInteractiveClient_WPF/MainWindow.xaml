@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IronPyInteractiveClient_WPF"
         mc:Ignorable="d"
-        Title="DebugWindow" Height="450" Width="800" MinHeight="120" MinWidth="200">
+        Title="DebugWindow" Height="405" Width="800" MinHeight="120" MinWidth="200">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -17,7 +18,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="wsAddrInput" Text="ws://localhost:8800/Py" TextWrapping="Wrap" Grid.Column="0" Margin="0,0,0,0"/>
+            <TextBox x:Name="wsAddrInput" Text="ws://localhost:8080/Py" TextWrapping="Wrap" Grid.Column="0" Margin="0,0,0,0"/>
             <Button x:Name="wsConnBtn" Content="Connect" Click="wsConnBtn_Click" Grid.Column="1" Margin="3,3,3,3"/>
         </Grid>
         <ScrollViewer Grid.Row="1" Name="scrollText">
@@ -28,8 +29,14 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="pyCommandInput" Text="import Lawn,Sexy; " TextWrapping="Wrap" Grid.Column="0" Margin="0,0,0,0" TextChanged="pyCommandInput_TextChanged" />
-            <Button x:Name="pyCommandSendBtn" Content="Send" Click="button_Click" Grid.Column="1" Margin="3,3,3,3" IsDefault="True" IsEnabled="False"/>
+            <TextBox x:Name="pyCommandInput" Height="40" Text="import Lawn,Sexy; " TextWrapping="Wrap" Grid.Column="0" Margin="0,0,0,0" TextChanged="pyCommandInput_TextChanged" KeyDown="pyCommandInput_KeyDown" KeyUp="pyCommandInput_KeyUp" AcceptsReturn="True" AcceptsTab="True"/>
+            <Button x:Name="pyCommandSendBtn" Content="Send(Ctrl+Enter)" Click="button_Click" Grid.Column="1" Margin="3,3,3,3" IsDefault="False" IsEnabled="False"/>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Height="16" Name="pyCaption" VerticalAlignment="Center" Text="Not Connected" Background="WhiteSmoke"/>
         </Grid>
     </Grid>
 </Window>

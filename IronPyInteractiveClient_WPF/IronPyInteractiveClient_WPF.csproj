@@ -11,4 +11,6 @@
     <PackageReference Include="WebSocketSharp.NetCore" Version="1.0.1-alpha.4" />
   </ItemGroup>
 
+  <Import Project="..\IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems" Label="Shared" />
+
 </Project>

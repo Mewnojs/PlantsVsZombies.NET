@@ -46,7 +46,18 @@ namespace Sexy.TodLib
 
 		private void Reset()
 		{
-			this.mTransX = (this.mTransY = (this.mSkewX = (this.mSkewY = (this.mScaleX = (this.mScaleY = (this.mFrame = (this.mAlpha = (this.mSkewXCos = (this.mSkewXSin = (this.mSkewYCos = (this.mSkewYSin = ReanimatorXnaHelpers.DEFAULT_FIELD_PLACEHOLDER)))))))))));
+			this.mTransX = 
+				this.mTransY = 
+				this.mSkewX = 
+				this.mSkewY = 
+				this.mScaleX = 
+				this.mScaleY = 
+				this.mFrame = 
+				this.mAlpha = 
+				this.mSkewXCos = 
+				this.mSkewXSin = 
+				this.mSkewYCos = 
+				this.mSkewYSin = ReanimatorXnaHelpers.DEFAULT_FIELD_PLACEHOLDER;
 			this.mFont = null;
 			this.mImage = null;
 			this.mText = (this.mImageName = (this.mFontName = string.Empty));

@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Net;
 using WebSocketSharp.NetCore.Server;
 using WebSocketSharp.NetCore;
+using static IronPyInteractiveDef_Shared.WSEvents;
 
 namespace Lawn
 {
@@ -27,23 +28,23 @@ namespace Lawn
                 }
                 catch (Exception ex)
                 {
-                    SendAsync(ExecutionEventJSON(ExecutionEventResult.error, ex.Message), x => { });
+                    SendAsync(ExecutionEventJSON(ExecutionEventResult.error, ex.Message, ex.GetType().ToString()), x => { });
                     return;
                 }
                 dynamic repr = mPyEnj.Runtime.GetBuiltinModule().GetVariable("repr");
-                SendAsync(ExecutionEventJSON(ExecutionEventResult.executed, (msg != null) ? repr(msg) : null), new Action<bool>(delegate{ }));// 
+                SendAsync(ExecutionEventJSON(ExecutionEventResult.executed, (msg != null) ? repr(msg) : null), new Action<bool>(delegate { }));// 
             }
 
-            protected override void OnOpen() 
+            protected override void OnOpen()
             {
                 mStdoutWriter.FlushEvent += OnWriterFlush;
                 mStderrWriter.FlushEvent += OnWriterFlush;
             }
 
-            private void OnWriterFlush(VirtualWriter sender) 
+            private void OnWriterFlush(VirtualWriter sender)
             {
                 SendAsync(OutputEventJSON(sender.name, sender.ToString()), x => { });
-                
+
             }
 
             protected override void OnClose(CloseEventArgs e)
@@ -52,34 +53,35 @@ namespace Lawn
                 mStderrWriter.FlushEvent -= OnWriterFlush;
             }
 
-            public string ExecutionEventJSON(ExecutionEventResult restype, object res)
+            
+
+            public string ExecutionEventJSON(ExecutionEventResult restype, object res, string exceptionType = null)
             {
-                return JsonConvert.SerializeObject(JObject.FromObject(new
+                return JsonConvert.SerializeObject(JObject.FromObject(new ExecutionEvent()
                 {
-                    type = "execution",
                     statuscode = restype,
                     result = res,
-                    timestamp = DateTime.Now.ToFileTime()
+                    errortype = exceptionType,
+                    timestamp = DateTime.UtcNow.ToFileTime()
                 }, mSerializer));
             }
 
             public string OutputEventJSON(string bufferName, string msg)
             {
-                return JsonConvert.SerializeObject(
-                    new Dictionary<string, object>
-                        { {"type", "output" }, {"name", bufferName}, {"msg", msg }, {"timestamp", DateTime.Now.ToFileTime() } }
+                return JsonConvert.SerializeObject(JObject.FromObject(
+                    new OutputEvent() {
+                        name = bufferName, 
+                        msg = msg, 
+                        timestamp = DateTime.UtcNow.ToFileTime() 
+                    })
                 );
             }
 
-            public enum ExecutionEventResult 
-            {
-                error = -1,
-                executed = 0
-            }
+            
 
-            public static void Initialize() 
+            public static void Initialize()
             {
-               object DebugExec(string code) 
+                object DebugExec(string code)
                 {
                     Debug.OutputDebug($"[Python]{code}");
                     return mPyEnj.Execute(code);
@@ -90,12 +92,12 @@ namespace Lawn
                 mPyEnj.Runtime.IO.SetErrorOutput(mStderrStream, mStderrWriter);
             }
 
-            private static ScriptEngine mPyEnj = Python.CreateEngine();
-            private static ScriptScope mPyScope = mPyEnj.CreateScope();
-            private static MemoryStream mStdoutStream = new MemoryStream();
-            private static MemoryStream mStderrStream = new MemoryStream();
-            private static VirtualWriter mStdoutWriter = new VirtualWriter("stdout");
-            private static VirtualWriter mStderrWriter = new VirtualWriter("stderr");
+            private static readonly ScriptEngine mPyEnj = Python.CreateEngine();
+            private static readonly ScriptScope mPyScope = mPyEnj.CreateScope();
+            private static readonly MemoryStream mStdoutStream = new MemoryStream();
+            private static readonly MemoryStream mStderrStream = new MemoryStream();
+            private static readonly VirtualWriter mStdoutWriter = new VirtualWriter("stdout");
+            private static readonly VirtualWriter mStderrWriter = new VirtualWriter("stderr");
 
             internal class VirtualWriter : StringWriter
             {
@@ -118,12 +120,12 @@ namespace Lawn
             }
         }
 
-        
+
 
 
         public static void Serve()
         {
-            int port = 8800;
+            int port = 8080;
             mWS = new WebSocketServer(IPAddress.Any, port);
             Console.WriteLine($"WS server started at: Port {port}");
             mWS.AddWebSocketService<PyHub>("/Py");
@@ -141,10 +143,10 @@ namespace Lawn
         /// Defines the entry point of the application.
         /// </summary>
         /// <param name="args">The arguments.</param>
-        
+
 
         private static WebSocketServer mWS;
-        private static JsonSerializer mSerializer = new JsonSerializer()
+        private static readonly JsonSerializer mSerializer = new JsonSerializer()
         {
             ReferenceLoopHandling = ReferenceLoopHandling.Serialize
         };
