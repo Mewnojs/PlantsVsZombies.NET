@@ -9,29 +9,29 @@ namespace Sexy
 	{
 		public XNASoundManager(SexyAppBase theApp)
 		{
-			this.mEnabled = false;
-			this.mContent = theApp.mContentManager;
-			this.mInstances = new List<XNASoundInstance>();
+			mEnabled = false;
+			mContent = theApp.mContentManager;
+			mInstances = new List<XNASoundInstance>();
 			int num = 0;
 			while ((long)num < (long)((ulong)XNASoundConstants.MAX_SOUNDS))
 			{
-				this.mSounds[num] = null;
+				mSounds[num] = null;
 				num++;
 			}
 		}
 
 		public override void Release()
 		{
-			this.ReleaseSounds();
-			for (int i = 0; i < this.mInstances.Count; i++)
+			ReleaseSounds();
+			for (int i = 0; i < mInstances.Count; i++)
 			{
-				this.mInstances[i].Release();
+				mInstances[i].Release();
 			}
 		}
 
 		public override void Enable(bool enable)
 		{
-			this.mEnabled = enable;
+			mEnabled = enable;
 		}
 
 		public override bool Initialized()
@@ -41,10 +41,10 @@ namespace Sexy
 
 		public override bool LoadSound(uint theSfxID, string theFilename)
 		{
-			SoundEffect mSound = this.mContent.Load<SoundEffect>(theFilename);
+			SoundEffect aSound = mContent.Load<SoundEffect>(theFilename);
 			XNASoundEntry xnasoundEntry = new XNASoundEntry();
-			xnasoundEntry.mSound = mSound;
-			this.mSounds[(int)((UIntPtr)theSfxID)] = xnasoundEntry;
+			xnasoundEntry.mSound = aSound;
+			mSounds[(int)((UIntPtr)theSfxID)] = xnasoundEntry;
 			return true;
 		}
 
@@ -53,9 +53,9 @@ namespace Sexy
 			int num = 0;
 			while ((long)num < (long)((ulong)XNASoundConstants.MAX_SOUNDS))
 			{
-				if (this.mInstances[num] == null)
+				if (mInstances[num] == null)
 				{
-					if (this.LoadSound((uint)num, theFilename))
+					if (LoadSound((uint)num, theFilename))
 					{
 						return num;
 					}
@@ -71,13 +71,13 @@ namespace Sexy
 
 		public override void ReleaseSound(uint theSfxID)
 		{
-			this.mSounds[(int)((UIntPtr)theSfxID)].Dispose();
-			this.mSounds[(int)((UIntPtr)theSfxID)] = null;
+			mSounds[(int)((UIntPtr)theSfxID)].Dispose();
+			mSounds[(int)((UIntPtr)theSfxID)] = null;
 		}
 
 		public override void SetVolume(double theVolume)
 		{
-			this.SetMasterVolume(theVolume);
+			SetMasterVolume(theVolume);
 		}
 
 		public override bool SetBaseVolume(uint theSfxID, double theBaseVolume)
@@ -86,12 +86,12 @@ namespace Sexy
 			{
 				return false;
 			}
-			this.mSounds[(int)((UIntPtr)theSfxID)].mBaseVolume = (float)theBaseVolume;
-			for (int i = 0; i < this.mInstances.Count; i++)
+			mSounds[(int)((UIntPtr)theSfxID)].mBaseVolume = (float)theBaseVolume;
+			for (int i = 0; i < mInstances.Count; i++)
 			{
-				if (this.mInstances[i].SoundId == theSfxID)
+				if (mInstances[i].SoundId == theSfxID)
 				{
-					this.mInstances[i].SetBaseVolume((double)this.mSounds[(int)((UIntPtr)theSfxID)].mBaseVolume);
+					mInstances[i].SetBaseVolume((double)mSounds[(int)((UIntPtr)theSfxID)].mBaseVolume);
 				}
 			}
 			return true;
@@ -103,12 +103,12 @@ namespace Sexy
 			{
 				return false;
 			}
-			this.mSounds[(int)((UIntPtr)theSfxID)].mBasePan = (float)theBasePan / 100f;
-			for (int i = 0; i < this.mInstances.Count; i++)
+			mSounds[(int)((UIntPtr)theSfxID)].mBasePan = (float)theBasePan / 100f;
+			for (int i = 0; i < mInstances.Count; i++)
 			{
-				if (this.mInstances[i].SoundId == theSfxID)
+				if (mInstances[i].SoundId == theSfxID)
 				{
-					this.mInstances[i].SetBasePan(theBasePan);
+					mInstances[i].SetBasePan(theBasePan);
 				}
 			}
 			return true;
@@ -116,13 +116,13 @@ namespace Sexy
 
 		public override SoundInstance GetSoundInstance(uint theSfxID)
 		{
-			if (this.mInstances.Count >= 16)
+			if (mInstances.Count >= 16)
 			{
 				return null;
 			}
-			SoundEffectInstance instance = this.mSounds[(int)((UIntPtr)theSfxID)].mSound.CreateInstance();
+			SoundEffectInstance instance = mSounds[(int)((UIntPtr)theSfxID)].mSound.CreateInstance();
 			XNASoundInstance newXNASoundInstance = XNASoundInstance.GetNewXNASoundInstance(theSfxID, instance);
-			this.mInstances.Add(newXNASoundInstance);
+			mInstances.Add(newXNASoundInstance);
 			return newXNASoundInstance;
 		}
 
@@ -130,7 +130,7 @@ namespace Sexy
 		{
 			for (uint num = 0U; num < XNASoundConstants.MAX_SOUNDS; num += 1U)
 			{
-				this.ReleaseSound(num);
+				ReleaseSound(num);
 			}
 		}
 
@@ -154,9 +154,9 @@ namespace Sexy
 
 		public override void StopAllSounds()
 		{
-			for (int i = 0; i < this.mInstances.Count; i++)
+			for (int i = 0; i < mInstances.Count; i++)
 			{
-				this.mInstances[i].Stop();
+				mInstances[i].Stop();
 			}
 		}
 
@@ -165,7 +165,7 @@ namespace Sexy
 			int num = 0;
 			while ((long)num < (long)((ulong)XNASoundConstants.MAX_SOUNDS))
 			{
-				if (this.mSounds[num] == null)
+				if (mSounds[num] == null)
 				{
 					return num;
 				}
@@ -180,7 +180,7 @@ namespace Sexy
 			int num2 = 0;
 			while ((long)num2 < (long)((ulong)XNASoundConstants.MAX_SOUNDS))
 			{
-				if (this.mSounds[num2] != null)
+				if (mSounds[num2] != null)
 				{
 					num++;
 				}
@@ -191,21 +191,21 @@ namespace Sexy
 
 		public override void Update()
 		{
-			for (int i = this.mInstances.Count - 1; i >= 0; i--)
+			for (int i = mInstances.Count - 1; i >= 0; i--)
 			{
-				if (this.mInstances[i].IsReleased())
+				if (mInstances[i].IsReleased())
 				{
-					this.mInstances[i].PrepareForReuse();
-					this.mInstances.RemoveAt(i);
+					mInstances[i].PrepareForReuse();
+					mInstances.RemoveAt(i);
 				}
-				else if (this.mInstances[i].IsDormant())
+				else if (mInstances[i].IsDormant())
 				{
-					if (!this.mInstances[i].IsReleased())
+					if (!mInstances[i].IsReleased())
 					{
-						this.mInstances[i].Release();
+						mInstances[i].Release();
 					}
-					this.mInstances[i].PrepareForReuse();
-					this.mInstances.RemoveAt(i);
+					mInstances[i].PrepareForReuse();
+					mInstances.RemoveAt(i);
 				}
 			}
 		}

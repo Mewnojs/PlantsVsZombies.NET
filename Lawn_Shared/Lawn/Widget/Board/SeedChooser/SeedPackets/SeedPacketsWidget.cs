@@ -7,12 +7,12 @@ namespace Lawn
 	{
 		public SeedPacketsWidget(LawnApp theApp, int theNumberOfRows, bool theIsImitaters, SeedPacketsWidgetListener theListener)
 		{
-			this.mApp = theApp;
-			this.mListener = theListener;
-			this.mImitaters = theIsImitaters;
-			this.mRows = theNumberOfRows;
-			this.mWidth = 4 * Constants.SMALL_SEEDPACKET_WIDTH + 3 * Constants.SEED_PACKET_HORIZ_GAP;
-			this.mHeight = Constants.SMALL_SEEDPACKET_HEIGHT * this.mRows + (this.mRows - 1) * Constants.SEED_PACKET_VERT_GAP;
+			mApp = theApp;
+			mListener = theListener;
+			mImitaters = theIsImitaters;
+			mRows = theNumberOfRows;
+			mWidth = 4 * Constants.SMALL_SEEDPACKET_WIDTH + 3 * Constants.SEED_PACKET_HORIZ_GAP;
+			mHeight = Constants.SMALL_SEEDPACKET_HEIGHT * mRows + (mRows - 1) * Constants.SEED_PACKET_VERT_GAP;
 		}
 
 		public void GetSeedPosition(SeedType theSeedType, ref int theX, ref int theY)
@@ -46,13 +46,13 @@ namespace Lawn
 			}
 			int num2 = y / (Constants.SMALL_SEEDPACKET_HEIGHT + Constants.SEED_PACKET_VERT_GAP);
 			SeedType unnamedParameter = (SeedType)(num2 * 4 + num);
-			this.mListener.SeedSelected(unnamedParameter);
+			mListener.SeedSelected(unnamedParameter);
 		}
 
 		public void DrawPackets(Graphics g, bool theDrawCost, bool theDrawBackground)
 		{
 			int num = 44;
-			if (this.mRows == 12)
+			if (mRows == 12)
 			{
 				num = 48;
 			}
@@ -61,15 +61,15 @@ namespace Lawn
 				int num2 = 0;
 				int num3 = 0;
 				SeedType seedType = (SeedType)i;
-				this.GetSeedPosition(seedType, ref num2, ref num3);
+				GetSeedPosition(seedType, ref num2, ref num3);
 				if (seedType != SeedType.SEED_IMITATER)
 				{
-					if (this.mApp.HasSeedType(seedType))
+					if (mApp.HasSeedType(seedType))
 					{
-						ChosenSeed chosenSeed = this.mApp.mSeedChooserScreen.mChosenSeeds[i];
+						ChosenSeed chosenSeed = mApp.mSeedChooserScreen.mChosenSeeds[i];
 						if (chosenSeed.mSeedState != ChosenSeedState.SEED_IN_CHOOSER)
 						{
-							if (this.mImitaters)
+							if (mImitaters)
 							{
 								SeedPacket.DrawSmallSeedPacket(g, (float)num2, (float)num3, SeedType.SEED_IMITATER, seedType, 0f, 255, theDrawCost, false, theDrawBackground, theDrawBackground);
 							}
@@ -88,30 +88,30 @@ namespace Lawn
 			for (int j = 0; j < 49; j++)
 			{
 				SeedType theSeedType = (SeedType)j;
-				if (this.mApp.HasSeedType(theSeedType))
+				if (mApp.HasSeedType(theSeedType))
 				{
-					ChosenSeed chosenSeed2 = this.mApp.mSeedChooserScreen.mChosenSeeds[j];
+					ChosenSeed chosenSeed2 = mApp.mSeedChooserScreen.mChosenSeeds[j];
 					if (chosenSeed2.mSeedState != ChosenSeedState.SEED_FLYING_TO_CHOOSER && chosenSeed2.mSeedState != ChosenSeedState.SEED_FLYING_TO_BANK && chosenSeed2.mSeedState != ChosenSeedState.SEED_PACKET_HIDDEN && chosenSeed2.mSeedState == ChosenSeedState.SEED_IN_CHOOSER)
 					{
 						bool flag = false;
-						uint num4 = this.mApp.mSeedChooserScreen.SeedNotRecommendedToPick(chosenSeed2.mSeedType);
+						uint num4 = mApp.mSeedChooserScreen.SeedNotRecommendedToPick(chosenSeed2.mSeedType);
 						if (num4 != 0U)
 						{
 							flag = true;
 						}
-						else if (this.mApp.mSeedChooserScreen.SeedNotAllowedToPick(chosenSeed2.mSeedType))
+						else if (mApp.mSeedChooserScreen.SeedNotAllowedToPick(chosenSeed2.mSeedType))
 						{
 							flag = true;
 						}
-						else if (this.mApp.mSeedChooserScreen.SeedNotAllowedDuringTrial(chosenSeed2.mSeedType))
+						else if (mApp.mSeedChooserScreen.SeedNotAllowedDuringTrial(chosenSeed2.mSeedType))
 						{
 							flag = true;
 						}
 						int num5 = 0;
 						int num6 = 0;
-						this.GetSeedPosition(chosenSeed2.mSeedType, ref num5, ref num6);
+						GetSeedPosition(chosenSeed2.mSeedType, ref num5, ref num6);
 						float num7 = (float)(flag ? 115 : 255);
-						if (this.mImitaters)
+						if (mImitaters)
 						{
 							SeedPacket.DrawSmallSeedPacket(g, (float)num5, (float)num6, SeedType.SEED_IMITATER, chosenSeed2.mSeedType, 0f, (int)num7, theDrawCost, false, theDrawBackground, theDrawBackground);
 						}
@@ -127,8 +127,8 @@ namespace Lawn
 		public override void Draw(Graphics g)
 		{
 			g.HardwareClip();
-			this.DrawPackets(g, false, true);
-			this.DrawPackets(g, true, false);
+			DrawPackets(g, false, true);
+			DrawPackets(g, true, false);
 			g.EndHardwareClip();
 		}
 

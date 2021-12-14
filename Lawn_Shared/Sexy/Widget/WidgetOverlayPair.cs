@@ -23,24 +23,24 @@ namespace Sexy
 
 		private WidgetOverlayPair(Widget w, int p)
 		{
-			this.Reset(w, p);
+			Reset(w, p);
 		}
 
 		private void Reset(Widget w, int p)
 		{
-			this.aWidget = w;
-			this.aPriority = p;
+			aWidget = w;
+			aPriority = p;
 		}
 
 		public void Clear()
 		{
-			this.aWidget = null;
-			this.aPriority = 0;
+			aWidget = null;
+			aPriority = 0;
 		}
 
 		public override int GetHashCode()
 		{
-			return this.aPriority;
+			return aPriority;
 		}
 
 		public override bool Equals(object obj)

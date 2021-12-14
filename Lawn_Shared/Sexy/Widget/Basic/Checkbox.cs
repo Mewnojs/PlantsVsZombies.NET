@@ -7,22 +7,22 @@ namespace Sexy
 	{
 		public virtual void SetChecked(bool isChecked)
 		{
-			this.SetChecked(isChecked, true);
+			SetChecked(isChecked, true);
 		}
 
 		public virtual void SetChecked(bool @checked, bool tellListener)
 		{
-			this.mChecked = @checked;
-			if (tellListener && this.mListener != null)
+			mChecked = @checked;
+			if (tellListener && mListener != null)
 			{
-				this.mListener.CheckboxChecked(this.mId, this.mChecked);
+				mListener.CheckboxChecked(mId, mChecked);
 			}
-			this.MarkDirty();
+			MarkDirty();
 		}
 
 		public virtual bool IsChecked()
 		{
-			return this.mChecked;
+			return mChecked;
 		}
 
 		public override void MouseDown(int x, int y, int theClickCount)
@@ -33,67 +33,67 @@ namespace Sexy
 		public override void MouseDown(int x, int y, int theBtnNum, int theClickCount)
 		{
 			base.MouseDown(x, y, theBtnNum, theClickCount);
-			this.mChecked = !this.mChecked;
-			if (this.mListener != null)
+			mChecked = !mChecked;
+			if (mListener != null)
 			{
-				this.mListener.CheckboxChecked(this.mId, this.mChecked);
+				mListener.CheckboxChecked(mId, mChecked);
 			}
-			this.MarkDirty();
+			MarkDirty();
 		}
 
 		public override void Draw(Graphics g)
 		{
 			base.Draw(g);
-			if (this.mCheckedRect.mWidth == 0 && this.mCheckedImage != null && this.mUncheckedImage != null)
+			if (mCheckedRect.mWidth == 0 && mCheckedImage != null && mUncheckedImage != null)
 			{
-				if (this.mChecked)
+				if (mChecked)
 				{
-					g.DrawImage(this.mCheckedImage, 0, 0);
+					g.DrawImage(mCheckedImage, 0, 0);
 					return;
 				}
-				g.DrawImage(this.mUncheckedImage, 0, 0);
+				g.DrawImage(mUncheckedImage, 0, 0);
 				return;
 			}
 			else
 			{
-				if (this.mCheckedRect.mWidth == 0 || this.mUncheckedImage == null)
+				if (mCheckedRect.mWidth == 0 || mUncheckedImage == null)
 				{
-					if (this.mUncheckedImage == null && this.mCheckedImage == null)
+					if (mUncheckedImage == null && mCheckedImage == null)
 					{
-						g.SetColor(new SexyColor(this.mOutlineColor));
-						g.FillRect(0, 0, this.mWidth, this.mHeight);
-						g.SetColor(new SexyColor(this.mBkgColor));
-						g.FillRect(1, 1, this.mWidth - 2, this.mHeight - 2);
-						if (this.mChecked)
+						g.SetColor(new SexyColor(mOutlineColor));
+						g.FillRect(0, 0, mWidth, mHeight);
+						g.SetColor(new SexyColor(mBkgColor));
+						g.FillRect(1, 1, mWidth - 2, mHeight - 2);
+						if (mChecked)
 						{
-							g.SetColor(new SexyColor(this.mCheckColor));
-							g.DrawLine(1, 1, this.mWidth - 2, this.mHeight - 2);
-							g.DrawLine(this.mWidth - 1, 1, 1, this.mHeight - 2);
+							g.SetColor(new SexyColor(mCheckColor));
+							g.DrawLine(1, 1, mWidth - 2, mHeight - 2);
+							g.DrawLine(mWidth - 1, 1, 1, mHeight - 2);
 						}
 					}
 					return;
 				}
-				if (this.mChecked)
+				if (mChecked)
 				{
-					g.DrawImage(this.mUncheckedImage, 0, 0, new TRect(this.mCheckedRect));
+					g.DrawImage(mUncheckedImage, 0, 0, new TRect(mCheckedRect));
 					return;
 				}
-				g.DrawImage(this.mUncheckedImage, 0, 0, new TRect(this.mUncheckedRect));
+				g.DrawImage(mUncheckedImage, 0, 0, new TRect(mUncheckedRect));
 				return;
 			}
 		}
 
 		public Checkbox(Image theUncheckedImage, Image theCheckedImage, int theId, CheckboxListener theCheckboxListener)
 		{
-			this.mUncheckedImage = theUncheckedImage;
-			this.mCheckedImage = theCheckedImage;
-			this.mId = theId;
-			this.mListener = theCheckboxListener;
-			this.mChecked = false;
-			this.mOutlineColor = new SexyColor(Color.White);
-			this.mBkgColor = new SexyColor(new Color(80, 80, 80));
-			this.mCheckColor = new SexyColor(new Color(255, 255, 0));
-			this.mDoFinger = true;
+			mUncheckedImage = theUncheckedImage;
+			mCheckedImage = theCheckedImage;
+			mId = theId;
+			mListener = theCheckboxListener;
+			mChecked = false;
+			mOutlineColor = new SexyColor(Color.White);
+			mBkgColor = new SexyColor(new Color(80, 80, 80));
+			mCheckColor = new SexyColor(new Color(255, 255, 0));
+			mDoFinger = true;
 		}
 
 		protected CheckboxListener mListener;

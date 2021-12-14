@@ -9,11 +9,11 @@ namespace Sexy
 		{
 			get
 			{
-				return (int)this.Color.R;
+				return (int)Color.R;
 			}
 			set
 			{
-				this.Color.R = (byte)value;
+				Color.R = (byte)value;
 			}
 		}
 
@@ -21,11 +21,11 @@ namespace Sexy
 		{
 			get
 			{
-				return (int)this.Color.G;
+				return (int)Color.G;
 			}
 			set
 			{
-				this.Color.G = (byte)value;
+				Color.G = (byte)value;
 			}
 		}
 
@@ -33,11 +33,11 @@ namespace Sexy
 		{
 			get
 			{
-				return (int)this.Color.B;
+				return (int)Color.B;
 			}
 			set
 			{
-				this.Color.B = (byte)value;
+				Color.B = (byte)value;
 			}
 		}
 
@@ -45,13 +45,13 @@ namespace Sexy
 		{
 			get
 			{
-				return (int)this.Color.A;
+				return (int)Color.A;
 			}
 			set
 			{
 				float scale = (float)value / 255f;
-				this.Color *= scale;
-				this.Color.A = (byte)value;
+				Color *= scale;
+				Color.A = (byte)value;
 			}
 		}
 
@@ -81,14 +81,14 @@ namespace Sexy
 
 		public void PremultiplyAlpha()
 		{
-			this.mRed = (int)((float)(this.mRed * this.mAlpha) / 255f);
-			this.mGreen = (int)((float)(this.mGreen * this.mAlpha) / 255f);
-			this.mBlue = (int)((float)(this.mBlue * this.mAlpha) / 255f);
+			mRed = (int)((float)(mRed * mAlpha) / 255f);
+			mGreen = (int)((float)(mGreen * mAlpha) / 255f);
+			mBlue = (int)((float)(mBlue * mAlpha) / 255f);
 		}
 
 		public SexyColor(int theRed, int theGreen, int theBlue)
 		{
-			this.Color = new Color(theRed, theGreen, theBlue);
+			Color = new Color(theRed, theGreen, theBlue);
 		}
 
 		public SexyColor(int theRed, int theGreen, int theBlue, int theAlpha)
@@ -98,22 +98,22 @@ namespace Sexy
 
 		public SexyColor(int theRed, int theGreen, int theBlue, int theAlpha, bool premultiply)
 		{
-			this.Color = new Color(theRed, theGreen, theBlue, theAlpha);
+			Color = new Color(theRed, theGreen, theBlue, theAlpha);
 			if (premultiply)
 			{
-				this.Color = Color.Multiply(this.Color, (float)theAlpha / 255f);
-				this.Color.A = (byte)theAlpha;
+				Color = Color.Multiply(Color, (float)theAlpha / 255f);
+				Color.A = (byte)theAlpha;
 			}
 		}
 
 		public SexyColor(string theElements)
 		{
-			this.Color = new Color((int)theElements[0], (int)theElements[1], (int)theElements[2], 255);
+			Color = new Color((int)theElements[0], (int)theElements[1], (int)theElements[2], 255);
 		}
 
 		public SexyColor(Color theColor)
 		{
-			this.Color = theColor;
+			Color = theColor;
 		}
 
 		public int this[int theIdx]
@@ -123,13 +123,13 @@ namespace Sexy
 				switch (theIdx)
 				{
 				case 0:
-					return (int)this.Color.R;
+					return (int)Color.R;
 				case 1:
-					return (int)this.Color.G;
+					return (int)Color.G;
 				case 2:
-					return (int)this.Color.B;
+					return (int)Color.B;
 				case 3:
-					return (int)this.Color.A;
+					return (int)Color.A;
 				default:
 					return 0;
 				}
@@ -148,17 +148,17 @@ namespace Sexy
 
 		public override bool Equals(object obj)
 		{
-			return obj is SexyColor && this.Color == ((SexyColor)obj).Color;
+			return obj is SexyColor && Color == ((SexyColor)obj).Color;
 		}
 
 		public override int GetHashCode()
 		{
-			return this.Color.GetHashCode();
+			return Color.GetHashCode();
 		}
 
 		public override string ToString()
 		{
-			return this.Color.ToString();
+			return Color.ToString();
 		}
 
 		public static implicit operator SexyColor(Color color)
@@ -181,7 +181,7 @@ namespace Sexy
 
 		internal void CopyFrom(Color c)
 		{
-			this.Color = c;
+			Color = c;
 		}
 
 		public Color Color;

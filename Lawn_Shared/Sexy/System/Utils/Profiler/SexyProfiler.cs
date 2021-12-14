@@ -7,43 +7,43 @@ namespace Sexy
 	{
 		public SexyProfiler()
 		{
-			this.mActive = false;
-			this.mProfiles = new List<Profile>();
+			mActive = false;
+			mProfiles = new List<Profile>();
 		}
 
 		public void Active(bool active)
 		{
-			this.mActive = active;
+			mActive = active;
 		}
 
 		public void StartFrame()
 		{
-			this.mProfiles.Clear();
+			mProfiles.Clear();
 		}
 
 		public void StartProfile(string name)
 		{
-			if (!this.mActive)
+			if (!mActive)
 			{
 				return;
 			}
 			Profile profile = new Profile();
 			profile.mSectionName = name;
-			profile.mStart = this.GetCurrentTime();
-			this.mProfiles.Add(profile);
+			profile.mStart = GetCurrentTime();
+			mProfiles.Add(profile);
 		}
 
 		public void EndProfile(string name)
 		{
-			if (!this.mActive)
+			if (!mActive)
 			{
 				return;
 			}
-			for (int i = 0; i < this.mProfiles.Count; i++)
+			for (int i = 0; i < mProfiles.Count; i++)
 			{
-				if (this.mProfiles[i].mSectionName == name)
+				if (mProfiles[i].mSectionName == name)
 				{
-					this.mProfiles[i].mEnd = this.GetCurrentTime();
+					mProfiles[i].mEnd = GetCurrentTime();
 					return;
 				}
 			}
@@ -56,14 +56,14 @@ namespace Sexy
 
 		public void PrintProfiles()
 		{
-			if (!this.mActive)
+			if (!mActive)
 			{
 				return;
 			}
-			for (int i = 0; i < this.mProfiles.Count; i++)
+			for (int i = 0; i < mProfiles.Count; i++)
 			{
-				int num = this.mProfiles[i].mEnd - this.mProfiles[i].mStart;
-				Debug.OutputDebug<string>("Section Name: " + this.mProfiles[i].mSectionName + "\n\tTotal Time(ms): " + num.ToString());
+				int num = mProfiles[i].mEnd - mProfiles[i].mStart;
+				Debug.OutputDebug<string>("Section Name: " + mProfiles[i].mSectionName + "\n\tTotal Time(ms): " + num.ToString());
 			}
 		}
 

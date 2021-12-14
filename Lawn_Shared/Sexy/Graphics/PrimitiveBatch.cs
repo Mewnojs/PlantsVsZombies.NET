@@ -12,53 +12,53 @@ namespace Sexy
 			{
 				throw new ArgumentNullException("graphicsDevice");
 			}
-			this.device = graphicsDevice;
-			this.basicEffect = new BasicEffect(graphicsDevice);
-			this.basicEffect.VertexColorEnabled = true;
-			this.basicEffect.LightingEnabled = false;
-			this.basicEffect.FogEnabled = false;
+			device = graphicsDevice;
+			basicEffect = new BasicEffect(graphicsDevice);
+			basicEffect.VertexColorEnabled = true;
+			basicEffect.LightingEnabled = false;
+			basicEffect.FogEnabled = false;
 		}
 
 		public void SetupMatrices()
 		{
-			this.basicEffect.View = Matrix.CreateOrthographicOffCenter(0f, (float)this.device.PresentationParameters.BackBufferWidth, (float)this.device.PresentationParameters.BackBufferHeight, 0f, 0f, 1f);
-			this.screenWidth = this.device.PresentationParameters.BackBufferWidth;
-			this.screenHeight = this.device.PresentationParameters.BackBufferHeight;
+			basicEffect.View = Matrix.CreateOrthographicOffCenter(0f, (float)device.PresentationParameters.BackBufferWidth, (float)device.PresentationParameters.BackBufferHeight, 0f, 0f, 1f);
+			screenWidth = device.PresentationParameters.BackBufferWidth;
+			screenHeight = device.PresentationParameters.BackBufferHeight;
 		}
 
 		public void SetupMatrices(int width, int height)
 		{
-			this.basicEffect.View = Matrix.CreateOrthographicOffCenter(0f, width, height, 0f, 0f, 1f);
-			this.screenWidth = width;
-			this.screenHeight = height;
+			basicEffect.View = Matrix.CreateOrthographicOffCenter(0f, width, height, 0f, 0f, 1f);
+			screenWidth = width;
+			screenHeight = height;
 		}
 
 		public void Draw(Image img, TRect destination, TRect source, Color colour, bool extraOffset, bool sourceOffsetsUsed)
 		{
 			Matrix? matrix = default(Matrix?);
-			this.Draw(img, destination, source, ref matrix, Vector2.Zero, colour, extraOffset, sourceOffsetsUsed, PrimitiveBatchEffects.None);
+			Draw(img, destination, source, ref matrix, Vector2.Zero, colour, extraOffset, sourceOffsetsUsed, PrimitiveBatchEffects.None);
 		}
 
 		public void Draw(Image img, TRect destination, TRect source, Color colour, bool extraOffset, bool sourceOffsetsUsed, PrimitiveBatchEffects effects)
 		{
 			Matrix? matrix = default(Matrix?);
-			this.Draw(img, destination, source, ref matrix, Vector2.Zero, colour, extraOffset, sourceOffsetsUsed, effects);
+			Draw(img, destination, source, ref matrix, Vector2.Zero, colour, extraOffset, sourceOffsetsUsed, effects);
 		}
 
 		public void Draw(Image img, TRect destination, TRect source, ref Matrix transform, Vector2 center, Color colour, bool extraOffset, bool sourceOffsetsUsed)
 		{
 			Matrix? matrix = new Matrix?(transform);
-			this.Draw(img, destination, source, ref matrix, center, colour, extraOffset, sourceOffsetsUsed, PrimitiveBatchEffects.None);
+			Draw(img, destination, source, ref matrix, center, colour, extraOffset, sourceOffsetsUsed, PrimitiveBatchEffects.None);
 		}
 
 		public void DrawRotatedScaled(Image img, TRect destination, TRect source, Vector2 center, float rotation, Vector2 scale, Color colour, bool extraOffset, bool sourceOffsetsUsed, PrimitiveBatchEffects effects)
 		{
-			Matrix? matrix = new Matrix?(Matrix.CreateTranslation((float)(-(float)this.OffsetX), (float)(-(float)this.OffsetY), 0f) * Matrix.CreateScale(scale.X, scale.Y, 1f) * Matrix.CreateRotationZ(rotation) * Matrix.CreateTranslation((float)destination.mX, (float)destination.mY, 0f));
+			Matrix? matrix = new Matrix?(Matrix.CreateTranslation((float)(-(float)OffsetX), (float)(-(float)OffsetY), 0f) * Matrix.CreateScale(scale.X, scale.Y, 1f) * Matrix.CreateRotationZ(rotation) * Matrix.CreateTranslation((float)destination.mX, (float)destination.mY, 0f));
 			destination.mX = 0;
 			destination.mY = 0;
 			destination.mWidth = source.mWidth;
 			destination.mHeight = source.mHeight;
-			this.Draw(img, destination, source, ref matrix, center, colour, false, sourceOffsetsUsed, effects);
+			Draw(img, destination, source, ref matrix, center, colour, false, sourceOffsetsUsed, effects);
 		}
 
 		public void Draw(Image img, TRect destination, TRect source, ref Matrix? transform, Vector2 center, Color colour, bool extraOffset, bool sourceOffsetsUsed, PrimitiveBatchEffects effects)
@@ -72,19 +72,19 @@ namespace Sexy
 				Matrix value = transform.Value;
 				value.M41 += value.M11 * -center.X + value.M21 * -center.Y;
 				value.M42 += value.M12 * -center.X + value.M22 * -center.Y;
-				this.Transform = value;
-				this.mHasTransform = true;
+				Transform = value;
+				mHasTransform = true;
 			}
 			else
 			{
-				this.mHasTransform = false;
+				mHasTransform = false;
 			}
-			this.Texture = img;
-			this.vertex.Color = colour;
+			Texture = img;
+			vertex.Color = colour;
 			if (extraOffset)
 			{
-				destination.mX -= this.OffsetX;
-				destination.mY -= this.OffsetY;
+				destination.mX -= OffsetX;
+				destination.mY -= OffsetY;
 			}
 			if (sourceOffsetsUsed)
 			{
@@ -100,73 +100,73 @@ namespace Sexy
 			float x = (float)(source.mX + (flag ? source.mWidth : 0)) / (float)img.Texture.Width;
 			float x2 = (float)(source.mX + (flag ? 0 : source.mWidth)) / (float)img.Texture.Width;
 			float z = 0f;
-			this.vertex.Position.X = (float)destination.mX;
-			this.vertex.Position.Y = (float)destination.mY;
-			this.vertex.Position.Z = z;
-			this.vertex.TextureCoordinate.X = x;
-			this.vertex.TextureCoordinate.Y = y;
-			this.AddVertex(ref this.vertex);
-			short num = (short)(this.positionInBuffer - 1);
-			this.vertex.Position.X = (float)(destination.mX + destination.mWidth);
-			this.vertex.Position.Y = (float)destination.mY;
-			this.vertex.TextureCoordinate.X = x2;
-			this.AddVertex(ref this.vertex);
-			short num2 = (short)(this.positionInBuffer - 1);
-			this.vertex.Position.X = (float)destination.mX;
-			this.vertex.Position.Y = (float)(destination.mY + destination.mHeight);
-			this.vertex.TextureCoordinate.X = x;
-			this.vertex.TextureCoordinate.Y = y2;
-			this.AddVertex(ref this.vertex);
-			short num3 = (short)(this.positionInBuffer - 1);
-			this.vertex.Position.X = (float)(destination.mX + destination.mWidth);
-			this.vertex.Position.Y = (float)(destination.mY + destination.mHeight);
-			this.vertex.TextureCoordinate.X = x2;
-			this.AddVertex(ref this.vertex);
-			short num4 = (short)(this.positionInBuffer - 1);
-			if (this.positionInIndexBuffer + 6 >= this.indices.Length)
+			vertex.Position.X = (float)destination.mX;
+			vertex.Position.Y = (float)destination.mY;
+			vertex.Position.Z = z;
+			vertex.TextureCoordinate.X = x;
+			vertex.TextureCoordinate.Y = y;
+			AddVertex(ref vertex);
+			short num = (short)(positionInBuffer - 1);
+			vertex.Position.X = (float)(destination.mX + destination.mWidth);
+			vertex.Position.Y = (float)destination.mY;
+			vertex.TextureCoordinate.X = x2;
+			AddVertex(ref vertex);
+			short num2 = (short)(positionInBuffer - 1);
+			vertex.Position.X = (float)destination.mX;
+			vertex.Position.Y = (float)(destination.mY + destination.mHeight);
+			vertex.TextureCoordinate.X = x;
+			vertex.TextureCoordinate.Y = y2;
+			AddVertex(ref vertex);
+			short num3 = (short)(positionInBuffer - 1);
+			vertex.Position.X = (float)(destination.mX + destination.mWidth);
+			vertex.Position.Y = (float)(destination.mY + destination.mHeight);
+			vertex.TextureCoordinate.X = x2;
+			AddVertex(ref vertex);
+			short num4 = (short)(positionInBuffer - 1);
+			if (positionInIndexBuffer + 6 >= indices.Length)
 			{
-				this.Flush();
+				Flush();
 			}
-			this.indices[this.positionInIndexBuffer++] = num;
-			this.indices[this.positionInIndexBuffer++] = num2;
-			this.indices[this.positionInIndexBuffer++] = num3;
-			this.indices[this.positionInIndexBuffer++] = num2;
-			this.indices[this.positionInIndexBuffer++] = num4;
-			this.indices[this.positionInIndexBuffer++] = num3;
-			this.primitiveCount += 2;
+			indices[positionInIndexBuffer++] = num;
+			indices[positionInIndexBuffer++] = num2;
+			indices[positionInIndexBuffer++] = num3;
+			indices[positionInIndexBuffer++] = num2;
+			indices[positionInIndexBuffer++] = num4;
+			indices[positionInIndexBuffer++] = num3;
+			primitiveCount += 2;
 		}
 
 		public void Dispose()
 		{
-			this.Dispose(true);
+			Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
 		protected virtual void Dispose(bool disposing)
 		{
-			if (disposing && !this.isDisposed)
+			if (disposing && !isDisposed)
 			{
-				if (this.basicEffect != null)
+				if (basicEffect != null)
 				{
-					this.basicEffect.Dispose();
+					basicEffect.Dispose();
 				}
-				this.isDisposed = true;
+				isDisposed = true;
 			}
 		}
 
 		public void Restart()
 		{
-			this.Begin(this.primitiveType, this.OffsetX, this.OffsetY, new Matrix?(this.Transform), this.Texture, this.lastUsedSamplerState);
+			Begin(primitiveType, OffsetX, OffsetY, new Matrix?(Transform), Texture, lastUsedSamplerState);
 		}
 
 		public void Begin(PrimitiveType primitiveType, int offsetX, int offsetY, Matrix? transform, Image texture, SamplerState st)
 		{
-			GlobalStaticVars.g.GraphicsDevice.RasterizerState = this.rasterizerState;
-			if (this.hasBegun)
+			GlobalStaticVars.g.GraphicsDevice.RasterizerState = rasterizerState;
+			if (hasBegun)
 			{
 				throw new InvalidOperationException("End must be called before Begin can be called again.");
 			}
-			if (this.screenWidth != this.device.PresentationParameters.BackBufferWidth || this.screenHeight != this.device.PresentationParameters.BackBufferHeight)
+			if (screenWidth != device.PresentationParameters.BackBufferWidth || screenHeight != device.PresentationParameters.BackBufferHeight)
 			{
 				//this.SetupMatrices();
 			}
@@ -174,26 +174,26 @@ namespace Sexy
 			{
 				throw new NotSupportedException("The specified primitiveType is not supported by PrimitiveBatch.");
 			}
-			this.hasBegun = true;
-			this.lastUsedSamplerState = st;
+			hasBegun = true;
+			lastUsedSamplerState = st;
 			if (st != null)
 			{
-				this.device.SamplerStates[0] = st;
+				device.SamplerStates[0] = st;
 			}
 			this.primitiveType = primitiveType;
-			this.numVertsPerPrimitive = PrimitiveBatch.NumVertsPerPrimitive(primitiveType);
-			this.Texture = texture;
-			this.OffsetX = offsetX;
-			this.OffsetY = offsetY;
+			numVertsPerPrimitive = PrimitiveBatch.NumVertsPerPrimitive(primitiveType);
+			Texture = texture;
+			OffsetX = offsetX;
+			OffsetY = offsetY;
 			if (transform != null)
 			{
-				this.Transform = transform.Value;
+				Transform = transform.Value;
 			}
 			else
 			{
-				this.Transform = Matrix.Identity;
+				Transform = Matrix.Identity;
 			}
-			this.basicEffect.CurrentTechnique.Passes[0].Apply();
+			basicEffect.CurrentTechnique.Passes[0].Apply();
 		}
 
 		public void AddTriVertices(TriVertex[,] vertices, int triangleCount, Color? theColor)
@@ -206,125 +206,125 @@ namespace Sexy
 					{
 						vertices[i, j].color = theColor.Value;
 					}
-					this.AddVertex(ref vertices[i, j].mVert);
-					this.indices[this.positionInIndexBuffer++] = (short)(this.positionInBuffer - 1);
-					this.primitiveCount++;
+					AddVertex(ref vertices[i, j].mVert);
+					indices[positionInIndexBuffer++] = (short)(positionInBuffer - 1);
+					primitiveCount++;
 				}
 			}
 		}
 
 		public void AddVertex(Vector2 vertex, Color color)
 		{
-			if (!this.hasBegun)
+			if (!hasBegun)
 			{
 				throw new InvalidOperationException("Begin must be called before AddVertex can be called.");
 			}
-			bool flag = this.positionInBuffer % this.numVertsPerPrimitive == 0;
-			if (flag && this.positionInBuffer + this.numVertsPerPrimitive >= this.VerticesLength)
+			bool flag = positionInBuffer % numVertsPerPrimitive == 0;
+			if (flag && positionInBuffer + numVertsPerPrimitive >= VerticesLength)
 			{
-				this.Flush();
+				Flush();
 			}
-			vertex.X += (float)this.OffsetX;
-			vertex.Y += (float)this.OffsetY;
-			if (this.mHasTransform)
+			vertex.X += (float)OffsetX;
+			vertex.Y += (float)OffsetY;
+			if (mHasTransform)
 			{
-				Vector2.Transform(ref vertex, ref this.Transform, out vertex);
+				Vector2.Transform(ref vertex, ref Transform, out vertex);
 			}
-			if (this.texture == null)
+			if (texture == null)
 			{
-				this.vertices[this.positionInBuffer].Position = new Vector3(vertex.X, vertex.Y, 0f);
-				this.vertices[this.positionInBuffer].Color = color;
+				vertices[positionInBuffer].Position = new Vector3(vertex.X, vertex.Y, 0f);
+				vertices[positionInBuffer].Color = color;
 			}
 			else
 			{
-				this.texturedVertices[this.positionInBuffer].Position = new Vector3(vertex.X, vertex.Y, 0f);
-				this.texturedVertices[this.positionInBuffer].Color = color;
-				this.texturedVertices[this.positionInBuffer].TextureCoordinate = Vector2.Zero;
+				texturedVertices[positionInBuffer].Position = new Vector3(vertex.X, vertex.Y, 0f);
+				texturedVertices[positionInBuffer].Color = color;
+				texturedVertices[positionInBuffer].TextureCoordinate = Vector2.Zero;
 			}
-			this.positionInBuffer++;
+			positionInBuffer++;
 		}
 
 		public void AddVertex(ref VertexPositionColorTexture vertex)
 		{
-			if (!this.hasBegun)
+			if (!hasBegun)
 			{
 				throw new InvalidOperationException("Begin must be called before AddVertex can be called.");
 			}
-			bool flag = this.positionInBuffer % this.numVertsPerPrimitive == 0;
-			if (flag && this.positionInBuffer + this.numVertsPerPrimitive >= this.VerticesLength)
+			bool flag = positionInBuffer % numVertsPerPrimitive == 0;
+			if (flag && positionInBuffer + numVertsPerPrimitive >= VerticesLength)
 			{
-				this.Flush();
+				Flush();
 			}
-			vertex.Position.X = vertex.Position.X + (float)this.OffsetX;
-			vertex.Position.Y = vertex.Position.Y + (float)this.OffsetY;
-			if (this.mHasTransform)
+			vertex.Position.X = vertex.Position.X + (float)OffsetX;
+			vertex.Position.Y = vertex.Position.Y + (float)OffsetY;
+			if (mHasTransform)
 			{
-				Vector3.Transform(ref vertex.Position, ref this.Transform, out vertex.Position);
+				Vector3.Transform(ref vertex.Position, ref Transform, out vertex.Position);
 			}
 			vertex.Position.X = vertex.Position.X - 0.5f;
 			vertex.Position.Y = vertex.Position.Y - 0.5f;
-			if (this.texture == null)
+			if (texture == null)
 			{
-				this.vertices[this.positionInBuffer].Position = vertex.Position;
-				this.vertices[this.positionInBuffer].Color = vertex.Color;
+				vertices[positionInBuffer].Position = vertex.Position;
+				vertices[positionInBuffer].Color = vertex.Color;
 			}
 			else
 			{
-				this.texturedVertices[this.positionInBuffer] = vertex;
+				texturedVertices[positionInBuffer] = vertex;
 			}
-			this.positionInBuffer++;
+			positionInBuffer++;
 		}
 
 		private int VerticesLength
 		{
 			get
 			{
-				if (this.texture != null)
+				if (texture != null)
 				{
-					return this.texturedVertices.Length;
+					return texturedVertices.Length;
 				}
-				return this.vertices.Length;
+				return vertices.Length;
 			}
 		}
 
 		public void End()
 		{
-			if (!this.hasBegun)
+			if (!hasBegun)
 			{
 				throw new InvalidOperationException("Begin must be called before End can be called.");
 			}
-			this.Flush();
-			this.hasBegun = false;
+			Flush();
+			hasBegun = false;
 		}
 
 		private void Flush()
 		{
-			if (!this.hasBegun)
+			if (!hasBegun)
 			{
 				throw new InvalidOperationException("Begin must be called before Flush can be called.");
 			}
-			if (this.positionInBuffer == 0)
+			if (positionInBuffer == 0)
 			{
 				return;
 			}
-			if (this.texture == null)
+			if (texture == null)
 			{
-				this.device.DrawUserIndexedPrimitives<VertexPositionColor>(this.primitiveType, this.vertices, 0, this.positionInBuffer, this.indices, 0, this.primitiveCount);
+				device.DrawUserIndexedPrimitives<VertexPositionColor>(primitiveType, vertices, 0, positionInBuffer, indices, 0, primitiveCount);
 			}
 			else
 			{
-				this.device.DrawUserIndexedPrimitives<VertexPositionColorTexture>(this.primitiveType, this.texturedVertices, 0, this.positionInBuffer, this.indices, 0, this.primitiveCount);
+				device.DrawUserIndexedPrimitives<VertexPositionColorTexture>(primitiveType, texturedVertices, 0, positionInBuffer, indices, 0, primitiveCount);
 			}
-			this.positionInBuffer = 0;
-			this.positionInIndexBuffer = 0;
-			this.primitiveCount = 0;
+			positionInBuffer = 0;
+			positionInIndexBuffer = 0;
+			primitiveCount = 0;
 		}
 
 		public bool HasBegun
 		{
 			get
 			{
-				return this.hasBegun;
+				return hasBegun;
 			}
 		}
 
@@ -332,31 +332,31 @@ namespace Sexy
 		{
 			get
 			{
-				return this.texture;
+				return texture;
 			}
 			set
 			{
-				if (this.texture == null && value == null)
+				if (texture == null && value == null)
 				{
 					return;
 				}
-				if (this.texture != null && value != null && this.texture.Texture == value.Texture)
+				if (texture != null && value != null && texture.Texture == value.Texture)
 				{
 					return;
 				}
-				this.Flush();
-				this.texture = value;
-				if (this.texture != null)
+				Flush();
+				texture = value;
+				if (texture != null)
 				{
-					this.basicEffect.TextureEnabled = true;
-					this.basicEffect.Texture = this.texture.Texture;
+					basicEffect.TextureEnabled = true;
+					basicEffect.Texture = texture.Texture;
 				}
 				else
 				{
-					this.basicEffect.TextureEnabled = false;
-					this.basicEffect.Texture = null;
+					basicEffect.TextureEnabled = false;
+					basicEffect.Texture = null;
 				}
-				this.basicEffect.CurrentTechnique.Passes[0].Apply();
+				basicEffect.CurrentTechnique.Passes[0].Apply();
 			}
 		}
 

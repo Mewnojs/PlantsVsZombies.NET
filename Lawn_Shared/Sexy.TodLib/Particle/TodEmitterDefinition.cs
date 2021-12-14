@@ -6,14 +6,14 @@ namespace Sexy.TodLib
 	{
 		public TodEmitterDefinition()
 		{
-			this.mImageRow = 0;
-			this.mImageCol = 0;
-			this.mImageFrames = 1;
-			this.mAnimated = 0;
-			this.mEmitterType = EmitterType.EMITTER_BOX;
-			this.mImage = null;
-			this.mName = "";
-			this.mOnDuration = "";
+			mImageRow = 0;
+			mImageCol = 0;
+			mImageFrames = 1;
+			mAnimated = 0;
+			mEmitterType = EmitterType.EMITTER_BOX;
+			mImage = null;
+			mName = "";
+			mOnDuration = "";
 		}
 
 		public void Dispose()

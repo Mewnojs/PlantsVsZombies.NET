@@ -31,12 +31,12 @@ namespace Sexy.TodLib
 
 		public override string ToString()
 		{
-			return "Image: " + this.mImageName;
+			return "Image: " + mImageName;
 		}
 
 		public ReanimatorTransform()
 		{
-			this.Reset();
+			Reset();
 		}
 
 		public void PrepareForReuse()
@@ -46,36 +46,36 @@ namespace Sexy.TodLib
 
 		private void Reset()
 		{
-			this.mTransX = 
-				this.mTransY = 
-				this.mSkewX = 
-				this.mSkewY = 
-				this.mScaleX = 
-				this.mScaleY = 
-				this.mFrame = 
-				this.mAlpha = 
-				this.mSkewXCos = 
-				this.mSkewXSin = 
-				this.mSkewYCos = 
-				this.mSkewYSin = ReanimatorXnaHelpers.DEFAULT_FIELD_PLACEHOLDER;
-			this.mFont = null;
-			this.mImage = null;
-			this.mText = (this.mImageName = (this.mFontName = string.Empty));
+			mTransX = 
+				mTransY = 
+				mSkewX = 
+				mSkewY = 
+				mScaleX = 
+				mScaleY = 
+				mFrame = 
+				mAlpha = 
+				mSkewXCos = 
+				mSkewXSin = 
+				mSkewYCos = 
+				mSkewYSin = ReanimatorXnaHelpers.DEFAULT_FIELD_PLACEHOLDER;
+			mFont = null;
+			mImage = null;
+			mText = (mImageName = (mFontName = string.Empty));
 		}
 
 		public void ExtractImages()
 		{
-			if (!string.IsNullOrEmpty(this.mImageName))
+			if (!string.IsNullOrEmpty(mImageName))
 			{
-				this.mImage = AtlasResources.GetImageInAtlasById(AtlasResources.GetAtlasIdByStringId(this.mImageName));
-				if (this.mImage == null && this.mImageName == "IMAGE_REANIM_ZOMBIESWON")
+				mImage = AtlasResources.GetImageInAtlasById(AtlasResources.GetAtlasIdByStringId(mImageName));
+				if (mImage == null && mImageName == "IMAGE_REANIM_ZOMBIESWON")
 				{
-					this.mImage = Resources.IMAGE_REANIM_ZOMBIESWON;
+					mImage = Resources.IMAGE_REANIM_ZOMBIESWON;
 				}
 			}
-			if (!string.IsNullOrEmpty(this.mFontName))
+			if (!string.IsNullOrEmpty(mFontName))
 			{
-				this.mFont = Resources.GetFontById((int)Resources.GetIdByStringId(this.mFontName));
+				mFont = Resources.GetFontById((int)Resources.GetIdByStringId(mFontName));
 			}
 		}
 

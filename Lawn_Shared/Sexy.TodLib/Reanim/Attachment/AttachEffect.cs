@@ -16,22 +16,22 @@ namespace Sexy.TodLib
 
 		public void PrepareForReuse()
 		{
-			this.Reset();
+			Reset();
 			AttachEffect.unusedObjects.Push(this);
 		}
 
 		private AttachEffect()
 		{
-			this.Reset();
+			Reset();
 		}
 
 		public void Reset()
 		{
-			this.mEffectID = null;
-			this.mEffectType = EffectType.EFFECT_PARTICLE;
-			this.mOffset = default(SexyTransform2D);
-			this.mDontDrawIfParentHidden = false;
-			this.mDontPropogateColor = false;
+			mEffectID = null;
+			mEffectType = EffectType.EFFECT_PARTICLE;
+			mOffset = default(SexyTransform2D);
+			mDontDrawIfParentHidden = false;
+			mDontPropogateColor = false;
 		}
 
 		public object mEffectID;

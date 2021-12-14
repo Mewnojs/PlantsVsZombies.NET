@@ -8,40 +8,40 @@ namespace Lawn
 	{
 		protected void DeleteOldestProfile()
 		{
-			if (this.mProfileMap.Count == 0)
+			if (mProfileMap.Count == 0)
 			{
 				return;
 			}
-			Dictionary<string, PlayerInfo>.Enumerator enumerator = this.mProfileMap.GetEnumerator();
+			Dictionary<string, PlayerInfo>.Enumerator enumerator = mProfileMap.GetEnumerator();
 			Dictionary<string, PlayerInfo>.Enumerator enumerator2 = enumerator;
 			while (enumerator.MoveNext())
 			{
 				KeyValuePair<string, PlayerInfo> keyValuePair = enumerator.Current;
-				uint mUseSeq = keyValuePair.Value.mUseSeq;
+				uint useSeq = keyValuePair.Value.mUseSeq;
 				KeyValuePair<string, PlayerInfo> keyValuePair2 = enumerator2.Current;
-				if (mUseSeq < keyValuePair2.Value.mUseSeq)
+				if (useSeq < keyValuePair2.Value.mUseSeq)
 				{
 					enumerator2 = enumerator;
 				}
 			}
 			KeyValuePair<string, PlayerInfo> keyValuePair3 = enumerator2.Current;
 			keyValuePair3.Value.DeleteUserFiles();
-			Dictionary<string, PlayerInfo> dictionary = this.mProfileMap;
+			Dictionary<string, PlayerInfo> dictionary = mProfileMap;
 			KeyValuePair<string, PlayerInfo> keyValuePair4 = enumerator2.Current;
 			dictionary.Remove(keyValuePair4.Key);
 		}
 
 		protected void DeleteOldProfiles()
 		{
-			while (this.mProfileMap.Count > 200)
+			while (mProfileMap.Count > 200)
 			{
-				this.DeleteOldestProfile();
+				DeleteOldestProfile();
 			}
 		}
 
 		public ProfileMgr()
 		{
-			this.Clear();
+			Clear();
 		}
 
 		public void Dispose()
@@ -50,10 +50,10 @@ namespace Lawn
 
 		public void Clear()
 		{
-			this.mProfileMap.Clear();
+			mProfileMap.Clear();
 			ProfileMgr.mNextProfileId = 1U;
-			this.mNextProfileUseSeq = 1U;
-			this.mLastMoreGamesUpdate = DateTime.Now;
+			mNextProfileUseSeq = 1U;
+			mLastMoreGamesUpdate = DateTime.Now;
 		}
 
 		private static string GetSaveFile()
@@ -81,10 +81,10 @@ namespace Lawn
 						PlayerInfo playerInfo = new PlayerInfo(num3);
 						if (playerInfo.LoadDetails())
 						{
-							this.mProfileMap.Add(playerInfo.mName, playerInfo);
+							mProfileMap.Add(playerInfo.mName, playerInfo);
 						}
 					}
-					this.activeUser = buffer.ReadString();
+					activeUser = buffer.ReadString();
 					if (buffer.ReadLong() != 555)
 					{
 						throw new Exception("Profile Manager: Save check number mismatch");
@@ -94,7 +94,7 @@ namespace Lawn
 			catch (Exception ex)
 			{
 				string message = ex.Message;
-				this.mProfileMap.Clear();
+				mProfileMap.Clear();
 			}
 		}
 
@@ -105,8 +105,8 @@ namespace Lawn
 				string saveFile = ProfileMgr.GetSaveFile();
 				Sexy.Buffer buffer = new Sexy.Buffer();
 				buffer.WriteLong(1);
-				buffer.WriteLong(this.mProfileMap.Count);
-				foreach (PlayerInfo playerInfo in this.mProfileMap.Values)
+				buffer.WriteLong(mProfileMap.Count);
+				foreach (PlayerInfo playerInfo in mProfileMap.Values)
 				{
 					buffer.WriteLong((int)playerInfo.mId);
 					playerInfo.SaveDetails();
@@ -123,16 +123,16 @@ namespace Lawn
 
 		public int GetNumProfiles()
 		{
-			return this.mProfileMap.Count;
+			return mProfileMap.Count;
 		}
 
 		public PlayerInfo GetProfile(string theName)
 		{
-			if (this.mProfileMap.ContainsKey(theName))
+			if (mProfileMap.ContainsKey(theName))
 			{
-				PlayerInfo playerInfo = this.mProfileMap[theName];
+				PlayerInfo playerInfo = mProfileMap[theName];
 				playerInfo.LoadDetails();
-				playerInfo.mUseSeq = this.mNextProfileUseSeq++;
+				playerInfo.mUseSeq = mNextProfileUseSeq++;
 				return playerInfo;
 			}
 			return null;
@@ -140,16 +140,16 @@ namespace Lawn
 
 		public PlayerInfo AddProfile(string theName)
 		{
-			if (this.mProfileMap.ContainsKey(theName))
+			if (mProfileMap.ContainsKey(theName))
 			{
-				return this.mProfileMap[theName];
+				return mProfileMap[theName];
 			}
-			this.mProfileMap.Add(theName, new PlayerInfo());
-			PlayerInfo playerInfo = this.mProfileMap[theName];
+			mProfileMap.Add(theName, new PlayerInfo());
+			PlayerInfo playerInfo = mProfileMap[theName];
 			playerInfo.mName = theName;
 			playerInfo.mId = ProfileMgr.GetNewProfileId();
-			playerInfo.mUseSeq = this.mNextProfileUseSeq++;
-			this.DeleteOldProfiles();
+			playerInfo.mUseSeq = mNextProfileUseSeq++;
+			DeleteOldProfiles();
 			return playerInfo;
 		}
 
@@ -160,33 +160,33 @@ namespace Lawn
 
 		public PlayerInfo GetAnyProfile()
 		{
-			if (this.mProfileMap.Count == 0)
+			if (mProfileMap.Count == 0)
 			{
 				return null;
 			}
-			if (!string.IsNullOrEmpty(this.activeUser))
+			if (!string.IsNullOrEmpty(activeUser))
 			{
-				foreach (PlayerInfo playerInfo in this.mProfileMap.Values)
+				foreach (PlayerInfo playerInfo in mProfileMap.Values)
 				{
-					if (playerInfo.mName == this.activeUser)
+					if (playerInfo.mName == activeUser)
 					{
 						return playerInfo;
 					}
 				}
 			}
-			Dictionary<string, PlayerInfo>.Enumerator enumerator2 = this.mProfileMap.GetEnumerator();
+			Dictionary<string, PlayerInfo>.Enumerator enumerator2 = mProfileMap.GetEnumerator();
 			enumerator2.MoveNext();
 			KeyValuePair<string, PlayerInfo> keyValuePair = enumerator2.Current;
 			PlayerInfo value = keyValuePair.Value;
 			value.LoadDetails();
-			value.mUseSeq = this.mNextProfileUseSeq++;
+			value.mUseSeq = mNextProfileUseSeq++;
 			return value;
 		}
 
 		public bool DeleteProfile(string theName)
 		{
-			this.mProfileMap[theName].DeleteUserFiles();
-			return this.mProfileMap.Remove(theName);
+			mProfileMap[theName].DeleteUserFiles();
+			return mProfileMap.Remove(theName);
 		}
 
 		public bool RenameProfile(string theOldName, string theNewName)
@@ -195,12 +195,12 @@ namespace Lawn
 			{
 				return true;
 			}
-			if (this.mProfileMap.ContainsKey(theOldName))
+			if (mProfileMap.ContainsKey(theOldName))
 			{
-				PlayerInfo playerInfo = this.mProfileMap[theOldName];
-				this.mProfileMap.Remove(theOldName);
+				PlayerInfo playerInfo = mProfileMap[theOldName];
+				mProfileMap.Remove(theOldName);
 				playerInfo.mName = theNewName;
-				this.mProfileMap.Add(theNewName, playerInfo);
+				mProfileMap.Add(theNewName, playerInfo);
 				return true;
 			}
 			return false;
@@ -208,7 +208,7 @@ namespace Lawn
 
 		public Dictionary<string, PlayerInfo> GetProfileMap()
 		{
-			return this.mProfileMap;
+			return mProfileMap;
 		}
 
 		private const int saveFileVersion = 1;

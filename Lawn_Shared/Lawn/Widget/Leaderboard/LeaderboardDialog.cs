@@ -18,32 +18,32 @@ namespace Lawn
 
 		public LeaderboardDialog(LawnApp theApp, LeaderBoardType aType) : base(theApp, null, 2, true, "", "", "", 0)
 		{
-			this.mApp = theApp;
-			this.mLeaderboardType = aType;
+			mApp = theApp;
+			mLeaderboardType = aType;
 			switch (aType)
 			{
 			case LeaderBoardType.LEADERBOARD_TYPE_IZOMBIE:
-				this.mTitle = "[I_ZOMBIE_1]";
-				this.mLeaderboardState = LeaderboardState.IZombie;
-				this.mGameMode = LeaderboardGameMode.IZombie;
+				mTitle = "[I_ZOMBIE_1]";
+				mLeaderboardState = LeaderboardState.IZombie;
+				mGameMode = LeaderboardGameMode.IZombie;
 				break;
 			case LeaderBoardType.LEADERBOARD_TYPE_VASEBREAKER:
-				this.mTitle = "[SCARY_POTTER_1]";
-				this.mLeaderboardState = LeaderboardState.Vasebreaker;
-				this.mGameMode = LeaderboardGameMode.Vasebreaker;
+				mTitle = "[SCARY_POTTER_1]";
+				mLeaderboardState = LeaderboardState.Vasebreaker;
+				mGameMode = LeaderboardGameMode.Vasebreaker;
 				break;
 			case LeaderBoardType.LEADERBOARD_TYPE_KILLED:
-				this.mTitle = "[ZOMBIES_KILLED]";
-				this.mLeaderboardState = LeaderboardState.Adventure;
-				this.mGameMode = LeaderboardGameMode.Adventure;
+				mTitle = "[ZOMBIES_KILLED]";
+				mLeaderboardState = LeaderboardState.Adventure;
+				mGameMode = LeaderboardGameMode.Adventure;
 				break;
 			}
-			this.mBackButton = GameButton.MakeButton(1000, this, "[STORE_BACK_TO_ZEN]");
-			LeaderBoardComm.LoadResults(this.mGameMode);
-			this.mScrollWidget = new ScrollWidget();
-			this.mScrollWidget.Resize(320 - AtlasResources.IMAGE_PILE_LEADERBOARDSCREEN_BANNER.mWidth / 2, 100, AtlasResources.IMAGE_PILE_LEADERBOARDSCREEN_BANNER.mWidth, Constants.BOARD_HEIGHT - 200);
-			this.mGradientWidget = new LeaderboardGradientWidget();
-			this.mGradientWidget.Resize(320 - AtlasResources.IMAGE_PILE_LEADERBOARDSCREEN_BANNER.mWidth / 2, 100, AtlasResources.IMAGE_PILE_LEADERBOARDSCREEN_BANNER.mWidth, Constants.BOARD_HEIGHT - 200);
+			mBackButton = GameButton.MakeButton(1000, this, "[STORE_BACK_TO_ZEN]");
+			LeaderBoardComm.LoadResults(mGameMode);
+			mScrollWidget = new ScrollWidget();
+			mScrollWidget.Resize(320 - AtlasResources.IMAGE_PILE_LEADERBOARDSCREEN_BANNER.mWidth / 2, 100, AtlasResources.IMAGE_PILE_LEADERBOARDSCREEN_BANNER.mWidth, Constants.BOARD_HEIGHT - 200);
+			mGradientWidget = new LeaderboardGradientWidget();
+			mGradientWidget.Resize(320 - AtlasResources.IMAGE_PILE_LEADERBOARDSCREEN_BANNER.mWidth / 2, 100, AtlasResources.IMAGE_PILE_LEADERBOARDSCREEN_BANNER.mWidth, Constants.BOARD_HEIGHT - 200);
 		}
 
 		public override int GetPreferredHeight(int theWidth)
@@ -55,35 +55,35 @@ namespace Lawn
 		{
 			base.Resize(theX, theY, theWidth, theHeight);
 			int num = 150;
-			int mHeight = AtlasResources.IMAGE_BUTTON_LEFT.mHeight;
-			this.mBackButton.Resize(this.mWidth / 2 - num / 2, theHeight - (int)Constants.InvertAndScale(50f), num, mHeight);
+			int btnHeight = AtlasResources.IMAGE_BUTTON_LEFT.mHeight;
+			mBackButton.Resize(mWidth / 2 - num / 2, theHeight - (int)Constants.InvertAndScale(50f), num, btnHeight);
 		}
 
 		public override void AddedToManager(WidgetManager theWidgetManager)
 		{
-			this.AddWidget(this.mBackButton);
-			this.AddWidget(this.mScrollWidget);
+			AddWidget(mBackButton);
+			AddWidget(mScrollWidget);
 			base.AddedToManager(theWidgetManager);
 		}
 
 		public override void RemovedFromManager(WidgetManager theWidgetManager)
 		{
-			this.RemoveWidget(this.mBackButton);
-			this.RemoveWidget(this.mScrollWidget);
+			RemoveWidget(mBackButton);
+			RemoveWidget(mScrollWidget);
 			base.RemovedFromManager(theWidgetManager);
 		}
 
 		public override bool BackButtonPress()
 		{
-			int mId = this.mBackButton.mId;
-			this.ButtonPress(mId);
-			this.ButtonDepress(mId);
+			int id = mBackButton.mId;
+			ButtonPress(id);
+			ButtonDepress(id);
 			return true;
 		}
 
 		public override void ButtonPress(int theId)
 		{
-			this.mApp.PlaySample(Resources.SOUND_GRAVEBUTTON);
+			mApp.PlaySample(Resources.SOUND_GRAVEBUTTON);
 		}
 
 		public override void ButtonDepress(int theId)
@@ -93,23 +93,23 @@ namespace Lawn
 			{
 				return;
 			}
-			this.mApp.KillLeaderboardDialog();
+			mApp.KillLeaderboardDialog();
 		}
 
 		public override void Draw(Graphics g)
 		{
-			TRect mClipRect = g.mClipRect;
+			TRect clipRect = g.mClipRect;
 			g.SetClipRect(new TRect(-g.mTransX, -g.mTransY, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT));
 			g.SetColor(new Color(0, 0, 0, 150));
 			g.FillRect(new TRect(-g.mTransX, -g.mTransY, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT));
-			g.mClipRect = mClipRect;
+			g.mClipRect = clipRect;
 			g.SetColor(SexyColor.White);
 			base.Draw(g);
-			TodCommon.TodDrawString(g, this.mTitle, this.mWidth / 2, 60, Resources.FONT_DWARVENTODCRAFT15, SexyColor.White, DrawStringJustification.DS_ALIGN_CENTER);
-			int num = LeaderBoardComm.LoadResults(this.mGameMode);
+			TodCommon.TodDrawString(g, mTitle, mWidth / 2, 60, Resources.FONT_DWARVENTODCRAFT15, SexyColor.White, DrawStringJustification.DS_ALIGN_CENTER);
+			int num = LeaderBoardComm.LoadResults(mGameMode);
 			if (num == -1)
 			{
-				TodCommon.TodDrawStringCenterBy(g, LeaderboardDialog.loadingStrings[this.loadingTimer], this.mWidth / 2, (int)Constants.InvertAndScale(150f), Resources.FONT_HOUSEOFTERROR16, SexyColor.White, DrawStringJustification.DS_ALIGN_CENTER, 1f, LeaderboardDialog.loadingStrings[0]);
+				TodCommon.TodDrawStringCenterBy(g, LeaderboardDialog.loadingStrings[loadingTimer], mWidth / 2, (int)Constants.InvertAndScale(150f), Resources.FONT_HOUSEOFTERROR16, SexyColor.White, DrawStringJustification.DS_ALIGN_CENTER, 1f, LeaderboardDialog.loadingStrings[0]);
 				return;
 			}
 			if (num == -2)
@@ -119,31 +119,31 @@ namespace Lawn
 				g.WriteWordWrapped(Constants.LeaderboardDialog_CannotConnect_Rect, TodStringFile.TodStringTranslate("[CANNOT_CONNECT]"), 0, 0, true);
 				return;
 			}
-			if (num > -1 && this.mListWidget == null)
+			if (num > -1 && mListWidget == null)
 			{
-				this.mListWidget = new LeaderboardList(this.mApp, this.mLeaderboardType);
-				this.mScrollWidget.AddWidget(this.mListWidget);
+				mListWidget = new LeaderboardList(mApp, mLeaderboardType);
+				mScrollWidget.AddWidget(mListWidget);
 			}
 		}
 
 		public void DrawList(Graphics g)
 		{
-			LeaderBoardComm.GetMaxEntries(this.mLeaderboardState);
+			LeaderBoardComm.GetMaxEntries(mLeaderboardState);
 		}
 
 		public override void Update()
 		{
 			base.Update();
-			this.loadingStep++;
-			if (this.loadingStep % 10 == 0)
+			loadingStep++;
+			if (loadingStep % 10 == 0)
 			{
-				this.loadingTimer = (this.loadingTimer + 1) % LeaderboardDialog.loadingStrings.Length;
+				loadingTimer = (loadingTimer + 1) % LeaderboardDialog.loadingStrings.Length;
 			}
 		}
 
 		public override void Dispose()
 		{
-			this.mBackButton.Dispose();
+			mBackButton.Dispose();
 			base.Dispose();
 		}
 

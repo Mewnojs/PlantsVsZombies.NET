@@ -7,35 +7,35 @@ namespace Sexy
 	{
 		public SexyMathHermite()
 		{
-			this.mIsBuilt = false;
+			mIsBuilt = false;
 		}
 
 		public void Rebuild()
 		{
-			this.mIsBuilt = false;
+			mIsBuilt = false;
 		}
 
 		public float Evaluate(float inX)
 		{
-			if (!this.mIsBuilt)
+			if (!mIsBuilt)
 			{
-				if (!this.BuildCurve())
+				if (!BuildCurve())
 				{
 					return 0f;
 				}
-				this.mIsBuilt = true;
+				mIsBuilt = true;
 			}
-			uint count = (uint)this.mPieces.Count;
+			uint count = (uint)mPieces.Count;
 			int num = 0;
 			while ((long)num < (long)((ulong)count))
 			{
-				if (inX < this.mPoints[num + 1].mX)
+				if (inX < mPoints[num + 1].mX)
 				{
-					return this.EvaluatePiece(inX, this.mPoints, num, this.mPieces[num]);
+					return EvaluatePiece(inX, mPoints, num, mPieces[num]);
 				}
 				num++;
 			}
-			return this.mPoints[this.mPoints.Count - 1].mFx;
+			return mPoints[mPoints.Count - 1].mFx;
 		}
 
 		protected void CreatePiece(List<SexyMathHermite.SPoint> inPoints, int inPointsIndex, List<SexyMathHermite.SPiece> outPiece, int outPieceIndex)
@@ -91,17 +91,17 @@ namespace Sexy
 
 		protected bool BuildCurve()
 		{
-			this.mPieces.Clear();
-			int count = this.mPoints.Count;
+			mPieces.Clear();
+			int count = mPoints.Count;
 			if (count < 2)
 			{
 				return false;
 			}
 			int num = count - 1;
-			this.mPieces.Capacity = num;
+			mPieces.Capacity = num;
 			for (int i = 0; i < num; i++)
 			{
-				this.CreatePiece(this.mPoints, i, this.mPieces, i);
+				CreatePiece(mPoints, i, mPieces, i);
 			}
 			return true;
 		}
@@ -116,9 +116,9 @@ namespace Sexy
 		{
 			public SPoint(float inX, float inFx, float inFxPrime)
 			{
-				this.mX = inX;
-				this.mFx = inFx;
-				this.mFxPrime = inFxPrime;
+				mX = inX;
+				mFx = inFx;
+				mFxPrime = inFxPrime;
 			}
 
 			public float mX;

@@ -8,18 +8,18 @@ namespace Sexy
 
 		protected virtual void Reset()
 		{
-			this.mKeys.Clear();
-			this.mKey = 0;
+			mKeys.Clear();
+			mKey = 0;
 		}
 
 		public KeyInterpolator<T> CopyFrom(KeyInterpolator<T> rhs)
 		{
-			this.mKeys.Clear();
+			mKeys.Clear();
 			foreach (TypedKey<T> item in rhs.mKeys)
 			{
-				this.mKeys.Add(item);
+				mKeys.Add(item);
 			}
-			this.mKey = this.mKeys.GetLastKey();
+			mKey = mKeys.GetLastKey();
 			return this;
 		}
 
@@ -29,13 +29,13 @@ namespace Sexy
 
 		public void Clear()
 		{
-			this.mKeys.Clear();
-			this.mKey = 0;
+			mKeys.Clear();
+			mKey = 0;
 		}
 
 		public bool Empty()
 		{
-			return this.mKeys.Count == 0;
+			return mKeys.Count == 0;
 		}
 
 		public void SetKey(int tick, T value, bool ease, bool tween)
@@ -46,30 +46,30 @@ namespace Sexy
 			item.ease = ease;
 			item.tween = tween;
 			item.KeyIdentifier = tick;
-			if (this.mKeys.Contains(item.KeyIdentifier))
+			if (mKeys.Contains(item.KeyIdentifier))
 			{
-				this.mKeys.Remove(item.KeyIdentifier);
+				mKeys.Remove(item.KeyIdentifier);
 			}
-			this.mKeys.Add(item);
-			this.mKey = tick;
+			mKeys.Add(item);
+			mKey = tick;
 		}
 
 		public int FirstTick()
 		{
-			if (this.mKeys.empty())
+			if (mKeys.empty())
 			{
 				return 0;
 			}
-			return this.mKeys.GetFirstKey();
+			return mKeys.GetFirstKey();
 		}
 
 		public int LastTick()
 		{
-			if (this.mKeys.empty())
+			if (mKeys.empty())
 			{
 				return 0;
 			}
-			return this.mKeys.GetLastKey();
+			return mKeys.GetLastKey();
 		}
 
 		protected MyTypedKeyCollection<T> mKeys = new MyTypedKeyCollection<T>();

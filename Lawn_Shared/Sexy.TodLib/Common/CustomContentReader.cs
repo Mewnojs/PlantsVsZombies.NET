@@ -8,46 +8,46 @@ namespace Sexy.TodLib
 	{
 		public CustomContentReader(ContentReader reader)
 		{
-			this.buffer = reader.ReadBytes((int)reader.BaseStream.Length);
+			buffer = reader.ReadBytes((int)reader.BaseStream.Length);
 		}
 
 		public int ReadInt32()
 		{
-			int result = BitConverter.ToInt32(this.buffer, this.index);
-			this.index += 4;
+			int result = BitConverter.ToInt32(buffer, index);
+			index += 4;
 			return result;
 		}
 
 		public byte ReadByte()
 		{
-			byte result = this.buffer[this.index];
-			this.index++;
+			byte result = buffer[index];
+			index++;
 			return result;
 		}
 
 		public float ReadSingle()
 		{
-			float result = BitConverter.ToSingle(this.buffer, this.index);
-			this.index += 4;
+			float result = BitConverter.ToSingle(buffer, index);
+			index += 4;
 			return result;
 		}
 
 		public bool ReadBoolean()
 		{
-			bool result = BitConverter.ToBoolean(this.buffer, this.index);
-			this.index++;
+			bool result = BitConverter.ToBoolean(buffer, index);
+			index++;
 			return result;
 		}
 
 		public string ReadString()
 		{
-			int num = BitConverter.ToInt32(this.buffer, this.index);
-			this.index += 4;
+			int num = BitConverter.ToInt32(buffer, index);
+			index += 4;
 			CustomContentReader.readStringBuilder.Remove(0, CustomContentReader.readStringBuilder.Length);
 			for (int i = 0; i < num; i++)
 			{
-				CustomContentReader.readStringBuilder.Append(BitConverter.ToChar(this.buffer, this.index));
-				this.index += 2;
+				CustomContentReader.readStringBuilder.Append(BitConverter.ToChar(buffer, index));
+				index += 2;
 			}
 			if (num == 0)
 			{

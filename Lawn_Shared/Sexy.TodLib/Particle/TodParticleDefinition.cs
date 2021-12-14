@@ -6,8 +6,8 @@ namespace Sexy.TodLib
 	{
 		public TodParticleDefinition()
 		{
-			this.mEmitterDefs = null;
-			this.mEmitterDefCount = 0;
+			mEmitterDefs = null;
+			mEmitterDefCount = 0;
 		}
 
 		public TodEmitterDefinition[] mEmitterDefs;

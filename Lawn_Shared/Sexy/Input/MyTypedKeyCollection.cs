@@ -9,14 +9,14 @@ namespace Sexy
 		public void Add(TypedKey<T> item)
 		{
 			base.Add(item);
-			this.keys.Add(this.GetKeyForItem(item));
-			this.keys.Sort();
+			keys.Add(GetKeyForItem(item));
+			keys.Sort();
 		}
 
 		public void Clear()
 		{
 			base.Clear();
-			this.keys.Clear();
+			keys.Clear();
 		}
 
 		protected override int GetKeyForItem(TypedKey<T> item)
@@ -32,8 +32,8 @@ namespace Sexy
 
 		public int GetKeyAfter(int key)
 		{
-			int num = this.GetLastKey();
-			foreach (int num2 in this.keys)
+			int num = GetLastKey();
+			foreach (int num2 in keys)
 			{
 				if (base[num2].tick > key && base[num2].tick < num)
 				{
@@ -46,8 +46,8 @@ namespace Sexy
 
 		public int GetKeyBefore(int key)
 		{
-			int num = this.GetFirstKey();
-			foreach (int num2 in this.keys)
+			int num = GetFirstKey();
+			foreach (int num2 in keys)
 			{
 				if (base[num2].tick < key && base[num2].tick > num)
 				{
@@ -63,16 +63,16 @@ namespace Sexy
 
 		public int GetFirstKey()
 		{
-			if (this.keys.Count > 0)
+			if (keys.Count > 0)
 			{
-				return this.keys[0];
+				return keys[0];
 			}
 			return 0;
 		}
 
 		public int GetLastKey()
 		{
-			return this.keys[this.keys.Count - 1];
+			return keys[keys.Count - 1];
 		}
 
 		public bool empty()

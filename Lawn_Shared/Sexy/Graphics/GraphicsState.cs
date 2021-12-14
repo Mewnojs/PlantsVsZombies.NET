@@ -35,31 +35,31 @@ namespace Sexy
 		public GraphicsState(Game game)
 		{
 			GraphicsState.mGraphicsDeviceManager = new GraphicsDeviceManager(game);
-			this.Reset();
+			Reset();
 		}
 
 		public GraphicsState()
 		{
-			this.Reset();
+			Reset();
 		}
 
 		private void Reset()
 		{
-			this.mTransX = 0;
-			this.mTransY = 0;
-			this.mFastStretch = false;
-			this.mWriteColoredString = false;
-			this.mLinearBlend = false;
-			this.mScaleX = 1f;
-			this.mScaleY = 1f;
-			this.mScaleOrigX = 0f;
-			this.mScaleOrigY = 0f;
-			this.mFont = null;
-			this.mColor = default(SexyColor);
-			this.mColorizeImages = false;
-			this.WorldRotation = 0f;
-			this.mDrawMode = Graphics.DrawMode.DRAWMODE_NORMAL;
-			this.mClipRect = new TRect(0, 0, this.mScreenWidth, this.mScreenHeight);
+			mTransX = 0;
+			mTransY = 0;
+			mFastStretch = false;
+			mWriteColoredString = false;
+			mLinearBlend = false;
+			mScaleX = 1f;
+			mScaleY = 1f;
+			mScaleOrigX = 0f;
+			mScaleOrigY = 0f;
+			mFont = null;
+			mColor = default(SexyColor);
+			mColorizeImages = false;
+			WorldRotation = 0f;
+			mDrawMode = Graphics.DrawMode.DRAWMODE_NORMAL;
+			mClipRect = new TRect(0, 0, mScreenWidth, mScreenHeight);
 		}
 
 		public static void Init()
@@ -74,27 +74,27 @@ namespace Sexy
 
 		public void CopyStateFrom(GraphicsState theState)
 		{
-			this.mTransX = theState.mTransX;
-			this.mTransY = theState.mTransY;
-			this.mFastStretch = theState.mFastStretch;
-			this.mWriteColoredString = theState.mWriteColoredString;
-			this.mLinearBlend = theState.mLinearBlend;
-			this.mScaleX = theState.mScaleX;
-			this.mScaleY = theState.mScaleY;
-			this.mScaleOrigX = theState.mScaleOrigX;
-			this.mScaleOrigY = theState.mScaleOrigY;
-			this.mClipRect = theState.mClipRect;
-			this.mFont = theState.mFont;
-			this.mColor = theState.mColor;
-			this.mDrawMode = theState.mDrawMode;
-			this.mColorizeImages = theState.mColorizeImages;
-			this.WorldRotation = theState.WorldRotation;
+			mTransX = theState.mTransX;
+			mTransY = theState.mTransY;
+			mFastStretch = theState.mFastStretch;
+			mWriteColoredString = theState.mWriteColoredString;
+			mLinearBlend = theState.mLinearBlend;
+			mScaleX = theState.mScaleX;
+			mScaleY = theState.mScaleY;
+			mScaleOrigX = theState.mScaleOrigX;
+			mScaleOrigY = theState.mScaleOrigY;
+			mClipRect = theState.mClipRect;
+			mFont = theState.mFont;
+			mColor = theState.mColor;
+			mDrawMode = theState.mDrawMode;
+			mColorizeImages = theState.mColorizeImages;
+			WorldRotation = theState.WorldRotation;
 		}
 
 		public void SetWorldRotation(float theRotation)
 		{
-			this.WorldRotation = theRotation;
-			this.NeedToSetWorldRotation = true;
+			WorldRotation = theRotation;
+			NeedToSetWorldRotation = true;
 		}
 
 		public void ApplyWorldRotation()

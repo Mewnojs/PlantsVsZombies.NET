@@ -11,21 +11,21 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mData.GetBuffer();
+				return mData.GetBuffer();
 			}
 			set
 			{
-				this.mData.Close();
-				this.mData = new MemoryStream(value);
+				mData.Close();
+				mData = new MemoryStream(value);
 			}
 		}
 
 		public Buffer()
 		{
-			this.mDataBitSize = 0;
-			this.mReadBitPos = 0;
-			this.mWriteBitPos = 0;
-			this.mData = new MemoryStream();
+			mDataBitSize = 0;
+			mReadBitPos = 0;
+			mWriteBitPos = 0;
+			mData = new MemoryStream();
 		}
 
 		public virtual void Dispose()
@@ -34,27 +34,27 @@ namespace Sexy
 
 		public void Clear()
 		{
-			this.mReadBitPos = 0;
-			this.mWriteBitPos = 0;
-			this.mDataBitSize = 0;
-			this.mData.Close();
-			this.mData = new MemoryStream();
+			mReadBitPos = 0;
+			mWriteBitPos = 0;
+			mDataBitSize = 0;
+			mData.Close();
+			mData = new MemoryStream();
 		}
 
 		public void SeekFront()
 		{
-			this.mReadBitPos = 0;
-			this.mData.Seek(0L, 0);
+			mReadBitPos = 0;
+			mData.Seek(0L, 0);
 		}
 
 		public int GetDataLen()
 		{
-			return (this.mDataBitSize + 7) / 8;
+			return (mDataBitSize + 7) / 8;
 		}
 
 		public void FromWebString(string theString)
 		{
-			this.Clear();
+			Clear();
 			if (theString.Length < 4)
 			{
 				return;
@@ -85,14 +85,14 @@ namespace Sexy
 				char c2 = theString[num3++];
 				int theNum = Buffer.gWebDecodeMap[(int)c2];
 				num4 = Math.Min(j, 6);
-				this.WriteNumBits(theNum, num4);
+				WriteNumBits(theNum, num4);
 			}
-			this.SeekFront();
+			SeekFront();
 		}
 
 		public void WriteByte(byte theByte)
 		{
-			this.mData.WriteByte(theByte);
+			mData.WriteByte(theByte);
 		}
 
 		public void WriteNumBits(int theNum, int theBits)
@@ -120,15 +120,15 @@ namespace Sexy
 		public void WriteBoolean(bool theBool)
 		{
 			byte[] bytes = BitConverter.GetBytes(theBool);
-			this.mData.Write(bytes, 0, bytes.Length);
+			mData.Write(bytes, 0, bytes.Length);
 		}
 
 		public void WriteBooleanArray(bool[] theBool)
 		{
-			this.WriteLong(theBool.Length);
+			WriteLong(theBool.Length);
 			for (int i = 0; i < theBool.Length; i++)
 			{
-				this.WriteBoolean(theBool[i]);
+				WriteBoolean(theBool[i]);
 			}
 		}
 
@@ -136,13 +136,13 @@ namespace Sexy
 		{
 			int length = theBool.GetLength(0);
 			int length2 = theBool.GetLength(1);
-			this.WriteLong(length);
-			this.WriteLong(length2);
+			WriteLong(length);
+			WriteLong(length2);
 			for (int i = 0; i < length; i++)
 			{
 				for (int j = 0; j < length2; j++)
 				{
-					this.WriteBoolean(theBool[i, j]);
+					WriteBoolean(theBool[i, j]);
 				}
 			}
 		}
@@ -150,21 +150,21 @@ namespace Sexy
 		public void WriteShort(short theShort)
 		{
 			byte[] bytes = BitConverter.GetBytes(theShort);
-			this.mData.Write(bytes, 0, bytes.Length);
+			mData.Write(bytes, 0, bytes.Length);
 		}
 
 		public void WriteLong(int theLong)
 		{
 			byte[] bytes = BitConverter.GetBytes(theLong);
-			this.mData.Write(bytes, 0, bytes.Length);
+			mData.Write(bytes, 0, bytes.Length);
 		}
 
 		public void WriteLongArray(int[] theLong)
 		{
-			this.WriteLong(theLong.Length);
+			WriteLong(theLong.Length);
 			for (int i = 0; i < theLong.Length; i++)
 			{
-				this.WriteLong(theLong[i]);
+				WriteLong(theLong[i]);
 			}
 		}
 
@@ -172,13 +172,13 @@ namespace Sexy
 		{
 			int length = theLong.GetLength(0);
 			int length2 = theLong.GetLength(1);
-			this.WriteLong(length);
-			this.WriteLong(length2);
+			WriteLong(length);
+			WriteLong(length2);
 			for (int i = 0; i < length; i++)
 			{
 				for (int j = 0; j < length2; j++)
 				{
-					this.WriteLong(theLong[i, j]);
+					WriteLong(theLong[i, j]);
 				}
 			}
 		}
@@ -188,16 +188,16 @@ namespace Sexy
 			int length = theLong.GetLength(0);
 			int length2 = theLong.GetLength(1);
 			int length3 = theLong.GetLength(2);
-			this.WriteLong(length);
-			this.WriteLong(length2);
-			this.WriteLong(length3);
+			WriteLong(length);
+			WriteLong(length2);
+			WriteLong(length3);
 			for (int i = 0; i < length; i++)
 			{
 				for (int j = 0; j < length2; j++)
 				{
 					for (int k = 0; k < length3; k++)
 					{
-						this.WriteLong(theLong[i, j, k]);
+						WriteLong(theLong[i, j, k]);
 					}
 				}
 			}
@@ -206,73 +206,73 @@ namespace Sexy
 		public void WriteFloat(float theFloat)
 		{
 			byte[] bytes = BitConverter.GetBytes(theFloat);
-			this.mData.Write(bytes, 0, bytes.Length);
+			mData.Write(bytes, 0, bytes.Length);
 		}
 
 		public void WriteDouble(double theDouble)
 		{
 			byte[] bytes = BitConverter.GetBytes(theDouble);
-			this.mData.Write(bytes, 0, bytes.Length);
+			mData.Write(bytes, 0, bytes.Length);
 		}
 
 		public void WriteDateTime(DateTime theTime)
 		{
-			this.WriteLong(theTime.Millisecond);
-			this.WriteLong(theTime.Second);
-			this.WriteLong(theTime.Minute);
-			this.WriteLong(theTime.Hour);
-			this.WriteLong(theTime.Day);
-			this.WriteLong(theTime.Month);
-			this.WriteLong(theTime.Year);
+			WriteLong(theTime.Millisecond);
+			WriteLong(theTime.Second);
+			WriteLong(theTime.Minute);
+			WriteLong(theTime.Hour);
+			WriteLong(theTime.Day);
+			WriteLong(theTime.Month);
+			WriteLong(theTime.Year);
 		}
 
 		public DateTime ReadDateTime()
 		{
-			int num = this.ReadLong();
-			int num2 = this.ReadLong();
-			int num3 = this.ReadLong();
-			int num4 = this.ReadLong();
-			int num5 = this.ReadLong();
-			int num6 = this.ReadLong();
-			int num7 = this.ReadLong();
+			int num = ReadLong();
+			int num2 = ReadLong();
+			int num3 = ReadLong();
+			int num4 = ReadLong();
+			int num5 = ReadLong();
+			int num6 = ReadLong();
+			int num7 = ReadLong();
 			return new DateTime(num7, num6, num5, num4, num3, num2, num, 0);
 		}
 
 		public void WriteString(string theString)
 		{
-			this.WriteLong(theString.Length);
-			byte[] bytes = this.encoding.GetBytes(theString);
+			WriteLong(theString.Length);
+			byte[] bytes = encoding.GetBytes(theString);
 			for (int i = 0; i < bytes.Length; i++)
 			{
-				this.WriteByte(bytes[i]);
+				WriteByte(bytes[i]);
 			}
 		}
 
 		public void WriteStringArray(string[] theString)
 		{
-			this.WriteLong(theString.Length);
+			WriteLong(theString.Length);
 			for (int i = 0; i < theString.Length; i++)
 			{
-				this.WriteString(theString[i]);
+				WriteString(theString[i]);
 			}
 		}
 
 		public void WriteRect(TRect theRect)
 		{
-			this.WriteLong(theRect.mX);
-			this.WriteLong(theRect.mY);
-			this.WriteLong(theRect.mWidth);
-			this.WriteLong(theRect.mHeight);
+			WriteLong(theRect.mX);
+			WriteLong(theRect.mY);
+			WriteLong(theRect.mWidth);
+			WriteLong(theRect.mHeight);
 		}
 
 		public void WriteUTF8String(string theString)
 		{
-			this.WriteString(theString);
+			WriteString(theString);
 		}
 
 		public void WriteLine(string theString)
 		{
-			this.WriteString(theString + "\r\n");
+			WriteString(theString + "\r\n");
 		}
 
 		public void WriteBuffer(List<byte> theBuffer)
@@ -283,48 +283,48 @@ namespace Sexy
 		{
 			for (int i = 0; i < theCount; i++)
 			{
-				this.WriteByte((byte)theByte[i]);
+				WriteByte((byte)theByte[i]);
 			}
 		}
 
 		public void SetData(List<byte> theBuffer)
 		{
-			this.mData.Seek(0L, 0);
+			mData.Seek(0L, 0);
 			for (int i = 0; i < theBuffer.Count; i++)
 			{
-				this.mData.WriteByte(theBuffer[i]);
+				mData.WriteByte(theBuffer[i]);
 			}
-			this.mDataBitSize = (int)this.mData.Length * 8;
+			mDataBitSize = (int)mData.Length * 8;
 		}
 
 		public void SetData(List<byte> theOtherList, int theCount)
 		{
-			this.mData = new MemoryStream();
-			this.mData.Write(theOtherList.ToArray(), 0, theCount);
-			this.mDataBitSize = (int)this.mData.Length * 8;
+			mData = new MemoryStream();
+			mData.Write(theOtherList.ToArray(), 0, theCount);
+			mDataBitSize = (int)mData.Length * 8;
 		}
 
 		public string ToWebString()
 		{
 			string text = "";
-			int num = this.mWriteBitPos;
-			int num2 = this.mReadBitPos;
-			this.mReadBitPos = 0;
+			int num = mWriteBitPos;
+			int num2 = mReadBitPos;
+			mReadBitPos = 0;
 			string text2 = new string(new char[256]);
 			text2 = string.Format("{0:X8}", num);
 			text += text2;
 			int num3 = (num + 5) / 6;
 			for (int i = 0; i < num3; i++)
 			{
-				text += Buffer.gWebEncodeMap[this.ReadNumBits(6, false)];
+				text += Buffer.gWebEncodeMap[ReadNumBits(6, false)];
 			}
-			this.mReadBitPos = num2;
+			mReadBitPos = num2;
 			return text;
 		}
 
 		public byte ReadByte()
 		{
-			return (byte)this.mData.ReadByte();
+			return (byte)mData.ReadByte();
 		}
 
 		public int ReadNumBits(int theBits, bool isSigned)
@@ -335,31 +335,31 @@ namespace Sexy
 		public bool ReadBoolean()
 		{
 			byte[] array = new byte[1];
-			this.mData.Read(array, 0, array.Length);
+			mData.Read(array, 0, array.Length);
 			return BitConverter.ToBoolean(array, 0);
 		}
 
 		public bool[] ReadBooleanArray()
 		{
-			int num = this.ReadLong();
+			int num = ReadLong();
 			bool[] array = new bool[num];
 			for (int i = 0; i < num; i++)
 			{
-				array[i] = this.ReadBoolean();
+				array[i] = ReadBoolean();
 			}
 			return array;
 		}
 
 		public bool[,] ReadBoolean2DArray()
 		{
-			int num = this.ReadLong();
-			int num2 = this.ReadLong();
+			int num = ReadLong();
+			int num2 = ReadLong();
 			bool[,] array = new bool[num, num2];
 			for (int i = 0; i < num; i++)
 			{
 				for (int j = 0; j < num2; j++)
 				{
-					array[i, j] = this.ReadBoolean();
+					array[i, j] = ReadBoolean();
 				}
 			}
 			return array;
@@ -368,38 +368,38 @@ namespace Sexy
 		public short ReadShort()
 		{
 			byte[] array = new byte[2];
-			this.mData.Read(array, 0, array.Length);
+			mData.Read(array, 0, array.Length);
 			return BitConverter.ToInt16(array, 0);
 		}
 
 		public int ReadLong()
 		{
 			byte[] array = new byte[4];
-			this.mData.Read(array, 0, array.Length);
+			mData.Read(array, 0, array.Length);
 			return BitConverter.ToInt32(array, 0);
 		}
 
 		public int[] ReadLongArray()
 		{
-			int num = this.ReadLong();
+			int num = ReadLong();
 			int[] array = new int[num];
 			for (int i = 0; i < num; i++)
 			{
-				array[i] = this.ReadLong();
+				array[i] = ReadLong();
 			}
 			return array;
 		}
 
 		public int[,] ReadLong2DArray()
 		{
-			int num = this.ReadLong();
-			int num2 = this.ReadLong();
+			int num = ReadLong();
+			int num2 = ReadLong();
 			int[,] array = new int[num, num2];
 			for (int i = 0; i < num; i++)
 			{
 				for (int j = 0; j < num2; j++)
 				{
-					array[i, j] = this.ReadLong();
+					array[i, j] = ReadLong();
 				}
 			}
 			return array;
@@ -407,9 +407,9 @@ namespace Sexy
 
 		public int[,,] ReadLong3DArray()
 		{
-			int num = this.ReadLong();
-			int num2 = this.ReadLong();
-			int num3 = this.ReadLong();
+			int num = ReadLong();
+			int num2 = ReadLong();
+			int num3 = ReadLong();
 			int[,,] array = new int[num, num2, num3];
 			for (int i = 0; i < num; i++)
 			{
@@ -417,7 +417,7 @@ namespace Sexy
 				{
 					for (int k = 0; k < num3; k++)
 					{
-						array[i, j, k] = this.ReadLong();
+						array[i, j, k] = ReadLong();
 					}
 				}
 			}
@@ -427,48 +427,48 @@ namespace Sexy
 		public float ReadFloat()
 		{
 			byte[] array = new byte[4];
-			this.mData.Read(array, 0, 4);
+			mData.Read(array, 0, 4);
 			return BitConverter.ToSingle(array, 0);
 		}
 
 		public double ReadDouble()
 		{
 			byte[] array = new byte[8];
-			this.mData.Read(array, 0, 8);
+			mData.Read(array, 0, 8);
 			return BitConverter.ToDouble(array, 0);
 		}
 
 		public string ReadString()
 		{
-			int num = this.ReadLong();
+			int num = ReadLong();
 			byte[] array = new byte[num];
-			this.mData.Read(array, 0, num);
-			return this.encoding.GetString(array, 0, num);
+			mData.Read(array, 0, num);
+			return encoding.GetString(array, 0, num);
 		}
 
 		public string[] ReadStringArray()
 		{
-			int num = this.ReadLong();
+			int num = ReadLong();
 			string[] array = new string[num];
 			for (int i = 0; i < num; i++)
 			{
-				array[i] = this.ReadString();
+				array[i] = ReadString();
 			}
 			return array;
 		}
 
 		public TRect ReadRect()
 		{
-			int theX = this.ReadLong();
-			int theY = this.ReadLong();
-			int theWidth = this.ReadLong();
-			int theHeight = this.ReadLong();
+			int theX = ReadLong();
+			int theY = ReadLong();
+			int theWidth = ReadLong();
+			int theHeight = ReadLong();
 			return new TRect(theX, theY, theWidth, theHeight);
 		}
 
 		public string ReadUTF8String()
 		{
-			return this.ReadString();
+			return ReadString();
 		}
 
 		public string ReadLine()
@@ -476,7 +476,7 @@ namespace Sexy
 			string text = "";
 			for (;;)
 			{
-				byte b = this.ReadByte();
+				byte b = ReadByte();
 				if (b == 0 || b == 10)
 				{
 					break;
@@ -493,7 +493,7 @@ namespace Sexy
 		{
 			for (int i = 0; i < theLen; i++)
 			{
-				theData[i] = this.ReadByte();
+				theData[i] = ReadByte();
 			}
 		}
 
@@ -508,12 +508,12 @@ namespace Sexy
 
 		public int GetDataLenBits()
 		{
-			return this.mDataBitSize;
+			return mDataBitSize;
 		}
 
 		public uint GetCRC32()
 		{
-			return this.GetCRC32(0U);
+			return GetCRC32(0U);
 		}
 
 		public uint GetCRC32(uint theSeed)
@@ -523,12 +523,12 @@ namespace Sexy
 
 		public bool AtEnd()
 		{
-			return this.mData.Position == this.mData.Length;
+			return mData.Position == mData.Length;
 		}
 
 		public bool PastEnd()
 		{
-			return this.mData.Position > this.mData.Length;
+			return mData.Position > mData.Length;
 		}
 
 		internal static int[] gWebDecodeMap = new int[]

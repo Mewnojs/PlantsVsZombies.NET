@@ -10,9 +10,9 @@ namespace Sexy.TodLib
 
 		public ReanimationParams(ReanimationType aReanimationType, string aReanimFilename, int aReanimparamFlags)
 		{
-			this.mReanimationType = aReanimationType;
-			this.mReanimFileName = aReanimFilename;
-			this.mReanimParamFlags = aReanimparamFlags;
+			mReanimationType = aReanimationType;
+			mReanimFileName = aReanimFilename;
+			mReanimParamFlags = aReanimparamFlags;
 		}
 
 		public ReanimationType mReanimationType;

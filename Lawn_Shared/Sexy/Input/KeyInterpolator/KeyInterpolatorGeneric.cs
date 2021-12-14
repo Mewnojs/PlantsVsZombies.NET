@@ -6,12 +6,12 @@ namespace Sexy
 	{
 		public KeyInterpolatorGeneric(KeyInterpolatorGeneric<T>.InterpolatorMethod m)
 		{
-			this.interpolationMethod = m;
+			interpolationMethod = m;
 		}
 
 		protected override T GetLerpResult(float f, T a, T b)
 		{
-			return this.interpolationMethod(f, a, b);
+			return interpolationMethod(f, a, b);
 		}
 
 		public override void PrepareForReuse()
@@ -20,13 +20,13 @@ namespace Sexy
 
 		public override T Tick(float tick)
 		{
-			bool flag = !this.mEaseFuncSet;
-			int num = this.mKeys.GetKeyAfter(this.mKey);
+			bool flag = !mEaseFuncSet;
+			int num = mKeys.GetKeyAfter(mKey);
 			bool flag2 = false;
 			while (!flag2 && tick >= (float)num)
 			{
-				this.mKey = num;
-				int keyAfter = this.mKeys.GetKeyAfter(num);
+				mKey = num;
+				int keyAfter = mKeys.GetKeyAfter(num);
 				if (num == keyAfter)
 				{
 					flag2 = true;
@@ -38,37 +38,37 @@ namespace Sexy
 				}
 				flag = true;
 			}
-			int firstKey = this.mKeys.GetFirstKey();
-			while (this.mKey != firstKey && tick < (float)this.mKey)
+			int firstKey = mKeys.GetFirstKey();
+			while (mKey != firstKey && tick < (float)mKey)
 			{
-				num = this.mKey;
-				this.mKey = this.mKeys.GetKeyBefore(this.mKey);
+				num = mKey;
+				mKey = mKeys.GetKeyBefore(mKey);
 				flag = true;
 			}
-			if (num == this.mKeys.GetLastKey() + 1)
+			if (num == mKeys.GetLastKey() + 1)
 			{
-				return this.mKeys[this.mKey].value;
+				return mKeys[mKey].value;
 			}
-			if (tick < (float)this.mKey)
+			if (tick < (float)mKey)
 			{
-				return this.mKeys[this.mKey].value;
+				return mKeys[mKey].value;
 			}
 			if (flag)
 			{
-				base.SetupEaseFunc<T>(this.mKeys[this.mKey], this.mKeys[num]);
+				base.SetupEaseFunc<T>(mKeys[mKey], mKeys[num]);
 			}
 			T result;
-			if (this.mKeys[num].tween)
+			if (mKeys[num].tween)
 			{
-				float num2 = (float)num - (float)this.mKey;
-				float num3 = tick - (float)this.mKey;
+				float num2 = (float)num - (float)mKey;
+				float num3 = tick - (float)mKey;
 				float t = num3 / num2;
-				float f = this.mEaseFunc.Tick(t);
-				result = this.GetLerpResult(f, this.mKeys[this.mKey].value, this.mKeys[num].value);
+				float f = mEaseFunc.Tick(t);
+				result = GetLerpResult(f, mKeys[mKey].value, mKeys[num].value);
 			}
 			else
 			{
-				result = this.mKeys[this.mKey].value;
+				result = mKeys[mKey].value;
 			}
 			return result;
 		}

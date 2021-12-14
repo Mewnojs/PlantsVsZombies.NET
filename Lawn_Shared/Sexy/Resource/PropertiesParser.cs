@@ -7,18 +7,18 @@ namespace Sexy
 	{
 		protected void Fail(string theErrorText)
 		{
-			if (!this.mHasFailed)
+			if (!mHasFailed)
 			{
-				this.mHasFailed = true;
-				int currentLineNum = this.mXMLParser.GetCurrentLineNum();
-				this.mError = theErrorText;
+				mHasFailed = true;
+				int currentLineNum = mXMLParser.GetCurrentLineNum();
+				mError = theErrorText;
 				if (currentLineNum > 0)
 				{
-					this.mError += Common.StrFormat_(" on Line {0}", currentLineNum);
+					mError += Common.StrFormat_(" on Line {0}", currentLineNum);
 				}
-				if (this.mXMLParser.GetFileName().Length != 0)
+				if (mXMLParser.GetFileName().Length != 0)
 				{
-					this.mError += Common.StrFormat_(" in File '{0}'", this.mXMLParser.GetFileName());
+					mError += Common.StrFormat_(" in File '{0}'", mXMLParser.GetFileName());
 				}
 			}
 		}
@@ -30,7 +30,7 @@ namespace Sexy
 			for (;;)
 			{
 				xmlelement = new XMLElement();
-				if (!this.mXMLParser.NextElement(ref xmlelement))
+				if (!mXMLParser.NextElement(ref xmlelement))
 				{
 					break;
 				}
@@ -49,7 +49,7 @@ namespace Sexy
 			}
 			return false;
 			Block_2:
-			this.Fail("Unexpected Section: '" + xmlelement.mValue + "'");
+			Fail("Unexpected Section: '" + xmlelement.mValue + "'");
 			return false;
 		}
 
@@ -60,7 +60,7 @@ namespace Sexy
 			for (;;)
 			{
 				xmlelement = new XMLElement();
-				if (!this.mXMLParser.NextElement(ref xmlelement))
+				if (!mXMLParser.NextElement(ref xmlelement))
 				{
 					break;
 				}
@@ -71,7 +71,7 @@ namespace Sexy
 						goto IL_55;
 					}
 					string empty = string.Empty;
-					if (!this.ParseSingleElement(ref empty))
+					if (!ParseSingleElement(ref empty))
 					{
 						return false;
 					}
@@ -91,10 +91,10 @@ namespace Sexy
 			}
 			return false;
 			IL_55:
-			this.Fail("Invalid Section '" + xmlelement.mValue + "'");
+			Fail("Invalid Section '" + xmlelement.mValue + "'");
 			return false;
 			Block_5:
-			this.Fail("Element Not Expected '" + xmlelement.mValue + "'");
+			Fail("Element Not Expected '" + xmlelement.mValue + "'");
 			return false;
 		}
 
@@ -107,7 +107,7 @@ namespace Sexy
 			for (;;)
 			{
 				xmlelement = new XMLElement();
-				if (!this.mXMLParser.NextElement(ref xmlelement))
+				if (!mXMLParser.NextElement(ref xmlelement))
 				{
 					break;
 				}
@@ -116,27 +116,27 @@ namespace Sexy
 					if (xmlelement.mValue == "String")
 					{
 						string empty = string.Empty;
-						if (!this.ParseSingleElement(ref empty))
+						if (!ParseSingleElement(ref empty))
 						{
 							return false;
 						}
 						string theId = xmlelement.mAttributes["id"];
-						this.mApp.SetString(theId, empty);
+						mApp.SetString(theId, empty);
 					}
 					else if (xmlelement.mValue == "StringArray")
 					{
 						List<string> list = new List<string>();
-						if (!this.ParseStringArray(ref list))
+						if (!ParseStringArray(ref list))
 						{
 							return false;
 						}
 						string text = xmlelement.mAttributes["id"];
-						this.mApp.mStringVectorProperties.Add(text, list);
+						mApp.mStringVectorProperties.Add(text, list);
 					}
 					else if (xmlelement.mValue == "Boolean")
 					{
 						text2 = string.Empty;
-						if (!this.ParseSingleElement(ref text2))
+						if (!ParseSingleElement(ref text2))
 						{
 							return false;
 						}
@@ -155,12 +155,12 @@ namespace Sexy
 							theValue = false;
 						}
 						string theId2 = xmlelement.mAttributes["id"];
-						this.mApp.SetBoolean(theId2, theValue);
+						mApp.SetBoolean(theId2, theValue);
 					}
 					else if (xmlelement.mValue == "Integer")
 					{
 						empty2 = string.Empty;
-						if (!this.ParseSingleElement(ref empty2))
+						if (!ParseSingleElement(ref empty2))
 						{
 							return false;
 						}
@@ -170,7 +170,7 @@ namespace Sexy
 							goto Block_16;
 						}
 						string theId3 = xmlelement.mAttributes["id"];
-						this.mApp.SetInteger(theId3, theValue2);
+						mApp.SetInteger(theId3, theValue2);
 					}
 					else
 					{
@@ -179,7 +179,7 @@ namespace Sexy
 							goto IL_28B;
 						}
 						empty3 = string.Empty;
-						if (!this.ParseSingleElement(ref empty3))
+						if (!ParseSingleElement(ref empty3))
 						{
 							return false;
 						}
@@ -189,7 +189,7 @@ namespace Sexy
 							goto Block_19;
 						}
 						string theId4 = xmlelement.mAttributes["id"];
-						this.mApp.SetDouble(theId4, theValue3);
+						mApp.SetDouble(theId4, theValue3);
 					}
 				}
 				else
@@ -206,31 +206,31 @@ namespace Sexy
 			}
 			return false;
 			IL_160:
-			this.Fail("Invalid Boolean Value: '" + text2 + "'");
+			Fail("Invalid Boolean Value: '" + text2 + "'");
 			return false;
 			Block_16:
-			this.Fail("Invalid Integer Value: '" + empty2 + "'");
+			Fail("Invalid Integer Value: '" + empty2 + "'");
 			return false;
 			Block_19:
-			this.Fail("Invalid Double Value: '" + empty3 + "'");
+			Fail("Invalid Double Value: '" + empty3 + "'");
 			return false;
 			IL_28B:
-			this.Fail("Invalid Section '" + xmlelement.mValue + "'");
+			Fail("Invalid Section '" + xmlelement.mValue + "'");
 			return false;
 			Block_20:
-			this.Fail("Element Not Expected '" + xmlelement.mValue + "'");
+			Fail("Element Not Expected '" + xmlelement.mValue + "'");
 			return false;
 		}
 
 		protected bool DoParseProperties()
 		{
-			if (!this.mXMLParser.HasFailed())
+			if (!mXMLParser.HasFailed())
 			{
 				XMLElement xmlelement;
 				for (;;)
 				{
 					xmlelement = new XMLElement();
-					if (!this.mXMLParser.NextElement(ref xmlelement))
+					if (!mXMLParser.NextElement(ref xmlelement))
 					{
 						break;
 					}
@@ -240,7 +240,7 @@ namespace Sexy
 						{
 							goto IL_47;
 						}
-						if (!this.ParseProperties())
+						if (!ParseProperties())
 						{
 							break;
 						}
@@ -252,26 +252,26 @@ namespace Sexy
 				}
 				goto IL_88;
 				IL_47:
-				this.Fail("Invalid Section '" + xmlelement.mValue + "'");
+				Fail("Invalid Section '" + xmlelement.mValue + "'");
 				goto IL_88;
 				Block_5:
-				this.Fail("Element Not Expected '" + xmlelement.mValue + "'");
+				Fail("Element Not Expected '" + xmlelement.mValue + "'");
 			}
 			IL_88:
-			if (this.mXMLParser.HasFailed())
+			if (mXMLParser.HasFailed())
 			{
-				this.Fail(this.mXMLParser.GetErrorText());
+				Fail(mXMLParser.GetErrorText());
 			}
-			this.mXMLParser.Dispose();
-			this.mXMLParser = null;
-			return !this.mHasFailed;
+			mXMLParser.Dispose();
+			mXMLParser = null;
+			return !mHasFailed;
 		}
 
 		public PropertiesParser(SexyAppBase theApp)
 		{
-			this.mApp = theApp;
-			this.mHasFailed = false;
-			this.mXMLParser = null;
+			mApp = theApp;
+			mHasFailed = false;
+			mXMLParser = null;
 		}
 
 		public virtual void Dispose()
@@ -280,21 +280,21 @@ namespace Sexy
 
 		public bool ParsePropertiesFile(string theFilename)
 		{
-			this.mXMLParser = new XMLParser();
-			this.mXMLParser.OpenFile(theFilename);
-			return this.DoParseProperties();
+			mXMLParser = new XMLParser();
+			mXMLParser.OpenFile(theFilename);
+			return DoParseProperties();
 		}
 
 		public bool ParsePropertiesBuffer(Buffer theBuffer)
 		{
-			this.mXMLParser = new XMLParser();
-			this.mXMLParser.SetStringSource("");
-			return this.DoParseProperties();
+			mXMLParser = new XMLParser();
+			mXMLParser.SetStringSource("");
+			return DoParseProperties();
 		}
 
 		public string GetErrorText()
 		{
-			return this.mError;
+			return mError;
 		}
 
 		public SexyAppBase mApp;

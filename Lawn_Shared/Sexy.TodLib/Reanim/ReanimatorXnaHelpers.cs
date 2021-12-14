@@ -48,10 +48,10 @@ namespace Sexy.TodLib
 				float num7 = 1f;
 				float num8 = 0f;
 				float num9 = 1f;
-				Image mImage = null;
-				string mImageName = string.Empty;
-				Font mFont = null;
-				string mText = string.Empty;
+				Image anImage = null;
+				string anImageName = string.Empty;
+				Font aFont = null;
+				string aText = string.Empty;
 				for (int j = 0; j < (int)reanimatorTrack.mTransformCount; j++)
 				{
 					ReanimatorTransform reanimatorTransform = reanimatorTrack.mTransforms[j];
@@ -69,29 +69,29 @@ namespace Sexy.TodLib
 					reanimatorTransform.mSkewYSin = (float)Math.Sin((double)(reanimatorTransform.mSkewY * -(double)TodCommon.DEG_TO_RAD));
 					if (reanimatorTransform.mImage == null)
 					{
-						reanimatorTransform.mImage = mImage;
-						reanimatorTransform.mImageName = mImageName;
+						reanimatorTransform.mImage = anImage;
+						reanimatorTransform.mImageName = anImageName;
 					}
 					else
 					{
-						mImage = reanimatorTransform.mImage;
-						mImageName = reanimatorTransform.mImageName;
+						anImage = reanimatorTransform.mImage;
+						anImageName = reanimatorTransform.mImageName;
 					}
 					if (reanimatorTransform.mFont == null)
 					{
-						reanimatorTransform.mFont = mFont;
+						reanimatorTransform.mFont = aFont;
 					}
 					else
 					{
-						mFont = reanimatorTransform.mFont;
+						aFont = reanimatorTransform.mFont;
 					}
 					if (string.IsNullOrEmpty(reanimatorTransform.mText))
 					{
-						reanimatorTransform.mText = mText;
+						reanimatorTransform.mText = aText;
 					}
 					else
 					{
-						mText = reanimatorTransform.mText;
+						aText = reanimatorTransform.mText;
 					}
 					reanimatorTrack.mTransforms[j] = reanimatorTransform;
 				}

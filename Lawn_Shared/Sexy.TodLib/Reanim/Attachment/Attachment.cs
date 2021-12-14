@@ -28,32 +28,32 @@ namespace Sexy.TodLib
 
 		public void PrepareForReuse()
 		{
-			this.reused = true;
-			this.mActive = false;
+			reused = true;
+			mActive = false;
 			Attachment.unusedObjects.Push(this);
 		}
 
 		private Attachment()
 		{
-			this.Reset();
+			Reset();
 		}
 
 		private void Reset()
 		{
-			this.mNumEffects = 0;
-			this.mDead = false;
-			this.mUsesClipping = false;
-			for (int i = 0; i < this.mEffectArray.Length; i++)
+			mNumEffects = 0;
+			mDead = false;
+			mUsesClipping = false;
+			for (int i = 0; i < mEffectArray.Length; i++)
 			{
-				if (this.mEffectArray[i] != null)
+				if (mEffectArray[i] != null)
 				{
-					this.mEffectArray[i].PrepareForReuse();
-					this.mEffectArray[i] = null;
+					mEffectArray[i].PrepareForReuse();
+					mEffectArray[i] = null;
 				}
 			}
 			for (int j = 0; j < 16; j++)
 			{
-				this.mEffectArray[j] = AttachEffect.GetNewAttachEffect();
+				mEffectArray[j] = AttachEffect.GetNewAttachEffect();
 			}
 		}
 
@@ -63,9 +63,9 @@ namespace Sexy.TodLib
 
 		public void Update()
 		{
-			for (int i = 0; i < this.mNumEffects; i++)
+			for (int i = 0; i < mNumEffects; i++)
 			{
-				AttachEffect attachEffect = this.mEffectArray[i];
+				AttachEffect attachEffect = mEffectArray[i];
 				bool flag = false;
 				switch (attachEffect.mEffectType)
 				{
@@ -135,39 +135,39 @@ namespace Sexy.TodLib
 				}
 				if (!flag)
 				{
-					int num2 = this.mNumEffects - i;
+					int num2 = mNumEffects - i;
 					if (num2 > 0)
 					{
-						for (int j = i; j < this.mEffectArray.Length - 1; j++)
+						for (int j = i; j < mEffectArray.Length - 1; j++)
 						{
-							if (j == i && this.mEffectArray[j] != null)
+							if (j == i && mEffectArray[j] != null)
 							{
-								this.mEffectArray[j].PrepareForReuse();
+								mEffectArray[j].PrepareForReuse();
 							}
-							this.mEffectArray[j] = this.mEffectArray[j + 1];
-							if (j == this.mEffectArray.Length - 2)
+							mEffectArray[j] = mEffectArray[j + 1];
+							if (j == mEffectArray.Length - 2)
 							{
-								this.mEffectArray[j + 1] = AttachEffect.GetNewAttachEffect();
+								mEffectArray[j + 1] = AttachEffect.GetNewAttachEffect();
 							}
 						}
 						i--;
 					}
-					this.mNumEffects--;
+					mNumEffects--;
 				}
 			}
-			if (this.mNumEffects == 0)
+			if (mNumEffects == 0)
 			{
-				this.mDead = true;
+				mDead = true;
 			}
 		}
 
 		public void SetMatrix(ref SexyTransform2D theMatrix)
 		{
 			Debug.ASSERT(EffectSystem.gEffectSystem != null);
-			for (int i = 0; i < this.mNumEffects; i++)
+			for (int i = 0; i < mNumEffects; i++)
 			{
-				AttachEffect attachEffect = this.mEffectArray[i];
-				SexyTransform2D mOverlayMatrix = new SexyTransform2D
+				AttachEffect attachEffect = mEffectArray[i];
+				SexyTransform2D overlayMatrix = new SexyTransform2D
 				{
 					mMatrix = new Matrix
 					{
@@ -201,7 +201,7 @@ namespace Sexy.TodLib
 					}
 					if (todParticleSystem != null)
 					{
-						todParticleSystem.SystemMove(mOverlayMatrix.mMatrix.M41, mOverlayMatrix.mMatrix.M42);
+						todParticleSystem.SystemMove(overlayMatrix.mMatrix.M41, overlayMatrix.mMatrix.M42);
 					}
 					break;
 				}
@@ -211,7 +211,7 @@ namespace Sexy.TodLib
 					Trail trail = (Trail)attachEffect.mEffectID;
 					if (trail != null)
 					{
-						trail.mTrailCenter = new SexyVector2(mOverlayMatrix.mMatrix.M41, mOverlayMatrix.mMatrix.M42);
+						trail.mTrailCenter = new SexyVector2(overlayMatrix.mMatrix.M41, overlayMatrix.mMatrix.M42);
 					}
 					break;
 				}
@@ -221,7 +221,7 @@ namespace Sexy.TodLib
 					Reanimation reanimation = (Reanimation)attachEffect.mEffectID;
 					if (reanimation != null)
 					{
-						reanimation.mOverlayMatrix = mOverlayMatrix;
+						reanimation.mOverlayMatrix = overlayMatrix;
 					}
 					break;
 				}
@@ -231,7 +231,7 @@ namespace Sexy.TodLib
 					Attachment attachment = mAttachments[mAttachments.IndexOf((Attachment)attachEffect.mEffectID)];
 					if (attachment != null)
 					{
-						attachment.SetMatrix(ref mOverlayMatrix);
+						attachment.SetMatrix(ref overlayMatrix);
 					}
 					break;
 				}
@@ -242,9 +242,9 @@ namespace Sexy.TodLib
 		public void OverrideColor(SexyColor theColor)
 		{
 			Debug.ASSERT(EffectSystem.gEffectSystem != null);
-			for (int i = 0; i < this.mNumEffects; i++)
+			for (int i = 0; i < mNumEffects; i++)
 			{
-				AttachEffect attachEffect = this.mEffectArray[i];
+				AttachEffect attachEffect = mEffectArray[i];
 				switch (attachEffect.mEffectType)
 				{
 				case EffectType.EFFECT_PARTICLE:
@@ -284,9 +284,9 @@ namespace Sexy.TodLib
 		public void OverrideScale(float theScale)
 		{
 			Debug.ASSERT(EffectSystem.gEffectSystem != null);
-			for (int i = 0; i < this.mNumEffects; i++)
+			for (int i = 0; i < mNumEffects; i++)
 			{
-				AttachEffect attachEffect = this.mEffectArray[i];
+				AttachEffect attachEffect = mEffectArray[i];
 				switch (attachEffect.mEffectType)
 				{
 				case EffectType.EFFECT_PARTICLE:
@@ -325,15 +325,15 @@ namespace Sexy.TodLib
 
 		public void Draw(Graphics g, bool theParentHidden, bool doScale)
 		{
-			Debug.ASSERT(!this.mDead);
+			Debug.ASSERT(!mDead);
 			Debug.ASSERT(EffectSystem.gEffectSystem != null);
 			List<TodParticleSystem> mParticleSystems = EffectSystem.gEffectSystem.mParticleHolder.mParticleSystems;
 			List<Trail> mTrails = EffectSystem.gEffectSystem.mTrailHolder.mTrails;
 			List<Reanimation> mReanimations = EffectSystem.gEffectSystem.mReanimationHolder.mReanimations;
 			List<Attachment> mAttachments = EffectSystem.gEffectSystem.mAttachmentHolder.mAttachments;
-			for (int i = 0; i < this.mNumEffects; i++)
+			for (int i = 0; i < mNumEffects; i++)
 			{
-				AttachEffect attachEffect = this.mEffectArray[i];
+				AttachEffect attachEffect = mEffectArray[i];
 				if (!theParentHidden || !attachEffect.mDontDrawIfParentHidden)
 				{
 					switch (attachEffect.mEffectType)
@@ -396,9 +396,9 @@ namespace Sexy.TodLib
 			List<Trail> mTrails = EffectSystem.gEffectSystem.mTrailHolder.mTrails;
 			List<Reanimation> mReanimations = EffectSystem.gEffectSystem.mReanimationHolder.mReanimations;
 			List<Attachment> mAttachments = EffectSystem.gEffectSystem.mAttachmentHolder.mAttachments;
-			for (int i = 0; i < this.mNumEffects; i++)
+			for (int i = 0; i < mNumEffects; i++)
 			{
-				AttachEffect attachEffect = this.mEffectArray[i];
+				AttachEffect attachEffect = mEffectArray[i];
 				switch (attachEffect.mEffectType)
 				{
 				case EffectType.EFFECT_PARTICLE:
@@ -440,8 +440,8 @@ namespace Sexy.TodLib
 				}
 				attachEffect.mEffectID = null;
 			}
-			this.mNumEffects = 0;
-			this.mDead = true;
+			mNumEffects = 0;
+			mDead = true;
 		}
 
 		public void Detach()
@@ -451,9 +451,9 @@ namespace Sexy.TodLib
 			List<Trail> mTrails = EffectSystem.gEffectSystem.mTrailHolder.mTrails;
 			List<Reanimation> mReanimations = EffectSystem.gEffectSystem.mReanimationHolder.mReanimations;
 			List<Attachment> mAttachments = EffectSystem.gEffectSystem.mAttachmentHolder.mAttachments;
-			for (int i = 0; i < this.mNumEffects; i++)
+			for (int i = 0; i < mNumEffects; i++)
 			{
-				AttachEffect attachEffect = this.mEffectArray[i];
+				AttachEffect attachEffect = mEffectArray[i];
 				switch (attachEffect.mEffectType)
 				{
 				case EffectType.EFFECT_PARTICLE:
@@ -504,18 +504,18 @@ namespace Sexy.TodLib
 				}
 				attachEffect.mEffectID = 0U;
 			}
-			this.mNumEffects = 0;
-			this.mDead = true;
+			mNumEffects = 0;
+			mDead = true;
 		}
 
 		public void CrossFade(string theCrossFadeName)
 		{
 			Debug.ASSERT(EffectSystem.gEffectSystem != null);
-			for (int i = 0; i < this.mNumEffects; i++)
+			for (int i = 0; i < mNumEffects; i++)
 			{
-				AttachEffect attachEffect = this.mEffectArray[i];
-				EffectType mEffectType = attachEffect.mEffectType;
-				if (mEffectType == EffectType.EFFECT_PARTICLE)
+				AttachEffect attachEffect = mEffectArray[i];
+				EffectType attachEffectType = attachEffect.mEffectType;
+				if (attachEffectType == EffectType.EFFECT_PARTICLE)
 				{
 					List<TodParticleSystem> mParticleSystems = EffectSystem.gEffectSystem.mParticleHolder.mParticleSystems;
 					int num = mParticleSystems.IndexOf((TodParticleSystem)attachEffect.mEffectID);
@@ -535,9 +535,9 @@ namespace Sexy.TodLib
 		public void PropogateColor(SexyColor theColor, bool theEnableAdditiveColor, SexyColor theAdditiveColor, bool theEnableOverlayColor, SexyColor theOverlayColor)
 		{
 			Debug.ASSERT(EffectSystem.gEffectSystem != null);
-			for (int i = 0; i < this.mNumEffects; i++)
+			for (int i = 0; i < mNumEffects; i++)
 			{
-				AttachEffect attachEffect = this.mEffectArray[i];
+				AttachEffect attachEffect = mEffectArray[i];
 				if (!attachEffect.mDontPropogateColor)
 				{
 					switch (attachEffect.mEffectType)
@@ -592,9 +592,9 @@ namespace Sexy.TodLib
 		public void SetPosition(SexyVector2 thePosition)
 		{
 			Debug.ASSERT(EffectSystem.gEffectSystem != null);
-			for (int i = 0; i < this.mNumEffects; i++)
+			for (int i = 0; i < mNumEffects; i++)
 			{
-				AttachEffect attachEffect = this.mEffectArray[i];
+				AttachEffect attachEffect = mEffectArray[i];
 				SexyVector2 position = new SexyVector2(Vector2.Transform(thePosition.mVector, attachEffect.mOffset.mMatrix));
 				switch (attachEffect.mEffectType)
 				{

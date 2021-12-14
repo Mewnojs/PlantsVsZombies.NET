@@ -7,139 +7,139 @@ namespace Sexy
 	{
 		private void MakeComplex()
 		{
-			if (!this.mComplex)
+			if (!mComplex)
 			{
-				this.mComplex = true;
-				this.CalcMatrix();
+				mComplex = true;
+				CalcMatrix();
 			}
 		}
 
 		private void CalcMatrix()
 		{
-			if (!this.isInitialised)
+			if (!isInitialised)
 			{
-				this.Reset();
+				Reset();
 			}
-			if (this.mNeedCalcMatrix)
+			if (mNeedCalcMatrix)
 			{
-				this.mNeedCalcMatrix = false;
-				this.mMatrix = new SexyTransform2D(Matrix.Identity);
-				this.mMatrix.mMatrix.M13 = this.mTransX1;
-				this.mMatrix.mMatrix.M23 = this.mTransY1;
-				this.mMatrix.mMatrix.M33 = 1f;
-				if (this.mHaveScale)
+				mNeedCalcMatrix = false;
+				mMatrix = new SexyTransform2D(Matrix.Identity);
+				mMatrix.mMatrix.M13 = mTransX1;
+				mMatrix.mMatrix.M23 = mTransY1;
+				mMatrix.mMatrix.M33 = 1f;
+				if (mHaveScale)
 				{
-					this.mMatrix.mMatrix.M11 = this.mScaleX;
-					this.mMatrix.mMatrix.M22 = this.mScaleY;
+					mMatrix.mMatrix.M11 = mScaleX;
+					mMatrix.mMatrix.M22 = mScaleY;
 				}
-				else if (this.mHaveRot)
+				else if (mHaveRot)
 				{
-					this.mMatrix.RotateRad(this.mRot);
+					mMatrix.RotateRad(mRot);
 				}
-				if (this.mTransX2 != 0f || this.mTransY2 != 0f)
+				if (mTransX2 != 0f || mTransY2 != 0f)
 				{
-					this.mMatrix.Translate(this.mTransX2, this.mTransY2);
+					mMatrix.Translate(mTransX2, mTransY2);
 				}
 			}
 		}
 
 		public void Reset()
 		{
-			this.mNeedCalcMatrix = true;
-			this.mComplex = false;
-			this.mTransX1 = (this.mTransY1 = 0f);
-			this.mTransX2 = (this.mTransY2 = 0f);
-			this.mScaleX = (this.mScaleY = 1f);
-			this.mRot = 0f;
-			this.mHaveRot = false;
-			this.mHaveScale = false;
-			this.isInitialised = true;
+			mNeedCalcMatrix = true;
+			mComplex = false;
+			mTransX1 = (mTransY1 = 0f);
+			mTransX2 = (mTransY2 = 0f);
+			mScaleX = (mScaleY = 1f);
+			mRot = 0f;
+			mHaveRot = false;
+			mHaveScale = false;
+			isInitialised = true;
 		}
 
 		public void Translate(float tx, float ty)
 		{
-			if (!this.isInitialised)
+			if (!isInitialised)
 			{
-				this.Reset();
+				Reset();
 			}
-			if (this.mComplex)
+			if (mComplex)
 			{
-				this.mMatrix.Translate(tx, ty);
+				mMatrix.Translate(tx, ty);
 				return;
 			}
-			this.mNeedCalcMatrix = true;
-			if (this.mHaveRot || this.mHaveScale)
+			mNeedCalcMatrix = true;
+			if (mHaveRot || mHaveScale)
 			{
-				this.mTransX2 += tx;
-				this.mTransY2 += ty;
+				mTransX2 += tx;
+				mTransY2 += ty;
 				return;
 			}
-			this.mTransX1 += tx;
-			this.mTransY1 += ty;
+			mTransX1 += tx;
+			mTransY1 += ty;
 		}
 
 		public void RotateRad(float rot)
 		{
-			if (!this.isInitialised)
+			if (!isInitialised)
 			{
-				this.Reset();
+				Reset();
 			}
-			if (this.mComplex)
+			if (mComplex)
 			{
-				this.mMatrix.RotateRad(rot);
+				mMatrix.RotateRad(rot);
 				return;
 			}
-			if (this.mHaveScale)
+			if (mHaveScale)
 			{
-				this.MakeComplex();
-				this.mMatrix.RotateRad(rot);
+				MakeComplex();
+				mMatrix.RotateRad(rot);
 				return;
 			}
-			this.mNeedCalcMatrix = true;
-			this.mHaveRot = true;
-			this.mRot += rot;
+			mNeedCalcMatrix = true;
+			mHaveRot = true;
+			mRot += rot;
 		}
 
 		public void RotateDeg(float rot)
 		{
-			if (!this.isInitialised)
+			if (!isInitialised)
 			{
-				this.Reset();
+				Reset();
 			}
-			this.RotateRad(3.1415927f * rot / 180f);
+			RotateRad(3.1415927f * rot / 180f);
 		}
 
 		public void Scale(float sx, float sy)
 		{
-			if (!this.isInitialised)
+			if (!isInitialised)
 			{
-				this.Reset();
+				Reset();
 			}
-			if (this.mComplex)
+			if (mComplex)
 			{
-				this.mMatrix.Scale(sx, sy);
+				mMatrix.Scale(sx, sy);
 				return;
 			}
-			if (this.mHaveRot || this.mTransX1 != 0f || this.mTransY1 != 0f || (sx < 0f && this.mScaleX * sx != -1f) || sy < 0f)
+			if (mHaveRot || mTransX1 != 0f || mTransY1 != 0f || (sx < 0f && mScaleX * sx != -1f) || sy < 0f)
 			{
-				this.MakeComplex();
-				this.mMatrix.Scale(sx, sy);
+				MakeComplex();
+				mMatrix.Scale(sx, sy);
 				return;
 			}
-			this.mNeedCalcMatrix = true;
-			this.mHaveScale = true;
-			this.mScaleX *= sx;
-			this.mScaleY *= sy;
+			mNeedCalcMatrix = true;
+			mHaveScale = true;
+			mScaleX *= sx;
+			mScaleY *= sy;
 		}
 
 		public SexyTransform2D GetMatrix()
 		{
-			if (!this.isInitialised)
+			if (!isInitialised)
 			{
-				this.Reset();
+				Reset();
 			}
-			this.CalcMatrix();
-			return this.mMatrix;
+			CalcMatrix();
+			return mMatrix;
 		}
 
 		private bool isInitialised;

@@ -9,10 +9,10 @@ namespace Lawn
 	{
 		public GlobalContentManager(Main m)
 		{
-			this.main = m;
-			this.content = this.main.Content;
-			this.graphicsDevice = this.main.GraphicsDevice;
-			this.content.RootDirectory = "Content";
+			main = m;
+			content = main.Content;
+			graphicsDevice = main.GraphicsDevice;
+			content.RootDirectory = "Content";
 		}
 
 		public void cleanUp()
@@ -21,19 +21,19 @@ namespace Lawn
 
 		public void LoadSplashScreen()
 		{
-			new ContentManager(this.main.Services);
+			new ContentManager(main.Services);
 		}
 
 		public void LoadGameContent()
 		{
-			this.cursor_texture = this.content.Load<Texture2D>(".\\Cursor");
-			this.LoadFonts();
+			cursor_texture = content.Load<Texture2D>(".\\Cursor");
+			LoadFonts();
 		}
 
 		public void LoadFonts()
 		{
-			this.DEFAULT_FONT = this.content.Load<SpriteFont>(".\\fonts\\Arial");
-			this.LOCALIZED_FONT_ARIAL = this.content.Load<SpriteFont>(".\\fonts\\ArialLocalizedFont");
+			DEFAULT_FONT = content.Load<SpriteFont>(".\\fonts\\Arial");
+			LOCALIZED_FONT_ARIAL = content.Load<SpriteFont>(".\\fonts\\ArialLocalizedFont");
 		}
 
 		public void LoadSounds()

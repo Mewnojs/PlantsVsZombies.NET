@@ -584,8 +584,8 @@ namespace Sexy.TodLib
 
 		public static bool TodLoadResources(string theGroup, bool doUnpackAtlasImages)
 		{
-			ResourceManager mResourceManager = GlobalStaticVars.gSexyAppBase.mResourceManager;
-			return mResourceManager.TodLoadResources(theGroup, doUnpackAtlasImages);
+			ResourceManager resourceManager = GlobalStaticVars.gSexyAppBase.mResourceManager;
+			return resourceManager.TodLoadResources(theGroup, doUnpackAtlasImages);
 		}
 
 		public static bool TodIsPointInPolygon(SexyVector2[] thePolygonPoint, int theNumberPolygonPoints, SexyVector2 theCheckPoint)

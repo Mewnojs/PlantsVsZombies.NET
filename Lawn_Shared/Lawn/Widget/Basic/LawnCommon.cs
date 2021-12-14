@@ -66,21 +66,21 @@ namespace Lawn
 			TRect trect = new TRect(0, 0, theComponentImage.mWidth, theComponentImage.mHeight);
 			int num = trect.mWidth / 3;
 			int num2 = trect.mHeight / 3;
-			int mX = trect.mX;
-			int mY = trect.mY;
+			int x = trect.mX;
+			int y = trect.mY;
 			int num3 = trect.mWidth - num * 2;
 			int num4 = trect.mHeight - num2 * 2;
-			g.DrawImage(theComponentImage, theDest.mX, theDest.mY, new TRect(mX, mY, num, num2));
-			g.DrawImage(theComponentImage, theDest.mX + theDest.mWidth - num, theDest.mY, new TRect(mX + num + num3, mY, num, num2));
-			g.DrawImage(theComponentImage, theDest.mX, theDest.mY + theDest.mHeight - num2, new TRect(mX, mY + num2 + num4, num, num2));
-			g.DrawImage(theComponentImage, theDest.mX + theDest.mWidth - num, theDest.mY + theDest.mHeight - num2, new TRect(mX + num + num3, mY + num2 + num4, num, num2));
-			g.DrawImage(theComponentImage, new TRect(theDest.mX, theDest.mY + num2, num, theDest.mHeight - num2 * 2), new TRect(mX, mY + num2, num, num4));
-			g.DrawImage(theComponentImage, new TRect(theDest.mX + theDest.mWidth - num, theDest.mY + num2, num, theDest.mHeight - num2 * 2), new TRect(mX + num + num3, mY + num2, num, num4));
-			g.DrawImage(theComponentImage, new TRect(theDest.mX + num, theDest.mY, theDest.mWidth - num * 2, num2), new TRect(mX + num, mY, num3, num2));
-			g.DrawImage(theComponentImage, new TRect(theDest.mX + num, theDest.mY + theDest.mHeight - num2, theDest.mWidth - num * 2, num2), new TRect(mX + num, mY + num2 + num4, num3, num2));
+			g.DrawImage(theComponentImage, theDest.mX, theDest.mY, new TRect(x, y, num, num2));
+			g.DrawImage(theComponentImage, theDest.mX + theDest.mWidth - num, theDest.mY, new TRect(x + num + num3, y, num, num2));
+			g.DrawImage(theComponentImage, theDest.mX, theDest.mY + theDest.mHeight - num2, new TRect(x, y + num2 + num4, num, num2));
+			g.DrawImage(theComponentImage, theDest.mX + theDest.mWidth - num, theDest.mY + theDest.mHeight - num2, new TRect(x + num + num3, y + num2 + num4, num, num2));
+			g.DrawImage(theComponentImage, new TRect(theDest.mX, theDest.mY + num2, num, theDest.mHeight - num2 * 2), new TRect(x, y + num2, num, num4));
+			g.DrawImage(theComponentImage, new TRect(theDest.mX + theDest.mWidth - num, theDest.mY + num2, num, theDest.mHeight - num2 * 2), new TRect(x + num + num3, y + num2, num, num4));
+			g.DrawImage(theComponentImage, new TRect(theDest.mX + num, theDest.mY, theDest.mWidth - num * 2, num2), new TRect(x + num, y, num3, num2));
+			g.DrawImage(theComponentImage, new TRect(theDest.mX + num, theDest.mY + theDest.mHeight - num2, theDest.mWidth - num * 2, num2), new TRect(x + num, y + num2 + num4, num3, num2));
 			if (theDrawCenter)
 			{
-				g.DrawImage(theComponentImage, new TRect(theDest.mX + num, theDest.mY + num2, theDest.mWidth - 2 * num, theDest.mHeight - 2 * num2), new TRect(mX + num, mY + num2, num3, num4));
+				g.DrawImage(theComponentImage, new TRect(theDest.mX + num, theDest.mY + num2, theDest.mWidth - 2 * num, theDest.mHeight - 2 * num2), new TRect(x + num, y + num2, num3, num4));
 			}
 		}
 

@@ -6,11 +6,11 @@ namespace Sexy.TodLib
 	{
 		public ReanimAtlasImage()
 		{
-			this.mX = 0;
-			this.mY = 0;
-			this.mWidth = 0;
-			this.mHeight = 0;
-			this.mOriginalImage = null;
+			mX = 0;
+			mY = 0;
+			mWidth = 0;
+			mHeight = 0;
+			mOriginalImage = null;
 		}
 
 		public int mX;

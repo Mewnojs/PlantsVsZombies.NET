@@ -16,62 +16,62 @@ namespace Sexy.TodLib
 
 		public void PrepareForReuse()
 		{
-			this.Reset();
+			Reset();
 			TodTriangleGroup.unusedObjects.Push(this);
 		}
 
 		private TodTriangleGroup()
 		{
-			this.Reset();
+			Reset();
 		}
 
 		private void Reset()
 		{
-			this.mImage = null;
-			this.mTriangleCount = 0;
-			this.mDrawMode = Graphics.DrawMode.DRAWMODE_NORMAL;
+			mImage = null;
+			mTriangleCount = 0;
+			mDrawMode = Graphics.DrawMode.DRAWMODE_NORMAL;
 		}
 
 		public void DrawGroup(Graphics g)
 		{
-			if (this.mImage == null)
+			if (mImage == null)
 			{
 				return;
 			}
-			if (this.mTriangleCount == 0)
+			if (mTriangleCount == 0)
 			{
 				return;
 			}
-			if (!GlobalStaticVars.gSexyAppBase.Is3DAccelerated() && this.mDrawMode == Graphics.DrawMode.DRAWMODE_ADDITIVE)
+			if (!GlobalStaticVars.gSexyAppBase.Is3DAccelerated() && mDrawMode == Graphics.DrawMode.DRAWMODE_ADDITIVE)
 			{
 				TodTriangleGroup.gTodTriangleDrawAdditive = true;
 			}
-			g.mDrawMode = this.mDrawMode;
-			for (int i = 0; i < this.mTriangleCount; i++)
+			g.mDrawMode = mDrawMode;
+			for (int i = 0; i < mTriangleCount; i++)
 			{
-				DrawCall drawCall = this.mDrawCalls[i];
+				DrawCall drawCall = mDrawCalls[i];
 				g.mClipRect = drawCall.mClipRect;
-				g.DrawImageRotated(this.mImage, (int)drawCall.mPosition.X, (int)drawCall.mPosition.Y, drawCall.mRotation, drawCall.mSrcRect);
+				g.DrawImageRotated(mImage, (int)drawCall.mPosition.X, (int)drawCall.mPosition.Y, drawCall.mRotation, drawCall.mSrcRect);
 			}
-			this.mTriangleCount = 0;
+			mTriangleCount = 0;
 			TodTriangleGroup.gTodTriangleDrawAdditive = false;
 		}
 
 		public void AddTriangle(Graphics g, Image theImage, ReanimatorTransform theTransform, TRect theClipRect, SexyColor theColor, Graphics.DrawMode theDrawMode, TRect theSrcRect)
 		{
-			if (this.mTriangleCount > 0 && (this.mDrawMode != theDrawMode || this.mImage != theImage))
+			if (mTriangleCount > 0 && (mDrawMode != theDrawMode || mImage != theImage))
 			{
-				this.DrawGroup(g);
+				DrawGroup(g);
 			}
 			DrawCall drawCall = default(DrawCall);
 			drawCall.SetTransform(theTransform);
 			drawCall.mClipRect = theClipRect;
 			drawCall.mColor = theColor;
 			drawCall.mSrcRect = theSrcRect;
-			this.mDrawCalls.Add(drawCall);
-			this.mImage = theImage;
-			this.mDrawMode = theDrawMode;
-			this.mTriangleCount++;
+			mDrawCalls.Add(drawCall);
+			mImage = theImage;
+			mDrawMode = theDrawMode;
+			mTriangleCount++;
 		}
 
 		public static bool gTodTriangleDrawAdditive = false;

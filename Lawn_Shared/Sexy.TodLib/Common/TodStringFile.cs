@@ -261,7 +261,7 @@ namespace Sexy.TodLib
 
 		internal static int TodWriteString(Graphics g, string theString, int theX, int theY, TodStringListFormat theCurrentFormat, int theWidth, DrawStringJustification theJustification, bool drawString, int theOffset, int theLength)
 		{
-			Font mNewFont = theCurrentFormat.mNewFont;
+			Font newFont = theCurrentFormat.mNewFont;
 			if (drawString)
 			{
 				switch (theJustification)
@@ -300,13 +300,13 @@ namespace Sexy.TodLib
 						i += num5 - num3;
 						if (drawString)
 						{
-							mNewFont.DrawString(g, g.mTransX + theX + num, g.mTransY + theY, TodStringFile.TodWriteStringBuilder, theCurrentFormat.mNewColor);
+							newFont.DrawString(g, g.mTransX + theX + num, g.mTransY + theY, TodStringFile.TodWriteStringBuilder, theCurrentFormat.mNewColor);
 						}
-						num += mNewFont.StringWidth(TodStringFile.TodWriteStringBuilder);
+						num += newFont.StringWidth(TodStringFile.TodWriteStringBuilder);
 						TodStringFile.TodWriteStringBuilder.Remove(0, TodStringFile.TodWriteStringBuilder.Length);
 						string theFormat = theString.Substring(num4, num5 - (num3 + 1));
 						TodStringFile.TodWriteStringSetFormat(theFormat, ref theCurrentFormat);
-						mNewFont = theCurrentFormat.mNewFont;
+						newFont = theCurrentFormat.mNewFont;
 					}
 				}
 				else
@@ -334,9 +334,9 @@ namespace Sexy.TodLib
 			}
 			if (drawString)
 			{
-				mNewFont.DrawString(g, g.mTransX + theX + num, g.mTransY + theY, TodStringFile.TodWriteStringBuilder, theCurrentFormat.mNewColor);
+				newFont.DrawString(g, g.mTransX + theX + num, g.mTransY + theY, TodStringFile.TodWriteStringBuilder, theCurrentFormat.mNewColor);
 			}
-			return num + mNewFont.StringWidth(TodStringFile.TodWriteStringBuilder);
+			return num + newFont.StringWidth(TodStringFile.TodWriteStringBuilder);
 		}
 
 		internal static int TodWriteWordWrappedHelper(Graphics g, string theString, int theX, int theY, TodStringListFormat theCurrentFormat, int theWidth, DrawStringJustification theJustification, bool drawString, int theOffset, int theLength, int theMaxChars)
@@ -387,9 +387,9 @@ namespace Sexy.TodLib
 			TodStringFile.aCurrentFormat.mNewColor.CopyFrom(theColor);
 			TodStringFile.aCurrentFormat.mLineSpacingOffset = 0;
 			TodStringFile.aCurrentFormat.mFormatFlags = 0U;
-			Font mNewFont = TodStringFile.aCurrentFormat.mNewFont;
+			Font newFont = TodStringFile.aCurrentFormat.mNewFont;
 			int num = 0;
-			int num2 = mNewFont.GetLineSpacing() + TodStringFile.aCurrentFormat.mLineSpacingOffset;
+			int num2 = newFont.GetLineSpacing() + TodStringFile.aCurrentFormat.mLineSpacingOffset;
 			string empty = string.Empty;
 			int i = 0;
 			int num3 = 0;
@@ -416,17 +416,17 @@ namespace Sexy.TodLib
 					if (num11 != -1)
 					{
 						i += num11 - num10 + 1;
-						int num12 = mNewFont.GetAscent() - mNewFont.GetAscentPadding();
-						SexyColor mNewColor = TodStringFile.aCurrentFormat.mNewColor;
+						int num12 = newFont.GetAscent() - newFont.GetAscentPadding();
+						SexyColor newColor = TodStringFile.aCurrentFormat.mNewColor;
 						TodStringFile.TodWriteStringSetFormat(theFormat, ref TodStringFile.aCurrentFormat);
-						TodStringFile.aCurrentFormat.mNewColor = mNewColor;
+						TodStringFile.aCurrentFormat.mNewColor = newColor;
 						if (TodStringFile.aCurrentFormat.mNewColor.mAlpha == 0)
 						{
 							int num13 = 0;
 							num13++;
 						}
-						int num14 = mNewFont.GetAscent() - mNewFont.GetAscentPadding();
-						num2 = mNewFont.GetLineSpacing() + TodStringFile.aCurrentFormat.mLineSpacingOffset;
+						int num14 = newFont.GetAscent() - newFont.GetAscentPadding();
+						num2 = newFont.GetLineSpacing() + TodStringFile.aCurrentFormat.mLineSpacingOffset;
 						num += num14 - num12;
 						continue;
 					}
@@ -445,7 +445,7 @@ namespace Sexy.TodLib
 					num5 = i;
 					i++;
 				}
-				num4 += mNewFont.CharWidthKern(c, thePrevChar);
+				num4 += newFont.CharWidthKern(c, thePrevChar);
 				thePrevChar = c;
 				if (num4 > theRect.mWidth)
 				{
@@ -509,7 +509,7 @@ namespace Sexy.TodLib
 			{
 				num += num2;
 			}
-			return num - mNewFont.GetDescent();
+			return num - newFont.GetDescent();
 		}
 
 		private static int strspn(string InputString, char[] Mask, int start)

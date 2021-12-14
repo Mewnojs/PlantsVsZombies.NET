@@ -8,130 +8,130 @@ namespace Lawn
 	{
 		public int GetLeft()
 		{
-			return this.mContentInsets.mLeft + this.mBackgroundInsets.mLeft;
+			return mContentInsets.mLeft + mBackgroundInsets.mLeft;
 		}
 
 		public int GetWidth()
 		{
-			return this.mWidth - this.mContentInsets.mLeft - this.mContentInsets.mRight - this.mBackgroundInsets.mLeft - this.mBackgroundInsets.mRight;
+			return mWidth - mContentInsets.mLeft - mContentInsets.mRight - mBackgroundInsets.mLeft - mBackgroundInsets.mRight;
 		}
 
 		public int GetTop()
 		{
-			return this.mContentInsets.mTop + this.mBackgroundInsets.mTop + (int)Constants.InvertAndScale(54f) + Constants.DIALOG_HEADER_OFFSET;
+			return mContentInsets.mTop + mBackgroundInsets.mTop + (int)Constants.InvertAndScale(54f) + Constants.DIALOG_HEADER_OFFSET;
 		}
 
 		public LawnDialog(LawnApp theApp, Image theButtonComponentImage, int theId, bool isModal, string theDialogHeader, string theDialogLines, string theDialogFooter, int theButtonMode) : base(null, theButtonComponentImage, theId, isModal, theDialogHeader, theDialogLines, string.Empty, 0)
 		{
-			this.mTextAlign = 2;
-			this.mApp = theApp;
-			this.mButtonDelay = -1;
-			this.mReanimation = new ReanimationWidget();
-			this.mReanimation.mLawnDialog = this;
-			this.mDrawStandardBack = true;
-			this.mTallBottom = false;
-			this.mVerticalCenterText = true;
-			this.mDialogHeader = TodStringFile.TodStringTranslate(theDialogHeader);
-			this.mDialogLines = TodStringFile.TodStringTranslate(theDialogLines);
-			this.SetColors(GameConstants.gLawnDialogColors, 7);
-			this.SetHeaderFont(Resources.FONT_DWARVENTODCRAFT15);
-			this.SetLinesFont(Resources.FONT_DWARVENTODCRAFT15);
-			this.mContentInsets = Constants.LawnDialog_Insets;
-			this.SetColor(0, new SexyColor(224, 187, 98));
-			this.SetColor(1, new SexyColor(224, 187, 98));
-			this.mSpaceAfterHeader = (int)Constants.InvertAndScale(10f);
+			mTextAlign = 2;
+			mApp = theApp;
+			mButtonDelay = -1;
+			mReanimation = new ReanimationWidget();
+			mReanimation.mLawnDialog = this;
+			mDrawStandardBack = true;
+			mTallBottom = false;
+			mVerticalCenterText = true;
+			mDialogHeader = TodStringFile.TodStringTranslate(theDialogHeader);
+			mDialogLines = TodStringFile.TodStringTranslate(theDialogLines);
+			SetColors(GameConstants.gLawnDialogColors, 7);
+			SetHeaderFont(Resources.FONT_DWARVENTODCRAFT15);
+			SetLinesFont(Resources.FONT_DWARVENTODCRAFT15);
+			mContentInsets = Constants.LawnDialog_Insets;
+			SetColor(0, new SexyColor(224, 187, 98));
+			SetColor(1, new SexyColor(224, 187, 98));
+			mSpaceAfterHeader = (int)Constants.InvertAndScale(10f);
 			if (theButtonMode == 1)
 			{
-				this.mLawnYesButton = GameButton.MakeButton(1000, this, "[BUTTON_YES]");
-				this.mLawnNoButton = GameButton.MakeButton(1001, this, "[BUTTON_NO]");
+				mLawnYesButton = GameButton.MakeButton(1000, this, "[BUTTON_YES]");
+				mLawnNoButton = GameButton.MakeButton(1001, this, "[BUTTON_NO]");
 				return;
 			}
 			if (theButtonMode == 2)
 			{
-				this.mLawnYesButton = GameButton.MakeButton(1000, this, "[BUTTON_OK]");
-				this.mLawnNoButton = GameButton.MakeButton(1001, this, "[BUTTON_CANCEL]");
+				mLawnYesButton = GameButton.MakeButton(1000, this, "[BUTTON_OK]");
+				mLawnNoButton = GameButton.MakeButton(1001, this, "[BUTTON_CANCEL]");
 				return;
 			}
 			if (theButtonMode == 3)
 			{
-				this.mLawnYesButton = GameButton.MakeButton(1000, this, theDialogFooter);
-				this.mLawnNoButton = null;
+				mLawnYesButton = GameButton.MakeButton(1000, this, theDialogFooter);
+				mLawnNoButton = null;
 				return;
 			}
-			this.mLawnYesButton = null;
-			this.mLawnNoButton = null;
+			mLawnYesButton = null;
+			mLawnNoButton = null;
 		}
 
 		public override void Dispose()
 		{
-			if (this.mReanimation != null)
+			if (mReanimation != null)
 			{
-				this.mReanimation.Dispose();
+				mReanimation.Dispose();
 			}
-			if (this.mLawnYesButton != null)
+			if (mLawnYesButton != null)
 			{
-				this.mLawnYesButton.Dispose();
+				mLawnYesButton.Dispose();
 			}
-			if (this.mLawnNoButton != null)
+			if (mLawnNoButton != null)
 			{
-				this.mLawnNoButton.Dispose();
+				mLawnNoButton.Dispose();
 			}
 		}
 
 		public virtual void SetButtonDelay(int theDelay)
 		{
-			this.mButtonDelay = theDelay;
-			if (this.mLawnYesButton != null)
+			mButtonDelay = theDelay;
+			if (mLawnYesButton != null)
 			{
-				this.mLawnYesButton.SetDisabled(true);
+				mLawnYesButton.SetDisabled(true);
 			}
-			if (this.mLawnNoButton != null)
+			if (mLawnNoButton != null)
 			{
-				this.mLawnNoButton.SetDisabled(true);
+				mLawnNoButton.SetDisabled(true);
 			}
 		}
 
 		public override void Update()
 		{
 			base.Update();
-			if (this.mUpdateCnt == this.mButtonDelay)
+			if (mUpdateCnt == mButtonDelay)
 			{
-				if (this.mLawnYesButton != null)
+				if (mLawnYesButton != null)
 				{
-					this.mLawnYesButton.SetDisabled(false);
+					mLawnYesButton.SetDisabled(false);
 				}
-				if (this.mLawnNoButton != null)
+				if (mLawnNoButton != null)
 				{
-					this.mLawnNoButton.SetDisabled(false);
+					mLawnNoButton.SetDisabled(false);
 				}
 			}
-			this.MarkDirty();
+			MarkDirty();
 		}
 
 		public override void ButtonPress(int theId)
 		{
-			this.mApp.PlaySample(Resources.SOUND_GRAVEBUTTON);
+			mApp.PlaySample(Resources.SOUND_GRAVEBUTTON);
 		}
 
 		public override bool BackButtonPress()
 		{
-			int mId;
-			if (this.mLawnNoButton != null && this.mId != 55)
+			int id;
+			if (mLawnNoButton != null && mId != 55)
 			{
-				mId = this.mLawnNoButton.mId;
+				id = mLawnNoButton.mId;
 			}
 			else
 			{
-				mId = this.mLawnYesButton.mId;
+				id = mLawnYesButton.mId;
 			}
-			this.ButtonPress(mId);
-			this.ButtonDepress(mId);
+			ButtonPress(id);
+			ButtonDepress(id);
 			return true;
 		}
 
 		public override void ButtonDepress(int theId)
 		{
-			if (this.mUpdateCnt > this.mButtonDelay)
+			if (mUpdateCnt > mButtonDelay)
 			{
 				base.ButtonDepress(theId);
 			}
@@ -139,16 +139,16 @@ namespace Lawn
 
 		public virtual void CheckboxChecked(int theId, bool cheked)
 		{
-			this.mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
+			mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
 		}
 
 		public override void KeyDown(KeyCode theKey)
 		{
-			if (this.mId == 19 && this.mApp.mBoard != null)
+			if (mId == 19 && mApp.mBoard != null)
 			{
-				this.mApp.mBoard.DoTypingCheck(theKey);
+				mApp.mBoard.DoTypingCheck(theKey);
 			}
-			if (this.mId == 3)
+			if (mId == 3)
 			{
 				return;
 			}
@@ -157,7 +157,7 @@ namespace Lawn
 				base.ButtonDepress(1000);
 				return;
 			}
-			if ((theKey == KeyCode.KEYCODE_ESCAPE || (ushort)theKey == 110 || (ushort)theKey == 78) && this.mLawnNoButton != null)
+			if ((theKey == KeyCode.KEYCODE_ESCAPE || (ushort)theKey == 110 || (ushort)theKey == 78) && mLawnNoButton != null)
 			{
 				base.ButtonDepress(1001);
 			}
@@ -166,39 +166,39 @@ namespace Lawn
 		public override void AddedToManager(WidgetManager theWidgetManager)
 		{
 			base.AddedToManager(theWidgetManager);
-			this.AddWidget(this.mReanimation);
-			if (this.mLawnYesButton != null)
+			AddWidget(mReanimation);
+			if (mLawnYesButton != null)
 			{
-				this.AddWidget(this.mLawnYesButton);
+				AddWidget(mLawnYesButton);
 			}
-			if (this.mLawnNoButton != null)
+			if (mLawnNoButton != null)
 			{
-				this.AddWidget(this.mLawnNoButton);
+				AddWidget(mLawnNoButton);
 			}
 		}
 
 		public override void RemovedFromManager(WidgetManager theWidgetManager)
 		{
 			base.RemovedFromManager(theWidgetManager);
-			if (this.mLawnYesButton != null)
+			if (mLawnYesButton != null)
 			{
-				this.RemoveWidget(this.mLawnYesButton);
+				RemoveWidget(mLawnYesButton);
 			}
-			if (this.mLawnNoButton != null)
+			if (mLawnNoButton != null)
 			{
-				this.RemoveWidget(this.mLawnNoButton);
+				RemoveWidget(mLawnNoButton);
 			}
-			this.RemoveWidget(this.mReanimation);
-			this.mReanimation.Dispose();
+			RemoveWidget(mReanimation);
+			mReanimation.Dispose();
 		}
 
 		public override void Resize(int theX, int theY, int theWidth, int theHeight)
 		{
 			base.Resize(theX, theY, theWidth, theHeight);
-			Image image = this.mTallBottom ? AtlasResources.IMAGE_DIALOG_BIGBOTTOMLEFT : AtlasResources.IMAGE_DIALOG_BOTTOMLEFT;
-			int num = this.mContentInsets.mLeft + this.mBackgroundInsets.mLeft - (int)Constants.InvertAndScale(5f);
+			Image image = mTallBottom ? AtlasResources.IMAGE_DIALOG_BIGBOTTOMLEFT : AtlasResources.IMAGE_DIALOG_BOTTOMLEFT;
+			int num = mContentInsets.mLeft + mBackgroundInsets.mLeft - (int)Constants.InvertAndScale(5f);
 			int num2 = theHeight - image.mHeight;
-			if (this.mTallBottom)
+			if (mTallBottom)
 			{
 				num2 += (int)Constants.InvertAndScale(44f);
 			}
@@ -206,14 +206,14 @@ namespace Lawn
 			{
 				num2 += (int)Constants.InvertAndScale(16f);
 			}
-			int num3 = this.mWidth - this.mContentInsets.mLeft - this.mBackgroundInsets.mLeft - this.mContentInsets.mRight - this.mBackgroundInsets.mRight + (int)Constants.InvertAndScale(8f);
-			int mHeight = AtlasResources.IMAGE_BUTTON_LEFT.mHeight;
+			int num3 = mWidth - mContentInsets.mLeft - mBackgroundInsets.mLeft - mContentInsets.mRight - mBackgroundInsets.mRight + (int)Constants.InvertAndScale(8f);
+			int imgHeight = AtlasResources.IMAGE_BUTTON_LEFT.mHeight;
 			int num4 = (int)Constants.InvertAndScale(10f);
 			int num5 = (num3 - num4) / 2;
-			int num6 = Math.Max(this.mButtonMinWidth, AtlasResources.IMAGE_BUTTON_LEFT.mWidth + AtlasResources.IMAGE_BUTTON_MIDDLE.mWidth + AtlasResources.IMAGE_BUTTON_RIGHT.mWidth);
-			if (this.mLawnYesButton != null && this.mLawnNoButton != null)
+			int num6 = Math.Max(mButtonMinWidth, AtlasResources.IMAGE_BUTTON_LEFT.mWidth + AtlasResources.IMAGE_BUTTON_MIDDLE.mWidth + AtlasResources.IMAGE_BUTTON_RIGHT.mWidth);
+			if (mLawnYesButton != null && mLawnNoButton != null)
 			{
-				int num7 = (int)(0.8f * (float)Math.Max(this.mLawnYesButton.mFont.StringWidth(this.mLawnYesButton.mLabel), this.mLawnNoButton.mFont.StringWidth(this.mLawnNoButton.mLabel)));
+				int num7 = (int)(0.8f * (float)Math.Max(mLawnYesButton.mFont.StringWidth(mLawnYesButton.mLabel), mLawnNoButton.mFont.StringWidth(mLawnNoButton.mLabel)));
 				if (num7 > num6)
 				{
 					num6 = num7;
@@ -224,7 +224,7 @@ namespace Lawn
 			{
 				num8 = num6;
 			}
-			if (this.mLawnYesButton != null && this.mLawnNoButton != null)
+			if (mLawnYesButton != null && mLawnNoButton != null)
 			{
 				num8 += (int)Constants.InvertAndScale(8f);
 				int num9 = num;
@@ -234,95 +234,95 @@ namespace Lawn
 					num9 -= 10;
 					num10 += 10;
 				}
-				this.mLawnYesButton.Resize(num9, num2, num8, mHeight);
-				this.mLawnNoButton.Resize(num10, num2, num8, mHeight);
+				mLawnYesButton.Resize(num9, num2, num8, imgHeight);
+				mLawnNoButton.Resize(num10, num2, num8, imgHeight);
 			}
-			else if (this.mLawnYesButton != null)
+			else if (mLawnYesButton != null)
 			{
 				int num11 = num3 - AtlasResources.IMAGE_BUTTON_MIDDLE.mWidth + 1;
 				num += (num3 - num11) / 2;
-				this.mLawnYesButton.Resize(num, num2, num11, mHeight);
+				mLawnYesButton.Resize(num, num2, num11, imgHeight);
 			}
-			if (this.mReanimation.mReanim != null)
+			if (mReanimation.mReanim != null)
 			{
-				this.mReanimation.Resize((int)this.mReanimation.mPosX, (int)((float)Constants.DIALOG_HEADER_OFFSET + this.mReanimation.mPosY), this.mReanimation.mWidth, this.mReanimation.mHeight);
+				mReanimation.Resize((int)mReanimation.mPosX, (int)((float)Constants.DIALOG_HEADER_OFFSET + mReanimation.mPosY), mReanimation.mWidth, mReanimation.mHeight);
 			}
-			this.mX = this.mApp.mWidth / 2 - this.mWidth / 2;
-			this.mY = this.mApp.mHeight / 2 - this.mHeight / 2;
+			mX = mApp.mWidth / 2 - mWidth / 2;
+			mY = mApp.mHeight / 2 - mHeight / 2;
 		}
 
 		public override void Draw(Graphics g)
 		{
-			if (!this.mDrawStandardBack)
+			if (!mDrawStandardBack)
 			{
 				return;
 			}
 			Image image = AtlasResources.IMAGE_DIALOG_BOTTOMLEFT;
 			Image image2 = AtlasResources.IMAGE_DIALOG_BOTTOMMIDDLE;
 			Image image3 = AtlasResources.IMAGE_DIALOG_BOTTOMRIGHT;
-			if (this.mTallBottom)
+			if (mTallBottom)
 			{
 				image = AtlasResources.IMAGE_DIALOG_BIGBOTTOMLEFT;
 				image2 = AtlasResources.IMAGE_DIALOG_BIGBOTTOMMIDDLE;
 				image3 = AtlasResources.IMAGE_DIALOG_BIGBOTTOMRIGHT;
 			}
-			int theWidth = this.mWidth - AtlasResources.IMAGE_DIALOG_TOPLEFT.mWidth - AtlasResources.IMAGE_DIALOG_TOPRIGHT.mWidth;
+			int theWidth = mWidth - AtlasResources.IMAGE_DIALOG_TOPLEFT.mWidth - AtlasResources.IMAGE_DIALOG_TOPRIGHT.mWidth;
 			int num = Constants.DIALOG_HEADER_OFFSET;
 			g.DrawImage(AtlasResources.IMAGE_DIALOG_TOPLEFT, 0, num);
 			LawnCommon.TileImageHorizontally(g, AtlasResources.IMAGE_DIALOG_TOPMIDDLE, AtlasResources.IMAGE_DIALOG_TOPLEFT.mWidth, num, theWidth);
-			g.DrawImage(AtlasResources.IMAGE_DIALOG_TOPRIGHT, this.mWidth - AtlasResources.IMAGE_DIALOG_TOPRIGHT.mWidth, num);
+			g.DrawImage(AtlasResources.IMAGE_DIALOG_TOPRIGHT, mWidth - AtlasResources.IMAGE_DIALOG_TOPRIGHT.mWidth, num);
 			num += AtlasResources.IMAGE_DIALOG_TOPRIGHT.mHeight;
-			int theWidth2 = this.mWidth - AtlasResources.IMAGE_DIALOG_CENTERLEFT.mWidth - AtlasResources.IMAGE_DIALOG_CENTERRIGHT.mWidth;
-			int num2 = this.mHeight - num - image2.mHeight;
+			int theWidth2 = mWidth - AtlasResources.IMAGE_DIALOG_CENTERLEFT.mWidth - AtlasResources.IMAGE_DIALOG_CENTERRIGHT.mWidth;
+			int num2 = mHeight - num - image2.mHeight;
 			Graphics @new = Graphics.GetNew(g);
-			@new.SetClipRect(0, num, this.mWidth, num2);
+			@new.SetClipRect(0, num, mWidth, num2);
 			int num3 = (num2 + AtlasResources.IMAGE_DIALOG_CENTERLEFT.mHeight - 1) / AtlasResources.IMAGE_DIALOG_CENTERLEFT.mHeight;
 			while (num3-- > 0)
 			{
 				@new.DrawImage(AtlasResources.IMAGE_DIALOG_CENTERLEFT, 0, num);
 				LawnCommon.TileImageHorizontally(@new, AtlasResources.IMAGE_DIALOG_CENTERMIDDLE, AtlasResources.IMAGE_DIALOG_CENTERLEFT.mWidth, num, theWidth2);
-				@new.DrawImage(AtlasResources.IMAGE_DIALOG_CENTERRIGHT, this.mWidth - AtlasResources.IMAGE_DIALOG_CENTERRIGHT.mWidth, num);
+				@new.DrawImage(AtlasResources.IMAGE_DIALOG_CENTERRIGHT, mWidth - AtlasResources.IMAGE_DIALOG_CENTERRIGHT.mWidth, num);
 				num += AtlasResources.IMAGE_DIALOG_CENTERLEFT.mHeight;
 			}
 			@new.PrepareForReuse();
-			int theWidth3 = this.mWidth - image.mWidth - image3.mWidth;
-			num = this.mHeight - image2.mHeight;
+			int theWidth3 = mWidth - image.mWidth - image3.mWidth;
+			num = mHeight - image2.mHeight;
 			g.DrawImage(image, 0, num);
 			LawnCommon.TileImageHorizontally(g, image2, image.mWidth, num, theWidth3);
-			g.DrawImage(image3, this.mWidth - image3.mWidth, num);
-			g.DrawImage(AtlasResources.IMAGE_DIALOG_HEADER, (this.mWidth - AtlasResources.IMAGE_DIALOG_HEADER.mWidth) / 2, 0);
-			int num4 = Constants.DIALOG_HEADER_OFFSET + this.mContentInsets.mTop + this.mBackgroundInsets.mTop;
-			if (this.mDialogHeader.Length > 0)
+			g.DrawImage(image3, mWidth - image3.mWidth, num);
+			g.DrawImage(AtlasResources.IMAGE_DIALOG_HEADER, (mWidth - AtlasResources.IMAGE_DIALOG_HEADER.mWidth) / 2, 0);
+			int num4 = Constants.DIALOG_HEADER_OFFSET + mContentInsets.mTop + mBackgroundInsets.mTop;
+			if (mDialogHeader.Length > 0)
 			{
-				g.SetFont(this.mHeaderFont);
-				g.SetColor(this.mColors[0]);
-				this.WriteCenteredLine(g, num4, this.mDialogHeader);
-				num4 += this.mHeaderFont.GetHeight();
-				num4 += this.mSpaceAfterHeader;
+				g.SetFont(mHeaderFont);
+				g.SetColor(mColors[0]);
+				WriteCenteredLine(g, num4, mDialogHeader);
+				num4 += mHeaderFont.GetHeight();
+				num4 += mSpaceAfterHeader;
 			}
-			g.SetFont(this.mLinesFont);
-			g.SetColor(this.mColors[1]);
-			int theWidth4 = this.mWidth - this.mContentInsets.mLeft - this.mContentInsets.mRight - this.mBackgroundInsets.mLeft - this.mBackgroundInsets.mRight - (int)Constants.InvertAndScale(4f);
-			TRect theRect = new TRect(this.mBackgroundInsets.mLeft + this.mContentInsets.mLeft + (int)Constants.InvertAndScale(2f), num4, theWidth4, 0);
-			if (this.mVerticalCenterText)
+			g.SetFont(mLinesFont);
+			g.SetColor(mColors[1]);
+			int theWidth4 = mWidth - mContentInsets.mLeft - mContentInsets.mRight - mBackgroundInsets.mLeft - mBackgroundInsets.mRight - (int)Constants.InvertAndScale(4f);
+			TRect theRect = new TRect(mBackgroundInsets.mLeft + mContentInsets.mLeft + (int)Constants.InvertAndScale(2f), num4, theWidth4, 0);
+			if (mVerticalCenterText)
 			{
-				int wordWrappedHeight = this.GetWordWrappedHeight(g, theWidth4, this.mDialogLines, this.mLinesFont.GetLineSpacing() + this.mLineSpacingOffset);
-				int num5 = this.mHeight - this.mContentInsets.mBottom - this.mBackgroundInsets.mBottom - num4 - this.mButtonHeight - (int)Constants.InvertAndScale(20f);
-				if (this.mTallBottom)
+				int wordWrappedHeight = GetWordWrappedHeight(g, theWidth4, mDialogLines, mLinesFont.GetLineSpacing() + mLineSpacingOffset);
+				int num5 = mHeight - mContentInsets.mBottom - mBackgroundInsets.mBottom - num4 - mButtonHeight - (int)Constants.InvertAndScale(20f);
+				if (mTallBottom)
 				{
 					num5 -= (int)Constants.InvertAndScale(40f);
 				}
 				theRect.mY += (num5 - wordWrappedHeight) / 2;
 			}
-			num4 += this.WriteWordWrapped(g, theRect, this.mDialogLines, this.mLineSpacingOffset, this.mTextAlign);
+			num4 += WriteWordWrapped(g, theRect, mDialogLines, mLineSpacingOffset, mTextAlign);
 		}
 
 		public override int WriteWordWrapped(Graphics g, TRect theRect, string theLine, int theLineSpacing, int theJustification)
 		{
-			bool mWriteColoredString = g.mWriteColoredString;
+			bool writeColoredString = g.mWriteColoredString;
 			g.mWriteColoredString = Widget.mWriteColoredString;
 			int result = TodStringFile.TodDrawStringWrapped(g, theLine, theRect, g.GetFont(), g.mColor, (DrawStringJustification)theJustification);
-			g.mWriteColoredString = mWriteColoredString;
+			g.mWriteColoredString = writeColoredString;
 			return result;
 		}
 
@@ -332,42 +332,42 @@ namespace Lawn
 
 		public void CalcSize(int theExtraX, int theExtraY)
 		{
-			this.CalcSize(theExtraX, theExtraY, 0);
+			CalcSize(theExtraX, theExtraY, 0);
 		}
 
 		public void CalcSize(int theExtraX, int theExtraY, int theMinWidth)
 		{
-			int num = this.mContentInsets.mLeft + this.mContentInsets.mRight + this.mBackgroundInsets.mLeft + this.mBackgroundInsets.mRight + theExtraX;
-			if (this.mDialogHeader.Length > 0)
+			int num = mContentInsets.mLeft + mContentInsets.mRight + mBackgroundInsets.mLeft + mBackgroundInsets.mRight + theExtraX;
+			if (mDialogHeader.Length > 0)
 			{
-				num += this.mHeaderFont.StringWidth(this.mDialogHeader);
+				num += mHeaderFont.StringWidth(mDialogHeader);
 				if (num < theMinWidth)
 				{
 					num = theMinWidth;
 				}
 			}
-			int num2 = Math.Max(this.mMinWidth, AtlasResources.IMAGE_DIALOG_TOPLEFT.mWidth + AtlasResources.IMAGE_DIALOG_TOPRIGHT.mWidth + AtlasResources.IMAGE_DIALOG_TOPMIDDLE.mWidth);
+			int num2 = Math.Max(mMinWidth, AtlasResources.IMAGE_DIALOG_TOPLEFT.mWidth + AtlasResources.IMAGE_DIALOG_TOPRIGHT.mWidth + AtlasResources.IMAGE_DIALOG_TOPMIDDLE.mWidth);
 			if (num < num2)
 			{
 				num = num2;
 			}
-			int num3 = Constants.DIALOG_HEADER_OFFSET + this.mContentInsets.mTop + this.mContentInsets.mBottom + this.mBackgroundInsets.mTop + this.mBackgroundInsets.mBottom + theExtraY;
-			if (!string.IsNullOrEmpty(this.mDialogHeader))
+			int num3 = Constants.DIALOG_HEADER_OFFSET + mContentInsets.mTop + mContentInsets.mBottom + mBackgroundInsets.mTop + mBackgroundInsets.mBottom + theExtraY;
+			if (!string.IsNullOrEmpty(mDialogHeader))
 			{
-				num3 += this.mHeaderFont.GetHeight();
-				num3 += this.mSpaceAfterHeader;
+				num3 += mHeaderFont.GetHeight();
+				num3 += mSpaceAfterHeader;
 			}
-			if (this.mDialogLines.Length > 0)
+			if (mDialogLines.Length > 0)
 			{
 				num += AtlasResources.IMAGE_DIALOG_TOPMIDDLE.mWidth;
 				Graphics @new = Graphics.GetNew();
-				@new.SetFont(this.mLinesFont);
-				num3 += this.GetWordWrappedHeight(@new, num - this.mContentInsets.mLeft - this.mContentInsets.mRight - this.mBackgroundInsets.mLeft - this.mBackgroundInsets.mRight - (int)Constants.InvertAndScale(4f), this.mDialogLines, this.mLineSpacingOffset);
+				@new.SetFont(mLinesFont);
+				num3 += GetWordWrappedHeight(@new, num - mContentInsets.mLeft - mContentInsets.mRight - mBackgroundInsets.mLeft - mBackgroundInsets.mRight - (int)Constants.InvertAndScale(4f), mDialogLines, mLineSpacingOffset);
 				@new.PrepareForReuse();
 			}
 			num3 += AtlasResources.IMAGE_DIALOG_BOTTOMMIDDLE.GetHeight();
 			int num4 = Constants.DIALOG_HEADER_OFFSET + AtlasResources.IMAGE_DIALOG_TOPLEFT.mHeight + AtlasResources.IMAGE_DIALOG_BOTTOMLEFT.mHeight;
-			if (this.mTallBottom)
+			if (mTallBottom)
 			{
 				num4 = Constants.DIALOG_HEADER_OFFSET + AtlasResources.IMAGE_DIALOG_TOPLEFT.mHeight + AtlasResources.IMAGE_DIALOG_BIGBOTTOMLEFT.mHeight;
 			}
@@ -375,7 +375,7 @@ namespace Lawn
 			{
 				num3 = num4;
 			}
-			this.Resize(this.mX, this.mY, num, num3);
+			Resize(mX, mY, num, num3);
 		}
 
 		public override int GetWordWrappedHeight(Graphics g, int theWidth, string theLine, int aLineSpacing)

@@ -7,31 +7,31 @@ namespace Sexy
 	{
 		public ListWidget(int theId, Font theFont, ListListener theListListener)
 		{
-			this.mJustify = 0;
-			this.mHiliteIdx = -1;
-			this.mSelectIdx = -1;
+			mJustify = 0;
+			mHiliteIdx = -1;
+			mSelectIdx = -1;
 			if (theFont != null)
 			{
-				this.mItemHeight = theFont.GetHeight();
+				mItemHeight = theFont.GetHeight();
 			}
 			else
 			{
-				this.mItemHeight = -1;
+				mItemHeight = -1;
 			}
-			this.SetColors(ListWidget.gInitialListWidgetColors, 6);
-			this.mId = theId;
-			this.mFont = theFont;
-			this.mListListener = theListListener;
-			this.mParent = null;
-			this.mChild = null;
-			this.mScrollbar = null;
-			this.mPosition = 0.0;
-			this.mPageSize = 0.0;
-			this.mSortFromChild = false;
-			this.mDrawOutline = true;
-			this.mMaxNumericPlaces = 0;
-			this.mDrawSelectWhenHilited = false;
-			this.mDoFingerWhenHilited = true;
+			SetColors(ListWidget.gInitialListWidgetColors, 6);
+			mId = theId;
+			mFont = theFont;
+			mListListener = theListListener;
+			mParent = null;
+			mChild = null;
+			mScrollbar = null;
+			mPosition = 0.0;
+			mPageSize = 0.0;
+			mSortFromChild = false;
+			mDrawOutline = true;
+			mMaxNumericPlaces = 0;
+			mDrawSelectWhenHilited = false;
+			mDoFingerWhenHilited = true;
 		}
 
 		public override void Dispose()
@@ -41,53 +41,53 @@ namespace Sexy
 		public override void RemovedFromManager(WidgetManager theManager)
 		{
 			base.RemovedFromManager(theManager);
-			if (this.mListListener != null)
+			if (mListListener != null)
 			{
-				this.mListListener.ListClosed(this.mId);
+				mListListener.ListClosed(mId);
 			}
 		}
 
 		public virtual string GetSortKey(int theIdx)
 		{
-			string text = this.mLines[theIdx];
-			while (text.Length < this.mMaxNumericPlaces)
+			string text = mLines[theIdx];
+			while (text.Length < mMaxNumericPlaces)
 			{
 				text = "0" + text;
 			}
-			if (this.mSortFromChild)
+			if (mSortFromChild)
 			{
-				return this.mChild.GetSortKey(theIdx) + text;
+				return mChild.GetSortKey(theIdx) + text;
 			}
-			if (this.mChild == null)
+			if (mChild == null)
 			{
 				return text;
 			}
-			return text + this.mChild.GetSortKey(theIdx);
+			return text + mChild.GetSortKey(theIdx);
 		}
 
 		public void Sort(bool ascending)
 		{
-			this.mLines.Sort();
+			mLines.Sort();
 		}
 
 		public virtual string GetStringAt(int theIdx)
 		{
-			return this.mLines[theIdx];
+			return mLines[theIdx];
 		}
 
 		public override void Resize(int theX, int theY, int theWidth, int theHeight)
 		{
 			base.Resize(theX, theY, theWidth, theHeight);
 			double pageSize = 1.0;
-			int num = (this.mItemHeight != -1) ? this.mItemHeight : this.mFont.GetHeight();
-			if (this.mHeight > num + 8)
+			int num = (mItemHeight != -1) ? mItemHeight : mFont.GetHeight();
+			if (mHeight > num + 8)
 			{
-				pageSize = ((double)this.mHeight - 8.0) / (double)num;
+				pageSize = ((double)mHeight - 8.0) / (double)num;
 			}
-			this.mPageSize = pageSize;
-			if (this.mScrollbar != null)
+			mPageSize = pageSize;
+			if (mScrollbar != null)
 			{
-				this.mScrollbar.SetPageSize(pageSize);
+				mScrollbar.SetPageSize(pageSize);
 			}
 		}
 
@@ -97,9 +97,9 @@ namespace Sexy
 			bool flag = false;
 			if (alphabetical)
 			{
-				for (int i = 0; i < this.mLines.Count; i++)
+				for (int i = 0; i < mLines.Count; i++)
 				{
-					if (string.Compare(theString, this.mLines[i]) < 0)
+					if (string.Compare(theString, mLines[i]) < 0)
 					{
 						result = i;
 						ListWidget listWidget = this;
@@ -117,7 +117,7 @@ namespace Sexy
 							{
 								listWidget.mLines.Insert(i, "-");
 							}
-							listWidget.mLineColors.Insert(i, this.mColors[2]);
+							listWidget.mLineColors.Insert(i, mColors[2]);
 							listWidget.MarkDirty();
 							listWidget = listWidget.mChild;
 						}
@@ -128,7 +128,7 @@ namespace Sexy
 			}
 			if (!flag)
 			{
-				result = this.mLines.Count;
+				result = mLines.Count;
 				ListWidget listWidget2 = this;
 				while (listWidget2.mParent != null)
 				{
@@ -144,34 +144,34 @@ namespace Sexy
 					{
 						listWidget2.mLines.Add("-");
 					}
-					listWidget2.mLineColors.Add(this.mColors[2]);
+					listWidget2.mLineColors.Add(mColors[2]);
 					listWidget2.MarkDirty();
 					listWidget2 = listWidget2.mChild;
 				}
 			}
-			if (this.mScrollbar != null)
+			if (mScrollbar != null)
 			{
-				this.mScrollbar.SetMaxValue((double)this.mLines.Count);
+				mScrollbar.SetMaxValue((double)mLines.Count);
 			}
 			return result;
 		}
 
 		public virtual void SetLine(int theIdx, string theString)
 		{
-			this.mLines[theIdx] = theString;
-			this.MarkDirty();
+			mLines[theIdx] = theString;
+			MarkDirty();
 		}
 
 		public virtual int GetLineCount()
 		{
-			return this.mLines.Count;
+			return mLines.Count;
 		}
 
 		public virtual int GetLineIdx(string theLine)
 		{
-			for (int i = 0; i < this.mLines.Count; i++)
+			for (int i = 0; i < mLines.Count; i++)
 			{
-				if (string.Compare(this.mLines[i], theLine) == 0)
+				if (string.Compare(mLines[i], theLine) == 0)
 				{
 					return i;
 				}
@@ -181,8 +181,8 @@ namespace Sexy
 
 		public virtual void SetColor(string theLine, SexyColor theColor)
 		{
-			int lineIdx = this.GetLineIdx(theLine);
-			this.SetLineColor(lineIdx, theColor);
+			int lineIdx = GetLineIdx(theLine);
+			SetLineColor(lineIdx, theColor);
 		}
 
 		public override void SetColor(int theIdx, SexyColor theColor)
@@ -192,7 +192,7 @@ namespace Sexy
 
 		public virtual void SetLineColor(int theIdx, SexyColor theColor)
 		{
-			if (theIdx >= 0 && theIdx < this.mLines.Count)
+			if (theIdx >= 0 && theIdx < mLines.Count)
 			{
 				ListWidget listWidget = this;
 				while (listWidget.mParent != null)
@@ -225,9 +225,9 @@ namespace Sexy
 					listWidget = listWidget.mChild;
 				}
 			}
-			if (this.mScrollbar != null)
+			if (mScrollbar != null)
 			{
-				this.mScrollbar.SetMaxValue((double)this.mLines.Count);
+				mScrollbar.SetMaxValue((double)mLines.Count);
 			}
 		}
 
@@ -247,104 +247,104 @@ namespace Sexy
 				listWidget.MarkDirty();
 				listWidget = listWidget.mChild;
 			}
-			if (this.mScrollbar != null)
+			if (mScrollbar != null)
 			{
-				this.mScrollbar.SetMaxValue((double)this.mLines.Count);
+				mScrollbar.SetMaxValue((double)mLines.Count);
 			}
 		}
 
 		public virtual int GetOptimalWidth()
 		{
 			int num = 0;
-			for (int i = 0; i < this.mLines.Count; i++)
+			for (int i = 0; i < mLines.Count; i++)
 			{
-				num = Math.Max(num, this.mFont.StringWidth(this.mLines[i]));
+				num = Math.Max(num, mFont.StringWidth(mLines[i]));
 			}
 			return num + 16;
 		}
 
 		public virtual int GetOptimalHeight()
 		{
-			int num = (this.mItemHeight != -1) ? this.mItemHeight : this.mFont.GetHeight();
-			return num * this.mLines.Count + 8;
+			int num = (mItemHeight != -1) ? mItemHeight : mFont.GetHeight();
+			return num * mLines.Count + 8;
 		}
 
 		public override void OrderInManagerChanged()
 		{
 			base.OrderInManagerChanged();
-			if (this.mChild != null)
+			if (mChild != null)
 			{
-				GlobalStaticVars.gSexyAppBase.mWidgetManager.PutInfront(this.mChild, this);
+				GlobalStaticVars.gSexyAppBase.mWidgetManager.PutInfront(mChild, this);
 			}
-			if (this.mScrollbar != null)
+			if (mScrollbar != null)
 			{
-				GlobalStaticVars.gSexyAppBase.mWidgetManager.PutInfront(this.mScrollbar, this);
+				GlobalStaticVars.gSexyAppBase.mWidgetManager.PutInfront(mScrollbar, this);
 			}
 		}
 
 		public override void Draw(Graphics g)
 		{
-			g.SetColor(this.mColors[0]);
-			g.FillRect(0, 0, this.mWidth, this.mHeight);
+			g.SetColor(mColors[0]);
+			g.FillRect(0, 0, mWidth, mHeight);
 			Graphics @new = Graphics.GetNew(g);
-			@new.ClipRect((int)Constants.InvertAndScale(4f), (int)Constants.InvertAndScale(4f), this.mWidth - (int)Constants.InvertAndScale(8f), this.mHeight - (int)Constants.InvertAndScale(8f));
+			@new.ClipRect((int)Constants.InvertAndScale(4f), (int)Constants.InvertAndScale(4f), mWidth - (int)Constants.InvertAndScale(8f), mHeight - (int)Constants.InvertAndScale(8f));
 			Graphics new2 = Graphics.GetNew(g);
-			new2.ClipRect(0, (int)Constants.InvertAndScale(4f), this.mWidth, this.mHeight - (int)Constants.InvertAndScale(8f));
-			@new.SetFont(this.mFont);
-			int num = (int)this.mPosition;
-			int num2 = Math.Min(this.mLines.Count - 1, (int)this.mPosition + (int)this.mPageSize + 1);
+			new2.ClipRect(0, (int)Constants.InvertAndScale(4f), mWidth, mHeight - (int)Constants.InvertAndScale(8f));
+			@new.SetFont(mFont);
+			int num = (int)mPosition;
+			int num2 = Math.Min(mLines.Count - 1, (int)mPosition + (int)mPageSize + 1);
 			int height;
 			int num3;
-			if (this.mItemHeight != -1)
+			if (mItemHeight != -1)
 			{
-				height = this.mItemHeight;
-				num3 = (height - this.mFont.GetHeight()) / 2;
+				height = mItemHeight;
+				num3 = (height - mFont.GetHeight()) / 2;
 			}
 			else
 			{
-				height = this.mFont.GetHeight();
+				height = mFont.GetHeight();
 				num3 = 0;
 			}
 			for (int i = num; i <= num2; i++)
 			{
-				int num4 = (int)Constants.InvertAndScale(4f) + (int)(((double)i - this.mPosition) * (double)height);
-				if (i == this.mSelectIdx || (i == this.mHiliteIdx && this.mDrawSelectWhenHilited))
+				int num4 = (int)Constants.InvertAndScale(4f) + (int)(((double)i - mPosition) * (double)height);
+				if (i == mSelectIdx || (i == mHiliteIdx && mDrawSelectWhenHilited))
 				{
-					new2.SetColor(this.mColors[4]);
-					new2.FillRect(0, num4, this.mWidth, height);
+					new2.SetColor(mColors[4]);
+					new2.FillRect(0, num4, mWidth, height);
 				}
-				if (i == this.mHiliteIdx)
+				if (i == mHiliteIdx)
 				{
-					@new.SetColor(this.mColors[3]);
+					@new.SetColor(mColors[3]);
 				}
-				else if (i == this.mSelectIdx && this.mColors.Count > 5)
+				else if (i == mSelectIdx && mColors.Count > 5)
 				{
-					@new.SetColor(this.mColors[5]);
+					@new.SetColor(mColors[5]);
 				}
 				else
 				{
-					@new.SetColor(this.mLineColors[i]);
+					@new.SetColor(mLineColors[i]);
 				}
-				string theString = this.mLines[i];
+				string theString = mLines[i];
 				int theX;
-				switch (this.mJustify)
+				switch (mJustify)
 				{
 				case 0:
 					theX = (int)Constants.InvertAndScale(4f);
 					break;
 				case 1:
-					theX = (this.mWidth - this.mFont.StringWidth(theString)) / 2;
+					theX = (mWidth - mFont.StringWidth(theString)) / 2;
 					break;
 				default:
-					theX = this.mWidth - this.mFont.StringWidth(theString) - (int)Constants.InvertAndScale(4f);
+					theX = mWidth - mFont.StringWidth(theString) - (int)Constants.InvertAndScale(4f);
 					break;
 				}
 				@new.DrawString(theString, theX, num4 + num3 - (int)Constants.InvertAndScale(5f));
 			}
-			if (this.mDrawOutline)
+			if (mDrawOutline)
 			{
-				g.SetColor(this.mColors[1]);
-				g.DrawRect(0, 0, this.mWidth - 1, this.mHeight - 1);
+				g.SetColor(mColors[1]);
+				g.DrawRect(0, 0, mWidth - 1, mHeight - 1);
 			}
 			@new.PrepareForReuse();
 			new2.PrepareForReuse();
@@ -352,27 +352,27 @@ namespace Sexy
 
 		public virtual void ScrollPosition(int theId, double thePosition)
 		{
-			if (this.mChild != null)
+			if (mChild != null)
 			{
-				this.mChild.ScrollPosition(theId, thePosition);
+				mChild.ScrollPosition(theId, thePosition);
 			}
-			this.mPosition = thePosition;
-			this.MarkDirty();
+			mPosition = thePosition;
+			MarkDirty();
 		}
 
 		public override void MouseMove(int x, int y)
 		{
-			CGPoint absPos = this.GetAbsPos();
+			CGPoint absPos = GetAbsPos();
 			x -= (int)absPos.x;
 			y -= (int)absPos.y;
 			y -= (int)Constants.InvertAndScale(4f);
-			int num = (this.mItemHeight != -1) ? this.mItemHeight : this.mFont.GetHeight();
-			int num2 = (int)((double)y / (double)num + this.mPosition);
-			if (num2 < 0 || num2 >= this.mLines.Count)
+			int num = (mItemHeight != -1) ? mItemHeight : mFont.GetHeight();
+			int num2 = (int)((double)y / (double)num + mPosition);
+			if (num2 < 0 || num2 >= mLines.Count)
 			{
 				num2 = -1;
 			}
-			if (num2 != this.mHiliteIdx)
+			if (num2 != mHiliteIdx)
 			{
 				ListWidget listWidget = this;
 				while (listWidget.mParent != null)
@@ -390,17 +390,17 @@ namespace Sexy
 
 		public override void MouseWheel(int theDelta)
 		{
-			if (this.mScrollbar != null)
+			if (mScrollbar != null)
 			{
 				int num = 5;
 				if (theDelta > 0)
 				{
-					this.mScrollbar.SetValue(this.mScrollbar.mValue - (double)num);
+					mScrollbar.SetValue(mScrollbar.mValue - (double)num);
 					return;
 				}
 				if (theDelta < 0)
 				{
-					this.mScrollbar.SetValue(this.mScrollbar.mValue + (double)num);
+					mScrollbar.SetValue(mScrollbar.mValue + (double)num);
 				}
 			}
 		}
@@ -412,9 +412,9 @@ namespace Sexy
 
 		public override void MouseDown(int x, int y, int theBitNum, int theClickCount)
 		{
-			if (this.mHiliteIdx != -1 && this.mListListener != null)
+			if (mHiliteIdx != -1 && mListListener != null)
 			{
-				this.mListListener.ListClicked(this.mId, this.mHiliteIdx, theClickCount);
+				mListListener.ListClicked(mId, mHiliteIdx, theClickCount);
 			}
 		}
 
@@ -450,16 +450,16 @@ namespace Sexy
 
 		public void SetHilite(int theHiliteIdx)
 		{
-			this.SetHilite(theHiliteIdx, false);
+			SetHilite(theHiliteIdx, false);
 		}
 
 		public void SetHilite(int theHiliteIdx, bool notifyListener)
 		{
-			int num = this.mHiliteIdx;
-			this.mHiliteIdx = theHiliteIdx;
-			if (num != this.mHiliteIdx && notifyListener && this.mListListener != null)
+			int num = mHiliteIdx;
+			mHiliteIdx = theHiliteIdx;
+			if (num != mHiliteIdx && notifyListener && mListListener != null)
 			{
-				this.mListListener.ListHiliteChanged(this.mId, num, this.mHiliteIdx);
+				mListListener.ListHiliteChanged(mId, num, mHiliteIdx);
 			}
 		}
 

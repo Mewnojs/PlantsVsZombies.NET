@@ -7,44 +7,44 @@ namespace Sexy
 	{
 		public HyperlinkWidget(int theId, ButtonListener theButtonListener) : base(theId, theButtonListener)
 		{
-			this.mColor = new Color(255, 255, 255);
-			this.mOverColor = new Color(255, 255, 255);
-			this.mDoFinger = true;
-			this.mUnderlineOffset = 3;
-			this.mUnderlineSize = 1;
+			mColor = new Color(255, 255, 255);
+			mOverColor = new Color(255, 255, 255);
+			mDoFinger = true;
+			mUnderlineOffset = 3;
+			mUnderlineSize = 1;
 		}
 
 		public override void Draw(Graphics g)
 		{
-			int theX = (this.mWidth - this.mFont.StringWidth(this.mLabel)) / 2;
-			int num = (this.mHeight + this.mFont.GetAscent()) / 2 - 1;
-			if (this.mIsOver)
+			int theX = (mWidth - mFont.StringWidth(mLabel)) / 2;
+			int num = (mHeight + mFont.GetAscent()) / 2 - 1;
+			if (mIsOver)
 			{
-				g.SetColor(this.mOverColor);
+				g.SetColor(mOverColor);
 			}
 			else
 			{
-				g.SetColor(this.mColor);
+				g.SetColor(mColor);
 			}
-			g.SetFont(this.mFont);
-			g.DrawString(this.mLabel, theX, num);
-			this.mUnderlineOffset = (int)((float)this.mFont.GetHeight() + Constants.InvertAndScale(3f));
-			for (int i = 0; i < this.mUnderlineSize; i++)
+			g.SetFont(mFont);
+			g.DrawString(mLabel, theX, num);
+			mUnderlineOffset = (int)((float)mFont.GetHeight() + Constants.InvertAndScale(3f));
+			for (int i = 0; i < mUnderlineSize; i++)
 			{
-				g.FillRect(theX, num + this.mUnderlineOffset + i, this.mFont.StringWidth(this.mLabel), 1);
+				g.FillRect(theX, num + mUnderlineOffset + i, mFont.StringWidth(mLabel), 1);
 			}
 		}
 
 		public override void MouseEnter()
 		{
 			base.MouseEnter();
-			this.MarkDirtyFull();
+			MarkDirtyFull();
 		}
 
 		public override void MouseLeave()
 		{
 			base.MouseLeave();
-			this.MarkDirtyFull();
+			MarkDirtyFull();
 		}
 
 		public Color mColor = default(Color);

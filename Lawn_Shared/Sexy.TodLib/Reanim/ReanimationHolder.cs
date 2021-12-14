@@ -20,7 +20,7 @@ namespace Sexy.TodLib
 			newReanimation.mRenderOrder = theRenderOrder;
 			newReanimation.ReanimationInitializeType(theX, theY, theReanimationType);
 			newReanimation.mActive = true;
-			this.mReanimations.Add(newReanimation);
+			mReanimations.Add(newReanimation);
 			return newReanimation;
 		}
 

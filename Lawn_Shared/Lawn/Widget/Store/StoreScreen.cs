@@ -16,81 +16,81 @@ namespace Lawn
 
 		public StoreScreen(LawnApp theApp, StoreListener theListener) : base(null, null, 4, true, "[STORE]", "", "", 0)
 		{
-			this.mListener = theListener;
-			this.mApp = theApp;
-			this.mClip = false;
-			this.mStoreTime = 0;
-			this.mBubbleCountDown = 0;
-			this.mBubbleClickToContinue = false;
-			this.mBubbleAutoAdvance = false;
-			this.mAmbientSpeechCountDown = 200;
-			this.mPreviousAmbientSpeechIndex = -1;
-			this.mPage = StorePage.STORE_PAGE_SLOT_UPGRADES;
-			this.mMouseOverItem = StoreItem.STORE_ITEM_INVALID;
-			this.mHatchTimer = 0;
-			this.mShakeX = 0;
-			this.mShakeY = 0;
-			this.mStartDialog = -1;
-			this.mHatchOpen = true;
-			this.mEasyBuyingCheat = false;
+			mListener = theListener;
+			mApp = theApp;
+			mClip = false;
+			mStoreTime = 0;
+			mBubbleCountDown = 0;
+			mBubbleClickToContinue = false;
+			mBubbleAutoAdvance = false;
+			mAmbientSpeechCountDown = 200;
+			mPreviousAmbientSpeechIndex = -1;
+			mPage = StorePage.STORE_PAGE_SLOT_UPGRADES;
+			mMouseOverItem = StoreItem.STORE_ITEM_INVALID;
+			mHatchTimer = 0;
+			mShakeX = 0;
+			mShakeY = 0;
+			mStartDialog = -1;
+			mHatchOpen = true;
+			mEasyBuyingCheat = false;
 			StoreScreen.mCoins.DataArrayInitialize(1024U, "coins");
-			this.mApp.DelayLoadStoreResource("DelayLoad_Store");
-			this.Resize(0, 0, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT);
-			this.mPottedPlantSpecs.InitializePottedPlant(SeedType.SEED_MARIGOLD);
-			this.mPottedPlantSpecs.mDrawVariation = (DrawVariation)TodCommon.RandRangeInt(2, 12);
-			this.mBackButton = new NewLawnButton(null, 100, this);
-			this.mBackButton.mDoFinger = true;
-			this.mBackButton.mLabel = "";
-			this.mBackButton.mButtonImage = AtlasResources.IMAGE_STORE_MAINMENUBUTTON;
-			this.mBackButton.mDownImage = AtlasResources.IMAGE_STORE_MAINMENUBUTTONDOWN;
-			this.mBackButton.mColors[0] = new SexyColor(98, 153, 235);
-			this.mBackButton.mColors[1] = new SexyColor(167, 192, 235);
-			this.mBackButton.Resize(Constants.StoreScreen_BackButton_X, Constants.StoreScreen_BackButton_Y, AtlasResources.IMAGE_STORE_MAINMENUBUTTON.mWidth, AtlasResources.IMAGE_STORE_MAINMENUBUTTON.mHeight);
-			this.mBackButton.mTextOffsetX = -7;
-			this.mBackButton.mTextOffsetY = 1;
-			this.mBackButton.mTextDownOffsetX = 2;
-			this.mBackButton.mTextDownOffsetY = 1;
-			this.mPrevButton = new NewLawnButton(null, 101, this);
-			this.mPrevButton.mDoFinger = true;
-			this.mPrevButton.mLabel = "";
-			this.mPrevButton.mButtonImage = AtlasResources.IMAGE_STORE_PREVBUTTON;
-			this.mPrevButton.mOverImage = AtlasResources.IMAGE_STORE_PREVBUTTONHIGHLIGHT;
-			this.mPrevButton.mDownImage = AtlasResources.IMAGE_STORE_PREVBUTTONHIGHLIGHT;
-			this.mPrevButton.mColors[0] = new SexyColor(255, 240, 0);
-			this.mPrevButton.mColors[1] = new SexyColor(200, 200, 255);
-			this.mPrevButton.Resize(Constants.StoreScreen_PrevButton_X, Constants.StoreScreen_PrevButton_Y, AtlasResources.IMAGE_STORE_PREVBUTTON.mWidth, AtlasResources.IMAGE_STORE_PREVBUTTON.mHeight);
-			this.mNextButton = new NewLawnButton(null, 102, this);
-			this.mNextButton.mDoFinger = true;
-			this.mNextButton.mLabel = "";
-			this.mNextButton.mButtonImage = AtlasResources.IMAGE_STORE_NEXTBUTTON;
-			this.mNextButton.mOverImage = AtlasResources.IMAGE_STORE_NEXTBUTTONHIGHLIGHT;
-			this.mNextButton.mDownImage = AtlasResources.IMAGE_STORE_NEXTBUTTONHIGHLIGHT;
-			this.mNextButton.mColors[0] = new SexyColor(255, 240, 0);
-			this.mNextButton.mColors[1] = new SexyColor(200, 200, 255);
-			this.mNextButton.Resize(Constants.StoreScreen_NextButton_X, Constants.StoreScreen_NextButton_Y, AtlasResources.IMAGE_STORE_NEXTBUTTON.mWidth, AtlasResources.IMAGE_STORE_NEXTBUTTON.mHeight);
-			this.mOverlayWidget = new StoreScreenOverlay(this);
-			this.mOverlayWidget.Resize(0, 0, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT);
-			if (!this.IsPageShown(StorePage.STORE_PAGE_PLANT_UPGRADES))
+			mApp.DelayLoadStoreResource("DelayLoad_Store");
+			Resize(0, 0, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT);
+			mPottedPlantSpecs.InitializePottedPlant(SeedType.SEED_MARIGOLD);
+			mPottedPlantSpecs.mDrawVariation = (DrawVariation)TodCommon.RandRangeInt(2, 12);
+			mBackButton = new NewLawnButton(null, 100, this);
+			mBackButton.mDoFinger = true;
+			mBackButton.mLabel = "";
+			mBackButton.mButtonImage = AtlasResources.IMAGE_STORE_MAINMENUBUTTON;
+			mBackButton.mDownImage = AtlasResources.IMAGE_STORE_MAINMENUBUTTONDOWN;
+			mBackButton.mColors[0] = new SexyColor(98, 153, 235);
+			mBackButton.mColors[1] = new SexyColor(167, 192, 235);
+			mBackButton.Resize(Constants.StoreScreen_BackButton_X, Constants.StoreScreen_BackButton_Y, AtlasResources.IMAGE_STORE_MAINMENUBUTTON.mWidth, AtlasResources.IMAGE_STORE_MAINMENUBUTTON.mHeight);
+			mBackButton.mTextOffsetX = -7;
+			mBackButton.mTextOffsetY = 1;
+			mBackButton.mTextDownOffsetX = 2;
+			mBackButton.mTextDownOffsetY = 1;
+			mPrevButton = new NewLawnButton(null, 101, this);
+			mPrevButton.mDoFinger = true;
+			mPrevButton.mLabel = "";
+			mPrevButton.mButtonImage = AtlasResources.IMAGE_STORE_PREVBUTTON;
+			mPrevButton.mOverImage = AtlasResources.IMAGE_STORE_PREVBUTTONHIGHLIGHT;
+			mPrevButton.mDownImage = AtlasResources.IMAGE_STORE_PREVBUTTONHIGHLIGHT;
+			mPrevButton.mColors[0] = new SexyColor(255, 240, 0);
+			mPrevButton.mColors[1] = new SexyColor(200, 200, 255);
+			mPrevButton.Resize(Constants.StoreScreen_PrevButton_X, Constants.StoreScreen_PrevButton_Y, AtlasResources.IMAGE_STORE_PREVBUTTON.mWidth, AtlasResources.IMAGE_STORE_PREVBUTTON.mHeight);
+			mNextButton = new NewLawnButton(null, 102, this);
+			mNextButton.mDoFinger = true;
+			mNextButton.mLabel = "";
+			mNextButton.mButtonImage = AtlasResources.IMAGE_STORE_NEXTBUTTON;
+			mNextButton.mOverImage = AtlasResources.IMAGE_STORE_NEXTBUTTONHIGHLIGHT;
+			mNextButton.mDownImage = AtlasResources.IMAGE_STORE_NEXTBUTTONHIGHLIGHT;
+			mNextButton.mColors[0] = new SexyColor(255, 240, 0);
+			mNextButton.mColors[1] = new SexyColor(200, 200, 255);
+			mNextButton.Resize(Constants.StoreScreen_NextButton_X, Constants.StoreScreen_NextButton_Y, AtlasResources.IMAGE_STORE_NEXTBUTTON.mWidth, AtlasResources.IMAGE_STORE_NEXTBUTTON.mHeight);
+			mOverlayWidget = new StoreScreenOverlay(this);
+			mOverlayWidget.Resize(0, 0, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT);
+			if (!IsPageShown(StorePage.STORE_PAGE_PLANT_UPGRADES))
 			{
-				this.mPrevButton.mDisabledImage = AtlasResources.IMAGE_STORE_PREVBUTTONDISABLED;
-				this.mPrevButton.SetDisabled(true);
-				this.mNextButton.mDisabledImage = AtlasResources.IMAGE_STORE_NEXTBUTTONDISABLED;
-				this.mNextButton.SetDisabled(true);
+				mPrevButton.mDisabledImage = AtlasResources.IMAGE_STORE_PREVBUTTONDISABLED;
+				mPrevButton.SetDisabled(true);
+				mNextButton.mDisabledImage = AtlasResources.IMAGE_STORE_NEXTBUTTONDISABLED;
+				mNextButton.SetDisabled(true);
 			}
-			this.mDrawnOnce = false;
-			this.mGoToTreeNow = false;
-			this.mPurchasedFullVersion = false;
-			this.mTrialLockedWhenStoreOpened = this.mApp.IsTrialStageLocked();
+			mDrawnOnce = false;
+			mGoToTreeNow = false;
+			mPurchasedFullVersion = false;
+			mTrialLockedWhenStoreOpened = mApp.IsTrialStageLocked();
 		}
 
 		public override void Dispose()
 		{
 			StoreScreen.mCoins.DataArrayDispose();
-			this.mBackButton.Dispose();
-			this.mPrevButton.Dispose();
-			this.mNextButton.Dispose();
-			this.mOverlayWidget.Dispose();
-			this.mApp.DelayLoadStoreResource(string.Empty);
+			mBackButton.Dispose();
+			mPrevButton.Dispose();
+			mNextButton.Dispose();
+			mOverlayWidget.Dispose();
+			mApp.DelayLoadStoreResource(string.Empty);
 		}
 
 		public override void KeyDown(KeyCode theKey)
@@ -99,91 +99,91 @@ namespace Lawn
 
 		public override void Update()
 		{
-			this.mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_TITLE_CRAZY_DAVE_MAIN_THEME);
-			if (this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || this.mApp.mBoard == null)
+			mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_TITLE_CRAZY_DAVE_MAIN_THEME);
+			if (mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || mApp.mBoard == null)
 			{
-				this.mApp.UpdateCrazyDave();
+				mApp.UpdateCrazyDave();
 			}
-			if (this.IsWaitingForDialog())
+			if (IsWaitingForDialog())
 			{
 				return;
 			}
-			if (this.mApp.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_OFF)
+			if (mApp.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_OFF)
 			{
-				if (this.mDrawnOnce)
+				if (mDrawnOnce)
 				{
-					this.StorePreLoad();
+					StorePreLoad();
 				}
 				return;
 			}
-			this.mStoreTime += 3;
-			if (this.mApp.mCrazyDaveState != CrazyDaveState.CRAZY_DAVE_OFF && this.mApp.mCrazyDaveState != CrazyDaveState.CRAZY_DAVE_ENTERING)
+			mStoreTime += 3;
+			if (mApp.mCrazyDaveState != CrazyDaveState.CRAZY_DAVE_OFF && mApp.mCrazyDaveState != CrazyDaveState.CRAZY_DAVE_ENTERING)
 			{
-				if (this.mHatchTimer > 0)
+				if (mHatchTimer > 0)
 				{
-					this.mHatchTimer -= 3;
-					this.mBackButton.mX -= this.mShakeX;
-					this.mBackButton.mY -= this.mShakeY;
-					this.mPrevButton.mX -= this.mShakeX;
-					this.mPrevButton.mY -= this.mShakeY;
-					this.mNextButton.mX -= this.mShakeX;
-					this.mNextButton.mY -= this.mShakeY;
-					if (this.mHatchTimer >= 0 && this.mHatchTimer < 3)
+					mHatchTimer -= 3;
+					mBackButton.mX -= mShakeX;
+					mBackButton.mY -= mShakeY;
+					mPrevButton.mX -= mShakeX;
+					mPrevButton.mY -= mShakeY;
+					mNextButton.mX -= mShakeX;
+					mNextButton.mY -= mShakeY;
+					if (mHatchTimer >= 0 && mHatchTimer < 3)
 					{
-						if (!this.mBubbleClickToContinue)
+						if (!mBubbleClickToContinue)
 						{
-							this.EnableButtons(true);
+							EnableButtons(true);
 						}
-						this.mShakeX = 0;
-						this.mShakeY = 0;
+						mShakeX = 0;
+						mShakeY = 0;
 					}
-					else if (this.mHatchTimer > 35)
+					else if (mHatchTimer > 35)
 					{
-						this.mShakeX = 0;
-						this.mShakeY = RandomNumbers.NextNumber(3) - 1;
+						mShakeX = 0;
+						mShakeY = RandomNumbers.NextNumber(3) - 1;
 					}
 					else
 					{
-						this.mShakeX = 0;
-						this.mShakeY = 0;
+						mShakeX = 0;
+						mShakeY = 0;
 					}
-					this.mBackButton.mX += this.mShakeX;
-					this.mBackButton.mY += this.mShakeY;
-					this.mPrevButton.mX += this.mShakeX;
-					this.mPrevButton.mY += this.mShakeY;
-					this.mNextButton.mX += this.mShakeX;
-					this.mNextButton.mY += this.mShakeY;
+					mBackButton.mX += mShakeX;
+					mBackButton.mY += mShakeY;
+					mPrevButton.mX += mShakeX;
+					mPrevButton.mY += mShakeY;
+					mNextButton.mX += mShakeX;
+					mNextButton.mY += mShakeY;
 				}
-				else if (this.mStartDialog != -1)
+				else if (mStartDialog != -1)
 				{
-					this.SetBubbleText(this.mStartDialog, 0, true);
-					this.mStartDialog = -1;
+					SetBubbleText(mStartDialog, 0, true);
+					mStartDialog = -1;
 				}
-				else if (!this.mBubbleClickToContinue)
+				else if (!mBubbleClickToContinue)
 				{
-					if (this.mBubbleCountDown > 0)
+					if (mBubbleCountDown > 0)
 					{
-						this.mBubbleCountDown -= 3;
-						if (this.mBubbleCountDown >= 0 && this.mBubbleCountDown < 3)
+						mBubbleCountDown -= 3;
+						if (mBubbleCountDown >= 0 && mBubbleCountDown < 3)
 						{
-							if (this.mApp.mSoundSystem.IsFoleyPlaying(FoleyType.FOLEY_CRAZYDAVESHORT) || this.mApp.mSoundSystem.IsFoleyPlaying(FoleyType.FOLEY_CRAZYDAVELONG) || this.mApp.mSoundSystem.IsFoleyPlaying(FoleyType.FOLEY_CRAZYDAVEEXTRALONG))
+							if (mApp.mSoundSystem.IsFoleyPlaying(FoleyType.FOLEY_CRAZYDAVESHORT) || mApp.mSoundSystem.IsFoleyPlaying(FoleyType.FOLEY_CRAZYDAVELONG) || mApp.mSoundSystem.IsFoleyPlaying(FoleyType.FOLEY_CRAZYDAVEEXTRALONG))
 							{
-								this.mBubbleCountDown = 3;
+								mBubbleCountDown = 3;
 							}
-							else if (this.mBubbleAutoAdvance)
+							else if (mBubbleAutoAdvance)
 							{
-								this.AdvanceCrazyDaveDialog();
+								AdvanceCrazyDaveDialog();
 							}
 							else
 							{
-								this.mApp.CrazyDaveStopTalking();
+								mApp.CrazyDaveStopTalking();
 							}
 						}
 					}
 					else
 					{
-						this.mAmbientSpeechCountDown -= 3;
-						if (this.mAmbientSpeechCountDown <= 0)
+						mAmbientSpeechCountDown -= 3;
+						if (mAmbientSpeechCountDown <= 0)
 						{
 							for (int i = 0; i < 4; i++)
 							{
@@ -192,13 +192,13 @@ namespace Lawn
 							for (int j = 0; j < 4; j++)
 							{
 								StoreScreen.aPickArray[j].mItem = 2015 + j;
-								if (this.mPreviousAmbientSpeechIndex == (int)StoreScreen.aPickArray[j].mItem)
+								if (mPreviousAmbientSpeechIndex == (int)StoreScreen.aPickArray[j].mItem)
 								{
 									StoreScreen.aPickArray[j].mWeight = 0;
 								}
 								else if (j == 3)
 								{
-									if (!this.mApp.HasFinishedAdventure())
+									if (!mApp.HasFinishedAdventure())
 									{
 										StoreScreen.aPickArray[j].mWeight = 0;
 									}
@@ -213,30 +213,30 @@ namespace Lawn
 								}
 							}
 							int theCrazyDaveMessage = (int)TodCommon.TodPickFromWeightedArray(StoreScreen.aPickArray, 4);
-							this.mPreviousAmbientSpeechIndex = theCrazyDaveMessage;
-							this.SetBubbleText(theCrazyDaveMessage, 800, false);
-							this.mAmbientSpeechCountDown = TodCommon.RandRangeInt(500, 1000);
+							mPreviousAmbientSpeechIndex = theCrazyDaveMessage;
+							SetBubbleText(theCrazyDaveMessage, 800, false);
+							mAmbientSpeechCountDown = TodCommon.RandRangeInt(500, 1000);
 						}
 					}
 				}
 			}
-			this.UpdateMouse();
-			if (this.CanInteractWithButtons() && this.mTrialLockedWhenStoreOpened && !this.mApp.IsTrialStageLocked())
+			UpdateMouse();
+			if (CanInteractWithButtons() && mTrialLockedWhenStoreOpened && !mApp.IsTrialStageLocked())
 			{
-				this.mPurchasedFullVersion = true;
-				this.mResult = 1000;
+				mPurchasedFullVersion = true;
+				mResult = 1000;
 				return;
 			}
 			base.Update();
-			this.MarkDirty();
+			MarkDirty();
 		}
 
 		public override void Draw(Graphics g)
 		{
 			g.SetLinearBlend(true);
-			this.mDrawnOnce = true;
-			int theY = TodCommon.TodAnimateCurve(50, 110, this.mStoreTime, Constants.StoreScreen_StoreSign_Y_Min, Constants.StoreScreen_StoreSign_Y_Max, TodCurves.CURVE_EASE_IN_OUT);
-			if (this.mApp.IsNight())
+			mDrawnOnce = true;
+			int theY = TodCommon.TodAnimateCurve(50, 110, mStoreTime, Constants.StoreScreen_StoreSign_Y_Min, Constants.StoreScreen_StoreSign_Y_Max, TodCurves.CURVE_EASE_IN_OUT);
+			if (mApp.IsNight())
 			{
 				g.DrawImage(Resources.IMAGE_STORE_BACKGROUNDNIGHT, 0, 0);
 			}
@@ -244,22 +244,22 @@ namespace Lawn
 			{
 				g.DrawImage(Resources.IMAGE_STORE_BACKGROUND, 0, 0);
 			}
-			g.DrawImage(Resources.IMAGE_STORE_CAR, Constants.StoreScreen_Car_X + this.mShakeX, Constants.StoreScreen_Car_Y + this.mShakeY);
-			if (this.mHatchTimer == 0 && this.mHatchOpen)
+			g.DrawImage(Resources.IMAGE_STORE_CAR, Constants.StoreScreen_Car_X + mShakeX, Constants.StoreScreen_Car_Y + mShakeY);
+			if (mHatchTimer == 0 && mHatchOpen)
 			{
-				g.DrawImage(Resources.IMAGE_STORE_HATCHBACKOPEN, Constants.StoreScreen_HatchOpen_X + this.mShakeX, Constants.StoreScreen_HatchOpen_Y + this.mShakeY);
-				if (this.mApp.IsNight())
+				g.DrawImage(Resources.IMAGE_STORE_HATCHBACKOPEN, Constants.StoreScreen_HatchOpen_X + mShakeX, Constants.StoreScreen_HatchOpen_Y + mShakeY);
+				if (mApp.IsNight())
 				{
-					g.DrawImage(Resources.IMAGE_STORE_CAR_NIGHT, Constants.StoreScreen_CarNight_X + this.mShakeX, Constants.StoreScreen_CarNight_Y + this.mShakeY);
+					g.DrawImage(Resources.IMAGE_STORE_CAR_NIGHT, Constants.StoreScreen_CarNight_X + mShakeX, Constants.StoreScreen_CarNight_Y + mShakeY);
 				}
 			}
 			else
 			{
-				g.DrawImage(Resources.IMAGE_STORE_CARCLOSED, Constants.StoreScreen_HatchClosed_X + this.mShakeX, Constants.StoreScreen_HatchClosed_Y + this.mShakeY);
-				if (this.mApp.IsNight())
+				g.DrawImage(Resources.IMAGE_STORE_CARCLOSED, Constants.StoreScreen_HatchClosed_X + mShakeX, Constants.StoreScreen_HatchClosed_Y + mShakeY);
+				if (mApp.IsNight())
 				{
-					g.DrawImage(Resources.IMAGE_STORE_CAR_NIGHT, Constants.StoreScreen_CarNight_X + this.mShakeX, Constants.StoreScreen_CarNight_Y + this.mShakeY);
-					g.DrawImage(Resources.IMAGE_STORE_CARCLOSED_NIGHT, Constants.StoreScreen_HatchClosed_X + this.mShakeX, Constants.StoreScreen_HatchClosed_Y + this.mShakeY);
+					g.DrawImage(Resources.IMAGE_STORE_CAR_NIGHT, Constants.StoreScreen_CarNight_X + mShakeX, Constants.StoreScreen_CarNight_Y + mShakeY);
+					g.DrawImage(Resources.IMAGE_STORE_CARCLOSED_NIGHT, Constants.StoreScreen_HatchClosed_X + mShakeX, Constants.StoreScreen_HatchClosed_Y + mShakeY);
 				}
 			}
 			g.DrawImage(AtlasResources.IMAGE_STORE_SIGN, Constants.StoreScreen_StoreSign_X, theY);
@@ -267,16 +267,16 @@ namespace Lawn
 			@new.mTransX += Constants.StoreScreen_RetardedDave_Offset_X;
 			Graphics graphics = @new;
 			graphics.mTransY = graphics.mTransY;
-			this.mApp.DrawCrazyDave(@new);
+			mApp.DrawCrazyDave(@new);
 			@new.PrepareForReuse();
-			if (this.mHatchTimer == 0 && this.mHatchOpen)
+			if (mHatchTimer == 0 && mHatchOpen)
 			{
 				for (int i = 0; i < 8; i++)
 				{
-					StoreItem storeItemType = this.GetStoreItemType(i);
+					StoreItem storeItemType = GetStoreItemType(i);
 					if (storeItemType != StoreItem.STORE_ITEM_INVALID)
 					{
-						this.DrawItem(g, i, storeItemType);
+						DrawItem(g, i, storeItemType);
 					}
 				}
 			}
@@ -285,7 +285,7 @@ namespace Lawn
 			g.DrawImage(AtlasResources.IMAGE_COINBANK, storeScreen_Coinbank_X, storeScreen_Coinbank_Y);
 			g.SetColor(new SexyColor(180, 255, 90));
 			g.SetFont(Resources.FONT_CONTINUUMBOLD14);
-			string moneyString = LawnApp.GetMoneyString(this.mApp.mPlayerInfo.mCoins);
+			string moneyString = LawnApp.GetMoneyString(mApp.mPlayerInfo.mCoins);
 			int theX = storeScreen_Coinbank_X + Constants.StoreScreen_Coinbank_TextOffset.X - Resources.FONT_CONTINUUMBOLD14.StringWidth(moneyString);
 			g.DrawString(moneyString, theX, storeScreen_Coinbank_Y + Constants.StoreScreen_Coinbank_TextOffset.Y);
 		}
@@ -293,33 +293,33 @@ namespace Lawn
 		public override void AddedToManager(WidgetManager theWidgetManager)
 		{
 			base.AddedToManager(theWidgetManager);
-			this.AddWidget(this.mBackButton);
-			this.AddWidget(this.mPrevButton);
-			this.AddWidget(this.mNextButton);
-			this.AddWidget(this.mOverlayWidget);
+			AddWidget(mBackButton);
+			AddWidget(mPrevButton);
+			AddWidget(mNextButton);
+			AddWidget(mOverlayWidget);
 		}
 
 		public override void RemovedFromManager(WidgetManager theWidgetManager)
 		{
 			base.RemovedFromManager(theWidgetManager);
-			this.RemoveWidget(this.mBackButton);
-			this.RemoveWidget(this.mPrevButton);
-			this.RemoveWidget(this.mNextButton);
-			this.RemoveWidget(this.mOverlayWidget);
-			this.mApp.CrazyDaveDie();
+			RemoveWidget(mBackButton);
+			RemoveWidget(mPrevButton);
+			RemoveWidget(mNextButton);
+			RemoveWidget(mOverlayWidget);
+			mApp.CrazyDaveDie();
 		}
 
 		public override void ButtonPress(int theId)
 		{
 			if (theId != 101 && theId != 102)
 			{
-				this.mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
+				mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
 			}
 		}
 
 		public override bool BackButtonPress()
 		{
-			this.ButtonDepress(this.mBackButton.mId);
+			ButtonDepress(mBackButton.mId);
 			return true;
 		}
 
@@ -327,107 +327,107 @@ namespace Lawn
 		{
 			if (theId == 100)
 			{
-				this.mResult = 1000;
-				if (this.mListener != null)
+				mResult = 1000;
+				if (mListener != null)
 				{
-					this.mListener.BackFromStore();
+					mListener.BackFromStore();
 				}
 				return;
 			}
 			if (theId == 101)
 			{
-				this.mHatchTimer = 51;
-				this.mApp.PlaySample(Resources.SOUND_HATCHBACK_CLOSE);
-				this.mBubbleCountDown = 1;
-				this.EnableButtons(false);
+				mHatchTimer = 51;
+				mApp.PlaySample(Resources.SOUND_HATCHBACK_CLOSE);
+				mBubbleCountDown = 1;
+				EnableButtons(false);
 				do
 				{
-					this.mPage--;
-					if (this.mPage < StorePage.STORE_PAGE_SLOT_UPGRADES)
+					mPage--;
+					if (mPage < StorePage.STORE_PAGE_SLOT_UPGRADES)
 					{
-						this.mPage = StorePage.STORE_PAGE_ZEN2;
+						mPage = StorePage.STORE_PAGE_ZEN2;
 					}
 				}
-				while (!this.IsPageShown(this.mPage));
+				while (!IsPageShown(mPage));
 			}
 			if (theId == 102)
 			{
-				this.mHatchTimer = 51;
-				this.mApp.PlaySample(Resources.SOUND_HATCHBACK_CLOSE);
-				this.mBubbleCountDown = 1;
-				this.EnableButtons(false);
+				mHatchTimer = 51;
+				mApp.PlaySample(Resources.SOUND_HATCHBACK_CLOSE);
+				mBubbleCountDown = 1;
+				EnableButtons(false);
 				do
 				{
-					this.mPage++;
-					if (this.mPage >= StorePage.NUM_STORE_PAGES)
+					mPage++;
+					if (mPage >= StorePage.NUM_STORE_PAGES)
 					{
-						this.mPage = StorePage.STORE_PAGE_SLOT_UPGRADES;
+						mPage = StorePage.STORE_PAGE_SLOT_UPGRADES;
 					}
 				}
-				while (!this.IsPageShown(this.mPage));
+				while (!IsPageShown(mPage));
 			}
 		}
 
 		public virtual void KeyChar(char theChar)
 		{
-			if (this.mBubbleClickToContinue && (theChar == ' ' || theChar == '\r'))
+			if (mBubbleClickToContinue && (theChar == ' ' || theChar == '\r'))
 			{
-				this.AdvanceCrazyDaveDialog();
+				AdvanceCrazyDaveDialog();
 				return;
 			}
 			if (theChar == 'c' || theChar == 'C')
 			{
-				this.mEasyBuyingCheat = true;
-				this.mNextButton.mMouseVisible = true;
-				this.mNextButton.SetDisabled(false);
-				this.mPrevButton.mMouseVisible = true;
-				this.mPrevButton.SetDisabled(false);
+				mEasyBuyingCheat = true;
+				mNextButton.mMouseVisible = true;
+				mNextButton.SetDisabled(false);
+				mPrevButton.mMouseVisible = true;
+				mPrevButton.SetDisabled(false);
 			}
 			if (theChar == '0')
 			{
-				this.mApp.mPlayerInfo.AddCoins(50000);
-				this.mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
+				mApp.mPlayerInfo.AddCoins(50000);
+				mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
 			}
 			if (theChar == '$')
 			{
-				this.mApp.mPlayerInfo.AddCoins(100);
-				this.mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
+				mApp.mPlayerInfo.AddCoins(100);
+				mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
 			}
 			if (theChar == 'l')
 			{
-				this.mApp.mDebugTrialLocked = !this.mApp.mDebugTrialLocked;
-				this.mApp.mTrialType = TrialType.TRIAL_STAGELOCKED;
+				mApp.mDebugTrialLocked = !mApp.mDebugTrialLocked;
+				mApp.mTrialType = TrialType.TRIAL_STAGELOCKED;
 			}
 		}
 
 		public override void MouseDown(int x, int y, int theClickCount)
 		{
-			if (this.mBubbleClickToContinue)
+			if (mBubbleClickToContinue)
 			{
-				this.AdvanceCrazyDaveDialog();
+				AdvanceCrazyDaveDialog();
 				return;
 			}
-			this.UpdateMouse();
-			if (!this.CanInteractWithButtons())
+			UpdateMouse();
+			if (!CanInteractWithButtons())
 			{
 				return;
 			}
 			for (int i = 0; i < 8; i++)
 			{
-				StoreItem storeItemType = this.GetStoreItemType(i);
+				StoreItem storeItemType = GetStoreItemType(i);
 				if (storeItemType != StoreItem.STORE_ITEM_INVALID)
 				{
 					int theX = 0;
 					int theY = 0;
-					this.GetStorePosition(i, ref theX, ref theY);
+					GetStorePosition(i, ref theX, ref theY);
 					TRect trect = new TRect(theX, theY, Constants.StoreScreen_MouseRegion.X, Constants.StoreScreen_MouseRegion.Y);
 					if (trect.Contains(x, y))
 					{
-						if (this.IsItemSoldOut(storeItemType) || this.IsItemUnavailable(storeItemType) || this.IsComingSoon(storeItemType))
+						if (IsItemSoldOut(storeItemType) || IsItemUnavailable(storeItemType) || IsComingSoon(storeItemType))
 						{
 							return;
 						}
-						this.PurchaseItem(storeItemType);
+						PurchaseItem(storeItemType);
 					}
 				}
 			}
@@ -435,9 +435,9 @@ namespace Lawn
 
 		public void SetBubbleText(int theCrazyDaveMessage, int theTime, bool theClickToContinue)
 		{
-			this.mApp.CrazyDaveTalkIndex(theCrazyDaveMessage);
-			this.mBubbleCountDown = theTime;
-			this.mBubbleClickToContinue = theClickToContinue;
+			mApp.CrazyDaveTalkIndex(theCrazyDaveMessage);
+			mBubbleCountDown = theTime;
+			mBubbleClickToContinue = theClickToContinue;
 		}
 
 		public void GetStorePosition(int theSpotIndex, ref int thePosX, ref int thePosY)
@@ -454,7 +454,7 @@ namespace Lawn
 
 		public StoreItem GetStoreItemType(int theSpotIndex)
 		{
-			if (this.mPage == StorePage.STORE_PAGE_SLOT_UPGRADES)
+			if (mPage == StorePage.STORE_PAGE_SLOT_UPGRADES)
 			{
 				if (theSpotIndex == 0)
 				{
@@ -490,7 +490,7 @@ namespace Lawn
 				}
 				return StoreItem.STORE_ITEM_INVALID;
 			}
-			else if (this.mPage == StorePage.STORE_PAGE_PLANT_UPGRADES)
+			else if (mPage == StorePage.STORE_PAGE_PLANT_UPGRADES)
 			{
 				if (theSpotIndex == 0)
 				{
@@ -518,7 +518,7 @@ namespace Lawn
 				}
 				return StoreItem.STORE_ITEM_INVALID;
 			}
-			else if (this.mPage == StorePage.STORE_PAGE_ZEN1)
+			else if (mPage == StorePage.STORE_PAGE_ZEN1)
 			{
 				if (theSpotIndex == 0)
 				{
@@ -556,7 +556,7 @@ namespace Lawn
 			}
 			else
 			{
-				if (this.mPage != StorePage.STORE_PAGE_ZEN2)
+				if (mPage != StorePage.STORE_PAGE_ZEN2)
 				{
 					Debug.ASSERT(false);
 					return StoreItem.STORE_ITEM_INVALID;
@@ -587,44 +587,44 @@ namespace Lawn
 
 		public bool IsItemUnavailable(StoreItem theStoreItem)
 		{
-			if (this.mEasyBuyingCheat)
+			if (mEasyBuyingCheat)
 			{
 				return false;
 			}
 			if (theStoreItem == StoreItem.STORE_ITEM_ROOF_CLEANER)
 			{
-				if (this.mApp.IsTrialStageLocked())
+				if (mApp.IsTrialStageLocked())
 				{
 					return true;
 				}
-				if (!this.mApp.HasFinishedAdventure() && this.mApp.mPlayerInfo.mLevel < 42)
+				if (!mApp.HasFinishedAdventure() && mApp.mPlayerInfo.mLevel < 42)
 				{
 					return true;
 				}
 			}
 			if (theStoreItem == StoreItem.STORE_ITEM_PLANT_GLOOMSHROOM)
 			{
-				if (this.mApp.IsTrialStageLocked())
+				if (mApp.IsTrialStageLocked())
 				{
 					return true;
 				}
-				if (!this.mApp.HasFinishedAdventure() && this.mApp.mPlayerInfo.mLevel < 35)
+				if (!mApp.HasFinishedAdventure() && mApp.mPlayerInfo.mLevel < 35)
 				{
 					return true;
 				}
 			}
 			if (theStoreItem == StoreItem.STORE_ITEM_PLANT_CATTAIL)
 			{
-				if (this.mApp.IsTrialStageLocked())
+				if (mApp.IsTrialStageLocked())
 				{
 					return true;
 				}
-				if (!this.mApp.HasFinishedAdventure() && this.mApp.mPlayerInfo.mLevel < 35)
+				if (!mApp.HasFinishedAdventure() && mApp.mPlayerInfo.mLevel < 35)
 				{
 					return true;
 				}
 			}
-			return (theStoreItem == StoreItem.STORE_ITEM_PLANT_SPIKEROCK && !this.mApp.HasFinishedAdventure() && this.mApp.mPlayerInfo.mLevel < 41) || (theStoreItem == StoreItem.STORE_ITEM_PLANT_GOLD_MAGNET && !this.mApp.HasFinishedAdventure() && this.mApp.mPlayerInfo.mLevel < 41) || ((theStoreItem == StoreItem.STORE_ITEM_PLANT_WINTERMELON || theStoreItem == StoreItem.STORE_ITEM_PLANT_COBCANNON || theStoreItem == StoreItem.STORE_ITEM_PLANT_IMITATER || theStoreItem == StoreItem.STORE_ITEM_FIRSTAID) && !this.mApp.HasFinishedAdventure());
+			return (theStoreItem == StoreItem.STORE_ITEM_PLANT_SPIKEROCK && !mApp.HasFinishedAdventure() && mApp.mPlayerInfo.mLevel < 41) || (theStoreItem == StoreItem.STORE_ITEM_PLANT_GOLD_MAGNET && !mApp.HasFinishedAdventure() && mApp.mPlayerInfo.mLevel < 41) || ((theStoreItem == StoreItem.STORE_ITEM_PLANT_WINTERMELON || theStoreItem == StoreItem.STORE_ITEM_PLANT_COBCANNON || theStoreItem == StoreItem.STORE_ITEM_PLANT_IMITATER || theStoreItem == StoreItem.STORE_ITEM_FIRSTAID) && !mApp.HasFinishedAdventure());
 		}
 
 		public bool IsItemSoldOut(StoreItem theStoreItem)
@@ -635,23 +635,23 @@ namespace Lawn
 			}
 			if (theStoreItem == StoreItem.STORE_ITEM_PACKET_UPGRADE)
 			{
-				return this.mApp.mPlayerInfo.mPurchases[21] >= 3;
+				return mApp.mPlayerInfo.mPurchases[21] >= 3;
 			}
 			if (theStoreItem == StoreItem.STORE_ITEM_FERTILIZER || theStoreItem == StoreItem.STORE_ITEM_BUG_SPRAY)
 			{
-				return this.mApp.mPlayerInfo.mPurchases[(int)theStoreItem] - 1000 > 15;
+				return mApp.mPlayerInfo.mPurchases[(int)theStoreItem] - 1000 > 15;
 			}
 			if (theStoreItem == StoreItem.STORE_ITEM_BONUS_LAWN_MOWER)
 			{
-				return this.mApp.mPlayerInfo.mPurchases[9] >= 2;
+				return mApp.mPlayerInfo.mPurchases[9] >= 2;
 			}
 			if (StoreScreen.IsPottedPlant(theStoreItem))
 			{
 				int currentDaysSince = LawnCommon.GetCurrentDaysSince2000();
-				return this.mApp.mZenGarden.IsZenGardenFull(true) || this.mApp.mPlayerInfo.mPurchases[(int)theStoreItem] == currentDaysSince;
+				return mApp.mZenGarden.IsZenGardenFull(true) || mApp.mPlayerInfo.mPurchases[(int)theStoreItem] == currentDaysSince;
 			}
 			Debug.ASSERT(theStoreItem >= StoreItem.STORE_ITEM_PLANT_GATLINGPEA && theStoreItem < (StoreItem)80);
-			return this.mApp.mPlayerInfo.mPurchases[(int)theStoreItem] != 0;
+			return mApp.mPlayerInfo.mPurchases[(int)theStoreItem] != 0;
 		}
 
 		public static int GetItemCost(StoreItem theStoreItem)
@@ -739,19 +739,19 @@ namespace Lawn
 		public bool CanAffordItem(StoreItem theStoreItem)
 		{
 			int itemCost = StoreScreen.GetItemCost(theStoreItem);
-			return this.mApp.mPlayerInfo.mCoins >= itemCost;
+			return mApp.mPlayerInfo.mCoins >= itemCost;
 		}
 
 		public void PurchaseItem(StoreItem theItemType)
 		{
-			this.mBubbleCountDown = 0;
-			this.mApp.CrazyDaveStopTalking();
-			if (!this.CanAffordItem(theItemType))
+			mBubbleCountDown = 0;
+			mApp.CrazyDaveStopTalking();
+			if (!CanAffordItem(theItemType))
 			{
-				this.mApp.DoDialog(25, true, "[NOT_ENOUGH_MONEY]", "[CANNOT_AFFORD_ITEM]", "[DIALOG_BUTTON_OK]", 3);
+				mApp.DoDialog(25, true, "[NOT_ENOUGH_MONEY]", "[CANNOT_AFFORD_ITEM]", "[DIALOG_BUTTON_OK]", 3);
 				return;
 			}
-			this.mPendingPurchaseItem = theItemType;
+			mPendingPurchaseItem = theItemType;
 			int theMessageIndex = 0;
 			switch (theItemType)
 			{
@@ -819,17 +819,17 @@ namespace Lawn
 				theMessageIndex = 2025;
 				goto IL_23F;
 			case StoreItem.STORE_ITEM_PACKET_UPGRADE:
-				if (this.mApp.mPlayerInfo.mPurchases[21] + 1 == 1)
+				if (mApp.mPlayerInfo.mPurchases[21] + 1 == 1)
 				{
 					theMessageIndex = 2011;
 					goto IL_23F;
 				}
-				if (this.mApp.mPlayerInfo.mPurchases[21] + 1 == 2)
+				if (mApp.mPlayerInfo.mPurchases[21] + 1 == 2)
 				{
 					theMessageIndex = 2012;
 					goto IL_23F;
 				}
-				if (this.mApp.mPlayerInfo.mPurchases[21] + 1 == 3)
+				if (mApp.mPlayerInfo.mPurchases[21] + 1 == 3)
 				{
 					theMessageIndex = 2013;
 					goto IL_23F;
@@ -854,156 +854,156 @@ namespace Lawn
 			}
 			Debug.ASSERT(false);
 			IL_23F:
-			string crazyDaveText = this.mApp.GetCrazyDaveText(theMessageIndex);
-			int aQuantity = this.mApp.mPlayerInfo.mPurchases[21] + 7;
-			ConfirmPurchaseDialog confirmPurchaseDialog = new ConfirmPurchaseDialog(this.mApp, theItemType, aQuantity, StoreScreen.GetItemCost(theItemType), crazyDaveText);
+			string crazyDaveText = mApp.GetCrazyDaveText(theMessageIndex);
+			int aQuantity = mApp.mPlayerInfo.mPurchases[21] + 7;
+			ConfirmPurchaseDialog confirmPurchaseDialog = new ConfirmPurchaseDialog(mApp, theItemType, aQuantity, StoreScreen.GetItemCost(theItemType), crazyDaveText);
 			confirmPurchaseDialog.Resize(Constants.StoreScreen_Dialog.X, Constants.StoreScreen_Dialog.Y, Constants.StoreScreen_Dialog.Width, Constants.StoreScreen_Dialog.Height);
-			this.mApp.AddDialog(46, confirmPurchaseDialog);
+			mApp.AddDialog(46, confirmPurchaseDialog);
 		}
 
 		public void PurchasePendingItem()
 		{
-			this.mApp.KillDialog(46);
-			StoreItem storeItem = this.mPendingPurchaseItem;
+			mApp.KillDialog(46);
+			StoreItem storeItem = mPendingPurchaseItem;
 			int itemCost = StoreScreen.GetItemCost(storeItem);
-			this.mApp.mPlayerInfo.AddCoins(-itemCost);
-			this.mApp.mPlayerInfo.mMoneySpent += itemCost;
-			if (this.mApp.mPlayerInfo.mMoneySpent >= 2500)
+			mApp.mPlayerInfo.AddCoins(-itemCost);
+			mApp.mPlayerInfo.mMoneySpent += itemCost;
+			if (mApp.mPlayerInfo.mMoneySpent >= 2500)
 			{
 				ReportAchievement.GiveAchievement(AchievementId.Shopaholic);
 			}
 			if (storeItem == StoreItem.STORE_ITEM_PACKET_UPGRADE)
 			{
-				this.mApp.mPlayerInfo.mPurchases[21]++;
-				string theDialogLines = Common.StrFormat_(TodStringFile.TodStringTranslate("[NOW_YOU_CAN_CHOOSE_X_SEEDS]"), 6 + this.mApp.mPlayerInfo.mPurchases[21]);
-				LawnDialog lawnDialog = this.mApp.DoDialog(26, true, "[MORE_SLOTS]", theDialogLines, "[DIALOG_BUTTON_OK]", 3);
+				mApp.mPlayerInfo.mPurchases[21]++;
+				string theDialogLines = Common.StrFormat_(TodStringFile.TodStringTranslate("[NOW_YOU_CAN_CHOOSE_X_SEEDS]"), 6 + mApp.mPlayerInfo.mPurchases[21]);
+				LawnDialog lawnDialog = mApp.DoDialog(26, true, "[MORE_SLOTS]", theDialogLines, "[DIALOG_BUTTON_OK]", 3);
 				lawnDialog.CalcSize(0, 0);
-				if (this.mApp.mBoard != null)
+				if (mApp.mBoard != null)
 				{
-					this.mApp.mBoard.mSeedBank.UpdateHeight();
+					mApp.mBoard.mSeedBank.UpdateHeight();
 				}
 			}
 			else if (storeItem == StoreItem.STORE_ITEM_BONUS_LAWN_MOWER)
 			{
-				this.mApp.mPlayerInfo.mPurchases[9]++;
+				mApp.mPlayerInfo.mPurchases[9]++;
 			}
 			else if (storeItem == StoreItem.STORE_ITEM_RAKE)
 			{
-				this.mApp.mPlayerInfo.mPurchases[24] = 3;
+				mApp.mPlayerInfo.mPurchases[24] = 3;
 			}
 			else if (storeItem == StoreItem.STORE_ITEM_FERTILIZER || storeItem == StoreItem.STORE_ITEM_BUG_SPRAY)
 			{
-				if (this.mApp.mPlayerInfo.mPurchases[(int)storeItem] < 1000)
+				if (mApp.mPlayerInfo.mPurchases[(int)storeItem] < 1000)
 				{
-					this.mApp.mPlayerInfo.mPurchases[(int)storeItem] = 1000;
+					mApp.mPlayerInfo.mPurchases[(int)storeItem] = 1000;
 				}
-				this.mApp.mPlayerInfo.mPurchases[(int)storeItem] += 5;
+				mApp.mPlayerInfo.mPurchases[(int)storeItem] += 5;
 			}
 			else if (StoreScreen.IsPottedPlant(storeItem))
 			{
-				this.mApp.mZenGarden.AddPottedPlant(this.mPottedPlantSpecs);
-				this.mPottedPlantSpecs.InitializePottedPlant(SeedType.SEED_MARIGOLD);
-				this.mPottedPlantSpecs.mDrawVariation = (DrawVariation)TodCommon.RandRangeInt(2, 12);
-				this.mApp.mPlayerInfo.mPurchases[(int)storeItem] = LawnCommon.GetCurrentDaysSince2000();
+				mApp.mZenGarden.AddPottedPlant(mPottedPlantSpecs);
+				mPottedPlantSpecs.InitializePottedPlant(SeedType.SEED_MARIGOLD);
+				mPottedPlantSpecs.mDrawVariation = (DrawVariation)TodCommon.RandRangeInt(2, 12);
+				mApp.mPlayerInfo.mPurchases[(int)storeItem] = LawnCommon.GetCurrentDaysSince2000();
 			}
 			else
 			{
 				Debug.ASSERT(storeItem >= StoreItem.STORE_ITEM_PLANT_GATLINGPEA && storeItem < (StoreItem)80);
-				this.mApp.mPlayerInfo.mPurchases[(int)storeItem] = 1;
+				mApp.mPlayerInfo.mPurchases[(int)storeItem] = 1;
 			}
 			if (storeItem == StoreItem.STORE_ITEM_FIRSTAID)
 			{
-				this.SetBubbleText(3400, 800, false);
+				SetBubbleText(3400, 800, false);
 			}
-			if (this.mApp.mSeedChooserScreen != null)
+			if (mApp.mSeedChooserScreen != null)
 			{
-				this.mApp.mSeedChooserScreen.UpdateAfterPurchase();
+				mApp.mSeedChooserScreen.UpdateAfterPurchase();
 			}
 			int i;
 			for (i = 0; i < 49; i++)
 			{
-				if (!this.mApp.HasSeedType((SeedType)i))
+				if (!mApp.HasSeedType((SeedType)i))
 				{
 					i = -1;
 					break;
 				}
 			}
-			if (i == 49 && !this.mApp.mPlayerInfo.mShownAchievements[1])
+			if (i == 49 && !mApp.mPlayerInfo.mShownAchievements[1])
 			{
 				ReportAchievement.GiveAchievement(AchievementId.ACHIEVEMENT_MORTICULTURALIST);
-				this.mApp.mPlayerInfo.mShownAchievements[1] = true;
-				this.SetBubbleText(4000, 150, false);
-				this.mBubbleAutoAdvance = true;
+				mApp.mPlayerInfo.mShownAchievements[1] = true;
+				SetBubbleText(4000, 150, false);
+				mBubbleAutoAdvance = true;
 			}
-			this.mApp.WriteCurrentUserConfig();
+			mApp.WriteCurrentUserConfig();
 		}
 
 		public void FinishTreeOfWisdomDialog(bool isYes)
 		{
-			this.mApp.KillDialog(47);
-			if (this.mApp.mSeedChooserScreen != null)
+			mApp.KillDialog(47);
+			if (mApp.mSeedChooserScreen != null)
 			{
-				this.mApp.mSeedChooserScreen.UpdateAfterPurchase();
+				mApp.mSeedChooserScreen.UpdateAfterPurchase();
 			}
-			this.mApp.WriteCurrentUserConfig();
+			mApp.WriteCurrentUserConfig();
 			if (isYes)
 			{
-				this.mGoToTreeNow = true;
-				this.mResult = 1000;
-				if (this.mListener != null)
+				mGoToTreeNow = true;
+				mResult = 1000;
+				if (mListener != null)
 				{
-					this.mListener.BackFromStore();
+					mListener.BackFromStore();
 				}
 			}
 		}
 
 		public void DrawItem(Graphics g, int theItemPosition, StoreItem theItemType)
 		{
-			if (this.IsItemUnavailable(theItemType))
+			if (IsItemUnavailable(theItemType))
 			{
 				return;
 			}
 			int aPosX = 0;
 			int aPosY = 0;
-			this.GetStorePosition(theItemPosition, ref aPosX, ref aPosY);
-			GlobalMembersStoreScreen.DrawStoreItem(g, aPosX, aPosY, theItemType, this.IsComingSoon(theItemType), this.IsItemSoldOut(theItemType), this.mApp.mPlayerInfo.mPurchases[21] + 7, StoreScreen.GetItemCost(theItemType));
+			GetStorePosition(theItemPosition, ref aPosX, ref aPosY);
+			GlobalMembersStoreScreen.DrawStoreItem(g, aPosX, aPosY, theItemType, IsComingSoon(theItemType), IsItemSoldOut(theItemType), mApp.mPlayerInfo.mPurchases[21] + 7, StoreScreen.GetItemCost(theItemType));
 		}
 
 		public void EnableButtons(bool theEnable)
 		{
 			bool flag = true;
-			if (!this.mEasyBuyingCheat && !this.IsPageShown(StorePage.STORE_PAGE_PLANT_UPGRADES))
+			if (!mEasyBuyingCheat && !IsPageShown(StorePage.STORE_PAGE_PLANT_UPGRADES))
 			{
 				flag = false;
 			}
 			if (flag || !theEnable)
 			{
-				this.mNextButton.mMouseVisible = theEnable;
-				this.mNextButton.SetDisabled(!theEnable);
-				this.mPrevButton.mMouseVisible = theEnable;
-				this.mPrevButton.SetDisabled(!theEnable);
+				mNextButton.mMouseVisible = theEnable;
+				mNextButton.SetDisabled(!theEnable);
+				mPrevButton.mMouseVisible = theEnable;
+				mPrevButton.SetDisabled(!theEnable);
 			}
-			this.mBackButton.mMouseVisible = theEnable;
-			this.mBackButton.SetDisabled(!theEnable);
+			mBackButton.mMouseVisible = theEnable;
+			mBackButton.SetDisabled(!theEnable);
 		}
 
 		public void SetupForIntro(int theDialogIndex)
 		{
-			this.mStartDialog = theDialogIndex;
-			this.mHatchOpen = false;
-			this.SetupBackButtonForZenGarden();
-			this.EnableButtons(false);
+			mStartDialog = theDialogIndex;
+			mHatchOpen = false;
+			SetupBackButtonForZenGarden();
+			EnableButtons(false);
 		}
 
 		public void SetupBackButtonForZenGarden()
 		{
-			this.mBackButton.mButtonImage = AtlasResources.IMAGE_STORE_CONTINUEBUTTON;
-			this.mBackButton.mDownImage = AtlasResources.IMAGE_STORE_CONTINUEBUTTONDOWN;
+			mBackButton.mButtonImage = AtlasResources.IMAGE_STORE_CONTINUEBUTTON;
+			mBackButton.mDownImage = AtlasResources.IMAGE_STORE_CONTINUEBUTTONDOWN;
 		}
 
 		public bool CanInteractWithButtons()
 		{
-			return this.mStoreTime >= 120 && !this.mBubbleClickToContinue && !this.mBubbleAutoAdvance && this.mHatchTimer <= 0 && !this.IsWaitingForDialog();
+			return mStoreTime >= 120 && !mBubbleClickToContinue && !mBubbleAutoAdvance && mHatchTimer <= 0 && !IsWaitingForDialog();
 		}
 
 		public static bool IsPottedPlant(StoreItem theStoreItem)
@@ -1013,92 +1013,92 @@ namespace Lawn
 
 		public void AdvanceCrazyDaveDialog()
 		{
-			if (!this.mBubbleClickToContinue && !this.mBubbleAutoAdvance)
+			if (!mBubbleClickToContinue && !mBubbleAutoAdvance)
 			{
 				return;
 			}
-			if (this.mApp.mCrazyDaveMessageIndex == 3100)
+			if (mApp.mCrazyDaveMessageIndex == 3100)
 			{
-				this.mHatchTimer = 150;
-				this.mHatchOpen = true;
-				this.mApp.PlaySample(Resources.SOUND_HATCHBACK_OPEN);
+				mHatchTimer = 150;
+				mHatchOpen = true;
+				mApp.PlaySample(Resources.SOUND_HATCHBACK_OPEN);
 			}
-			if (!this.mApp.AdvanceCrazyDaveText())
+			if (!mApp.AdvanceCrazyDaveText())
 			{
-				this.mApp.CrazyDaveStopTalking();
-				this.mBubbleClickToContinue = false;
-				this.mBubbleAutoAdvance = false;
-				this.mAmbientSpeechCountDown = 500;
-				if (this.mHatchTimer == 0)
+				mApp.CrazyDaveStopTalking();
+				mBubbleClickToContinue = false;
+				mBubbleAutoAdvance = false;
+				mAmbientSpeechCountDown = 500;
+				if (mHatchTimer == 0)
 				{
-					this.EnableButtons(true);
+					EnableButtons(true);
 				}
 			}
 			else
 			{
 				int theTime = 0;
-				if (this.mApp.mCrazyDaveMessageIndex == 4001)
+				if (mApp.mCrazyDaveMessageIndex == 4001)
 				{
 					theTime = 200;
 				}
-				else if (this.mApp.mCrazyDaveMessageIndex == 4002)
+				else if (mApp.mCrazyDaveMessageIndex == 4002)
 				{
 					theTime = 400;
 				}
-				else if (this.mApp.mCrazyDaveMessageIndex == 4003)
+				else if (mApp.mCrazyDaveMessageIndex == 4003)
 				{
 					theTime = 150;
 				}
-				else if (this.mApp.mCrazyDaveMessageIndex == 4004)
+				else if (mApp.mCrazyDaveMessageIndex == 4004)
 				{
 					theTime = 500;
 				}
-				this.SetBubbleText(this.mApp.mCrazyDaveMessageIndex, theTime, this.mBubbleClickToContinue);
+				SetBubbleText(mApp.mCrazyDaveMessageIndex, theTime, mBubbleClickToContinue);
 			}
-			if (this.mApp.mCrazyDaveMessageIndex == 303 || this.mApp.mCrazyDaveMessageIndex == 606 || this.mApp.mCrazyDaveMessageIndex == 2105 || this.mApp.mCrazyDaveMessageIndex == 2601)
+			if (mApp.mCrazyDaveMessageIndex == 303 || mApp.mCrazyDaveMessageIndex == 606 || mApp.mCrazyDaveMessageIndex == 2105 || mApp.mCrazyDaveMessageIndex == 2601)
 			{
-				this.mHatchTimer = 150;
-				this.mHatchOpen = true;
-				this.mApp.PlaySample(Resources.SOUND_HATCHBACK_OPEN);
+				mHatchTimer = 150;
+				mHatchOpen = true;
+				mApp.PlaySample(Resources.SOUND_HATCHBACK_OPEN);
 			}
-			if (this.mApp.mCrazyDaveMessageIndex == 603)
+			if (mApp.mCrazyDaveMessageIndex == 603)
 			{
-				this.mApp.mPlayerInfo.AddCoins(100);
-				this.mApp.mPlayerInfo.mNeedsMagicTacoReward = false;
-				this.mApp.WriteCurrentUserConfig();
+				mApp.mPlayerInfo.AddCoins(100);
+				mApp.mPlayerInfo.mNeedsMagicTacoReward = false;
+				mApp.WriteCurrentUserConfig();
 			}
-			if (this.mApp.mCrazyDaveMessageIndex == 2103)
+			if (mApp.mCrazyDaveMessageIndex == 2103)
 			{
-				this.mApp.mPlayerInfo.mNeedsMagicBaconReward = false;
-				this.mApp.WriteCurrentUserConfig();
-				this.mApp.PlaySample(Resources.SOUND_DIAMOND);
+				mApp.mPlayerInfo.mNeedsMagicBaconReward = false;
+				mApp.WriteCurrentUserConfig();
+				mApp.PlaySample(Resources.SOUND_DIAMOND);
 				Coin coin = StoreScreen.mCoins.DataArrayAlloc();
 				coin.CoinInitialize(80, 520, CoinType.COIN_DIAMOND, CoinMotion.COIN_MOTION_FROM_PRESENT);
 				coin.mVelX = 0f;
 				coin.mVelY = -5f;
 			}
-			if (this.mApp.mCrazyDaveMessageIndex == 902)
+			if (mApp.mCrazyDaveMessageIndex == 902)
 			{
-				this.mApp.mPlayerInfo.AddCoins(100);
+				mApp.mPlayerInfo.AddCoins(100);
 			}
-			if (this.mApp.mCrazyDaveMessageIndex == 1002)
+			if (mApp.mCrazyDaveMessageIndex == 1002)
 			{
-				this.mApp.mPlayerInfo.AddCoins(100);
+				mApp.mPlayerInfo.AddCoins(100);
 			}
 		}
 
 		public bool IsComingSoon(StoreItem theStoreItem)
 		{
-			return this.IsFullVersionOnly(theStoreItem) || (StoreScreen.IsPottedPlant(theStoreItem) && !this.mApp.HasFinishedAdventure());
+			return IsFullVersionOnly(theStoreItem) || (StoreScreen.IsPottedPlant(theStoreItem) && !mApp.HasFinishedAdventure());
 		}
 
 		public void StorePreLoad()
 		{
 			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_CRAZY_DAVE, true);
-			this.mApp.CrazyDaveEnter();
+			mApp.CrazyDaveEnter();
 			Plant.PreloadPlantResources(SeedType.SEED_GATLINGPEA);
 			Plant.PreloadPlantResources(SeedType.SEED_TWINSUNFLOWER);
-			if (this.mApp.HasFinishedAdventure())
+			if (mApp.HasFinishedAdventure())
 			{
 				Plant.PreloadPlantResources(SeedType.SEED_TWINSUNFLOWER);
 				Plant.PreloadPlantResources(SeedType.SEED_GLOOMSHROOM);
@@ -1113,11 +1113,11 @@ namespace Lawn
 
 		public bool IsPageShown(StorePage thePage)
 		{
-			if (this.mApp.IsTrialStageLocked())
+			if (mApp.IsTrialStageLocked())
 			{
 				return thePage == StorePage.STORE_PAGE_SLOT_UPGRADES;
 			}
-			return (thePage != StorePage.STORE_PAGE_ZEN1 || this.mApp.mPlayerInfo.mZenGardenTutorialComplete || this.mApp.mZenGarden.mIsTutorial) && (thePage != StorePage.STORE_PAGE_ZEN2 || this.mApp.mPlayerInfo.mZenGardenTutorialComplete || this.mApp.HasFinishedAdventure()) && (this.mApp.HasFinishedAdventure() || thePage != StorePage.STORE_PAGE_PLANT_UPGRADES || this.mApp.mPlayerInfo.mLevel >= 42);
+			return (thePage != StorePage.STORE_PAGE_ZEN1 || mApp.mPlayerInfo.mZenGardenTutorialComplete || mApp.mZenGarden.mIsTutorial) && (thePage != StorePage.STORE_PAGE_ZEN2 || mApp.mPlayerInfo.mZenGardenTutorialComplete || mApp.HasFinishedAdventure()) && (mApp.HasFinishedAdventure() || thePage != StorePage.STORE_PAGE_PLANT_UPGRADES || mApp.mPlayerInfo.mLevel >= 42);
 		}
 
 		public override void DrawOverlay(Graphics g)
@@ -1126,9 +1126,9 @@ namespace Lawn
 
 		public bool IsFullVersionOnly(StoreItem theStoreItem)
 		{
-			if (this.mApp.IsTrialStageLocked())
+			if (mApp.IsTrialStageLocked())
 			{
-				if (theStoreItem == StoreItem.STORE_ITEM_PACKET_UPGRADE && this.mApp.mPlayerInfo.mPurchases[21] >= 2)
+				if (theStoreItem == StoreItem.STORE_ITEM_PACKET_UPGRADE && mApp.mPlayerInfo.mPurchases[21] >= 2)
 				{
 					return true;
 				}
@@ -1142,7 +1142,7 @@ namespace Lawn
 
 		public bool IsWaitingForDialog()
 		{
-			return this.mApp.GetDialog(Dialogs.DIALOG_STORE_PURCHASE) != null || this.mApp.GetDialog(Dialogs.DIALOG_NOT_ENOUGH_MONEY) != null || this.mApp.GetDialog(Dialogs.DIALOG_VISIT_TREE_OF_WISDOM) != null || this.mApp.GetDialog(Dialogs.DIALOG_UPGRADED) != null;
+			return mApp.GetDialog(Dialogs.DIALOG_STORE_PURCHASE) != null || mApp.GetDialog(Dialogs.DIALOG_NOT_ENOUGH_MONEY) != null || mApp.GetDialog(Dialogs.DIALOG_VISIT_TREE_OF_WISDOM) != null || mApp.GetDialog(Dialogs.DIALOG_UPGRADED) != null;
 		}
 
 		private const int aNumpicks = 4;

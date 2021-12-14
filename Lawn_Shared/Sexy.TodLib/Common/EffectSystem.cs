@@ -6,10 +6,10 @@ namespace Sexy.TodLib
 	{
 		public EffectSystem()
 		{
-			this.mParticleHolder = null;
-			this.mTrailHolder = null;
-			this.mReanimationHolder = null;
-			this.mAttachmentHolder = null;
+			mParticleHolder = null;
+			mTrailHolder = null;
+			mReanimationHolder = null;
+			mAttachmentHolder = null;
 		}
 
 		public void Dispose()
@@ -19,121 +19,121 @@ namespace Sexy.TodLib
 		public void EffectSystemInitialize()
 		{
 			Debug.ASSERT(EffectSystem.gEffectSystem == null);
-			Debug.ASSERT(this.mParticleHolder == null && this.mTrailHolder == null && this.mReanimationHolder == null && this.mAttachmentHolder == null);
+			Debug.ASSERT(mParticleHolder == null && mTrailHolder == null && mReanimationHolder == null && mAttachmentHolder == null);
 			EffectSystem.gEffectSystem = this;
-			this.mParticleHolder = new TodParticleHolder();
-			this.mTrailHolder = new TrailHolder();
-			this.mReanimationHolder = new ReanimationHolder();
-			this.mAttachmentHolder = new AttachmentHolder();
-			this.mParticleHolder.InitializeHolder();
-			this.mTrailHolder.InitializeHolder();
-			this.mReanimationHolder.InitializeHolder();
-			this.mAttachmentHolder.InitializeHolder();
+			mParticleHolder = new TodParticleHolder();
+			mTrailHolder = new TrailHolder();
+			mReanimationHolder = new ReanimationHolder();
+			mAttachmentHolder = new AttachmentHolder();
+			mParticleHolder.InitializeHolder();
+			mTrailHolder.InitializeHolder();
+			mReanimationHolder.InitializeHolder();
+			mAttachmentHolder.InitializeHolder();
 		}
 
 		public void EffectSystemDispose()
 		{
-			if (this.mParticleHolder != null)
+			if (mParticleHolder != null)
 			{
-				this.mParticleHolder.DisposeHolder();
-				this.mParticleHolder.Dispose();
-				this.mParticleHolder = null;
+				mParticleHolder.DisposeHolder();
+				mParticleHolder.Dispose();
+				mParticleHolder = null;
 			}
-			if (this.mTrailHolder != null)
+			if (mTrailHolder != null)
 			{
-				this.mTrailHolder.DisposeHolder();
-				this.mTrailHolder.Dispose();
-				this.mTrailHolder = null;
+				mTrailHolder.DisposeHolder();
+				mTrailHolder.Dispose();
+				mTrailHolder = null;
 			}
-			if (this.mReanimationHolder != null)
+			if (mReanimationHolder != null)
 			{
-				this.mReanimationHolder.DisposeHolder();
-				this.mReanimationHolder = null;
+				mReanimationHolder.DisposeHolder();
+				mReanimationHolder = null;
 			}
-			if (this.mAttachmentHolder != null)
+			if (mAttachmentHolder != null)
 			{
-				this.mAttachmentHolder.DisposeHolder();
-				this.mAttachmentHolder.Dispose();
-				this.mAttachmentHolder = null;
+				mAttachmentHolder.DisposeHolder();
+				mAttachmentHolder.Dispose();
+				mAttachmentHolder = null;
 			}
 			EffectSystem.gEffectSystem = null;
 		}
 
 		public void EffectSystemFreeAll()
 		{
-			this.mParticleHolder.mParticleSystems.Clear();
-			for (int i = 0; i < this.mParticleHolder.mEmitters.Count; i++)
+			mParticleHolder.mParticleSystems.Clear();
+			for (int i = 0; i < mParticleHolder.mEmitters.Count; i++)
 			{
-				this.mParticleHolder.mEmitters[i].PrepareForReuse();
+				mParticleHolder.mEmitters[i].PrepareForReuse();
 			}
-			this.mParticleHolder.mEmitters.Clear();
-			this.mParticleHolder.mParticles.Clear();
-			this.mTrailHolder.mTrails.Clear();
-			for (int j = 0; j < this.mReanimationHolder.mReanimations.Count; j++)
+			mParticleHolder.mEmitters.Clear();
+			mParticleHolder.mParticles.Clear();
+			mTrailHolder.mTrails.Clear();
+			for (int j = 0; j < mReanimationHolder.mReanimations.Count; j++)
 			{
-				this.mReanimationHolder.mReanimations[j].PrepareForReuse();
+				mReanimationHolder.mReanimations[j].PrepareForReuse();
 			}
-			this.mReanimationHolder.mReanimations.Clear();
-			this.mAttachmentHolder.mAttachments.Clear();
+			mReanimationHolder.mReanimations.Clear();
+			mAttachmentHolder.mAttachments.Clear();
 		}
 
 		public void ProcessDeleteQueue()
 		{
-			for (int i = this.mParticleHolder.mParticleSystems.Count - 1; i >= 0; i--)
+			for (int i = mParticleHolder.mParticleSystems.Count - 1; i >= 0; i--)
 			{
-				if (this.mParticleHolder.mParticleSystems[i].mDead)
+				if (mParticleHolder.mParticleSystems[i].mDead)
 				{
-					this.mParticleHolder.mParticleSystems[i].ParticleSystemDie();
-					this.mParticleHolder.mParticleSystems[i].PrepareForReuse();
-					this.mParticleHolder.mParticleSystems.RemoveAt(i);
+					mParticleHolder.mParticleSystems[i].ParticleSystemDie();
+					mParticleHolder.mParticleSystems[i].PrepareForReuse();
+					mParticleHolder.mParticleSystems.RemoveAt(i);
 				}
 			}
-			for (int j = 0; j < this.mReanimationHolder.mReanimations.Count; j++)
+			for (int j = 0; j < mReanimationHolder.mReanimations.Count; j++)
 			{
-				Reanimation reanimation = this.mReanimationHolder.mReanimations[j];
+				Reanimation reanimation = mReanimationHolder.mReanimations[j];
 				if (reanimation.mDead)
 				{
-					this.mReanimationHolder.mReanimations[j].PrepareForReuse();
-					this.mReanimationHolder.mReanimations.RemoveAt(j);
+					mReanimationHolder.mReanimations[j].PrepareForReuse();
+					mReanimationHolder.mReanimations.RemoveAt(j);
 					j--;
 				}
 			}
-			for (int k = 0; k < this.mTrailHolder.mTrails.Count; k++)
+			for (int k = 0; k < mTrailHolder.mTrails.Count; k++)
 			{
-				Trail trail = this.mTrailHolder.mTrails[k];
+				Trail trail = mTrailHolder.mTrails[k];
 				if (trail.mDead)
 				{
-					this.mTrailHolder.mTrails.RemoveAt(k);
+					mTrailHolder.mTrails.RemoveAt(k);
 					k--;
 				}
 			}
-			for (int l = this.mAttachmentHolder.mAttachments.Count - 1; l >= 0; l--)
+			for (int l = mAttachmentHolder.mAttachments.Count - 1; l >= 0; l--)
 			{
-				if (this.mAttachmentHolder.mAttachments[l] == null || this.mAttachmentHolder.mAttachments[l].mDead)
+				if (mAttachmentHolder.mAttachments[l] == null || mAttachmentHolder.mAttachments[l].mDead)
 				{
-					this.mAttachmentHolder.mAttachments[l].PrepareForReuse();
-					this.mAttachmentHolder.mAttachments.RemoveAt(l);
+					mAttachmentHolder.mAttachments[l].PrepareForReuse();
+					mAttachmentHolder.mAttachments.RemoveAt(l);
 				}
 			}
 		}
 
 		public void Update()
 		{
-			foreach (TodParticleSystem todParticleSystem in this.mParticleHolder.mParticleSystems)
+			foreach (TodParticleSystem todParticleSystem in mParticleHolder.mParticleSystems)
 			{
 				if (!todParticleSystem.mIsAttachment)
 				{
 					todParticleSystem.Update();
 				}
 			}
-			foreach (Reanimation reanimation in this.mReanimationHolder.mReanimations)
+			foreach (Reanimation reanimation in mReanimationHolder.mReanimations)
 			{
 				if (reanimation != null && !reanimation.mIsAttachment)
 				{
 					reanimation.Update();
 				}
 			}
-			foreach (Trail trail in this.mTrailHolder.mTrails)
+			foreach (Trail trail in mTrailHolder.mTrails)
 			{
 				if (!trail.mIsAttachment)
 				{

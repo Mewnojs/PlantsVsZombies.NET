@@ -8,123 +8,123 @@ namespace Lawn
 	{
 		public ChallengeScreen(LawnApp theApp, ChallengePage thePage)
 		{
-			this.mApp = theApp;
-			this.mClip = false;
-			this.mCheatEnableChallenges = false;
-			this.mPageIndex = thePage;
-			this.mUnlockState = UnlockingState.UNLOCKING_OFF;
-			this.mUnlockChallengeIndex = -1;
-			this.mUnlockStateCounter = 0;
-			this.mLockShakeX = 0f;
-			this.mLockShakeY = 0f;
-			this.mBackButton = GameButton.MakeNewButton(100, this, "[BACK_TO_MENU]", null, AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2, AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2_GLOW, AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2_GLOW);
-			this.mBackButton.Resize(18, 366, 111, 26);
-			this.mBackButton.mTextDownOffsetX = 1;
-			this.mBackButton.mTextDownOffsetY = 1;
-			this.mBackButton.mColors[0] = new SexyColor(42, 42, 90);
-			this.mBackButton.mColors[1] = new SexyColor(42, 42, 90);
-			this.mChallengeScreenWidget = new ChallengeScreenWidget(this.mApp);
-			this.mChallengeScreenWidget.Resize(base.M(0), base.M1(0), base.M2(800), base.M3(415));
-			this.mScrollWidget = new ScrollWidget();
-			this.mScrollWidget.AddWidget(this.mChallengeScreenWidget);
-			this.mScrollWidget.EnableIndicators(AtlasResources.IMAGE_SCROLL_INDICATOR);
-			this.mScrollWidget.Resize(base.M(0), base.M1(65), base.M2(800), base.M3(415));
-			this.AddWidget(this.mScrollWidget);
+			mApp = theApp;
+			mClip = false;
+			mCheatEnableChallenges = false;
+			mPageIndex = thePage;
+			mUnlockState = UnlockingState.UNLOCKING_OFF;
+			mUnlockChallengeIndex = -1;
+			mUnlockStateCounter = 0;
+			mLockShakeX = 0f;
+			mLockShakeY = 0f;
+			mBackButton = GameButton.MakeNewButton(100, this, "[BACK_TO_MENU]", null, AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2, AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2_GLOW, AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2_GLOW);
+			mBackButton.Resize(18, 366, 111, 26);
+			mBackButton.mTextDownOffsetX = 1;
+			mBackButton.mTextDownOffsetY = 1;
+			mBackButton.mColors[0] = new SexyColor(42, 42, 90);
+			mBackButton.mColors[1] = new SexyColor(42, 42, 90);
+			mChallengeScreenWidget = new ChallengeScreenWidget(mApp);
+			mChallengeScreenWidget.Resize(base.M(0), base.M1(0), base.M2(800), base.M3(415));
+			mScrollWidget = new ScrollWidget();
+			mScrollWidget.AddWidget(mChallengeScreenWidget);
+			mScrollWidget.EnableIndicators(AtlasResources.IMAGE_SCROLL_INDICATOR);
+			mScrollWidget.Resize(base.M(0), base.M1(65), base.M2(800), base.M3(415));
+			AddWidget(mScrollWidget);
 			for (int i = 0; i < 4; i++)
 			{
-				this.mPageButton[i] = new ButtonWidget(300 + i, this);
-				this.mPageButton[i].mDoFinger = true;
+				mPageButton[i] = new ButtonWidget(300 + i, this);
+				mPageButton[i].mDoFinger = true;
 				if (i == 2)
 				{
-					this.mPageButton[i].mLabel = TodStringFile.TodStringTranslate("Limbo Page");
+					mPageButton[i].mLabel = TodStringFile.TodStringTranslate("Limbo Page");
 				}
 				else
 				{
-					this.mPageButton[i].mLabel = TodCommon.TodReplaceNumberString("[PAGE_X]", "{PAGE}", i);
+					mPageButton[i].mLabel = TodCommon.TodReplaceNumberString("[PAGE_X]", "{PAGE}", i);
 				}
-				this.mPageButton[i].mButtonImage = AtlasResources.IMAGE_BLANK;
-				this.mPageButton[i].mOverImage = AtlasResources.IMAGE_BLANK;
-				this.mPageButton[i].mDownImage = AtlasResources.IMAGE_BLANK;
-				this.mPageButton[i].SetFont(Resources.FONT_BRIANNETOD12);
-				this.mPageButton[i].mColors[0] = new SexyColor(255, 240, 0);
-				this.mPageButton[i].mColors[1] = new SexyColor(220, 220, 0);
-				this.mPageButton[i].Resize(base.S(200 + i * 100), base.S(540), base.S(100), base.S(75));
-				if (!this.ShowPageButtons() || i == 0 || i == 3)
+				mPageButton[i].mButtonImage = AtlasResources.IMAGE_BLANK;
+				mPageButton[i].mOverImage = AtlasResources.IMAGE_BLANK;
+				mPageButton[i].mDownImage = AtlasResources.IMAGE_BLANK;
+				mPageButton[i].SetFont(Resources.FONT_BRIANNETOD12);
+				mPageButton[i].mColors[0] = new SexyColor(255, 240, 0);
+				mPageButton[i].mColors[1] = new SexyColor(220, 220, 0);
+				mPageButton[i].Resize(base.S(200 + i * 100), base.S(540), base.S(100), base.S(75));
+				if (!ShowPageButtons() || i == 0 || i == 3)
 				{
-					this.mPageButton[i].mVisible = false;
+					mPageButton[i].mVisible = false;
 				}
 			}
 			for (int j = 0; j < ChallengeScreen.gChallengeDefs.Length; j++)
 			{
 				ChallengeDefinition challengeDefinition = ChallengeScreen.gChallengeDefs[j];
-				this.mChallengeButton[j] = new ButtonWidget(200 + j, this);
-				this.mChallengeButton[j].mDoFinger = true;
-				this.mChallengeButton[j].mFrameNoDraw = true;
+				mChallengeButton[j] = new ButtonWidget(200 + j, this);
+				mChallengeButton[j].mDoFinger = true;
+				mChallengeButton[j].mFrameNoDraw = true;
 				if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_CHALLENGE || challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_LIMBO || challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_PUZZLE)
 				{
-					this.mChallengeButton[j].Resize(base.M(75) + challengeDefinition.mCol * base.M1(150), base.M2(15) + challengeDefinition.mRow * base.M3(95), 50, 60);
+					mChallengeButton[j].Resize(base.M(75) + challengeDefinition.mCol * base.M1(150), base.M2(15) + challengeDefinition.mRow * base.M3(95), 50, 60);
 				}
 				else
 				{
-					this.mChallengeButton[j].Resize(base.S(38 + challengeDefinition.mCol * 155), base.S(125 + challengeDefinition.mRow * 145), base.S(104), base.S(115));
+					mChallengeButton[j].Resize(base.S(38 + challengeDefinition.mCol * 155), base.S(125 + challengeDefinition.mRow * 145), base.S(104), base.S(115));
 				}
-				if (this.MoreTrophiesNeeded(j) != 0)
+				if (MoreTrophiesNeeded(j) != 0)
 				{
-					this.mChallengeButton[j].mDoFinger = false;
-					this.mChallengeButton[j].mDisabled = true;
+					mChallengeButton[j].mDoFinger = false;
+					mChallengeButton[j].mDisabled = true;
 				}
 			}
-			this.UpdateButtons();
-			if (this.mApp.mGameMode != GameMode.GAMEMODE_UPSELL || this.mApp.mGameScene != GameScenes.SCENE_LEVEL_INTRO)
+			UpdateButtons();
+			if (mApp.mGameMode != GameMode.GAMEMODE_UPSELL || mApp.mGameScene != GameScenes.SCENE_LEVEL_INTRO)
 			{
-				this.mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_CHOOSE_YOUR_SEEDS);
+				mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_CHOOSE_YOUR_SEEDS);
 			}
-			if (this.mPageIndex == ChallengePage.CHALLENGE_PAGE_SURVIVAL && this.mApp.mPlayerInfo.mHasNewSurvival)
+			if (mPageIndex == ChallengePage.CHALLENGE_PAGE_SURVIVAL && mApp.mPlayerInfo.mHasNewSurvival)
 			{
-				this.SetUnlockChallengeIndex(this.mPageIndex, false);
-				this.mApp.mPlayerInfo.mHasNewSurvival = false;
+				SetUnlockChallengeIndex(mPageIndex, false);
+				mApp.mPlayerInfo.mHasNewSurvival = false;
 				return;
 			}
-			if (this.mPageIndex == ChallengePage.CHALLENGE_PAGE_CHALLENGE && this.mApp.mPlayerInfo.mHasNewMiniGame)
+			if (mPageIndex == ChallengePage.CHALLENGE_PAGE_CHALLENGE && mApp.mPlayerInfo.mHasNewMiniGame)
 			{
-				this.SetUnlockChallengeIndex(this.mPageIndex, false);
-				this.mApp.mPlayerInfo.mHasNewMiniGame = false;
+				SetUnlockChallengeIndex(mPageIndex, false);
+				mApp.mPlayerInfo.mHasNewMiniGame = false;
 				return;
 			}
-			if (this.mPageIndex == ChallengePage.CHALLENGE_PAGE_PUZZLE && this.mApp.mPlayerInfo.mHasNewVasebreaker)
+			if (mPageIndex == ChallengePage.CHALLENGE_PAGE_PUZZLE && mApp.mPlayerInfo.mHasNewVasebreaker)
 			{
-				this.SetUnlockChallengeIndex(this.mPageIndex, false);
-				this.mApp.mPlayerInfo.mHasNewVasebreaker = false;
+				SetUnlockChallengeIndex(mPageIndex, false);
+				mApp.mPlayerInfo.mHasNewVasebreaker = false;
 				return;
 			}
-			if (this.mPageIndex == ChallengePage.CHALLENGE_PAGE_PUZZLE && this.mApp.mPlayerInfo.mHasNewIZombie)
+			if (mPageIndex == ChallengePage.CHALLENGE_PAGE_PUZZLE && mApp.mPlayerInfo.mHasNewIZombie)
 			{
-				this.SetUnlockChallengeIndex(this.mPageIndex, true);
-				this.mApp.mPlayerInfo.mHasNewIZombie = false;
+				SetUnlockChallengeIndex(mPageIndex, true);
+				mApp.mPlayerInfo.mHasNewIZombie = false;
 			}
 		}
 
 		public override bool BackButtonPress()
 		{
-			this.mApp.KillChallengeScreen();
-			this.mApp.DoBackToMain();
+			mApp.KillChallengeScreen();
+			mApp.DoBackToMain();
 			return true;
 		}
 
 		public void SetUnlockChallengeIndex(ChallengePage thePage, bool aIsIZombie)
 		{
-			this.mUnlockState = UnlockingState.UNLOCKING_SHAKING;
-			this.mUnlockStateCounter = 100;
-			this.mUnlockChallengeIndex = 0;
+			mUnlockState = UnlockingState.UNLOCKING_SHAKING;
+			mUnlockStateCounter = 100;
+			mUnlockChallengeIndex = 0;
 			for (int i = 0; i < ChallengeScreen.gChallengeDefs.Length; i++)
 			{
 				ChallengeDefinition challengeDefinition = ChallengeScreen.gChallengeDefs[i];
-				if (challengeDefinition.mPage == thePage && (thePage != ChallengePage.CHALLENGE_PAGE_PUZZLE || ((aIsIZombie || this.IsScaryPotterLevel(challengeDefinition.mChallengeMode)) && (!aIsIZombie || this.IsIZombieLevel(challengeDefinition.mChallengeMode)))))
+				if (challengeDefinition.mPage == thePage && (thePage != ChallengePage.CHALLENGE_PAGE_PUZZLE || ((aIsIZombie || IsScaryPotterLevel(challengeDefinition.mChallengeMode)) && (!aIsIZombie || IsIZombieLevel(challengeDefinition.mChallengeMode)))))
 				{
-					int num = this.AccomplishmentsNeeded(i);
+					int num = AccomplishmentsNeeded(i);
 					if (num <= 0)
 					{
-						this.mUnlockChallengeIndex = i;
+						mUnlockChallengeIndex = i;
 					}
 				}
 			}
@@ -133,7 +133,7 @@ namespace Lawn
 		public int MoreTrophiesNeeded(int aChallengeIndex)
 		{
 			ChallengeDefinition challengeDefinition = ChallengeScreen.gChallengeDefs[aChallengeIndex];
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_UPSELL && this.mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
+			if (mApp.mGameMode == GameMode.GAMEMODE_UPSELL && mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
 			{
 				if (challengeDefinition.mChallengeMode == GameMode.GAMEMODE_CHALLENGE_FINAL_BOSS)
 				{
@@ -143,7 +143,7 @@ namespace Lawn
 			}
 			else
 			{
-				if (this.mApp.IsTrialStageLocked())
+				if (mApp.IsTrialStageLocked())
 				{
 					if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_PUZZLE && challengeDefinition.mChallengeMode >= GameMode.GAMEMODE_SCARY_POTTER_4)
 					{
@@ -170,18 +170,18 @@ namespace Lawn
 						return 2;
 					}
 				}
-				if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_PUZZLE && this.IsScaryPotterLevel(challengeDefinition.mChallengeMode))
+				if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_PUZZLE && IsScaryPotterLevel(challengeDefinition.mChallengeMode))
 				{
 					int num = 0;
 					for (int i = 0; i < ChallengeScreen.gChallengeDefs.Length; i++)
 					{
 						ChallengeDefinition challengeDefinition2 = ChallengeScreen.gChallengeDefs[i];
-						if (this.IsScaryPotterLevel(challengeDefinition2.mChallengeMode) && this.mApp.HasBeatenChallenge(challengeDefinition2.mChallengeMode))
+						if (IsScaryPotterLevel(challengeDefinition2.mChallengeMode) && mApp.HasBeatenChallenge(challengeDefinition2.mChallengeMode))
 						{
 							num++;
 						}
 					}
-					if (challengeDefinition.mChallengeMode < GameMode.GAMEMODE_SCARY_POTTER_4 || this.mApp.HasFinishedAdventure() || num < 3)
+					if (challengeDefinition.mChallengeMode < GameMode.GAMEMODE_SCARY_POTTER_4 || mApp.HasFinishedAdventure() || num < 3)
 					{
 						int num2 = challengeDefinition.mChallengeMode - GameMode.GAMEMODE_SCARY_POTTER_1;
 						return TodCommon.ClampInt(num2 - num, 0, 9);
@@ -192,18 +192,18 @@ namespace Lawn
 					}
 					return 2;
 				}
-				else if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_PUZZLE && this.IsIZombieLevel(challengeDefinition.mChallengeMode))
+				else if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_PUZZLE && IsIZombieLevel(challengeDefinition.mChallengeMode))
 				{
 					int num3 = 0;
 					for (int j = 0; j < ChallengeScreen.gChallengeDefs.Length; j++)
 					{
 						ChallengeDefinition challengeDefinition3 = ChallengeScreen.gChallengeDefs[j];
-						if (this.IsIZombieLevel(challengeDefinition3.mChallengeMode) && this.mApp.HasBeatenChallenge(challengeDefinition3.mChallengeMode))
+						if (IsIZombieLevel(challengeDefinition3.mChallengeMode) && mApp.HasBeatenChallenge(challengeDefinition3.mChallengeMode))
 						{
 							num3++;
 						}
 					}
-					if (challengeDefinition.mChallengeMode < GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_4 || this.mApp.HasFinishedAdventure() || num3 < 3)
+					if (challengeDefinition.mChallengeMode < GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_4 || mApp.HasFinishedAdventure() || num3 < 3)
 					{
 						int num4 = challengeDefinition.mChallengeMode - GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_1;
 						return TodCommon.ClampInt(num4 - num3, 0, 9);
@@ -217,7 +217,7 @@ namespace Lawn
 				else
 				{
 					int num5 = challengeDefinition.mRow * 5 + challengeDefinition.mCol;
-					if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_CHALLENGE && !this.mApp.HasFinishedAdventure())
+					if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_CHALLENGE && !mApp.HasFinishedAdventure())
 					{
 						if (num5 < 3)
 						{
@@ -229,7 +229,7 @@ namespace Lawn
 						}
 						return 2;
 					}
-					else if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_SURVIVAL && !this.mApp.HasFinishedAdventure())
+					else if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_SURVIVAL && !mApp.HasFinishedAdventure())
 					{
 						if (num5 < 3)
 						{
@@ -243,13 +243,13 @@ namespace Lawn
 					}
 					else
 					{
-						int numTrophies = this.mApp.GetNumTrophies(challengeDefinition.mPage);
+						int numTrophies = mApp.GetNumTrophies(challengeDefinition.mPage);
 						int num6 = 0;
 						if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_LIMBO)
 						{
 							return 0;
 						}
-						if (this.mApp.IsSurvivalEndless(challengeDefinition.mChallengeMode))
+						if (mApp.IsSurvivalEndless(challengeDefinition.mChallengeMode))
 						{
 							return 10 - numTrophies;
 						}
@@ -270,7 +270,7 @@ namespace Lawn
 
 		public bool ShowPageButtons()
 		{
-			return this.mApp.mTodCheatKeys && this.mPageIndex != ChallengePage.CHALLENGE_PAGE_SURVIVAL && this.mPageIndex != ChallengePage.CHALLENGE_PAGE_PUZZLE;
+			return mApp.mTodCheatKeys && mPageIndex != ChallengePage.CHALLENGE_PAGE_SURVIVAL && mPageIndex != ChallengePage.CHALLENGE_PAGE_PUZZLE;
 		}
 
 		public void UpdateButtons()
@@ -278,26 +278,26 @@ namespace Lawn
 			for (int i = 0; i < ChallengeScreen.gChallengeDefs.Length; i++)
 			{
 				ChallengeDefinition challengeDefinition = ChallengeScreen.gChallengeDefs[i];
-				if (challengeDefinition.mPage != this.mPageIndex)
+				if (challengeDefinition.mPage != mPageIndex)
 				{
-					this.mChallengeButton[i].mVisible = false;
+					mChallengeButton[i].mVisible = false;
 				}
 				else
 				{
-					this.mChallengeButton[i].mVisible = true;
+					mChallengeButton[i].mVisible = true;
 				}
 			}
 			for (int j = 0; j < 4; j++)
 			{
-				if (j == (int)this.mPageIndex)
+				if (j == (int)mPageIndex)
 				{
-					this.mPageButton[j].mColors[0] = new SexyColor(64, 64, 64);
-					this.mPageButton[j].mDisabled = true;
+					mPageButton[j].mColors[0] = new SexyColor(64, 64, 64);
+					mPageButton[j].mDisabled = true;
 				}
 				else
 				{
-					this.mPageButton[j].mColors[0] = new SexyColor(255, 240, 0);
-					this.mPageButton[j].mDisabled = false;
+					mPageButton[j].mColors[0] = new SexyColor(255, 240, 0);
+					mPageButton[j].mDisabled = false;
 				}
 			}
 		}
@@ -309,13 +309,13 @@ namespace Lawn
 
 		public int AccomplishmentsNeeded(int aChallengeIndex)
 		{
-			int num = this.MoreTrophiesNeeded(aChallengeIndex);
+			int num = MoreTrophiesNeeded(aChallengeIndex);
 			ChallengeDefinition challengeDefinition = ChallengeScreen.gChallengeDefs[aChallengeIndex];
-			if (this.mApp.IsSurvivalEndless(challengeDefinition.mChallengeMode) && num <= 3 && this.mApp.GetNumTrophies(ChallengePage.CHALLENGE_PAGE_SURVIVAL) < 10 && this.mApp.HasFinishedAdventure() && !this.mApp.IsTrialStageLocked())
+			if (mApp.IsSurvivalEndless(challengeDefinition.mChallengeMode) && num <= 3 && mApp.GetNumTrophies(ChallengePage.CHALLENGE_PAGE_SURVIVAL) < 10 && mApp.HasFinishedAdventure() && !mApp.IsTrialStageLocked())
 			{
 				num = 1;
 			}
-			if (this.mCheatEnableChallenges)
+			if (mCheatEnableChallenges)
 			{
 				num = 0;
 			}
@@ -325,12 +325,12 @@ namespace Lawn
 		public override void Draw(Graphics g)
 		{
 			g.SetLinearBlend(true);
-			LawnCommon.DrawImageBox(g, new TRect(0, 0, this.mWidth, this.mHeight), AtlasResources.IMAGE_ALMANAC_ROUNDED_OUTLINE);
-			if (this.mPageIndex == ChallengePage.CHALLENGE_PAGE_SURVIVAL)
+			LawnCommon.DrawImageBox(g, new TRect(0, 0, mWidth, mHeight), AtlasResources.IMAGE_ALMANAC_ROUNDED_OUTLINE);
+			if (mPageIndex == ChallengePage.CHALLENGE_PAGE_SURVIVAL)
 			{
 				TodCommon.TodDrawString(g, "[PICK_AREA]", 400, 22, Resources.FONT_DWARVENTODCRAFT15, new SexyColor(220, 220, 220), DrawStringJustification.DS_ALIGN_CENTER);
 			}
-			else if (this.mPageIndex == ChallengePage.CHALLENGE_PAGE_PUZZLE)
+			else if (mPageIndex == ChallengePage.CHALLENGE_PAGE_PUZZLE)
 			{
 				TodCommon.TodDrawString(g, "[SCARY_POTTER]", 400, 22, Resources.FONT_DWARVENTODCRAFT15, new SexyColor(220, 220, 220), DrawStringJustification.DS_ALIGN_CENTER);
 			}
@@ -339,26 +339,26 @@ namespace Lawn
 				TodCommon.TodDrawString(g, "[PICK_CHALLENGE]", 400, 22, Resources.FONT_DWARVENTODCRAFT15, new SexyColor(220, 220, 220), DrawStringJustification.DS_ALIGN_CENTER);
 			}
 			int num = 0;
-			int numTrophies = this.mApp.GetNumTrophies(this.mPageIndex);
-			if (this.mPageIndex == ChallengePage.CHALLENGE_PAGE_SURVIVAL)
+			int numTrophies = mApp.GetNumTrophies(mPageIndex);
+			if (mPageIndex == ChallengePage.CHALLENGE_PAGE_SURVIVAL)
 			{
 				num = 10;
 			}
-			else if (this.mPageIndex == ChallengePage.CHALLENGE_PAGE_CHALLENGE)
+			else if (mPageIndex == ChallengePage.CHALLENGE_PAGE_CHALLENGE)
 			{
 				num = 20;
 			}
-			else if (this.mPageIndex == ChallengePage.CHALLENGE_PAGE_PUZZLE)
+			else if (mPageIndex == ChallengePage.CHALLENGE_PAGE_PUZZLE)
 			{
 				num = 18;
 			}
 			if (num > 0)
 			{
-				if (this.trophyStrings[(int)this.mPageIndex] == null)
+				if (trophyStrings[(int)mPageIndex] == null)
 				{
-					this.trophyStrings[(int)this.mPageIndex] = LawnApp.ToString(numTrophies) + "/" + LawnApp.ToString(num);
+					trophyStrings[(int)mPageIndex] = LawnApp.ToString(numTrophies) + "/" + LawnApp.ToString(num);
 				}
-				string theText = this.trophyStrings[(int)this.mPageIndex];
+				string theText = trophyStrings[(int)mPageIndex];
 				TodCommon.TodDrawString(g, theText, 600, 39, Resources.FONT_DWARVENTODCRAFT12, new SexyColor(255, 240, 0), DrawStringJustification.DS_ALIGN_CENTER);
 			}
 			TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_TROPHY, 580f, 15f, 0.5f, 0.5f);
@@ -367,88 +367,88 @@ namespace Lawn
 		public override void Update()
 		{
 			base.Update();
-			this.UpdateToolTip();
-			if (this.mUnlockStateCounter > 0)
+			UpdateToolTip();
+			if (mUnlockStateCounter > 0)
 			{
-				this.mUnlockStateCounter--;
+				mUnlockStateCounter--;
 			}
-			if (this.mUnlockState == UnlockingState.UNLOCKING_SHAKING)
+			if (mUnlockState == UnlockingState.UNLOCKING_SHAKING)
 			{
-				if (this.mUnlockStateCounter == 0)
+				if (mUnlockStateCounter == 0)
 				{
-					this.mApp.PlayFoley(FoleyType.FOLEY_PAPER);
-					this.mUnlockState = UnlockingState.UNLOCKING_FADING;
-					this.mUnlockStateCounter = 50;
-					this.mLockShakeX = 0f;
-					this.mLockShakeY = 0f;
+					mApp.PlayFoley(FoleyType.FOLEY_PAPER);
+					mUnlockState = UnlockingState.UNLOCKING_FADING;
+					mUnlockStateCounter = 50;
+					mLockShakeX = 0f;
+					mLockShakeY = 0f;
 				}
 				else
 				{
-					this.mLockShakeX = TodCommon.RandRangeFloat(-2f, 2f);
-					this.mLockShakeY = TodCommon.RandRangeFloat(-2f, 2f);
+					mLockShakeX = TodCommon.RandRangeFloat(-2f, 2f);
+					mLockShakeY = TodCommon.RandRangeFloat(-2f, 2f);
 				}
 			}
-			else if (this.mUnlockState == UnlockingState.UNLOCKING_FADING && this.mUnlockStateCounter == 0)
+			else if (mUnlockState == UnlockingState.UNLOCKING_FADING && mUnlockStateCounter == 0)
 			{
-				this.mUnlockState = UnlockingState.UNLOCKING_OFF;
-				this.mUnlockStateCounter = 0;
-				this.mUnlockChallengeIndex = -1;
+				mUnlockState = UnlockingState.UNLOCKING_OFF;
+				mUnlockStateCounter = 0;
+				mUnlockChallengeIndex = -1;
 			}
-			this.MarkDirty();
+			MarkDirty();
 		}
 
 		public override void AddedToManager(WidgetManager theWidgetManager)
 		{
 			base.AddedToManager(theWidgetManager);
-			this.AddWidget(this.mBackButton);
+			AddWidget(mBackButton);
 			for (int i = 0; i < ChallengeScreen.gChallengeDefs.Length; i++)
 			{
-				this.mChallengeScreenWidget.AddWidget(this.mChallengeButton[i]);
+				mChallengeScreenWidget.AddWidget(mChallengeButton[i]);
 			}
 			for (int j = 0; j < 4; j++)
 			{
-				this.AddWidget(this.mPageButton[j]);
+				AddWidget(mPageButton[j]);
 			}
 		}
 
 		public override void RemovedFromManager(WidgetManager theWidgetManager)
 		{
 			base.RemovedFromManager(theWidgetManager);
-			this.RemoveWidget(this.mBackButton);
+			RemoveWidget(mBackButton);
 			for (int i = 0; i < 122; i++)
 			{
-				this.RemoveWidget(this.mChallengeButton[i]);
+				RemoveWidget(mChallengeButton[i]);
 			}
 			for (int j = 0; j < 4; j++)
 			{
-				this.RemoveWidget(this.mPageButton[j]);
+				RemoveWidget(mPageButton[j]);
 			}
 		}
 
 		public void ButtonPress(int theId)
 		{
-			this.mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
+			mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
 		}
 
 		public void ButtonDepress(int theId)
 		{
 			if (theId == 100)
 			{
-				this.mApp.KillChallengeScreen();
-				this.mApp.DoBackToMain();
+				mApp.KillChallengeScreen();
+				mApp.DoBackToMain();
 			}
 			int num = theId - 200;
 			if (num >= 0 && num < 122)
 			{
 				GameMode theGameMode = num + GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_1;
-				this.mApp.KillChallengeScreen();
-				this.mApp.PreNewGame(theGameMode, true);
+				mApp.KillChallengeScreen();
+				mApp.PreNewGame(theGameMode, true);
 			}
 			int num2 = theId - 300;
 			if (num2 >= 0 && num2 < 4)
 			{
-				this.mPageIndex = (ChallengePage)num2;
-				this.UpdateButtons();
+				mPageIndex = (ChallengePage)num2;
+				UpdateButtons();
 			}
 		}
 

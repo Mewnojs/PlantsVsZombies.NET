@@ -7,27 +7,27 @@ namespace Lawn
 	{
 		public void Reset()
 		{
-			this.mPosX = (this.mPosY = (this.mDestOffsetX = (this.mDestOffsetY = 0f)));
-			this.mItemType = MagnetItemType.MAGNET_ITEM_NONE;
+			mPosX = (mPosY = (mDestOffsetX = (mDestOffsetY = 0f)));
+			mItemType = MagnetItemType.MAGNET_ITEM_NONE;
 		}
 
 		public bool SaveToFile(Sexy.Buffer b)
 		{
-			b.WriteFloat(this.mDestOffsetX);
-			b.WriteFloat(this.mDestOffsetY);
-			b.WriteLong((int)this.mItemType);
-			b.WriteFloat(this.mPosX);
-			b.WriteFloat(this.mPosY);
+			b.WriteFloat(mDestOffsetX);
+			b.WriteFloat(mDestOffsetY);
+			b.WriteLong((int)mItemType);
+			b.WriteFloat(mPosX);
+			b.WriteFloat(mPosY);
 			return true;
 		}
 
 		public bool LoadFromFile(Sexy.Buffer b)
 		{
-			this.mDestOffsetX = b.ReadFloat();
-			this.mDestOffsetY = b.ReadFloat();
-			this.mItemType = (MagnetItemType)b.ReadLong();
-			this.mPosX = b.ReadFloat();
-			this.mPosY = b.ReadFloat();
+			mDestOffsetX = b.ReadFloat();
+			mDestOffsetY = b.ReadFloat();
+			mItemType = (MagnetItemType)b.ReadLong();
+			mPosX = b.ReadFloat();
+			mPosY = b.ReadFloat();
 			return true;
 		}
 

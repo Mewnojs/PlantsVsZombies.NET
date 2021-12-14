@@ -103,7 +103,7 @@ namespace Lawn
             {
                 public VirtualWriter(string Name) : base()
                 {
-                    this.name = Name;
+                    name = Name;
                     return;
                 }
 
@@ -111,7 +111,7 @@ namespace Lawn
                 {
                     base.Flush();
                     FlushEvent.Invoke(this);
-                    this.GetStringBuilder().Clear();
+                    GetStringBuilder().Clear();
                 }
 
                 public delegate void FlushEventHandler(VirtualWriter sender);

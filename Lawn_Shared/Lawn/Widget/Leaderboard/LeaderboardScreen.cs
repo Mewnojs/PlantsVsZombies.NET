@@ -8,36 +8,36 @@ namespace Lawn
 	{
 		public LeaderboardScreen(LawnApp theApp)
 		{
-			this.mApp = theApp;
-			this.mClip = false;
-			this.mApp.DelayLoadMainMenuResource(false);
-			this.mApp.DelayLoadZenGardenResources(false);
-			this.mApp.DelayLoadLeaderboardResource(true);
-			this.mZombiePileWidget = new ZombiePileWidget(this.mApp);
-			this.mPileScrollWidget = new ScrollWidget();
-			this.mPileScrollWidget.EnableBounce(false);
-			this.mPileScrollWidget.Resize(0, 0, this.mZombiePileWidget.mWidth, Constants.BOARD_HEIGHT);
-			this.mPileScrollWidget.AddWidget(this.mZombiePileWidget);
-			this.AddWidget(this.mPileScrollWidget);
-			this.mPileScrollWidget.ScrollToBottom(false);
-			this.mApp.DelayLoadBackgroundResource("DelayLoad_Leaderboard_Background");
-			LeaderBoardComm.RecordResult(LeaderboardGameMode.Adventure, (int)this.mApp.mPlayerInfo.mZombiesKilled);
+			mApp = theApp;
+			mClip = false;
+			mApp.DelayLoadMainMenuResource(false);
+			mApp.DelayLoadZenGardenResources(false);
+			mApp.DelayLoadLeaderboardResource(true);
+			mZombiePileWidget = new ZombiePileWidget(mApp);
+			mPileScrollWidget = new ScrollWidget();
+			mPileScrollWidget.EnableBounce(false);
+			mPileScrollWidget.Resize(0, 0, mZombiePileWidget.mWidth, Constants.BOARD_HEIGHT);
+			mPileScrollWidget.AddWidget(mZombiePileWidget);
+			AddWidget(mPileScrollWidget);
+			mPileScrollWidget.ScrollToBottom(false);
+			mApp.DelayLoadBackgroundResource("DelayLoad_Leaderboard_Background");
+			LeaderBoardComm.RecordResult(LeaderboardGameMode.Adventure, (int)mApp.mPlayerInfo.mZombiesKilled);
 		}
 
 		public void UnloadResources()
 		{
-			this.mApp.DelayLoadLeaderboardResource(false);
+			mApp.DelayLoadLeaderboardResource(false);
 		}
 
 		public void SetGrayed(bool aGray)
 		{
-			this.mZombiePileWidget.SetGray(aGray);
+			mZombiePileWidget.SetGray(aGray);
 		}
 
 		public override bool BackButtonPress()
 		{
-			this.mApp.KillLeaderboardScreen();
-			this.mApp.DoBackToMain(false);
+			mApp.KillLeaderboardScreen();
+			mApp.DoBackToMain(false);
 			return true;
 		}
 
@@ -51,22 +51,22 @@ namespace Lawn
 
 		public void SlideTo(int theX, int theY)
 		{
-			this.mSlideCounter = 75;
-			this.mDestX = theX;
-			this.mDestY = theY;
-			this.mStartX = this.mX;
-			this.mStartY = this.mY;
+			mSlideCounter = 75;
+			mDestX = theX;
+			mDestY = theY;
+			mStartX = mX;
+			mStartY = mY;
 		}
 
 		public override void Update()
 		{
 			base.Update();
-			if (this.mSlideCounter > 0)
+			if (mSlideCounter > 0)
 			{
-				int theNewX = TodCommon.TodAnimateCurve(75, 0, this.mSlideCounter, this.mStartX, this.mDestX, TodCurves.CURVE_EASE_IN_OUT);
-				int theNewY = TodCommon.TodAnimateCurve(75, 0, this.mSlideCounter, this.mStartY, this.mDestY, TodCurves.CURVE_EASE_IN_OUT);
-				this.Move(theNewX, theNewY);
-				this.mSlideCounter -= 3;
+				int theNewX = TodCommon.TodAnimateCurve(75, 0, mSlideCounter, mStartX, mDestX, TodCurves.CURVE_EASE_IN_OUT);
+				int theNewY = TodCommon.TodAnimateCurve(75, 0, mSlideCounter, mStartY, mDestY, TodCurves.CURVE_EASE_IN_OUT);
+				Move(theNewX, theNewY);
+				mSlideCounter -= 3;
 			}
 		}
 

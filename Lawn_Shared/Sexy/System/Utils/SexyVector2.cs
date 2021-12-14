@@ -9,11 +9,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mVector.X;
+				return mVector.X;
 			}
 			set
 			{
-				this.mVector.X = value;
+				mVector.X = value;
 			}
 		}
 
@@ -21,27 +21,27 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mVector.Y;
+				return mVector.Y;
 			}
 			set
 			{
-				this.mVector.Y = value;
+				mVector.Y = value;
 			}
 		}
 
 		public SexyVector2(float theX, float theY)
 		{
-			this.mVector = new Vector2(theX, theY);
+			mVector = new Vector2(theX, theY);
 		}
 
 		public SexyVector2(Vector2 theVector)
 		{
-			this.mVector = theVector;
+			mVector = theVector;
 		}
 
 		public float Dot(SexyVector2 v)
 		{
-			return Vector2.Dot(this.mVector, v.mVector);
+			return Vector2.Dot(mVector, v.mVector);
 		}
 
 		public static SexyVector2 operator +(SexyVector2 lhs, SexyVector2 rhs)
@@ -81,38 +81,38 @@ namespace Sexy
 
 		public float Magnitude()
 		{
-			return (float)Math.Sqrt((double)(this.x * this.x + this.y * this.y));
+			return (float)Math.Sqrt((double)(x * x + y * y));
 		}
 
 		public float MagnitudeSquared()
 		{
-			return this.x * this.x + this.y * this.y;
+			return x * x + y * y;
 		}
 
 		public SexyVector2 Normalize()
 		{
-			this.mVector.Normalize();
+			mVector.Normalize();
 			return this;
 		}
 
 		public override string ToString()
 		{
-			return this.mVector.ToString();
+			return mVector.ToString();
 		}
 
 		public SexyVector2 Perp()
 		{
-			return new SexyVector2(-this.y, this.x);
+			return new SexyVector2(-y, x);
 		}
 
 		public override int GetHashCode()
 		{
-			return this.mVector.GetHashCode();
+			return mVector.GetHashCode();
 		}
 
 		public override bool Equals(object obj)
 		{
-			return this.mVector.Equals(obj);
+			return mVector.Equals(obj);
 		}
 
 		public Vector2 mVector;

@@ -7,65 +7,65 @@ namespace Lawn
 	{
 		public virtual void PrepareForReuse()
 		{
-			this.Reset();
+			Reset();
 		}
 
 		protected GameObject()
 		{
-			this.Reset();
+			Reset();
 		}
 
 		protected virtual void Reset()
 		{
-			this.id = GameObject.nextId++;
-			this.mX = 0;
-			this.mY = 0;
-			this.mWidth = 0;
-			this.mHeight = 0;
-			this.mVisible = true;
-			this.mRow = -1;
-			this.mRenderOrder = 400000;
-			this.mApp = (LawnApp)GlobalStaticVars.gSexyAppBase;
-			this.mBoard = this.mApp.mBoard;
-			this.mPosScaled = true;
+			id = GameObject.nextId++;
+			mX = 0;
+			mY = 0;
+			mWidth = 0;
+			mHeight = 0;
+			mVisible = true;
+			mRow = -1;
+			mRenderOrder = 400000;
+			mApp = (LawnApp)GlobalStaticVars.gSexyAppBase;
+			mBoard = mApp.mBoard;
+			mPosScaled = true;
 		}
 
 		public virtual bool SaveToFile(Sexy.Buffer b)
 		{
-			b.WriteLong(this.id);
-			b.WriteLong(this.mHeight);
-			b.WriteBoolean(this.mPosScaled);
-			b.WriteFloat(this.mPrevTransX);
-			b.WriteFloat(this.mPrevTransY);
-			b.WriteLong(this.mRenderOrder);
-			b.WriteLong(this.mRow);
-			b.WriteBoolean(this.mVisible);
-			b.WriteLong(this.mWidth);
-			b.WriteLong(this.mX);
-			b.WriteLong(this.mY);
+			b.WriteLong(id);
+			b.WriteLong(mHeight);
+			b.WriteBoolean(mPosScaled);
+			b.WriteFloat(mPrevTransX);
+			b.WriteFloat(mPrevTransY);
+			b.WriteLong(mRenderOrder);
+			b.WriteLong(mRow);
+			b.WriteBoolean(mVisible);
+			b.WriteLong(mWidth);
+			b.WriteLong(mX);
+			b.WriteLong(mY);
 			return true;
 		}
 
 		public virtual bool LoadFromFile(Sexy.Buffer b)
 		{
-			this.id = b.ReadLong();
-			this.mHeight = b.ReadLong();
-			this.mPosScaled = b.ReadBoolean();
-			this.mPrevTransX = b.ReadFloat();
-			this.mPrevTransY = b.ReadFloat();
-			this.mRenderOrder = b.ReadLong();
-			this.mRow = b.ReadLong();
-			this.mVisible = b.ReadBoolean();
-			this.mWidth = b.ReadLong();
-			this.mX = b.ReadLong();
-			this.mY = b.ReadLong();
+			id = b.ReadLong();
+			mHeight = b.ReadLong();
+			mPosScaled = b.ReadBoolean();
+			mPrevTransX = b.ReadFloat();
+			mPrevTransY = b.ReadFloat();
+			mRenderOrder = b.ReadLong();
+			mRow = b.ReadLong();
+			mVisible = b.ReadBoolean();
+			mWidth = b.ReadLong();
+			mX = b.ReadLong();
+			mY = b.ReadLong();
 			return true;
 		}
 
 		public virtual void LoadingComplete()
 		{
-			this.mApp = GlobalStaticVars.gLawnApp;
-			this.mBoard = this.mApp.mBoard;
+			mApp = GlobalStaticVars.gLawnApp;
+			mBoard = mApp.mBoard;
 		}
 
 		protected static void SaveId(GameObject obj, Sexy.Buffer b)
@@ -108,35 +108,35 @@ namespace Lawn
 
 		public bool BeginDraw(Graphics g)
 		{
-			if (!this.mVisible)
+			if (!mVisible)
 			{
 				return false;
 			}
-			this.mPrevTransX = (float)g.mTransX;
-			this.mPrevTransY = (float)g.mTransY;
-			if (this.mPosScaled)
+			mPrevTransX = (float)g.mTransX;
+			mPrevTransY = (float)g.mTransY;
+			if (mPosScaled)
 			{
-				g.mTransX += (int)((float)this.mX * Constants.S);
-				g.mTransY += (int)((float)this.mY * Constants.S);
+				g.mTransX += (int)((float)mX * Constants.S);
+				g.mTransY += (int)((float)mY * Constants.S);
 			}
 			else
 			{
-				g.mTransX += this.mX;
-				g.mTransY += this.mY;
+				g.mTransX += mX;
+				g.mTransY += mY;
 			}
 			return true;
 		}
 
 		public void EndDraw(Graphics g)
 		{
-			g.mTransX = (int)this.mPrevTransX;
-			g.mTransY = (int)this.mPrevTransY;
+			g.mTransX = (int)mPrevTransX;
+			g.mTransY = (int)mPrevTransY;
 		}
 
 		public void MakeParentGraphicsFrame(Graphics g)
 		{
-			g.mTransX -= (int)((float)this.mX * Constants.S);
-			g.mTransY -= (int)((float)this.mY * Constants.S);
+			g.mTransX -= (int)((float)mX * Constants.S);
+			g.mTransY -= (int)((float)mY * Constants.S);
 		}
 
 		public LawnApp mApp;

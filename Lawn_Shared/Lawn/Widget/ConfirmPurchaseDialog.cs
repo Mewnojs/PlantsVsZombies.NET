@@ -8,10 +8,10 @@ namespace Lawn
 	{
 		public ConfirmPurchaseDialog(LawnApp theApp, StoreItem theItemType, int aQuantity, int aCost, string theDesc) : base(theApp, null, 46, true, "[BUY_ITEM_HEADER]", string.Empty, string.Empty, 1)
 		{
-			this.mItemType = theItemType;
-			this.mQuantity = aQuantity;
-			this.mCost = aCost;
-			this.mDesc = theDesc;
+			mItemType = theItemType;
+			mQuantity = aQuantity;
+			mCost = aCost;
+			mDesc = theDesc;
 		}
 
 		public override int GetPreferredHeight(int theWidth)
@@ -32,9 +32,9 @@ namespace Lawn
 			g.SetColorizeImages(true);
 			LawnCommon.DrawImageBox(g, trect, AtlasResources.IMAGE_ALMANAC_PAPER);
 			g.SetColorizeImages(false);
-			GlobalMembersStoreScreen.DrawStoreItem(g, Constants.ConfirmPurchaseDialog_Item_Pos.X, Constants.ConfirmPurchaseDialog_Item_Pos.Y, this.mItemType, false, false, this.mQuantity, this.mCost);
+			GlobalMembersStoreScreen.DrawStoreItem(g, Constants.ConfirmPurchaseDialog_Item_Pos.X, Constants.ConfirmPurchaseDialog_Item_Pos.Y, mItemType, false, false, mQuantity, mCost);
 			trect = Constants.ConfirmPurchaseDialog_Text;
-			TodStringFile.TodDrawStringWrapped(g, this.mDesc, trect, Resources.FONT_BRIANNETOD12, new SexyColor(40, 50, 90), DrawStringJustification.DS_ALIGN_CENTER_VERTICAL_MIDDLE);
+			TodStringFile.TodDrawStringWrapped(g, mDesc, trect, Resources.FONT_BRIANNETOD12, new SexyColor(40, 50, 90), DrawStringJustification.DS_ALIGN_CENTER_VERTICAL_MIDDLE);
 		}
 
 		public StoreItem mItemType;

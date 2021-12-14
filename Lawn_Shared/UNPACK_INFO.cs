@@ -3,19 +3,19 @@ using Sexy;
 
 internal class UNPACK_INFO
 {
-	public UNPACK_INFO(Image mpImage, int mX, int mY, int mWidth, int mHeight, int mRows, int mCols, AnimType mAnimType, int mFrameDelay, int mBeginDelay, int mEndDelay)
+	public UNPACK_INFO(Image pImage, int theX, int theY, int theWidth, int theHeight, int theRows, int theCols, AnimType theAnimType, int theFrameDelay, int theBeginDelay, int theEndDelay)
 	{
-		this.mpImage = mpImage;
-		this.mX = mX;
-		this.mY = mY;
-		this.mWidth = mWidth;
-		this.mHeight = mHeight;
-		this.mRows = mRows;
-		this.mCols = mCols;
-		this.mAnimType = mAnimType;
-		this.mFrameDelay = mFrameDelay;
-		this.mBeginDelay = mBeginDelay;
-		this.mEndDelay = mEndDelay;
+		mpImage = pImage;
+		mX = theX;
+		mY = theY;
+		mWidth = theWidth;
+		mHeight = theHeight;
+		mRows = theRows;
+		mCols = theCols;
+		mAnimType = theAnimType;
+		mFrameDelay = theFrameDelay;
+		mBeginDelay = theBeginDelay;
+		mEndDelay = theEndDelay;
 	}
 
 	public Image mpImage;

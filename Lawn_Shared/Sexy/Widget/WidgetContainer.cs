@@ -8,15 +8,15 @@ namespace Sexy
 		public Widget GetWidgetAtHelper(int x, int y, int theFlags, out bool found, out int theWidgetX, out int theWidgetY)
 		{
 			bool flag = false;
-			GlobalMembersFlags.ModFlags(ref theFlags, this.mWidgetFlagsMod);
-			for (LinkedListNode<Widget> linkedListNode = this.mWidgets.Last; linkedListNode != null; linkedListNode = linkedListNode.Previous)
+			GlobalMembersFlags.ModFlags(ref theFlags, mWidgetFlagsMod);
+			for (LinkedListNode<Widget> linkedListNode = mWidgets.Last; linkedListNode != null; linkedListNode = linkedListNode.Previous)
 			{
 				Widget value = linkedListNode.Value;
 				int num = theFlags;
 				GlobalMembersFlags.ModFlags(ref num, value.mWidgetFlagsMod);
 				if (flag)
 				{
-					GlobalMembersFlags.ModFlags(ref num, this.mWidgetManager.mBelowModalFlagsMod);
+					GlobalMembersFlags.ModFlags(ref num, mWidgetManager.mBelowModalFlagsMod);
 				}
 				if ((num & 16) != 0 && value.mVisible)
 				{
@@ -44,7 +44,7 @@ namespace Sexy
 						}
 					}
 				}
-				flag |= (value == this.mWidgetManager.mBaseModalWidget);
+				flag |= (value == mWidgetManager.mBaseModalWidget);
 			}
 			found = false;
 			theWidgetX = (theWidgetY = 0);
@@ -53,7 +53,7 @@ namespace Sexy
 
 		public bool IsBelowHelper(Widget theWidget1, Widget theWidget2, ref bool found)
 		{
-			foreach (Widget widget in this.mWidgets)
+			foreach (Widget widget in mWidgets)
 			{
 				if (widget == theWidget1)
 				{
@@ -76,8 +76,8 @@ namespace Sexy
 
 		public void InsertWidgetHelper(LinkedList<Widget>.Enumerator where, Widget theWidget)
 		{
-			LinkedListNode<Widget> anItr = this.mWidgets.Find(where.Current);
-			this.InsertWidgetHelper(anItr, theWidget);
+			LinkedListNode<Widget> anItr = mWidgets.Find(where.Current);
+			InsertWidgetHelper(anItr, theWidget);
 		}
 
 		public void InsertWidgetHelper(LinkedListNode<Widget> anItr, Widget theWidget)
@@ -92,99 +92,99 @@ namespace Sexy
 						anItr = anItr.Next;
 						continue;
 					}
-					if ((anItr.Value == this.mWidgets.First.Value) || (anItr.Value.mZOrder <= theWidget.mZOrder))
+					if ((anItr.Value == mWidgets.First.Value) || (anItr.Value.mZOrder <= theWidget.mZOrder))
 					{
-						this.mWidgets.AddAfter(anItr, theWidget);
+						mWidgets.AddAfter(anItr, theWidget);
 						return;
 					}
 				}
-				while ((anItr != null) && (anItr.Value != this.mWidgets.First.Value))
+				while ((anItr != null) && (anItr.Value != mWidgets.First.Value))
 				{
 					anItr = anItr.Previous;
 					if (anItr.Value.mZOrder <= theWidget.mZOrder)
 					{
 						anItr = anItr.Next;
-						this.mWidgets.AddBefore(anItr, theWidget);
+						mWidgets.AddBefore(anItr, theWidget);
 						return;
 					}
 				}
-				this.mWidgets.AddLast(theWidget);
+				mWidgets.AddLast(theWidget);
 				return;
 			}
 		}
 
 		public WidgetContainer()
 		{
-			this.mX = 0;
-			this.mY = 0;
-			this.mWidth = 0;
-			this.mHeight = 0;
-			this.mParent = null;
-			this.mWidgetManager = null;
-			this.mUpdateIteratorModified = false;
-			this.mUpdateIterator = this.mWidgets.Last;
-			this.mLastWMUpdateCount = 0;
-			this.mUpdateCnt = 0;
-			this.mHasAlpha = false;
-			this.mClip = true;
-			this.mPriority = 0;
-			this.mZOrder = 0;
+			mX = 0;
+			mY = 0;
+			mWidth = 0;
+			mHeight = 0;
+			mParent = null;
+			mWidgetManager = null;
+			mUpdateIteratorModified = false;
+			mUpdateIterator = mWidgets.Last;
+			mLastWMUpdateCount = 0;
+			mUpdateCnt = 0;
+			mHasAlpha = false;
+			mClip = true;
+			mPriority = 0;
+			mZOrder = 0;
 		}
 
 		public virtual void Dispose()
 		{
-			Debug.ASSERT(this.mParent == null);
-			Debug.ASSERT(this.mWidgets.Count == 0);
+			Debug.ASSERT(mParent == null);
+			Debug.ASSERT(mWidgets.Count == 0);
 		}
 
 		public virtual TRect GetRect()
 		{
-			return new TRect(this.mX, this.mY, this.mWidth, this.mHeight);
+			return new TRect(mX, mY, mWidth, mHeight);
 		}
 
 		public virtual bool Intersects(WidgetContainer theWidget)
 		{
-			return this.GetRect().Intersects(theWidget.GetRect());
+			return GetRect().Intersects(theWidget.GetRect());
 		}
 
 		public virtual void AddWidget(Widget theWidget)
 		{
-			if (!this.mWidgets.Contains(theWidget))
+			if (!mWidgets.Contains(theWidget))
 			{
-				this.InsertWidgetHelper(this.mWidgets.Last, theWidget);
-				theWidget.mWidgetManager = this.mWidgetManager;
+				InsertWidgetHelper(mWidgets.Last, theWidget);
+				theWidget.mWidgetManager = mWidgetManager;
 				theWidget.mParent = this;
-				if (this.mWidgetManager != null)
+				if (mWidgetManager != null)
 				{
-					theWidget.AddedToManager(this.mWidgetManager);
+					theWidget.AddedToManager(mWidgetManager);
 					theWidget.MarkDirtyFull();
-					this.mWidgetManager.RehupMouse();
+					mWidgetManager.RehupMouse();
 				}
-				this.MarkDirty();
+				MarkDirty();
 			}
 		}
 
 		public virtual void RemoveWidget(Widget theWidget)
 		{
-			LinkedListNode<Widget> linkedListNode = this.mWidgets.Find(theWidget);
+			LinkedListNode<Widget> linkedListNode = mWidgets.Find(theWidget);
 			if (linkedListNode != null)
 			{
 				theWidget.WidgetRemovedHelper();
 				theWidget.mParent = null;
-				bool flag = linkedListNode.Value == ((this.mUpdateIterator != null) ? this.mUpdateIterator.Value : null);
+				bool flag = linkedListNode.Value == ((mUpdateIterator != null) ? mUpdateIterator.Value : null);
 				LinkedListNode<Widget> next = linkedListNode.Next;
-				this.mWidgets.Remove(linkedListNode);
+				mWidgets.Remove(linkedListNode);
 				if (flag)
 				{
-					this.mUpdateIterator = next;
-					this.mUpdateIteratorModified = true;
+					mUpdateIterator = next;
+					mUpdateIteratorModified = true;
 				}
 			}
 		}
 
 		public virtual bool HasWidget(Widget theWidget)
 		{
-			return this.mWidgets.Count > 0;
+			return mWidgets.Count > 0;
 		}
 
 		public virtual void DisableWidget(Widget theWidget)
@@ -193,20 +193,20 @@ namespace Sexy
 
 		public virtual void RemoveAllWidgets(bool doDelete)
 		{
-			this.RemoveAllWidgets(doDelete, false);
+			RemoveAllWidgets(doDelete, false);
 		}
 
 		public virtual void RemoveAllWidgets()
 		{
-			this.RemoveAllWidgets(false, false);
+			RemoveAllWidgets(false, false);
 		}
 
 		public virtual void RemoveAllWidgets(bool doDelete, bool recursive)
 		{
-			while (this.mWidgets.Count != 0)
+			while (mWidgets.Count != 0)
 			{
-				Widget value = this.mWidgets.First.Value;
-				this.RemoveWidget(value);
+				Widget value = mWidgets.First.Value;
+				RemoveWidget(value);
 				if (recursive)
 				{
 					value.RemoveAllWidgets(doDelete, recursive);
@@ -225,7 +225,7 @@ namespace Sexy
 		public virtual bool IsBelow(Widget theWidget1, Widget theWidget2)
 		{
 			bool flag = false;
-			return this.IsBelowHelper(theWidget1, theWidget2, ref flag);
+			return IsBelowHelper(theWidget1, theWidget2, ref flag);
 		}
 
 		public virtual void MarkAllDirty()
@@ -234,74 +234,74 @@ namespace Sexy
 
 		public virtual void BringToFront(Widget theWidget)
 		{
-			LinkedListNode<Widget> linkedListNode = this.mWidgets.Find(theWidget);
+			LinkedListNode<Widget> linkedListNode = mWidgets.Find(theWidget);
 			if (linkedListNode != null)
 			{
-				if (linkedListNode == this.mUpdateIterator)
+				if (linkedListNode == mUpdateIterator)
 				{
-					this.mUpdateIteratorModified = true;
+					mUpdateIteratorModified = true;
 				}
-				this.mWidgets.Remove(linkedListNode);
-				this.InsertWidgetHelper(this.mWidgets.Last, theWidget);
+				mWidgets.Remove(linkedListNode);
+				InsertWidgetHelper(mWidgets.Last, theWidget);
 				theWidget.OrderInManagerChanged();
 			}
 		}
 
 		public virtual void BringToBack(Widget theWidget)
 		{
-			LinkedListNode<Widget> linkedListNode = this.mWidgets.Find(theWidget);
+			LinkedListNode<Widget> linkedListNode = mWidgets.Find(theWidget);
 			if (linkedListNode != null)
 			{
-				if (linkedListNode == this.mUpdateIterator)
+				if (linkedListNode == mUpdateIterator)
 				{
-					this.mUpdateIteratorModified = true;
+					mUpdateIteratorModified = true;
 				}
-				this.mWidgets.Remove(linkedListNode);
-				this.InsertWidgetHelper(this.mWidgets.First, theWidget);
+				mWidgets.Remove(linkedListNode);
+				InsertWidgetHelper(mWidgets.First, theWidget);
 				theWidget.OrderInManagerChanged();
 			}
 		}
 
 		public virtual void PutBehind(Widget theWidget, Widget theRefWidget)
 		{
-			LinkedListNode<Widget> linkedListNode = this.mWidgets.Find(theWidget);
+			LinkedListNode<Widget> linkedListNode = mWidgets.Find(theWidget);
 			if (linkedListNode != null)
 			{
-				if (linkedListNode == this.mUpdateIterator)
+				if (linkedListNode == mUpdateIterator)
 				{
-					this.mUpdateIteratorModified = true;
+					mUpdateIteratorModified = true;
 				}
-				this.mWidgets.Remove(linkedListNode);
-				linkedListNode = this.mWidgets.Find(theRefWidget);
-				this.InsertWidgetHelper(linkedListNode, theWidget);
+				mWidgets.Remove(linkedListNode);
+				linkedListNode = mWidgets.Find(theRefWidget);
+				InsertWidgetHelper(linkedListNode, theWidget);
 				theWidget.OrderInManagerChanged();
 			}
 		}
 
 		public virtual void PutInfront(Widget theWidget, Widget theRefWidget)
 		{
-			LinkedListNode<Widget> linkedListNode = this.mWidgets.Find(theWidget);
+			LinkedListNode<Widget> linkedListNode = mWidgets.Find(theWidget);
 			if (linkedListNode != null)
 			{
-				if (linkedListNode == this.mUpdateIterator)
+				if (linkedListNode == mUpdateIterator)
 				{
-					this.mUpdateIteratorModified = true;
+					mUpdateIteratorModified = true;
 				}
-				this.mWidgets.Remove(linkedListNode);
-				linkedListNode = this.mWidgets.Find(theRefWidget);
+				mWidgets.Remove(linkedListNode);
+				linkedListNode = mWidgets.Find(theRefWidget);
 				linkedListNode = linkedListNode.Next;
-				this.InsertWidgetHelper(linkedListNode, theWidget);
+				InsertWidgetHelper(linkedListNode, theWidget);
 				theWidget.OrderInManagerChanged();
 			}
 		}
 
 		public virtual CGPoint GetAbsPos()
 		{
-			if (this.mParent == null)
+			if (mParent == null)
 			{
-				return new CGPoint((float)this.mX, (float)this.mY);
+				return new CGPoint((float)mX, (float)mY);
 			}
-			return new CGPoint((float)this.mX, (float)this.mY) + this.mParent.GetAbsPos();
+			return new CGPoint((float)mX, (float)mY) + mParent.GetAbsPos();
 		}
 
 		public virtual void MarkDirty()
@@ -322,17 +322,17 @@ namespace Sexy
 
 		public virtual void AddedToManager(WidgetManager theWidgetManager)
 		{
-			foreach (Widget widget in this.mWidgets)
+			foreach (Widget widget in mWidgets)
 			{
 				widget.mWidgetManager = theWidgetManager;
 				widget.AddedToManager(theWidgetManager);
-				this.MarkDirty();
+				MarkDirty();
 			}
 		}
 
 		public virtual void RemovedFromManager(WidgetManager theWidgetManager)
 		{
-			foreach (Widget widget in this.mWidgets)
+			foreach (Widget widget in mWidgets)
 			{
 				theWidgetManager.DisableWidget(widget);
 				widget.RemovedFromManager(theWidgetManager);
@@ -347,42 +347,42 @@ namespace Sexy
 
 		public virtual void Update()
 		{
-			this.mUpdateCnt++;
+			mUpdateCnt++;
 		}
 
 		public virtual void UpdateAll(ModalFlags theFlags)
 		{
-			new AutoModalFlags(theFlags, this.mWidgetFlagsMod);
+			new AutoModalFlags(theFlags, mWidgetFlagsMod);
 			if ((theFlags.GetFlags() & 2) != 0)
 			{
-				this.MarkDirty();
+				MarkDirty();
 			}
-			WidgetManager widgetManager = this.mWidgetManager;
+			WidgetManager widgetManager = mWidgetManager;
 			if (widgetManager == null)
 			{
 				return;
 			}
-			if ((theFlags.GetFlags() & 1) != 0 && this.mLastWMUpdateCount != this.mWidgetManager.mUpdateCnt)
+			if ((theFlags.GetFlags() & 1) != 0 && mLastWMUpdateCount != mWidgetManager.mUpdateCnt)
 			{
-				this.mLastWMUpdateCount = this.mWidgetManager.mUpdateCnt;
-				this.Update();
+				mLastWMUpdateCount = mWidgetManager.mUpdateCnt;
+				Update();
 			}
-			this.mUpdateIterator = this.mWidgets.First;
-			while (this.mUpdateIterator != null)
+			mUpdateIterator = mWidgets.First;
+			while (mUpdateIterator != null)
 			{
-				this.mUpdateIteratorModified = false;
-				Widget value = this.mUpdateIterator.Value;
+				mUpdateIteratorModified = false;
+				Widget value = mUpdateIterator.Value;
 				if (value == widgetManager.mBaseModalWidget)
 				{
 					theFlags.mIsOver = true;
 				}
 				value.UpdateAll(theFlags);
-				if (!this.mUpdateIteratorModified)
+				if (!mUpdateIteratorModified)
 				{
-					this.mUpdateIterator = this.mUpdateIterator.Next;
+					mUpdateIterator = mUpdateIterator.Next;
 				}
 			}
-			this.mUpdateIteratorModified = true;
+			mUpdateIteratorModified = true;
 		}
 
 		public virtual void UpdateF(float theFrac)
@@ -391,27 +391,27 @@ namespace Sexy
 
 		public void UpdateFAll(ModalFlags theFlags, float theFrac)
 		{
-			new AutoModalFlags(theFlags, this.mWidgetFlagsMod);
+			new AutoModalFlags(theFlags, mWidgetFlagsMod);
 			if ((theFlags.GetFlags() & 1) != 0)
 			{
-				this.UpdateF(theFrac);
+				UpdateF(theFrac);
 			}
-			this.mUpdateIterator = this.mWidgets.First;
-			while (this.mUpdateIterator.Value != null)
+			mUpdateIterator = mWidgets.First;
+			while (mUpdateIterator.Value != null)
 			{
-				this.mUpdateIteratorModified = false;
-				Widget value = this.mUpdateIterator.Value;
-				if (value == this.mWidgetManager.mBaseModalWidget)
+				mUpdateIteratorModified = false;
+				Widget value = mUpdateIterator.Value;
+				if (value == mWidgetManager.mBaseModalWidget)
 				{
 					theFlags.mIsOver = true;
 				}
 				value.UpdateFAll(theFlags, theFrac);
-				if (!this.mUpdateIteratorModified)
+				if (!mUpdateIteratorModified)
 				{
-					this.mUpdateIterator = this.mUpdateIterator.Next;
+					mUpdateIterator = mUpdateIterator.Next;
 				}
 			}
-			this.mUpdateIteratorModified = true;
+			mUpdateIteratorModified = true;
 		}
 
 		public virtual void Draw(Graphics g)
@@ -420,34 +420,34 @@ namespace Sexy
 
 		public void DrawAll(ModalFlags theFlags, Graphics g)
 		{
-			if (this.mWidgetManager != null && this.mPriority > this.mWidgetManager.mMinDeferredOverlayPriority)
+			if (mWidgetManager != null && mPriority > mWidgetManager.mMinDeferredOverlayPriority)
 			{
-				this.mWidgetManager.FlushDeferredOverlayWidgets(this.mPriority);
+				mWidgetManager.FlushDeferredOverlayWidgets(mPriority);
 			}
-			new AutoModalFlags(theFlags, this.mWidgetFlagsMod);
-			if (this.mClip && (theFlags.GetFlags() & 8) != 0)
+			new AutoModalFlags(theFlags, mWidgetFlagsMod);
+			if (mClip && (theFlags.GetFlags() & 8) != 0)
 			{
-				g.ClipRect(0, 0, this.mWidth, this.mHeight);
+				g.ClipRect(0, 0, mWidth, mHeight);
 			}
-			if (this.mWidgets.Count == 0)
+			if (mWidgets.Count == 0)
 			{
 				if ((theFlags.GetFlags() & 4) != 0)
 				{
-					this.Draw(g);
+					Draw(g);
 				}
 				return;
 			}
 			if ((theFlags.GetFlags() & 4) != 0)
 			{
 				g.PushState();
-				this.Draw(g);
+				Draw(g);
 				g.PopState();
 			}
-			for (LinkedListNode<Widget> linkedListNode = this.mWidgets.First; linkedListNode != null; linkedListNode = linkedListNode.Next)
+			for (LinkedListNode<Widget> linkedListNode = mWidgets.First; linkedListNode != null; linkedListNode = linkedListNode.Next)
 			{
 				if (linkedListNode.Value.mVisible)
 				{
-					if (this.mWidgetManager != null && linkedListNode.Value == this.mWidgetManager.mBaseModalWidget)
+					if (mWidgetManager != null && linkedListNode.Value == mWidgetManager.mBaseModalWidget)
 					{
 						theFlags.mIsOver = true;
 					}
@@ -465,8 +465,8 @@ namespace Sexy
 
 		public void SysColorChangedAll()
 		{
-			this.SysColorChanged();
-			foreach (Widget widget in this.mWidgets)
+			SysColorChanged();
+			foreach (Widget widget in mWidgets)
 			{
 				widget.SysColorChangedAll();
 			}
@@ -474,7 +474,7 @@ namespace Sexy
 
 		public virtual void InterfaceOrientationChanged(UI_ORIENTATION toOrientation)
 		{
-			foreach (Widget widget in this.mWidgets)
+			foreach (Widget widget in mWidgets)
 			{
 				widget.InterfaceOrientationChanged(toOrientation);
 			}
@@ -482,7 +482,7 @@ namespace Sexy
 
 		public void KeyboardWillShow(ref TRect theRect)
 		{
-			foreach (Widget widget in this.mWidgets)
+			foreach (Widget widget in mWidgets)
 			{
 				widget.KeyboardWillShow(ref theRect);
 			}
@@ -490,7 +490,7 @@ namespace Sexy
 
 		public void KeyboardDidShow(ref TRect theRect)
 		{
-			foreach (Widget widget in this.mWidgets)
+			foreach (Widget widget in mWidgets)
 			{
 				widget.KeyboardDidShow(ref theRect);
 			}
@@ -498,7 +498,7 @@ namespace Sexy
 
 		public void KeyboardWillHide(ref TRect theRect)
 		{
-			foreach (Widget widget in this.mWidgets)
+			foreach (Widget widget in mWidgets)
 			{
 				widget.KeyboardWillHide(ref theRect);
 			}
@@ -506,7 +506,7 @@ namespace Sexy
 
 		public void KeyboardDidHide(ref TRect theRect)
 		{
-			foreach (Widget widget in this.mWidgets)
+			foreach (Widget widget in mWidgets)
 			{
 				widget.KeyboardDidHide(ref theRect);
 			}

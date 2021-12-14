@@ -6,8 +6,8 @@ namespace Lawn
 	{
 		public ZombieAllowedLevels(ZombieType aZombieType, int[] levels)
 		{
-			this.mZombieType = aZombieType;
-			this.mAllowedOnLevel = levels;
+			mZombieType = aZombieType;
+			mAllowedOnLevel = levels;
 		}
 
 		public ZombieType mZombieType;

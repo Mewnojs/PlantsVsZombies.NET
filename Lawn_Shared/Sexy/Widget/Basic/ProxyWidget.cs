@@ -6,14 +6,14 @@ namespace Sexy
 	{
 		public ProxyWidget(ProxyWidgetListener listener)
 		{
-			this.mListener = listener;
+			mListener = listener;
 		}
 
 		public override void Draw(Graphics g)
 		{
-			if (this.mListener != null)
+			if (mListener != null)
 			{
-				this.mListener.DrawProxyWidget(g, this);
+				mListener.DrawProxyWidget(g, this);
 			}
 		}
 

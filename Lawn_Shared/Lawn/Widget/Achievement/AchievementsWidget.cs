@@ -8,9 +8,9 @@ namespace Lawn
     {
         public AchievementsWidget(LawnApp theApp)
         {
-            this.mApp = theApp;
-            this.mWidth = Constants.BOARD_WIDTH;
-            this.mHeight = Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight * Constants.AchievementWidget_HOLE_DEPTH + Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE_CHINA.mHeight + Constants.AchievementWidget_Background_Offset_Y;
+            mApp = theApp;
+            mWidth = Constants.BOARD_WIDTH;
+            mHeight = Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight * Constants.AchievementWidget_HOLE_DEPTH + Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE_CHINA.mHeight + Constants.AchievementWidget_Background_Offset_Y;
         }
 
         public override void Draw(Graphics g)
@@ -46,18 +46,18 @@ namespace Lawn
 				{
 					g.SetColor(new SexyColor(255, 255, 255, 100));
 				}
-				g.DrawImage(AtlasResources.GetImageInAtlasById(this.mApp.GetAchievementIcon((AchievementId)i)),
+				g.DrawImage(AtlasResources.GetImageInAtlasById(mApp.GetAchievementIcon((AchievementId)i)),
 					Constants.AchievementWidget_Image_Pos.X, destY + Constants.AchievementWidget_Image_Pos.Y,
 					Constants.AchievementWidget_Image_Size, Constants.AchievementWidget_Image_Size);
 				g.SetColorizeImages(false);
 				g.SetFont(Resources.FONT_DWARVENTODCRAFT15);
 				g.SetColor(new SexyColor(224, 187, 98));
-				string theString = this.mApp.GetAchievementName((AchievementId)i);
+				string theString = mApp.GetAchievementName((AchievementId)i);
 				g.DrawString(theString, Constants.AchievementWidget_Name_Pos.X, destY + Constants.AchievementWidget_Name_Pos.Y);
 				g.SetFont(Resources.FONT_DWARVENTODCRAFT12);
 				g.SetColor(new SexyColor(255, 255, 255));
 				TRect theRect = new TRect(Constants.AchievementWidget_Description_Box.X, destY + Constants.AchievementWidget_Description_Box.Y, Constants.AchievementWidget_Description_Box.Width, Constants.AchievementWidget_Description_Box.Height);
-				g.WriteWordWrapped(theRect, this.mApp.GetAchievementDescription((AchievementId)i), 0, -1, false);
+				g.WriteWordWrapped(theRect, mApp.GetAchievementDescription((AchievementId)i), 0, -1, false);
 			}
             /*//original version
             int num = Constants.AchievementWidget_Background_Offset_Y;
@@ -152,7 +152,7 @@ namespace Lawn
         {
             if (AchievementsWidget.BackButtonRect.Contains(x, y))
             {
-                this.mApp.PlaySample(Resources.SOUND_GRAVEBUTTON);
+                mApp.PlaySample(Resources.SOUND_GRAVEBUTTON);
             }
         }
 
@@ -160,10 +160,10 @@ namespace Lawn
         {
             if (AchievementsWidget.BackButtonRect.Contains(x, y))
             {
-                this.mApp.mGameSelector.ButtonDepress(118);
+                mApp.mGameSelector.ButtonDepress(118);
                 return;
             }
-            ScrollWidget scrollWidget = (ScrollWidget)this.mParent;
+            ScrollWidget scrollWidget = (ScrollWidget)mParent;
             scrollWidget.ScrollToMin(true);
         }
 

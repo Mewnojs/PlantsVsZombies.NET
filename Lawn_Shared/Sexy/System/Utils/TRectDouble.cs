@@ -9,11 +9,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mRect;
+				return mRect;
 			}
 			set
 			{
-				this.mRect = value;
+				mRect = value;
 			}
 		}
 
@@ -21,11 +21,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mRect.X;
+				return mRect.X;
 			}
 			set
 			{
-				this.mRect.X = value;
+				mRect.X = value;
 			}
 		}
 
@@ -33,11 +33,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mRect.Y;
+				return mRect.Y;
 			}
 			set
 			{
-				this.mRect.Y = value;
+				mRect.Y = value;
 			}
 		}
 
@@ -45,11 +45,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mRect.Width;
+				return mRect.Width;
 			}
 			set
 			{
-				this.mRect.Width = value;
+				mRect.Width = value;
 			}
 		}
 
@@ -57,35 +57,35 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mRect.Height;
+				return mRect.Height;
 			}
 			set
 			{
-				this.mRect.Height = value;
+				mRect.Height = value;
 			}
 		}
 
 		public TRectDouble(int theX, int theY, int theWidth, int theHeight)
 		{
-			this.mRect = new Rectangle(theX, theY, theWidth, theHeight);
+			mRect = new Rectangle(theX, theY, theWidth, theHeight);
 		}
 
 		public TRectDouble(TRectDouble theTRect)
 		{
-			this.mRect = theTRect.mRect;
+			mRect = theTRect.mRect;
 		}
 
 		public bool Intersects(TRectDouble theTRect)
 		{
-			return this.mRect.Intersects(theTRect.mRect);
+			return mRect.Intersects(theTRect.mRect);
 		}
 
 		public TRectDouble Intersection(TRectDouble theTRect)
 		{
-			int num = Math.Max(this.mRect.X, theTRect.mRect.X);
-			int num2 = Math.Min(this.mRect.X + this.mRect.Width, theTRect.mRect.X + theTRect.mRect.Width);
-			int num3 = Math.Max(this.mRect.Y, theTRect.mRect.Y);
-			int num4 = Math.Min(this.mRect.Y + this.mRect.Height, theTRect.mRect.Y + theTRect.mRect.Height);
+			int num = Math.Max(mRect.X, theTRect.mRect.X);
+			int num2 = Math.Min(mRect.X + mRect.Width, theTRect.mRect.X + theTRect.mRect.Width);
+			int num3 = Math.Max(mRect.Y, theTRect.mRect.Y);
+			int num4 = Math.Min(mRect.Y + mRect.Height, theTRect.mRect.Y + theTRect.mRect.Height);
 			if (num2 - num < 0 || num4 - num3 < 0)
 			{
 				return new TRectDouble(0, 0, 0, 0);
@@ -95,36 +95,36 @@ namespace Sexy
 
 		public TRectDouble Union(TRectDouble theTRect)
 		{
-			int num = Math.Min(this.mRect.X, theTRect.mRect.X);
-			int num2 = Math.Max(this.mRect.X + this.mRect.Width, theTRect.mRect.X + theTRect.mRect.Width);
-			int num3 = Math.Min(this.mRect.Y, theTRect.mRect.Y);
-			int num4 = Math.Max(this.mRect.Y + this.mRect.Height, theTRect.mRect.Y + theTRect.mRect.Height);
+			int num = Math.Min(mRect.X, theTRect.mRect.X);
+			int num2 = Math.Max(mRect.X + mRect.Width, theTRect.mRect.X + theTRect.mRect.Width);
+			int num3 = Math.Min(mRect.Y, theTRect.mRect.Y);
+			int num4 = Math.Max(mRect.Y + mRect.Height, theTRect.mRect.Y + theTRect.mRect.Height);
 			return new TRectDouble(num, num3, num2 - num, num4 - num3);
 		}
 
 		public bool Contains(int theX, int theY)
 		{
-			return this.mRect.Contains(theX, theY);
+			return mRect.Contains(theX, theY);
 		}
 
 		public bool Contains(TPoint thePoint)
 		{
-			return this.mRect.Contains(thePoint.Point);
+			return mRect.Contains(thePoint.Point);
 		}
 
 		public void Offset(int theX, int theY)
 		{
-			this.mRect.Offset(theX, theY);
+			mRect.Offset(theX, theY);
 		}
 
 		public void Offset(TPoint thePoint)
 		{
-			this.mRect.Offset(thePoint.Point);
+			mRect.Offset(thePoint.Point);
 		}
 
 		public TRectDouble Inflate(int theX, int theY)
 		{
-			this.mRect.Inflate(theX, theY);
+			mRect.Inflate(theX, theY);
 			return this;
 		}
 
@@ -140,17 +140,17 @@ namespace Sexy
 				return false;
 			}
 			TRectDouble trectDouble = (TRectDouble)obj;
-			return this.mRect == trectDouble.mRect;
+			return mRect == trectDouble.mRect;
 		}
 
 		public override int GetHashCode()
 		{
-			return this.mRect.GetHashCode();
+			return mRect.GetHashCode();
 		}
 
 		public override string ToString()
 		{
-			return this.mRect.ToString();
+			return mRect.ToString();
 		}
 
 		public static bool operator !=(TRectDouble a, TRectDouble b)

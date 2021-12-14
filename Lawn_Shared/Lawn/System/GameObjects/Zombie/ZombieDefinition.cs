@@ -7,13 +7,13 @@ namespace Lawn
 	{
 		public ZombieDefinition(ZombieType aZombieType, ReanimationType aReanimationType, int aZombieValue, int aStartingLevel, int aFirstAllowedWave, int aPickWeight, string aZombieName)
 		{
-			this.mZombieType = aZombieType;
-			this.mReanimationType = aReanimationType;
-			this.mZombieValue = aZombieValue;
-			this.mStartingLevel = aStartingLevel;
-			this.mFirstAllowedWave = aFirstAllowedWave;
-			this.mPickWeight = aPickWeight;
-			this.mZombieName = aZombieName;
+			mZombieType = aZombieType;
+			mReanimationType = aReanimationType;
+			mZombieValue = aZombieValue;
+			mStartingLevel = aStartingLevel;
+			mFirstAllowedWave = aFirstAllowedWave;
+			mPickWeight = aPickWeight;
+			mZombieName = aZombieName;
 		}
 
 		public ZombieType mZombieType;

@@ -14,38 +14,38 @@ namespace Sexy
 	{
 		public ResourceManager(SexyAppBase theApp)
 		{
-			this.mApp = theApp;
-			this.mHasFailed = false;
-			this.mXMLParser = null;
-			this.mCurResGroupList = null;
-			this.mResGroupMap = new Dictionary<string, List<BaseRes>>();
-			this.mImageMap = new Dictionary<string, BaseRes>();
-			this.mSoundMap = new Dictionary<string, BaseRes>();
-			this.mFontMap = new Dictionary<string, BaseRes>();
-			this.mMusicMap = new Dictionary<string, BaseRes>();
-			this.mLevelMap = new Dictionary<string, BaseRes>();
-			this.mReanimMap = new Dictionary<string, BaseRes>();
-			this.mParticleMap = new Dictionary<string, BaseRes>();
-			this.mTrailMap = new Dictionary<string, BaseRes>();
-			this.mLoadedGroups = new List<string>();
-			this.mContentManager = this.mApp.mContentManager;
+			mApp = theApp;
+			mHasFailed = false;
+			mXMLParser = null;
+			mCurResGroupList = null;
+			mResGroupMap = new Dictionary<string, List<BaseRes>>();
+			mImageMap = new Dictionary<string, BaseRes>();
+			mSoundMap = new Dictionary<string, BaseRes>();
+			mFontMap = new Dictionary<string, BaseRes>();
+			mMusicMap = new Dictionary<string, BaseRes>();
+			mLevelMap = new Dictionary<string, BaseRes>();
+			mReanimMap = new Dictionary<string, BaseRes>();
+			mParticleMap = new Dictionary<string, BaseRes>();
+			mTrailMap = new Dictionary<string, BaseRes>();
+			mLoadedGroups = new List<string>();
+			mContentManager = mApp.mContentManager;
 			for (int i = 0; i < ResourceManager.mUnloadContentManager.Length; i++)
 			{
 				ResourceManager.mUnloadContentManager[i] = new ContentManager(SexyAppBase.XnaGame.Services);
-				ResourceManager.mUnloadContentManager[i].RootDirectory = this.mApp.mContentManager.RootDirectory;
+				ResourceManager.mUnloadContentManager[i].RootDirectory = mApp.mContentManager.RootDirectory;
 			}
 			ResourceManager.mReanimContentManager = new ContentManager(SexyAppBase.XnaGame.Services);
-			ResourceManager.mReanimContentManager.RootDirectory = this.mApp.mContentManager.RootDirectory;
+			ResourceManager.mReanimContentManager.RootDirectory = mApp.mContentManager.RootDirectory;
 			ResourceManager.mParticleContentManager = new ContentManager(SexyAppBase.XnaGame.Services);
-			ResourceManager.mParticleContentManager.RootDirectory = this.mApp.mContentManager.RootDirectory;
-			this.backDropContentManager = new ContentManager(SexyAppBase.XnaGame.Services);
-			this.backDropContentManager.RootDirectory = this.mContentManager.RootDirectory;
-			this.mAllowAlreadyDefinedResources = false;
-			this.mAllowMissingProgramResources = false;
-			this.mProgress = 0.0;
-			this.mTotalResources = 0;
-			this.mLoadedCount = 0;
-			this.arial = this.mContentManager.Load<SpriteFont>("fonts/Arial");
+			ResourceManager.mParticleContentManager.RootDirectory = mApp.mContentManager.RootDirectory;
+			backDropContentManager = new ContentManager(SexyAppBase.XnaGame.Services);
+			backDropContentManager.RootDirectory = mContentManager.RootDirectory;
+			mAllowAlreadyDefinedResources = false;
+			mAllowMissingProgramResources = false;
+			mProgress = 0.0;
+			mTotalResources = 0;
+			mLoadedCount = 0;
+			arial = mContentManager.Load<SpriteFont>("fonts/Arial");
 		}
 
 		public virtual string GetResourceDir()
@@ -57,19 +57,19 @@ namespace Sexy
 		{
 			if (res.mUnloadGroup <= 0)
 			{
-				return this.mContentManager;
+				return mContentManager;
 			}
 			return ResourceManager.mUnloadContentManager[res.mUnloadGroup];
 		}
 
 		~ResourceManager()
 		{
-			this.Dispose(false);
+			Dispose(false);
 		}
 
 		public void Dispose()
 		{
-			this.Dispose(true);
+			Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
@@ -79,12 +79,12 @@ namespace Sexy
 
 		public bool HadError()
 		{
-			return this.mHasFailed;
+			return mHasFailed;
 		}
 
 		public bool IsGroupLoaded(string theResGroup)
 		{
-			return this.mLoadedGroups.Contains(theResGroup);
+			return mLoadedGroups.Contains(theResGroup);
 		}
 
 		public bool LoadReanimation(string filename, ref ReanimatorDefinition def)
@@ -102,13 +102,13 @@ namespace Sexy
 
 		public bool LoadTrail(string filename, ref TrailDefinition def)
 		{
-			def = this.mContentManager.Load<TrailDefinition>(filename);
+			def = mContentManager.Load<TrailDefinition>(filename);
 			return true;
 		}
 
 		public void ExtractReanimImages()
 		{
-			foreach (KeyValuePair<string, BaseRes> keyValuePair in this.mReanimMap)
+			foreach (KeyValuePair<string, BaseRes> keyValuePair in mReanimMap)
 			{
 				((ReanimRes)keyValuePair.Value).mReanim.ExtractImages();
 			}
@@ -116,40 +116,40 @@ namespace Sexy
 
 		public bool ParseResourcesFile(string theFilename)
 		{
-			this.mXMLParser = new XMLParser();
-			if (!this.mXMLParser.OpenFile(Path.Combine(this.GetResourceDir(), theFilename)))
+			mXMLParser = new XMLParser();
+			if (!mXMLParser.OpenFile(Path.Combine(GetResourceDir(), theFilename)))
 			{
-				this.Fail("Resource file not found: " + theFilename);
+				Fail("Resource file not found: " + theFilename);
 			}
 			XMLElement xmlelement = new XMLElement();
-			while (!this.mXMLParser.HasFailed())
+			while (!mXMLParser.HasFailed())
 			{
-				if (!this.mXMLParser.NextElement(ref xmlelement))
+				if (!mXMLParser.NextElement(ref xmlelement))
 				{
-					this.Fail(this.mXMLParser.GetErrorText());
+					Fail(mXMLParser.GetErrorText());
 				}
 				if (xmlelement.mType == XMLElementType.TYPE_START)
 				{
 					if (!(xmlelement.mValue != "ResourceManifest"))
 					{
-						return this.DoParseResources();
+						return DoParseResources();
 					}
 					break;
 				}
 			}
-			this.Fail("Expecting ResourceManifest tag");
-			return this.DoParseResources();
+			Fail("Expecting ResourceManifest tag");
+			return DoParseResources();
 		}
 
 		private bool DoParseResources()
 		{
-			if (!this.mXMLParser.HasFailed())
+			if (!mXMLParser.HasFailed())
 			{
 				XMLElement xmlelement;
 				for (;;)
 				{
 					xmlelement = new XMLElement();
-					if (!this.mXMLParser.NextElement(ref xmlelement))
+					if (!mXMLParser.NextElement(ref xmlelement))
 					{
 						goto IL_F7;
 					}
@@ -159,14 +159,14 @@ namespace Sexy
 						{
 							goto IL_B1;
 						}
-						this.mCurResGroup = xmlelement.mAttributes["id"];
-						this.mResGroupMap.Add(this.mCurResGroup, new List<BaseRes>());
-						this.mCurResGroupList = this.mResGroupMap[this.mCurResGroup];
-						if (this.mCurResGroup.Length == 0)
+						mCurResGroup = xmlelement.mAttributes["id"];
+						mResGroupMap.Add(mCurResGroup, new List<BaseRes>());
+						mCurResGroupList = mResGroupMap[mCurResGroup];
+						if (mCurResGroup.Length == 0)
 						{
 							break;
 						}
-						if (!this.ParseResources())
+						if (!ParseResources())
 						{
 							goto Block_5;
 						}
@@ -176,32 +176,32 @@ namespace Sexy
 						goto Block_6;
 					}
 				}
-				this.Fail("No id specified.");
+				Fail("No id specified.");
 				Block_5:
 				goto IL_F7;
 				IL_B1:
-				this.Fail("Invalid Section '" + xmlelement.mValue + "'");
+				Fail("Invalid Section '" + xmlelement.mValue + "'");
 				goto IL_F7;
 				Block_6:
-				this.Fail("Element Not Expected '" + xmlelement.mValue + "'");
+				Fail("Element Not Expected '" + xmlelement.mValue + "'");
 			}
 			IL_F7:
-			if (this.mXMLParser.HasFailed())
+			if (mXMLParser.HasFailed())
 			{
-				this.Fail(this.mXMLParser.GetErrorText());
+				Fail(mXMLParser.GetErrorText());
 			}
-			this.mXMLParser = null;
-			return !this.mHasFailed;
+			mXMLParser = null;
+			return !mHasFailed;
 		}
 
 		private bool ParseResources()
 		{
-			this.mDefaultPath = this.GetResourceDir();
+			mDefaultPath = GetResourceDir();
 			XMLElement xmlelement;
 			for (;;)
 			{
 				xmlelement = new XMLElement();
-				if (!this.mXMLParser.NextElement(ref xmlelement))
+				if (!mXMLParser.NextElement(ref xmlelement))
 				{
 					break;
 				}
@@ -209,11 +209,11 @@ namespace Sexy
 				{
 					if (xmlelement.mValue == "Image")
 					{
-						if (!this.ParseImageResource(xmlelement))
+						if (!ParseImageResource(xmlelement))
 						{
 							return false;
 						}
-						if (!this.mXMLParser.NextElement(ref xmlelement))
+						if (!mXMLParser.NextElement(ref xmlelement))
 						{
 							return false;
 						}
@@ -224,11 +224,11 @@ namespace Sexy
 					}
 					else if (xmlelement.mValue == "Reanim")
 					{
-						if (!this.ParseReanimResource(xmlelement))
+						if (!ParseReanimResource(xmlelement))
 						{
 							return false;
 						}
-						if (!this.mXMLParser.NextElement(ref xmlelement))
+						if (!mXMLParser.NextElement(ref xmlelement))
 						{
 							return false;
 						}
@@ -239,11 +239,11 @@ namespace Sexy
 					}
 					else if (xmlelement.mValue == "Particle")
 					{
-						if (!this.ParseParticleResource(xmlelement))
+						if (!ParseParticleResource(xmlelement))
 						{
 							return false;
 						}
-						if (!this.mXMLParser.NextElement(ref xmlelement))
+						if (!mXMLParser.NextElement(ref xmlelement))
 						{
 							return false;
 						}
@@ -254,11 +254,11 @@ namespace Sexy
 					}
 					else if (xmlelement.mValue == "Trail")
 					{
-						if (!this.ParseTrailResource(xmlelement))
+						if (!ParseTrailResource(xmlelement))
 						{
 							return false;
 						}
-						if (!this.mXMLParser.NextElement(ref xmlelement))
+						if (!mXMLParser.NextElement(ref xmlelement))
 						{
 							return false;
 						}
@@ -269,11 +269,11 @@ namespace Sexy
 					}
 					else if (xmlelement.mValue == "Sound")
 					{
-						if (!this.ParseSoundResource(xmlelement))
+						if (!ParseSoundResource(xmlelement))
 						{
 							return false;
 						}
-						if (!this.mXMLParser.NextElement(ref xmlelement))
+						if (!mXMLParser.NextElement(ref xmlelement))
 						{
 							return false;
 						}
@@ -284,11 +284,11 @@ namespace Sexy
 					}
 					else if (xmlelement.mValue == "Font")
 					{
-						if (!this.ParseFontResource(xmlelement))
+						if (!ParseFontResource(xmlelement))
 						{
 							return false;
 						}
-						if (!this.mXMLParser.NextElement(ref xmlelement))
+						if (!mXMLParser.NextElement(ref xmlelement))
 						{
 							return false;
 						}
@@ -299,11 +299,11 @@ namespace Sexy
 					}
 					else if (xmlelement.mValue == "Music")
 					{
-						if (!this.ParseMusicResource(xmlelement))
+						if (!ParseMusicResource(xmlelement))
 						{
 							return false;
 						}
-						if (!this.mXMLParser.NextElement(ref xmlelement))
+						if (!mXMLParser.NextElement(ref xmlelement))
 						{
 							return false;
 						}
@@ -314,11 +314,11 @@ namespace Sexy
 					}
 					else if (xmlelement.mValue == "Level")
 					{
-						if (!this.ParseLevelResource(xmlelement))
+						if (!ParseLevelResource(xmlelement))
 						{
 							return false;
 						}
-						if (!this.mXMLParser.NextElement(ref xmlelement))
+						if (!mXMLParser.NextElement(ref xmlelement))
 						{
 							return false;
 						}
@@ -333,11 +333,11 @@ namespace Sexy
 						{
 							goto IL_2A2;
 						}
-						if (!this.ParseSetDefaults(xmlelement))
+						if (!ParseSetDefaults(xmlelement))
 						{
 							return false;
 						}
-						if (!this.mXMLParser.NextElement(ref xmlelement))
+						if (!mXMLParser.NextElement(ref xmlelement))
 						{
 							return false;
 						}
@@ -361,34 +361,34 @@ namespace Sexy
 			}
 			return false;
 			Block_6:
-			return this.Fail("Unexpected element found.");
+			return Fail("Unexpected element found.");
 			Block_10:
-			return this.Fail("Unexpected element found.");
+			return Fail("Unexpected element found.");
 			Block_14:
-			return this.Fail("Unexpected element found.");
+			return Fail("Unexpected element found.");
 			Block_18:
-			return this.Fail("Unexpected element found.");
+			return Fail("Unexpected element found.");
 			Block_22:
-			return this.Fail("Unexpected element found.");
+			return Fail("Unexpected element found.");
 			Block_26:
-			return this.Fail("Unexpected element found.");
+			return Fail("Unexpected element found.");
 			Block_30:
-			return this.Fail("Unexpected element found.");
+			return Fail("Unexpected element found.");
 			Block_34:
-			return this.Fail("Unexpected element found.");
+			return Fail("Unexpected element found.");
 			Block_38:
-			return this.Fail("Unexpected element found.");
+			return Fail("Unexpected element found.");
 			IL_2A2:
-			this.Fail("Invalid Section '" + xmlelement.mValue + "'");
+			Fail("Invalid Section '" + xmlelement.mValue + "'");
 			return false;
 			Block_39:
-			this.Fail("Element Not Expected '" + xmlelement.mValue + "'");
+			Fail("Element Not Expected '" + xmlelement.mValue + "'");
 			return false;
 		}
 
 		private bool ParseCommonResource(XMLElement theElement, BaseRes theRes, Dictionary<string, BaseRes> theMap)
 		{
-			this.mHadAlreadyDefinedError = false;
+			mHadAlreadyDefinedError = false;
 			string text = theElement.mAttributes["path"];
 			theRes.mXMLAttributes = theElement.mAttributes;
 			theRes.mFromProgram = false;
@@ -402,21 +402,21 @@ namespace Sexy
 			}
 			else
 			{
-				theRes.mPath = this.mDefaultPath + text;
+				theRes.mPath = mDefaultPath + text;
 			}
 			Dictionary<string, string>.Enumerator enumerator = theElement.mAttributes.GetEnumerator();
-			string text2 = this.mDefaultIdPrefix;
+			string text2 = mDefaultIdPrefix;
 			while (enumerator.MoveNext())
 			{
 				KeyValuePair<string, string> keyValuePair = enumerator.Current;
 				if (keyValuePair.Key == "id")
 				{
-					string text3 = this.mDefaultIdPrefix;
+					string text3 = mDefaultIdPrefix;
 					KeyValuePair<string, string> keyValuePair2 = enumerator.Current;
 					text2 = text3 + keyValuePair2.Value;
 				}
 			}
-			theRes.mResGroup = this.mCurResGroup;
+			theRes.mResGroup = mCurResGroup;
 			theRes.mId = text2;
 			enumerator = theElement.mAttributes.GetEnumerator();
 			string text4 = null;
@@ -450,11 +450,11 @@ namespace Sexy
 			}
 			if (theMap.ContainsKey(text2))
 			{
-				this.mHadAlreadyDefinedError = true;
-				return this.Fail("Resource already defined.");
+				mHadAlreadyDefinedError = true;
+				return Fail("Resource already defined.");
 			}
 			theMap.Add(text2, theRes);
-			this.mCurResGroupList.Add(theRes);
+			mCurResGroupList.Add(theRes);
 			return true;
 		}
 
@@ -466,11 +466,11 @@ namespace Sexy
 				KeyValuePair<string, string> current = enumerator.Current;
 				if (current.Key == "path")
 				{
-					this.mDefaultPath = this.GetResourceDir() + enumerator.Current.Value + "/";
+					mDefaultPath = GetResourceDir() + enumerator.Current.Value + "/";
 				}
 				if (enumerator.Current.Key == "idprefix")
 				{
-					this.mDefaultIdPrefix = enumerator.Current.Value;
+					mDefaultIdPrefix = enumerator.Current.Value;
 				}
 			}
 			return true;
@@ -480,17 +480,17 @@ namespace Sexy
 		private bool ParseFontResource(XMLElement theElement)
 		{
 			FontRes fontRes = new FontRes();
-			if (!this.ParseCommonResource(theElement, fontRes, this.mFontMap))
+			if (!ParseCommonResource(theElement, fontRes, mFontMap))
 			{
-				if (!this.mHadAlreadyDefinedError || !this.mAllowAlreadyDefinedResources)
+				if (!mHadAlreadyDefinedError || !mAllowAlreadyDefinedResources)
 				{
 					fontRes.DeleteResource();
 					return false;
 				}
-				this.mError = "";
-				this.mHasFailed = false;
+				mError = "";
+				mHasFailed = false;
 				FontRes fontRes2 = fontRes;
-				fontRes = (FontRes)this.mFontMap[fontRes2.mId];
+				fontRes = (FontRes)mFontMap[fontRes2.mId];
 				fontRes.mPath = fontRes2.mPath;
 				fontRes.mXMLAttributes = fontRes2.mXMLAttributes;
 				fontRes2.DeleteResource();
@@ -565,7 +565,7 @@ namespace Sexy
 				}
 				if (fontRes.mSize <= 0)
 				{
-					return this.Fail("SysFont needs point size");
+					return Fail("SysFont needs point size");
 				}
 			}
 			else
@@ -578,17 +578,17 @@ namespace Sexy
 		public bool ParseSoundResource(XMLElement theElement)
 		{
 			SoundRes soundRes = new SoundRes();
-			if (!this.ParseCommonResource(theElement, soundRes, this.mSoundMap))
+			if (!ParseCommonResource(theElement, soundRes, mSoundMap))
 			{
-				if (!this.mHadAlreadyDefinedError || !this.mAllowAlreadyDefinedResources)
+				if (!mHadAlreadyDefinedError || !mAllowAlreadyDefinedResources)
 				{
 					soundRes.DeleteResource();
 					return false;
 				}
-				this.mError = "";
-				this.mHasFailed = false;
+				mError = "";
+				mHasFailed = false;
 				SoundRes soundRes2 = soundRes;
-				soundRes = (SoundRes)this.mSoundMap[soundRes2.mId];
+				soundRes = (SoundRes)mSoundMap[soundRes2.mId];
 				soundRes.mPath = soundRes2.mPath;
 				soundRes.mXMLAttributes = soundRes2.mXMLAttributes;
 				soundRes2.DeleteResource();
@@ -619,17 +619,17 @@ namespace Sexy
 		public bool ParseMusicResource(XMLElement theElement)
 		{
 			MusicRes musicRes = new MusicRes();
-			if (!this.ParseCommonResource(theElement, musicRes, this.mMusicMap))
+			if (!ParseCommonResource(theElement, musicRes, mMusicMap))
 			{
-				if (!this.mHadAlreadyDefinedError || !this.mAllowAlreadyDefinedResources)
+				if (!mHadAlreadyDefinedError || !mAllowAlreadyDefinedResources)
 				{
 					musicRes.DeleteResource();
 					return false;
 				}
-				this.mError = "";
-				this.mHasFailed = false;
+				mError = "";
+				mHasFailed = false;
 				MusicRes musicRes2 = musicRes;
-				musicRes = (MusicRes)this.mMusicMap[musicRes2.mId];
+				musicRes = (MusicRes)mMusicMap[musicRes2.mId];
 				musicRes.mPath = musicRes2.mPath;
 				musicRes.mXMLAttributes = musicRes2.mXMLAttributes;
 				musicRes2.DeleteResource();
@@ -641,17 +641,17 @@ namespace Sexy
 		public bool ParseReanimResource(XMLElement theElement)
 		{
 			ReanimRes reanimRes = new ReanimRes();
-			if (!this.ParseCommonResource(theElement, reanimRes, this.mReanimMap))
+			if (!ParseCommonResource(theElement, reanimRes, mReanimMap))
 			{
-				if (!this.mHadAlreadyDefinedError || !this.mAllowAlreadyDefinedResources)
+				if (!mHadAlreadyDefinedError || !mAllowAlreadyDefinedResources)
 				{
 					reanimRes.DeleteResource();
 					return false;
 				}
-				this.mError = "";
-				this.mHasFailed = false;
+				mError = "";
+				mHasFailed = false;
 				ReanimRes reanimRes2 = reanimRes;
-				reanimRes = (ReanimRes)this.mReanimMap[reanimRes2.mId];
+				reanimRes = (ReanimRes)mReanimMap[reanimRes2.mId];
 				reanimRes.mPath = reanimRes2.mPath;
 				reanimRes.mXMLAttributes = reanimRes2.mXMLAttributes;
 				reanimRes2.DeleteResource();
@@ -662,17 +662,17 @@ namespace Sexy
 		public bool ParseParticleResource(XMLElement theElement)
 		{
 			ParticleRes particleRes = new ParticleRes();
-			if (!this.ParseCommonResource(theElement, particleRes, this.mParticleMap))
+			if (!ParseCommonResource(theElement, particleRes, mParticleMap))
 			{
-				if (!this.mHadAlreadyDefinedError || !this.mAllowAlreadyDefinedResources)
+				if (!mHadAlreadyDefinedError || !mAllowAlreadyDefinedResources)
 				{
 					particleRes.DeleteResource();
 					return false;
 				}
-				this.mError = "";
-				this.mHasFailed = false;
+				mError = "";
+				mHasFailed = false;
 				ParticleRes particleRes2 = particleRes;
-				particleRes = (ParticleRes)this.mParticleMap[particleRes2.mId];
+				particleRes = (ParticleRes)mParticleMap[particleRes2.mId];
 				particleRes.mPath = particleRes2.mPath;
 				particleRes.mXMLAttributes = particleRes2.mXMLAttributes;
 				particleRes2.DeleteResource();
@@ -683,17 +683,17 @@ namespace Sexy
 		public bool ParseTrailResource(XMLElement theElement)
 		{
 			TrailRes trailRes = new TrailRes();
-			if (!this.ParseCommonResource(theElement, trailRes, this.mTrailMap))
+			if (!ParseCommonResource(theElement, trailRes, mTrailMap))
 			{
-				if (!this.mHadAlreadyDefinedError || !this.mAllowAlreadyDefinedResources)
+				if (!mHadAlreadyDefinedError || !mAllowAlreadyDefinedResources)
 				{
 					trailRes.DeleteResource();
 					return false;
 				}
-				this.mError = "";
-				this.mHasFailed = false;
+				mError = "";
+				mHasFailed = false;
 				TrailRes trailRes2 = trailRes;
-				trailRes = (TrailRes)this.mTrailMap[trailRes2.mId];
+				trailRes = (TrailRes)mTrailMap[trailRes2.mId];
 				trailRes.mPath = trailRes2.mPath;
 				trailRes.mXMLAttributes = trailRes2.mXMLAttributes;
 				trailRes2.DeleteResource();
@@ -704,17 +704,17 @@ namespace Sexy
 		public bool ParseLevelResource(XMLElement theElement)
 		{
 			LevelRes levelRes = new LevelRes();
-			if (!this.ParseCommonResource(theElement, levelRes, this.mLevelMap))
+			if (!ParseCommonResource(theElement, levelRes, mLevelMap))
 			{
-				if (!this.mHadAlreadyDefinedError || !this.mAllowAlreadyDefinedResources)
+				if (!mHadAlreadyDefinedError || !mAllowAlreadyDefinedResources)
 				{
 					levelRes.DeleteResource();
 					return false;
 				}
-				this.mError = "";
-				this.mHasFailed = false;
+				mError = "";
+				mHasFailed = false;
 				LevelRes levelRes2 = levelRes;
-				levelRes = (LevelRes)this.mLevelMap[levelRes2.mId];
+				levelRes = (LevelRes)mLevelMap[levelRes2.mId];
 				levelRes.mPath = levelRes2.mPath;
 				levelRes.mXMLAttributes = levelRes2.mXMLAttributes;
 				levelRes2.DeleteResource();
@@ -726,17 +726,17 @@ namespace Sexy
 		public bool ParseImageResource(XMLElement theElement)
 		{
 			ImageRes imageRes = new ImageRes();
-			if (!this.ParseCommonResource(theElement, imageRes, this.mImageMap))
+			if (!ParseCommonResource(theElement, imageRes, mImageMap))
 			{
-				if (!this.mHadAlreadyDefinedError || !this.mAllowAlreadyDefinedResources)
+				if (!mHadAlreadyDefinedError || !mAllowAlreadyDefinedResources)
 				{
 					imageRes.DeleteResource();
 					return false;
 				}
-				this.mError = "";
-				this.mHasFailed = false;
+				mError = "";
+				mHasFailed = false;
 				ImageRes imageRes2 = imageRes;
-				imageRes = (ImageRes)this.mImageMap[imageRes2.mId];
+				imageRes = (ImageRes)mImageMap[imageRes2.mId];
 				imageRes.mPath = imageRes2.mPath;
 				imageRes.mXMLAttributes = imageRes2.mXMLAttributes;
 				imageRes2.DeleteResource();
@@ -744,7 +744,7 @@ namespace Sexy
 			imageRes.mPalletize = !theElement.mAttributes.ContainsKey("nopal");
 			imageRes.mA4R4G4B4 = theElement.mAttributes.ContainsKey("a4r4g4b4");
 			imageRes.mDDSurface = theElement.mAttributes.ContainsKey("ddsurface");
-			imageRes.mPurgeBits = (theElement.mAttributes.ContainsKey("nobits") || (this.mApp.Is3DAccelerated() && theElement.mAttributes.ContainsKey("nobits3d")) || (!this.mApp.Is3DAccelerated() && theElement.mAttributes.ContainsKey("nobits2d")));
+			imageRes.mPurgeBits = (theElement.mAttributes.ContainsKey("nobits") || (mApp.Is3DAccelerated() && theElement.mAttributes.ContainsKey("nobits3d")) || (!mApp.Is3DAccelerated() && theElement.mAttributes.ContainsKey("nobits2d")));
 			imageRes.mA8R8G8B8 = theElement.mAttributes.ContainsKey("a8r8g8b8");
 			imageRes.mR5G6B5 = theElement.mAttributes.ContainsKey("r5g6b5");
 			imageRes.mA1R5G5B5 = theElement.mAttributes.ContainsKey("a1r5g5b5");
@@ -761,7 +761,7 @@ namespace Sexy
 				if (keyValuePair.Key == "alphaimage")
 				{
 					ImageRes imageRes3 = imageRes;
-					string text = this.mDefaultPath;
+					string text = mDefaultPath;
 					KeyValuePair<string, string> keyValuePair2 = enumerator.Current;
 					imageRes3.mAlphaImage = text + keyValuePair2.Value;
 				}
@@ -789,7 +789,7 @@ namespace Sexy
 							if (keyValuePair7.Key == "alphagrid")
 							{
 								ImageRes imageRes6 = imageRes;
-								string text2 = this.mDefaultPath;
+								string text2 = mDefaultPath;
 								KeyValuePair<string, string> keyValuePair8 = enumerator.Current;
 								imageRes6.mAlphaGridImage = text2 + keyValuePair8.Value;
 							}
@@ -852,7 +852,7 @@ namespace Sexy
 													{
 														if (!(value == "pingpong"))
 														{
-															this.Fail("Invalid animation type.");
+															Fail("Invalid animation type.");
 															return false;
 														}
 														animType = AnimType.AnimType_PingPong;
@@ -877,9 +877,9 @@ namespace Sexy
 				{
 					if (keyValuePair19.Key == "framedelay")
 					{
-						AnimInfo mAnimInfo = imageRes.mAnimInfo;
+						AnimInfo animInfo = imageRes.mAnimInfo;
 						KeyValuePair<string, string> keyValuePair20 = enumerator.Current;
-						mAnimInfo.mFrameDelay = Convert.ToInt32(keyValuePair20.Value);
+						animInfo.mFrameDelay = Convert.ToInt32(keyValuePair20.Value);
 					}
 					else
 					{
@@ -939,7 +939,7 @@ namespace Sexy
 
 		public void DeleteImage(string theName)
 		{
-			this.ReplaceImage(theName, null);
+			ReplaceImage(theName, null);
 		}
 
 		public void DeleteResources(Dictionary<string, BaseRes> theMap, string theGroup)
@@ -955,27 +955,27 @@ namespace Sexy
 
 		public void DeleteResources(string theGroup)
 		{
-			this.DeleteResources(this.mImageMap, theGroup);
-			this.DeleteResources(this.mSoundMap, theGroup);
-			this.DeleteResources(this.mFontMap, theGroup);
-			this.mLoadedGroups.Remove(theGroup);
+			DeleteResources(mImageMap, theGroup);
+			DeleteResources(mSoundMap, theGroup);
+			DeleteResources(mFontMap, theGroup);
+			mLoadedGroups.Remove(theGroup);
 			Resources.ExtractResourcesByName(this, theGroup);
 		}
 
 		public void UnloadInitResources()
 		{
-			foreach (BaseRes baseRes in this.unloadableResources)
+			foreach (BaseRes baseRes in unloadableResources)
 			{
 				baseRes.DeleteResource();
 			}
-			this.unloadableResources.Clear();
+			unloadableResources.Clear();
 		}
 
 		public void UnloadBackground(string theGroup)
 		{
 			GC.Collect();
-			this.DeleteResources(theGroup);
-			this.mLoadedGroups.Remove(theGroup);
+			DeleteResources(theGroup);
+			mLoadedGroups.Remove(theGroup);
 			GC.Collect();
 			SexyAppBase.XnaGame.CompensateForSlowUpdate();
 		}
@@ -987,63 +987,63 @@ namespace Sexy
 
 		public Font GetFontThrow(string theRes)
 		{
-			if (this.mFontMap.ContainsKey(theRes))
+			if (mFontMap.ContainsKey(theRes))
 			{
-				return ((FontRes)this.mFontMap[theRes]).mFont;
+				return ((FontRes)mFontMap[theRes]).mFont;
 			}
 			return null;
 		}
 
 		public ReanimatorDefinition GetReanimThrow(string theRes)
 		{
-			if (this.mReanimMap.ContainsKey(theRes))
+			if (mReanimMap.ContainsKey(theRes))
 			{
-				return ((ReanimRes)this.mReanimMap[theRes]).mReanim;
+				return ((ReanimRes)mReanimMap[theRes]).mReanim;
 			}
 			return null;
 		}
 
 		public TodParticleDefinition GetParticleThrow(string theRes)
 		{
-			if (this.mParticleMap.ContainsKey(theRes))
+			if (mParticleMap.ContainsKey(theRes))
 			{
-				return ((ParticleRes)this.mParticleMap[theRes]).mParticle;
+				return ((ParticleRes)mParticleMap[theRes]).mParticle;
 			}
 			return null;
 		}
 
 		public TrailDefinition GetTrailThrow(string theRes)
 		{
-			if (this.mTrailMap.ContainsKey(theRes))
+			if (mTrailMap.ContainsKey(theRes))
 			{
-				return ((TrailRes)this.mTrailMap[theRes]).mTrail;
+				return ((TrailRes)mTrailMap[theRes]).mTrail;
 			}
 			return null;
 		}
 
 		public Image GetImageThrow(string theRes)
 		{
-			if (this.mImageMap.ContainsKey(theRes))
+			if (mImageMap.ContainsKey(theRes))
 			{
-				return ((ImageRes)this.mImageMap[theRes]).mImage;
+				return ((ImageRes)mImageMap[theRes]).mImage;
 			}
 			return null;
 		}
 
 		public int GetSoundThrow(string theRes)
 		{
-			if (this.mSoundMap.ContainsKey(theRes))
+			if (mSoundMap.ContainsKey(theRes))
 			{
-				return ((SoundRes)this.mSoundMap[theRes]).mSoundId;
+				return ((SoundRes)mSoundMap[theRes]).mSoundId;
 			}
 			return -1;
 		}
 
 		public int GetMusicThrow(string theRes)
 		{
-			if (this.mMusicMap.ContainsKey(theRes))
+			if (mMusicMap.ContainsKey(theRes))
 			{
-				return ((MusicRes)this.mMusicMap[theRes]).mSongId;
+				return ((MusicRes)mMusicMap[theRes]).mSongId;
 			}
 			return -1;
 		}
@@ -1086,64 +1086,64 @@ namespace Sexy
 
 		public int GetNumResourcesGroupNameStartsWith(string theResGroup)
 		{
-			return this.GetNumResourcesGroupNameStartsWith(theResGroup, this.mImageMap);
+			return GetNumResourcesGroupNameStartsWith(theResGroup, mImageMap);
 		}
 
 		public int GetNumResources(string theResGroup)
 		{
-			return this.GetNumImages(theResGroup) + this.GetNumSounds(theResGroup) + this.GetNumFonts(theResGroup) + this.GetNumSongs(theResGroup);
+			return GetNumImages(theResGroup) + GetNumSounds(theResGroup) + GetNumFonts(theResGroup) + GetNumSongs(theResGroup);
 		}
 
 		public int GetNumImages(string theResGroup)
 		{
-			return this.GetNumResources(theResGroup, this.mImageMap);
+			return GetNumResources(theResGroup, mImageMap);
 		}
 
 		public int GetNumSounds(string theResGroup)
 		{
-			return this.GetNumResources(theResGroup, this.mSoundMap);
+			return GetNumResources(theResGroup, mSoundMap);
 		}
 
 		public int GetNumFonts(string theResGroup)
 		{
-			return this.GetNumResources(theResGroup, this.mFontMap);
+			return GetNumResources(theResGroup, mFontMap);
 		}
 
 		public int GetNumSongs(string theResGroup)
 		{
-			return this.GetNumResources(theResGroup, this.mMusicMap);
+			return GetNumResources(theResGroup, mMusicMap);
 		}
 
 		public int GetNumReanims(string theResGroup)
 		{
-			return this.GetNumResources(theResGroup, this.mReanimMap);
+			return GetNumResources(theResGroup, mReanimMap);
 		}
 
 		public int GetNumParticles(string theResGroup)
 		{
-			return this.GetNumResources(theResGroup, this.mParticleMap);
+			return GetNumResources(theResGroup, mParticleMap);
 		}
 
 		public int GetNumTrails(string theResGroup)
 		{
-			return this.GetNumResources(theResGroup, this.mTrailMap);
+			return GetNumResources(theResGroup, mTrailMap);
 		}
 
 		public void LoadAllResources()
 		{
-			this.mTotalResources = this.GetNumResources("");
-			this.mTotalResources -= this.GetNumResourcesGroupNameStartsWith("DelayLoad_");
-			this.mLoadedCount = 0;
-			this.mProgress = 0.0;
-			Dictionary<string, List<BaseRes>>.Enumerator enumerator = this.mResGroupMap.GetEnumerator();
+			mTotalResources = GetNumResources("");
+			mTotalResources -= GetNumResourcesGroupNameStartsWith("DelayLoad_");
+			mLoadedCount = 0;
+			mProgress = 0.0;
+			Dictionary<string, List<BaseRes>>.Enumerator enumerator = mResGroupMap.GetEnumerator();
 			while (enumerator.MoveNext())
 			{
 				KeyValuePair<string, List<BaseRes>> current = enumerator.Current;
 				if ((current.Key != "Levels") && !enumerator.Current.Key.StartsWith("DelayLoad_"))
 				{
-					this.StartLoadResources(enumerator.Current.Key);
-					this.LoadResources(enumerator.Current.Key);
-					if (this.HadError())
+					StartLoadResources(enumerator.Current.Key);
+					LoadResources(enumerator.Current.Key);
+					if (HadError())
 					{
 						return;
 					}
@@ -1155,24 +1155,24 @@ namespace Sexy
 
 		public void StartLoadResources(string theResGroup)
 		{
-			this.mError = "";
-			this.mHasFailed = false;
-			this.mCurResGroup = theResGroup;
-			this.mCurResGroupList = this.mResGroupMap[theResGroup];
-			this.mCurResGroupListItr = this.mCurResGroupList.GetEnumerator();
+			mError = "";
+			mHasFailed = false;
+			mCurResGroup = theResGroup;
+			mCurResGroupList = mResGroupMap[theResGroup];
+			mCurResGroupListItr = mCurResGroupList.GetEnumerator();
 		}
 
 		public bool LoadResources(string theResGroup)
 		{
-			this.mError = "";
-			this.mHasFailed = false;
-			this.StartLoadResources(theResGroup);
-			while (this.LoadNextResource())
+			mError = "";
+			mHasFailed = false;
+			StartLoadResources(theResGroup);
+			while (LoadNextResource())
 			{
 			}
-			if (!this.HadError())
+			if (!HadError())
 			{
-				this.mLoadedGroups.Add(theResGroup);
+				mLoadedGroups.Add(theResGroup);
 				return true;
 			}
 			return false;
@@ -1180,19 +1180,19 @@ namespace Sexy
 
 		public bool LoadNextResource()
 		{
-			if (this.HadError())
+			if (HadError())
 			{
 				return false;
 			}
-			if (this.mCurResGroupList == null)
+			if (mCurResGroupList == null)
 			{
 				return false;
 			}
 			bool flag = false;
 			bool flag2 = false;
-			while (this.mCurResGroupListItr.MoveNext())
+			while (mCurResGroupListItr.MoveNext())
 			{
-				BaseRes baseRes = this.mCurResGroupListItr.Current;
+				BaseRes baseRes = mCurResGroupListItr.Current;
 				if (!baseRes.mFromProgram)
 				{
 					switch (baseRes.mType)
@@ -1204,7 +1204,7 @@ namespace Sexy
 						{
 							continue;
 						}
-						flag = this.DoLoadImage(imageRes);
+						flag = DoLoadImage(imageRes);
 						flag2 = true;
 						break;
 					}
@@ -1215,7 +1215,7 @@ namespace Sexy
 						{
 							continue;
 						}
-						flag = this.DoLoadSound(soundRes);
+						flag = DoLoadSound(soundRes);
 						flag2 = true;
 						break;
 					}
@@ -1226,7 +1226,7 @@ namespace Sexy
 						{
 							continue;
 						}
-						flag = this.DoLoadFont(fontRes);
+						flag = DoLoadFont(fontRes);
 						flag2 = true;
 						break;
 					}
@@ -1237,7 +1237,7 @@ namespace Sexy
 						{
 							continue;
 						}
-						flag = this.DoLoadMusic(musicRes);
+						flag = DoLoadMusic(musicRes);
 						flag2 = true;
 						break;
 					}
@@ -1248,7 +1248,7 @@ namespace Sexy
 						{
 							continue;
 						}
-						flag = this.DoLoadReanim(ref reanimRes);
+						flag = DoLoadReanim(ref reanimRes);
 						flag2 = true;
 						break;
 					}
@@ -1259,7 +1259,7 @@ namespace Sexy
 						{
 							continue;
 						}
-						flag = this.DoLoadParticle(ref particleRes);
+						flag = DoLoadParticle(ref particleRes);
 						flag2 = true;
 						break;
 					}
@@ -1270,7 +1270,7 @@ namespace Sexy
 						{
 							continue;
 						}
-						flag = this.DoLoadTrail(ref trailRes);
+						flag = DoLoadTrail(ref trailRes);
 						flag2 = true;
 						break;
 					}
@@ -1283,19 +1283,19 @@ namespace Sexy
 			}
 			if (flag)
 			{
-				this.mLoadedCount++;
-				this.mProgress = (double)this.mLoadedCount / (double)this.mTotalResources;
-				Debug.OutputDebug<string>(this.mProgress.ToString());
+				mLoadedCount++;
+				mProgress = (double)mLoadedCount / (double)mTotalResources;
+				Debug.OutputDebug<string>(mProgress.ToString());
 			}
 			return flag;
 		}
 
 		public bool LoadLevelBackgrounds(int levelNumber, out Image verticalBackground, out Image horizontalBackground)
 		{
-			Dictionary<string, BaseRes>.Enumerator enumerator = this.mLevelMap.GetEnumerator();
-			if (this.loadedBackdrop != levelNumber)
+			Dictionary<string, BaseRes>.Enumerator enumerator = mLevelMap.GetEnumerator();
+			if (loadedBackdrop != levelNumber)
 			{
-				this.backDropContentManager.Unload();
+				backDropContentManager.Unload();
 			}
 			while (enumerator.MoveNext())
 			{
@@ -1303,9 +1303,9 @@ namespace Sexy
 				LevelRes levelRes = (LevelRes)keyValuePair.Value;
 				if (levelRes.mLevelNumber == levelNumber)
 				{
-					verticalBackground = new Image(this.backDropContentManager.Load<Texture2D>(levelRes.mPath + "v"));
-					horizontalBackground = new Image(this.backDropContentManager.Load<Texture2D>(levelRes.mPath + "h"));
-					this.loadedBackdrop = levelNumber;
+					verticalBackground = new Image(backDropContentManager.Load<Texture2D>(levelRes.mPath + "v"));
+					horizontalBackground = new Image(backDropContentManager.Load<Texture2D>(levelRes.mPath + "h"));
+					loadedBackdrop = levelNumber;
 					return true;
 				}
 			}
@@ -1375,7 +1375,7 @@ namespace Sexy
 				texture2D.GetData<Color>(array);
 				for (int i = 0; i < array.Length; i++)
 				{
-					this.PremultiplyPixel(ref array[i]);
+					PremultiplyPixel(ref array[i]);
 				}
 				if (Main.DO_LOW_MEMORY_OPTIONS)
 				{
@@ -1427,16 +1427,16 @@ namespace Sexy
 				}
 				if (theRes.mFormat == ImageRes.TextureFormat.Content)
 				{
-					texture2D = this.GetContentManager(theRes).Load<Texture2D>(text);
+					texture2D = GetContentManager(theRes).Load<Texture2D>(text);
 				}
 				else
 				{
-					texture2D = this.LoadTextureFromStream(text, true, theRes.mFormat, theRes.lowMemorySurfaceFormat);
+					texture2D = LoadTextureFromStream(text, true, theRes.mFormat, theRes.lowMemorySurfaceFormat);
 				}
 			}
 			catch (Exception ex)
 			{
-				return this.Fail("Failed to load image: " + theRes.mPath + ex.Message);
+				return Fail("Failed to load image: " + theRes.mPath + ex.Message);
 			}
 			theRes.mImage = new Image(texture2D, 0, 0, texture2D.Width, texture2D.Height);
 			if (theRes.mAnimInfo.mAnimType != AnimType.AnimType_None)
@@ -1447,9 +1447,9 @@ namespace Sexy
 			theRes.mImage.mNumCols = theRes.mCols;
 			if (theRes.mUnloadGroup > 0)
 			{
-				this.unloadableResources.Add(theRes);
+				unloadableResources.Add(theRes);
 			}
-			this.ResourceLoadedHook(theRes);
+			ResourceLoadedHook(theRes);
 			return true;
 		}
 
@@ -1458,11 +1458,11 @@ namespace Sexy
 			Font font = new Font();
 			if (fontRes.mSysFont)
 			{
-				return this.Fail("SysFont not supported");
+				return Fail("SysFont not supported");
 			}
 			if (fontRes.mDefault)
 			{
-				font.AddLayer(this.arial);
+				font.AddLayer(arial);
 				fontRes.mFont = font;
 				return true;
 			}
@@ -1532,7 +1532,7 @@ namespace Sexy
 							if (xmlReader.NodeType == XmlNodeType.Text)
 							{
 								string value = xmlReader.Value;
-								font.AddLayer(this.mContentManager.Load<SpriteFont>(value), zero2);
+								font.AddLayer(mContentManager.Load<SpriteFont>(value), zero2);
 							}
 							xmlReader.Read();
 						}
@@ -1560,80 +1560,80 @@ namespace Sexy
 				}
 			}
 			fontRes.mFont = font;
-			this.ResourceLoadedHook(fontRes);
+			ResourceLoadedHook(fontRes);
 			return true;
 		}
 
 		private bool DoLoadSound(SoundRes soundRes)
 		{
-			int freeSoundId = this.mApp.mSoundManager.GetFreeSoundId();
+			int freeSoundId = mApp.mSoundManager.GetFreeSoundId();
 			if (freeSoundId < 0)
 			{
-				return this.Fail("Out of free sound ids");
+				return Fail("Out of free sound ids");
 			}
-			if (!this.mApp.mSoundManager.LoadSound((uint)freeSoundId, soundRes.mPath))
+			if (!mApp.mSoundManager.LoadSound((uint)freeSoundId, soundRes.mPath))
 			{
-				return this.Fail("Failed to load sound: " + soundRes.mPath);
+				return Fail("Failed to load sound: " + soundRes.mPath);
 			}
 			if (soundRes.mVolume >= 0.0)
 			{
-				this.mApp.mSoundManager.SetBaseVolume((uint)freeSoundId, soundRes.mVolume);
+				mApp.mSoundManager.SetBaseVolume((uint)freeSoundId, soundRes.mVolume);
 			}
 			if (soundRes.mPanning != 0)
 			{
-				this.mApp.mSoundManager.SetBasePan((uint)freeSoundId, soundRes.mPanning);
+				mApp.mSoundManager.SetBasePan((uint)freeSoundId, soundRes.mPanning);
 			}
 			soundRes.mSoundId = freeSoundId;
-			this.ResourceLoadedHook(soundRes);
+			ResourceLoadedHook(soundRes);
 			return true;
 		}
 
 		private bool DoLoadMusic(MusicRes musicRes)
 		{
-			int freeMusicId = this.mApp.mMusicInterface.GetFreeMusicId();
+			int freeMusicId = mApp.mMusicInterface.GetFreeMusicId();
 			if (freeMusicId < 0)
 			{
-				return this.Fail("Out of free song ids");
+				return Fail("Out of free song ids");
 			}
-			if (!this.mApp.mMusicInterface.LoadMusic(freeMusicId, musicRes.mPath))
+			if (!mApp.mMusicInterface.LoadMusic(freeMusicId, musicRes.mPath))
 			{
-				return this.Fail("Failed to load song: " + musicRes.mPath);
+				return Fail("Failed to load song: " + musicRes.mPath);
 			}
 			musicRes.mSongId = freeMusicId;
-			this.ResourceLoadedHook(musicRes);
+			ResourceLoadedHook(musicRes);
 			return true;
 		}
 
 		private bool DoLoadReanim(ref ReanimRes reanimRes)
 		{
 			ReanimRes reanimRes2 = reanimRes;
-			if (!this.LoadReanimation(reanimRes2.mPath, ref reanimRes2.mReanim))
+			if (!LoadReanimation(reanimRes2.mPath, ref reanimRes2.mReanim))
 			{
-				return this.Fail("Failed to load reanim: " + reanimRes2.mPath);
+				return Fail("Failed to load reanim: " + reanimRes2.mPath);
 			}
-			this.ResourceLoadedHook(reanimRes);
+			ResourceLoadedHook(reanimRes);
 			return true;
 		}
 
 		private bool DoLoadParticle(ref ParticleRes particleRes)
 		{
 			ParticleRes particleRes2 = particleRes;
-			if (!this.LoadParticle(particleRes2.mPath, ref particleRes2.mParticle))
+			if (!LoadParticle(particleRes2.mPath, ref particleRes2.mParticle))
 			{
-				return this.Fail("Failed to load reanim: " + particleRes2.mPath);
+				return Fail("Failed to load reanim: " + particleRes2.mPath);
 			}
-			this.ResourceLoadedHook(particleRes);
+			ResourceLoadedHook(particleRes);
 			return true;
 		}
 
 		private bool DoLoadTrail(ref TrailRes trailRes)
 		{
 			TrailRes trailRes2 = trailRes;
-			if (!this.LoadTrail(trailRes2.mPath, ref trailRes2.mTrail))
+			if (!LoadTrail(trailRes2.mPath, ref trailRes2.mTrail))
 			{
-				return this.Fail("Failed to load reanim: " + trailRes2.mPath);
+				return Fail("Failed to load reanim: " + trailRes2.mPath);
 			}
-			this.ResourceLoadedHook(trailRes);
+			ResourceLoadedHook(trailRes);
 			return true;
 		}
 
@@ -1643,23 +1643,23 @@ namespace Sexy
 
 		private bool Fail(string theErrorText)
 		{
-			if (!this.mHasFailed)
+			if (!mHasFailed)
 			{
-				this.mHasFailed = true;
-				if (this.mXMLParser == null)
+				mHasFailed = true;
+				if (mXMLParser == null)
 				{
-					this.mError = theErrorText;
+					mError = theErrorText;
 					return false;
 				}
-				int currentLineNum = this.mXMLParser.GetCurrentLineNum();
-				this.mError = theErrorText;
+				int currentLineNum = mXMLParser.GetCurrentLineNum();
+				mError = theErrorText;
 				if (currentLineNum > 0)
 				{
-					this.mError = this.mError + " on Line " + currentLineNum.ToString();
+					mError = mError + " on Line " + currentLineNum.ToString();
 				}
-				if (!string.IsNullOrEmpty(this.mXMLParser.GetFileName()))
+				if (!string.IsNullOrEmpty(mXMLParser.GetFileName()))
 				{
-					this.mError = this.mError + " in File '" + this.mXMLParser.GetFileName() + "'";
+					mError = mError + " in File '" + mXMLParser.GetFileName() + "'";
 				}
 			}
 			return false;
@@ -1667,31 +1667,31 @@ namespace Sexy
 
 		public bool TodLoadResources(string theGroup)
 		{
-			return this.TodLoadResources(theGroup, false);
+			return TodLoadResources(theGroup, false);
 		}
 
 		public bool TodLoadResources(string theGroup, bool doUnpackAtlasImages)
 		{
-			if (this.IsGroupLoaded(theGroup))
+			if (IsGroupLoaded(theGroup))
 			{
 				return true;
 			}
 			PerfTimer perfTimer = default(PerfTimer);
 			perfTimer.Start();
-			this.StartLoadResources(theGroup);
-			while (!GlobalStaticVars.gSexyAppBase.mShutdown && this.LoadNextResource())
+			StartLoadResources(theGroup);
+			while (!GlobalStaticVars.gSexyAppBase.mShutdown && LoadNextResource())
 			{
 			}
 			if (GlobalStaticVars.gSexyAppBase.mShutdown)
 			{
 				return false;
 			}
-			if (this.HadError())
+			if (HadError())
 			{
 				GlobalStaticVars.gSexyAppBase.ShowResourceError(true);
 				return false;
 			}
-			this.mLoadedGroups.Add(theGroup);
+			mLoadedGroups.Add(theGroup);
 			Math.Max((int)perfTimer.GetDuration(), 0);
 			return true;
 		}

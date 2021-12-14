@@ -8,32 +8,32 @@ namespace Sexy.TodLib
 		{
 			get
 			{
-				return this.name;
+				return name;
 			}
 			set
 			{
-				this.name = value;
-				this.IsAttacher = this.name.StartsWith("attacher__");
+				name = value;
+				IsAttacher = name.StartsWith("attacher__");
 			}
 		}
 
 		public ReanimatorTrack(string name, int transformCount)
 		{
-			this.mName = name;
-			this.mTransformCount = (short)transformCount;
-			this.mTransforms = new ReanimatorTransform[(int)this.mTransformCount];
+			mName = name;
+			mTransformCount = (short)transformCount;
+			mTransforms = new ReanimatorTransform[(int)mTransformCount];
 		}
 
 		public override string ToString()
 		{
-			return this.name;
+			return name;
 		}
 
 		public void ExtractImages()
 		{
-			for (int i = 0; i < this.mTransforms.Length; i++)
+			for (int i = 0; i < mTransforms.Length; i++)
 			{
-				this.mTransforms[i].ExtractImages();
+				mTransforms[i].ExtractImages();
 			}
 		}
 

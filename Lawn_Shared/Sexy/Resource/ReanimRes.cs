@@ -7,14 +7,14 @@ namespace Sexy
 	{
 		public ReanimRes()
 		{
-			this.mType = ResType.ResType_Image;
+			mType = ResType.ResType_Image;
 		}
 
 		public override void DeleteResource()
 		{
-			if (this.mReanim != null)
+			if (mReanim != null)
 			{
-				this.mReanim = null;
+				mReanim = null;
 			}
 			base.DeleteResource();
 		}

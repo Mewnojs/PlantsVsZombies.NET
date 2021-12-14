@@ -6,10 +6,10 @@ namespace Sexy.TodLib
 	{
 		public TrailDefinition()
 		{
-			this.mMaxPoints = 2;
-			this.mMinPointDistance = 1f;
-			this.mTrailFlags = 0;
-			this.mImage = null;
+			mMaxPoints = 2;
+			mMinPointDistance = 1f;
+			mTrailFlags = 0;
+			mImage = null;
 		}
 
 		public void Dispose()

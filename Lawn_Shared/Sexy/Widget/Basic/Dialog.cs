@@ -12,56 +12,56 @@ namespace Sexy
 
 		public Dialog(Image theComponentImage, Image theButtonComponentImage, int theId, bool isModal, string theDialogHeader, string theDialogLines, string theDialogFooter, int theButtonMode)
 		{
-			this.mId = theId;
-			this.mResult = int.MaxValue;
-			this.mComponentImage = theComponentImage;
-			this.mIsModal = isModal;
+			mId = theId;
+			mResult = int.MaxValue;
+			mComponentImage = theComponentImage;
+			mIsModal = isModal;
 			int num = (int)Constants.InvertAndScale(24f);
-			this.mContentInsets = new Insets(num, num, num, num);
-			this.mTextAlign = 0;
-			this.mLineSpacingOffset = 0;
-			this.mSpaceAfterHeader = (int)Constants.InvertAndScale(10f);
-			this.mButtonSidePadding = 0;
-			this.mButtonHorzSpacing = (int)Constants.InvertAndScale(8f);
-			this.mDialogListener = GlobalStaticVars.gSexyAppBase;
-			this.mDialogHeader = theDialogHeader;
-			this.mDialogFooter = theDialogFooter;
-			this.mButtonMode = theButtonMode;
-			if (this.mButtonMode == 1 || this.mButtonMode == 2)
+			mContentInsets = new Insets(num, num, num, num);
+			mTextAlign = 0;
+			mLineSpacingOffset = 0;
+			mSpaceAfterHeader = (int)Constants.InvertAndScale(10f);
+			mButtonSidePadding = 0;
+			mButtonHorzSpacing = (int)Constants.InvertAndScale(8f);
+			mDialogListener = GlobalStaticVars.gSexyAppBase;
+			mDialogHeader = theDialogHeader;
+			mDialogFooter = theDialogFooter;
+			mButtonMode = theButtonMode;
+			if (mButtonMode == 1 || mButtonMode == 2)
 			{
-				this.mYesButton = new DialogButton(theButtonComponentImage, 1000, this);
-				this.mNoButton = new DialogButton(theButtonComponentImage, 1001, this);
-				if (this.mButtonMode == 1)
+				mYesButton = new DialogButton(theButtonComponentImage, 1000, this);
+				mNoButton = new DialogButton(theButtonComponentImage, 1001, this);
+				if (mButtonMode == 1)
 				{
-					this.mYesButton.mLabel = Strings.YES;
-					this.mNoButton.mLabel = Strings.NO;
+					mYesButton.mLabel = Strings.YES;
+					mNoButton.mLabel = Strings.NO;
 				}
 				else
 				{
-					this.mYesButton.mLabel = Strings.OK;
-					this.mNoButton.mLabel = Strings.CANCEL;
+					mYesButton.mLabel = Strings.OK;
+					mNoButton.mLabel = Strings.CANCEL;
 				}
 			}
-			else if (this.mButtonMode == 3)
+			else if (mButtonMode == 3)
 			{
-				this.mYesButton = new DialogButton(theButtonComponentImage, 1000, this);
-				this.mYesButton.mLabel = this.mDialogFooter;
-				this.mNoButton = null;
+				mYesButton = new DialogButton(theButtonComponentImage, 1000, this);
+				mYesButton.mLabel = mDialogFooter;
+				mNoButton = null;
 			}
 			else
 			{
-				this.mYesButton = null;
-				this.mNoButton = null;
-				this.mNumButtons = 0;
+				mYesButton = null;
+				mNoButton = null;
+				mNumButtons = 0;
 			}
-			this.mDialogLines = theDialogLines;
-			this.mButtonHeight = ((theButtonComponentImage == null) ? ((int)Constants.InvertAndScale(24f)) : theButtonComponentImage.mHeight);
-			this.mHasTransparencies = true;
-			this.mHasAlpha = true;
-			this.mHeaderFont = Resources.FONT_BRIANNETOD16;
-			this.mLinesFont = Resources.FONT_BRIANNETOD12;
-			this.mDragging = false;
-			this.mPriority = 1;
+			mDialogLines = theDialogLines;
+			mButtonHeight = ((theButtonComponentImage == null) ? ((int)Constants.InvertAndScale(24f)) : theButtonComponentImage.mHeight);
+			mHasTransparencies = true;
+			mHasAlpha = true;
+			mHeaderFont = Resources.FONT_BRIANNETOD16;
+			mLinesFont = Resources.FONT_BRIANNETOD12;
+			mDragging = false;
+			mPriority = 1;
 			if (theButtonComponentImage == null)
 			{
 				GlobalMembersDialog.gDialogColors[3, 0] = 0;
@@ -71,46 +71,46 @@ namespace Sexy
 				GlobalMembersDialog.gDialogColors[4, 1] = 0;
 				GlobalMembersDialog.gDialogColors[4, 2] = 0;
 			}
-			this.SetColors(GlobalMembersDialog.gDialogColors, 7);
+			SetColors(GlobalMembersDialog.gDialogColors, 7);
 		}
 
 		public override void Dispose()
 		{
-			this.mYesButton.Dispose();
-			this.mNoButton.Dispose();
-			this.mHeaderFont.Dispose();
-			this.mLinesFont.Dispose();
+			mYesButton.Dispose();
+			mNoButton.Dispose();
+			mHeaderFont.Dispose();
+			mLinesFont.Dispose();
 			base.Dispose();
 		}
 
 		public virtual void SetButtonFont(Font theFont)
 		{
-			if (this.mYesButton != null)
+			if (mYesButton != null)
 			{
-				this.mYesButton.SetFont(theFont);
+				mYesButton.SetFont(theFont);
 			}
-			if (this.mNoButton != null)
+			if (mNoButton != null)
 			{
-				this.mNoButton.SetFont(theFont);
+				mNoButton.SetFont(theFont);
 			}
 		}
 
 		public virtual void SetHeaderFont(Font theFont)
 		{
-			if (this.mHeaderFont != null)
+			if (mHeaderFont != null)
 			{
-				this.mHeaderFont.Dispose();
+				mHeaderFont.Dispose();
 			}
-			this.mHeaderFont = theFont.Duplicate();
+			mHeaderFont = theFont.Duplicate();
 		}
 
 		public virtual void SetLinesFont(Font theFont)
 		{
-			if (this.mLinesFont != null)
+			if (mLinesFont != null)
 			{
-				this.mLinesFont.Dispose();
+				mLinesFont.Dispose();
 			}
-			this.mLinesFont = theFont.Duplicate();
+			mLinesFont = theFont.Duplicate();
 		}
 
 		public override void SetColor(int theIdx, SexyColor theColor)
@@ -118,144 +118,144 @@ namespace Sexy
 			base.SetColor(theIdx, theColor);
 			if (theIdx == 3)
 			{
-				if (this.mYesButton != null)
+				if (mYesButton != null)
 				{
-					this.mYesButton.SetColor(ButtonWidget.ColorType.COLOR_LABEL, theColor);
+					mYesButton.SetColor(ButtonWidget.ColorType.COLOR_LABEL, theColor);
 				}
-				if (this.mNoButton != null)
+				if (mNoButton != null)
 				{
-					this.mNoButton.SetColor(ButtonWidget.ColorType.COLOR_LABEL, theColor);
+					mNoButton.SetColor(ButtonWidget.ColorType.COLOR_LABEL, theColor);
 					return;
 				}
 			}
 			else if (theIdx == 4)
 			{
-				if (this.mYesButton != null)
+				if (mYesButton != null)
 				{
-					this.mYesButton.SetColor(ButtonWidget.ColorType.COLOR_LABEL_HILITE, theColor);
+					mYesButton.SetColor(ButtonWidget.ColorType.COLOR_LABEL_HILITE, theColor);
 				}
-				if (this.mNoButton != null)
+				if (mNoButton != null)
 				{
-					this.mNoButton.SetColor(ButtonWidget.ColorType.COLOR_LABEL_HILITE, theColor);
+					mNoButton.SetColor(ButtonWidget.ColorType.COLOR_LABEL_HILITE, theColor);
 				}
 			}
 		}
 
 		public virtual int GetPreferredHeight(int theWidth)
 		{
-			this.EnsureFonts();
-			int num = this.mContentInsets.mTop + this.mContentInsets.mBottom + this.mBackgroundInsets.mTop + this.mBackgroundInsets.mBottom;
+			EnsureFonts();
+			int num = mContentInsets.mTop + mContentInsets.mBottom + mBackgroundInsets.mTop + mBackgroundInsets.mBottom;
 			bool flag = false;
-			if (this.mDialogHeader.Length > 0)
+			if (mDialogHeader.Length > 0)
 			{
-				num += this.mHeaderFont.GetHeight() - this.mHeaderFont.GetAscentPadding();
+				num += mHeaderFont.GetHeight() - mHeaderFont.GetAscentPadding();
 				flag = true;
 			}
-			if (this.mDialogLines.Length > 0)
+			if (mDialogLines.Length > 0)
 			{
 				if (flag)
 				{
-					num += this.mSpaceAfterHeader;
+					num += mSpaceAfterHeader;
 				}
 				Graphics g = GlobalStaticVars.g;
-				g.SetFont(this.mLinesFont);
-				num += this.GetWordWrappedHeight(g, theWidth - this.mContentInsets.mLeft - this.mContentInsets.mRight - this.mBackgroundInsets.mLeft - this.mBackgroundInsets.mRight - (int)Constants.InvertAndScale(4f), this.mDialogLines, this.mLinesFont.GetLineSpacing() + this.mLineSpacingOffset);
+				g.SetFont(mLinesFont);
+				num += GetWordWrappedHeight(g, theWidth - mContentInsets.mLeft - mContentInsets.mRight - mBackgroundInsets.mLeft - mBackgroundInsets.mRight - (int)Constants.InvertAndScale(4f), mDialogLines, mLinesFont.GetLineSpacing() + mLineSpacingOffset);
 				flag = true;
-				num += this.mSpaceAfterHeader;
+				num += mSpaceAfterHeader;
 			}
-			if (this.mDialogFooter.Length != 0 && this.mButtonMode != 3)
+			if (mDialogFooter.Length != 0 && mButtonMode != 3)
 			{
 				if (flag)
 				{
 					num += (int)Constants.InvertAndScale(8f);
 				}
-				num += this.mHeaderFont.GetLineSpacing();
+				num += mHeaderFont.GetLineSpacing();
 			}
 			return num + AtlasResources.IMAGE_DIALOG_BOTTOMMIDDLE.GetHeight();
 		}
 
 		public override void Draw(Graphics g)
 		{
-			this.EnsureFonts();
-			TRect theDest = new TRect(this.mBackgroundInsets.mLeft, this.mBackgroundInsets.mTop, this.mWidth - this.mBackgroundInsets.mLeft - this.mBackgroundInsets.mRight, this.mHeight - this.mBackgroundInsets.mTop - this.mBackgroundInsets.mBottom);
-			if (this.mComponentImage != null)
+			EnsureFonts();
+			TRect theDest = new TRect(mBackgroundInsets.mLeft, mBackgroundInsets.mTop, mWidth - mBackgroundInsets.mLeft - mBackgroundInsets.mRight, mHeight - mBackgroundInsets.mTop - mBackgroundInsets.mBottom);
+			if (mComponentImage != null)
 			{
-				g.DrawImageBox(theDest, this.mComponentImage);
+				g.DrawImageBox(theDest, mComponentImage);
 			}
 			else
 			{
 				int num = 6;
 				Color theDefaultColor = new Color(GlobalMembersDialog.gDialogColors[num, 0], GlobalMembersDialog.gDialogColors[num, 1], GlobalMembersDialog.gDialogColors[num, 2]);
-				g.SetColor(this.GetColor(Dialog.DialogColour.COLOR_OUTLINE, theDefaultColor));
-				g.DrawRect(12, 12, this.mWidth - 24 - 1, this.mHeight - 24 - 1);
+				g.SetColor(GetColor(Dialog.DialogColour.COLOR_OUTLINE, theDefaultColor));
+				g.DrawRect(12, 12, mWidth - 24 - 1, mHeight - 24 - 1);
 				num = 5;
 				theDefaultColor = new Color(GlobalMembersDialog.gDialogColors[num, 0], GlobalMembersDialog.gDialogColors[num, 1], GlobalMembersDialog.gDialogColors[num, 2]);
-				g.SetColor(this.GetColor(Dialog.DialogColour.COLOR_BKG, theDefaultColor));
-				g.FillRect(13, 13, this.mWidth - 24 - 2, this.mHeight - 24 - 2);
+				g.SetColor(GetColor(Dialog.DialogColour.COLOR_BKG, theDefaultColor));
+				g.FillRect(13, 13, mWidth - 24 - 2, mHeight - 24 - 2);
 				g.SetColor(new Color(0, 0, 0, 128));
-				g.FillRect(this.mWidth - 12, 24, 12, this.mHeight - 36);
-				g.FillRect(24, this.mHeight - 12, this.mWidth - 24, 12);
+				g.FillRect(mWidth - 12, 24, 12, mHeight - 36);
+				g.FillRect(24, mHeight - 12, mWidth - 24, 12);
 			}
-			int num2 = this.mContentInsets.mTop + this.mBackgroundInsets.mTop;
-			if (this.mDialogHeader.Length > 0)
+			int num2 = mContentInsets.mTop + mBackgroundInsets.mTop;
+			if (mDialogHeader.Length > 0)
 			{
-				num2 += this.mHeaderFont.GetAscent() - this.mHeaderFont.GetAscentPadding();
-				g.SetFont(this.mHeaderFont);
-				g.SetColor(this.mColors[0]);
-				this.WriteCenteredLine(g, num2, this.mDialogHeader);
-				num2 += this.mHeaderFont.GetHeight() - this.mHeaderFont.GetAscent();
-				num2 += this.mSpaceAfterHeader;
+				num2 += mHeaderFont.GetAscent() - mHeaderFont.GetAscentPadding();
+				g.SetFont(mHeaderFont);
+				g.SetColor(mColors[0]);
+				WriteCenteredLine(g, num2, mDialogHeader);
+				num2 += mHeaderFont.GetHeight() - mHeaderFont.GetAscent();
+				num2 += mSpaceAfterHeader;
 			}
-			g.SetFont(this.mLinesFont);
-			g.SetColor(this.mColors[1]);
-			TRect theRect = new TRect(this.mBackgroundInsets.mLeft + this.mContentInsets.mLeft + 2, num2, this.mWidth - this.mContentInsets.mLeft - this.mContentInsets.mRight - this.mBackgroundInsets.mLeft - this.mBackgroundInsets.mRight - 4, 0);
-			num2 += this.WriteWordWrapped(g, theRect, this.mDialogLines, this.mLinesFont.GetLineSpacing() + this.mLineSpacingOffset, this.mTextAlign);
-			if (this.mDialogFooter.Length != 0 && this.mButtonMode != 3)
+			g.SetFont(mLinesFont);
+			g.SetColor(mColors[1]);
+			TRect theRect = new TRect(mBackgroundInsets.mLeft + mContentInsets.mLeft + 2, num2, mWidth - mContentInsets.mLeft - mContentInsets.mRight - mBackgroundInsets.mLeft - mBackgroundInsets.mRight - 4, 0);
+			num2 += WriteWordWrapped(g, theRect, mDialogLines, mLinesFont.GetLineSpacing() + mLineSpacingOffset, mTextAlign);
+			if (mDialogFooter.Length != 0 && mButtonMode != 3)
 			{
 				num2 += 8;
-				num2 += this.mHeaderFont.GetLineSpacing();
-				g.SetFont(this.mHeaderFont);
-				g.SetColor(this.mColors[2]);
-				this.WriteCenteredLine(g, num2, this.mDialogFooter);
+				num2 += mHeaderFont.GetLineSpacing();
+				g.SetFont(mHeaderFont);
+				g.SetColor(mColors[2]);
+				WriteCenteredLine(g, num2, mDialogFooter);
 			}
 		}
 
 		public override void AddedToManager(WidgetManager theWidgetManager)
 		{
 			base.AddedToManager(theWidgetManager);
-			if (this.mYesButton != null)
+			if (mYesButton != null)
 			{
-				theWidgetManager.AddWidget(this.mYesButton);
+				theWidgetManager.AddWidget(mYesButton);
 			}
-			if (this.mNoButton != null)
+			if (mNoButton != null)
 			{
-				theWidgetManager.AddWidget(this.mNoButton);
+				theWidgetManager.AddWidget(mNoButton);
 			}
 		}
 
 		public override void RemovedFromManager(WidgetManager theWidgetManager)
 		{
 			base.RemovedFromManager(theWidgetManager);
-			if (this.mYesButton != null)
+			if (mYesButton != null)
 			{
-				theWidgetManager.RemoveWidget(this.mYesButton);
+				theWidgetManager.RemoveWidget(mYesButton);
 			}
-			if (this.mNoButton != null)
+			if (mNoButton != null)
 			{
-				theWidgetManager.RemoveWidget(this.mNoButton);
+				theWidgetManager.RemoveWidget(mNoButton);
 			}
 		}
 
 		public override void OrderInManagerChanged()
 		{
 			base.OrderInManagerChanged();
-			if (this.mYesButton != null)
+			if (mYesButton != null)
 			{
-				this.mWidgetManager.PutInfront(this.mYesButton, this);
+				mWidgetManager.PutInfront(mYesButton, this);
 			}
-			if (this.mNoButton != null)
+			if (mNoButton != null)
 			{
-				this.mWidgetManager.PutInfront(this.mNoButton, this);
+				mWidgetManager.PutInfront(mNoButton, this);
 			}
 		}
 
@@ -267,18 +267,18 @@ namespace Sexy
 		public override void Resize(int theX, int theY, int theWidth, int theHeight)
 		{
 			base.Resize(theX, theY, theWidth, theHeight);
-			if (this.mYesButton != null && this.mNoButton != null)
+			if (mYesButton != null && mNoButton != null)
 			{
-				int num = (this.mWidth - this.mContentInsets.mLeft - this.mContentInsets.mRight - this.mBackgroundInsets.mLeft - this.mBackgroundInsets.mRight - this.mButtonSidePadding * 2 - this.mButtonHorzSpacing) / 2;
-				int num2 = this.mButtonHeight;
-				this.mYesButton.Resize(this.mX + this.mBackgroundInsets.mLeft + this.mContentInsets.mLeft + this.mButtonSidePadding, this.mY + this.mHeight - this.mContentInsets.mBottom - this.mBackgroundInsets.mBottom - num2, num, num2);
-				this.mNoButton.Resize(this.mYesButton.mX + num + this.mButtonHorzSpacing, this.mYesButton.mY, num, num2);
+				int num = (mWidth - mContentInsets.mLeft - mContentInsets.mRight - mBackgroundInsets.mLeft - mBackgroundInsets.mRight - mButtonSidePadding * 2 - mButtonHorzSpacing) / 2;
+				int num2 = mButtonHeight;
+				mYesButton.Resize(mX + mBackgroundInsets.mLeft + mContentInsets.mLeft + mButtonSidePadding, mY + mHeight - mContentInsets.mBottom - mBackgroundInsets.mBottom - num2, num, num2);
+				mNoButton.Resize(mYesButton.mX + num + mButtonHorzSpacing, mYesButton.mY, num, num2);
 				return;
 			}
-			if (this.mYesButton != null)
+			if (mYesButton != null)
 			{
-				int num3 = this.mButtonHeight;
-				this.mYesButton.Resize(this.mX + this.mContentInsets.mLeft + this.mBackgroundInsets.mLeft, this.mY + this.mHeight - this.mContentInsets.mBottom - this.mBackgroundInsets.mBottom - num3, this.mWidth - this.mContentInsets.mLeft - this.mContentInsets.mRight - this.mBackgroundInsets.mLeft - this.mBackgroundInsets.mRight, num3);
+				int num3 = mButtonHeight;
+				mYesButton.Resize(mX + mContentInsets.mLeft + mBackgroundInsets.mLeft, mY + mHeight - mContentInsets.mBottom - mBackgroundInsets.mBottom - num3, mWidth - mContentInsets.mLeft - mContentInsets.mRight - mBackgroundInsets.mLeft - mBackgroundInsets.mRight, num3);
 			}
 		}
 
@@ -291,54 +291,54 @@ namespace Sexy
 		{
 			if (theClickCount == 1)
 			{
-				this.mDragging = true;
-				this.mDragMouseX = x;
-				this.mDragMouseY = y;
+				mDragging = true;
+				mDragMouseX = x;
+				mDragMouseY = y;
 			}
 			base.MouseDown(x, y, theBtnNum, theClickCount);
 		}
 
 		public override void MouseDrag(int x, int y)
 		{
-			if (this.mDragging)
+			if (mDragging)
 			{
-				int num = this.mX + x - this.mDragMouseX;
-				int num2 = this.mY + y - this.mDragMouseY;
+				int num = mX + x - mDragMouseX;
+				int num2 = mY + y - mDragMouseY;
 				if (num < -8)
 				{
 					num = -8;
 				}
-				else if (num + this.mWidth > this.mWidgetManager.mWidth + 8)
+				else if (num + mWidth > mWidgetManager.mWidth + 8)
 				{
-					num = this.mWidgetManager.mWidth - this.mWidth + 8;
+					num = mWidgetManager.mWidth - mWidth + 8;
 				}
 				if (num2 < -8)
 				{
 					num2 = -8;
 				}
-				else if (num2 + this.mHeight > this.mWidgetManager.mHeight + 8)
+				else if (num2 + mHeight > mWidgetManager.mHeight + 8)
 				{
-					num2 = this.mWidgetManager.mHeight - this.mHeight + 8;
+					num2 = mWidgetManager.mHeight - mHeight + 8;
 				}
-				this.mDragMouseX = this.mX + x - num;
-				this.mDragMouseY = this.mY + y - num2;
-				if (this.mDragMouseX < 8)
+				mDragMouseX = mX + x - num;
+				mDragMouseY = mY + y - num2;
+				if (mDragMouseX < 8)
 				{
-					this.mDragMouseX = 8;
+					mDragMouseX = 8;
 				}
-				else if (this.mDragMouseX > this.mWidth - 9)
+				else if (mDragMouseX > mWidth - 9)
 				{
-					this.mDragMouseX = this.mWidth - 9;
+					mDragMouseX = mWidth - 9;
 				}
-				if (this.mDragMouseY < 8)
+				if (mDragMouseY < 8)
 				{
-					this.mDragMouseY = 8;
+					mDragMouseY = 8;
 				}
-				else if (this.mDragMouseY > this.mHeight - 9)
+				else if (mDragMouseY > mHeight - 9)
 				{
-					this.mDragMouseY = this.mHeight - 9;
+					mDragMouseY = mHeight - 9;
 				}
-				this.Move(num, num2);
+				Move(num, num2);
 			}
 		}
 
@@ -349,9 +349,9 @@ namespace Sexy
 
 		public override void MouseUp(int x, int y, int theBtnNum, int theClickCount)
 		{
-			if (this.mDragging)
+			if (mDragging)
 			{
-				this.mDragging = false;
+				mDragging = false;
 			}
 			base.MouseUp(x, y, theBtnNum, theClickCount);
 		}
@@ -363,31 +363,31 @@ namespace Sexy
 
 		public virtual bool IsModal()
 		{
-			return this.mIsModal;
+			return mIsModal;
 		}
 
 		public virtual int WaitForResult()
 		{
-			return this.WaitForResult(true);
+			return WaitForResult(true);
 		}
 
 		public virtual int WaitForResult(bool autoKill)
 		{
-			while (GlobalStaticVars.gSexyAppBase.UpdateApp() && this.mWidgetManager != null && this.mResult == 2147483647)
+			while (GlobalStaticVars.gSexyAppBase.UpdateApp() && mWidgetManager != null && mResult == 2147483647)
 			{
 			}
 			if (autoKill)
 			{
-				GlobalStaticVars.gSexyAppBase.KillDialog(this.mId);
+				GlobalStaticVars.gSexyAppBase.KillDialog(mId);
 			}
-			return this.mResult;
+			return mResult;
 		}
 
 		public virtual void ButtonPress(int theId)
 		{
 			if (theId == 1000 || theId == 1001)
 			{
-				this.mDialogListener.DialogButtonPress(this.mId, theId);
+				mDialogListener.DialogButtonPress(mId, theId);
 			}
 		}
 
@@ -395,8 +395,8 @@ namespace Sexy
 		{
 			if (theId == 1000 || theId == 1001)
 			{
-				this.mResult = theId;
-				this.mDialogListener.DialogButtonDepress(this.mId, theId);
+				mResult = theId;
+				mDialogListener.DialogButtonDepress(mId, theId);
 			}
 		}
 
@@ -406,7 +406,7 @@ namespace Sexy
 
 		public void ButtonPress(int theId, int theClickCount)
 		{
-			this.ButtonPress(theId);
+			ButtonPress(theId);
 		}
 
 		public void ButtonMouseEnter(int theId)

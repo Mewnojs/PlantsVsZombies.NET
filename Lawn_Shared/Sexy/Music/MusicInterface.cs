@@ -23,57 +23,57 @@ namespace Sexy
 
 		public virtual void PlayMusic(int theSongId)
 		{
-			this.PlayMusic(theSongId, this.mDefaultFadeOutSeconds, this.mDefaultFadeInSeconds, true);
+			PlayMusic(theSongId, mDefaultFadeOutSeconds, mDefaultFadeInSeconds, true);
 		}
 
 		public virtual void PlayMusic(int theSongId, bool loop)
 		{
-			this.PlayMusic(theSongId, this.mDefaultFadeOutSeconds, this.mDefaultFadeInSeconds, loop);
+			PlayMusic(theSongId, mDefaultFadeOutSeconds, mDefaultFadeInSeconds, loop);
 		}
 
 		public virtual void PlayMusic(int theSongId, float fadeInSeconds)
 		{
-			this.PlayMusic(theSongId, this.mDefaultFadeOutSeconds, fadeInSeconds, true);
+			PlayMusic(theSongId, mDefaultFadeOutSeconds, fadeInSeconds, true);
 		}
 
 		public virtual void PlayMusic(int theSongId, float fadeInSeconds, bool loop)
 		{
-			this.PlayMusic(theSongId, this.mDefaultFadeOutSeconds, fadeInSeconds, loop);
+			PlayMusic(theSongId, mDefaultFadeOutSeconds, fadeInSeconds, loop);
 		}
 
 		public virtual void PlayMusic(int theSongId, float fadeOutSeconds, float fadeInSeconds)
 		{
-			this.PlayMusic(theSongId, fadeOutSeconds, fadeInSeconds, true);
+			PlayMusic(theSongId, fadeOutSeconds, fadeInSeconds, true);
 		}
 
 		public virtual void PlayMusic(int theSongId, float fadeOutSeconds, float fadeInSeconds, bool loop)
 		{
-			this.PlayMusic(theSongId, 0, fadeOutSeconds, fadeInSeconds, loop);
+			PlayMusic(theSongId, 0, fadeOutSeconds, fadeInSeconds, loop);
 		}
 
 		public virtual void PlayMusic(int theSongId, int offset)
 		{
-			this.PlayMusic(theSongId, offset, this.mDefaultFadeOutSeconds, this.mDefaultFadeInSeconds, true);
+			PlayMusic(theSongId, offset, mDefaultFadeOutSeconds, mDefaultFadeInSeconds, true);
 		}
 
 		public virtual void PlayMusic(int theSongId, int offset, bool loop)
 		{
-			this.PlayMusic(theSongId, offset, this.mDefaultFadeOutSeconds, this.mDefaultFadeInSeconds, loop);
+			PlayMusic(theSongId, offset, mDefaultFadeOutSeconds, mDefaultFadeInSeconds, loop);
 		}
 
 		public virtual void PlayMusic(int theSongId, int offset, float fadeInSeconds)
 		{
-			this.PlayMusic(theSongId, offset, this.mDefaultFadeOutSeconds, fadeInSeconds, true);
+			PlayMusic(theSongId, offset, mDefaultFadeOutSeconds, fadeInSeconds, true);
 		}
 
 		public virtual void PlayMusic(int theSongId, int offset, float fadeInSeconds, bool loop)
 		{
-			this.PlayMusic(theSongId, offset, this.mDefaultFadeOutSeconds, fadeInSeconds, loop);
+			PlayMusic(theSongId, offset, mDefaultFadeOutSeconds, fadeInSeconds, loop);
 		}
 
 		public virtual void PlayMusic(int theSongId, int offset, float fadeOutSeconds, float fadeInSeconds)
 		{
-			this.PlayMusic(theSongId, offset, fadeOutSeconds, fadeInSeconds, true);
+			PlayMusic(theSongId, offset, fadeOutSeconds, fadeInSeconds, true);
 		}
 
 		public virtual void PlayMusic(int theSongid, int offset, float fadeOutSeconds, float fadeinSeconds, bool loop)
@@ -82,7 +82,7 @@ namespace Sexy
 
 		public virtual void StopMusic()
 		{
-			this.StopMusic(this.mDefaultFadeOutSeconds);
+			StopMusic(mDefaultFadeOutSeconds);
 		}
 
 		public virtual void StopMusic(float fadeOutSeconds)
@@ -107,12 +107,12 @@ namespace Sexy
 
 		public virtual void SetDefaultFadeOut(float fadeOutSeconds)
 		{
-			this.mDefaultFadeOutSeconds = fadeOutSeconds;
+			mDefaultFadeOutSeconds = fadeOutSeconds;
 		}
 
 		public virtual void SetDefaultFadeIn(float fadeInSeconds)
 		{
-			this.mDefaultFadeInSeconds = fadeInSeconds;
+			mDefaultFadeInSeconds = fadeInSeconds;
 		}
 
 		public virtual bool IsPlaying(int theSongId)

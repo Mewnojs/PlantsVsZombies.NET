@@ -17,19 +17,19 @@ namespace Lawn
 
 		public QuickPlayWidget(LawnApp theApp, QuickPlayWidgetListener theListener)
 		{
-			this.mApp = theApp;
-			this.mListener = theListener;
-			this.mWidth = 0;
-			this.mHeight = AtlasResources.IMAGE_MINI_GAME_FRAME.mHeight;
+			mApp = theApp;
+			mListener = theListener;
+			mWidth = 0;
+			mHeight = AtlasResources.IMAGE_MINI_GAME_FRAME.mHeight;
 		}
 
 		public override void Draw(Graphics g)
 		{
 			int num = 10;
-			for (int i = 0; i < this.mLevels.Count; i++)
+			for (int i = 0; i < mLevels.Count; i++)
 			{
-				int num2 = this.mLevels[i];
-				this.DrawBackgroundThumbnailForLevel(g, num + Constants.QuickPlayWidget_Thumb_X, Constants.QuickPlayWidget_Thumb_Y, num2);
+				int num2 = mLevels[i];
+				DrawBackgroundThumbnailForLevel(g, num + Constants.QuickPlayWidget_Thumb_X, Constants.QuickPlayWidget_Thumb_Y, num2);
 				if (num2 == 10 || num2 == 20 || num2 == 30 || num2 == 40 || num2 == 45)
 				{
 					g.SetColor(new SexyColor(0, 0, 0));
@@ -45,9 +45,9 @@ namespace Lawn
 				num += AtlasResources.IMAGE_MINI_GAME_FRAME.mWidth + 10;
 			}
 			num = 10;
-			for (int j = 0; j < this.mLevels.Count; j++)
+			for (int j = 0; j < mLevels.Count; j++)
 			{
-				int num3 = this.mLevels[j];
+				int num3 = mLevels[j];
 				int num4 = num3 * 5;
 				while (QuickPlayWidget.ZombieThumbTab[num4].type != ZombieType.ZOMBIE_INVALID)
 				{
@@ -62,13 +62,13 @@ namespace Lawn
 					{
 						g.DrawImage(AtlasResources.IMAGE_BUNGEECORD, (float)(num + num5) + Constants.InvertAndScale(33f), (float)(QuickPlayWidget.ZombieThumbTab[num4].y + Constants.QuickPlayWidget_Bungee_Y));
 					}
-					this.DrawZombieThumbnail(g, QuickPlayWidget.ZombieThumbTab[num4].type, num + num5, QuickPlayWidget.ZombieThumbTab[num4].y, mirror);
+					DrawZombieThumbnail(g, QuickPlayWidget.ZombieThumbTab[num4].type, num + num5, QuickPlayWidget.ZombieThumbTab[num4].y, mirror);
 					num4++;
 				}
 				num += AtlasResources.IMAGE_MINI_GAME_FRAME.mWidth + 10;
 			}
 			num = 10;
-			for (int k = 0; k < this.mLevels.Count; k++)
+			for (int k = 0; k < mLevels.Count; k++)
 			{
 				g.DrawImage(AtlasResources.IMAGE_MINI_GAME_FRAME, num, 0);
 				num += AtlasResources.IMAGE_MINI_GAME_FRAME.mWidth + 10;
@@ -77,27 +77,27 @@ namespace Lawn
 
 		public override void MouseUp(int x, int y, int theClickCount)
 		{
-			if (this.mLevels.Count != 0)
+			if (mLevels.Count != 0)
 			{
 				int num = x / (AtlasResources.IMAGE_MINI_GAME_FRAME.mWidth + 10);
-				this.mListener.QuickPlayStageSelected(this.mLevels[num]);
+				mListener.QuickPlayStageSelected(mLevels[num]);
 			}
 		}
 
 		public void AddLevel(int theLevel)
 		{
-			this.mLevels.Add(theLevel);
+			mLevels.Add(theLevel);
 		}
 
 		public void Clear()
 		{
-			this.mLevels.Clear();
+			mLevels.Clear();
 		}
 
 		public void SizeToFit()
 		{
-			this.mWidth = (10 + AtlasResources.IMAGE_MINI_GAME_FRAME.mWidth) * this.mLevels.Count;
-			this.mHeight = AtlasResources.IMAGE_MINI_GAME_FRAME.mHeight;
+			mWidth = (10 + AtlasResources.IMAGE_MINI_GAME_FRAME.mWidth) * mLevels.Count;
+			mHeight = AtlasResources.IMAGE_MINI_GAME_FRAME.mHeight;
 		}
 
 		public void DrawBackgroundThumbnailForLevel(Graphics g, int theX, int theY, int theLevel)
@@ -148,18 +148,18 @@ namespace Lawn
 
 		public void DrawZombieThumbnail(Graphics g, ZombieType theZombieType, int theX, int theY)
 		{
-			this.DrawZombieThumbnail(g, theZombieType, theX, theY, false);
+			DrawZombieThumbnail(g, theZombieType, theX, theY, false);
 		}
 
 		public void DrawZombieThumbnail(Graphics g, ZombieType theZombieType, int theX, int theY, bool mirror)
 		{
-			float mScaleX = g.mScaleX;
+			float scaleX = g.mScaleX;
 			if (mirror)
 			{
 				g.mScaleX = -g.mScaleX;
 			}
-			this.mApp.mReanimatorCache.DrawCachedZombie(g, (float)theX, (float)theY, theZombieType);
-			g.mScaleX = mScaleX;
+			mApp.mReanimatorCache.DrawCachedZombie(g, (float)theX, (float)theY, theZombieType);
+			g.mScaleX = scaleX;
 		}
 
 		public LawnApp mApp;

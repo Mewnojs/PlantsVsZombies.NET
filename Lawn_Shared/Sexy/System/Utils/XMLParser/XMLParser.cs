@@ -8,16 +8,16 @@ namespace Sexy
 	{
 		protected void Fail(string theErrorText)
 		{
-			this.mHasFailed = true;
-			this.mErrorText = theErrorText;
+			mHasFailed = true;
+			mErrorText = theErrorText;
 		}
 
 		protected void Init()
 		{
-			this.mSection = "";
-			this.mLineNum = 1;
-			this.mHasFailed = false;
-			this.mErrorText = "";
+			mSection = "";
+			mLineNum = 1;
+			mHasFailed = false;
+			mErrorText = "";
 		}
 
 		protected bool AddAttribute(XMLElement theElement, string theAttributeKey, string theAttributeValue)
@@ -62,9 +62,9 @@ namespace Sexy
 
 		public XMLParser()
 		{
-			this.mLineNum = 0;
-			this.mAllowComments = false;
-			this.mFileName = string.Empty;
+			mLineNum = 0;
+			mAllowComments = false;
+			mFileName = string.Empty;
 		}
 
 		public override void Dispose()
@@ -76,12 +76,12 @@ namespace Sexy
 		{
 			if (!base.OpenFile(theFileName))
 			{
-				this.mLineNum = 0;
-				this.Fail("Unable to open file " + theFileName);
+				mLineNum = 0;
+				Fail("Unable to open file " + theFileName);
 				return false;
 			}
-			this.mFileName = theFileName;
-			this.Init();
+			mFileName = theFileName;
+			Init();
 			return true;
 		}
 
@@ -91,7 +91,7 @@ namespace Sexy
 			for (;;)
 			{
 				theElement.mType = XMLElementType.TYPE_NONE;
-				theElement.mSection = this.mSection;
+				theElement.mSection = mSection;
 				theElement.mValue = "";
 				theElement.mValueEncoded = "";
 				theElement.mAttributes.Clear();
@@ -116,7 +116,7 @@ namespace Sexy
 				{
 					c = '\0';
 					int num;
-					switch (this.GetChar(ref c))
+					switch (GetChar(ref c))
 					{
 					case EncodingParser.GetCharReturnType.SUCCESSFUL:
 						num = 1;
@@ -138,7 +138,7 @@ namespace Sexy
 					bool flag6 = false;
 					if (c == '\n')
 					{
-						this.mLineNum++;
+						mLineNum++;
 					}
 					if (theElement.mType == XMLElementType.TYPE_COMMENT)
 					{
@@ -267,8 +267,8 @@ namespace Sexy
 							{
 								if ((!flag5 && c != '=') || (flag5 && (!string.IsNullOrEmpty(text2) || flag3)))
 								{
-									this.AddAttribute(theElement, this.XMLDecodeString(text), this.XMLDecodeString(text2));
-									this.AddAttributeEncoded(theElement, text, text2);
+									AddAttribute(theElement, XMLDecodeString(text), XMLDecodeString(text2));
+									AddAttributeEncoded(theElement, text, text2);
 									text = "";
 									text2 = "";
 									text3 = "";
@@ -317,12 +317,12 @@ namespace Sexy
 				IL_77C:
 				if (text.Length > 0)
 				{
-					this.AddAttribute(theElement, this.XMLDecodeString(text), this.XMLDecodeString(text2));
-					this.AddAttribute(theElement, text, text2);
+					AddAttribute(theElement, XMLDecodeString(text), XMLDecodeString(text2));
+					AddAttribute(theElement, text, text2);
 				}
 				theElement.mValueEncoded = theElement.mValue;
-				theElement.mValue = this.XMLDecodeString(theElement.mValue);
-				if (theElement.mType != XMLElementType.TYPE_COMMENT || this.mAllowComments)
+				theElement.mValue = XMLDecodeString(theElement.mValue);
+				if (theElement.mType != XMLElementType.TYPE_COMMENT || mAllowComments)
 				{
 					return true;
 				}
@@ -334,7 +334,7 @@ namespace Sexy
 				text5 = text5.Substring(0, length2 - 2);
 				goto IL_77C;
 				Block_18:
-				this.PutChar(c);
+				PutChar(c);
 				goto IL_77C;
 				Block_20:
 				if (theElement.mType == XMLElementType.TYPE_START)
@@ -348,10 +348,10 @@ namespace Sexy
 					{
 						if (text.Length > 0)
 						{
-							text3 = this.XMLDecodeString(text);
+							text3 = XMLDecodeString(text);
 							text4 = text;
-							this.AddAttribute(theElement, this.XMLDecodeString(text), this.XMLDecodeString(text2));
-							this.AddAttributeEncoded(theElement, text, text2);
+							AddAttribute(theElement, XMLDecodeString(text), XMLDecodeString(text2));
+							AddAttributeEncoded(theElement, text, text2);
 							text = "";
 							text2 = "";
 						}
@@ -361,14 +361,14 @@ namespace Sexy
 							int length3 = text6.Length;
 							if (length3 > 0 && text6[length3 - 1] == '/')
 							{
-								this.AddAttribute(theElement, text3, this.XMLDecodeString(text6.Substring(0, length3 - 1)));
+								AddAttribute(theElement, text3, XMLDecodeString(text6.Substring(0, length3 - 1)));
 								flag7 = true;
 							}
 							text6 = theElement.mAttributesEncoded[text4];
 							length3 = text6.Length;
 							if (length3 > 0 && text6[length3 - 1] == '/')
 							{
-								this.AddAttributeEncoded(theElement, text4, text6.Substring(0, length3 - 1));
+								AddAttributeEncoded(theElement, text4, text6.Substring(0, length3 - 1));
 								flag7 = true;
 							}
 						}
@@ -385,52 +385,52 @@ namespace Sexy
 					if (flag7)
 					{
 						string theString = "</" + theElement.mValue + ">";
-						this.PutString(theString);
+						PutString(theString);
 						text = "";
 					}
-					if (this.mSection.Length != 0)
+					if (mSection.Length != 0)
 					{
-						this.mSection += "/";
+						mSection += "/";
 					}
-					this.mSection += theElement.mValue;
+					mSection += theElement.mValue;
 					goto IL_77C;
 				}
 				if (theElement.mType != XMLElementType.TYPE_END)
 				{
 					goto IL_570;
 				}
-				int num2 = this.mSection.LastIndexOf('/');
-				if (num2 == -1 && this.mSection.Length == 0)
+				int num2 = mSection.LastIndexOf('/');
+				if (num2 == -1 && mSection.Length == 0)
 				{
 					goto Block_35;
 				}
-				text7 = this.mSection.Substring(num2 + 1);
+				text7 = mSection.Substring(num2 + 1);
 				if (text7 != theElement.mValue)
 				{
 					goto Block_36;
 				}
 				if (num2 == -1)
 				{
-					this.mSection = this.mSection.Remove(0, this.mSection.Length);
+					mSection = mSection.Remove(0, mSection.Length);
 					goto IL_77C;
 				}
-				this.mSection = this.mSection.Remove(num2, this.mSection.Length - num2);
+				mSection = mSection.Remove(num2, mSection.Length - num2);
 				goto IL_77C;
 			}
 			IL_BB:
-			this.Fail("Illegal Character");
+			Fail("Illegal Character");
 			return false;
 			IL_C8:
-			this.Fail("Internal Error");
+			Fail("Internal Error");
 			return false;
 			IL_2AB:
-			this.Fail("Unexpected '<'");
+			Fail("Unexpected '<'");
 			return false;
 			Block_35:
-			this.Fail("Unexpected End");
+			Fail("Unexpected End");
 			return false;
 			Block_36:
-			this.Fail(string.Concat(new string[]
+			Fail(string.Concat(new string[]
 			{
 				"End '",
 				theElement.mValue,
@@ -440,15 +440,15 @@ namespace Sexy
 			}));
 			return false;
 			IL_570:
-			this.Fail("Unexpected '>'");
+			Fail("Unexpected '>'");
 			return false;
 			IL_602:
-			this.Fail("Illegal Character");
+			Fail("Illegal Character");
 			return false;
 			IL_766:
 			if (theElement.mType != XMLElementType.TYPE_NONE)
 			{
-				this.Fail("Unexpected End of File");
+				Fail("Unexpected End of File");
 			}
 			return false;
 		}
@@ -460,33 +460,33 @@ namespace Sexy
 
 		public string GetErrorText()
 		{
-			return this.mErrorText;
+			return mErrorText;
 		}
 
 		public int GetCurrentLineNum()
 		{
-			return this.mLineNum;
+			return mLineNum;
 		}
 
 		public string GetFileName()
 		{
-			return this.mFileName;
+			return mFileName;
 		}
 
 		public override void SetStringSource(string theString)
 		{
-			this.Init();
+			Init();
 			base.SetStringSource(theString);
 		}
 
 		public void AllowComments(bool doAllow)
 		{
-			this.mAllowComments = doAllow;
+			mAllowComments = doAllow;
 		}
 
 		public bool HasFailed()
 		{
-			return this.mHasFailed;
+			return mHasFailed;
 		}
 
 		protected string mFileName;

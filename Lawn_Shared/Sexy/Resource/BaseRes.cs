@@ -7,7 +7,7 @@ namespace Sexy
 	{
 		~BaseRes()
 		{
-			this.DeleteResource();
+			DeleteResource();
 		}
 
 		public virtual void DeleteResource()

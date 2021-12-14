@@ -8,71 +8,71 @@ namespace Sexy
 	{
 		public ScrollWidget(ScrollWidgetListener listener)
 		{
-			this.Init(listener);
+			Init(listener);
 		}
 
 		public ScrollWidget()
 		{
-			this.Init(null);
+			Init(null);
 		}
 
 		public override void Dispose()
 		{
-			this.RemoveAllWidgets(true, true);
+			RemoveAllWidgets(true, true);
 		}
 
 		public void SetPageControl(PageControl pageControl)
 		{
-			this.mPageControl = pageControl;
-			if (this.mPagingEnabled)
+			mPageControl = pageControl;
+			if (mPagingEnabled)
 			{
-				this.mPageControl.SetNumberOfPages(this.mPageCountHorizontal);
+				mPageControl.SetNumberOfPages(mPageCountHorizontal);
 			}
 		}
 
 		public void SetScrollMode(ScrollWidget.ScrollMode mode)
 		{
-			this.mScrollMode = mode;
-			this.CacheDerivedValues();
+			mScrollMode = mode;
+			CacheDerivedValues();
 		}
 
 		public void SetScrollInsets(Insets insets)
 		{
-			this.mScrollInsets = insets;
-			this.CacheDerivedValues();
+			mScrollInsets = insets;
+			CacheDerivedValues();
 		}
 
 		public void SetScrollOffset(CGPoint offset, bool animated)
 		{
 			if (animated)
 			{
-				this.mScrollTarget = offset;
-				this.mSeekScrollTarget = true;
+				mScrollTarget = offset;
+				mSeekScrollTarget = true;
 				return;
 			}
-			this.mScrollOffset = offset;
-			this.mScrollVelocity = CGMaths.CGPointMake(0f, 0f);
-			if (this.mClient != null)
+			mScrollOffset = offset;
+			mScrollVelocity = CGMaths.CGPointMake(0f, 0f);
+			if (mClient != null)
 			{
-				this.mClient.Move((int)this.mScrollOffset.x, (int)this.mScrollOffset.y);
+				mClient.Move((int)mScrollOffset.x, (int)mScrollOffset.y);
 			}
 		}
 
 		public void ScrollToMin(bool animated)
 		{
-			this.SetScrollOffset(CGMaths.CGPointMake((float)this.mScrollInsets.mLeft, (float)this.mScrollInsets.mTop), animated);
+			SetScrollOffset(CGMaths.CGPointMake((float)mScrollInsets.mLeft, (float)mScrollInsets.mTop), animated);
 		}
 
 		public void ScrollToBottom(bool animated)
 		{
-			this.SetScrollOffset(CGMaths.CGPointMake(this.mScrollMin.x, this.mScrollMin.y), animated);
+			SetScrollOffset(CGMaths.CGPointMake(mScrollMin.x, mScrollMin.y), animated);
 		}
 
 		public void ScrollToPoint(CGPoint point, bool animated)
 		{
-			if (!this.mIsDown)
+			if (!mIsDown)
 			{
-				this.SetScrollOffset(new CGPoint
+				SetScrollOffset(new CGPoint
 				{
 					x = -point.mX,
 					y = -point.mY
@@ -82,111 +82,111 @@ namespace Sexy
 
 		public void ScrollRectIntoView(TRect rect, bool animated)
 		{
-			if (!this.mIsDown)
+			if (!mIsDown)
 			{
 				float num = (float)(rect.mX + rect.mWidth);
 				float num2 = (float)(rect.mY + rect.mHeight);
-				float num3 = Math.Max(Math.Min(0f, this.mScrollMin.x), (float)(-(float)rect.mX));
-				float num4 = Math.Max(Math.Min(0f, this.mScrollMin.y), (float)(-(float)rect.mY));
-				float num5 = Math.Min(this.mScrollMax.x, (float)this.mWidth - num);
-				float num6 = Math.Min(this.mScrollMax.y, (float)this.mHeight - num2);
-				this.SetScrollOffset(new CGPoint
+				float num3 = Math.Max(Math.Min(0f, mScrollMin.x), (float)(-(float)rect.mX));
+				float num4 = Math.Max(Math.Min(0f, mScrollMin.y), (float)(-(float)rect.mY));
+				float num5 = Math.Min(mScrollMax.x, (float)mWidth - num);
+				float num6 = Math.Min(mScrollMax.y, (float)mHeight - num2);
+				SetScrollOffset(new CGPoint
 				{
-					x = Math.Min(num5, Math.Max(num3, this.mScrollOffset.x)),
-					y = Math.Min(num6, Math.Max(num4, this.mScrollOffset.y))
+					x = Math.Min(num5, Math.Max(num3, mScrollOffset.x)),
+					y = Math.Min(num6, Math.Max(num4, mScrollOffset.y))
 				}, animated);
 			}
 		}
 
 		public void EnableBounce(bool enable)
 		{
-			this.mBounceEnabled = enable;
+			mBounceEnabled = enable;
 		}
 
 		public void EnablePaging(bool enable)
 		{
-			this.mPagingEnabled = enable;
+			mPagingEnabled = enable;
 		}
 
 		public void EnableIndicators(Image indicatorsImage)
 		{
-			this.mIndicatorsImage = indicatorsImage;
-			this.mIndicatorsEnabled = (null != indicatorsImage);
-			if (this.mIndicatorsEnabled && this.mIndicatorsProxy == null)
+			mIndicatorsImage = indicatorsImage;
+			mIndicatorsEnabled = (null != indicatorsImage);
+			if (mIndicatorsEnabled && mIndicatorsProxy == null)
 			{
-				this.mIndicatorsProxy = new ProxyWidget(this);
-				this.mIndicatorsProxy.mMouseVisible = false;
-				this.mIndicatorsProxy.mZOrder = int.MaxValue;
-				this.mIndicatorsProxy.Resize(0, 0, this.mWidth, this.mHeight);
-				base.AddWidget(this.mIndicatorsProxy);
+				mIndicatorsProxy = new ProxyWidget(this);
+				mIndicatorsProxy.mMouseVisible = false;
+				mIndicatorsProxy.mZOrder = int.MaxValue;
+				mIndicatorsProxy.Resize(0, 0, mWidth, mHeight);
+				base.AddWidget(mIndicatorsProxy);
 				return;
 			}
-			if (!this.mIndicatorsEnabled && this.mIndicatorsProxy != null)
+			if (!mIndicatorsEnabled && mIndicatorsProxy != null)
 			{
-				base.RemoveWidget(this.mIndicatorsProxy);
-				this.mIndicatorsProxy.Dispose();
-				this.mIndicatorsProxy = null;
+				base.RemoveWidget(mIndicatorsProxy);
+				mIndicatorsProxy.Dispose();
+				mIndicatorsProxy = null;
 			}
 		}
 
 		public void SetIndicatorsInsets(Insets insets)
 		{
-			this.mIndicatorsInsets = insets;
+			mIndicatorsInsets = insets;
 		}
 
 		public void FlashIndicators()
 		{
-			this.mIndicatorsFlashTimer = ScrollWidget.SCROLL_INDICATORS_FLASH_TICKS;
+			mIndicatorsFlashTimer = ScrollWidget.SCROLL_INDICATORS_FLASH_TICKS;
 		}
 
 		public void SetPageHorizontal(int page, bool animated)
 		{
-			this.SetPage(page, this.mCurrentPageVertical, animated);
+			SetPage(page, mCurrentPageVertical, animated);
 		}
 
 		public void SetPageVertical(int page, bool animated)
 		{
-			this.SetPage(this.mCurrentPageHorizontal, page, animated);
+			SetPage(mCurrentPageHorizontal, page, animated);
 		}
 
 		public void SetPage(int hpage, int vpage, bool animated)
 		{
-			if (this.mPagingEnabled)
+			if (mPagingEnabled)
 			{
-				this.mCurrentPageHorizontal = Math.Max(0, Math.Min(hpage, this.mPageCountHorizontal - 1));
-				this.mCurrentPageVertical = Math.Max(0, Math.Min(vpage, this.mPageCountVertical - 1));
-				this.SetScrollOffset(new CGPoint
+				mCurrentPageHorizontal = Math.Max(0, Math.Min(hpage, mPageCountHorizontal - 1));
+				mCurrentPageVertical = Math.Max(0, Math.Min(vpage, mPageCountVertical - 1));
+				SetScrollOffset(new CGPoint
 				{
-					x = (float)this.mScrollInsets.mLeft - (float)this.mCurrentPageHorizontal * this.mPageSize.x,
-					y = (float)this.mScrollInsets.mTop - (float)this.mCurrentPageVertical * this.mPageSize.y
+					x = (float)mScrollInsets.mLeft - (float)mCurrentPageHorizontal * mPageSize.x,
+					y = (float)mScrollInsets.mTop - (float)mCurrentPageVertical * mPageSize.y
 				}, animated);
 			}
 		}
 
 		public int GetPageHorizontal()
 		{
-			return this.mCurrentPageHorizontal;
+			return mCurrentPageHorizontal;
 		}
 
 		public int GetPageVertical()
 		{
-			return this.mCurrentPageVertical;
+			return mCurrentPageVertical;
 		}
 
 		public void SetBackgroundImage(Image image)
 		{
-			this.mBackgroundImage = image;
+			mBackgroundImage = image;
 		}
 
 		public void EnableBackgroundFill(bool enable)
 		{
-			this.mFillBackground = enable;
+			mFillBackground = enable;
 		}
 
 		public void AddOverlayImage(Image image, CGPoint offset)
 		{
-			this.mDrawOverlays = true;
-			foreach (ScrollWidget.Overlay overlay in this.mOverlays)
+			mDrawOverlays = true;
+			foreach (ScrollWidget.Overlay overlay in mOverlays)
 			{
 				if (overlay.image == image)
 				{
@@ -197,32 +197,32 @@ namespace Sexy
 			ScrollWidget.Overlay overlay2 = new ScrollWidget.Overlay();
 			overlay2.image = image;
 			overlay2.offset = offset;
-			this.mOverlays.Add(overlay2);
+			mOverlays.Add(overlay2);
 		}
 
 		public void EnableOverlays(bool enable)
 		{
-			this.mDrawOverlays = enable;
+			mDrawOverlays = enable;
 		}
 
 		public override void AddWidget(Widget theWidget)
 		{
-			if (this.mClient == null)
+			if (mClient == null)
 			{
-				this.mClient = theWidget;
-				Widget widget = this.mClient;
+				mClient = theWidget;
+				Widget widget = mClient;
 				widget.mWidgetFlagsMod.mRemoveFlags = (widget.mWidgetFlagsMod.mRemoveFlags | 16);
-				this.mClient.Move((int)this.mScrollOffset.x, (int)this.mScrollOffset.y);
-				base.AddWidget(this.mClient);
-				this.CacheDerivedValues();
+				mClient.Move((int)mScrollOffset.x, (int)mScrollOffset.y);
+				base.AddWidget(mClient);
+				CacheDerivedValues();
 			}
 		}
 
 		public override void RemoveWidget(Widget theWidget)
 		{
-			if (theWidget == this.mClient)
+			if (theWidget == mClient)
 			{
-				this.mClient = null;
+				mClient = null;
 			}
 			base.RemoveWidget(theWidget);
 		}
@@ -230,11 +230,11 @@ namespace Sexy
 		public override void Resize(int x, int y, int width, int height)
 		{
 			base.Resize(x, y, width, height);
-			if (this.mIndicatorsProxy != null)
+			if (mIndicatorsProxy != null)
 			{
-				this.mIndicatorsProxy.Resize(0, 0, width, height);
+				mIndicatorsProxy.Resize(0, 0, width, height);
 			}
-			this.CacheDerivedValues();
+			CacheDerivedValues();
 		}
 
 		public override void Resize(TRect frame)
@@ -244,256 +244,256 @@ namespace Sexy
 
 		public void ClientSizeChanged()
 		{
-			if (this.mClient != null)
+			if (mClient != null)
 			{
-				this.CacheDerivedValues();
+				CacheDerivedValues();
 			}
 		}
 
 		public override void TouchBegan(_Touch touch)
 		{
-			if (this.mClient != null)
+			if (mClient != null)
 			{
-				this.clientAllowsScroll = this.mClient.DoScroll(touch);
-				if (this.mSeekScrollTarget)
+				clientAllowsScroll = mClient.DoScroll(touch);
+				if (mSeekScrollTarget)
 				{
-					if (this.mListener != null)
+					if (mListener != null)
 					{
-						this.mListener.ScrollTargetInterrupted(this);
+						mListener.ScrollTargetInterrupted(this);
 					}
-					if (this.mPagingEnabled && this.mPageControl != null)
+					if (mPagingEnabled && mPageControl != null)
 					{
-						this.mPageControl.SetCurrentPage(this.mCurrentPageHorizontal);
+						mPageControl.SetCurrentPage(mCurrentPageHorizontal);
 					}
 				}
-				this.mScrollTouchReference = touch.location;
-				this.mScrollOffsetReference = CGMaths.CGPointMake((float)this.mClient.mX, (float)this.mClient.mY);
-				this.mScrollOffset = this.mScrollOffsetReference;
-				this.mScrollLastTimestamp = touch.timestamp;
-				this.mScrollTracking = false;
-				this.mSeekScrollTarget = false;
-				this.mClientLastDown = this.GetClientWidgetAt(touch);
-				this.mClientLastDown.mIsDown = true;
-				this.mClientLastDown.mIsOver = true;
-				this.mClientLastDown.TouchBegan(touch);
+				mScrollTouchReference = touch.location;
+				mScrollOffsetReference = CGMaths.CGPointMake((float)mClient.mX, (float)mClient.mY);
+				mScrollOffset = mScrollOffsetReference;
+				mScrollLastTimestamp = touch.timestamp;
+				mScrollTracking = false;
+				mSeekScrollTarget = false;
+				mClientLastDown = GetClientWidgetAt(touch);
+				mClientLastDown.mIsDown = true;
+				mClientLastDown.mIsOver = true;
+				mClientLastDown.TouchBegan(touch);
 			}
 		}
 
 		public override void TouchMoved(_Touch touch)
 		{
-			CGPoint cgpoint = CGMaths.CGPointSubtract(touch.location, this.mScrollTouchReference);
-			if (this.mClient != null)
+			CGPoint cgpoint = CGMaths.CGPointSubtract(touch.location, mScrollTouchReference);
+			if (mClient != null)
 			{
-				if (this.clientAllowsScroll)
+				if (clientAllowsScroll)
 				{
-					if (!this.mScrollTracking && (this.mScrollPractical & ScrollWidget.ScrollMode.SCROLL_HORIZONTAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED && Math.Abs(cgpoint.x) > 4f)
+					if (!mScrollTracking && (mScrollPractical & ScrollWidget.ScrollMode.SCROLL_HORIZONTAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED && Math.Abs(cgpoint.x) > 4f)
 					{
-						this.mScrollTracking = true;
+						mScrollTracking = true;
 					}
-					if (!this.mScrollTracking && (this.mScrollPractical & ScrollWidget.ScrollMode.SCROLL_VERTICAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED && Math.Abs(cgpoint.y) > 4f)
+					if (!mScrollTracking && (mScrollPractical & ScrollWidget.ScrollMode.SCROLL_VERTICAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED && Math.Abs(cgpoint.y) > 4f)
 					{
-						this.mScrollTracking = true;
+						mScrollTracking = true;
 					}
 				}
-				if (this.mScrollTracking && this.mClientLastDown != null)
+				if (mScrollTracking && mClientLastDown != null)
 				{
-					this.mClientLastDown.TouchesCanceled();
-					this.mClientLastDown.mIsDown = false;
-					this.mClientLastDown = null;
+					mClientLastDown.TouchesCanceled();
+					mClientLastDown.mIsDown = false;
+					mClientLastDown = null;
 				}
 			}
-			if (this.mScrollTracking)
+			if (mScrollTracking)
 			{
-				this.TouchMotion(touch);
+				TouchMotion(touch);
 				return;
 			}
-			if (this.mClientLastDown != null)
+			if (mClientLastDown != null)
 			{
-				CGPoint b = this.GetAbsPos() - this.mClientLastDown.GetAbsPos();
+				CGPoint b = GetAbsPos() - mClientLastDown.GetAbsPos();
 				CGPoint a = new CGPoint(touch.location.X, touch.location.Y);
 				CGPoint cgpoint2 = a + b;
-				CGPoint a2 = new CGPoint(cgpoint2.mX + (float)this.mClientLastDown.mX, cgpoint2.mY + (float)this.mClientLastDown.mY);
-				bool flag = this.mClientLastDown.GetInsetRect().Contains(a2);
-				if (flag && !this.mClientLastDown.mIsOver)
+				CGPoint a2 = new CGPoint(cgpoint2.mX + (float)mClientLastDown.mX, cgpoint2.mY + (float)mClientLastDown.mY);
+				bool flag = mClientLastDown.GetInsetRect().Contains(a2);
+				if (flag && !mClientLastDown.mIsOver)
 				{
-					this.mClientLastDown.mIsOver = true;
-					this.mClientLastDown.MouseEnter();
+					mClientLastDown.mIsOver = true;
+					mClientLastDown.MouseEnter();
 				}
-				else if (!flag && this.mClientLastDown.mIsOver)
+				else if (!flag && mClientLastDown.mIsOver)
 				{
-					this.mClientLastDown.MouseLeave();
-					this.mClientLastDown.mIsOver = false;
+					mClientLastDown.MouseLeave();
+					mClientLastDown.mIsOver = false;
 				}
 				CGMaths.CGPointTranslate(ref touch.location, b.mX, b.mY);
 				CGMaths.CGPointTranslate(ref touch.previousLocation, b.mX, b.mY);
-				this.mClientLastDown.TouchMoved(touch);
+				mClientLastDown.TouchMoved(touch);
 			}
 		}
 
 		public override void TouchEnded(_Touch touch)
 		{
-			if (this.mScrollTracking)
+			if (mScrollTracking)
 			{
-				this.TouchMotion(touch);
-				this.mScrollTracking = false;
-				if (this.mPagingEnabled)
+				TouchMotion(touch);
+				mScrollTracking = false;
+				if (mPagingEnabled)
 				{
-					this.SnapToPage();
+					SnapToPage();
 					return;
 				}
 			}
-			else if (this.mClientLastDown != null)
+			else if (mClientLastDown != null)
 			{
-				CGPoint b = this.GetAbsPos() - this.mClientLastDown.GetAbsPos();
+				CGPoint b = GetAbsPos() - mClientLastDown.GetAbsPos();
 				CGPoint a = new CGPoint(touch.location.X, touch.location.Y);
 				//a + b;
 				CGMaths.CGPointTranslate(ref touch.location, b.mX, b.mY);
 				CGMaths.CGPointTranslate(ref touch.previousLocation, b.mX, b.mY);
-				this.mClientLastDown.TouchEnded(touch);
-				this.mClientLastDown.mIsDown = false;
-				this.mClientLastDown = null;
+				mClientLastDown.TouchEnded(touch);
+				mClientLastDown.mIsDown = false;
+				mClientLastDown = null;
 			}
 		}
 
 		public override void TouchesCanceled()
 		{
-			if (this.mClient != null && this.mClientLastDown != null && !this.mScrollTracking)
+			if (mClient != null && mClientLastDown != null && !mScrollTracking)
 			{
-				this.mClientLastDown.TouchesCanceled();
-				this.mClientLastDown.mIsDown = false;
-				this.mClientLastDown = null;
+				mClientLastDown.TouchesCanceled();
+				mClientLastDown.mIsDown = false;
+				mClientLastDown = null;
 			}
-			this.mScrollTracking = false;
+			mScrollTracking = false;
 		}
 
 		public override void Update()
 		{
 			base.Update();
-			this.DoScrollUpdate();
-			this.DoScrollUpdate();
-			this.DoScrollUpdate();
+			DoScrollUpdate();
+			DoScrollUpdate();
+			DoScrollUpdate();
 		}
 
 		public void DoScrollUpdate()
 		{
-			if (this.mVisible && !this.mDisabled)
+			if (mVisible && !mDisabled)
 			{
-				if (this.mIsDown)
+				if (mIsDown)
 				{
-					this.mIndicatorsFlashTimer = ScrollWidget.SCROLL_INDICATORS_FLASH_TICKS;
+					mIndicatorsFlashTimer = ScrollWidget.SCROLL_INDICATORS_FLASH_TICKS;
 				}
 				else
 				{
-					float num = Math.Min(0f, this.mScrollMin.x);
-					float num2 = Math.Min(0f, this.mScrollMin.y);
-					float num3 = this.mScrollMax.x;
-					float num4 = this.mScrollMax.y;
-					if (this.mSeekScrollTarget)
+					float num = Math.Min(0f, mScrollMin.x);
+					float num2 = Math.Min(0f, mScrollMin.y);
+					float num3 = mScrollMax.x;
+					float num4 = mScrollMax.y;
+					if (mSeekScrollTarget)
 					{
-						float num5 = CGMaths.CGVectorNorm(CGMaths.CGPointSubtract(this.mScrollTarget, this.mScrollOffset));
+						float num5 = CGMaths.CGVectorNorm(CGMaths.CGPointSubtract(mScrollTarget, mScrollOffset));
 						if (num5 < 0.01f)
 						{
-							this.mScrollOffset = this.mScrollTarget;
-							this.mSeekScrollTarget = false;
-							if (this.mListener != null)
+							mScrollOffset = mScrollTarget;
+							mSeekScrollTarget = false;
+							if (mListener != null)
 							{
-								this.mListener.ScrollTargetReached(this);
+								mListener.ScrollTargetReached(this);
 							}
-							if (this.mPagingEnabled && this.mPageControl != null)
+							if (mPagingEnabled && mPageControl != null)
 							{
-								this.mPageControl.SetCurrentPage(this.mCurrentPageHorizontal);
+								mPageControl.SetCurrentPage(mCurrentPageHorizontal);
 							}
 						}
 						else
 						{
-							num3 = (num = this.mScrollTarget.x);
-							num4 = (num2 = this.mScrollTarget.y);
+							num3 = (num = mScrollTarget.x);
+							num4 = (num2 = mScrollTarget.y);
 						}
 					}
-					float num6 = CGMaths.CGVectorNorm(this.mScrollVelocity);
+					float num6 = CGMaths.CGVectorNorm(mScrollVelocity);
 					if (num6 < 0.0001f)
 					{
-						this.mScrollVelocity = CGMaths.CGPointMake(0f, 0f);
+						mScrollVelocity = CGMaths.CGPointMake(0f, 0f);
 					}
 					else
 					{
-						bool flag = this.mScrollOffset.x < num || this.mScrollOffset.x >= num3;
-						bool flag2 = this.mScrollOffset.y < num2 || this.mScrollOffset.y >= num4;
+						bool flag = mScrollOffset.x < num || mScrollOffset.x >= num3;
+						bool flag2 = mScrollOffset.y < num2 || mScrollOffset.y >= num4;
 						CGPoint multiplier = default(CGPoint);
 						multiplier.x = (flag ? 0.85f : 0.975f);
 						multiplier.y = (flag2 ? 0.85f : 0.975f);
-						this.mScrollOffset = CGMaths.CGPointAddScaled(this.mScrollOffset, this.mScrollVelocity, 0.01f);
-						this.mScrollVelocity = CGMaths.CGPointMultiply(this.mScrollVelocity, multiplier);
+						mScrollOffset = CGMaths.CGPointAddScaled(mScrollOffset, mScrollVelocity, 0.01f);
+						mScrollVelocity = CGMaths.CGPointMultiply(mScrollVelocity, multiplier);
 					}
-					if (this.mScrollOffset.x < num)
+					if (mScrollOffset.x < num)
 					{
-						if (this.mBounceEnabled || this.mSeekScrollTarget)
+						if (mBounceEnabled || mSeekScrollTarget)
 						{
-							float num7 = (this.mSpringOverride == 0f) ? 0.1f : this.mSpringOverride;
-							this.mScrollOffset.x = this.mScrollOffset.x + num7 * (num - this.mScrollOffset.x);
+							float num7 = (mSpringOverride == 0f) ? 0.1f : mSpringOverride;
+							mScrollOffset.x = mScrollOffset.x + num7 * (num - mScrollOffset.x);
 						}
 						else
 						{
-							this.mScrollOffset.x = num;
-							this.mScrollVelocity.x = 0f;
+							mScrollOffset.x = num;
+							mScrollVelocity.x = 0f;
 						}
 					}
-					else if (this.mScrollOffset.x > num3)
+					else if (mScrollOffset.x > num3)
 					{
-						if (this.mBounceEnabled || this.mSeekScrollTarget)
+						if (mBounceEnabled || mSeekScrollTarget)
 						{
-							float num8 = (this.mSpringOverride == 0f) ? 0.1f : this.mSpringOverride;
-							this.mScrollOffset.x = this.mScrollOffset.x + num8 * (num3 - this.mScrollOffset.x);
+							float num8 = (mSpringOverride == 0f) ? 0.1f : mSpringOverride;
+							mScrollOffset.x = mScrollOffset.x + num8 * (num3 - mScrollOffset.x);
 						}
 						else
 						{
-							this.mScrollOffset.x = num3;
-							this.mScrollVelocity.x = 0f;
+							mScrollOffset.x = num3;
+							mScrollVelocity.x = 0f;
 						}
 					}
-					if (this.mScrollOffset.y < num2)
+					if (mScrollOffset.y < num2)
 					{
-						if (this.mBounceEnabled || this.mSeekScrollTarget)
+						if (mBounceEnabled || mSeekScrollTarget)
 						{
-							float num9 = (this.mSpringOverride == 0f) ? 0.1f : this.mSpringOverride;
-							this.mScrollOffset.y = this.mScrollOffset.y + num9 * (num2 - this.mScrollOffset.y);
+							float num9 = (mSpringOverride == 0f) ? 0.1f : mSpringOverride;
+							mScrollOffset.y = mScrollOffset.y + num9 * (num2 - mScrollOffset.y);
 						}
 						else
 						{
-							this.mScrollOffset.y = num2;
-							this.mScrollVelocity.y = 0f;
+							mScrollOffset.y = num2;
+							mScrollVelocity.y = 0f;
 						}
 					}
-					else if (this.mScrollOffset.y > num4)
+					else if (mScrollOffset.y > num4)
 					{
-						if (this.mBounceEnabled || this.mSeekScrollTarget)
+						if (mBounceEnabled || mSeekScrollTarget)
 						{
-							float num10 = (this.mSpringOverride == 0f) ? 0.1f : this.mSpringOverride;
-							this.mScrollOffset.y = this.mScrollOffset.y + num10 * (num4 - this.mScrollOffset.y);
+							float num10 = (mSpringOverride == 0f) ? 0.1f : mSpringOverride;
+							mScrollOffset.y = mScrollOffset.y + num10 * (num4 - mScrollOffset.y);
 						}
 						else
 						{
-							this.mScrollOffset.y = num4;
-							this.mScrollVelocity.y = 0f;
+							mScrollOffset.y = num4;
+							mScrollVelocity.y = 0f;
 						}
 					}
-					if (this.mClient != null)
+					if (mClient != null)
 					{
-						this.mClient.Move((int)this.mScrollOffset.x, (int)this.mScrollOffset.y);
+						mClient.Move((int)mScrollOffset.x, (int)mScrollOffset.y);
 					}
-					if (this.mIndicatorsFlashTimer > 0)
+					if (mIndicatorsFlashTimer > 0)
 					{
-						this.mIndicatorsFlashTimer--;
+						mIndicatorsFlashTimer--;
 					}
 				}
-				if (this.mIndicatorsFlashTimer > 0 && this.mIndicatorsOpacity < 1f)
+				if (mIndicatorsFlashTimer > 0 && mIndicatorsOpacity < 1f)
 				{
-					this.mIndicatorsOpacity = Math.Min(1f, this.mIndicatorsOpacity + ScrollWidget.SCROLL_INDICATORS_FADE_IN_RATE);
+					mIndicatorsOpacity = Math.Min(1f, mIndicatorsOpacity + ScrollWidget.SCROLL_INDICATORS_FADE_IN_RATE);
 					return;
 				}
-				if (this.mIndicatorsFlashTimer == 0 && this.mIndicatorsOpacity > 0f)
+				if (mIndicatorsFlashTimer == 0 && mIndicatorsOpacity > 0f)
 				{
-					this.mIndicatorsOpacity = Math.Max(0f, this.mIndicatorsOpacity - ScrollWidget.SCROLL_INDICATORS_FADE_OUT_RATE);
+					mIndicatorsOpacity = Math.Max(0f, mIndicatorsOpacity - ScrollWidget.SCROLL_INDICATORS_FADE_OUT_RATE);
 				}
 			}
 		}
@@ -529,73 +529,73 @@ namespace Sexy
 		public override void Draw(Graphics g)
 		{
 			base.Draw(g);
-			if (this.mBackgroundImage != null)
+			if (mBackgroundImage != null)
 			{
-				g.DrawImage(this.mBackgroundImage, 0, 0);
+				g.DrawImage(mBackgroundImage, 0, 0);
 				return;
 			}
-			if (this.mFillBackground)
+			if (mFillBackground)
 			{
-				g.SetColor(this.GetColor(0));
-				g.FillRect(0, 0, this.mWidth, this.mHeight);
+				g.SetColor(GetColor(0));
+				g.FillRect(0, 0, mWidth, mHeight);
 			}
 		}
 
 		public void DrawProxyWidget(Graphics g, ProxyWidget proxyWidget)
 		{
-			Color color = new Color(255, 255, 255, (int)(255f * this.mIndicatorsOpacity));
+			Color color = new Color(255, 255, 255, (int)(255f * mIndicatorsOpacity));
 			if (color.A != 0)
 			{
-				int width = this.mIndicatorsImage.GetWidth();
-				int height = this.mIndicatorsImage.GetHeight();
-				Insets insets = this.mIndicatorsInsets;
+				int width = mIndicatorsImage.GetWidth();
+				int height = mIndicatorsImage.GetHeight();
+				Insets insets = mIndicatorsInsets;
 				g.SetColor(color);
 				g.SetColorizeImages(true);
-				if ((this.mScrollPractical & ScrollWidget.ScrollMode.SCROLL_HORIZONTAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED)
+				if ((mScrollPractical & ScrollWidget.ScrollMode.SCROLL_HORIZONTAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED)
 				{
-					float num = (float)this.mWidth / (float)this.mClient.Width();
-					int num2 = this.mWidth - insets.mLeft - insets.mRight - (((this.mScrollMode & ScrollWidget.ScrollMode.SCROLL_VERTICAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED) ? width : 0);
+					float num = (float)mWidth / (float)mClient.Width();
+					int num2 = mWidth - insets.mLeft - insets.mRight - (((mScrollMode & ScrollWidget.ScrollMode.SCROLL_VERTICAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED) ? width : 0);
 					int num3 = (int)((float)num2 * num);
 					int num4 = num2 - num3;
-					float num5 = (float)Math.Min(0, this.mWidth - this.mClient.mWidth - this.mScrollInsets.mRight);
-					float num6 = (float)this.mScrollInsets.mLeft;
-					float num7 = 1f - (this.mScrollOffset.x - num5) / (num6 - num5);
+					float num5 = (float)Math.Min(0, mWidth - mClient.mWidth - mScrollInsets.mRight);
+					float num6 = (float)mScrollInsets.mLeft;
+					float num7 = 1f - (mScrollOffset.x - num5) / (num6 - num5);
 					int num8 = (int)((float)num4 * num7);
 					int num9 = num8 + num3;
 					num8 = Math.Min(Math.Max(0, num8), num2 - width);
 					num9 = Math.Min(Math.Max(width, num9), num2);
 					TRect destRect = default(TRect);
 					destRect.mX = insets.mLeft + num8;
-					destRect.mY = this.mHeight - insets.mBottom - height;
+					destRect.mY = mHeight - insets.mBottom - height;
 					destRect.mWidth = num9 - num8;
 					destRect.mHeight = height;
-					ScrollWidget.DrawHorizontalStretchableImage(g, this.mIndicatorsImage, destRect);
+					ScrollWidget.DrawHorizontalStretchableImage(g, mIndicatorsImage, destRect);
 				}
-				if ((this.mScrollPractical & ScrollWidget.ScrollMode.SCROLL_VERTICAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED)
+				if ((mScrollPractical & ScrollWidget.ScrollMode.SCROLL_VERTICAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED)
 				{
-					float num10 = (float)this.mHeight / (float)this.mClient.Height();
-					int num11 = this.mHeight - insets.mTop - insets.mBottom - (((this.mScrollMode & ScrollWidget.ScrollMode.SCROLL_HORIZONTAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED) ? height : 0);
+					float num10 = (float)mHeight / (float)mClient.Height();
+					int num11 = mHeight - insets.mTop - insets.mBottom - (((mScrollMode & ScrollWidget.ScrollMode.SCROLL_HORIZONTAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED) ? height : 0);
 					int num12 = (int)((float)num11 * num10);
 					int num13 = num11 - num12;
-					float num14 = (float)Math.Min(0, this.mHeight - this.mClient.mHeight - this.mScrollInsets.mBottom);
-					float num15 = (float)this.mScrollInsets.mTop;
-					float num16 = 1f - (this.mScrollOffset.y - num14) / (num15 - num14);
+					float num14 = (float)Math.Min(0, mHeight - mClient.mHeight - mScrollInsets.mBottom);
+					float num15 = (float)mScrollInsets.mTop;
+					float num16 = 1f - (mScrollOffset.y - num14) / (num15 - num14);
 					int num17 = (int)((float)num13 * num16);
 					int num18 = num17 + num12;
 					num17 = Math.Min(Math.Max(0, num17), num11 - height);
 					num18 = Math.Min(Math.Max(height, num18), num11);
 					TRect destRect2 = default(TRect);
-					destRect2.mX = this.mWidth - insets.mRight - width;
+					destRect2.mX = mWidth - insets.mRight - width;
 					destRect2.mY = insets.mTop + num17;
 					destRect2.mWidth = width;
 					destRect2.mHeight = num18 - num17;
-					ScrollWidget.DrawVerticalStretchableImage(g, this.mIndicatorsImage, destRect2);
+					ScrollWidget.DrawVerticalStretchableImage(g, mIndicatorsImage, destRect2);
 				}
 			}
-			if (this.mDrawOverlays)
+			if (mDrawOverlays)
 			{
 				g.SetColorizeImages(false);
-				foreach (ScrollWidget.Overlay overlay in this.mOverlays)
+				foreach (ScrollWidget.Overlay overlay in mOverlays)
 				{
 					g.DrawImage(overlay.image, overlay.offset.mX, overlay.offset.mY);
 				}
@@ -604,158 +604,158 @@ namespace Sexy
 
 		protected void Init(ScrollWidgetListener listener)
 		{
-			this.mClient = null;
-			this.mClientLastDown = null;
-			this.mListener = listener;
-			this.mPageControl = null;
-			this.mIndicatorsProxy = null;
-			this.mIndicatorsImage = null;
-			this.mScrollMode = ScrollWidget.ScrollMode.SCROLL_VERTICAL;
-			this.mScrollInsets = new Insets(0, 0, 0, 0);
-			this.mScrollTracking = false;
-			this.mSeekScrollTarget = false;
-			this.mBounceEnabled = true;
-			this.mPagingEnabled = false;
-			this.mIndicatorsEnabled = false;
-			this.mIndicatorsInsets = new Insets(0, 0, 0, 0);
-			this.mIndicatorsFlashTimer = 0;
-			this.mIndicatorsOpacity = 0f;
-			this.mBackgroundImage = null;
-			this.mFillBackground = false;
-			this.mDrawOverlays = false;
-			this.mScrollOffset = CGMaths.CGPointMake(0f, 0f);
-			this.mScrollVelocity = CGMaths.CGPointMake(0f, 0f);
-			this.mClip = true;
+			mClient = null;
+			mClientLastDown = null;
+			mListener = listener;
+			mPageControl = null;
+			mIndicatorsProxy = null;
+			mIndicatorsImage = null;
+			mScrollMode = ScrollWidget.ScrollMode.SCROLL_VERTICAL;
+			mScrollInsets = new Insets(0, 0, 0, 0);
+			mScrollTracking = false;
+			mSeekScrollTarget = false;
+			mBounceEnabled = true;
+			mPagingEnabled = false;
+			mIndicatorsEnabled = false;
+			mIndicatorsInsets = new Insets(0, 0, 0, 0);
+			mIndicatorsFlashTimer = 0;
+			mIndicatorsOpacity = 0f;
+			mBackgroundImage = null;
+			mFillBackground = false;
+			mDrawOverlays = false;
+			mScrollOffset = CGMaths.CGPointMake(0f, 0f);
+			mScrollVelocity = CGMaths.CGPointMake(0f, 0f);
+			mClip = true;
 		}
 
 		protected void SnapToPage()
 		{
 			CGPoint cgpoint = CGMaths.CGPointSubtract(new CGPoint
 			{
-				x = (float)this.mScrollInsets.mLeft + this.mPageSize.x / 2f,
-				y = (float)this.mScrollInsets.mTop + this.mPageSize.y / 2f
-			}, this.mScrollOffset);
-			int num = (int)Math.Floor((double)(cgpoint.x / this.mPageSize.x));
-			int num2 = (int)Math.Floor((double)(cgpoint.y / this.mPageSize.y));
-			num = Math.Max(0, Math.Min(num, this.mPageCountHorizontal - 1));
-			num2 = Math.Max(0, Math.Min(num2, this.mPageCountVertical - 1));
+				x = (float)mScrollInsets.mLeft + mPageSize.x / 2f,
+				y = (float)mScrollInsets.mTop + mPageSize.y / 2f
+			}, mScrollOffset);
+			int num = (int)Math.Floor((double)(cgpoint.x / mPageSize.x));
+			int num2 = (int)Math.Floor((double)(cgpoint.y / mPageSize.y));
+			num = Math.Max(0, Math.Min(num, mPageCountHorizontal - 1));
+			num2 = Math.Max(0, Math.Min(num2, mPageCountVertical - 1));
 			CGPoint cgpoint2 = default(CGPoint);
-			cgpoint2.x = (float)this.mScrollInsets.mLeft - (float)num * this.mPageSize.x;
-			cgpoint2.y = (float)this.mScrollInsets.mTop - (float)num2 * this.mPageSize.y;
-			if (this.mScrollVelocity.x > 40f && cgpoint2.x < this.mScrollOffset.x)
+			cgpoint2.x = (float)mScrollInsets.mLeft - (float)num * mPageSize.x;
+			cgpoint2.y = (float)mScrollInsets.mTop - (float)num2 * mPageSize.y;
+			if (mScrollVelocity.x > 40f && cgpoint2.x < mScrollOffset.x)
 			{
 				num--;
 			}
-			else if (this.mScrollVelocity.x < -40f && cgpoint2.x > this.mScrollOffset.x)
+			else if (mScrollVelocity.x < -40f && cgpoint2.x > mScrollOffset.x)
 			{
 				num++;
 			}
-			if (this.mScrollVelocity.y > 40f && cgpoint2.y < this.mScrollOffset.y)
+			if (mScrollVelocity.y > 40f && cgpoint2.y < mScrollOffset.y)
 			{
 				num2--;
 			}
-			else if (this.mScrollVelocity.y < -40f && cgpoint2.y > this.mScrollOffset.y)
+			else if (mScrollVelocity.y < -40f && cgpoint2.y > mScrollOffset.y)
 			{
 				num2++;
 			}
-			this.SetPage(num, num2, true);
+			SetPage(num, num2, true);
 		}
 
 		protected void TouchMotion(_Touch touch)
 		{
-			CGPoint cgpoint = CGMaths.CGPointSubtract(touch.location, this.mScrollTouchReference);
-			CGPoint cgpoint2 = this.mScrollOffset;
-			if ((this.mScrollPractical & ScrollWidget.ScrollMode.SCROLL_HORIZONTAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED)
+			CGPoint cgpoint = CGMaths.CGPointSubtract(touch.location, mScrollTouchReference);
+			CGPoint cgpoint2 = mScrollOffset;
+			if ((mScrollPractical & ScrollWidget.ScrollMode.SCROLL_HORIZONTAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED)
 			{
-				cgpoint2.x = this.mScrollOffsetReference.x + cgpoint.X;
-				float x = this.mScrollMin.x;
-				float x2 = this.mScrollMax.x;
+				cgpoint2.x = mScrollOffsetReference.x + cgpoint.X;
+				float x = mScrollMin.x;
+				float x2 = mScrollMax.x;
 				if (cgpoint2.x < x)
 				{
-					cgpoint2.x = (this.mBounceEnabled ? (cgpoint2.x + 0.5f * (x - cgpoint2.x)) : x);
-					this.mScrollVelocity.x = 0f;
+					cgpoint2.x = (mBounceEnabled ? (cgpoint2.x + 0.5f * (x - cgpoint2.x)) : x);
+					mScrollVelocity.x = 0f;
 				}
 				else if (cgpoint2.x > x2)
 				{
-					cgpoint2.x = (this.mBounceEnabled ? (cgpoint2.x + 0.5f * (x2 - cgpoint2.x)) : x2);
-					this.mScrollVelocity.x = 0f;
+					cgpoint2.x = (mBounceEnabled ? (cgpoint2.x + 0.5f * (x2 - cgpoint2.x)) : x2);
+					mScrollVelocity.x = 0f;
 				}
 				else
 				{
-					float num = cgpoint2.x - this.mScrollOffset.x;
-					double num2 = touch.timestamp - this.mScrollLastTimestamp;
+					float num = cgpoint2.x - mScrollOffset.x;
+					double num2 = touch.timestamp - mScrollLastTimestamp;
 					if (num2 > 0.0)
 					{
 						double num3 = (double)num / num2;
 						double num4 = Math.Min(1.0, num2 / 0.10000000149011612);
-						this.mScrollVelocity.x = (float)(num4 * num3 + (1.0 - num4) * (double)this.mScrollVelocity.x);
+						mScrollVelocity.x = (float)(num4 * num3 + (1.0 - num4) * (double)mScrollVelocity.x);
 					}
 				}
 			}
-			if ((this.mScrollPractical & ScrollWidget.ScrollMode.SCROLL_VERTICAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED)
+			if ((mScrollPractical & ScrollWidget.ScrollMode.SCROLL_VERTICAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED)
 			{
-				cgpoint2.y = this.mScrollOffsetReference.y + cgpoint.Y;
-				float y = this.mScrollMin.y;
-				float y2 = this.mScrollMax.y;
+				cgpoint2.y = mScrollOffsetReference.y + cgpoint.Y;
+				float y = mScrollMin.y;
+				float y2 = mScrollMax.y;
 				if (cgpoint2.y < y)
 				{
-					cgpoint2.y = (this.mBounceEnabled ? (cgpoint2.y + 0.5f * (y - cgpoint2.y)) : y);
-					this.mScrollVelocity.y = 0f;
+					cgpoint2.y = (mBounceEnabled ? (cgpoint2.y + 0.5f * (y - cgpoint2.y)) : y);
+					mScrollVelocity.y = 0f;
 				}
 				else if (cgpoint2.y > y2)
 				{
-					cgpoint2.y = (this.mBounceEnabled ? (cgpoint2.y + 0.5f * (y2 - cgpoint2.y)) : y2);
-					this.mScrollVelocity.y = 0f;
+					cgpoint2.y = (mBounceEnabled ? (cgpoint2.y + 0.5f * (y2 - cgpoint2.y)) : y2);
+					mScrollVelocity.y = 0f;
 				}
 				else
 				{
-					float num5 = cgpoint2.y - this.mScrollOffset.mY;
-					double num6 = touch.timestamp - this.mScrollLastTimestamp;
+					float num5 = cgpoint2.y - mScrollOffset.mY;
+					double num6 = touch.timestamp - mScrollLastTimestamp;
 					if (num6 > 0.0)
 					{
 						double num7 = (double)num5 / num6;
 						double num8 = Math.Min(1.0, num6 / 0.10000000149011612);
-						this.mScrollVelocity.y = (float)(num8 * num7 + (1.0 - num8) * (double)this.mScrollVelocity.y);
+						mScrollVelocity.y = (float)(num8 * num7 + (1.0 - num8) * (double)mScrollVelocity.y);
 					}
 				}
 			}
-			this.mScrollOffset = cgpoint2;
-			this.mScrollLastTimestamp = touch.timestamp;
-			this.mClient.Move((int)this.mScrollOffset.x, (int)this.mScrollOffset.y);
-			this.oldTouch = touch.location;
-			this.oldTouchTime = touch.timestamp;
+			mScrollOffset = cgpoint2;
+			mScrollLastTimestamp = touch.timestamp;
+			mClient.Move((int)mScrollOffset.x, (int)mScrollOffset.y);
+			oldTouch = touch.location;
+			oldTouchTime = touch.timestamp;
 		}
 
 		protected Widget GetClientWidgetAt(_Touch touch)
 		{
-			int num = (int)touch.location.X - this.mClient.mX;
-			int num2 = (int)touch.location.Y - this.mClient.mY;
-			int theFlags = 16 | this.mWidgetManager.GetWidgetFlags();
+			int num = (int)touch.location.X - mClient.mX;
+			int num2 = (int)touch.location.Y - mClient.mY;
+			int theFlags = 16 | mWidgetManager.GetWidgetFlags();
 			Widget widgetAtHelper;
 			int num3;
 			int num4;
-			if (this.mClientLastDown != null)
+			if (mClientLastDown != null)
 			{
-				CGPoint absPos = this.mClient.GetAbsPos();
-				CGPoint absPos2 = this.mClientLastDown.GetAbsPos();
-				widgetAtHelper = this.mClientLastDown;
+				CGPoint absPos = mClient.GetAbsPos();
+				CGPoint absPos2 = mClientLastDown.GetAbsPos();
+				widgetAtHelper = mClientLastDown;
 				num3 = (int)(touch.location.X + absPos.mX - absPos2.mX);
 				num4 = (int)(touch.location.Y + absPos.mY - absPos2.mY);
 			}
 			else
 			{
-				Widget widget = this.mClient;
+				Widget widget = mClient;
 				widget.mWidgetFlagsMod.mRemoveFlags = (widget.mWidgetFlagsMod.mRemoveFlags & -17);
 				bool flag;
-				widgetAtHelper = this.mClient.GetWidgetAtHelper(num, num2, theFlags, out flag, out num3, out num4);
-				Widget widget2 = this.mClient;
+				widgetAtHelper = mClient.GetWidgetAtHelper(num, num2, theFlags, out flag, out num3, out num4);
+				Widget widget2 = mClient;
 				widget2.mWidgetFlagsMod.mRemoveFlags = (widget2.mWidgetFlagsMod.mRemoveFlags | 16);
 			}
 			if (widgetAtHelper == null || widgetAtHelper.mDisabled)
 			{
 				num3 = num;
 				num4 = num2;
-				widgetAtHelper = this.mClient;
+				widgetAtHelper = mClient;
 			}
 			touch.previousLocation.X = touch.previousLocation.X + ((float)num3 - touch.location.X);
 			touch.previousLocation.Y = touch.previousLocation.Y + ((float)num4 - touch.location.Y);
@@ -766,42 +766,42 @@ namespace Sexy
 
 		public CGPoint GetScrollOffset()
 		{
-			return this.mScrollOffset;
+			return mScrollOffset;
 		}
 
 		public void SetScrollOffset(float x, float y)
 		{
-			this.mScrollOffset.x = x;
-			this.mScrollOffset.y = y;
+			mScrollOffset.x = x;
+			mScrollOffset.y = y;
 		}
 
 		protected void CacheDerivedValues()
 		{
-			if (this.mClient != null)
+			if (mClient != null)
 			{
-				this.mScrollMin.x = (float)(this.mWidth - this.mClient.mWidth - this.mScrollInsets.mRight);
-				this.mScrollMin.y = (float)(this.mHeight - this.mClient.mHeight - this.mScrollInsets.mBottom);
-				this.mScrollMax.x = (float)this.mScrollInsets.mLeft;
-				this.mScrollMax.y = (float)this.mScrollInsets.mTop;
-				int num = ((this.mScrollMin.x < this.mScrollMax.x) ? 1 : 0) | ((this.mScrollMin.y < this.mScrollMax.y) ? 2 : 0);
-				this.mScrollPractical = (this.mScrollMode & (ScrollWidget.ScrollMode)num);
+				mScrollMin.x = (float)(mWidth - mClient.mWidth - mScrollInsets.mRight);
+				mScrollMin.y = (float)(mHeight - mClient.mHeight - mScrollInsets.mBottom);
+				mScrollMax.x = (float)mScrollInsets.mLeft;
+				mScrollMax.y = (float)mScrollInsets.mTop;
+				int num = ((mScrollMin.x < mScrollMax.x) ? 1 : 0) | ((mScrollMin.y < mScrollMax.y) ? 2 : 0);
+				mScrollPractical = (mScrollMode & (ScrollWidget.ScrollMode)num);
 			}
 			else
 			{
-				this.mScrollMin.x = (this.mScrollMax.x = (this.mScrollMin.y = (this.mScrollMax.y = 0f)));
-				this.mScrollPractical = ScrollWidget.ScrollMode.SCROLL_DISABLED;
+				mScrollMin.x = (mScrollMax.x = (mScrollMin.y = (mScrollMax.y = 0f)));
+				mScrollPractical = ScrollWidget.ScrollMode.SCROLL_DISABLED;
 			}
-			if (this.mPagingEnabled)
+			if (mPagingEnabled)
 			{
-				this.mPageSize.x = (float)(this.mWidth - this.mScrollInsets.mLeft - this.mScrollInsets.mRight);
-				this.mPageSize.y = (float)(this.mHeight - this.mScrollInsets.mTop - this.mScrollInsets.mBottom);
-				if (this.mClient != null)
+				mPageSize.x = (float)(mWidth - mScrollInsets.mLeft - mScrollInsets.mRight);
+				mPageSize.y = (float)(mHeight - mScrollInsets.mTop - mScrollInsets.mBottom);
+				if (mClient != null)
 				{
-					this.mPageCountHorizontal = (int)Math.Floor((double)((float)this.mClient.Width() / this.mPageSize.x));
-					this.mPageCountVertical = (int)Math.Floor((double)((float)this.mClient.Height() / this.mPageSize.y));
+					mPageCountHorizontal = (int)Math.Floor((double)((float)mClient.Width() / mPageSize.x));
+					mPageCountVertical = (int)Math.Floor((double)((float)mClient.Height() / mPageSize.y));
 					return;
 				}
-				this.mPageCountHorizontal = (this.mPageCountVertical = 0);
+				mPageCountHorizontal = (mPageCountVertical = 0);
 			}
 		}
 

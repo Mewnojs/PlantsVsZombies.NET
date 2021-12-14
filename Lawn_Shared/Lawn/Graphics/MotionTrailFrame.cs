@@ -7,16 +7,16 @@ namespace Lawn
 	{
 		public void SaveToFile(Sexy.Buffer b)
 		{
-			b.WriteFloat(this.mPosX);
-			b.WriteFloat(this.mPosY);
-			b.WriteFloat(this.mAnimTime);
+			b.WriteFloat(mPosX);
+			b.WriteFloat(mPosY);
+			b.WriteFloat(mAnimTime);
 		}
 
 		public void LoadFromFile(Sexy.Buffer b)
 		{
-			this.mPosX = b.ReadFloat();
-			this.mPosY = b.ReadFloat();
-			this.mAnimTime = b.ReadFloat();
+			mPosX = b.ReadFloat();
+			mPosY = b.ReadFloat();
+			mAnimTime = b.ReadFloat();
 		}
 
 		public float mPosX;

@@ -6,16 +6,16 @@ namespace Sexy
 	{
 		public AutoModalFlags(ModalFlags theModalFlags, FlagsMod theFlagMod)
 		{
-			this.mModalFlags = theModalFlags;
-			this.mOldOverFlags = theModalFlags.mOverFlags;
-			this.mOldUnderFlags = theModalFlags.mUnderFlags;
+			mModalFlags = theModalFlags;
+			mOldOverFlags = theModalFlags.mOverFlags;
+			mOldUnderFlags = theModalFlags.mUnderFlags;
 			theModalFlags.ModFlags(ref theFlagMod);
 		}
 
 		public void Dispose()
 		{
-			this.mModalFlags.mOverFlags = this.mOldOverFlags;
-			this.mModalFlags.mUnderFlags = this.mOldUnderFlags;
+			mModalFlags.mOverFlags = mOldOverFlags;
+			mModalFlags.mUnderFlags = mOldUnderFlags;
 		}
 
 		public ModalFlags mModalFlags;

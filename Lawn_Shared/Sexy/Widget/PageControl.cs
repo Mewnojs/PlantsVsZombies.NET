@@ -6,9 +6,9 @@ namespace Sexy
 	{
 		public PageControl(Image partsImage)
 		{
-			this.mPartsImage = partsImage;
-			this.mNumberOfPages = 0;
-			this.mCurrentPage = 0;
+			mPartsImage = partsImage;
+			mNumberOfPages = 0;
+			mCurrentPage = 0;
 		}
 
 		public override void Dispose()
@@ -18,37 +18,37 @@ namespace Sexy
 
 		public void SetNumberOfPages(int count)
 		{
-			if (count != this.mNumberOfPages)
+			if (count != mNumberOfPages)
 			{
-				this.mNumberOfPages = count;
-				int theWidth = this.mPartsImage.GetCelWidth() * count;
-				int celHeight = this.mPartsImage.GetCelHeight();
-				this.Resize(this.mX, this.mY, theWidth, celHeight);
+				mNumberOfPages = count;
+				int theWidth = mPartsImage.GetCelWidth() * count;
+				int celHeight = mPartsImage.GetCelHeight();
+				Resize(mX, mY, theWidth, celHeight);
 			}
 		}
 
 		public void SetCurrentPage(int page)
 		{
-			this.mCurrentPage = page;
-			this.MarkDirtyFull();
+			mCurrentPage = page;
+			MarkDirtyFull();
 		}
 
 		public int GetCurrentPage()
 		{
-			return this.mCurrentPage;
+			return mCurrentPage;
 		}
 
 		public new void Draw(Graphics g)
 		{
-			int celWidth = this.mPartsImage.GetCelWidth();
-			int celHeight = this.mPartsImage.GetCelHeight();
-			int num = celWidth * this.mNumberOfPages;
-			int num2 = (this.mWidth - num) / 2;
-			int theY = (this.mHeight - celHeight) / 2;
-			for (int i = 0; i < this.mNumberOfPages; i++)
+			int celWidth = mPartsImage.GetCelWidth();
+			int celHeight = mPartsImage.GetCelHeight();
+			int num = celWidth * mNumberOfPages;
+			int num2 = (mWidth - num) / 2;
+			int theY = (mHeight - celHeight) / 2;
+			for (int i = 0; i < mNumberOfPages; i++)
 			{
-				int theCel = (this.mCurrentPage == i) ? 0 : 1;
-				g.DrawImageCel(this.mPartsImage, num2, theY, theCel);
+				int theCel = (mCurrentPage == i) ? 0 : 1;
+				g.DrawImageCel(mPartsImage, num2, theY, theCel);
 				num2 += celWidth;
 			}
 		}

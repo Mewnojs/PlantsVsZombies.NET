@@ -9,11 +9,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mPoint.X;
+				return mPoint.X;
 			}
 			set
 			{
-				this.mPoint.X = value;
+				mPoint.X = value;
 			}
 		}
 
@@ -21,11 +21,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mPoint.X;
+				return mPoint.X;
 			}
 			set
 			{
-				this.mPoint.X = value;
+				mPoint.X = value;
 			}
 		}
 
@@ -33,11 +33,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mPoint.Y;
+				return mPoint.Y;
 			}
 			set
 			{
-				this.mPoint.Y = value;
+				mPoint.Y = value;
 			}
 		}
 
@@ -45,22 +45,22 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mPoint.Y;
+				return mPoint.Y;
 			}
 			set
 			{
-				this.mPoint.Y = value;
+				mPoint.Y = value;
 			}
 		}
 
 		public TPointFloat(float theX, float theY)
 		{
-			this.mPoint = new Vector2(theX, theY);
+			mPoint = new Vector2(theX, theY);
 		}
 
 		public TPointFloat(TPointFloat theTPoint)
 		{
-			this.mPoint = theTPoint.mPoint;
+			mPoint = theTPoint.mPoint;
 		}
 
 		public static bool operator ==(TPointFloat a, TPointFloat b)
@@ -80,12 +80,12 @@ namespace Sexy
 				return false;
 			}
 			TPoint tpoint = (TPoint)obj;
-			return this.mX == (float)tpoint.mX && this.mY == (float)tpoint.mY;
+			return mX == (float)tpoint.mX && mY == (float)tpoint.mY;
 		}
 
 		public override int GetHashCode()
 		{
-			return this.mPoint.GetHashCode();
+			return mPoint.GetHashCode();
 		}
 
 		public static TPointFloat operator +(TPointFloat a, TPointFloat b)
@@ -120,7 +120,7 @@ namespace Sexy
 
 		public override string ToString()
 		{
-			return this.mPoint.ToString();
+			return mPoint.ToString();
 		}
 
 		private Vector2 mPoint;

@@ -7,39 +7,39 @@ namespace Sexy.TodLib
 	{
 		public void Dispose()
 		{
-			this.DisposeHolder();
+			DisposeHolder();
 		}
 
 		public void InitializeHolder()
 		{
-			this.mParticleSystems = new List<TodParticleSystem>(1024);
-			this.mEmitters = new List<TodParticleEmitter>(1024);
-			this.mParticles = new List<TodParticle>(1024);
+			mParticleSystems = new List<TodParticleSystem>(1024);
+			mEmitters = new List<TodParticleEmitter>(1024);
+			mParticles = new List<TodParticle>(1024);
 		}
 
 		public void DisposeHolder()
 		{
-			this.mParticleSystems.Clear();
-			for (int i = 0; i < this.mEmitters.Count; i++)
+			mParticleSystems.Clear();
+			for (int i = 0; i < mEmitters.Count; i++)
 			{
-				this.mEmitters[i].PrepareForReuse();
+				mEmitters[i].PrepareForReuse();
 			}
-			this.mEmitters.Clear();
-			for (int j = 0; j < this.mParticles.Count; j++)
+			mEmitters.Clear();
+			for (int j = 0; j < mParticles.Count; j++)
 			{
-				this.mParticles[j].PrepareForReuse();
+				mParticles[j].PrepareForReuse();
 			}
-			this.mParticles.Clear();
+			mParticles.Clear();
 		}
 
 		public TodParticleSystem AllocParticleSystemFromDef(float theX, float theY, int theRenderOrder, TodParticleDefinition theDefinition, ParticleEffect theParticleEffect)
 		{
-			if (this.mParticleSystems.Count == this.mParticleSystems.Capacity)
+			if (mParticleSystems.Count == mParticleSystems.Capacity)
 			{
 				Debug.OutputDebug<string>("Too many particle systems\n");
 				return null;
 			}
-			if (this.mEmitters.Count + theDefinition.mEmitterDefCount > this.mEmitters.Capacity)
+			if (mEmitters.Count + theDefinition.mEmitterDefCount > mEmitters.Capacity)
 			{
 				Debug.OutputDebug<string>("Too many particle emitters\n");
 				return null;
@@ -48,19 +48,19 @@ namespace Sexy.TodLib
 			newTodParticleSystem.mActive = true;
 			newTodParticleSystem.mParticleHolder = this;
 			newTodParticleSystem.TodParticleInitializeFromDef(theX, theY, theRenderOrder, theDefinition, theParticleEffect);
-			this.mParticleSystems.Add(newTodParticleSystem);
+			mParticleSystems.Add(newTodParticleSystem);
 			return newTodParticleSystem;
 		}
 
 		public TodParticleSystem AllocParticleSystem(float theX, float theY, int theRenderOrder, ParticleEffect theParticleEffect)
 		{
 			TodParticleDefinition theDefinition = TodParticleGlobal.gParticleDefArray[(int)theParticleEffect];
-			return this.AllocParticleSystemFromDef(theX, theY, theRenderOrder, theDefinition, theParticleEffect);
+			return AllocParticleSystemFromDef(theX, theY, theRenderOrder, theDefinition, theParticleEffect);
 		}
 
 		public bool IsOverLoaded()
 		{
-			return this.mParticleSystems.Count > 100 || this.mEmitters.Count > 100 || this.mParticles.Count > 100;
+			return mParticleSystems.Count > 100 || mEmitters.Count > 100 || mParticles.Count > 100;
 		}
 
 		public void SaveToFile(Sexy.Buffer b)

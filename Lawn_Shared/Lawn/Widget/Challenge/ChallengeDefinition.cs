@@ -6,17 +6,17 @@ namespace Lawn
 	{
 		public ChallengeDefinition(GameMode mode, int index, ChallengePage page, int row, int col, string name)
 		{
-			this.mChallengeMode = mode;
-			this.mChallengeIconIndex = index;
-			this.mPage = page;
-			this.mRow = row;
-			this.mCol = col;
-			this.mChallengeName = name;
+			mChallengeMode = mode;
+			mChallengeIconIndex = index;
+			mPage = page;
+			mRow = row;
+			mCol = col;
+			mChallengeName = name;
 		}
 
 		public override string ToString()
 		{
-			return this.mChallengeName;
+			return mChallengeName;
 		}
 
 		public GameMode mChallengeMode;

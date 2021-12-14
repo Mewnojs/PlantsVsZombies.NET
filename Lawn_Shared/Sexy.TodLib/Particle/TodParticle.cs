@@ -33,34 +33,34 @@ namespace Sexy.TodLib
 
 		public void PrepareForReuse()
 		{
-			this.Reset();
+			Reset();
 			TodParticle.unusedObjects.Push(this);
 		}
 
 		private void Reset()
 		{
-			this.mParticleEmitter = null;
-			this.mParticleDuration = 0;
-			this.mParticleAge = 0;
-			this.mParticleTimeValue = 0f;
-			this.mParticleLastTimeValue = 0f;
-			this.mAnimationTimeValue = 0f;
-			this.mVelocity = default(SexyVector2);
-			this.mPosition = default(SexyVector2);
-			this.mImageFrame = 0;
-			this.mSpinPosition = 0f;
-			this.mSpinVelocity = 0f;
-			this.mCrossFadeParticleID = null;
-			this.mCrossFadeDuration = 0;
-			for (int i = 0; i < this.mParticleInterp.Length; i++)
+			mParticleEmitter = null;
+			mParticleDuration = 0;
+			mParticleAge = 0;
+			mParticleTimeValue = 0f;
+			mParticleLastTimeValue = 0f;
+			mAnimationTimeValue = 0f;
+			mVelocity = default(SexyVector2);
+			mPosition = default(SexyVector2);
+			mImageFrame = 0;
+			mSpinPosition = 0f;
+			mSpinVelocity = 0f;
+			mCrossFadeParticleID = null;
+			mCrossFadeDuration = 0;
+			for (int i = 0; i < mParticleInterp.Length; i++)
 			{
-				this.mParticleInterp[i] = 0f;
+				mParticleInterp[i] = 0f;
 			}
 			for (int j = 0; j < 5; j++)
 			{
 				for (int k = 0; k < 2; k++)
 				{
-					this.mParticleFieldInterp[j, k] = 0f;
+					mParticleFieldInterp[j, k] = 0f;
 				}
 			}
 		}

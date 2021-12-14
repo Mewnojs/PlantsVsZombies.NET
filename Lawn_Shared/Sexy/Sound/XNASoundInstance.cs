@@ -10,7 +10,7 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mId;
+				return mId;
 			}
 		}
 
@@ -36,25 +36,25 @@ namespace Sexy
 
 		private XNASoundInstance()
 		{
-			this.Reset(0U, null);
+			Reset(0U, null);
 		}
 
 		private XNASoundInstance(uint id, SoundEffectInstance instance)
 		{
-			this.Reset(id, instance);
+			Reset(id, instance);
 		}
 
 		public void Reset(uint id, SoundEffectInstance instance)
 		{
-			this.mBaseVolume = 1f;
-			this.mVolume = 1f;
-			this.mBasePan = 0f;
-			this.mPan = 0f;
-			this.mPitch = 0f;
-			this.mIsReleased = false;
-			this.mId = id;
-			this.didPlay = false;
-			this.mSound = instance;
+			mBaseVolume = 1f;
+			mVolume = 1f;
+			mBasePan = 0f;
+			mPan = 0f;
+			mPitch = 0f;
+			mIsReleased = false;
+			mId = id;
+			didPlay = false;
+			mSound = instance;
 		}
 
 		public void PrepareForReuse()
@@ -64,84 +64,84 @@ namespace Sexy
 
 		public override void Release()
 		{
-			if (this.mSound != null)
+			if (mSound != null)
 			{
-				this.mSound.Dispose();
-				this.mSound = null;
+				mSound.Dispose();
+				mSound = null;
 			}
-			this.mIsReleased = true;
+			mIsReleased = true;
 		}
 
 		public override void SetBaseVolume(double theBaseVolume)
 		{
-			this.mBaseVolume = (float)theBaseVolume;
+			mBaseVolume = (float)theBaseVolume;
 		}
 
 		public override void SetBasePan(int theBasePan)
 		{
-			this.mBasePan = (float)theBasePan / 100f;
+			mBasePan = (float)theBasePan / 100f;
 		}
 
 		public override void AdjustPitch(double theNumSteps)
 		{
-			this.mPitch = (float)theNumSteps;
+			mPitch = (float)theNumSteps;
 		}
 
 		public override void SetVolume(double theVolume)
 		{
-			this.mVolume = (float)theVolume;
+			mVolume = (float)theVolume;
 		}
 
 		public override void SetPan(int thePosition)
 		{
-			this.mPan = (float)thePosition / 10000f;
+			mPan = (float)thePosition / 10000f;
 		}
 
 		public override bool Play(bool looping)
 		{
-			this.didPlay = true;
-			if (this.mSound.State == SoundState.Stopped)
+			didPlay = true;
+			if (mSound.State == SoundState.Stopped)
 			{
-				this.mSound.IsLooped = looping;
+				mSound.IsLooped = looping;
 			}
-			this.mSound.Volume = this.mBaseVolume * this.mVolume;
-			this.mSound.Pan = Math.Min(Math.Max(-1f, this.mBasePan + this.mPan), 1f);
-			this.mSound.Pitch = this.mPitch / 10f;
-			this.mSound.Play();
+			mSound.Volume = mBaseVolume * mVolume;
+			mSound.Pan = Math.Min(Math.Max(-1f, mBasePan + mPan), 1f);
+			mSound.Pitch = mPitch / 10f;
+			mSound.Play();
 			return true;
 		}
 
 		public override bool Play(bool looping, bool autoRelease)
 		{
-			return this.Play(looping);
+			return Play(looping);
 		}
 
 		public override void Stop()
 		{
-			if (this.mSound != null)
+			if (mSound != null)
 			{
-				this.mSound.Stop();
+				mSound.Stop();
 			}
 		}
 
 		public override bool IsPlaying()
 		{
-			return this.mSound != null && this.mSound.State == SoundState.Playing;
+			return mSound != null && mSound.State == SoundState.Playing;
 		}
 
 		public override bool IsDormant()
 		{
-			return this.didPlay && this.mSound.State == SoundState.Stopped;
+			return didPlay && mSound.State == SoundState.Stopped;
 		}
 
 		public override double GetVolume()
 		{
-			return (double)this.mVolume;
+			return (double)mVolume;
 		}
 
 		public override bool IsReleased()
 		{
-			return this.mIsReleased;
+			return mIsReleased;
 		}
 
 		private float mBaseVolume;

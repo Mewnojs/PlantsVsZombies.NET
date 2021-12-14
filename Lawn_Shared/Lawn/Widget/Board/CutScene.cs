@@ -16,235 +16,235 @@ namespace Lawn
 
 		public CutScene()
 		{
-			this.mApp = (LawnApp)GlobalStaticVars.gSexyAppBase;
-			this.mBoard = this.mApp.mBoard;
-			this.mCutsceneTime = 0;
-			this.mSodTime = 0;
-			this.mFogTime = 0;
-			this.mBossTime = 0;
-			this.mCrazyDaveTime = 0;
-			this.mGraveStoneTime = 0;
-			this.mReadySetPlantTime = 0;
-			this.mLawnMowerTime = 0;
-			this.mCrazyDaveDialogStart = -1;
-			this.mSeedChoosing = false;
-			this.mZombiesWonReanimID = null;
-			this.mPreloaded = false;
-			this.mPlacedZombies = false;
-			this.mPlacedLawnItems = false;
-			this.mCrazyDaveCountDown = 0;
-			this.mCrazyDaveLastTalkIndex = -1;
-			this.mUpsellHideBoard = false;
-			this.mUpsellChallengeScreen = null;
-			this.mPreUpdatingBoard = false;
+			mApp = (LawnApp)GlobalStaticVars.gSexyAppBase;
+			mBoard = mApp.mBoard;
+			mCutsceneTime = 0;
+			mSodTime = 0;
+			mFogTime = 0;
+			mBossTime = 0;
+			mCrazyDaveTime = 0;
+			mGraveStoneTime = 0;
+			mReadySetPlantTime = 0;
+			mLawnMowerTime = 0;
+			mCrazyDaveDialogStart = -1;
+			mSeedChoosing = false;
+			mZombiesWonReanimID = null;
+			mPreloaded = false;
+			mPlacedZombies = false;
+			mPlacedLawnItems = false;
+			mCrazyDaveCountDown = 0;
+			mCrazyDaveLastTalkIndex = -1;
+			mUpsellHideBoard = false;
+			mUpsellChallengeScreen = null;
+			mPreUpdatingBoard = false;
 		}
 
 		public void Dispose()
 		{
-			this.mApp.mMuteSoundsForCutscene = false;
+			mApp.mMuteSoundsForCutscene = false;
 		}
 
 		public void StartLevelIntro()
 		{
-			this.mCutsceneTime = 0;
-			this.mBoard.mSeedBank.Move(-this.mBoard.mSeedBank.mWidth, 0);
-			this.mBoard.mMenuButton.mBtnNoDraw = true;
-			this.mApp.mSeedChooserScreen.mMouseVisible = false;
-			this.mApp.mSeedChooserScreen.Move(0, Constants.SEED_CHOOSER_OFFSETSCREEN_OFFSET);
-			this.mApp.mSeedChooserScreen.mMenuButton.mBtnNoDraw = true;
-			this.mBoard.mShowShovel = false;
-			this.mBoard.mSeedBank.mCutSceneDarken = 255;
-			this.mPlacedZombies = false;
-			this.mPreloaded = false;
-			this.mPlacedLawnItems = false;
-			this.mApp.mWidgetManager.SetFocus(this.mBoard);
+			mCutsceneTime = 0;
+			mBoard.mSeedBank.Move(-mBoard.mSeedBank.mWidth, 0);
+			mBoard.mMenuButton.mBtnNoDraw = true;
+			mApp.mSeedChooserScreen.mMouseVisible = false;
+			mApp.mSeedChooserScreen.Move(0, Constants.SEED_CHOOSER_OFFSETSCREEN_OFFSET);
+			mApp.mSeedChooserScreen.mMenuButton.mBtnNoDraw = true;
+			mBoard.mShowShovel = false;
+			mBoard.mSeedBank.mCutSceneDarken = 255;
+			mPlacedZombies = false;
+			mPreloaded = false;
+			mPlacedLawnItems = false;
+			mApp.mWidgetManager.SetFocus(mBoard);
 			bool flag = false;
-			if (!this.mApp.IsFirstTimeAdventureMode())
+			if (!mApp.IsFirstTimeAdventureMode())
 			{
 				flag = false;
 			}
-			else if (this.mBoard.mLevel == 1 || this.mBoard.mLevel == 2 || this.mBoard.mLevel == 4)
+			else if (mBoard.mLevel == 1 || mBoard.mLevel == 2 || mBoard.mLevel == 4)
 			{
 				flag = true;
 			}
 			if (flag)
 			{
-				this.mSodTime = CutScene.TimeRollSodEnd - CutScene.TimeRollSodStart;
-				this.mBoard.mSodPosition = 0;
+				mSodTime = CutScene.TimeRollSodEnd - CutScene.TimeRollSodStart;
+				mBoard.mSodPosition = 0;
 			}
 			else
 			{
-				this.mSodTime = 0;
-				this.mBoard.mSodPosition = 1000;
+				mSodTime = 0;
+				mBoard.mSodPosition = 1000;
 			}
-			this.mGraveStoneTime = 0;
-			this.mBoard.mEnableGraveStones = false;
-			if (this.mBoard.StageHasGraveStones())
+			mGraveStoneTime = 0;
+			mBoard.mEnableGraveStones = false;
+			if (mBoard.StageHasGraveStones())
 			{
-				if ((this.mApp.IsAdventureMode() || this.mApp.IsQuickPlayMode()) && this.mApp.IsWhackAZombieLevel())
+				if ((mApp.IsAdventureMode() || mApp.IsQuickPlayMode()) && mApp.IsWhackAZombieLevel())
 				{
-					this.mGraveStoneTime = 0;
+					mGraveStoneTime = 0;
 				}
-				else if (!this.IsSurvivalRepick())
+				else if (!IsSurvivalRepick())
 				{
-					this.mGraveStoneTime = CutScene.TimeGraveStoneEnd - CutScene.TimeGraveStoneStart;
+					mGraveStoneTime = CutScene.TimeGraveStoneEnd - CutScene.TimeGraveStoneStart;
 				}
 			}
-			if (this.mApp.IsFirstTimeAdventureMode() && this.mBoard.mLevel <= 2)
+			if (mApp.IsFirstTimeAdventureMode() && mBoard.mLevel <= 2)
 			{
-				this.mReadySetPlantTime = 0;
+				mReadySetPlantTime = 0;
 			}
-			else if (this.mApp.IsShovelLevel() || this.mApp.IsSquirrelLevel() || this.mApp.IsWallnutBowlingLevel() || this.mApp.IsIZombieLevel() || this.mApp.IsWhackAZombieLevel() || this.mApp.IsScaryPotterLevel() || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZOMBIQUARIUM || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND || this.mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
+			else if (mApp.IsShovelLevel() || mApp.IsSquirrelLevel() || mApp.IsWallnutBowlingLevel() || mApp.IsIZombieLevel() || mApp.IsWhackAZombieLevel() || mApp.IsScaryPotterLevel() || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZOMBIQUARIUM || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND || mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
 			{
-				this.mReadySetPlantTime = 0;
+				mReadySetPlantTime = 0;
 			}
 			else
 			{
-				this.mReadySetPlantTime = CutScene.TimeReadySetPlantEnd - CutScene.TimeReadySetPlantStart;
+				mReadySetPlantTime = CutScene.TimeReadySetPlantEnd - CutScene.TimeReadySetPlantStart;
 			}
-			this.mLawnMowerTime = 0;
-			if (!this.IsSurvivalRepick())
+			mLawnMowerTime = 0;
+			if (!IsSurvivalRepick())
 			{
-				this.mLawnMowerTime = 550;
+				mLawnMowerTime = 550;
 			}
 			bool flag2 = false;
-			if (this.mBoard.mPrevBoardResult == BoardResult.BOARDRESULT_RESTART || this.mBoard.mPrevBoardResult == BoardResult.BOARDRESULT_LOST)
+			if (mBoard.mPrevBoardResult == BoardResult.BOARDRESULT_RESTART || mBoard.mPrevBoardResult == BoardResult.BOARDRESULT_LOST)
 			{
 				flag2 = true;
 			}
-			if (this.mApp.IsFirstTimeAdventureMode() && this.mBoard.mLevel == 11)
+			if (mApp.IsFirstTimeAdventureMode() && mBoard.mLevel == 11)
 			{
-				this.mCrazyDaveDialogStart = 201;
+				mCrazyDaveDialogStart = 201;
 			}
-			else if (this.mApp.IsFirstTimeAdventureMode() && this.mBoard.mLevel == 12)
+			else if (mApp.IsFirstTimeAdventureMode() && mBoard.mLevel == 12)
 			{
-				this.mCrazyDaveDialogStart = 1401;
+				mCrazyDaveDialogStart = 1401;
 			}
-			else if (this.mApp.IsFirstTimeAdventureMode() && this.mBoard.mLevel >= 13 && this.mBoard.mLevel <= 24 && this.mBoard.mLevel != 15 && this.mBoard.mLevel != 20 && this.mBoard.mLevel != 21 && this.CanGetPacketUpgrade())
+			else if (mApp.IsFirstTimeAdventureMode() && mBoard.mLevel >= 13 && mBoard.mLevel <= 24 && mBoard.mLevel != 15 && mBoard.mLevel != 20 && mBoard.mLevel != 21 && CanGetPacketUpgrade())
 			{
-				this.mCrazyDaveDialogStart = 1501;
+				mCrazyDaveDialogStart = 1501;
 			}
-			else if (this.mApp.IsFirstTimeAdventureMode() && this.mBoard.mLevel >= 16 && this.mBoard.mLevel <= 24 && this.mBoard.mLevel != 20 && this.mBoard.mLevel != 21 && this.CanGetSecondPacketUpgrade())
+			else if (mApp.IsFirstTimeAdventureMode() && mBoard.mLevel >= 16 && mBoard.mLevel <= 24 && mBoard.mLevel != 20 && mBoard.mLevel != 21 && CanGetSecondPacketUpgrade())
 			{
-				this.mCrazyDaveDialogStart = 1551;
+				mCrazyDaveDialogStart = 1551;
 			}
-			else if (this.mApp.IsWallnutBowlingLevel() && this.mApp.IsAdventureMode())
+			else if (mApp.IsWallnutBowlingLevel() && mApp.IsAdventureMode())
 			{
-				if (this.mApp.IsFirstTimeAdventureMode())
+				if (mApp.IsFirstTimeAdventureMode())
 				{
-					this.mCrazyDaveDialogStart = 2400;
+					mCrazyDaveDialogStart = 2400;
 				}
 				else
 				{
-					this.mCrazyDaveDialogStart = 2411;
-					this.mBoard.mChallenge.mShowBowlingLine = true;
+					mCrazyDaveDialogStart = 2411;
+					mBoard.mChallenge.mShowBowlingLine = true;
 				}
-				this.mBoard.mShowShovel = true;
+				mBoard.mShowShovel = true;
 			}
-			else if (this.mApp.IsFirstTimeAdventureMode() && this.mBoard.mLevel == 21)
+			else if (mApp.IsFirstTimeAdventureMode() && mBoard.mLevel == 21)
 			{
-				this.mCrazyDaveDialogStart = 501;
+				mCrazyDaveDialogStart = 501;
 			}
-			else if (this.mApp.IsWhackAZombieLevel() && this.mApp.IsAdventureMode())
+			else if (mApp.IsWhackAZombieLevel() && mApp.IsAdventureMode())
 			{
-				this.mCrazyDaveDialogStart = 401;
+				mCrazyDaveDialogStart = 401;
 			}
-			else if (this.mApp.IsLittleTroubleLevel() && this.mApp.IsAdventureMode())
+			else if (mApp.IsLittleTroubleLevel() && mApp.IsAdventureMode())
 			{
-				this.mCrazyDaveDialogStart = 701;
+				mCrazyDaveDialogStart = 701;
 			}
-			else if (this.mApp.IsFirstTimeAdventureMode() && this.mBoard.mLevel == 31)
+			else if (mApp.IsFirstTimeAdventureMode() && mBoard.mLevel == 31)
 			{
-				this.mCrazyDaveDialogStart = 801;
+				mCrazyDaveDialogStart = 801;
 			}
-			else if (this.mApp.IsScaryPotterLevel() && this.mApp.IsAdventureMode())
+			else if (mApp.IsScaryPotterLevel() && mApp.IsAdventureMode())
 			{
-				this.mCrazyDaveDialogStart = 2500;
+				mCrazyDaveDialogStart = 2500;
 			}
-			else if (this.mApp.IsStormyNightLevel() && this.mApp.IsAdventureMode())
+			else if (mApp.IsStormyNightLevel() && mApp.IsAdventureMode())
 			{
-				this.mCrazyDaveDialogStart = 1101;
+				mCrazyDaveDialogStart = 1101;
 			}
-			else if (this.mApp.IsFirstTimeAdventureMode() && this.mBoard.mLevel == 41)
+			else if (mApp.IsFirstTimeAdventureMode() && mBoard.mLevel == 41)
 			{
-				this.mCrazyDaveDialogStart = 1201;
+				mCrazyDaveDialogStart = 1201;
 			}
-			else if (this.mApp.IsBungeeBlitzLevel() && this.mApp.IsAdventureMode())
+			else if (mApp.IsBungeeBlitzLevel() && mApp.IsAdventureMode())
 			{
-				this.mCrazyDaveDialogStart = 1304;
+				mCrazyDaveDialogStart = 1304;
 			}
-			else if (!this.mApp.IsFirstTimeAdventureMode() && !this.mApp.IsQuickPlayMode() && this.mBoard.mLevel == 1)
+			else if (!mApp.IsFirstTimeAdventureMode() && !mApp.IsQuickPlayMode() && mBoard.mLevel == 1)
 			{
-				this.mCrazyDaveDialogStart = 1601;
+				mCrazyDaveDialogStart = 1601;
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_1)
+			else if (mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_1)
 			{
-				this.mCrazyDaveDialogStart = 2200;
+				mCrazyDaveDialogStart = 2200;
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
+			else if (mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
 			{
-				this.mCrazyDaveDialogStart = 3300;
-				this.mUpsellHideBoard = true;
-				this.mBoard.mMenuButton.mBtnNoDraw = false;
+				mCrazyDaveDialogStart = 3300;
+				mUpsellHideBoard = true;
+				mBoard.mMenuButton.mBtnNoDraw = false;
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_SCARY_POTTER_1 && !this.mApp.HasBeatenChallenge(GameMode.GAMEMODE_SCARY_POTTER_1))
+			else if (mApp.mGameMode == GameMode.GAMEMODE_SCARY_POTTER_1 && !mApp.HasBeatenChallenge(GameMode.GAMEMODE_SCARY_POTTER_1))
 			{
-				this.mCrazyDaveDialogStart = 3000;
+				mCrazyDaveDialogStart = 3000;
 			}
-			else if (this.mApp.IsFinalBossLevel() && this.mApp.IsAdventureMode() && !flag2)
+			else if (mApp.IsFinalBossLevel() && mApp.IsAdventureMode() && !flag2)
 			{
-				this.mCrazyDaveDialogStart = 2300;
+				mCrazyDaveDialogStart = 2300;
 			}
-			if (this.mCrazyDaveDialogStart != -1)
+			if (mCrazyDaveDialogStart != -1)
 			{
-				this.mCrazyDaveTime = CutScene.TimeEarlyDaveLeaveEnd - CutScene.TimePanRightStart;
-				if (this.mApp.IsFinalBossLevel() && this.mApp.IsAdventureMode())
+				mCrazyDaveTime = CutScene.TimeEarlyDaveLeaveEnd - CutScene.TimePanRightStart;
+				if (mApp.IsFinalBossLevel() && mApp.IsAdventureMode())
 				{
-					this.mCrazyDaveTime += 4000;
+					mCrazyDaveTime += 4000;
 				}
 			}
-			if (this.mBoard.StageHasFog())
+			if (mBoard.StageHasFog())
 			{
-				this.mFogTime = CutScene.TimeFogRollIn + 2000 - CutScene.TimeReadySetPlantStart - this.mLawnMowerTime - this.mSodTime;
+				mFogTime = CutScene.TimeFogRollIn + 2000 - CutScene.TimeReadySetPlantStart - mLawnMowerTime - mSodTime;
 			}
 			else
 			{
-				this.mFogTime = 0;
+				mFogTime = 0;
 			}
-			if (this.mApp.IsFinalBossLevel())
+			if (mApp.IsFinalBossLevel())
 			{
-				this.mBossTime = 4000;
+				mBossTime = 4000;
 			}
 			else
 			{
-				this.mBossTime = 0;
+				mBossTime = 0;
 			}
-			if (this.IsScrolledLeftAtStart())
+			if (IsScrolledLeftAtStart())
 			{
-				this.mBoard.Move((int)((float)Constants.BOARD_OFFSET * Constants.S), 0);
+				mBoard.Move((int)((float)Constants.BOARD_OFFSET * Constants.S), 0);
 			}
-			if (this.IsNonScrollingCutscene() && this.mCrazyDaveTime == 0)
+			if (IsNonScrollingCutscene() && mCrazyDaveTime == 0)
 			{
-				this.CancelIntro();
+				CancelIntro();
 				return;
 			}
-			if (this.mApp.IsFinalBossLevel() || this.mApp.IsScaryPotterLevel() || this.mApp.IsWallnutBowlingLevel())
+			if (mApp.IsFinalBossLevel() || mApp.IsScaryPotterLevel() || mApp.IsWallnutBowlingLevel())
 			{
-				this.PreloadResources();
-				this.PlaceLawnItems();
+				PreloadResources();
+				PlaceLawnItems();
 			}
 			string text = string.Empty;
-			if (this.mCrazyDaveTime <= 0 && this.mApp.mGameMode != GameMode.GAMEMODE_INTRO && (this.mApp.mGameMode == GameMode.GAMEMODE_ADVENTURE || this.mApp.IsQuickPlayMode()))
+			if (mCrazyDaveTime <= 0 && mApp.mGameMode != GameMode.GAMEMODE_INTRO && (mApp.mGameMode == GameMode.GAMEMODE_ADVENTURE || mApp.IsQuickPlayMode()))
 			{
-				if (this.mBoard.mBackground == BackgroundType.BACKGROUND_1_DAY || this.mBoard.mBackground == BackgroundType.BACKGROUND_2_NIGHT)
+				if (mBoard.mBackground == BackgroundType.BACKGROUND_1_DAY || mBoard.mBackground == BackgroundType.BACKGROUND_2_NIGHT)
 				{
 					text = TodStringFile.TodStringTranslate("[PLAYERS_HOUSE]");
 				}
-				else if (this.mBoard.mBackground == BackgroundType.BACKGROUND_3_POOL || this.mBoard.mBackground == BackgroundType.BACKGROUND_4_FOG)
+				else if (mBoard.mBackground == BackgroundType.BACKGROUND_3_POOL || mBoard.mBackground == BackgroundType.BACKGROUND_4_FOG)
 				{
 					text = TodStringFile.TodStringTranslate("[PLAYERS_BACKYARD]");
 				}
-				else if (this.mBoard.mBackground == BackgroundType.BACKGROUND_5_ROOF || this.mBoard.mBackground == BackgroundType.BACKGROUND_6_BOSS)
+				else if (mBoard.mBackground == BackgroundType.BACKGROUND_5_ROOF || mBoard.mBackground == BackgroundType.BACKGROUND_6_BOSS)
 				{
 					text = TodStringFile.TodStringTranslate("[PLAYERS_ROOF]");
 				}
@@ -253,199 +253,199 @@ namespace Lawn
 					Debug.ASSERT(false);
 				}
 			}
-			text = TodCommon.TodReplaceString(text, "{PLAYER}", this.mApp.mPlayerInfo.mName);
+			text = TodCommon.TodReplaceString(text, "{PLAYER}", mApp.mPlayerInfo.mName);
 			if (!text.empty())
 			{
-				this.mBoard.DisplayAdvice(text, MessageStyle.MESSAGE_STYLE_HOUSE_NAME, AdviceType.ADVICE_NONE);
+				mBoard.DisplayAdvice(text, MessageStyle.MESSAGE_STYLE_HOUSE_NAME, AdviceType.ADVICE_NONE);
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
+			if (mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
 			{
-				this.mApp.mMusic.StopAllMusic();
+				mApp.mMusic.StopAllMusic();
 				return;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_INTRO)
+			if (mApp.mGameMode == GameMode.GAMEMODE_INTRO)
 			{
-				this.mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_POOL_WATERYGRAVES);
+				mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_POOL_WATERYGRAVES);
 				return;
 			}
-			if (this.mCrazyDaveTime > 0)
+			if (mCrazyDaveTime > 0)
 			{
-				this.mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_TITLE_CRAZY_DAVE_MAIN_THEME);
+				mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_TITLE_CRAZY_DAVE_MAIN_THEME);
 				return;
 			}
-			if (this.mApp.IsFinalBossLevel())
+			if (mApp.IsFinalBossLevel())
 			{
-				this.mApp.mMusic.StopAllMusic();
+				mApp.mMusic.StopAllMusic();
 				return;
 			}
-			this.mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_CHOOSE_YOUR_SEEDS);
+			mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_CHOOSE_YOUR_SEEDS);
 		}
 
 		public void CancelIntro()
 		{
-			this.PreloadResources();
-			this.PlaceStreetZombies();
-			if (this.mCutsceneTime < CutScene.TimePanRightEnd + this.mCrazyDaveTime)
+			PreloadResources();
+			PlaceStreetZombies();
+			if (mCutsceneTime < CutScene.TimePanRightEnd + mCrazyDaveTime)
 			{
-				this.mCutsceneTime = CutScene.TimeSeedChoserSlideOnEnd + this.mCrazyDaveTime - 20;
-				if (!this.IsNonScrollingCutscene())
+				mCutsceneTime = CutScene.TimeSeedChoserSlideOnEnd + mCrazyDaveTime - 20;
+				if (!IsNonScrollingCutscene())
 				{
-					this.mBoard.Move(Constants.BOARD_OFFSET - Constants.BACKGROUND_IMAGE_WIDTH + Constants.WIDE_BOARD_WIDTH, 0);
+					mBoard.Move(Constants.BOARD_OFFSET - Constants.BACKGROUND_IMAGE_WIDTH + Constants.WIDE_BOARD_WIDTH, 0);
 				}
-				if (this.mBoard.mAdvice.mMessageStyle == MessageStyle.MESSAGE_STYLE_HOUSE_NAME)
+				if (mBoard.mAdvice.mMessageStyle == MessageStyle.MESSAGE_STYLE_HOUSE_NAME)
 				{
-					this.mBoard.ClearAdvice(AdviceType.ADVICE_NONE);
+					mBoard.ClearAdvice(AdviceType.ADVICE_NONE);
 				}
-				if (this.mCrazyDaveDialogStart != -1)
+				if (mCrazyDaveDialogStart != -1)
 				{
-					if (this.mApp.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_OFF)
+					if (mApp.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_OFF)
 					{
-						this.mApp.CrazyDaveEnter();
+						mApp.CrazyDaveEnter();
 					}
-					this.mApp.mCrazyDaveMessageIndex = this.mCrazyDaveDialogStart;
+					mApp.mCrazyDaveMessageIndex = mCrazyDaveDialogStart;
 				}
-				while (this.mApp.mCrazyDaveMessageIndex != -1)
+				while (mApp.mCrazyDaveMessageIndex != -1)
 				{
-					this.AdvanceCrazyDaveDialog(true);
+					AdvanceCrazyDaveDialog(true);
 				}
-				if (this.mBoard.mLevel == 5)
+				if (mBoard.mLevel == 5)
 				{
-					int count = this.mBoard.mPlants.Count;
+					int count = mBoard.mPlants.Count;
 					for (int i = 0; i < count; i++)
 					{
-						Plant plant = this.mBoard.mPlants[i];
+						Plant plant = mBoard.mPlants[i];
 						if (!plant.mDead)
 						{
 							plant.Die();
 						}
 					}
-					this.mBoard.mChallenge.mShowBowlingLine = true;
+					mBoard.mChallenge.mShowBowlingLine = true;
 				}
 			}
-			this.mApp.CrazyDaveDie();
-			if (this.mCutsceneTime > CutScene.TimePanLeftStart + this.mCrazyDaveTime || !this.mBoard.ChooseSeedsOnCurrentLevel())
+			mApp.CrazyDaveDie();
+			if (mCutsceneTime > CutScene.TimePanLeftStart + mCrazyDaveTime || !mBoard.ChooseSeedsOnCurrentLevel())
 			{
-				this.mCutsceneTime = CutScene.TimeIntroEnd + this.mLawnMowerTime + this.mSodTime + this.mGraveStoneTime + this.mCrazyDaveTime + this.mFogTime + this.mBossTime + this.mReadySetPlantTime - 20;
-				this.PlaceLawnItems();
-				if (this.mApp.IsStormyNightLevel())
+				mCutsceneTime = CutScene.TimeIntroEnd + mLawnMowerTime + mSodTime + mGraveStoneTime + mCrazyDaveTime + mFogTime + mBossTime + mReadySetPlantTime - 20;
+				PlaceLawnItems();
+				if (mApp.IsStormyNightLevel())
 				{
-					this.mBoard.mChallenge.mChallengeStateCounter = 0;
+					mBoard.mChallenge.mChallengeStateCounter = 0;
 				}
-				if (this.mApp.IsFinalBossLevel())
+				if (mApp.IsFinalBossLevel())
 				{
-					this.mBoard.mChallenge.PlayBossEnter();
+					mBoard.mChallenge.PlayBossEnter();
 				}
-				if (!this.mApp.IsChallengeWithoutSeedBank())
+				if (!mApp.IsChallengeWithoutSeedBank())
 				{
-					this.mBoard.mSeedBank.Move(0, 0);
+					mBoard.mSeedBank.Move(0, 0);
 				}
-				this.mBoard.mEnableGraveStones = true;
-				this.ShowShovel();
-				if (this.mApp.IsFinalBossLevel())
+				mBoard.mEnableGraveStones = true;
+				ShowShovel();
+				if (mApp.IsFinalBossLevel())
 				{
-					this.mApp.mMusic.StartGameMusic();
+					mApp.mMusic.StartGameMusic();
 				}
-				if (this.mBoard.mFogBlownCountDown > 0)
+				if (mBoard.mFogBlownCountDown > 0)
 				{
-					this.mBoard.mFogBlownCountDown = 0;
-					this.mBoard.mFogOffset = 0f;
+					mBoard.mFogBlownCountDown = 0;
+					mBoard.mFogOffset = 0f;
 				}
-				if (this.mBoard.mTutorialState != TutorialState.TUTORIAL_ZEN_GARDEN_PICKUP_WATER)
+				if (mBoard.mTutorialState != TutorialState.TUTORIAL_ZEN_GARDEN_PICKUP_WATER)
 				{
-					this.mBoard.mMenuButton.mBtnNoDraw = false;
+					mBoard.mMenuButton.mBtnNoDraw = false;
 				}
-				this.mApp.mSoundSystem.StopFoley(FoleyType.FOLEY_DIGGER);
+				mApp.mSoundSystem.StopFoley(FoleyType.FOLEY_DIGGER);
 			}
 		}
 
 		public void Update(bool updateDave)
 		{
-			if (this.mPreUpdatingBoard)
+			if (mPreUpdatingBoard)
 			{
 				return;
 			}
-			if (this.IsShowingCrazyDave() && this.mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO && (!this.mBoard.mPaused || this.mApp.mGameMode != GameMode.GAMEMODE_UPSELL) && updateDave)
+			if (IsShowingCrazyDave() && mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO && (!mBoard.mPaused || mApp.mGameMode != GameMode.GAMEMODE_UPSELL) && updateDave)
 			{
-				this.mApp.UpdateCrazyDave();
+				mApp.UpdateCrazyDave();
 			}
-			if (this.mBoard.mPaused)
+			if (mBoard.mPaused)
 			{
 				return;
 			}
-			if (this.mApp.mGameScene == GameScenes.SCENE_ZOMBIES_WON)
+			if (mApp.mGameScene == GameScenes.SCENE_ZOMBIES_WON)
 			{
-				this.mCutsceneTime += 10;
-				this.UpdateZombiesWon();
+				mCutsceneTime += 10;
+				UpdateZombiesWon();
 				return;
 			}
-			if (this.mApp.mGameScene != GameScenes.SCENE_LEVEL_INTRO)
-			{
-				return;
-			}
-			if (this.mBoard.mDrawCount == 0)
+			if (mApp.mGameScene != GameScenes.SCENE_LEVEL_INTRO)
 			{
 				return;
 			}
-			if (!this.mPreloaded)
+			if (mBoard.mDrawCount == 0)
 			{
-				this.PreloadResources();
+				return;
 			}
-			if (!this.mPlacedZombies)
+			if (!mPreloaded)
 			{
-				this.PlaceStreetZombies();
+				PreloadResources();
 			}
-			if (this.IsNonScrollingCutscene() || !this.mBoard.ChooseSeedsOnCurrentLevel())
+			if (!mPlacedZombies)
 			{
-				this.PlaceLawnItems();
+				PlaceStreetZombies();
+			}
+			if (IsNonScrollingCutscene() || !mBoard.ChooseSeedsOnCurrentLevel())
+			{
+				PlaceLawnItems();
 			}
 			bool flag = false;
-			if (this.mSeedChoosing)
+			if (mSeedChoosing)
 			{
 				flag = true;
 			}
-			else if (this.mApp.mCrazyDaveMessageIndex != -1)
+			else if (mApp.mCrazyDaveMessageIndex != -1)
 			{
 				flag = true;
 			}
-			else if (this.IsInShovelTutorial())
+			else if (IsInShovelTutorial())
 			{
 				flag = true;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
+			if (mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
 			{
-				this.UpdateUpsell();
-				if (this.mApp.mCrazyDaveState != CrazyDaveState.CRAZY_DAVE_OFF && this.mApp.mCrazyDaveState != CrazyDaveState.CRAZY_DAVE_ENTERING)
+				UpdateUpsell();
+				if (mApp.mCrazyDaveState != CrazyDaveState.CRAZY_DAVE_OFF && mApp.mCrazyDaveState != CrazyDaveState.CRAZY_DAVE_ENTERING)
 				{
 					flag = true;
 				}
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_INTRO)
+			if (mApp.mGameMode == GameMode.GAMEMODE_INTRO)
 			{
-				this.mCutsceneTime += 10;
-				this.UpdateIntro();
+				mCutsceneTime += 10;
+				UpdateIntro();
 				return;
 			}
 			if (!flag)
 			{
-				this.mCutsceneTime += 10;
-				if (this.mCutsceneTime == CutScene.TimeSeedChoserSlideOnEnd + this.mCrazyDaveTime && this.mBoard.ChooseSeedsOnCurrentLevel())
+				mCutsceneTime += 10;
+				if (mCutsceneTime == CutScene.TimeSeedChoserSlideOnEnd + mCrazyDaveTime && mBoard.ChooseSeedsOnCurrentLevel())
 				{
-					this.StartSeedChooser();
+					StartSeedChooser();
 				}
 			}
-			int num = CutScene.TimeIntroEnd + this.mLawnMowerTime + this.mSodTime + this.mGraveStoneTime + this.mCrazyDaveTime + this.mFogTime + this.mBossTime + this.mReadySetPlantTime;
-			if (this.mCutsceneTime >= num)
+			int num = CutScene.TimeIntroEnd + mLawnMowerTime + mSodTime + mGraveStoneTime + mCrazyDaveTime + mFogTime + mBossTime + mReadySetPlantTime;
+			if (mCutsceneTime >= num)
 			{
-				this.mBoard.RemoveCutsceneZombies();
-				if (this.mBoard.mTutorialState != TutorialState.TUTORIAL_ZEN_GARDEN_PICKUP_WATER && this.mBoard.mTutorialState != TutorialState.TUTORIAL_ZEN_GARDEN_KEEP_WATERING && this.mBoard.mTutorialState != TutorialState.TUTORIAL_ZEN_GARDEN_FERTILIZE_PLANTS && this.mBoard.mTutorialState != TutorialState.TUTORIAL_ZEN_GARDEN_VISIT_STORE && this.mBoard.mTutorialState != TutorialState.TUTORIAL_ZEN_GARDEN_WATER_PLANT && this.mBoard.mTutorialState != TutorialState.TUTORIAL_ZEN_GARDEN_COMPLETED)
+				mBoard.RemoveCutsceneZombies();
+				if (mBoard.mTutorialState != TutorialState.TUTORIAL_ZEN_GARDEN_PICKUP_WATER && mBoard.mTutorialState != TutorialState.TUTORIAL_ZEN_GARDEN_KEEP_WATERING && mBoard.mTutorialState != TutorialState.TUTORIAL_ZEN_GARDEN_FERTILIZE_PLANTS && mBoard.mTutorialState != TutorialState.TUTORIAL_ZEN_GARDEN_VISIT_STORE && mBoard.mTutorialState != TutorialState.TUTORIAL_ZEN_GARDEN_WATER_PLANT && mBoard.mTutorialState != TutorialState.TUTORIAL_ZEN_GARDEN_COMPLETED)
 				{
-					this.mBoard.mMenuButton.mBtnNoDraw = false;
+					mBoard.mMenuButton.mBtnNoDraw = false;
 				}
-				this.ShowShovel();
-				this.mApp.StartPlaying();
+				ShowShovel();
+				mApp.StartPlaying();
 				return;
 			}
-			this.AnimateBoard();
+			AnimateBoard();
 		}
 
 		public void AnimateBoard()
@@ -453,237 +453,237 @@ namespace Lawn
 			int timeEarlyDaveEnterStart = CutScene.TimeEarlyDaveEnterStart;
 			int timeEarlyDaveEnterEnd = CutScene.TimeEarlyDaveEnterEnd;
 			int timeEarlyDaveLeaveEnd = CutScene.TimeEarlyDaveLeaveEnd;
-			int num = CutScene.TimePanRightStart + this.mCrazyDaveTime;
-			int num2 = CutScene.TimePanRightEnd + this.mCrazyDaveTime;
-			int num3 = CutScene.TimePanLeftStart + this.mCrazyDaveTime;
-			int num4 = CutScene.TimePanLeftEnd + this.mCrazyDaveTime;
-			if (this.mCrazyDaveTime > 0)
+			int num = CutScene.TimePanRightStart + mCrazyDaveTime;
+			int num2 = CutScene.TimePanRightEnd + mCrazyDaveTime;
+			int num3 = CutScene.TimePanLeftStart + mCrazyDaveTime;
+			int num4 = CutScene.TimePanLeftEnd + mCrazyDaveTime;
+			if (mCrazyDaveTime > 0)
 			{
-				if (this.mCutsceneTime == timeEarlyDaveEnterStart)
+				if (mCutsceneTime == timeEarlyDaveEnterStart)
 				{
-					this.mApp.CrazyDaveEnter();
-					if (this.mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
+					mApp.CrazyDaveEnter();
+					if (mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
 					{
-						Reanimation reanimation = this.mApp.ReanimationTryToGet(this.mApp.mCrazyDaveReanimID);
+						Reanimation reanimation = mApp.ReanimationTryToGet(mApp.mCrazyDaveReanimID);
 						reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_enterup, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 12f);
 						reanimation.SetPosition(100f * Constants.S, 70f * Constants.S);
 					}
 				}
-				if (this.mCutsceneTime == timeEarlyDaveEnterEnd && this.mCrazyDaveDialogStart != -1)
+				if (mCutsceneTime == timeEarlyDaveEnterEnd && mCrazyDaveDialogStart != -1)
 				{
-					this.mApp.CrazyDaveTalkIndex(this.mCrazyDaveDialogStart);
-					this.mCrazyDaveDialogStart = -1;
+					mApp.CrazyDaveTalkIndex(mCrazyDaveDialogStart);
+					mCrazyDaveDialogStart = -1;
 				}
-				if (this.mCutsceneTime == timeEarlyDaveLeaveEnd && this.IsNonScrollingCutscene())
+				if (mCutsceneTime == timeEarlyDaveLeaveEnd && IsNonScrollingCutscene())
 				{
-					this.mCutsceneTime = num4;
+					mCutsceneTime = num4;
 				}
 			}
 			int num5 = Constants.BOARD_OFFSET;
-			if (!this.IsScrolledLeftAtStart())
+			if (!IsScrolledLeftAtStart())
 			{
 				num5 = (int)(Constants.IS * (float)Constants.Board_Offset_AspectRatio_Correction);
 			}
-			if (this.mCutsceneTime <= num)
+			if (mCutsceneTime <= num)
 			{
-				this.mBoard.Move((int)((float)num5 * Constants.S), 0);
+				mBoard.Move((int)((float)num5 * Constants.S), 0);
 			}
-			if (this.mCutsceneTime > num && this.mCutsceneTime <= num2)
+			if (mCutsceneTime > num && mCutsceneTime <= num2)
 			{
 				int thePositionStart = -num5;
 				int thePositionEnd = -Constants.BOARD_OFFSET + Constants.BACKGROUND_IMAGE_WIDTH - Constants.WIDE_BOARD_WIDTH + Constants.Board_Cutscene_ExtraScroll;
-				int num6 = this.CalcPosition(num, num2, thePositionStart, thePositionEnd);
-				this.mBoard.Move(-(int)((float)num6 * Constants.S), 0);
+				int num6 = CalcPosition(num, num2, thePositionStart, thePositionEnd);
+				mBoard.Move(-(int)((float)num6 * Constants.S), 0);
 			}
-			if (this.mBoard.ChooseSeedsOnCurrentLevel())
+			if (mBoard.ChooseSeedsOnCurrentLevel())
 			{
-				int num7 = CutScene.TimeSeedChoserSlideOnStart + this.mCrazyDaveTime;
-				int num8 = CutScene.TimeSeedChoserSlideOnEnd + this.mCrazyDaveTime;
-				if (this.mCutsceneTime > num7 && this.mCutsceneTime <= num8)
+				int num7 = CutScene.TimeSeedChoserSlideOnStart + mCrazyDaveTime;
+				int num8 = CutScene.TimeSeedChoserSlideOnEnd + mCrazyDaveTime;
+				if (mCutsceneTime > num7 && mCutsceneTime <= num8)
 				{
 					int seed_CHOOSER_OFFSETSCREEN_OFFSET = Constants.SEED_CHOOSER_OFFSETSCREEN_OFFSET;
 					int thePositionEnd2 = 0;
-					int theNewY = this.CalcPosition(num7, num8, seed_CHOOSER_OFFSETSCREEN_OFFSET, thePositionEnd2);
-					this.mApp.mSeedChooserScreen.Move(0, theNewY);
-					int mY = this.CalcPosition(num7, num8, (int)Constants.InvertAndScale(-50f), Constants.UIMenuButtonPosition.Y);
-					this.mApp.mSeedChooserScreen.mMenuButton.mY = mY;
-					this.mApp.mSeedChooserScreen.mMenuButton.mBtnNoDraw = false;
+					int theNewY = CalcPosition(num7, num8, seed_CHOOSER_OFFSETSCREEN_OFFSET, thePositionEnd2);
+					mApp.mSeedChooserScreen.Move(0, theNewY);
+					int y = CalcPosition(num7, num8, (int)Constants.InvertAndScale(-50f), Constants.UIMenuButtonPosition.Y);
+					mApp.mSeedChooserScreen.mMenuButton.mY = y;
+					mApp.mSeedChooserScreen.mMenuButton.mBtnNoDraw = false;
 				}
-				int num9 = CutScene.TimeSeedChoserSlideOffStart + this.mCrazyDaveTime;
-				int num10 = CutScene.TimeSeedChoserSlideOffEnd + this.mCrazyDaveTime;
-				if (this.mCutsceneTime > num9 && this.mCutsceneTime <= num10)
+				int num9 = CutScene.TimeSeedChoserSlideOffStart + mCrazyDaveTime;
+				int num10 = CutScene.TimeSeedChoserSlideOffEnd + mCrazyDaveTime;
+				if (mCutsceneTime > num9 && mCutsceneTime <= num10)
 				{
 					int thePositionStart2 = 0;
 					int seed_CHOOSER_OFFSETSCREEN_OFFSET2 = Constants.SEED_CHOOSER_OFFSETSCREEN_OFFSET;
-					int theNewY2 = this.CalcPosition(num9, num10, thePositionStart2, seed_CHOOSER_OFFSETSCREEN_OFFSET2);
-					this.mApp.mSeedChooserScreen.Move(0, theNewY2);
-					this.mApp.mSeedChooserScreen.mMenuButton.mDisabled = true;
+					int theNewY2 = CalcPosition(num9, num10, thePositionStart2, seed_CHOOSER_OFFSETSCREEN_OFFSET2);
+					mApp.mSeedChooserScreen.Move(0, theNewY2);
+					mApp.mSeedChooserScreen.mMenuButton.mDisabled = true;
 				}
 			}
-			if (this.mCutsceneTime > num3)
+			if (mCutsceneTime > num3)
 			{
 				int thePositionStart3 = Constants.BACKGROUND_IMAGE_WIDTH - Constants.WIDE_BOARD_WIDTH - Constants.BOARD_OFFSET + Constants.Board_Cutscene_ExtraScroll + (int)(Constants.IS * (float)Constants.Board_Offset_AspectRatio_Correction);
 				int thePositionEnd3 = 0;
-				int num11 = this.CalcPosition(num3, num4, thePositionStart3, thePositionEnd3);
-				this.mBoard.Move(-(int)((float)num11 * Constants.S) + Constants.Board_Offset_AspectRatio_Correction, 0);
+				int num11 = CalcPosition(num3, num4, thePositionStart3, thePositionEnd3);
+				mBoard.Move(-(int)((float)num11 * Constants.S) + Constants.Board_Offset_AspectRatio_Correction, 0);
 			}
 			int num12 = 0;
-			if (!this.mBoard.ChooseSeedsOnCurrentLevel())
+			if (!mBoard.ChooseSeedsOnCurrentLevel())
 			{
-				num12 = CutScene.TimePanLeftEnd - CutScene.TimeSeedChoserSlideOnStart + this.mSodTime + this.mGraveStoneTime + this.mFogTime + this.mBossTime;
+				num12 = CutScene.TimePanLeftEnd - CutScene.TimeSeedChoserSlideOnStart + mSodTime + mGraveStoneTime + mFogTime + mBossTime;
 			}
-			int num13 = CutScene.TimeSeedBankOnStart + this.mCrazyDaveTime + num12;
-			int num14 = CutScene.TimeSeedBankOnEnd + this.mCrazyDaveTime + num12;
-			if (!this.mApp.IsChallengeWithoutSeedBank() && this.mCutsceneTime > num13 && this.mCutsceneTime <= num14)
+			int num13 = CutScene.TimeSeedBankOnStart + mCrazyDaveTime + num12;
+			int num14 = CutScene.TimeSeedBankOnEnd + mCrazyDaveTime + num12;
+			if (!mApp.IsChallengeWithoutSeedBank() && mCutsceneTime > num13 && mCutsceneTime <= num14)
 			{
-				int x = this.CalcPosition(num13, num14, -this.mBoard.mSeedBank.mWidth, 0);
-				this.mBoard.mSeedBank.Move(x, 0);
+				int x = CalcPosition(num13, num14, -mBoard.mSeedBank.mWidth, 0);
+				mBoard.mSeedBank.Move(x, 0);
 			}
-			int num15 = CutScene.TimeSeedBankRightStart + this.mCrazyDaveTime;
-			int theTimeEnd = CutScene.TimeSeedBankRightEnd + this.mCrazyDaveTime;
-			if (this.mCutsceneTime > num15)
+			int num15 = CutScene.TimeSeedBankRightStart + mCrazyDaveTime;
+			int theTimeEnd = CutScene.TimeSeedBankRightEnd + mCrazyDaveTime;
+			if (mCutsceneTime > num15)
 			{
-				this.mBoard.mSeedBank.mCutSceneDarken = TodCommon.TodAnimateCurve(num15, theTimeEnd, this.mCutsceneTime, 255, 128, TodCurves.CURVE_EASE_OUT);
+				mBoard.mSeedBank.mCutSceneDarken = TodCommon.TodAnimateCurve(num15, theTimeEnd, mCutsceneTime, 255, 128, TodCurves.CURVE_EASE_OUT);
 			}
-			if (this.mSodTime > 0)
+			if (mSodTime > 0)
 			{
-				int num16 = CutScene.TimeRollSodStart + this.mCrazyDaveTime;
-				int num17 = CutScene.TimeRollSodEnd + this.mCrazyDaveTime;
-				int mSodPosition = TodCommon.TodAnimateCurve(num16, num17, this.mCutsceneTime, 0, 1000, TodCurves.CURVE_LINEAR);
-				this.mBoard.mSodPosition = mSodPosition;
-				if (this.mCutsceneTime == num16)
+				int num16 = CutScene.TimeRollSodStart + mCrazyDaveTime;
+				int num17 = CutScene.TimeRollSodEnd + mCrazyDaveTime;
+				int aSodPosition = TodCommon.TodAnimateCurve(num16, num17, mCutsceneTime, 0, 1000, TodCurves.CURVE_LINEAR);
+				mBoard.mSodPosition = aSodPosition;
+				if (mCutsceneTime == num16)
 				{
-					this.mApp.PlayFoley(FoleyType.FOLEY_DIGGER);
-					if (this.mBoard.mLevel == 1)
+					mApp.PlayFoley(FoleyType.FOLEY_DIGGER);
+					if (mBoard.mLevel == 1)
 					{
-						this.mApp.AddReanimation((float)Constants.BOARD_EDGE, 0f, 400000, ReanimationType.REANIM_SODROLL, false);
-						this.mApp.AddTodParticle((float)(Constants.CutScene_ExtraRoom_1_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM), (float)Constants.CutScene_ExtraRoom_1_Particle_Pos.Y, 400001, ParticleEffect.PARTICLE_SOD_ROLL);
+						mApp.AddReanimation((float)Constants.BOARD_EDGE, 0f, 400000, ReanimationType.REANIM_SODROLL, false);
+						mApp.AddTodParticle((float)(Constants.CutScene_ExtraRoom_1_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM), (float)Constants.CutScene_ExtraRoom_1_Particle_Pos.Y, 400001, ParticleEffect.PARTICLE_SOD_ROLL);
 					}
-					else if (this.mBoard.mLevel == 2)
+					else if (mBoard.mLevel == 2)
 					{
-						this.mApp.AddReanimation((float)Constants.BOARD_EDGE - 10f, (float)Constants.CutScene_SodRoll_1_Pos * Constants.S, 400000, ReanimationType.REANIM_SODROLL, false);
-						this.mApp.AddReanimation((float)Constants.BOARD_EDGE - 10f, (float)Constants.CutScene_SodRoll_2_Pos * Constants.S, 400000, ReanimationType.REANIM_SODROLL, false);
-						this.mApp.AddTodParticle((float)(Constants.CutScene_ExtraRoom_2_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM), (float)Constants.CutScene_ExtraRoom_2_Particle_Pos.Y, 400001, ParticleEffect.PARTICLE_SOD_ROLL);
-						this.mApp.AddTodParticle((float)(Constants.CutScene_ExtraRoom_3_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM), (float)Constants.CutScene_ExtraRoom_3_Particle_Pos.Y, 400001, ParticleEffect.PARTICLE_SOD_ROLL);
+						mApp.AddReanimation((float)Constants.BOARD_EDGE - 10f, (float)Constants.CutScene_SodRoll_1_Pos * Constants.S, 400000, ReanimationType.REANIM_SODROLL, false);
+						mApp.AddReanimation((float)Constants.BOARD_EDGE - 10f, (float)Constants.CutScene_SodRoll_2_Pos * Constants.S, 400000, ReanimationType.REANIM_SODROLL, false);
+						mApp.AddTodParticle((float)(Constants.CutScene_ExtraRoom_2_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM), (float)Constants.CutScene_ExtraRoom_2_Particle_Pos.Y, 400001, ParticleEffect.PARTICLE_SOD_ROLL);
+						mApp.AddTodParticle((float)(Constants.CutScene_ExtraRoom_3_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM), (float)Constants.CutScene_ExtraRoom_3_Particle_Pos.Y, 400001, ParticleEffect.PARTICLE_SOD_ROLL);
 					}
-					else if (this.mBoard.mLevel == 4)
+					else if (mBoard.mLevel == 4)
 					{
-						this.mApp.AddReanimation((float)(Constants.CutScene_SodRoll_3_Pos.X + Constants.BOARD_EDGE) + 10f, (float)Constants.CutScene_SodRoll_3_Pos.Y * Constants.S, 400000, ReanimationType.REANIM_SODROLL, false);
-						this.mApp.AddReanimation((float)(Constants.CutScene_SodRoll_4_Pos.X + Constants.BOARD_EDGE) + 10f, (float)Constants.CutScene_SodRoll_4_Pos.Y * Constants.S, 400000, ReanimationType.REANIM_SODROLL, false);
-						this.mApp.AddTodParticle((float)(Constants.CutScene_ExtraRoom_4_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM), (float)Constants.CutScene_ExtraRoom_4_Particle_Pos.Y, 400001, ParticleEffect.PARTICLE_SOD_ROLL);
-						this.mApp.AddTodParticle((float)(Constants.CutScene_ExtraRoom_5_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM), (float)Constants.CutScene_ExtraRoom_5_Particle_Pos.Y, 400001, ParticleEffect.PARTICLE_SOD_ROLL);
+						mApp.AddReanimation((float)(Constants.CutScene_SodRoll_3_Pos.X + Constants.BOARD_EDGE) + 10f, (float)Constants.CutScene_SodRoll_3_Pos.Y * Constants.S, 400000, ReanimationType.REANIM_SODROLL, false);
+						mApp.AddReanimation((float)(Constants.CutScene_SodRoll_4_Pos.X + Constants.BOARD_EDGE) + 10f, (float)Constants.CutScene_SodRoll_4_Pos.Y * Constants.S, 400000, ReanimationType.REANIM_SODROLL, false);
+						mApp.AddTodParticle((float)(Constants.CutScene_ExtraRoom_4_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM), (float)Constants.CutScene_ExtraRoom_4_Particle_Pos.Y, 400001, ParticleEffect.PARTICLE_SOD_ROLL);
+						mApp.AddTodParticle((float)(Constants.CutScene_ExtraRoom_5_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM), (float)Constants.CutScene_ExtraRoom_5_Particle_Pos.Y, 400001, ParticleEffect.PARTICLE_SOD_ROLL);
 					}
 				}
-				if (this.mCutsceneTime == num17)
+				if (mCutsceneTime == num17)
 				{
-					this.mApp.mSoundSystem.StopFoley(FoleyType.FOLEY_DIGGER);
+					mApp.mSoundSystem.StopFoley(FoleyType.FOLEY_DIGGER);
 				}
 			}
-			if (this.mGraveStoneTime > 0)
+			if (mGraveStoneTime > 0)
 			{
-				int num18 = CutScene.TimeGraveStoneStart + this.mSodTime + this.mCrazyDaveTime;
-				if (this.mCutsceneTime == num18)
+				int num18 = CutScene.TimeGraveStoneStart + mSodTime + mCrazyDaveTime;
+				if (mCutsceneTime == num18)
 				{
-					this.mBoard.mEnableGraveStones = true;
-					this.AddGraveStoneParticles();
+					mBoard.mEnableGraveStones = true;
+					AddGraveStoneParticles();
 				}
 			}
-			if (this.mCutsceneTime == num3)
+			if (mCutsceneTime == num3)
 			{
-				this.PlaceLawnItems();
+				PlaceLawnItems();
 			}
-			if (!this.IsSurvivalRepick())
+			if (!IsSurvivalRepick())
 			{
 				for (int i = 0; i < Constants.MAX_GRIDSIZEY; i++)
 				{
-					int num19 = CutScene.TimeLawnMowerStart[i] + this.mSodTime + this.mGraveStoneTime + this.mCrazyDaveTime;
+					int num19 = CutScene.TimeLawnMowerStart[i] + mSodTime + mGraveStoneTime + mCrazyDaveTime;
 					int theTimeEnd2 = num19 + CutScene.TimeLawnMowerDuration;
-					if (this.mCutsceneTime > num19)
+					if (mCutsceneTime > num19)
 					{
-						LawnMower lawnMower = this.mBoard.FindLawnMowerInRow(i);
+						LawnMower lawnMower = mBoard.FindLawnMowerInRow(i);
 						if (lawnMower != null)
 						{
 							lawnMower.mVisible = true;
-							int num20 = this.CalcPosition(num19, theTimeEnd2, -80, -21) + Constants.BOARD_EXTRA_ROOM;
+							int num20 = CalcPosition(num19, theTimeEnd2, -80, -21) + Constants.BOARD_EXTRA_ROOM;
 							lawnMower.mPosX = (float)num20;
 						}
 					}
 				}
 			}
-			int num21 = CutScene.TimeFogRollIn + this.mSodTime + this.mGraveStoneTime + this.mCrazyDaveTime;
-			if (this.mBoard.mFogBlownCountDown > 0 && this.mCutsceneTime > num21)
+			int num21 = CutScene.TimeFogRollIn + mSodTime + mGraveStoneTime + mCrazyDaveTime;
+			if (mBoard.mFogBlownCountDown > 0 && mCutsceneTime > num21)
 			{
-				if (this.mBoard.mFogBlownCountDown > 200)
+				if (mBoard.mFogBlownCountDown > 200)
 				{
-					this.mBoard.mFogBlownCountDown = 200;
+					mBoard.mFogBlownCountDown = 200;
 				}
-				this.mBoard.mFogBlownCountDown--;
+				mBoard.mFogBlownCountDown--;
 			}
-			if (this.mApp.IsStormyNightLevel())
+			if (mApp.IsStormyNightLevel())
 			{
-				if (this.mCutsceneTime == num2 - 1000)
+				if (mCutsceneTime == num2 - 1000)
 				{
-					this.mBoard.mChallenge.mChallengeState = ChallengeState.STATECHALLENGE_STORM_FLASH_2;
-					this.mBoard.mChallenge.mChallengeStateCounter = 310;
+					mBoard.mChallenge.mChallengeState = ChallengeState.STATECHALLENGE_STORM_FLASH_2;
+					mBoard.mChallenge.mChallengeStateCounter = 310;
 				}
-				else if (this.mCutsceneTime == num4)
+				else if (mCutsceneTime == num4)
 				{
-					this.mBoard.mChallenge.mChallengeState = ChallengeState.STATECHALLENGE_STORM_FLASH_2;
-					this.mBoard.mChallenge.mChallengeStateCounter = 310;
+					mBoard.mChallenge.mChallengeState = ChallengeState.STATECHALLENGE_STORM_FLASH_2;
+					mBoard.mChallenge.mChallengeStateCounter = 310;
 				}
 			}
-			int num22 = CutScene.TimeReadySetPlantStart + this.mLawnMowerTime + this.mCrazyDaveTime;
-			if (this.mBossTime > 0 && this.mCutsceneTime == num22)
+			int num22 = CutScene.TimeReadySetPlantStart + mLawnMowerTime + mCrazyDaveTime;
+			if (mBossTime > 0 && mCutsceneTime == num22)
 			{
-				this.mBoard.mChallenge.PlayBossEnter();
+				mBoard.mChallenge.PlayBossEnter();
 			}
-			if (this.mApp.IsFinalBossLevel() && this.mCutsceneTime == num13)
+			if (mApp.IsFinalBossLevel() && mCutsceneTime == num13)
 			{
-				this.mApp.mMusic.StartGameMusic();
+				mApp.mMusic.StartGameMusic();
 			}
-			int num23 = CutScene.TimeReadySetPlantStart + this.mLawnMowerTime + this.mSodTime + this.mGraveStoneTime + this.mCrazyDaveTime + this.mFogTime + this.mBossTime;
-			if (this.mReadySetPlantTime > 0 && this.mCutsceneTime == num23)
+			int num23 = CutScene.TimeReadySetPlantStart + mLawnMowerTime + mSodTime + mGraveStoneTime + mCrazyDaveTime + mFogTime + mBossTime;
+			if (mReadySetPlantTime > 0 && mCutsceneTime == num23)
 			{
 				int x2 = Constants.CutScene_ReadySetPlant_Pos.X;
 				int y = Constants.CutScene_ReadySetPlant_Pos.Y;
-				this.mApp.AddReanimation((float)x2 * Constants.IS, (float)y * Constants.IS, 900000, ReanimationType.REANIM_READYSETPLANT);
-				this.mApp.PlaySample(Resources.SOUND_READYSETPLANT);
-				this.mApp.IsFinalBossLevel();
+				mApp.AddReanimation((float)x2 * Constants.IS, (float)y * Constants.IS, 900000, ReanimationType.REANIM_READYSETPLANT);
+				mApp.PlaySample(Resources.SOUND_READYSETPLANT);
+				mApp.IsFinalBossLevel();
 			}
-			if (this.mReadySetPlantTime == 0 && this.mCutsceneTime == num23 - 2000)
+			if (mReadySetPlantTime == 0 && mCutsceneTime == num23 - 2000)
 			{
-				this.mApp.IsFinalBossLevel();
+				mApp.IsFinalBossLevel();
 			}
 		}
 
 		public void StartSeedChooser()
 		{
-			this.mApp.mSeedChooserScreen.mMouseVisible = true;
-			this.mSeedChoosing = true;
-			this.mApp.mWidgetManager.SetFocus(this.mApp.mSeedChooserScreen);
+			mApp.mSeedChooserScreen.mMouseVisible = true;
+			mSeedChoosing = true;
+			mApp.mWidgetManager.SetFocus(mApp.mSeedChooserScreen);
 		}
 
 		public void EndSeedChooser()
 		{
-			this.mApp.mSeedChooserScreen.mMouseVisible = false;
-			this.mSeedChoosing = false;
-			this.mCutsceneTime = CutScene.TimeSeedChoserSlideOnEnd + this.mCrazyDaveTime + 10;
-			this.mApp.mWidgetManager.SetFocus(this.mBoard);
+			mApp.mSeedChooserScreen.mMouseVisible = false;
+			mSeedChoosing = false;
+			mCutsceneTime = CutScene.TimeSeedChoserSlideOnEnd + mCrazyDaveTime + 10;
+			mApp.mWidgetManager.SetFocus(mBoard);
 		}
 
 		public int CalcPosition(int theTimeStart, int theTimeEnd, int thePositionStart, int thePositionEnd)
 		{
-			return TodCommon.TodAnimateCurve(theTimeStart, theTimeEnd, this.mCutsceneTime, thePositionStart, thePositionEnd, TodCurves.CURVE_EASE_IN_OUT);
+			return TodCommon.TodAnimateCurve(theTimeStart, theTimeEnd, mCutsceneTime, thePositionStart, thePositionEnd, TodCurves.CURVE_EASE_IN_OUT);
 		}
 
 		public void PlaceStreetZombies()
 		{
-			if (this.mPlacedZombies)
+			if (mPlacedZombies)
 			{
 				return;
 			}
-			this.mPlacedZombies = true;
-			if (this.mApp.IsFinalBossLevel())
+			mPlacedZombies = true;
+			if (mApp.IsFinalBossLevel())
 			{
 				return;
 			}
@@ -694,18 +694,18 @@ namespace Lawn
 			{
 				array[i] = 0;
 			}
-			Debug.ASSERT(this.mBoard.mNumWaves <= 100);
-			for (int j = 0; j < this.mBoard.mNumWaves; j++)
+			Debug.ASSERT(mBoard.mNumWaves <= 100);
+			for (int j = 0; j < mBoard.mNumWaves; j++)
 			{
 				for (int k = 0; k < 50; k++)
 				{
-					ZombieType zombieType = this.mBoard.mZombiesInWave[j, k];
+					ZombieType zombieType = mBoard.mZombiesInWave[j, k];
 					if (zombieType == ZombieType.ZOMBIE_INVALID)
 					{
 						break;
 					}
 					num2 += Zombie.GetZombieDefinition(zombieType).mZombieValue;
-					if (zombieType != ZombieType.ZOMBIE_FLAG && (zombieType != ZombieType.ZOMBIE_YETI || (!this.mApp.IsQuickPlayMode() && this.mApp.IsStormyNightLevel())) && (zombieType != ZombieType.ZOMBIE_BOBSLED || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BOBSLED_BONANZA))
+					if (zombieType != ZombieType.ZOMBIE_FLAG && (zombieType != ZombieType.ZOMBIE_YETI || (!mApp.IsQuickPlayMode() && mApp.IsStormyNightLevel())) && (zombieType != ZombieType.ZOMBIE_BOBSLED || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BOBSLED_BONANZA))
 					{
 						Debug.ASSERT(zombieType >= ZombieType.ZOMBIE_NORMAL && zombieType < ZombieType.NUM_ZOMBIE_TYPES);
 						array[(int)zombieType]++;
@@ -717,17 +717,17 @@ namespace Lawn
 					}
 				}
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
 			{
 				for (int l = 0; l < 33; l++)
 				{
-					if (l != 19 && this.mBoard.mZombieAllowed[l])
+					if (l != 19 && mBoard.mZombieAllowed[l])
 					{
 						array[l] = Math.Max(array[l], 1);
 					}
 				}
 			}
-			if (this.mBoard.StageHasPool())
+			if (mBoard.StageHasPool())
 			{
 				array[10] = 1;
 			}
@@ -740,35 +740,35 @@ namespace Lawn
 				}
 			}
 			int num3 = 10;
-			if (this.mApp.IsLittleTroubleLevel())
+			if (mApp.IsLittleTroubleLevel())
 			{
 				num3 = 15;
 			}
-			else if (this.mApp.IsStormyNightLevel() && (this.mApp.IsAdventureMode() || this.mApp.IsQuickPlayMode()))
+			else if (mApp.IsStormyNightLevel() && (mApp.IsAdventureMode() || mApp.IsQuickPlayMode()))
 			{
 				num3 = 18;
 			}
-			else if (this.mApp.IsMiniBossLevel())
+			else if (mApp.IsMiniBossLevel())
 			{
 				num3 = 18;
 			}
 			Debug.ASSERT(num3 <= 18);
 			for (int num4 = 0; num4 < 33; num4++)
 			{
-				if (array[num4] != 0 && (this.Is2x2Zombie((ZombieType)num4) || num4 == 12))
+				if (array[num4] != 0 && (Is2x2Zombie((ZombieType)num4) || num4 == 12))
 				{
-					this.FindAndPlaceZombie((ZombieType)num4, array2);
+					FindAndPlaceZombie((ZombieType)num4, array2);
 				}
 			}
 			for (int num5 = 0; num5 < 33; num5++)
 			{
-				if (array[num5] != 0 && !this.Is2x2Zombie((ZombieType)num5) && num5 != 12)
+				if (array[num5] != 0 && !Is2x2Zombie((ZombieType)num5) && num5 != 12)
 				{
 					int num6 = array[num5] * num3 / num;
 					num6 = TodCommon.ClampInt(num6, 1, array[num5]);
 					for (int num7 = 0; num7 < num6; num7++)
 					{
-						this.FindAndPlaceZombie((ZombieType)num5, array2);
+						FindAndPlaceZombie((ZombieType)num5, array2);
 					}
 				}
 			}
@@ -778,7 +778,7 @@ namespace Lawn
 		{
 			int num = -1;
 			GridItem gridItem = null;
-			while (this.mBoard.IterateGridItems(ref gridItem, ref num))
+			while (mBoard.IterateGridItems(ref gridItem, ref num))
 			{
 				if (gridItem.mGridItemType == GridItemType.GRIDITEM_GRAVESTONE)
 				{
@@ -790,12 +790,12 @@ namespace Lawn
 		public void PlaceAZombie(ZombieType theZombieType, int theGridX, int theGridY)
 		{
 			bool flag = false;
-			if (theZombieType == ZombieType.ZOMBIE_DUCKY_TUBE && this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS_2)
+			if (theZombieType == ZombieType.ZOMBIE_DUCKY_TUBE && mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS_2)
 			{
 				theZombieType = ZombieType.ZOMBIE_PEA_HEAD;
 				flag = true;
 			}
-			Zombie zombie = this.mBoard.AddZombieInRow(theZombieType, 0, GameConstants.ZOMBIE_WAVE_CUTSCENE);
+			Zombie zombie = mBoard.AddZombieInRow(theZombieType, 0, GameConstants.ZOMBIE_WAVE_CUTSCENE);
 			Debug.ASSERT(zombie != null);
 			zombie.mPosX = (float)(830 + 56 * theGridX + 110);
 			zombie.mPosY = (float)(70 + 90 * theGridY);
@@ -805,10 +805,10 @@ namespace Lawn
 			}
 			if (flag)
 			{
-				Reanimation reanimation = this.mApp.ReanimationGet(zombie.mBodyReanimID);
+				Reanimation reanimation = mApp.ReanimationGet(zombie.mBodyReanimID);
 				reanimation.AssignRenderGroupToPrefix("Zombie_duckytube", 0);
 			}
-			if (this.mBoard.StageHasRoof())
+			if (mBoard.StageHasRoof())
 			{
 				zombie.mPosY -= (float)(7 * (5 - theGridX) - 2 * (5 - theGridY) + 5);
 				zombie.mPosX -= 5f;
@@ -818,16 +818,16 @@ namespace Lawn
 				zombie.mPosY -= 10f;
 				zombie.mPosX -= 30f;
 			}
-			else if (this.mApp.IsLittleTroubleLevel())
+			else if (mApp.IsLittleTroubleLevel())
 			{
 				zombie.mPosY += (float)(RandomNumbers.NextNumber(50) - 25);
 				zombie.mPosX += (float)(RandomNumbers.NextNumber(50) - 25);
 			}
-			else if (this.Is2x2Zombie(theZombieType))
+			else if (Is2x2Zombie(theZombieType))
 			{
 				zombie.mPosX += (float)(-20 + RandomNumbers.NextNumber(15));
 			}
-			else if (theGridY == 4 && (this.mApp.CanShowAlmanac() || this.mApp.CanShowStore()))
+			else if (theGridY == 4 && (mApp.CanShowAlmanac() || mApp.CanShowStore()))
 			{
 				zombie.mPosX += (float)RandomNumbers.NextNumber(15);
 			}
@@ -860,7 +860,7 @@ namespace Lawn
 			{
 				return false;
 			}
-			if (this.Is2x2Zombie(theZombieType))
+			if (Is2x2Zombie(theZombieType))
 			{
 				if (theGridX == 0 || theGridY == 0)
 				{
@@ -879,15 +879,15 @@ namespace Lawn
 			{
 				return false;
 			}
-			if (theGridX == 0 && this.mBoard.StageHasPool())
+			if (theGridX == 0 && mBoard.StageHasPool())
 			{
 				return false;
 			}
-			if (this.mBoard.StageHasRoof() && theGridX == 0 && theGridY == 0)
+			if (mBoard.StageHasRoof() && theGridX == 0 && theGridY == 0)
 			{
 				return false;
 			}
-			if (theGridX == 4 && this.mBoard.StageHasFog() && theZombieType == ZombieType.ZOMBIE_BALLOON)
+			if (theGridX == 4 && mBoard.StageHasFog() && theZombieType == ZombieType.ZOMBIE_BALLOON)
 			{
 				return false;
 			}
@@ -897,7 +897,7 @@ namespace Lawn
 				{
 					return false;
 				}
-				if (theGridX == 1 && this.mBoard.StageHasPool())
+				if (theGridX == 1 && mBoard.StageHasPool())
 				{
 					return false;
 				}
@@ -911,34 +911,34 @@ namespace Lawn
 
 		public bool IsSurvivalRepick()
 		{
-			return this.mApp.IsSurvivalMode() && this.mBoard.mChallenge.mSurvivalStage > 0 && this.mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO;
+			return mApp.IsSurvivalMode() && mBoard.mChallenge.mSurvivalStage > 0 && mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO;
 		}
 
 		public bool IsAfterSeedChooser()
 		{
-			return this.mCutsceneTime > CutScene.TimeSeedChoserSlideOffStart + this.mCrazyDaveTime;
+			return mCutsceneTime > CutScene.TimeSeedChoserSlideOffStart + mCrazyDaveTime;
 		}
 
 		public void AddFlowerPots()
 		{
 			int num = 0;
-			if (this.mBoard.mLevel == 41)
+			if (mBoard.mLevel == 41)
 			{
 				num = 5;
 			}
-			else if (this.mBoard.mLevel == 42)
+			else if (mBoard.mLevel == 42)
 			{
 				num = 4;
 			}
-			else if (this.mBoard.mLevel >= 43 && this.mBoard.mLevel <= 50)
+			else if (mBoard.mLevel >= 43 && mBoard.mLevel <= 50)
 			{
 				num = 3;
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_COLUMN)
+			else if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_COLUMN)
 			{
 				num = 8;
 			}
-			else if (this.mBoard.StageHasRoof())
+			else if (mBoard.StageHasRoof())
 			{
 				num = 3;
 			}
@@ -946,12 +946,12 @@ namespace Lawn
 			{
 				for (int j = 0; j < Constants.MAX_GRIDSIZEY; j++)
 				{
-					if (this.mBoard.CanPlantAt(i, j, SeedType.SEED_FLOWERPOT) == PlantingReason.PLANTING_OK)
+					if (mBoard.CanPlantAt(i, j, SeedType.SEED_FLOWERPOT) == PlantingReason.PLANTING_OK)
 					{
 						Plant newPlant = Plant.GetNewPlant();
 						newPlant.mIsOnBoard = true;
 						newPlant.PlantInitialize(i, j, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-						this.mBoard.mPlants.Add(newPlant);
+						mBoard.mPlants.Add(newPlant);
 					}
 				}
 			}
@@ -959,67 +959,67 @@ namespace Lawn
 
 		public void UpdateZombiesWon()
 		{
-			if (this.mCutsceneTime > CutScene.LostTimePanRightStart && this.mCutsceneTime <= CutScene.LostTimePanRightEnd)
+			if (mCutsceneTime > CutScene.LostTimePanRightStart && mCutsceneTime <= CutScene.LostTimePanRightEnd)
 			{
-				int num = this.CalcPosition(CutScene.TimePanRightStart, CutScene.TimePanRightEnd, (int)((float)Constants.Board_Offset_AspectRatio_Correction * Constants.IS), Constants.BOARD_OFFSET);
-				this.mBoard.Move((int)((float)num * Constants.S), 0);
+				int num = CalcPosition(CutScene.TimePanRightStart, CutScene.TimePanRightEnd, (int)((float)Constants.Board_Offset_AspectRatio_Correction * Constants.IS), Constants.BOARD_OFFSET);
+				mBoard.Move((int)((float)num * Constants.S), 0);
 			}
-			if (this.mCutsceneTime == CutScene.LostTimeBrainGraphicStart - 400 || this.mCutsceneTime == CutScene.LostTimeBrainGraphicStart - 900)
+			if (mCutsceneTime == CutScene.LostTimeBrainGraphicStart - 400 || mCutsceneTime == CutScene.LostTimeBrainGraphicStart - 900)
 			{
-				this.mApp.PlayFoley(FoleyType.FOLEY_CHOMP);
+				mApp.PlayFoley(FoleyType.FOLEY_CHOMP);
 			}
-			if (this.mCutsceneTime == CutScene.LostTimeBrainGraphicStart)
+			if (mCutsceneTime == CutScene.LostTimeBrainGraphicStart)
 			{
 				ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_ZOMBIES_WON, true);
 				int num2 = Constants.BOARD_EXTRA_ROOM / 2;
-				Reanimation reanimation = this.mApp.AddReanimation((float)(-(float)Constants.BOARD_OFFSET + num2 + Constants.Board_Offset_AspectRatio_Correction), 0f, 900000, ReanimationType.REANIM_ZOMBIES_WON);
+				Reanimation reanimation = mApp.AddReanimation((float)(-(float)Constants.BOARD_OFFSET + num2 + Constants.Board_Offset_AspectRatio_Correction), 0f, 900000, ReanimationType.REANIM_ZOMBIES_WON);
 				reanimation.mAnimRate = 12f;
 				reanimation.mLoopType = ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD;
 				ReanimatorTrackInstance trackInstanceByName = reanimation.GetTrackInstanceByName(Reanimation.ReanimTrackId_fullscreen);
 				trackInstanceByName.mTrackColor = SexyColor.Black;
-				this.mZombiesWonReanimID = this.mApp.ReanimationGetID(reanimation);
+				mZombiesWonReanimID = mApp.ReanimationGetID(reanimation);
 				reanimation.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_zombieswon);
-				this.mApp.PlayFoley(FoleyType.FOLEY_SCREAM);
+				mApp.PlayFoley(FoleyType.FOLEY_SCREAM);
 			}
-			if (this.mCutsceneTime == CutScene.LostTimeBrainGraphicShake)
+			if (mCutsceneTime == CutScene.LostTimeBrainGraphicShake)
 			{
-				Reanimation reanimation2 = this.mApp.ReanimationGet(this.mZombiesWonReanimID);
+				Reanimation reanimation2 = mApp.ReanimationGet(mZombiesWonReanimID);
 				reanimation2.SetShakeOverride(GlobalMembersReanimIds.ReanimTrackId_zombieswon, 1f);
 			}
-			if (this.mCutsceneTime == CutScene.LostTimeBrainGraphicCancelShake)
+			if (mCutsceneTime == CutScene.LostTimeBrainGraphicCancelShake)
 			{
-				Reanimation reanimation3 = this.mApp.ReanimationGet(this.mZombiesWonReanimID);
+				Reanimation reanimation3 = mApp.ReanimationGet(mZombiesWonReanimID);
 				reanimation3.SetShakeOverride(GlobalMembersReanimIds.ReanimTrackId_zombieswon, 0f);
 			}
-			if (this.mCutsceneTime == CutScene.LostTimeBrainGraphicEnd)
+			if (mCutsceneTime == CutScene.LostTimeBrainGraphicEnd)
 			{
-				Reanimation reanimation4 = this.mApp.ReanimationGet(this.mZombiesWonReanimID);
+				Reanimation reanimation4 = mApp.ReanimationGet(mZombiesWonReanimID);
 				reanimation4.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_screen);
 			}
-			if (this.mCutsceneTime == CutScene.LostTimeEnd)
+			if (mCutsceneTime == CutScene.LostTimeEnd)
 			{
-				if (this.mApp.IsSurvivalMode())
+				if (mApp.IsSurvivalMode())
 				{
-					int survivalFlagsCompleted = this.mBoard.GetSurvivalFlagsCompleted();
-					string theStringToSubstitute = this.mApp.Pluralize(survivalFlagsCompleted, "[ONE_FLAG]", "[COUNT_FLAGS]");
+					int survivalFlagsCompleted = mBoard.GetSurvivalFlagsCompleted();
+					string theStringToSubstitute = mApp.Pluralize(survivalFlagsCompleted, "[ONE_FLAG]", "[COUNT_FLAGS]");
 					string theMessage = TodCommon.TodReplaceString("[SURVIVAL_DEATH_MESSAGE]", "{FLAGS}", theStringToSubstitute);
 					GameOverDialog theDialog = new GameOverDialog(theMessage, true);
-					this.mApp.AddDialog(17, theDialog);
+					mApp.AddDialog(17, theDialog);
 					return;
 				}
 				GameOverDialog theDialog2 = new GameOverDialog("", false);
-				this.mApp.AddDialog(17, theDialog2);
+				mApp.AddDialog(17, theDialog2);
 			}
 		}
 
 		public void StartZombiesWon()
 		{
-			this.mCutsceneTime = 0;
-			this.mBoard.mMenuButton.mBtnNoDraw = true;
-			this.mBoard.mShowShovel = false;
-			this.mApp.mMusic.StopAllMusic();
-			this.mBoard.StopAllZombieSounds();
-			this.mApp.PlaySample(Resources.SOUND_LOSEMUSIC);
+			mCutsceneTime = 0;
+			mBoard.mMenuButton.mBtnNoDraw = true;
+			mBoard.mShowShovel = false;
+			mApp.mMusic.StopAllMusic();
+			mBoard.StopAllZombieSounds();
+			mApp.PlaySample(Resources.SOUND_LOSEMUSIC);
 		}
 
 		public bool ShowZombieWalking()
@@ -1029,129 +1029,129 @@ namespace Lawn
 
 		public bool IsCutSceneOver()
 		{
-			Debug.ASSERT(this.mApp.mGameScene == GameScenes.SCENE_ZOMBIES_WON);
-			return this.mCutsceneTime >= CutScene.LostTimeEnd;
+			Debug.ASSERT(mApp.mGameScene == GameScenes.SCENE_ZOMBIES_WON);
+			return mCutsceneTime >= CutScene.LostTimeEnd;
 		}
 
 		public void ZombieWonClick()
 		{
-			if (this.IsCutSceneOver() || this.mApp.mTodCheatKeys)
+			if (IsCutSceneOver() || mApp.mTodCheatKeys)
 			{
-				this.mApp.EndLevel();
+				mApp.EndLevel();
 			}
 		}
 
 		public void MouseDown(int x, int y)
 		{
-			if (this.mApp.mTodCheatKeys && this.mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
+			if (mApp.mTodCheatKeys && mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
 			{
-				if (this.mCrazyDaveCountDown > 1)
+				if (mCrazyDaveCountDown > 1)
 				{
-					this.mCrazyDaveCountDown = 1;
+					mCrazyDaveCountDown = 1;
 					return;
 				}
 			}
 			else
 			{
-				if (this.IsShowingCrazyDave())
+				if (IsShowingCrazyDave())
 				{
-					this.AdvanceCrazyDaveDialog(false);
+					AdvanceCrazyDaveDialog(false);
 					return;
 				}
-				if (this.mApp.mTodCheatKeys)
+				if (mApp.mTodCheatKeys)
 				{
-					this.CancelIntro();
+					CancelIntro();
 				}
 			}
 		}
 
 		public void AdvanceCrazyDaveDialog(bool theJustSkipping)
 		{
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
+			if (mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
 			{
 				return;
 			}
-			if (this.mApp.mCrazyDaveMessageIndex == -1)
+			if (mApp.mCrazyDaveMessageIndex == -1)
 			{
 				return;
 			}
-			if (this.mApp.mCrazyDaveMessageIndex == 2406 && !theJustSkipping)
+			if (mApp.mCrazyDaveMessageIndex == 2406 && !theJustSkipping)
 			{
-				this.mBoard.SetTutorialState(TutorialState.TUTORIAL_SHOVEL_PICKUP);
-				this.mApp.CrazyDaveLeave();
+				mBoard.SetTutorialState(TutorialState.TUTORIAL_SHOVEL_PICKUP);
+				mApp.CrazyDaveLeave();
 				return;
 			}
-			if (!this.mApp.AdvanceCrazyDaveText())
+			if (!mApp.AdvanceCrazyDaveText())
 			{
-				this.mApp.CrazyDaveLeave();
-				if (this.mApp.IsFinalBossLevel() && this.mApp.IsAdventureMode())
+				mApp.CrazyDaveLeave();
+				if (mApp.IsFinalBossLevel() && mApp.IsAdventureMode())
 				{
-					Reanimation reanimation = this.mApp.ReanimationGet(this.mApp.mCrazyDaveReanimID);
+					Reanimation reanimation = mApp.ReanimationGet(mApp.mCrazyDaveReanimID);
 					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_grab, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 18f);
-					this.mApp.mMusic.FadeOut(50);
+					mApp.mMusic.FadeOut(50);
 					if (!theJustSkipping)
 					{
-						this.mApp.PlaySample(Resources.SOUND_BUNGEE_SCREAM);
+						mApp.PlaySample(Resources.SOUND_BUNGEE_SCREAM);
 						return;
 					}
 				}
 				else
 				{
-					if (this.mBoard.ChooseSeedsOnCurrentLevel())
+					if (mBoard.ChooseSeedsOnCurrentLevel())
 					{
-						this.mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_CHOOSE_YOUR_SEEDS);
+						mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_CHOOSE_YOUR_SEEDS);
 						return;
 					}
-					if (this.IsNonScrollingCutscene())
+					if (IsNonScrollingCutscene())
 					{
-						this.mApp.mMusic.FadeOut(50);
+						mApp.mMusic.FadeOut(50);
 					}
 				}
 				return;
 			}
-			if (this.mApp.mCrazyDaveMessageIndex == 107 || this.mApp.mCrazyDaveMessageIndex == 2407)
+			if (mApp.mCrazyDaveMessageIndex == 107 || mApp.mCrazyDaveMessageIndex == 2407)
 			{
-				this.mBoard.mChallenge.ShovelAddWallnuts();
+				mBoard.mChallenge.ShovelAddWallnuts();
 			}
-			if (this.mApp.mCrazyDaveMessageIndex == 405 || this.mApp.mCrazyDaveMessageIndex == 2411)
+			if (mApp.mCrazyDaveMessageIndex == 405 || mApp.mCrazyDaveMessageIndex == 2411)
 			{
-				this.mBoard.mChallenge.mShowBowlingLine = true;
+				mBoard.mChallenge.mShowBowlingLine = true;
 			}
-			bool flag = this.mApp.mCrazyDaveMessageIndex == 1503 || this.mApp.mCrazyDaveMessageIndex == 1553;
+			bool flag = mApp.mCrazyDaveMessageIndex == 1503 || mApp.mCrazyDaveMessageIndex == 1553;
 			if (flag && !theJustSkipping)
 			{
 				int itemCost = StoreScreen.GetItemCost(StoreItem.STORE_ITEM_PACKET_UPGRADE);
-				int num = this.mApp.mPlayerInfo.mPurchases[21] + 6;
+				int num = mApp.mPlayerInfo.mPurchases[21] + 6;
 				string theDialogLines = TodCommon.TodReplaceNumberString("[UPGRADE_DIALOG_BODY]", "{SLOTS}", num + 1);
 				string moneyString = LawnApp.GetMoneyString(itemCost);
-				LawnDialog lawnDialog = this.mApp.DoDialog(51, true, moneyString, theDialogLines, string.Empty, 1);
+				LawnDialog lawnDialog = mApp.DoDialog(51, true, moneyString, theDialogLines, string.Empty, 1);
 				lawnDialog.Resize((int)Constants.InvertAndScale(300f), (int)Constants.InvertAndScale(100f), (int)Constants.InvertAndScale(370f), (int)Constants.InvertAndScale(200f));
-				this.mBoard.mCoinBankFadeCount = 100;
+				mBoard.mCoinBankFadeCount = 100;
 				return;
 			}
-			if (this.mApp.mCrazyDaveMessageIndex == 406)
+			if (mApp.mCrazyDaveMessageIndex == 406)
 			{
-				this.mBoard.mEnableGraveStones = true;
-				this.AddGraveStoneParticles();
+				mBoard.mEnableGraveStones = true;
+				AddGraveStoneParticles();
 			}
 		}
 
 		public void ShowShovel()
 		{
-			if (this.mApp.IsWhackAZombieLevel() || this.mApp.IsWallnutBowlingLevel() || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST || this.mApp.IsIZombieLevel() || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || this.mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM || this.mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
+			if (mApp.IsWhackAZombieLevel() || mApp.IsWallnutBowlingLevel() || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST || mApp.IsIZombieLevel() || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM || mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
 			{
 				return;
 			}
-			if (!this.mApp.IsFirstTimeAdventureMode() || this.mBoard.mLevel > 4)
+			if (!mApp.IsFirstTimeAdventureMode() || mBoard.mLevel > 4)
 			{
-				this.mBoard.mShowShovel = true;
+				mBoard.mShowShovel = true;
 			}
 		}
 
 		public bool CanGetPacketUpgrade()
 		{
 			int itemCost = StoreScreen.GetItemCost(StoreItem.STORE_ITEM_PACKET_UPGRADE);
-			return this.mApp.mPlayerInfo.mPurchases[21] == 0 && this.mApp.mPlayerInfo.mCoins >= itemCost && this.mApp.mPlayerInfo.mDidntPurchasePacketUpgrade < 2;
+			return mApp.mPlayerInfo.mPurchases[21] == 0 && mApp.mPlayerInfo.mCoins >= itemCost && mApp.mPlayerInfo.mDidntPurchasePacketUpgrade < 2;
 		}
 
 		public void FindPlaceForStreetZombies(ZombieType theZombieType, bool[,] theZombieGrid, ref int thePosX, ref int thePosY)
@@ -1171,7 +1171,7 @@ namespace Lawn
 			{
 				for (int k = 0; k < 5; k++)
 				{
-					if (this.CanZombieGoInGridSpot(theZombieType, j, k, theZombieGrid))
+					if (CanZombieGoInGridSpot(theZombieType, j, k, theZombieGrid))
 					{
 						CutScene.aPicks[num].mX = j;
 						CutScene.aPicks[num].mY = k;
@@ -1195,23 +1195,23 @@ namespace Lawn
 		{
 			int num = 0;
 			int num2 = 0;
-			this.FindPlaceForStreetZombies(theZombieType, theZombieGrid, ref num, ref num2);
+			FindPlaceForStreetZombies(theZombieType, theZombieGrid, ref num, ref num2);
 			if (theZombieType != ZombieType.ZOMBIE_BUNGEE)
 			{
 				theZombieGrid[num, num2] = true;
 			}
-			if (this.Is2x2Zombie(theZombieType))
+			if (Is2x2Zombie(theZombieType))
 			{
 				Debug.ASSERT(num > 0 && num2 > 0);
 				theZombieGrid[num - 1, num2] = true;
 				theZombieGrid[num, num2 - 1] = true;
 				theZombieGrid[num - 1, num2 - 1] = true;
 			}
-			this.PlaceAZombie(theZombieType, num, num2);
-			if (theZombieType == ZombieType.ZOMBIE_BUNGEE && this.mApp.IsBungeeBlitzLevel())
+			PlaceAZombie(theZombieType, num, num2);
+			if (theZombieType == ZombieType.ZOMBIE_BUNGEE && mApp.IsBungeeBlitzLevel())
 			{
-				this.PlaceAZombie(ZombieType.ZOMBIE_BUNGEE, 1, num2);
-				this.PlaceAZombie(ZombieType.ZOMBIE_BUNGEE, 2, num2);
+				PlaceAZombie(ZombieType.ZOMBIE_BUNGEE, 1, num2);
+				PlaceAZombie(ZombieType.ZOMBIE_BUNGEE, 2, num2);
 			}
 		}
 
@@ -1222,18 +1222,18 @@ namespace Lawn
 
 		public void PreloadResources()
 		{
-			if (this.mPreloaded)
+			if (mPreloaded)
 			{
 				return;
 			}
-			this.mPreloaded = true;
+			mPreloaded = true;
 			PerfTimer perfTimer = default(PerfTimer);
 			perfTimer.Start();
-			for (int i = 0; i < this.mBoard.mNumWaves; i++)
+			for (int i = 0; i < mBoard.mNumWaves; i++)
 			{
 				for (int j = 0; j < 50; j++)
 				{
-					ZombieType zombieType = this.mBoard.mZombiesInWave[i, j];
+					ZombieType zombieType = mBoard.mZombiesInWave[i, j];
 					if (zombieType == ZombieType.ZOMBIE_INVALID)
 					{
 						break;
@@ -1244,30 +1244,30 @@ namespace Lawn
 			for (int k = 0; k < 53; k++)
 			{
 				SeedType theSeedType = (SeedType)k;
-				if (this.mApp.HasSeedType(theSeedType))
+				if (mApp.HasSeedType(theSeedType))
 				{
 					Plant.PreloadPlantResources(theSeedType);
 				}
 			}
-			if (this.mApp.IsFirstTimeAdventureMode() && this.mBoard.mLevel <= 50)
+			if (mApp.IsFirstTimeAdventureMode() && mBoard.mLevel <= 50)
 			{
-				SeedType awardSeedForLevel = this.mApp.GetAwardSeedForLevel(this.mBoard.mLevel);
+				SeedType awardSeedForLevel = mApp.GetAwardSeedForLevel(mBoard.mLevel);
 				Plant.PreloadPlantResources(awardSeedForLevel);
 			}
-			if (this.mCrazyDaveDialogStart != -1)
+			if (mCrazyDaveDialogStart != -1)
 			{
 				ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_CRAZY_DAVE, true);
 			}
-			if (this.mApp.mPlayerInfo.mPurchases[24] != 0)
+			if (mApp.mPlayerInfo.mPurchases[24] != 0)
 			{
 				ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_RAKE, true);
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 			{
 				Plant.PreloadPlantResources(SeedType.SEED_SPROUT);
 				Plant.PreloadPlantResources(SeedType.SEED_MARIGOLD);
 			}
-			if (this.mBoard.StageHasRoof())
+			if (mBoard.StageHasRoof())
 			{
 				ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_ROOF_CLEANER, true);
 			}
@@ -1275,38 +1275,38 @@ namespace Lawn
 			{
 				ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_LAWNMOWER, true);
 			}
-			if (this.mBoard.StageHasPool())
+			if (mBoard.StageHasPool())
 			{
 				ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_SPLASH, true);
 				ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_POOL_CLEANER, true);
 			}
-			if (this.mBoard.CanDropLoot())
+			if (mBoard.CanDropLoot())
 			{
 				ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_COIN_SILVER, true);
 				ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_COIN_GOLD, true);
 				ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_DIAMOND, true);
 			}
-			if (this.mSodTime > 0)
+			if (mSodTime > 0)
 			{
 				ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_SODROLL, true);
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_PORTAL_COMBAT)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_PORTAL_COMBAT)
 			{
 				ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_PORTAL_CIRCLE, true);
 				ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_PORTAL_SQUARE, true);
 			}
-			if (this.mApp.IsWhackAZombieLevel() || this.mApp.IsScaryPotterLevel())
+			if (mApp.IsWhackAZombieLevel() || mApp.IsScaryPotterLevel())
 			{
 				ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_HAMMER, true);
 			}
-			if (this.mApp.IsStormyNightLevel() || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RAINING_SEEDS)
+			if (mApp.IsStormyNightLevel() || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RAINING_SEEDS)
 			{
 				ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_RAIN_CIRCLE, true);
 				ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_RAIN_SPLASH, true);
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_INTRO)
+			if (mApp.mGameMode == GameMode.GAMEMODE_INTRO)
 			{
-				this.mApp.DelayLoadBackgroundResource("DelayLoad_Background3");
+				mApp.DelayLoadBackgroundResource("DelayLoad_Background3");
 				Zombie.PreloadZombieResources(ZombieType.ZOMBIE_NORMAL);
 				Zombie.PreloadZombieResources(ZombieType.ZOMBIE_TRAFFIC_CONE);
 				Zombie.PreloadZombieResources(ZombieType.ZOMBIE_PAIL);
@@ -1320,140 +1320,140 @@ namespace Lawn
 				Plant.PreloadPlantResources(SeedType.SEED_SPIKEWEED);
 				Plant.PreloadPlantResources(SeedType.SEED_TANGLEKELP);
 			}
-			this.PlaceStreetZombies();
-			this.mBoard.mPreloadTime = Math.Max((int)perfTimer.GetDuration(), 0);
+			PlaceStreetZombies();
+			mBoard.mPreloadTime = Math.Max((int)perfTimer.GetDuration(), 0);
 		}
 
 		public bool IsBeforePreloading()
 		{
-			return this.mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO && !this.mPreloaded;
+			return mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO && !mPreloaded;
 		}
 
 		public bool IsShowingCrazyDave()
 		{
-			return this.mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO && (this.mCrazyDaveTime > 0 && this.mCutsceneTime < CutScene.TimePanRightEnd + this.mCrazyDaveTime);
+			return mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO && (mCrazyDaveTime > 0 && mCutsceneTime < CutScene.TimePanRightEnd + mCrazyDaveTime);
 		}
 
 		public bool IsNonScrollingCutscene()
 		{
-			return this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ICE || this.mApp.mGameMode == GameMode.GAMEMODE_UPSELL || this.mApp.IsScaryPotterLevel() || this.mApp.IsIZombieLevel() || this.mApp.IsWhackAZombieLevel() || this.mApp.IsShovelLevel() || this.mApp.IsSquirrelLevel() || this.mApp.IsWallnutBowlingLevel() || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || this.mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZOMBIQUARIUM;
+			return mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ICE || mApp.mGameMode == GameMode.GAMEMODE_UPSELL || mApp.IsScaryPotterLevel() || mApp.IsIZombieLevel() || mApp.IsWhackAZombieLevel() || mApp.IsShovelLevel() || mApp.IsSquirrelLevel() || mApp.IsWallnutBowlingLevel() || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZOMBIQUARIUM;
 		}
 
 		public bool IsScrolledLeftAtStart()
 		{
-			return (this.mBoard.mChallenge.mSurvivalStage <= 0 || !this.mApp.IsSurvivalMode()) && !this.mApp.IsShovelLevel() && !this.mApp.IsSquirrelLevel() && !this.mApp.IsWallnutBowlingLevel() && !this.IsNonScrollingCutscene();
+			return (mBoard.mChallenge.mSurvivalStage <= 0 || !mApp.IsSurvivalMode()) && !mApp.IsShovelLevel() && !mApp.IsSquirrelLevel() && !mApp.IsWallnutBowlingLevel() && !IsNonScrollingCutscene();
 		}
 
 		public bool IsInShovelTutorial()
 		{
-			return this.mBoard.mTutorialState == TutorialState.TUTORIAL_SHOVEL_PICKUP || this.mBoard.mTutorialState == TutorialState.TUTORIAL_SHOVEL_DIG || this.mBoard.mTutorialState == TutorialState.TUTORIAL_SHOVEL_KEEP_DIGGING;
+			return mBoard.mTutorialState == TutorialState.TUTORIAL_SHOVEL_PICKUP || mBoard.mTutorialState == TutorialState.TUTORIAL_SHOVEL_DIG || mBoard.mTutorialState == TutorialState.TUTORIAL_SHOVEL_KEEP_DIGGING;
 		}
 
 		public void PlaceLawnItems()
 		{
-			if (this.mPlacedLawnItems)
+			if (mPlacedLawnItems)
 			{
 				return;
 			}
-			this.mPlacedLawnItems = true;
-			if (!this.IsSurvivalRepick())
+			mPlacedLawnItems = true;
+			if (!IsSurvivalRepick())
 			{
-				this.mBoard.InitLawnMowers();
-				this.AddFlowerPots();
+				mBoard.InitLawnMowers();
+				AddFlowerPots();
 			}
-			if (!this.IsSurvivalRepick())
+			if (!IsSurvivalRepick())
 			{
-				this.mBoard.PlaceRake();
+				mBoard.PlaceRake();
 			}
 		}
 
 		public bool CanGetSecondPacketUpgrade()
 		{
 			int itemCost = StoreScreen.GetItemCost(StoreItem.STORE_ITEM_PACKET_UPGRADE);
-			return this.mApp.mPlayerInfo.mPurchases[21] == 1 && this.mApp.mPlayerInfo.mCoins >= itemCost && this.mApp.mPlayerInfo.mDidntPurchasePacketUpgrade < 2;
+			return mApp.mPlayerInfo.mPurchases[21] == 1 && mApp.mPlayerInfo.mCoins >= itemCost && mApp.mPlayerInfo.mDidntPurchasePacketUpgrade < 2;
 		}
 
 		public int ParseTalkTimeFromMessage()
 		{
-			string crazyDaveText = this.mApp.GetCrazyDaveText(this.mCrazyDaveLastTalkIndex);
+			string crazyDaveText = mApp.GetCrazyDaveText(mCrazyDaveLastTalkIndex);
 			int num = crazyDaveText.IndexOf("{TIME_");
 			if (num != -1)
 			{
 				int num2 = crazyDaveText.IndexOf("}", num);
 				string text = crazyDaveText.Substring(num + 6, num2 - num - 6);
-				this.mCrazyDaveCountDown = int.Parse(text);
-				return this.mCrazyDaveCountDown;
+				mCrazyDaveCountDown = int.Parse(text);
+				return mCrazyDaveCountDown;
 			}
 			return 100;
 		}
 
 		public int ParseDelayTimeFromMessage()
 		{
-			string crazyDaveText = this.mApp.GetCrazyDaveText(this.mCrazyDaveLastTalkIndex);
+			string crazyDaveText = mApp.GetCrazyDaveText(mCrazyDaveLastTalkIndex);
 			int num = crazyDaveText.IndexOf("{DELAY_");
 			if (num != -1)
 			{
 				int num2 = crazyDaveText.IndexOf("}", num);
 				string text = crazyDaveText.Substring(num + 7, num2 - num - 7);
-				this.mCrazyDaveCountDown = int.Parse(text);
-				return this.mCrazyDaveCountDown;
+				mCrazyDaveCountDown = int.Parse(text);
+				return mCrazyDaveCountDown;
 			}
 			return 100;
 		}
 
 		public void UpdateUpsell()
 		{
-			if (!this.mBoard.mMenuButton.mIsOver)
+			if (!mBoard.mMenuButton.mIsOver)
 			{
-				bool mIsOver = this.mBoard.mStoreButton.mIsOver;
+				bool isOver = mBoard.mStoreButton.mIsOver;
 			}
-			if (this.mApp.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_OFF || this.mApp.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_ENTERING)
+			if (mApp.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_OFF || mApp.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_ENTERING)
 			{
 				return;
 			}
-			if (this.mCrazyDaveLastTalkIndex == -1)
+			if (mCrazyDaveLastTalkIndex == -1)
 			{
-				this.mApp.CrazyDaveTalkIndex(this.mCrazyDaveDialogStart);
-				this.mCrazyDaveLastTalkIndex = this.mCrazyDaveDialogStart;
-				this.mCrazyDaveCountDown = this.ParseTalkTimeFromMessage();
+				mApp.CrazyDaveTalkIndex(mCrazyDaveDialogStart);
+				mCrazyDaveLastTalkIndex = mCrazyDaveDialogStart;
+				mCrazyDaveCountDown = ParseTalkTimeFromMessage();
 				return;
 			}
-			if (this.mCrazyDaveCountDown > 0)
+			if (mCrazyDaveCountDown > 0)
 			{
-				this.mCrazyDaveCountDown--;
+				mCrazyDaveCountDown--;
 			}
-			if (this.mCrazyDaveLastTalkIndex == 3317)
+			if (mCrazyDaveLastTalkIndex == 3317)
 			{
-				if (this.mCrazyDaveCountDown == 0)
+				if (mCrazyDaveCountDown == 0)
 				{
-					this.mBoard.mStoreButton.Resize(450, 420, 260, 46);
-					this.mBoard.mMenuButton.mBtnNoDraw = false;
-					this.mBoard.mStoreButton.mBtnNoDraw = false;
+					mBoard.mStoreButton.Resize(450, 420, 260, 46);
+					mBoard.mMenuButton.mBtnNoDraw = false;
+					mBoard.mStoreButton.mBtnNoDraw = false;
 				}
 				return;
 			}
-			if (this.mCrazyDaveLastTalkIndex == 3311 && this.mCrazyDaveCountDown == 90)
+			if (mCrazyDaveLastTalkIndex == 3311 && mCrazyDaveCountDown == 90)
 			{
-				this.mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_MINIGAME_LOONBOON);
+				mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_MINIGAME_LOONBOON);
 			}
-			if (this.mCrazyDaveCountDown != 0)
+			if (mCrazyDaveCountDown != 0)
 			{
 				return;
 			}
-			if (this.mApp.mCrazyDaveMessageIndex != -1)
+			if (mApp.mCrazyDaveMessageIndex != -1)
 			{
-				this.mCrazyDaveCountDown = this.ParseDelayTimeFromMessage();
-				this.mApp.CrazyDaveStopTalking();
+				mCrazyDaveCountDown = ParseDelayTimeFromMessage();
+				mApp.CrazyDaveStopTalking();
 				return;
 			}
-			int theMessageIndex = this.mCrazyDaveLastTalkIndex + 1;
-			this.mApp.CrazyDaveTalkIndex(theMessageIndex);
-			this.mCrazyDaveLastTalkIndex = theMessageIndex;
-			this.mCrazyDaveCountDown = this.ParseTalkTimeFromMessage();
-			if (this.mCrazyDaveLastTalkIndex == 3305)
+			int theMessageIndex = mCrazyDaveLastTalkIndex + 1;
+			mApp.CrazyDaveTalkIndex(theMessageIndex);
+			mCrazyDaveLastTalkIndex = theMessageIndex;
+			mCrazyDaveCountDown = ParseTalkTimeFromMessage();
+			if (mCrazyDaveLastTalkIndex == 3305)
 			{
-				Reanimation reanimation = this.mApp.ReanimationGet(this.mApp.mCrazyDaveReanimID);
-				Reanimation reanimation2 = this.mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_SQUASH);
+				Reanimation reanimation = mApp.ReanimationGet(mApp.mCrazyDaveReanimID);
+				Reanimation reanimation2 = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_SQUASH);
 				reanimation2.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.REANIM_LOOP, 0, 15f);
 				ReanimatorTrackInstance trackInstanceByName = reanimation.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_dave_handinghand);
 				AttachEffect attachEffect = GlobalMembersAttachment.AttachReanim(ref trackInstanceByName.mAttachmentID, reanimation2, Constants.S * 92f, Constants.S * 387f);
@@ -1461,22 +1461,22 @@ namespace Lawn
 				attachEffect.mOffset.mMatrix.M22 = 1.2f;
 				reanimation.Update();
 			}
-			if (this.mCrazyDaveLastTalkIndex == 3306)
+			if (mCrazyDaveLastTalkIndex == 3306)
 			{
-				Reanimation reanimation3 = this.mApp.ReanimationGet(this.mApp.mCrazyDaveReanimID);
-				Reanimation reanimation4 = this.mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_THREEPEATER);
+				Reanimation reanimation3 = mApp.ReanimationGet(mApp.mCrazyDaveReanimID);
+				Reanimation reanimation4 = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_THREEPEATER);
 				reanimation4.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.REANIM_LOOP, 0, 15f);
-				Reanimation reanimation5 = this.mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_THREEPEATER);
+				Reanimation reanimation5 = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_THREEPEATER);
 				reanimation5.mLoopType = ReanimLoopType.REANIM_LOOP;
 				reanimation5.mAnimRate = reanimation4.mAnimRate;
 				reanimation5.SetFramesForLayer("anim_head_idle1");
 				reanimation5.AttachToAnotherReanimation(ref reanimation4, "anim_head1");
-				Reanimation reanimation6 = this.mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_THREEPEATER);
+				Reanimation reanimation6 = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_THREEPEATER);
 				reanimation6.mLoopType = ReanimLoopType.REANIM_LOOP;
 				reanimation6.mAnimRate = reanimation4.mAnimRate;
 				reanimation6.SetFramesForLayer("anim_head_idle2");
 				reanimation6.AttachToAnotherReanimation(ref reanimation4, "anim_head2");
-				Reanimation reanimation7 = this.mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_THREEPEATER);
+				Reanimation reanimation7 = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_THREEPEATER);
 				reanimation7.mLoopType = ReanimLoopType.REANIM_LOOP;
 				reanimation7.mAnimRate = reanimation4.mAnimRate;
 				reanimation7.SetFramesForLayer("anim_head_idle3");
@@ -1487,10 +1487,10 @@ namespace Lawn
 				reanimation3.Update();
 				reanimation4.Update();
 			}
-			if (this.mCrazyDaveLastTalkIndex == 3307)
+			if (mCrazyDaveLastTalkIndex == 3307)
 			{
-				Reanimation reanimation8 = this.mApp.ReanimationGet(this.mApp.mCrazyDaveReanimID);
-				Reanimation reanimation9 = this.mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_MAGNETSHROOM);
+				Reanimation reanimation8 = mApp.ReanimationGet(mApp.mCrazyDaveReanimID);
+				Reanimation reanimation9 = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_MAGNETSHROOM);
 				reanimation9.PlayReanim("anim_idle", ReanimLoopType.REANIM_LOOP, 0, 15f);
 				TodCommon.TodScaleRotateTransformMatrix(ref reanimation9.mOverlayMatrix.mMatrix, 0f, 0f, 0.3f, 1f, 1f);
 				ReanimatorTrackInstance trackInstanceByName3 = reanimation8.GetTrackInstanceByName("Dave_pot");
@@ -1499,51 +1499,51 @@ namespace Lawn
 				attachEffect3.mOffset.mMatrix.M22 = 1.2f;
 				reanimation8.Update();
 			}
-			if (this.mCrazyDaveLastTalkIndex == 3309)
+			if (mCrazyDaveLastTalkIndex == 3309)
 			{
-				Reanimation reanimation10 = this.mApp.ReanimationGet(this.mApp.mCrazyDaveReanimID);
+				Reanimation reanimation10 = mApp.ReanimationGet(mApp.mCrazyDaveReanimID);
 				Reanimation reanimation11 = reanimation10.FindSubReanim(ReanimationType.REANIM_THREEPEATER);
 				reanimation11.ReanimationDie();
 				Reanimation reanimation12 = reanimation10.FindSubReanim(ReanimationType.REANIM_MAGNETSHROOM);
 				reanimation12.ReanimationDie();
 			}
-			if (this.mCrazyDaveLastTalkIndex == 3312)
+			if (mCrazyDaveLastTalkIndex == 3312)
 			{
-				this.mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_MINIGAME_LOONBOON);
-				this.LoadUpsellBoardPool();
-				this.mApp.PlaySample(Resources.SOUND_FINALWAVE);
-				this.mUpsellHideBoard = false;
+				mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_MINIGAME_LOONBOON);
+				LoadUpsellBoardPool();
+				mApp.PlaySample(Resources.SOUND_FINALWAVE);
+				mUpsellHideBoard = false;
 			}
-			if (this.mCrazyDaveLastTalkIndex == 3313)
+			if (mCrazyDaveLastTalkIndex == 3313)
 			{
-				this.LoadUpsellBoardFog();
-				this.mApp.PlaySample(Resources.SOUND_HUGE_WAVE);
-				this.mUpsellHideBoard = false;
+				LoadUpsellBoardFog();
+				mApp.PlaySample(Resources.SOUND_HUGE_WAVE);
+				mUpsellHideBoard = false;
 			}
-			if (this.mCrazyDaveLastTalkIndex == 3314)
+			if (mCrazyDaveLastTalkIndex == 3314)
 			{
-				this.LoadUpsellChallengeScreen();
-				this.mApp.PlaySample(Resources.SOUND_FINALWAVE);
-				this.mUpsellHideBoard = false;
+				LoadUpsellChallengeScreen();
+				mApp.PlaySample(Resources.SOUND_FINALWAVE);
+				mUpsellHideBoard = false;
 			}
-			if (this.mCrazyDaveLastTalkIndex == 3315)
+			if (mCrazyDaveLastTalkIndex == 3315)
 			{
-				this.ClearUpsellBoard();
-				this.mApp.PlaySample(Resources.SOUND_FINALWAVE);
-				this.mUpsellHideBoard = true;
-				this.mApp.AddTodParticle((float)Constants.CutScene_Upsell_TerraCotta_Arrow.X, (float)Constants.CutScene_Upsell_TerraCotta_Arrow.Y, 900000, ParticleEffect.PARTICLE_UPSELL_ARROW);
+				ClearUpsellBoard();
+				mApp.PlaySample(Resources.SOUND_FINALWAVE);
+				mUpsellHideBoard = true;
+				mApp.AddTodParticle((float)Constants.CutScene_Upsell_TerraCotta_Arrow.X, (float)Constants.CutScene_Upsell_TerraCotta_Arrow.Y, 900000, ParticleEffect.PARTICLE_UPSELL_ARROW);
 			}
-			if (this.mCrazyDaveLastTalkIndex == 3316)
+			if (mCrazyDaveLastTalkIndex == 3316)
 			{
-				this.LoadUpsellBoardRoof();
-				this.mApp.PlaySample(Resources.SOUND_HUGE_WAVE);
-				this.mUpsellHideBoard = false;
+				LoadUpsellBoardRoof();
+				mApp.PlaySample(Resources.SOUND_HUGE_WAVE);
+				mUpsellHideBoard = false;
 			}
-			if (this.mCrazyDaveLastTalkIndex == 3317)
+			if (mCrazyDaveLastTalkIndex == 3317)
 			{
-				this.ClearUpsellBoard();
-				this.mBoard.mMenuButton.mBtnNoDraw = true;
-				this.mUpsellHideBoard = true;
+				ClearUpsellBoard();
+				mBoard.mMenuButton.mBtnNoDraw = true;
+				mUpsellHideBoard = true;
 			}
 		}
 
@@ -1551,77 +1551,77 @@ namespace Lawn
 		{
 			for (int i = 0; i < Constants.MAX_GRIDSIZEY; i++)
 			{
-				this.mBoard.mIceTimer[i] = 0;
-				this.mBoard.mIceMinX[i] = Constants.BOARD_WIDTH;
+				mBoard.mIceTimer[i] = 0;
+				mBoard.mIceMinX[i] = Constants.BOARD_WIDTH;
 			}
-			this.mBoard.mZombiesRow1.Clear();
-			this.mBoard.mZombiesRow2.Clear();
-			this.mBoard.mZombiesRow3.Clear();
-			this.mBoard.mZombiesRow4.Clear();
-			this.mBoard.mZombiesRow5.Clear();
-			this.mBoard.mZombiesRow6.Clear();
-			for (int j = 0; j < this.mBoard.mZombies.Count; j++)
+			mBoard.mZombiesRow1.Clear();
+			mBoard.mZombiesRow2.Clear();
+			mBoard.mZombiesRow3.Clear();
+			mBoard.mZombiesRow4.Clear();
+			mBoard.mZombiesRow5.Clear();
+			mBoard.mZombiesRow6.Clear();
+			for (int j = 0; j < mBoard.mZombies.Count; j++)
 			{
-				this.mBoard.mZombies[j].PrepareForReuse();
+				mBoard.mZombies[j].PrepareForReuse();
 			}
-			this.mBoard.mZombies.Clear();
-			for (int k = 0; k < this.mBoard.mPlants.Count; k++)
+			mBoard.mZombies.Clear();
+			for (int k = 0; k < mBoard.mPlants.Count; k++)
 			{
-				this.mBoard.mPlants[k].PrepareForReuse();
+				mBoard.mPlants[k].PrepareForReuse();
 			}
-			this.mBoard.mPlants.Clear();
-			for (int l = 0; l < this.mBoard.mCoins.Count; l++)
+			mBoard.mPlants.Clear();
+			for (int l = 0; l < mBoard.mCoins.Count; l++)
 			{
-				this.mBoard.mCoins[l].PrepareForReuse();
+				mBoard.mCoins[l].PrepareForReuse();
 			}
-			this.mBoard.mCoins.Clear();
-			for (int m = 0; m < this.mBoard.mProjectiles.Count; m++)
+			mBoard.mCoins.Clear();
+			for (int m = 0; m < mBoard.mProjectiles.Count; m++)
 			{
-				this.mBoard.mProjectiles[m].PrepareForReuse();
+				mBoard.mProjectiles[m].PrepareForReuse();
 			}
-			this.mBoard.mProjectiles.Clear();
-			for (int n = 0; n < this.mBoard.mGridItems.Count; n++)
+			mBoard.mProjectiles.Clear();
+			for (int n = 0; n < mBoard.mGridItems.Count; n++)
 			{
-				this.mBoard.mGridItems[n].PrepareForReuse();
+				mBoard.mGridItems[n].PrepareForReuse();
 			}
-			this.mBoard.mGridItems.Clear();
-			for (int num = 0; num < this.mBoard.mLawnMowers.Count; num++)
+			mBoard.mGridItems.Clear();
+			for (int num = 0; num < mBoard.mLawnMowers.Count; num++)
 			{
-				this.mBoard.mLawnMowers[num].PrepareForReuse();
+				mBoard.mLawnMowers[num].PrepareForReuse();
 			}
-			this.mBoard.mLawnMowers.Clear();
+			mBoard.mLawnMowers.Clear();
 			int num2 = -1;
 			TodParticleSystem todParticleSystem = null;
-			while (this.mBoard.IterateParticles(ref todParticleSystem, ref num2))
+			while (mBoard.IterateParticles(ref todParticleSystem, ref num2))
 			{
 				todParticleSystem.ParticleSystemDie();
 			}
 			int num3 = -1;
 			Reanimation reanimation = null;
-			while (this.mBoard.IterateReanimations(ref reanimation, ref num3))
+			while (mBoard.IterateReanimations(ref reanimation, ref num3))
 			{
 				if (reanimation.mReanimationType != ReanimationType.REANIM_CRAZY_DAVE)
 				{
 					reanimation.ReanimationDie();
 				}
 			}
-			this.mBoard.mPoolSparklyParticleID = null;
-			if (this.mUpsellChallengeScreen != null)
+			mBoard.mPoolSparklyParticleID = null;
+			if (mUpsellChallengeScreen != null)
 			{
-				this.mUpsellChallengeScreen.Dispose();
-				this.mUpsellChallengeScreen = null;
+				mUpsellChallengeScreen.Dispose();
+				mUpsellChallengeScreen = null;
 			}
 		}
 
 		public void AddUpsellZombie(ZombieType theZombieType, int thePixelX, int theGridY)
 		{
-			Zombie zombie = this.mBoard.AddZombieInRow(theZombieType, theGridY, 0);
+			Zombie zombie = mBoard.AddZombieInRow(theZombieType, theGridY, 0);
 			zombie.mPosX = (float)thePixelX;
 			zombie.mPosY = zombie.GetPosYBasedOnRow(theGridY);
 			zombie.SetRow(theGridY);
 			zombie.mX = (int)zombie.mPosX;
 			zombie.mY = (int)zombie.mPosY;
-			if (this.mBoard.StageHasPool() && (theGridY == 2 || theGridY == 3))
+			if (mBoard.StageHasPool() && (theGridY == 2 || theGridY == 3))
 			{
 				zombie.mUsesClipping = true;
 			}
@@ -1629,371 +1629,371 @@ namespace Lawn
 
 		public void LoadIntroBoard()
 		{
-			this.ClearUpsellBoard();
-			this.mApp.mMuteSoundsForCutscene = true;
-			this.mBoard.NewPlant(0, 1, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(0, 2, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(0, 2, SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(0, 3, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(0, 3, SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(0, 4, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 0, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 1, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 2, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 2, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 4, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 5, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 0, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 1, SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 3, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 3, SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 4, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 5, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(3, 0, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(3, 4, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(4, 2, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(4, 2, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(5, 1, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(5, 4, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(5, 5, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(6, 0, SeedType.SEED_SPIKEWEED, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(6, 4, SeedType.SEED_SPIKEWEED, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(7, 1, SeedType.SEED_SPIKEWEED, SeedType.SEED_NONE);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 460, 0);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_FOOTBALL, 680, 0);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, 730, 0);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 810, 0);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, 670, 1);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 740, 1);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 880, 1);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 500, 2);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, 680, 2);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_PAIL, 604, 3);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_SNORKEL, 880, 3);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 600, 4);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_PAIL, 690, 4);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 780, 4);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_CATAPULT, 730, 5);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 590, 5);
-			this.mPreUpdatingBoard = true;
+			ClearUpsellBoard();
+			mApp.mMuteSoundsForCutscene = true;
+			mBoard.NewPlant(0, 1, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
+			mBoard.NewPlant(0, 2, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+			mBoard.NewPlant(0, 2, SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
+			mBoard.NewPlant(0, 3, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+			mBoard.NewPlant(0, 3, SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
+			mBoard.NewPlant(0, 4, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 0, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 1, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 2, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 2, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 4, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 5, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 0, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 1, SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 3, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 3, SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 4, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 5, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
+			mBoard.NewPlant(3, 0, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
+			mBoard.NewPlant(3, 4, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
+			mBoard.NewPlant(4, 2, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+			mBoard.NewPlant(4, 2, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
+			mBoard.NewPlant(5, 1, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
+			mBoard.NewPlant(5, 4, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
+			mBoard.NewPlant(5, 5, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
+			mBoard.NewPlant(6, 0, SeedType.SEED_SPIKEWEED, SeedType.SEED_NONE);
+			mBoard.NewPlant(6, 4, SeedType.SEED_SPIKEWEED, SeedType.SEED_NONE);
+			mBoard.NewPlant(7, 1, SeedType.SEED_SPIKEWEED, SeedType.SEED_NONE);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 460, 0);
+			AddUpsellZombie(ZombieType.ZOMBIE_FOOTBALL, 680, 0);
+			AddUpsellZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, 730, 0);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 810, 0);
+			AddUpsellZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, 670, 1);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 740, 1);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 880, 1);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 500, 2);
+			AddUpsellZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, 680, 2);
+			AddUpsellZombie(ZombieType.ZOMBIE_PAIL, 604, 3);
+			AddUpsellZombie(ZombieType.ZOMBIE_SNORKEL, 880, 3);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 600, 4);
+			AddUpsellZombie(ZombieType.ZOMBIE_PAIL, 690, 4);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 780, 4);
+			AddUpsellZombie(ZombieType.ZOMBIE_CATAPULT, 730, 5);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 590, 5);
+			mPreUpdatingBoard = true;
 			for (int i = 0; i < 100; i++)
 			{
-				this.mBoard.Update();
+				mBoard.Update();
 			}
-			this.mPreUpdatingBoard = false;
+			mPreUpdatingBoard = false;
 		}
 
 		public void LoadUpsellBoardPool()
 		{
-			this.ClearUpsellBoard();
-			this.mApp.mMuteSoundsForCutscene = true;
-			this.mBoard.NewPlant(0, 1, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(0, 2, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(0, 2, SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(0, 3, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(0, 3, SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(0, 4, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 0, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 1, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 2, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 2, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 4, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 5, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 0, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 1, SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 3, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 3, SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 4, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 5, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(3, 4, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(4, 0, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(4, 2, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(4, 2, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(5, 1, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(5, 4, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(5, 5, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(6, 0, SeedType.SEED_SPIKEWEED, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(6, 3, SeedType.SEED_TANGLEKELP, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(6, 4, SeedType.SEED_SPIKEWEED, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(6, 5, SeedType.SEED_SQUASH, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(7, 1, SeedType.SEED_SPIKEWEED, SeedType.SEED_NONE);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 460, 0);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_ZAMBONI, 680, 0);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, 670, 1);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 740, 1);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 500, 2);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, 680, 2);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 604, 3);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 690, 4);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 740, 4);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_PAIL, 730, 5);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 590, 5);
-			this.mPreUpdatingBoard = true;
+			ClearUpsellBoard();
+			mApp.mMuteSoundsForCutscene = true;
+			mBoard.NewPlant(0, 1, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
+			mBoard.NewPlant(0, 2, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+			mBoard.NewPlant(0, 2, SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
+			mBoard.NewPlant(0, 3, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+			mBoard.NewPlant(0, 3, SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
+			mBoard.NewPlant(0, 4, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 0, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 1, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 2, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 2, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 4, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 5, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 0, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 1, SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 3, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 3, SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 4, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 5, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
+			mBoard.NewPlant(3, 4, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
+			mBoard.NewPlant(4, 0, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
+			mBoard.NewPlant(4, 2, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+			mBoard.NewPlant(4, 2, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
+			mBoard.NewPlant(5, 1, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
+			mBoard.NewPlant(5, 4, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
+			mBoard.NewPlant(5, 5, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
+			mBoard.NewPlant(6, 0, SeedType.SEED_SPIKEWEED, SeedType.SEED_NONE);
+			mBoard.NewPlant(6, 3, SeedType.SEED_TANGLEKELP, SeedType.SEED_NONE);
+			mBoard.NewPlant(6, 4, SeedType.SEED_SPIKEWEED, SeedType.SEED_NONE);
+			mBoard.NewPlant(6, 5, SeedType.SEED_SQUASH, SeedType.SEED_NONE);
+			mBoard.NewPlant(7, 1, SeedType.SEED_SPIKEWEED, SeedType.SEED_NONE);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 460, 0);
+			AddUpsellZombie(ZombieType.ZOMBIE_ZAMBONI, 680, 0);
+			AddUpsellZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, 670, 1);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 740, 1);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 500, 2);
+			AddUpsellZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, 680, 2);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 604, 3);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 690, 4);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 740, 4);
+			AddUpsellZombie(ZombieType.ZOMBIE_PAIL, 730, 5);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 590, 5);
+			mPreUpdatingBoard = true;
 			for (int i = 0; i < 100; i++)
 			{
-				this.mBoard.Update();
+				mBoard.Update();
 			}
-			this.mPreUpdatingBoard = false;
-			this.mApp.mMuteSoundsForCutscene = false;
+			mPreUpdatingBoard = false;
+			mApp.mMuteSoundsForCutscene = false;
 		}
 
 		public void LoadUpsellBoardFog()
 		{
-			this.ClearUpsellBoard();
-			this.mApp.mMuteSoundsForCutscene = true;
-			this.mBoard.mBackground = BackgroundType.BACKGROUND_4_FOG;
-			this.mBoard.LoadBackgroundImages();
-			this.mBoard.NewPlant(0, 1, SeedType.SEED_SUNSHROOM, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(0, 4, SeedType.SEED_SUNSHROOM, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 0, SeedType.SEED_SUNSHROOM, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 1, SeedType.SEED_SUNSHROOM, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 2, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 2, SeedType.SEED_CACTUS, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 4, SeedType.SEED_SUNSHROOM, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 5, SeedType.SEED_SUNSHROOM, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 0, SeedType.SEED_CACTUS, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 4, SeedType.SEED_CACTUS, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 5, SeedType.SEED_FUMESHROOM, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(3, 1, SeedType.SEED_FUMESHROOM, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(3, 2, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(3, 3, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(3, 3, SeedType.SEED_CACTUS, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(3, 5, SeedType.SEED_PUFFSHROOM, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(4, 0, SeedType.SEED_PUFFSHROOM, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(4, 1, SeedType.SEED_MAGNETSHROOM, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(4, 2, SeedType.SEED_SEASHROOM, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(4, 5, SeedType.SEED_PUFFSHROOM, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(5, 1, SeedType.SEED_PUFFSHROOM, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(5, 2, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(5, 2, SeedType.SEED_PLANTERN, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(5, 3, SeedType.SEED_SEASHROOM, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(6, 2, SeedType.SEED_SEASHROOM, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(6, 3, SeedType.SEED_SEASHROOM, SeedType.SEED_NONE);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 460, 0);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 680, 0);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_BALLOON, 780, 0);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, 670, 1);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_BALLOON, 640, 1);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_PAIL, 640, 2);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, 780, 3);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_BALLOON, 704, 4);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 690, 4);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_PAIL, 590, 5);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 740, 5);
-			this.mPreUpdatingBoard = true;
+			ClearUpsellBoard();
+			mApp.mMuteSoundsForCutscene = true;
+			mBoard.mBackground = BackgroundType.BACKGROUND_4_FOG;
+			mBoard.LoadBackgroundImages();
+			mBoard.NewPlant(0, 1, SeedType.SEED_SUNSHROOM, SeedType.SEED_NONE);
+			mBoard.NewPlant(0, 4, SeedType.SEED_SUNSHROOM, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 0, SeedType.SEED_SUNSHROOM, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 1, SeedType.SEED_SUNSHROOM, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 2, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 2, SeedType.SEED_CACTUS, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 4, SeedType.SEED_SUNSHROOM, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 5, SeedType.SEED_SUNSHROOM, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 0, SeedType.SEED_CACTUS, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 4, SeedType.SEED_CACTUS, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 5, SeedType.SEED_FUMESHROOM, SeedType.SEED_NONE);
+			mBoard.NewPlant(3, 1, SeedType.SEED_FUMESHROOM, SeedType.SEED_NONE);
+			mBoard.NewPlant(3, 2, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+			mBoard.NewPlant(3, 3, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+			mBoard.NewPlant(3, 3, SeedType.SEED_CACTUS, SeedType.SEED_NONE);
+			mBoard.NewPlant(3, 5, SeedType.SEED_PUFFSHROOM, SeedType.SEED_NONE);
+			mBoard.NewPlant(4, 0, SeedType.SEED_PUFFSHROOM, SeedType.SEED_NONE);
+			mBoard.NewPlant(4, 1, SeedType.SEED_MAGNETSHROOM, SeedType.SEED_NONE);
+			mBoard.NewPlant(4, 2, SeedType.SEED_SEASHROOM, SeedType.SEED_NONE);
+			mBoard.NewPlant(4, 5, SeedType.SEED_PUFFSHROOM, SeedType.SEED_NONE);
+			mBoard.NewPlant(5, 1, SeedType.SEED_PUFFSHROOM, SeedType.SEED_NONE);
+			mBoard.NewPlant(5, 2, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+			mBoard.NewPlant(5, 2, SeedType.SEED_PLANTERN, SeedType.SEED_NONE);
+			mBoard.NewPlant(5, 3, SeedType.SEED_SEASHROOM, SeedType.SEED_NONE);
+			mBoard.NewPlant(6, 2, SeedType.SEED_SEASHROOM, SeedType.SEED_NONE);
+			mBoard.NewPlant(6, 3, SeedType.SEED_SEASHROOM, SeedType.SEED_NONE);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 460, 0);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 680, 0);
+			AddUpsellZombie(ZombieType.ZOMBIE_BALLOON, 780, 0);
+			AddUpsellZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, 670, 1);
+			AddUpsellZombie(ZombieType.ZOMBIE_BALLOON, 640, 1);
+			AddUpsellZombie(ZombieType.ZOMBIE_PAIL, 640, 2);
+			AddUpsellZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, 780, 3);
+			AddUpsellZombie(ZombieType.ZOMBIE_BALLOON, 704, 4);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 690, 4);
+			AddUpsellZombie(ZombieType.ZOMBIE_PAIL, 590, 5);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 740, 5);
+			mPreUpdatingBoard = true;
 			for (int i = 0; i < 100; i++)
 			{
-				this.mBoard.Update();
+				mBoard.Update();
 			}
-			this.mPreUpdatingBoard = false;
-			this.mApp.mMuteSoundsForCutscene = false;
+			mPreUpdatingBoard = false;
+			mApp.mMuteSoundsForCutscene = false;
 		}
 
 		public void LoadUpsellChallengeScreen()
 		{
-			this.ClearUpsellBoard();
+			ClearUpsellBoard();
 		}
 
 		public void LoadUpsellBoardRoof()
 		{
-			this.ClearUpsellBoard();
-			this.mApp.mMuteSoundsForCutscene = true;
-			this.mBoard.mBackground = BackgroundType.BACKGROUND_5_ROOF;
-			this.mBoard.LoadBackgroundImages();
-			this.mBoard.mPlantRow[0] = PlantRowType.PLANTROW_NORMAL;
-			this.mBoard.mPlantRow[1] = PlantRowType.PLANTROW_NORMAL;
-			this.mBoard.mPlantRow[2] = PlantRowType.PLANTROW_NORMAL;
-			this.mBoard.mPlantRow[3] = PlantRowType.PLANTROW_NORMAL;
-			this.mBoard.mPlantRow[4] = PlantRowType.PLANTROW_NORMAL;
-			this.mBoard.mPlantRow[5] = PlantRowType.PLANTROW_DIRT;
+			ClearUpsellBoard();
+			mApp.mMuteSoundsForCutscene = true;
+			mBoard.mBackground = BackgroundType.BACKGROUND_5_ROOF;
+			mBoard.LoadBackgroundImages();
+			mBoard.mPlantRow[0] = PlantRowType.PLANTROW_NORMAL;
+			mBoard.mPlantRow[1] = PlantRowType.PLANTROW_NORMAL;
+			mBoard.mPlantRow[2] = PlantRowType.PLANTROW_NORMAL;
+			mBoard.mPlantRow[3] = PlantRowType.PLANTROW_NORMAL;
+			mBoard.mPlantRow[4] = PlantRowType.PLANTROW_NORMAL;
+			mBoard.mPlantRow[5] = PlantRowType.PLANTROW_DIRT;
 			for (int i = 0; i < Constants.GRIDSIZEX; i++)
 			{
 				for (int j = 0; j < Constants.MAX_GRIDSIZEY; j++)
 				{
-					if (this.mBoard.mPlantRow[j] == PlantRowType.PLANTROW_DIRT)
+					if (mBoard.mPlantRow[j] == PlantRowType.PLANTROW_DIRT)
 					{
-						this.mBoard.mGridSquareType[i, j] = GridSquareType.GRIDSQUARE_DIRT;
+						mBoard.mGridSquareType[i, j] = GridSquareType.GRIDSQUARE_DIRT;
 					}
 					else
 					{
-						this.mBoard.mGridSquareType[i, j] = GridSquareType.GRIDSQUARE_GRASS;
+						mBoard.mGridSquareType[i, j] = GridSquareType.GRIDSQUARE_GRASS;
 					}
 				}
 			}
-			this.mBoard.NewPlant(0, 0, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(0, 0, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(0, 1, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(0, 1, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(0, 2, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(0, 2, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(0, 3, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(0, 3, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(0, 4, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(0, 4, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 0, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 0, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 1, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 1, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 2, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 2, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 3, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 3, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 4, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(1, 4, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 0, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 0, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 1, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 1, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 2, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 2, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 3, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 3, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 4, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(2, 4, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(3, 1, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(3, 1, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(3, 2, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(3, 2, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(3, 3, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(3, 3, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(3, 4, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(3, 4, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(4, 0, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(4, 0, SeedType.SEED_CHOMPER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(4, 1, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(4, 1, SeedType.SEED_CHOMPER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(4, 2, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(4, 2, SeedType.SEED_REPEATER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(4, 3, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(5, 2, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(5, 2, SeedType.SEED_WALLNUT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(5, 3, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(5, 3, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(5, 4, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-			this.mBoard.NewPlant(5, 4, SeedType.SEED_WALLNUT, SeedType.SEED_NONE);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 460, 0);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 680, 0);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_CATAPULT, 780, 1);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, 670, 1);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 580, 0);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 540, 1);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_PAIL, 500, 1);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_PAIL, 640, 2);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, 780, 3);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 380, 3);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_CATAPULT, 704, 4);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 690, 4);
-			this.AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 590, 4);
-			this.mPreUpdatingBoard = true;
+			mBoard.NewPlant(0, 0, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(0, 0, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
+			mBoard.NewPlant(0, 1, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(0, 1, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
+			mBoard.NewPlant(0, 2, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(0, 2, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
+			mBoard.NewPlant(0, 3, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(0, 3, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
+			mBoard.NewPlant(0, 4, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(0, 4, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 0, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 0, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 1, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 1, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 2, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 2, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 3, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 3, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 4, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(1, 4, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 0, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 0, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 1, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 1, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 2, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 2, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 3, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 3, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 4, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(2, 4, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
+			mBoard.NewPlant(3, 1, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(3, 1, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
+			mBoard.NewPlant(3, 2, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(3, 2, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
+			mBoard.NewPlant(3, 3, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(3, 3, SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
+			mBoard.NewPlant(3, 4, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(3, 4, SeedType.SEED_CABBAGEPULT, SeedType.SEED_NONE);
+			mBoard.NewPlant(4, 0, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(4, 0, SeedType.SEED_CHOMPER, SeedType.SEED_NONE);
+			mBoard.NewPlant(4, 1, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(4, 1, SeedType.SEED_CHOMPER, SeedType.SEED_NONE);
+			mBoard.NewPlant(4, 2, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(4, 2, SeedType.SEED_REPEATER, SeedType.SEED_NONE);
+			mBoard.NewPlant(4, 3, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(5, 2, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(5, 2, SeedType.SEED_WALLNUT, SeedType.SEED_NONE);
+			mBoard.NewPlant(5, 3, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(5, 3, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
+			mBoard.NewPlant(5, 4, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+			mBoard.NewPlant(5, 4, SeedType.SEED_WALLNUT, SeedType.SEED_NONE);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 460, 0);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 680, 0);
+			AddUpsellZombie(ZombieType.ZOMBIE_CATAPULT, 780, 1);
+			AddUpsellZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, 670, 1);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 580, 0);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 540, 1);
+			AddUpsellZombie(ZombieType.ZOMBIE_PAIL, 500, 1);
+			AddUpsellZombie(ZombieType.ZOMBIE_PAIL, 640, 2);
+			AddUpsellZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, 780, 3);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 380, 3);
+			AddUpsellZombie(ZombieType.ZOMBIE_CATAPULT, 704, 4);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 690, 4);
+			AddUpsellZombie(ZombieType.ZOMBIE_NORMAL, 590, 4);
+			mPreUpdatingBoard = true;
 			for (int k = 0; k < 100; k++)
 			{
-				this.mBoard.Update();
+				mBoard.Update();
 			}
-			this.mPreUpdatingBoard = false;
-			this.mApp.mMuteSoundsForCutscene = false;
+			mPreUpdatingBoard = false;
+			mApp.mMuteSoundsForCutscene = false;
 		}
 
 		public bool ShouldRunUpsellBoard()
 		{
-			return (this.mApp.mGameMode == GameMode.GAMEMODE_UPSELL || this.mApp.mGameMode == GameMode.GAMEMODE_INTRO) && !this.mUpsellHideBoard;
+			return (mApp.mGameMode == GameMode.GAMEMODE_UPSELL || mApp.mGameMode == GameMode.GAMEMODE_INTRO) && !mUpsellHideBoard;
 		}
 
 		public void DrawUpsell(Graphics g)
 		{
-			if (this.mCrazyDaveLastTalkIndex == 3315)
+			if (mCrazyDaveLastTalkIndex == 3315)
 			{
 				Reanimation newReanimation = Reanimation.GetNewReanimation();
 				newReanimation.ReanimationInitializeType((float)Constants.CutScene_Upsell_TerraCotta_Pot.X, (float)Constants.CutScene_Upsell_TerraCotta_Pot.Y, ReanimationType.REANIM_FLOWER_POT);
 				newReanimation.SetFramesForLayer("anim_zengarden");
 				newReanimation.OverrideScale(1.3f, 1.3f);
 				newReanimation.Draw(g);
-				this.mBoard.mMenuButton.Draw(g);
+				mBoard.mMenuButton.Draw(g);
 				newReanimation.PrepareForReuse();
 			}
-			if (this.mUpsellChallengeScreen != null)
+			if (mUpsellChallengeScreen != null)
 			{
-				this.mUpsellChallengeScreen.Draw(g);
-				this.mBoard.mMenuButton.Draw(g);
+				mUpsellChallengeScreen.Draw(g);
+				mBoard.mMenuButton.Draw(g);
 			}
 		}
 
 		public void DrawIntro(Graphics g)
 		{
-			if (this.mCutsceneTime <= CutScene.TimeIntro_PanRightStart)
+			if (mCutsceneTime <= CutScene.TimeIntro_PanRightStart)
 			{
 				g.SetColorizeImages(true);
 				g.SetColor(SexyColor.Black);
-				g.FillRect(-this.mBoard.mX, -this.mBoard.mY, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT);
+				g.FillRect(-mBoard.mX, -mBoard.mY, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT);
 				g.SetColorizeImages(false);
 			}
 			int num = CutScene.TimeIntro_PanRightStart - 1000;
-			if (this.mCutsceneTime > CutScene.TimeIntro_PresentsFadeIn && this.mCutsceneTime <= num)
+			if (mCutsceneTime > CutScene.TimeIntro_PresentsFadeIn && mCutsceneTime <= num)
 			{
 				int theAlpha;
-				if (this.mCutsceneTime < num - 600)
+				if (mCutsceneTime < num - 600)
 				{
-					theAlpha = TodCommon.TodAnimateCurve(CutScene.TimeIntro_PresentsFadeIn, CutScene.TimeIntro_PresentsFadeIn + 300, this.mCutsceneTime, 0, Constants.CutScene_LogoEndPos, TodCurves.CURVE_LINEAR);
+					theAlpha = TodCommon.TodAnimateCurve(CutScene.TimeIntro_PresentsFadeIn, CutScene.TimeIntro_PresentsFadeIn + 300, mCutsceneTime, 0, Constants.CutScene_LogoEndPos, TodCurves.CURVE_LINEAR);
 				}
 				else
 				{
-					theAlpha = TodCommon.TodAnimateCurve(num - 600, num - 300, this.mCutsceneTime, 255, 0, TodCurves.CURVE_LINEAR);
+					theAlpha = TodCommon.TodAnimateCurve(num - 600, num - 300, mCutsceneTime, 255, 0, TodCurves.CURVE_LINEAR);
 				}
 				SexyColor theColor = new SexyColor(255, 255, 255, theAlpha);
-				TodCommon.TodDrawString(g, "[INTRO_PRESENTS]", Constants.BOARD_WIDTH / 2 - this.mBoard.mX, (int)(310f * Constants.S) - this.mBoard.mY - 40, Resources.FONT_BRIANNETOD16, theColor, DrawStringJustification.DS_ALIGN_CENTER);
+				TodCommon.TodDrawString(g, "[INTRO_PRESENTS]", Constants.BOARD_WIDTH / 2 - mBoard.mX, (int)(310f * Constants.S) - mBoard.mY - 40, Resources.FONT_BRIANNETOD16, theColor, DrawStringJustification.DS_ALIGN_CENTER);
 			}
-			if (this.mCutsceneTime > CutScene.TimeIntro_LogoStart && this.mCutsceneTime <= CutScene.TimeIntro_PanRightEnd)
+			if (mCutsceneTime > CutScene.TimeIntro_LogoStart && mCutsceneTime <= CutScene.TimeIntro_PanRightEnd)
 			{
-				float num2 = TodCommon.TodAnimateCurveFloat(CutScene.TimeIntro_LogoStart, CutScene.TimeIntro_LogoEnd, this.mCutsceneTime, 5f, 1f, TodCurves.CURVE_EASE_OUT);
-				TRect theRect = new TRect(Constants.BOARD_WIDTH / 2 - this.mBoard.mX - (int)((float)Constants.BOARD_WIDTH * 0.5f * num2), Constants.BOARD_HEIGHT / 2 - this.mBoard.mY - (int)(75f * num2), (int)((float)Constants.BOARD_WIDTH * num2), (int)((float)Constants.CutScene_LogoBackRect_Height * num2));
+				float num2 = TodCommon.TodAnimateCurveFloat(CutScene.TimeIntro_LogoStart, CutScene.TimeIntro_LogoEnd, mCutsceneTime, 5f, 1f, TodCurves.CURVE_EASE_OUT);
+				TRect theRect = new TRect(Constants.BOARD_WIDTH / 2 - mBoard.mX - (int)((float)Constants.BOARD_WIDTH * 0.5f * num2), Constants.BOARD_HEIGHT / 2 - mBoard.mY - (int)(75f * num2), (int)((float)Constants.BOARD_WIDTH * num2), (int)((float)Constants.CutScene_LogoBackRect_Height * num2));
 				g.SetColor(new SexyColor(0, 0, 0, 128));
 				g.SetColorizeImages(true);
 				g.FillRect(theRect);
 				g.SetColorizeImages(false);
-				TodCommon.TodDrawImageScaledF(g, Resources.IMAGE_PVZ_LOGO, (float)(Constants.BOARD_WIDTH / 2 - this.mBoard.mX) - (float)Resources.IMAGE_PVZ_LOGO.mWidth * 0.5f * num2, (float)(Constants.BOARD_HEIGHT / 2 - this.mBoard.mY) - (float)Resources.IMAGE_PVZ_LOGO.mHeight * 0.5f * num2, num2, num2);
+				TodCommon.TodDrawImageScaledF(g, Resources.IMAGE_PVZ_LOGO, (float)(Constants.BOARD_WIDTH / 2 - mBoard.mX) - (float)Resources.IMAGE_PVZ_LOGO.mWidth * 0.5f * num2, (float)(Constants.BOARD_HEIGHT / 2 - mBoard.mY) - (float)Resources.IMAGE_PVZ_LOGO.mHeight * 0.5f * num2, num2, num2);
 			}
-			if (this.mCutsceneTime > CutScene.TimeIntro_FadeOut && this.mCutsceneTime <= CutScene.TimeIntro_FadeOutEnd)
+			if (mCutsceneTime > CutScene.TimeIntro_FadeOut && mCutsceneTime <= CutScene.TimeIntro_FadeOutEnd)
 			{
-				int theAlpha2 = TodCommon.TodAnimateCurve(CutScene.TimeIntro_FadeOut, CutScene.TimeIntro_FadeOutEnd, this.mCutsceneTime, 0, 255, TodCurves.CURVE_LINEAR);
+				int theAlpha2 = TodCommon.TodAnimateCurve(CutScene.TimeIntro_FadeOut, CutScene.TimeIntro_FadeOutEnd, mCutsceneTime, 0, 255, TodCurves.CURVE_LINEAR);
 				g.SetColor(new SexyColor(0, 0, 0, theAlpha2));
 				g.SetColorizeImages(true);
-				g.FillRect(-this.mBoard.mX, -this.mBoard.mY, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT);
+				g.FillRect(-mBoard.mX, -mBoard.mY, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT);
 			}
-			if (this.mCutsceneTime > CutScene.TimeIntro_FadeOutEnd)
+			if (mCutsceneTime > CutScene.TimeIntro_FadeOutEnd)
 			{
 				g.SetColor(SexyColor.Black);
 				g.SetColorizeImages(true);
-				g.FillRect(-this.mBoard.mX, -this.mBoard.mY, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT);
+				g.FillRect(-mBoard.mX, -mBoard.mY, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT);
 			}
 		}
 
 		public void UpdateIntro()
 		{
-			int num = TodCommon.TodAnimateCurve(CutScene.TimeIntro_PanRightStart, CutScene.TimeIntro_PanRightEnd, this.mCutsceneTime, -100, 100, TodCurves.CURVE_LINEAR);
-			this.mBoard.Move((int)((float)(-(float)num) * Constants.S), 0);
-			if (this.mCutsceneTime == 10)
+			int num = TodCommon.TodAnimateCurve(CutScene.TimeIntro_PanRightStart, CutScene.TimeIntro_PanRightEnd, mCutsceneTime, -100, 100, TodCurves.CURVE_LINEAR);
+			mBoard.Move((int)((float)(-(float)num) * Constants.S), 0);
+			if (mCutsceneTime == 10)
 			{
-				this.LoadIntroBoard();
+				LoadIntroBoard();
 			}
-			if (this.mCutsceneTime == CutScene.TimeIntro_FadeOut)
+			if (mCutsceneTime == CutScene.TimeIntro_FadeOut)
 			{
-				this.mApp.mMusic.FadeOut(250);
+				mApp.mMusic.FadeOut(250);
 			}
-			if (this.mCutsceneTime == CutScene.TimeIntro_LogoEnd)
+			if (mCutsceneTime == CutScene.TimeIntro_LogoEnd)
 			{
-				this.mApp.AddTodParticle((float)Constants.CutScene_LogoEnd_Particle_Pos.X, (float)Constants.CutScene_LogoEnd_Particle_Pos.Y, 400000, ParticleEffect.PARTICLE_SCREEN_FLASH);
-				this.mApp.mMuteSoundsForCutscene = false;
-				this.mApp.PlaySample(Resources.SOUND_HUGE_WAVE);
-				this.mApp.mMuteSoundsForCutscene = true;
+				mApp.AddTodParticle((float)Constants.CutScene_LogoEnd_Particle_Pos.X, (float)Constants.CutScene_LogoEnd_Particle_Pos.Y, 400000, ParticleEffect.PARTICLE_SCREEN_FLASH);
+				mApp.mMuteSoundsForCutscene = false;
+				mApp.PlaySample(Resources.SOUND_HUGE_WAVE);
+				mApp.mMuteSoundsForCutscene = true;
 			}
-			if (this.mCutsceneTime == CutScene.TimeIntro_FadeOut - 200)
+			if (mCutsceneTime == CutScene.TimeIntro_FadeOut - 200)
 			{
-				this.mApp.mMuteSoundsForCutscene = false;
-				this.mApp.PlaySample(Resources.SOUND_SIREN);
-				this.mApp.mMuteSoundsForCutscene = true;
+				mApp.mMuteSoundsForCutscene = false;
+				mApp.PlaySample(Resources.SOUND_SIREN);
+				mApp.mMuteSoundsForCutscene = true;
 			}
-			if (this.mCutsceneTime == CutScene.TimeIntro_End)
+			if (mCutsceneTime == CutScene.TimeIntro_End)
 			{
-				this.mApp.PreNewGame(GameMode.GAMEMODE_ADVENTURE, false);
+				mApp.PreNewGame(GameMode.GAMEMODE_ADVENTURE, false);
 			}
 		}
 

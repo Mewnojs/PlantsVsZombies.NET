@@ -8,125 +8,125 @@ namespace Lawn
 	{
 		public NewLawnButton(Image theComponentImage, int theId, ButtonListener theListener) : base(theComponentImage, theId, theListener)
 		{
-			this.mHiliteFont = null;
-			this.mTextDownOffsetX = 0;
-			this.mTextDownOffsetY = 0;
-			this.mButtonOffsetX = 0;
-			this.mButtonOffsetY = 0;
-			this.mUsePolygonShape = false;
-			this.SetColor(5, SexyColor.White);
+			mHiliteFont = null;
+			mTextDownOffsetX = 0;
+			mTextDownOffsetY = 0;
+			mButtonOffsetX = 0;
+			mButtonOffsetY = 0;
+			mUsePolygonShape = false;
+			SetColor(5, SexyColor.White);
 		}
 
 		public override void Draw(Graphics g)
 		{
-			if (this.mBtnNoDraw)
+			if (mBtnNoDraw)
 			{
 				return;
 			}
-			bool flag = this.mIsDown && this.mIsOver && !this.mDisabled;
-			flag ^= this.mInverted;
-			int num = this.mTextOffsetX + this.mTranslateX;
-			int num2 = this.mTextOffsetY + this.mTranslateY;
-			if (this.mFont != null)
+			bool flag = mIsDown && mIsOver && !mDisabled;
+			flag ^= mInverted;
+			int num = mTextOffsetX + mTranslateX;
+			int num2 = mTextOffsetY + mTranslateY;
+			if (mFont != null)
 			{
-				if (this.mLabelJustify == 0)
+				if (mLabelJustify == 0)
 				{
-					num += (this.mWidth - this.mFont.StringWidth(this.mLabel)) / 2;
+					num += (mWidth - mFont.StringWidth(mLabel)) / 2;
 				}
-				else if (this.mLabelJustify == 1)
+				else if (mLabelJustify == 1)
 				{
-					num += this.mWidth - this.mFont.StringWidth(this.mLabel);
+					num += mWidth - mFont.StringWidth(mLabel);
 				}
-				num2 += (this.mHeight + this.mFont.GetAscent() - this.mFont.GetAscent() / 6 - 1) / 2;
+				num2 += (mHeight + mFont.GetAscent() - mFont.GetAscent() / 6 - 1) / 2;
 			}
 			if (!flag)
 			{
 				g.SetColorizeImages(true);
-				g.SetColor(this.mColors[5]);
-				if (this.mDisabled && base.HaveButtonImage(this.mDisabledImage, this.mDisabledRect))
+				g.SetColor(mColors[5]);
+				if (mDisabled && base.HaveButtonImage(mDisabledImage, mDisabledRect))
 				{
-					this.DrawButtonImage(g, this.mDisabledImage, this.mDisabledRect, this.mButtonOffsetX, this.mButtonOffsetY);
+					DrawButtonImage(g, mDisabledImage, mDisabledRect, mButtonOffsetX, mButtonOffsetY);
 				}
-				else if (this.mOverAlpha > 0.0 && base.HaveButtonImage(this.mOverImage, this.mOverRect))
+				else if (mOverAlpha > 0.0 && base.HaveButtonImage(mOverImage, mOverRect))
 				{
-					if (base.HaveButtonImage(this.mButtonImage, this.mNormalRect) && this.mOverAlpha < 1.0)
+					if (base.HaveButtonImage(mButtonImage, mNormalRect) && mOverAlpha < 1.0)
 					{
-						this.DrawButtonImage(g, this.mButtonImage, this.mNormalRect, this.mButtonOffsetX, this.mButtonOffsetY);
+						DrawButtonImage(g, mButtonImage, mNormalRect, mButtonOffsetX, mButtonOffsetY);
 					}
 					SexyColor aColor = g.GetColor();
-					aColor.mAlpha = (int)(this.mOverAlpha * 255.0);
+					aColor.mAlpha = (int)(mOverAlpha * 255.0);
 					g.SetColor(aColor);
-					this.DrawButtonImage(g, this.mOverImage, this.mOverRect, this.mButtonOffsetX, this.mButtonOffsetY);
+					DrawButtonImage(g, mOverImage, mOverRect, mButtonOffsetX, mButtonOffsetY);
 				}
-				else if ((this.mIsOver || this.mIsDown) && base.HaveButtonImage(this.mOverImage, this.mOverRect))
+				else if ((mIsOver || mIsDown) && base.HaveButtonImage(mOverImage, mOverRect))
 				{
-					this.DrawButtonImage(g, this.mOverImage, this.mOverRect, this.mButtonOffsetX, this.mButtonOffsetY);
+					DrawButtonImage(g, mOverImage, mOverRect, mButtonOffsetX, mButtonOffsetY);
 				}
-				else if (base.HaveButtonImage(this.mButtonImage, this.mNormalRect))
+				else if (base.HaveButtonImage(mButtonImage, mNormalRect))
 				{
-					this.DrawButtonImage(g, this.mButtonImage, this.mNormalRect, this.mButtonOffsetX, this.mButtonOffsetY);
+					DrawButtonImage(g, mButtonImage, mNormalRect, mButtonOffsetX, mButtonOffsetY);
 				}
 				g.SetColorizeImages(false);
-				if (this.mIsOver)
+				if (mIsOver)
 				{
-					if (this.mHiliteFont != null)
+					if (mHiliteFont != null)
 					{
-						g.SetFont(this.mHiliteFont);
+						g.SetFont(mHiliteFont);
 					}
 					else
 					{
-						g.SetFont(this.mFont);
+						g.SetFont(mFont);
 					}
-					g.SetColor(this.mColors[1]);
+					g.SetColor(mColors[1]);
 				}
 				else
 				{
-					g.SetFont(this.mFont);
-					g.SetColor(this.mColors[0]);
+					g.SetFont(mFont);
+					g.SetColor(mColors[0]);
 				}
-				g.DrawString(this.mLabel, num, num2);
+				g.DrawString(mLabel, num, num2);
 				return;
 			}
 			g.SetColorizeImages(true);
-			g.SetColor(this.mColors[5]);
-			if (base.HaveButtonImage(this.mDownImage, this.mDownRect))
+			g.SetColor(mColors[5]);
+			if (base.HaveButtonImage(mDownImage, mDownRect))
 			{
-				this.DrawButtonImage(g, this.mDownImage, this.mDownRect, this.mButtonOffsetX + this.mTranslateX, this.mButtonOffsetY + this.mTranslateY);
+				DrawButtonImage(g, mDownImage, mDownRect, mButtonOffsetX + mTranslateX, mButtonOffsetY + mTranslateY);
 			}
-			else if (base.HaveButtonImage(this.mOverImage, this.mOverRect))
+			else if (base.HaveButtonImage(mOverImage, mOverRect))
 			{
-				this.DrawButtonImage(g, this.mOverImage, this.mOverRect, this.mButtonOffsetX + this.mTranslateX, this.mButtonOffsetY + this.mTranslateY);
+				DrawButtonImage(g, mOverImage, mOverRect, mButtonOffsetX + mTranslateX, mButtonOffsetY + mTranslateY);
 			}
-			else if (base.HaveButtonImage(this.mButtonImage, this.mNormalRect))
+			else if (base.HaveButtonImage(mButtonImage, mNormalRect))
 			{
-				this.DrawButtonImage(g, this.mButtonImage, this.mNormalRect, this.mButtonOffsetX + this.mTranslateX, this.mButtonOffsetY + this.mTranslateY);
+				DrawButtonImage(g, mButtonImage, mNormalRect, mButtonOffsetX + mTranslateX, mButtonOffsetY + mTranslateY);
 			}
 			g.SetColorizeImages(false);
-			if (this.mHiliteFont != null)
+			if (mHiliteFont != null)
 			{
-				g.SetFont(this.mHiliteFont);
+				g.SetFont(mHiliteFont);
 			}
 			else
 			{
-				g.SetFont(this.mFont);
+				g.SetFont(mFont);
 			}
-			g.SetColor(this.mColors[1]);
-			g.DrawString(this.mLabel, num + this.mTextDownOffsetX, num2 + this.mTextDownOffsetY);
+			g.SetColor(mColors[1]);
+			g.DrawString(mLabel, num + mTextDownOffsetX, num2 + mTextDownOffsetY);
 		}
 
 		public override bool IsPointVisible(int x, int y)
 		{
-			if (!this.mUsePolygonShape)
+			if (!mUsePolygonShape)
 			{
 				return base.IsPointVisible(x, y);
 			}
 			SexyVector2 theCheckPoint = new SexyVector2((float)x, (float)y);
-			return TodCommon.TodIsPointInPolygon(this.mPolygonShape, 4, theCheckPoint);
+			return TodCommon.TodIsPointInPolygon(mPolygonShape, 4, theCheckPoint);
 		}
 
 		public void SetLabel(string theLabel)
 		{
-			this.mLabel = TodStringFile.TodStringTranslate(theLabel);
+			mLabel = TodStringFile.TodStringTranslate(theLabel);
 		}
 
 		public Font mHiliteFont;

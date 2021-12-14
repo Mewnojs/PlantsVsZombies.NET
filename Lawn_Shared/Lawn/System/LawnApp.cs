@@ -16,15 +16,15 @@ namespace Lawn
 		{
 			get
 			{
-				return this._playerInfo;
+				return _playerInfo;
 			}
 			set
 			{
-				this._playerInfo = value;
-				if (this.mPlayerInfo != null)
+				_playerInfo = value;
+				if (mPlayerInfo != null)
 				{
-					this.SetMusicVolume(this.mPlayerInfo.mMusicVolume);
-					this.SetSfxVolume(this.mPlayerInfo.mSoundVolume);
+					SetMusicVolume(mPlayerInfo.mMusicVolume);
+					SetSfxVolume(mPlayerInfo.mSoundVolume);
 				}
 			}
 		}
@@ -36,120 +36,120 @@ namespace Lawn
 
 		public LawnApp(Main m) : base(m)
 		{
-			this.mBoard = null;
-			this.mGameSelector = null;
-			this.mSeedChooserScreen = null;
-			this.mAwardScreen = null;
-			this.mCreditScreen = null;
-			this.mTitleScreen = null;
-			this.mSoundSystem = null;
-			this.mKonamiCheck = null;
-			this.mMustacheCheck = null;
-			this.mMoustacheCheck = null;
-			this.mSuperMowerCheck = null;
-			this.mSuperMowerCheck2 = null;
-			this.mFutureCheck = null;
-			this.mPinataCheck = null;
-			this.mDanceCheck = null;
-			this.mDaisyCheck = null;
-			this.mSukhbirCheck = null;
-			this.mMustacheMode = false;
-			this.mSuperMowerMode = false;
-			this.mFutureMode = false;
-			this.mPinataMode = false;
-			this.mDanceMode = false;
-			this.mDaisyMode = false;
-			this.mSukhbirMode = false;
-			this.mGameScene = GameScenes.SCENE_LOADING;
-			this.mZenGarden = null;
-			this.mEffectSystem = null;
-			this.mReanimatorCache = null;
-			this.mCloseRequest = false;
-			this.mWidth = Constants.BOARD_WIDTH;
-			this.mHeight = Constants.BOARD_HEIGHT;
-			this.mAppCounter = 0;
-			this.mAppRandSeed = DateTime.UtcNow.Millisecond;
-			this.mTrialType = TrialType.TRIAL_NONE;
-			this.mDebugTrialLocked = false;
-			this.mMuteSoundsForCutscene = false;
+			mBoard = null;
+			mGameSelector = null;
+			mSeedChooserScreen = null;
+			mAwardScreen = null;
+			mCreditScreen = null;
+			mTitleScreen = null;
+			mSoundSystem = null;
+			mKonamiCheck = null;
+			mMustacheCheck = null;
+			mMoustacheCheck = null;
+			mSuperMowerCheck = null;
+			mSuperMowerCheck2 = null;
+			mFutureCheck = null;
+			mPinataCheck = null;
+			mDanceCheck = null;
+			mDaisyCheck = null;
+			mSukhbirCheck = null;
+			mMustacheMode = false;
+			mSuperMowerMode = false;
+			mFutureMode = false;
+			mPinataMode = false;
+			mDanceMode = false;
+			mDaisyMode = false;
+			mSukhbirMode = false;
+			mGameScene = GameScenes.SCENE_LOADING;
+			mZenGarden = null;
+			mEffectSystem = null;
+			mReanimatorCache = null;
+			mCloseRequest = false;
+			mWidth = Constants.BOARD_WIDTH;
+			mHeight = Constants.BOARD_HEIGHT;
+			mAppCounter = 0;
+			mAppRandSeed = DateTime.UtcNow.Millisecond;
+			mTrialType = TrialType.TRIAL_NONE;
+			mDebugTrialLocked = false;
+			mMuteSoundsForCutscene = false;
 			base.mMusicVolume = 0.85;
-			this.mSfxVolume = 0.85;
-			this.mAutoStartLoadingThread = false;
-			this.mProdName = "PlantsVsZombies";
-			string mTitle = "Plants vs. Zombies";
-			this.mTitle = mTitle;
-			this.mPlayerInfo = null;
-			this.mLastLevelStats = new LevelStats();
-			this.mFirstTimeGameSelector = true;
-			this.mGameMode = GameMode.GAMEMODE_ADVENTURE;
-			this.mEasyPlantingCheat = false;
-			this.mLoadingZombiesThreadCompleted = true;
-			this.mGamesPlayed = 0;
-			this.mMaxExecutions = 0;
-			this.mMaxPlays = 0;
-			this.mMaxTime = 0;
-			this.mCompletedLoadingThreadTasks = 0;
-			this.mProfileMgr = new ProfileMgr();
-			this.mRegisterResourcesLoaded = false;
-			this.mTodCheatKeys = false;
-			this.mCrazyDaveReanimID = null;
-			this.mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_OFF;
-			this.mCrazyDaveBlinkCounter = 0;
-			this.mCrazyDaveBlinkReanimID = null;
-			this.mCrazyDaveMessageIndex = -1;
-			this.mLawnMessageBoxListener = null;
-			ReportAchievement.AchievementsChanged += this.ReportAchievement_AchievementsChanged;
+			mSfxVolume = 0.85;
+			mAutoStartLoadingThread = false;
+			mProdName = "PlantsVsZombies";
+			string aTitle = "Plants vs. Zombies";
+			mTitle = aTitle;
+			mPlayerInfo = null;
+			mLastLevelStats = new LevelStats();
+			mFirstTimeGameSelector = true;
+			mGameMode = GameMode.GAMEMODE_ADVENTURE;
+			mEasyPlantingCheat = false;
+			mLoadingZombiesThreadCompleted = true;
+			mGamesPlayed = 0;
+			mMaxExecutions = 0;
+			mMaxPlays = 0;
+			mMaxTime = 0;
+			mCompletedLoadingThreadTasks = 0;
+			mProfileMgr = new ProfileMgr();
+			mRegisterResourcesLoaded = false;
+			mTodCheatKeys = false;
+			mCrazyDaveReanimID = null;
+			mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_OFF;
+			mCrazyDaveBlinkCounter = 0;
+			mCrazyDaveBlinkReanimID = null;
+			mCrazyDaveMessageIndex = -1;
+			mLawnMessageBoxListener = null;
+			ReportAchievement.AchievementsChanged += ReportAchievement_AchievementsChanged;
 		}
 
 		private void ReportAchievement_AchievementsChanged()
 		{
-			if (this.mPlayerInfo != null)
+			if (mPlayerInfo != null)
 			{
-				this.mPlayerInfo.UpdateAchievementInfo();
+				mPlayerInfo.UpdateAchievementInfo();
 			}
 		}
 
 		public override void Dispose()
 		{
-			if (this.mBoard != null)
+			if (mBoard != null)
 			{
-				this.WriteCurrentUserConfig();
+				WriteCurrentUserConfig();
 			}
-			if (this.mBoard != null)
+			if (mBoard != null)
 			{
-				this.mBoardResult = BoardResult.BOARDRESULT_QUIT_APP;
-				this.mBoard.TryToSaveGame();
-				this.mWidgetManager.RemoveWidget(this.mBoard);
-				this.mBoard.Dispose();
-				this.mBoard = null;
+				mBoardResult = BoardResult.BOARDRESULT_QUIT_APP;
+				mBoard.TryToSaveGame();
+				mWidgetManager.RemoveWidget(mBoard);
+				mBoard.Dispose();
+				mBoard = null;
 			}
-			if (this.mTitleScreen != null)
+			if (mTitleScreen != null)
 			{
-				this.mWidgetManager.RemoveWidget(this.mTitleScreen);
-				this.mTitleScreen.Dispose();
+				mWidgetManager.RemoveWidget(mTitleScreen);
+				mTitleScreen.Dispose();
 			}
-			if (this.mGameSelector != null)
+			if (mGameSelector != null)
 			{
-				this.mWidgetManager.RemoveWidget(this.mGameSelector);
-				this.mGameSelector.Dispose();
+				mWidgetManager.RemoveWidget(mGameSelector);
+				mGameSelector.Dispose();
 			}
-			if (this.mSeedChooserScreen != null)
+			if (mSeedChooserScreen != null)
 			{
-				this.mWidgetManager.RemoveWidget(this.mSeedChooserScreen);
-				this.mSeedChooserScreen.Dispose();
+				mWidgetManager.RemoveWidget(mSeedChooserScreen);
+				mSeedChooserScreen.Dispose();
 			}
-			if (this.mAwardScreen != null)
+			if (mAwardScreen != null)
 			{
-				this.mWidgetManager.RemoveWidget(this.mAwardScreen);
-				this.mAwardScreen.Dispose();
+				mWidgetManager.RemoveWidget(mAwardScreen);
+				mAwardScreen.Dispose();
 			}
-			if (this.mCreditScreen != null)
+			if (mCreditScreen != null)
 			{
-				this.mWidgetManager.RemoveWidget(this.mCreditScreen);
-				this.mCreditScreen.Dispose();
+				mWidgetManager.RemoveWidget(mCreditScreen);
+				mCreditScreen.Dispose();
 			}
-			this.mProfileMgr.Dispose();
-			this.mResourceManager.DeleteResources("");
+			mProfileMgr.Dispose();
+			mResourceManager.DeleteResources("");
 		}
 
 		public bool KillNewOptionsDialog()
@@ -158,7 +158,7 @@ namespace Lawn
 			{
 				return false;
 			}
-			this.KillDialog(2);
+			KillDialog(2);
 			return true;
 		}
 
@@ -168,29 +168,29 @@ namespace Lawn
 			{
 				return false;
 			}
-			this.KillDialog(59);
-			this.mLeaderboardScreen.SetGrayed(false);
+			KillDialog(59);
+			mLeaderboardScreen.SetGrayed(false);
 			return true;
 		}
 
 		public override void GotFocus()
 		{
-			if (this.mSoundManager != null)
+			if (mSoundManager != null)
 			{
-				this.mSoundManager.Enable(true);
+				mSoundManager.Enable(true);
 			}
-			if (this.mMusicInterface != null)
+			if (mMusicInterface != null)
 			{
-				this.mMusicInterface.Enable(this.mMusicEnabled);
+				mMusicInterface.Enable(mMusicEnabled);
 			}
-			if (this.mCreditScreen != null)
+			if (mCreditScreen != null)
 			{
-				this.mCreditScreen.AppGotFocus();
+				mCreditScreen.AppGotFocus();
 			}
-			if (this.checkGiveAchievements && !SexyAppBase.IsInTrialMode)
+			if (checkGiveAchievements && !SexyAppBase.IsInTrialMode)
 			{
-				this.checkGiveAchievements = false;
-				ReportAchievement.GiveAchievement(this.achievementToCheck);
+				checkGiveAchievements = false;
+				ReportAchievement.GiveAchievement(achievementToCheck);
 			}
 			base.GotFocus();
 		}
@@ -198,32 +198,32 @@ namespace Lawn
 		public override void LostFocus()
 		{
 			base.LostFocus();
-			if (this.mSoundManager != null)
+			if (mSoundManager != null)
 			{
-				this.mSoundManager.StopAllSounds();
+				mSoundManager.StopAllSounds();
 			}
-			if (this.mBoard != null && this.mBoard.mBoardFadeOutCounter > 0)
+			if (mBoard != null && mBoard.mBoardFadeOutCounter > 0)
 			{
-				this.mBoard.mBoardFadeOutCounter = 3;
+				mBoard.mBoardFadeOutCounter = 3;
 			}
-			if (!this.mTodCheatKeys && this.CanPauseNow())
+			if (!mTodCheatKeys && CanPauseNow())
 			{
-				if (this.mBoard != null)
+				if (mBoard != null)
 				{
-					this.mBoard.RefreshSeedPacketFromCursor();
+					mBoard.RefreshSeedPacketFromCursor();
 				}
-				this.DoPauseDialog();
+				DoPauseDialog();
 			}
 		}
 
 		public override void AppEnteredBackground()
 		{
-			this.WriteRestoreInfo();
-			if (this.mBoard != null)
+			WriteRestoreInfo();
+			if (mBoard != null)
 			{
-				this.mBoard.TryToSaveGame();
+				mBoard.TryToSaveGame();
 			}
-			this.WriteCurrentUserConfig();
+			WriteCurrentUserConfig();
 		}
 
 		public override void InitHook()
@@ -232,10 +232,10 @@ namespace Lawn
 
 		public override void WriteToRegistry()
 		{
-			if (this.mPlayerInfo != null)
+			if (mPlayerInfo != null)
 			{
-				base.RegistryWriteString("CurUser", this.mPlayerInfo.mName);
-				this.mPlayerInfo.SaveDetails();
+				base.RegistryWriteString("CurUser", mPlayerInfo.mName);
+				mPlayerInfo.SaveDetails();
 			}
 			base.WriteToRegistry();
 		}
@@ -247,8 +247,8 @@ namespace Lawn
 			{
 				return;
 			}
-			Resources.ExtractLoaderBarFontResources(this.mResourceManager);
-			Resources.ExtractLoaderBarResources(this.mResourceManager);
+			Resources.ExtractLoaderBarFontResources(mResourceManager);
+			Resources.ExtractLoaderBarResources(mResourceManager);
 			AtlasResources.mAtlasResources.UnpackLoadingAtlasImages();
 			Resources.LinkUpResArray();
 			ReanimationParams[] array = new ReanimationParams[]
@@ -258,43 +258,43 @@ namespace Lawn
 			};
 			ReanimatorXnaHelpers.ReanimatorLoadDefinitions(ref array, array.Length);
 			TodStringFile.TodStringListLoad("Content/"+"LawnStrings_" + Constants.LanguageSubDir + ".txt");
-			this.mTitleScreen.mLoaderScreenIsLoaded = true;
-			this.mNumLoadingThreadTasks += this.mResourceManager.GetNumResources("LoadingFonts") * 54;
-			this.mNumLoadingThreadTasks += this.mResourceManager.GetNumResources("LoadingImages") * 9;
-			this.mNumLoadingThreadTasks += this.mResourceManager.GetNumResources("LoadingSounds") * 54;
-			this.mNumLoadingThreadTasks += 612;
-			this.mNumLoadingThreadTasks += 8092;
-			this.mNumLoadingThreadTasks += 360500;
-			this.mNumLoadingThreadTasks += this.GetNumPreloadingTasks();
-			this.mNumLoadingThreadTasks += this.mMusic.GetNumLoadingTasks();
+			mTitleScreen.mLoaderScreenIsLoaded = true;
+			mNumLoadingThreadTasks += mResourceManager.GetNumResources("LoadingFonts") * 54;
+			mNumLoadingThreadTasks += mResourceManager.GetNumResources("LoadingImages") * 9;
+			mNumLoadingThreadTasks += mResourceManager.GetNumResources("LoadingSounds") * 54;
+			mNumLoadingThreadTasks += 612;
+			mNumLoadingThreadTasks += 8092;
+			mNumLoadingThreadTasks += 360500;
+			mNumLoadingThreadTasks += GetNumPreloadingTasks();
+			mNumLoadingThreadTasks += mMusic.GetNumLoadingTasks();
 			if (!Main.LOW_MEMORY_DEVICE)
 			{
-				this.DelayLoadGamePlayResources(true);
-				this.DelayLoadLeaderboardResource(true);
-				this.DelayLoadCachedResources(true);
-				this.DelayLoadZenGardenResources(true);
+				DelayLoadGamePlayResources(true);
+				DelayLoadLeaderboardResource(true);
+				DelayLoadCachedResources(true);
+				DelayLoadZenGardenResources(true);
 			}
-			this.DelayLoadMainMenuResource(true);
-			this.mResourceManager.LoadAllResources();
-			Resources.ExtractResources(this.mResourceManager, AtlasResources.mAtlasResources);
+			DelayLoadMainMenuResource(true);
+			mResourceManager.LoadAllResources();
+			Resources.ExtractResources(mResourceManager, AtlasResources.mAtlasResources);
 			AtlasResources.mAtlasResources.ExtractResources();
 			ReanimatorXnaHelpers.ReanimatorLoadDefinitions(ref GameConstants.gLawnReanimationArray, 119);
 			TodStringFile.TodStringListSetColors(GameConstants.gLawnStringFormats, GameConstants.gLawnStringFormatCount);
-			if (this.mLoadingFailed || this.mShutdown || this.mCloseRequest)
+			if (mLoadingFailed || mShutdown || mCloseRequest)
 			{
 				return;
 			}
-			this.mMusic.MusicInit();
-			this.mZenGarden = new ZenGarden();
-			this.mReanimatorCache = new ReanimatorCache();
-			this.mReanimatorCache.ReanimatorCacheInitialize();
+			mMusic.MusicInit();
+			mZenGarden = new ZenGarden();
+			mReanimatorCache = new ReanimatorCache();
+			mReanimatorCache.ReanimatorCacheInitialize();
 			TodFoley.TodFoleyInitialize(null, 103);
 			GlobalMembersTrail.TrailLoadDefinitions(GameConstants.gLawnTrailArray, 1);
 			TodParticleGlobal.TodParticleLoadDefinitions(ref GameConstants.gLawnParticleArray, 102);
-			this.PreloadForUser();
-			if (!this.mLoadingFailed && !this.mShutdown)
+			PreloadForUser();
+			if (!mLoadingFailed && !mShutdown)
 			{
-				bool flag = this.mCloseRequest;
+				bool flag = mCloseRequest;
 			}
 			// init filter effects
 			for (int i = 0; i < (int)FilterEffectType.NUM_FILTER_EFFECTS; i++)
@@ -305,18 +305,18 @@ namespace Lawn
 
 		public virtual void LoadingCompleted()
 		{
-			this.mWidgetManager.RemoveWidget(this.mTitleScreen);
-			base.SafeDeleteWidget(this.mTitleScreen);
-			this.mTitleScreen = null;
-			this.mResourceManager.DeleteImage("IMAGE_TITLESCREEN");
-			if (this.mRestoreLocation == RestoreLocation.RESTORE_BOARD && this.RestoreGame())
+			mWidgetManager.RemoveWidget(mTitleScreen);
+			base.SafeDeleteWidget(mTitleScreen);
+			mTitleScreen = null;
+			mResourceManager.DeleteImage("IMAGE_TITLESCREEN");
+			if (mRestoreLocation == RestoreLocation.RESTORE_BOARD && RestoreGame())
 			{
 				return;
 			}
-			this.ShowGameSelector();
+			ShowGameSelector();
 			if (Main.LOW_MEMORY_DEVICE)
 			{
-				this.mResourceManager.UnloadInitResources();
+				mResourceManager.UnloadInitResources();
 			}
 		}
 
@@ -394,7 +394,7 @@ namespace Lawn
 
 		public override void PlaySample(int theSoundNum)
 		{
-			if (!this.mMuteSoundsForCutscene)
+			if (!mMuteSoundsForCutscene)
 			{
 				base.PlaySample(theSoundNum);
 			}
@@ -404,7 +404,7 @@ namespace Lawn
 		{
 			string theDialogLines = TodStringFile.TodStringTranslate("[QUIT_MESSAGE]");
 			string theDialogHeader = TodStringFile.TodStringTranslate("[QUIT_HEADER]");
-			LawnDialog lawnDialog = this.DoDialog(13, true, theDialogHeader, theDialogLines, "", 2);
+			LawnDialog lawnDialog = DoDialog(13, true, theDialogHeader, theDialogLines, "", 2);
 			lawnDialog.mLawnYesButton.mLabel = TodStringFile.TodStringTranslate("[QUIT_BUTTON]");
 			LawnApp.CenterDialog(lawnDialog, lawnDialog.mWidth, lawnDialog.mHeight);
 		}
@@ -419,11 +419,11 @@ namespace Lawn
 
 		public void DoUserDialog()
 		{
-			this.KillDialog(29);
+			KillDialog(29);
 			UserDialog userDialog = new UserDialog(this);
 			LawnApp.CenterDialog(userDialog, userDialog.mWidth, userDialog.mHeight);
 			base.AddDialog(29, userDialog);
-			this.mWidgetManager.SetFocus(userDialog);
+			mWidgetManager.SetFocus(userDialog);
 		}
 
 		public void FinishUserDialog(bool isYes)
@@ -435,28 +435,28 @@ namespace Lawn
 			}
 			if (isYes)
 			{
-				PlayerInfo profile = this.mProfileMgr.GetProfile(userDialog.GetSelName());
+				PlayerInfo profile = mProfileMgr.GetProfile(userDialog.GetSelName());
 				if (profile != null)
 				{
-					this.mPlayerInfo = profile;
-					this.mWidgetManager.MarkAllDirty();
-					if (this.mGameSelector != null)
+					mPlayerInfo = profile;
+					mWidgetManager.MarkAllDirty();
+					if (mGameSelector != null)
 					{
-						this.mGameSelector.SyncProfile(true);
+						mGameSelector.SyncProfile(true);
 					}
 				}
 			}
-			this.KillDialog(29);
+			KillDialog(29);
 		}
 
 		public void DoCreateUserDialog(bool isOnlyUser)
 		{
-			this.FinishCreateUserDialog(true);
+			FinishCreateUserDialog(true);
 		}
 
 		public void DoCheatDialog()
 		{
-			this.KillDialog(35);
+			KillDialog(35);
 			CheatDialog cheatDialog = new CheatDialog(this);
 			LawnApp.CenterDialog(cheatDialog, cheatDialog.mWidth, cheatDialog.mHeight);
 			base.AddDialog(35, cheatDialog);
@@ -473,12 +473,12 @@ namespace Lawn
 			{
 				return;
 			}
-			this.KillDialog(35);
+			KillDialog(35);
 			if (isYes)
 			{
-				this.mMusic.StopAllMusic();
-				this.mBoardResult = BoardResult.BOARDRESULT_CHEAT;
-				this.PreNewGame(this.mGameMode, false);
+				mMusic.StopAllMusic();
+				mBoardResult = BoardResult.BOARDRESULT_CHEAT;
+				PreNewGame(mGameMode, false);
 			}
 		}
 
@@ -486,90 +486,90 @@ namespace Lawn
 		{
 			string gamertag = "Player";//Gamer.SignedInGamers[PlayerIndex.One].Gamertag;
 			string theDialogLines = "[ENTER_NEW_USER]";
-			if (isYes && gamertag.empty() && this.mPlayerInfo != null)
+			if (isYes && gamertag.empty() && mPlayerInfo != null)
 			{
-				this.KillDialog(30);
+				KillDialog(30);
 				return;
 			}
-			if (this.mPlayerInfo == null && (!isYes || gamertag.empty()))
+			if (mPlayerInfo == null && (!isYes || gamertag.empty()))
 			{
-				this.DoDialog(33, true, "[ENTER_YOUR_NAME]", theDialogLines, "[DIALOG_BUTTON_OK]", 3);
+				DoDialog(33, true, "[ENTER_YOUR_NAME]", theDialogLines, "[DIALOG_BUTTON_OK]", 3);
 				return;
 			}
 			if (!isYes)
 			{
-				this.KillDialog(30);
+				KillDialog(30);
 				return;
 			}
-			PlayerInfo playerInfo = this.mProfileMgr.AddProfile(gamertag);
+			PlayerInfo playerInfo = mProfileMgr.AddProfile(gamertag);
 			if (playerInfo == null)
 			{
-				this.DoDialog(33, true, "[NAME_CONFLICT]", "[ENTER_UNIQUE_PLAYER_NAME]", "[DIALOG_BUTTON_OK]", 3);
+				DoDialog(33, true, "[NAME_CONFLICT]", "[ENTER_UNIQUE_PLAYER_NAME]", "[DIALOG_BUTTON_OK]", 3);
 				return;
 			}
-			this.mProfileMgr.Save();
-			this.mPlayerInfo = playerInfo;
-			this.KillDialog(29);
-			this.KillDialog(30);
-			this.mWidgetManager.MarkAllDirty();
-			if (this.mGameSelector != null)
+			mProfileMgr.Save();
+			mPlayerInfo = playerInfo;
+			KillDialog(29);
+			KillDialog(30);
+			mWidgetManager.MarkAllDirty();
+			if (mGameSelector != null)
 			{
-				this.mGameSelector.SyncProfile(true);
+				mGameSelector.SyncProfile(true);
 			}
 		}
 
 		public void DoConfirmDeleteUserDialog(string theName)
 		{
-			this.KillDialog(31);
-			this.DoDialog(31, true, "[ARE_YOU_SURE]", Common.StrFormat_(TodStringFile.TodStringTranslate("[DELETE_USER_WARNING]"), theName), "", 1);
+			KillDialog(31);
+			DoDialog(31, true, "[ARE_YOU_SURE]", Common.StrFormat_(TodStringFile.TodStringTranslate("[DELETE_USER_WARNING]"), theName), "", 1);
 		}
 
 		public void FinishConfirmDeleteUserDialog(bool isYes)
 		{
-			this.KillDialog(31);
+			KillDialog(31);
 			UserDialog userDialog = (UserDialog)base.GetDialog(Dialogs.DIALOG_USERDIALOG);
 			if (userDialog == null)
 			{
 				return;
 			}
-			this.mWidgetManager.SetFocus(userDialog);
+			mWidgetManager.SetFocus(userDialog);
 			if (!isYes)
 			{
 				return;
 			}
-			string text = (this.mPlayerInfo != null) ? this.mPlayerInfo.mName : "";
+			string text = (mPlayerInfo != null) ? mPlayerInfo.mName : "";
 			string selName = userDialog.GetSelName();
 			if (selName == text)
 			{
-				this.mPlayerInfo = null;
+				mPlayerInfo = null;
 			}
-			this.mProfileMgr.DeleteProfile(selName);
+			mProfileMgr.DeleteProfile(selName);
 			userDialog.FinishDeleteUser();
-			if (this.mPlayerInfo == null)
+			if (mPlayerInfo == null)
 			{
-				this.mPlayerInfo = this.mProfileMgr.GetProfile(userDialog.GetSelName());
-				if (this.mPlayerInfo == null)
+				mPlayerInfo = mProfileMgr.GetProfile(userDialog.GetSelName());
+				if (mPlayerInfo == null)
 				{
-					this.mPlayerInfo = this.mProfileMgr.GetAnyProfile();
+					mPlayerInfo = mProfileMgr.GetAnyProfile();
 				}
 			}
-			this.mProfileMgr.Save();
-			if (this.mPlayerInfo == null)
+			mProfileMgr.Save();
+			if (mPlayerInfo == null)
 			{
-				this.DoCreateUserDialog(true);
+				DoCreateUserDialog(true);
 			}
-			this.mWidgetManager.MarkAllDirty();
-			if (this.mGameSelector != null)
+			mWidgetManager.MarkAllDirty();
+			if (mGameSelector != null)
 			{
-				this.mGameSelector.SyncProfile(true);
+				mGameSelector.SyncProfile(true);
 			}
 		}
 
 		public void DoRenameUserDialog(string theName)
 		{
-			this.KillDialog(32);
+			KillDialog(32);
 			NewUserDialog newUserDialog = new NewUserDialog(this, true, true);
-			newUserDialog.Move(this.mWidth / 2 - newUserDialog.mWidth / 2, (int)Constants.InvertAndScale(20f));
+			newUserDialog.Move(mWidth / 2 - newUserDialog.mWidth / 2, (int)Constants.InvertAndScale(20f));
 			newUserDialog.SetName(theName);
 			base.AddDialog(32, newUserDialog);
 		}
@@ -579,8 +579,8 @@ namespace Lawn
 			UserDialog userDialog = (UserDialog)base.GetDialog(29);
 			if (!isYes)
 			{
-				this.KillDialog(32);
-				this.mWidgetManager.SetFocus(userDialog);
+				KillDialog(32);
+				mWidgetManager.SetFocus(userDialog);
 				return;
 			}
 			NewUserDialog newUserDialog = (NewUserDialog)base.GetDialog(32);
@@ -592,226 +592,226 @@ namespace Lawn
 			string name = newUserDialog.GetName();
 			if (string.IsNullOrEmpty(name))
 			{
-				this.KillDialog(32);
-				this.mWidgetManager.SetFocus(userDialog);
+				KillDialog(32);
+				mWidgetManager.SetFocus(userDialog);
 				return;
 			}
-			bool flag = this.mProfileMgr.GetProfile(selName) == this.mPlayerInfo;
-			if (!this.mProfileMgr.RenameProfile(selName, name))
+			bool flag = mProfileMgr.GetProfile(selName) == mPlayerInfo;
+			if (!mProfileMgr.RenameProfile(selName, name))
 			{
-				this.DoDialog(34, true, "[NAME_CONFLICT]", "[ENTER_UNIQUE_PLAYER_NAME]", "[DIALOG_BUTTON_OK]", 3);
+				DoDialog(34, true, "[NAME_CONFLICT]", "[ENTER_UNIQUE_PLAYER_NAME]", "[DIALOG_BUTTON_OK]", 3);
 				return;
 			}
-			this.mProfileMgr.Save();
+			mProfileMgr.Save();
 			if (flag)
 			{
-				this.mPlayerInfo = this.mProfileMgr.GetProfile(name);
+				mPlayerInfo = mProfileMgr.GetProfile(name);
 			}
 			userDialog.FinishRenameUser(name);
-			this.mWidgetManager.MarkAllDirty();
-			this.KillDialog(32);
-			this.mWidgetManager.SetFocus(userDialog);
+			mWidgetManager.MarkAllDirty();
+			KillDialog(32);
+			mWidgetManager.SetFocus(userDialog);
 		}
 
 		public void FinishNameError(int theId)
 		{
-			this.KillDialog(theId);
+			KillDialog(theId);
 			NewUserDialog newUserDialog = (NewUserDialog)base.GetDialog(Dialogs.DIALOG_CREATEUSER);
 			if (newUserDialog != null)
 			{
-				this.mWidgetManager.SetFocus(newUserDialog.mNameEditWidget);
+				mWidgetManager.SetFocus(newUserDialog.mNameEditWidget);
 			}
 		}
 
 		public void FinishRestartConfirmDialog()
 		{
-			this.mKilledYetiAndRestarted = this.mBoard.mKilledYeti;
-			this.KillDialog(37);
-			this.KillDialog(39);
-			this.KillBoard();
-			this.PreNewGame(this.mGameMode, false);
+			mKilledYetiAndRestarted = mBoard.mKilledYeti;
+			KillDialog(37);
+			KillDialog(39);
+			KillBoard();
+			PreNewGame(mGameMode, false);
 		}
 
 		public void FinishInGameRestartConfirmDialog(bool isYes)
 		{
-			this.KillDialog(23);
+			KillDialog(23);
 			if (isYes)
 			{
-				this.mMusic.StopAllMusic();
-				this.mSoundSystem.CancelPausedFoley();
-				this.KillNewOptionsDialog();
-				this.mBoardResult = BoardResult.BOARDRESULT_RESTART;
-				if (this.mBoard != null)
+				mMusic.StopAllMusic();
+				mSoundSystem.CancelPausedFoley();
+				KillNewOptionsDialog();
+				mBoardResult = BoardResult.BOARDRESULT_RESTART;
+				if (mBoard != null)
 				{
-					this.mKilledYetiAndRestarted = this.mBoard.mKilledYeti;
+					mKilledYetiAndRestarted = mBoard.mKilledYeti;
 				}
-				this.PreNewGame(this.mGameMode, false);
+				PreNewGame(mGameMode, false);
 			}
 		}
 
 		public void FinishAboutDialog(bool isYes)
 		{
-			this.KillDialog(52);
+			KillDialog(52);
 		}
 
 		public void FinishRestartWarningDialog(bool isYes)
 		{
-			this.KillDialog(53);
+			KillDialog(53);
 		}
 
 		public void FinishPacketSlotPurchaseDialog(bool isYes)
 		{
-			this.KillDialog(51);
+			KillDialog(51);
 			if (isYes)
 			{
 				int itemCost = StoreScreen.GetItemCost(StoreItem.STORE_ITEM_PACKET_UPGRADE);
-				this.mPlayerInfo.AddCoins(-itemCost);
-				this.mPlayerInfo.mPurchases[21]++;
-				this.WriteCurrentUserConfig();
-				this.mBoard.mSeedBank.UpdateHeight();
-				if (this.mCrazyDaveMessageIndex == 1503)
+				mPlayerInfo.AddCoins(-itemCost);
+				mPlayerInfo.mPurchases[21]++;
+				WriteCurrentUserConfig();
+				mBoard.mSeedBank.UpdateHeight();
+				if (mCrazyDaveMessageIndex == 1503)
 				{
-					this.CrazyDaveTalkIndex(1510);
+					CrazyDaveTalkIndex(1510);
 					return;
 				}
-				if (this.mCrazyDaveMessageIndex == 1553)
+				if (mCrazyDaveMessageIndex == 1553)
 				{
-					this.CrazyDaveTalkIndex(1560);
+					CrazyDaveTalkIndex(1560);
 					return;
 				}
 			}
 			else
 			{
-				this.mPlayerInfo.mDidntPurchasePacketUpgrade++;
-				if (this.mCrazyDaveMessageIndex == 1503)
+				mPlayerInfo.mDidntPurchasePacketUpgrade++;
+				if (mCrazyDaveMessageIndex == 1503)
 				{
-					this.CrazyDaveTalkIndex(1520);
+					CrazyDaveTalkIndex(1520);
 					return;
 				}
-				if (this.mCrazyDaveMessageIndex == 1553)
+				if (mCrazyDaveMessageIndex == 1553)
 				{
-					this.CrazyDaveTalkIndex(1570);
+					CrazyDaveTalkIndex(1570);
 				}
 			}
 		}
 
 		public void FinishTimesUpDialog()
 		{
-			this.KillDialog(42);
+			KillDialog(42);
 		}
 
 		public void FinishPlantSale(bool isYes)
 		{
-			this.mZenGarden.DoPlantSale(isYes);
-			this.KillDialog(48);
+			mZenGarden.DoPlantSale(isYes);
+			KillDialog(48);
 		}
 
 		public void FinishLawnDialogMessageBox(bool isYes)
 		{
-			if (this.mLawnMessageBoxListener != null)
+			if (mLawnMessageBoxListener != null)
 			{
-				this.mLawnMessageBoxListener.LawnMessageBoxDone(isYes ? 1000 : 1001);
-				this.mLawnMessageBoxListener = null;
-				this.mWidgetManager.SetFocus(this.mOldFocus);
-				this.mOldFocus = null;
+				mLawnMessageBoxListener.LawnMessageBoxDone(isYes ? 1000 : 1001);
+				mLawnMessageBoxListener = null;
+				mWidgetManager.SetFocus(mOldFocus);
+				mOldFocus = null;
 			}
 		}
 
 		public void KillBoard()
 		{
-			this.FinishModelessDialogs();
-			this.KillSeedChooserScreen();
-			if (this.mBoard != null)
+			FinishModelessDialogs();
+			KillSeedChooserScreen();
+			if (mBoard != null)
 			{
-				this.mBoard.DisposeBoard();
-				this.mWidgetManager.RemoveWidget(this.mBoard);
-				base.SafeDeleteWidget(this.mBoard);
-				this.mBoard = null;
+				mBoard.DisposeBoard();
+				mWidgetManager.RemoveWidget(mBoard);
+				base.SafeDeleteWidget(mBoard);
+				mBoard = null;
 			}
 		}
 
 		public void MakeNewBoard()
 		{
-			this.KillBoard();
-			this.mBoard = new Board(this);
-			this.mBoard.Resize(Constants.Board_Offset_AspectRatio_Correction, 0, this.mWidth, this.mHeight);
-			this.mWidgetManager.AddWidget(this.mBoard);
-			this.mWidgetManager.BringToBack(this.mBoard);
-			this.mWidgetManager.SetFocus(this.mBoard);
+			KillBoard();
+			mBoard = new Board(this);
+			mBoard.Resize(Constants.Board_Offset_AspectRatio_Correction, 0, mWidth, mHeight);
+			mWidgetManager.AddWidget(mBoard);
+			mWidgetManager.BringToBack(mBoard);
+			mWidgetManager.SetFocus(mBoard);
 			GC.Collect();
 			SexyAppBase.XnaGame.CompensateForSlowUpdate();
 		}
 
 		public void StartPlaying()
 		{
-			this.KillSeedChooserScreen();
-			this.mBoard.StartLevel();
-			this.mGameScene = GameScenes.SCENE_PLAYING;
+			KillSeedChooserScreen();
+			mBoard.StartLevel();
+			mGameScene = GameScenes.SCENE_PLAYING;
 		}
 
 		public bool TryLoadGame()
 		{
-			string savedGameName = LawnCommon.GetSavedGameName(this.mGameMode, (int)this.mPlayerInfo.mId);
-			this.mMusic.StopAllMusic();
+			string savedGameName = LawnCommon.GetSavedGameName(mGameMode, (int)mPlayerInfo.mId);
+			mMusic.StopAllMusic();
 			if (base.FileExists(savedGameName))
 			{
-				this.MakeNewBoard();
-				if (this.mBoard.LoadGame(savedGameName))
+				MakeNewBoard();
+				if (mBoard.LoadGame(savedGameName))
 				{
-					this.mFirstTimeGameSelector = false;
-					this.DoContinueDialog();
+					mFirstTimeGameSelector = false;
+					DoContinueDialog();
 					return true;
 				}
-				this.KillBoard();
+				KillBoard();
 			}
 			return false;
 		}
 
 		internal override void NewGame()
 		{
-			this.mFirstTimeGameSelector = false;
-			this.MakeNewBoard();
-			this.mBoard.InitLevel();
-			this.mBoardResult = BoardResult.BOARDRESULT_NONE;
-			this.mGameScene = GameScenes.SCENE_LEVEL_INTRO;
-			this.ShowSeedChooserScreen();
-			this.mBoard.mCutScene.StartLevelIntro();
+			mFirstTimeGameSelector = false;
+			MakeNewBoard();
+			mBoard.InitLevel();
+			mBoardResult = BoardResult.BOARDRESULT_NONE;
+			mGameScene = GameScenes.SCENE_LEVEL_INTRO;
+			ShowSeedChooserScreen();
+			mBoard.mCutScene.StartLevelIntro();
 		}
 
 		public bool RestoreGame()
 		{
-			string savedGameName = LawnCommon.GetSavedGameName(this.mRestoreGameMode, (int)this.mPlayerInfo.mId);
-			this.mMusic.StopAllMusic();
+			string savedGameName = LawnCommon.GetSavedGameName(mRestoreGameMode, (int)mPlayerInfo.mId);
+			mMusic.StopAllMusic();
 			if (base.FileExists(savedGameName))
 			{
-				this.mGameMode = this.mRestoreGameMode;
-				this.MakeNewBoard();
-				if (this.mBoard.LoadGame(savedGameName))
+				mGameMode = mRestoreGameMode;
+				MakeNewBoard();
+				if (mBoard.LoadGame(savedGameName))
 				{
-					if (this.mBoard.mNextSurvivalStageCounter != 1)
+					if (mBoard.mNextSurvivalStageCounter != 1)
 					{
-						string savedGameName2 = LawnCommon.GetSavedGameName(this.mRestoreGameMode, (int)this.mPlayerInfo.mId);
+						string savedGameName2 = LawnCommon.GetSavedGameName(mRestoreGameMode, (int)mPlayerInfo.mId);
 						base.EraseFile(savedGameName2);
 					}
-					this.mBoard.Pause(false);
-					this.DoPauseDialog();
+					mBoard.Pause(false);
+					DoPauseDialog();
 					return true;
 				}
-				this.KillBoard();
+				KillBoard();
 			}
 			return false;
 		}
 
 		public void RestartLoopingSounds()
 		{
-			if (this.mGameMode == GameMode.GAMEMODE_CHALLENGE_RAINING_SEEDS || this.IsStormyNightLevel())
+			if (mGameMode == GameMode.GAMEMODE_CHALLENGE_RAINING_SEEDS || IsStormyNightLevel())
 			{
-				this.PlayFoley(FoleyType.FOLEY_RAIN);
+				PlayFoley(FoleyType.FOLEY_RAIN);
 			}
-			int count = this.mBoard.mZombies.Count;
+			int count = mBoard.mZombies.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Zombie zombie = this.mBoard.mZombies[i];
+				Zombie zombie = mBoard.mZombies[i];
 				if (!zombie.mDead && zombie.mPlayingSong)
 				{
 					zombie.mPlayingSong = false;
@@ -822,109 +822,109 @@ namespace Lawn
 
 		public void PreNewGame(GameMode theGameMode, bool theLookForSavedGame)
 		{
-			this.PreNewGame(theGameMode, theLookForSavedGame, true);
+			PreNewGame(theGameMode, theLookForSavedGame, true);
 		}
 
 		public void PreNewGame(GameMode theGameMode, bool theLookForSavedGame, bool checkForTutorialCompletion)
 		{
-			if (this.NeedRegister())
+			if (NeedRegister())
 			{
-				this.ShowGameSelector();
+				ShowGameSelector();
 				return;
 			}
-			this.DelayLoadMainMenuResource(false);
+			DelayLoadMainMenuResource(false);
 			if (theGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 			{
-				this.DelayLoadZenGardenResources(true);
+				DelayLoadZenGardenResources(true);
 			}
 			else
 			{
-				this.DelayLoadZenGardenResources(false);
+				DelayLoadZenGardenResources(false);
 			}
 			GC.Collect();
 			GC.WaitForPendingFinalizers();
-			this.DelayLoadGamePlayResources(true);
-			if (SexyAppBase.IsInTrialMode && this.mPlayerInfo.mLevel >= 7 && theGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+			DelayLoadGamePlayResources(true);
+			if (SexyAppBase.IsInTrialMode && mPlayerInfo.mLevel >= 7 && theGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 			{
-				if (this.mPlayerInfo.mNeedsTrialLevelReset)
+				if (mPlayerInfo.mNeedsTrialLevelReset)
 				{
-					this.mPlayerInfo.SetLevel(1);
-					this.mPlayerInfo.mNeedsTrialLevelReset = false;
+					mPlayerInfo.SetLevel(1);
+					mPlayerInfo.mNeedsTrialLevelReset = false;
 				}
 				else
 				{
 					theGameMode = GameMode.GAMEMODE_UPSELL;
 				}
 			}
-			if (SexyAppBase.IsInTrialMode && checkForTutorialCompletion && theGameMode == GameMode.GAMEMODE_ADVENTURE && this.mPlayerInfo.mLevel <= 3 && this.mPlayerInfo.mHasFinishedTutorial && this.mPlayerInfo.mFinishedAdventure == 0)
+			if (SexyAppBase.IsInTrialMode && checkForTutorialCompletion && theGameMode == GameMode.GAMEMODE_ADVENTURE && mPlayerInfo.mLevel <= 3 && mPlayerInfo.mHasFinishedTutorial && mPlayerInfo.mFinishedAdventure == 0)
 			{
-				LawnDialog theDialog = this.DoDialog(58, true, string.Empty, "[SKIP_TUTORIAL_MESSAGE]", string.Empty, 1);
+				LawnDialog theDialog = DoDialog(58, true, string.Empty, "[SKIP_TUTORIAL_MESSAGE]", string.Empty, 1);
 				LawnApp.CenterDialog(theDialog, (int)Constants.InvertAndScale(400f), (int)Constants.InvertAndScale(200f));
 				return;
 			}
-			this.mGameMode = theGameMode;
-			if (theLookForSavedGame && this.TryLoadGame())
+			mGameMode = theGameMode;
+			if (theLookForSavedGame && TryLoadGame())
 			{
 				return;
 			}
-			string savedGameName = LawnCommon.GetSavedGameName(this.mGameMode, (int)this.mPlayerInfo.mId);
+			string savedGameName = LawnCommon.GetSavedGameName(mGameMode, (int)mPlayerInfo.mId);
 			base.EraseFile(savedGameName);
-			this.NewGame();
-			if (this.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && !this.mPlayerInfo.mZenGardenTutorialComplete)
+			NewGame();
+			if (mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && !mPlayerInfo.mZenGardenTutorialComplete)
 			{
-				this.mZenGarden.SetupForZenTutorial();
+				mZenGarden.SetupForZenTutorial();
 			}
 		}
 
 		public void ShowGameSelectorWithOptions()
 		{
-			this.ShowGameSelector();
-			this.DoNewOptions(true);
+			ShowGameSelector();
+			DoNewOptions(true);
 		}
 
 		public void ShowGameSelector()
 		{
-			this.KillBoard();
-			this.UpdateRegisterInfo();
-			this.DelayLoadGamePlayResources(false);
-			this.DelayLoadMainMenuResource(true);
-			if (this.mGameSelector != null)
+			KillBoard();
+			UpdateRegisterInfo();
+			DelayLoadGamePlayResources(false);
+			DelayLoadMainMenuResource(true);
+			if (mGameSelector != null)
 			{
-				this.mWidgetManager.RemoveWidget(this.mGameSelector);
-				base.SafeDeleteWidget(this.mGameSelector);
+				mWidgetManager.RemoveWidget(mGameSelector);
+				base.SafeDeleteWidget(mGameSelector);
 			}
-			this.mGameScene = GameScenes.SCENE_MENU;
-			this.mGameSelector = new GameSelector(this);
-			this.mGameSelector.Resize(0, 0, Constants.GameSelector_Width, Constants.GameSelector_Height);
-			this.mWidgetManager.AddWidget(this.mGameSelector);
-			this.mWidgetManager.BringToBack(this.mGameSelector);
-			this.mWidgetManager.SetFocus(this.mGameSelector);
-			if (this.NeedRegister())
+			mGameScene = GameScenes.SCENE_MENU;
+			mGameSelector = new GameSelector(this);
+			mGameSelector.Resize(0, 0, Constants.GameSelector_Width, Constants.GameSelector_Height);
+			mWidgetManager.AddWidget(mGameSelector);
+			mWidgetManager.BringToBack(mGameSelector);
+			mWidgetManager.SetFocus(mGameSelector);
+			if (NeedRegister())
 			{
-				this.DoNeedRegisterDialog();
+				DoNeedRegisterDialog();
 			}
 		}
 
 		public void KillGameSelector()
 		{
-			if (this.mGameSelector != null)
+			if (mGameSelector != null)
 			{
-				this.mWidgetManager.RemoveWidget(this.mGameSelector);
-				base.SafeDeleteWidget(this.mGameSelector);
-				this.mGameSelector = null;
+				mWidgetManager.RemoveWidget(mGameSelector);
+				base.SafeDeleteWidget(mGameSelector);
+				mGameSelector = null;
 			}
 		}
 
 		public void ShowGameSelectorQuickPlay(bool theDoFadeIn, GameSelectorButtons theButton)
 		{
-			this.ShowGameSelector();
-			this.mGameSelector.mNeedToPlayRollIn = false;
-			this.mGameSelector.MoveToQuickplay(theDoFadeIn, theButton);
+			ShowGameSelector();
+			mGameSelector.mNeedToPlayRollIn = false;
+			mGameSelector.MoveToQuickplay(theDoFadeIn, theButton);
 		}
 
 		public void ShowGameSelectorQuickPlay(bool theDoFadeIn)
 		{
-			this.ShowGameSelectorQuickPlay(theDoFadeIn, GameSelectorButtons.GameSelector_MiniGames);
+			ShowGameSelectorQuickPlay(theDoFadeIn, GameSelectorButtons.GameSelector_MiniGames);
 		}
 
 		protected override void ShowUpdateMessage()
@@ -938,8 +938,8 @@ namespace Lawn
 			{
 				TodStringFile.TodStringTranslate("[BUTTON_YES]"),
 				TodStringFile.TodStringTranslate("[BUTTON_NO]")
-			}, 0, MessageBoxIcon.None, new AsyncCallback(this.GameUpdateMessageClosed), null);
-			this.wantToShowUpdateMessage = false;
+			}, 0, MessageBoxIcon.None, new AsyncCallback(GameUpdateMessageClosed), null);
+			wantToShowUpdateMessage = false;
 		}
 
 		protected override bool ShowRunWhenLockedMessage()
@@ -963,9 +963,9 @@ namespace Lawn
 		private void RunWhenLockedMessageClosed(IAsyncResult result)
 		{
 			Main.RunWhenLocked = (Guide.EndShowMessageBox(result) == 0);
-			if (this.mPlayerInfo != null)
+			if (mPlayerInfo != null)
 			{
-				this.mPlayerInfo.mRunWhileLocked = Main.RunWhenLocked;
+				mPlayerInfo.mRunWhileLocked = Main.RunWhenLocked;
 			}
 		}
 
@@ -990,66 +990,66 @@ namespace Lawn
 
 		public void ShowAwardScreen(AwardType theAwardType, bool theShowAchievements)
 		{
-			this.mGameScene = GameScenes.SCENE_AWARD;
-			this.mAwardScreen = new AwardScreen(this, theAwardType, theShowAchievements);
-			this.mAwardScreen.Resize(0, 0, this.mWidth, this.mHeight);
-			this.mWidgetManager.AddWidget(this.mAwardScreen);
-			this.mWidgetManager.BringToBack(this.mAwardScreen);
-			this.mWidgetManager.SetFocus(this.mAwardScreen);
+			mGameScene = GameScenes.SCENE_AWARD;
+			mAwardScreen = new AwardScreen(this, theAwardType, theShowAchievements);
+			mAwardScreen.Resize(0, 0, mWidth, mHeight);
+			mWidgetManager.AddWidget(mAwardScreen);
+			mWidgetManager.BringToBack(mAwardScreen);
+			mWidgetManager.SetFocus(mAwardScreen);
 		}
 
 		public void KillAwardScreen()
 		{
-			if (this.mAwardScreen != null)
+			if (mAwardScreen != null)
 			{
-				this.mWidgetManager.RemoveWidget(this.mAwardScreen);
-				base.SafeDeleteWidget(this.mAwardScreen);
-				this.mAwardScreen = null;
+				mWidgetManager.RemoveWidget(mAwardScreen);
+				base.SafeDeleteWidget(mAwardScreen);
+				mAwardScreen = null;
 			}
 		}
 
 		public void ShowSeedChooserScreen()
 		{
-			Debug.ASSERT(this.mSeedChooserScreen == null);
-			this.mSeedChooserScreen = new SeedChooserScreen();
-			this.mSeedChooserScreen.Resize(0, 0, this.mWidth, this.mHeight);
-			this.mWidgetManager.AddWidget(this.mSeedChooserScreen);
-			this.mWidgetManager.BringToBack(this.mSeedChooserScreen);
+			Debug.ASSERT(mSeedChooserScreen == null);
+			mSeedChooserScreen = new SeedChooserScreen();
+			mSeedChooserScreen.Resize(0, 0, mWidth, mHeight);
+			mWidgetManager.AddWidget(mSeedChooserScreen);
+			mWidgetManager.BringToBack(mSeedChooserScreen);
 		}
 
 		public void KillSeedChooserScreen()
 		{
-			if (this.mSeedChooserScreen != null)
+			if (mSeedChooserScreen != null)
 			{
-				this.mWidgetManager.RemoveWidget(this.mSeedChooserScreen);
-				base.SafeDeleteWidget(this.mSeedChooserScreen);
-				this.mSeedChooserScreen = null;
+				mWidgetManager.RemoveWidget(mSeedChooserScreen);
+				base.SafeDeleteWidget(mSeedChooserScreen);
+				mSeedChooserScreen = null;
 			}
 		}
 
 		public void DoBackToMain()
 		{
-			this.DoBackToMain(true);
+			DoBackToMain(true);
 		}
 
 		public void DoBackToMain(bool stopMusic)
 		{
 			if (stopMusic)
 			{
-				this.mMusic.StopAllMusic();
+				mMusic.StopAllMusic();
 			}
-			this.mSoundSystem.CancelPausedFoley();
-			this.mSoundManager.StopAllSounds();
-			this.WriteCurrentUserConfig();
-			this.KillNewOptionsDialog();
-			this.KillBoard();
-			this.ShowGameSelector();
-			this.mZenGarden.UnloadBackdrop();
+			mSoundSystem.CancelPausedFoley();
+			mSoundManager.StopAllSounds();
+			WriteCurrentUserConfig();
+			KillNewOptionsDialog();
+			KillBoard();
+			ShowGameSelector();
+			mZenGarden.UnloadBackdrop();
 		}
 
 		public void DoConfirmBackToMain()
 		{
-			LawnDialog lawnDialog = this.DoDialog(22, true, "[LEAVE_GAME_HEADER]", "[LEAVE_GAME]", "", 1);
+			LawnDialog lawnDialog = DoDialog(22, true, "[LEAVE_GAME_HEADER]", "[LEAVE_GAME]", "", 1);
 			lawnDialog.mLawnYesButton.mLabel = TodStringFile.TodStringTranslate("[LEAVE_BUTTON]");
 			lawnDialog.mLawnNoButton.mLabel = TodStringFile.TodStringTranslate("[DIALOG_BUTTON_CANCEL]");
 			lawnDialog.CalcSize(0, 0);
@@ -1057,25 +1057,25 @@ namespace Lawn
 
 		public void DoNewOptions(bool theFromGameSelector)
 		{
-			this.FinishModelessDialogs();
+			FinishModelessDialogs();
 			NewOptionsDialog newOptionsDialog = new NewOptionsDialog(this, theFromGameSelector);
 			int theWidth = (int)Constants.InvertAndScale(420f);
 			int preferredHeight = newOptionsDialog.GetPreferredHeight(theWidth);
 			LawnApp.CenterDialog(newOptionsDialog, theWidth, preferredHeight);
 			base.AddDialog(2, newOptionsDialog);
-			this.mWidgetManager.SetFocus(newOptionsDialog);
+			mWidgetManager.SetFocus(newOptionsDialog);
 		}
 
 		public void ShowLeaderboardDialog(LeaderBoardType aType)
 		{
-			this.FinishModelessDialogs();
+			FinishModelessDialogs();
 			LeaderboardDialog leaderboardDialog = new LeaderboardDialog(this, aType);
 			int theWidth = (int)Constants.InvertAndScale(420f);
 			int preferredHeight = leaderboardDialog.GetPreferredHeight(theWidth);
 			LawnApp.CenterDialog(leaderboardDialog, theWidth, preferredHeight);
 			base.AddDialog(59, leaderboardDialog);
-			this.mLeaderboardScreen.SetGrayed(true);
-			this.mWidgetManager.SetFocus(leaderboardDialog);
+			mLeaderboardScreen.SetGrayed(true);
+			mWidgetManager.SetFocus(leaderboardDialog);
 		}
 
 		public void DoRegister()
@@ -1084,7 +1084,7 @@ namespace Lawn
 
 		public void DoRegisterError()
 		{
-			this.DoDialog(9, true, "[INVALID_CODE]", "[INVALID_CODE_MESSAGE]", "[DIALOG_BUTTON_OK]", 3);
+			DoDialog(9, true, "[INVALID_CODE]", "[INVALID_CODE_MESSAGE]", "[DIALOG_BUTTON_OK]", 3);
 		}
 
 		public bool CanDoRegisterDialog()
@@ -1094,9 +1094,9 @@ namespace Lawn
 
 		public bool WriteCurrentUserConfig()
 		{
-			if (this.mPlayerInfo != null)
+			if (mPlayerInfo != null)
 			{
-				this.mPlayerInfo.SaveDetails();
+				mPlayerInfo.SaveDetails();
 			}
 			return true;
 		}
@@ -1104,25 +1104,25 @@ namespace Lawn
 		public void WriteRestoreInfo()
 		{
 			RestoreLocation theValue = RestoreLocation.RESTORE_TITLESCREEN;
-			if (this.mGameSelector != null)
+			if (mGameSelector != null)
 			{
 				theValue = RestoreLocation.RESTORE_MAINMENU;
 			}
-			else if (this.mBoard != null)
+			else if (mBoard != null)
 			{
 				theValue = RestoreLocation.RESTORE_BOARD;
-				base.RegistryWriteInteger("RestoreGameMode", (int)this.mGameMode);
+				base.RegistryWriteInteger("RestoreGameMode", (int)mGameMode);
 			}
 			base.RegistryWriteInteger("RestoreLocation", (int)theValue);
 		}
 
 		public void ReadRestoreInfo()
 		{
-			this.mRestoreLocation = RestoreLocation.RESTORE_MAINMENU;
-			this.mRestoreLocation = (RestoreLocation)base.RegistryReadInteger("RestoreLocation");
-			if (this.mRestoreLocation == RestoreLocation.RESTORE_BOARD)
+			mRestoreLocation = RestoreLocation.RESTORE_MAINMENU;
+			mRestoreLocation = (RestoreLocation)base.RegistryReadInteger("RestoreLocation");
+			if (mRestoreLocation == RestoreLocation.RESTORE_BOARD)
 			{
-				this.mRestoreGameMode = (GameMode)base.RegistryReadInteger("RestoreGameMode");
+				mRestoreGameMode = (GameMode)base.RegistryReadInteger("RestoreGameMode");
 			}
 		}
 
@@ -1130,7 +1130,7 @@ namespace Lawn
 		{
 			string fmt = TodStringFile.TodStringTranslate("[UNLOCK_TO_EARN]");
 			string theDialogLines = Common.StrFormat_(fmt, Achievements.GetAchievementItem(theId).Name);
-			LawnDialog lawnDialog = this.DoDialog(55, true, "[ACHIEVEMENT_UNLOCKED]", theDialogLines, "", 2);
+			LawnDialog lawnDialog = DoDialog(55, true, "[ACHIEVEMENT_UNLOCKED]", theDialogLines, "", 2);
 			lawnDialog.mLawnYesButton.mLabel = TodStringFile.TodStringTranslate("[CONTINUE_BUTTON]");
 			lawnDialog.mLawnNoButton.mLabel = TodStringFile.TodStringTranslate("[GET_FULL_VERSION_BUTTON]");
 			lawnDialog.CalcSize(200, 10);
@@ -1139,7 +1139,7 @@ namespace Lawn
 
 		public void DoNeedRegisterDialog()
 		{
-			LawnDialog lawnDialog = this.DoDialog(5, true, "[REGISTER_HEADER]", "[REGISTER]", "", 2);
+			LawnDialog lawnDialog = DoDialog(5, true, "[REGISTER_HEADER]", "[REGISTER]", "", 2);
 			lawnDialog.mLawnYesButton.mLabel = TodStringFile.TodStringTranslate("[REGISTER_BUTTON]");
 			lawnDialog.mLawnNoButton.mLabel = TodStringFile.TodStringTranslate("[QUIT_BUTTON]");
 		}
@@ -1153,9 +1153,9 @@ namespace Lawn
 
 		public void DoPauseDialog()
 		{
-			this.mBoard.Pause(true);
-			this.FinishModelessDialogs();
-			LawnDialog lawnDialog = this.DoDialog(19, true, "[GAME_PAUSED]", "", "[RESUME_GAME]", 3);
+			mBoard.Pause(true);
+			FinishModelessDialogs();
+			LawnDialog lawnDialog = DoDialog(19, true, "[GAME_PAUSED]", "", "[RESUME_GAME]", 3);
 			int num = Math.Max(Resources.FONT_DWARVENTODCRAFT15.StringWidth(TodStringFile.TodStringTranslate("[GAME_PAUSED]")), Resources.FONT_DWARVENTODCRAFT15.StringWidth(TodStringFile.TodStringTranslate("[RESUME_GAME]")));
 			if ((float)num < Constants.InvertAndScale(125f))
 			{
@@ -1166,9 +1166,9 @@ namespace Lawn
 			lawnDialog.mSpaceAfterHeader = (int)Constants.InvertAndScale(65f);
 			lawnDialog.CalcSize((int)Constants.InvertAndScale(20f), (int)Constants.InvertAndScale(10f), num);
 			LawnApp.CenterDialog(lawnDialog, lawnDialog.mWidth, lawnDialog.mHeight);
-			if (this.mBoard.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_HAMMER)
+			if (mBoard.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_HAMMER)
 			{
-				this.EnforceCursor();
+				EnforceCursor();
 			}
 		}
 
@@ -1183,9 +1183,9 @@ namespace Lawn
 			TodStringFile.TodStringTranslate(theDialogFooter);
 			LawnDialog lawnDialog = new LawnDialog(this, null, theDialogId, isModal, theDialogHeader, theDialogLines, theDialogFooter, theButtonMode);
 			base.DoDialog(lawnDialog, theDialogId);
-			if (this.mWidgetManager.mFocusWidget == null)
+			if (mWidgetManager.mFocusWidget == null)
 			{
-				this.mWidgetManager.mFocusWidget = lawnDialog;
+				mWidgetManager.mFocusWidget = lawnDialog;
 			}
 			return lawnDialog;
 		}
@@ -1200,64 +1200,64 @@ namespace Lawn
 
 		public override void Shutdown()
 		{
-			if (!this.mLoadingThreadCompleted)
+			if (!mLoadingThreadCompleted)
 			{
-				this.mLoadingFailed = true;
+				mLoadingFailed = true;
 				return;
 			}
-			if (!this.mShutdown)
+			if (!mShutdown)
 			{
 				for (int i = 0; i < 60; i++)
 				{
-					this.KillDialog(i);
+					KillDialog(i);
 				}
-				if (this.mBoard != null)
+				if (mBoard != null)
 				{
-					this.mBoardResult = BoardResult.BOARDRESULT_QUIT_APP;
-					this.mWidgetManager.mDownButtons = 0;
-					this.mBoard.TryToSaveGame();
-					this.KillBoard();
-					this.WriteCurrentUserConfig();
+					mBoardResult = BoardResult.BOARDRESULT_QUIT_APP;
+					mWidgetManager.mDownButtons = 0;
+					mBoard.TryToSaveGame();
+					KillBoard();
+					WriteCurrentUserConfig();
 				}
-				this.mProfileMgr.Save();
+				mProfileMgr.Save();
 				base.ProcessSafeDeleteList();
-				if (this.mZenGarden != null)
+				if (mZenGarden != null)
 				{
-					this.mZenGarden = null;
+					mZenGarden = null;
 				}
-				if (this.mEffectSystem != null)
+				if (mEffectSystem != null)
 				{
-					this.mEffectSystem.EffectSystemDispose();
-					this.mEffectSystem.Dispose();
-					this.mEffectSystem = null;
+					mEffectSystem.EffectSystemDispose();
+					mEffectSystem.Dispose();
+					mEffectSystem = null;
 				}
-				if (this.mReanimatorCache != null)
+				if (mReanimatorCache != null)
 				{
-					this.mReanimatorCache.ReanimatorCacheDispose();
-					this.mReanimatorCache = null;
+					mReanimatorCache.ReanimatorCacheDispose();
+					mReanimatorCache = null;
 				}
 				TodParticleGlobal.TodParticleFreeDefinitions();
 				ReanimatorXnaHelpers.ReanimatorFreeDefinitions();
 				Coin.CoinFreeTextures();
 				GlobalMembersTrail.TrailFreeDefinitions();
-				this.UpdateRegisterInfo();
+				UpdateRegisterInfo();
 				base.Shutdown();
 			}
 		}
 
 		public override void Init()
 		{
-			bool flag = this.mTodCheatKeys;
-			this.mSessionID = (int)DateTime.UtcNow.Ticks;
-			this.mPlayTimeActiveSession = 0;
-			this.mPlayTimeInactiveSession = 0;
-			this.mBoardResult = BoardResult.BOARDRESULT_NONE;
-			this.mKilledYetiAndRestarted = false;
+			bool flag = mTodCheatKeys;
+			mSessionID = (int)DateTime.UtcNow.Ticks;
+			mPlayTimeActiveSession = 0;
+			mPlayTimeInactiveSession = 0;
+			mBoardResult = BoardResult.BOARDRESULT_NONE;
+			mKilledYetiAndRestarted = false;
 			base.Init();
-			this.ReadRestoreInfo();
-			if (!this.mResourceManager.ParseResourcesFile("Content/resources.xml"))
+			ReadRestoreInfo();
+			if (!mResourceManager.ParseResourcesFile("Content/resources.xml"))
 			{
-				this.ShowResourceError(true);
+				ShowResourceError(true);
 				return;
 			}
 			if (Constants.Language != Constants.LanguageIndex.de)
@@ -1271,74 +1271,74 @@ namespace Lawn
 			{
 				return;
 			}
-			Resources.ExtractInitResources(this.mResourceManager);
+			Resources.ExtractInitResources(mResourceManager);
 			PerfTimer perfTimer = default(PerfTimer);
 			perfTimer.Start();
-			this.mProfileMgr.Load();
+			mProfileMgr.Load();
 			string empty = string.Empty;
-			if (this.mPlayerInfo == null && this.RegistryReadString("CurUser", empty) != null)
+			if (mPlayerInfo == null && RegistryReadString("CurUser", empty) != null)
 			{
-				this.mPlayerInfo = this.mProfileMgr.GetProfile(empty);
+				mPlayerInfo = mProfileMgr.GetProfile(empty);
 			}
 			try
 			{
 				if (MediaPlayer.GameHasControl)
 				{
-					MediaPlayer.Play(this.mContentManager.Load<Song>(GlobalStaticVars.GetResourceDir() + "music/crazydave"));
+					MediaPlayer.Play(mContentManager.Load<Song>(GlobalStaticVars.GetResourceDir() + "music/crazydave"));
 				}
 			}
 			catch (Exception)
 			{
 			}
-			if (this.mPlayerInfo == null)
+			if (mPlayerInfo == null)
 			{
-				PlayerInfo anyProfile = this.mProfileMgr.GetAnyProfile();
+				PlayerInfo anyProfile = mProfileMgr.GetAnyProfile();
 				if (!MediaPlayer.GameHasControl)
 				{
 					anyProfile.mMusicVolume = (double)MediaPlayer.Volume;
 				}
-				this.mPlayerInfo = anyProfile;
+				mPlayerInfo = anyProfile;
 			}
-			this.mMaxExecutions = base.GetInteger("MaxExecutions", 0);
-			this.mMaxPlays = base.GetInteger("MaxPlays", 0);
-			this.mMaxTime = base.GetInteger("MaxTime", 60);
-			this.mTitleScreen = new TitleScreen(this);
-			this.mTitleScreen.Resize(0, 0, this.mWidth, this.mHeight);
-			this.mWidgetManager.AddWidget(this.mTitleScreen);
-			this.mWidgetManager.SetFocus(this.mTitleScreen);
+			mMaxExecutions = base.GetInteger("MaxExecutions", 0);
+			mMaxPlays = base.GetInteger("MaxPlays", 0);
+			mMaxTime = base.GetInteger("MaxTime", 60);
+			mTitleScreen = new TitleScreen(this);
+			mTitleScreen.Resize(0, 0, mWidth, mHeight);
+			mWidgetManager.AddWidget(mTitleScreen);
+			mWidgetManager.SetFocus(mTitleScreen);
 			perfTimer.Start();
-			this.mMusic = new Music();
-			this.mSoundSystem = new TodFoley();
-			this.mEffectSystem = new EffectSystem();
-			this.mEffectSystem.EffectSystemInitialize();
+			mMusic = new Music();
+			mSoundSystem = new TodFoley();
+			mEffectSystem = new EffectSystem();
+			mEffectSystem.EffectSystemInitialize();
 			FilterEffect.FilterEffectInitForApp();
-			this.mKonamiCheck = new TypingCheck();
-			this.mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_UP);
-			this.mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_UP);
-			this.mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_DOWN);
-			this.mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_DOWN);
-			this.mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_LEFT);
-			this.mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_RIGHT);
-			this.mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_LEFT);
-			this.mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_RIGHT);
-			this.mKonamiCheck.AddChar('b');
-			this.mKonamiCheck.AddChar('a');
-			this.mMustacheCheck = new TypingCheck("mustache");
-			this.mMoustacheCheck = new TypingCheck("moustache");
-			this.mSuperMowerCheck = new TypingCheck("trickedout");
-			this.mSuperMowerCheck2 = new TypingCheck("tricked out");
-			this.mFutureCheck = new TypingCheck("future");
-			this.mPinataCheck = new TypingCheck("pinata");
-			this.mDanceCheck = new TypingCheck("dance");
-			this.mDaisyCheck = new TypingCheck("daisies");
-			this.mSukhbirCheck = new TypingCheck("sukhbir");
+			mKonamiCheck = new TypingCheck();
+			mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_UP);
+			mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_UP);
+			mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_DOWN);
+			mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_DOWN);
+			mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_LEFT);
+			mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_RIGHT);
+			mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_LEFT);
+			mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_RIGHT);
+			mKonamiCheck.AddChar('b');
+			mKonamiCheck.AddChar('a');
+			mMustacheCheck = new TypingCheck("mustache");
+			mMoustacheCheck = new TypingCheck("moustache");
+			mSuperMowerCheck = new TypingCheck("trickedout");
+			mSuperMowerCheck2 = new TypingCheck("tricked out");
+			mFutureCheck = new TypingCheck("future");
+			mPinataCheck = new TypingCheck("pinata");
+			mDanceCheck = new TypingCheck("dance");
+			mDaisyCheck = new TypingCheck("daisies");
+			mSukhbirCheck = new TypingCheck("sukhbir");
 			perfTimer.Start();
 			perfTimer.Start();
 		}
 
 		public override void Start()
 		{
-			if (this.mLoadingFailed)
+			if (mLoadingFailed)
 			{
 				return;
 			}
@@ -1369,20 +1369,20 @@ namespace Lawn
 		{
 			if (base.KillDialog(theDialogId))
 			{
-				if (this.mDialogMap.Count == 0)
+				if (mDialogMap.Count == 0)
 				{
-					if (this.mBoard != null)
+					if (mBoard != null)
 					{
-						this.mWidgetManager.SetFocus(this.mBoard);
+						mWidgetManager.SetFocus(mBoard);
 					}
-					else if (this.mGameSelector != null)
+					else if (mGameSelector != null)
 					{
-						this.mWidgetManager.SetFocus(this.mGameSelector);
+						mWidgetManager.SetFocus(mGameSelector);
 					}
 				}
-				if (this.mBoard != null && !this.NeedPauseGame())
+				if (mBoard != null && !NeedPauseGame())
 				{
-					this.mBoard.Pause(false);
+					mBoard.Pause(false);
 				}
 				return true;
 			}
@@ -1391,9 +1391,9 @@ namespace Lawn
 
 		public override void ModalOpen()
 		{
-			if (this.mBoard != null && this.NeedPauseGame())
+			if (mBoard != null && NeedPauseGame())
 			{
-				this.mBoard.Pause(true);
+				mBoard.Pause(true);
 			}
 		}
 
@@ -1403,7 +1403,7 @@ namespace Lawn
 
 		public void PreDisplayHook()
 		{
-			this.PreDisplayHook();
+			PreDisplayHook();
 		}
 
 		public bool ChangeDirHook(string theIntendedPath)
@@ -1432,8 +1432,8 @@ namespace Lawn
 				switch (num)
 				{
 				case 0:
-					this.KillDialog(0);
-					this.ShowGameSelector();
+					KillDialog(0);
+					ShowGameSelector();
 					return;
 				case 1:
 				case 3:
@@ -1464,83 +1464,83 @@ namespace Lawn
 				case 57:
 					break;
 				case 2:
-					this.KillNewOptionsDialog();
-					if (this.mBoard != null)
+					KillNewOptionsDialog();
+					if (mBoard != null)
 					{
-						this.RestartLoopingSounds();
+						RestartLoopingSounds();
 						return;
 					}
 					return;
 				case 5:
-					this.DoRegister();
+					DoRegister();
 					return;
 				case 6:
 					return;
 				case 7:
-					this.KillDialog(7);
-					this.CheckForUpdates();
+					KillDialog(7);
+					CheckForUpdates();
 					return;
 				case 13:
-					this.KillDialog(13);
-					this.CloseRequestAsync();
+					KillDialog(13);
+					CloseRequestAsync();
 					return;
 				case 15:
-					this.KillDialog(15);
-					this.DoRegister();
+					KillDialog(15);
+					DoRegister();
 					return;
 				case 16:
-					this.KillDialog(16);
+					KillDialog(16);
 					return;
 				case 19:
-					this.KillDialog(19);
+					KillDialog(19);
 					return;
 				case 20:
-					this.KillDialog(20);
-					this.mBoard.AddSunMoney(100);
+					KillDialog(20);
+					mBoard.AddSunMoney(100);
 					return;
 				case 21:
-					this.KillDialog(21);
+					KillDialog(21);
 					return;
 				case 22:
-					this.KillDialog(22);
-					this.mBoardResult = BoardResult.BOARDRESULT_QUIT;
-					this.mBoard.TryToSaveGame();
-					this.DoBackToMain();
+					KillDialog(22);
+					mBoardResult = BoardResult.BOARDRESULT_QUIT;
+					mBoard.TryToSaveGame();
+					DoBackToMain();
 					return;
 				case 23:
-					this.FinishInGameRestartConfirmDialog(true);
+					FinishInGameRestartConfirmDialog(true);
 					return;
 				case 28:
 				case 49:
-					this.KillDialog(theId - 2000);
-					this.FinishLawnDialogMessageBox(true);
+					KillDialog(theId - 2000);
+					FinishLawnDialogMessageBox(true);
 					return;
 				case 29:
-					this.FinishUserDialog(true);
+					FinishUserDialog(true);
 					return;
 				case 30:
-					this.FinishCreateUserDialog(true);
+					FinishCreateUserDialog(true);
 					return;
 				case 31:
-					this.FinishConfirmDeleteUserDialog(true);
+					FinishConfirmDeleteUserDialog(true);
 					return;
 				case 32:
-					this.FinishRenameUserDialog(true);
+					FinishRenameUserDialog(true);
 					return;
 				case 33:
-					this.FinishNameError(theId - 2000);
+					FinishNameError(theId - 2000);
 					return;
 				case 34:
-					this.FinishNameError(theId - 2000);
+					FinishNameError(theId - 2000);
 					return;
 				case 35:
-					this.FinishCheatDialog(true);
+					FinishCheatDialog(true);
 					return;
 				case 39:
-					this.FinishRestartConfirmDialog();
+					FinishRestartConfirmDialog();
 					return;
 				case 42:
-					this.FinishTimesUpDialog();
+					FinishTimesUpDialog();
 					return;
 				case 46:
 					((StoreScreen)base.GetDialog(4)).PurchasePendingItem();
@@ -1549,35 +1549,35 @@ namespace Lawn
 					((StoreScreen)base.GetDialog(4)).FinishTreeOfWisdomDialog(true);
 					return;
 				case 48:
-					this.FinishPlantSale(true);
+					FinishPlantSale(true);
 					return;
 				case 51:
-					this.FinishPacketSlotPurchaseDialog(true);
+					FinishPacketSlotPurchaseDialog(true);
 					return;
 				case 52:
-					this.FinishAboutDialog(true);
+					FinishAboutDialog(true);
 					return;
 				case 53:
-					this.FinishRestartWarningDialog(true);
+					FinishRestartWarningDialog(true);
 					return;
 				case 55:
-					this.KillDialog(55);
+					KillDialog(55);
 					return;
 				case 58:
-					this.KillDialog(theId - 2000);
-					this.PreNewGame(GameMode.GAMEMODE_ADVENTURE, true, false);
-					this.mPlayerInfo.mHasFinishedTutorial = false;
+					KillDialog(theId - 2000);
+					PreNewGame(GameMode.GAMEMODE_ADVENTURE, true, false);
+					mPlayerInfo.mHasFinishedTutorial = false;
 					return;
 				default:
 					if (num == 20008)
 					{
-						this.KillDialog(20008);
-						this.KillDialog(8);
+						KillDialog(20008);
+						KillDialog(8);
 						return;
 					}
 					break;
 				}
-				this.KillDialog(theId - 2000);
+				KillDialog(theId - 2000);
 				return;
 			}
 			if (theId % 10000 >= 3000 && theId % 10000 < 4000)
@@ -1588,17 +1588,17 @@ namespace Lawn
 					switch (num2)
 					{
 					case 5:
-						this.KillDialog(5);
-						this.Shutdown();
+						KillDialog(5);
+						Shutdown();
 						return;
 					case 6:
-						this.KillDialog(6);
+						KillDialog(6);
 						return;
 					default:
 						switch (num2)
 						{
 						case 23:
-							this.FinishInGameRestartConfirmDialog(false);
+							FinishInGameRestartConfirmDialog(false);
 							return;
 						case 24:
 						case 25:
@@ -1610,26 +1610,26 @@ namespace Lawn
 						case 28:
 							break;
 						case 29:
-							this.FinishUserDialog(false);
+							FinishUserDialog(false);
 							return;
 						case 30:
-							this.FinishCreateUserDialog(false);
+							FinishCreateUserDialog(false);
 							return;
 						case 31:
-							this.FinishConfirmDeleteUserDialog(false);
+							FinishConfirmDeleteUserDialog(false);
 							return;
 						case 32:
-							this.FinishRenameUserDialog(false);
+							FinishRenameUserDialog(false);
 							return;
 						case 35:
-							this.FinishCheatDialog(false);
+							FinishCheatDialog(false);
 							return;
 						default:
 							if (num2 != 42)
 							{
 								goto IL_47F;
 							}
-							this.FinishTimesUpDialog();
+							FinishTimesUpDialog();
 							return;
 						}
 						break;
@@ -1643,7 +1643,7 @@ namespace Lawn
 						((StoreScreen)base.GetDialog(4)).FinishTreeOfWisdomDialog(false);
 						return;
 					case 48:
-						this.FinishPlantSale(false);
+						FinishPlantSale(false);
 						return;
 					case 49:
 						break;
@@ -1653,58 +1653,58 @@ namespace Lawn
 					case 54:
 						goto IL_47F;
 					case 51:
-						this.FinishPacketSlotPurchaseDialog(false);
+						FinishPacketSlotPurchaseDialog(false);
 						return;
 					case 55:
-						this.checkGiveAchievements = true;
-						this.BuyGame();
+						checkGiveAchievements = true;
+						BuyGame();
 						return;
 					default:
 						if (num2 == 58)
 						{
-							this.KillDialog(theId - 3000);
-							this.mPlayerInfo.SetLevel(4);
-							this.PreNewGame(GameMode.GAMEMODE_ADVENTURE, false, false);
+							KillDialog(theId - 3000);
+							mPlayerInfo.SetLevel(4);
+							PreNewGame(GameMode.GAMEMODE_ADVENTURE, false, false);
 							return;
 						}
 						if (num2 != 10008)
 						{
 							goto IL_47F;
 						}
-						this.KillDialog(10008);
-						this.KillDialog(8);
+						KillDialog(10008);
+						KillDialog(8);
 						return;
 					}
 				}
-				this.KillDialog(theId - 3000);
-				this.FinishLawnDialogMessageBox(false);
+				KillDialog(theId - 3000);
+				FinishLawnDialogMessageBox(false);
 				return;
 				IL_47F:
-				this.KillDialog(theId - 3000);
+				KillDialog(theId - 3000);
 			}
 		}
 
 		public override void LeftTrialMode()
 		{
 			base.LeftTrialMode();
-			if (this.mGameSelector != null)
+			if (mGameSelector != null)
 			{
-				this.mGameSelector.SyncButtons();
+				mGameSelector.SyncButtons();
 			}
 		}
 
 		public override void UpdateFrames()
 		{
-			if (this.wantToShowUpdateMessage)
+			if (wantToShowUpdateMessage)
 			{
-				this.ShowUpdateMessage();
+				ShowUpdateMessage();
 			}
 			if (LoadingScreen.IsLoading)
 			{
 				LoadingScreen.gLoadingScreen.Update();
 				return;
 			}
-			this.UpdatePlayTimeStats();
+			UpdatePlayTimeStats();
 			int num = 1;
 			if (GlobalStaticVars.gSlowMo)
 			{
@@ -1724,62 +1724,62 @@ namespace Lawn
 			}
 			for (int i = 0; i < num; i++)
 			{
-				this.mAppCounter++;
-				if (this.mBoard != null)
+				mAppCounter++;
+				if (mBoard != null)
 				{
-					this.mBoard.ProcessDeleteQueue();
+					mBoard.ProcessDeleteQueue();
 				}
 				base.UpdateFrames();
-				if (this.mLoadingThreadCompleted && this.mEffectSystem != null)
+				if (mLoadingThreadCompleted && mEffectSystem != null)
 				{
-					this.mEffectSystem.ProcessDeleteQueue();
+					mEffectSystem.ProcessDeleteQueue();
 				}
-				this.CheckForGameEnd();
+				CheckForGameEnd();
 			}
 		}
 
 		public bool IsAdventureMode()
 		{
-			return this.mGameMode == GameMode.GAMEMODE_ADVENTURE;
+			return mGameMode == GameMode.GAMEMODE_ADVENTURE;
 		}
 
 		public bool IsQuickPlayMode()
 		{
-			return this.mGameMode >= GameMode.GAMEMODE_QUICKPLAY_1 && this.mGameMode <= GameMode.GAMEMODE_QUICKPLAY_50;
+			return mGameMode >= GameMode.GAMEMODE_QUICKPLAY_1 && mGameMode <= GameMode.GAMEMODE_QUICKPLAY_50;
 		}
 
 		public bool IsSurvivalMode()
 		{
-			return this.mGameMode >= GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_1 && this.mGameMode <= GameMode.GAMEMODE_SURVIVAL_ENDLESS_STAGE_5;
+			return mGameMode >= GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_1 && mGameMode <= GameMode.GAMEMODE_SURVIVAL_ENDLESS_STAGE_5;
 		}
 
 		public bool IsContinuousChallenge()
 		{
-			return this.IsArtChallenge() || this.IsSlotMachineLevel() || this.IsFinalBossLevel() || this.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED || this.mGameMode == GameMode.GAMEMODE_UPSELL || this.mGameMode == GameMode.GAMEMODE_INTRO || this.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST;
+			return IsArtChallenge() || IsSlotMachineLevel() || IsFinalBossLevel() || mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED || mGameMode == GameMode.GAMEMODE_UPSELL || mGameMode == GameMode.GAMEMODE_INTRO || mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST;
 		}
 
 		public bool IsArtChallenge()
 		{
-			return this.mBoard != null && (this.mGameMode == GameMode.GAMEMODE_CHALLENGE_ART_CHALLENGE_1 || this.mGameMode == GameMode.GAMEMODE_CHALLENGE_ART_CHALLENGE_2 || this.mGameMode == GameMode.GAMEMODE_CHALLENGE_SEEING_STARS);
+			return mBoard != null && (mGameMode == GameMode.GAMEMODE_CHALLENGE_ART_CHALLENGE_1 || mGameMode == GameMode.GAMEMODE_CHALLENGE_ART_CHALLENGE_2 || mGameMode == GameMode.GAMEMODE_CHALLENGE_SEEING_STARS);
 		}
 
 		public bool NeedPauseGame()
 		{
-			if (this.mDialogList.Count == 0)
+			if (mDialogList.Count == 0)
 			{
 				return false;
 			}
 			int num = 0;
-			if (this.mDialogList.Count == 1 && this.mDialogList.First.Value.mId != 0)
+			if (mDialogList.Count == 1 && mDialogList.First.Value.mId != 0)
 			{
-				num = this.mDialogList.First.Value.mId;
+				num = mDialogList.First.Value.mId;
 			}
-			return num != 28 && num != 51 && num != 50 && (this.mBoard == null || this.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN) && (this.mBoard == null || this.mGameMode != GameMode.GAMEMODE_TREE_OF_WISDOM);
+			return num != 28 && num != 51 && num != 50 && (mBoard == null || mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN) && (mBoard == null || mGameMode != GameMode.GAMEMODE_TREE_OF_WISDOM);
 		}
 
 		public void ShowResourceError()
 		{
-			this.ShowResourceError(false);
+			ShowResourceError(false);
 		}
 
 		public override void ShowResourceError(bool doExit)
@@ -1802,192 +1802,192 @@ namespace Lawn
 
 		public void PlayFoley(FoleyType theFoleyType)
 		{
-			if (!this.mMuteSoundsForCutscene)
+			if (!mMuteSoundsForCutscene)
 			{
-				this.mSoundSystem.PlayFoley(theFoleyType);
+				mSoundSystem.PlayFoley(theFoleyType);
 			}
 		}
 
 		public void PlayFoleyPitch(FoleyType theFoleyType, float aPitch)
 		{
-			if (!this.mMuteSoundsForCutscene)
+			if (!mMuteSoundsForCutscene)
 			{
-				this.mSoundSystem.PlayFoleyPitch(theFoleyType, aPitch);
+				mSoundSystem.PlayFoleyPitch(theFoleyType, aPitch);
 			}
 		}
 
 		public void FastLoad(GameMode theGameMode)
 		{
-			if (this.mShutdown)
+			if (mShutdown)
 			{
 				return;
 			}
-			this.mWidgetManager.RemoveWidget(this.mTitleScreen);
-			base.SafeDeleteWidget(this.mTitleScreen);
-			this.mTitleScreen = null;
-			this.PreNewGame(theGameMode, false);
+			mWidgetManager.RemoveWidget(mTitleScreen);
+			base.SafeDeleteWidget(mTitleScreen);
+			mTitleScreen = null;
+			PreNewGame(theGameMode, false);
 		}
 
 		public string GetStageString(int theLevel)
 		{
 			string text;
-			if (!this.cachedStageStrings.TryGetValue(theLevel, out text))
+			if (!cachedStageStrings.TryGetValue(theLevel, out text))
 			{
 				int num = TodCommon.ClampInt((theLevel - 1) / 10 + 1, 1, 6);
 				int num2 = theLevel - (num - 1) * 10;
 				text = Common.StrFormat_(TodStringFile.TodStringTranslate("[STAGE_STRING]"), num, num2);
-				this.cachedStageStrings.Add(theLevel, text);
+				cachedStageStrings.Add(theLevel, text);
 			}
 			return text;
 		}
 
 		public void KillChallengeScreen()
 		{
-			if (this.mChallengeScreen != null)
+			if (mChallengeScreen != null)
 			{
-				this.mWidgetManager.RemoveWidget(this.mChallengeScreen);
-				base.SafeDeleteWidget(this.mChallengeScreen);
-				this.mChallengeScreen = null;
+				mWidgetManager.RemoveWidget(mChallengeScreen);
+				base.SafeDeleteWidget(mChallengeScreen);
+				mChallengeScreen = null;
 			}
 		}
 
 		public void ShowChallengeScreen(ChallengePage thePage)
 		{
-			this.mGameScene = GameScenes.SCENE_CHALLENGE;
-			this.mChallengeScreen = new ChallengeScreen(this, thePage);
-			this.mChallengeScreen.Resize(0, 0, this.mWidth, this.mHeight);
-			this.mWidgetManager.AddWidget(this.mChallengeScreen);
-			this.mWidgetManager.BringToBack(this.mChallengeScreen);
-			this.mWidgetManager.SetFocus(this.mChallengeScreen);
+			mGameScene = GameScenes.SCENE_CHALLENGE;
+			mChallengeScreen = new ChallengeScreen(this, thePage);
+			mChallengeScreen.Resize(0, 0, mWidth, mHeight);
+			mWidgetManager.AddWidget(mChallengeScreen);
+			mWidgetManager.BringToBack(mChallengeScreen);
+			mWidgetManager.SetFocus(mChallengeScreen);
 		}
 
 		public void ShowLeaderboardScreen()
 		{
-			this.mGameScene = GameScenes.SCENE_LEADERBOARD;
-			this.mLeaderboardScreen = new LeaderboardScreen(this);
-			this.mLeaderboardScreen.Resize(0, 0, this.mWidth, this.mHeight);
-			this.mWidgetManager.AddWidget(this.mLeaderboardScreen);
-			this.mWidgetManager.BringToBack(this.mLeaderboardScreen);
-			this.mWidgetManager.SetFocus(this.mLeaderboardScreen);
+			mGameScene = GameScenes.SCENE_LEADERBOARD;
+			mLeaderboardScreen = new LeaderboardScreen(this);
+			mLeaderboardScreen.Resize(0, 0, mWidth, mHeight);
+			mWidgetManager.AddWidget(mLeaderboardScreen);
+			mWidgetManager.BringToBack(mLeaderboardScreen);
+			mWidgetManager.SetFocus(mLeaderboardScreen);
 		}
 
 		public void KillLeaderboardScreen()
 		{
-			if (this.mLeaderboardScreen != null)
+			if (mLeaderboardScreen != null)
 			{
-				this.mLeaderboardScreen.UnloadResources();
-				this.mWidgetManager.RemoveWidget(this.mLeaderboardScreen);
-				base.SafeDeleteWidget(this.mLeaderboardScreen);
-				this.mLeaderboardScreen = null;
+				mLeaderboardScreen.UnloadResources();
+				mWidgetManager.RemoveWidget(mLeaderboardScreen);
+				base.SafeDeleteWidget(mLeaderboardScreen);
+				mLeaderboardScreen = null;
 			}
 		}
 
 		public void CheckForGameEnd()
 		{
-			if (this.mBoard == null || !this.mBoard.mLevelComplete)
+			if (mBoard == null || !mBoard.mLevelComplete)
 			{
 				return;
 			}
-			bool flag = this.mBoard.CheckForPostGameAchievements();
+			bool flag = mBoard.CheckForPostGameAchievements();
 			flag = false;
-			this.UpdatePlayerProfileForFinishingLevel();
-			if (this.IsAdventureMode())
+			UpdatePlayerProfileForFinishingLevel();
+			if (IsAdventureMode())
 			{
-				int mLevel = this.mBoard.mLevel;
-				this.KillBoard();
-				if (this.IsFirstTimeAdventureMode() && mLevel < 50)
+				int level = mBoard.mLevel;
+				KillBoard();
+				if (IsFirstTimeAdventureMode() && level < 50)
 				{
-					this.ShowAwardScreen(AwardType.AWARD_FOR_LEVEL, flag);
+					ShowAwardScreen(AwardType.AWARD_FOR_LEVEL, flag);
 					return;
 				}
-				if (mLevel == 50)
+				if (level == 50)
 				{
-					if (this.mPlayerInfo.mFinishedAdventure != 1)
+					if (mPlayerInfo.mFinishedAdventure != 1)
 					{
-						this.ShowAwardScreen(AwardType.AWARD_FOR_LEVEL, flag);
+						ShowAwardScreen(AwardType.AWARD_FOR_LEVEL, flag);
 						return;
 					}
-					this.ShowAwardScreen(AwardType.AWARD_PRE_CREDITS_ZOMBIE_NOTE, flag);
+					ShowAwardScreen(AwardType.AWARD_PRE_CREDITS_ZOMBIE_NOTE, flag);
 					return;
 				}
 				else
 				{
-					if (mLevel == 9 || mLevel == 19 || mLevel == 29 || mLevel == 39 || mLevel == 49)
+					if (level == 9 || level == 19 || level == 29 || level == 39 || level == 49)
 					{
-						this.ShowAwardScreen(AwardType.AWARD_FOR_LEVEL, flag);
+						ShowAwardScreen(AwardType.AWARD_FOR_LEVEL, flag);
 						return;
 					}
 					if (flag)
 					{
-						this.ShowAwardScreen(AwardType.AWARD_ACHIEVEMENT_ONLY, true);
+						ShowAwardScreen(AwardType.AWARD_ACHIEVEMENT_ONLY, true);
 						return;
 					}
-					this.PreNewGame(this.mGameMode, false);
+					PreNewGame(mGameMode, false);
 					return;
 				}
 			}
-			else if (this.IsQuickPlayMode())
+			else if (IsQuickPlayMode())
 			{
-				this.KillBoard();
+				KillBoard();
 				if (flag)
 				{
-					this.ShowAwardScreen(AwardType.AWARD_ACHIEVEMENT_ONLY, flag);
+					ShowAwardScreen(AwardType.AWARD_ACHIEVEMENT_ONLY, flag);
 					return;
 				}
-				this.ShowGameSelectorQuickPlay(false);
+				ShowGameSelectorQuickPlay(false);
 				return;
 			}
-			else if (this.IsSurvivalMode())
+			else if (IsSurvivalMode())
 			{
-				if (this.mBoard.IsFinalSurvivalStage())
+				if (mBoard.IsFinalSurvivalStage())
 				{
-					this.KillBoard();
-					this.ShowGameSelectorQuickPlay(false);
+					KillBoard();
+					ShowGameSelectorQuickPlay(false);
 					return;
 				}
-				this.mBoard.mChallenge.mSurvivalStage++;
-				this.KillSeedChooserScreen();
-				this.mBoard.InitSurvivalStage();
+				mBoard.mChallenge.mSurvivalStage++;
+				KillSeedChooserScreen();
+				mBoard.InitSurvivalStage();
 				return;
 			}
 			else
 			{
-				if (!this.IsPuzzleMode())
+				if (!IsPuzzleMode())
 				{
-					this.KillBoard();
-					this.ShowGameSelectorQuickPlay(false);
+					KillBoard();
+					ShowGameSelectorQuickPlay(false);
 					return;
 				}
-				bool flag2 = this.IsIZombieLevel();
-				this.KillBoard();
+				bool flag2 = IsIZombieLevel();
+				KillBoard();
 				if (flag2)
 				{
-					this.ShowGameSelectorQuickPlay(false, GameSelectorButtons.GameSelector_IZombie);
+					ShowGameSelectorQuickPlay(false, GameSelectorButtons.GameSelector_IZombie);
 					return;
 				}
-				this.ShowGameSelectorQuickPlay(false, GameSelectorButtons.GameSelector_Vasebreaker);
+				ShowGameSelectorQuickPlay(false, GameSelectorButtons.GameSelector_Vasebreaker);
 				return;
 			}
 		}
 
 		public virtual void CloseRequestAsync()
 		{
-			this.mCloseRequest = true;
+			mCloseRequest = true;
 		}
 
 		public bool IsChallengeWithoutSeedBank()
 		{
-			return this.mGameMode == GameMode.GAMEMODE_CHALLENGE_RAINING_SEEDS || this.mGameMode == GameMode.GAMEMODE_UPSELL || this.mGameMode == GameMode.GAMEMODE_INTRO || this.IsWhackAZombieLevel() || this.IsSquirrelLevel() || this.IsScaryPotterLevel() || this.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || this.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM;
+			return mGameMode == GameMode.GAMEMODE_CHALLENGE_RAINING_SEEDS || mGameMode == GameMode.GAMEMODE_UPSELL || mGameMode == GameMode.GAMEMODE_INTRO || IsWhackAZombieLevel() || IsSquirrelLevel() || IsScaryPotterLevel() || mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM;
 		}
 
 		public AlmanacDialog DoAlmanacDialog(SeedType theSeedType, ZombieType theZombieType, AlmanacListener theListener)
 		{
 			default(PerfTimer).Start();
-			this.FinishModelessDialogs();
+			FinishModelessDialogs();
 			AlmanacDialog almanacDialog = new AlmanacDialog(this, theListener);
 			almanacDialog.Resize(0, 0, Constants.BackBufferSize.Y, Constants.BackBufferSize.X);
 			base.AddDialog(3, almanacDialog);
-			this.mWidgetManager.SetFocus(almanacDialog);
+			mWidgetManager.SetFocus(almanacDialog);
 			if (theSeedType != SeedType.SEED_NONE)
 			{
 				almanacDialog.ShowPlant(theSeedType);
@@ -2005,24 +2005,24 @@ namespace Lawn
 			{
 				return false;
 			}
-			this.KillDialog(3);
+			KillDialog(3);
 			return true;
 		}
 
 		public int GetSeedsAvailable()
 		{
-			int level = this.mPlayerInfo.GetLevel();
-			if (this.HasFinishedAdventure() || level > 50)
+			int level = mPlayerInfo.GetLevel();
+			if (HasFinishedAdventure() || level > 50)
 			{
 				return 49;
 			}
-			int awardSeedForLevel = (int)this.GetAwardSeedForLevel(level);
+			int awardSeedForLevel = (int)GetAwardSeedForLevel(level);
 			return Math.Min(49, awardSeedForLevel);
 		}
 
 		public Reanimation AddReanimation(float theX, float theY, int aRenderOrder, ReanimationType theReanimationType)
 		{
-			return this.AddReanimation(theX, theY, aRenderOrder, theReanimationType, true);
+			return AddReanimation(theX, theY, aRenderOrder, theReanimationType, true);
 		}
 
 		public Reanimation AddReanimation(float theX, float theY, int aRenderOrder, ReanimationType theReanimationType, bool theDoScalePos)
@@ -2032,12 +2032,12 @@ namespace Lawn
 				theX *= Constants.S;
 				theY *= Constants.S;
 			}
-			return this.mEffectSystem.mReanimationHolder.AllocReanimation(theX, theY, aRenderOrder, theReanimationType);
+			return mEffectSystem.mReanimationHolder.AllocReanimation(theX, theY, aRenderOrder, theReanimationType);
 		}
 
 		public TodParticleSystem AddTodParticle(float theX, float theY, int aRenderOrder, ParticleEffect theEffect)
 		{
-			return this.mEffectSystem.mParticleHolder.AllocParticleSystem(theX, theY, aRenderOrder, theEffect);
+			return mEffectSystem.mParticleHolder.AllocParticleSystem(theX, theY, aRenderOrder, theEffect);
 		}
 
 		public TodParticleSystem ParticleGetID(TodParticleSystem theParticle)
@@ -2088,7 +2088,7 @@ namespace Lawn
 
 		public void RemoveReanimation(ref Reanimation theReanimationID)
 		{
-			Reanimation reanimation = this.ReanimationTryToGet(theReanimationID);
+			Reanimation reanimation = ReanimationTryToGet(theReanimationID);
 			if (reanimation != null)
 			{
 				reanimation.ReanimationDie();
@@ -2098,7 +2098,7 @@ namespace Lawn
 
 		public void RemoveParticle(TodParticleSystem theParticleID)
 		{
-			TodParticleSystem todParticleSystem = this.ParticleTryToGet(theParticleID);
+			TodParticleSystem todParticleSystem = ParticleTryToGet(theParticleID);
 			if (todParticleSystem != null)
 			{
 				todParticleSystem.ParticleSystemDie();
@@ -2107,24 +2107,24 @@ namespace Lawn
 
 		public StoreScreen ShowStoreScreen(StoreListener theListener)
 		{
-			this.DelayLoadGamePlayResources(false);
-			this.DelayLoadCachedResources(true);
-			this.DelayLoadMainMenuResource(true);
-			this.DelayLoadZenGardenResources(true);
-			this.FinishModelessDialogs();
+			DelayLoadGamePlayResources(false);
+			DelayLoadCachedResources(true);
+			DelayLoadMainMenuResource(true);
+			DelayLoadZenGardenResources(true);
+			FinishModelessDialogs();
 			Debug.ASSERT(base.GetDialog(Dialogs.DIALOG_STORE) == null);
 			StoreScreen storeScreen = new StoreScreen(this, theListener);
 			base.AddDialog(4, storeScreen);
-			this.mWidgetManager.SetFocus(storeScreen);
+			mWidgetManager.SetFocus(storeScreen);
 			return storeScreen;
 		}
 
 		public UpsellScreen ShowUpsellScreen()
 		{
-			this.FinishModelessDialogs();
+			FinishModelessDialogs();
 			UpsellScreen upsellScreen = new UpsellScreen(this);
 			base.AddDialog(54, upsellScreen);
-			this.mWidgetManager.SetFocus(upsellScreen);
+			mWidgetManager.SetFocus(upsellScreen);
 			return upsellScreen;
 		}
 
@@ -2134,60 +2134,60 @@ namespace Lawn
 			{
 				return;
 			}
-			this.KillDialog(4);
+			KillDialog(4);
 		}
 
 		public bool HasSeedType(SeedType theSeedType)
 		{
 			if (theSeedType == SeedType.SEED_GATLINGPEA)
 			{
-				return this.mPlayerInfo.mPurchases[0] > 0;
+				return mPlayerInfo.mPurchases[0] > 0;
 			}
-			if (this.IsTrialStageLocked() && theSeedType >= SeedType.SEED_JALAPENO)
+			if (IsTrialStageLocked() && theSeedType >= SeedType.SEED_JALAPENO)
 			{
 				return false;
 			}
 			if (theSeedType == SeedType.SEED_TWINSUNFLOWER)
 			{
-				return this.mPlayerInfo.mPurchases[1] > 0;
+				return mPlayerInfo.mPurchases[1] > 0;
 			}
 			if (theSeedType == SeedType.SEED_GLOOMSHROOM)
 			{
-				return this.mPlayerInfo.mPurchases[2] > 0;
+				return mPlayerInfo.mPurchases[2] > 0;
 			}
 			if (theSeedType == SeedType.SEED_CATTAIL)
 			{
-				return this.mPlayerInfo.mPurchases[3] > 0;
+				return mPlayerInfo.mPurchases[3] > 0;
 			}
 			if (theSeedType == SeedType.SEED_WINTERMELON)
 			{
-				return this.mPlayerInfo.mPurchases[4] > 0;
+				return mPlayerInfo.mPurchases[4] > 0;
 			}
 			if (theSeedType == SeedType.SEED_GOLD_MAGNET)
 			{
-				return this.mPlayerInfo.mPurchases[5] > 0;
+				return mPlayerInfo.mPurchases[5] > 0;
 			}
 			if (theSeedType == SeedType.SEED_SPIKEROCK)
 			{
-				return this.mPlayerInfo.mPurchases[6] > 0;
+				return mPlayerInfo.mPurchases[6] > 0;
 			}
 			if (theSeedType == SeedType.SEED_COBCANNON)
 			{
-				return this.mPlayerInfo.mPurchases[7] > 0;
+				return mPlayerInfo.mPurchases[7] > 0;
 			}
 			if (theSeedType == SeedType.SEED_IMITATER)
 			{
-				return this.mPlayerInfo.mPurchases[8] > 0;
+				return mPlayerInfo.mPurchases[8] > 0;
 			}
-			return theSeedType < (SeedType)this.GetSeedsAvailable();
+			return theSeedType < (SeedType)GetSeedsAvailable();
 		}
 
 		public void EndLevel()
 		{
-			this.KillBoard();
-			if (this.IsAdventureMode())
+			KillBoard();
+			if (IsAdventureMode())
 			{
-				this.NewGame();
+				NewGame();
 			}
 		}
 
@@ -2198,42 +2198,42 @@ namespace Lawn
 
 		public bool IsShovelLevel()
 		{
-			return this.mBoard != null && this.mGameMode == GameMode.GAMEMODE_CHALLENGE_SHOVEL;
+			return mBoard != null && mGameMode == GameMode.GAMEMODE_CHALLENGE_SHOVEL;
 		}
 
 		public bool IsWallnutBowlingLevel()
 		{
-			return this.mBoard != null && (this.mGameMode == GameMode.GAMEMODE_CHALLENGE_WALLNUT_BOWLING || this.mGameMode == GameMode.GAMEMODE_CHALLENGE_WALLNUT_BOWLING_2 || ((this.IsAdventureMode() && this.mPlayerInfo.mLevel == 5) || this.mGameMode == GameMode.GAMEMODE_QUICKPLAY_5));
+			return mBoard != null && (mGameMode == GameMode.GAMEMODE_CHALLENGE_WALLNUT_BOWLING || mGameMode == GameMode.GAMEMODE_CHALLENGE_WALLNUT_BOWLING_2 || ((IsAdventureMode() && mPlayerInfo.mLevel == 5) || mGameMode == GameMode.GAMEMODE_QUICKPLAY_5));
 		}
 
 		public bool IsMiniBossLevel()
 		{
-			return this.mBoard != null && ((this.IsAdventureMode() && this.mPlayerInfo.mLevel == 10) || this.mGameMode == GameMode.GAMEMODE_QUICKPLAY_10 || ((this.IsAdventureMode() && this.mPlayerInfo.mLevel == 20) || this.mGameMode == GameMode.GAMEMODE_QUICKPLAY_20) || ((this.IsAdventureMode() && this.mPlayerInfo.mLevel == 30) || this.mGameMode == GameMode.GAMEMODE_QUICKPLAY_30));
+			return mBoard != null && ((IsAdventureMode() && mPlayerInfo.mLevel == 10) || mGameMode == GameMode.GAMEMODE_QUICKPLAY_10 || ((IsAdventureMode() && mPlayerInfo.mLevel == 20) || mGameMode == GameMode.GAMEMODE_QUICKPLAY_20) || ((IsAdventureMode() && mPlayerInfo.mLevel == 30) || mGameMode == GameMode.GAMEMODE_QUICKPLAY_30));
 		}
 
 		public bool IsSlotMachineLevel()
 		{
-			return this.mBoard != null && this.mGameMode == GameMode.GAMEMODE_CHALLENGE_SLOT_MACHINE;
+			return mBoard != null && mGameMode == GameMode.GAMEMODE_CHALLENGE_SLOT_MACHINE;
 		}
 
 		public bool IsLittleTroubleLevel()
 		{
-			return this.mBoard != null && (this.mGameMode == GameMode.GAMEMODE_CHALLENGE_LITTLE_TROUBLE || ((this.IsAdventureMode() && this.mPlayerInfo.mLevel == 25) || this.mGameMode == GameMode.GAMEMODE_QUICKPLAY_25));
+			return mBoard != null && (mGameMode == GameMode.GAMEMODE_CHALLENGE_LITTLE_TROUBLE || ((IsAdventureMode() && mPlayerInfo.mLevel == 25) || mGameMode == GameMode.GAMEMODE_QUICKPLAY_25));
 		}
 
 		public bool IsStormyNightLevel()
 		{
-			return this.mBoard != null && (this.mGameMode == GameMode.GAMEMODE_CHALLENGE_STORMY_NIGHT || ((this.IsAdventureMode() && this.mPlayerInfo.mLevel == 40) || this.mGameMode == GameMode.GAMEMODE_QUICKPLAY_40));
+			return mBoard != null && (mGameMode == GameMode.GAMEMODE_CHALLENGE_STORMY_NIGHT || ((IsAdventureMode() && mPlayerInfo.mLevel == 40) || mGameMode == GameMode.GAMEMODE_QUICKPLAY_40));
 		}
 
 		public bool IsFinalBossLevel()
 		{
-			return this.mBoard != null && (this.mGameMode == GameMode.GAMEMODE_CHALLENGE_FINAL_BOSS || ((this.IsAdventureMode() && this.mPlayerInfo.mLevel == 50) || this.mGameMode == GameMode.GAMEMODE_QUICKPLAY_50));
+			return mBoard != null && (mGameMode == GameMode.GAMEMODE_CHALLENGE_FINAL_BOSS || ((IsAdventureMode() && mPlayerInfo.mLevel == 50) || mGameMode == GameMode.GAMEMODE_QUICKPLAY_50));
 		}
 
 		public bool IsBungeeBlitzLevel()
 		{
-			return this.mBoard != null && (this.mGameMode == GameMode.GAMEMODE_CHALLENGE_BUNGEE_BLITZ || ((this.IsAdventureMode() && this.mPlayerInfo.mLevel == 45) || this.mGameMode == GameMode.GAMEMODE_QUICKPLAY_45));
+			return mBoard != null && (mGameMode == GameMode.GAMEMODE_CHALLENGE_BUNGEE_BLITZ || ((IsAdventureMode() && mPlayerInfo.mLevel == 45) || mGameMode == GameMode.GAMEMODE_QUICKPLAY_45));
 		}
 
 		public SeedType GetAwardSeedForLevel(int theLevel)
@@ -2259,50 +2259,50 @@ namespace Lawn
 		public string GetCrazyDaveText(int theMessageIndex)
 		{
 			string theText = Common.StrFormat_("[CRAZY_DAVE_{0}]", theMessageIndex);
-			theText = TodCommon.TodReplaceString(theText, "{PLAYER_NAME}", this.mPlayerInfo.mName);
-			theText = TodCommon.TodReplaceString(theText, "{MONEY}", LawnApp.GetMoneyString(this.mPlayerInfo.mCoins));
+			theText = TodCommon.TodReplaceString(theText, "{PLAYER_NAME}", mPlayerInfo.mName);
+			theText = TodCommon.TodReplaceString(theText, "{MONEY}", LawnApp.GetMoneyString(mPlayerInfo.mCoins));
 			int itemCost = StoreScreen.GetItemCost(StoreItem.STORE_ITEM_PACKET_UPGRADE);
 			return TodCommon.TodReplaceString(theText, "{UPGRADE_COST}", LawnApp.GetMoneyString(itemCost));
 		}
 
 		public bool CanShowAlmanac()
 		{
-			return !this.IsIceDemo() && this.mPlayerInfo != null && (this.HasFinishedAdventure() || this.mPlayerInfo.mLevel >= 15);
+			return !IsIceDemo() && mPlayerInfo != null && (HasFinishedAdventure() || mPlayerInfo.mLevel >= 15);
 		}
 
 		public bool IsNight()
 		{
-			return (this.mBoard != null && this.mBoard.StageIsNight()) || (!this.IsIceDemo() && this.mPlayerInfo != null && ((this.mPlayerInfo.mLevel >= 11 && this.mPlayerInfo.mLevel <= 20) || (this.mPlayerInfo.mLevel >= 31 && this.mPlayerInfo.mLevel <= 40) || this.mPlayerInfo.mLevel == 50));
+			return (mBoard != null && mBoard.StageIsNight()) || (!IsIceDemo() && mPlayerInfo != null && ((mPlayerInfo.mLevel >= 11 && mPlayerInfo.mLevel <= 20) || (mPlayerInfo.mLevel >= 31 && mPlayerInfo.mLevel <= 40) || mPlayerInfo.mLevel == 50));
 		}
 
 		public bool CanShowStore()
 		{
-			return !this.IsIceDemo() && this.mPlayerInfo != null && (this.HasFinishedAdventure() || this.mPlayerInfo.mHasSeenUpsell || this.mPlayerInfo.mLevel >= 25);
+			return !IsIceDemo() && mPlayerInfo != null && (HasFinishedAdventure() || mPlayerInfo.mHasSeenUpsell || mPlayerInfo.mLevel >= 25);
 		}
 
 		public bool HasBeatenChallenge(GameMode theGameMode)
 		{
-			if (this.mPlayerInfo == null)
+			if (mPlayerInfo == null)
 			{
 				return false;
 			}
 			int num = theGameMode - GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_1;
 			Debug.ASSERT(num >= 0 && num < 122);
-			if (this.IsSurvivalNormal(theGameMode))
+			if (IsSurvivalNormal(theGameMode))
 			{
-				return this.mPlayerInfo.mChallengeRecords[num] >= 5;
+				return mPlayerInfo.mChallengeRecords[num] >= 5;
 			}
-			if (this.IsSurvivalHard(theGameMode))
+			if (IsSurvivalHard(theGameMode))
 			{
-				return this.mPlayerInfo.mChallengeRecords[num] >= 10;
+				return mPlayerInfo.mChallengeRecords[num] >= 10;
 			}
-			return !this.IsSurvivalEndless(theGameMode) && !this.IsEndlessScaryPotter(theGameMode) && !this.IsEndlessIZombie(theGameMode) && this.mPlayerInfo.mChallengeRecords[num] > 0;
+			return !IsSurvivalEndless(theGameMode) && !IsEndlessScaryPotter(theGameMode) && !IsEndlessIZombie(theGameMode) && mPlayerInfo.mChallengeRecords[num] > 0;
 		}
 
 		public PottedPlant GetPottedPlantByIndex(int thePottedPlantIndex)
 		{
-			Debug.ASSERT(thePottedPlantIndex >= 0 && thePottedPlantIndex < this.mPlayerInfo.mNumPottedPlants);
-			return this.mPlayerInfo.mPottedPlant[thePottedPlantIndex];
+			Debug.ASSERT(thePottedPlantIndex >= 0 && thePottedPlantIndex < mPlayerInfo.mNumPottedPlants);
+			return mPlayerInfo.mPottedPlant[thePottedPlantIndex];
 		}
 
 		public bool IsSurvivalNormal(GameMode theGameMode)
@@ -2322,34 +2322,34 @@ namespace Lawn
 
 		public bool HasFinishedAdventure()
 		{
-			return this.mPlayerInfo != null && this.mPlayerInfo.mFinishedAdventure > 0;
+			return mPlayerInfo != null && mPlayerInfo.mFinishedAdventure > 0;
 		}
 
 		public bool IsFirstTimeAdventureMode()
 		{
-			return this.IsAdventureMode() && !this.HasFinishedAdventure();
+			return IsAdventureMode() && !HasFinishedAdventure();
 		}
 
 		public bool CanSpawnYetis()
 		{
 			ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(ZombieType.ZOMBIE_YETI);
-			return this.HasFinishedAdventure() && (this.mPlayerInfo.mFinishedAdventure >= 2 || this.mPlayerInfo.mLevel >= zombieDefinition.mStartingLevel);
+			return HasFinishedAdventure() && (mPlayerInfo.mFinishedAdventure >= 2 || mPlayerInfo.mLevel >= zombieDefinition.mStartingLevel);
 		}
 
 		public void CrazyDaveEnter()
 		{
-			Debug.ASSERT(this.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_OFF);
-			Debug.ASSERT(this.ReanimationTryToGet(this.mCrazyDaveReanimID) == null);
-			Reanimation reanimation = this.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_CRAZY_DAVE);
+			Debug.ASSERT(mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_OFF);
+			Debug.ASSERT(ReanimationTryToGet(mCrazyDaveReanimID) == null);
+			Reanimation reanimation = AddReanimation(0f, 0f, 0, ReanimationType.REANIM_CRAZY_DAVE);
 			reanimation.mIsAttachment = true;
 			reanimation.SetBasePoseFromAnim(GlobalMembersReanimIds.ReanimTrackId_anim_idle_handing);
-			this.mCrazyDaveReanimID = this.ReanimationGetID(reanimation);
+			mCrazyDaveReanimID = ReanimationGetID(reanimation);
 			reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_enter, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 24f);
-			this.mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_ENTERING;
-			this.mCrazyDaveMessageIndex = -1;
-			this.mCrazyDaveMessageText = string.Empty;
-			this.mCrazyDaveBlinkCounter = TodCommon.RandRangeInt(400, 800);
-			if (this.mGameScene == GameScenes.SCENE_LEVEL_INTRO && this.IsStormyNightLevel())
+			mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_ENTERING;
+			mCrazyDaveMessageIndex = -1;
+			mCrazyDaveMessageText = string.Empty;
+			mCrazyDaveBlinkCounter = TodCommon.RandRangeInt(400, 800);
+			if (mGameScene == GameScenes.SCENE_LEVEL_INTRO && IsStormyNightLevel())
 			{
 				reanimation.mColorOverride = new SexyColor(64, 64, 64);
 			}
@@ -2357,110 +2357,110 @@ namespace Lawn
 
 		public void FinishZenGardenTutorial()
 		{
-			this.mZenGarden.mIsTutorial = false;
-			this.mPlayerInfo.mZenGardenTutorialComplete = true;
-			this.mPlayerInfo.mIsInZenTutorial = false;
-			this.mBoardResult = BoardResult.BOARDRESULT_WON;
-			this.KillBoard();
-			this.PreNewGame(GameMode.GAMEMODE_ADVENTURE, false);
+			mZenGarden.mIsTutorial = false;
+			mPlayerInfo.mZenGardenTutorialComplete = true;
+			mPlayerInfo.mIsInZenTutorial = false;
+			mBoardResult = BoardResult.BOARDRESULT_WON;
+			KillBoard();
+			PreNewGame(GameMode.GAMEMODE_ADVENTURE, false);
 		}
 
 		public void UpdateCrazyDave()
 		{
-			Reanimation reanimation = this.ReanimationTryToGet(this.mCrazyDaveReanimID);
+			Reanimation reanimation = ReanimationTryToGet(mCrazyDaveReanimID);
 			if (reanimation == null)
 			{
 				return;
 			}
-			if (this.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_ENTERING || this.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_TALKING)
+			if (mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_ENTERING || mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_TALKING)
 			{
 				if (reanimation.mLoopCount > 0)
 				{
 					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.REANIM_LOOP, 20, 12f);
-					this.mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_IDLING;
+					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_IDLING;
 				}
 			}
-			else if (this.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING)
+			else if (mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING)
 			{
 				if (reanimation.mLoopCount > 0)
 				{
 					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle_handing, ReanimLoopType.REANIM_LOOP, 20, 12f);
-					this.mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_HANDING_IDLING;
+					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_HANDING_IDLING;
 				}
 			}
-			else if (this.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_LEAVING && reanimation.mLoopCount > 0)
+			else if (mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_LEAVING && reanimation.mLoopCount > 0)
 			{
-				this.CrazyDaveDie();
+				CrazyDaveDie();
 			}
-			if (this.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_IDLING || this.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_IDLING)
+			if (mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_IDLING || mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_IDLING)
 			{
-				if (this.mCrazyDaveMessageText.IndexOf("{MOUTH_BIG_SMILE}") != -1)
+				if (mCrazyDaveMessageText.IndexOf("{MOUTH_BIG_SMILE}") != -1)
 				{
 					reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_dave_mouths, AtlasResources.IMAGE_REANIM_CRAZYDAVE_MOUTH1);
-					this.mCrazyDaveMessageText = this.mCrazyDaveMessageText.Replace("{MOUTH_BIG_SMILE}", "");
+					mCrazyDaveMessageText = mCrazyDaveMessageText.Replace("{MOUTH_BIG_SMILE}", "");
 				}
-				else if (this.mCrazyDaveMessageText.IndexOf("{MOUTH_SMALL_SMILE}") != -1)
+				else if (mCrazyDaveMessageText.IndexOf("{MOUTH_SMALL_SMILE}") != -1)
 				{
 					reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_dave_mouths, AtlasResources.IMAGE_REANIM_CRAZYDAVE_MOUTH5);
-					this.mCrazyDaveMessageText = this.mCrazyDaveMessageText.Replace("{MOUTH_SMALL_SMILE}", "");
+					mCrazyDaveMessageText = mCrazyDaveMessageText.Replace("{MOUTH_SMALL_SMILE}", "");
 				}
-				else if (this.mCrazyDaveMessageText.IndexOf("{MOUTH_BIG_OH}") != -1)
+				else if (mCrazyDaveMessageText.IndexOf("{MOUTH_BIG_OH}") != -1)
 				{
 					reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_dave_mouths, AtlasResources.IMAGE_REANIM_CRAZYDAVE_MOUTH4);
-					this.mCrazyDaveMessageText = this.mCrazyDaveMessageText.Replace("{MOUTH_BIG_OH}", "");
+					mCrazyDaveMessageText = mCrazyDaveMessageText.Replace("{MOUTH_BIG_OH}", "");
 				}
-				else if (this.mCrazyDaveMessageText.IndexOf("{MOUTH_SMALL_OH}") != -1)
+				else if (mCrazyDaveMessageText.IndexOf("{MOUTH_SMALL_OH}") != -1)
 				{
 					reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_dave_mouths, AtlasResources.IMAGE_REANIM_CRAZYDAVE_MOUTH6);
-					this.mCrazyDaveMessageText = this.mCrazyDaveMessageText.Replace("{MOUTH_SMALL_OH}", "");
+					mCrazyDaveMessageText = mCrazyDaveMessageText.Replace("{MOUTH_SMALL_OH}", "");
 				}
 			}
 			Reanimation reanimation2;
-			if (this.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_IDLING || this.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_TALKING || this.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING || this.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_IDLING)
+			if (mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_IDLING || mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_TALKING || mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING || mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_IDLING)
 			{
-				this.mCrazyDaveBlinkCounter--;
-				if (this.mCrazyDaveBlinkCounter <= 0)
+				mCrazyDaveBlinkCounter--;
+				if (mCrazyDaveBlinkCounter <= 0)
 				{
-					this.mCrazyDaveBlinkCounter = TodCommon.RandRangeInt(400, 800);
-					reanimation2 = this.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_CRAZY_DAVE);
+					mCrazyDaveBlinkCounter = TodCommon.RandRangeInt(400, 800);
+					reanimation2 = AddReanimation(0f, 0f, 0, ReanimationType.REANIM_CRAZY_DAVE);
 					reanimation2.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_blink);
 					reanimation2.mLoopType = ReanimLoopType.REANIM_PLAY_ONCE_FULL_LAST_FRAME_AND_HOLD;
 					reanimation2.mAnimRate = 15f;
 					reanimation2.AttachToAnotherReanimation(ref reanimation, GlobalMembersReanimIds.ReanimTrackId_dave_head);
 					reanimation2.mColorOverride = reanimation.mColorOverride;
 					reanimation.AssignRenderGroupToTrack(GlobalMembersReanimIds.ReanimTrackId_dave_eye, -1);
-					this.mCrazyDaveBlinkReanimID = this.ReanimationGetID(reanimation2);
+					mCrazyDaveBlinkReanimID = ReanimationGetID(reanimation2);
 				}
 			}
-			reanimation2 = this.ReanimationTryToGet(this.mCrazyDaveBlinkReanimID);
+			reanimation2 = ReanimationTryToGet(mCrazyDaveBlinkReanimID);
 			if (reanimation2 != null && reanimation2.mLoopCount > 0)
 			{
 				reanimation.AssignRenderGroupToTrack(GlobalMembersReanimIds.ReanimTrackId_dave_eye, 0);
-				this.RemoveReanimation(ref this.mCrazyDaveBlinkReanimID);
-				this.mCrazyDaveBlinkReanimID = null;
+				RemoveReanimation(ref mCrazyDaveBlinkReanimID);
+				mCrazyDaveBlinkReanimID = null;
 			}
 			reanimation.Update();
 		}
 
 		public void CrazyDaveTalkIndex(int theMessageIndex)
 		{
-			this.mCrazyDaveMessageIndex = theMessageIndex;
-			string crazyDaveText = this.GetCrazyDaveText(theMessageIndex);
-			this.CrazyDaveTalkMessage(crazyDaveText);
+			mCrazyDaveMessageIndex = theMessageIndex;
+			string crazyDaveText = GetCrazyDaveText(theMessageIndex);
+			CrazyDaveTalkMessage(crazyDaveText);
 		}
 
 		public void CrazyDaveTalkMessage(string theMessage)
 		{
-			Reanimation reanimation = this.ReanimationGet(this.mCrazyDaveReanimID);
+			Reanimation reanimation = ReanimationGet(mCrazyDaveReanimID);
 			bool flag = false;
 			if (theMessage.IndexOf("{HANDING}") != -1)
 			{
 				flag = true;
 				theMessage = theMessage.Replace("{HANDING}", string.Empty);
 			}
-			if ((this.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING || this.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_IDLING) && !flag)
+			if ((mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING || mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_IDLING) && !flag)
 			{
-				this.CrazyDaveDoneHanding();
+				CrazyDaveDoneHanding();
 			}
 			bool flag2 = true;
 			if (theMessage.IndexOf("{NO_SOUND}") != -1)
@@ -2470,7 +2470,7 @@ namespace Lawn
 			}
 			else
 			{
-				this.CrazyDaveStopSound();
+				CrazyDaveStopSound();
 			}
 			int num = 0;
 			bool flag3 = false;
@@ -2491,35 +2491,35 @@ namespace Lawn
 			}
 			Image theImage = null;
 			reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_dave_mouths, theImage);
-			if (this.mCrazyDaveState != CrazyDaveState.CRAZY_DAVE_TALKING || flag2)
+			if (mCrazyDaveState != CrazyDaveState.CRAZY_DAVE_TALKING || flag2)
 			{
 				if (flag)
 				{
 					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_talk_handing, ReanimLoopType.REANIM_LOOP, 50, 12f);
 					if (flag2 && theMessage.IndexOf("{SHORT_SOUND}") != -1)
 					{
-						this.PlayFoley(FoleyType.FOLEY_CRAZYDAVESHORT);
+						PlayFoley(FoleyType.FOLEY_CRAZYDAVESHORT);
 						theMessage = theMessage.Replace("{SHORT_SOUND}", "");
 					}
 					else if (flag2 && theMessage.IndexOf("{SCREAM}") != -1)
 					{
-						this.PlayFoley(FoleyType.FOLEY_CRAZYDAVESCREAM);
+						PlayFoley(FoleyType.FOLEY_CRAZYDAVESCREAM);
 						theMessage = theMessage.Replace("{SCREAM}", "");
 					}
 					else if (flag2)
 					{
-						this.PlayFoley(FoleyType.FOLEY_CRAZYDAVELONG);
+						PlayFoley(FoleyType.FOLEY_CRAZYDAVELONG);
 					}
-					this.mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_HANDING_TALKING;
+					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_HANDING_TALKING;
 				}
 				else if (theMessage.IndexOf("{SHAKE}") != -1)
 				{
 					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_crazy, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 50, 12f);
 					if (flag2)
 					{
-						this.PlayFoley(FoleyType.FOLEY_CRAZYDAVECRAZY);
+						PlayFoley(FoleyType.FOLEY_CRAZYDAVECRAZY);
 					}
-					this.mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_TALKING;
+					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_TALKING;
 					theMessage = theMessage.Replace("{SHAKE}", "");
 				}
 				else if (theMessage.IndexOf("{SCREAM}") != -1)
@@ -2527,9 +2527,9 @@ namespace Lawn
 					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_smalltalk, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 50, 12f);
 					if (flag2)
 					{
-						this.PlayFoley(FoleyType.FOLEY_CRAZYDAVESCREAM);
+						PlayFoley(FoleyType.FOLEY_CRAZYDAVESCREAM);
 					}
-					this.mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_TALKING;
+					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_TALKING;
 					theMessage = theMessage.Replace("{SCREAM}", "");
 				}
 				else if (theMessage.IndexOf("{SCREAM2}") != -1)
@@ -2537,15 +2537,15 @@ namespace Lawn
 					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_mediumtalk, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 50, 12f);
 					if (flag2)
 					{
-						this.PlayFoley(FoleyType.FOLEY_CRAZYDAVESCREAM2);
+						PlayFoley(FoleyType.FOLEY_CRAZYDAVESCREAM2);
 					}
-					this.mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_TALKING;
+					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_TALKING;
 					theMessage = theMessage.Replace("{SCREAM2}", "");
 				}
 				else if (theMessage.IndexOf("{SHOW_WALLNUT}") != -1)
 				{
 					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_talk_handing, ReanimLoopType.REANIM_LOOP, 50, 12f);
-					Reanimation reanimation2 = this.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_WALLNUT);
+					Reanimation reanimation2 = AddReanimation(0f, 0f, 0, ReanimationType.REANIM_WALLNUT);
 					reanimation2.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.REANIM_LOOP, 0, 12f);
 					ReanimatorTrackInstance trackInstanceByName = reanimation.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_dave_handinghand);
 					AttachEffect attachEffect = GlobalMembersAttachment.AttachReanim(ref trackInstanceByName.mAttachmentID, reanimation2, 100f * Constants.S, 393f * Constants.S);
@@ -2554,15 +2554,15 @@ namespace Lawn
 					reanimation.Update();
 					if (flag2)
 					{
-						this.PlayFoley(FoleyType.FOLEY_CRAZYDAVESCREAM2);
+						PlayFoley(FoleyType.FOLEY_CRAZYDAVESCREAM2);
 					}
-					this.mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_HANDING_TALKING;
+					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_HANDING_TALKING;
 					theMessage = theMessage.Replace("{SHOW_WALLNUT}", "");
 				}
 				else if (theMessage.IndexOf("{SHOW_HAMMER}") != -1)
 				{
 					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_talk_handing, ReanimLoopType.REANIM_LOOP, 50, 12f);
-					Reanimation reanimation3 = this.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_HAMMER);
+					Reanimation reanimation3 = AddReanimation(0f, 0f, 0, ReanimationType.REANIM_HAMMER);
 					reanimation3.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_whack_zombie, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 24f);
 					reanimation3.mAnimTime = 1f;
 					ReanimatorTrackInstance trackInstanceByName2 = reanimation.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_dave_handinghand);
@@ -2572,9 +2572,9 @@ namespace Lawn
 					reanimation.Update();
 					if (flag2)
 					{
-						this.PlayFoley(FoleyType.FOLEY_CRAZYDAVELONG);
+						PlayFoley(FoleyType.FOLEY_CRAZYDAVELONG);
 					}
-					this.mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_HANDING_TALKING;
+					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_HANDING_TALKING;
 					theMessage = theMessage.Replace("{SHOW_HAMMER}", "");
 				}
 				else if (num < 23)
@@ -2582,66 +2582,66 @@ namespace Lawn
 					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_smalltalk, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 50, 12f);
 					if (flag2)
 					{
-						this.PlayFoley(FoleyType.FOLEY_CRAZYDAVESHORT);
+						PlayFoley(FoleyType.FOLEY_CRAZYDAVESHORT);
 					}
-					this.mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_TALKING;
+					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_TALKING;
 				}
 				else if (num < 52)
 				{
 					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_mediumtalk, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 50, 12f);
 					if (flag2)
 					{
-						this.PlayFoley(FoleyType.FOLEY_CRAZYDAVELONG);
+						PlayFoley(FoleyType.FOLEY_CRAZYDAVELONG);
 					}
-					this.mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_TALKING;
+					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_TALKING;
 				}
 				else
 				{
 					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_blahblah, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 50, 12f);
 					if (flag2)
 					{
-						this.PlayFoley(FoleyType.FOLEY_CRAZYDAVEEXTRALONG);
+						PlayFoley(FoleyType.FOLEY_CRAZYDAVEEXTRALONG);
 					}
-					this.mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_TALKING;
+					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_TALKING;
 				}
 			}
-			this.mCrazyDaveMessageText = theMessage;
+			mCrazyDaveMessageText = theMessage;
 		}
 
 		public void CrazyDaveLeave()
 		{
-			Reanimation reanimation = this.ReanimationTryToGet(this.mCrazyDaveReanimID);
+			Reanimation reanimation = ReanimationTryToGet(mCrazyDaveReanimID);
 			if (reanimation == null)
 			{
 				return;
 			}
-			if (this.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING || this.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_IDLING)
+			if (mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING || mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_IDLING)
 			{
-				this.CrazyDaveDoneHanding();
+				CrazyDaveDoneHanding();
 			}
 			reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_leave, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, 24f);
 			Image theImage = null;
 			reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_dave_mouths, theImage);
-			this.mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_LEAVING;
-			this.mCrazyDaveMessageIndex = -1;
-			this.mCrazyDaveMessageText = string.Empty;
-			this.CrazyDaveStopSound();
+			mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_LEAVING;
+			mCrazyDaveMessageIndex = -1;
+			mCrazyDaveMessageText = string.Empty;
+			CrazyDaveStopSound();
 		}
 
 		public void DrawCrazyDave(Graphics g)
 		{
-			this.DrawCrazyDave(g, false);
+			DrawCrazyDave(g, false);
 		}
 
 		public void DrawCrazyDave(Graphics g, bool theUseSmallFont)
 		{
-			Reanimation reanimation = this.ReanimationTryToGet(this.mCrazyDaveReanimID);
+			Reanimation reanimation = ReanimationTryToGet(mCrazyDaveReanimID);
 			if (reanimation == null)
 			{
 				return;
 			}
 			int theWidth = Constants.RetardedDave_Bubble_Size;
-			if (!this.mCrazyDaveMessageText.empty())
+			if (!mCrazyDaveMessageText.empty())
 			{
 				int num = (int)Constants.InvertAndScale(285f);
 				int num2 = (int)Constants.InvertAndScale(80f);
@@ -2655,7 +2655,7 @@ namespace Lawn
 					g.DrawImage(image_STORE_SPEECHBUBBLE, num, num2, new TRect(0, 0, (int)Constants.InvertAndScale(64f), image_STORE_SPEECHBUBBLE.mHeight));
 					g.DrawImage(image_STORE_SPEECHBUBBLE, num + (int)Constants.InvertAndScale(64f), num2, new TRect(image_STORE_SPEECHBUBBLE.mWidth - num3, 0, num3, image_STORE_SPEECHBUBBLE.mHeight));
 				}
-				else if (this.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+				else if (mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 				{
 					num += Constants.ZenGarden_RetardedDaveBubble_Pos.X;
 					num2 += Constants.ZenGarden_RetardedDaveBubble_Pos.Y;
@@ -2668,9 +2668,9 @@ namespace Lawn
 					g.DrawImage(image_STORE_SPEECHBUBBLE, num, num2);
 				}
 				g.DrawImage(AtlasResources.IMAGE_STORE_SPEECHBUBBLE_TIP, num + (int)Constants.InvertAndScale(30f), num2 - Constants.RetardedDave_Bubble_Tip_Offset + image_STORE_SPEECHBUBBLE.mHeight);
-				string text = this.mCrazyDaveMessageText;
+				string text = mCrazyDaveMessageText;
 				TRect theRect = new TRect(num + Constants.RetardedDave_Bubble_Rect.mX, num2 + Constants.RetardedDave_Bubble_Rect.mY, theWidth, Constants.RetardedDave_Bubble_Rect.mHeight);
-				int mX = theRect.mX;
+				int x = theRect.mX;
 				if (text.IndexOf("{SHAKE}") != -1)
 				{
 					text = TodCommon.TodReplaceString(text, "{SHAKE}", "");
@@ -2678,7 +2678,7 @@ namespace Lawn
 					theRect.mY += RandomNumbers.NextNumber() % 2;
 				}
 				bool flag = true;
-				if (this.mGameMode == GameMode.GAMEMODE_UPSELL)
+				if (mGameMode == GameMode.GAMEMODE_UPSELL)
 				{
 					flag = false;
 				}
@@ -2698,7 +2698,7 @@ namespace Lawn
 				TodStringFile.TodDrawStringWrapped(g, text, theRect, theUseSmallFont ? Resources.FONT_BRIANNETOD12 : Resources.FONT_BRIANNETOD16, SexyColor.Black, DrawStringJustification.DS_ALIGN_CENTER_VERTICAL_MIDDLE);
 				if (flag)
 				{
-					TodCommon.TodDrawString(g, "[TAP_TO_CONTINUE]", mX + theRect.mWidth / 2, num2 + Constants.RetardedDave_Bubble_TapToContinue_Y, Resources.FONT_PICO129, SexyColor.Black, DrawStringJustification.DS_ALIGN_CENTER);
+					TodCommon.TodDrawString(g, "[TAP_TO_CONTINUE]", x + theRect.mWidth / 2, num2 + Constants.RetardedDave_Bubble_TapToContinue_Y, Resources.FONT_PICO129, SexyColor.Black, DrawStringJustification.DS_ALIGN_CENTER);
 				}
 			}
 			reanimation.Draw(g);
@@ -2706,17 +2706,17 @@ namespace Lawn
 
 		public void CrazyDaveDie()
 		{
-			Reanimation reanimation = this.ReanimationTryToGet(this.mCrazyDaveReanimID);
+			Reanimation reanimation = ReanimationTryToGet(mCrazyDaveReanimID);
 			if (reanimation == null)
 			{
 				return;
 			}
 			reanimation.ReanimationDie();
-			this.mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_OFF;
-			this.mCrazyDaveReanimID = null;
-			this.mCrazyDaveMessageIndex = -1;
-			this.mCrazyDaveMessageText = string.Empty;
-			this.CrazyDaveStopSound();
+			mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_OFF;
+			mCrazyDaveReanimID = null;
+			mCrazyDaveMessageIndex = -1;
+			mCrazyDaveMessageText = string.Empty;
+			CrazyDaveStopSound();
 		}
 
 		public void DoUpsellScreen()
@@ -2726,73 +2726,73 @@ namespace Lawn
 		public void CrazyDaveStopTalking()
 		{
 			bool flag = true;
-			if (this.mGameMode == GameMode.GAMEMODE_UPSELL)
+			if (mGameMode == GameMode.GAMEMODE_UPSELL)
 			{
 				flag = false;
 			}
-			if (flag && this.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING)
+			if (flag && mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING)
 			{
-				this.CrazyDaveDoneHanding();
+				CrazyDaveDoneHanding();
 			}
 			Image theImage = null;
-			Reanimation reanimation = this.ReanimationGet(this.mCrazyDaveReanimID);
+			Reanimation reanimation = ReanimationGet(mCrazyDaveReanimID);
 			reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_dave_mouths, theImage);
-			if (this.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING && !flag)
+			if (mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING && !flag)
 			{
 				reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle_handing, ReanimLoopType.REANIM_LOOP, 20, 12f);
-				this.mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_HANDING_IDLING;
+				mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_HANDING_IDLING;
 			}
-			else if (this.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_TALKING || this.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING)
+			else if (mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_TALKING || mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING)
 			{
 				reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.REANIM_LOOP, 20, 12f);
-				this.mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_IDLING;
+				mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_IDLING;
 			}
-			this.mCrazyDaveMessageIndex = -1;
-			this.mCrazyDaveMessageText = string.Empty;
-			this.CrazyDaveStopSound();
+			mCrazyDaveMessageIndex = -1;
+			mCrazyDaveMessageText = string.Empty;
+			CrazyDaveStopSound();
 		}
 
 		public void PreloadForUser()
 		{
-			int num = this.mCompletedLoadingThreadTasks + this.GetNumPreloadingTasks();
-			if (this.mTitleScreen != null && this.mTitleScreen.mQuickLoadKey != KeyCode.KEYCODE_UNKNOWN)
+			int num = mCompletedLoadingThreadTasks + GetNumPreloadingTasks();
+			if (mTitleScreen != null && mTitleScreen.mQuickLoadKey != KeyCode.KEYCODE_UNKNOWN)
 			{
-				this.mCompletedLoadingThreadTasks = num;
+				mCompletedLoadingThreadTasks = num;
 				return;
 			}
 			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_PUFF, true);
 			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_LAWN_MOWERED_ZOMBIE, true);
 			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_READYSETPLANT, true);
-			this.mCompletedLoadingThreadTasks += 68;
+			mCompletedLoadingThreadTasks += 68;
 			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_FINAL_WAVE, true);
 			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_SUN, true);
 			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_TEXT_FADE_ON, true);
-			this.mCompletedLoadingThreadTasks += 68;
+			mCompletedLoadingThreadTasks += 68;
 			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_ZOMBIE, true);
-			this.mCompletedLoadingThreadTasks += 68;
+			mCompletedLoadingThreadTasks += 68;
 			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_ZOMBIE_NEWSPAPER, true);
-			this.mCompletedLoadingThreadTasks += 68;
+			mCompletedLoadingThreadTasks += 68;
 			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_SELECTOR_SCREEN, true);
-			this.mCompletedLoadingThreadTasks += 340;
-			this.mCompletedLoadingThreadTasks += 68;
-			if (this.mPlayerInfo != null)
+			mCompletedLoadingThreadTasks += 340;
+			mCompletedLoadingThreadTasks += 68;
+			if (mPlayerInfo != null)
 			{
 				for (int i = 0; i < 53; i++)
 				{
 					SeedType theSeedType = (SeedType)i;
-					if (this.HasSeedType(theSeedType) || this.HasFinishedAdventure())
+					if (HasSeedType(theSeedType) || HasFinishedAdventure())
 					{
 						Plant.PreloadPlantResources(theSeedType);
-						if (this.mCompletedLoadingThreadTasks < num)
+						if (mCompletedLoadingThreadTasks < num)
 						{
-							this.mCompletedLoadingThreadTasks += 68;
+							mCompletedLoadingThreadTasks += 68;
 						}
-						if (this.mTitleScreen != null && this.mTitleScreen.mQuickLoadKey != KeyCode.KEYCODE_UNKNOWN)
+						if (mTitleScreen != null && mTitleScreen.mQuickLoadKey != KeyCode.KEYCODE_UNKNOWN)
 						{
-							this.mCompletedLoadingThreadTasks = num;
+							mCompletedLoadingThreadTasks = num;
 							return;
 						}
-						if (this.mShutdown || this.mCloseRequest)
+						if (mShutdown || mCloseRequest)
 						{
 							return;
 						}
@@ -2802,12 +2802,12 @@ namespace Lawn
 				while (j < 33)
 				{
 					ZombieType zombieType = (ZombieType)j;
-					if (this.HasFinishedAdventure())
+					if (HasFinishedAdventure())
 					{
 						goto IL_175;
 					}
 					ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(zombieType);
-					if (this.mPlayerInfo.mLevel >= zombieDefinition.mStartingLevel)
+					if (mPlayerInfo.mLevel >= zombieDefinition.mStartingLevel)
 					{
 						goto IL_175;
 					}
@@ -2820,25 +2820,25 @@ namespace Lawn
 						goto IL_1E0;
 					}
 					Zombie.PreloadZombieResources(zombieType);
-					if (this.mCompletedLoadingThreadTasks < num)
+					if (mCompletedLoadingThreadTasks < num)
 					{
-						this.mCompletedLoadingThreadTasks += 68;
+						mCompletedLoadingThreadTasks += 68;
 					}
-					if (this.mTitleScreen != null && this.mTitleScreen.mQuickLoadKey != KeyCode.KEYCODE_UNKNOWN)
+					if (mTitleScreen != null && mTitleScreen.mQuickLoadKey != KeyCode.KEYCODE_UNKNOWN)
 					{
-						this.mCompletedLoadingThreadTasks = num;
+						mCompletedLoadingThreadTasks = num;
 						return;
 					}
-					if (this.mShutdown || this.mCloseRequest)
+					if (mShutdown || mCloseRequest)
 					{
 						return;
 					}
 					goto IL_1E0;
 				}
 			}
-			if (this.mCompletedLoadingThreadTasks != num)
+			if (mCompletedLoadingThreadTasks != num)
 			{
-				this.mCompletedLoadingThreadTasks = num;
+				mCompletedLoadingThreadTasks = num;
 			}
 		}
 
@@ -2853,12 +2853,12 @@ namespace Lawn
 		public int GetNumPreloadingTasks()
 		{
 			int num = 10;
-			if (this.mPlayerInfo != null)
+			if (mPlayerInfo != null)
 			{
 				for (int i = 0; i < 53; i++)
 				{
 					SeedType theSeedType = (SeedType)i;
-					if (this.HasSeedType(theSeedType) || this.HasFinishedAdventure())
+					if (HasSeedType(theSeedType) || HasFinishedAdventure())
 					{
 						num++;
 					}
@@ -2867,12 +2867,12 @@ namespace Lawn
 				while (j < 33)
 				{
 					ZombieType zombieType = (ZombieType)j;
-					if (this.HasFinishedAdventure())
+					if (HasFinishedAdventure())
 					{
 						goto IL_5B;
 					}
 					ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(zombieType);
-					if (this.mPlayerInfo.mLevel >= zombieDefinition.mStartingLevel)
+					if (mPlayerInfo.mLevel >= zombieDefinition.mStartingLevel)
 					{
 						goto IL_5B;
 					}
@@ -2893,9 +2893,9 @@ namespace Lawn
 
 		public void LawnMessageBox(int theDialogId, string theHeaderName, string theLinesName, string theButton1Name, string theButton2Name, int theButtonMode, LawnMessageBoxListener theListener)
 		{
-			this.mOldFocus = this.mWidgetManager.mFocusWidget;
-			this.mLawnMessageBoxListener = theListener;
-			LawnDialog lawnDialog = this.DoDialog(theDialogId, true, theHeaderName, theLinesName, theButton1Name, theButtonMode);
+			mOldFocus = mWidgetManager.mFocusWidget;
+			mLawnMessageBoxListener = theListener;
+			LawnDialog lawnDialog = DoDialog(theDialogId, true, theHeaderName, theLinesName, theButton1Name, theButtonMode);
 			if (lawnDialog.mLawnYesButton != null)
 			{
 				lawnDialog.mLawnYesButton.mLabel = TodStringFile.TodStringTranslate(theButton1Name);
@@ -2905,7 +2905,7 @@ namespace Lawn
 				lawnDialog.mLawnNoButton.mLabel = TodStringFile.TodStringTranslate(theButton2Name);
 			}
 			lawnDialog.CalcSize(0, 0, (int)Constants.InvertAndScale(400f));
-			this.mWidgetManager.SetFocus(lawnDialog);
+			mWidgetManager.SetFocus(lawnDialog);
 		}
 
 		public virtual void EnforceCursor()
@@ -2914,20 +2914,20 @@ namespace Lawn
 
 		public void ShowCreditScreen()
 		{
-			this.mCreditScreen = new CreditScreen(this);
-			this.mCreditScreen.Resize(0, 0, this.mWidth, this.mHeight);
-			this.mWidgetManager.AddWidget(this.mCreditScreen);
-			this.mWidgetManager.BringToBack(this.mCreditScreen);
-			this.mWidgetManager.SetFocus(this.mCreditScreen);
+			mCreditScreen = new CreditScreen(this);
+			mCreditScreen.Resize(0, 0, mWidth, mHeight);
+			mWidgetManager.AddWidget(mCreditScreen);
+			mWidgetManager.BringToBack(mCreditScreen);
+			mWidgetManager.SetFocus(mCreditScreen);
 		}
 
 		public void KillCreditScreen()
 		{
-			if (this.mCreditScreen != null)
+			if (mCreditScreen != null)
 			{
-				this.mWidgetManager.RemoveWidget(this.mCreditScreen);
-				base.SafeDeleteWidget(this.mCreditScreen);
-				this.mCreditScreen = null;
+				mWidgetManager.RemoveWidget(mCreditScreen);
+				base.SafeDeleteWidget(mCreditScreen);
+				mCreditScreen = null;
 			}
 		}
 
@@ -2946,7 +2946,7 @@ namespace Lawn
 			for (int i = 1; i < 69; i++)
 			{
 				ChallengeDefinition challengeDefinition = ChallengeScreen.gChallengeDefs[i - 1];
-				if (thePage == challengeDefinition.mPage && this.HasBeatenChallenge(challengeDefinition.mChallengeMode))
+				if (thePage == challengeDefinition.mPage && HasBeatenChallenge(challengeDefinition.mChallengeMode))
 				{
 					num++;
 				}
@@ -2956,7 +2956,7 @@ namespace Lawn
 
 		public bool EarnedGoldTrophy()
 		{
-			return this.HasFinishedAdventure() && this.TrophiesNeedForGoldSunflower() <= 0;
+			return HasFinishedAdventure() && TrophiesNeedForGoldSunflower() <= 0;
 		}
 
 		public bool IsRegistered()
@@ -2976,7 +2976,7 @@ namespace Lawn
 
 		public bool IsScaryPotterLevel()
 		{
-			return (this.mGameMode >= GameMode.GAMEMODE_SCARY_POTTER_1 && this.mGameMode <= GameMode.GAMEMODE_SCARY_POTTER_ENDLESS) || ((this.IsAdventureMode() && this.mPlayerInfo.mLevel == 35) || this.mGameMode == GameMode.GAMEMODE_QUICKPLAY_35);
+			return (mGameMode >= GameMode.GAMEMODE_SCARY_POTTER_1 && mGameMode <= GameMode.GAMEMODE_SCARY_POTTER_ENDLESS) || ((IsAdventureMode() && mPlayerInfo.mLevel == 35) || mGameMode == GameMode.GAMEMODE_QUICKPLAY_35);
 		}
 
 		public bool IsEndlessScaryPotter(GameMode theGameMode)
@@ -2986,17 +2986,17 @@ namespace Lawn
 
 		public bool IsSquirrelLevel()
 		{
-			return this.mBoard != null && this.mGameMode == GameMode.GAMEMODE_CHALLENGE_SQUIRREL;
+			return mBoard != null && mGameMode == GameMode.GAMEMODE_CHALLENGE_SQUIRREL;
 		}
 
 		public bool IsIZombieLevel()
 		{
-			return this.mBoard != null && (this.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_1 || this.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_2 || this.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_3 || this.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_4 || this.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_5 || this.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_6 || this.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_7 || this.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_8 || this.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_9 || this.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_ENDLESS);
+			return mBoard != null && (mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_1 || mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_2 || mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_3 || mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_4 || mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_5 || mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_6 || mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_7 || mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_8 || mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_9 || mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_ENDLESS);
 		}
 
 		public bool CanShowZenGarden()
 		{
-			return this.mPlayerInfo != null && !this.IsTrialStageLocked() && (this.HasFinishedAdventure() || this.mPlayerInfo.mLevel >= 45);
+			return mPlayerInfo != null && !IsTrialStageLocked() && (HasFinishedAdventure() || mPlayerInfo.mLevel >= 45);
 		}
 
 		public static string GetMoneyString(int theAmount)
@@ -3025,19 +3025,19 @@ namespace Lawn
 
 		public bool AdvanceCrazyDaveText()
 		{
-			int num = this.mCrazyDaveMessageIndex + 1;
+			int num = mCrazyDaveMessageIndex + 1;
 			string theString = Common.StrFormat_("[CRAZY_DAVE_{0}]", num);
 			if (!TodStringFile.TodStringListExists(theString))
 			{
 				return false;
 			}
-			this.CrazyDaveTalkIndex(num);
+			CrazyDaveTalkIndex(num);
 			return true;
 		}
 
 		public bool IsWhackAZombieLevel()
 		{
-			return this.mBoard != null && (this.mGameMode == GameMode.GAMEMODE_CHALLENGE_WHACK_A_ZOMBIE || ((this.IsAdventureMode() && this.mPlayerInfo.mLevel == 15) || this.mGameMode == GameMode.GAMEMODE_QUICKPLAY_15));
+			return mBoard != null && (mGameMode == GameMode.GAMEMODE_CHALLENGE_WHACK_A_ZOMBIE || ((IsAdventureMode() && mPlayerInfo.mLevel == 15) || mGameMode == GameMode.GAMEMODE_QUICKPLAY_15));
 		}
 
 		public void UpdatePlayTimeStats()
@@ -3046,17 +3046,17 @@ namespace Lawn
 
 		public bool CanPauseNow()
 		{
-			return this.mBoard != null && (this.mSeedChooserScreen == null || !this.mSeedChooserScreen.mMouseVisible) && this.mBoard.mBoardFadeOutCounter < 0 && this.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_OFF && this.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && this.mGameMode != GameMode.GAMEMODE_TREE_OF_WISDOM && base.GetDialogCount() <= 0;
+			return mBoard != null && (mSeedChooserScreen == null || !mSeedChooserScreen.mMouseVisible) && mBoard.mBoardFadeOutCounter < 0 && mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_OFF && mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && mGameMode != GameMode.GAMEMODE_TREE_OF_WISDOM && base.GetDialogCount() <= 0;
 		}
 
 		public bool IsPuzzleMode()
 		{
-			return (this.mGameMode >= GameMode.GAMEMODE_SCARY_POTTER_1 && this.mGameMode <= GameMode.GAMEMODE_SCARY_POTTER_ENDLESS) || (this.mGameMode >= GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_1 && this.mGameMode <= GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_ENDLESS);
+			return (mGameMode >= GameMode.GAMEMODE_SCARY_POTTER_1 && mGameMode <= GameMode.GAMEMODE_SCARY_POTTER_ENDLESS) || (mGameMode >= GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_1 && mGameMode <= GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_ENDLESS);
 		}
 
 		public bool IsChallengeMode()
 		{
-			return !this.IsAdventureMode() && !this.IsQuickPlayMode() && !this.IsPuzzleMode() && !this.IsSurvivalMode();
+			return !IsAdventureMode() && !IsQuickPlayMode() && !IsPuzzleMode() && !IsSurvivalMode();
 		}
 
 		public bool IsEndlessIZombie(GameMode theGameMode)
@@ -3066,7 +3066,7 @@ namespace Lawn
 
 		public void CrazyDaveDoneHanding()
 		{
-			Reanimation reanimation = this.ReanimationGet(this.mCrazyDaveReanimID);
+			Reanimation reanimation = ReanimationGet(mCrazyDaveReanimID);
 			ReanimatorTrackInstance trackInstanceByName = reanimation.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_dave_handinghand);
 			GlobalMembersAttachment.AttachmentDie(ref trackInstanceByName.mAttachmentID);
 		}
@@ -3078,37 +3078,37 @@ namespace Lawn
 
 		public int GetCurrentChallengeIndex()
 		{
-			return this.mGameMode - GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_1;
+			return mGameMode - GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_1;
 		}
 
 		public void LoadGroup(string theGroupName, int theGroupAveMsToLoad)
 		{
 			PerfTimer perfTimer = default(PerfTimer);
 			perfTimer.Start();
-			this.mResourceManager.StartLoadResources(theGroupName);
-			while (!this.mShutdown && !this.mCloseRequest && !this.mLoadingFailed && TodCommon.TodLoadNextResource())
+			mResourceManager.StartLoadResources(theGroupName);
+			while (!mShutdown && !mCloseRequest && !mLoadingFailed && TodCommon.TodLoadNextResource())
 			{
-				this.mCompletedLoadingThreadTasks += theGroupAveMsToLoad;
+				mCompletedLoadingThreadTasks += theGroupAveMsToLoad;
 			}
-			if (this.mShutdown || this.mCloseRequest)
+			if (mShutdown || mCloseRequest)
 			{
 				return;
 			}
-			if (this.mResourceManager.HadError())
+			if (mResourceManager.HadError())
 			{
-				this.ShowResourceError();
-				this.mLoadingFailed = true;
+				ShowResourceError();
+				mLoadingFailed = true;
 				return;
 			}
-			if (!Resources.ExtractResourcesByName(this.mResourceManager, theGroupName))
+			if (!Resources.ExtractResourcesByName(mResourceManager, theGroupName))
 			{
-				this.ShowResourceError();
-				this.mLoadingFailed = true;
+				ShowResourceError();
+				mLoadingFailed = true;
 				return;
 			}
-			int theTotalGroupWeigth = this.mResourceManager.GetNumResources(theGroupName) * theGroupAveMsToLoad;
+			int theTotalGroupWeigth = mResourceManager.GetNumResources(theGroupName) * theGroupAveMsToLoad;
 			int theGroupTime = Math.Max((int)perfTimer.GetDuration(), 0);
-			this.TraceLoadGroup(theGroupName, theGroupTime, theTotalGroupWeigth, theGroupAveMsToLoad);
+			TraceLoadGroup(theGroupName, theGroupTime, theTotalGroupWeigth, theGroupAveMsToLoad);
 		}
 
 		public void TraceLoadGroup(string theGroupName, int theGroupTime, int theTotalGroupWeigth, int theTaskWeight)
@@ -3117,17 +3117,17 @@ namespace Lawn
 
 		public void DelayLoadBackgroundResource(string theGroupName)
 		{
-			if (this.mLastBackgroundResGroupLoaded != theGroupName)
+			if (mLastBackgroundResGroupLoaded != theGroupName)
 			{
-				if (!string.IsNullOrEmpty(this.mLastBackgroundResGroupLoaded))
+				if (!string.IsNullOrEmpty(mLastBackgroundResGroupLoaded))
 				{
-					this.mResourceManager.UnloadBackground(this.mLastBackgroundResGroupLoaded);
+					mResourceManager.UnloadBackground(mLastBackgroundResGroupLoaded);
 				}
 				if (!string.IsNullOrEmpty(theGroupName))
 				{
 					TodCommon.TodLoadResources(theGroupName);
 				}
-				this.mLastBackgroundResGroupLoaded = theGroupName;
+				mLastBackgroundResGroupLoaded = theGroupName;
 			}
 		}
 
@@ -3152,38 +3152,38 @@ namespace Lawn
 
 		public void DelayLoadLeaderboardResource(bool doLoad)
 		{
-			if (!Main.LOW_MEMORY_DEVICE && this.leaderboardLoaded)
+			if (!Main.LOW_MEMORY_DEVICE && leaderboardLoaded)
 			{
 				return;
 			}
 			if (doLoad)
 			{
-				this.DelayLoadMainMenuResource(false);
-				this.DelayLoadGamePlayResources(false);
+				DelayLoadMainMenuResource(false);
+				DelayLoadGamePlayResources(false);
 			}
-			if (doLoad && !this.leaderboardLoaded)
+			if (doLoad && !leaderboardLoaded)
 			{
 				LawnApp.LoadResourceInThread("DelayLoad_Leaderboard");
 			}
-			else if (this.leaderboardLoaded && !doLoad)
+			else if (leaderboardLoaded && !doLoad)
 			{
-				this.mResourceManager.UnloadBackground("DelayLoad_Leaderboard");
+				mResourceManager.UnloadBackground("DelayLoad_Leaderboard");
 			}
-			this.DelayLoadPileResource(doLoad);
+			DelayLoadPileResource(doLoad);
 			if (!doLoad)
 			{
-				this.DelayLoadMainMenuResource(true);
+				DelayLoadMainMenuResource(true);
 			}
-			this.leaderboardLoaded = doLoad;
+			leaderboardLoaded = doLoad;
 		}
 
 		public void DelayLoadGamePlayResources(bool doLoad)
 		{
-			if (!Main.LOW_MEMORY_DEVICE && this.gamePlayLoaded)
+			if (!Main.LOW_MEMORY_DEVICE && gamePlayLoaded)
 			{
 				return;
 			}
-			if (doLoad && !this.gamePlayLoaded)
+			if (doLoad && !gamePlayLoaded)
 			{
 				GC.Collect();
 				TodCommon.TodLoadResources("DelayLoad_GamePlay");
@@ -3197,39 +3197,39 @@ namespace Lawn
 					TodParticleGlobal.TodParticleLoadDefinitions(ref GameConstants.gLawnParticleArray, 102);
 				}
 			}
-			else if (this.gamePlayLoaded && !doLoad)
+			else if (gamePlayLoaded && !doLoad)
 			{
-				this.mResourceManager.UnloadBackground("DelayLoad_GamePlay");
+				mResourceManager.UnloadBackground("DelayLoad_GamePlay");
 			}
-			this.gamePlayLoaded = doLoad;
+			gamePlayLoaded = doLoad;
 		}
 
 		private void DelayLoadCachedResources(bool doLoad)
 		{
-			if (!Main.LOW_MEMORY_DEVICE && this.cachedLoaded)
+			if (!Main.LOW_MEMORY_DEVICE && cachedLoaded)
 			{
 				return;
 			}
-			if (doLoad && !this.cachedLoaded)
+			if (doLoad && !cachedLoaded)
 			{
 				GC.Collect();
 				TodCommon.TodLoadResources("DelayLoad_Cached");
 				AtlasResources.mAtlasResources.UnpackCachedAtlasImages();
 			}
-			else if (this.cachedLoaded && !doLoad)
+			else if (cachedLoaded && !doLoad)
 			{
-				this.mResourceManager.UnloadBackground("DelayLoad_Cached");
+				mResourceManager.UnloadBackground("DelayLoad_Cached");
 			}
-			this.cachedLoaded = doLoad;
+			cachedLoaded = doLoad;
 		}
 
 		public void DelayLoadZenGardenResources(bool doLoad)
 		{
-			if (!Main.LOW_MEMORY_DEVICE && this.zenGardenLoaded)
+			if (!Main.LOW_MEMORY_DEVICE && zenGardenLoaded)
 			{
 				return;
 			}
-			if (doLoad && !this.zenGardenLoaded)
+			if (doLoad && !zenGardenLoaded)
 			{
 				GC.Collect();
 				TodCommon.TodLoadResources("DelayLoad_ZenGarden");
@@ -3242,269 +3242,269 @@ namespace Lawn
 					TodParticleGlobal.TodParticleLoadDefinitions(ref GameConstants.gLawnParticleArray, 102);
 				}
 			}
-			else if (this.zenGardenLoaded && !doLoad)
+			else if (zenGardenLoaded && !doLoad)
 			{
-				this.mResourceManager.UnloadBackground("DelayLoad_ZenGarden");
+				mResourceManager.UnloadBackground("DelayLoad_ZenGarden");
 			}
-			this.zenGardenLoaded = doLoad;
+			zenGardenLoaded = doLoad;
 		}
 
 		public void DelayLoadMainMenuResource(bool doLoad)
 		{
-			if (!Main.LOW_MEMORY_DEVICE && this.mainMenuLoaded)
+			if (!Main.LOW_MEMORY_DEVICE && mainMenuLoaded)
 			{
 				return;
 			}
-			if (doLoad && !this.mainMenuLoaded)
+			if (doLoad && !mainMenuLoaded)
 			{
 				TodCommon.TodLoadResources("DelayLoad_MainMenu");
 				AtlasResources.mAtlasResources.UnpackGoodiesAtlasImages();
 				AtlasResources.mAtlasResources.UnpackQuickplayAtlasImages();
 				AtlasResources.mAtlasResources.UnpackMiniGamesAtlasImages();
 			}
-			else if (this.mainMenuLoaded && !doLoad)
+			else if (mainMenuLoaded && !doLoad)
 			{
-				this.mResourceManager.UnloadBackground("DelayLoad_MainMenu");
+				mResourceManager.UnloadBackground("DelayLoad_MainMenu");
 			}
-			this.mainMenuLoaded = doLoad;
+			mainMenuLoaded = doLoad;
 		}
 
 		public void DelayLoadPileResource(bool doLoad)
 		{
-			if (!Main.LOW_MEMORY_DEVICE && this.pileLoaded)
+			if (!Main.LOW_MEMORY_DEVICE && pileLoaded)
 			{
 				return;
 			}
-			if (doLoad && !this.pileLoaded)
+			if (doLoad && !pileLoaded)
 			{
 				TodCommon.TodLoadResources("DelayLoad_Pile");
 				AtlasResources.mAtlasResources.UnpackPileAtlasImages();
 			}
-			else if (this.pileLoaded && !doLoad)
+			else if (pileLoaded && !doLoad)
 			{
-				this.mResourceManager.UnloadBackground("DelayLoad_Pile");
+				mResourceManager.UnloadBackground("DelayLoad_Pile");
 			}
-			this.pileLoaded = doLoad;
+			pileLoaded = doLoad;
 		}
 
 		public void DelayLoadZombieNoteResource(string theGroupName)
 		{
-			if (this.mLastZombieNoteResGroupLoaded != theGroupName)
+			if (mLastZombieNoteResGroupLoaded != theGroupName)
 			{
-				if (!string.IsNullOrEmpty(this.mLastZombieNoteResGroupLoaded))
+				if (!string.IsNullOrEmpty(mLastZombieNoteResGroupLoaded))
 				{
-					this.mResourceManager.UnloadBackground(this.mLastZombieNoteResGroupLoaded);
+					mResourceManager.UnloadBackground(mLastZombieNoteResGroupLoaded);
 				}
 				TodCommon.TodLoadResources(theGroupName);
-				this.mLastZombieNoteResGroupLoaded = theGroupName;
-				Resources.ExtractResourcesByName(this.mResourceManager, theGroupName);
+				mLastZombieNoteResGroupLoaded = theGroupName;
+				Resources.ExtractResourcesByName(mResourceManager, theGroupName);
 			}
 		}
 
 		public void DelayLoadZenGardenBackground(string theGroupName)
 		{
-			if (this.mLastZenGardenResourceLoaded != theGroupName)
+			if (mLastZenGardenResourceLoaded != theGroupName)
 			{
-				if (!string.IsNullOrEmpty(this.mLastZenGardenResourceLoaded))
+				if (!string.IsNullOrEmpty(mLastZenGardenResourceLoaded))
 				{
-					this.mResourceManager.UnloadBackground(this.mLastZenGardenResourceLoaded);
+					mResourceManager.UnloadBackground(mLastZenGardenResourceLoaded);
 				}
 				TodCommon.TodLoadResources(theGroupName);
-				this.mLastZenGardenResourceLoaded = theGroupName;
-				Resources.ExtractResourcesByName(this.mResourceManager, theGroupName);
+				mLastZenGardenResourceLoaded = theGroupName;
+				Resources.ExtractResourcesByName(mResourceManager, theGroupName);
 			}
 		}
 
 		public void DelayLoadZombieNotePaperResource(string theGroupName)
 		{
-			if (this.mLastPaperGroupLoaded != theGroupName)
+			if (mLastPaperGroupLoaded != theGroupName)
 			{
-				if (!string.IsNullOrEmpty(this.mLastPaperGroupLoaded))
+				if (!string.IsNullOrEmpty(mLastPaperGroupLoaded))
 				{
-					this.mResourceManager.UnloadBackground(this.mLastPaperGroupLoaded);
+					mResourceManager.UnloadBackground(mLastPaperGroupLoaded);
 				}
 				TodCommon.TodLoadResources(theGroupName);
-				this.mLastPaperGroupLoaded = theGroupName;
-				Resources.ExtractResourcesByName(this.mResourceManager, theGroupName);
+				mLastPaperGroupLoaded = theGroupName;
+				Resources.ExtractResourcesByName(mResourceManager, theGroupName);
 			}
 		}
 
 		public void DelayLoadUpsellResource(string theGroupName)
 		{
-			if (this.mLastStoreResGroupLoaded != theGroupName)
+			if (mLastStoreResGroupLoaded != theGroupName)
 			{
-				if (!string.IsNullOrEmpty(this.mLastUpsellResGroupLoaded))
+				if (!string.IsNullOrEmpty(mLastUpsellResGroupLoaded))
 				{
-					this.mResourceManager.UnloadBackground(this.mLastUpsellResGroupLoaded);
+					mResourceManager.UnloadBackground(mLastUpsellResGroupLoaded);
 				}
 				TodCommon.TodLoadResources(theGroupName);
-				this.mLastUpsellResGroupLoaded = theGroupName;
-				Resources.ExtractResourcesByName(this.mResourceManager, theGroupName);
+				mLastUpsellResGroupLoaded = theGroupName;
+				Resources.ExtractResourcesByName(mResourceManager, theGroupName);
 			}
 		}
 
 		public void DelayLoadStoreResource(string theGroupName)
 		{
-			if (this.mLastStoreResGroupLoaded != theGroupName)
+			if (mLastStoreResGroupLoaded != theGroupName)
 			{
-				if (!string.IsNullOrEmpty(this.mLastStoreResGroupLoaded))
+				if (!string.IsNullOrEmpty(mLastStoreResGroupLoaded))
 				{
-					this.mResourceManager.UnloadBackground(this.mLastStoreResGroupLoaded);
+					mResourceManager.UnloadBackground(mLastStoreResGroupLoaded);
 				}
 				TodCommon.TodLoadResources(theGroupName);
-				this.mLastStoreResGroupLoaded = theGroupName;
+				mLastStoreResGroupLoaded = theGroupName;
 			}
 		}
 
 		public void CrazyDaveStopSound()
 		{
-			this.mSoundSystem.StopFoley(FoleyType.FOLEY_CRAZYDAVESHORT);
-			this.mSoundSystem.StopFoley(FoleyType.FOLEY_CRAZYDAVELONG);
-			this.mSoundSystem.StopFoley(FoleyType.FOLEY_CRAZYDAVEEXTRALONG);
-			this.mSoundSystem.StopFoley(FoleyType.FOLEY_CRAZYDAVECRAZY);
+			mSoundSystem.StopFoley(FoleyType.FOLEY_CRAZYDAVESHORT);
+			mSoundSystem.StopFoley(FoleyType.FOLEY_CRAZYDAVELONG);
+			mSoundSystem.StopFoley(FoleyType.FOLEY_CRAZYDAVEEXTRALONG);
+			mSoundSystem.StopFoley(FoleyType.FOLEY_CRAZYDAVECRAZY);
 		}
 
 		public bool UpdatePlayerProfileForFinishingLevel()
 		{
 			bool flag = false;
-			if (this.IsAdventureMode())
+			if (IsAdventureMode())
 			{
-				int mLevel = this.mBoard.mLevel;
-				if (mLevel == 50)
+				int level = mBoard.mLevel;
+				if (level == 50)
 				{
-					if (this.mPlayerInfo.mIZombieUnlocked == 3 && this.HasBeatenChallenge(GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_3))
+					if (mPlayerInfo.mIZombieUnlocked == 3 && HasBeatenChallenge(GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_3))
 					{
-						this.mPlayerInfo.mIZombieUnlocked++;
+						mPlayerInfo.mIZombieUnlocked++;
 					}
-					if (this.mPlayerInfo.mVasebreakerUnlocked == 3 && this.HasBeatenChallenge(GameMode.GAMEMODE_SCARY_POTTER_3))
+					if (mPlayerInfo.mVasebreakerUnlocked == 3 && HasBeatenChallenge(GameMode.GAMEMODE_SCARY_POTTER_3))
 					{
-						this.mPlayerInfo.mVasebreakerUnlocked++;
+						mPlayerInfo.mVasebreakerUnlocked++;
 					}
-					this.mPlayerInfo.SetLevel(1);
-					this.mPlayerInfo.mFinishedAdventure++;
-					if (this.mPlayerInfo.mFinishedAdventure == 1)
+					mPlayerInfo.SetLevel(1);
+					mPlayerInfo.mFinishedAdventure++;
+					if (mPlayerInfo.mFinishedAdventure == 1)
 					{
-						this.mPlayerInfo.mNeedsMessageOnGameSelector = true;
-						this.mPlayerInfo.mMiniGamesUnlockable = 19;
+						mPlayerInfo.mNeedsMessageOnGameSelector = true;
+						mPlayerInfo.mMiniGamesUnlockable = 19;
 						int num = 0;
-						if (this.HasBeatenChallenge(GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS))
+						if (HasBeatenChallenge(GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS))
 						{
 							num++;
 						}
-						if (this.HasBeatenChallenge(GameMode.GAMEMODE_CHALLENGE_WALLNUT_BOWLING))
+						if (HasBeatenChallenge(GameMode.GAMEMODE_CHALLENGE_WALLNUT_BOWLING))
 						{
 							num++;
 						}
-						if (this.HasBeatenChallenge(GameMode.GAMEMODE_CHALLENGE_SLOT_MACHINE))
+						if (HasBeatenChallenge(GameMode.GAMEMODE_CHALLENGE_SLOT_MACHINE))
 						{
 							num++;
 						}
-						this.mPlayerInfo.mMiniGamesUnlocked += num;
+						mPlayerInfo.mMiniGamesUnlocked += num;
 					}
 				}
 				else
 				{
-					this.mPlayerInfo.SetLevel(mLevel + 1);
+					mPlayerInfo.SetLevel(level + 1);
 				}
-				if (!this.HasFinishedAdventure() && mLevel == 34)
+				if (!HasFinishedAdventure() && level == 34)
 				{
-					this.mPlayerInfo.mNeedsMagicTacoReward = true;
+					mPlayerInfo.mNeedsMagicTacoReward = true;
 				}
-				if (!this.HasFinishedAdventure() && mLevel == 44)
+				if (!HasFinishedAdventure() && level == 44)
 				{
-					this.mPlayerInfo.mNeedsMagicBaconReward = true;
+					mPlayerInfo.mNeedsMagicBaconReward = true;
 				}
-				if ((mLevel >= 22 || this.mPlayerInfo.mFinishedAdventure > 0) && !this.mPlayerInfo.mHasUnlockedMinigames)
+				if ((level >= 22 || mPlayerInfo.mFinishedAdventure > 0) && !mPlayerInfo.mHasUnlockedMinigames)
 				{
-					this.mPlayerInfo.UnlockFirstMiniGames();
+					mPlayerInfo.UnlockFirstMiniGames();
 				}
-				if ((mLevel >= 36 || this.mPlayerInfo.mFinishedAdventure > 0) && !this.mPlayerInfo.mHasUnlockedPuzzleMode)
+				if ((level >= 36 || mPlayerInfo.mFinishedAdventure > 0) && !mPlayerInfo.mHasUnlockedPuzzleMode)
 				{
-					this.mPlayerInfo.UnlockPuzzleMode();
+					mPlayerInfo.UnlockPuzzleMode();
 				}
 			}
-			else if (!this.IsQuickPlayMode())
+			else if (!IsQuickPlayMode())
 			{
-				if (this.IsSurvivalMode())
+				if (IsSurvivalMode())
 				{
-					if (this.mBoard.IsFinalSurvivalStage())
+					if (mBoard.IsFinalSurvivalStage())
 					{
-						flag = !this.HasBeatenChallenge(this.mGameMode);
-						this.mBoard.SurvivalSaveScore();
-						if (flag && this.HasFinishedAdventure())
+						flag = !HasBeatenChallenge(mGameMode);
+						mBoard.SurvivalSaveScore();
+						if (flag && HasFinishedAdventure())
 						{
-							int numTrophies = this.GetNumTrophies(ChallengePage.CHALLENGE_PAGE_SURVIVAL);
+							int numTrophies = GetNumTrophies(ChallengePage.CHALLENGE_PAGE_SURVIVAL);
 							if (numTrophies != 8 && numTrophies != 9)
 							{
-								this.mPlayerInfo.mHasNewSurvival = true;
+								mPlayerInfo.mHasNewSurvival = true;
 							}
 						}
 					}
 				}
-				else if (this.IsPuzzleMode())
+				else if (IsPuzzleMode())
 				{
-					flag = !this.HasBeatenChallenge(this.mGameMode);
-					int currentChallengeIndex = this.GetCurrentChallengeIndex();
-					this.mPlayerInfo.mChallengeRecords[currentChallengeIndex]++;
-					if (!this.HasFinishedAdventure() && (this.mGameMode == GameMode.GAMEMODE_SCARY_POTTER_3 || this.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_3))
+					flag = !HasBeatenChallenge(mGameMode);
+					int currentChallengeIndex = GetCurrentChallengeIndex();
+					mPlayerInfo.mChallengeRecords[currentChallengeIndex]++;
+					if (!HasFinishedAdventure() && (mGameMode == GameMode.GAMEMODE_SCARY_POTTER_3 || mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_3))
 					{
 						flag = false;
 					}
 					if (flag)
 					{
-						if (this.IsScaryPotterLevel())
+						if (IsScaryPotterLevel())
 						{
-							this.mPlayerInfo.mHasNewVasebreaker = true;
-							this.mPlayerInfo.mVasebreakerUnlocked++;
-							if (this.mPlayerInfo.mFinishedAdventure == 0 && this.mPlayerInfo.mVasebreakerUnlocked > 3)
+							mPlayerInfo.mHasNewVasebreaker = true;
+							mPlayerInfo.mVasebreakerUnlocked++;
+							if (mPlayerInfo.mFinishedAdventure == 0 && mPlayerInfo.mVasebreakerUnlocked > 3)
 							{
-								this.mPlayerInfo.mVasebreakerUnlocked = 3;
+								mPlayerInfo.mVasebreakerUnlocked = 3;
 							}
-							if (this.mPlayerInfo.mVasebreakerUnlocked > 10)
+							if (mPlayerInfo.mVasebreakerUnlocked > 10)
 							{
-								this.mPlayerInfo.mVasebreakerUnlocked = 10;
+								mPlayerInfo.mVasebreakerUnlocked = 10;
 							}
 						}
 						else
 						{
-							this.mPlayerInfo.mHasNewIZombie = true;
-							this.mPlayerInfo.mIZombieUnlocked++;
-							if (this.mPlayerInfo.mFinishedAdventure == 0 && this.mPlayerInfo.mIZombieUnlocked > 3)
+							mPlayerInfo.mHasNewIZombie = true;
+							mPlayerInfo.mIZombieUnlocked++;
+							if (mPlayerInfo.mFinishedAdventure == 0 && mPlayerInfo.mIZombieUnlocked > 3)
 							{
-								this.mPlayerInfo.mIZombieUnlocked = 3;
+								mPlayerInfo.mIZombieUnlocked = 3;
 							}
-							if (this.mPlayerInfo.mIZombieUnlocked > 10)
+							if (mPlayerInfo.mIZombieUnlocked > 10)
 							{
-								this.mPlayerInfo.mIZombieUnlocked = 10;
+								mPlayerInfo.mIZombieUnlocked = 10;
 							}
 						}
 					}
 				}
 				else
 				{
-					flag = !this.HasBeatenChallenge(this.mGameMode);
-					int currentChallengeIndex2 = this.GetCurrentChallengeIndex();
-					this.mPlayerInfo.mChallengeRecords[currentChallengeIndex2]++;
-					if (this.mPlayerInfo.mMiniGamesUnlocked < this.mPlayerInfo.mMiniGamesUnlockable)
+					flag = !HasBeatenChallenge(mGameMode);
+					int currentChallengeIndex2 = GetCurrentChallengeIndex();
+					mPlayerInfo.mChallengeRecords[currentChallengeIndex2]++;
+					if (mPlayerInfo.mMiniGamesUnlocked < mPlayerInfo.mMiniGamesUnlockable)
 					{
-						this.mPlayerInfo.mMiniGamesUnlocked++;
+						mPlayerInfo.mMiniGamesUnlocked++;
 					}
-					if (flag && this.HasFinishedAdventure())
+					if (flag && HasFinishedAdventure())
 					{
-						int numTrophies2 = this.GetNumTrophies(ChallengePage.CHALLENGE_PAGE_CHALLENGE);
+						int numTrophies2 = GetNumTrophies(ChallengePage.CHALLENGE_PAGE_CHALLENGE);
 						if (numTrophies2 <= 17)
 						{
-							this.mPlayerInfo.mHasNewMiniGame = true;
+							mPlayerInfo.mHasNewMiniGame = true;
 						}
 					}
 				}
 			}
-			int numTrophies3 = this.GetNumTrophies(ChallengePage.CHALLENGE_PAGE_CHALLENGE);
+			int numTrophies3 = GetNumTrophies(ChallengePage.CHALLENGE_PAGE_CHALLENGE);
 			if (numTrophies3 == 19)
 			{
 				ReportAchievement.GiveAchievement(AchievementId.BeyondTheGrave);
 			}
-			this.WriteCurrentUserConfig();
+			WriteCurrentUserConfig();
 			return flag;
 		}
 
@@ -3526,27 +3526,27 @@ namespace Lawn
 		public override void SetSfxVolume(double theVolume)
 		{
 			base.SetSfxVolume(theVolume);
-			this.mPlayerInfo.mSoundVolume = theVolume;
+			mPlayerInfo.mSoundVolume = theVolume;
 		}
 
 		public override void SetMusicVolume(double theVolume)
 		{
 			base.SetMusicVolume(theVolume);
-			if (this.mPlayerInfo != null)
+			if (mPlayerInfo != null)
 			{
-				this.mPlayerInfo.mMusicVolume = theVolume;
+				mPlayerInfo.mMusicVolume = theVolume;
 			}
 		}
 
 		public bool SaveFileExists()
 		{
-			string savedGameName = LawnCommon.GetSavedGameName(GameMode.GAMEMODE_ADVENTURE, (int)this.mPlayerInfo.mId);
+			string savedGameName = LawnCommon.GetSavedGameName(GameMode.GAMEMODE_ADVENTURE, (int)mPlayerInfo.mId);
 			return base.FileExists(savedGameName);
 		}
 
 		public void Vibrate()
 		{
-			if (this.mPlayerInfo == null || !this.mPlayerInfo.mDoVibration)
+			if (mPlayerInfo == null || !mPlayerInfo.mDoVibration)
 			{
 				return;
 			}
@@ -3555,17 +3555,17 @@ namespace Lawn
 
 		public override void MoviePlayerContentPreloadDidFinish(bool succeeded)
 		{
-			if (this.mCreditScreen != null)
+			if (mCreditScreen != null)
 			{
-				this.mCreditScreen.VideoLoaded(succeeded);
+				mCreditScreen.VideoLoaded(succeeded);
 			}
 		}
 
 		public override void MoviePlayerPlaybackDidFinish()
 		{
-			if (this.mCreditScreen != null)
+			if (mCreditScreen != null)
 			{
-				this.mCreditScreen.VideoFinished();
+				mCreditScreen.VideoFinished();
 			}
 		}
 
@@ -3779,8 +3779,8 @@ namespace Lawn
 		{
 			public TableTmp(int aNormal, int aAdditive)
 			{
-				this.mNormalImageId = aNormal;
-				this.mAdditiveImageId = aAdditive;
+				mNormalImageId = aNormal;
+				mAdditiveImageId = aAdditive;
 			}
 
 			public int mNormalImageId;

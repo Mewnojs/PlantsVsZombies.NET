@@ -20,12 +20,12 @@ namespace Sexy.TodLib
 
 		public void Reset()
 		{
-			this.mX = (this.mY = (this.mWeight = 0));
+			mX = (mY = (mWeight = 0));
 		}
 
 		public void PrepareForReuse()
 		{
-			this.Reset();
+			Reset();
 			TodWeightedGridArray.unusedObjects.Push(this);
 		}
 

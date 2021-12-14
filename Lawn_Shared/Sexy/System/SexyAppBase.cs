@@ -31,11 +31,11 @@ namespace Sexy
 		{
 			get
 			{
-				return (double)this.mMusicInterface.GetVolume();
+				return (double)mMusicInterface.GetVolume();
 			}
 			set
 			{
-				this.mMusicInterface.SetVolume((float)value);
+				mMusicInterface.SetVolume((float)value);
 			}
 		}
 
@@ -49,21 +49,21 @@ namespace Sexy
 
 		public virtual void PlaySample(int theSoundNum)
 		{
-			this.PlaySample(theSoundNum, 0);
+			PlaySample(theSoundNum, 0);
 		}
 
 		public virtual void PlaySample(int theSoundNum, int thePan)
 		{
-			this.PlaySample(theSoundNum, thePan, false);
+			PlaySample(theSoundNum, thePan, false);
 		}
 
 		public virtual SoundInstance PlaySample(int theSoundNum, int thePan, bool looping)
 		{
-			if (this.mSoundManager == null)
+			if (mSoundManager == null)
 			{
 				return null;
 			}
-			SoundInstance soundInstance = this.mSoundManager.GetSoundInstance((uint)theSoundNum);
+			SoundInstance soundInstance = mSoundManager.GetSoundInstance((uint)theSoundNum);
 			if (soundInstance != null)
 			{
 				if (thePan != 0)
@@ -108,44 +108,44 @@ namespace Sexy
 		{
 			SexyAppBase.UseLiveServers = true;
 			SexyAppBase.XnaGame = m;
-			this.gSexyAppBase = this;
-			this.mProdName = "ProductName";
-			this.mShutdown = false;
-			this.mInterfaceOrientation = UI_ORIENTATION.UI_ORIENTATION_LANDSCAPE_LEFT;
-			this.mPaused = false;
-			this.mLoaded = false;
-			this.mLoadingFailed = false;
-			this.mAutoStartLoadingThread = true;
-			this.mLoadingThreadStarted = false;
-			this.mLoadingThreadCompleted = false;
-			this.mInitialized = false;
-			this.mMusicEnabled = true;
-			this.mContentManager = m.Content;
-			SexyAppBase.GetWidthHeightForOrientation(this.mInterfaceOrientation, ref this.mWidth, ref this.mHeight);
-			this.mWidgetManager = new WidgetManager(this);
-			this.mResourceManager = new ResourceManager(this);
-			this.mSoundManager = new XNASoundManager(this);
-			this.mMusicInterface = new XNAMusicInterface(this);
-			this.mMusicInterface.SetDefaultFadeIn(0f);
-			this.mMusicInterface.SetDefaultFadeOut(0.006f);
-			this.mMusicVolume = 0.85;
-			this.mSfxVolume = 0.85;
+			gSexyAppBase = this;
+			mProdName = "ProductName";
+			mShutdown = false;
+			mInterfaceOrientation = UI_ORIENTATION.UI_ORIENTATION_LANDSCAPE_LEFT;
+			mPaused = false;
+			mLoaded = false;
+			mLoadingFailed = false;
+			mAutoStartLoadingThread = true;
+			mLoadingThreadStarted = false;
+			mLoadingThreadCompleted = false;
+			mInitialized = false;
+			mMusicEnabled = true;
+			mContentManager = m.Content;
+			SexyAppBase.GetWidthHeightForOrientation(mInterfaceOrientation, ref mWidth, ref mHeight);
+			mWidgetManager = new WidgetManager(this);
+			mResourceManager = new ResourceManager(this);
+			mSoundManager = new XNASoundManager(this);
+			mMusicInterface = new XNAMusicInterface(this);
+			mMusicInterface.SetDefaultFadeIn(0f);
+			mMusicInterface.SetDefaultFadeOut(0.006f);
+			mMusicVolume = 0.85;
+			mSfxVolume = 0.85;
 		}
 
 		~SexyAppBase()
 		{
-			this.Dispose(false);
+			Dispose(false);
 		}
 
 		public virtual void Dispose()
 		{
-			this.Dispose(true);
+			Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
 		protected virtual void Dispose(bool disposing)
 		{
-			this.gSexyAppBase = null;
+			gSexyAppBase = null;
 		}
 
 		public bool EraseFile(string theFileName)
@@ -181,47 +181,47 @@ namespace Sexy
 
 		public void SetBoolean(string theId, bool theValue)
 		{
-			if (this.mBoolProperties.ContainsKey(theId))
+			if (mBoolProperties.ContainsKey(theId))
 			{
-				this.mBoolProperties[theId] = theValue;
+				mBoolProperties[theId] = theValue;
 				return;
 			}
-			this.mBoolProperties.Add(theId, theValue);
+			mBoolProperties.Add(theId, theValue);
 		}
 
 		public void SetInteger(string theId, int theValue)
 		{
-			if (this.mIntProperties.ContainsKey(theId))
+			if (mIntProperties.ContainsKey(theId))
 			{
-				this.mIntProperties[theId] = theValue;
+				mIntProperties[theId] = theValue;
 				return;
 			}
-			this.mIntProperties.Add(theId, theValue);
+			mIntProperties.Add(theId, theValue);
 		}
 
 		public int GetInteger(string theId, int theDefault)
 		{
-			if (this.mIntProperties.ContainsKey(theId))
+			if (mIntProperties.ContainsKey(theId))
 			{
-				return this.mIntProperties[theId];
+				return mIntProperties[theId];
 			}
 			return theDefault;
 		}
 
 		public void SetDouble(string theId, double theValue)
 		{
-			if (this.mDoubleProperties.ContainsKey(theId))
+			if (mDoubleProperties.ContainsKey(theId))
 			{
-				this.mDoubleProperties[theId] = theValue;
+				mDoubleProperties[theId] = theValue;
 				return;
 			}
-			this.mDoubleProperties.Add(theId, theValue);
+			mDoubleProperties.Add(theId, theValue);
 		}
 
 		public virtual void Init()
 		{
-			this.mWidgetManager.Resize(this.mWidth, this.mHeight);
-			this.InitHook();
+			mWidgetManager.Resize(mWidth, mHeight);
+			InitHook();
 		}
 
 		public virtual void InitHook()
@@ -234,20 +234,20 @@ namespace Sexy
 
 		public void StartLoadingThread()
 		{
-			if (!this.mLoadingThreadStarted)
+			if (!mLoadingThreadStarted)
 			{
-				new Thread(new ThreadStart(this.LoadingThreadProcStub))
+				new Thread(new ThreadStart(LoadingThreadProcStub))
 				{
 					IsBackground = true
 				}.Start();
-				this.mLoadingThreadStarted = true;
+				mLoadingThreadStarted = true;
 			}
 		}
 
 		public void LoadingThreadProcStub()
 		{
-			this.LoadingThreadProc();
-			this.mLoadingThreadCompleted = true;
+			LoadingThreadProc();
+			mLoadingThreadCompleted = true;
 		}
 
 		public virtual void LoadingThreadProc()
@@ -271,19 +271,19 @@ namespace Sexy
 
 		public void UpdateAudio()
 		{
-			this.mSoundManager.Update();
-			this.mMusicInterface.Update();
+			mSoundManager.Update();
+			mMusicInterface.Update();
 		}
 
 		public bool UpdateApp()
 		{
-			this.UpdateAudio();
-			this.UpdateInput();
-			if (SexyAppBase.FirstRun && this.ShowRunWhenLockedMessage())
+			UpdateAudio();
+			UpdateInput();
+			if (SexyAppBase.FirstRun && ShowRunWhenLockedMessage())
 			{
 				SexyAppBase.FirstRun = false;
 			}
-			this.DoUpdateFrames();
+			DoUpdateFrames();
 			return true;
 		}
 
@@ -298,13 +298,13 @@ namespace Sexy
 
 		public virtual bool DoUpdateFrames()
 		{
-			this.mUpdateCount++;
-			if (this.mLoadingThreadCompleted && !this.mLoaded)
+			mUpdateCount++;
+			if (mLoadingThreadCompleted && !mLoaded)
 			{
-				this.mLoaded = true;
-				this.LoadingThreadCompleted();
+				mLoaded = true;
+				LoadingThreadCompleted();
 			}
-			this.UpdateFrames();
+			UpdateFrames();
 			return true;
 		}
 
@@ -314,17 +314,17 @@ namespace Sexy
 
 		public virtual void UpdateFrames()
 		{
-			if (this.wantToShowUpdateMessage)
+			if (wantToShowUpdateMessage)
 			{
-				this.ShowUpdateMessage();
+				ShowUpdateMessage();
 			}
-			this.mWidgetManager.UpdateFrame();
+			mWidgetManager.UpdateFrame();
 		}
 
 		public virtual void DrawGame(GameTime gameTime)
 		{
 			GlobalStaticVars.g.BeginFrame();
-			this.mWidgetManager.DrawScreen();
+			mWidgetManager.DrawScreen();
 			GlobalStaticVars.g.EndFrame();
 		}
 
@@ -334,14 +334,14 @@ namespace Sexy
 
 		public virtual void InterfaceOrientationChanged(UI_ORIENTATION toOrientation)
 		{
-			this.nextOrientation = new UI_ORIENTATION?(toOrientation);
-			if (this.mIsOrientationLocked)
+			nextOrientation = new UI_ORIENTATION?(toOrientation);
+			if (mIsOrientationLocked)
 			{
 				return;
 			}
-			SexyAppBase.GetWidthHeightForOrientation(toOrientation, ref this.mWidth, ref this.mHeight);
-			this.mInterfaceOrientation = toOrientation;
-			this.mWidgetManager.InterfaceOrientationChanged(toOrientation);
+			SexyAppBase.GetWidthHeightForOrientation(toOrientation, ref mWidth, ref mHeight);
+			mInterfaceOrientation = toOrientation;
+			mWidgetManager.InterfaceOrientationChanged(toOrientation);
 			Main.NeedToSetUpOrientationMatrix(toOrientation);
 			Graphics.OrientationChanged();
 		}
@@ -362,28 +362,28 @@ namespace Sexy
 
 		public double GetMusicVolume()
 		{
-			return this.mMusicVolume;
+			return mMusicVolume;
 		}
 
 		public virtual void SetMusicVolume(double theVolume)
 		{
-			this.mMusicVolume = theVolume;
+			mMusicVolume = theVolume;
 		}
 
 		public double GetSfxVolume()
 		{
-			return this.mSfxVolume;
+			return mSfxVolume;
 		}
 
 		public virtual void SetSfxVolume(double theVolume)
 		{
-			this.mSfxVolume = theVolume;
-			this.mSoundManager.SetVolume(theVolume);
+			mSfxVolume = theVolume;
+			mSoundManager.SetVolume(theVolume);
 		}
 
 		public void EnableMusic(bool enable)
 		{
-			this.mMusicEnabled = enable;
+			mMusicEnabled = enable;
 		}
 
 		public virtual void ModalOpen()
@@ -401,23 +401,23 @@ namespace Sexy
 
 		public bool KillDialog(int theDialogId, bool removeWidget, bool deleteWidget)
 		{
-			if (this.mDialogMap.ContainsKey(theDialogId))
+			if (mDialogMap.ContainsKey(theDialogId))
 			{
-				Dialog dialog = this.mDialogMap[theDialogId];
-				this.mDialogList.Remove(dialog);
-				this.mDialogMap.Remove(theDialogId);
+				Dialog dialog = mDialogMap[theDialogId];
+				mDialogList.Remove(dialog);
+				mDialogMap.Remove(theDialogId);
 				if (removeWidget || deleteWidget)
 				{
-					this.mWidgetManager.RemoveWidget(dialog);
+					mWidgetManager.RemoveWidget(dialog);
 				}
 				if (dialog.IsModal())
 				{
-					this.ModalClose();
-					this.mWidgetManager.RemoveBaseModal(dialog);
+					ModalClose();
+					mWidgetManager.RemoveBaseModal(dialog);
 				}
 				if (deleteWidget)
 				{
-					this.SafeDeleteWidget(dialog);
+					SafeDeleteWidget(dialog);
 				}
 				return true;
 			}
@@ -434,65 +434,65 @@ namespace Sexy
 
 		public virtual void Start()
 		{
-			if (this.mAutoStartLoadingThread)
+			if (mAutoStartLoadingThread)
 			{
-				this.StartLoadingThread();
+				StartLoadingThread();
 			}
 		}
 
 		public virtual bool KillDialog(int theDialogId)
 		{
-			return this.KillDialog(theDialogId, true, true);
+			return KillDialog(theDialogId, true, true);
 		}
 
 		public virtual bool KillDialog(Dialogs theDialogId)
 		{
-			return this.KillDialog((int)theDialogId);
+			return KillDialog((int)theDialogId);
 		}
 
 		public virtual bool KillDialog(Dialog theDialog)
 		{
-			return this.KillDialog(theDialog.mId);
+			return KillDialog(theDialog.mId);
 		}
 
 		public void AddDialog(int theDialogId, Dialog theDialog)
 		{
-			this.KillDialog(theDialogId);
+			KillDialog(theDialogId);
 			if (theDialog.mWidth == 0)
 			{
-				int num = this.mWidth / 2;
-				theDialog.Resize((this.mWidth - num) / 2, this.mHeight / 5, num, theDialog.GetPreferredHeight(num));
+				int num = mWidth / 2;
+				theDialog.Resize((mWidth - num) / 2, mHeight / 5, num, theDialog.GetPreferredHeight(num));
 			}
-			this.mDialogMap.Add(theDialogId, theDialog);
-			this.mDialogList.AddLast(theDialog);
-			this.mWidgetManager.AddWidget(theDialog);
+			mDialogMap.Add(theDialogId, theDialog);
+			mDialogList.AddLast(theDialog);
+			mWidgetManager.AddWidget(theDialog);
 			if (theDialog.IsModal())
 			{
-				this.mWidgetManager.AddBaseModal(theDialog);
-				this.ModalOpen();
+				mWidgetManager.AddBaseModal(theDialog);
+				ModalOpen();
 			}
 		}
 
 		public void AddDialog(Dialog theDialog)
 		{
-			this.AddDialog(theDialog.mId, theDialog);
+			AddDialog(theDialog.mId, theDialog);
 		}
 
 		public virtual Dialog DoDialog(Dialog theDialog, int theDialogId)
 		{
-			this.KillDialog(theDialogId);
-			this.AddDialog(theDialogId, theDialog);
+			KillDialog(theDialogId);
+			AddDialog(theDialogId, theDialog);
 			return theDialog;
 		}
 
 		public int GetDialogCount()
 		{
-			return Enumerable.Count<KeyValuePair<int, Dialog>>(this.mDialogMap);
+			return Enumerable.Count<KeyValuePair<int, Dialog>>(mDialogMap);
 		}
 
 		public Dialog GetDialog(int theDialogId)
 		{
-			foreach (KeyValuePair<int, Dialog> keyValuePair in this.mDialogMap)
+			foreach (KeyValuePair<int, Dialog> keyValuePair in mDialogMap)
 			{
 				if (keyValuePair.Key == theDialogId)
 				{
@@ -504,39 +504,39 @@ namespace Sexy
 
 		public Dialog GetDialog(Dialogs theDialogId)
 		{
-			return this.GetDialog((int)theDialogId);
+			return GetDialog((int)theDialogId);
 		}
 
 		public void SetString(string theId, string theValue)
 		{
-			if (this.mStringProperties.ContainsKey(theId))
+			if (mStringProperties.ContainsKey(theId))
 			{
-				this.mStringProperties[theId] = theValue;
+				mStringProperties[theId] = theValue;
 				return;
 			}
-			this.mStringProperties.Add(theId, theValue);
+			mStringProperties.Add(theId, theValue);
 		}
 
 		public string GetString(string theId)
 		{
-			if (this.mStringProperties.ContainsKey(theId))
+			if (mStringProperties.ContainsKey(theId))
 			{
-				return this.mStringProperties[theId];
+				return mStringProperties[theId];
 			}
 			return "";
 		}
 
 		public double GetLoadingThreadProgress()
 		{
-			if (this.mLoaded)
+			if (mLoaded)
 			{
 				return 1.0;
 			}
-			if (!this.mLoadingThreadStarted)
+			if (!mLoadingThreadStarted)
 			{
 				return 0.0;
 			}
-			return ((double)this.mResourceManager.mLoadedCount + (double)ReanimatorXnaHelpers.mLoadedResources) / (double)(this.mResourceManager.mTotalResources + ReanimatorXnaHelpers.mTotalResources);
+			return ((double)mResourceManager.mLoadedCount + (double)ReanimatorXnaHelpers.mLoadedResources) / (double)(mResourceManager.mTotalResources + ReanimatorXnaHelpers.mTotalResources);
 		}
 
 		public SexyColor HSLToRGB(int h, int s, int l)
@@ -607,22 +607,22 @@ namespace Sexy
 
 		public void TouchBegan(_Touch touch)
 		{
-			this.mWidgetManager.TouchBegan(touch);
+			mWidgetManager.TouchBegan(touch);
 		}
 
 		public void TouchMoved(_Touch touch)
 		{
-			this.mWidgetManager.TouchMoved(touch);
+			mWidgetManager.TouchMoved(touch);
 		}
 
 		public void TouchEnded(_Touch touch)
 		{
-			this.mWidgetManager.TouchEnded(touch);
+			mWidgetManager.TouchEnded(touch);
 		}
 
 		public void TouchesCanceled()
 		{
-			this.mWidgetManager.TouchesCanceled();
+			mWidgetManager.TouchesCanceled();
 		}
 
 		public void ShakeBegan(double timestamp)
@@ -644,7 +644,7 @@ namespace Sexy
 
 		public void ShowUpdateRequiredMessage()
 		{
-			this.wantToShowUpdateMessage = true;
+			wantToShowUpdateMessage = true;
 			Main.GamerServicesComp.Enabled = false;
 		}
 
@@ -652,12 +652,12 @@ namespace Sexy
 		{
 			if (theButtonId == 1000)
 			{
-				this.ButtonPress(2000 + theDialogId);
+				ButtonPress(2000 + theDialogId);
 				return;
 			}
 			if (theButtonId == 1001)
 			{
-				this.ButtonPress(3000 + theDialogId);
+				ButtonPress(3000 + theDialogId);
 			}
 		}
 
@@ -665,12 +665,12 @@ namespace Sexy
 		{
 			if (theButtonId == 1000)
 			{
-				this.ButtonDepress(2000 + theDialogId);
+				ButtonDepress(2000 + theDialogId);
 				return;
 			}
 			if (theButtonId == 1001)
 			{
-				this.ButtonDepress(3000 + theDialogId);
+				ButtonDepress(3000 + theDialogId);
 			}
 		}
 
@@ -716,12 +716,12 @@ namespace Sexy
 
 		public UI_ORIENTATION GetOrientation()
 		{
-			return this.mInterfaceOrientation;
+			return mInterfaceOrientation;
 		}
 
 		public virtual bool ShouldAutorotateToInterfaceOrientation(UI_ORIENTATION theOrientation)
 		{
-			return !this.mIsOrientationLocked;
+			return !mIsOrientationLocked;
 		}
 
 		public virtual void WriteToRegistry()
@@ -751,7 +751,7 @@ namespace Sexy
 
 		public virtual void Shutdown()
 		{
-			this.mShutdown = true;
+			mShutdown = true;
 		}
 
 		public void LockOrientation(bool theFlag)
@@ -789,7 +789,7 @@ namespace Sexy
 		{
 		}
 
-		public bool PlayMovie(VideoType video, MOVIESCALINGMODE mOVIESCALINGMODE, MOVIECONTROLMODE mOVIECONTROLMODE, SexyColor sexyColor)
+		public bool PlayMovie(VideoType video, MOVIESCALINGMODE theMOVIESCALINGMODE, MOVIECONTROLMODE theMOVIECONTROLMODE, SexyColor sexyColor)
 		{
 			bool flag = true;
 			try
@@ -806,35 +806,35 @@ namespace Sexy
 			{
 				string message = ex.Message;
 				flag = false;
-				this.GotFocus();
+				GotFocus();
 			}
-			this.MoviePlayerContentPreloadDidFinish(flag);
+			MoviePlayerContentPreloadDidFinish(flag);
 			return flag;
 		}
 
 		public bool IsLandscape()
 		{
-			return this.mInterfaceOrientation == UI_ORIENTATION.UI_ORIENTATION_LANDSCAPE_LEFT || this.mInterfaceOrientation == UI_ORIENTATION.UI_ORIENTATION_LANDSCAPE_RIGHT;
+			return mInterfaceOrientation == UI_ORIENTATION.UI_ORIENTATION_LANDSCAPE_LEFT || mInterfaceOrientation == UI_ORIENTATION.UI_ORIENTATION_LANDSCAPE_RIGHT;
 		}
 
 		public bool IsPortrait()
 		{
-			return !this.IsLandscape();
+			return !IsLandscape();
 		}
 
 		public virtual bool BackButtonPress()
 		{
-			if (!this.mLoadingThreadCompleted)
+			if (!mLoadingThreadCompleted)
 			{
-				this.WantsToExit = true;
+				WantsToExit = true;
 			}
-			return this.mWidgetManager.BackButtonPress();
+			return mWidgetManager.BackButtonPress();
 		}
 
 		public virtual void AppExit()
 		{
-			this.WantsToExit = true;
-			this.Shutdown();
+			WantsToExit = true;
+			Shutdown();
 		}
 
 		public static bool IsInTrialMode

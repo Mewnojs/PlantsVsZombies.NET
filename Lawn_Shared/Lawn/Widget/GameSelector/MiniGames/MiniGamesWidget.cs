@@ -9,43 +9,43 @@ namespace Lawn
 	{
 		public MiniGamesWidget(LawnApp theApp, MiniGamesWidgetListener theListener)
 		{
-			this.mApp = theApp;
-			this.mListener = theListener;
-			this.mWidth = 0;
-			this.mHeight = AtlasResources.IMAGE_MINI_GAME_FRAME.mHeight + 20;
-			this.mMode = MiniGameMode.MINI_GAME_MODE_GAMES;
+			mApp = theApp;
+			mListener = theListener;
+			mWidth = 0;
+			mHeight = AtlasResources.IMAGE_MINI_GAME_FRAME.mHeight + 20;
+			mMode = MiniGameMode.MINI_GAME_MODE_GAMES;
 		}
 
 		public void SwitchMode(MiniGameMode mode)
 		{
-			this.mMode = mode;
-			this.SizeToFit();
+			mMode = mode;
+			SizeToFit();
 		}
 
 		public int GetModeLevelCount()
 		{
-			if (this.mApp.mPlayerInfo == null)
+			if (mApp.mPlayerInfo == null)
 			{
 				return 0;
 			}
-			switch (this.mMode)
+			switch (mMode)
 			{
 			case MiniGameMode.MINI_GAME_MODE_GAMES:
-				if (this.mApp.mPlayerInfo.mMiniGamesUnlocked < 19)
+				if (mApp.mPlayerInfo.mMiniGamesUnlocked < 19)
 				{
-					return this.mApp.mPlayerInfo.mMiniGamesUnlocked;
+					return mApp.mPlayerInfo.mMiniGamesUnlocked;
 				}
 				return 19;
 			case MiniGameMode.MINI_GAME_MODE_I_ZOMBIE:
-				if (this.mApp.mPlayerInfo.mIZombieUnlocked < 10)
+				if (mApp.mPlayerInfo.mIZombieUnlocked < 10)
 				{
-					return this.mApp.mPlayerInfo.mIZombieUnlocked;
+					return mApp.mPlayerInfo.mIZombieUnlocked;
 				}
 				return 10;
 			case MiniGameMode.MINI_GAME_MODE_VASEBREAKER:
-				if (this.mApp.mPlayerInfo.mVasebreakerUnlocked < 10)
+				if (mApp.mPlayerInfo.mVasebreakerUnlocked < 10)
 				{
-					return this.mApp.mPlayerInfo.mVasebreakerUnlocked;
+					return mApp.mPlayerInfo.mVasebreakerUnlocked;
 				}
 				return 10;
 			default:
@@ -55,26 +55,26 @@ namespace Lawn
 
 		public bool GetDrawPadlock()
 		{
-			if (this.mApp.mPlayerInfo == null)
+			if (mApp.mPlayerInfo == null)
 			{
 				return false;
 			}
-			switch (this.mMode)
+			switch (mMode)
 			{
 			case MiniGameMode.MINI_GAME_MODE_GAMES:
-				if (this.mApp.mPlayerInfo.mMiniGamesUnlocked != 19)
+				if (mApp.mPlayerInfo.mMiniGamesUnlocked != 19)
 				{
 					return true;
 				}
 				break;
 			case MiniGameMode.MINI_GAME_MODE_I_ZOMBIE:
-				if (this.mApp.mPlayerInfo.mIZombieUnlocked != 10)
+				if (mApp.mPlayerInfo.mIZombieUnlocked != 10)
 				{
 					return true;
 				}
 				break;
 			case MiniGameMode.MINI_GAME_MODE_VASEBREAKER:
-				if (this.mApp.mPlayerInfo.mVasebreakerUnlocked != 10)
+				if (mApp.mPlayerInfo.mVasebreakerUnlocked != 10)
 				{
 					return true;
 				}
@@ -85,28 +85,28 @@ namespace Lawn
 
 		public bool HasBeenBeaten(int index)
 		{
-			return this.mApp.HasBeatenChallenge((GameMode)this.GetGameMode(index + 1));
+			return mApp.HasBeatenChallenge((GameMode)GetGameMode(index + 1));
 		}
 
 		public override void Draw(Graphics g)
 		{
 			int num = 10;
-			int modeLevelCount = this.GetModeLevelCount();
-			bool drawPadlock = this.GetDrawPadlock();
+			int modeLevelCount = GetModeLevelCount();
+			bool drawPadlock = GetDrawPadlock();
 			for (int i = 0; i < modeLevelCount; i++)
 			{
-				this.DrawBackgroundThumbnailForLevel(g, num + Constants.QuickPlayWidget_Thumb_X, Constants.QuickPlayWidget_Thumb_Y, i + 1);
+				DrawBackgroundThumbnailForLevel(g, num + Constants.QuickPlayWidget_Thumb_X, Constants.QuickPlayWidget_Thumb_Y, i + 1);
 				num += AtlasResources.IMAGE_MINI_GAME_FRAME.mWidth + 10;
 			}
 			num = 10;
 			for (int j = 0; j < modeLevelCount; j++)
 			{
 				g.DrawImage(AtlasResources.IMAGE_MINI_GAME_FRAME, num, 0);
-				if (this.HasBeenBeaten(j))
+				if (HasBeenBeaten(j))
 				{
 					g.DrawImage(AtlasResources.IMAGE_MINIGAME_TROPHY, num + 3, 6);
 				}
-				string levelName = this.GetLevelName(j + 1);
+				string levelName = GetLevelName(j + 1);
 				g.SetFont(Resources.FONT_DWARVENTODCRAFT12);
 				g.SetColor(Color.White);
 				g.WriteWordWrapped(new TRect(num + 15, AtlasResources.IMAGE_MINI_GAME_FRAME.mHeight, AtlasResources.IMAGE_MINI_GAME_FRAME.mWidth - 30, 100), levelName, 5, 0);
@@ -116,7 +116,7 @@ namespace Lawn
 			{
 				g.SetColorizeImages(true);
 				g.SetColor(new Color(100, 100, 100));
-				this.DrawBackgroundThumbnailForLevel(g, num + Constants.QuickPlayWidget_Thumb_X, Constants.QuickPlayWidget_Thumb_Y, modeLevelCount + 1);
+				DrawBackgroundThumbnailForLevel(g, num + Constants.QuickPlayWidget_Thumb_X, Constants.QuickPlayWidget_Thumb_Y, modeLevelCount + 1);
 				g.SetColorizeImages(false);
 				g.DrawImage(AtlasResources.IMAGE_LOCK_BIG, num + 95 - AtlasResources.IMAGE_LOCK_BIG.mWidth / 2, 50);
 				g.DrawImage(AtlasResources.IMAGE_MINI_GAME_FRAME, num, 0);
@@ -130,46 +130,46 @@ namespace Lawn
 				return;
 			}
 			int num = x / (AtlasResources.IMAGE_MINI_GAME_FRAME.mWidth + 10);
-			if (num == this.GetModeLevelCount())
+			if (num == GetModeLevelCount())
 			{
-				this.DisplayLockedMessage();
+				DisplayLockedMessage();
 				return;
 			}
-			if (num > this.GetModeLevelCount())
+			if (num > GetModeLevelCount())
 			{
 				return;
 			}
-			int gameMode = this.GetGameMode(num + 1);
-			this.mListener.MiniGamesStageSelected(gameMode - 1);
+			int gameMode = GetGameMode(num + 1);
+			mListener.MiniGamesStageSelected(gameMode - 1);
 		}
 
 		public void DisplayLockedMessage()
 		{
-			switch (this.mMode)
+			switch (mMode)
 			{
 			case MiniGameMode.MINI_GAME_MODE_GAMES:
-				if (!this.mApp.HasFinishedAdventure())
+				if (!mApp.HasFinishedAdventure())
 				{
-					this.mApp.LawnMessageBox(49, "[MODE_LOCKED]", "[FINISH_ADVENTURE_TOOLTIP]", "[DIALOG_BUTTON_OK]", "", 3, null);
+					mApp.LawnMessageBox(49, "[MODE_LOCKED]", "[FINISH_ADVENTURE_TOOLTIP]", "[DIALOG_BUTTON_OK]", "", 3, null);
 					return;
 				}
-				this.mApp.LawnMessageBox(49, "[MODE_LOCKED]", "[ONE_MORE_CHALLENGE_TOOLTIP]", "[DIALOG_BUTTON_OK]", "", 3, null);
+				mApp.LawnMessageBox(49, "[MODE_LOCKED]", "[ONE_MORE_CHALLENGE_TOOLTIP]", "[DIALOG_BUTTON_OK]", "", 3, null);
 				return;
 			case MiniGameMode.MINI_GAME_MODE_I_ZOMBIE:
-				if (!this.mApp.HasFinishedAdventure() && this.mApp.mPlayerInfo.mIZombieUnlocked == 3)
+				if (!mApp.HasFinishedAdventure() && mApp.mPlayerInfo.mIZombieUnlocked == 3)
 				{
-					this.mApp.LawnMessageBox(49, "[MODE_LOCKED]", "[FINISH_ADVENTURE_TOOLTIP]", "[DIALOG_BUTTON_OK]", "", 3, null);
+					mApp.LawnMessageBox(49, "[MODE_LOCKED]", "[FINISH_ADVENTURE_TOOLTIP]", "[DIALOG_BUTTON_OK]", "", 3, null);
 					return;
 				}
-				this.mApp.LawnMessageBox(49, "[MODE_LOCKED]", "[ONE_MORE_IZOMBIE_TOOLTIP]", "[DIALOG_BUTTON_OK]", "", 3, null);
+				mApp.LawnMessageBox(49, "[MODE_LOCKED]", "[ONE_MORE_IZOMBIE_TOOLTIP]", "[DIALOG_BUTTON_OK]", "", 3, null);
 				return;
 			case MiniGameMode.MINI_GAME_MODE_VASEBREAKER:
-				if (!this.mApp.HasFinishedAdventure() && this.mApp.mPlayerInfo.mVasebreakerUnlocked == 3)
+				if (!mApp.HasFinishedAdventure() && mApp.mPlayerInfo.mVasebreakerUnlocked == 3)
 				{
-					this.mApp.LawnMessageBox(49, "[MODE_LOCKED]", "[FINISH_ADVENTURE_TOOLTIP]", "[DIALOG_BUTTON_OK]", "", 3, null);
+					mApp.LawnMessageBox(49, "[MODE_LOCKED]", "[FINISH_ADVENTURE_TOOLTIP]", "[DIALOG_BUTTON_OK]", "", 3, null);
 					return;
 				}
-				this.mApp.LawnMessageBox(49, "[MODE_LOCKED]", "[ONE_MORE_SCARY_POTTER_TOOLTIP]", "[DIALOG_BUTTON_OK]", "", 3, null);
+				mApp.LawnMessageBox(49, "[MODE_LOCKED]", "[ONE_MORE_SCARY_POTTER_TOOLTIP]", "[DIALOG_BUTTON_OK]", "", 3, null);
 				return;
 			default:
 				return;
@@ -178,27 +178,27 @@ namespace Lawn
 
 		public void SizeToFit()
 		{
-			if (this.GetDrawPadlock())
+			if (GetDrawPadlock())
 			{
-				this.mWidth = (10 + AtlasResources.IMAGE_MINI_GAME_FRAME.mWidth) * (this.GetModeLevelCount() + 1);
+				mWidth = (10 + AtlasResources.IMAGE_MINI_GAME_FRAME.mWidth) * (GetModeLevelCount() + 1);
 			}
 			else
 			{
-				this.mWidth = (10 + AtlasResources.IMAGE_MINI_GAME_FRAME.mWidth) * this.GetModeLevelCount();
+				mWidth = (10 + AtlasResources.IMAGE_MINI_GAME_FRAME.mWidth) * GetModeLevelCount();
 			}
-			this.mHeight = AtlasResources.IMAGE_MINI_GAME_FRAME.mHeight + 10;
+			mHeight = AtlasResources.IMAGE_MINI_GAME_FRAME.mHeight + 10;
 		}
 
 		public int GetGameMode(int index)
 		{
-			switch (this.mMode)
+			switch (mMode)
 			{
 			case MiniGameMode.MINI_GAME_MODE_GAMES:
-				return this.GetGameModeMiniGames(index);
+				return GetGameModeMiniGames(index);
 			case MiniGameMode.MINI_GAME_MODE_I_ZOMBIE:
-				return this.GetGameModeIZombie(index);
+				return GetGameModeIZombie(index);
 			case MiniGameMode.MINI_GAME_MODE_VASEBREAKER:
-				return this.GetGameModeVasebreaker(index);
+				return GetGameModeVasebreaker(index);
 			default:
 				return -1;
 			}
@@ -206,7 +206,7 @@ namespace Lawn
 
 		public string GetLevelName(int index)
 		{
-			switch (this.mMode)
+			switch (mMode)
 			{
 			case MiniGameMode.MINI_GAME_MODE_GAMES:
 				return TodStringFile.TodStringTranslate(ChallengeScreen.gChallengeDefs[index + 14].mChallengeName);
@@ -229,14 +229,14 @@ namespace Lawn
 
 		public Image GetImageForMode(int index)
 		{
-			switch (this.mMode)
+			switch (mMode)
 			{
 			case MiniGameMode.MINI_GAME_MODE_GAMES:
-				return this.GetImageForGames(index);
+				return GetImageForGames(index);
 			case MiniGameMode.MINI_GAME_MODE_I_ZOMBIE:
-				return this.GetImageForIZombie(index);
+				return GetImageForIZombie(index);
 			case MiniGameMode.MINI_GAME_MODE_VASEBREAKER:
-				return this.GetImageForVasebreaker(index);
+				return GetImageForVasebreaker(index);
 			default:
 				return null;
 			}
@@ -301,7 +301,7 @@ namespace Lawn
 
 		public void DrawBackgroundThumbnailForLevel(Graphics g, int theX, int theY, int theLevel)
 		{
-			Image imageForMode = this.GetImageForMode(theLevel);
+			Image imageForMode = GetImageForMode(theLevel);
 			if (imageForMode != null)
 			{
 				g.DrawImage(imageForMode, theX, theY + 2);

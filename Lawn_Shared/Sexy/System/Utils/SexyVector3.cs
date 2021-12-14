@@ -9,11 +9,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mVector.X;
+				return mVector.X;
 			}
 			set
 			{
-				this.mVector.X = value;
+				mVector.X = value;
 			}
 		}
 
@@ -21,11 +21,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mVector.Y;
+				return mVector.Y;
 			}
 			set
 			{
-				this.mVector.Y = value;
+				mVector.Y = value;
 			}
 		}
 
@@ -33,33 +33,33 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mVector.Z;
+				return mVector.Z;
 			}
 			set
 			{
-				this.mVector.Z = value;
+				mVector.Z = value;
 			}
 		}
 
 		public SexyVector3(float theX, float theY, float theZ)
 		{
-			this.mVector = new Vector3(theX, theY, theZ);
+			mVector = new Vector3(theX, theY, theZ);
 		}
 
 		public SexyVector3(Vector3 theVector)
 		{
-			this.mVector = theVector;
+			mVector = theVector;
 		}
 
 		public float Dot(SexyVector3 rhs)
 		{
-			return Vector3.Dot(this.mVector, rhs.mVector);
+			return Vector3.Dot(mVector, rhs.mVector);
 		}
 
 		public SexyVector3 Cross(SexyVector3 v)
 		{
 			Vector3 theVector = default(Vector3);
-			Vector3.Cross(ref this.mVector, ref v.mVector, out theVector);
+			Vector3.Cross(ref mVector, ref v.mVector, out theVector);
 			return new SexyVector3(theVector);
 		}
 
@@ -85,23 +85,23 @@ namespace Sexy
 
 		public float Norm()
 		{
-			return this.x * this.x + this.y * this.y + this.z * this.z;
+			return x * x + y * y + z * z;
 		}
 
 		public float Magnitude()
 		{
-			return (float)Math.Sqrt((double)this.Norm());
+			return (float)Math.Sqrt((double)Norm());
 		}
 
 		public SexyVector3 Normalize()
 		{
-			this.mVector.Normalize();
-			return new SexyVector3(this.mVector);
+			mVector.Normalize();
+			return new SexyVector3(mVector);
 		}
 
 		public override string ToString()
 		{
-			return this.mVector.ToString();
+			return mVector.ToString();
 		}
 
 		public Vector3 mVector;

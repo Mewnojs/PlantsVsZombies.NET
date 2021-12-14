@@ -8,63 +8,63 @@ namespace Lawn
 	{
 		public ReanimationWidget()
 		{
-			this.mApp = (LawnApp)GlobalStaticVars.gSexyAppBase;
-			this.mReanim = null;
-			this.mMouseVisible = false;
-			this.mClip = false;
-			this.mHasAlpha = true;
-			this.mLawnDialog = null;
-			this.mPosX = 0f;
-			this.mPosY = 0f;
+			mApp = (LawnApp)GlobalStaticVars.gSexyAppBase;
+			mReanim = null;
+			mMouseVisible = false;
+			mClip = false;
+			mHasAlpha = true;
+			mLawnDialog = null;
+			mPosX = 0f;
+			mPosY = 0f;
 		}
 
 		public override void Dispose()
 		{
-			if (this.mReanim != null)
+			if (mReanim != null)
 			{
-				this.mReanim.mActive = false;
-				this.mApp.mEffectSystem.mReanimationHolder.mReanimations.Remove(this.mReanim);
-				this.mReanim.PrepareForReuse();
-				this.mReanim = null;
+				mReanim.mActive = false;
+				mApp.mEffectSystem.mReanimationHolder.mReanimations.Remove(mReanim);
+				mReanim.PrepareForReuse();
+				mReanim = null;
 			}
 		}
 
 		public override void Draw(Graphics g)
 		{
-			if (this.mReanim == null)
+			if (mReanim == null)
 			{
 				return;
 			}
-			this.mReanim.Draw(g);
+			mReanim.Draw(g);
 		}
 
 		public override void Update()
 		{
-			if (this.mReanim == null)
+			if (mReanim == null)
 			{
 				return;
 			}
-			this.mReanim.Update();
-			this.mParent.MarkDirty();
+			mReanim.Update();
+			mParent.MarkDirty();
 		}
 
 		public void AddReanimation(float x, float y, ReanimationType theReanimationType)
 		{
-			Debug.ASSERT(this.mReanim == null);
-			this.mPosX = x;
-			this.mPosY = y;
-			this.mReanim = this.mApp.mEffectSystem.mReanimationHolder.AllocReanimation(x, y, 0, theReanimationType);
-			this.mReanim.mLoopType = ReanimLoopType.REANIM_LOOP;
-			this.mReanim.mIsAttachment = true;
-			if (this.mReanim.TrackExists(GlobalMembersReanimIds.ReanimTrackId_anim_idle))
+			Debug.ASSERT(mReanim == null);
+			mPosX = x;
+			mPosY = y;
+			mReanim = mApp.mEffectSystem.mReanimationHolder.AllocReanimation(x, y, 0, theReanimationType);
+			mReanim.mLoopType = ReanimLoopType.REANIM_LOOP;
+			mReanim.mIsAttachment = true;
+			if (mReanim.TrackExists(GlobalMembersReanimIds.ReanimTrackId_anim_idle))
 			{
-				this.mReanim.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_idle);
+				mReanim.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_idle);
 			}
-			if (this.mReanim.TrackExists("zombie_butter"))
+			if (mReanim.TrackExists("zombie_butter"))
 			{
-				this.mReanim.AssignRenderGroupToTrack("zombie_butter", -1);
+				mReanim.AssignRenderGroupToTrack("zombie_butter", -1);
 			}
-			this.Resize((int)x, (int)y, (int)Constants.InvertAndScale(10f), (int)Constants.InvertAndScale(10f));
+			Resize((int)x, (int)y, (int)Constants.InvertAndScale(10f), (int)Constants.InvertAndScale(10f));
 		}
 
 		public LawnApp mApp;

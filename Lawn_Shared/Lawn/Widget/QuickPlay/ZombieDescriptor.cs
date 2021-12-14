@@ -6,9 +6,9 @@ namespace Lawn
 	{
 		public ZombieDescriptor(ZombieType theType, int aX, int aY)
 		{
-			this.type = theType;
-			this.x = aX;
-			this.y = aY;
+			type = theType;
+			x = aX;
+			y = aY;
 		}
 
 		public ZombieType type;

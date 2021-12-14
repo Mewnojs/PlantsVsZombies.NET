@@ -8,106 +8,106 @@ namespace Lawn
     {
         public CursorObject()
         {
-            this.mType = SeedType.SEED_NONE;
-            this.mImitaterType = SeedType.SEED_NONE;
-            this.mSeedBankIndex = -1;
-            this.mX = 0;
-            this.mY = 0;
-            this.mCursorType = CursorType.CURSOR_TYPE_NORMAL;
-            this.mCoinID = null;
-            this.mDuplicatorPlantID = null;
-            this.mCobCannonPlantID = null;
-            this.mGlovePlantID = null;
-            this.mReanimCursorID = null;
-            this.mPosScaled = false;
-            if (this.mApp.IsWhackAZombieLevel())
+            mType = SeedType.SEED_NONE;
+            mImitaterType = SeedType.SEED_NONE;
+            mSeedBankIndex = -1;
+            mX = 0;
+            mY = 0;
+            mCursorType = CursorType.CURSOR_TYPE_NORMAL;
+            mCoinID = null;
+            mDuplicatorPlantID = null;
+            mCobCannonPlantID = null;
+            mGlovePlantID = null;
+            mReanimCursorID = null;
+            mPosScaled = false;
+            if (mApp.IsWhackAZombieLevel())
             {
                 ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_HAMMER, true);
-                Reanimation reanimation = this.mApp.AddReanimation(-25f, 16f, 0, ReanimationType.REANIM_HAMMER);
+                Reanimation reanimation = mApp.AddReanimation(-25f, 16f, 0, ReanimationType.REANIM_HAMMER);
                 reanimation.mIsAttachment = true;
                 reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_whack_zombie, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 24f);
                 reanimation.mAnimTime = 1f;
-                this.mReanimCursorID = this.mApp.ReanimationGetID(reanimation);
+                mReanimCursorID = mApp.ReanimationGetID(reanimation);
             }
-            this.mWidth = 80;
-            this.mHeight = 80;
+            mWidth = 80;
+            mHeight = 80;
         }
 
         public void Update()
         {
-            if (this.mApp.mGameScene != GameScenes.SCENE_PLAYING && !this.mBoard.mCutScene.IsInShovelTutorial())
+            if (mApp.mGameScene != GameScenes.SCENE_PLAYING && !mBoard.mCutScene.IsInShovelTutorial())
             {
-                this.mVisible = false;
+                mVisible = false;
                 return;
             }
-            if (!this.mApp.mWidgetManager.mMouseIn)
+            if (!mApp.mWidgetManager.mMouseIn)
             {
-                this.mVisible = false;
+                mVisible = false;
                 return;
             }
-            Reanimation reanimation = this.mApp.ReanimationTryToGet(this.mReanimCursorID);
+            Reanimation reanimation = mApp.ReanimationTryToGet(mReanimCursorID);
             if (reanimation != null)
             {
                 reanimation.Update();
             }
-            this.mVisible = true;
-            this.mX = this.mBoard.mLastToolX;
-            this.mY = this.mBoard.mLastToolY;
+            mVisible = true;
+            mX = mBoard.mLastToolX;
+            mY = mBoard.mLastToolY;
         }
 
         public override bool LoadFromFile(Sexy.Buffer b)
         {
             base.LoadFromFile(b);
-            this.mCursorType = (CursorType)b.ReadLong();
-            this.mHammerDownCounter = b.ReadLong();
-            this.mImitaterType = (SeedType)b.ReadLong();
-            this.mSeedBankIndex = b.ReadLong();
-            this.mType = (SeedType)b.ReadLong();
+            mCursorType = (CursorType)b.ReadLong();
+            mHammerDownCounter = b.ReadLong();
+            mImitaterType = (SeedType)b.ReadLong();
+            mSeedBankIndex = b.ReadLong();
+            mType = (SeedType)b.ReadLong();
             return true;
         }
 
         public override bool SaveToFile(Sexy.Buffer b)
         {
             base.SaveToFile(b);
-            b.WriteLong((int)this.mCursorType);
-            b.WriteLong(this.mHammerDownCounter);
-            b.WriteLong((int)this.mImitaterType);
-            b.WriteLong(this.mSeedBankIndex);
-            b.WriteLong((int)this.mType);
+            b.WriteLong((int)mCursorType);
+            b.WriteLong(mHammerDownCounter);
+            b.WriteLong((int)mImitaterType);
+            b.WriteLong(mSeedBankIndex);
+            b.WriteLong((int)mType);
             return true;
         }
 
         public void DrawGroundLayer(Graphics g)
         {
-            if (this.mCursorType != CursorType.CURSOR_TYPE_NORMAL)
+            if (mCursorType != CursorType.CURSOR_TYPE_NORMAL)
             {
-                int theX = (int)((float)this.mX * Constants.IS);
-                int theY = (int)((float)this.mY * Constants.IS);
+                int theX = (int)((float)mX * Constants.IS);
+                int theY = (int)((float)mY * Constants.IS);
                 int num;
                 int num2;
-                if (this.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_BANK)
+                if (mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_BANK)
                 {
-                    if (this.mBoard.mIgnoreMouseUp)
+                    if (mBoard.mIgnoreMouseUp)
                     {
                         return;
                     }
-                    num = this.mBoard.PlantingPixelToGridX(theX, theY, this.mType);
-                    num2 = this.mBoard.PlantingPixelToGridY(theX, theY, this.mType);
-                    if (this.mBoard.CanPlantAt(num, num2, this.mType) != PlantingReason.PLANTING_OK)
+                    num = mBoard.PlantingPixelToGridX(theX, theY, mType);
+                    num2 = mBoard.PlantingPixelToGridY(theX, theY, mType);
+                    if (mBoard.CanPlantAt(num, num2, mType) != PlantingReason.PLANTING_OK)
                     {
                         return;
                     }
                 }
                 else
                 {
-                    num = this.mBoard.PixelToGridX(theX, theY);
-                    num2 = this.mBoard.PixelToGridY(theX, theY);
-                    if (this.mCursorType == CursorType.CURSOR_TYPE_SHOVEL && (this.mBoard.mIgnoreMouseUp || this.mBoard.ToolHitTest(this.mX, this.mY, false).mObjectType == GameObjectType.OBJECT_TYPE_NONE))
+                    num = mBoard.PixelToGridX(theX, theY);
+                    num2 = mBoard.PixelToGridY(theX, theY);
+                    if (mCursorType == CursorType.CURSOR_TYPE_SHOVEL && (mBoard.mIgnoreMouseUp || mBoard.ToolHitTest(mX, mY, false).mObjectType == GameObjectType.OBJECT_TYPE_NONE))
                     {
                         return;
                     }
                 }
-                if (num2 < 0 || num < 0 || this.mBoard.GridToPixelY(num, num2) < 0)
+                if (num2 < 0 || num < 0 || mBoard.GridToPixelY(num, num2) < 0)
                 {
                     return;
                 }
@@ -115,14 +115,14 @@ namespace Lawn
                 @new.mTransX = Constants.Board_Offset_AspectRatio_Correction;
                 for (int i = 0; i < Constants.GRIDSIZEX; i++)
                 {
-                    this.mBoard.DrawCelHighlight(@new, i, num2);
+                    mBoard.DrawCelHighlight(@new, i, num2);
                 }
-                int num3 = this.mBoard.StageHas6Rows() ? 6 : 5;
+                int num3 = mBoard.StageHas6Rows() ? 6 : 5;
                 for (int j = 0; j < num3; j++)
                 {
                     if (j != num2)
                     {
-                        this.mBoard.DrawCelHighlight(@new, num, j);
+                        mBoard.DrawCelHighlight(@new, num, j);
                     }
                 }
                 @new.PrepareForReuse();
@@ -139,41 +139,41 @@ namespace Lawn
             switch (mCursorType)
             {
                 case CursorType.CURSOR_TYPE_SHOVEL:
-                    if (this.mBoard.mIgnoreMouseUp || (float)this.mX * Constants.IS < (float)Constants.LAWN_XMIN || (float)this.mY * Constants.IS < (float)Constants.LAWN_YMIN)
+                    if (mBoard.mIgnoreMouseUp || (float)mX * Constants.IS < (float)Constants.LAWN_XMIN || (float)mY * Constants.IS < (float)Constants.LAWN_YMIN)
                     {
                         return;
                     }
-                    int mWidth = AtlasResources.IMAGE_SHOVEL_HI_RES.mWidth;
-                    int mHeight = AtlasResources.IMAGE_SHOVEL_HI_RES.mHeight;
+                    int imgShovelWidth = AtlasResources.IMAGE_SHOVEL_HI_RES.mWidth;
+                    int imgShovelHeight = AtlasResources.IMAGE_SHOVEL_HI_RES.mHeight;
                     g.SetColor(SexyColor.White);
-                    int num = (int)TodCommon.TodAnimateCurveFloat(0, 39, this.mBoard.mEffectCounter % 40, 0f, (float)(mWidth / 2), TodCurves.CURVE_BOUNCE_SLOW_MIDDLE);
-                    g.DrawImage(AtlasResources.IMAGE_SHOVEL_HI_RES, num, -mHeight - num, mWidth, mHeight);
+                    int num = (int)TodCommon.TodAnimateCurveFloat(0, 39, mBoard.mEffectCounter % 40, 0f, (float)(imgShovelWidth / 2), TodCurves.CURVE_BOUNCE_SLOW_MIDDLE);
+                    g.DrawImage(AtlasResources.IMAGE_SHOVEL_HI_RES, num, -imgShovelHeight - num, imgShovelWidth, imgShovelHeight);
                     return;
                 case CursorType.CURSOR_TYPE_HAMMER:
-                    Reanimation reanimation = this.mApp.ReanimationGet(this.mReanimCursorID);
+                    Reanimation reanimation = mApp.ReanimationGet(mReanimCursorID);
                     reanimation.Draw(g);
                     return;
                 case CursorType.CURSOR_TYPE_COBCANNON_TARGET:
-                    if ((float)this.mX * Constants.IS < (float)Constants.LAWN_XMIN || (float)this.mY * Constants.IS < (float)Constants.LAWN_YMIN)
+                    if ((float)mX * Constants.IS < (float)Constants.LAWN_XMIN || (float)mY * Constants.IS < (float)Constants.LAWN_YMIN)
                     {
                         return;
                     }
-                    int mWidth3 = AtlasResources.IMAGE_COBCANNON_TARGET.mWidth;
-                    int mHeight3 = AtlasResources.IMAGE_COBCANNON_TARGET.mHeight;
+                    int imgCobCannonTargetWidth = AtlasResources.IMAGE_COBCANNON_TARGET.mWidth;
+                    int imgCobCannonTargetHeight = AtlasResources.IMAGE_COBCANNON_TARGET.mHeight;
                     g.SetColorizeImages(true);
                     g.SetColor(new SexyColor(255, 255, 255, 127));
-                    g.DrawImage(AtlasResources.IMAGE_COBCANNON_TARGET, -mWidth3 / 2, -mHeight3 / 2, mWidth3, mHeight3);
+                    g.DrawImage(AtlasResources.IMAGE_COBCANNON_TARGET, -imgCobCannonTargetWidth / 2, -imgCobCannonTargetHeight / 2, imgCobCannonTargetWidth, imgCobCannonTargetHeight);
                     g.SetColorizeImages(false);
                     return;
                 case CursorType.CURSOR_TYPE_WATERING_CAN:
-                    if (this.mApp.mPlayerInfo.mPurchases[13] > 0)
+                    if (mApp.mPlayerInfo.mPurchases[13] > 0)
                     {
                         TRect trect = new TRect(Constants.ZEN_XMIN, Constants.ZEN_YMIN, Constants.ZEN_XMAX - Constants.ZEN_XMIN, Constants.ZEN_YMAX - Constants.ZEN_YMIN);
-                        if (trect.Contains(this.mApp.mBoard.mLastToolX, this.mApp.mBoard.mLastToolY))
+                        if (trect.Contains(mApp.mBoard.mLastToolX, mApp.mBoard.mLastToolY))
                         {
-                            int mWidth2 = AtlasResources.IMAGE_ZEN_GOLDTOOLRETICLE.mWidth;
-                            int mHeight2 = AtlasResources.IMAGE_ZEN_GOLDTOOLRETICLE.mHeight;
-                            g.DrawImage(AtlasResources.IMAGE_ZEN_GOLDTOOLRETICLE, -mWidth2 / 2, -mHeight2 / 2, mWidth2, mHeight2);
+                            int imgGoldToolReticleWidth = AtlasResources.IMAGE_ZEN_GOLDTOOLRETICLE.mWidth;
+                            int imgGoldToolReticleHeight = AtlasResources.IMAGE_ZEN_GOLDTOOLRETICLE.mHeight;
+                            g.DrawImage(AtlasResources.IMAGE_ZEN_GOLDTOOLRETICLE, -imgGoldToolReticleWidth / 2, -imgGoldToolReticleHeight / 2, imgGoldToolReticleWidth, imgGoldToolReticleHeight);
                         }
                         DrawToolIconImage(g, AtlasResources.IMAGE_REANIM_ZENGARDEN_WATERINGCAN1_GOLD);
                     }
@@ -203,15 +203,15 @@ namespace Lawn
                 case CursorType.CURSOR_TYPE_WHEEELBARROW:
                     Image wbimage = AtlasResources.IMAGE_ZEN_WHEELBARROW;
                     DrawToolIconImage(g, wbimage);
-                    PottedPlant wbplant = this.mApp.mZenGarden.GetPottedPlantInWheelbarrow();
+                    PottedPlant wbplant = mApp.mZenGarden.GetPottedPlantInWheelbarrow();
                     if (wbplant != null)
                     {
-                        this.mApp.mZenGarden.DrawPottedPlant(g, -wbimage.mWidth / 2 + (float)(Constants.ZenGardenButton_WheelbarrowPlant_Offset.X), -wbimage.mHeight / 2 + (float)(Constants.ZenGardenButton_WheelbarrowPlant_Offset.Y), wbplant, 0.6f, true);
+                        mApp.mZenGarden.DrawPottedPlant(g, -wbimage.mWidth / 2 + (float)(Constants.ZenGardenButton_WheelbarrowPlant_Offset.X), -wbimage.mHeight / 2 + (float)(Constants.ZenGardenButton_WheelbarrowPlant_Offset.Y), wbplant, 0.6f, true);
                     }
                     return;
                 case CursorType.CURSOR_TYPE_PLANT_FROM_BANK:
                 case CursorType.CURSOR_TYPE_PLANT_FROM_USABLE_COIN:
-                    if (this.mBoard.mIgnoreMouseUp || (float)this.mX * Constants.IS < (float)Constants.LAWN_XMIN || (float)this.mY * Constants.IS < (float)Constants.LAWN_YMIN)
+                    if (mBoard.mIgnoreMouseUp || (float)mX * Constants.IS < (float)Constants.LAWN_XMIN || (float)mY * Constants.IS < (float)Constants.LAWN_YMIN)
                     {
                         return;
                     }
@@ -237,7 +237,7 @@ namespace Lawn
 
         public void Die()
         {
-            this.mApp.RemoveReanimation(ref this.mReanimCursorID);
+            mApp.RemoveReanimation(ref mReanimCursorID);
         }
 
         public int mSeedBankIndex;

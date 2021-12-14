@@ -7,15 +7,15 @@ namespace Sexy
 	{
 		public TrailRes()
 		{
-			this.mType = ResType.ResType_Trail;
+			mType = ResType.ResType_Trail;
 		}
 
 		public override void DeleteResource()
 		{
-			if (this.mTrail != null)
+			if (mTrail != null)
 			{
-				this.mTrail.Dispose();
-				this.mTrail = null;
+				mTrail.Dispose();
+				mTrail = null;
 			}
 			base.DeleteResource();
 		}

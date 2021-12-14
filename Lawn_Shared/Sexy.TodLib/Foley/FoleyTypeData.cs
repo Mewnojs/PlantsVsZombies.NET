@@ -6,10 +6,10 @@ namespace Sexy.TodLib
 	{
 		public FoleyTypeData()
 		{
-			this.mLastVariationPlayed = -1;
+			mLastVariationPlayed = -1;
 			for (int i = 0; i < 8; i++)
 			{
-				this.mFoleyInstances[i] = new FoleyInstance();
+				mFoleyInstances[i] = new FoleyInstance();
 			}
 		}
 

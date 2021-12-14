@@ -6,7 +6,7 @@ namespace Sexy.TodLib
 	{
 		public ReanimAtlas()
 		{
-			this.mImageCount = 0;
+			mImageCount = 0;
 		}
 
 		public void ReanimAtlasCreate(ReanimatorDefinition theReanimDef)

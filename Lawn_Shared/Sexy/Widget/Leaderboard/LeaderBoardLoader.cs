@@ -18,11 +18,11 @@ namespace Sexy
 		{
 			get
 			{
-				if ((DateTime.UtcNow - this.resultsReceived).TotalSeconds < (double)this.CACHE_DURATION)
+				if ((DateTime.UtcNow - resultsReceived).TotalSeconds < (double)CACHE_DURATION)
 				{
 					return LeaderBoardLoader.LoaderState.Loaded;
 				}
-				if ((DateTime.UtcNow - this.requestSendTime).TotalSeconds < 30.0)
+				if ((DateTime.UtcNow - requestSendTime).TotalSeconds < 30.0)
 				{
 					return LeaderBoardLoader.LoaderState.Loading;
 				}
@@ -32,7 +32,7 @@ namespace Sexy
 
 		public void ResetCache()
 		{
-			this.resultsReceived = DateTime.MinValue;
+			resultsReceived = DateTime.MinValue;
 		}
 
 		public void SendRequest()
@@ -42,14 +42,14 @@ namespace Sexy
 				return;
 			}
 			SignedInGamer gamer = Main.GetGamer();
-			if (this.LeaderboardConnectionState != LeaderBoardLoader.LoaderState.Idle)
+			if (LeaderboardConnectionState != LeaderBoardLoader.LoaderState.Idle)
 			{
 				return;
 			}
 			try
 			{
-				LeaderboardIdentity leaderboardId = LeaderboardIdentity.Create(LeaderboardKey.BestScoreLifeTime, this.GameMode);
-				LeaderboardReader.BeginRead(leaderboardId, gamer, 5, new AsyncCallback(this.RequestReceived), gamer);
+				LeaderboardIdentity leaderboardId = LeaderboardIdentity.Create(LeaderboardKey.BestScoreLifeTime, GameMode);
+				LeaderboardReader.BeginRead(leaderboardId, gamer, 5, new AsyncCallback(RequestReceived), gamer);
 			}
 			catch (GameUpdateRequiredException)
 			{
@@ -59,110 +59,110 @@ namespace Sexy
 			{
 				Console.WriteLine("Error in GetResultsCallBack. {0}", ex.Message);
 			}
-			this.requestSendTime = DateTime.UtcNow;
+			requestSendTime = DateTime.UtcNow;
 		}
 
 		public void LoadEntry(int index)
 		{
-			if (index < this.reader.PageStart)
+			if (index < reader.PageStart)
 			{
-				if (!this.pagingUp && this.reader.CanPageUp)
+				if (!pagingUp && reader.CanPageUp)
 				{
-					this.pagingUp = true;
-					this.reader.BeginPageUp(new AsyncCallback(this.PageUpRequestReceived), Main.GetGamer());
+					pagingUp = true;
+					reader.BeginPageUp(new AsyncCallback(PageUpRequestReceived), Main.GetGamer());
 					return;
 				}
 			}
-			else if (!this.pagingDown && this.reader.CanPageDown)
+			else if (!pagingDown && reader.CanPageDown)
 			{
-				this.pagingDown = true;
-				this.reader.BeginPageDown(new AsyncCallback(this.PageDownRequestReceived), Main.GetGamer());
+				pagingDown = true;
+				reader.BeginPageDown(new AsyncCallback(PageDownRequestReceived), Main.GetGamer());
 			}
 		}
 
 		private void PageUpRequestReceived(IAsyncResult result)
 		{
-			this.pagingUp = false;
-			this.ProcessData(result, false);
+			pagingUp = false;
+			ProcessData(result, false);
 		}
 
 		private void PageDownRequestReceived(IAsyncResult result)
 		{
-			this.pagingDown = false;
-			this.ProcessData(result, false);
+			pagingDown = false;
+			ProcessData(result, false);
 		}
 
 		private void RequestReceived(IAsyncResult result)
 		{
-			this.ProcessData(result, true);
+			ProcessData(result, true);
 		}
 
 		private void ProcessData(IAsyncResult result, bool clearList)
 		{
-			this.requestSendTime = DateTime.MinValue;
+			requestSendTime = DateTime.MinValue;
 			lock (LeaderBoardComm.LeaderboardLock)
 			{
 				try
 				{
-					this.reader = LeaderboardReader.EndRead(result);
-					this.LeaderboardEntryCount = this.reader.TotalLeaderboardSize;
+					reader = LeaderboardReader.EndRead(result);
+					LeaderboardEntryCount = reader.TotalLeaderboardSize;
 					if (clearList)
 					{
-						this.LeaderboardEntries.Clear();
+						LeaderboardEntries.Clear();
 					}
-					this.UpdateEntriesFromReader();
-					this.resultsReceived = DateTime.UtcNow;
+					UpdateEntriesFromReader();
+					resultsReceived = DateTime.UtcNow;
 				}
 				catch (GameUpdateRequiredException)
 				{
-					this.ErrorState = LeaderBoardLoader.ErrorStates.GameUpdateRequired;
+					ErrorState = LeaderBoardLoader.ErrorStates.GameUpdateRequired;
 				}
 				catch (Exception ex)
 				{
 					string message = ex.Message;
 					Console.WriteLine("Error in RequestReceived in LeaderBoardLoader. {0}", ex.Message);
-					if (this.LeaderboardEntries.Count == 0)
+					if (LeaderboardEntries.Count == 0)
 					{
-						this.ErrorState = LeaderBoardLoader.ErrorStates.Error;
+						ErrorState = LeaderBoardLoader.ErrorStates.Error;
 					}
 					else
 					{
-						this.ErrorState = LeaderBoardLoader.ErrorStates.None;
+						ErrorState = LeaderBoardLoader.ErrorStates.None;
 					}
 				}
 			}
-			if (this.LoadingCompleted != null)
+			if (LoadingCompleted != null)
 			{
-				this.LoadingCompleted(this);
+				LoadingCompleted(this);
 			}
 		}
 
 		private void UpdateEntriesFromReader()
 		{
 			Gamer gamer = Main.GetGamer();
-			for (int i = 0; i < this.reader.Entries.Count; i++)
+			for (int i = 0; i < reader.Entries.Count; i++)
 			{
-				int num = this.reader.PageStart + i;
-				LeaderboardEntry leaderboardEntry = this.reader.Entries[i];
-				if (this.LeaderboardEntries.ContainsKey(num))
+				int num = reader.PageStart + i;
+				LeaderboardEntry leaderboardEntry = reader.Entries[i];
+				if (LeaderboardEntries.ContainsKey(num))
 				{
-					this.LeaderboardEntries[num] = leaderboardEntry;
+					LeaderboardEntries[num] = leaderboardEntry;
 				}
 				else
 				{
-					this.LeaderboardEntries.Add(num, leaderboardEntry);
+					LeaderboardEntries.Add(num, leaderboardEntry);
 				}
 				if (gamer != null && leaderboardEntry.Gamer.Gamertag == gamer.Gamertag)
 				{
-					this.SignedInGamerIndex = i;
+					SignedInGamerIndex = i;
 				}
 			}
 		}
 
 		public LeaderBoardLoader(LeaderboardGameMode gameMode)
 		{
-			this.ErrorState = LeaderBoardLoader.ErrorStates.None;
-			this.GameMode = LeaderBoardHelper.GetLeaderboardNumber(gameMode);
+			ErrorState = LeaderBoardLoader.ErrorStates.None;
+			GameMode = LeaderBoardHelper.GetLeaderboardNumber(gameMode);
 		}
 
 		private const int REQUEST_RESEND_DELAY = 30;

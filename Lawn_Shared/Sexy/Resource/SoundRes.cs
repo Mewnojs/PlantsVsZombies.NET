@@ -6,15 +6,15 @@ namespace Sexy
 	{
 		public SoundRes()
 		{
-			this.mType = ResType.ResType_Sound;
+			mType = ResType.ResType_Sound;
 		}
 
 		public override void DeleteResource()
 		{
-			if (this.mSoundId >= 0)
+			if (mSoundId >= 0)
 			{
-				GlobalStaticVars.gSexyAppBase.mSoundManager.ReleaseSound((uint)this.mSoundId);
-				this.mSoundId = -1;
+				GlobalStaticVars.gSexyAppBase.mSoundManager.ReleaseSound((uint)mSoundId);
+				mSoundId = -1;
 			}
 			base.DeleteResource();
 		}

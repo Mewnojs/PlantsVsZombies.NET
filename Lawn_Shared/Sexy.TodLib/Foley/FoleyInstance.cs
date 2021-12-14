@@ -8,21 +8,21 @@ namespace Sexy.TodLib
 		{
 			get
 			{
-				return this._paused && !this.mInstance.IsReleased();
+				return _paused && !mInstance.IsReleased();
 			}
 			set
 			{
-				this._paused = value;
+				_paused = value;
 			}
 		}
 
 		public FoleyInstance()
 		{
-			this.mInstance = null;
-			this.mRefCount = 0;
-			this.mPaused = false;
-			this.mStartTime = 0;
-			this.mPauseOffset = 0;
+			mInstance = null;
+			mRefCount = 0;
+			mPaused = false;
+			mStartTime = 0;
+			mPauseOffset = 0;
 		}
 
 		public XNASoundInstance mInstance;

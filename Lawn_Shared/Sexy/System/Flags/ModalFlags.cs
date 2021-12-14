@@ -6,17 +6,17 @@ namespace Sexy
 	{
 		public void ModFlags(ref FlagsMod theFlagsMod)
 		{
-			GlobalMembersFlags.ModFlags(ref this.mOverFlags, theFlagsMod);
-			GlobalMembersFlags.ModFlags(ref this.mUnderFlags, theFlagsMod);
+			GlobalMembersFlags.ModFlags(ref mOverFlags, theFlagsMod);
+			GlobalMembersFlags.ModFlags(ref mUnderFlags, theFlagsMod);
 		}
 
 		public int GetFlags()
 		{
-			if (!this.mIsOver)
+			if (!mIsOver)
 			{
-				return this.mUnderFlags;
+				return mUnderFlags;
 			}
-			return this.mOverFlags;
+			return mOverFlags;
 		}
 
 		public int mOverFlags;

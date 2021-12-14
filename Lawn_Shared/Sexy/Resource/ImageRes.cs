@@ -7,19 +7,19 @@ namespace Sexy
 	{
 		public ImageRes()
 		{
-			this.mType = ResType.ResType_Image;
+			mType = ResType.ResType_Image;
 		}
 
 		public override void DeleteResource()
 		{
-			if (this.mImage != null)
+			if (mImage != null)
 			{
-				this.mImage.Dispose();
-				if (this.mFormat == ImageRes.TextureFormat.Content && this.mUnloadGroup > 0)
+				mImage.Dispose();
+				if (mFormat == ImageRes.TextureFormat.Content && mUnloadGroup > 0)
 				{
-					ResourceManager.mUnloadContentManager[this.mUnloadGroup].Unload();
+					ResourceManager.mUnloadContentManager[mUnloadGroup].Unload();
 				}
-				this.mImage = null;
+				mImage = null;
 			}
 			base.DeleteResource();
 		}

@@ -6,19 +6,19 @@ namespace Sexy.TodLib
 	{
 		public bool SaveToFile(Buffer b)
 		{
-			b.WriteLong(this.mItem);
-			b.WriteFloat(this.mWeight);
-			b.WriteFloat(this.mLastPicked);
-			b.WriteFloat(this.mSecondLastPicked);
+			b.WriteLong(mItem);
+			b.WriteFloat(mWeight);
+			b.WriteFloat(mLastPicked);
+			b.WriteFloat(mSecondLastPicked);
 			return true;
 		}
 
 		public bool LoadFromFile(Buffer b)
 		{
-			this.mItem = b.ReadLong();
-			this.mWeight = b.ReadFloat();
-			this.mLastPicked = b.ReadFloat();
-			this.mSecondLastPicked = b.ReadFloat();
+			mItem = b.ReadLong();
+			mWeight = b.ReadFloat();
+			mLastPicked = b.ReadFloat();
+			mSecondLastPicked = b.ReadFloat();
 			return true;
 		}
 

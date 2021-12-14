@@ -6,7 +6,7 @@ namespace Sexy
 	{
 		public SexyChar(char c)
 		{
-			this.value_type = c;
+			value_type = c;
 		}
 
 		public static bool operator ==(SexyChar a, KeyCode b)
@@ -23,7 +23,7 @@ namespace Sexy
 		{
 			if (obj is SexyChar)
 			{
-				return this.value_type == ((SexyChar)obj).value_type;
+				return value_type == ((SexyChar)obj).value_type;
 			}
 			if (obj is KeyCode)
 			{
@@ -35,12 +35,12 @@ namespace Sexy
 
 		public override int GetHashCode()
 		{
-			return this.value_type.GetHashCode();
+			return value_type.GetHashCode();
 		}
 
 		public override string ToString()
 		{
-			return this.value_type.ToString();
+			return value_type.ToString();
 		}
 
 		public char value_type;

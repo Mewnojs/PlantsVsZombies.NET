@@ -8,9 +8,9 @@ namespace Lawn
 	{
 		public BungeeDropGrid()
 		{
-			for (int i = 0; i < this.mGridArray.Length; i++)
+			for (int i = 0; i < mGridArray.Length; i++)
 			{
-				this.mGridArray[i] = TodWeightedGridArray.GetNewTodWeightedGridArray();
+				mGridArray[i] = TodWeightedGridArray.GetNewTodWeightedGridArray();
 			}
 		}
 

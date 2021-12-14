@@ -8,16 +8,16 @@ namespace Sexy
 	{
 		public void WidgetRemovedHelper()
 		{
-			if (this.mWidgetManager == null)
+			if (mWidgetManager == null)
 			{
 				return;
 			}
-			foreach (Widget widget in this.mWidgets)
+			foreach (Widget widget in mWidgets)
 			{
 				widget.WidgetRemovedHelper();
 			}
-			this.mWidgetManager.DisableWidget(this);
-			foreach (PreModalInfo preModalInfo in this.mWidgetManager.mPreModalInfoList)
+			mWidgetManager.DisableWidget(this);
+			foreach (PreModalInfo preModalInfo in mWidgetManager.mPreModalInfoList)
 			{
 				if (preModalInfo.mPrevBaseModalWidget == this)
 				{
@@ -28,14 +28,14 @@ namespace Sexy
 					preModalInfo.mPrevFocusWidget = null;
 				}
 			}
-			this.RemovedFromManager(this.mWidgetManager);
-			this.MarkDirtyFull(this);
-			this.mWidgetManager = null;
+			RemovedFromManager(mWidgetManager);
+			MarkDirtyFull(this);
+			mWidgetManager = null;
 		}
 
 		public Widget()
 		{
-			this.Reset();
+			Reset();
 		}
 
 		public virtual bool DoScroll(_Touch touch)
@@ -45,23 +45,23 @@ namespace Sexy
 
 		protected virtual void Reset()
 		{
-			this.mWidgetManager = null;
-			this.mVisible = true;
-			this.mDisabled = false;
-			this.mIsDown = false;
-			this.mIsOver = false;
-			this.mDoFinger = false;
-			this.mMouseVisible = true;
-			this.mHasFocus = false;
-			this.mHasTransparencies = false;
-			this.mWantsFocus = false;
-			this.mTabPrev = null;
-			this.mTabNext = null;
+			mWidgetManager = null;
+			mVisible = true;
+			mDisabled = false;
+			mIsDown = false;
+			mIsOver = false;
+			mDoFinger = false;
+			mMouseVisible = true;
+			mHasFocus = false;
+			mHasTransparencies = false;
+			mWantsFocus = false;
+			mTabPrev = null;
+			mTabNext = null;
 		}
 
 		public override void Dispose()
 		{
-			this.mColors.Clear();
+			mColors.Clear();
 		}
 
 		public virtual void OrderInManagerChanged()
@@ -70,102 +70,102 @@ namespace Sexy
 
 		public virtual void SetVisible(bool isVisible)
 		{
-			if (this.mVisible == isVisible)
+			if (mVisible == isVisible)
 			{
 				return;
 			}
-			this.mVisible = isVisible;
-			if (this.mVisible)
+			mVisible = isVisible;
+			if (mVisible)
 			{
-				this.MarkDirty();
+				MarkDirty();
 			}
 			else
 			{
-				this.MarkDirtyFull();
+				MarkDirtyFull();
 			}
-			if (this.mWidgetManager != null)
+			if (mWidgetManager != null)
 			{
-				this.mWidgetManager.RehupMouse();
+				mWidgetManager.RehupMouse();
 			}
 		}
 
 		public virtual void SetColors(int[,] theColors, int theNumColors)
 		{
-			this.mColors.Clear();
+			mColors.Clear();
 			for (int i = 0; i < theNumColors; i++)
 			{
-				this.SetColor(i, new Color(theColors[i, 0], theColors[i, 1], theColors[i, 2]));
+				SetColor(i, new Color(theColors[i, 0], theColors[i, 1], theColors[i, 2]));
 			}
-			this.MarkDirty();
+			MarkDirty();
 		}
 
 		public virtual void SetColor(int theIdx, SexyColor theColor)
 		{
-			this.SetColor(theIdx, theColor.Color);
+			SetColor(theIdx, theColor.Color);
 		}
 
 		public virtual void SetColor(ButtonWidget.ColorType theIdx, Color theColor)
 		{
-			this.SetColor((int)theIdx, theColor);
+			SetColor((int)theIdx, theColor);
 		}
 
 		public virtual void SetColor(int theIdx, Color theColor)
 		{
-			if (theIdx >= this.mColors.Count)
+			if (theIdx >= mColors.Count)
 			{
-				this.mColors.Add(theColor);
+				mColors.Add(theColor);
 			}
 			else
 			{
-				this.mColors[theIdx] = theColor;
+				mColors[theIdx] = theColor;
 			}
-			this.MarkDirty();
+			MarkDirty();
 		}
 
 		public virtual Color GetColor(Dialog.DialogColour theIdx)
 		{
-			return this.GetColor((int)theIdx);
+			return GetColor((int)theIdx);
 		}
 
 		public virtual Color GetColor(int theIdx)
 		{
 			Color result = default(Color);
-			if (theIdx < this.mColors.Count)
+			if (theIdx < mColors.Count)
 			{
-				return this.mColors[theIdx];
+				return mColors[theIdx];
 			}
 			return result;
 		}
 
 		public virtual Color GetColor(Dialog.DialogColour theIdx, Color theDefaultColor)
 		{
-			return this.GetColor((int)theIdx, theDefaultColor);
+			return GetColor((int)theIdx, theDefaultColor);
 		}
 
 		public virtual Color GetColor(int theIdx, Color theDefaultColor)
 		{
-			if (theIdx < this.mColors.Count)
+			if (theIdx < mColors.Count)
 			{
-				return this.mColors[theIdx];
+				return mColors[theIdx];
 			}
 			return theDefaultColor;
 		}
 
 		public virtual void SetDisabled(bool isDisabled)
 		{
-			if (this.mDisabled == isDisabled)
+			if (mDisabled == isDisabled)
 			{
 				return;
 			}
-			this.mDisabled = isDisabled;
-			if (isDisabled && this.mWidgetManager != null)
+			mDisabled = isDisabled;
+			if (isDisabled && mWidgetManager != null)
 			{
-				this.mWidgetManager.DisableWidget(this);
+				mWidgetManager.DisableWidget(this);
 			}
-			this.MarkDirty();
-			if (!isDisabled && this.mWidgetManager != null && this.Contains(this.mWidgetManager.mLastMouseX, this.mWidgetManager.mLastMouseY))
+			MarkDirty();
+			if (!isDisabled && mWidgetManager != null && Contains(mWidgetManager.mLastMouseX, mWidgetManager.mLastMouseY))
 			{
-				this.mWidgetManager.MousePosition(this.mWidgetManager.mLastMouseX, this.mWidgetManager.mLastMouseY);
+				mWidgetManager.MousePosition(mWidgetManager.mLastMouseX, mWidgetManager.mLastMouseY);
 			}
 		}
 
@@ -175,35 +175,35 @@ namespace Sexy
 
 		public virtual void Resize(int theX, int theY, int theWidth, int theHeight)
 		{
-			if (this.mX == theX && this.mY == theY && this.mWidth == theWidth && this.mHeight == theHeight)
+			if (mX == theX && mY == theY && mWidth == theWidth && mHeight == theHeight)
 			{
 				return;
 			}
-			this.MarkDirtyFull();
-			this.mX = theX;
-			this.mY = theY;
-			this.mWidth = theWidth;
-			this.mHeight = theHeight;
-			this.MarkDirty();
-			if (this.mWidgetManager != null)
+			MarkDirtyFull();
+			mX = theX;
+			mY = theY;
+			mWidth = theWidth;
+			mHeight = theHeight;
+			MarkDirty();
+			if (mWidgetManager != null)
 			{
-				this.mWidgetManager.RehupMouse();
+				mWidgetManager.RehupMouse();
 			}
 		}
 
 		public virtual void Resize(TRect theRect)
 		{
-			this.Resize(theRect.mX, theRect.mY, theRect.mWidth, theRect.mHeight);
+			Resize(theRect.mX, theRect.mY, theRect.mWidth, theRect.mHeight);
 		}
 
 		public virtual void Move(int theNewX, int theNewY)
 		{
-			this.Resize(theNewX, theNewY, this.mWidth, this.mHeight);
+			Resize(theNewX, theNewY, mWidth, mHeight);
 		}
 
 		public virtual bool WantsFocus()
 		{
-			return this.mWantsFocus;
+			return mWantsFocus;
 		}
 
 		public override void Draw(Graphics g)
@@ -216,7 +216,7 @@ namespace Sexy
 
 		public virtual void DrawOverlay(Graphics g, int thePriority)
 		{
-			this.DrawOverlay(g);
+			DrawOverlay(g);
 		}
 
 		public override void Update()
@@ -230,12 +230,12 @@ namespace Sexy
 
 		public virtual void GotFocus()
 		{
-			this.mHasFocus = true;
+			mHasFocus = true;
 		}
 
 		public virtual void LostFocus()
 		{
-			this.mHasFocus = false;
+			mHasFocus = false;
 		}
 
 		public virtual void KeyChar(SexyChar theChar)
@@ -246,17 +246,17 @@ namespace Sexy
 		{
 			if (theKey == KeyCode.KEYCODE_TAB)
 			{
-				if (this.mWidgetManager.mKeyDown[16])
+				if (mWidgetManager.mKeyDown[16])
 				{
-					if (this.mTabPrev != null)
+					if (mTabPrev != null)
 					{
-						this.mWidgetManager.SetFocus(this.mTabPrev);
+						mWidgetManager.SetFocus(mTabPrev);
 						return;
 					}
 				}
-				else if (this.mTabNext != null)
+				else if (mTabNext != null)
 				{
-					this.mWidgetManager.SetFocus(this.mTabNext);
+					mWidgetManager.SetFocus(mTabNext);
 				}
 			}
 		}
@@ -281,15 +281,15 @@ namespace Sexy
 		{
 			if (theMagicCode == 3)
 			{
-				this.MouseDown(x, y, 2, 1);
+				MouseDown(x, y, 2, 1);
 				return;
 			}
 			if (theMagicCode >= 0)
 			{
-				this.MouseDown(x, y, 0, theMagicCode);
+				MouseDown(x, y, 0, theMagicCode);
 				return;
 			}
-			this.MouseDown(x, y, 1, -theMagicCode);
+			MouseDown(x, y, 1, -theMagicCode);
 		}
 
 		public virtual void MouseDown(int x, int y, int theBtnNum, int theClickCount)
@@ -300,15 +300,15 @@ namespace Sexy
 		{
 			if (theMagicCode == 3)
 			{
-				this.MouseUp(x, y, 2, 1);
+				MouseUp(x, y, 2, 1);
 				return;
 			}
 			if (theMagicCode >= 0)
 			{
-				this.MouseUp(x, y, 0, theMagicCode);
+				MouseUp(x, y, 0, theMagicCode);
 				return;
 			}
-			this.MouseUp(x, y, 1, -theMagicCode);
+			MouseUp(x, y, 1, -theMagicCode);
 		}
 
 		public virtual void MouseUp(int x, int y, int theBtnNum, int theClickCount)
@@ -327,21 +327,21 @@ namespace Sexy
 		{
 			int x = (int)touch.location.X;
 			int y = (int)touch.location.Y;
-			this.MouseDown(x, y, 1);
+			MouseDown(x, y, 1);
 		}
 
 		public virtual void TouchMoved(_Touch touch)
 		{
 			int x = (int)touch.location.X;
 			int y = (int)touch.location.Y;
-			this.MouseDrag(x, y);
+			MouseDrag(x, y);
 		}
 
 		public virtual void TouchEnded(_Touch touch)
 		{
 			int x = (int)touch.location.X;
 			int y = (int)touch.location.Y;
-			this.MouseUp(x, y, 1);
+			MouseUp(x, y, 1);
 		}
 
 		public virtual void TouchesCanceled()
@@ -357,51 +357,51 @@ namespace Sexy
 		{
 			Font font = g.GetFont();
 			int num = font.StringWidth(theLine);
-			int theX = (this.mWidth - num) / 2;
+			int theX = (mWidth - num) / 2;
 			g.DrawString(theLine, theX, anOffset);
 			return new TRect(theX, anOffset - font.GetAscent(), num, font.GetHeight());
 		}
 
 		public virtual TRect WriteCenteredLine(Graphics g, int anOffset, string theLine, Color theColor1, Color theColor2)
 		{
-			return this.WriteCenteredLine(g, anOffset, theLine, theColor1, theColor2, new TPoint(1, 2));
+			return WriteCenteredLine(g, anOffset, theLine, theColor1, theColor2, new TPoint(1, 2));
 		}
 
 		public virtual TRect WriteCenteredLine(Graphics g, int anOffset, string theLine, Color theColor1, Color theColor2, TPoint theShadowOffset)
 		{
 			Font font = g.GetFont();
 			int num = font.StringWidth(theLine);
-			int num2 = (this.mWidth - num) / 2;
+			int num2 = (mWidth - num) / 2;
 			g.SetColor(theColor2);
-			g.DrawString(theLine, (this.mWidth - num) / 2 + theShadowOffset.mX, anOffset + theShadowOffset.mY);
+			g.DrawString(theLine, (mWidth - num) / 2 + theShadowOffset.mX, anOffset + theShadowOffset.mY);
 			g.SetColor(theColor1);
-			g.DrawString(theLine, (this.mWidth - num) / 2, anOffset);
+			g.DrawString(theLine, (mWidth - num) / 2, anOffset);
 			return new TRect(num2 + Math.Min(0, theShadowOffset.mX), anOffset - font.GetAscent() + Math.Min(0, theShadowOffset.mY), num + Math.Abs(theShadowOffset.mX), font.GetHeight() + Math.Abs(theShadowOffset.mY));
 		}
 
 		public virtual int WriteString(Graphics g, string theString, int theX, int theY, int theWidth, int theJustification, bool drawString, int theOffset)
 		{
-			return this.WriteString(g, theString, theX, theY, theWidth, theJustification, drawString, theOffset, -1);
+			return WriteString(g, theString, theX, theY, theWidth, theJustification, drawString, theOffset, -1);
 		}
 
 		public virtual int WriteString(Graphics g, string theString, int theX, int theY, int theWidth, int theJustification, bool drawString)
 		{
-			return this.WriteString(g, theString, theX, theY, theWidth, theJustification, drawString, 0, -1);
+			return WriteString(g, theString, theX, theY, theWidth, theJustification, drawString, 0, -1);
 		}
 
 		public virtual int WriteString(Graphics g, string theString, int theX, int theY, int theWidth, int theJustification)
 		{
-			return this.WriteString(g, theString, theX, theY, theWidth, theJustification, true, 0, -1);
+			return WriteString(g, theString, theX, theY, theWidth, theJustification, true, 0, -1);
 		}
 
 		public virtual int WriteString(Graphics g, string theString, int theX, int theY, int theWidth)
 		{
-			return this.WriteString(g, theString, theX, theY, theWidth, -1, true, 0, -1);
+			return WriteString(g, theString, theX, theY, theWidth, -1, true, 0, -1);
 		}
 
 		public virtual int WriteString(Graphics g, string theString, int theX, int theY)
 		{
-			return this.WriteString(g, theString, theX, theY, -1, -1, true, 0, -1);
+			return WriteString(g, theString, theX, theY, -1, -1, true, 0, -1);
 		}
 
 		public virtual int WriteString(Graphics g, string theString, int theX, int theY, int theWidth, int theJustification, bool drawString, int theOffset, int theLength)
@@ -468,79 +468,79 @@ namespace Sexy
 
 		public virtual bool Contains(int theX, int theY)
 		{
-			return theX >= this.mX && theX < this.mX + this.mWidth && theY >= this.mY && theY < this.mY + this.mHeight;
+			return theX >= mX && theX < mX + mWidth && theY >= mY && theY < mY + mHeight;
 		}
 
 		public virtual TRect GetInsetRect()
 		{
-			return new TRect(this.mX + this.mMouseInsets.mLeft, this.mY + this.mMouseInsets.mTop, this.mWidth - this.mMouseInsets.mLeft - this.mMouseInsets.mRight, this.mHeight - this.mMouseInsets.mTop - this.mMouseInsets.mBottom);
+			return new TRect(mX + mMouseInsets.mLeft, mY + mMouseInsets.mTop, mWidth - mMouseInsets.mLeft - mMouseInsets.mRight, mHeight - mMouseInsets.mTop - mMouseInsets.mBottom);
 		}
 
 		public void DeferOverlay()
 		{
-			this.DeferOverlay(0);
+			DeferOverlay(0);
 		}
 
 		public void DeferOverlay(int thePriority)
 		{
-			this.mWidgetManager.DeferOverlay(this, thePriority);
+			mWidgetManager.DeferOverlay(this, thePriority);
 		}
 
 		public int Left()
 		{
-			return this.mX;
+			return mX;
 		}
 
 		public int Top()
 		{
-			return this.mY;
+			return mY;
 		}
 
 		public int Right()
 		{
-			return this.mX + this.mWidth;
+			return mX + mWidth;
 		}
 
 		public int Bottom()
 		{
-			return this.mY + this.mHeight;
+			return mY + mHeight;
 		}
 
 		public int Width()
 		{
-			return this.mWidth;
+			return mWidth;
 		}
 
 		public int Height()
 		{
-			return this.mHeight;
+			return mHeight;
 		}
 
 		public void Layout(int theLayoutFlags, Widget theRelativeWidget, int theLeftPad, int theTopPad, int theWidthPad)
 		{
-			this.Layout(theLayoutFlags, theRelativeWidget, theLeftPad, theTopPad, theWidthPad, 0);
+			Layout(theLayoutFlags, theRelativeWidget, theLeftPad, theTopPad, theWidthPad, 0);
 		}
 
 		public void Layout(int theLayoutFlags, Widget theRelativeWidget, int theLeftPad, int theTopPad)
 		{
-			this.Layout(theLayoutFlags, theRelativeWidget, theLeftPad, theTopPad, 0, 0);
+			Layout(theLayoutFlags, theRelativeWidget, theLeftPad, theTopPad, 0, 0);
 		}
 
 		public void Layout(int theLayoutFlags, Widget theRelativeWidget, int theLeftPad)
 		{
-			this.Layout(theLayoutFlags, theRelativeWidget, theLeftPad, 0, 0, 0);
+			Layout(theLayoutFlags, theRelativeWidget, theLeftPad, 0, 0, 0);
 		}
 
 		public void Layout(int theLayoutFlags, Widget theRelativeWidget)
 		{
-			this.Layout(theLayoutFlags, theRelativeWidget, 0, 0, 0, 0);
+			Layout(theLayoutFlags, theRelativeWidget, 0, 0, 0, 0);
 		}
 
 		public void Layout(int theLayoutFlags, Widget theRelativeWidget, int theLeftPad, int theTopPad, int theWidthPad, int theHeightPad)
 		{
 			int num = theRelativeWidget.Left();
 			int num2 = theRelativeWidget.Top();
-			if (theRelativeWidget == this.mParent)
+			if (theRelativeWidget == mParent)
 			{
 				num = 0;
 				num2 = 0;
@@ -549,10 +549,10 @@ namespace Sexy
 			int num4 = theRelativeWidget.Height();
 			int num5 = num + num3;
 			int num6 = num2 + num4;
-			int num7 = this.Left();
-			int num8 = this.Top();
-			int num9 = this.Width();
-			int num10 = this.Height();
+			int num7 = Left();
+			int num8 = Top();
+			int num9 = Width();
+			int num10 = Height();
 			for (int i = 1; i < 4194304; i <<= 1)
 			{
 				if ((theLayoutFlags & i) != 0)
@@ -694,7 +694,7 @@ namespace Sexy
 					}
 				}
 			}
-			this.Resize(num7, num8, num9, num10);
+			Resize(num7, num8, num9, num10);
 		}
 
 		public bool mVisible;

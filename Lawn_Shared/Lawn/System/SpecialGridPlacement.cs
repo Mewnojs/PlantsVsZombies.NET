@@ -6,10 +6,10 @@ namespace Lawn
 	{
 		public SpecialGridPlacement(int aPixelX, int aPixelY, int aGridX, int aGridY)
 		{
-			this.mPixelX = aPixelX;
-			this.mPixelY = aPixelY;
-			this.mGridX = aGridX;
-			this.mGridY = aGridY;
+			mPixelX = aPixelX;
+			mPixelY = aPixelY;
+			mGridX = aGridX;
+			mGridY = aGridY;
 		}
 
 		public int mPixelX;

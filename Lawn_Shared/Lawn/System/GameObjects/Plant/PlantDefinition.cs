@@ -8,15 +8,15 @@ namespace Lawn
 	{
 		public PlantDefinition(SeedType aSeedType, Image[] aPlantImage, ReanimationType aReanimationType, int aPacketIndex, int aSeedCost, int aRefreshTime, PlantSubClass aSubClass, int aLaunchRate, string aPlantName)
 		{
-			this.mSeedType = aSeedType;
-			this.mPlantImage = aPlantImage;
-			this.mReanimationType = aReanimationType;
-			this.mPacketIndex = aPacketIndex;
-			this.mSeedCost = aSeedCost;
-			this.mRefreshTime = aRefreshTime;
-			this.mSubClass = aSubClass;
-			this.mLaunchRate = aLaunchRate;
-			this.mPlantName = aPlantName;
+			mSeedType = aSeedType;
+			mPlantImage = aPlantImage;
+			mReanimationType = aReanimationType;
+			mPacketIndex = aPacketIndex;
+			mSeedCost = aSeedCost;
+			mRefreshTime = aRefreshTime;
+			mSubClass = aSubClass;
+			mLaunchRate = aLaunchRate;
+			mPlantName = aPlantName;
 		}
 
 		public SeedType mSeedType;

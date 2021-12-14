@@ -7,9 +7,9 @@ namespace Sexy
 	{
 		public T GetNew()
 		{
-			if (this.unusedInstances.Count != 0)
+			if (unusedInstances.Count != 0)
 			{
-				return this.unusedInstances.Pop();
+				return unusedInstances.Pop();
 			}
 			if (default(T) != null)
 			{
@@ -21,7 +21,7 @@ namespace Sexy
 		public void PushOnToReuseStack(T obj)
 		{
 			obj.Reset();
-			this.unusedInstances.Push(obj);
+			unusedInstances.Push(obj);
 		}
 
 		private Stack<T> unusedInstances = new Stack<T>();

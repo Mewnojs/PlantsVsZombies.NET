@@ -17,11 +17,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.gamerScore;
+				return gamerScore;
 			}
 			protected set
 			{
-				this.gamerScore = value;
+				gamerScore = value;
 			}
 		}
 
@@ -29,11 +29,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.name;
+				return name;
 			}
 			protected set
 			{
-				this.name = value;
+				name = value;
 			}
 		}
 
@@ -41,11 +41,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.description;
+				return description;
 			}
 			protected set
 			{
-				this.description = value;
+				description = value;
 			}
 		}
 
@@ -53,30 +53,30 @@ namespace Sexy
 		{
 			get
 			{
-				return this.achievementImage;
+				return achievementImage;
 			}
 			protected set
 			{
-				this.achievementImage = value;
+				achievementImage = value;
 			}
 		}
 
 		public AchievementItem(Achievement a)
 		{
-			this.Name = a.Name;
-			this.Description = a.Description;
-			this.GamerScore = a.GamerScore;
-			this.Key = a.Key;
-			this.IsEarned = a.IsEarned;
+			Name = a.Name;
+			Description = a.Description;
+			GamerScore = a.GamerScore;
+			Key = a.Key;
+			IsEarned = a.IsEarned;
 			using (Stream picture = a.GetPicture())
 			{
-				this.AchievementImage = new Image(Texture2D.FromStream(GlobalStaticVars.g.GraphicsDevice, picture));
+				AchievementImage = new Image(Texture2D.FromStream(GlobalStaticVars.g.GraphicsDevice, picture));
 			}
 		}
 
 		public void Dispose()
 		{
-			this.AchievementImage.Dispose();
+			AchievementImage.Dispose();
 		}
 
 		public static bool operator ==(AchievementItem a, AchievementItem b)
@@ -97,17 +97,17 @@ namespace Sexy
 				return false;
 			}
 			AchievementItem achievementItem = obj as AchievementItem;
-			return achievementItem.Name == this.Name;
+			return achievementItem.Name == Name;
 		}
 
 		public override int GetHashCode()
 		{
-			return this.name.GetHashCode();
+			return name.GetHashCode();
 		}
 
 		public override string ToString()
 		{
-			return this.name;
+			return name;
 		}
 
 		private int gamerScore;

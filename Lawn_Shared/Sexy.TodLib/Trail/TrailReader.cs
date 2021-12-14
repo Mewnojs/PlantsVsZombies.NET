@@ -12,11 +12,11 @@ namespace Sexy.TodLib
 			trailDefinition.mMaxPoints = input.ReadInt32();
 			trailDefinition.mMinPointDistance = (float)input.ReadDouble();
 			trailDefinition.mTrailFlags = input.ReadInt32();
-			this.ReadFloatParameterTrack(ref input, out trailDefinition.mTrailDuration);
-			this.ReadFloatParameterTrack(ref input, out trailDefinition.mWidthOverLength);
-			this.ReadFloatParameterTrack(ref input, out trailDefinition.mWidthOverTime);
-			this.ReadFloatParameterTrack(ref input, out trailDefinition.mAlphaOverLength);
-			this.ReadFloatParameterTrack(ref input, out trailDefinition.mAlphaOverTime);
+			ReadFloatParameterTrack(ref input, out trailDefinition.mTrailDuration);
+			ReadFloatParameterTrack(ref input, out trailDefinition.mWidthOverLength);
+			ReadFloatParameterTrack(ref input, out trailDefinition.mWidthOverTime);
+			ReadFloatParameterTrack(ref input, out trailDefinition.mAlphaOverLength);
+			ReadFloatParameterTrack(ref input, out trailDefinition.mAlphaOverTime);
 			return trailDefinition;
 		}
 

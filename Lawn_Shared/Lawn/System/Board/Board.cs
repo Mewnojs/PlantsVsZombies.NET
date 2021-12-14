@@ -10,65 +10,65 @@ namespace Lawn
 		public bool LoadFromFile(Sexy.Buffer b)
 		{
 			EffectSystem.gEffectSystem.LoadFromFile(b);
-			this.doAddGraveStones = false;
-			this.mLevel = b.ReadLong();
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_ADVENTURE && this.mLevel != this.mApp.mPlayerInfo.mLevel)
+			doAddGraveStones = false;
+			mLevel = b.ReadLong();
+			if (mApp.mGameMode == GameMode.GAMEMODE_ADVENTURE && mLevel != mApp.mPlayerInfo.mLevel)
 			{
 				throw new Exception("Board Level does not match player level.");
 			}
-			this.mApp.mGameScene = (GameScenes)b.ReadLong();
+			mApp.mGameScene = (GameScenes)b.ReadLong();
 			Board.mPeashootersPlanted = b.ReadLong();
-			this.mNomNomNomAchievementTracker = b.ReadBoolean();
-			this.mNoFungusAmongUsAchievementTracker = b.ReadBoolean();
-			this.mBackground = (BackgroundType)b.ReadLong();
-			this.mBoardFadeOutCounter = b.ReadLong();
-			this.mBoardRandSeed = b.ReadLong();
-			this.mBonusLawnMowersRemaining = b.ReadLong();
-			this.mCatapultPlantsUsed = b.ReadBoolean();
-			this.mChallenge.LoadFromFile(b);
-			this.mChocolateCollected = b.ReadLong();
-			this.mCobCannonCursorDelayCounter = b.ReadLong();
-			this.mCobCannonMouseX = b.ReadLong();
-			this.mCobCannonMouseY = b.ReadLong();
-			this.mCoinBankFadeCount = b.ReadLong();
+			mNomNomNomAchievementTracker = b.ReadBoolean();
+			mNoFungusAmongUsAchievementTracker = b.ReadBoolean();
+			mBackground = (BackgroundType)b.ReadLong();
+			mBoardFadeOutCounter = b.ReadLong();
+			mBoardRandSeed = b.ReadLong();
+			mBonusLawnMowersRemaining = b.ReadLong();
+			mCatapultPlantsUsed = b.ReadBoolean();
+			mChallenge.LoadFromFile(b);
+			mChocolateCollected = b.ReadLong();
+			mCobCannonCursorDelayCounter = b.ReadLong();
+			mCobCannonMouseX = b.ReadLong();
+			mCobCannonMouseY = b.ReadLong();
+			mCoinBankFadeCount = b.ReadLong();
 			int num = b.ReadLong();
-			this.mCoins.Clear();
+			mCoins.Clear();
 			for (int i = 0; i < num; i++)
 			{
 				Coin coin = new Coin();
 				coin.LoadFromFile(b);
-				this.mCoins.Add(coin);
+				mCoins.Add(coin);
 			}
-			this.mCoinsCollected = b.ReadLong();
-			this.mCollectedCoinStreak = b.ReadLong();
-			this.mCurrentWave = b.ReadLong();
-			this.mCursorObject.LoadFromFile(b);
-			this.mDaisyMode = b.ReadBoolean();
-			this.mDanceMode = b.ReadBoolean();
-			this.mDiamondsCollected = b.ReadLong();
-			this.mDoomsUsed = b.ReadLong();
-			this.mDroppedFirstCoin = b.ReadBoolean();
-			this.mEffectCounter = b.ReadLong();
-			this.mEnableGraveStones = b.ReadBoolean();
-			this.mFinalBossKilled = b.ReadBoolean();
-			this.mFinalWaveSoundCounter = b.ReadLong();
-			this.mFlagRaiseCounter = b.ReadLong();
-			this.mFogBlownCountDown = b.ReadLong();
-			this.mFogOffset = b.ReadFloat();
-			this.mFwooshCountDown = b.ReadLong();
-			this.mGameID = b.ReadLong();
-			this.mGargantuarsKillsByCornCob = b.ReadLong();
-			this.mGravesCleared = b.ReadLong();
-			this.mGridCelFog = b.ReadLong2DArray();
-			this.mGridCelLook = b.ReadLong2DArray();
-			this.mGridCelOffset = b.ReadLong3DArray();
+			mCoinsCollected = b.ReadLong();
+			mCollectedCoinStreak = b.ReadLong();
+			mCurrentWave = b.ReadLong();
+			mCursorObject.LoadFromFile(b);
+			mDaisyMode = b.ReadBoolean();
+			mDanceMode = b.ReadBoolean();
+			mDiamondsCollected = b.ReadLong();
+			mDoomsUsed = b.ReadLong();
+			mDroppedFirstCoin = b.ReadBoolean();
+			mEffectCounter = b.ReadLong();
+			mEnableGraveStones = b.ReadBoolean();
+			mFinalBossKilled = b.ReadBoolean();
+			mFinalWaveSoundCounter = b.ReadLong();
+			mFlagRaiseCounter = b.ReadLong();
+			mFogBlownCountDown = b.ReadLong();
+			mFogOffset = b.ReadFloat();
+			mFwooshCountDown = b.ReadLong();
+			mGameID = b.ReadLong();
+			mGargantuarsKillsByCornCob = b.ReadLong();
+			mGravesCleared = b.ReadLong();
+			mGridCelFog = b.ReadLong2DArray();
+			mGridCelLook = b.ReadLong2DArray();
+			mGridCelOffset = b.ReadLong3DArray();
 			int num2 = b.ReadLong();
-			this.mGridItems.Clear();
+			mGridItems.Clear();
 			for (int j = 0; j < num2; j++)
 			{
 				GridItem newGridItem = GridItem.GetNewGridItem();
 				newGridItem.LoadFromFile(b);
-				this.mGridItems.Add(newGridItem);
+				mGridItems.Add(newGridItem);
 			}
 			int num3 = b.ReadLong();
 			int num4 = b.ReadLong();
@@ -76,117 +76,117 @@ namespace Lawn
 			{
 				for (int l = 0; l < num4; l++)
 				{
-					this.mGridSquareType[k, l] = (GridSquareType)b.ReadLong();
+					mGridSquareType[k, l] = (GridSquareType)b.ReadLong();
 				}
 			}
-			this.mHelpDisplayed = b.ReadBooleanArray();
-			this.mHelpIndex = (AdviceType)b.ReadLong();
-			this.mHugeWaveCountDown = b.ReadLong();
-			this.mIceMinX = b.ReadLongArray();
-			this.mIceTimer = b.ReadLongArray();
-			this.mIceTrapCounter = b.ReadLong();
-			this.mIgnoreMouseUp = b.ReadBoolean();
-			this.mKilledYeti = b.ReadBoolean();
-			this.mLastBungeeWave = b.ReadLong();
-			this.mLastToolX = b.ReadLong();
-			this.mLastToolY = b.ReadLong();
-			this.mLastWMUpdateCount = b.ReadLong();
+			mHelpDisplayed = b.ReadBooleanArray();
+			mHelpIndex = (AdviceType)b.ReadLong();
+			mHugeWaveCountDown = b.ReadLong();
+			mIceMinX = b.ReadLongArray();
+			mIceTimer = b.ReadLongArray();
+			mIceTrapCounter = b.ReadLong();
+			mIgnoreMouseUp = b.ReadBoolean();
+			mKilledYeti = b.ReadBoolean();
+			mLastBungeeWave = b.ReadLong();
+			mLastToolX = b.ReadLong();
+			mLastToolY = b.ReadLong();
+			mLastWMUpdateCount = b.ReadLong();
 			int num5 = b.ReadLong();
-			this.mLawnMowers.Clear();
+			mLawnMowers.Clear();
 			for (int m = 0; m < num5; m++)
 			{
 				LawnMower newLawnMower = LawnMower.GetNewLawnMower();
 				newLawnMower.LoadFromFile(b);
-				this.mLawnMowers.Add(newLawnMower);
+				mLawnMowers.Add(newLawnMower);
 			}
-			this.mLevelAwardSpawned = b.ReadBoolean();
-			this.mLevelComplete = b.ReadBoolean();
-			this.mLevelFadeCount = b.ReadLong();
-			this.mLevelStr = b.ReadString();
-			this.mMainCounter = b.ReadLong();
-			this.mMaxSunPlants = b.ReadLong();
-			this.mMinFPS = b.ReadFloat();
-			this.mMushroomAndCoffeeBeansOnly = b.ReadBoolean();
-			this.mMushroomsUsed = b.ReadBoolean();
-			this.mNextSurvivalStageCounter = b.ReadLong();
-			this.mNumSunsFallen = b.ReadLong();
-			this.mNumWaves = b.ReadLong();
-			this.mNutsUsed = b.ReadBoolean();
-			this.mOutOfMoneyCounter = b.ReadLong();
-			this.mPeaShooterUsed = b.ReadBoolean();
-			this.mPinataMode = b.ReadBoolean();
-			this.mPlanternOrBloverUsed = b.ReadBoolean();
-			this.PickBackground();
+			mLevelAwardSpawned = b.ReadBoolean();
+			mLevelComplete = b.ReadBoolean();
+			mLevelFadeCount = b.ReadLong();
+			mLevelStr = b.ReadString();
+			mMainCounter = b.ReadLong();
+			mMaxSunPlants = b.ReadLong();
+			mMinFPS = b.ReadFloat();
+			mMushroomAndCoffeeBeansOnly = b.ReadBoolean();
+			mMushroomsUsed = b.ReadBoolean();
+			mNextSurvivalStageCounter = b.ReadLong();
+			mNumSunsFallen = b.ReadLong();
+			mNumWaves = b.ReadLong();
+			mNutsUsed = b.ReadBoolean();
+			mOutOfMoneyCounter = b.ReadLong();
+			mPeaShooterUsed = b.ReadBoolean();
+			mPinataMode = b.ReadBoolean();
+			mPlanternOrBloverUsed = b.ReadBoolean();
+			PickBackground();
 			int num6 = b.ReadLong();
-			this.mPlants.Clear();
+			mPlants.Clear();
 			for (int n = 0; n < num6; n++)
 			{
 				Plant newPlant = Plant.GetNewPlant();
 				newPlant.LoadFromFile(b);
-				if (this.mApp.IsIZombieLevel())
+				if (mApp.IsIZombieLevel())
 				{
-					this.mChallenge.IZombieSetupPlant(newPlant);
+					mChallenge.IZombieSetupPlant(newPlant);
 				}
-				this.mPlants.Add(newPlant);
+				mPlants.Add(newPlant);
 			}
-			this.mPlantsEaten = b.ReadLong();
-			this.mPlantsShoveled = b.ReadLong();
-			this.mPlayTimeActiveLevel = b.ReadLong();
-			this.mPlayTimeInactiveLevel = b.ReadLong();
-			this.mPottedPlantsCollected = b.ReadLong();
-			this.mProgressMeterWidth = b.ReadLong();
+			mPlantsEaten = b.ReadLong();
+			mPlantsShoveled = b.ReadLong();
+			mPlayTimeActiveLevel = b.ReadLong();
+			mPlayTimeInactiveLevel = b.ReadLong();
+			mPottedPlantsCollected = b.ReadLong();
+			mProgressMeterWidth = b.ReadLong();
 			int num7 = b.ReadLong();
-			this.mProjectiles.Clear();
+			mProjectiles.Clear();
 			for (int num8 = 0; num8 < num7; num8++)
 			{
 				Projectile newProjectile = Projectile.GetNewProjectile();
 				newProjectile.LoadFromFile(b);
-				this.mProjectiles.Add(newProjectile);
+				mProjectiles.Add(newProjectile);
 			}
-			this.mRiseFromGraveCounter = b.ReadLong();
+			mRiseFromGraveCounter = b.ReadLong();
 			int num9 = b.ReadLong();
 			for (int num10 = 0; num10 < num9; num10++)
 			{
-				if (this.mRowPickingArray[num10] == null)
+				if (mRowPickingArray[num10] == null)
 				{
-					this.mRowPickingArray[num10] = new TodSmoothArray();
+					mRowPickingArray[num10] = new TodSmoothArray();
 				}
-				this.mRowPickingArray[num10].LoadFromFile(b);
+				mRowPickingArray[num10].LoadFromFile(b);
 			}
-			this.mScoreNextMowerCounter = b.ReadLong();
-			this.mShowShovel = b.ReadBoolean();
-			this.mSeedBank = new SeedBank();
-			this.mSeedBank.LoadFromFile(b);
-			this.mSodPosition = b.ReadLong();
-			this.mSpecialGraveStoneX = b.ReadLong();
-			this.mSpecialGraveStoneY = b.ReadLong();
-			this.mSunCountDown = b.ReadLong();
-			this.mSunMoney = b.ReadLong();
-			this.mSuperMowerMode = b.ReadBoolean();
-			this.mTimeStopCounter = b.ReadLong();
-			this.mTotalSpawnedWaves = b.ReadLong();
-			this.mTriggeredLawnMowers = b.ReadLong();
-			this.mTutorialState = (TutorialState)b.ReadLong();
-			this.mTutorialTimer = b.ReadLong();
-			this.mWaveRowGotLawnMowered = b.ReadLongArray();
-			this.mZombieAllowed = b.ReadBooleanArray();
-			this.mZombieCountDown = b.ReadLong();
-			this.mZombieCountDownStart = b.ReadLong();
-			this.mZombieHealthToNextWave = b.ReadLong();
-			this.mZombieHealthWaveStart = b.ReadLong();
+			mScoreNextMowerCounter = b.ReadLong();
+			mShowShovel = b.ReadBoolean();
+			mSeedBank = new SeedBank();
+			mSeedBank.LoadFromFile(b);
+			mSodPosition = b.ReadLong();
+			mSpecialGraveStoneX = b.ReadLong();
+			mSpecialGraveStoneY = b.ReadLong();
+			mSunCountDown = b.ReadLong();
+			mSunMoney = b.ReadLong();
+			mSuperMowerMode = b.ReadBoolean();
+			mTimeStopCounter = b.ReadLong();
+			mTotalSpawnedWaves = b.ReadLong();
+			mTriggeredLawnMowers = b.ReadLong();
+			mTutorialState = (TutorialState)b.ReadLong();
+			mTutorialTimer = b.ReadLong();
+			mWaveRowGotLawnMowered = b.ReadLongArray();
+			mZombieAllowed = b.ReadBooleanArray();
+			mZombieCountDown = b.ReadLong();
+			mZombieCountDownStart = b.ReadLong();
+			mZombieHealthToNextWave = b.ReadLong();
+			mZombieHealthWaveStart = b.ReadLong();
 			int num11 = b.ReadLong();
-			this.mZombies.Clear();
-			this.mZombiesRow1.Clear();
-			this.mZombiesRow2.Clear();
-			this.mZombiesRow3.Clear();
-			this.mZombiesRow4.Clear();
-			this.mZombiesRow5.Clear();
-			this.mZombiesRow6.Clear();
+			mZombies.Clear();
+			mZombiesRow1.Clear();
+			mZombiesRow2.Clear();
+			mZombiesRow3.Clear();
+			mZombiesRow4.Clear();
+			mZombiesRow5.Clear();
+			mZombiesRow6.Clear();
 			for (int num12 = 0; num12 < num11; num12++)
 			{
 				Zombie newZombie = Zombie.GetNewZombie();
 				newZombie.LoadFromFile(b);
-				this.AddToZombieList(newZombie);
+				AddToZombieList(newZombie);
 			}
 			num3 = b.ReadLong();
 			num4 = b.ReadLong();
@@ -194,39 +194,39 @@ namespace Lawn
 			{
 				for (int num14 = 0; num14 < num4; num14++)
 				{
-					this.mZombiesInWave[num13, num14] = (ZombieType)b.ReadLong();
+					mZombiesInWave[num13, num14] = (ZombieType)b.ReadLong();
 				}
 			}
 			if (b.ReadLong() != 777)
 			{
 				throw new Exception("Check number mismatch while loading.");
 			}
-			foreach (Zombie zombie in this.mZombies)
+			foreach (Zombie zombie in mZombies)
 			{
 				zombie.LoadingComplete();
 			}
-			foreach (Plant plant in this.mPlants)
+			foreach (Plant plant in mPlants)
 			{
 				plant.LoadingComplete();
 			}
-			foreach (Projectile projectile in this.mProjectiles)
+			foreach (Projectile projectile in mProjectiles)
 			{
 				projectile.LoadingComplete();
 			}
-			foreach (LawnMower lawnMower in this.mLawnMowers)
+			foreach (LawnMower lawnMower in mLawnMowers)
 			{
 				lawnMower.LoadingComplete();
 			}
-			foreach (Coin coin2 in this.mCoins)
+			foreach (Coin coin2 in mCoins)
 			{
 				coin2.LoadingComplete();
 			}
-			foreach (GridItem gridItem in this.mGridItems)
+			foreach (GridItem gridItem in mGridItems)
 			{
 				gridItem.LoadingComplete();
 			}
-			this.doAddGraveStones = true;
-			this.mApp.mSoundManager.StopAllSounds();
+			doAddGraveStones = true;
+			mApp.mSoundManager.StopAllSounds();
 			return true;
 		}
 
@@ -248,262 +248,262 @@ namespace Lawn
 
 		public Board() : this(GlobalStaticVars.gLawnApp)
 		{
-			this.SetFullRect();
+			SetFullRect();
 		}
 
 		private void SetFullRect()
 		{
-			this.FullRect = new TRect(-Constants.Board_Offset_AspectRatio_Correction, this.mY, this.mWidth, this.mHeight);
+			FullRect = new TRect(-Constants.Board_Offset_AspectRatio_Correction, mY, mWidth, mHeight);
 		}
 
 		public override void Move(int theNewX, int theNewY)
 		{
 			base.Move(theNewX, theNewY);
-			this.SetFullRect();
+			SetFullRect();
 		}
 
 		public override void Resize(int theX, int theY, int theWidth, int theHeight)
 		{
 			base.Resize(theX, theY, theWidth, theHeight);
-			this.SetFullRect();
+			SetFullRect();
 		}
 
 		public override void Resize(TRect theRect)
 		{
 			base.Resize(theRect);
-			this.SetFullRect();
+			SetFullRect();
 		}
 
 		protected override void Reset()
 		{
 			base.Reset();
-			this.mX = Constants.Board_Offset_AspectRatio_Correction;
-			this.SetFullRect();
+			mX = Constants.Board_Offset_AspectRatio_Correction;
+			SetFullRect();
 		}
 
 		public Board(LawnApp theApp)
 		{
-			this.SetupRenderItems();
-			this.mApp = theApp;
-			this.mApp.mBoard = this;
-			this.mZombies = new List<Zombie>(512);
-			this.mPlants = new List<Plant>(512);
-			this.mProjectiles = new List<Projectile>(512);
-			this.mCoins = new List<Coin>(512);
-			this.mLawnMowers = new List<LawnMower>(32);
-			this.mGridItems = new List<GridItem>(128);
-			this.mApp.mEffectSystem.EffectSystemFreeAll();
-			this.mBoardRandSeed = this.mApp.mAppRandSeed;
-			if (this.mApp.IsSurvivalMode())
+			SetupRenderItems();
+			mApp = theApp;
+			mApp.mBoard = this;
+			mZombies = new List<Zombie>(512);
+			mPlants = new List<Plant>(512);
+			mProjectiles = new List<Projectile>(512);
+			mCoins = new List<Coin>(512);
+			mLawnMowers = new List<LawnMower>(32);
+			mGridItems = new List<GridItem>(128);
+			mApp.mEffectSystem.EffectSystemFreeAll();
+			mBoardRandSeed = mApp.mAppRandSeed;
+			if (mApp.IsSurvivalMode())
 			{
-				this.mBoardRandSeed = RandomNumbers.NextNumber();
+				mBoardRandSeed = RandomNumbers.NextNumber();
 			}
-			this.mCoinBankFadeCount = 0;
-			this.mLevelFadeCount = 0;
-			this.mLevel = 0;
-			this.mCursorObject = new CursorObject();
-			this.mCursorPreview = new CursorPreview();
-			this.mSeedBank = new SeedBank();
-			this.mCutScene = new CutScene();
-			this.mSpecialGraveStoneX = -1;
-			this.mSpecialGraveStoneY = -1;
+			mCoinBankFadeCount = 0;
+			mLevelFadeCount = 0;
+			mLevel = 0;
+			mCursorObject = new CursorObject();
+			mCursorPreview = new CursorPreview();
+			mSeedBank = new SeedBank();
+			mCutScene = new CutScene();
+			mSpecialGraveStoneX = -1;
+			mSpecialGraveStoneY = -1;
 			for (int i = 0; i < Constants.GRIDSIZEX; i++)
 			{
 				for (int j = 0; j < Constants.MAX_GRIDSIZEY; j++)
 				{
-					this.mGridSquareType[i, j] = GridSquareType.GRIDSQUARE_GRASS;
-					this.mGridCelLook[i, j] = RandomNumbers.NextNumber(20);
-					this.mGridCelOffset[i, j, 0] = RandomNumbers.NextNumber(10) - 5;
-					this.mGridCelOffset[i, j, 1] = RandomNumbers.NextNumber(10) - 5;
+					mGridSquareType[i, j] = GridSquareType.GRIDSQUARE_GRASS;
+					mGridCelLook[i, j] = RandomNumbers.NextNumber(20);
+					mGridCelOffset[i, j, 0] = RandomNumbers.NextNumber(10) - 5;
+					mGridCelOffset[i, j, 1] = RandomNumbers.NextNumber(10) - 5;
 				}
 				for (int k = 0; k < 7; k++)
 				{
-					this.mGridCelFog[i, k] = 0;
+					mGridCelFog[i, k] = 0;
 				}
 			}
-			this.mSunCountDown = 0;
-			this.mShakeCounter = 0;
-			this.mShakeAmountX = 0;
-			this.mShakeAmountY = 0;
-			this.mPaused = false;
-			this.mLevelAwardSpawned = false;
-			this.mFlagRaiseCounter = 0;
-			this.mIceTrapCounter = 0;
-			this.mLevelComplete = false;
-			this.mBoardFadeOutCounter = -1;
-			this.mNextSurvivalStageCounter = 0;
-			this.mScoreNextMowerCounter = 0;
-			this.mProgressMeterWidth = 0;
-			this.mPoolSparklyParticleID = null;
-			this.mFogBlownCountDown = 0;
-			this.mFogOffset = 0f;
-			this.mFwooshCountDown = 0;
-			this.mTimeStopCounter = 0;
-			this.mCobCannonCursorDelayCounter = 0;
-			this.mCobCannonMouseX = 0;
-			this.mCobCannonMouseY = 0;
-			this.mDroppedFirstCoin = false;
-			this.mBonusLawnMowersRemaining = 0;
-			this.mEnableGraveStones = false;
-			this.mHelpIndex = AdviceType.ADVICE_NONE;
-			this.mEffectCounter = 0;
-			this.mDrawCount = 0;
-			this.mRiseFromGraveCounter = 0;
-			this.mFinalWaveSoundCounter = 0;
-			this.mKilledYeti = false;
-			this.mTriggeredLawnMowers = 0;
-			this.mPlayTimeActiveLevel = 0;
-			this.mPlayTimeInactiveLevel = 0;
-			this.mMaxSunPlants = 0;
-			this.mStartDrawTime = 0;
-			this.mIntervalDrawTime = 0;
-			this.mIntervalDrawCountStart = 0;
-			this.mPreloadTime = 0;
-			this.mGameID = DateTime.Now.Millisecond;
-			this.mGravesCleared = 0;
-			this.mPlantsEaten = 0;
-			this.mPlantsShoveled = 0;
-			this.mCoinsCollected = 0;
-			this.mDiamondsCollected = 0;
-			this.mPottedPlantsCollected = 0;
-			this.mChocolateCollected = 0;
-			this.mCollectedCoinStreak = 0;
-			this.mGargantuarsKillsByCornCob = 0;
-			this.mMushroomsUsed = false;
-			this.mDoomsUsed = 0;
-			this.mPlanternOrBloverUsed = false;
-			this.mNutsUsed = false;
-			this.mLastToolX = (this.mLastToolY = -1);
-			this.mMinFPS = 1000f;
+			mSunCountDown = 0;
+			mShakeCounter = 0;
+			mShakeAmountX = 0;
+			mShakeAmountY = 0;
+			mPaused = false;
+			mLevelAwardSpawned = false;
+			mFlagRaiseCounter = 0;
+			mIceTrapCounter = 0;
+			mLevelComplete = false;
+			mBoardFadeOutCounter = -1;
+			mNextSurvivalStageCounter = 0;
+			mScoreNextMowerCounter = 0;
+			mProgressMeterWidth = 0;
+			mPoolSparklyParticleID = null;
+			mFogBlownCountDown = 0;
+			mFogOffset = 0f;
+			mFwooshCountDown = 0;
+			mTimeStopCounter = 0;
+			mCobCannonCursorDelayCounter = 0;
+			mCobCannonMouseX = 0;
+			mCobCannonMouseY = 0;
+			mDroppedFirstCoin = false;
+			mBonusLawnMowersRemaining = 0;
+			mEnableGraveStones = false;
+			mHelpIndex = AdviceType.ADVICE_NONE;
+			mEffectCounter = 0;
+			mDrawCount = 0;
+			mRiseFromGraveCounter = 0;
+			mFinalWaveSoundCounter = 0;
+			mKilledYeti = false;
+			mTriggeredLawnMowers = 0;
+			mPlayTimeActiveLevel = 0;
+			mPlayTimeInactiveLevel = 0;
+			mMaxSunPlants = 0;
+			mStartDrawTime = 0;
+			mIntervalDrawTime = 0;
+			mIntervalDrawCountStart = 0;
+			mPreloadTime = 0;
+			mGameID = DateTime.Now.Millisecond;
+			mGravesCleared = 0;
+			mPlantsEaten = 0;
+			mPlantsShoveled = 0;
+			mCoinsCollected = 0;
+			mDiamondsCollected = 0;
+			mPottedPlantsCollected = 0;
+			mChocolateCollected = 0;
+			mCollectedCoinStreak = 0;
+			mGargantuarsKillsByCornCob = 0;
+			mMushroomsUsed = false;
+			mDoomsUsed = 0;
+			mPlanternOrBloverUsed = false;
+			mNutsUsed = false;
+			mLastToolX = (mLastToolY = -1);
+			mMinFPS = 1000f;
 			for (int l = 0; l < Constants.MAX_GRIDSIZEY; l++)
 			{
 				for (int m = 0; m < 12; m++)
 				{
-					this.mFwooshID[l, m] = null;
+					mFwooshID[l, m] = null;
 				}
 			}
-			this.mPrevMouseX = -1;
-			this.mPrevMouseY = -1;
-			this.mFinalBossKilled = false;
-			this.mMustacheMode = this.mApp.mMustacheMode;
-			this.mSuperMowerMode = this.mApp.mSuperMowerMode;
-			this.mFutureMode = this.mApp.mFutureMode;
-			this.mPinataMode = this.mApp.mPinataMode;
-			this.mDanceMode = this.mApp.mDanceMode;
-			this.mDaisyMode = this.mApp.mDaisyMode;
-			this.mSukhbirMode = this.mApp.mSukhbirMode;
-			this.mShowShovel = false;
-			this.mAdvice = new MessageWidget(this.mApp);
-			this.mBackground = BackgroundType.BACKGROUND_1_DAY;
-			this.mMainCounter = 0;
-			this.mTutorialState = TutorialState.TUTORIAL_OFF;
-			this.mTutorialTimer = -1;
-			this.mTutorialParticleID = null;
-			this.mChallenge = new Challenge();
-			this.mClip = false;
-			this.mDebugTextMode = DebugTextMode.DEBUG_TEXT_NONE;
-			this.mMenuButton = new GameButton(0, this);
-			this.mMenuButton.mDrawStoneButton = true;
-			this.mStoreButton = null;
-			this.mIgnoreMouseUp = false;
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || this.mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
+			mPrevMouseX = -1;
+			mPrevMouseY = -1;
+			mFinalBossKilled = false;
+			mMustacheMode = mApp.mMustacheMode;
+			mSuperMowerMode = mApp.mSuperMowerMode;
+			mFutureMode = mApp.mFutureMode;
+			mPinataMode = mApp.mPinataMode;
+			mDanceMode = mApp.mDanceMode;
+			mDaisyMode = mApp.mDaisyMode;
+			mSukhbirMode = mApp.mSukhbirMode;
+			mShowShovel = false;
+			mAdvice = new MessageWidget(mApp);
+			mBackground = BackgroundType.BACKGROUND_1_DAY;
+			mMainCounter = 0;
+			mTutorialState = TutorialState.TUTORIAL_OFF;
+			mTutorialTimer = -1;
+			mTutorialParticleID = null;
+			mChallenge = new Challenge();
+			mClip = false;
+			mDebugTextMode = DebugTextMode.DEBUG_TEXT_NONE;
+			mMenuButton = new GameButton(0, this);
+			mMenuButton.mDrawStoneButton = true;
+			mStoreButton = null;
+			mIgnoreMouseUp = false;
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
 			{
-				this.mMenuButton.SetLabel("[MAIN_MENU_BUTTON]");
-				this.mMenuButton.Resize(Constants.UIMenuButtonPosition.X, Constants.UIMenuButtonPosition.Y, Constants.UIMenuButtonWidth, AtlasResources.IMAGE_BUTTON_LEFT.mHeight);
-				this.mStoreButton = new GameButton(1, this);
-				this.mStoreButton.mButtonImage = AtlasResources.IMAGE_ZENSHOPBUTTON;
-				this.mStoreButton.mOverImage = AtlasResources.IMAGE_ZENSHOPBUTTON_HIGHLIGHT;
-				this.mStoreButton.mDownImage = AtlasResources.IMAGE_ZENSHOPBUTTON_HIGHLIGHT;
-				this.mStoreButton.mParentWidget = this;
-				this.mStoreButton.Resize(Constants.ZenGardenStoreButtonX, Constants.ZenGardenStoreButtonY, AtlasResources.IMAGE_ZENSHOPBUTTON.mWidth, AtlasResources.IMAGE_ZENSHOPBUTTON.mHeight);
+				mMenuButton.SetLabel("[MAIN_MENU_BUTTON]");
+				mMenuButton.Resize(Constants.UIMenuButtonPosition.X, Constants.UIMenuButtonPosition.Y, Constants.UIMenuButtonWidth, AtlasResources.IMAGE_BUTTON_LEFT.mHeight);
+				mStoreButton = new GameButton(1, this);
+				mStoreButton.mButtonImage = AtlasResources.IMAGE_ZENSHOPBUTTON;
+				mStoreButton.mOverImage = AtlasResources.IMAGE_ZENSHOPBUTTON_HIGHLIGHT;
+				mStoreButton.mDownImage = AtlasResources.IMAGE_ZENSHOPBUTTON_HIGHLIGHT;
+				mStoreButton.mParentWidget = this;
+				mStoreButton.Resize(Constants.ZenGardenStoreButtonX, Constants.ZenGardenStoreButtonY, AtlasResources.IMAGE_ZENSHOPBUTTON.mWidth, AtlasResources.IMAGE_ZENSHOPBUTTON.mHeight);
 			}
 			else
 			{
-				this.mMenuButton.SetLabel("[MENU_BUTTON]");
-				this.mMenuButton.Resize(Constants.UIMenuButtonPosition.X, Constants.UIMenuButtonPosition.Y, Constants.UIMenuButtonWidth, AtlasResources.IMAGE_BUTTON_LEFT.mHeight);
+				mMenuButton.SetLabel("[MENU_BUTTON]");
+				mMenuButton.Resize(Constants.UIMenuButtonPosition.X, Constants.UIMenuButtonPosition.Y, Constants.UIMenuButtonWidth, AtlasResources.IMAGE_BUTTON_LEFT.mHeight);
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
 			{
-				this.mStoreButton = new GameButton(1, this);
-				this.mStoreButton.mDrawStoneButton = true;
-				this.mStoreButton.mBtnNoDraw = true;
-				this.mStoreButton.mDisabled = true;
+				mStoreButton = new GameButton(1, this);
+				mStoreButton.mDrawStoneButton = true;
+				mStoreButton.mBtnNoDraw = true;
+				mStoreButton.mDisabled = true;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
+			if (mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
 			{
-				this.mMenuButton.SetLabel("[MAIN_MENU_BUTTON]");
-				this.mMenuButton.Resize(Constants.UIMenuButtonPosition.X, 2, Constants.UIMenuButtonWidth, AtlasResources.IMAGE_BUTTON_LEFT.mHeight);
-				this.mStoreButton = new GameButton(1, this);
-				this.mStoreButton.mDrawStoneButton = true;
-				this.mStoreButton.mBtnNoDraw = true;
-				this.mStoreButton.Resize(this.mStoreButton.mX, this.mStoreButton.mY, this.mStoreButton.mWidth + 200, this.mStoreButton.mHeight);
-				this.mStoreButton.SetLabel("[GET_FULL_VERSION_BUTTON]");
+				mMenuButton.SetLabel("[MAIN_MENU_BUTTON]");
+				mMenuButton.Resize(Constants.UIMenuButtonPosition.X, 2, Constants.UIMenuButtonWidth, AtlasResources.IMAGE_BUTTON_LEFT.mHeight);
+				mStoreButton = new GameButton(1, this);
+				mStoreButton.mDrawStoneButton = true;
+				mStoreButton.mBtnNoDraw = true;
+				mStoreButton.Resize(mStoreButton.mX, mStoreButton.mY, mStoreButton.mWidth + 200, mStoreButton.mHeight);
+				mStoreButton.SetLabel("[GET_FULL_VERSION_BUTTON]");
 			}
 		}
 
 		public override void Dispose()
 		{
-			this.mAdvice.Dispose();
-			this.mMenuButton.Dispose();
-			if (this.mStoreButton != null)
+			mAdvice.Dispose();
+			mMenuButton.Dispose();
+			if (mStoreButton != null)
 			{
-				this.mStoreButton.Dispose();
+				mStoreButton.Dispose();
 			}
-			this.mZombiesRow1.Clear();
-			this.mZombiesRow2.Clear();
-			this.mZombiesRow3.Clear();
-			this.mZombiesRow4.Clear();
-			this.mZombiesRow5.Clear();
-			this.mZombiesRow6.Clear();
-			for (int i = 0; i < this.mZombies.Count; i++)
+			mZombiesRow1.Clear();
+			mZombiesRow2.Clear();
+			mZombiesRow3.Clear();
+			mZombiesRow4.Clear();
+			mZombiesRow5.Clear();
+			mZombiesRow6.Clear();
+			for (int i = 0; i < mZombies.Count; i++)
 			{
-				this.mZombies[i].PrepareForReuse();
+				mZombies[i].PrepareForReuse();
 			}
-			this.mZombies.Clear();
-			for (int j = 0; j < this.mPlants.Count; j++)
+			mZombies.Clear();
+			for (int j = 0; j < mPlants.Count; j++)
 			{
-				this.mPlants[j].PrepareForReuse();
+				mPlants[j].PrepareForReuse();
 			}
-			this.mPlants.Clear();
-			for (int k = 0; k < this.mProjectiles.Count; k++)
+			mPlants.Clear();
+			for (int k = 0; k < mProjectiles.Count; k++)
 			{
-				this.mProjectiles[k].PrepareForReuse();
+				mProjectiles[k].PrepareForReuse();
 			}
-			this.mProjectiles.Clear();
-			this.mCoins.Clear();
-			for (int l = 0; l < this.mLawnMowers.Count; l++)
+			mProjectiles.Clear();
+			mCoins.Clear();
+			for (int l = 0; l < mLawnMowers.Count; l++)
 			{
-				this.mLawnMowers[l].PrepareForReuse();
+				mLawnMowers[l].PrepareForReuse();
 			}
-			this.mLawnMowers.Clear();
-			for (int m = 0; m < this.mGridItems.Count; m++)
+			mLawnMowers.Clear();
+			for (int m = 0; m < mGridItems.Count; m++)
 			{
-				this.mGridItems[m].PrepareForReuse();
+				mGridItems[m].PrepareForReuse();
 			}
-			this.mGridItems.Clear();
-			for (int n = 0; n < this.aRenderList.Length; n++)
+			mGridItems.Clear();
+			for (int n = 0; n < aRenderList.Length; n++)
 			{
-				this.aRenderList[n].PrepareForReuse();
+				aRenderList[n].PrepareForReuse();
 			}
-			this.mCutScene.Dispose();
-			this.mApp.DelayLoadBackgroundResource(string.Empty);
-			this.RemoveAllWidgets();
+			mCutScene.Dispose();
+			mApp.DelayLoadBackgroundResource(string.Empty);
+			RemoveAllWidgets();
 		}
 
 		public void DisposeBoard()
 		{
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 			{
-				this.mApp.mZenGarden.LeaveGarden();
+				mApp.mZenGarden.LeaveGarden();
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
+			if (mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
 			{
-				this.mChallenge.TreeOfWisdomLeave();
+				mChallenge.TreeOfWisdomLeave();
 			}
-			this.mApp.mSoundSystem.StopFoley(FoleyType.FOLEY_RAIN);
-			this.mApp.mZenGarden.mBoard = null;
-			this.mApp.CrazyDaveDie();
-			this.mApp.mEffectSystem.EffectSystemFreeAll();
+			mApp.mSoundSystem.StopFoley(FoleyType.FOLEY_RAIN);
+			mApp.mZenGarden.mBoard = null;
+			mApp.CrazyDaveDie();
+			mApp.mEffectSystem.EffectSystemFreeAll();
 		}
 
 		public static void BoardInitForPlayer()
@@ -515,7 +515,7 @@ namespace Lawn
 		{
 			int num = 0;
 			Coin coin = null;
-			while (this.IterateCoins(ref coin))
+			while (IterateCoins(ref coin))
 			{
 				if (coin.mIsBeingCollected && coin.IsSun())
 				{
@@ -528,19 +528,19 @@ namespace Lawn
 		public void DrawGameObjects(Graphics g)
 		{
 			int num = 0;
-			bool flag = this.mChallenge.IsStormyNightPitchBlack();
+			bool flag = mChallenge.IsStormyNightPitchBlack();
 			if (!flag)
 			{
-				int count = this.mPlants.Count;
+				int count = mPlants.Count;
 				for (int i = 0; i < count; i++)
 				{
-					Plant plant = this.mPlants[i];
-					if (!plant.mDead && plant.mOnBungeeState == PlantOnBungeeState.PLANT_NOT_ON_BUNGEE && this.mX + plant.mX >= -32)
+					Plant plant = mPlants[i];
+					if (!plant.mDead && plant.mOnBungeeState == PlantOnBungeeState.PLANT_NOT_ON_BUNGEE && mX + plant.mX >= -32)
 					{
-						GlobalMembersBoard.AddGameObjectRenderItemPlant(this.aRenderList, ref num, RenderObjectType.RENDER_ITEM_PLANT, plant);
-						if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && plant.mPottedPlantIndex != -1)
+						GlobalMembersBoard.AddGameObjectRenderItemPlant(aRenderList, ref num, RenderObjectType.RENDER_ITEM_PLANT, plant);
+						if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && plant.mPottedPlantIndex != -1)
 						{
-							RenderItem renderItem = this.aRenderList[num];
+							RenderItem renderItem = aRenderList[num];
 							renderItem.mRenderObjectType = RenderObjectType.RENDER_ITEM_PLANT_OVERLAY;
 							renderItem.mZPos = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_PARTICLE, 0, plant.mY);
 							renderItem.mGameObject = plant;
@@ -550,7 +550,7 @@ namespace Lawn
 						}
 						if ((plant.mSeedType == SeedType.SEED_MAGNETSHROOM || plant.mSeedType == SeedType.SEED_GOLD_MAGNET) && plant.DrawMagnetItemsOnTop())
 						{
-							RenderItem renderItem2 = this.aRenderList[num];
+							RenderItem renderItem2 = aRenderList[num];
 							renderItem2.mRenderObjectType = RenderObjectType.RENDER_ITEM_PLANT_MAGNET_ITEMS;
 							renderItem2.mZPos = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_TOP, 0, -1);
 							renderItem2.mGameObject = plant;
@@ -562,28 +562,28 @@ namespace Lawn
 				}
 			}
 			Coin theGameObject = null;
-			while (this.IterateCoins(ref theGameObject))
+			while (IterateCoins(ref theGameObject))
 			{
-				GlobalMembersBoard.AddGameObjectRenderItemCoin(this.aRenderList, ref num, RenderObjectType.RENDER_ITEM_COIN, theGameObject);
+				GlobalMembersBoard.AddGameObjectRenderItemCoin(aRenderList, ref num, RenderObjectType.RENDER_ITEM_COIN, theGameObject);
 			}
 			if (!flag)
 			{
-				int count2 = this.mZombies.Count;
+				int count2 = mZombies.Count;
 				for (int j = 0; j < count2; j++)
 				{
-					Zombie zombie = this.mZombies[j];
+					Zombie zombie = mZombies[j];
 					if (!zombie.mDead)
 					{
 						if (zombie.mZombieType == ZombieType.ZOMBIE_BOSS)
 						{
-							this.AddBossRenderItem(this.aRenderList, ref num, zombie);
+							AddBossRenderItem(aRenderList, ref num, zombie);
 						}
 						else
 						{
-							GlobalMembersBoard.AddGameObjectRenderItemZombie(this.aRenderList, ref num, RenderObjectType.RENDER_ITEM_ZOMBIE, zombie);
+							GlobalMembersBoard.AddGameObjectRenderItemZombie(aRenderList, ref num, RenderObjectType.RENDER_ITEM_ZOMBIE, zombie);
 							if (zombie.HasShadow() && !GlobalStaticVars.gLowFramerate)
 							{
-								RenderItem renderItem3 = this.aRenderList[num];
+								RenderItem renderItem3 = aRenderList[num];
 								renderItem3.mRenderObjectType = RenderObjectType.RENDER_ITEM_ZOMBIE_SHADOW;
 								renderItem3.mZPos = 200000 + 10000 * zombie.mRow + 3;
 								renderItem3.mGameObject = zombie;
@@ -593,7 +593,7 @@ namespace Lawn
 							}
 							if (zombie.mZombieType == ZombieType.ZOMBIE_BUNGEE)
 							{
-								RenderItem renderItem4 = this.aRenderList[num];
+								RenderItem renderItem4 = aRenderList[num];
 								renderItem4.mRenderObjectType = RenderObjectType.RENDER_ITEM_ZOMBIE_BUNGEE_TARGET;
 								renderItem4.mZPos = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_PROJECTILE, zombie.mRow, 1);
 								renderItem4.mGameObject = zombie;
@@ -606,12 +606,12 @@ namespace Lawn
 				}
 				int num2 = -1;
 				Projectile projectile = null;
-				while (this.IterateProjectiles(ref projectile, ref num2))
+				while (IterateProjectiles(ref projectile, ref num2))
 				{
-					GlobalMembersBoard.AddGameObjectRenderItemProjectile(this.aRenderList, ref num, RenderObjectType.RENDER_ITEM_PROJECTILE, projectile);
+					GlobalMembersBoard.AddGameObjectRenderItemProjectile(aRenderList, ref num, RenderObjectType.RENDER_ITEM_PROJECTILE, projectile);
 					if (!GlobalStaticVars.gLowFramerate)
 					{
-						RenderItem renderItem5 = this.aRenderList[num];
+						RenderItem renderItem5 = aRenderList[num];
 						renderItem5.mRenderObjectType = RenderObjectType.RENDER_ITEM_PROJECTILE_SHADOW;
 						renderItem5.mZPos = 305000 + 10000 * projectile.mRow + 3;
 						renderItem5.mGameObject = projectile;
@@ -621,9 +621,9 @@ namespace Lawn
 					}
 				}
 				LawnMower lawnMower = null;
-				while (this.IterateLawnMowers(ref lawnMower))
+				while (IterateLawnMowers(ref lawnMower))
 				{
-					RenderItem renderItem6 = this.aRenderList[num];
+					RenderItem renderItem6 = aRenderList[num];
 					renderItem6.mRenderObjectType = RenderObjectType.RENDER_ITEM_MOWER;
 					renderItem6.mZPos = lawnMower.mRenderOrder;
 					renderItem6.mMower = lawnMower;
@@ -632,11 +632,11 @@ namespace Lawn
 				}
 				int num3 = -1;
 				TodParticleSystem todParticleSystem = null;
-				while (this.IterateParticles(ref todParticleSystem, ref num3))
+				while (IterateParticles(ref todParticleSystem, ref num3))
 				{
 					if (!todParticleSystem.mIsAttachment)
 					{
-						RenderItem renderItem7 = this.aRenderList[num];
+						RenderItem renderItem7 = aRenderList[num];
 						renderItem7.mRenderObjectType = RenderObjectType.RENDER_ITEM_PARTICLE;
 						renderItem7.mZPos = todParticleSystem.mRenderOrder;
 						renderItem7.mParticleSytem = todParticleSystem;
@@ -646,11 +646,11 @@ namespace Lawn
 				}
 				int num4 = -1;
 				Reanimation reanimation = null;
-				while (this.IterateReanimations(ref reanimation, ref num4))
+				while (IterateReanimations(ref reanimation, ref num4))
 				{
 					if (!reanimation.mIsAttachment)
 					{
-						RenderItem renderItem8 = this.aRenderList[num];
+						RenderItem renderItem8 = aRenderList[num];
 						renderItem8.mRenderObjectType = RenderObjectType.RENDER_ITEM_REANIMATION;
 						renderItem8.mZPos = reanimation.mRenderOrder;
 						renderItem8.mReanimation = reanimation;
@@ -660,17 +660,17 @@ namespace Lawn
 				}
 				int num5 = -1;
 				GridItem gridItem = null;
-				while (this.IterateGridItems(ref gridItem, ref num5))
+				while (IterateGridItems(ref gridItem, ref num5))
 				{
-					RenderItem renderItem9 = this.aRenderList[num];
+					RenderItem renderItem9 = aRenderList[num];
 					renderItem9.mRenderObjectType = RenderObjectType.RENDER_ITEM_GRID_ITEM;
 					renderItem9.mZPos = gridItem.mRenderOrder;
 					renderItem9.mGridItem = gridItem;
 					renderItem9.id = (long)num;
 					num++;
-					if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && gridItem.mGridItemType == GridItemType.GRIDITEM_STINKY)
+					if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && gridItem.mGridItemType == GridItemType.GRIDITEM_STINKY)
 					{
-						RenderItem renderItem10 = this.aRenderList[num];
+						RenderItem renderItem10 = aRenderList[num];
 						renderItem10.mRenderObjectType = RenderObjectType.RENDER_ITEM_GRID_ITEM_OVERLAY;
 						renderItem10.mZPos = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_PARTICLE, 0, (int)gridItem.mPosY - 30);
 						renderItem10.mGridItem = gridItem;
@@ -680,22 +680,22 @@ namespace Lawn
 			}
 			for (int k = 0; k < Constants.MAX_GRIDSIZEY; k++)
 			{
-				if (this.mIceTimer[k] > 0)
+				if (mIceTimer[k] > 0)
 				{
-					RenderItem renderItem11 = this.aRenderList[num];
+					RenderItem renderItem11 = aRenderList[num];
 					renderItem11.mRenderObjectType = RenderObjectType.RENDER_ITEM_ICE;
 					renderItem11.mBoardGridY = k;
-					renderItem11.mZPos = this.GetIceZPos(k);
+					renderItem11.mZPos = GetIceZPos(k);
 					renderItem11.id = (long)num;
 					num++;
 				}
 			}
 			int thePosZ;
-			if (this.mTimeStopCounter > 0)
+			if (mTimeStopCounter > 0)
 			{
 				thePosZ = 800000;
 			}
-			else if (this.mApp.mGameScene == GameScenes.SCENE_PLAYING || this.mApp.mGameScene == GameScenes.SCENE_ZOMBIES_WON || this.mCutScene.IsAfterSeedChooser() || this.mCutScene.IsInShovelTutorial() || this.mHelpIndex == AdviceType.ADVICE_CLICK_TO_CONTINUE)
+			else if (mApp.mGameScene == GameScenes.SCENE_PLAYING || mApp.mGameScene == GameScenes.SCENE_ZOMBIES_WON || mCutScene.IsAfterSeedChooser() || mCutScene.IsInShovelTutorial() || mHelpIndex == AdviceType.ADVICE_CLICK_TO_CONTINUE)
 			{
 				thePosZ = 100001;
 			}
@@ -703,60 +703,60 @@ namespace Lawn
 			{
 				thePosZ = 800000;
 			}
-			GlobalMembersBoard.AddUIRenderItem(this.aRenderList, ref num, RenderObjectType.RENDER_ITEM_BACKDROP, 100000);
-			GlobalMembersBoard.AddUIRenderItem(this.aRenderList, ref num, RenderObjectType.RENDER_ITEM_BOTTOM_UI, thePosZ);
-			GlobalMembersBoard.AddUIRenderItem(this.aRenderList, ref num, RenderObjectType.RENDER_ITEM_COIN_BANK, 600000);
-			GlobalMembersBoard.AddUIRenderItem(this.aRenderList, ref num, RenderObjectType.RENDER_ITEM_TOP_UI, 700000);
-			GlobalMembersBoard.AddUIRenderItem(this.aRenderList, ref num, RenderObjectType.RENDER_ITEM_SCREEN_FADE, 900000);
-			if (this.mApp.mGameScene == GameScenes.SCENE_ZOMBIES_WON)
+			GlobalMembersBoard.AddUIRenderItem(aRenderList, ref num, RenderObjectType.RENDER_ITEM_BACKDROP, 100000);
+			GlobalMembersBoard.AddUIRenderItem(aRenderList, ref num, RenderObjectType.RENDER_ITEM_BOTTOM_UI, thePosZ);
+			GlobalMembersBoard.AddUIRenderItem(aRenderList, ref num, RenderObjectType.RENDER_ITEM_COIN_BANK, 600000);
+			GlobalMembersBoard.AddUIRenderItem(aRenderList, ref num, RenderObjectType.RENDER_ITEM_TOP_UI, 700000);
+			GlobalMembersBoard.AddUIRenderItem(aRenderList, ref num, RenderObjectType.RENDER_ITEM_SCREEN_FADE, 900000);
+			if (mApp.mGameScene == GameScenes.SCENE_ZOMBIES_WON)
 			{
 				int thePosZ2 = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_GRAVE_STONE, 3, 2);
-				GlobalMembersBoard.AddUIRenderItem(this.aRenderList, ref num, RenderObjectType.RENDER_ITEM_DOOR_MASK, thePosZ2);
+				GlobalMembersBoard.AddUIRenderItem(aRenderList, ref num, RenderObjectType.RENDER_ITEM_DOOR_MASK, thePosZ2);
 			}
-			if (this.StageHasFog())
+			if (StageHasFog())
 			{
-				GlobalMembersBoard.AddUIRenderItem(this.aRenderList, ref num, RenderObjectType.RENDER_ITEM_FOG, 500000);
+				GlobalMembersBoard.AddUIRenderItem(aRenderList, ref num, RenderObjectType.RENDER_ITEM_FOG, 500000);
 			}
-			if (this.mApp.IsStormyNightLevel() || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RAINING_SEEDS)
+			if (mApp.IsStormyNightLevel() || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RAINING_SEEDS)
 			{
-				GlobalMembersBoard.AddUIRenderItem(this.aRenderList, ref num, RenderObjectType.RENDER_ITEM_STORM, 500003);
+				GlobalMembersBoard.AddUIRenderItem(aRenderList, ref num, RenderObjectType.RENDER_ITEM_STORM, 500003);
 			}
-			GlobalMembersBoard.AddGameObjectRenderItemCursorPreview(this.aRenderList, ref num, RenderObjectType.RENDER_ITEM_CURSOR_PREVIEW, this.mCursorPreview);
+			GlobalMembersBoard.AddGameObjectRenderItemCursorPreview(aRenderList, ref num, RenderObjectType.RENDER_ITEM_CURSOR_PREVIEW, mCursorPreview);
 			if (Board.needToSortRenderList)
 			{
-				Array.Sort<RenderItem>(this.aRenderList, 0, num, null);
+				Array.Sort<RenderItem>(aRenderList, 0, num, null);
 			}
-			this.SortZombieRowLists();
+			SortZombieRowLists();
 			for (int l = 0; l < num; l++)
 			{
-				RenderItem renderItem12 = this.aRenderList[l];
+				RenderItem renderItem12 = aRenderList[l];
 				if (renderItem12.mRenderObjectType != (RenderObjectType)0)
 				{
-					RenderObjectType mRenderObjectType = renderItem12.mRenderObjectType;
-					if (mRenderObjectType != RenderObjectType.RENDER_ITEM_ICE)
+					RenderObjectType aRenderObjectType = renderItem12.mRenderObjectType;
+					if (aRenderObjectType != RenderObjectType.RENDER_ITEM_ICE)
 					{
-						if (mRenderObjectType != RenderObjectType.RENDER_ITEM_BACKDROP)
+						if (aRenderObjectType != RenderObjectType.RENDER_ITEM_BACKDROP)
 						{
-							if (mRenderObjectType == RenderObjectType.RENDER_ITEM_GRID_ITEM && renderItem12.mGridItem.mGridItemType == GridItemType.GRIDITEM_GRAVESTONE)
+							if (aRenderObjectType == RenderObjectType.RENDER_ITEM_GRID_ITEM && renderItem12.mGridItem.mGridItemType == GridItemType.GRIDITEM_GRAVESTONE)
 							{
 								renderItem12.mGridItem.DrawGridItem(g);
 							}
 						}
 						else if (!flag)
 						{
-							this.DrawBackdrop(g);
-							this.DrawCursorOnBackground(g);
+							DrawBackdrop(g);
+							DrawCursorOnBackground(g);
 						}
 					}
 					else
 					{
-						this.DrawIce(g, renderItem12.mBoardGridY);
+						DrawIce(g, renderItem12.mBoardGridY);
 					}
 				}
 			}
 			for (int m = 0; m < num; m++)
 			{
-				RenderItem renderItem13 = this.aRenderList[m];
+				RenderItem renderItem13 = aRenderList[m];
 				if (renderItem13.mRenderObjectType != (RenderObjectType)0)
 				{
 					switch (renderItem13.mRenderObjectType)
@@ -802,7 +802,7 @@ namespace Lawn
 					case RenderObjectType.RENDER_ITEM_PLANT_OVERLAY:
 						if (renderItem13.mPlant.BeginDraw(g))
 						{
-							this.mApp.mZenGarden.DrawPlantOverlay(g, renderItem13.mPlant);
+							mApp.mZenGarden.DrawPlantOverlay(g, renderItem13.mPlant);
 							renderItem13.mPlant.EndDraw(g);
 						}
 						break;
@@ -827,27 +827,27 @@ namespace Lawn
 						renderItem13.mReanimation.Draw(g);
 						break;
 					case RenderObjectType.RENDER_ITEM_TOP_UI:
-						this.DrawUITop(g);
+						DrawUITop(g);
 						if (flag)
 						{
-							this.DrawCursorOnBackground(g);
+							DrawCursorOnBackground(g);
 						}
-						this.DrawCursorOverlay(g);
+						DrawCursorOverlay(g);
 						break;
 					case RenderObjectType.RENDER_ITEM_FOG:
-						this.DrawFog(g);
+						DrawFog(g);
 						break;
 					case RenderObjectType.RENDER_ITEM_STORM:
-						this.mChallenge.DrawWeather(g);
+						mChallenge.DrawWeather(g);
 						break;
 					case RenderObjectType.RENDER_ITEM_BOTTOM_UI:
-						this.DrawUIBottom(g);
+						DrawUIBottom(g);
 						break;
 					case RenderObjectType.RENDER_ITEM_DOOR_MASK:
-						this.DrawHouseDoorTop(g);
+						DrawHouseDoorTop(g);
 						break;
 					case RenderObjectType.RENDER_ITEM_COIN_BANK:
-						this.DrawUICoinBank(g);
+						DrawUICoinBank(g);
 						break;
 					case RenderObjectType.RENDER_ITEM_PROJECTILE_SHADOW:
 						if (renderItem13.mProjectile.BeginDraw(g))
@@ -860,11 +860,11 @@ namespace Lawn
 						renderItem13.mMower.Draw(g);
 						break;
 					case RenderObjectType.RENDER_ITEM_SCREEN_FADE:
-						this.DrawFadeOut(g);
+						DrawFadeOut(g);
 						break;
 					case RenderObjectType.RENDER_ITEM_BOSS_PART:
 					{
-						Zombie bossZombie = this.GetBossZombie();
+						Zombie bossZombie = GetBossZombie();
 						if (bossZombie != null && bossZombie.BeginDraw(g))
 						{
 							bossZombie.DrawBossPart(g, renderItem13.mBossPart);
@@ -888,63 +888,63 @@ namespace Lawn
 
 		public void ClearCursor()
 		{
-			if (this.mAdvice.mDuration > 0 && (this.mHelpIndex == AdviceType.ADVICE_PLANT_GRAVEBUSTERS_ON_GRAVES || this.mHelpIndex == AdviceType.ADVICE_PLANT_LILYPAD_ON_WATER || this.mHelpIndex == AdviceType.ADVICE_PLANT_TANGLEKELP_ON_WATER || this.mHelpIndex == AdviceType.ADVICE_PLANT_SEASHROOM_ON_WATER || this.mHelpIndex == AdviceType.ADVICE_PLANT_POTATO_MINE_ON_LILY || this.mHelpIndex == AdviceType.ADVICE_PLANT_WRONG_ART_TYPE || this.mHelpIndex == AdviceType.ADVICE_PLANT_NEED_POT || this.mHelpIndex == AdviceType.ADVICE_PLANT_NOT_PASSED_LINE || this.mHelpIndex == AdviceType.ADVICE_PLANT_ONLY_ON_REPEATERS || this.mHelpIndex == AdviceType.ADVICE_PLANT_ONLY_ON_MELONPULT || this.mHelpIndex == AdviceType.ADVICE_PLANT_ONLY_ON_SUNFLOWER || this.mHelpIndex == AdviceType.ADVICE_PLANT_ONLY_ON_KERNELPULT))
+			if (mAdvice.mDuration > 0 && (mHelpIndex == AdviceType.ADVICE_PLANT_GRAVEBUSTERS_ON_GRAVES || mHelpIndex == AdviceType.ADVICE_PLANT_LILYPAD_ON_WATER || mHelpIndex == AdviceType.ADVICE_PLANT_TANGLEKELP_ON_WATER || mHelpIndex == AdviceType.ADVICE_PLANT_SEASHROOM_ON_WATER || mHelpIndex == AdviceType.ADVICE_PLANT_POTATO_MINE_ON_LILY || mHelpIndex == AdviceType.ADVICE_PLANT_WRONG_ART_TYPE || mHelpIndex == AdviceType.ADVICE_PLANT_NEED_POT || mHelpIndex == AdviceType.ADVICE_PLANT_NOT_PASSED_LINE || mHelpIndex == AdviceType.ADVICE_PLANT_ONLY_ON_REPEATERS || mHelpIndex == AdviceType.ADVICE_PLANT_ONLY_ON_MELONPULT || mHelpIndex == AdviceType.ADVICE_PLANT_ONLY_ON_SUNFLOWER || mHelpIndex == AdviceType.ADVICE_PLANT_ONLY_ON_KERNELPULT))
 			{
-				this.ClearAdvice(this.mHelpIndex);
+				ClearAdvice(mHelpIndex);
 			}
-			if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_USABLE_COIN && this.mCursorObject.mCoinID != null)
+			if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_USABLE_COIN && mCursorObject.mCoinID != null)
 			{
-				this.mCursorObject.mCoinID.mIsBeingCollected = false;
+				mCursorObject.mCoinID.mIsBeingCollected = false;
 			}
-			this.mCursorObject.mType = SeedType.SEED_NONE;
-			this.mCursorObject.mCursorType = CursorType.CURSOR_TYPE_NORMAL;
-			this.mCursorObject.mSeedBankIndex = -1;
-			this.mCursorObject.mCoinID = null;
-			this.mCursorObject.mDuplicatorPlantID = null;
-			this.mCursorObject.mCobCannonPlantID = null;
-			this.mCursorObject.mGlovePlantID = null;
-			this.mChallenge.ClearCursor();
-			if (this.mTutorialState == TutorialState.TUTORIAL_LEVEL_1_PLANT_PEASHOOTER)
+			mCursorObject.mType = SeedType.SEED_NONE;
+			mCursorObject.mCursorType = CursorType.CURSOR_TYPE_NORMAL;
+			mCursorObject.mSeedBankIndex = -1;
+			mCursorObject.mCoinID = null;
+			mCursorObject.mDuplicatorPlantID = null;
+			mCursorObject.mCobCannonPlantID = null;
+			mCursorObject.mGlovePlantID = null;
+			mChallenge.ClearCursor();
+			if (mTutorialState == TutorialState.TUTORIAL_LEVEL_1_PLANT_PEASHOOTER)
 			{
-				this.SetTutorialState(TutorialState.TUTORIAL_LEVEL_1_PICK_UP_PEASHOOTER);
+				SetTutorialState(TutorialState.TUTORIAL_LEVEL_1_PICK_UP_PEASHOOTER);
 				return;
 			}
-			if (this.mTutorialState == TutorialState.TUTORIAL_LEVEL_2_PLANT_SUNFLOWER || this.mTutorialState == TutorialState.TUTORIAL_LEVEL_2_REFRESH_SUNFLOWER)
+			if (mTutorialState == TutorialState.TUTORIAL_LEVEL_2_PLANT_SUNFLOWER || mTutorialState == TutorialState.TUTORIAL_LEVEL_2_REFRESH_SUNFLOWER)
 			{
-				if (!this.mSeedBank.mSeedPackets[1].CanPickUp())
+				if (!mSeedBank.mSeedPackets[1].CanPickUp())
 				{
-					this.SetTutorialState(TutorialState.TUTORIAL_LEVEL_2_REFRESH_SUNFLOWER);
+					SetTutorialState(TutorialState.TUTORIAL_LEVEL_2_REFRESH_SUNFLOWER);
 					return;
 				}
-				this.SetTutorialState(TutorialState.TUTORIAL_LEVEL_2_PICK_UP_SUNFLOWER);
+				SetTutorialState(TutorialState.TUTORIAL_LEVEL_2_PICK_UP_SUNFLOWER);
 				return;
 			}
 			else
 			{
-				if (this.mTutorialState != TutorialState.TUTORIAL_MORESUN_PLANT_SUNFLOWER && this.mTutorialState != TutorialState.TUTORIAL_MORESUN_REFRESH_SUNFLOWER)
+				if (mTutorialState != TutorialState.TUTORIAL_MORESUN_PLANT_SUNFLOWER && mTutorialState != TutorialState.TUTORIAL_MORESUN_REFRESH_SUNFLOWER)
 				{
-					if (this.mTutorialState == TutorialState.TUTORIAL_SHOVEL_DIG)
+					if (mTutorialState == TutorialState.TUTORIAL_SHOVEL_DIG)
 					{
-						this.SetTutorialState(TutorialState.TUTORIAL_SHOVEL_PICKUP);
+						SetTutorialState(TutorialState.TUTORIAL_SHOVEL_PICKUP);
 					}
 					return;
 				}
-				if (!this.mSeedBank.mSeedPackets[1].CanPickUp())
+				if (!mSeedBank.mSeedPackets[1].CanPickUp())
 				{
-					this.SetTutorialState(TutorialState.TUTORIAL_MORESUN_REFRESH_SUNFLOWER);
+					SetTutorialState(TutorialState.TUTORIAL_MORESUN_REFRESH_SUNFLOWER);
 					return;
 				}
-				this.SetTutorialState(TutorialState.TUTORIAL_MORESUN_PICK_UP_SUNFLOWER);
+				SetTutorialState(TutorialState.TUTORIAL_MORESUN_PICK_UP_SUNFLOWER);
 				return;
 			}
 		}
 
 		public bool AreEnemyZombiesOnScreen()
 		{
-			int count = this.mZombies.Count;
+			int count = mZombies.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Zombie zombie = this.mZombies[i];
+				Zombie zombie = mZombies[i];
 				if (!zombie.mDead && zombie.mHasHead && !zombie.IsDeadOrDying() && !zombie.mMindControlled)
 				{
 					return true;
@@ -956,7 +956,7 @@ namespace Lawn
 		public LawnMower FindLawnMowerInRow(int theRow)
 		{
 			LawnMower lawnMower = null;
-			while (this.IterateLawnMowers(ref lawnMower))
+			while (IterateLawnMowers(ref lawnMower))
 			{
 				if (lawnMower.mRow == theRow)
 				{
@@ -977,309 +977,309 @@ namespace Lawn
 			{
 				return false;
 			}
-			this.LoadBackgroundImages();
-			this.ResetFPSStats();
-			this.UpdateLayers();
+			LoadBackgroundImages();
+			ResetFPSStats();
+			UpdateLayers();
 			return true;
 		}
 
 		public void InitLevel()
 		{
-			this.mMainCounter = 0;
-			this.mEnableGraveStones = false;
-			this.mSodPosition = 0;
-			this.mPrevBoardResult = this.mApp.mBoardResult;
-			if (this.mApp.mGameMode != GameMode.GAMEMODE_TREE_OF_WISDOM && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+			mMainCounter = 0;
+			mEnableGraveStones = false;
+			mSodPosition = 0;
+			mPrevBoardResult = mApp.mBoardResult;
+			if (mApp.mGameMode != GameMode.GAMEMODE_TREE_OF_WISDOM && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 			{
-				this.mApp.mMusic.StopAllMusic();
+				mApp.mMusic.StopAllMusic();
 			}
-			this.mNomNomNomAchievementTracker = true;
-			this.mNoFungusAmongUsAchievementTracker = true;
-			this.mPeaShooterUsed = false;
-			this.mCatapultPlantsUsed = false;
-			this.mMushroomAndCoffeeBeansOnly = true;
-			if (this.mApp.IsAdventureMode())
+			mNomNomNomAchievementTracker = true;
+			mNoFungusAmongUsAchievementTracker = true;
+			mPeaShooterUsed = false;
+			mCatapultPlantsUsed = false;
+			mMushroomAndCoffeeBeansOnly = true;
+			if (mApp.IsAdventureMode())
 			{
-				this.mLevel = this.mApp.mPlayerInfo.GetLevel();
+				mLevel = mApp.mPlayerInfo.GetLevel();
 			}
-			else if (this.mApp.IsQuickPlayMode())
+			else if (mApp.IsQuickPlayMode())
 			{
-				this.mLevel = this.mApp.mGameMode - GameMode.GAMEMODE_QUICKPLAY_1 + 1;
-			}
-			else
-			{
-				this.mLevel = 0;
-			}
-			this.mLevelStr = TodStringFile.TodStringTranslate("[LEVEL]") + " " + this.mApp.GetStageString(this.mLevel);
-			this.PickBackground();
-			this.mCurrentWave = 0;
-			this.InitZombieWaves();
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST || this.mApp.IsScaryPotterLevel() || this.mApp.IsWhackAZombieLevel())
-			{
-				this.mSunMoney = 0;
-			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
-			{
-				this.mSunMoney = 5000;
-			}
-			else if (this.mApp.IsIZombieLevel())
-			{
-				this.mSunMoney = 150;
-			}
-			else if (this.mApp.IsFirstTimeAdventureMode() && this.mLevel == 1)
-			{
-				this.mSunMoney = 150;
+				mLevel = mApp.mGameMode - GameMode.GAMEMODE_QUICKPLAY_1 + 1;
 			}
 			else
 			{
-				this.mSunMoney = 50;
+				mLevel = 0;
 			}
-			for (int i = 0; i < this.mRowPickingArray.Length; i++)
+			mLevelStr = TodStringFile.TodStringTranslate("[LEVEL]") + " " + mApp.GetStageString(mLevel);
+			PickBackground();
+			mCurrentWave = 0;
+			InitZombieWaves();
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST || mApp.IsScaryPotterLevel() || mApp.IsWhackAZombieLevel())
 			{
-				this.mRowPickingArray[i] = new TodSmoothArray();
+				mSunMoney = 0;
+			}
+			else if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
+			{
+				mSunMoney = 5000;
+			}
+			else if (mApp.IsIZombieLevel())
+			{
+				mSunMoney = 150;
+			}
+			else if (mApp.IsFirstTimeAdventureMode() && mLevel == 1)
+			{
+				mSunMoney = 150;
+			}
+			else
+			{
+				mSunMoney = 50;
+			}
+			for (int i = 0; i < mRowPickingArray.Length; i++)
+			{
+				mRowPickingArray[i] = new TodSmoothArray();
 			}
 			for (int j = 0; j < Constants.MAX_GRIDSIZEY; j++)
 			{
-				this.mWaveRowGotLawnMowered[j] = -100;
-				this.mIceMinX[j] = Constants.Board_Ice_Start;
-				this.mIceTimer[j] = 0;
-				this.mIceParticleID[j] = ParticleSystemID.PARTICLESYSTEMID_NULL;
-				this.mRowPickingArray[j].mItem = j;
+				mWaveRowGotLawnMowered[j] = -100;
+				mIceMinX[j] = Constants.Board_Ice_Start;
+				mIceTimer[j] = 0;
+				mIceParticleID[j] = ParticleSystemID.PARTICLESYSTEMID_NULL;
+				mRowPickingArray[j].mItem = j;
 			}
-			this.mNumSunsFallen = 0;
-			if (!this.StageIsNight())
+			mNumSunsFallen = 0;
+			if (!StageIsNight())
 			{
-				this.mSunCountDown = TodCommon.RandRangeInt(425, 700);
+				mSunCountDown = TodCommon.RandRangeInt(425, 700);
 			}
 			for (int k = 0; k < 67; k++)
 			{
-				this.mHelpDisplayed[k] = false;
+				mHelpDisplayed[k] = false;
 			}
-			this.mSeedBank.mNumPackets = this.GetNumSeedsInBank();
-			this.mSeedBank.UpdateHeight();
+			mSeedBank.mNumPackets = GetNumSeedsInBank();
+			mSeedBank.UpdateHeight();
 			for (int l = 0; l < 9; l++)
 			{
-				SeedPacket seedPacket = this.mSeedBank.mSeedPackets[l];
+				SeedPacket seedPacket = mSeedBank.mSeedPackets[l];
 				seedPacket.mIndex = l;
-				seedPacket.mY = this.GetSeedPacketPositionY(l);
+				seedPacket.mY = GetSeedPacketPositionY(l);
 				seedPacket.mX = 0;
 				seedPacket.mPacketType = SeedType.SEED_NONE;
 			}
-			if (this.mApp.IsSlotMachineLevel())
+			if (mApp.IsSlotMachineLevel())
 			{
-				Debug.ASSERT(this.mSeedBank.mNumPackets == 3);
-				this.mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_SNOWPEA, SeedType.SEED_NONE);
+				Debug.ASSERT(mSeedBank.mNumPackets == 3);
+				mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_SUNFLOWER, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_SNOWPEA, SeedType.SEED_NONE);
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ICE)
+			else if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ICE)
 			{
-				Debug.ASSERT(this.mSeedBank.mNumPackets == 6);
-				this.mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_CHERRYBOMB, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_WALLNUT, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[3].SetPacketType(SeedType.SEED_REPEATER, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[4].SetPacketType(SeedType.SEED_SNOWPEA, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[5].SetPacketType(SeedType.SEED_CHOMPER, SeedType.SEED_NONE);
+				Debug.ASSERT(mSeedBank.mNumPackets == 6);
+				mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_CHERRYBOMB, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_WALLNUT, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[3].SetPacketType(SeedType.SEED_REPEATER, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[4].SetPacketType(SeedType.SEED_SNOWPEA, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[5].SetPacketType(SeedType.SEED_CHOMPER, SeedType.SEED_NONE);
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_1)
+			else if (mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_1)
 			{
-				Debug.ASSERT(this.mSeedBank.mNumPackets == 3);
-				this.mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_ZOMBIE_NORMAL, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_ZOMBIE_PAIL, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ZOMBIE_FOOTBALL, SeedType.SEED_NONE);
+				Debug.ASSERT(mSeedBank.mNumPackets == 3);
+				mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_ZOMBIE_NORMAL, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_ZOMBIE_PAIL, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ZOMBIE_FOOTBALL, SeedType.SEED_NONE);
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_2)
+			else if (mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_2)
 			{
-				Debug.ASSERT(this.mSeedBank.mNumPackets == 3);
-				this.mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_ZOMBIE_NORMAL, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_ZOMBIE_SCREEN_DOOR, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ZOMBIE_PAIL, SeedType.SEED_NONE);
+				Debug.ASSERT(mSeedBank.mNumPackets == 3);
+				mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_ZOMBIE_NORMAL, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_ZOMBIE_SCREEN_DOOR, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ZOMBIE_PAIL, SeedType.SEED_NONE);
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_3)
+			else if (mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_3)
 			{
-				Debug.ASSERT(this.mSeedBank.mNumPackets == 3);
-				this.mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_ZOMBIE_NORMAL, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_ZOMBIE_PAIL, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ZOMBIE_DIGGER, SeedType.SEED_NONE);
+				Debug.ASSERT(mSeedBank.mNumPackets == 3);
+				mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_ZOMBIE_NORMAL, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_ZOMBIE_PAIL, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ZOMBIE_DIGGER, SeedType.SEED_NONE);
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_4)
+			else if (mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_4)
 			{
-				Debug.ASSERT(this.mSeedBank.mNumPackets == 3);
-				this.mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_ZOMBIE_NORMAL, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_ZOMBIE_PAIL, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ZOMBIE_LADDER, SeedType.SEED_NONE);
+				Debug.ASSERT(mSeedBank.mNumPackets == 3);
+				mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_ZOMBIE_NORMAL, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_ZOMBIE_PAIL, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ZOMBIE_LADDER, SeedType.SEED_NONE);
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_5)
+			else if (mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_5)
 			{
-				Debug.ASSERT(this.mSeedBank.mNumPackets == 4);
-				this.mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_ZOMBIE_NORMAL, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_ZOMBIE_PAIL, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ZOMBIE_BUNGEE, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[3].SetPacketType(SeedType.SEED_ZOMBIE_BALLOON, SeedType.SEED_NONE);
+				Debug.ASSERT(mSeedBank.mNumPackets == 4);
+				mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_ZOMBIE_NORMAL, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_ZOMBIE_PAIL, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ZOMBIE_BUNGEE, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[3].SetPacketType(SeedType.SEED_ZOMBIE_BALLOON, SeedType.SEED_NONE);
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_6)
+			else if (mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_6)
 			{
-				Debug.ASSERT(this.mSeedBank.mNumPackets == 4);
-				this.mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_ZOMBIE_NORMAL, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_ZOMBIE_POLEVAULTER, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ZOMBIE_PAIL, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[3].SetPacketType(SeedType.SEED_ZOMBIE_GARGANTUAR, SeedType.SEED_NONE);
+				Debug.ASSERT(mSeedBank.mNumPackets == 4);
+				mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_ZOMBIE_NORMAL, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_ZOMBIE_POLEVAULTER, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ZOMBIE_PAIL, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[3].SetPacketType(SeedType.SEED_ZOMBIE_GARGANTUAR, SeedType.SEED_NONE);
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_7)
+			else if (mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_7)
 			{
-				Debug.ASSERT(this.mSeedBank.mNumPackets == 4);
-				this.mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_ZOMBIE_NORMAL, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_ZOMBIE_POLEVAULTER, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ZOMBIE_PAIL, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[3].SetPacketType(SeedType.SEED_ZOMBIE_DANCER, SeedType.SEED_NONE);
+				Debug.ASSERT(mSeedBank.mNumPackets == 4);
+				mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_ZOMBIE_NORMAL, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_ZOMBIE_POLEVAULTER, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ZOMBIE_PAIL, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[3].SetPacketType(SeedType.SEED_ZOMBIE_DANCER, SeedType.SEED_NONE);
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_8)
+			else if (mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_8)
 			{
-				Debug.ASSERT(this.mSeedBank.mNumPackets == 6);
-				this.mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_ZOMBIE_IMP, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_ZOMBIE_TRAFFIC_CONE, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ZOMBIE_PAIL, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[3].SetPacketType(SeedType.SEED_ZOMBIE_BUNGEE, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[4].SetPacketType(SeedType.SEED_ZOMBIE_DIGGER, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[5].SetPacketType(SeedType.SEED_ZOMBIE_LADDER, SeedType.SEED_NONE);
+				Debug.ASSERT(mSeedBank.mNumPackets == 6);
+				mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_ZOMBIE_IMP, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_ZOMBIE_TRAFFIC_CONE, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ZOMBIE_PAIL, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[3].SetPacketType(SeedType.SEED_ZOMBIE_BUNGEE, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[4].SetPacketType(SeedType.SEED_ZOMBIE_DIGGER, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[5].SetPacketType(SeedType.SEED_ZOMBIE_LADDER, SeedType.SEED_NONE);
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_9)
+			else if (mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_9)
 			{
-				Debug.ASSERT(this.mSeedBank.mNumPackets == 8);
-				this.mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_ZOMBIE_IMP, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_ZOMBIE_TRAFFIC_CONE, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ZOMBIE_POLEVAULTER, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[3].SetPacketType(SeedType.SEED_ZOMBIE_PAIL, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[4].SetPacketType(SeedType.SEED_ZOMBIE_BUNGEE, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[5].SetPacketType(SeedType.SEED_ZOMBIE_DIGGER, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[6].SetPacketType(SeedType.SEED_ZOMBIE_LADDER, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[7].SetPacketType(SeedType.SEED_ZOMBIE_FOOTBALL, SeedType.SEED_NONE);
+				Debug.ASSERT(mSeedBank.mNumPackets == 8);
+				mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_ZOMBIE_IMP, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_ZOMBIE_TRAFFIC_CONE, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ZOMBIE_POLEVAULTER, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[3].SetPacketType(SeedType.SEED_ZOMBIE_PAIL, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[4].SetPacketType(SeedType.SEED_ZOMBIE_BUNGEE, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[5].SetPacketType(SeedType.SEED_ZOMBIE_DIGGER, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[6].SetPacketType(SeedType.SEED_ZOMBIE_LADDER, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[7].SetPacketType(SeedType.SEED_ZOMBIE_FOOTBALL, SeedType.SEED_NONE);
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_ENDLESS)
+			else if (mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_ENDLESS)
 			{
-				Debug.ASSERT(this.mSeedBank.mNumPackets == 9);
-				this.mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_ZOMBIE_IMP, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_ZOMBIE_TRAFFIC_CONE, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ZOMBIE_POLEVAULTER, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[3].SetPacketType(SeedType.SEED_ZOMBIE_PAIL, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[4].SetPacketType(SeedType.SEED_ZOMBIE_BUNGEE, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[5].SetPacketType(SeedType.SEED_ZOMBIE_DIGGER, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[6].SetPacketType(SeedType.SEED_ZOMBIE_LADDER, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[7].SetPacketType(SeedType.SEED_ZOMBIE_FOOTBALL, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[8].SetPacketType(SeedType.SEED_ZOMBIE_DANCER, SeedType.SEED_NONE);
+				Debug.ASSERT(mSeedBank.mNumPackets == 9);
+				mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_ZOMBIE_IMP, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_ZOMBIE_TRAFFIC_CONE, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ZOMBIE_POLEVAULTER, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[3].SetPacketType(SeedType.SEED_ZOMBIE_PAIL, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[4].SetPacketType(SeedType.SEED_ZOMBIE_BUNGEE, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[5].SetPacketType(SeedType.SEED_ZOMBIE_DIGGER, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[6].SetPacketType(SeedType.SEED_ZOMBIE_LADDER, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[7].SetPacketType(SeedType.SEED_ZOMBIE_FOOTBALL, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[8].SetPacketType(SeedType.SEED_ZOMBIE_DANCER, SeedType.SEED_NONE);
 			}
-			else if (this.mApp.IsScaryPotterLevel())
+			else if (mApp.IsScaryPotterLevel())
 			{
-				Debug.ASSERT(this.mSeedBank.mNumPackets == 1);
-				this.mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_CHERRYBOMB, SeedType.SEED_NONE);
+				Debug.ASSERT(mSeedBank.mNumPackets == 1);
+				mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_CHERRYBOMB, SeedType.SEED_NONE);
 			}
-			else if (this.mApp.IsWhackAZombieLevel() && (this.mApp.IsAdventureMode() || this.mApp.IsQuickPlayMode()))
+			else if (mApp.IsWhackAZombieLevel() && (mApp.IsAdventureMode() || mApp.IsQuickPlayMode()))
 			{
-				Debug.ASSERT(this.mSeedBank.mNumPackets == 3);
-				this.mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_POTATOMINE, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_GRAVEBUSTER, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_CHERRYBOMB, SeedType.SEED_NONE);
+				Debug.ASSERT(mSeedBank.mNumPackets == 3);
+				mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_POTATOMINE, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_GRAVEBUSTER, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_CHERRYBOMB, SeedType.SEED_NONE);
 			}
-			else if (this.mApp.IsWhackAZombieLevel() && !this.mApp.IsAdventureMode() && !this.mApp.IsQuickPlayMode())
+			else if (mApp.IsWhackAZombieLevel() && !mApp.IsAdventureMode() && !mApp.IsQuickPlayMode())
 			{
-				Debug.ASSERT(this.mSeedBank.mNumPackets == 3);
-				this.mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_POTATOMINE, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_GRAVEBUSTER, SeedType.SEED_NONE);
-				this.mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ICESHROOM, SeedType.SEED_NONE);
+				Debug.ASSERT(mSeedBank.mNumPackets == 3);
+				mSeedBank.mSeedPackets[0].SetPacketType(SeedType.SEED_POTATOMINE, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[1].SetPacketType(SeedType.SEED_GRAVEBUSTER, SeedType.SEED_NONE);
+				mSeedBank.mSeedPackets[2].SetPacketType(SeedType.SEED_ICESHROOM, SeedType.SEED_NONE);
 			}
-			else if (!this.ChooseSeedsOnCurrentLevel() && !this.HasConveyorBeltSeedBank())
+			else if (!ChooseSeedsOnCurrentLevel() && !HasConveyorBeltSeedBank())
 			{
-				this.mSeedBank.mNumPackets = this.GetNumSeedsInBank();
-				for (int m = 0; m < this.mSeedBank.mNumPackets; m++)
+				mSeedBank.mNumPackets = GetNumSeedsInBank();
+				for (int m = 0; m < mSeedBank.mNumPackets; m++)
 				{
-					SeedPacket seedPacket2 = this.mSeedBank.mSeedPackets[m];
+					SeedPacket seedPacket2 = mSeedBank.mSeedPackets[m];
 					seedPacket2.SetPacketType((SeedType)m, SeedType.SEED_NONE);
 				}
 			}
-			this.mWidgetManager.MarkAllDirty();
-			this.mPaused = false;
-			this.mOutOfMoneyCounter = 0;
-			if (this.StageHasFog())
+			mWidgetManager.MarkAllDirty();
+			mPaused = false;
+			mOutOfMoneyCounter = 0;
+			if (StageHasFog())
 			{
-				this.mFogOffset = 1065f - (float)this.LeftFogColumn() * 80f;
-				this.mFogBlownCountDown = 200;
+				mFogOffset = 1065f - (float)LeftFogColumn() * 80f;
+				mFogBlownCountDown = 200;
 			}
-			this.mChallenge.InitLevel();
-			this.SetupRenderItems();
+			mChallenge.InitLevel();
+			SetupRenderItems();
 			Board.needToSortRenderList = true;
 		}
 
 		private void SetupRenderItems()
 		{
-			for (int i = 0; i < this.aRenderList.Length; i++)
+			for (int i = 0; i < aRenderList.Length; i++)
 			{
-				if (this.aRenderList[i] != null)
+				if (aRenderList[i] != null)
 				{
-					this.aRenderList[i].PrepareForReuse();
+					aRenderList[i].PrepareForReuse();
 				}
-				this.aRenderList[i] = RenderItem.GetNewRenderItem();
+				aRenderList[i] = RenderItem.GetNewRenderItem();
 			}
 		}
 
 		public void DisplayAdvice(string theAdvice, MessageStyle theMessageStyle, AdviceType theHelpIndex)
 		{
-			this.DisplayAdvice(theAdvice, theMessageStyle, theHelpIndex, null);
+			DisplayAdvice(theAdvice, theMessageStyle, theHelpIndex, null);
 		}
 
 		public void DisplayAdvice(string theAdvice, MessageStyle theMessageStyle, AdviceType theHelpIndex, Image theIcon)
 		{
 			if (theHelpIndex != AdviceType.ADVICE_NONE)
 			{
-				if (this.mHelpDisplayed[(int)theHelpIndex])
+				if (mHelpDisplayed[(int)theHelpIndex])
 				{
 					return;
 				}
-				this.mHelpDisplayed[(int)theHelpIndex] = true;
+				mHelpDisplayed[(int)theHelpIndex] = true;
 			}
-			this.mAdvice.SetLabel(theAdvice, theMessageStyle, theIcon);
-			this.mHelpIndex = theHelpIndex;
+			mAdvice.SetLabel(theAdvice, theMessageStyle, theIcon);
+			mHelpIndex = theHelpIndex;
 		}
 
 		public void StartLevel()
 		{
-			this.mCoinBankFadeCount = 0;
-			this.mLevelFadeCount = 1000;
-			this.mApp.mLastLevelStats.Reset();
-			this.mChallenge.StartLevel();
-			if (this.mApp.IsSurvivalMode() && this.mChallenge.mSurvivalStage > 0)
+			mCoinBankFadeCount = 0;
+			mLevelFadeCount = 1000;
+			mApp.mLastLevelStats.Reset();
+			mChallenge.StartLevel();
+			if (mApp.IsSurvivalMode() && mChallenge.mSurvivalStage > 0)
 			{
-				string savedGameName = LawnCommon.GetSavedGameName(this.mApp.mGameMode, (int)this.mApp.mPlayerInfo.mId);
-				this.mApp.EraseFile(savedGameName);
+				string savedGameName = LawnCommon.GetSavedGameName(mApp.mGameMode, (int)mApp.mPlayerInfo.mId);
+				mApp.EraseFile(savedGameName);
 			}
-			if (this.mApp.IsSurvivalMode() && this.mChallenge.mSurvivalStage > 0)
+			if (mApp.IsSurvivalMode() && mChallenge.mSurvivalStage > 0)
 			{
-				this.FreezeEffectsForCutscene(false);
-				this.mApp.mSoundSystem.GamePause(false);
+				FreezeEffectsForCutscene(false);
+				mApp.mSoundSystem.GamePause(false);
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ICE)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ICE)
 			{
 				return;
 			}
-			if (this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && this.mApp.mGameMode != GameMode.GAMEMODE_TREE_OF_WISDOM && this.mApp.mGameMode != GameMode.GAMEMODE_UPSELL && this.mApp.mGameMode != GameMode.GAMEMODE_INTRO && this.mApp.mGameMode != GameMode.GAMEMODE_INTRO)
+			if (mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && mApp.mGameMode != GameMode.GAMEMODE_TREE_OF_WISDOM && mApp.mGameMode != GameMode.GAMEMODE_UPSELL && mApp.mGameMode != GameMode.GAMEMODE_INTRO && mApp.mGameMode != GameMode.GAMEMODE_INTRO)
 			{
-				if (this.mApp.IsFinalBossLevel())
+				if (mApp.IsFinalBossLevel())
 				{
 					return;
 				}
-				this.mApp.mMusic.StartGameMusic();
+				mApp.mMusic.StartGameMusic();
 			}
 		}
 
 		public Plant AddPlant(int theGridX, int theGridY, SeedType theSeedType, SeedType theImitaterType)
 		{
-			Plant plant = this.NewPlant(theGridX, theGridY, theSeedType, theImitaterType);
-			this.DoPlantingEffects(theGridX, theGridY, plant, false);
-			this.mChallenge.PlantAdded(plant);
-			int num = this.CountPlantByType(SeedType.SEED_SUNFLOWER) + this.CountPlantByType(SeedType.SEED_SUNSHROOM);
-			if (num > this.mMaxSunPlants)
+			Plant plant = NewPlant(theGridX, theGridY, theSeedType, theImitaterType);
+			DoPlantingEffects(theGridX, theGridY, plant, false);
+			mChallenge.PlantAdded(plant);
+			int num = CountPlantByType(SeedType.SEED_SUNFLOWER) + CountPlantByType(SeedType.SEED_SUNSHROOM);
+			if (num > mMaxSunPlants)
 			{
-				this.mMaxSunPlants = num;
+				mMaxSunPlants = num;
 			}
 			SeedType seedType = theSeedType;
 			if (seedType == SeedType.SEED_IMITATER)
@@ -1293,43 +1293,43 @@ namespace Lawn
 				{
 					if (SexyAppBase.IsInTrialMode)
 					{
-						if (!this.mApp.mPlayerInfo.mHasSeenAchievementDialog)
+						if (!mApp.mPlayerInfo.mHasSeenAchievementDialog)
 						{
-							this.mApp.mPlayerInfo.mHasSeenAchievementDialog = true;
-							this.mApp.achievementToCheck = AchievementId.SoilYourPlants;
-							this.mApp.DoLockedAchievementDialog(AchievementId.SoilYourPlants);
+							mApp.mPlayerInfo.mHasSeenAchievementDialog = true;
+							mApp.achievementToCheck = AchievementId.SoilYourPlants;
+							mApp.DoLockedAchievementDialog(AchievementId.SoilYourPlants);
 						}
 					}
 					else
 					{
-						this.GrantAchievement(AchievementId.SoilYourPlants);
+						GrantAchievement(AchievementId.SoilYourPlants);
 					}
 				}
 			}
 			if (seedType != SeedType.SEED_SUNFLOWER && seedType != SeedType.SEED_WALLNUT && seedType != SeedType.SEED_CHOMPER)
 			{
-				this.mNomNomNomAchievementTracker = false;
+				mNomNomNomAchievementTracker = false;
 			}
-			if (this.IsFungus(seedType))
+			if (IsFungus(seedType))
 			{
-				this.mNoFungusAmongUsAchievementTracker = false;
+				mNoFungusAmongUsAchievementTracker = false;
 			}
 			if (seedType == SeedType.SEED_PEASHOOTER || seedType == SeedType.SEED_SNOWPEA || seedType == SeedType.SEED_REPEATER || seedType == SeedType.SEED_THREEPEATER || seedType == SeedType.SEED_SPLITPEA || seedType == SeedType.SEED_GATLINGPEA)
 			{
-				this.mPeaShooterUsed = true;
+				mPeaShooterUsed = true;
 			}
 			if (seedType == SeedType.SEED_CABBAGEPULT || seedType == SeedType.SEED_KERNELPULT || seedType == SeedType.SEED_MELONPULT || seedType == SeedType.SEED_WINTERMELON)
 			{
-				this.mCatapultPlantsUsed = true;
+				mCatapultPlantsUsed = true;
 			}
-			bool flag = this.IsFungus(seedType);
+			bool flag = IsFungus(seedType);
 			if (seedType != SeedType.SEED_INSTANT_COFFEE && !flag)
 			{
-				this.mMushroomAndCoffeeBeansOnly = false;
+				mMushroomAndCoffeeBeansOnly = false;
 			}
 			if (flag)
 			{
-				this.mMushroomsUsed = true;
+				mMushroomsUsed = true;
 			}
 			return plant;
 		}
@@ -1343,7 +1343,7 @@ namespace Lawn
 		{
 			Projectile newProjectile = Projectile.GetNewProjectile();
 			newProjectile.ProjectileInitialize(theX, theY, aRenderOrder, theRow, projectileType);
-			this.mProjectiles.Add(newProjectile);
+			mProjectiles.Add(newProjectile);
 			return newProjectile;
 		}
 
@@ -1351,39 +1351,39 @@ namespace Lawn
 		{
 			Coin coin = new Coin();
 			coin.CoinInitialize(theX, theY, theCoinType, theCoinMotion);
-			this.mCoins.Add(coin);
-			if (this.mApp.IsFirstTimeAdventureMode() && this.mLevel == 1)
+			mCoins.Add(coin);
+			if (mApp.IsFirstTimeAdventureMode() && mLevel == 1)
 			{
-				this.DisplayAdvice("[ADVICE_CLICK_ON_SUN]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1_STAY, AdviceType.ADVICE_CLICK_ON_SUN);
+				DisplayAdvice("[ADVICE_CLICK_ON_SUN]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1_STAY, AdviceType.ADVICE_CLICK_ON_SUN);
 			}
 			return coin;
 		}
 
 		public void RefreshSeedPacketFromCursor()
 		{
-			if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_USABLE_COIN)
+			if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_USABLE_COIN)
 			{
-				Coin coin = this.mCoins[this.mCoins.IndexOf(this.mCursorObject.mCoinID)];
+				Coin coin = mCoins[mCoins.IndexOf(mCursorObject.mCoinID)];
 				coin.DroppedUsableSeed();
 			}
-			else if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_BANK)
+			else if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_BANK)
 			{
-				Debug.ASSERT(this.mCursorObject.mSeedBankIndex >= 0 && this.mCursorObject.mSeedBankIndex < this.mSeedBank.mNumPackets);
-				SeedPacket seedPacket = this.mSeedBank.mSeedPackets[this.mCursorObject.mSeedBankIndex];
+				Debug.ASSERT(mCursorObject.mSeedBankIndex >= 0 && mCursorObject.mSeedBankIndex < mSeedBank.mNumPackets);
+				SeedPacket seedPacket = mSeedBank.mSeedPackets[mCursorObject.mSeedBankIndex];
 				seedPacket.Activate();
 			}
-			this.ClearCursor();
+			ClearCursor();
 		}
 
 		public void DeselectSeedPacket()
 		{
-			if (this.mCursorObject.mSeedBankIndex == -1)
+			if (mCursorObject.mSeedBankIndex == -1)
 			{
 				return;
 			}
-			SeedPacket seedPacket = this.mSeedBank.mSeedPackets[this.mCursorObject.mSeedBankIndex];
+			SeedPacket seedPacket = mSeedBank.mSeedPackets[mCursorObject.mSeedBankIndex];
 			seedPacket.Activate();
-			this.ClearCursor();
+			ClearCursor();
 		}
 
 		public ZombieType PickGraveRisingZombieType(int theZombiePoints)
@@ -1399,7 +1399,7 @@ namespace Lawn
 			Board.aZombieWeightArray[num].mItem = 2;
 			Board.aZombieWeightArray[num].mWeight = Zombie.GetZombieDefinition(ZombieType.ZOMBIE_TRAFFIC_CONE).mPickWeight;
 			num++;
-			if (!this.StageHasGraveStones())
+			if (!StageHasGraveStones())
 			{
 				Board.aZombieWeightArray[num].mItem = 4;
 				Board.aZombieWeightArray[num].mWeight = Zombie.GetZombieDefinition(ZombieType.ZOMBIE_PAIL).mPickWeight;
@@ -1409,11 +1409,11 @@ namespace Lawn
 			{
 				ZombieType zombieType = (ZombieType)Board.aZombieWeightArray[j].mItem;
 				ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(zombieType);
-				if (this.mApp.IsFirstTimeAdventureMode() && this.mLevel < zombieDefinition.mStartingLevel)
+				if (mApp.IsFirstTimeAdventureMode() && mLevel < zombieDefinition.mStartingLevel)
 				{
 					Board.aZombieWeightArray[j].mWeight = 0;
 				}
-				else if (!this.mZombieAllowed[(int)zombieType] && zombieType != ZombieType.ZOMBIE_NORMAL)
+				else if (!mZombieAllowed[(int)zombieType] && zombieType != ZombieType.ZOMBIE_NORMAL)
 				{
 					Board.aZombieWeightArray[j].mWeight = 0;
 				}
@@ -1433,21 +1433,21 @@ namespace Lawn
 				Board.aZombieWeightArray[i].Reset();
 				ZombieType zombieType = (ZombieType)i;
 				ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(zombieType);
-				if (this.mZombieAllowed[(int)zombieType])
+				if (mZombieAllowed[(int)zombieType])
 				{
-					if (zombieType == ZombieType.ZOMBIE_BUNGEE && this.mApp.IsSurvivalEndless(this.mApp.mGameMode))
+					if (zombieType == ZombieType.ZOMBIE_BUNGEE && mApp.IsSurvivalEndless(mApp.mGameMode))
 					{
-						if (!this.IsFlagWave(theWaveIndex))
+						if (!IsFlagWave(theWaveIndex))
 						{
 							goto IL_1E4;
 						}
 					}
-					else if (this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_POGO_PARTY && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BOBSLED_BONANZA && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_AIR_RAID)
+					else if (mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_POGO_PARTY && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BOBSLED_BONANZA && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_AIR_RAID)
 					{
 						int num2 = zombieDefinition.mFirstAllowedWave;
-						if (this.mApp.IsSurvivalEndless(this.mApp.mGameMode))
+						if (mApp.IsSurvivalEndless(mApp.mGameMode))
 						{
-							int survivalFlagsCompleted = this.GetSurvivalFlagsCompleted();
+							int survivalFlagsCompleted = GetSurvivalFlagsCompleted();
 							int num3 = TodCommon.TodAnimateCurve(18, 50, survivalFlagsCompleted, 0, 15, TodCurves.CURVE_LINEAR);
 							num2 = Math.Max(num2 - num3, 1);
 						}
@@ -1456,10 +1456,10 @@ namespace Lawn
 							goto IL_1E4;
 						}
 					}
-					int mWeight = zombieDefinition.mPickWeight;
-					if (this.mApp.IsSurvivalMode())
+					int aPickWeight = zombieDefinition.mPickWeight;
+					if (mApp.IsSurvivalMode())
 					{
-						int survivalFlagsCompleted2 = this.GetSurvivalFlagsCompleted();
+						int survivalFlagsCompleted2 = GetSurvivalFlagsCompleted();
 						if (zombieType == ZombieType.ZOMBIE_GARGANTUAR || zombieType == ZombieType.ZOMBIE_ZAMBONI)
 						{
 							int num4 = TodCommon.TodAnimateCurve(10, 50, survivalFlagsCompleted2, 2, 50, TodCurves.CURVE_LINEAR);
@@ -1470,7 +1470,7 @@ namespace Lawn
 						}
 						if (zombieType == ZombieType.ZOMBIE_REDEYE_GARGANTUAR)
 						{
-							if (this.IsFlagWave(theWaveIndex))
+							if (IsFlagWave(theWaveIndex))
 							{
 								int num5 = TodCommon.TodAnimateCurve(14, 100, survivalFlagsCompleted2, 1, 50, TodCurves.CURVE_LINEAR);
 								if (theZombiePicker.mZombieTypeCount[(int)zombieType] >= num5)
@@ -1485,20 +1485,20 @@ namespace Lawn
 								{
 									goto IL_1E4;
 								}
-								mWeight = 1000;
+								aPickWeight = 1000;
 							}
 						}
 						if (zombieType == ZombieType.ZOMBIE_NORMAL)
 						{
-							mWeight = TodCommon.TodAnimateCurve(10, 50, survivalFlagsCompleted2, zombieDefinition.mPickWeight, zombieDefinition.mPickWeight / 10, TodCurves.CURVE_LINEAR);
+							aPickWeight = TodCommon.TodAnimateCurve(10, 50, survivalFlagsCompleted2, zombieDefinition.mPickWeight, zombieDefinition.mPickWeight / 10, TodCurves.CURVE_LINEAR);
 						}
 						if (zombieType == ZombieType.ZOMBIE_TRAFFIC_CONE)
 						{
-							mWeight = TodCommon.TodAnimateCurve(10, 50, survivalFlagsCompleted2, zombieDefinition.mPickWeight, zombieDefinition.mPickWeight / 4, TodCurves.CURVE_LINEAR);
+							aPickWeight = TodCommon.TodAnimateCurve(10, 50, survivalFlagsCompleted2, zombieDefinition.mPickWeight, zombieDefinition.mPickWeight / 4, TodCurves.CURVE_LINEAR);
 						}
 					}
 					Board.aZombieWeightArray[num].mItem = i;
-					Board.aZombieWeightArray[num].mWeight = mWeight;
+					Board.aZombieWeightArray[num].mWeight = aPickWeight;
 					num++;
 				}
 				IL_1E4:;
@@ -1512,122 +1512,122 @@ namespace Lawn
 			{
 				return 0;
 			}
-			GridItem rake = this.GetRake();
-			if (rake != null && rake.mGridItemState == GridItemState.GRIDITEM_STATE_RAKE_ATTRACTING && this.RowCanHaveZombieType(rake.mGridY, theZombieType))
+			GridItem rake = GetRake();
+			if (rake != null && rake.mGridItemState == GridItemState.GRIDITEM_STATE_RAKE_ATTRACTING && RowCanHaveZombieType(rake.mGridY, theZombieType))
 			{
 				rake.mGridItemState = GridItemState.GRIDITEM_STATE_RAKE_WAITING;
-				TodCommon.TodUpdateSmoothArrayPick(this.mRowPickingArray, Constants.MAX_GRIDSIZEY, rake.mGridY);
+				TodCommon.TodUpdateSmoothArrayPick(mRowPickingArray, Constants.MAX_GRIDSIZEY, rake.mGridY);
 				return rake.mGridY;
 			}
 			for (int i = 0; i < Constants.MAX_GRIDSIZEY; i++)
 			{
-				if (!this.RowCanHaveZombieType(i, theZombieType))
+				if (!RowCanHaveZombieType(i, theZombieType))
 				{
-					this.mRowPickingArray[i].mWeight = 0f;
+					mRowPickingArray[i].mWeight = 0f;
 				}
-				else if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_PORTAL_COMBAT)
+				else if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_PORTAL_COMBAT)
 				{
-					this.mRowPickingArray[i].mWeight = this.mChallenge.PortalCombatRowSpawnWeight(i);
+					mRowPickingArray[i].mWeight = mChallenge.PortalCombatRowSpawnWeight(i);
 				}
-				else if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_INVISIGHOUL && this.mCurrentWave <= 3 && i == 5)
+				else if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_INVISIGHOUL && mCurrentWave <= 3 && i == 5)
 				{
-					this.mRowPickingArray[i].mWeight = 0f;
+					mRowPickingArray[i].mWeight = 0f;
 				}
 				else
 				{
-					int num = this.mCurrentWave - this.mWaveRowGotLawnMowered[i];
-					if (this.mApp.IsContinuousChallenge() && this.mCurrentWave == this.mNumWaves - 1)
+					int num = mCurrentWave - mWaveRowGotLawnMowered[i];
+					if (mApp.IsContinuousChallenge() && mCurrentWave == mNumWaves - 1)
 					{
 						num = 100;
 					}
 					if (num <= 1)
 					{
-						this.mRowPickingArray[i].mWeight = 0.01f;
+						mRowPickingArray[i].mWeight = 0.01f;
 					}
 					else if (num <= 2)
 					{
-						this.mRowPickingArray[i].mWeight = 0.5f;
+						mRowPickingArray[i].mWeight = 0.5f;
 					}
 					else
 					{
-						this.mRowPickingArray[i].mWeight = 1f;
+						mRowPickingArray[i].mWeight = 1f;
 					}
 				}
 			}
-			return TodCommon.TodPickFromSmoothArray(this.mRowPickingArray, Constants.MAX_GRIDSIZEY);
+			return TodCommon.TodPickFromSmoothArray(mRowPickingArray, Constants.MAX_GRIDSIZEY);
 		}
 
 		public Zombie AddZombie(ZombieType theZombieType, int theFromWave)
 		{
-			int theRow = this.PickRowForNewZombie(theZombieType);
-			return this.AddZombieInRow(theZombieType, theRow, theFromWave);
+			int theRow = PickRowForNewZombie(theZombieType);
+			return AddZombieInRow(theZombieType, theRow, theFromWave);
 		}
 
 		public void SpawnZombieWave()
 		{
-			this.mChallenge.SpawnZombieWave();
-			if (this.mApp.IsBungeeBlitzLevel())
+			mChallenge.SpawnZombieWave();
+			if (mApp.IsBungeeBlitzLevel())
 			{
 				BungeeDropGrid theBungeeDropGrid = new BungeeDropGrid();
-				this.SetupBungeeDrop(theBungeeDropGrid);
+				SetupBungeeDrop(theBungeeDropGrid);
 				for (int i = 0; i < 50; i++)
 				{
-					ZombieType zombieType = this.mZombiesInWave[this.mCurrentWave, i];
+					ZombieType zombieType = mZombiesInWave[mCurrentWave, i];
 					if (zombieType == ZombieType.ZOMBIE_INVALID)
 					{
 						break;
 					}
 					if (zombieType == ZombieType.ZOMBIE_BUNGEE || zombieType == ZombieType.ZOMBIE_ZAMBONI)
 					{
-						this.AddZombie(zombieType, this.mCurrentWave);
+						AddZombie(zombieType, mCurrentWave);
 					}
 					else
 					{
-						this.BungeeDropZombie(theBungeeDropGrid, zombieType);
+						BungeeDropZombie(theBungeeDropGrid, zombieType);
 					}
 				}
 			}
 			else
 			{
-				Debug.ASSERT(this.mCurrentWave >= 0 && this.mCurrentWave < 100 && this.mCurrentWave < this.mNumWaves);
+				Debug.ASSERT(mCurrentWave >= 0 && mCurrentWave < 100 && mCurrentWave < mNumWaves);
 				for (int j = 0; j < 50; j++)
 				{
-					ZombieType zombieType2 = this.mZombiesInWave[this.mCurrentWave, j];
+					ZombieType zombieType2 = mZombiesInWave[mCurrentWave, j];
 					if (zombieType2 == ZombieType.ZOMBIE_INVALID)
 					{
 						break;
 					}
-					if (zombieType2 == ZombieType.ZOMBIE_BOBSLED && !this.CanAddBobSled())
+					if (zombieType2 == ZombieType.ZOMBIE_BOBSLED && !CanAddBobSled())
 					{
 						for (int k = 0; k < 4; k++)
 						{
-							this.AddZombie(ZombieType.ZOMBIE_NORMAL, this.mCurrentWave);
+							AddZombie(ZombieType.ZOMBIE_NORMAL, mCurrentWave);
 						}
 					}
 					else
 					{
-						this.AddZombie(zombieType2, this.mCurrentWave);
+						AddZombie(zombieType2, mCurrentWave);
 					}
 				}
 			}
-			if (this.mCurrentWave == this.mNumWaves - 1 && !this.mApp.IsContinuousChallenge())
+			if (mCurrentWave == mNumWaves - 1 && !mApp.IsContinuousChallenge())
 			{
-				this.mRiseFromGraveCounter = 210;
+				mRiseFromGraveCounter = 210;
 			}
-			if (this.IsFlagWave(this.mCurrentWave))
+			if (IsFlagWave(mCurrentWave))
 			{
-				this.mFlagRaiseCounter = 100;
+				mFlagRaiseCounter = 100;
 			}
-			this.mCurrentWave++;
-			this.mTotalSpawnedWaves++;
+			mCurrentWave++;
+			mTotalSpawnedWaves++;
 		}
 
 		public void RemoveAllZombies()
 		{
-			int count = this.mZombies.Count;
+			int count = mZombies.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Zombie zombie = this.mZombies[i];
+				Zombie zombie = mZombies[i];
 				if (!zombie.mDead && !zombie.IsDeadOrDying())
 				{
 					zombie.DieNoLoot(false);
@@ -1637,10 +1637,10 @@ namespace Lawn
 
 		public void RemoveCutsceneZombies()
 		{
-			int count = this.mZombies.Count;
+			int count = mZombies.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Zombie zombie = this.mZombies[i];
+				Zombie zombie = mZombies[i];
 				if (!zombie.mDead && zombie.mFromWave == GameConstants.ZOMBIE_WAVE_CUTSCENE)
 				{
 					zombie.DieNoLoot(false);
@@ -1650,29 +1650,29 @@ namespace Lawn
 
 		public void SpawnZombiesFromGraves()
 		{
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS_2)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS_2)
 			{
 				return;
 			}
-			if (this.StageHasRoof())
+			if (StageHasRoof())
 			{
-				this.SpawnZombiesFromSky();
+				SpawnZombiesFromSky();
 			}
-			else if (this.StageHasPool())
+			else if (StageHasPool())
 			{
-				this.SpawnZombiesFromPool();
+				SpawnZombiesFromPool();
 				return;
 			}
-			int num = this.GetGraveStoneCount();
+			int num = GetGraveStoneCount();
 			int num2 = -1;
 			GridItem gridItem = null;
-			while (this.IterateGridItems(ref gridItem, ref num2))
+			while (IterateGridItems(ref gridItem, ref num2))
 			{
-				if (gridItem.mGridItemType == GridItemType.GRIDITEM_GRAVESTONE && gridItem.mGridItemCounter >= 100 && (this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_GRAVE_DANGER || RandomNumbers.NextNumber(this.mNumWaves) <= this.mCurrentWave))
+				if (gridItem.mGridItemType == GridItemType.GRIDITEM_GRAVESTONE && gridItem.mGridItemCounter >= 100 && (mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_GRAVE_DANGER || RandomNumbers.NextNumber(mNumWaves) <= mCurrentWave))
 				{
-					ZombieType theZombieType = this.PickGraveRisingZombieType(num);
+					ZombieType theZombieType = PickGraveRisingZombieType(num);
 					ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(theZombieType);
-					Zombie zombie = this.AddZombie(theZombieType, this.mCurrentWave);
+					Zombie zombie = AddZombie(theZombieType, mCurrentWave);
 					if (zombie == null)
 					{
 						return;
@@ -1690,20 +1690,20 @@ namespace Lawn
 			{
 				return PlantingReason.PLANTING_NOT_HERE;
 			}
-			PlantingReason plantingReason = this.mChallenge.CanPlantAt(theGridX, theGridY, theType);
+			PlantingReason plantingReason = mChallenge.CanPlantAt(theGridX, theGridY, theType);
 			if (plantingReason != PlantingReason.PLANTING_OK || Challenge.IsZombieSeedType(theType))
 			{
 				return plantingReason;
 			}
 			PlantsOnLawn plantsOnLawn = default(PlantsOnLawn);
-			this.GetPlantsOnLawn(theGridX, theGridY, ref plantsOnLawn);
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+			GetPlantsOnLawn(theGridX, theGridY, ref plantsOnLawn);
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 			{
 				if (plantsOnLawn.mUnderPlant != null || plantsOnLawn.mNormalPlant != null || plantsOnLawn.mFlyingPlant != null || plantsOnLawn.mPumpkinPlant != null)
 				{
 					return PlantingReason.PLANTING_NOT_HERE;
 				}
-				if (this.mApp.mZenGarden.mGardenType == GardenType.GARDEN_AQUARIUM && !Plant.IsAquatic(theType))
+				if (mApp.mZenGarden.mGardenType == GardenType.GARDEN_AQUARIUM && !Plant.IsAquatic(theType))
 				{
 					return PlantingReason.PLANTING_NOT_ON_WATER;
 				}
@@ -1711,7 +1711,7 @@ namespace Lawn
 			}
 			else
 			{
-				bool flag = this.GetGraveStoneAt(theGridX, theGridY) != null;
+				bool flag = GetGraveStoneAt(theGridX, theGridY) != null;
 				if (theType == SeedType.SEED_GRAVEBUSTER)
 				{
 					if (plantsOnLawn.mNormalPlant != null)
@@ -1748,7 +1748,7 @@ namespace Lawn
 				{
 					bool flag2 = plantsOnLawn.mUnderPlant != null && plantsOnLawn.mUnderPlant.mSeedType == SeedType.SEED_LILYPAD && plantsOnLawn.mUnderPlant.mOnBungeeState != PlantOnBungeeState.PLANT_GETTING_GRABBED_BY_BUNGEE;
 					bool flag3 = plantsOnLawn.mUnderPlant != null && plantsOnLawn.mUnderPlant.mSeedType == SeedType.SEED_FLOWERPOT && plantsOnLawn.mUnderPlant.mOnBungeeState != PlantOnBungeeState.PLANT_GETTING_GRABBED_BY_BUNGEE;
-					bool flag4 = this.GetCraterAt(theGridX, theGridY) != null;
+					bool flag4 = GetCraterAt(theGridX, theGridY) != null;
 					if (flag4)
 					{
 						if (Plant.IsFlying(theType))
@@ -1759,22 +1759,22 @@ namespace Lawn
 					}
 					else
 					{
-						bool flag5 = this.GetScaryPotAt(theGridX, theGridY) != null;
+						bool flag5 = GetScaryPotAt(theGridX, theGridY) != null;
 						if (flag5)
 						{
 							return PlantingReason.PLANTING_NOT_HERE;
 						}
-						if (this.IsIceAt(theGridX, theGridY))
+						if (IsIceAt(theGridX, theGridY))
 						{
 							return PlantingReason.PLANTING_NOT_HERE;
 						}
-						if (this.mGridSquareType[theGridX, theGridY] == GridSquareType.GRIDSQUARE_DIRT || this.mGridSquareType[theGridX, theGridY] == GridSquareType.GRIDSQUARE_NONE)
+						if (mGridSquareType[theGridX, theGridY] == GridSquareType.GRIDSQUARE_DIRT || mGridSquareType[theGridX, theGridY] == GridSquareType.GRIDSQUARE_NONE)
 						{
 							return PlantingReason.PLANTING_NOT_HERE;
 						}
 						if (theType == SeedType.SEED_LILYPAD || theType == SeedType.SEED_TANGLEKELP || theType == SeedType.SEED_SEASHROOM)
 						{
-							if (!this.IsPoolSquare(theGridX, theGridY))
+							if (!IsPoolSquare(theGridX, theGridY))
 							{
 								return PlantingReason.PLANTING_ONLY_IN_POOL;
 							}
@@ -1794,11 +1794,11 @@ namespace Lawn
 						}
 						else
 						{
-							if ((theType == SeedType.SEED_SPIKEWEED || theType == SeedType.SEED_SPIKEROCK) && (this.mGridSquareType[theGridX, theGridY] == GridSquareType.GRIDSQUARE_POOL || this.StageHasRoof() || plantsOnLawn.mUnderPlant != null))
+							if ((theType == SeedType.SEED_SPIKEWEED || theType == SeedType.SEED_SPIKEROCK) && (mGridSquareType[theGridX, theGridY] == GridSquareType.GRIDSQUARE_POOL || StageHasRoof() || plantsOnLawn.mUnderPlant != null))
 							{
 								return PlantingReason.PLANTING_NEEDS_GROUND;
 							}
-							if (this.mGridSquareType[theGridX, theGridY] == GridSquareType.GRIDSQUARE_POOL && !flag2 && theType != SeedType.SEED_CATTAIL && (plantsOnLawn.mNormalPlant == null || plantsOnLawn.mNormalPlant.mSeedType != SeedType.SEED_CATTAIL || theType != SeedType.SEED_PUMPKINSHELL))
+							if (mGridSquareType[theGridX, theGridY] == GridSquareType.GRIDSQUARE_POOL && !flag2 && theType != SeedType.SEED_CATTAIL && (plantsOnLawn.mNormalPlant == null || plantsOnLawn.mNormalPlant.mSeedType != SeedType.SEED_CATTAIL || theType != SeedType.SEED_PUMPKINSHELL))
 							{
 								return PlantingReason.PLANTING_NOT_ON_WATER;
 							}
@@ -1812,7 +1812,7 @@ namespace Lawn
 							}
 							else
 							{
-								if (this.StageHasRoof() && !flag3)
+								if (StageHasRoof() && !flag3)
 								{
 									return PlantingReason.PLANTING_NEEDS_POT;
 								}
@@ -1826,7 +1826,7 @@ namespace Lawn
 									{
 										return PlantingReason.PLANTING_OK;
 									}
-									if (this.mApp.mPlayerInfo.mPurchases[29] != 0 && plantsOnLawn.mPumpkinPlant.mPlantHealth < plantsOnLawn.mPumpkinPlant.mPlantMaxHealth * 2 / 3 && theType == plantsOnLawn.mPumpkinPlant.mSeedType && plantsOnLawn.mPumpkinPlant.mOnBungeeState != PlantOnBungeeState.PLANT_GETTING_GRABBED_BY_BUNGEE)
+									if (mApp.mPlayerInfo.mPurchases[29] != 0 && plantsOnLawn.mPumpkinPlant.mPlantHealth < plantsOnLawn.mPumpkinPlant.mPlantMaxHealth * 2 / 3 && theType == plantsOnLawn.mPumpkinPlant.mSeedType && plantsOnLawn.mPumpkinPlant.mOnBungeeState != PlantOnBungeeState.PLANT_GETTING_GRABBED_BY_BUNGEE)
 									{
 										return PlantingReason.PLANTING_OK;
 									}
@@ -1859,7 +1859,7 @@ namespace Lawn
 									}
 									if (plantsOnLawn.mNormalPlant == null)
 									{
-										if (!this.mApp.mEasyPlantingCheat)
+										if (!mApp.mEasyPlantingCheat)
 										{
 											if (Plant.IsUpgrade(theType))
 											{
@@ -1868,11 +1868,11 @@ namespace Lawn
 										}
 										else
 										{
-											if (theType == SeedType.SEED_COBCANNON && !this.IsValidCobCannonSpot(theGridX, theGridY))
+											if (theType == SeedType.SEED_COBCANNON && !IsValidCobCannonSpot(theGridX, theGridY))
 											{
 												return PlantingReason.PLANTING_NEEDS_UPGRADE;
 											}
-											if (theType == SeedType.SEED_CATTAIL && !this.IsPoolSquare(theGridX, theGridY))
+											if (theType == SeedType.SEED_CATTAIL && !IsPoolSquare(theGridX, theGridY))
 											{
 												return PlantingReason.PLANTING_NOT_HERE;
 											}
@@ -1887,7 +1887,7 @@ namespace Lawn
 									{
 										return PlantingReason.PLANTING_NEEDS_UPGRADE;
 									}
-									if ((theType == SeedType.SEED_WALLNUT || theType == SeedType.SEED_TALLNUT) && this.mApp.mPlayerInfo.mPurchases[29] != 0 && plantsOnLawn.mNormalPlant.mPlantHealth < plantsOnLawn.mNormalPlant.mPlantMaxHealth * 2 / 3 && theType == plantsOnLawn.mNormalPlant.mSeedType && plantsOnLawn.mNormalPlant.mOnBungeeState != PlantOnBungeeState.PLANT_GETTING_GRABBED_BY_BUNGEE)
+									if ((theType == SeedType.SEED_WALLNUT || theType == SeedType.SEED_TALLNUT) && mApp.mPlayerInfo.mPurchases[29] != 0 && plantsOnLawn.mNormalPlant.mPlantHealth < plantsOnLawn.mNormalPlant.mPlantMaxHealth * 2 / 3 && theType == plantsOnLawn.mNormalPlant.mSeedType && plantsOnLawn.mNormalPlant.mOnBungeeState != PlantOnBungeeState.PLANT_GETTING_GRABBED_BY_BUNGEE)
 									{
 										return PlantingReason.PLANTING_OK;
 									}
@@ -1903,86 +1903,86 @@ namespace Lawn
 		public override void MouseMove(int x, int y)
 		{
 			base.MouseMove(x, y);
-			this.mChallenge.MouseMove(x, y);
+			mChallenge.MouseMove(x, y);
 		}
 
 		public override void MouseDrag(int x, int y)
 		{
 			base.MouseDrag(x, y);
-			if (this.mIgnoreMouseUp && this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_USABLE_COIN)
+			if (mIgnoreMouseUp && mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_USABLE_COIN)
 			{
-				this.mIgnoreMouseUp = false;
+				mIgnoreMouseUp = false;
 			}
-			this.mLastToolX = x;
-			this.mLastToolY = y;
-			if (this.mIgnoreNextMouseUp)
+			mLastToolX = x;
+			mLastToolY = y;
+			if (mIgnoreNextMouseUp)
 			{
 				TRect trect = new TRect(Constants.ZEN_XMIN, Constants.ZEN_YMIN, Constants.ZEN_XMAX - Constants.ZEN_XMIN, Constants.ZEN_YMAX - Constants.ZEN_YMIN);
-				if (trect.Contains(this.mApp.mBoard.mLastToolX, this.mApp.mBoard.mLastToolY))
+				if (trect.Contains(mApp.mBoard.mLastToolX, mApp.mBoard.mLastToolY))
 				{
-					this.mIgnoreNextMouseUp = false;
+					mIgnoreNextMouseUp = false;
 				}
 			}
-			this.mChallenge.MouseMove(x, y);
+			mChallenge.MouseMove(x, y);
 		}
 
 		public override void MouseDown(int x, int y, int theClickCount)
 		{
 			base.MouseDown(x, y, theClickCount);
-			this.mLastToolX = x;
-			this.mLastToolY = y;
-			this.mMenuButton.Update();
-			if (this.mStoreButton != null)
+			mLastToolX = x;
+			mLastToolY = y;
+			mMenuButton.Update();
+			if (mStoreButton != null)
 			{
-				this.mStoreButton.Update();
+				mStoreButton.Update();
 			}
-			this.mIgnoreMouseUp = !this.CanInteractWithBoardButtons();
-			if (this.mTimeStopCounter > 0)
+			mIgnoreMouseUp = !CanInteractWithBoardButtons();
+			if (mTimeStopCounter > 0)
 			{
 				return;
 			}
 			HitResult theHitResult;
-			this.MouseHitTest(x, y, out theHitResult, false);
-			if (this.mChallenge.MouseDown(x, y, theClickCount, theHitResult))
+			MouseHitTest(x, y, out theHitResult, false);
+			if (mChallenge.MouseDown(x, y, theClickCount, theHitResult))
 			{
 				return;
 			}
-			if (this.mMenuButton.IsMouseOver() && this.CanInteractWithBoardButtons() && theClickCount > 0)
+			if (mMenuButton.IsMouseOver() && CanInteractWithBoardButtons() && theClickCount > 0)
 			{
-				this.mApp.PlaySample(Resources.SOUND_GRAVEBUTTON);
+				mApp.PlaySample(Resources.SOUND_GRAVEBUTTON);
 			}
-			else if (this.mStoreButton != null && this.mStoreButton.IsMouseOver() && this.CanInteractWithBoardButtons() && theClickCount > 0)
+			else if (mStoreButton != null && mStoreButton.IsMouseOver() && CanInteractWithBoardButtons() && theClickCount > 0)
 			{
-				if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || this.mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
+				if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
 				{
-					this.mApp.PlaySample(Resources.SOUND_TAP);
+					mApp.PlaySample(Resources.SOUND_TAP);
 				}
-				else if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND || this.mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
+				else if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND || mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
 				{
-					this.mApp.PlaySample(Resources.SOUND_GRAVEBUTTON);
+					mApp.PlaySample(Resources.SOUND_GRAVEBUTTON);
 				}
 			}
-			if (this.mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO && this.mApp.mSeedChooserScreen != null)
+			if (mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO && mApp.mSeedChooserScreen != null)
 			{
-				this.mApp.mSeedChooserScreen.CancelLawnView();
+				mApp.mSeedChooserScreen.CancelLawnView();
 			}
-			if (this.mApp.mGameScene == GameScenes.SCENE_ZOMBIES_WON)
+			if (mApp.mGameScene == GameScenes.SCENE_ZOMBIES_WON)
 			{
-				this.mCutScene.ZombieWonClick();
+				mCutScene.ZombieWonClick();
 				return;
 			}
-			if (this.mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
+			if (mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
 			{
-				this.mCutScene.MouseDown(x, y);
+				mCutScene.MouseDown(x, y);
 			}
-			if (this.mApp.mTodCheatKeys && !this.mApp.IsScaryPotterLevel() && this.mNextSurvivalStageCounter > 0)
+			if (mApp.mTodCheatKeys && !mApp.IsScaryPotterLevel() && mNextSurvivalStageCounter > 0)
 			{
-				this.mNextSurvivalStageCounter = 2;
+				mNextSurvivalStageCounter = 2;
 				for (int i = 0; i < Constants.MAX_GRIDSIZEY; i++)
 				{
-					if (this.mIceTimer[i] > this.mNextSurvivalStageCounter)
+					if (mIceTimer[i] > mNextSurvivalStageCounter)
 					{
-						this.mIceTimer[i] = this.mNextSurvivalStageCounter;
+						mIceTimer[i] = mNextSurvivalStageCounter;
 					}
 				}
 			}
@@ -1990,45 +1990,45 @@ namespace Lawn
 			{
 				Coin coin = (Coin)theHitResult.mObject;
 				coin.MouseDown(x, y, theClickCount);
-				this.mIgnoreMouseUp = true;
+				mIgnoreMouseUp = true;
 				return;
 			}
-			if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_WATERING_CAN || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_FERTILIZER || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_BUG_SPRAY || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PHONOGRAPH || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_CHOCOLATE || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_GLOVE || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_MONEY_SIGN || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_WHEEELBARROW || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_TREE_FOOD)
+			if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_WATERING_CAN || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_FERTILIZER || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_BUG_SPRAY || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PHONOGRAPH || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_CHOCOLATE || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_GLOVE || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_MONEY_SIGN || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_WHEEELBARROW || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_TREE_FOOD)
 			{
-				this.MouseDownWithTool(x, y, theClickCount, this.mCursorObject.mCursorType, false);
+				MouseDownWithTool(x, y, theClickCount, mCursorObject.mCursorType, false);
 				return;
 			}
-			if (this.IsPlantInCursor())
+			if (IsPlantInCursor())
 			{
 				return;
 			}
 			if (theHitResult.mObjectType == GameObjectType.OBJECT_TYPE_SEEDPACKET)
 			{
-				this.RefreshSeedPacketFromCursor();
+				RefreshSeedPacketFromCursor();
 				SeedPacket seedPacket = (SeedPacket)theHitResult.mObject;
 				seedPacket.MouseDown(x, y, theClickCount);
 				return;
 			}
 			if (theHitResult.mObjectType == GameObjectType.OBJECT_TYPE_NEXT_GARDEN)
 			{
-				if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+				if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 				{
-					this.mApp.mZenGarden.GotoNextGarden();
+					mApp.mZenGarden.GotoNextGarden();
 				}
-				else if (this.mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
+				else if (mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
 				{
-					this.mChallenge.TreeOfWisdomNextGarden();
+					mChallenge.TreeOfWisdomNextGarden();
 				}
-				this.mApp.PlaySample(Resources.SOUND_TAP);
+				mApp.PlaySample(Resources.SOUND_TAP);
 				return;
 			}
 			if (theHitResult.mObjectType == GameObjectType.OBJECT_TYPE_SHOVEL || theHitResult.mObjectType == GameObjectType.OBJECT_TYPE_WATERING_CAN || theHitResult.mObjectType == GameObjectType.OBJECT_TYPE_FERTILIZER || theHitResult.mObjectType == GameObjectType.OBJECT_TYPE_BUG_SPRAY || theHitResult.mObjectType == GameObjectType.OBJECT_TYPE_PHONOGRAPH || theHitResult.mObjectType == GameObjectType.OBJECT_TYPE_CHOCOLATE || theHitResult.mObjectType == GameObjectType.OBJECT_TYPE_GLOVE || theHitResult.mObjectType == GameObjectType.OBJECT_TYPE_MONEY_SIGN || theHitResult.mObjectType == GameObjectType.OBJECT_TYPE_WHEELBARROW || theHitResult.mObjectType == GameObjectType.OBJECT_TYPE_TREE_FOOD)
 			{
-				if (this.mCursorObject.mCursorType != CursorType.CURSOR_TYPE_SHOVEL)
+				if (mCursorObject.mCursorType != CursorType.CURSOR_TYPE_SHOVEL)
 				{
-					this.RefreshSeedPacketFromCursor();
+					RefreshSeedPacketFromCursor();
 				}
-				this.PickUpTool(theHitResult.mObjectType);
+				PickUpTool(theHitResult.mObjectType);
 				return;
 			}
 			if (theHitResult.mObjectType == GameObjectType.OBJECT_TYPE_PLANT)
@@ -2041,22 +2041,22 @@ namespace Lawn
 		public override void MouseUp(int x, int y, int theClickCount)
 		{
 			base.MouseUp(x, y, theClickCount);
-			if (this.mIgnoreMouseUp)
+			if (mIgnoreMouseUp)
 			{
-				this.mLastToolX = (this.mLastToolY = -1);
-				this.mLastToolX = 0;
+				mLastToolX = (mLastToolY = -1);
+				mLastToolX = 0;
 				return;
 			}
-			if (this.mIgnoreNextMouseUp)
+			if (mIgnoreNextMouseUp)
 			{
-				this.mIgnoreNextMouseUp = false;
+				mIgnoreNextMouseUp = false;
 				return;
 			}
-			if (this.mIgnoreNextMouseUpSeedPacket)
+			if (mIgnoreNextMouseUpSeedPacket)
 			{
 				HitResult hitResult;
-				this.MouseHitTest(x, y, out hitResult, false);
-				this.mIgnoreNextMouseUpSeedPacket = false;
+				MouseHitTest(x, y, out hitResult, false);
+				mIgnoreNextMouseUpSeedPacket = false;
 				if (hitResult.mObjectType == GameObjectType.OBJECT_TYPE_COIN)
 				{
 					Coin coin = (Coin)hitResult.mObject;
@@ -2066,92 +2066,92 @@ namespace Lawn
 					}
 				}
 			}
-			if (this.mMenuButton.IsMouseOver() && this.CanInteractWithBoardButtons() && theClickCount > 0)
+			if (mMenuButton.IsMouseOver() && CanInteractWithBoardButtons() && theClickCount > 0)
 			{
-				this.RefreshSeedPacketFromCursor();
-				if (this.mApp.GetDialog(Dialogs.DIALOG_GAME_OVER) != null || this.mApp.GetDialog(Dialogs.DIALOG_LEVEL_COMPLETE) != null)
+				RefreshSeedPacketFromCursor();
+				if (mApp.GetDialog(Dialogs.DIALOG_GAME_OVER) != null || mApp.GetDialog(Dialogs.DIALOG_LEVEL_COMPLETE) != null)
 				{
 					return;
 				}
-				this.mMenuButton.mIsOver = false;
-				this.mMenuButton.mIsDown = false;
-				this.UpdateCursor();
-				if (this.mTutorialState == TutorialState.TUTORIAL_ZEN_GARDEN_COMPLETED)
+				mMenuButton.mIsOver = false;
+				mMenuButton.mIsDown = false;
+				UpdateCursor();
+				if (mTutorialState == TutorialState.TUTORIAL_ZEN_GARDEN_COMPLETED)
 				{
-					this.mApp.FinishZenGardenTutorial();
+					mApp.FinishZenGardenTutorial();
 					return;
 				}
-				if (this.mTutorialState == TutorialState.TUTORIAL_ZEN_GARDEN_COMPLETED)
+				if (mTutorialState == TutorialState.TUTORIAL_ZEN_GARDEN_COMPLETED)
 				{
-					this.mApp.mBoardResult = BoardResult.BOARDRESULT_WON;
-					this.mApp.KillBoard();
-					this.mApp.PreNewGame(GameMode.GAMEMODE_ADVENTURE, false);
+					mApp.mBoardResult = BoardResult.BOARDRESULT_WON;
+					mApp.KillBoard();
+					mApp.PreNewGame(GameMode.GAMEMODE_ADVENTURE, false);
 					return;
 				}
-				if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || this.mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM || this.mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
+				if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM || mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
 				{
-					this.mApp.mPlayerInfo.mNeedsTrialLevelReset = true;
-					this.mApp.mBoardResult = BoardResult.BOARDRESULT_QUIT;
-					this.mApp.DoBackToMain();
+					mApp.mPlayerInfo.mNeedsTrialLevelReset = true;
+					mApp.mBoardResult = BoardResult.BOARDRESULT_QUIT;
+					mApp.DoBackToMain();
 					return;
 				}
-				this.mApp.PlaySample(Resources.SOUND_PAUSE);
-				this.mApp.DoNewOptions(false);
+				mApp.PlaySample(Resources.SOUND_PAUSE);
+				mApp.DoNewOptions(false);
 				return;
 			}
 			else
 			{
-				if (((float)this.mLastToolX >= (float)Constants.LAWN_XMIN * Constants.S || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN) && this.IsPlantInCursor())
+				if (((float)mLastToolX >= (float)Constants.LAWN_XMIN * Constants.S || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN) && IsPlantInCursor())
 				{
-					if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_GLOVE && this.mCursorObject.mGlovePlantID != null)
+					if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_GLOVE && mCursorObject.mGlovePlantID != null)
 					{
-						this.mCursorObject.mGlovePlantID.mGloveGrabbed = false;
+						mCursorObject.mGlovePlantID.mGloveGrabbed = false;
 					}
-					this.MouseUpWithPlant(this.mLastToolX, this.mLastToolY, theClickCount);
+					MouseUpWithPlant(mLastToolX, mLastToolY, theClickCount);
 					return;
 				}
-				if (((float)this.mLastToolX < (float)Constants.LAWN_XMIN * Constants.S || (float)this.mLastToolY >= (float)Constants.LAWN_YMIN * Constants.S) && this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_SHOVEL)
+				if (((float)mLastToolX < (float)Constants.LAWN_XMIN * Constants.S || (float)mLastToolY >= (float)Constants.LAWN_YMIN * Constants.S) && mCursorObject.mCursorType == CursorType.CURSOR_TYPE_SHOVEL)
 				{
-					this.MouseDownWithTool(this.mLastToolX, this.mLastToolY, theClickCount, this.mCursorObject.mCursorType, false);
+					MouseDownWithTool(mLastToolX, mLastToolY, theClickCount, mCursorObject.mCursorType, false);
 					return;
 				}
-				if ((float)this.mLastToolX >= (float)Constants.LAWN_XMIN * Constants.S && (float)this.mLastToolY >= (float)Constants.LAWN_YMIN * Constants.S && this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_COBCANNON_TARGET)
+				if ((float)mLastToolX >= (float)Constants.LAWN_XMIN * Constants.S && (float)mLastToolY >= (float)Constants.LAWN_YMIN * Constants.S && mCursorObject.mCursorType == CursorType.CURSOR_TYPE_COBCANNON_TARGET)
 				{
-					this.MouseDownCobcannonFire(this.mLastToolX, this.mLastToolY, theClickCount);
-					this.mLastToolX = (this.mLastToolY = -1);
+					MouseDownCobcannonFire(mLastToolX, mLastToolY, theClickCount);
+					mLastToolX = (mLastToolY = -1);
 					return;
 				}
-				if ((this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_FERTILIZER || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_BUG_SPRAY || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PHONOGRAPH || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_CHOCOLATE || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_GLOVE || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_MONEY_SIGN || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_WHEEELBARROW || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_TREE_FOOD || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_WATERING_CAN) && (float)this.mLastToolY >= (float)Constants.ZEN_YMIN * Constants.S)
+				if ((mCursorObject.mCursorType == CursorType.CURSOR_TYPE_FERTILIZER || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_BUG_SPRAY || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PHONOGRAPH || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_CHOCOLATE || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_GLOVE || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_MONEY_SIGN || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_WHEEELBARROW || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_TREE_FOOD || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_WATERING_CAN) && (float)mLastToolY >= (float)Constants.ZEN_YMIN * Constants.S)
 				{
-					this.MouseDownWithTool(x, y, theClickCount, this.mCursorObject.mCursorType, false);
+					MouseDownWithTool(x, y, theClickCount, mCursorObject.mCursorType, false);
 					return;
 				}
-				if (this.mChallenge.MouseUp(this.mLastToolX, this.mLastToolY) && theClickCount > 0)
+				if (mChallenge.MouseUp(mLastToolX, mLastToolY) && theClickCount > 0)
 				{
 					return;
 				}
-				if (this.mStoreButton != null && this.mStoreButton.IsMouseOver() && this.CanInteractWithBoardButtons() && theClickCount > 0)
+				if (mStoreButton != null && mStoreButton.IsMouseOver() && CanInteractWithBoardButtons() && theClickCount > 0)
 				{
-					if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+					if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 					{
-						this.ClearAdviceImmediately();
-						this.mApp.mZenGarden.OpenStore();
+						ClearAdviceImmediately();
+						mApp.mZenGarden.OpenStore();
 					}
-					if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
+					if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
 					{
-						this.mChallenge.mChallengeState = ChallengeState.STATECHALLENGE_LAST_STAND_ONSLAUGHT;
-						this.mStoreButton.mBtnNoDraw = true;
-						this.mStoreButton.mDisabled = true;
-						this.mZombieCountDown = 9;
-						this.mZombieCountDownStart = this.mZombieCountDown;
+						mChallenge.mChallengeState = ChallengeState.STATECHALLENGE_LAST_STAND_ONSLAUGHT;
+						mStoreButton.mBtnNoDraw = true;
+						mStoreButton.mDisabled = true;
+						mZombieCountDown = 9;
+						mZombieCountDownStart = mZombieCountDown;
 					}
-					else if (this.mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
+					else if (mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
 					{
-						this.mApp.BuyGame();
-						this.mApp.DoBackToMain();
+						mApp.BuyGame();
+						mApp.DoBackToMain();
 					}
 				}
-				this.mLastToolX = (this.mLastToolY = -1);
+				mLastToolX = (mLastToolY = -1);
 				return;
 			}
 		}
@@ -2159,11 +2159,11 @@ namespace Lawn
 		public override void KeyChar(SexyChar theChar)
 		{
 			char value_type = theChar.value_type;
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 			{
 				if (value_type == 'm')
 				{
-					if (this.mApp.mZenGarden.IsZenGardenFull(true))
+					if (mApp.mZenGarden.IsZenGardenFull(true))
 					{
 						return;
 					}
@@ -2171,40 +2171,40 @@ namespace Lawn
 					pottedPlant.InitializePottedPlant(SeedType.SEED_MARIGOLD);
 					pottedPlant.mPlantAge = PottedPlantAge.PLANTAGE_FULL;
 					pottedPlant.mDrawVariation = (DrawVariation)TodCommon.RandRangeInt(2, 12);
-					this.mApp.mZenGarden.AddPottedPlant(pottedPlant);
+					mApp.mZenGarden.AddPottedPlant(pottedPlant);
 					return;
 				}
 				else
 				{
 					if (value_type == '+')
 					{
-						while (!this.mApp.mZenGarden.IsZenGardenFull(true))
+						while (!mApp.mZenGarden.IsZenGardenFull(true))
 						{
-							SeedType theSeedType = this.mApp.mZenGarden.PickRandomSeedType();
+							SeedType theSeedType = mApp.mZenGarden.PickRandomSeedType();
 							PottedPlant pottedPlant2 = new PottedPlant();
 							pottedPlant2.InitializePottedPlant(theSeedType);
 							pottedPlant2.mPlantAge = PottedPlantAge.PLANTAGE_FULL;
-							this.mApp.mZenGarden.AddPottedPlant(pottedPlant2);
+							mApp.mZenGarden.AddPottedPlant(pottedPlant2);
 						}
 						return;
 					}
 					if (value_type == '-')
 					{
-						this.mPlants.Clear();
-						this.mApp.mPlayerInfo.mNumPottedPlants = 0;
+						mPlants.Clear();
+						mApp.mPlayerInfo.mNumPottedPlants = 0;
 						return;
 					}
 					if (value_type == 'a')
 					{
-						if (this.mApp.mZenGarden.IsZenGardenFull(true))
+						if (mApp.mZenGarden.IsZenGardenFull(true))
 						{
 							return;
 						}
-						SeedType theSeedType2 = this.mApp.mZenGarden.PickRandomSeedType();
+						SeedType theSeedType2 = mApp.mZenGarden.PickRandomSeedType();
 						PottedPlant pottedPlant3 = new PottedPlant();
 						pottedPlant3.InitializePottedPlant(theSeedType2);
 						pottedPlant3.mPlantAge = PottedPlantAge.PLANTAGE_SMALL;
-						this.mApp.mZenGarden.AddPottedPlant(pottedPlant3);
+						mApp.mZenGarden.AddPottedPlant(pottedPlant3);
 						return;
 					}
 					else
@@ -2213,42 +2213,42 @@ namespace Lawn
 						{
 							int num = -1;
 							Plant plant = null;
-							while (this.IteratePlants(ref plant, ref num))
+							while (IteratePlants(ref plant, ref num))
 							{
-								if (this.GetZenToolAt(plant.mPlantCol, plant.mRow) == null && plant.mPottedPlantIndex >= 0)
+								if (GetZenToolAt(plant.mPlantCol, plant.mRow) == null && plant.mPottedPlantIndex >= 0)
 								{
-									PottedPlant thePottedPlant = this.mApp.mZenGarden.PottedPlantFromIndex(plant.mPottedPlantIndex);
-									PottedPlantNeed plantsNeed = this.mApp.mZenGarden.GetPlantsNeed(thePottedPlant);
+									PottedPlant thePottedPlant = mApp.mZenGarden.PottedPlantFromIndex(plant.mPottedPlantIndex);
+									PottedPlantNeed plantsNeed = mApp.mZenGarden.GetPlantsNeed(thePottedPlant);
 									if (plantsNeed == PottedPlantNeed.PLANTNEED_WATER)
 									{
 										plant.mHighlighted = true;
-										this.mApp.mZenGarden.MouseDownWithFeedingTool(plant.mX, plant.mY, CursorType.CURSOR_TYPE_WATERING_CAN);
+										mApp.mZenGarden.MouseDownWithFeedingTool(plant.mX, plant.mY, CursorType.CURSOR_TYPE_WATERING_CAN);
 										return;
 									}
 									if (plantsNeed == PottedPlantNeed.PLANTNEED_FERTILIZER)
 									{
 										plant.mHighlighted = true;
-										if (this.mApp.mPlayerInfo.mPurchases[14] <= 1000)
+										if (mApp.mPlayerInfo.mPurchases[14] <= 1000)
 										{
-											this.mApp.mPlayerInfo.mPurchases[14] = 1001;
+											mApp.mPlayerInfo.mPurchases[14] = 1001;
 										}
-										this.mApp.mZenGarden.MouseDownWithFeedingTool(plant.mX, plant.mY, CursorType.CURSOR_TYPE_FERTILIZER);
+										mApp.mZenGarden.MouseDownWithFeedingTool(plant.mX, plant.mY, CursorType.CURSOR_TYPE_FERTILIZER);
 										return;
 									}
 									if (plantsNeed == PottedPlantNeed.PLANTNEED_BUGSPRAY)
 									{
 										plant.mHighlighted = true;
-										if (this.mApp.mPlayerInfo.mPurchases[15] <= 1000)
+										if (mApp.mPlayerInfo.mPurchases[15] <= 1000)
 										{
-											this.mApp.mPlayerInfo.mPurchases[15] = 1001;
+											mApp.mPlayerInfo.mPurchases[15] = 1001;
 										}
-										this.mApp.mZenGarden.MouseDownWithFeedingTool(plant.mX, plant.mY, CursorType.CURSOR_TYPE_BUG_SPRAY);
+										mApp.mZenGarden.MouseDownWithFeedingTool(plant.mX, plant.mY, CursorType.CURSOR_TYPE_BUG_SPRAY);
 										return;
 									}
 									if (plantsNeed == PottedPlantNeed.PLANTNEED_PHONOGRAPH)
 									{
 										plant.mHighlighted = true;
-										this.mApp.mZenGarden.MouseDownWithFeedingTool(plant.mX, plant.mY, CursorType.CURSOR_TYPE_PHONOGRAPH);
+										mApp.mZenGarden.MouseDownWithFeedingTool(plant.mX, plant.mY, CursorType.CURSOR_TYPE_PHONOGRAPH);
 										return;
 									}
 								}
@@ -2259,40 +2259,40 @@ namespace Lawn
 						{
 							int num2 = -1;
 							Plant plant2 = null;
-							while (this.IteratePlants(ref plant2, ref num2))
+							while (IteratePlants(ref plant2, ref num2))
 							{
 								if (plant2.mPottedPlantIndex >= 0)
 								{
-									Debug.ASSERT(plant2.mPottedPlantIndex < this.mApp.mPlayerInfo.mNumPottedPlants);
-									PottedPlant thePottedPlant2 = this.mApp.mPlayerInfo.mPottedPlant[plant2.mPottedPlantIndex];
-									this.mApp.mZenGarden.ResetPlantTimers(thePottedPlant2);
+									Debug.ASSERT(plant2.mPottedPlantIndex < mApp.mPlayerInfo.mNumPottedPlants);
+									PottedPlant thePottedPlant2 = mApp.mPlayerInfo.mPottedPlant[plant2.mPottedPlantIndex];
+									mApp.mZenGarden.ResetPlantTimers(thePottedPlant2);
 								}
 							}
 							return;
 						}
 						if (value_type == 's')
 						{
-							if (this.mApp.mZenGarden.IsStinkySleeping())
+							if (mApp.mZenGarden.IsStinkySleeping())
 							{
-								this.mApp.mZenGarden.WakeStinky();
+								mApp.mZenGarden.WakeStinky();
 								return;
 							}
-							this.mApp.mZenGarden.ResetStinkyTimers();
+							mApp.mZenGarden.ResetStinkyTimers();
 							return;
 						}
 						else if (value_type == 'c')
 						{
-							if (this.mApp.mPlayerInfo.mPurchases[26] < 1000)
+							if (mApp.mPlayerInfo.mPurchases[26] < 1000)
 							{
-								this.mApp.mPlayerInfo.mPurchases[26] = 1001;
+								mApp.mPlayerInfo.mPurchases[26] = 1001;
 								return;
 							}
-							this.mApp.mPlayerInfo.mPurchases[26]++;
+							mApp.mPlayerInfo.mPurchases[26]++;
 							return;
 						}
 						else if (value_type == ']')
 						{
-							PottedPlant pottedPlantInWheelbarrow = this.mApp.mZenGarden.GetPottedPlantInWheelbarrow();
+							PottedPlant pottedPlantInWheelbarrow = mApp.mZenGarden.GetPottedPlantInWheelbarrow();
 							if (pottedPlantInWheelbarrow != null)
 							{
 								pottedPlantInWheelbarrow.mSeedType++;
@@ -2310,88 +2310,88 @@ namespace Lawn
 					}
 				}
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
+			if (mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
 			{
 				if (value_type == 'f')
 				{
-					if (this.mApp.mPlayerInfo.mPurchases[28] <= 1000)
+					if (mApp.mPlayerInfo.mPurchases[28] <= 1000)
 					{
-						this.mApp.mPlayerInfo.mPurchases[28] = 1001;
+						mApp.mPlayerInfo.mPurchases[28] = 1001;
 					}
-					this.mChallenge.TreeOfWisdomFertilize();
+					mChallenge.TreeOfWisdomFertilize();
 					return;
 				}
 				if (value_type == 'g')
 				{
-					this.mChallenge.TreeOfWisdomGrow();
+					mChallenge.TreeOfWisdomGrow();
 					return;
 				}
 				if (value_type == 'b')
 				{
-					this.mChallenge.mChallengeStateCounter = 1;
+					mChallenge.mChallengeStateCounter = 1;
 					return;
 				}
 				if (value_type == '0')
 				{
-					int currentChallengeIndex = this.mApp.GetCurrentChallengeIndex();
-					this.mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex] = 0;
-					this.mChallenge.TreeOfWisdomGrow();
+					int currentChallengeIndex = mApp.GetCurrentChallengeIndex();
+					mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex] = 0;
+					mChallenge.TreeOfWisdomGrow();
 					return;
 				}
 				if (value_type == '1')
 				{
-					int currentChallengeIndex2 = this.mApp.GetCurrentChallengeIndex();
-					this.mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex2] = 9;
-					this.mChallenge.TreeOfWisdomGrow();
+					int currentChallengeIndex2 = mApp.GetCurrentChallengeIndex();
+					mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex2] = 9;
+					mChallenge.TreeOfWisdomGrow();
 					return;
 				}
 				if (value_type == '2')
 				{
-					int currentChallengeIndex3 = this.mApp.GetCurrentChallengeIndex();
-					this.mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex3] = 19;
-					this.mChallenge.TreeOfWisdomGrow();
+					int currentChallengeIndex3 = mApp.GetCurrentChallengeIndex();
+					mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex3] = 19;
+					mChallenge.TreeOfWisdomGrow();
 					return;
 				}
 				if (value_type == '3')
 				{
-					int currentChallengeIndex4 = this.mApp.GetCurrentChallengeIndex();
-					this.mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex4] = 29;
-					this.mChallenge.TreeOfWisdomGrow();
+					int currentChallengeIndex4 = mApp.GetCurrentChallengeIndex();
+					mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex4] = 29;
+					mChallenge.TreeOfWisdomGrow();
 					return;
 				}
 				if (value_type == '4')
 				{
-					int currentChallengeIndex5 = this.mApp.GetCurrentChallengeIndex();
-					this.mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex5] = 39;
-					this.mChallenge.TreeOfWisdomGrow();
+					int currentChallengeIndex5 = mApp.GetCurrentChallengeIndex();
+					mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex5] = 39;
+					mChallenge.TreeOfWisdomGrow();
 					return;
 				}
 				if (value_type == '5')
 				{
-					int currentChallengeIndex6 = this.mApp.GetCurrentChallengeIndex();
-					this.mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex6] = 49;
-					this.mChallenge.TreeOfWisdomGrow();
+					int currentChallengeIndex6 = mApp.GetCurrentChallengeIndex();
+					mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex6] = 49;
+					mChallenge.TreeOfWisdomGrow();
 					return;
 				}
 				if (value_type == '6')
 				{
-					int currentChallengeIndex7 = this.mApp.GetCurrentChallengeIndex();
-					this.mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex7] = 98;
-					this.mChallenge.TreeOfWisdomGrow();
+					int currentChallengeIndex7 = mApp.GetCurrentChallengeIndex();
+					mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex7] = 98;
+					mChallenge.TreeOfWisdomGrow();
 					return;
 				}
 				if (value_type == '7')
 				{
-					int currentChallengeIndex8 = this.mApp.GetCurrentChallengeIndex();
-					this.mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex8] = 498;
-					this.mChallenge.TreeOfWisdomGrow();
+					int currentChallengeIndex8 = mApp.GetCurrentChallengeIndex();
+					mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex8] = 498;
+					mChallenge.TreeOfWisdomGrow();
 					return;
 				}
 				if (value_type == '8')
 				{
-					int currentChallengeIndex9 = this.mApp.GetCurrentChallengeIndex();
-					this.mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex9] = 998;
-					this.mChallenge.TreeOfWisdomGrow();
+					int currentChallengeIndex9 = mApp.GetCurrentChallengeIndex();
+					mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex9] = 998;
+					mChallenge.TreeOfWisdomGrow();
 				}
 				return;
 			}
@@ -2400,32 +2400,32 @@ namespace Lawn
 				Zombie bossZombie;
 				if (value_type == '<')
 				{
-					this.mApp.DoNewOptions(false);
+					mApp.DoNewOptions(false);
 				}
 				else if (value_type == '2')
 				{
-					this.AddZombie(ZombieType.ZOMBIE_DIGGER, GameConstants.ZOMBIE_WAVE_DEBUG);
+					AddZombie(ZombieType.ZOMBIE_DIGGER, GameConstants.ZOMBIE_WAVE_DEBUG);
 				}
 				else if (value_type == 'l')
 				{
-					this.mApp.DoCheatDialog();
+					mApp.DoCheatDialog();
 				}
 				else if (value_type == '#')
 				{
-					if (this.mApp.IsSurvivalMode())
+					if (mApp.IsSurvivalMode())
 					{
-						if (this.mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
+						if (mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
 						{
 							return;
 						}
-						this.mCurrentWave = this.mNumWaves;
-						this.mChallenge.mSurvivalStage += 5;
-						this.RemoveAllZombies();
-						this.FadeOutLevel();
+						mCurrentWave = mNumWaves;
+						mChallenge.mSurvivalStage += 5;
+						RemoveAllZombies();
+						FadeOutLevel();
 					}
 					else
 					{
-						bossZombie = this.GetBossZombie();
+						bossZombie = GetBossZombie();
 						if (bossZombie != null)
 						{
 							bossZombie.ApplyBossSmokeParticles(true);
@@ -2434,116 +2434,116 @@ namespace Lawn
 				}
 				else if (value_type == '!')
 				{
-					this.mApp.mBoardResult = BoardResult.BOARDRESULT_CHEAT;
-					if (this.IsLastStandStageWithRepick())
+					mApp.mBoardResult = BoardResult.BOARDRESULT_CHEAT;
+					if (IsLastStandStageWithRepick())
 					{
-						if (this.mNextSurvivalStageCounter == 0)
+						if (mNextSurvivalStageCounter == 0)
 						{
-							this.mCurrentWave = this.mNumWaves;
-							this.RemoveAllZombies();
-							this.FadeOutLevel();
+							mCurrentWave = mNumWaves;
+							RemoveAllZombies();
+							FadeOutLevel();
 						}
 					}
-					else if ((this.mApp.IsScaryPotterLevel() && !this.IsFinalScaryPotterStage()) || this.mApp.IsEndlessIZombie(this.mApp.mGameMode))
+					else if ((mApp.IsScaryPotterLevel() && !IsFinalScaryPotterStage()) || mApp.IsEndlessIZombie(mApp.mGameMode))
 					{
-						if (this.mNextSurvivalStageCounter == 0)
+						if (mNextSurvivalStageCounter == 0)
 						{
-							this.RemoveAllZombies();
-							this.FadeOutLevel();
+							RemoveAllZombies();
+							FadeOutLevel();
 						}
 					}
-					else if (this.mApp.IsSurvivalMode())
+					else if (mApp.IsSurvivalMode())
 					{
-						if (this.mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
+						if (mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
 						{
 							return;
 						}
-						this.mCurrentWave = this.mNumWaves;
-						if (!this.IsSurvivalStageWithRepick())
+						mCurrentWave = mNumWaves;
+						if (!IsSurvivalStageWithRepick())
 						{
-							this.RemoveAllZombies();
+							RemoveAllZombies();
 						}
-						this.FadeOutLevel();
+						FadeOutLevel();
 					}
 					else
 					{
-						this.RemoveAllZombies();
-						this.FadeOutLevel();
-						this.mBoardFadeOutCounter = 200;
+						RemoveAllZombies();
+						FadeOutLevel();
+						mBoardFadeOutCounter = 200;
 					}
 				}
 				else if (value_type == '+')
 				{
-					this.mApp.mBoardResult = BoardResult.BOARDRESULT_CHEAT;
-					if (this.IsLastStandStageWithRepick())
+					mApp.mBoardResult = BoardResult.BOARDRESULT_CHEAT;
+					if (IsLastStandStageWithRepick())
 					{
-						if (this.mNextSurvivalStageCounter == 0)
+						if (mNextSurvivalStageCounter == 0)
 						{
-							this.mCurrentWave = this.mNumWaves;
-							this.RemoveAllZombies();
-							this.FadeOutLevel();
+							mCurrentWave = mNumWaves;
+							RemoveAllZombies();
+							FadeOutLevel();
 						}
 					}
-					else if ((this.mApp.IsScaryPotterLevel() && !this.IsFinalScaryPotterStage()) || this.mApp.IsEndlessIZombie(this.mApp.mGameMode))
+					else if ((mApp.IsScaryPotterLevel() && !IsFinalScaryPotterStage()) || mApp.IsEndlessIZombie(mApp.mGameMode))
 					{
-						if (this.mNextSurvivalStageCounter == 0)
+						if (mNextSurvivalStageCounter == 0)
 						{
-							this.RemoveAllZombies();
-							this.FadeOutLevel();
+							RemoveAllZombies();
+							FadeOutLevel();
 						}
 					}
-					else if (this.mApp.IsSurvivalEndless(this.mApp.mGameMode))
+					else if (mApp.IsSurvivalEndless(mApp.mGameMode))
 					{
-						if (this.mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
+						if (mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
 						{
 							return;
 						}
-						this.mCurrentWave = this.mNumWaves;
-						this.RemoveAllZombies();
-						this.FadeOutLevel();
+						mCurrentWave = mNumWaves;
+						RemoveAllZombies();
+						FadeOutLevel();
 					}
-					else if (this.mApp.IsSurvivalMode())
+					else if (mApp.IsSurvivalMode())
 					{
-						this.mChallenge.mSurvivalStage = 5;
-						this.RemoveAllZombies();
-						this.FadeOutLevel();
-						this.mBoardFadeOutCounter = 200;
+						mChallenge.mSurvivalStage = 5;
+						RemoveAllZombies();
+						FadeOutLevel();
+						mBoardFadeOutCounter = 200;
 					}
 					else
 					{
-						this.RemoveAllZombies();
-						this.FadeOutLevel();
-						this.mBoardFadeOutCounter = 200;
+						RemoveAllZombies();
+						FadeOutLevel();
+						mBoardFadeOutCounter = 200;
 					}
 				}
 				else if (value_type == '8')
 				{
-					this.mApp.mEasyPlantingCheat = !this.mApp.mEasyPlantingCheat;
+					mApp.mEasyPlantingCheat = !mApp.mEasyPlantingCheat;
 				}
 				else if (value_type == '7')
 				{
-					this.mApp.ToggleSlowMo();
+					mApp.ToggleSlowMo();
 				}
 				else if (value_type == '6')
 				{
-					this.mApp.ToggleFastMo();
+					mApp.ToggleFastMo();
 				}
 				else if (value_type == 'z')
 				{
-					this.ClearAdviceImmediately();
-					this.DisplayAdviceAgain("[ADVICE_HUGE_WAVE]", MessageStyle.MESSAGE_STYLE_HUGE_WAVE, AdviceType.ADVICE_HUGE_WAVE);
-					this.mHugeWaveCountDown = 750;
-					this.mDebugTextMode++;
-					if (this.mDebugTextMode > DebugTextMode.DEBUG_TEXT_COLLISION)
+					ClearAdviceImmediately();
+					DisplayAdviceAgain("[ADVICE_HUGE_WAVE]", MessageStyle.MESSAGE_STYLE_HUGE_WAVE, AdviceType.ADVICE_HUGE_WAVE);
+					mHugeWaveCountDown = 750;
+					mDebugTextMode++;
+					if (mDebugTextMode > DebugTextMode.DEBUG_TEXT_COLLISION)
 					{
-						this.mDebugTextMode = DebugTextMode.DEBUG_TEXT_NONE;
+						mDebugTextMode = DebugTextMode.DEBUG_TEXT_NONE;
 					}
 				}
-				if (this.mApp.mGameScene != GameScenes.SCENE_PLAYING)
+				if (mApp.mGameScene != GameScenes.SCENE_PLAYING)
 				{
 					return;
 				}
-				bossZombie = this.GetBossZombie();
+				bossZombie = GetBossZombie();
 				if (bossZombie != null && !bossZombie.IsDeadOrDying())
 				{
 					if (value_type == 'b')
@@ -2577,69 +2577,69 @@ namespace Lawn
 						return;
 					}
 				}
-				if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS_2)
+				if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS_2)
 				{
 					if (value_type == 'w')
 					{
-						this.AddZombie(ZombieType.ZOMBIE_WALLNUT_HEAD, GameConstants.ZOMBIE_WAVE_DEBUG);
+						AddZombie(ZombieType.ZOMBIE_WALLNUT_HEAD, GameConstants.ZOMBIE_WAVE_DEBUG);
 						return;
 					}
 					if (value_type == 't')
 					{
-						this.AddZombie(ZombieType.ZOMBIE_TALLNUT_HEAD, GameConstants.ZOMBIE_WAVE_DEBUG);
+						AddZombie(ZombieType.ZOMBIE_TALLNUT_HEAD, GameConstants.ZOMBIE_WAVE_DEBUG);
 						return;
 					}
 					if (value_type == 'j')
 					{
-						this.AddZombie(ZombieType.ZOMBIE_JALAPENO_HEAD, GameConstants.ZOMBIE_WAVE_DEBUG);
+						AddZombie(ZombieType.ZOMBIE_JALAPENO_HEAD, GameConstants.ZOMBIE_WAVE_DEBUG);
 						return;
 					}
 					if (value_type == 'g')
 					{
-						this.AddZombie(ZombieType.ZOMBIE_GATLING_HEAD, GameConstants.ZOMBIE_WAVE_DEBUG);
+						AddZombie(ZombieType.ZOMBIE_GATLING_HEAD, GameConstants.ZOMBIE_WAVE_DEBUG);
 						return;
 					}
 					if (value_type == 's')
 					{
-						this.AddZombie(ZombieType.ZOMBIE_SQUASH_HEAD, GameConstants.ZOMBIE_WAVE_DEBUG);
+						AddZombie(ZombieType.ZOMBIE_SQUASH_HEAD, GameConstants.ZOMBIE_WAVE_DEBUG);
 						return;
 					}
 				}
-				if (value_type == 'q' && this.mApp.IsSurvivalEndless(this.mApp.mGameMode))
+				if (value_type == 'q' && mApp.IsSurvivalEndless(mApp.mGameMode))
 				{
-					this.mApp.mEasyPlantingCheat = true;
+					mApp.mEasyPlantingCheat = true;
 					for (int i = 0; i < Constants.MAX_GRIDSIZEY; i++)
 					{
 						for (int j = 0; j < Constants.GRIDSIZEX; j++)
 						{
-							if (this.CanPlantAt(j, i, SeedType.SEED_LILYPAD) == PlantingReason.PLANTING_OK)
+							if (CanPlantAt(j, i, SeedType.SEED_LILYPAD) == PlantingReason.PLANTING_OK)
 							{
-								this.AddPlant(j, i, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+								AddPlant(j, i, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
 							}
-							if (this.CanPlantAt(j, i, SeedType.SEED_PUMPKINSHELL) == PlantingReason.PLANTING_OK && (j <= 6 || this.IsPoolSquare(j, i)))
+							if (CanPlantAt(j, i, SeedType.SEED_PUMPKINSHELL) == PlantingReason.PLANTING_OK && (j <= 6 || IsPoolSquare(j, i)))
 							{
-								this.AddPlant(j, i, SeedType.SEED_PUMPKINSHELL, SeedType.SEED_NONE);
+								AddPlant(j, i, SeedType.SEED_PUMPKINSHELL, SeedType.SEED_NONE);
 							}
-							if (this.CanPlantAt(j, i, SeedType.SEED_GATLINGPEA) == PlantingReason.PLANTING_OK)
+							if (CanPlantAt(j, i, SeedType.SEED_GATLINGPEA) == PlantingReason.PLANTING_OK)
 							{
 								if (j < 5)
 								{
-									this.AddPlant(j, i, SeedType.SEED_GATLINGPEA, SeedType.SEED_NONE);
+									AddPlant(j, i, SeedType.SEED_GATLINGPEA, SeedType.SEED_NONE);
 								}
 								else if (j == 5)
 								{
-									this.AddPlant(j, i, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
+									AddPlant(j, i, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
 								}
 								else if (j == 6)
 								{
-									this.AddPlant(j, i, SeedType.SEED_SPLITPEA, SeedType.SEED_NONE);
+									AddPlant(j, i, SeedType.SEED_SPLITPEA, SeedType.SEED_NONE);
 								}
 								else if (i == 2 || i == 3)
 								{
-									this.AddPlant(j, i, SeedType.SEED_GLOOMSHROOM, SeedType.SEED_NONE);
-									if (this.CanPlantAt(j, i, SeedType.SEED_INSTANT_COFFEE) == PlantingReason.PLANTING_OK)
+									AddPlant(j, i, SeedType.SEED_GLOOMSHROOM, SeedType.SEED_NONE);
+									if (CanPlantAt(j, i, SeedType.SEED_INSTANT_COFFEE) == PlantingReason.PLANTING_OK)
 									{
-										this.AddPlant(j, i, SeedType.SEED_INSTANT_COFFEE, SeedType.SEED_NONE);
+										AddPlant(j, i, SeedType.SEED_INSTANT_COFFEE, SeedType.SEED_NONE);
 									}
 								}
 							}
@@ -2647,56 +2647,56 @@ namespace Lawn
 					}
 					return;
 				}
-				if (value_type == 'q' && this.mApp.IsIZombieLevel())
+				if (value_type == 'q' && mApp.IsIZombieLevel())
 				{
-					this.mApp.mEasyPlantingCheat = true;
-					if (this.mApp.IsIZombieLevel())
+					mApp.mEasyPlantingCheat = true;
+					if (mApp.IsIZombieLevel())
 					{
 						for (int k = 0; k < 5; k++)
 						{
-							this.mChallenge.IZombiePlaceZombie(ZombieType.ZOMBIE_FOOTBALL, 6, k);
+							mChallenge.IZombiePlaceZombie(ZombieType.ZOMBIE_FOOTBALL, 6, k);
 						}
 						return;
 					}
 				}
 				else if (value_type == 'q')
 				{
-					this.mApp.mEasyPlantingCheat = true;
+					mApp.mEasyPlantingCheat = true;
 					for (int l = 0; l < Constants.MAX_GRIDSIZEY; l++)
 					{
 						for (int m = 0; m < Constants.GRIDSIZEX; m++)
 						{
-							if (this.StageHasRoof() && this.CanPlantAt(m, l, SeedType.SEED_FLOWERPOT) == PlantingReason.PLANTING_OK)
+							if (StageHasRoof() && CanPlantAt(m, l, SeedType.SEED_FLOWERPOT) == PlantingReason.PLANTING_OK)
 							{
-								this.AddPlant(m, l, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+								AddPlant(m, l, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
 							}
-							if (this.CanPlantAt(m, l, SeedType.SEED_LILYPAD) == PlantingReason.PLANTING_OK)
+							if (CanPlantAt(m, l, SeedType.SEED_LILYPAD) == PlantingReason.PLANTING_OK)
 							{
-								this.AddPlant(m, l, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+								AddPlant(m, l, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
 							}
-							if (this.CanPlantAt(m, l, SeedType.SEED_THREEPEATER) == PlantingReason.PLANTING_OK)
+							if (CanPlantAt(m, l, SeedType.SEED_THREEPEATER) == PlantingReason.PLANTING_OK)
 							{
-								this.AddPlant(m, l, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
+								AddPlant(m, l, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
 							}
 						}
 					}
-					if (!this.mChallenge.UpdateZombieSpawning())
+					if (!mChallenge.UpdateZombieSpawning())
 					{
-						int num3 = Math.Min(this.mNumWaves - this.mCurrentWave, 20);
+						int num3 = Math.Min(mNumWaves - mCurrentWave, 20);
 						for (int n = 0; n < num3; n++)
 						{
-							this.SpawnZombieWave();
+							SpawnZombieWave();
 						}
 					}
-					if (this.mApp.IsScaryPotterLevel())
+					if (mApp.IsScaryPotterLevel())
 					{
 						int num4 = -1;
 						GridItem gridItem = null;
-						while (this.IterateGridItems(ref gridItem, ref num4))
+						while (IterateGridItems(ref gridItem, ref num4))
 						{
 							if (gridItem.mGridItemType == GridItemType.GRIDITEM_SCARY_POT)
 							{
-								this.mChallenge.ScaryPotterOpenPot(gridItem);
+								mChallenge.ScaryPotterOpenPot(gridItem);
 							}
 						}
 						return;
@@ -2704,42 +2704,42 @@ namespace Lawn
 				}
 				else if (value_type == ']')
 				{
-					this.mApp.mEasyPlantingCheat = true;
+					mApp.mEasyPlantingCheat = true;
 					for (int num5 = 0; num5 < Constants.MAX_GRIDSIZEY; num5++)
 					{
 						for (int num6 = 0; num6 < Constants.GRIDSIZEX; num6++)
 						{
-							if (this.StageHasRoof() && this.CanPlantAt(num6, num5, SeedType.SEED_FLOWERPOT) == PlantingReason.PLANTING_OK)
+							if (StageHasRoof() && CanPlantAt(num6, num5, SeedType.SEED_FLOWERPOT) == PlantingReason.PLANTING_OK)
 							{
-								this.AddPlant(num6, num5, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+								AddPlant(num6, num5, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
 							}
-							if (this.CanPlantAt(num6, num5, SeedType.SEED_LILYPAD) == PlantingReason.PLANTING_OK)
+							if (CanPlantAt(num6, num5, SeedType.SEED_LILYPAD) == PlantingReason.PLANTING_OK)
 							{
-								this.AddPlant(num6, num5, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+								AddPlant(num6, num5, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
 							}
-							if (this.CanPlantAt(num6, num5, SeedType.SEED_PEASHOOTER) == PlantingReason.PLANTING_OK)
+							if (CanPlantAt(num6, num5, SeedType.SEED_PEASHOOTER) == PlantingReason.PLANTING_OK)
 							{
-								this.AddPlant(num6, num5, SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
+								AddPlant(num6, num5, SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
 							}
 						}
 					}
-					if (!this.mChallenge.UpdateZombieSpawning())
+					if (!mChallenge.UpdateZombieSpawning())
 					{
-						int num7 = Math.Min(this.mNumWaves - this.mCurrentWave, 20);
+						int num7 = Math.Min(mNumWaves - mCurrentWave, 20);
 						for (int num8 = 0; num8 < num7; num8++)
 						{
-							this.SpawnZombieWave();
+							SpawnZombieWave();
 						}
 					}
-					if (this.mApp.IsScaryPotterLevel())
+					if (mApp.IsScaryPotterLevel())
 					{
 						int num9 = -1;
 						GridItem gridItem2 = null;
-						while (this.IterateGridItems(ref gridItem2, ref num9))
+						while (IterateGridItems(ref gridItem2, ref num9))
 						{
 							if (gridItem2.mGridItemType == GridItemType.GRIDITEM_SCARY_POT)
 							{
-								this.mChallenge.ScaryPotterOpenPot(gridItem2);
+								mChallenge.ScaryPotterOpenPot(gridItem2);
 							}
 						}
 						return;
@@ -2747,31 +2747,31 @@ namespace Lawn
 				}
 				else if (value_type == '[')
 				{
-					if (!this.mChallenge.UpdateZombieSpawning())
+					if (!mChallenge.UpdateZombieSpawning())
 					{
 						int num10 = 1;
 						for (int num11 = 0; num11 < num10; num11++)
 						{
-							this.SpawnZombieWave();
+							SpawnZombieWave();
 						}
 						return;
 					}
 				}
 				else if (value_type == '?' || value_type == '/')
 				{
-					if (this.mHugeWaveCountDown > 0)
+					if (mHugeWaveCountDown > 0)
 					{
-						this.mHugeWaveCountDown = 1;
+						mHugeWaveCountDown = 1;
 						return;
 					}
-					this.mZombieCountDown = 6;
+					mZombieCountDown = 6;
 					return;
 				}
 				else if (value_type == 'b')
 				{
-					if (this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST)
+					if (mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST)
 					{
-						this.AddZombie(ZombieType.ZOMBIE_BUNGEE, GameConstants.ZOMBIE_WAVE_DEBUG);
+						AddZombie(ZombieType.ZOMBIE_BUNGEE, GameConstants.ZOMBIE_WAVE_DEBUG);
 						return;
 					}
 				}
@@ -2779,44 +2779,44 @@ namespace Lawn
 				{
 					if (value_type == 'O')
 					{
-						this.AddZombie(ZombieType.ZOMBIE_FOOTBALL, GameConstants.ZOMBIE_WAVE_DEBUG);
+						AddZombie(ZombieType.ZOMBIE_FOOTBALL, GameConstants.ZOMBIE_WAVE_DEBUG);
 						return;
 					}
 					if (value_type == 's')
 					{
-						this.AddZombie(ZombieType.ZOMBIE_DOOR, GameConstants.ZOMBIE_WAVE_DEBUG);
+						AddZombie(ZombieType.ZOMBIE_DOOR, GameConstants.ZOMBIE_WAVE_DEBUG);
 						return;
 					}
 					if (value_type == 'L')
 					{
-						this.AddZombie(ZombieType.ZOMBIE_LADDER, GameConstants.ZOMBIE_WAVE_DEBUG);
+						AddZombie(ZombieType.ZOMBIE_LADDER, GameConstants.ZOMBIE_WAVE_DEBUG);
 						return;
 					}
 					if (value_type == 'y')
 					{
-						this.AddZombie(ZombieType.ZOMBIE_YETI, GameConstants.ZOMBIE_WAVE_DEBUG);
+						AddZombie(ZombieType.ZOMBIE_YETI, GameConstants.ZOMBIE_WAVE_DEBUG);
 						return;
 					}
 					if (value_type == 'a')
 					{
-						this.AddZombie(ZombieType.ZOMBIE_FLAG, GameConstants.ZOMBIE_WAVE_DEBUG);
+						AddZombie(ZombieType.ZOMBIE_FLAG, GameConstants.ZOMBIE_WAVE_DEBUG);
 						return;
 					}
 					if (value_type == 'w')
 					{
-						this.AddZombie(ZombieType.ZOMBIE_NEWSPAPER, GameConstants.ZOMBIE_WAVE_DEBUG);
+						AddZombie(ZombieType.ZOMBIE_NEWSPAPER, GameConstants.ZOMBIE_WAVE_DEBUG);
 						return;
 					}
 					if (value_type == 'F')
 					{
-						this.AddZombie(ZombieType.ZOMBIE_BALLOON, GameConstants.ZOMBIE_WAVE_DEBUG);
+						AddZombie(ZombieType.ZOMBIE_BALLOON, GameConstants.ZOMBIE_WAVE_DEBUG);
 						return;
 					}
 					if (value_type == 'n')
 					{
-						if (this.StageHasPool())
+						if (StageHasPool())
 						{
-							this.AddZombie(ZombieType.ZOMBIE_SNORKEL, GameConstants.ZOMBIE_WAVE_DEBUG);
+							AddZombie(ZombieType.ZOMBIE_SNORKEL, GameConstants.ZOMBIE_WAVE_DEBUG);
 							return;
 						}
 					}
@@ -2824,12 +2824,12 @@ namespace Lawn
 					{
 						if (value_type == 'c')
 						{
-							this.AddZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, GameConstants.ZOMBIE_WAVE_DEBUG);
+							AddZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, GameConstants.ZOMBIE_WAVE_DEBUG);
 							return;
 						}
 						if (value_type == 'm')
 						{
-							this.AddZombie(ZombieType.ZOMBIE_DANCER, GameConstants.ZOMBIE_WAVE_DEBUG);
+							AddZombie(ZombieType.ZOMBIE_DANCER, GameConstants.ZOMBIE_WAVE_DEBUG);
 							return;
 						}
 						if (value_type == '*')
@@ -2840,43 +2840,43 @@ namespace Lawn
 						}
 						if (value_type == ' ')
 						{
-							this.mApp.DoPauseDialog();
+							mApp.DoPauseDialog();
 							return;
 						}
 						if (value_type == 'h')
 						{
-							this.AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
+							AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
 							return;
 						}
 						if (value_type == 'H')
 						{
-							this.AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
-							this.AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
-							this.AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
-							this.AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
-							this.AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
+							AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
+							AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
+							AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
+							AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
+							AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
 							return;
 						}
 						if (value_type == 'D')
 						{
-							this.AddZombie(ZombieType.ZOMBIE_DIGGER, GameConstants.ZOMBIE_WAVE_DEBUG);
+							AddZombie(ZombieType.ZOMBIE_DIGGER, GameConstants.ZOMBIE_WAVE_DEBUG);
 							return;
 						}
 						if (value_type == 'p')
 						{
-							this.AddZombie(ZombieType.ZOMBIE_POLEVAULTER, GameConstants.ZOMBIE_WAVE_DEBUG);
+							AddZombie(ZombieType.ZOMBIE_POLEVAULTER, GameConstants.ZOMBIE_WAVE_DEBUG);
 							return;
 						}
 						if (value_type == 'P')
 						{
-							this.AddZombie(ZombieType.ZOMBIE_POGO, GameConstants.ZOMBIE_WAVE_DEBUG);
+							AddZombie(ZombieType.ZOMBIE_POGO, GameConstants.ZOMBIE_WAVE_DEBUG);
 							return;
 						}
 						if (value_type == 'R')
 						{
-							if (this.StageHasPool())
+							if (StageHasPool())
 							{
-								this.AddZombie(ZombieType.ZOMBIE_DOLPHIN_RIDER, GameConstants.ZOMBIE_WAVE_DEBUG);
+								AddZombie(ZombieType.ZOMBIE_DOLPHIN_RIDER, GameConstants.ZOMBIE_WAVE_DEBUG);
 								return;
 							}
 						}
@@ -2884,36 +2884,36 @@ namespace Lawn
 						{
 							if (value_type == 'j')
 							{
-								this.AddZombie(ZombieType.ZOMBIE_JACK_IN_THE_BOX, GameConstants.ZOMBIE_WAVE_DEBUG);
+								AddZombie(ZombieType.ZOMBIE_JACK_IN_THE_BOX, GameConstants.ZOMBIE_WAVE_DEBUG);
 								return;
 							}
 							if (value_type == 'g')
 							{
-								this.AddZombie(ZombieType.ZOMBIE_GARGANTUAR, GameConstants.ZOMBIE_WAVE_DEBUG);
+								AddZombie(ZombieType.ZOMBIE_GARGANTUAR, GameConstants.ZOMBIE_WAVE_DEBUG);
 								return;
 							}
 							if (value_type == 'G')
 							{
-								this.AddZombie(ZombieType.ZOMBIE_REDEYE_GARGANTUAR, GameConstants.ZOMBIE_WAVE_DEBUG);
+								AddZombie(ZombieType.ZOMBIE_REDEYE_GARGANTUAR, GameConstants.ZOMBIE_WAVE_DEBUG);
 								return;
 							}
 							if (value_type == 'i')
 							{
-								this.AddZombie(ZombieType.ZOMBIE_ZAMBONI, GameConstants.ZOMBIE_WAVE_DEBUG);
+								AddZombie(ZombieType.ZOMBIE_ZAMBONI, GameConstants.ZOMBIE_WAVE_DEBUG);
 								return;
 							}
 							if (value_type == 'C')
 							{
-								this.AddZombie(ZombieType.ZOMBIE_CATAPULT, GameConstants.ZOMBIE_WAVE_DEBUG);
+								AddZombie(ZombieType.ZOMBIE_CATAPULT, GameConstants.ZOMBIE_WAVE_DEBUG);
 								return;
 							}
 							if (value_type == '1')
 							{
-								Plant topPlantAt = this.GetTopPlantAt(0, 0, PlantPriority.TOPPLANT_ANY);
+								Plant topPlantAt = GetTopPlantAt(0, 0, PlantPriority.TOPPLANT_ANY);
 								if (topPlantAt != null)
 								{
 									topPlantAt.Die();
-									this.mChallenge.ZombieAtePlant(null, topPlantAt);
+									mChallenge.ZombieAtePlant(null, topPlantAt);
 									return;
 								}
 							}
@@ -2921,59 +2921,59 @@ namespace Lawn
 							{
 								if (value_type == 'B')
 								{
-									this.mFogBlownCountDown = 2200;
+									mFogBlownCountDown = 2200;
 									return;
 								}
 								if (value_type == 't')
 								{
-									if (!this.CanAddBobSled())
+									if (!CanAddBobSled())
 									{
 										int num12 = RandomNumbers.NextNumber(5);
 										int num13 = 400;
-										if (this.StageHasPool())
+										if (StageHasPool())
 										{
 											num12 = RandomNumbers.NextNumber(2);
 										}
-										else if (this.StageHasRoof())
+										else if (StageHasRoof())
 										{
 											num13 = 500;
 										}
-										this.mIceTimer[num12] = 3000;
-										this.mIceMinX[num12] = num13;
+										mIceTimer[num12] = 3000;
+										mIceMinX[num12] = num13;
 									}
-									this.AddZombie(ZombieType.ZOMBIE_BOBSLED, GameConstants.ZOMBIE_WAVE_DEBUG);
+									AddZombie(ZombieType.ZOMBIE_BOBSLED, GameConstants.ZOMBIE_WAVE_DEBUG);
 									return;
 								}
 								if (value_type == 'r')
 								{
-									this.SpawnZombiesFromGraves();
+									SpawnZombiesFromGraves();
 									return;
 								}
 								if (value_type == '0')
 								{
-									this.AddSunMoney(100);
-									this.mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
+									AddSunMoney(100);
+									mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
 									return;
 								}
 								if (value_type == '9')
 								{
-									this.AddSunMoney(999999);
-									this.mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
+									AddSunMoney(999999);
+									mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
 									return;
 								}
 								if (value_type == '$')
 								{
-									this.mApp.mPlayerInfo.AddCoins(100);
-									this.mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
-									this.ShowCoinBank();
+									mApp.mPlayerInfo.AddCoins(100);
+									mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
+									ShowCoinBank();
 									return;
 								}
 								if (value_type == '-')
 								{
-									this.mSunMoney -= 100;
-									if (this.mSunMoney < 0)
+									mSunMoney -= 100;
+									if (mSunMoney < 0)
 									{
-										this.mSunMoney = 0;
+										mSunMoney = 0;
 										return;
 									}
 								}
@@ -2985,7 +2985,7 @@ namespace Lawn
 									}
 									if (value_type == 'M')
 									{
-										this.mLawnMowers.Clear();
+										mLawnMowers.Clear();
 									}
 								}
 							}
@@ -3002,35 +3002,35 @@ namespace Lawn
 
 		public override void KeyDown(KeyCode theKey)
 		{
-			this.DoTypingCheck(theKey);
+			DoTypingCheck(theKey);
 			if ((ushort)theKey == 32 || (ushort)theKey == 13)
 			{
-				if (this.IsScaryPotterDaveTalking() && this.mApp.mCrazyDaveMessageIndex != -1)
+				if (IsScaryPotterDaveTalking() && mApp.mCrazyDaveMessageIndex != -1)
 				{
-					this.mChallenge.AdvanceCrazyDaveDialog();
+					mChallenge.AdvanceCrazyDaveDialog();
 					return;
 				}
-				if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || this.mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
+				if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
 				{
-					this.mApp.mZenGarden.AdvanceCrazyDaveDialog();
+					mApp.mZenGarden.AdvanceCrazyDaveDialog();
 					return;
 				}
 			}
-			if ((ushort)theKey == 32 && this.mApp.CanPauseNow())
+			if ((ushort)theKey == 32 && mApp.CanPauseNow())
 			{
-				this.mApp.PlaySample(Resources.SOUND_PAUSE);
-				this.mApp.DoPauseDialog();
+				mApp.PlaySample(Resources.SOUND_PAUSE);
+				mApp.DoPauseDialog();
 			}
 			if (theKey == KeyCode.KEYCODE_ESCAPE)
 			{
-				if (this.mCursorObject.mCursorType != CursorType.CURSOR_TYPE_NORMAL)
+				if (mCursorObject.mCursorType != CursorType.CURSOR_TYPE_NORMAL)
 				{
-					this.RefreshSeedPacketFromCursor();
+					RefreshSeedPacketFromCursor();
 					return;
 				}
-				if (this.CanInteractWithBoardButtons() && this.mApp.mGameScene != GameScenes.SCENE_ZOMBIES_WON)
+				if (CanInteractWithBoardButtons() && mApp.mGameScene != GameScenes.SCENE_ZOMBIES_WON)
 				{
-					this.mApp.DoNewOptions(false);
+					mApp.DoNewOptions(false);
 				}
 			}
 		}
@@ -3038,154 +3038,154 @@ namespace Lawn
 		public override void Update()
 		{
 			base.Update();
-			this.MarkDirty();
-			this.mCutScene.Update(false);
-			this.mCutScene.Update(false);
-			this.mCutScene.Update(true);
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+			MarkDirty();
+			mCutScene.Update(false);
+			mCutScene.Update(false);
+			mCutScene.Update(true);
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 			{
-				this.mApp.mZenGarden.ZenGardenUpdate(0);
-				this.mApp.mZenGarden.ZenGardenUpdate(1);
-				this.mApp.mZenGarden.ZenGardenUpdate(2);
-				this.mApp.UpdateCrazyDave();
+				mApp.mZenGarden.ZenGardenUpdate(0);
+				mApp.mZenGarden.ZenGardenUpdate(1);
+				mApp.mZenGarden.ZenGardenUpdate(2);
+				mApp.UpdateCrazyDave();
 			}
-			if (this.IsScaryPotterDaveTalking())
+			if (IsScaryPotterDaveTalking())
 			{
-				this.mApp.UpdateCrazyDave();
+				mApp.UpdateCrazyDave();
 			}
-			if (this.mPaused)
+			if (mPaused)
 			{
-				this.mChallenge.Update();
-				this.mChallenge.Update();
-				this.mChallenge.Update();
-				this.mCursorPreview.mVisible = false;
-				this.mCursorObject.mVisible = false;
+				mChallenge.Update();
+				mChallenge.Update();
+				mChallenge.Update();
+				mCursorPreview.mVisible = false;
+				mCursorObject.mVisible = false;
 				return;
 			}
-			bool mDisabled = !this.CanInteractWithBoardButtons() || this.mIgnoreMouseUp;
-			if (!this.mMenuButton.mBtnNoDraw)
+			bool aDisabled = !CanInteractWithBoardButtons() || mIgnoreMouseUp;
+			if (!mMenuButton.mBtnNoDraw)
 			{
-				this.mMenuButton.mDisabled = mDisabled;
+				mMenuButton.mDisabled = aDisabled;
 			}
-			this.mMenuButton.Update();
-			if (this.mStoreButton != null)
+			mMenuButton.Update();
+			if (mStoreButton != null)
 			{
-				this.mStoreButton.mDisabled = mDisabled;
-				this.mStoreButton.Update();
+				mStoreButton.mDisabled = aDisabled;
+				mStoreButton.Update();
 			}
-			this.mApp.mEffectSystem.Update();
-			this.mAdvice.Update();
-			this.UpdateTutorial();
-			this.UpdateTutorial();
-			this.UpdateTutorial();
-			if (this.mCobCannonCursorDelayCounter > 0)
+			mApp.mEffectSystem.Update();
+			mAdvice.Update();
+			UpdateTutorial();
+			UpdateTutorial();
+			UpdateTutorial();
+			if (mCobCannonCursorDelayCounter > 0)
 			{
-				this.mCobCannonCursorDelayCounter -= 3;
+				mCobCannonCursorDelayCounter -= 3;
 			}
-			if (this.mOutOfMoneyCounter > 0)
+			if (mOutOfMoneyCounter > 0)
 			{
-				this.mOutOfMoneyCounter -= 3;
+				mOutOfMoneyCounter -= 3;
 			}
-			if (this.mShakeCounter > 0)
+			if (mShakeCounter > 0)
 			{
-				this.mShakeCounter -= 3;
-				if (this.mShakeCounter == 0)
+				mShakeCounter -= 3;
+				if (mShakeCounter == 0)
 				{
-					this.mX = Constants.Board_Offset_AspectRatio_Correction;
-					this.mY = 0;
+					mX = Constants.Board_Offset_AspectRatio_Correction;
+					mY = 0;
 				}
 				else
 				{
-					this.mX = TodCommon.TodAnimateCurve(12, 0, this.mShakeCounter, Constants.Board_Offset_AspectRatio_Correction, Constants.Board_Offset_AspectRatio_Correction - this.mShakeAmountX, TodCurves.CURVE_BOUNCE);
-					this.mY = TodCommon.TodAnimateCurve(12, 0, this.mShakeCounter, 0, this.mShakeAmountY, TodCurves.CURVE_BOUNCE);
+					mX = TodCommon.TodAnimateCurve(12, 0, mShakeCounter, Constants.Board_Offset_AspectRatio_Correction, Constants.Board_Offset_AspectRatio_Correction - mShakeAmountX, TodCurves.CURVE_BOUNCE);
+					mY = TodCommon.TodAnimateCurve(12, 0, mShakeCounter, 0, mShakeAmountY, TodCurves.CURVE_BOUNCE);
 				}
 			}
-			if (this.mCoinBankFadeCount > 0 && this.mApp.GetDialog(Dialogs.DIALOG_PURCHASE_PACKET_SLOT) == null)
+			if (mCoinBankFadeCount > 0 && mApp.GetDialog(Dialogs.DIALOG_PURCHASE_PACKET_SLOT) == null)
 			{
-				this.mCoinBankFadeCount -= 3;
+				mCoinBankFadeCount -= 3;
 			}
-			if (this.mLevelFadeCount > 0)
+			if (mLevelFadeCount > 0)
 			{
-				this.mLevelFadeCount -= 3;
+				mLevelFadeCount -= 3;
 			}
-			this.UpdateLayers();
-			if (this.mTimeStopCounter > 0)
+			UpdateLayers();
+			if (mTimeStopCounter > 0)
 			{
 				return;
 			}
-			this.mEffectCounter += 3;
-			if (this.StageHasPool() && this.mPoolSparklyParticleID == null)
+			mEffectCounter += 3;
+			if (StageHasPool() && mPoolSparklyParticleID == null)
 			{
 				int aRenderOrder = 220000;
-				TodParticleSystem theParticle = this.mApp.AddTodParticle((float)(450 + Constants.BOARD_EXTRA_ROOM), 295f, aRenderOrder, ParticleEffect.PARTICLE_POOL_SPARKLY);
-				this.mPoolSparklyParticleID = this.mApp.ParticleGetID(theParticle);
+				TodParticleSystem theParticle = mApp.AddTodParticle((float)(450 + Constants.BOARD_EXTRA_ROOM), 295f, aRenderOrder, ParticleEffect.PARTICLE_POOL_SPARKLY);
+				mPoolSparklyParticleID = mApp.ParticleGetID(theParticle);
 			}
-			this.UpdateGridItems();
-			this.UpdateFwoosh();
-			this.UpdateGame();
-			this.UpdateFog();
-			this.UpdateFog();
-			this.UpdateFog();
-			this.mChallenge.Update();
-			this.mChallenge.Update();
-			this.mChallenge.Update();
-			this.UpdateLevelEndSequence();
-			this.UpdateLevelEndSequence();
-			this.UpdateLevelEndSequence();
-			this.mPrevMouseX = this.mApp.mWidgetManager.mLastMouseX;
-			this.mPrevMouseY = this.mApp.mWidgetManager.mLastMouseY;
+			UpdateGridItems();
+			UpdateFwoosh();
+			UpdateGame();
+			UpdateFog();
+			UpdateFog();
+			UpdateFog();
+			mChallenge.Update();
+			mChallenge.Update();
+			mChallenge.Update();
+			UpdateLevelEndSequence();
+			UpdateLevelEndSequence();
+			UpdateLevelEndSequence();
+			mPrevMouseX = mApp.mWidgetManager.mLastMouseX;
+			mPrevMouseY = mApp.mWidgetManager.mLastMouseY;
 		}
 
 		public void UpdateLayers()
 		{
-			if (this.mWidgetManager != null)
+			if (mWidgetManager != null)
 			{
-				this.mWidgetManager.MarkAllDirty();
+				mWidgetManager.MarkAllDirty();
 			}
-			for (LinkedListNode<Dialog> linkedListNode = this.mApp.mDialogList.First; linkedListNode != null; linkedListNode = linkedListNode.Next)
+			for (LinkedListNode<Dialog> linkedListNode = mApp.mDialogList.First; linkedListNode != null; linkedListNode = linkedListNode.Next)
 			{
 				Dialog value = linkedListNode.Value;
-				this.mWidgetManager.BringToFront(value);
+				mWidgetManager.BringToFront(value);
 				value.MarkDirty();
 			}
 		}
 
 		public override void Draw(Graphics g)
 		{
-			if (this.mApp.GetDialog(Dialogs.DIALOG_STORE) != null || this.mApp.GetDialog(Dialogs.DIALOG_ALMANAC) != null)
+			if (mApp.GetDialog(Dialogs.DIALOG_STORE) != null || mApp.GetDialog(Dialogs.DIALOG_ALMANAC) != null)
 			{
 				return;
 			}
 			g.SetLinearBlend(true);
-			if (this.mDrawCount == 0 || !this.mCutScene.mPreloaded)
+			if (mDrawCount == 0 || !mCutScene.mPreloaded)
 			{
-				this.ResetFPSStats();
+				ResetFPSStats();
 			}
 			else
 			{
 				int tickCount = Environment.TickCount;
-				int num = this.mDrawCount - this.mIntervalDrawCountStart;
-				int num2 = tickCount - this.mIntervalDrawTime;
+				int num = mDrawCount - mIntervalDrawCountStart;
+				int num2 = tickCount - mIntervalDrawTime;
 				if (num2 > 10000)
 				{
 					float num3 = ((float)num * 1000f + 500f) / (float)num2;
-					if (num3 < this.mMinFPS)
+					if (num3 < mMinFPS)
 					{
-						this.mMinFPS = num3;
+						mMinFPS = num3;
 					}
-					this.mIntervalDrawCountStart = this.mDrawCount;
-					this.mIntervalDrawTime = tickCount;
+					mIntervalDrawCountStart = mDrawCount;
+					mIntervalDrawTime = tickCount;
 				}
 			}
-			this.mDrawCount++;
-			this.DrawGameObjects(g);
+			mDrawCount++;
+			DrawGameObjects(g);
 			g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
 		}
 
 		public void DrawBackdrop(Graphics g)
 		{
 			Image image = null;
-			switch (this.mBackground)
+			switch (mBackground)
 			{
 			case BackgroundType.BACKGROUND_1_DAY:
 				image = Resources.IMAGE_BACKGROUND1;
@@ -3221,27 +3221,27 @@ namespace Lawn
 				Debug.ASSERT(false);
 				break;
 			}
-			GameMode mGameMode = this.mApp.mGameMode;
-			if (this.mLevel == 1 && this.mApp.IsFirstTimeAdventureMode())
+			GameMode aGameMode = mApp.mGameMode;
+			if (mLevel == 1 && mApp.IsFirstTimeAdventureMode())
 			{
 				g.DrawImage(Resources.IMAGE_BACKGROUND1UNSODDED, -((float)Constants.BOARD_OFFSET * Constants.S), 0f);
-				int theWidth = TodCommon.TodAnimateCurve(0, 950, this.mSodPosition, 0, AtlasResources.IMAGE_SOD1ROW.GetWidth(), TodCurves.CURVE_LINEAR);
+				int theWidth = TodCommon.TodAnimateCurve(0, 950, mSodPosition, 0, AtlasResources.IMAGE_SOD1ROW.GetWidth(), TodCurves.CURVE_LINEAR);
 				TRect theSrcRect = new TRect(0, 0, theWidth, AtlasResources.IMAGE_SOD1ROW.GetHeight());
 				g.DrawImage(AtlasResources.IMAGE_SOD1ROW, (int)((float)(-(float)Constants.BOARD_OFFSET + 239) * Constants.S), (int)(265f * Constants.S), theSrcRect);
 			}
-			else if (((this.mLevel == 2 || this.mLevel == 3) && this.mApp.IsFirstTimeAdventureMode()) || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RESODDED)
+			else if (((mLevel == 2 || mLevel == 3) && mApp.IsFirstTimeAdventureMode()) || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RESODDED)
 			{
 				g.DrawImage(Resources.IMAGE_BACKGROUND1UNSODDED, (float)(-(float)Constants.BOARD_OFFSET) * Constants.S, 0f);
 				g.DrawImage(AtlasResources.IMAGE_SOD1ROW, (float)(-(float)Constants.BOARD_OFFSET + 239) * Constants.S, 265f * Constants.S);
-				int theWidth2 = TodCommon.TodAnimateCurve(0, 950, this.mSodPosition, 0, AtlasResources.IMAGE_SOD3ROW.GetWidth(), TodCurves.CURVE_LINEAR);
+				int theWidth2 = TodCommon.TodAnimateCurve(0, 950, mSodPosition, 0, AtlasResources.IMAGE_SOD3ROW.GetWidth(), TodCurves.CURVE_LINEAR);
 				TRect theSrcRect2 = new TRect(0, 0, theWidth2, AtlasResources.IMAGE_SOD3ROW.GetHeight());
 				g.DrawImage(AtlasResources.IMAGE_SOD3ROW, (int)((float)(-(float)Constants.BOARD_OFFSET + 235) * Constants.S), (int)(149f * Constants.S), theSrcRect2);
 			}
-			else if (this.mLevel == 4 && this.mApp.IsFirstTimeAdventureMode())
+			else if (mLevel == 4 && mApp.IsFirstTimeAdventureMode())
 			{
 				g.DrawImage(Resources.IMAGE_BACKGROUND1UNSODDED, (float)(-(float)Constants.BOARD_OFFSET) * Constants.S, 0f);
 				g.DrawImage(AtlasResources.IMAGE_SOD3ROW, (float)(-(float)Constants.BOARD_OFFSET + 235) * Constants.S, 149f * Constants.S);
-				int num = TodCommon.TodAnimateCurve(0, 950, this.mSodPosition, 0, 773, TodCurves.CURVE_LINEAR);
+				int num = TodCommon.TodAnimateCurve(0, 950, mSodPosition, 0, 773, TodCurves.CURVE_LINEAR);
 				TRect theSrcRect3 = new TRect((int)(232f * Constants.S), 0, (int)((float)num * Constants.S), Resources.IMAGE_BACKGROUND1.GetHeight());
 				g.DrawImage(Resources.IMAGE_BACKGROUND1, (int)((float)(-(float)Constants.BOARD_OFFSET + 232) * Constants.S), 0, theSrcRect3);
 			}
@@ -3256,22 +3256,22 @@ namespace Lawn
 					g.DrawImage(image, (int)((float)(-(float)Constants.BOARD_OFFSET) * Constants.S), 0);
 				}
 			}
-			if (this.mApp.mGameScene == GameScenes.SCENE_ZOMBIES_WON)
+			if (mApp.mGameScene == GameScenes.SCENE_ZOMBIES_WON)
 			{
-				this.DrawHouseDoorBottom(g);
+				DrawHouseDoorBottom(g);
 			}
-			if (this.mTutorialState == TutorialState.TUTORIAL_LEVEL_1_PLANT_PEASHOOTER)
+			if (mTutorialState == TutorialState.TUTORIAL_LEVEL_1_PLANT_PEASHOOTER)
 			{
 				Graphics @new = Graphics.GetNew(g);
-				SexyColor flashingColor = TodCommon.GetFlashingColor(this.mMainCounter, 75);
+				SexyColor flashingColor = TodCommon.GetFlashingColor(mMainCounter, 75);
 				@new.SetColorizeImages(true);
 				@new.SetColor(flashingColor);
 				@new.DrawImage(AtlasResources.IMAGE_SOD1ROW, (float)(-(float)Constants.BOARD_OFFSET + 239) * Constants.S, 265f * Constants.S);
 				@new.SetColorizeImages(false);
 				@new.PrepareForReuse();
 			}
-			this.mChallenge.DrawBackdrop(g);
-			if (this.mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO && this.StageHasGraveStones())
+			mChallenge.DrawBackdrop(g);
+			if (mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO && StageHasGraveStones())
 			{
 				g.DrawImage(AtlasResources.IMAGE_NIGHT_GRAVE_GRAPHIC, Constants.InvertAndScale(640f), 40f * Constants.S);
 			}
@@ -3279,19 +3279,19 @@ namespace Lawn
 
 		public void DrawCursorOnBackground(Graphics g)
 		{
-			if (this.mTimeStopCounter == 0 && (!this.mApp.IsWhackAZombieLevel() || this.mCursorObject.mCursorType != CursorType.CURSOR_TYPE_HAMMER) && this.mIsDown && (float)this.mLastToolX >= (float)Constants.LAWN_XMIN * Constants.S && this.mCursorObject.BeginDraw(g))
+			if (mTimeStopCounter == 0 && (!mApp.IsWhackAZombieLevel() || mCursorObject.mCursorType != CursorType.CURSOR_TYPE_HAMMER) && mIsDown && (float)mLastToolX >= (float)Constants.LAWN_XMIN * Constants.S && mCursorObject.BeginDraw(g))
 			{
-				this.mCursorObject.DrawGroundLayer(g);
-				this.mCursorObject.EndDraw(g);
+				mCursorObject.DrawGroundLayer(g);
+				mCursorObject.EndDraw(g);
 			}
 		}
 
 		public void DrawCursorOverlay(Graphics g)
 		{
-			if (this.mTimeStopCounter == 0 && this.mIsDown && ((float)this.mLastToolX >= (float)Constants.LAWN_XMIN * Constants.S || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN) && this.mCursorObject.BeginDraw(g))
+			if (mTimeStopCounter == 0 && mIsDown && ((float)mLastToolX >= (float)Constants.LAWN_XMIN * Constants.S || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN) && mCursorObject.BeginDraw(g))
 			{
-				this.mCursorObject.DrawTopLayer(g);
-				this.mCursorObject.EndDraw(g);
+				mCursorObject.DrawTopLayer(g);
+				mCursorObject.EndDraw(g);
 			}
 		}
 
@@ -3309,212 +3309,212 @@ namespace Lawn
 
 		public void AddSunMoney(int theAmount)
 		{
-			this.mSunMoney += theAmount;
-			if (this.mSunMoney > 9990)
+			mSunMoney += theAmount;
+			if (mSunMoney > 9990)
 			{
-				this.mSunMoney = 9990;
+				mSunMoney = 9990;
 			}
 		}
 
 		public bool TakeSunMoney(int theAmount)
 		{
-			if (theAmount <= this.mSunMoney + this.CountSunBeingCollected())
+			if (theAmount <= mSunMoney + CountSunBeingCollected())
 			{
-				this.mSunMoney -= theAmount;
+				mSunMoney -= theAmount;
 				return true;
 			}
-			this.mApp.PlaySample(Resources.SOUND_BUZZER);
-			this.mOutOfMoneyCounter = 70;
+			mApp.PlaySample(Resources.SOUND_BUZZER);
+			mOutOfMoneyCounter = 70;
 			return false;
 		}
 
 		public bool CanTakeSunMoney(int theAmount)
 		{
-			return theAmount <= this.mSunMoney + this.CountSunBeingCollected();
+			return theAmount <= mSunMoney + CountSunBeingCollected();
 		}
 
 		public void Pause(bool thePause)
 		{
-			if (this.mPaused == thePause)
+			if (mPaused == thePause)
 			{
 				return;
 			}
 			if (thePause)
 			{
-				this.mPaused = true;
-				if (this.mApp.mPlayerInfo.mCoins > 0)
+				mPaused = true;
+				if (mApp.mPlayerInfo.mCoins > 0)
 				{
-					this.ShowCoinBank();
+					ShowCoinBank();
 				}
-				this.mLevelFadeCount = 1000;
-				if (this.mApp.mGameScene != GameScenes.SCENE_LEVEL_INTRO)
+				mLevelFadeCount = 1000;
+				if (mApp.mGameScene != GameScenes.SCENE_LEVEL_INTRO)
 				{
-					this.mApp.mSoundSystem.GamePause(true);
-					this.mApp.mMusic.GameMusicPause(true);
+					mApp.mSoundSystem.GamePause(true);
+					mApp.mMusic.GameMusicPause(true);
 					return;
 				}
 			}
 			else
 			{
-				this.mPaused = false;
-				this.mApp.mSoundSystem.GamePause(false);
-				this.mApp.mMusic.GameMusicPause(false);
+				mPaused = false;
+				mApp.mSoundSystem.GamePause(false);
+				mApp.mMusic.GameMusicPause(false);
 			}
 		}
 
 		public void TryToSaveGame()
 		{
-			this.ClearCursor();
-			string savedGameName = LawnCommon.GetSavedGameName(this.mApp.mGameMode, (int)this.mApp.mPlayerInfo.mId);
-			if (this.NeedSaveGame())
+			ClearCursor();
+			string savedGameName = LawnCommon.GetSavedGameName(mApp.mGameMode, (int)mApp.mPlayerInfo.mId);
+			if (NeedSaveGame())
 			{
-				if (this.mBoardFadeOutCounter >= 0)
+				if (mBoardFadeOutCounter >= 0)
 				{
-					this.CompleteEndLevelSequenceForSaving();
+					CompleteEndLevelSequenceForSaving();
 					return;
 				}
 				Common.MkDir(GlobalStaticVars.GetDocumentsDir() + "userdata");
-				this.mApp.mMusic.GameMusicPause(true);
-				this.SaveGame(savedGameName);
-				this.SurvivalSaveScore();
+				mApp.mMusic.GameMusicPause(true);
+				SaveGame(savedGameName);
+				SurvivalSaveScore();
 			}
 		}
 
 		public bool NeedSaveGame()
 		{
-			return this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ICE && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && this.mApp.mGameMode != GameMode.GAMEMODE_UPSELL && this.mApp.mGameMode != GameMode.GAMEMODE_INTRO && this.mApp.mGameScene == GameScenes.SCENE_PLAYING;
+			return mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ICE && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && mApp.mGameMode != GameMode.GAMEMODE_UPSELL && mApp.mGameMode != GameMode.GAMEMODE_INTRO && mApp.mGameScene == GameScenes.SCENE_PLAYING;
 		}
 
 		public bool RowCanHaveZombies(int theRow)
 		{
-			return theRow >= 0 && theRow < Constants.MAX_GRIDSIZEY && ((this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RESODDED && theRow <= 4) || this.mPlantRow[theRow] != PlantRowType.PLANTROW_DIRT);
+			return theRow >= 0 && theRow < Constants.MAX_GRIDSIZEY && ((mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RESODDED && theRow <= 4) || mPlantRow[theRow] != PlantRowType.PLANTROW_DIRT);
 		}
 
 		public void ProcessDeleteQueue()
 		{
-			for (int i = this.mPlants.Count - 1; i >= 0; i--)
+			for (int i = mPlants.Count - 1; i >= 0; i--)
 			{
-				if (this.mPlants[i].mDead)
+				if (mPlants[i].mDead)
 				{
-					this.mPlants[i].PrepareForReuse();
-					this.mPlants.RemoveAt(i);
+					mPlants[i].PrepareForReuse();
+					mPlants.RemoveAt(i);
 				}
 			}
-			for (int j = this.mZombies.Count - 1; j >= 0; j--)
+			for (int j = mZombies.Count - 1; j >= 0; j--)
 			{
-				if (this.mZombies[j].mDead)
+				if (mZombies[j].mDead)
 				{
-					if (this.mZombies[j].mZombieType == ZombieType.ZOMBIE_BOSS)
+					if (mZombies[j].mZombieType == ZombieType.ZOMBIE_BOSS)
 					{
 						for (int k = 0; k < 6; k++)
 						{
-							List<Zombie> zombiesInRow = this.GetZombiesInRow(k);
-							zombiesInRow.Remove(this.mZombies[j]);
+							List<Zombie> zombiesInRow = GetZombiesInRow(k);
+							zombiesInRow.Remove(mZombies[j]);
 						}
 					}
 					else
 					{
-						List<Zombie> zombiesInRow2 = this.GetZombiesInRow(this.mZombies[j].mRow);
-						zombiesInRow2.Remove(this.mZombies[j]);
+						List<Zombie> zombiesInRow2 = GetZombiesInRow(mZombies[j].mRow);
+						zombiesInRow2.Remove(mZombies[j]);
 					}
-					this.mZombies[j].PrepareForReuse();
-					this.mZombies.RemoveAt(j);
+					mZombies[j].PrepareForReuse();
+					mZombies.RemoveAt(j);
 				}
 			}
-			for (int l = this.mProjectiles.Count - 1; l >= 0; l--)
+			for (int l = mProjectiles.Count - 1; l >= 0; l--)
 			{
-				if (this.mProjectiles[l].mDead)
+				if (mProjectiles[l].mDead)
 				{
-					this.mProjectiles[l].PrepareForReuse();
-					this.mProjectiles.RemoveAt(l);
+					mProjectiles[l].PrepareForReuse();
+					mProjectiles.RemoveAt(l);
 				}
 			}
-			for (int m = this.mCoins.Count - 1; m >= 0; m--)
+			for (int m = mCoins.Count - 1; m >= 0; m--)
 			{
-				if (this.mCoins[m].mDead)
+				if (mCoins[m].mDead)
 				{
-					this.mCoins.RemoveAt(m);
+					mCoins.RemoveAt(m);
 				}
 			}
-			for (int n = this.mLawnMowers.Count - 1; n >= 0; n--)
+			for (int n = mLawnMowers.Count - 1; n >= 0; n--)
 			{
-				if (this.mLawnMowers[n].mDead)
+				if (mLawnMowers[n].mDead)
 				{
-					this.mLawnMowers[n].PrepareForReuse();
-					this.mLawnMowers.RemoveAt(n);
+					mLawnMowers[n].PrepareForReuse();
+					mLawnMowers.RemoveAt(n);
 				}
 			}
-			for (int num = this.mLawnMowers.Count - 1; num >= 0; num--)
+			for (int num = mLawnMowers.Count - 1; num >= 0; num--)
 			{
-				if (this.mLawnMowers[num].mDead)
+				if (mLawnMowers[num].mDead)
 				{
-					this.mGridItems[num].PrepareForReuse();
-					this.mGridItems.RemoveAt(num);
+					mGridItems[num].PrepareForReuse();
+					mGridItems.RemoveAt(num);
 				}
 			}
 		}
 
 		public bool ChooseSeedsOnCurrentLevel()
 		{
-			return !this.mApp.IsChallengeWithoutSeedBank() && !this.HasConveyorBeltSeedBank() && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ICE && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && this.mApp.mGameMode != GameMode.GAMEMODE_TREE_OF_WISDOM && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZOMBIQUARIUM && !this.mApp.IsIZombieLevel() && !this.mApp.IsSquirrelLevel() && !this.mApp.IsSlotMachineLevel() && ((!this.mApp.IsAdventureMode() && !this.mApp.IsQuickPlayMode()) || !this.mApp.IsFirstTimeAdventureMode() || this.mLevel > 7);
+			return !mApp.IsChallengeWithoutSeedBank() && !HasConveyorBeltSeedBank() && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ICE && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && mApp.mGameMode != GameMode.GAMEMODE_TREE_OF_WISDOM && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZOMBIQUARIUM && !mApp.IsIZombieLevel() && !mApp.IsSquirrelLevel() && !mApp.IsSlotMachineLevel() && ((!mApp.IsAdventureMode() && !mApp.IsQuickPlayMode()) || !mApp.IsFirstTimeAdventureMode() || mLevel > 7);
 		}
 
 		public int GetNumSeedsInBank()
 		{
-			if (this.mApp.IsScaryPotterLevel())
+			if (mApp.IsScaryPotterLevel())
 			{
 				return 1;
 			}
-			if (this.mApp.IsWhackAZombieLevel())
+			if (mApp.IsWhackAZombieLevel())
 			{
 				return 3;
 			}
-			if (this.mApp.IsChallengeWithoutSeedBank())
+			if (mApp.IsChallengeWithoutSeedBank())
 			{
 				return 0;
 			}
-			if (this.HasConveyorBeltSeedBank())
+			if (HasConveyorBeltSeedBank())
 			{
 				return 9;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ICE)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ICE)
 			{
 				return 6;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST)
 			{
 				return 0;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZOMBIQUARIUM)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZOMBIQUARIUM)
 			{
 				return 2;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_1 || this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_2 || this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_3 || this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_4)
+			if (mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_1 || mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_2 || mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_3 || mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_4)
 			{
 				return 3;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_5 || this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_6 || this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_7)
+			if (mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_5 || mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_6 || mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_7)
 			{
 				return 4;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_8)
+			if (mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_8)
 			{
 				return 6;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_9)
+			if (mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_9)
 			{
 				return 8;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_ENDLESS)
+			if (mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_ENDLESS)
 			{
 				return 9;
 			}
-			if (this.mApp.IsSlotMachineLevel())
+			if (mApp.IsSlotMachineLevel())
 			{
 				return 3;
 			}
-			int num = this.mApp.mPlayerInfo.mPurchases[21] + 6;
-			int seedsAvailable = this.mApp.GetSeedsAvailable();
+			int num = mApp.mPlayerInfo.mPurchases[21] + 6;
+			int seedsAvailable = mApp.GetSeedsAvailable();
 			if (seedsAvailable < num)
 			{
 				num = seedsAvailable;
@@ -3524,39 +3524,39 @@ namespace Lawn
 
 		public bool StageIsDayWithoutPool()
 		{
-			return this.mBackground == BackgroundType.BACKGROUND_1_DAY;
+			return mBackground == BackgroundType.BACKGROUND_1_DAY;
 		}
 
 		public bool StageIsNight()
 		{
-			return this.mBackground == BackgroundType.BACKGROUND_2_NIGHT || this.mBackground == BackgroundType.BACKGROUND_4_FOG || this.mBackground == BackgroundType.BACKGROUND_MUSHROOM_GARDEN || this.mBackground == BackgroundType.BACKGROUND_6_BOSS;
+			return mBackground == BackgroundType.BACKGROUND_2_NIGHT || mBackground == BackgroundType.BACKGROUND_4_FOG || mBackground == BackgroundType.BACKGROUND_MUSHROOM_GARDEN || mBackground == BackgroundType.BACKGROUND_6_BOSS;
 		}
 
 		public bool StageHasPool()
 		{
-			return this.mBackground == BackgroundType.BACKGROUND_3_POOL || this.mBackground == BackgroundType.BACKGROUND_4_FOG;
+			return mBackground == BackgroundType.BACKGROUND_3_POOL || mBackground == BackgroundType.BACKGROUND_4_FOG;
 		}
 
 		public bool StageHas6Rows()
 		{
-			return this.mBackground == BackgroundType.BACKGROUND_3_POOL || this.mBackground == BackgroundType.BACKGROUND_4_FOG;
+			return mBackground == BackgroundType.BACKGROUND_3_POOL || mBackground == BackgroundType.BACKGROUND_4_FOG;
 		}
 
 		public bool StageHasFog()
 		{
-			return !this.mApp.IsStormyNightLevel() && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_INVISIGHOUL && this.mBackground == BackgroundType.BACKGROUND_4_FOG;
+			return !mApp.IsStormyNightLevel() && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_INVISIGHOUL && mBackground == BackgroundType.BACKGROUND_4_FOG;
 		}
 
 		public bool StageHasGraveStones()
 		{
-			return !this.mApp.IsWallnutBowlingLevel() && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_POGO_PARTY && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_PORTAL_COMBAT && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_LAST_STAND && !this.mApp.IsIZombieLevel() && !this.mApp.IsScaryPotterLevel() && this.mBackground == BackgroundType.BACKGROUND_2_NIGHT;
+			return !mApp.IsWallnutBowlingLevel() && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_POGO_PARTY && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_PORTAL_COMBAT && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_LAST_STAND && !mApp.IsIZombieLevel() && !mApp.IsScaryPotterLevel() && mBackground == BackgroundType.BACKGROUND_2_NIGHT;
 		}
 
 		public int PixelToGridX(int theX, int theY)
 		{
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && (this.mBackground == BackgroundType.BACKGROUND_MUSHROOM_GARDEN || this.mBackground == BackgroundType.BACKGROUND_ZOMBIQUARIUM || this.mBackground == BackgroundType.BACKGROUND_GREENHOUSE))
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && (mBackground == BackgroundType.BACKGROUND_MUSHROOM_GARDEN || mBackground == BackgroundType.BACKGROUND_ZOMBIQUARIUM || mBackground == BackgroundType.BACKGROUND_GREENHOUSE))
 			{
-				return this.mApp.mZenGarden.PixelToGridX(theX, theY);
+				return mApp.mZenGarden.PixelToGridX(theX, theY);
 			}
 			if (theX < Constants.LAWN_XMIN)
 			{
@@ -3567,16 +3567,16 @@ namespace Lawn
 
 		public int PixelToGridY(int theX, int theY)
 		{
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && (this.mBackground == BackgroundType.BACKGROUND_MUSHROOM_GARDEN || this.mBackground == BackgroundType.BACKGROUND_ZOMBIQUARIUM || this.mBackground == BackgroundType.BACKGROUND_GREENHOUSE))
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && (mBackground == BackgroundType.BACKGROUND_MUSHROOM_GARDEN || mBackground == BackgroundType.BACKGROUND_ZOMBIQUARIUM || mBackground == BackgroundType.BACKGROUND_GREENHOUSE))
 			{
-				return this.mApp.mZenGarden.PixelToGridY(theX, theY);
+				return mApp.mZenGarden.PixelToGridY(theX, theY);
 			}
-			int num = this.PixelToGridX(theX, theY);
+			int num = PixelToGridX(theX, theY);
 			if (num == -1 || theY < Constants.LAWN_YMIN)
 			{
 				return -1;
 			}
-			if (this.StageHasRoof())
+			if (StageHasRoof())
 			{
 				int num2 = 0;
 				if (num < 5)
@@ -3585,7 +3585,7 @@ namespace Lawn
 				}
 				return TodCommon.ClampInt((theY - Constants.LAWN_YMIN - num2) / 85, 0, 4);
 			}
-			if (this.StageHas6Rows())
+			if (StageHas6Rows())
 			{
 				return TodCommon.ClampInt((theY - Constants.LAWN_YMIN) / 85, 0, 5);
 			}
@@ -3596,9 +3596,9 @@ namespace Lawn
 		{
 			Debug.ASSERT(theGridX >= 0 && theGridX < Constants.GRIDSIZEX);
 			Debug.ASSERT(theGridY >= 0 && theGridY < Constants.MAX_GRIDSIZEY);
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && (this.mBackground == BackgroundType.BACKGROUND_MUSHROOM_GARDEN || this.mBackground == BackgroundType.BACKGROUND_ZOMBIQUARIUM || this.mBackground == BackgroundType.BACKGROUND_GREENHOUSE))
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && (mBackground == BackgroundType.BACKGROUND_MUSHROOM_GARDEN || mBackground == BackgroundType.BACKGROUND_ZOMBIQUARIUM || mBackground == BackgroundType.BACKGROUND_GREENHOUSE))
 			{
-				return this.mApp.mZenGarden.GridToPixelX(theGridX, theGridY);
+				return mApp.mZenGarden.GridToPixelX(theGridX, theGridY);
 			}
 			int num = 80;
 			return theGridX * num + Constants.LAWN_XMIN;
@@ -3608,12 +3608,12 @@ namespace Lawn
 		{
 			Debug.ASSERT(theGridX >= 0 && theGridX < Constants.GRIDSIZEX);
 			Debug.ASSERT(theGridY >= 0 && theGridY < Constants.MAX_GRIDSIZEY);
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && (this.mBackground == BackgroundType.BACKGROUND_MUSHROOM_GARDEN || this.mBackground == BackgroundType.BACKGROUND_ZOMBIQUARIUM || this.mBackground == BackgroundType.BACKGROUND_GREENHOUSE))
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && (mBackground == BackgroundType.BACKGROUND_MUSHROOM_GARDEN || mBackground == BackgroundType.BACKGROUND_ZOMBIQUARIUM || mBackground == BackgroundType.BACKGROUND_GREENHOUSE))
 			{
-				return this.mApp.mZenGarden.GridToPixelY(theGridX, theGridY);
+				return mApp.mZenGarden.GridToPixelY(theGridX, theGridY);
 			}
 			int num2;
-			if (this.StageHasRoof())
+			if (StageHasRoof())
 			{
 				int num = 0;
 				if (theGridX < 5)
@@ -3622,7 +3622,7 @@ namespace Lawn
 				}
 				num2 = theGridY * 85 + Constants.LAWN_YMIN + num - 10;
 			}
-			else if (this.StageHas6Rows())
+			else if (StageHas6Rows())
 			{
 				num2 = theGridY * 85 + Constants.LAWN_YMIN;
 			}
@@ -3630,7 +3630,7 @@ namespace Lawn
 			{
 				num2 = theGridY * 100 + Constants.LAWN_YMIN;
 			}
-			if (theGridX != -1 && this.mGridSquareType[theGridX, theGridY] == GridSquareType.GRIDSQUARE_HIGH_GROUND)
+			if (theGridX != -1 && mGridSquareType[theGridX, theGridY] == GridSquareType.GRIDSQUARE_HIGH_GROUND)
 			{
 				num2 += -Constants.HIGH_GROUND_HEIGHT;
 			}
@@ -3639,59 +3639,59 @@ namespace Lawn
 
 		public int PixelToGridXKeepOnBoard(int theX, int theY)
 		{
-			return Math.Max(this.PixelToGridX(theX, theY), 0);
+			return Math.Max(PixelToGridX(theX, theY), 0);
 		}
 
 		public int PixelToGridYKeepOnBoard(int theX, int theY)
 		{
 			int theX2 = Math.Max(theX, Constants.LAWN_XMIN);
-			return Math.Max(this.PixelToGridY(theX2, theY), 0);
+			return Math.Max(PixelToGridY(theX2, theY), 0);
 		}
 
 		public void UpdateGameObjects()
 		{
-			int count = this.mPlants.Count;
+			int count = mPlants.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Plant plant = this.mPlants[i];
+				Plant plant = mPlants[i];
 				if (!plant.mDead)
 				{
 					plant.Update();
 				}
 			}
-			count = this.mZombies.Count;
+			count = mZombies.Count;
 			for (int j = 0; j < count; j++)
 			{
-				Zombie zombie = this.mZombies[j];
+				Zombie zombie = mZombies[j];
 				if (!zombie.mDead)
 				{
 					zombie.Update();
 				}
 			}
-			count = this.mProjectiles.Count;
+			count = mProjectiles.Count;
 			for (int k = 0; k < count; k++)
 			{
-				Projectile projectile = this.mProjectiles[k];
+				Projectile projectile = mProjectiles[k];
 				if (!projectile.mDead)
 				{
 					projectile.Update();
 				}
 			}
 			Coin coin = null;
-			while (this.IterateCoins(ref coin))
+			while (IterateCoins(ref coin))
 			{
 				coin.Update();
 			}
 			LawnMower lawnMower = null;
-			while (this.IterateLawnMowers(ref lawnMower))
+			while (IterateLawnMowers(ref lawnMower))
 			{
 				lawnMower.Update();
 			}
-			this.mCursorPreview.Update();
-			this.mCursorObject.Update();
-			for (int l = 0; l < this.mSeedBank.mNumPackets; l++)
+			mCursorPreview.Update();
+			mCursorObject.Update();
+			for (int l = 0; l < mSeedBank.mNumPackets; l++)
 			{
-				SeedPacket seedPacket = this.mSeedBank.mSeedPackets[l];
+				SeedPacket seedPacket = mSeedBank.mSeedPackets[l];
 				seedPacket.Update();
 				seedPacket.Update();
 				seedPacket.Update();
@@ -3706,58 +3706,58 @@ namespace Lawn
 				y = (int)((float)y * Constants.IS);
 			}
 			theHitResult = default(HitResult);
-			if (this.mBoardFadeOutCounter >= 0)
+			if (mBoardFadeOutCounter >= 0)
 			{
 				theHitResult.mObject = null;
 				theHitResult.mObjectType = GameObjectType.OBJECT_TYPE_NONE;
 				return false;
 			}
-			if (this.IsScaryPotterDaveTalking())
+			if (IsScaryPotterDaveTalking())
 			{
 				theHitResult.mObject = null;
 				theHitResult.mObjectType = GameObjectType.OBJECT_TYPE_NONE;
 				return false;
 			}
-			if (this.mMenuButton.IsMouseOver() && this.CanInteractWithBoardButtons())
+			if (mMenuButton.IsMouseOver() && CanInteractWithBoardButtons())
 			{
 				theHitResult.mObjectType = GameObjectType.OBJECT_TYPE_MENU_BUTTON;
 				return true;
 			}
-			if (this.mStoreButton != null && this.mStoreButton.IsMouseOver() && this.CanInteractWithBoardButtons())
+			if (mStoreButton != null && mStoreButton.IsMouseOver() && CanInteractWithBoardButtons())
 			{
 				theHitResult.mObjectType = GameObjectType.OBJECT_TYPE_STORE_BUTTON;
 				return true;
 			}
-			TRect shovelButtonRect = this.GetShovelButtonRect();
+			TRect shovelButtonRect = GetShovelButtonRect();
 			x = (int)((float)x * Constants.S);
 			y = (int)((float)y * Constants.S);
-			if (this.mSeedBank.MouseHitTest(x, y, out theHitResult))
+			if (mSeedBank.MouseHitTest(x, y, out theHitResult))
 			{
-				if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_BANK)
+				if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_BANK)
 				{
 					SeedPacket seedPacket = (SeedPacket)theHitResult.mObject;
-					int mSeedBankIndex = this.mCursorObject.mSeedBankIndex;
-					this.RefreshSeedPacketFromCursor();
-					if (mSeedBankIndex == seedPacket.mIndex)
+					int aSeedBankIndex = mCursorObject.mSeedBankIndex;
+					RefreshSeedPacketFromCursor();
+					if (aSeedBankIndex == seedPacket.mIndex)
 					{
 						theHitResult.mObjectType = GameObjectType.OBJECT_TYPE_NONE;
 						return true;
 					}
 					return true;
 				}
-				else if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_NORMAL || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_SHOVEL || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_COBCANNON_TARGET || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_HAMMER)
+				else if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_NORMAL || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_SHOVEL || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_COBCANNON_TARGET || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_HAMMER)
 				{
 					return true;
 				}
 			}
-			if (this.mShowShovel && shovelButtonRect.Contains(x, y) && this.CanInteractWithBoardButtons())
+			if (mShowShovel && shovelButtonRect.Contains(x, y) && CanInteractWithBoardButtons())
 			{
 				theHitResult.mObjectType = GameObjectType.OBJECT_TYPE_SHOVEL;
 				return true;
 			}
 			Coin coin = null;
 			Coin coin2 = null;
-			while (this.IterateCoins(ref coin2))
+			while (IterateCoins(ref coin2))
 			{
 				HitResult hitResult;
 				if (coin2.MouseHitTest(x, y, out hitResult))
@@ -3774,18 +3774,18 @@ namespace Lawn
 			{
 				return true;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 			{
 				bool flag = false;
-				if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_CHOCOLATE && !this.mApp.mZenGarden.IsStinkyHighOnChocolate())
+				if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_CHOCOLATE && !mApp.mZenGarden.IsStinkyHighOnChocolate())
 				{
 					flag = true;
 				}
-				else if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_NORMAL && this.mApp.mZenGarden.IsStinkySleeping())
+				else if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_NORMAL && mApp.mZenGarden.IsStinkySleeping())
 				{
 					flag = true;
 				}
-				GridItem stinky = this.mApp.mZenGarden.GetStinky();
+				GridItem stinky = mApp.mZenGarden.GetStinky();
 				if (flag && stinky != null)
 				{
 					TRect trect = new TRect((int)(Constants.S * (stinky.mPosX - 6f)), (int)(Constants.S * (stinky.mPosY - 10f)), (int)(Constants.S * 84f), (int)(Constants.S * 90f));
@@ -3798,52 +3798,52 @@ namespace Lawn
 			}
 			x = (int)((float)x * Constants.IS);
 			y = (int)((float)y * Constants.IS);
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM && this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_TREE_FOOD && this.mChallenge.TreeOfWisdomHitTest(x, y, theHitResult))
+			if (mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM && mCursorObject.mCursorType == CursorType.CURSOR_TYPE_TREE_FOOD && mChallenge.TreeOfWisdomHitTest(x, y, theHitResult))
 			{
 				return true;
 			}
 			x = (int)((float)x * Constants.S);
 			y = (int)((float)y * Constants.S);
-			if ((this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || this.mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM) && this.CanInteractWithBoardButtons())
+			if ((mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM) && CanInteractWithBoardButtons())
 			{
 				for (int i = 6; i <= 15; i++)
 				{
 					GameObjectType gameObjectType = (GameObjectType)i;
-					if (this.CanUseGameObject(gameObjectType) && (gameObjectType != GameObjectType.OBJECT_TYPE_TREE_FOOD || this.mChallenge.TreeOfWisdomCanFeed()) && (gameObjectType != GameObjectType.OBJECT_TYPE_MONEY_SIGN || this.mApp.mPlayerInfo.mZenGardenTutorialComplete) && this.GetZenButtonRect(gameObjectType).Contains(x, y))
+					if (CanUseGameObject(gameObjectType) && (gameObjectType != GameObjectType.OBJECT_TYPE_TREE_FOOD || mChallenge.TreeOfWisdomCanFeed()) && (gameObjectType != GameObjectType.OBJECT_TYPE_MONEY_SIGN || mApp.mPlayerInfo.mZenGardenTutorialComplete) && GetZenButtonRect(gameObjectType).Contains(x, y))
 					{
 						theHitResult.mObjectType = gameObjectType;
 						return true;
 					}
 				}
 			}
-			if (this.mApp.IsSlotMachineLevel() && this.mCursorObject.mCursorType != CursorType.CURSOR_TYPE_SHOVEL)
+			if (mApp.IsSlotMachineLevel() && mCursorObject.mCursorType != CursorType.CURSOR_TYPE_SHOVEL)
 			{
-				TRect trect2 = this.mChallenge.SlotMachineGetHandleRect();
-				TRect trect3 = this.mChallenge.SlotMachineRect();
+				TRect trect2 = mChallenge.SlotMachineGetHandleRect();
+				TRect trect3 = mChallenge.SlotMachineRect();
 				int num = (int)(Constants.S * 50f);
 				trect2.mX -= num;
 				trect2.mWidth += num * 2;
 				trect2.mY -= num;
 				trect2.mHeight += num * 2;
-				if ((trect2.Contains(x, y) || trect3.Contains(x, y)) && this.mChallenge.mChallengeState == ChallengeState.STATECHALLENGE_NORMAL && !this.HasLevelAwardDropped())
+				if ((trect2.Contains(x, y) || trect3.Contains(x, y)) && mChallenge.mChallengeState == ChallengeState.STATECHALLENGE_NORMAL && !HasLevelAwardDropped())
 				{
 					theHitResult.mObjectType = GameObjectType.OBJECT_TYPE_SLOT_MACHINE_HANDLE;
 					return true;
 				}
 			}
-			x = (int)((float)x * Constants.IS);
-			y = (int)((float)y * Constants.IS);
-			if (this.MouseHitTestPlant(x, y, out theHitResult, true))
+			x = (int)(x * Constants.IS);
+			y = (int)(y * Constants.IS);
+			if (MouseHitTestPlant(x, y, out theHitResult, true))
 			{
 				return true;
 			}
-			x = (int)((float)x * Constants.S);
-			y = (int)((float)y * Constants.S);
-			if (this.mApp.IsScaryPotterLevel() && this.mChallenge.mChallengeState != ChallengeState.STATECHALLENGE_SCARY_POTTER_MALLETING && this.mApp.mGameScene == GameScenes.SCENE_PLAYING && this.mApp.GetDialog(Dialogs.DIALOG_GAME_OVER) == null && this.mApp.GetDialog(Dialogs.DIALOG_CONTINUE) == null)
+			x = (int)(x * Constants.S);
+			y = (int)(y * Constants.S);
+			if (mApp.IsScaryPotterLevel() && mChallenge.mChallengeState != ChallengeState.STATECHALLENGE_SCARY_POTTER_MALLETING && mApp.mGameScene == GameScenes.SCENE_PLAYING && mApp.GetDialog(Dialogs.DIALOG_GAME_OVER) == null && mApp.GetDialog(Dialogs.DIALOG_CONTINUE) == null)
 			{
-				int theGridX = this.PixelToGridX((int)((float)x * Constants.IS), (int)((float)y * Constants.IS));
-				int theGridY = this.PixelToGridY((int)((float)x * Constants.IS), (int)((float)y * Constants.IS));
-				GridItem scaryPotAt = this.GetScaryPotAt(theGridX, theGridY);
+				int theGridX = PixelToGridX((int)(x * Constants.IS), (int)(y * Constants.IS));
+				int theGridY = PixelToGridY((int)(x * Constants.IS), (int)(y * Constants.IS));
+				GridItem scaryPotAt = GetScaryPotAt(theGridX, theGridY);
 				if (scaryPotAt != null)
 				{
 					theHitResult.mObject = scaryPotAt;
@@ -3851,16 +3851,16 @@ namespace Lawn
 					return true;
 				}
 			}
-			if (this.mApp.IsSlotMachineLevel() && this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_SHOVEL)
+			if (mApp.IsSlotMachineLevel() && mCursorObject.mCursorType == CursorType.CURSOR_TYPE_SHOVEL)
 			{
-				TRect trect4 = this.mChallenge.SlotMachineGetHandleRect();
-				TRect trect5 = this.mChallenge.SlotMachineRect();
+				TRect trect4 = mChallenge.SlotMachineGetHandleRect();
+				TRect trect5 = mChallenge.SlotMachineRect();
 				int num2 = (int)(Constants.S * 50f);
 				trect4.mX -= num2;
 				trect4.mWidth += num2 * 2;
 				trect4.mY -= num2;
 				trect4.mHeight += num2 * 2;
-				if ((trect4.Contains(x, y) || trect5.Contains(x, y)) && this.mChallenge.mChallengeState == ChallengeState.STATECHALLENGE_NORMAL && !this.HasLevelAwardDropped())
+				if ((trect4.Contains(x, y) || trect5.Contains(x, y)) && mChallenge.mChallengeState == ChallengeState.STATECHALLENGE_NORMAL && !HasLevelAwardDropped())
 				{
 					theHitResult.mObjectType = GameObjectType.OBJECT_TYPE_SLOT_MACHINE_HANDLE;
 					return true;
@@ -3875,180 +3875,180 @@ namespace Lawn
 		{
 			if (theClickCount < 0)
 			{
-				this.RefreshSeedPacketFromCursor();
-				this.mApp.PlayFoley(FoleyType.FOLEY_DROP);
+				RefreshSeedPacketFromCursor();
+				mApp.PlayFoley(FoleyType.FOLEY_DROP);
 				return;
 			}
-			if (this.mApp.IsIZombieLevel())
+			if (mApp.IsIZombieLevel())
 			{
-				this.mChallenge.IZombieMouseDownWithZombie(x, y, theClickCount);
+				mChallenge.IZombieMouseDownWithZombie(x, y, theClickCount);
 				return;
 			}
-			SeedType seedTypeInCursor = this.GetSeedTypeInCursor();
-			int num = this.PlantingPixelToGridX((int)((float)x * Constants.IS), (int)((float)y * Constants.IS), seedTypeInCursor);
-			int num2 = this.PlantingPixelToGridY((int)((float)x * Constants.IS), (int)((float)y * Constants.IS), seedTypeInCursor);
+			SeedType seedTypeInCursor = GetSeedTypeInCursor();
+			int num = PlantingPixelToGridX((int)((float)x * Constants.IS), (int)((float)y * Constants.IS), seedTypeInCursor);
+			int num2 = PlantingPixelToGridY((int)((float)x * Constants.IS), (int)((float)y * Constants.IS), seedTypeInCursor);
 			if (num < 0 || num >= Constants.GRIDSIZEX || num2 < 0 || num2 >= Constants.MAX_GRIDSIZEY)
 			{
-				this.RefreshSeedPacketFromCursor();
-				this.mApp.PlayFoley(FoleyType.FOLEY_DROP);
+				RefreshSeedPacketFromCursor();
+				mApp.PlayFoley(FoleyType.FOLEY_DROP);
 				return;
 			}
-			PlantingReason plantingReason = this.CanPlantAt(num, num2, seedTypeInCursor);
+			PlantingReason plantingReason = CanPlantAt(num, num2, seedTypeInCursor);
 			if (plantingReason != PlantingReason.PLANTING_OK)
 			{
 				if (plantingReason == PlantingReason.PLANTING_ONLY_ON_GRAVES)
 				{
-					this.DisplayAdvice("[ADVICE_GRAVEBUSTERS_ON_GRAVES]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_GRAVEBUSTERS_ON_GRAVES);
+					DisplayAdvice("[ADVICE_GRAVEBUSTERS_ON_GRAVES]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_GRAVEBUSTERS_ON_GRAVES);
 				}
 				else if (seedTypeInCursor == SeedType.SEED_LILYPAD && plantingReason == PlantingReason.PLANTING_ONLY_IN_POOL)
 				{
-					this.DisplayAdvice("[ADVICE_LILYPAD_ON_WATER]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_LILYPAD_ON_WATER);
+					DisplayAdvice("[ADVICE_LILYPAD_ON_WATER]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_LILYPAD_ON_WATER);
 				}
 				else if (seedTypeInCursor == SeedType.SEED_TANGLEKELP && plantingReason == PlantingReason.PLANTING_ONLY_IN_POOL)
 				{
-					this.DisplayAdvice("[ADVICE_TANGLEKELP_ON_WATER]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_TANGLEKELP_ON_WATER);
+					DisplayAdvice("[ADVICE_TANGLEKELP_ON_WATER]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_TANGLEKELP_ON_WATER);
 				}
 				else if (seedTypeInCursor == SeedType.SEED_SEASHROOM && plantingReason == PlantingReason.PLANTING_ONLY_IN_POOL)
 				{
-					this.DisplayAdvice("[ADVICE_SEASHROOM_ON_WATER]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_SEASHROOM_ON_WATER);
+					DisplayAdvice("[ADVICE_SEASHROOM_ON_WATER]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_SEASHROOM_ON_WATER);
 				}
 				else if (plantingReason == PlantingReason.PLANTING_ONLY_ON_GROUND)
 				{
-					this.DisplayAdvice("[ADVICE_POTATO_MINE_ON_LILY]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_POTATO_MINE_ON_LILY);
+					DisplayAdvice("[ADVICE_POTATO_MINE_ON_LILY]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_POTATO_MINE_ON_LILY);
 				}
 				else if (plantingReason == PlantingReason.PLANTING_NOT_PASSED_LINE)
 				{
-					this.DisplayAdvice("[ADVICE_NOT_PASSED_LINE]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_NOT_PASSED_LINE);
+					DisplayAdvice("[ADVICE_NOT_PASSED_LINE]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_NOT_PASSED_LINE);
 				}
 				else if (plantingReason == PlantingReason.PLANTING_NEEDS_UPGRADE && seedTypeInCursor == SeedType.SEED_GATLINGPEA)
 				{
-					this.DisplayAdvice("[ADVICE_ONLY_ON_REPEATERS]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_ONLY_ON_REPEATERS);
+					DisplayAdvice("[ADVICE_ONLY_ON_REPEATERS]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_ONLY_ON_REPEATERS);
 				}
 				else if (plantingReason == PlantingReason.PLANTING_NEEDS_UPGRADE && seedTypeInCursor == SeedType.SEED_WINTERMELON)
 				{
-					this.DisplayAdvice("[ADVICE_ONLY_ON_MELONPULT]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_ONLY_ON_MELONPULT);
+					DisplayAdvice("[ADVICE_ONLY_ON_MELONPULT]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_ONLY_ON_MELONPULT);
 				}
 				else if (plantingReason == PlantingReason.PLANTING_NEEDS_UPGRADE && seedTypeInCursor == SeedType.SEED_TWINSUNFLOWER)
 				{
-					this.DisplayAdvice("[ADVICE_ONLY_ON_SUNFLOWER]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_ONLY_ON_SUNFLOWER);
+					DisplayAdvice("[ADVICE_ONLY_ON_SUNFLOWER]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_ONLY_ON_SUNFLOWER);
 				}
 				else if (plantingReason == PlantingReason.PLANTING_NEEDS_UPGRADE && seedTypeInCursor == SeedType.SEED_SPIKEROCK)
 				{
-					this.DisplayAdvice("[ADVICE_ONLY_ON_SPIKEWEED]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_ONLY_ON_SPIKEWEED);
+					DisplayAdvice("[ADVICE_ONLY_ON_SPIKEWEED]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_ONLY_ON_SPIKEWEED);
 				}
 				else if (plantingReason == PlantingReason.PLANTING_NEEDS_UPGRADE && seedTypeInCursor == SeedType.SEED_COBCANNON)
 				{
-					this.DisplayAdvice("[ADVICE_ONLY_ON_KERNELPULT]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_ONLY_ON_KERNELPULT);
+					DisplayAdvice("[ADVICE_ONLY_ON_KERNELPULT]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_ONLY_ON_KERNELPULT);
 				}
 				else if (plantingReason == PlantingReason.PLANTING_NEEDS_UPGRADE && seedTypeInCursor == SeedType.SEED_GOLD_MAGNET)
 				{
-					this.DisplayAdvice("[ADVICE_ONLY_ON_MAGNETSHROOM]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_ONLY_ON_MAGNETSHROOM);
+					DisplayAdvice("[ADVICE_ONLY_ON_MAGNETSHROOM]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_ONLY_ON_MAGNETSHROOM);
 				}
 				else if (plantingReason == PlantingReason.PLANTING_NEEDS_UPGRADE && seedTypeInCursor == SeedType.SEED_GLOOMSHROOM)
 				{
-					this.DisplayAdvice("[ADVICE_ONLY_ON_FUMESHROOM]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_ONLY_ON_FUMESHROOM);
+					DisplayAdvice("[ADVICE_ONLY_ON_FUMESHROOM]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_ONLY_ON_FUMESHROOM);
 				}
 				else if (plantingReason == PlantingReason.PLANTING_NEEDS_UPGRADE && seedTypeInCursor == SeedType.SEED_CATTAIL)
 				{
-					this.DisplayAdvice("[ADVICE_ONLY_ON_LILYPAD]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_ONLY_ON_LILYPAD);
+					DisplayAdvice("[ADVICE_ONLY_ON_LILYPAD]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_ONLY_ON_LILYPAD);
 				}
 				else if (plantingReason == PlantingReason.PLANTING_NOT_ON_ART)
 				{
-					SeedType artChallengeSeed = this.mChallenge.GetArtChallengeSeed(num, num2);
+					SeedType artChallengeSeed = mChallenge.GetArtChallengeSeed(num, num2);
 					string nameString = Plant.GetNameString(artChallengeSeed, SeedType.SEED_NONE);
 					string theAdvice = TodCommon.TodReplaceString("[ADVICE_WRONG_ART_TYPE]", "{SEED}", nameString);
-					this.DisplayAdvice(theAdvice, MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_WRONG_ART_TYPE);
+					DisplayAdvice(theAdvice, MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_WRONG_ART_TYPE);
 				}
 				else if (plantingReason == PlantingReason.PLANTING_NEEDS_POT)
 				{
-					if (this.mApp.IsFirstTimeAdventureMode() && this.mLevel == 41)
+					if (mApp.IsFirstTimeAdventureMode() && mLevel == 41)
 					{
-						this.DisplayAdvice("[ADVICE_PLANT_NEED_POT1]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_NEED_POT);
+						DisplayAdvice("[ADVICE_PLANT_NEED_POT1]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_NEED_POT);
 					}
 					else
 					{
-						this.DisplayAdvice("[ADVICE_PLANT_NEED_POT2]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_NEED_POT);
+						DisplayAdvice("[ADVICE_PLANT_NEED_POT2]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_NEED_POT);
 					}
 				}
 				else if (plantingReason == PlantingReason.PLANTING_NOT_ON_GRAVE)
 				{
-					this.DisplayAdvice("[ADVICE_PLANT_NOT_ON_GRAVE]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_NOT_ON_GRAVE);
+					DisplayAdvice("[ADVICE_PLANT_NOT_ON_GRAVE]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_NOT_ON_GRAVE);
 				}
 				else if (plantingReason == PlantingReason.PLANTING_NOT_ON_CRATER)
 				{
-					if (this.IsPoolSquare(num, num2))
+					if (IsPoolSquare(num, num2))
 					{
-						this.DisplayAdvice("[ADVICE_CANT_PLANT_THERE]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_CANT_PLANT_THERE);
+						DisplayAdvice("[ADVICE_CANT_PLANT_THERE]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_CANT_PLANT_THERE);
 					}
 					else
 					{
-						this.DisplayAdvice("[ADVICE_PLANT_NOT_ON_CRATER]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_NOT_ON_CRATER);
+						DisplayAdvice("[ADVICE_PLANT_NOT_ON_CRATER]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_NOT_ON_CRATER);
 					}
 				}
 				else if (plantingReason == PlantingReason.PLANTING_NOT_ON_WATER)
 				{
-					if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && this.mApp.mZenGarden.mGardenType == GardenType.GARDEN_AQUARIUM)
+					if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && mApp.mZenGarden.mGardenType == GardenType.GARDEN_AQUARIUM)
 					{
-						this.DisplayAdvice("[ZEN_ONLY_AQUATIC_PLANTS]", MessageStyle.MESSAGE_STYLE_HINT_TALL_FAST, AdviceType.ADVICE_NONE);
+						DisplayAdvice("[ZEN_ONLY_AQUATIC_PLANTS]", MessageStyle.MESSAGE_STYLE_HINT_TALL_FAST, AdviceType.ADVICE_NONE);
 					}
 					else if (seedTypeInCursor == SeedType.SEED_POTATOMINE)
 					{
-						this.DisplayAdvice("[ADVICE_CANT_PLANT_THERE]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_CANT_PLANT_THERE);
+						DisplayAdvice("[ADVICE_CANT_PLANT_THERE]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_CANT_PLANT_THERE);
 					}
 					else
 					{
-						this.DisplayAdvice("[ADVICE_PLANT_NOT_ON_WATER]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_NOT_ON_WATER);
+						DisplayAdvice("[ADVICE_PLANT_NOT_ON_WATER]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANT_NOT_ON_WATER);
 					}
 				}
 				else if (plantingReason == PlantingReason.PLANTING_NEEDS_GROUND)
 				{
-					this.DisplayAdvice("[ADVICE_PLANTING_NEEDS_GROUND]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANTING_NEEDS_GROUND);
+					DisplayAdvice("[ADVICE_PLANTING_NEEDS_GROUND]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANTING_NEEDS_GROUND);
 				}
 				else if (plantingReason == PlantingReason.PLANTING_NEEDS_SLEEPING)
 				{
-					this.DisplayAdvice("[ADVICE_PLANTING_NEED_SLEEPING]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANTING_NEED_SLEEPING);
+					DisplayAdvice("[ADVICE_PLANTING_NEED_SLEEPING]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_PLANTING_NEED_SLEEPING);
 				}
-				if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_GLOVE || this.mApp.IsWhackAZombieLevel())
+				if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_GLOVE || mApp.IsWhackAZombieLevel())
 				{
-					this.RefreshSeedPacketFromCursor();
-					this.mApp.PlayFoley(FoleyType.FOLEY_DROP);
+					RefreshSeedPacketFromCursor();
+					mApp.PlayFoley(FoleyType.FOLEY_DROP);
 				}
 				return;
 			}
-			this.ClearAdvice(AdviceType.ADVICE_PLANTING_NEED_SLEEPING);
-			this.ClearAdvice(AdviceType.ADVICE_CANT_PLANT_THERE);
-			this.ClearAdvice(AdviceType.ADVICE_PLANTING_NEEDS_GROUND);
-			this.ClearAdvice(AdviceType.ADVICE_PLANT_NOT_ON_WATER);
-			this.ClearAdvice(AdviceType.ADVICE_PLANT_NOT_ON_CRATER);
-			this.ClearAdvice(AdviceType.ADVICE_PLANT_NOT_ON_GRAVE);
-			this.ClearAdvice(AdviceType.ADVICE_PLANT_NEED_POT);
-			this.ClearAdvice(AdviceType.ADVICE_PLANT_WRONG_ART_TYPE);
-			this.ClearAdvice(AdviceType.ADVICE_PLANT_ONLY_ON_LILYPAD);
-			this.ClearAdvice(AdviceType.ADVICE_PLANT_ONLY_ON_MAGNETSHROOM);
-			this.ClearAdvice(AdviceType.ADVICE_PLANT_ONLY_ON_FUMESHROOM);
-			this.ClearAdvice(AdviceType.ADVICE_PLANT_ONLY_ON_KERNELPULT);
-			this.ClearAdvice(AdviceType.ADVICE_PLANT_ONLY_ON_SUNFLOWER);
-			this.ClearAdvice(AdviceType.ADVICE_PLANT_ONLY_ON_SPIKEWEED);
-			this.ClearAdvice(AdviceType.ADVICE_PLANT_ONLY_ON_MELONPULT);
-			this.ClearAdvice(AdviceType.ADVICE_PLANT_ONLY_ON_REPEATERS);
-			this.ClearAdvice(AdviceType.ADVICE_PLANT_NOT_PASSED_LINE);
-			this.ClearAdvice(AdviceType.ADVICE_PLANT_GRAVEBUSTERS_ON_GRAVES);
-			this.ClearAdvice(AdviceType.ADVICE_PLANT_LILYPAD_ON_WATER);
-			this.ClearAdvice(AdviceType.ADVICE_PLANT_TANGLEKELP_ON_WATER);
-			this.ClearAdvice(AdviceType.ADVICE_PLANT_SEASHROOM_ON_WATER);
-			this.ClearAdvice(AdviceType.ADVICE_PLANT_POTATO_MINE_ON_LILY);
-			this.ClearAdvice(AdviceType.ADVICE_SURVIVE_FLAGS);
-			if (!this.mApp.mEasyPlantingCheat && this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_BANK && !this.HasConveyorBeltSeedBank())
+			ClearAdvice(AdviceType.ADVICE_PLANTING_NEED_SLEEPING);
+			ClearAdvice(AdviceType.ADVICE_CANT_PLANT_THERE);
+			ClearAdvice(AdviceType.ADVICE_PLANTING_NEEDS_GROUND);
+			ClearAdvice(AdviceType.ADVICE_PLANT_NOT_ON_WATER);
+			ClearAdvice(AdviceType.ADVICE_PLANT_NOT_ON_CRATER);
+			ClearAdvice(AdviceType.ADVICE_PLANT_NOT_ON_GRAVE);
+			ClearAdvice(AdviceType.ADVICE_PLANT_NEED_POT);
+			ClearAdvice(AdviceType.ADVICE_PLANT_WRONG_ART_TYPE);
+			ClearAdvice(AdviceType.ADVICE_PLANT_ONLY_ON_LILYPAD);
+			ClearAdvice(AdviceType.ADVICE_PLANT_ONLY_ON_MAGNETSHROOM);
+			ClearAdvice(AdviceType.ADVICE_PLANT_ONLY_ON_FUMESHROOM);
+			ClearAdvice(AdviceType.ADVICE_PLANT_ONLY_ON_KERNELPULT);
+			ClearAdvice(AdviceType.ADVICE_PLANT_ONLY_ON_SUNFLOWER);
+			ClearAdvice(AdviceType.ADVICE_PLANT_ONLY_ON_SPIKEWEED);
+			ClearAdvice(AdviceType.ADVICE_PLANT_ONLY_ON_MELONPULT);
+			ClearAdvice(AdviceType.ADVICE_PLANT_ONLY_ON_REPEATERS);
+			ClearAdvice(AdviceType.ADVICE_PLANT_NOT_PASSED_LINE);
+			ClearAdvice(AdviceType.ADVICE_PLANT_GRAVEBUSTERS_ON_GRAVES);
+			ClearAdvice(AdviceType.ADVICE_PLANT_LILYPAD_ON_WATER);
+			ClearAdvice(AdviceType.ADVICE_PLANT_TANGLEKELP_ON_WATER);
+			ClearAdvice(AdviceType.ADVICE_PLANT_SEASHROOM_ON_WATER);
+			ClearAdvice(AdviceType.ADVICE_PLANT_POTATO_MINE_ON_LILY);
+			ClearAdvice(AdviceType.ADVICE_SURVIVE_FLAGS);
+			if (!mApp.mEasyPlantingCheat && mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_BANK && !HasConveyorBeltSeedBank())
 			{
-				int currentPlantCost = this.GetCurrentPlantCost(this.mCursorObject.mType, this.mCursorObject.mImitaterType);
-				if (!this.TakeSunMoney(currentPlantCost))
+				int currentPlantCost = GetCurrentPlantCost(mCursorObject.mType, mCursorObject.mImitaterType);
+				if (!TakeSunMoney(currentPlantCost))
 				{
 					return;
 				}
 			}
-			Plant topPlantAt = this.GetTopPlantAt(num, num2, PlantPriority.TOPPLANT_ONLY_NORMAL_POSITION);
+			Plant topPlantAt = GetTopPlantAt(num, num2, PlantPriority.TOPPLANT_ONLY_NORMAL_POSITION);
 			bool flag = false;
-			int mWakeUpCounter = 0;
+			int aWakeUpCounter = 0;
 			if (topPlantAt != null && topPlantAt.IsUpgradableTo(seedTypeInCursor))
 			{
 				if (seedTypeInCursor == SeedType.SEED_GLOOMSHROOM)
@@ -4059,7 +4059,7 @@ namespace Lawn
 					}
 					else
 					{
-						mWakeUpCounter = topPlantAt.mWakeUpCounter;
+						aWakeUpCounter = topPlantAt.mWakeUpCounter;
 					}
 				}
 				topPlantAt.Die();
@@ -4070,7 +4070,7 @@ namespace Lawn
 			}
 			if (seedTypeInCursor == SeedType.SEED_PUMPKINSHELL)
 			{
-				Plant topPlantAt2 = this.GetTopPlantAt(num, num2, PlantPriority.TOPPLANT_ONLY_PUMPKIN);
+				Plant topPlantAt2 = GetTopPlantAt(num, num2, PlantPriority.TOPPLANT_ONLY_PUMPKIN);
 				if (topPlantAt2 != null && topPlantAt2.mSeedType == seedTypeInCursor)
 				{
 					topPlantAt2.Die();
@@ -4078,7 +4078,7 @@ namespace Lawn
 			}
 			if (seedTypeInCursor == SeedType.SEED_COBCANNON)
 			{
-				Plant topPlantAt3 = this.GetTopPlantAt(num + 1, num2, PlantPriority.TOPPLANT_ONLY_NORMAL_POSITION);
+				Plant topPlantAt3 = GetTopPlantAt(num + 1, num2, PlantPriority.TOPPLANT_ONLY_NORMAL_POSITION);
 				if (topPlantAt3 != null)
 				{
 					topPlantAt3.Die();
@@ -4087,7 +4087,7 @@ namespace Lawn
 			if (seedTypeInCursor == SeedType.SEED_CATTAIL)
 			{
 				PlantsOnLawn plantsOnLawn = default(PlantsOnLawn);
-				this.GetPlantsOnLawn(num, num2, ref plantsOnLawn);
+				GetPlantsOnLawn(num, num2, ref plantsOnLawn);
 				if (plantsOnLawn.mUnderPlant != null)
 				{
 					plantsOnLawn.mUnderPlant.Die();
@@ -4097,48 +4097,48 @@ namespace Lawn
 					plantsOnLawn.mNormalPlant.Die();
 				}
 			}
-			if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_GLOVE)
+			if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_GLOVE)
 			{
-				Plant mGlovePlantID = this.mCursorObject.mGlovePlantID;
-				mGlovePlantID.mGloveGrabbed = false;
-				this.mApp.mZenGarden.MovePlant(mGlovePlantID, num, num2);
+				Plant aGlovePlantID = mCursorObject.mGlovePlantID;
+				aGlovePlantID.mGloveGrabbed = false;
+				mApp.mZenGarden.MovePlant(aGlovePlantID, num, num2);
 			}
-			else if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_WHEEL_BARROW)
+			else if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_WHEEL_BARROW)
 			{
-				this.mApp.mZenGarden.MouseDownWithFullWheelBarrow(x, y);
+				mApp.mZenGarden.MouseDownWithFullWheelBarrow(x, y);
 			}
-			else if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_USABLE_COIN)
+			else if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_USABLE_COIN)
 			{
-				this.AddPlant(num, num2, this.mCursorObject.mType, this.mCursorObject.mImitaterType);
-				Coin coin = this.mCoins[this.mCoins.IndexOf(this.mCursorObject.mCoinID)];
-				this.mCursorObject.mCoinID = null;
+				AddPlant(num, num2, mCursorObject.mType, mCursorObject.mImitaterType);
+				Coin coin = mCoins[mCoins.IndexOf(mCursorObject.mCoinID)];
+				mCursorObject.mCoinID = null;
 				coin.Die();
 			}
-			else if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_BANK)
+			else if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_BANK)
 			{
-				Plant plant = this.AddPlant(num, num2, this.mCursorObject.mType, this.mCursorObject.mImitaterType);
+				Plant plant = AddPlant(num, num2, mCursorObject.mType, mCursorObject.mImitaterType);
 				if (flag)
 				{
 					plant.SetSleeping(false);
 				}
-				plant.mWakeUpCounter = mWakeUpCounter;
-				Debug.ASSERT(this.mCursorObject.mSeedBankIndex >= 0 && this.mCursorObject.mSeedBankIndex < this.mSeedBank.mNumPackets);
-				SeedPacket seedPacket = this.mSeedBank.mSeedPackets[this.mCursorObject.mSeedBankIndex];
+				plant.mWakeUpCounter = aWakeUpCounter;
+				Debug.ASSERT(mCursorObject.mSeedBankIndex >= 0 && mCursorObject.mSeedBankIndex < mSeedBank.mNumPackets);
+				SeedPacket seedPacket = mSeedBank.mSeedPackets[mCursorObject.mSeedBankIndex];
 				seedPacket.WasPlanted();
 			}
 			else
 			{
 				Debug.ASSERT(false);
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_COLUMN)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_COLUMN)
 			{
 				for (int i = 0; i < Constants.MAX_GRIDSIZEY; i++)
 				{
-					if (i != num2 && this.CanPlantAt(num, i, seedTypeInCursor) == PlantingReason.PLANTING_OK)
+					if (i != num2 && CanPlantAt(num, i, seedTypeInCursor) == PlantingReason.PLANTING_OK)
 					{
 						if (seedTypeInCursor == SeedType.SEED_WALLNUT || seedTypeInCursor == SeedType.SEED_TALLNUT)
 						{
-							Plant topPlantAt4 = this.GetTopPlantAt(num, i, PlantPriority.TOPPLANT_ONLY_NORMAL_POSITION);
+							Plant topPlantAt4 = GetTopPlantAt(num, i, PlantPriority.TOPPLANT_ONLY_NORMAL_POSITION);
 							if (topPlantAt4 != null && topPlantAt4.mSeedType == seedTypeInCursor)
 							{
 								topPlantAt4.Die();
@@ -4146,76 +4146,76 @@ namespace Lawn
 						}
 						if (seedTypeInCursor == SeedType.SEED_PUMPKINSHELL)
 						{
-							Plant topPlantAt5 = this.GetTopPlantAt(num, i, PlantPriority.TOPPLANT_ONLY_PUMPKIN);
+							Plant topPlantAt5 = GetTopPlantAt(num, i, PlantPriority.TOPPLANT_ONLY_PUMPKIN);
 							if (topPlantAt5 != null && topPlantAt5.mSeedType == seedTypeInCursor)
 							{
 								topPlantAt5.Die();
 							}
 						}
-						this.AddPlant(num, i, this.mCursorObject.mType, this.mCursorObject.mImitaterType);
+						AddPlant(num, i, mCursorObject.mType, mCursorObject.mImitaterType);
 					}
 				}
 			}
-			if (this.mTutorialState == TutorialState.TUTORIAL_LEVEL_1_PLANT_PEASHOOTER)
+			if (mTutorialState == TutorialState.TUTORIAL_LEVEL_1_PLANT_PEASHOOTER)
 			{
-				int count = this.mPlants.Count;
+				int count = mPlants.Count;
 				if (count >= 2)
 				{
-					this.SetTutorialState(TutorialState.TUTORIAL_LEVEL_1_COMPLETED);
+					SetTutorialState(TutorialState.TUTORIAL_LEVEL_1_COMPLETED);
 				}
 				else
 				{
-					this.SetTutorialState(TutorialState.TUTORIAL_LEVEL_1_REFRESH_PEASHOOTER);
+					SetTutorialState(TutorialState.TUTORIAL_LEVEL_1_REFRESH_PEASHOOTER);
 				}
 			}
-			if (this.mTutorialState == TutorialState.TUTORIAL_LEVEL_2_PLANT_SUNFLOWER)
+			if (mTutorialState == TutorialState.TUTORIAL_LEVEL_2_PLANT_SUNFLOWER)
 			{
-				int num3 = this.CountSunFlowers();
+				int num3 = CountSunFlowers();
 				if (seedTypeInCursor == SeedType.SEED_SUNFLOWER && num3 == 2)
 				{
-					this.DisplayAdvice("[ADVICE_MORE_SUNFLOWERS]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL2, AdviceType.ADVICE_NONE);
+					DisplayAdvice("[ADVICE_MORE_SUNFLOWERS]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL2, AdviceType.ADVICE_NONE);
 				}
 				if (num3 >= 3)
 				{
-					this.SetTutorialState(TutorialState.TUTORIAL_LEVEL_2_COMPLETED);
+					SetTutorialState(TutorialState.TUTORIAL_LEVEL_2_COMPLETED);
 				}
-				else if (!this.mSeedBank.mSeedPackets[1].CanPickUp())
+				else if (!mSeedBank.mSeedPackets[1].CanPickUp())
 				{
-					this.SetTutorialState(TutorialState.TUTORIAL_LEVEL_2_REFRESH_SUNFLOWER);
+					SetTutorialState(TutorialState.TUTORIAL_LEVEL_2_REFRESH_SUNFLOWER);
 				}
 				else
 				{
-					this.SetTutorialState(TutorialState.TUTORIAL_LEVEL_2_PICK_UP_SUNFLOWER);
+					SetTutorialState(TutorialState.TUTORIAL_LEVEL_2_PICK_UP_SUNFLOWER);
 				}
 			}
-			if (this.mTutorialState == TutorialState.TUTORIAL_MORESUN_PLANT_SUNFLOWER)
+			if (mTutorialState == TutorialState.TUTORIAL_MORESUN_PLANT_SUNFLOWER)
 			{
-				int num4 = this.CountSunFlowers();
+				int num4 = CountSunFlowers();
 				if (num4 >= 3)
 				{
-					this.SetTutorialState(TutorialState.TUTORIAL_MORESUN_COMPLETED);
-					this.DisplayAdvice("[ADVICE_PLANT_SUNFLOWER5]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LATER, AdviceType.ADVICE_PLANT_SUNFLOWER5);
-					this.mTutorialTimer = -1;
+					SetTutorialState(TutorialState.TUTORIAL_MORESUN_COMPLETED);
+					DisplayAdvice("[ADVICE_PLANT_SUNFLOWER5]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LATER, AdviceType.ADVICE_PLANT_SUNFLOWER5);
+					mTutorialTimer = -1;
 				}
-				else if (!this.mSeedBank.mSeedPackets[1].CanPickUp())
+				else if (!mSeedBank.mSeedPackets[1].CanPickUp())
 				{
-					this.SetTutorialState(TutorialState.TUTORIAL_MORESUN_REFRESH_SUNFLOWER);
+					SetTutorialState(TutorialState.TUTORIAL_MORESUN_REFRESH_SUNFLOWER);
 				}
 				else
 				{
-					this.SetTutorialState(TutorialState.TUTORIAL_MORESUN_PICK_UP_SUNFLOWER);
+					SetTutorialState(TutorialState.TUTORIAL_MORESUN_PICK_UP_SUNFLOWER);
 				}
 			}
-			if (this.mApp.IsWallnutBowlingLevel())
+			if (mApp.IsWallnutBowlingLevel())
 			{
-				this.mApp.PlaySample(Resources.SOUND_BOWLING);
+				mApp.PlaySample(Resources.SOUND_BOWLING);
 			}
-			this.ClearCursor();
+			ClearCursor();
 		}
 
 		public void MouseDownWithTool(int x, int y, int theClickCount, CursorType theCursorType, bool posScaled)
 		{
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 			{
 				if (posScaled)
 				{
@@ -4225,7 +4225,7 @@ namespace Lawn
 				}
 				if (y < Constants.ZEN_YMIN)
 				{
-					this.ClearCursor();
+					ClearCursor();
 					return;
 				}
 			}
@@ -4236,21 +4236,21 @@ namespace Lawn
 			}
 			if (theClickCount < 0)
 			{
-				this.ClearCursor();
-				this.mApp.PlayFoley(FoleyType.FOLEY_DROP);
+				ClearCursor();
+				mApp.PlayFoley(FoleyType.FOLEY_DROP);
 				return;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 			{
-				this.mApp.mZenGarden.MouseDownWithTool(x, y, theCursorType);
+				mApp.mZenGarden.MouseDownWithTool(x, y, theCursorType);
 				return;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
+			if (mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
 			{
-				this.mChallenge.TreeOfWisdomTool(x, y);
+				mChallenge.TreeOfWisdomTool(x, y);
 				return;
 			}
-			HitResult hitResult = this.ToolHitTest(x, y, true);
+			HitResult hitResult = ToolHitTest(x, y, true);
 			Plant plant = null;
 			if (hitResult.mObjectType == GameObjectType.OBJECT_TYPE_PLANT)
 			{
@@ -4260,46 +4260,46 @@ namespace Lawn
 			{
 				if (theCursorType == CursorType.CURSOR_TYPE_SHOVEL)
 				{
-					this.mApp.PlayFoley(FoleyType.FOLEY_USE_SHOVEL);
-					this.mPlantsShoveled++;
+					mApp.PlayFoley(FoleyType.FOLEY_USE_SHOVEL);
+					mPlantsShoveled++;
 					plant.Die();
-					if (plant.mSeedType == SeedType.SEED_CATTAIL && this.GetTopPlantAt(plant.mPlantCol, plant.mRow, PlantPriority.TOPPLANT_ONLY_PUMPKIN) != null)
+					if (plant.mSeedType == SeedType.SEED_CATTAIL && GetTopPlantAt(plant.mPlantCol, plant.mRow, PlantPriority.TOPPLANT_ONLY_PUMPKIN) != null)
 					{
-						this.NewPlant(plant.mPlantCol, plant.mRow, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+						NewPlant(plant.mPlantCol, plant.mRow, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
 					}
-					if (this.mTutorialState == TutorialState.TUTORIAL_SHOVEL_DIG || this.mTutorialState == TutorialState.TUTORIAL_SHOVEL_KEEP_DIGGING)
+					if (mTutorialState == TutorialState.TUTORIAL_SHOVEL_DIG || mTutorialState == TutorialState.TUTORIAL_SHOVEL_KEEP_DIGGING)
 					{
-						if (this.CountPlantByType(SeedType.SEED_PEASHOOTER) == 0)
+						if (CountPlantByType(SeedType.SEED_PEASHOOTER) == 0)
 						{
-							this.SetTutorialState(TutorialState.TUTORIAL_SHOVEL_COMPLETED);
+							SetTutorialState(TutorialState.TUTORIAL_SHOVEL_COMPLETED);
 						}
 						else
 						{
-							this.SetTutorialState(TutorialState.TUTORIAL_SHOVEL_KEEP_DIGGING);
+							SetTutorialState(TutorialState.TUTORIAL_SHOVEL_KEEP_DIGGING);
 						}
 					}
 				}
-				this.ClearCursor();
+				ClearCursor();
 				return;
 			}
 			HitResult hitResult2;
-			this.MouseHitTest(x, y, out hitResult2, true);
+			MouseHitTest(x, y, out hitResult2, true);
 			if (hitResult2.mObjectType == GameObjectType.OBJECT_TYPE_COIN)
 			{
 				return;
 			}
-			this.mApp.PlayFoley(FoleyType.FOLEY_DROP);
-			this.ClearCursor();
+			mApp.PlayFoley(FoleyType.FOLEY_DROP);
+			ClearCursor();
 		}
 
 		public bool CanInteractWithBoardButtons()
 		{
-			return !this.mPaused && this.mApp.GetDialogCount() <= 0 && this.mBoardFadeOutCounter < 0 && this.mChallenge.mChallengeState != ChallengeState.STATECHALLENGE_ZEN_FADING && (this.mApp.mGameMode == GameMode.GAMEMODE_UPSELL || this.mApp.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_OFF);
+			return !mPaused && mApp.GetDialogCount() <= 0 && mBoardFadeOutCounter < 0 && mChallenge.mChallengeState != ChallengeState.STATECHALLENGE_ZEN_FADING && (mApp.mGameMode == GameMode.GAMEMODE_UPSELL || mApp.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_OFF);
 		}
 
 		public void DrawProgressMeter(Graphics g)
 		{
-			if (!this.HasProgressMeter())
+			if (!HasProgressMeter())
 			{
 				return;
 			}
@@ -4310,69 +4310,69 @@ namespace Lawn
 			int celHeight = AtlasResources.IMAGE_FLAGMETER.GetCelHeight();
 			int thePosX = num + celWidth / 2;
 			int board_ProgressBarText_Pos = Constants.Board_ProgressBarText_Pos;
-			int num2 = TodCommon.TodAnimateCurve(0, 150, this.mProgressMeterWidth, 0, Constants.UIProgressMeterBarEnd, TodCurves.CURVE_LINEAR);
+			int num2 = TodCommon.TodAnimateCurve(0, 150, mProgressMeterWidth, 0, Constants.UIProgressMeterBarEnd, TodCurves.CURVE_LINEAR);
 			TRect theSrcRect = new TRect(celWidth - num2 - 7, celHeight, num2, celHeight);
 			TRect theDestRect = new TRect(num + celWidth - num2 - 7, y, num2, celHeight);
 			g.DrawImage(AtlasResources.IMAGE_FLAGMETER, theDestRect, theSrcRect);
 			SexyColor theColor = new SexyColor(224, 187, 98);
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST)
 			{
-				if (this.progressMeterStringValue != this.mChallenge.mChallengeScore)
+				if (progressMeterStringValue != mChallenge.mChallengeScore)
 				{
-					this.progressMeterString = Common.StrFormat_(TodStringFile.TodStringTranslate("[PROGRESS_METER_MATCHES]"), this.mChallenge.mChallengeScore, 75, TodStringFile.TodStringTranslate("[MATCHES]"));
-					this.progressMeterStringValue = this.mChallenge.mChallengeScore;
+					progressMeterString = Common.StrFormat_(TodStringFile.TodStringTranslate("[PROGRESS_METER_MATCHES]"), mChallenge.mChallengeScore, 75, TodStringFile.TodStringTranslate("[MATCHES]"));
+					progressMeterStringValue = mChallenge.mChallengeScore;
 				}
-				TodCommon.TodDrawString(g, this.progressMeterString, thePosX, board_ProgressBarText_Pos, Resources.FONT_DWARVENTODCRAFT12, theColor, DrawStringJustification.DS_ALIGN_CENTER);
+				TodCommon.TodDrawString(g, progressMeterString, thePosX, board_ProgressBarText_Pos, Resources.FONT_DWARVENTODCRAFT12, theColor, DrawStringJustification.DS_ALIGN_CENTER);
 			}
-			else if (this.mApp.IsSquirrelLevel())
+			else if (mApp.IsSquirrelLevel())
 			{
-				string theText = Common.StrFormat_(TodStringFile.TodStringTranslate("[PROGRESS_METER_SQUIRRELS]"), this.mChallenge.mChallengeScore, 7, TodStringFile.TodStringTranslate("[SQUIRRELS]"));
+				string theText = Common.StrFormat_(TodStringFile.TodStringTranslate("[PROGRESS_METER_SQUIRRELS]"), mChallenge.mChallengeScore, 7, TodStringFile.TodStringTranslate("[SQUIRRELS]"));
 				TodCommon.TodDrawString(g, theText, thePosX, board_ProgressBarText_Pos, Resources.FONT_DWARVENTODCRAFT12, theColor, DrawStringJustification.DS_ALIGN_CENTER);
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_SLOT_MACHINE)
+			else if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_SLOT_MACHINE)
 			{
-				int num3 = TodCommon.ClampInt(this.mSunMoney, 0, 2000);
-				if (this.progressMeterStringValue != num3)
+				int num3 = TodCommon.ClampInt(mSunMoney, 0, 2000);
+				if (progressMeterStringValue != num3)
 				{
-					this.progressMeterString = Common.StrFormat_(TodStringFile.TodStringTranslate("[PROGRESS_METER_SUN_SLOT_MACHINE]"), num3, 2000, TodStringFile.TodStringTranslate("[SUN]"));
-					this.progressMeterStringValue = num3;
+					progressMeterString = Common.StrFormat_(TodStringFile.TodStringTranslate("[PROGRESS_METER_SUN_SLOT_MACHINE]"), num3, 2000, TodStringFile.TodStringTranslate("[SUN]"));
+					progressMeterStringValue = num3;
 				}
-				TodCommon.TodDrawString(g, this.progressMeterString, thePosX, board_ProgressBarText_Pos, Resources.FONT_DWARVENTODCRAFT12, theColor, celWidth - 10, DrawStringJustification.DS_ALIGN_CENTER);
+				TodCommon.TodDrawString(g, progressMeterString, thePosX, board_ProgressBarText_Pos, Resources.FONT_DWARVENTODCRAFT12, theColor, celWidth - 10, DrawStringJustification.DS_ALIGN_CENTER);
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZOMBIQUARIUM)
+			else if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZOMBIQUARIUM)
 			{
-				int num4 = TodCommon.ClampInt(this.mSunMoney, 0, 1000);
+				int num4 = TodCommon.ClampInt(mSunMoney, 0, 1000);
 				string theText2 = Common.StrFormat_(TodStringFile.TodStringTranslate("[PROGRESS_METER_SUN_ZOMBIQUARIUM]"), num4, 1000, TodStringFile.TodStringTranslate("[SUN]"));
 				TodCommon.TodDrawString(g, theText2, thePosX, board_ProgressBarText_Pos, Resources.FONT_DWARVENTODCRAFT12, theColor, DrawStringJustification.DS_ALIGN_CENTER);
 			}
-			else if (this.mApp.IsIZombieLevel())
+			else if (mApp.IsIZombieLevel())
 			{
-				if (this.progressMeterStringValue != this.mChallenge.mChallengeScore)
+				if (progressMeterStringValue != mChallenge.mChallengeScore)
 				{
-					this.progressMeterString = Common.StrFormat_(TodStringFile.TodStringTranslate("[PROGRESS_METER_BRAINS]"), this.mChallenge.mChallengeScore, 5, TodStringFile.TodStringTranslate("[BRAINS]"));
-					this.progressMeterStringValue = this.mChallenge.mChallengeScore;
+					progressMeterString = Common.StrFormat_(TodStringFile.TodStringTranslate("[PROGRESS_METER_BRAINS]"), mChallenge.mChallengeScore, 5, TodStringFile.TodStringTranslate("[BRAINS]"));
+					progressMeterStringValue = mChallenge.mChallengeScore;
 				}
 				Resources.FONT_DWARVENTODCRAFT12.characterOffsetMagic = 2;
-				TodCommon.TodDrawString(g, this.progressMeterString, thePosX, board_ProgressBarText_Pos, Resources.FONT_DWARVENTODCRAFT12, theColor, DrawStringJustification.DS_ALIGN_CENTER);
+				TodCommon.TodDrawString(g, progressMeterString, thePosX, board_ProgressBarText_Pos, Resources.FONT_DWARVENTODCRAFT12, theColor, DrawStringJustification.DS_ALIGN_CENTER);
 				Resources.FONT_DWARVENTODCRAFT12.characterOffsetMagic = 0;
 			}
-			else if (this.ProgressMeterHasFlags())
+			else if (ProgressMeterHasFlags())
 			{
-				int numWavesPerFlag = this.GetNumWavesPerFlag();
-				for (int i = 1; i <= this.mNumWaves / numWavesPerFlag; i++)
+				int numWavesPerFlag = GetNumWavesPerFlag();
+				for (int i = 1; i <= mNumWaves / numWavesPerFlag; i++)
 				{
 					int theTimeAge = i * numWavesPerFlag;
 					int num5 = 0;
 					int thePositionEnd = num + 6;
 					int thePositionStart = num + celWidth - 10;
-					int theX = TodCommon.TodAnimateCurve(0, this.mNumWaves, theTimeAge, thePositionStart, thePositionEnd, TodCurves.CURVE_LINEAR);
+					int theX = TodCommon.TodAnimateCurve(0, mNumWaves, theTimeAge, thePositionStart, thePositionEnd, TodCurves.CURVE_LINEAR);
 					g.DrawImageCel(AtlasResources.IMAGE_FLAGMETERPARTS, theX, y - 4, 1, 0);
 					g.DrawImageCel(AtlasResources.IMAGE_FLAGMETERPARTS, theX, y - num5 - 3, 2, 0);
 				}
 			}
-			if (this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST && !this.mApp.IsSquirrelLevel() && !this.mApp.IsSlotMachineLevel() && !this.mApp.IsIZombieLevel() && !this.mApp.IsFinalBossLevel())
+			if (mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST && !mApp.IsSquirrelLevel() && !mApp.IsSlotMachineLevel() && !mApp.IsIZombieLevel() && !mApp.IsFinalBossLevel())
 			{
-				int num6 = TodCommon.TodAnimateCurve(0, 150, this.mProgressMeterWidth, 0, Constants.UIProgressMeterHeadEnd, TodCurves.CURVE_LINEAR);
+				int num6 = TodCommon.TodAnimateCurve(0, 150, mProgressMeterWidth, 0, Constants.UIProgressMeterHeadEnd, TodCurves.CURVE_LINEAR);
 				g.DrawImageCel(AtlasResources.IMAGE_FLAGMETERPARTS, num + celWidth - num6 - 20, y - 3, 0, 0);
 			}
 		}
@@ -4383,12 +4383,12 @@ namespace Lawn
 			{
 				return null;
 			}
-			if (this.mApp.IsWallnutBowlingLevel() && !this.mCutScene.IsInShovelTutorial())
+			if (mApp.IsWallnutBowlingLevel() && !mCutScene.IsInShovelTutorial())
 			{
 				return null;
 			}
 			PlantsOnLawn plantsOnLawn = default(PlantsOnLawn);
-			this.GetPlantsOnLawn(theGridX, theGridY, ref plantsOnLawn);
+			GetPlantsOnLawn(theGridX, theGridY, ref plantsOnLawn);
 			if (thePriority == PlantPriority.TOPPLANT_ONLY_FLYING)
 			{
 				return plantsOnLawn.mFlyingPlant;
@@ -4510,14 +4510,14 @@ namespace Lawn
 			{
 				return;
 			}
-			if (this.mApp.IsWallnutBowlingLevel() && !this.mCutScene.IsInShovelTutorial())
+			if (mApp.IsWallnutBowlingLevel() && !mCutScene.IsInShovelTutorial())
 			{
 				return;
 			}
-			int count = this.mPlants.Count;
+			int count = mPlants.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Plant plant = this.mPlants[i];
+				Plant plant = mPlants[i];
 				if (!plant.mDead)
 				{
 					SeedType seedType = plant.mSeedType;
@@ -4554,7 +4554,7 @@ namespace Lawn
 						}
 						else if (seedType == SeedType.SEED_LILYPAD)
 						{
-							if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+							if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 							{
 								Debug.ASSERT(thePlantOnLawn.mNormalPlant == null);
 								thePlantOnLawn.mNormalPlant = plant;
@@ -4584,10 +4584,10 @@ namespace Lawn
 		public int CountSunFlowers()
 		{
 			int num = 0;
-			int count = this.mPlants.Count;
+			int count = mPlants.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Plant plant = this.mPlants[i];
+				Plant plant = mPlants[i];
 				if (!plant.mDead && plant.MakesSun())
 				{
 					num++;
@@ -4598,13 +4598,13 @@ namespace Lawn
 
 		public int GetSeedPacketPositionY(int theIndex)
 		{
-			int mNumPackets = this.mSeedBank.mNumPackets;
+			int aNumPackets = mSeedBank.mNumPackets;
 			int num = Constants.SMALL_SEEDPACKET_HEIGHT;
-			if (mNumPackets <= 7)
+			if (aNumPackets <= 7)
 			{
 				num += (int)Constants.InvertAndScale(8f);
 			}
-			else if (mNumPackets == 8)
+			else if (aNumPackets == 8)
 			{
 				num += (int)Constants.InvertAndScale(5f);
 			}
@@ -4613,7 +4613,7 @@ namespace Lawn
 
 		public void AddGraveStones(int theGridX, int theCount)
 		{
-			if (!this.doAddGraveStones)
+			if (!doAddGraveStones)
 			{
 				return;
 			}
@@ -4622,9 +4622,9 @@ namespace Lawn
 			while (i < theCount)
 			{
 				int theGridY = RandomNumbers.NextNumber(Constants.MAX_GRIDSIZEY);
-				if (this.CanAddGraveStoneAt(theGridX, theGridY))
+				if (CanAddGraveStoneAt(theGridX, theGridY))
 				{
-					this.AddAGraveStone(theGridX, theGridY);
+					AddAGraveStone(theGridX, theGridY);
 					i++;
 				}
 			}
@@ -4635,7 +4635,7 @@ namespace Lawn
 			int num = 0;
 			int num2 = -1;
 			GridItem gridItem = null;
-			while (this.IterateGridItems(ref gridItem, ref num2))
+			while (IterateGridItems(ref gridItem, ref num2))
 			{
 				if (gridItem.mGridItemType == GridItemType.GRIDITEM_GRAVESTONE)
 				{
@@ -4647,21 +4647,21 @@ namespace Lawn
 
 		public void ZombiesWon(Zombie aZombie)
 		{
-			if (this.mApp.mGameScene == GameScenes.SCENE_ZOMBIES_WON)
+			if (mApp.mGameScene == GameScenes.SCENE_ZOMBIES_WON)
 			{
 				return;
 			}
-			this.ClearAdvice(AdviceType.ADVICE_NONE);
-			this.ClearCursor();
-			if (this.mNextSurvivalStageCounter > 0)
+			ClearAdvice(AdviceType.ADVICE_NONE);
+			ClearCursor();
+			if (mNextSurvivalStageCounter > 0)
 			{
-				this.mNextSurvivalStageCounter = 0;
+				mNextSurvivalStageCounter = 0;
 			}
-			this.mApp.mBoardResult = BoardResult.BOARDRESULT_LOST;
-			int count = this.mZombies.Count;
+			mApp.mBoardResult = BoardResult.BOARDRESULT_LOST;
+			int count = mZombies.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Zombie zombie = this.mZombies[i];
+				Zombie zombie = mZombies[i];
 				if (!zombie.mDead && zombie != aZombie)
 				{
 					if ((float)zombie.GetZombieRect().mX < -50f || zombie.mZombiePhase == ZombiePhase.PHASE_RISING_FROM_GRAVE || zombie.mZombiePhase == ZombiePhase.PHASE_DANCER_RISING)
@@ -4676,58 +4676,58 @@ namespace Lawn
 			}
 			string theMessage = string.Empty;
 			bool flag = true;
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZOMBIQUARIUM)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZOMBIQUARIUM)
 			{
 				theMessage = "[ZOMBIQUARIUM_DEATH_MESSAGE]";
 				flag = false;
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
+			else if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
 			{
-				int survivalFlagsCompleted = this.GetSurvivalFlagsCompleted();
-				string theStringToSubstitute = this.mApp.Pluralize(survivalFlagsCompleted, "[ONE_FLAG]", "[COUNT_FLAGS]");
+				int survivalFlagsCompleted = GetSurvivalFlagsCompleted();
+				string theStringToSubstitute = mApp.Pluralize(survivalFlagsCompleted, "[ONE_FLAG]", "[COUNT_FLAGS]");
 				theMessage = TodCommon.TodReplaceString("[LAST_STAND_DEATH_MESSAGE]", "{FLAGS}", theStringToSubstitute);
 				flag = false;
 			}
-			else if (this.mApp.IsEndlessScaryPotter(this.mApp.mGameMode) || this.mApp.IsEndlessIZombie(this.mApp.mGameMode))
+			else if (mApp.IsEndlessScaryPotter(mApp.mGameMode) || mApp.IsEndlessIZombie(mApp.mGameMode))
 			{
-				int mSurvivalStage = this.mChallenge.mSurvivalStage;
-				if (this.mApp.IsEndlessScaryPotter(this.mApp.mGameMode))
+				int aSurvivalStage = mChallenge.mSurvivalStage;
+				if (mApp.IsEndlessScaryPotter(mApp.mGameMode))
 				{
-					this.mApp.mPlayerInfo.mVasebreakerScore = Math.Max(this.mApp.mPlayerInfo.mVasebreakerScore, (long)mSurvivalStage);
-					LeaderBoardComm.RecordResult(LeaderboardGameMode.Vasebreaker, (int)this.mApp.mPlayerInfo.mVasebreakerScore);
+					mApp.mPlayerInfo.mVasebreakerScore = Math.Max(mApp.mPlayerInfo.mVasebreakerScore, (long)aSurvivalStage);
+					LeaderBoardComm.RecordResult(LeaderboardGameMode.Vasebreaker, (int)mApp.mPlayerInfo.mVasebreakerScore);
 				}
-				else if (this.mApp.IsEndlessIZombie(this.mApp.mGameMode))
+				else if (mApp.IsEndlessIZombie(mApp.mGameMode))
 				{
-					this.mApp.mPlayerInfo.mIZombieScore = Math.Max(this.mApp.mPlayerInfo.mIZombieScore, (long)mSurvivalStage);
-					LeaderBoardComm.RecordResult(LeaderboardGameMode.IZombie, (int)this.mApp.mPlayerInfo.mIZombieScore);
+					mApp.mPlayerInfo.mIZombieScore = Math.Max(mApp.mPlayerInfo.mIZombieScore, (long)aSurvivalStage);
+					LeaderBoardComm.RecordResult(LeaderboardGameMode.IZombie, (int)mApp.mPlayerInfo.mIZombieScore);
 				}
-				theMessage = TodCommon.TodReplaceNumberString("[ENDLESS_PUZZLE_DEATH_MESSAGE]", "{STREAK}", mSurvivalStage);
+				theMessage = TodCommon.TodReplaceNumberString("[ENDLESS_PUZZLE_DEATH_MESSAGE]", "{STREAK}", aSurvivalStage);
 				flag = false;
 			}
-			else if (this.mApp.IsIZombieLevel())
+			else if (mApp.IsIZombieLevel())
 			{
 				theMessage = "[I_ZOMBIE_DEATH_MESSAGE]";
 				flag = false;
 			}
 			if (flag)
 			{
-				this.mApp.mGameScene = GameScenes.SCENE_ZOMBIES_WON;
+				mApp.mGameScene = GameScenes.SCENE_ZOMBIES_WON;
 				aZombie.WalkIntoHouse();
-				this.ClearAdvice(AdviceType.ADVICE_NONE);
-				this.mCutScene.StartZombiesWon();
-				this.FreezeEffectsForCutscene(true);
-				this.TutorialArrowRemove();
-				this.UpdateCursor();
+				ClearAdvice(AdviceType.ADVICE_NONE);
+				mCutScene.StartZombiesWon();
+				FreezeEffectsForCutscene(true);
+				TutorialArrowRemove();
+				UpdateCursor();
 				return;
 			}
 			GameOverDialog theDialog = new GameOverDialog(theMessage, true);
-			this.mApp.AddDialog(17, theDialog);
-			this.mApp.mMusic.StopAllMusic();
-			this.StopAllZombieSounds();
-			this.mApp.PlaySample(Resources.SOUND_LOSEMUSIC);
+			mApp.AddDialog(17, theDialog);
+			mApp.mMusic.StopAllMusic();
+			StopAllZombieSounds();
+			mApp.PlaySample(Resources.SOUND_LOSEMUSIC);
 			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_ZOMBIES_WON, true);
 			int num = Constants.BOARD_EXTRA_ROOM / 2;
-			Reanimation reanimation = this.mApp.AddReanimation((float)(-(float)Constants.BOARD_OFFSET + num + Constants.Board_Offset_AspectRatio_Correction), 0f, 900000, ReanimationType.REANIM_ZOMBIES_WON);
+			Reanimation reanimation = mApp.AddReanimation((float)(-(float)Constants.BOARD_OFFSET + num + Constants.Board_Offset_AspectRatio_Correction), 0f, 900000, ReanimationType.REANIM_ZOMBIES_WON);
 			reanimation.mLoopType = ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD;
 			ReanimatorTrackInstance trackInstanceByName = reanimation.GetTrackInstanceByName(Reanimation.ReanimTrackId_fullscreen);
 			trackInstanceByName.mTrackColor = SexyColor.Black;
@@ -4736,25 +4736,25 @@ namespace Lawn
 
 		public void DrawLevel(Graphics g)
 		{
-			if (this.mLevelFadeCount <= 0)
+			if (mLevelFadeCount <= 0)
 			{
 				return;
 			}
-			if (this.mApp.IsAdventureMode())
+			if (mApp.IsAdventureMode())
 			{
-				if (this.levelStrVal != this.mLevel)
+				if (levelStrVal != mLevel)
 				{
-					this.mLevelStr = TodStringFile.TodStringTranslate("[LEVEL]") + " " + this.mApp.GetStageString(this.mLevel);
-					this.levelStrVal = this.mLevel;
+					mLevelStr = TodStringFile.TodStringTranslate("[LEVEL]") + " " + mApp.GetStageString(mLevel);
+					levelStrVal = mLevel;
 				}
 			}
-			else if (this.mApp.IsSurvivalMode() || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
+			else if (mApp.IsSurvivalMode() || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
 			{
-				this.mApp.GetCurrentChallengeIndex();
-				int survivalFlagsCompleted = this.GetSurvivalFlagsCompleted();
+				mApp.GetCurrentChallengeIndex();
+				int survivalFlagsCompleted = GetSurvivalFlagsCompleted();
 				if (survivalFlagsCompleted > 0)
 				{
-					string theStringToSubstitute = this.mApp.Pluralize(survivalFlagsCompleted, "[ONE_FLAG]", "[COUNT_FLAGS]");
+					string theStringToSubstitute = mApp.Pluralize(survivalFlagsCompleted, "[ONE_FLAG]", "[COUNT_FLAGS]");
 					string text;
 					if (survivalFlagsCompleted == 1)
 					{
@@ -4764,56 +4764,56 @@ namespace Lawn
 					{
 						text = TodCommon.TodReplaceString("[FLAGS_COMPLETED_PLURAL]", "{FLAGS}", theStringToSubstitute);
 					}
-					this.mLevelStr = TodStringFile.TodStringTranslate(this.mChallenge.mName) + " - " + text;
+					mLevelStr = TodStringFile.TodStringTranslate(mChallenge.mName) + " - " + text;
 				}
 				else
 				{
-					this.mLevelStr = this.mChallenge.mName;
+					mLevelStr = mChallenge.mName;
 				}
 			}
-			else if (this.mApp.IsEndlessScaryPotter(this.mApp.mGameMode) || this.mApp.IsEndlessIZombie(this.mApp.mGameMode))
+			else if (mApp.IsEndlessScaryPotter(mApp.mGameMode) || mApp.IsEndlessIZombie(mApp.mGameMode))
 			{
-				this.mApp.GetCurrentChallengeIndex();
-				int num = this.mChallenge.mSurvivalStage;
-				if (this.mNextSurvivalStageCounter > 0)
+				mApp.GetCurrentChallengeIndex();
+				int num = mChallenge.mSurvivalStage;
+				if (mNextSurvivalStageCounter > 0)
 				{
 					num++;
 				}
 				if (num > 0)
 				{
 					string text2 = TodCommon.TodReplaceNumberString("[ENDLESS_STREAK]", "{STREAK}", num);
-					this.mLevelStr = TodStringFile.TodStringTranslate(this.mChallenge.mName) + " - " + text2;
+					mLevelStr = TodStringFile.TodStringTranslate(mChallenge.mName) + " - " + text2;
 				}
 				else
 				{
-					this.mLevelStr = this.mChallenge.mName;
+					mLevelStr = mChallenge.mName;
 				}
 			}
 			else
 			{
-				this.mLevelStr = this.mChallenge.mName;
+				mLevelStr = mChallenge.mName;
 			}
 			int thePosX = Constants.UILevelPosition.X - Constants.Board_Offset_AspectRatio_Correction;
 			int num2 = Constants.UILevelPosition.Y;
-			if (this.mChallenge.mChallengeState == ChallengeState.STATECHALLENGE_ZEN_FADING)
+			if (mChallenge.mChallengeState == ChallengeState.STATECHALLENGE_ZEN_FADING)
 			{
-				num2 += TodCommon.TodAnimateCurve(50, 0, this.mChallenge.mChallengeStateCounter, 0, 50, TodCurves.CURVE_EASE_IN_OUT);
+				num2 += TodCommon.TodAnimateCurve(50, 0, mChallenge.mChallengeStateCounter, 0, 50, TodCurves.CURVE_EASE_IN_OUT);
 			}
-			int theAlpha = TodCommon.ClampInt(255 * this.mLevelFadeCount / 15, 0, 255);
-			TodCommon.TodDrawString(g, this.mLevelStr, thePosX, num2, Resources.FONT_HOUSEOFTERROR16, new SexyColor(224, 187, 98, theAlpha), DrawStringJustification.DS_ALIGN_RIGHT);
+			int theAlpha = TodCommon.ClampInt(255 * mLevelFadeCount / 15, 0, 255);
+			TodCommon.TodDrawString(g, mLevelStr, thePosX, num2, Resources.FONT_HOUSEOFTERROR16, new SexyColor(224, 187, 98, theAlpha), DrawStringJustification.DS_ALIGN_RIGHT);
 		}
 
 		public void DrawShovel(Graphics g)
 		{
-			if (this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && this.mApp.mGameMode != GameMode.GAMEMODE_TREE_OF_WISDOM && this.mShowShovel)
+			if (mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && mApp.mGameMode != GameMode.GAMEMODE_TREE_OF_WISDOM && mShowShovel)
 			{
-				TRect shovelButtonRect = this.GetShovelButtonRect();
+				TRect shovelButtonRect = GetShovelButtonRect();
 				g.DrawImage(AtlasResources.IMAGE_SHOVELBANK, shovelButtonRect.mX, shovelButtonRect.mY);
-				if (this.mCursorObject.mCursorType != CursorType.CURSOR_TYPE_SHOVEL)
+				if (mCursorObject.mCursorType != CursorType.CURSOR_TYPE_SHOVEL)
 				{
-					if (this.mChallenge.mChallengeState == (ChallengeState)15)
+					if (mChallenge.mChallengeState == (ChallengeState)15)
 					{
-						SexyColor flashingColor = TodCommon.GetFlashingColor(this.mMainCounter, 75);
+						SexyColor flashingColor = TodCommon.GetFlashingColor(mMainCounter, 75);
 						g.SetColorizeImages(true);
 						g.SetColor(flashingColor);
 					}
@@ -4821,231 +4821,231 @@ namespace Lawn
 					g.SetColorizeImages(false);
 				}
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || this.mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
 			{
-				this.DrawZenButtons(g);
+				DrawZenButtons(g);
 			}
 		}
 
 		public void UpdateZombieSpawning()
 		{
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_UPSELL || this.mApp.mGameMode == GameMode.GAMEMODE_INTRO)
+			if (mApp.mGameMode == GameMode.GAMEMODE_UPSELL || mApp.mGameMode == GameMode.GAMEMODE_INTRO)
 			{
 				return;
 			}
-			if (this.mFinalWaveSoundCounter > 0)
+			if (mFinalWaveSoundCounter > 0)
 			{
-				this.mFinalWaveSoundCounter -= 3;
-				if (this.mFinalWaveSoundCounter >= 0 && this.mFinalWaveSoundCounter < 3)
+				mFinalWaveSoundCounter -= 3;
+				if (mFinalWaveSoundCounter >= 0 && mFinalWaveSoundCounter < 3)
 				{
-					this.mApp.PlaySample(Resources.SOUND_FINALWAVE);
+					mApp.PlaySample(Resources.SOUND_FINALWAVE);
 				}
 			}
-			if (this.mTutorialState == TutorialState.TUTORIAL_LEVEL_1_PICK_UP_PEASHOOTER || this.mTutorialState == TutorialState.TUTORIAL_LEVEL_1_PLANT_PEASHOOTER || this.mTutorialState == TutorialState.TUTORIAL_LEVEL_1_REFRESH_PEASHOOTER || this.mTutorialState == TutorialState.TUTORIAL_SLOT_MACHINE_PULL)
+			if (mTutorialState == TutorialState.TUTORIAL_LEVEL_1_PICK_UP_PEASHOOTER || mTutorialState == TutorialState.TUTORIAL_LEVEL_1_PLANT_PEASHOOTER || mTutorialState == TutorialState.TUTORIAL_LEVEL_1_REFRESH_PEASHOOTER || mTutorialState == TutorialState.TUTORIAL_SLOT_MACHINE_PULL)
 			{
 				return;
 			}
-			if (this.HasLevelAwardDropped())
+			if (HasLevelAwardDropped())
 			{
 				return;
 			}
-			if (this.mRiseFromGraveCounter > 0)
+			if (mRiseFromGraveCounter > 0)
 			{
-				this.mRiseFromGraveCounter -= 3;
-				if (this.mRiseFromGraveCounter >= 0 && this.mRiseFromGraveCounter < 3)
+				mRiseFromGraveCounter -= 3;
+				if (mRiseFromGraveCounter >= 0 && mRiseFromGraveCounter < 3)
 				{
-					this.SpawnZombiesFromGraves();
+					SpawnZombiesFromGraves();
 				}
 			}
-			if (this.mHugeWaveCountDown > 0)
+			if (mHugeWaveCountDown > 0)
 			{
-				this.mHugeWaveCountDown -= 3;
-				if (this.mHugeWaveCountDown >= 0 && this.mHugeWaveCountDown < 3)
+				mHugeWaveCountDown -= 3;
+				if (mHugeWaveCountDown >= 0 && mHugeWaveCountDown < 3)
 				{
-					this.ClearAdvice(AdviceType.ADVICE_HUGE_WAVE);
-					this.NextWaveComing();
-					this.mZombieCountDown = 3;
+					ClearAdvice(AdviceType.ADVICE_HUGE_WAVE);
+					NextWaveComing();
+					mZombieCountDown = 3;
 				}
 				else
 				{
-					if (this.mHugeWaveCountDown < 723 || this.mHugeWaveCountDown >= 726)
+					if (mHugeWaveCountDown < 723 || mHugeWaveCountDown >= 726)
 					{
-						if (this.mApp.mMusic.mCurMusicTune == MusicTune.MUSIC_TUNE_DAY_GRASSWALK || this.mApp.mMusic.mCurMusicTune == MusicTune.MUSIC_TUNE_POOL_WATERYGRAVES || this.mApp.mMusic.mCurMusicTune == MusicTune.MUSIC_TUNE_FOG_RIGORMORMIST || this.mApp.mMusic.mCurMusicTune == MusicTune.MUSIC_TUNE_ROOF_GRAZETHEROOF)
+						if (mApp.mMusic.mCurMusicTune == MusicTune.MUSIC_TUNE_DAY_GRASSWALK || mApp.mMusic.mCurMusicTune == MusicTune.MUSIC_TUNE_POOL_WATERYGRAVES || mApp.mMusic.mCurMusicTune == MusicTune.MUSIC_TUNE_FOG_RIGORMORMIST || mApp.mMusic.mCurMusicTune == MusicTune.MUSIC_TUNE_ROOF_GRAZETHEROOF)
 						{
-							if (this.mHugeWaveCountDown == 399)
+							if (mHugeWaveCountDown == 399)
 							{
 								return;
 							}
 						}
-						else if (this.mApp.mMusic.mCurMusicTune == MusicTune.MUSIC_TUNE_NIGHT_MOONGRAINS)
+						else if (mApp.mMusic.mCurMusicTune == MusicTune.MUSIC_TUNE_NIGHT_MOONGRAINS)
 						{
-							int num = this.mHugeWaveCountDown;
+							int num = mHugeWaveCountDown;
 						}
 						return;
 					}
-					this.mApp.PlaySample(Resources.SOUND_HUGE_WAVE);
+					mApp.PlaySample(Resources.SOUND_HUGE_WAVE);
 				}
 			}
-			if (this.mChallenge.UpdateZombieSpawning())
+			if (mChallenge.UpdateZombieSpawning())
 			{
 				return;
 			}
-			if (this.mCurrentWave == this.mNumWaves)
+			if (mCurrentWave == mNumWaves)
 			{
-				if (this.IsFinalSurvivalStage())
+				if (IsFinalSurvivalStage())
 				{
 					return;
 				}
-				if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
+				if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
 				{
 					return;
 				}
-				if (!this.mApp.IsSurvivalMode() && !this.mApp.IsContinuousChallenge())
+				if (!mApp.IsSurvivalMode() && !mApp.IsContinuousChallenge())
 				{
 					return;
 				}
 			}
-			this.mZombieCountDown -= 3;
-			if (this.mCurrentWave == this.mNumWaves && this.mApp.IsSurvivalMode())
+			mZombieCountDown -= 3;
+			if (mCurrentWave == mNumWaves && mApp.IsSurvivalMode())
 			{
-				if (this.mZombieCountDown >= 0 && this.mZombieCountDown < 3)
+				if (mZombieCountDown >= 0 && mZombieCountDown < 3)
 				{
-					this.FadeOutLevel();
+					FadeOutLevel();
 				}
 				return;
 			}
-			int num2 = this.mZombieCountDownStart - this.mZombieCountDown;
-			if (this.mZombieCountDown > 5 && num2 > 400)
+			int num2 = mZombieCountDownStart - mZombieCountDown;
+			if (mZombieCountDown > 5 && num2 > 400)
 			{
-				int num3 = this.TotalZombiesHealthInWave(this.mCurrentWave - 1);
-				if (num3 <= this.mZombieHealthToNextWave && this.mZombieCountDown > 201)
+				int num3 = TotalZombiesHealthInWave(mCurrentWave - 1);
+				if (num3 <= mZombieHealthToNextWave && mZombieCountDown > 201)
 				{
-					this.mZombieCountDown = 201;
+					mZombieCountDown = 201;
 				}
 			}
-			if (this.mZombieCountDown >= 5 && this.mZombieCountDown < 8)
+			if (mZombieCountDown >= 5 && mZombieCountDown < 8)
 			{
-				if (this.IsFlagWave(this.mCurrentWave))
+				if (IsFlagWave(mCurrentWave))
 				{
-					this.ClearAdviceImmediately();
-					this.DisplayAdviceAgain("[ADVICE_HUGE_WAVE]", MessageStyle.MESSAGE_STYLE_HUGE_WAVE, AdviceType.ADVICE_HUGE_WAVE);
-					this.mHugeWaveCountDown = 750;
+					ClearAdviceImmediately();
+					DisplayAdviceAgain("[ADVICE_HUGE_WAVE]", MessageStyle.MESSAGE_STYLE_HUGE_WAVE, AdviceType.ADVICE_HUGE_WAVE);
+					mHugeWaveCountDown = 750;
 					return;
 				}
-				this.NextWaveComing();
+				NextWaveComing();
 			}
-			if (this.mZombieCountDown < 0 || this.mZombieCountDown >= 3)
+			if (mZombieCountDown < 0 || mZombieCountDown >= 3)
 			{
 				return;
 			}
-			this.SpawnZombieWave();
-			this.mZombieHealthWaveStart = this.TotalZombiesHealthInWave(this.mCurrentWave - 1);
-			bool flag = this.mApp.IsWallnutBowlingLevel() || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND;
-			if (this.mCurrentWave == this.mNumWaves && this.mApp.IsSurvivalMode())
+			SpawnZombieWave();
+			mZombieHealthWaveStart = TotalZombiesHealthInWave(mCurrentWave - 1);
+			bool flag = mApp.IsWallnutBowlingLevel() || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND;
+			if (mCurrentWave == mNumWaves && mApp.IsSurvivalMode())
 			{
-				this.mZombieHealthToNextWave = 0;
-				this.mZombieCountDown = 5499;
+				mZombieHealthToNextWave = 0;
+				mZombieCountDown = 5499;
 			}
-			else if (this.IsFlagWave(this.mCurrentWave) && !flag)
+			else if (IsFlagWave(mCurrentWave) && !flag)
 			{
-				this.mZombieHealthToNextWave = 0;
-				this.mZombieCountDown = 4500;
+				mZombieHealthToNextWave = 0;
+				mZombieCountDown = 4500;
 			}
 			else
 			{
-				this.mZombieHealthToNextWave = (int)(TodCommon.RandRangeFloat(0.5f, 0.65f) * (float)this.mZombieHealthWaveStart);
-				if (this.mApp.IsLittleTroubleLevel() || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_COLUMN || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
+				mZombieHealthToNextWave = (int)(TodCommon.RandRangeFloat(0.5f, 0.65f) * (float)mZombieHealthWaveStart);
+				if (mApp.IsLittleTroubleLevel() || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_COLUMN || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
 				{
-					this.mZombieCountDown = 750;
+					mZombieCountDown = 750;
 				}
 				else
 				{
-					this.mZombieCountDown = 2500 + RandomNumbers.NextNumber(600);
+					mZombieCountDown = 2500 + RandomNumbers.NextNumber(600);
 				}
 			}
-			this.mZombieCountDownStart = this.mZombieCountDown;
+			mZombieCountDownStart = mZombieCountDown;
 		}
 
 		public void UpdateSunSpawning()
 		{
-			if (this.StageIsNight())
+			if (StageIsNight())
 			{
 				return;
 			}
-			if (this.HasLevelAwardDropped())
+			if (HasLevelAwardDropped())
 			{
 				return;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RAINING_SEEDS || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ICE || this.mApp.mGameMode == GameMode.GAMEMODE_UPSELL || this.mApp.mGameMode == GameMode.GAMEMODE_INTRO || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZOMBIQUARIUM || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || this.mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND || this.mApp.IsIZombieLevel() || this.mApp.IsScaryPotterLevel() || this.mApp.IsSquirrelLevel() || this.HasConveyorBeltSeedBank())
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RAINING_SEEDS || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ICE || mApp.mGameMode == GameMode.GAMEMODE_UPSELL || mApp.mGameMode == GameMode.GAMEMODE_INTRO || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZOMBIQUARIUM || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND || mApp.IsIZombieLevel() || mApp.IsScaryPotterLevel() || mApp.IsSquirrelLevel() || HasConveyorBeltSeedBank())
 			{
 				return;
 			}
-			if (this.mTutorialState == TutorialState.TUTORIAL_SLOT_MACHINE_PULL)
+			if (mTutorialState == TutorialState.TUTORIAL_SLOT_MACHINE_PULL)
 			{
 				return;
 			}
-			if ((this.mTutorialState == TutorialState.TUTORIAL_LEVEL_1_PICK_UP_PEASHOOTER || this.mTutorialState == TutorialState.TUTORIAL_LEVEL_1_PLANT_PEASHOOTER) && this.mPlants.Count == 0)
+			if ((mTutorialState == TutorialState.TUTORIAL_LEVEL_1_PICK_UP_PEASHOOTER || mTutorialState == TutorialState.TUTORIAL_LEVEL_1_PLANT_PEASHOOTER) && mPlants.Count == 0)
 			{
 				return;
 			}
-			this.mSunCountDown -= 3;
-			if (this.mSunCountDown > 0)
+			mSunCountDown -= 3;
+			if (mSunCountDown > 0)
 			{
 				return;
 			}
 			int theX = Constants.LAWN_XMIN + RandomNumbers.NextNumber(Constants.Board_SunCoinRange);
-			this.mNumSunsFallen++;
-			this.mSunCountDown = Math.Min(950, 425 + this.mNumSunsFallen * 10) + RandomNumbers.NextNumber(275);
+			mNumSunsFallen++;
+			mSunCountDown = Math.Min(950, 425 + mNumSunsFallen * 10) + RandomNumbers.NextNumber(275);
 			CoinType theCoinType = CoinType.COIN_SUN;
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_SUNNY_DAY)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_SUNNY_DAY)
 			{
 				theCoinType = CoinType.COIN_LARGESUN;
 			}
-			this.AddCoin(theX, 60, theCoinType, CoinMotion.COIN_MOTION_FROM_SKY);
+			AddCoin(theX, 60, theCoinType, CoinMotion.COIN_MOTION_FROM_SKY);
 		}
 
 		public void ClearAdvice(AdviceType theHelpIndex)
 		{
-			if (theHelpIndex != AdviceType.ADVICE_NONE && theHelpIndex != this.mHelpIndex)
+			if (theHelpIndex != AdviceType.ADVICE_NONE && theHelpIndex != mHelpIndex)
 			{
 				return;
 			}
-			this.mAdvice.ClearLabel();
-			this.mHelpIndex = AdviceType.ADVICE_NONE;
+			mAdvice.ClearLabel();
+			mHelpIndex = AdviceType.ADVICE_NONE;
 		}
 
 		public bool RowCanHaveZombieType(int theRow, ZombieType theZombieType)
 		{
-			if (!this.RowCanHaveZombies(theRow))
+			if (!RowCanHaveZombies(theRow))
 			{
 				return false;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RESODDED && this.mPlantRow[theRow] == PlantRowType.PLANTROW_DIRT && this.mCurrentWave < 5)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RESODDED && mPlantRow[theRow] == PlantRowType.PLANTROW_DIRT && mCurrentWave < 5)
 			{
 				return false;
 			}
-			if (this.mPlantRow[theRow] == PlantRowType.PLANTROW_POOL && !Zombie.ZombieTypeCanGoInPool(theZombieType))
+			if (mPlantRow[theRow] == PlantRowType.PLANTROW_POOL && !Zombie.ZombieTypeCanGoInPool(theZombieType))
 			{
 				return false;
 			}
-			if (this.mPlantRow[theRow] == PlantRowType.PLANTROW_HIGH_GROUND && !Zombie.ZombieTypeCanGoOnHighGround(theZombieType))
+			if (mPlantRow[theRow] == PlantRowType.PLANTROW_HIGH_GROUND && !Zombie.ZombieTypeCanGoOnHighGround(theZombieType))
 			{
 				return false;
 			}
-			int num = this.mCurrentWave;
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
+			int num = mCurrentWave;
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
 			{
-				num += this.mChallenge.mSurvivalStage * this.GetNumWavesPerSurvivalStage();
+				num += mChallenge.mSurvivalStage * GetNumWavesPerSurvivalStage();
 			}
-			return (this.mPlantRow[theRow] != PlantRowType.PLANTROW_POOL || num >= 5 || Board.IsZombieTypePoolOnly(theZombieType)) && (this.mPlantRow[theRow] == PlantRowType.PLANTROW_POOL || !Board.IsZombieTypePoolOnly(theZombieType)) && (theZombieType != ZombieType.ZOMBIE_BOBSLED || this.mIceTimer[theRow] > 0) && (theRow != 0 || this.mApp.IsSurvivalEndless(this.mApp.mGameMode) || (theZombieType != ZombieType.ZOMBIE_GARGANTUAR && theZombieType != ZombieType.ZOMBIE_REDEYE_GARGANTUAR)) && (theZombieType != ZombieType.ZOMBIE_DANCER || this.StageHasPool() || (this.RowCanHaveZombies(theRow - 1) && this.RowCanHaveZombies(theRow + 1)));
+			return (mPlantRow[theRow] != PlantRowType.PLANTROW_POOL || num >= 5 || Board.IsZombieTypePoolOnly(theZombieType)) && (mPlantRow[theRow] == PlantRowType.PLANTROW_POOL || !Board.IsZombieTypePoolOnly(theZombieType)) && (theZombieType != ZombieType.ZOMBIE_BOBSLED || mIceTimer[theRow] > 0) && (theRow != 0 || mApp.IsSurvivalEndless(mApp.mGameMode) || (theZombieType != ZombieType.ZOMBIE_GARGANTUAR && theZombieType != ZombieType.ZOMBIE_REDEYE_GARGANTUAR)) && (theZombieType != ZombieType.ZOMBIE_DANCER || StageHasPool() || (RowCanHaveZombies(theRow - 1) && RowCanHaveZombies(theRow + 1)));
 		}
 
 		public int NumberZombiesInWave(int theWaveIndex)
 		{
-			Debug.ASSERT(theWaveIndex >= 0 && theWaveIndex < 100 && theWaveIndex < this.mNumWaves);
+			Debug.ASSERT(theWaveIndex >= 0 && theWaveIndex < 100 && theWaveIndex < mNumWaves);
 			for (int i = 0; i < 50; i++)
 			{
-				ZombieType zombieType = this.mZombiesInWave[theWaveIndex, i];
+				ZombieType zombieType = mZombiesInWave[theWaveIndex, i];
 				if (zombieType == ZombieType.ZOMBIE_INVALID)
 				{
 					return i;
@@ -5058,10 +5058,10 @@ namespace Lawn
 		public int TotalZombiesHealthInWave(int theWaveIndex)
 		{
 			int num = 0;
-			int count = this.mZombies.Count;
+			int count = mZombies.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Zombie zombie = this.mZombies[i];
+				Zombie zombie = mZombies[i];
 				if (!zombie.mDead && zombie.mFromWave == theWaveIndex && !zombie.mMindControlled && !zombie.IsDeadOrDying() && zombie.mZombieType != ZombieType.ZOMBIE_BUNGEE && zombie.mRelatedZombieID == null)
 				{
 					num += zombie.mBodyHealth;
@@ -5076,35 +5076,35 @@ namespace Lawn
 		public void DrawUICoinBank(Graphics g)
 		{
 			g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
-			if (this.mApp.mGameScene != GameScenes.SCENE_PLAYING && this.mApp.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_OFF)
+			if (mApp.mGameScene != GameScenes.SCENE_PLAYING && mApp.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_OFF)
 			{
 				return;
 			}
-			if (this.mCoinBankFadeCount <= 0)
+			if (mCoinBankFadeCount <= 0)
 			{
 				return;
 			}
 			int num = Constants.UICoinBankPosition.X;
 			int num2 = Constants.UICoinBankPosition.Y - AtlasResources.IMAGE_COINBANK.mHeight - 1;
-			if (this.mApp.IsSlotMachineLevel())
+			if (mApp.IsSlotMachineLevel())
 			{
 				num -= 50;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 			{
-				num = 450 - this.mX;
+				num = 450 - mX;
 			}
-			else if (this.mApp.mCrazyDaveState != CrazyDaveState.CRAZY_DAVE_OFF)
+			else if (mApp.mCrazyDaveState != CrazyDaveState.CRAZY_DAVE_OFF)
 			{
-				num = 150 - this.mX;
+				num = 150 - mX;
 			}
 			g.SetColorizeImages(true);
-			int theAlpha = TodCommon.ClampInt(255 * this.mCoinBankFadeCount / 15, 0, 255);
+			int theAlpha = TodCommon.ClampInt(255 * mCoinBankFadeCount / 15, 0, 255);
 			g.SetColor(new SexyColor(255, 255, 255, theAlpha));
 			g.DrawImage(AtlasResources.IMAGE_COINBANK, num, num2);
 			g.SetColor(new SexyColor(180, 255, 90, theAlpha));
 			g.SetFont(Resources.FONT_CONTINUUMBOLD14);
-			string moneyString = LawnApp.GetMoneyString(this.mApp.mPlayerInfo.mCoins);
+			string moneyString = LawnApp.GetMoneyString(mApp.mPlayerInfo.mCoins);
 			int theX = num + Constants.StoreScreen_Coinbank_TextOffset.X - Resources.FONT_CONTINUUMBOLD14.StringWidth(moneyString);
 			g.DrawString(moneyString, theX, num2 + Constants.StoreScreen_Coinbank_TextOffset.Y);
 			g.SetColorizeImages(false);
@@ -5112,189 +5112,189 @@ namespace Lawn
 
 		public void ShowCoinBank()
 		{
-			this.mCoinBankFadeCount = 1000;
+			mCoinBankFadeCount = 1000;
 		}
 
 		public void FadeOutLevel()
 		{
-			if (this.mApp.IsScaryPotterLevel())
+			if (mApp.IsScaryPotterLevel())
 			{
-				if (this.mApp.mGameMode == GameMode.GAMEMODE_SCARY_POTTER_ENDLESS && this.mChallenge.mSurvivalStage >= 14)
+				if (mApp.mGameMode == GameMode.GAMEMODE_SCARY_POTTER_ENDLESS && mChallenge.mSurvivalStage >= 14)
 				{
-					this.GrantAchievement(AchievementId.ChinaShop);
+					GrantAchievement(AchievementId.ChinaShop);
 				}
 			}
-			else if (this.mApp.IsIZombieLevel())
+			else if (mApp.IsIZombieLevel())
 			{
-				if (this.mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_ENDLESS && this.mChallenge.mSurvivalStage >= 9)
+				if (mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_ENDLESS && mChallenge.mSurvivalStage >= 9)
 				{
-					this.GrantAchievement(AchievementId.BetterOffDead);
+					GrantAchievement(AchievementId.BetterOffDead);
 				}
 			}
-			else if (!this.mApp.IsQuickPlayMode() && !this.HasConveyorBeltSeedBank() && !this.mApp.IsWhackAZombieLevel())
+			else if (!mApp.IsQuickPlayMode() && !HasConveyorBeltSeedBank() && !mApp.IsWhackAZombieLevel())
 			{
-				if (this.AwardCloseShave())
+				if (AwardCloseShave())
 				{
-					this.GrantAchievement(AchievementId.CloseShave);
+					GrantAchievement(AchievementId.CloseShave);
 				}
-				if (this.mNomNomNomAchievementTracker)
+				if (mNomNomNomAchievementTracker)
 				{
-					this.GrantAchievement(AchievementId.NomNomNom);
+					GrantAchievement(AchievementId.NomNomNom);
 				}
-				if (this.StageIsNight() && this.mNoFungusAmongUsAchievementTracker)
+				if (StageIsNight() && mNoFungusAmongUsAchievementTracker)
 				{
-					this.GrantAchievement(AchievementId.NoFungusAmongUs);
+					GrantAchievement(AchievementId.NoFungusAmongUs);
 				}
-				if (this.StageHasPool() && !this.mPeaShooterUsed)
+				if (StageHasPool() && !mPeaShooterUsed)
 				{
-					this.GrantAchievement(AchievementId.DontPeainthePool);
+					GrantAchievement(AchievementId.DontPeainthePool);
 				}
-				if (this.StageHasRoof() && !this.mCatapultPlantsUsed)
+				if (StageHasRoof() && !mCatapultPlantsUsed)
 				{
-					this.GrantAchievement(AchievementId.Grounded);
+					GrantAchievement(AchievementId.Grounded);
 				}
-				if (this.StageIsDayWithoutPool() && this.mMushroomAndCoffeeBeansOnly)
+				if (StageIsDayWithoutPool() && mMushroomAndCoffeeBeansOnly)
 				{
-					this.GrantAchievement(AchievementId.GoodMorning);
+					GrantAchievement(AchievementId.GoodMorning);
 				}
 			}
-			if (this.mLevel >= 3)
+			if (mLevel >= 3)
 			{
-				this.mApp.mPlayerInfo.mHasFinishedTutorial = true;
+				mApp.mPlayerInfo.mHasFinishedTutorial = true;
 			}
-			if (this.mApp.mGameScene != GameScenes.SCENE_PLAYING)
+			if (mApp.mGameScene != GameScenes.SCENE_PLAYING)
 			{
-				this.RefreshSeedPacketFromCursor();
-				this.mApp.mLastLevelStats.mUnusedLawnMowers = 0;
-				this.mLevelComplete = true;
+				RefreshSeedPacketFromCursor();
+				mApp.mLastLevelStats.mUnusedLawnMowers = 0;
+				mLevelComplete = true;
 				return;
 			}
 			bool flag = true;
-			if (this.mApp.IsScaryPotterLevel() && !this.IsFinalScaryPotterStage())
+			if (mApp.IsScaryPotterLevel() && !IsFinalScaryPotterStage())
 			{
 				flag = false;
 			}
-			else if (this.IsSurvivalStageWithRepick())
+			else if (IsSurvivalStageWithRepick())
 			{
 				flag = false;
 			}
-			else if (this.IsLastStandStageWithRepick())
+			else if (IsLastStandStageWithRepick())
 			{
 				flag = false;
 			}
-			else if (this.mApp.IsEndlessIZombie(this.mApp.mGameMode))
+			else if (mApp.IsEndlessIZombie(mApp.mGameMode))
 			{
 				flag = false;
 			}
 			if (flag)
 			{
-				this.mApp.mMusic.StopAllMusic();
-				if (this.mApp.IsAdventureMode() && this.mLevel == 50)
+				mApp.mMusic.StopAllMusic();
+				if (mApp.IsAdventureMode() && mLevel == 50)
 				{
-					this.mApp.PlayFoley(FoleyType.FOLEY_FINALFANFARE);
+					mApp.PlayFoley(FoleyType.FOLEY_FINALFANFARE);
 				}
-				else if (this.mApp.TrophiesNeedForGoldSunflower() == 1)
+				else if (mApp.TrophiesNeedForGoldSunflower() == 1)
 				{
-					this.mApp.PlayFoley(FoleyType.FOLEY_FINALFANFARE);
+					mApp.PlayFoley(FoleyType.FOLEY_FINALFANFARE);
 				}
 				else
 				{
-					this.mApp.PlayFoley(FoleyType.FOLEY_WINMUSIC);
+					mApp.PlayFoley(FoleyType.FOLEY_WINMUSIC);
 				}
 			}
-			if (this.mApp.IsEndlessScaryPotter(this.mApp.mGameMode))
+			if (mApp.IsEndlessScaryPotter(mApp.mGameMode))
 			{
-				this.mLevelAwardSpawned = true;
-				this.mNextSurvivalStageCounter = 500;
-				string theAdvice = TodCommon.TodReplaceNumberString("[ADVICE_MORE_SCARY_POTS]", "{STREAK}", this.mChallenge.mSurvivalStage + 1);
-				this.PuzzleSaveStreak();
-				this.ClearAdvice(AdviceType.ADVICE_NONE);
-				this.DisplayAdvice(theAdvice, MessageStyle.MESSAGE_STYLE_BIG_MIDDLE, AdviceType.ADVICE_NONE);
+				mLevelAwardSpawned = true;
+				mNextSurvivalStageCounter = 500;
+				string theAdvice = TodCommon.TodReplaceNumberString("[ADVICE_MORE_SCARY_POTS]", "{STREAK}", mChallenge.mSurvivalStage + 1);
+				PuzzleSaveStreak();
+				ClearAdvice(AdviceType.ADVICE_NONE);
+				DisplayAdvice(theAdvice, MessageStyle.MESSAGE_STYLE_BIG_MIDDLE, AdviceType.ADVICE_NONE);
 				return;
 			}
-			if (this.mApp.IsAdventureMode() && this.mApp.IsScaryPotterLevel() && !this.IsFinalScaryPotterStage())
+			if (mApp.IsAdventureMode() && mApp.IsScaryPotterLevel() && !IsFinalScaryPotterStage())
 			{
-				this.mNextSurvivalStageCounter = 500;
-				this.ClearAdvice(AdviceType.ADVICE_NONE);
+				mNextSurvivalStageCounter = 500;
+				ClearAdvice(AdviceType.ADVICE_NONE);
 				return;
 			}
-			if (this.mApp.IsScaryPotterLevel() && !this.IsFinalScaryPotterStage())
+			if (mApp.IsScaryPotterLevel() && !IsFinalScaryPotterStage())
 			{
-				this.mLevelAwardSpawned = true;
-				this.mNextSurvivalStageCounter = 500;
-				string theAdvice2 = TodCommon.TodReplaceNumberString("[ADVICE_3_IN_A_ROW]", "{STREAK}", this.mChallenge.mSurvivalStage + 1);
-				this.PuzzleSaveStreak();
-				this.ClearAdvice(AdviceType.ADVICE_NONE);
-				this.DisplayAdvice(theAdvice2, MessageStyle.MESSAGE_STYLE_BIG_MIDDLE, AdviceType.ADVICE_NONE);
+				mLevelAwardSpawned = true;
+				mNextSurvivalStageCounter = 500;
+				string theAdvice2 = TodCommon.TodReplaceNumberString("[ADVICE_3_IN_A_ROW]", "{STREAK}", mChallenge.mSurvivalStage + 1);
+				PuzzleSaveStreak();
+				ClearAdvice(AdviceType.ADVICE_NONE);
+				DisplayAdvice(theAdvice2, MessageStyle.MESSAGE_STYLE_BIG_MIDDLE, AdviceType.ADVICE_NONE);
 				return;
 			}
-			if (this.mApp.IsEndlessIZombie(this.mApp.mGameMode))
+			if (mApp.IsEndlessIZombie(mApp.mGameMode))
 			{
-				this.mNextSurvivalStageCounter = 500;
-				string theAdvice3 = TodCommon.TodReplaceNumberString("[ADVICE_MORE_IZOMBIE]", "{STREAK}", this.mChallenge.mSurvivalStage + 1);
-				this.PuzzleSaveStreak();
-				this.ClearAdvice(AdviceType.ADVICE_NONE);
-				this.DisplayAdvice(theAdvice3, MessageStyle.MESSAGE_STYLE_BIG_MIDDLE, AdviceType.ADVICE_NONE);
+				mNextSurvivalStageCounter = 500;
+				string theAdvice3 = TodCommon.TodReplaceNumberString("[ADVICE_MORE_IZOMBIE]", "{STREAK}", mChallenge.mSurvivalStage + 1);
+				PuzzleSaveStreak();
+				ClearAdvice(AdviceType.ADVICE_NONE);
+				DisplayAdvice(theAdvice3, MessageStyle.MESSAGE_STYLE_BIG_MIDDLE, AdviceType.ADVICE_NONE);
 				return;
 			}
-			if (this.IsLastStandStageWithRepick())
+			if (IsLastStandStageWithRepick())
 			{
-				this.mNextSurvivalStageCounter = 500;
-				this.mChallenge.LastStandCompletedStage();
+				mNextSurvivalStageCounter = 500;
+				mChallenge.LastStandCompletedStage();
 				return;
 			}
-			if (!this.IsSurvivalStageWithRepick())
+			if (!IsSurvivalStageWithRepick())
 			{
-				this.RefreshSeedPacketFromCursor();
-				this.mApp.mLastLevelStats.mUnusedLawnMowers = this.CountUntriggerLawnMowers();
-				this.mBoardFadeOutCounter = 600;
-				bool flag2 = this.mLevel == 9 || this.mLevel == 19 || this.mLevel == 29 || this.mLevel == 39 || this.mLevel == 49;
+				RefreshSeedPacketFromCursor();
+				mApp.mLastLevelStats.mUnusedLawnMowers = CountUntriggerLawnMowers();
+				mBoardFadeOutCounter = 600;
+				bool flag2 = mLevel == 9 || mLevel == 19 || mLevel == 29 || mLevel == 39 || mLevel == 49;
 				if (flag2)
 				{
-					this.mBoardFadeOutCounter = 500;
+					mBoardFadeOutCounter = 500;
 				}
-				if (this.CanDropLoot())
+				if (CanDropLoot())
 				{
-					this.mScoreNextMowerCounter = 200;
+					mScoreNextMowerCounter = 200;
 				}
 				Coin coin = null;
-				while (this.IterateCoins(ref coin))
+				while (IterateCoins(ref coin))
 				{
 					coin.TryAutoCollectAfterLevelAward();
 				}
 				return;
 			}
-			Debug.ASSERT(this.mApp.IsSurvivalMode());
-			this.mNextSurvivalStageCounter = 500;
-			this.DisplayAdvice("[ADVICE_MORE_ZOMBIES]", MessageStyle.MESSAGE_STYLE_BIG_MIDDLE, AdviceType.ADVICE_NONE);
-			this.mApp.mMusic.FadeOut(500);
-			this.mApp.PlaySample(Resources.SOUND_HUGE_WAVE);
+			Debug.ASSERT(mApp.IsSurvivalMode());
+			mNextSurvivalStageCounter = 500;
+			DisplayAdvice("[ADVICE_MORE_ZOMBIES]", MessageStyle.MESSAGE_STYLE_BIG_MIDDLE, AdviceType.ADVICE_NONE);
+			mApp.mMusic.FadeOut(500);
+			mApp.PlaySample(Resources.SOUND_HUGE_WAVE);
 			for (int i = 0; i < Constants.MAX_GRIDSIZEY; i++)
 			{
-				if (this.mIceTimer[i] > this.mNextSurvivalStageCounter)
+				if (mIceTimer[i] > mNextSurvivalStageCounter)
 				{
-					this.mIceTimer[i] = this.mNextSurvivalStageCounter;
+					mIceTimer[i] = mNextSurvivalStageCounter;
 				}
 			}
 		}
 
 		public bool AwardCloseShave()
 		{
-			return this.GetBottomLawnMower() == null && (this.mBackground != BackgroundType.BACKGROUND_5_ROOF || this.mApp.mPlayerInfo.mPurchases[23] != 0) && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST;
+			return GetBottomLawnMower() == null && (mBackground != BackgroundType.BACKGROUND_5_ROOF || mApp.mPlayerInfo.mPurchases[23] != 0) && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST;
 		}
 
 		public void DrawFadeOut(Graphics g)
 		{
-			if (this.mBoardFadeOutCounter < 0)
+			if (mBoardFadeOutCounter < 0)
 			{
 				return;
 			}
-			if (this.IsSurvivalStageWithRepick())
+			if (IsSurvivalStageWithRepick())
 			{
 				return;
 			}
-			int theAlpha = TodCommon.TodAnimateCurve(200, 0, this.mBoardFadeOutCounter, 0, 255, TodCurves.CURVE_LINEAR);
-			if (this.mLevel == 9 || this.mLevel == 19 || this.mLevel == 29 || this.mLevel == 39 || this.mLevel == 49)
+			int theAlpha = TodCommon.TodAnimateCurve(200, 0, mBoardFadeOutCounter, 0, 255, TodCurves.CURVE_LINEAR);
+			if (mLevel == 9 || mLevel == 19 || mLevel == 29 || mLevel == 39 || mLevel == 49)
 			{
 				g.SetColor(new SexyColor(0, 0, 0, theAlpha, false));
 			}
@@ -5303,20 +5303,20 @@ namespace Lawn
 				g.SetColor(new SexyColor(255, 255, 255, theAlpha, false));
 			}
 			g.SetColorizeImages(true);
-			g.FillRect(-Constants.Board_Offset_AspectRatio_Correction, 0, this.mWidth, this.mHeight);
+			g.FillRect(-Constants.Board_Offset_AspectRatio_Correction, 0, mWidth, mHeight);
 		}
 
 		public void DrawIce(Graphics g, int y)
 		{
-			int theY = (int)((float)(this.GridToPixelY(8, y) + 20) * Constants.S);
+			int theY = (int)((float)(GridToPixelY(8, y) + 20) * Constants.S);
 			int height = AtlasResources.IMAGE_ICE.GetHeight();
-			int num = TodCommon.ClampInt((int)((float)(255 * this.mIceTimer[y]) / 10f), 0, 255);
+			int num = TodCommon.ClampInt((int)((float)(255 * mIceTimer[y]) / 10f), 0, 255);
 			if (num < 255)
 			{
 				g.SetColorizeImages(true);
 				g.SetColor(new SexyColor(255, 255, 255, num, true));
 			}
-			int num2 = (int)((float)this.mIceMinX[y] * Constants.S);
+			int num2 = (int)((float)mIceMinX[y] * Constants.S);
 			int num3 = 8;
 			int num4 = num2 + num3;
 			int width = AtlasResources.IMAGE_ICE.GetWidth();
@@ -5346,7 +5346,7 @@ namespace Lawn
 
 		public void DrawCelHighlight(Graphics g, int theCol, int theRow)
 		{
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 			{
 				return;
 			}
@@ -5355,7 +5355,7 @@ namespace Lawn
 			aColor.mAlpha = 0;
 			aColor.mRed = (aColor.mGreen = (aColor.mBlue = 50));
 			g.SetColor(aColor);
-			TPoint[] celPosition = this.GetCelPosition(theCol, theRow);
+			TPoint[] celPosition = GetCelPosition(theCol, theRow);
 			celPosition[0].mX = (int)((float)celPosition[0].mX * Constants.S);
 			celPosition[0].mY = (int)((float)celPosition[0].mY * Constants.S);
 			celPosition[1].mX = (int)((float)celPosition[1].mX * Constants.S);
@@ -5371,11 +5371,11 @@ namespace Lawn
 
 		public TPoint[] GetCelPosition(int theCol, int theRow)
 		{
-			int num = this.StageHas6Rows() ? 6 : 5;
-			if (this.StageHasPool())
+			int num = StageHas6Rows() ? 6 : 5;
+			if (StageHasPool())
 			{
 				int[] board_Cel_Y_Values_Pool = Constants.Board_Cel_Y_Values_Pool;
-				Board.mCelPoints[0].mX = this.GridToPixelX(theCol, theRow);
+				Board.mCelPoints[0].mX = GridToPixelX(theCol, theRow);
 				Board.mCelPoints[0].mY = board_Cel_Y_Values_Pool[theRow];
 				if (theCol == Constants.GRIDSIZEX - 1)
 				{
@@ -5391,23 +5391,23 @@ namespace Lawn
 				Board.mCelPoints[3].mX = Board.mCelPoints[0].mX;
 				Board.mCelPoints[3].mY = board_Cel_Y_Values_Pool[theRow + 1];
 			}
-			else if (this.StageHasRoof())
+			else if (StageHasRoof())
 			{
 				int num2 = 20;
-				Board.mCelPoints[0].mX = this.GridToPixelX(theCol, theRow);
-				Board.mCelPoints[0].mY = this.GridToPixelY(theCol, theRow) + num2;
+				Board.mCelPoints[0].mX = GridToPixelX(theCol, theRow);
+				Board.mCelPoints[0].mY = GridToPixelY(theCol, theRow) + num2;
 				int num3 = 80;
 				Board.mCelPoints[1].mX = Board.mCelPoints[0].mX + num3;
 				Board.mCelPoints[1].mY = Board.mCelPoints[0].mY;
 				Board.mCelPoints[2].mX = Board.mCelPoints[1].mX;
-				Board.mCelPoints[2].mY = ((theRow < num - 1) ? (this.GridToPixelY(theCol, theRow + 1) + num2) : (Board.mCelPoints[0].mY + num3));
+				Board.mCelPoints[2].mY = ((theRow < num - 1) ? (GridToPixelY(theCol, theRow + 1) + num2) : (Board.mCelPoints[0].mY + num3));
 				Board.mCelPoints[3].mX = Board.mCelPoints[0].mX;
 				Board.mCelPoints[3].mY = Board.mCelPoints[2].mY;
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+			else if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 			{
 				int[] board_Cel_Y_Values_ZenGarden = Constants.Board_Cel_Y_Values_ZenGarden;
-				Board.mCelPoints[0].mX = this.GridToPixelX(theCol, theRow);
+				Board.mCelPoints[0].mX = GridToPixelX(theCol, theRow);
 				Board.mCelPoints[0].mY = board_Cel_Y_Values_ZenGarden[theRow];
 				if (theCol == Constants.GRIDSIZEX - 1)
 				{
@@ -5426,7 +5426,7 @@ namespace Lawn
 			else
 			{
 				int[] board_Cel_Y_Values_Normal = Constants.Board_Cel_Y_Values_Normal;
-				Board.mCelPoints[0].mX = this.GridToPixelX(theCol, theRow);
+				Board.mCelPoints[0].mX = GridToPixelX(theCol, theRow);
 				Board.mCelPoints[0].mY = board_Cel_Y_Values_Normal[theRow];
 				if (theCol == Constants.GRIDSIZEX - 1)
 				{
@@ -5448,21 +5448,21 @@ namespace Lawn
 		public bool IsIceAt(int theGridX, int theGridY)
 		{
 			Debug.ASSERT(theGridY >= 0 && theGridY < Constants.MAX_GRIDSIZEY);
-			if (this.mIceTimer[theGridY] <= 0)
+			if (mIceTimer[theGridY] <= 0)
 			{
 				return false;
 			}
-			if (this.mIceMinX[theGridY] > 750 + Constants.BOARD_EXTRA_ROOM)
+			if (mIceMinX[theGridY] > 750 + Constants.BOARD_EXTRA_ROOM)
 			{
 				return false;
 			}
-			int num = this.PixelToGridXKeepOnBoard(this.mIceMinX[theGridY] + 12, 0);
+			int num = PixelToGridXKeepOnBoard(mIceMinX[theGridY] + 12, 0);
 			return theGridX >= num;
 		}
 
 		public Zombie ZombieGetID(Zombie theZombie)
 		{
-			if (this.mZombies.IndexOf(theZombie) != -1)
+			if (mZombies.IndexOf(theZombie) != -1)
 			{
 				return theZombie;
 			}
@@ -5471,15 +5471,15 @@ namespace Lawn
 
 		public Zombie ZombieGet(Zombie theZombieID)
 		{
-			return this.mZombies[this.mZombies.IndexOf(theZombieID)];
+			return mZombies[mZombies.IndexOf(theZombieID)];
 		}
 
 		public Zombie ZombieTryToGet(Zombie theZombieID)
 		{
-			int num = this.mZombies.IndexOf(theZombieID);
+			int num = mZombies.IndexOf(theZombieID);
 			if (num != -1)
 			{
-				return this.mZombies[num];
+				return mZombies[num];
 			}
 			return null;
 		}
@@ -5507,16 +5507,16 @@ namespace Lawn
 		{
 			for (int i = 0; i < Constants.MAX_GRIDSIZEY; i++)
 			{
-				if (this.mIceTimer[i] > 0)
+				if (mIceTimer[i] > 0)
 				{
-					this.mIceTimer[i] -= 3;
-					if (this.mIceTimer[i] < 0)
+					mIceTimer[i] -= 3;
+					if (mIceTimer[i] < 0)
 					{
-						this.mIceTimer[i] = 0;
+						mIceTimer[i] = 0;
 					}
-					if (this.mIceTimer[i] >= 0 && this.mIceTimer[i] < 3)
+					if (mIceTimer[i] >= 0 && mIceTimer[i] < 3)
 					{
-						this.mIceMinX[i] = Constants.Board_Ice_Start;
+						mIceMinX[i] = Constants.Board_Ice_Start;
 					}
 				}
 			}
@@ -5531,7 +5531,7 @@ namespace Lawn
 		{
 			for (int i = 0; i < Constants.MAX_GRIDSIZEY; i++)
 			{
-				if (this.mIceTimer[i] > 0 && this.mIceMinX[i] < 700 + Constants.BOARD_EXTRA_ROOM)
+				if (mIceTimer[i] > 0 && mIceMinX[i] < 700 + Constants.BOARD_EXTRA_ROOM)
 				{
 					return true;
 				}
@@ -5541,16 +5541,16 @@ namespace Lawn
 
 		public void ShakeBoard(int theShakeAmountX, int theShakeAmountY)
 		{
-			this.mShakeCounter = 12;
-			this.mShakeAmountX = theShakeAmountX;
-			this.mShakeAmountY = theShakeAmountY;
+			mShakeCounter = 12;
+			mShakeAmountX = theShakeAmountX;
+			mShakeAmountY = theShakeAmountY;
 		}
 
 		public int CountUntriggerLawnMowers()
 		{
 			int num = 0;
 			LawnMower lawnMower = null;
-			while (this.IterateLawnMowers(ref lawnMower))
+			while (IterateLawnMowers(ref lawnMower))
 			{
 				if (lawnMower.mMowerState != LawnMowerState.MOWER_TRIGGERED && lawnMower.mMowerState != LawnMowerState.MOWER_SQUISHED)
 				{
@@ -5562,13 +5562,13 @@ namespace Lawn
 
 		public bool IterateZombies(ref Zombie theZombie, ref int index)
 		{
-			if (index == -1 || index >= this.mZombies.Count)
+			if (index == -1 || index >= mZombies.Count)
 			{
-				index = this.mZombies.IndexOf(theZombie);
+				index = mZombies.IndexOf(theZombie);
 			}
-			while (++index < this.mZombies.Count)
+			while (++index < mZombies.Count)
 			{
-				theZombie = this.mZombies[index];
+				theZombie = mZombies[index];
 				if (!theZombie.mDead)
 				{
 					return true;
@@ -5579,13 +5579,13 @@ namespace Lawn
 
 		public bool IteratePlants(ref Plant thePlant, ref int index)
 		{
-			if (index == -1 || index >= this.mPlants.Count)
+			if (index == -1 || index >= mPlants.Count)
 			{
-				index = this.mPlants.IndexOf(thePlant);
+				index = mPlants.IndexOf(thePlant);
 			}
-			while (++index < this.mPlants.Count)
+			while (++index < mPlants.Count)
 			{
-				thePlant = this.mPlants[index];
+				thePlant = mPlants[index];
 				if (!thePlant.mDead)
 				{
 					return true;
@@ -5596,13 +5596,13 @@ namespace Lawn
 
 		public bool IterateProjectiles(ref Projectile theProjectile, ref int index)
 		{
-			if (index == -1 || index >= this.mProjectiles.Count)
+			if (index == -1 || index >= mProjectiles.Count)
 			{
-				index = this.mProjectiles.IndexOf(theProjectile);
+				index = mProjectiles.IndexOf(theProjectile);
 			}
-			while (++index < this.mProjectiles.Count)
+			while (++index < mProjectiles.Count)
 			{
-				theProjectile = this.mProjectiles[index];
+				theProjectile = mProjectiles[index];
 				if (!theProjectile.mDead)
 				{
 					return true;
@@ -5613,10 +5613,10 @@ namespace Lawn
 
 		public bool IterateCoins(ref Coin theCoin)
 		{
-			int num = this.mCoins.IndexOf(theCoin);
-			for (int i = num + 1; i < this.mCoins.Count; i++)
+			int num = mCoins.IndexOf(theCoin);
+			for (int i = num + 1; i < mCoins.Count; i++)
 			{
-				theCoin = this.mCoins[i];
+				theCoin = mCoins[i];
 				if (!theCoin.mDead)
 				{
 					return true;
@@ -5627,10 +5627,10 @@ namespace Lawn
 
 		public bool IterateLawnMowers(ref LawnMower theLawnMower)
 		{
-			int num = this.mLawnMowers.IndexOf(theLawnMower);
-			for (int i = num + 1; i < this.mLawnMowers.Count; i++)
+			int num = mLawnMowers.IndexOf(theLawnMower);
+			for (int i = num + 1; i < mLawnMowers.Count; i++)
 			{
-				theLawnMower = this.mLawnMowers[i];
+				theLawnMower = mLawnMowers[i];
 				if (!theLawnMower.mDead)
 				{
 					return true;
@@ -5641,13 +5641,13 @@ namespace Lawn
 
 		public bool IterateParticles(ref TodParticleSystem theParticle, ref int index)
 		{
-			if (index == -1 || index >= this.mApp.mEffectSystem.mParticleHolder.mParticleSystems.Count)
+			if (index == -1 || index >= mApp.mEffectSystem.mParticleHolder.mParticleSystems.Count)
 			{
-				index = this.mApp.mEffectSystem.mParticleHolder.mParticleSystems.IndexOf(theParticle);
+				index = mApp.mEffectSystem.mParticleHolder.mParticleSystems.IndexOf(theParticle);
 			}
-			while (++index < this.mApp.mEffectSystem.mParticleHolder.mParticleSystems.Count)
+			while (++index < mApp.mEffectSystem.mParticleHolder.mParticleSystems.Count)
 			{
-				theParticle = this.mApp.mEffectSystem.mParticleHolder.mParticleSystems[index];
+				theParticle = mApp.mEffectSystem.mParticleHolder.mParticleSystems[index];
 				if (theParticle != null && !theParticle.mDead)
 				{
 					return true;
@@ -5658,13 +5658,13 @@ namespace Lawn
 
 		public bool IterateReanimations(ref Reanimation theReanimation, ref int index)
 		{
-			if (index == -1 || index >= this.mApp.mEffectSystem.mReanimationHolder.mReanimations.Count)
+			if (index == -1 || index >= mApp.mEffectSystem.mReanimationHolder.mReanimations.Count)
 			{
-				index = this.mApp.mEffectSystem.mReanimationHolder.mReanimations.IndexOf(theReanimation);
+				index = mApp.mEffectSystem.mReanimationHolder.mReanimations.IndexOf(theReanimation);
 			}
-			while (++index < this.mApp.mEffectSystem.mReanimationHolder.mReanimations.Count)
+			while (++index < mApp.mEffectSystem.mReanimationHolder.mReanimations.Count)
 			{
-				theReanimation = this.mApp.mEffectSystem.mReanimationHolder.mReanimations[index];
+				theReanimation = mApp.mEffectSystem.mReanimationHolder.mReanimations[index];
 				if (theReanimation != null && !theReanimation.mDead)
 				{
 					return true;
@@ -5675,13 +5675,13 @@ namespace Lawn
 
 		public bool IterateGridItems(ref GridItem theGridItem, ref int index)
 		{
-			if (index == -1 || index >= this.mGridItems.Count)
+			if (index == -1 || index >= mGridItems.Count)
 			{
-				index = this.mGridItems.IndexOf(theGridItem);
+				index = mGridItems.IndexOf(theGridItem);
 			}
-			while (++index < this.mGridItems.Count)
+			while (++index < mGridItems.Count)
 			{
-				theGridItem = this.mGridItems[index];
+				theGridItem = mGridItems[index];
 				if (!theGridItem.mDead)
 				{
 					return true;
@@ -5692,73 +5692,73 @@ namespace Lawn
 
 		public void ZombieSwitchRow(Zombie aZombie, int aRow)
 		{
-			List<Zombie> zombiesInRow = this.GetZombiesInRow(aZombie.mRow);
-			List<Zombie> zombiesInRow2 = this.GetZombiesInRow(aRow);
+			List<Zombie> zombiesInRow = GetZombiesInRow(aZombie.mRow);
+			List<Zombie> zombiesInRow2 = GetZombiesInRow(aRow);
 			zombiesInRow.Remove(aZombie);
 			zombiesInRow2.Add(aZombie);
 		}
 
 		public void SortZombieRowLists()
 		{
-			this.mZombiesRow1.Sort();
-			this.mZombiesRow2.Sort();
-			this.mZombiesRow3.Sort();
-			this.mZombiesRow4.Sort();
-			this.mZombiesRow5.Sort();
-			this.mZombiesRow6.Sort();
+			mZombiesRow1.Sort();
+			mZombiesRow2.Sort();
+			mZombiesRow3.Sort();
+			mZombiesRow4.Sort();
+			mZombiesRow5.Sort();
+			mZombiesRow6.Sort();
 		}
 
 		public List<Zombie> GetZombiesInRow(int aRow)
 		{
 			if (aRow == 0)
 			{
-				return this.mZombiesRow1;
+				return mZombiesRow1;
 			}
 			if (aRow == 1)
 			{
-				return this.mZombiesRow2;
+				return mZombiesRow2;
 			}
 			if (aRow == 2)
 			{
-				return this.mZombiesRow3;
+				return mZombiesRow3;
 			}
 			if (aRow == 3)
 			{
-				return this.mZombiesRow4;
+				return mZombiesRow4;
 			}
 			if (aRow == 4)
 			{
-				return this.mZombiesRow5;
+				return mZombiesRow5;
 			}
-			return this.mZombiesRow6;
+			return mZombiesRow6;
 		}
 
 		public void AddToZombieList(Zombie aZombie)
 		{
-			this.mZombies.Add(aZombie);
+			mZombies.Add(aZombie);
 			if (aZombie.mZombieType == ZombieType.ZOMBIE_BOSS)
 			{
 				for (int i = 0; i < 6; i++)
 				{
-					List<Zombie> zombiesInRow = this.GetZombiesInRow(i);
+					List<Zombie> zombiesInRow = GetZombiesInRow(i);
 					zombiesInRow.Add(aZombie);
 				}
 				return;
 			}
-			List<Zombie> zombiesInRow2 = this.GetZombiesInRow(aZombie.mRow);
+			List<Zombie> zombiesInRow2 = GetZombiesInRow(aZombie.mRow);
 			zombiesInRow2.Add(aZombie);
 		}
 
 		public void AddToZombieList(Zombie aZombie, int row)
 		{
-			this.mZombies.Add(aZombie);
-			List<Zombie> zombiesInRow = this.GetZombiesInRow(row);
+			mZombies.Add(aZombie);
+			List<Zombie> zombiesInRow = GetZombiesInRow(row);
 			zombiesInRow.Add(aZombie);
 		}
 
 		public Zombie AddZombieInRow(ZombieType theZombieType, int theRow, int theFromWave)
 		{
-			if (this.mZombies.Count >= this.mZombies.Capacity - 1)
+			if (mZombies.Count >= mZombies.Capacity - 1)
 			{
 				return null;
 			}
@@ -5769,15 +5769,15 @@ namespace Lawn
 			}
 			Zombie newZombie = Zombie.GetNewZombie();
 			newZombie.ZombieInitialize(theRow, theZombieType, theVariant, null, theFromWave);
-			this.AddToZombieList(newZombie);
+			AddToZombieList(newZombie);
 			if (theZombieType == ZombieType.ZOMBIE_BOBSLED && newZombie.IsOnBoard())
 			{
 				Zombie newZombie2 = Zombie.GetNewZombie();
 				Zombie newZombie3 = Zombie.GetNewZombie();
 				Zombie newZombie4 = Zombie.GetNewZombie();
-				this.AddToZombieList(newZombie2, theRow);
-				this.AddToZombieList(newZombie3, theRow);
-				this.AddToZombieList(newZombie4, theRow);
+				AddToZombieList(newZombie2, theRow);
+				AddToZombieList(newZombie3, theRow);
+				AddToZombieList(newZombie4, theRow);
 				newZombie2.ZombieInitialize(theRow, ZombieType.ZOMBIE_BOBSLED, false, newZombie, theFromWave);
 				newZombie3.ZombieInitialize(theRow, ZombieType.ZOMBIE_BOBSLED, false, newZombie, theFromWave);
 				newZombie4.ZombieInitialize(theRow, ZombieType.ZOMBIE_BOBSLED, false, newZombie, theFromWave);
@@ -5787,95 +5787,95 @@ namespace Lawn
 
 		public bool IsPoolSquare(int theGridX, int theGridY)
 		{
-			return theGridX >= 0 && theGridY >= 0 && this.mGridSquareType[theGridX, theGridY] == GridSquareType.GRIDSQUARE_POOL;
+			return theGridX >= 0 && theGridY >= 0 && mGridSquareType[theGridX, theGridY] == GridSquareType.GRIDSQUARE_POOL;
 		}
 
 		public void PickZombieWaves()
 		{
-			if ((this.mApp.IsAdventureMode() || this.mApp.IsQuickPlayMode()) && this.mApp.IsWhackAZombieLevel())
+			if ((mApp.IsAdventureMode() || mApp.IsQuickPlayMode()) && mApp.IsWhackAZombieLevel())
 			{
-				this.mNumWaves = 8;
+				mNumWaves = 8;
 			}
-			else if (this.mApp.IsAdventureMode() || this.mApp.IsQuickPlayMode())
+			else if (mApp.IsAdventureMode() || mApp.IsQuickPlayMode())
 			{
-				int num = TodCommon.ClampInt(this.mLevel - 1, 0, 49);
-				this.mNumWaves = GameConstants.gZombieWaves[num];
-				if (!this.mApp.IsFirstTimeAdventureMode() && !this.mApp.IsMiniBossLevel())
+				int num = TodCommon.ClampInt(mLevel - 1, 0, 49);
+				mNumWaves = GameConstants.gZombieWaves[num];
+				if (!mApp.IsFirstTimeAdventureMode() && !mApp.IsMiniBossLevel())
 				{
-					if (this.mNumWaves < 10)
+					if (mNumWaves < 10)
 					{
-						this.mNumWaves = 20;
+						mNumWaves = 20;
 					}
 					else
 					{
-						this.mNumWaves += 10;
+						mNumWaves += 10;
 					}
 				}
 			}
-			else if (this.mApp.IsSurvivalMode() || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
+			else if (mApp.IsSurvivalMode() || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
 			{
-				this.mNumWaves = this.GetNumWavesPerSurvivalStage();
+				mNumWaves = GetNumWavesPerSurvivalStage();
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || this.mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM || this.mApp.IsSquirrelLevel())
+			else if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM || mApp.IsSquirrelLevel())
 			{
-				this.mNumWaves = 0;
+				mNumWaves = 0;
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WHACK_A_ZOMBIE)
+			else if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WHACK_A_ZOMBIE)
 			{
-				this.mNumWaves = 12;
+				mNumWaves = 12;
 			}
-			else if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WALLNUT_BOWLING || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_AIR_RAID || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_GRAVE_DANGER || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_HIGH_GRAVITY || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_PORTAL_COMBAT || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_INVISIGHOUL)
+			else if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WALLNUT_BOWLING || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_AIR_RAID || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_GRAVE_DANGER || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_HIGH_GRAVITY || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_PORTAL_COMBAT || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_INVISIGHOUL)
 			{
-				this.mNumWaves = 20;
+				mNumWaves = 20;
 			}
-			else if (this.mApp.IsStormyNightLevel() || this.mApp.IsLittleTroubleLevel() || this.mApp.IsBungeeBlitzLevel() || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_COLUMN || this.mApp.IsShovelLevel() || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS_2 || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WALLNUT_BOWLING_2 || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_POGO_PARTY)
+			else if (mApp.IsStormyNightLevel() || mApp.IsLittleTroubleLevel() || mApp.IsBungeeBlitzLevel() || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_COLUMN || mApp.IsShovelLevel() || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS_2 || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WALLNUT_BOWLING_2 || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_POGO_PARTY)
 			{
-				this.mNumWaves = 30;
+				mNumWaves = 30;
 			}
 			else
 			{
-				this.mNumWaves = 40;
+				mNumWaves = 40;
 			}
 			ZombiePicker zombiePicker = new ZombiePicker();
 			Board.ZombiePickerInit(zombiePicker);
-			ZombieType introducedZombieType = this.GetIntroducedZombieType();
-			Debug.ASSERT(this.mNumWaves <= 100);
+			ZombieType introducedZombieType = GetIntroducedZombieType();
+			Debug.ASSERT(mNumWaves <= 100);
 			int i = 0;
-			while (i < this.mNumWaves)
+			while (i < mNumWaves)
 			{
 				Board.ZombiePickerInitForWave(zombiePicker);
-				this.mZombiesInWave[i, 0] = ZombieType.ZOMBIE_INVALID;
-				bool flag = this.IsFlagWave(i);
-				bool flag2 = i == this.mNumWaves - 1;
-				if (!this.mApp.IsBungeeBlitzLevel() || !flag)
+				mZombiesInWave[i, 0] = ZombieType.ZOMBIE_INVALID;
+				bool flag = IsFlagWave(i);
+				bool flag2 = i == mNumWaves - 1;
+				if (!mApp.IsBungeeBlitzLevel() || !flag)
 				{
 					goto IL_2E4;
 				}
 				for (int j = 0; j < 5; j++)
 				{
-					this.PutZombieInWave(ZombieType.ZOMBIE_BUNGEE, i, zombiePicker);
+					PutZombieInWave(ZombieType.ZOMBIE_BUNGEE, i, zombiePicker);
 				}
 				if (flag2)
 				{
 					goto IL_2E4;
 				}
-				if ((this.mApp.IsAdventureMode() || this.mApp.IsQuickPlayMode()) && flag2)
+				if ((mApp.IsAdventureMode() || mApp.IsQuickPlayMode()) && flag2)
 				{
-					this.PutInMissingZombies(i, zombiePicker);
+					PutInMissingZombies(i, zombiePicker);
 				}
 				IL_65F:
 				i++;
 				continue;
 				IL_2E4:
-				if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
+				if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
 				{
-					zombiePicker.mZombiePoints = (this.mChallenge.mSurvivalStage * this.GetNumWavesPerSurvivalStage() + i + 10) * 2 / 5 + 1;
+					zombiePicker.mZombiePoints = (mChallenge.mSurvivalStage * GetNumWavesPerSurvivalStage() + i + 10) * 2 / 5 + 1;
 				}
-				else if (this.mApp.IsSurvivalMode() && this.mChallenge.mSurvivalStage > 0)
+				else if (mApp.IsSurvivalMode() && mChallenge.mSurvivalStage > 0)
 				{
-					zombiePicker.mZombiePoints = (this.mChallenge.mSurvivalStage * this.GetNumWavesPerSurvivalStage() + i) * 2 / 5 + 1;
+					zombiePicker.mZombiePoints = (mChallenge.mSurvivalStage * GetNumWavesPerSurvivalStage() + i) * 2 / 5 + 1;
 				}
-				else if (this.mApp.IsAdventureMode() && this.mApp.HasFinishedAdventure() && this.mLevel != 5)
+				else if (mApp.IsAdventureMode() && mApp.HasFinishedAdventure() && mLevel != 5)
 				{
 					zombiePicker.mZombiePoints = i * 2 / 5 + 1;
 				}
@@ -5887,32 +5887,32 @@ namespace Lawn
 				{
 					int num2 = Math.Min(zombiePicker.mZombiePoints, 8);
 					zombiePicker.mZombiePoints = (int)((float)zombiePicker.mZombiePoints * 2.5f);
-					if (this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS_2)
+					if (mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS_2)
 					{
 						for (int k = 0; k < num2; k++)
 						{
-							this.PutZombieInWave(ZombieType.ZOMBIE_NORMAL, i, zombiePicker);
+							PutZombieInWave(ZombieType.ZOMBIE_NORMAL, i, zombiePicker);
 						}
-						this.PutZombieInWave(ZombieType.ZOMBIE_FLAG, i, zombiePicker);
+						PutZombieInWave(ZombieType.ZOMBIE_FLAG, i, zombiePicker);
 					}
 				}
-				if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_COLUMN)
+				if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_COLUMN)
 				{
 					zombiePicker.mZombiePoints *= 6;
 				}
-				else if (this.mApp.IsLittleTroubleLevel() || this.mApp.IsWallnutBowlingLevel())
+				else if (mApp.IsLittleTroubleLevel() || mApp.IsWallnutBowlingLevel())
 				{
 					zombiePicker.mZombiePoints *= 4;
 				}
-				else if (this.mApp.IsMiniBossLevel())
+				else if (mApp.IsMiniBossLevel())
 				{
 					zombiePicker.mZombiePoints *= 3;
 				}
-				else if (this.mApp.IsStormyNightLevel() && (this.mApp.IsAdventureMode() || this.mApp.IsQuickPlayMode()))
+				else if (mApp.IsStormyNightLevel() && (mApp.IsAdventureMode() || mApp.IsQuickPlayMode()))
 				{
 					zombiePicker.mZombiePoints *= 3;
 				}
-				else if (this.mApp.IsShovelLevel() || this.mApp.IsBungeeBlitzLevel() || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_PORTAL_COMBAT || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_INVISIGHOUL)
+				else if (mApp.IsShovelLevel() || mApp.IsBungeeBlitzLevel() || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_PORTAL_COMBAT || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_INVISIGHOUL)
 				{
 					zombiePicker.mZombiePoints *= 2;
 				}
@@ -5928,75 +5928,75 @@ namespace Lawn
 					}
 					else if (introducedZombieType == ZombieType.ZOMBIE_YETI)
 					{
-						if (i == this.mNumWaves / 2 && !this.mApp.mKilledYetiAndRestarted && !this.mApp.IsQuickPlayMode())
+						if (i == mNumWaves / 2 && !mApp.mKilledYetiAndRestarted && !mApp.IsQuickPlayMode())
 						{
 							flag3 = true;
 						}
 					}
-					else if (i == this.mNumWaves / 2 || flag2)
+					else if (i == mNumWaves / 2 || flag2)
 					{
 						flag3 = true;
 					}
 					if (flag3)
 					{
-						this.PutZombieInWave(introducedZombieType, i, zombiePicker);
+						PutZombieInWave(introducedZombieType, i, zombiePicker);
 					}
 				}
-				if (this.mLevel == 50 && flag2)
+				if (mLevel == 50 && flag2)
 				{
-					this.PutZombieInWave(ZombieType.ZOMBIE_GARGANTUAR, i, zombiePicker);
+					PutZombieInWave(ZombieType.ZOMBIE_GARGANTUAR, i, zombiePicker);
 				}
-				if ((this.mApp.IsAdventureMode() || this.mApp.IsQuickPlayMode()) && flag2)
+				if ((mApp.IsAdventureMode() || mApp.IsQuickPlayMode()) && flag2)
 				{
-					this.PutInMissingZombies(i, zombiePicker);
+					PutInMissingZombies(i, zombiePicker);
 				}
-				if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_COLUMN)
+				if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_COLUMN)
 				{
 					if (i % 10 == 5)
 					{
 						for (int l = 0; l < 10; l++)
 						{
-							this.PutZombieInWave(ZombieType.ZOMBIE_LADDER, i, zombiePicker);
+							PutZombieInWave(ZombieType.ZOMBIE_LADDER, i, zombiePicker);
 						}
 					}
 					if (i % 10 == 8)
 					{
 						for (int m = 0; m < 10; m++)
 						{
-							this.PutZombieInWave(ZombieType.ZOMBIE_JACK_IN_THE_BOX, i, zombiePicker);
+							PutZombieInWave(ZombieType.ZOMBIE_JACK_IN_THE_BOX, i, zombiePicker);
 						}
 					}
 					if (i == 19)
 					{
 						for (int n = 0; n < 3; n++)
 						{
-							this.PutZombieInWave(ZombieType.ZOMBIE_GARGANTUAR, i, zombiePicker);
+							PutZombieInWave(ZombieType.ZOMBIE_GARGANTUAR, i, zombiePicker);
 						}
 					}
 					if (i == 29)
 					{
 						for (int num3 = 0; num3 < 5; num3++)
 						{
-							this.PutZombieInWave(ZombieType.ZOMBIE_GARGANTUAR, i, zombiePicker);
+							PutZombieInWave(ZombieType.ZOMBIE_GARGANTUAR, i, zombiePicker);
 						}
 					}
 				}
 				while (zombiePicker.mZombiePoints > 0 && zombiePicker.mZombieCount < 50)
 				{
-					ZombieType theZombieType = this.PickZombieType(zombiePicker.mZombiePoints, i, zombiePicker);
-					this.PutZombieInWave(theZombieType, i, zombiePicker);
+					ZombieType theZombieType = PickZombieType(zombiePicker.mZombiePoints, i, zombiePicker);
+					PutZombieInWave(theZombieType, i, zombiePicker);
 				}
-				int mZombiePoints = zombiePicker.mZombiePoints;
+				int aZombiePoints = zombiePicker.mZombiePoints;
 				goto IL_65F;
 			}
 		}
 
 		public void StopAllZombieSounds()
 		{
-			int count = this.mZombies.Count;
+			int count = mZombies.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Zombie zombie = this.mZombies[i];
+				Zombie zombie = mZombies[i];
 				if (!zombie.mDead)
 				{
 					zombie.StopZombieSound();
@@ -6006,54 +6006,54 @@ namespace Lawn
 
 		public bool HasLevelAwardDropped()
 		{
-			return this.mLevelAwardSpawned || (this.mNextSurvivalStageCounter > 0 || this.mBoardFadeOutCounter >= 0);
+			return mLevelAwardSpawned || (mNextSurvivalStageCounter > 0 || mBoardFadeOutCounter >= 0);
 		}
 
 		public void UpdateProgressMeter()
 		{
-			if (this.mApp.IsFinalBossLevel())
+			if (mApp.IsFinalBossLevel())
 			{
-				Zombie bossZombie = this.GetBossZombie();
+				Zombie bossZombie = GetBossZombie();
 				if (bossZombie != null && !bossZombie.IsDeadOrDying())
 				{
-					this.mProgressMeterWidth = 150 * (bossZombie.mBodyMaxHealth - bossZombie.mBodyHealth) / bossZombie.mBodyMaxHealth;
+					mProgressMeterWidth = 150 * (bossZombie.mBodyMaxHealth - bossZombie.mBodyHealth) / bossZombie.mBodyMaxHealth;
 					return;
 				}
-				this.mProgressMeterWidth = 150;
+				mProgressMeterWidth = 150;
 				return;
 			}
 			else
 			{
-				if (this.mCurrentWave == 0)
+				if (mCurrentWave == 0)
 				{
 					return;
 				}
-				if (this.mFlagRaiseCounter > 0)
+				if (mFlagRaiseCounter > 0)
 				{
-					this.mFlagRaiseCounter -= 3;
+					mFlagRaiseCounter -= 3;
 				}
 				int num = 150;
-				int numWavesPerFlag = this.GetNumWavesPerFlag();
-				if (this.ProgressMeterHasFlags())
+				int numWavesPerFlag = GetNumWavesPerFlag();
+				if (ProgressMeterHasFlags())
 				{
-					int num2 = this.mNumWaves / numWavesPerFlag;
+					int num2 = mNumWaves / numWavesPerFlag;
 					num -= num2 * 12;
 				}
-				int num3 = num / (this.mNumWaves - 1);
-				int num4 = (this.mCurrentWave - 1) * num / (this.mNumWaves - 1);
-				int num5 = this.mCurrentWave * num / (this.mNumWaves - 1);
-				if (this.ProgressMeterHasFlags())
+				int num3 = num / (mNumWaves - 1);
+				int num4 = (mCurrentWave - 1) * num / (mNumWaves - 1);
+				int num5 = mCurrentWave * num / (mNumWaves - 1);
+				if (ProgressMeterHasFlags())
 				{
-					int num6 = this.mCurrentWave / numWavesPerFlag;
+					int num6 = mCurrentWave / numWavesPerFlag;
 					num4 += num6 * 12;
 					num5 += num6 * 12;
 				}
-				float num7 = (float)(this.mZombieCountDownStart - this.mZombieCountDown) / (float)this.mZombieCountDownStart;
-				if (this.mZombieHealthToNextWave != -1)
+				float num7 = (float)(mZombieCountDownStart - mZombieCountDown) / (float)mZombieCountDownStart;
+				if (mZombieHealthToNextWave != -1)
 				{
-					int num8 = this.TotalZombiesHealthInWave(this.mCurrentWave - 1);
-					int num9 = Math.Max(this.mZombieHealthWaveStart - this.mZombieHealthToNextWave, 1);
-					float num10 = (float)(num9 - num8 + this.mZombieHealthToNextWave) / (float)num9;
+					int num8 = TotalZombiesHealthInWave(mCurrentWave - 1);
+					int num9 = Math.Max(mZombieHealthWaveStart - mZombieHealthToNextWave, 1);
+					float num10 = (float)(num9 - num8 + mZombieHealthToNextWave) / (float)num9;
 					if (num10 > num7)
 					{
 						num7 = num10;
@@ -6061,15 +6061,15 @@ namespace Lawn
 				}
 				int num11 = num4 + TodCommon.FloatRoundToInt((float)(num5 - num4) * num7);
 				num11 = TodCommon.ClampInt(num11, 1, 150);
-				int num12 = num11 - this.mProgressMeterWidth;
-				if (num12 > num3 && Board.IsInModRange(this.mMainCounter, 5))
+				int num12 = num11 - mProgressMeterWidth;
+				if (num12 > num3 && Board.IsInModRange(mMainCounter, 5))
 				{
-					this.mProgressMeterWidth++;
+					mProgressMeterWidth++;
 					return;
 				}
-				if (num12 > 0 && Board.IsInModRange(this.mMainCounter, 20))
+				if (num12 > 0 && Board.IsInModRange(mMainCounter, 20))
 				{
-					this.mProgressMeterWidth++;
+					mProgressMeterWidth++;
 				}
 				return;
 			}
@@ -6082,86 +6082,86 @@ namespace Lawn
 
 		public void DrawUIBottom(Graphics g)
 		{
-			if (this.mApp.mGameScene != GameScenes.SCENE_ZOMBIES_WON)
+			if (mApp.mGameScene != GameScenes.SCENE_ZOMBIES_WON)
 			{
-				if (this.mSeedBank.BeginDraw(g))
+				if (mSeedBank.BeginDraw(g))
 				{
-					this.mSeedBank.DrawSun(g);
-					this.mSeedBank.EndDraw(g);
+					mSeedBank.DrawSun(g);
+					mSeedBank.EndDraw(g);
 				}
-				MessageStyle mMessageStyle = this.mAdvice.mMessageStyle;
+				MessageStyle aMessageStyle = mAdvice.mMessageStyle;
 			}
-			this.DrawShovel(g);
-			if (!this.StageHasFog())
+			DrawShovel(g);
+			if (!StageHasFog())
 			{
-				this.DrawTopRightUI(g);
+				DrawTopRightUI(g);
 			}
-			if (this.mApp.mGameScene == GameScenes.SCENE_PLAYING)
+			if (mApp.mGameScene == GameScenes.SCENE_PLAYING)
 			{
-				this.DrawProgressMeter(g);
+				DrawProgressMeter(g);
 			}
 		}
 
 		public void DrawUITop(Graphics g)
 		{
-			if (this.mApp.mGameScene != GameScenes.SCENE_ZOMBIES_WON && this.mSeedBank.BeginDraw(g))
+			if (mApp.mGameScene != GameScenes.SCENE_ZOMBIES_WON && mSeedBank.BeginDraw(g))
 			{
-				this.mSeedBank.Draw(g);
-				this.mSeedBank.EndDraw(g);
+				mSeedBank.Draw(g);
+				mSeedBank.EndDraw(g);
 			}
-			if (this.StageHasFog())
+			if (StageHasFog())
 			{
-				this.DrawTopRightUI(g);
+				DrawTopRightUI(g);
 			}
-			if (this.mTimeStopCounter > 0)
+			if (mTimeStopCounter > 0)
 			{
 				g.SetColor(new SexyColor(200, 200, 200, 210));
 				g.FillRect(0, 0, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT);
 			}
-			if (this.mApp.IsSlotMachineLevel())
+			if (mApp.IsSlotMachineLevel())
 			{
-				this.mChallenge.DrawSlotMachine(g);
+				mChallenge.DrawSlotMachine(g);
 			}
-			if (this.mApp.mGameScene == GameScenes.SCENE_PLAYING)
+			if (mApp.mGameScene == GameScenes.SCENE_PLAYING)
 			{
-				this.DrawLevel(g);
+				DrawLevel(g);
 			}
-			if (this.mStoreButton != null && this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
+			if (mStoreButton != null && mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
 			{
-				this.mStoreButton.Draw(g);
+				mStoreButton.Draw(g);
 			}
-			if ((this.mApp.mGameMode == GameMode.GAMEMODE_UPSELL || this.mApp.mGameMode == GameMode.GAMEMODE_INTRO) && this.mCutScene.mUpsellHideBoard)
+			if ((mApp.mGameMode == GameMode.GAMEMODE_UPSELL || mApp.mGameMode == GameMode.GAMEMODE_INTRO) && mCutScene.mUpsellHideBoard)
 			{
 				g.SetColor(new SexyColor(0, 0, 0));
 				g.FillRect(-Constants.Board_Offset_AspectRatio_Correction, 0, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT);
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
+			if (mApp.mGameMode == GameMode.GAMEMODE_UPSELL)
 			{
-				this.mCutScene.DrawUpsell(g);
+				mCutScene.DrawUpsell(g);
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_INTRO)
+			if (mApp.mGameMode == GameMode.GAMEMODE_INTRO)
 			{
-				this.mCutScene.DrawIntro(g);
+				mCutScene.DrawIntro(g);
 			}
-			if (this.mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || this.mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM || this.IsScaryPotterDaveTalking())
+			if (mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM || IsScaryPotterDaveTalking())
 			{
 				Graphics @new = Graphics.GetNew(g);
-				@new.mTransX -= this.mX;
-				@new.mTransY -= this.mY;
-				this.mApp.DrawCrazyDave(@new);
+				@new.mTransX -= mX;
+				@new.mTransY -= mY;
+				mApp.DrawCrazyDave(@new);
 				@new.PrepareForReuse();
 			}
-			this.mAdvice.Draw(g);
+			mAdvice.Draw(g);
 		}
 
 		public Zombie ZombieHitTest(int theMouseX, int theMouseY)
 		{
 			Zombie zombie = null;
-			int count = this.mZombies.Count;
+			int count = mZombies.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Zombie zombie2 = this.mZombies[i];
-				if (!zombie2.mDead && !zombie2.IsDeadOrDying() && (this.mApp.mGameScene != GameScenes.SCENE_LEVEL_INTRO || (zombie2.mZombieType != ZombieType.ZOMBIE_PEA_HEAD && zombie2.mZombieType != ZombieType.ZOMBIE_WALLNUT_HEAD && zombie2.mZombieType != ZombieType.ZOMBIE_TALLNUT_HEAD && zombie2.mZombieType != ZombieType.ZOMBIE_JALAPENO_HEAD && zombie2.mZombieType != ZombieType.ZOMBIE_GATLING_HEAD && zombie2.mZombieType != ZombieType.ZOMBIE_SQUASH_HEAD)) && zombie2.GetZombieRect().Contains(theMouseX, theMouseY) && (zombie == null || zombie2.mY > zombie.mY))
+				Zombie zombie2 = mZombies[i];
+				if (!zombie2.mDead && !zombie2.IsDeadOrDying() && (mApp.mGameScene != GameScenes.SCENE_LEVEL_INTRO || (zombie2.mZombieType != ZombieType.ZOMBIE_PEA_HEAD && zombie2.mZombieType != ZombieType.ZOMBIE_WALLNUT_HEAD && zombie2.mZombieType != ZombieType.ZOMBIE_TALLNUT_HEAD && zombie2.mZombieType != ZombieType.ZOMBIE_JALAPENO_HEAD && zombie2.mZombieType != ZombieType.ZOMBIE_GATLING_HEAD && zombie2.mZombieType != ZombieType.ZOMBIE_SQUASH_HEAD)) && zombie2.GetZombieRect().Contains(theMouseX, theMouseY) && (zombie == null || zombie2.mY > zombie.mY))
 				{
 					zombie = zombie2;
 				}
@@ -6171,16 +6171,16 @@ namespace Lawn
 
 		public void KillAllPlantsInRadius(int theX, int theY, int theRadius)
 		{
-			int count = this.mPlants.Count;
+			int count = mPlants.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Plant plant = this.mPlants[i];
+				Plant plant = mPlants[i];
 				if (!plant.mDead)
 				{
 					TRect plantRect = plant.GetPlantRect();
 					if (GameConstants.GetCircleRectOverlap(theX, theY, theRadius, plantRect))
 					{
-						this.mPlantsEaten++;
+						mPlantsEaten++;
 						plant.Die();
 					}
 				}
@@ -6189,10 +6189,10 @@ namespace Lawn
 
 		public Plant GetPumpkinAt(int theGridX, int theGridY)
 		{
-			int count = this.mPlants.Count;
+			int count = mPlants.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Plant plant = this.mPlants[i];
+				Plant plant = mPlants[i];
 				if (!plant.mDead && plant.mPlantCol == theGridX && plant.mRow == theGridY && !plant.NotOnGround() && plant.mSeedType == SeedType.SEED_PUMPKINSHELL)
 				{
 					return plant;
@@ -6203,10 +6203,10 @@ namespace Lawn
 
 		public Plant GetFlowerPotAt(int theGridX, int theGridY)
 		{
-			int count = this.mPlants.Count;
+			int count = mPlants.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Plant plant = this.mPlants[i];
+				Plant plant = mPlants[i];
 				if (!plant.mDead && plant.mPlantCol == theGridX && plant.mRow == theGridY && !plant.NotOnGround() && plant.mSeedType == SeedType.SEED_FLOWERPOT)
 				{
 					return plant;
@@ -6237,7 +6237,7 @@ namespace Lawn
 
 		public bool IsZombieWaveDistributionOk()
 		{
-			if (!this.mApp.IsAdventureMode() && !this.mApp.IsQuickPlayMode())
+			if (!mApp.IsAdventureMode() && !mApp.IsQuickPlayMode())
 			{
 				return true;
 			}
@@ -6246,11 +6246,11 @@ namespace Lawn
 			{
 				array[i] = 0;
 			}
-			for (int j = 0; j < this.mNumWaves; j++)
+			for (int j = 0; j < mNumWaves; j++)
 			{
 				for (int k = 0; k < 50; k++)
 				{
-					ZombieType zombieType = this.mZombiesInWave[j, k];
+					ZombieType zombieType = mZombiesInWave[j, k];
 					if (zombieType == ZombieType.ZOMBIE_INVALID)
 					{
 						break;
@@ -6261,7 +6261,7 @@ namespace Lawn
 			}
 			for (int l = 0; l < 33; l++)
 			{
-				if (l != 19 && Board.CanZombieSpawnOnLevel((ZombieType)l, this.mLevel) && array[l] == 0)
+				if (l != 19 && Board.CanZombieSpawnOnLevel((ZombieType)l, mLevel) && array[l] == 0)
 				{
 					return false;
 				}
@@ -6271,7 +6271,7 @@ namespace Lawn
 
 		public void PickBackground()
 		{
-			switch (this.mApp.mGameMode)
+			switch (mApp.mGameMode)
 			{
 			case GameMode.GAMEMODE_ADVENTURE:
 			case GameMode.GAMEMODE_QUICKPLAY_1:
@@ -6324,37 +6324,37 @@ namespace Lawn
 			case GameMode.GAMEMODE_QUICKPLAY_48:
 			case GameMode.GAMEMODE_QUICKPLAY_49:
 			case GameMode.GAMEMODE_QUICKPLAY_50:
-				if (this.mLevel <= 10)
+				if (mLevel <= 10)
 				{
-					this.mBackground = BackgroundType.BACKGROUND_1_DAY;
+					mBackground = BackgroundType.BACKGROUND_1_DAY;
 				}
-				else if (this.mLevel <= 20)
+				else if (mLevel <= 20)
 				{
-					this.mBackground = BackgroundType.BACKGROUND_2_NIGHT;
+					mBackground = BackgroundType.BACKGROUND_2_NIGHT;
 				}
-				else if (this.mLevel <= 30)
+				else if (mLevel <= 30)
 				{
-					this.mBackground = BackgroundType.BACKGROUND_3_POOL;
+					mBackground = BackgroundType.BACKGROUND_3_POOL;
 				}
-				else if (this.mApp.IsScaryPotterLevel())
+				else if (mApp.IsScaryPotterLevel())
 				{
-					this.mBackground = BackgroundType.BACKGROUND_2_NIGHT;
+					mBackground = BackgroundType.BACKGROUND_2_NIGHT;
 				}
-				else if (this.mLevel <= 40)
+				else if (mLevel <= 40)
 				{
-					this.mBackground = BackgroundType.BACKGROUND_4_FOG;
+					mBackground = BackgroundType.BACKGROUND_4_FOG;
 				}
-				else if (this.mLevel <= 49)
+				else if (mLevel <= 49)
 				{
-					this.mBackground = BackgroundType.BACKGROUND_5_ROOF;
+					mBackground = BackgroundType.BACKGROUND_5_ROOF;
 				}
-				else if (this.mLevel == 50)
+				else if (mLevel == 50)
 				{
-					this.mBackground = BackgroundType.BACKGROUND_6_BOSS;
+					mBackground = BackgroundType.BACKGROUND_6_BOSS;
 				}
 				else
 				{
-					this.mBackground = BackgroundType.BACKGROUND_1_DAY;
+					mBackground = BackgroundType.BACKGROUND_1_DAY;
 				}
 				break;
 			case GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_1:
@@ -6373,7 +6373,7 @@ namespace Lawn
 			case GameMode.GAMEMODE_CHALLENGE_ICE:
 			case GameMode.GAMEMODE_CHALLENGE_SHOVEL:
 			case GameMode.GAMEMODE_CHALLENGE_SQUIRREL:
-				this.mBackground = BackgroundType.BACKGROUND_1_DAY;
+				mBackground = BackgroundType.BACKGROUND_1_DAY;
 				break;
 			case GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_2:
 			case GameMode.GAMEMODE_SURVIVAL_HARD_STAGE_2:
@@ -6403,7 +6403,7 @@ namespace Lawn
 			case GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_8:
 			case GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_9:
 			case GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_ENDLESS:
-				this.mBackground = BackgroundType.BACKGROUND_2_NIGHT;
+				mBackground = BackgroundType.BACKGROUND_2_NIGHT;
 				break;
 			case GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_3:
 			case GameMode.GAMEMODE_SURVIVAL_HARD_STAGE_3:
@@ -6415,7 +6415,7 @@ namespace Lawn
 			case GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS_2:
 			case GameMode.GAMEMODE_UPSELL:
 			case GameMode.GAMEMODE_INTRO:
-				this.mBackground = BackgroundType.BACKGROUND_3_POOL;
+				mBackground = BackgroundType.BACKGROUND_3_POOL;
 				break;
 			case GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_4:
 			case GameMode.GAMEMODE_SURVIVAL_HARD_STAGE_4:
@@ -6424,7 +6424,7 @@ namespace Lawn
 			case GameMode.GAMEMODE_CHALLENGE_INVISIGHOUL:
 			case GameMode.GAMEMODE_CHALLENGE_AIR_RAID:
 			case GameMode.GAMEMODE_CHALLENGE_STORMY_NIGHT:
-				this.mBackground = BackgroundType.BACKGROUND_4_FOG;
+				mBackground = BackgroundType.BACKGROUND_4_FOG;
 				break;
 			case GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_5:
 			case GameMode.GAMEMODE_SURVIVAL_HARD_STAGE_5:
@@ -6433,89 +6433,89 @@ namespace Lawn
 			case GameMode.GAMEMODE_CHALLENGE_POGO_PARTY:
 			case GameMode.GAMEMODE_CHALLENGE_HIGH_GRAVITY:
 			case GameMode.GAMEMODE_CHALLENGE_BUNGEE_BLITZ:
-				this.mBackground = BackgroundType.BACKGROUND_5_ROOF;
+				mBackground = BackgroundType.BACKGROUND_5_ROOF;
 				break;
 			case GameMode.GAMEMODE_CHALLENGE_FINAL_BOSS:
-				this.mBackground = BackgroundType.BACKGROUND_6_BOSS;
+				mBackground = BackgroundType.BACKGROUND_6_BOSS;
 				break;
 			case GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN:
-				this.mBackground = BackgroundType.BACKGROUND_GREENHOUSE;
+				mBackground = BackgroundType.BACKGROUND_GREENHOUSE;
 				break;
 			case GameMode.GAMEMODE_TREE_OF_WISDOM:
-				this.mBackground = BackgroundType.BACKGROUND_TREE_OF_WISDOM;
+				mBackground = BackgroundType.BACKGROUND_TREE_OF_WISDOM;
 				break;
 			case GameMode.GAMEMODE_CHALLENGE_ZOMBIQUARIUM:
-				this.mBackground = BackgroundType.BACKGROUND_ZOMBIQUARIUM;
+				mBackground = BackgroundType.BACKGROUND_ZOMBIQUARIUM;
 				break;
 			default:
 				Debug.ASSERT(false);
 				break;
 			}
-			this.LoadBackgroundImages();
-			if (this.mBackground == BackgroundType.BACKGROUND_1_DAY || this.mBackground == BackgroundType.BACKGROUND_GREENHOUSE || this.mBackground == BackgroundType.BACKGROUND_TREE_OF_WISDOM)
+			LoadBackgroundImages();
+			if (mBackground == BackgroundType.BACKGROUND_1_DAY || mBackground == BackgroundType.BACKGROUND_GREENHOUSE || mBackground == BackgroundType.BACKGROUND_TREE_OF_WISDOM)
 			{
-				this.mPlantRow[0] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[1] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[2] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[3] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[4] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[5] = PlantRowType.PLANTROW_DIRT;
-				if (this.mApp.IsAdventureMode() && this.mApp.IsFirstTimeAdventureMode())
+				mPlantRow[0] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[1] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[2] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[3] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[4] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[5] = PlantRowType.PLANTROW_DIRT;
+				if (mApp.IsAdventureMode() && mApp.IsFirstTimeAdventureMode())
 				{
-					if (this.mLevel == 1)
+					if (mLevel == 1)
 					{
-						this.mPlantRow[0] = PlantRowType.PLANTROW_DIRT;
-						this.mPlantRow[1] = PlantRowType.PLANTROW_DIRT;
-						this.mPlantRow[3] = PlantRowType.PLANTROW_DIRT;
-						this.mPlantRow[4] = PlantRowType.PLANTROW_DIRT;
+						mPlantRow[0] = PlantRowType.PLANTROW_DIRT;
+						mPlantRow[1] = PlantRowType.PLANTROW_DIRT;
+						mPlantRow[3] = PlantRowType.PLANTROW_DIRT;
+						mPlantRow[4] = PlantRowType.PLANTROW_DIRT;
 					}
-					else if (this.mLevel == 2 || this.mLevel == 3)
+					else if (mLevel == 2 || mLevel == 3)
 					{
-						this.mPlantRow[0] = PlantRowType.PLANTROW_DIRT;
-						this.mPlantRow[4] = PlantRowType.PLANTROW_DIRT;
+						mPlantRow[0] = PlantRowType.PLANTROW_DIRT;
+						mPlantRow[4] = PlantRowType.PLANTROW_DIRT;
 					}
 				}
-				else if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RESODDED)
+				else if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RESODDED)
 				{
-					this.mPlantRow[0] = PlantRowType.PLANTROW_DIRT;
-					this.mPlantRow[4] = PlantRowType.PLANTROW_DIRT;
+					mPlantRow[0] = PlantRowType.PLANTROW_DIRT;
+					mPlantRow[4] = PlantRowType.PLANTROW_DIRT;
 				}
 			}
-			else if (this.mBackground == BackgroundType.BACKGROUND_2_NIGHT)
+			else if (mBackground == BackgroundType.BACKGROUND_2_NIGHT)
 			{
-				this.mPlantRow[0] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[1] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[2] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[3] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[4] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[5] = PlantRowType.PLANTROW_DIRT;
+				mPlantRow[0] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[1] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[2] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[3] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[4] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[5] = PlantRowType.PLANTROW_DIRT;
 			}
-			else if (this.mBackground == BackgroundType.BACKGROUND_3_POOL || this.mBackground == BackgroundType.BACKGROUND_ZOMBIQUARIUM)
+			else if (mBackground == BackgroundType.BACKGROUND_3_POOL || mBackground == BackgroundType.BACKGROUND_ZOMBIQUARIUM)
 			{
-				this.mPlantRow[0] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[1] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[2] = PlantRowType.PLANTROW_POOL;
-				this.mPlantRow[3] = PlantRowType.PLANTROW_POOL;
-				this.mPlantRow[4] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[5] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[0] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[1] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[2] = PlantRowType.PLANTROW_POOL;
+				mPlantRow[3] = PlantRowType.PLANTROW_POOL;
+				mPlantRow[4] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[5] = PlantRowType.PLANTROW_NORMAL;
 			}
-			else if (this.mBackground == BackgroundType.BACKGROUND_4_FOG)
+			else if (mBackground == BackgroundType.BACKGROUND_4_FOG)
 			{
-				this.mPlantRow[0] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[1] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[2] = PlantRowType.PLANTROW_POOL;
-				this.mPlantRow[3] = PlantRowType.PLANTROW_POOL;
-				this.mPlantRow[4] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[5] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[0] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[1] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[2] = PlantRowType.PLANTROW_POOL;
+				mPlantRow[3] = PlantRowType.PLANTROW_POOL;
+				mPlantRow[4] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[5] = PlantRowType.PLANTROW_NORMAL;
 			}
-			else if (this.mBackground == BackgroundType.BACKGROUND_5_ROOF || this.mBackground == BackgroundType.BACKGROUND_6_BOSS)
+			else if (mBackground == BackgroundType.BACKGROUND_5_ROOF || mBackground == BackgroundType.BACKGROUND_6_BOSS)
 			{
-				this.mPlantRow[0] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[1] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[2] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[3] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[4] = PlantRowType.PLANTROW_NORMAL;
-				this.mPlantRow[5] = PlantRowType.PLANTROW_DIRT;
+				mPlantRow[0] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[1] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[2] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[3] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[4] = PlantRowType.PLANTROW_NORMAL;
+				mPlantRow[5] = PlantRowType.PLANTROW_DIRT;
 			}
 			else
 			{
@@ -6525,80 +6525,80 @@ namespace Lawn
 			{
 				for (int j = 0; j < Constants.MAX_GRIDSIZEY; j++)
 				{
-					if (this.mPlantRow[j] == PlantRowType.PLANTROW_DIRT)
+					if (mPlantRow[j] == PlantRowType.PLANTROW_DIRT)
 					{
-						this.mGridSquareType[i, j] = GridSquareType.GRIDSQUARE_DIRT;
+						mGridSquareType[i, j] = GridSquareType.GRIDSQUARE_DIRT;
 					}
-					else if (this.mPlantRow[j] == PlantRowType.PLANTROW_POOL && i >= 0 && i <= 8)
+					else if (mPlantRow[j] == PlantRowType.PLANTROW_POOL && i >= 0 && i <= 8)
 					{
-						this.mGridSquareType[i, j] = GridSquareType.GRIDSQUARE_POOL;
+						mGridSquareType[i, j] = GridSquareType.GRIDSQUARE_POOL;
 					}
-					else if (this.mPlantRow[j] == PlantRowType.PLANTROW_HIGH_GROUND && i >= 4 && i <= 8)
+					else if (mPlantRow[j] == PlantRowType.PLANTROW_HIGH_GROUND && i >= 4 && i <= 8)
 					{
-						this.mGridSquareType[i, j] = GridSquareType.GRIDSQUARE_HIGH_GROUND;
+						mGridSquareType[i, j] = GridSquareType.GRIDSQUARE_HIGH_GROUND;
 					}
 				}
 			}
-			int levelRandSeed = this.GetLevelRandSeed();
+			int levelRandSeed = GetLevelRandSeed();
 			RandomNumbers.Seed(levelRandSeed);
-			if (this.StageHasGraveStones())
+			if (StageHasGraveStones())
 			{
-				if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_GRAVE_DANGER)
+				if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_GRAVE_DANGER)
 				{
-					this.AddGraveStones(6, TodCommon.RandRangeInt(1, 2));
-					this.AddGraveStones(7, TodCommon.RandRangeInt(1, 3));
-					this.AddGraveStones(8, TodCommon.RandRangeInt(2, 3));
+					AddGraveStones(6, TodCommon.RandRangeInt(1, 2));
+					AddGraveStones(7, TodCommon.RandRangeInt(1, 3));
+					AddGraveStones(8, TodCommon.RandRangeInt(2, 3));
 				}
-				else if (this.mApp.IsWhackAZombieLevel())
+				else if (mApp.IsWhackAZombieLevel())
 				{
-					this.mChallenge.WhackAZombiePlaceGraves(9);
+					mChallenge.WhackAZombiePlaceGraves(9);
 				}
-				else if (this.mBackground == BackgroundType.BACKGROUND_2_NIGHT)
+				else if (mBackground == BackgroundType.BACKGROUND_2_NIGHT)
 				{
-					if (this.mApp.IsSurvivalNormal(this.mApp.mGameMode))
+					if (mApp.IsSurvivalNormal(mApp.mGameMode))
 					{
-						this.AddGraveStones(5, 1);
-						this.AddGraveStones(6, 1);
-						this.AddGraveStones(7, 1);
-						this.AddGraveStones(8, 2);
+						AddGraveStones(5, 1);
+						AddGraveStones(6, 1);
+						AddGraveStones(7, 1);
+						AddGraveStones(8, 2);
 					}
-					else if (!this.mApp.IsAdventureMode() && !this.mApp.IsQuickPlayMode())
+					else if (!mApp.IsAdventureMode() && !mApp.IsQuickPlayMode())
 					{
-						this.AddGraveStones(4, 1);
-						this.AddGraveStones(5, 1);
-						this.AddGraveStones(6, 2);
-						this.AddGraveStones(7, 2);
-						this.AddGraveStones(8, 3);
+						AddGraveStones(4, 1);
+						AddGraveStones(5, 1);
+						AddGraveStones(6, 2);
+						AddGraveStones(7, 2);
+						AddGraveStones(8, 3);
 					}
-					else if (this.mLevel == 11 || this.mLevel == 12 || this.mLevel == 13)
+					else if (mLevel == 11 || mLevel == 12 || mLevel == 13)
 					{
-						this.AddGraveStones(6, 1);
-						this.AddGraveStones(7, 1);
-						this.AddGraveStones(8, 2);
+						AddGraveStones(6, 1);
+						AddGraveStones(7, 1);
+						AddGraveStones(8, 2);
 					}
-					else if (this.mLevel == 14 || this.mLevel == 16 || this.mLevel == 18)
+					else if (mLevel == 14 || mLevel == 16 || mLevel == 18)
 					{
-						this.AddGraveStones(5, 1);
-						this.AddGraveStones(6, 1);
-						this.AddGraveStones(7, 2);
-						this.AddGraveStones(8, 3);
+						AddGraveStones(5, 1);
+						AddGraveStones(6, 1);
+						AddGraveStones(7, 2);
+						AddGraveStones(8, 3);
 					}
-					else if (this.mLevel == 17 || this.mLevel == 19)
+					else if (mLevel == 17 || mLevel == 19)
 					{
-						this.AddGraveStones(4, 1);
-						this.AddGraveStones(5, 2);
-						this.AddGraveStones(6, 2);
-						this.AddGraveStones(7, 3);
-						this.AddGraveStones(8, 3);
+						AddGraveStones(4, 1);
+						AddGraveStones(5, 2);
+						AddGraveStones(6, 2);
+						AddGraveStones(7, 3);
+						AddGraveStones(8, 3);
 					}
-					else if (this.mLevel >= 20)
+					else if (mLevel >= 20)
 					{
-						this.AddGraveStones(3, 1);
-						this.AddGraveStones(4, 2);
-						this.AddGraveStones(5, 2);
-						this.AddGraveStones(6, 2);
-						this.AddGraveStones(7, 3);
-						this.AddGraveStones(8, 3);
+						AddGraveStones(3, 1);
+						AddGraveStones(4, 2);
+						AddGraveStones(5, 2);
+						AddGraveStones(6, 2);
+						AddGraveStones(7, 3);
+						AddGraveStones(8, 3);
 					}
 					else
 					{
@@ -6606,70 +6606,70 @@ namespace Lawn
 					}
 				}
 			}
-			this.PickSpecialGraveStone();
+			PickSpecialGraveStone();
 		}
 
 		public void InitZombieWaves()
 		{
 			Debug.ASSERT(true);
-			if (this.mApp.IsAdventureMode() || this.mApp.IsQuickPlayMode())
+			if (mApp.IsAdventureMode() || mApp.IsQuickPlayMode())
 			{
-				this.InitZombieWavesForLevel(this.mLevel);
+				InitZombieWavesForLevel(mLevel);
 			}
 			else
 			{
-				this.mChallenge.InitZombieWaves();
+				mChallenge.InitZombieWaves();
 			}
-			this.PickZombieWaves();
-			Debug.ASSERT(this.IsZombieWaveDistributionOk());
-			this.mCurrentWave = 0;
-			this.mTotalSpawnedWaves = 0;
-			this.mApp.mKilledYetiAndRestarted = false;
-			if (this.mApp.IsFirstTimeAdventureMode() && this.mLevel == 2)
+			PickZombieWaves();
+			Debug.ASSERT(IsZombieWaveDistributionOk());
+			mCurrentWave = 0;
+			mTotalSpawnedWaves = 0;
+			mApp.mKilledYetiAndRestarted = false;
+			if (mApp.IsFirstTimeAdventureMode() && mLevel == 2)
 			{
-				this.mZombieCountDown = 4998;
+				mZombieCountDown = 4998;
 			}
-			else if (this.mApp.IsSurvivalMode() && this.mChallenge.mSurvivalStage > 0)
+			else if (mApp.IsSurvivalMode() && mChallenge.mSurvivalStage > 0)
 			{
-				this.mZombieCountDown = 600;
+				mZombieCountDown = 600;
 			}
 			else
 			{
-				this.mZombieCountDown = 1800;
+				mZombieCountDown = 1800;
 			}
-			this.mZombieCountDownStart = this.mZombieCountDown;
-			this.mZombieHealthToNextWave = -1;
-			this.mZombieHealthWaveStart = 0;
-			this.mLastBungeeWave = 0;
-			this.mProgressMeterWidth = 0;
-			this.mHugeWaveCountDown = 0;
-			this.mLevelAwardSpawned = false;
+			mZombieCountDownStart = mZombieCountDown;
+			mZombieHealthToNextWave = -1;
+			mZombieHealthWaveStart = 0;
+			mLastBungeeWave = 0;
+			mProgressMeterWidth = 0;
+			mHugeWaveCountDown = 0;
+			mLevelAwardSpawned = false;
 		}
 
 		public void InitSurvivalStage()
 		{
-			this.RefreshSeedPacketFromCursor();
-			this.mApp.mSoundSystem.GamePause(true);
-			this.FreezeEffectsForCutscene(true);
-			this.mLevelComplete = false;
-			this.InitZombieWaves();
-			this.mApp.mGameScene = GameScenes.SCENE_LEVEL_INTRO;
-			this.mApp.ShowSeedChooserScreen();
-			this.mCutScene.StartLevelIntro();
-			this.mSeedBank.UpdateHeight();
+			RefreshSeedPacketFromCursor();
+			mApp.mSoundSystem.GamePause(true);
+			FreezeEffectsForCutscene(true);
+			mLevelComplete = false;
+			InitZombieWaves();
+			mApp.mGameScene = GameScenes.SCENE_LEVEL_INTRO;
+			mApp.ShowSeedChooserScreen();
+			mCutScene.StartLevelIntro();
+			mSeedBank.UpdateHeight();
 			for (int i = 0; i < 9; i++)
 			{
-				SeedPacket seedPacket = this.mSeedBank.mSeedPackets[i];
-				seedPacket.mY = this.GetSeedPacketPositionY(i);
+				SeedPacket seedPacket = mSeedBank.mSeedPackets[i];
+				seedPacket.mY = GetSeedPacketPositionY(i);
 				seedPacket.mPacketType = SeedType.SEED_NONE;
 			}
-			if (this.StageHasFog())
+			if (StageHasFog())
 			{
-				this.mFogBlownCountDown = 2000;
+				mFogBlownCountDown = 2000;
 			}
 			for (int j = 0; j < Constants.MAX_GRIDSIZEY; j++)
 			{
-				this.mWaveRowGotLawnMowered[j] = -100;
+				mWaveRowGotLawnMowered[j] = -100;
 			}
 		}
 
@@ -6680,109 +6680,109 @@ namespace Lawn
 
 		public void UpdateGame()
 		{
-			this.UpdateGameObjects();
-			if (this.StageHasFog() && this.mFogBlownCountDown > 0)
+			UpdateGameObjects();
+			if (StageHasFog() && mFogBlownCountDown > 0)
 			{
-				float num = 1065f - (float)this.LeftFogColumn() * 80f + (float)Constants.BOARD_EXTRA_ROOM;
-				if (this.mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
+				float num = 1065f - (float)LeftFogColumn() * 80f + (float)Constants.BOARD_EXTRA_ROOM;
+				if (mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
 				{
-					this.mFogOffset = TodCommon.TodAnimateCurveFloat(200, 0, this.mFogBlownCountDown, num, 0f, TodCurves.CURVE_EASE_OUT);
+					mFogOffset = TodCommon.TodAnimateCurveFloat(200, 0, mFogBlownCountDown, num, 0f, TodCurves.CURVE_EASE_OUT);
 				}
-				else if (this.mFogBlownCountDown < 2000)
+				else if (mFogBlownCountDown < 2000)
 				{
-					this.mFogOffset = TodCommon.TodAnimateCurveFloat(2000, 0, this.mFogBlownCountDown, num, 0f, TodCurves.CURVE_EASE_OUT);
+					mFogOffset = TodCommon.TodAnimateCurveFloat(2000, 0, mFogBlownCountDown, num, 0f, TodCurves.CURVE_EASE_OUT);
 				}
-				else if (this.mFogOffset < num)
+				else if (mFogOffset < num)
 				{
-					this.mFogOffset = TodCommon.TodAnimateCurveFloat(-5, (int)num, (int)(this.mFogOffset * 1.1f), 0f, num, TodCurves.CURVE_LINEAR);
+					mFogOffset = TodCommon.TodAnimateCurveFloat(-5, (int)num, (int)(mFogOffset * 1.1f), 0f, num, TodCurves.CURVE_LINEAR);
 				}
 			}
-			if (this.mApp.mGameScene != GameScenes.SCENE_PLAYING && !this.mCutScene.ShouldRunUpsellBoard())
+			if (mApp.mGameScene != GameScenes.SCENE_PLAYING && !mCutScene.ShouldRunUpsellBoard())
 			{
 				return;
 			}
-			this.mMainCounter += 3;
-			this.UpdateSunSpawning();
-			this.UpdateZombieSpawning();
-			this.UpdateIce();
-			if (this.mIceTrapCounter > 0)
+			mMainCounter += 3;
+			UpdateSunSpawning();
+			UpdateZombieSpawning();
+			UpdateIce();
+			if (mIceTrapCounter > 0)
 			{
-				this.mIceTrapCounter -= 3;
-				if (this.mIceTrapCounter >= 0 && this.mIceTrapCounter < 3)
+				mIceTrapCounter -= 3;
+				if (mIceTrapCounter >= 0 && mIceTrapCounter < 3)
 				{
-					TodParticleSystem todParticleSystem = this.mApp.ParticleTryToGet(this.mPoolSparklyParticleID);
+					TodParticleSystem todParticleSystem = mApp.ParticleTryToGet(mPoolSparklyParticleID);
 					if (todParticleSystem != null)
 					{
 						todParticleSystem.mDontUpdate = false;
 					}
 				}
 			}
-			if (this.mFogBlownCountDown > 0)
+			if (mFogBlownCountDown > 0)
 			{
-				this.mFogBlownCountDown -= 3;
+				mFogBlownCountDown -= 3;
 			}
-			if (this.mMainCounter == 3)
+			if (mMainCounter == 3)
 			{
-				if (this.mApp.IsFirstTimeAdventureMode() && this.mLevel == 1)
+				if (mApp.IsFirstTimeAdventureMode() && mLevel == 1)
 				{
-					this.SetTutorialState(TutorialState.TUTORIAL_LEVEL_1_PICK_UP_PEASHOOTER);
+					SetTutorialState(TutorialState.TUTORIAL_LEVEL_1_PICK_UP_PEASHOOTER);
 				}
-				else if (this.mApp.IsFirstTimeAdventureMode() && this.mLevel == 2)
+				else if (mApp.IsFirstTimeAdventureMode() && mLevel == 2)
 				{
-					this.SetTutorialState(TutorialState.TUTORIAL_LEVEL_2_PICK_UP_SUNFLOWER);
-					this.DisplayAdvice("[ADVICE_PLANT_SUNFLOWER1]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL2, AdviceType.ADVICE_NONE);
-					this.mTutorialTimer = 500;
+					SetTutorialState(TutorialState.TUTORIAL_LEVEL_2_PICK_UP_SUNFLOWER);
+					DisplayAdvice("[ADVICE_PLANT_SUNFLOWER1]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL2, AdviceType.ADVICE_NONE);
+					mTutorialTimer = 500;
 				}
 			}
-			this.UpdateProgressMeter();
+			UpdateProgressMeter();
 		}
 
 		public void InitZombieWavesForLevel(int aForLevel)
 		{
-			if (this.mApp.IsWhackAZombieLevel())
+			if (mApp.IsWhackAZombieLevel())
 			{
-				this.mChallenge.InitZombieWaves();
+				mChallenge.InitZombieWaves();
 				return;
 			}
-			if (this.mApp.IsWallnutBowlingLevel() && !this.mApp.IsFirstTimeAdventureMode())
+			if (mApp.IsWallnutBowlingLevel() && !mApp.IsFirstTimeAdventureMode())
 			{
-				this.mChallenge.InitZombieWaves();
+				mChallenge.InitZombieWaves();
 				return;
 			}
 			for (int i = 0; i < 33; i++)
 			{
-				this.mZombieAllowed[i] = Board.CanZombieSpawnOnLevel((ZombieType)i, aForLevel);
+				mZombieAllowed[i] = Board.CanZombieSpawnOnLevel((ZombieType)i, aForLevel);
 			}
 		}
 
 		public uint SeedNotRecommendedForLevel(SeedType theSeedType)
 		{
 			uint result = 0U;
-			if (Plant.IsNocturnal(theSeedType) && !this.StageIsNight())
+			if (Plant.IsNocturnal(theSeedType) && !StageIsNight())
 			{
 				TodCommon.SetBit(ref result, 0, 1);
 			}
-			if (theSeedType == SeedType.SEED_INSTANT_COFFEE && this.StageIsNight())
+			if (theSeedType == SeedType.SEED_INSTANT_COFFEE && StageIsNight())
 			{
 				TodCommon.SetBit(ref result, 7, 1);
 			}
-			if (theSeedType == SeedType.SEED_GRAVEBUSTER && !this.StageHasGraveStones())
+			if (theSeedType == SeedType.SEED_GRAVEBUSTER && !StageHasGraveStones())
 			{
 				TodCommon.SetBit(ref result, 2, 1);
 			}
-			if (theSeedType == SeedType.SEED_PLANTERN && !this.StageHasFog())
+			if (theSeedType == SeedType.SEED_PLANTERN && !StageHasFog())
 			{
 				TodCommon.SetBit(ref result, 3, 1);
 			}
-			if (theSeedType == SeedType.SEED_FLOWERPOT && !this.StageHasRoof())
+			if (theSeedType == SeedType.SEED_FLOWERPOT && !StageHasRoof())
 			{
 				TodCommon.SetBit(ref result, 4, 1);
 			}
-			if (this.StageHasRoof() && (theSeedType == SeedType.SEED_SPIKEWEED || theSeedType == SeedType.SEED_SPIKEROCK))
+			if (StageHasRoof() && (theSeedType == SeedType.SEED_SPIKEWEED || theSeedType == SeedType.SEED_SPIKEROCK))
 			{
 				TodCommon.SetBit(ref result, 5, 1);
 			}
-			if (!this.StageHasPool() && (theSeedType == SeedType.SEED_LILYPAD || theSeedType == SeedType.SEED_TANGLEKELP || theSeedType == SeedType.SEED_SEASHROOM || theSeedType == SeedType.SEED_CATTAIL))
+			if (!StageHasPool() && (theSeedType == SeedType.SEED_LILYPAD || theSeedType == SeedType.SEED_TANGLEKELP || theSeedType == SeedType.SEED_SEASHROOM || theSeedType == SeedType.SEED_CATTAIL))
 			{
 				TodCommon.SetBit(ref result, 1, 1);
 			}
@@ -6791,36 +6791,36 @@ namespace Lawn
 
 		public void DrawTopRightUI(Graphics g)
 		{
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 			{
-				if (this.mChallenge.mChallengeState == ChallengeState.STATECHALLENGE_ZEN_FADING)
+				if (mChallenge.mChallengeState == ChallengeState.STATECHALLENGE_ZEN_FADING)
 				{
-					this.mMenuButton.mY = TodCommon.TodAnimateCurve(50, 0, this.mChallenge.mChallengeStateCounter, 2, -50, TodCurves.CURVE_EASE_IN_OUT);
-					this.mStoreButton.mX = TodCommon.TodAnimateCurve(50, 0, this.mChallenge.mChallengeStateCounter, Constants.ZenGardenStoreButtonX, 800, TodCurves.CURVE_EASE_IN_OUT);
+					mMenuButton.mY = TodCommon.TodAnimateCurve(50, 0, mChallenge.mChallengeStateCounter, 2, -50, TodCurves.CURVE_EASE_IN_OUT);
+					mStoreButton.mX = TodCommon.TodAnimateCurve(50, 0, mChallenge.mChallengeStateCounter, Constants.ZenGardenStoreButtonX, 800, TodCurves.CURVE_EASE_IN_OUT);
 				}
 				else
 				{
-					this.mMenuButton.mY = 2;
-					this.mStoreButton.mX = Constants.ZenGardenStoreButtonX;
+					mMenuButton.mY = 2;
+					mStoreButton.mX = Constants.ZenGardenStoreButtonX;
 				}
 			}
-			if (this.mTutorialState == TutorialState.TUTORIAL_ZEN_GARDEN_COMPLETED)
+			if (mTutorialState == TutorialState.TUTORIAL_ZEN_GARDEN_COMPLETED)
 			{
-				SexyColor flashingColor = TodCommon.GetFlashingColor(this.mMainCounter, 75);
+				SexyColor flashingColor = TodCommon.GetFlashingColor(mMainCounter, 75);
 				g.SetColorizeImages(true);
 				g.SetColor(flashingColor);
 			}
-			this.mMenuButton.Draw(g);
+			mMenuButton.Draw(g);
 			g.SetColorizeImages(false);
-			if (this.mStoreButton != null && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
+			if (mStoreButton != null && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
 			{
-				if (this.mTutorialState == TutorialState.TUTORIAL_ZEN_GARDEN_VISIT_STORE)
+				if (mTutorialState == TutorialState.TUTORIAL_ZEN_GARDEN_VISIT_STORE)
 				{
-					SexyColor flashingColor2 = TodCommon.GetFlashingColor(this.mMainCounter, 75);
+					SexyColor flashingColor2 = TodCommon.GetFlashingColor(mMainCounter, 75);
 					g.SetColorizeImages(true);
 					g.SetColor(flashingColor2);
 				}
-				this.mStoreButton.Draw(g);
+				mStoreButton.Draw(g);
 				g.SetColorizeImages(false);
 			}
 		}
@@ -6833,17 +6833,17 @@ namespace Lawn
 			{
 				for (int j = 0; j < 7; j++)
 				{
-					int num = this.mGridCelFog[i, j];
+					int num = mGridCelFog[i, j];
 					if (num != 0)
 					{
-						int num2 = this.mGridCelLook[i, j % Constants.MAX_GRIDSIZEY];
+						int num2 = mGridCelLook[i, j % Constants.MAX_GRIDSIZEY];
 						int theCelCol = num2 % 8;
-						float num3 = (float)(i * 80) + this.mFogOffset - 15f;
+						float num3 = (float)(i * 80) + mFogOffset - 15f;
 						float num4 = (float)(j * 85) + 20f;
 						int num5 = (int)(255f - (float)num2 * 1.5f);
 						int num6 = 255 - num2;
-						float num7 = (float)this.mMainCounter * 3.1415927f * 2f / 900f;
-						float num8 = (float)this.mMainCounter * 3.1415927f * 2f / 500f;
+						float num7 = (float)mMainCounter * 3.1415927f * 2f / 900f;
+						float num8 = (float)mMainCounter * 3.1415927f * 2f / 500f;
 						float num9 = 3f * (float)i * 3.1415927f * 2f / (float)Constants.GRIDSIZEX;
 						float num10 = 3f * (float)j * 3.1415927f * 2f / 7f;
 						float num11 = (float)(13.0 + 4.0 * Math.Sin((double)(num10 + num7)) + 8.0 * Math.Sin((double)(num9 + num8)));
@@ -6865,20 +6865,20 @@ namespace Lawn
 
 		public void UpdateFog()
 		{
-			if (!this.StageHasFog())
+			if (!StageHasFog())
 			{
 				return;
 			}
 			int num = 3;
-			if (this.mFogBlownCountDown > 0 && this.mFogBlownCountDown < 2000)
+			if (mFogBlownCountDown > 0 && mFogBlownCountDown < 2000)
 			{
 				num = 1;
 			}
-			else if (this.mFogBlownCountDown > 0)
+			else if (mFogBlownCountDown > 0)
 			{
 				num = 20;
 			}
-			int num2 = this.LeftFogColumn();
+			int num2 = LeftFogColumn();
 			for (int i = num2; i < Constants.GRIDSIZEX; i++)
 			{
 				for (int j = 0; j < 7; j++)
@@ -6888,22 +6888,22 @@ namespace Lawn
 					{
 						num3 = 200;
 					}
-					this.mGridCelFog[i, j] = Math.Min(this.mGridCelFog[i, j] + num, num3);
+					mGridCelFog[i, j] = Math.Min(mGridCelFog[i, j] + num, num3);
 				}
 			}
-			int count = this.mPlants.Count;
+			int count = mPlants.Count;
 			for (int k = 0; k < count; k++)
 			{
-				Plant plant = this.mPlants[k];
+				Plant plant = mPlants[k];
 				if (!plant.mDead && !plant.NotOnGround())
 				{
 					if (plant.mSeedType == SeedType.SEED_PLANTERN)
 					{
-						this.ClearFogAroundPlant(plant, 4);
+						ClearFogAroundPlant(plant, 4);
 					}
 					else if (plant.mSeedType == SeedType.SEED_TORCHWOOD)
 					{
-						this.ClearFogAroundPlant(plant, 1);
+						ClearFogAroundPlant(plant, 1);
 					}
 				}
 			}
@@ -6911,23 +6911,23 @@ namespace Lawn
 
 		public int LeftFogColumn()
 		{
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_AIR_RAID)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_AIR_RAID)
 			{
 				return 6;
 			}
-			if (!this.mApp.IsAdventureMode() && !this.mApp.IsQuickPlayMode())
+			if (!mApp.IsAdventureMode() && !mApp.IsQuickPlayMode())
 			{
 				return 5;
 			}
-			if (this.mLevel == 31)
+			if (mLevel == 31)
 			{
 				return 6;
 			}
-			if (this.mLevel >= 32 && this.mLevel <= 36)
+			if (mLevel >= 32 && mLevel <= 36)
 			{
 				return 5;
 			}
-			if (this.mLevel >= 37 && this.mLevel <= 40)
+			if (mLevel >= 37 && mLevel <= 40)
 			{
 				return 4;
 			}
@@ -6942,40 +6942,40 @@ namespace Lawn
 
 		public void DropLootPiece(int thePosX, int thePosY, int theDropFactor)
 		{
-			if (this.mApp.IsFirstTimeAdventureMode() && this.mLevel == 22 && this.mCurrentWave > 5 && !this.mApp.mPlayerInfo.mHasUnlockedMinigames && this.CountCoinByType(CoinType.COIN_PRESENT_MINIGAMES) == 0)
+			if (mApp.IsFirstTimeAdventureMode() && mLevel == 22 && mCurrentWave > 5 && !mApp.mPlayerInfo.mHasUnlockedMinigames && CountCoinByType(CoinType.COIN_PRESENT_MINIGAMES) == 0)
 			{
-				this.mApp.PlayFoley(FoleyType.FOLEY_ART_CHALLENGE);
-				this.AddCoin(thePosX - 40, thePosY, CoinType.COIN_PRESENT_MINIGAMES, CoinMotion.COIN_MOTION_COIN);
+				mApp.PlayFoley(FoleyType.FOLEY_ART_CHALLENGE);
+				AddCoin(thePosX - 40, thePosY, CoinType.COIN_PRESENT_MINIGAMES, CoinMotion.COIN_MOTION_COIN);
 				return;
 			}
-			if (this.mApp.IsFirstTimeAdventureMode() && this.mLevel == 36 && this.mCurrentWave > 5 && !this.mApp.mPlayerInfo.mHasUnlockedPuzzleMode && this.CountCoinByType(CoinType.COIN_PRESENT_PUZZLE_MODE) == 0)
+			if (mApp.IsFirstTimeAdventureMode() && mLevel == 36 && mCurrentWave > 5 && !mApp.mPlayerInfo.mHasUnlockedPuzzleMode && CountCoinByType(CoinType.COIN_PRESENT_PUZZLE_MODE) == 0)
 			{
-				this.mApp.PlayFoley(FoleyType.FOLEY_ART_CHALLENGE);
-				this.AddCoin(thePosX - 40, thePosY, CoinType.COIN_PRESENT_PUZZLE_MODE, CoinMotion.COIN_MOTION_COIN);
+				mApp.PlayFoley(FoleyType.FOLEY_ART_CHALLENGE);
+				AddCoin(thePosX - 40, thePosY, CoinType.COIN_PRESENT_PUZZLE_MODE, CoinMotion.COIN_MOTION_COIN);
 				return;
 			}
 			int num = RandomNumbers.NextNumber(30000);
-			if (this.mApp.IsFirstTimeAdventureMode() && this.mLevel == 11 && !this.mDroppedFirstCoin && this.mCurrentWave > 5)
+			if (mApp.IsFirstTimeAdventureMode() && mLevel == 11 && !mDroppedFirstCoin && mCurrentWave > 5)
 			{
 				num = 1000;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_COLUMN)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_COLUMN)
 			{
 				num *= 5;
 			}
-			if (this.mApp.IsWhackAZombieLevel())
+			if (mApp.IsWhackAZombieLevel())
 			{
 				int num2 = 2500;
 				int num3;
-				if (this.mSunMoney > 500)
+				if (mSunMoney > 500)
 				{
 					num3 = num2 + 300;
 				}
-				else if (this.mSunMoney > 350)
+				else if (mSunMoney > 350)
 				{
 					num3 = num2 + 600;
 				}
-				else if (this.mSunMoney > 200)
+				else if (mSunMoney > 200)
 				{
 					num3 = num2 + 1200;
 				}
@@ -6985,27 +6985,27 @@ namespace Lawn
 				}
 				if (num >= num2 * theDropFactor && num < num3 * theDropFactor)
 				{
-					this.mApp.PlayFoley(FoleyType.FOLEY_SPAWN_SUN);
-					this.AddCoin(thePosX - 20, thePosY, CoinType.COIN_SUN, CoinMotion.COIN_MOTION_COIN);
-					this.AddCoin(thePosX - 40, thePosY, CoinType.COIN_SUN, CoinMotion.COIN_MOTION_COIN);
-					this.AddCoin(thePosX - 60, thePosY, CoinType.COIN_SUN, CoinMotion.COIN_MOTION_COIN);
+					mApp.PlayFoley(FoleyType.FOLEY_SPAWN_SUN);
+					AddCoin(thePosX - 20, thePosY, CoinType.COIN_SUN, CoinMotion.COIN_MOTION_COIN);
+					AddCoin(thePosX - 40, thePosY, CoinType.COIN_SUN, CoinMotion.COIN_MOTION_COIN);
+					AddCoin(thePosX - 60, thePosY, CoinType.COIN_SUN, CoinMotion.COIN_MOTION_COIN);
 					return;
 				}
 			}
-			if (this.mTotalSpawnedWaves > 70)
+			if (mTotalSpawnedWaves > 70)
 			{
 				return;
 			}
 			int num4;
-			if (!this.mApp.mZenGarden.CanDropPottedPlantLoot())
+			if (!mApp.mZenGarden.CanDropPottedPlantLoot())
 			{
 				num4 = 0;
 			}
-			else if ((this.mApp.IsAdventureMode() || this.mApp.IsQuickPlayMode()) && !this.mApp.IsFirstTimeAdventureMode())
+			else if ((mApp.IsAdventureMode() || mApp.IsQuickPlayMode()) && !mApp.IsFirstTimeAdventureMode())
 			{
 				num4 = 24;
 			}
-			else if (this.mApp.IsSurvivalEndless(this.mApp.mGameMode))
+			else if (mApp.IsSurvivalEndless(mApp.mGameMode))
 			{
 				num4 = 3;
 			}
@@ -7014,15 +7014,15 @@ namespace Lawn
 				num4 = 12;
 			}
 			int num5 = num4;
-			if (!this.mApp.mZenGarden.CanDropChocolate())
+			if (!mApp.mZenGarden.CanDropChocolate())
 			{
 				num5 = num5;
 			}
-			else if ((this.mApp.IsAdventureMode() || this.mApp.IsQuickPlayMode()) && !this.mApp.IsFirstTimeAdventureMode())
+			else if ((mApp.IsAdventureMode() || mApp.IsQuickPlayMode()) && !mApp.IsFirstTimeAdventureMode())
 			{
 				num5 += 72;
 			}
-			else if (this.mApp.IsSurvivalEndless(this.mApp.mGameMode))
+			else if (mApp.IsSurvivalEndless(mApp.mGameMode))
 			{
 				num5 += 9;
 			}
@@ -7058,131 +7058,131 @@ namespace Lawn
 				}
 				coinType = CoinType.COIN_SILVER;
 			}
-			if (coinType == CoinType.COIN_DIAMOND && this.mApp.mPlayerInfo.mPurchases[21] < 1)
+			if (coinType == CoinType.COIN_DIAMOND && mApp.mPlayerInfo.mPurchases[21] < 1)
 			{
 				coinType = CoinType.COIN_GOLD;
 			}
-			if (this.mApp.IsWallnutBowlingLevel() && (coinType == CoinType.COIN_SILVER || coinType == CoinType.COIN_GOLD || coinType == CoinType.COIN_DIAMOND))
+			if (mApp.IsWallnutBowlingLevel() && (coinType == CoinType.COIN_SILVER || coinType == CoinType.COIN_GOLD || coinType == CoinType.COIN_DIAMOND))
 			{
 				return;
 			}
-			if (this.mApp.IsFirstTimeAdventureMode() && this.mLevel == 11)
+			if (mApp.IsFirstTimeAdventureMode() && mLevel == 11)
 			{
-				int num9 = Coin.GetCoinValue(CoinType.COIN_GOLD) * this.mLawnMowers.Count;
+				int num9 = Coin.GetCoinValue(CoinType.COIN_GOLD) * mLawnMowers.Count;
 				int itemCost = StoreScreen.GetItemCost(StoreItem.STORE_ITEM_PACKET_UPGRADE);
-				int num10 = this.mApp.mPlayerInfo.mCoins + this.CountCoinsBeingCollected();
+				int num10 = mApp.mPlayerInfo.mCoins + CountCoinsBeingCollected();
 				if (Coin.GetCoinValue(coinType) + num10 + num9 >= itemCost)
 				{
 					return;
 				}
 			}
-			this.mApp.PlayFoley(FoleyType.FOLEY_SPAWN_SUN);
-			this.AddCoin(thePosX - 40, thePosY, coinType, CoinMotion.COIN_MOTION_COIN);
-			this.mDroppedFirstCoin = true;
+			mApp.PlayFoley(FoleyType.FOLEY_SPAWN_SUN);
+			AddCoin(thePosX - 40, thePosY, coinType, CoinMotion.COIN_MOTION_COIN);
+			mDroppedFirstCoin = true;
 		}
 
 		public void UpdateLevelEndSequence()
 		{
-			if (this.mNextSurvivalStageCounter > 0)
+			if (mNextSurvivalStageCounter > 0)
 			{
-				if (!this.IsScaryPotterDaveTalking())
+				if (!IsScaryPotterDaveTalking())
 				{
-					this.mNextSurvivalStageCounter--;
-					if (this.mApp.IsAdventureMode() && this.mApp.IsScaryPotterLevel() && this.mNextSurvivalStageCounter == 300)
+					mNextSurvivalStageCounter--;
+					if (mApp.IsAdventureMode() && mApp.IsScaryPotterLevel() && mNextSurvivalStageCounter == 300)
 					{
-						this.mApp.CrazyDaveEnter();
-						if (this.mChallenge.mSurvivalStage == 0)
+						mApp.CrazyDaveEnter();
+						if (mChallenge.mSurvivalStage == 0)
 						{
-							this.mApp.CrazyDaveTalkIndex(2700);
+							mApp.CrazyDaveTalkIndex(2700);
 						}
 						else
 						{
-							this.mApp.CrazyDaveTalkIndex(2800);
+							mApp.CrazyDaveTalkIndex(2800);
 						}
-						this.mChallenge.PuzzleNextStageClear();
-						this.mNextSurvivalStageCounter = 100;
+						mChallenge.PuzzleNextStageClear();
+						mNextSurvivalStageCounter = 100;
 					}
 				}
-				if (this.mNextSurvivalStageCounter == 1 && this.mApp.IsSurvivalMode() && this.mApp.IsSurvivalMode())
+				if (mNextSurvivalStageCounter == 1 && mApp.IsSurvivalMode() && mApp.IsSurvivalMode())
 				{
-					this.TryToSaveGame();
+					TryToSaveGame();
 				}
-				if (this.mNextSurvivalStageCounter == 0)
+				if (mNextSurvivalStageCounter == 0)
 				{
-					if (this.mApp.IsScaryPotterLevel() && this.mApp.IsAdventureMode())
+					if (mApp.IsScaryPotterLevel() && mApp.IsAdventureMode())
 					{
 						return;
 					}
-					if (this.mApp.IsScaryPotterLevel() && !this.IsFinalScaryPotterStage())
+					if (mApp.IsScaryPotterLevel() && !IsFinalScaryPotterStage())
 					{
-						this.mChallenge.PuzzleNextStageClear();
-						this.mChallenge.ScaryPotterPopulate();
+						mChallenge.PuzzleNextStageClear();
+						mChallenge.ScaryPotterPopulate();
 						return;
 					}
-					if (this.mApp.IsEndlessIZombie(this.mApp.mGameMode))
+					if (mApp.IsEndlessIZombie(mApp.mGameMode))
 					{
-						this.mChallenge.PuzzleNextStageClear();
-						this.mChallenge.IZombieInitLevel();
+						mChallenge.PuzzleNextStageClear();
+						mChallenge.IZombieInitLevel();
 						return;
 					}
-					if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
+					if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
 					{
-						this.ClearAdvice(AdviceType.ADVICE_NONE);
+						ClearAdvice(AdviceType.ADVICE_NONE);
 						return;
 					}
-					this.mLevelComplete = true;
-					this.RemoveZombiesForRepick();
+					mLevelComplete = true;
+					RemoveZombiesForRepick();
 					return;
 				}
 			}
-			if (this.mBoardFadeOutCounter < 0)
+			if (mBoardFadeOutCounter < 0)
 			{
 				return;
 			}
-			this.mBoardFadeOutCounter--;
-			if (this.mBoardFadeOutCounter == 0)
+			mBoardFadeOutCounter--;
+			if (mBoardFadeOutCounter == 0)
 			{
-				this.mLevelComplete = true;
+				mLevelComplete = true;
 				return;
 			}
-			if (this.mBoardFadeOutCounter == 300)
+			if (mBoardFadeOutCounter == 300)
 			{
-				bool flag = this.IsSurvivalStageWithRepick();
-				bool flag2 = this.mLevel == 9 || this.mLevel == 19 || this.mLevel == 29 || this.mLevel == 39 || this.mLevel == 49;
+				bool flag = IsSurvivalStageWithRepick();
+				bool flag2 = mLevel == 9 || mLevel == 19 || mLevel == 29 || mLevel == 39 || mLevel == 49;
 				if (!flag && !flag2)
 				{
-					this.mApp.PlaySample(Resources.SOUND_LIGHTFILL);
+					mApp.PlaySample(Resources.SOUND_LIGHTFILL);
 				}
 			}
-			if (this.mScoreNextMowerCounter > 0)
+			if (mScoreNextMowerCounter > 0)
 			{
-				this.mScoreNextMowerCounter--;
-				if (this.mScoreNextMowerCounter != 0)
+				mScoreNextMowerCounter--;
+				if (mScoreNextMowerCounter != 0)
 				{
 					return;
 				}
 			}
-			if (!this.CanDropLoot())
+			if (!CanDropLoot())
 			{
 				return;
 			}
-			if (this.IsSurvivalStageWithRepick())
+			if (IsSurvivalStageWithRepick())
 			{
 				return;
 			}
-			this.mScoreNextMowerCounter = 40;
-			LawnMower bottomLawnMower = this.GetBottomLawnMower();
+			mScoreNextMowerCounter = 40;
+			LawnMower bottomLawnMower = GetBottomLawnMower();
 			if (bottomLawnMower == null)
 			{
 				return;
 			}
 			CoinType theCoinType = CoinType.COIN_GOLD;
-			this.AddCoin((int)(bottomLawnMower.mPosX + (float)Constants.LawnMower_Coin_Offset.X), (int)(bottomLawnMower.mPosY + (float)Constants.LawnMower_Coin_Offset.Y), theCoinType, CoinMotion.COIN_MOTION_LAWNMOWER_COIN);
-			SoundInstance soundInstance = this.mApp.mSoundManager.GetSoundInstance((uint)Resources.SOUND_POINTS);
+			AddCoin((int)(bottomLawnMower.mPosX + (float)Constants.LawnMower_Coin_Offset.X), (int)(bottomLawnMower.mPosY + (float)Constants.LawnMower_Coin_Offset.Y), theCoinType, CoinMotion.COIN_MOTION_LAWNMOWER_COIN);
+			SoundInstance soundInstance = mApp.mSoundManager.GetSoundInstance((uint)Resources.SOUND_POINTS);
 			if (soundInstance != null)
 			{
 				soundInstance.Play(false, true);
-				float num = TodCommon.ClampFloat(6f - (float)this.CountUntriggerLawnMowers(), 0f, 6f);
+				float num = TodCommon.ClampFloat(6f - (float)CountUntriggerLawnMowers(), 0f, 6f);
 				soundInstance.AdjustPitch((double)num);
 			}
 			else
@@ -7196,7 +7196,7 @@ namespace Lawn
 		{
 			LawnMower lawnMower = null;
 			LawnMower lawnMower2 = null;
-			while (this.IterateLawnMowers(ref lawnMower2))
+			while (IterateLawnMowers(ref lawnMower2))
 			{
 				if (lawnMower2.mMowerState != LawnMowerState.MOWER_TRIGGERED && lawnMower2.mMowerState != LawnMowerState.MOWER_SQUISHED && (lawnMower == null || lawnMower.mRow < lawnMower2.mRow))
 				{
@@ -7208,12 +7208,12 @@ namespace Lawn
 
 		public bool CanDropLoot()
 		{
-			return !this.mCutScene.ShouldRunUpsellBoard() && (!this.mApp.IsFirstTimeAdventureMode() || this.mLevel >= 11);
+			return !mCutScene.ShouldRunUpsellBoard() && (!mApp.IsFirstTimeAdventureMode() || mLevel >= 11);
 		}
 
 		public ZombieType GetIntroducedZombieType()
 		{
-			if ((!this.mApp.IsAdventureMode() && !this.mApp.IsQuickPlayMode()) || this.mLevel == 1)
+			if ((!mApp.IsAdventureMode() && !mApp.IsQuickPlayMode()) || mLevel == 1)
 			{
 				return ZombieType.ZOMBIE_INVALID;
 			}
@@ -7221,7 +7221,7 @@ namespace Lawn
 			{
 				ZombieType zombieType = (ZombieType)i;
 				ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(zombieType);
-				if ((zombieType != ZombieType.ZOMBIE_YETI || this.mApp.CanSpawnYetis()) && zombieDefinition.mStartingLevel == this.mLevel)
+				if ((zombieType != ZombieType.ZOMBIE_YETI || mApp.CanSpawnYetis()) && zombieDefinition.mStartingLevel == mLevel)
 				{
 					return zombieType;
 				}
@@ -7234,7 +7234,7 @@ namespace Lawn
 			int num = 0;
 			int num2 = -1;
 			GridItem gridItem = null;
-			while (this.IterateGridItems(ref gridItem, ref num2))
+			while (IterateGridItems(ref gridItem, ref num2))
 			{
 				if (gridItem.mGridItemType == GridItemType.GRIDITEM_GRAVESTONE)
 				{
@@ -7253,7 +7253,7 @@ namespace Lawn
 
 		public float GetPosYBasedOnRow(float thePosX, int theRow)
 		{
-			if (this.StageHasRoof())
+			if (StageHasRoof())
 			{
 				float num = 0f;
 				int num2 = 440 + Constants.BOARD_EXTRA_ROOM;
@@ -7261,59 +7261,59 @@ namespace Lawn
 				{
 					num = ((float)num2 - thePosX) * 0.25f;
 				}
-				return (float)this.GridToPixelY(8, theRow) + num;
+				return (float)GridToPixelY(8, theRow) + num;
 			}
-			return (float)this.GridToPixelY(0, theRow);
+			return (float)GridToPixelY(0, theRow);
 		}
 
 		public void NextWaveComing()
 		{
-			if (this.mCurrentWave + 1 == this.mNumWaves)
+			if (mCurrentWave + 1 == mNumWaves)
 			{
 				bool flag = true;
-				if (this.IsSurvivalStageWithRepick())
+				if (IsSurvivalStageWithRepick())
 				{
 					flag = false;
 				}
-				else if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
+				else if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
 				{
 					flag = false;
 				}
-				else if (this.mApp.IsContinuousChallenge())
+				else if (mApp.IsContinuousChallenge())
 				{
 					flag = false;
 				}
 				if (flag)
 				{
-					this.mApp.AddReanimation(0f + (float)Constants.BOARD_EXTRA_ROOM, 30f, 800000, ReanimationType.REANIM_FINAL_WAVE);
-					this.mFinalWaveSoundCounter = 60;
+					mApp.AddReanimation(0f + (float)Constants.BOARD_EXTRA_ROOM, 30f, 800000, ReanimationType.REANIM_FINAL_WAVE);
+					mFinalWaveSoundCounter = 60;
 				}
 			}
-			if (this.mCurrentWave == 0)
+			if (mCurrentWave == 0)
 			{
-				this.mApp.PlaySample(Resources.SOUND_AWOOGA);
+				mApp.PlaySample(Resources.SOUND_AWOOGA);
 				return;
 			}
-			if (this.mApp.IsWhackAZombieLevel())
+			if (mApp.IsWhackAZombieLevel())
 			{
-				if (this.mCurrentWave == this.mNumWaves - 1)
+				if (mCurrentWave == mNumWaves - 1)
 				{
-					this.mApp.PlaySample(Resources.SOUND_SIREN);
+					mApp.PlaySample(Resources.SOUND_SIREN);
 					return;
 				}
 			}
-			else if (this.IsFlagWave(this.mCurrentWave))
+			else if (IsFlagWave(mCurrentWave))
 			{
-				this.mApp.PlaySample(Resources.SOUND_SIREN);
+				mApp.PlaySample(Resources.SOUND_SIREN);
 			}
 		}
 
 		public bool BungeeIsTargetingCell(int theCol, int theRow)
 		{
-			int count = this.mZombies.Count;
+			int count = mZombies.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Zombie zombie = this.mZombies[i];
+				Zombie zombie = mZombies[i];
 				if (!zombie.mDead && !zombie.IsDeadOrDying() && zombie.mZombieType == ZombieType.ZOMBIE_BUNGEE && zombie.mRow == theRow && zombie.mTargetCol == theCol)
 				{
 					return true;
@@ -7325,45 +7325,45 @@ namespace Lawn
 		public int PlantingPixelToGridX(int theX, int theY, SeedType theSeedType)
 		{
 			int theY2 = theY;
-			this.OffsetYForPlanting(ref theY2, theSeedType);
-			return this.PixelToGridX(theX, theY2);
+			OffsetYForPlanting(ref theY2, theSeedType);
+			return PixelToGridX(theX, theY2);
 		}
 
 		public int PlantingPixelToGridY(int theX, int theY, SeedType theSeedType)
 		{
 			int num = theY;
-			this.OffsetYForPlanting(ref num, theSeedType);
+			OffsetYForPlanting(ref num, theSeedType);
 			if (theSeedType == SeedType.SEED_INSTANT_COFFEE)
 			{
-				int theGridX = this.PixelToGridX(theX, num);
-				int num2 = this.PixelToGridY(theX, num);
-				Plant topPlantAt = this.GetTopPlantAt(theGridX, num2, PlantPriority.TOPPLANT_ONLY_NORMAL_POSITION);
+				int theGridX = PixelToGridX(theX, num);
+				int num2 = PixelToGridY(theX, num);
+				Plant topPlantAt = GetTopPlantAt(theGridX, num2, PlantPriority.TOPPLANT_ONLY_NORMAL_POSITION);
 				if (topPlantAt != null && topPlantAt.mIsAsleep)
 				{
 					return num2;
 				}
-				num2 = this.PixelToGridY(theX, num + 30);
-				Plant topPlantAt2 = this.GetTopPlantAt(theGridX, num2, PlantPriority.TOPPLANT_ONLY_NORMAL_POSITION);
+				num2 = PixelToGridY(theX, num + 30);
+				Plant topPlantAt2 = GetTopPlantAt(theGridX, num2, PlantPriority.TOPPLANT_ONLY_NORMAL_POSITION);
 				if (topPlantAt2 != null && topPlantAt2.mIsAsleep)
 				{
 					return num2;
 				}
-				num2 = this.PixelToGridY(theX, num - 50);
-				Plant topPlantAt3 = this.GetTopPlantAt(theGridX, num2, PlantPriority.TOPPLANT_ONLY_NORMAL_POSITION);
+				num2 = PixelToGridY(theX, num - 50);
+				Plant topPlantAt3 = GetTopPlantAt(theGridX, num2, PlantPriority.TOPPLANT_ONLY_NORMAL_POSITION);
 				if (topPlantAt3 != null && topPlantAt3.mIsAsleep)
 				{
 					return num2;
 				}
 			}
-			return this.PixelToGridY(theX, num);
+			return PixelToGridY(theX, num);
 		}
 
 		public Plant FindUmbrellaPlant(int theGridX, int theGridY)
 		{
-			int count = this.mPlants.Count;
+			int count = mPlants.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Plant plant = this.mPlants[i];
+				Plant plant = mPlants[i];
 				if (!plant.mDead && plant.mSeedType == SeedType.SEED_UMBRELLA && !plant.NotOnGround() && theGridX >= plant.mPlantCol - 1 && theGridX <= plant.mPlantCol + 1 && theGridY >= plant.mRow - 1 && theGridY <= plant.mRow + 1)
 				{
 					return plant;
@@ -7376,107 +7376,107 @@ namespace Lawn
 		{
 			if (theTutorialState == TutorialState.TUTORIAL_LEVEL_1_PICK_UP_PEASHOOTER)
 			{
-				if (this.mPlants.Count == 0)
+				if (mPlants.Count == 0)
 				{
-					float num = (float)(this.mSeedBank.mX + this.mSeedBank.mSeedPackets[0].mX + Constants.SMALL_SEEDPACKET_WIDTH / 2) - Constants.InvertAndScale(13f);
+					float num = (float)(mSeedBank.mX + mSeedBank.mSeedPackets[0].mX + Constants.SMALL_SEEDPACKET_WIDTH / 2) - Constants.InvertAndScale(13f);
 					float num2 = 0f;
-					this.TutorialArrowShow((int)num, (int)num2);
-					this.DisplayAdvice("[ADVICE_CLICK_SEED_PACKET]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1_STAY, AdviceType.ADVICE_NONE);
+					TutorialArrowShow((int)num, (int)num2);
+					DisplayAdvice("[ADVICE_CLICK_SEED_PACKET]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1_STAY, AdviceType.ADVICE_NONE);
 				}
 				else
 				{
-					this.DisplayAdvice("[ADVICE_ENOUGH_SUN]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1_STAY, AdviceType.ADVICE_NONE);
-					this.mTutorialTimer = 400;
+					DisplayAdvice("[ADVICE_ENOUGH_SUN]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1_STAY, AdviceType.ADVICE_NONE);
+					mTutorialTimer = 400;
 				}
 			}
 			else if (theTutorialState == TutorialState.TUTORIAL_LEVEL_1_PLANT_PEASHOOTER)
 			{
-				this.mTutorialTimer = -1;
-				this.TutorialArrowRemove();
-				if (this.mPlants.Count == 0)
+				mTutorialTimer = -1;
+				TutorialArrowRemove();
+				if (mPlants.Count == 0)
 				{
-					this.DisplayAdvice("[ADVICE_CLICK_ON_GRASS]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1_STAY, AdviceType.ADVICE_NONE);
+					DisplayAdvice("[ADVICE_CLICK_ON_GRASS]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1_STAY, AdviceType.ADVICE_NONE);
 				}
 				else
 				{
-					this.ClearAdvice(AdviceType.ADVICE_NONE);
+					ClearAdvice(AdviceType.ADVICE_NONE);
 				}
 			}
 			else if (theTutorialState == TutorialState.TUTORIAL_LEVEL_1_REFRESH_PEASHOOTER)
 			{
-				this.DisplayAdvice("[ADVICE_PLANTED_PEASHOOTER]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1_STAY, AdviceType.ADVICE_NONE);
-				this.mSunCountDown = 400;
+				DisplayAdvice("[ADVICE_PLANTED_PEASHOOTER]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1_STAY, AdviceType.ADVICE_NONE);
+				mSunCountDown = 400;
 			}
 			else if (theTutorialState == TutorialState.TUTORIAL_LEVEL_1_COMPLETED)
 			{
-				this.DisplayAdvice("[ADVICE_ZOMBIE_ONSLAUGHT]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1, AdviceType.ADVICE_NONE);
-				this.mZombieCountDown = 99;
-				this.mZombieCountDownStart = this.mZombieCountDown;
+				DisplayAdvice("[ADVICE_ZOMBIE_ONSLAUGHT]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1, AdviceType.ADVICE_NONE);
+				mZombieCountDown = 99;
+				mZombieCountDownStart = mZombieCountDown;
 			}
 			else if (theTutorialState == TutorialState.TUTORIAL_LEVEL_2_PICK_UP_SUNFLOWER || theTutorialState == TutorialState.TUTORIAL_MORESUN_PICK_UP_SUNFLOWER)
 			{
-				float num3 = (float)(this.mSeedBank.mX + this.mSeedBank.mSeedPackets[1].mX) + Constants.InvertAndScale(13f);
-				float num4 = (float)(this.mSeedBank.mY + this.mSeedBank.mSeedPackets[1].mY);
-				this.TutorialArrowShow((int)num3, (int)num4);
+				float num3 = (float)(mSeedBank.mX + mSeedBank.mSeedPackets[1].mX) + Constants.InvertAndScale(13f);
+				float num4 = (float)(mSeedBank.mY + mSeedBank.mSeedPackets[1].mY);
+				TutorialArrowShow((int)num3, (int)num4);
 			}
 			else if (theTutorialState == TutorialState.TUTORIAL_LEVEL_2_PLANT_SUNFLOWER || theTutorialState == TutorialState.TUTORIAL_LEVEL_2_REFRESH_SUNFLOWER || theTutorialState == TutorialState.TUTORIAL_MORESUN_PLANT_SUNFLOWER || theTutorialState == TutorialState.TUTORIAL_MORESUN_REFRESH_SUNFLOWER)
 			{
-				this.TutorialArrowRemove();
+				TutorialArrowRemove();
 			}
 			else if (theTutorialState == TutorialState.TUTORIAL_LEVEL_2_COMPLETED)
 			{
-				if (this.mCurrentWave == 0)
+				if (mCurrentWave == 0)
 				{
-					this.mZombieCountDown = 999;
-					this.mZombieCountDownStart = this.mZombieCountDown;
+					mZombieCountDown = 999;
+					mZombieCountDownStart = mZombieCountDown;
 				}
 			}
 			else if (theTutorialState == TutorialState.TUTORIAL_SLOT_MACHINE_PULL)
 			{
-				this.DisplayAdvice("[ADVICE_SLOT_MACHINE_PULL]", MessageStyle.MESSAGE_STYLE_SLOT_MACHINE, AdviceType.ADVICE_SLOT_MACHINE_PULL);
+				DisplayAdvice("[ADVICE_SLOT_MACHINE_PULL]", MessageStyle.MESSAGE_STYLE_SLOT_MACHINE, AdviceType.ADVICE_SLOT_MACHINE_PULL);
 			}
 			else if (theTutorialState == TutorialState.TUTORIAL_SLOT_MACHINE_COMPLETED)
 			{
-				this.ClearAdvice(AdviceType.ADVICE_SLOT_MACHINE_PULL);
+				ClearAdvice(AdviceType.ADVICE_SLOT_MACHINE_PULL);
 			}
 			else if (theTutorialState == TutorialState.TUTORIAL_SHOVEL_PICKUP)
 			{
-				this.DisplayAdvice("[ADVICE_CLICK_SHOVEL]", MessageStyle.MESSAGE_STYLE_HINT_STAY, AdviceType.ADVICE_NONE);
-				int x = this.GetShovelButtonRect().mX + (int)Constants.InvertAndScale(16f) + Constants.Board_Offset_AspectRatio_Correction;
+				DisplayAdvice("[ADVICE_CLICK_SHOVEL]", MessageStyle.MESSAGE_STYLE_HINT_STAY, AdviceType.ADVICE_NONE);
+				int x = GetShovelButtonRect().mX + (int)Constants.InvertAndScale(16f) + Constants.Board_Offset_AspectRatio_Correction;
 				int y = 0;
-				this.TutorialArrowShow(x, y);
+				TutorialArrowShow(x, y);
 			}
 			else if (theTutorialState == TutorialState.TUTORIAL_SHOVEL_DIG)
 			{
-				this.DisplayAdvice("[ADVICE_CLICK_PLANT]", MessageStyle.MESSAGE_STYLE_HINT_STAY, AdviceType.ADVICE_NONE);
-				this.TutorialArrowRemove();
+				DisplayAdvice("[ADVICE_CLICK_PLANT]", MessageStyle.MESSAGE_STYLE_HINT_STAY, AdviceType.ADVICE_NONE);
+				TutorialArrowRemove();
 			}
 			else if (theTutorialState == TutorialState.TUTORIAL_SHOVEL_KEEP_DIGGING)
 			{
-				this.DisplayAdvice("[ADVICE_KEEP_DIGGING]", MessageStyle.MESSAGE_STYLE_HINT_STAY, AdviceType.ADVICE_NONE);
+				DisplayAdvice("[ADVICE_KEEP_DIGGING]", MessageStyle.MESSAGE_STYLE_HINT_STAY, AdviceType.ADVICE_NONE);
 			}
 			else if (theTutorialState == TutorialState.TUTORIAL_SHOVEL_COMPLETED)
 			{
-				this.ClearAdvice(AdviceType.ADVICE_NONE);
-				this.mCutScene.mCutsceneTime = 1500;
-				this.mCutScene.mCrazyDaveDialogStart = 2410;
+				ClearAdvice(AdviceType.ADVICE_NONE);
+				mCutScene.mCutsceneTime = 1500;
+				mCutScene.mCrazyDaveDialogStart = 2410;
 			}
-			this.mTutorialState = theTutorialState;
+			mTutorialState = theTutorialState;
 		}
 
 		public void DoFwoosh(int theRow)
 		{
 			for (int i = 0; i < 12; i++)
 			{
-				Reanimation reanimation = this.mApp.ReanimationTryToGet(this.mFwooshID[theRow, i]);
+				Reanimation reanimation = mApp.ReanimationTryToGet(mFwooshID[theRow, i]);
 				if (reanimation != null)
 				{
 					reanimation.ReanimationDie();
 				}
 				float num = 750f * (float)i / 11f + 10f + (float)Constants.BOARD_EXTRA_ROOM;
-				float theY = this.GetPosYBasedOnRow(num + 10f, theRow) - 10f;
+				float theY = GetPosYBasedOnRow(num + 10f, theRow) - 10f;
 				int aRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_PARTICLE, theRow, 1);
-				Reanimation reanimation2 = this.mApp.AddReanimation(num, theY, aRenderOrder, ReanimationType.REANIM_JALAPENO_FIRE);
+				Reanimation reanimation2 = mApp.AddReanimation(num, theY, aRenderOrder, ReanimationType.REANIM_JALAPENO_FIRE);
 				reanimation2.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_flame);
 				reanimation2.mLoopType = ReanimLoopType.REANIM_LOOP_FULL_LAST_FRAME;
 				reanimation2.mAnimRate *= TodCommon.RandRangeFloat(0.7f, 1.3f);
@@ -7487,47 +7487,47 @@ namespace Lawn
 					num3 = -1f;
 				}
 				reanimation2.OverrideScale(num2 * num3, 1f);
-				this.mFwooshID[theRow, i] = this.mApp.ReanimationGetID(reanimation2);
+				mFwooshID[theRow, i] = mApp.ReanimationGetID(reanimation2);
 			}
-			this.mFwooshCountDown = 100;
+			mFwooshCountDown = 100;
 		}
 
 		public void UpdateFwoosh()
 		{
-			if (this.mFwooshCountDown == 0)
+			if (mFwooshCountDown == 0)
 			{
 				return;
 			}
-			this.mFwooshCountDown -= 3;
-			int num = TodCommon.TodAnimateCurve(50, 0, this.mFwooshCountDown, 12, 0, TodCurves.CURVE_LINEAR);
+			mFwooshCountDown -= 3;
+			int num = TodCommon.TodAnimateCurve(50, 0, mFwooshCountDown, 12, 0, TodCurves.CURVE_LINEAR);
 			for (int i = 0; i < Constants.MAX_GRIDSIZEY; i++)
 			{
 				for (int j = 0; j < 12 - num; j++)
 				{
-					Reanimation reanimation = this.mApp.ReanimationTryToGet(this.mFwooshID[i, j]);
+					Reanimation reanimation = mApp.ReanimationTryToGet(mFwooshID[i, j]);
 					if (reanimation != null)
 					{
 						reanimation.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_done);
 						reanimation.mLoopType = ReanimLoopType.REANIM_PLAY_ONCE_FULL_LAST_FRAME;
 						reanimation.mAnimRate = 15f;
 					}
-					this.mFwooshID[i, j] = null;
+					mFwooshID[i, j] = null;
 				}
 			}
 		}
 
 		public Plant SpecialPlantHitTest(int x, int y)
 		{
-			int count = this.mPlants.Count;
+			int count = mPlants.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Plant plant = this.mPlants[i];
+				Plant plant = mPlants[i];
 				if (!plant.mDead)
 				{
 					if (plant.mSeedType == SeedType.SEED_PUMPKINSHELL)
 					{
 						float num = 25f;
-						if (this.GetTopPlantAt(plant.mPlantCol, plant.mRow, PlantPriority.TOPPLANT_ONLY_NORMAL_POSITION) == null)
+						if (GetTopPlantAt(plant.mPlantCol, plant.mRow, PlantPriority.TOPPLANT_ONLY_NORMAL_POSITION) == null)
 						{
 							num = 0f;
 						}
@@ -7553,11 +7553,11 @@ namespace Lawn
 		public HitResult ToolHitTest(int x, int y, bool posScaled)
 		{
 			HitResult result;
-			this.MouseHitTest(x, y, out result, posScaled);
+			MouseHitTest(x, y, out result, posScaled);
 			if (result.mObjectType == GameObjectType.OBJECT_TYPE_PLANT)
 			{
 				Plant plant = (Plant)result.mObject;
-				if (plant.mSeedType == SeedType.SEED_GRAVEBUSTER && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+				if (plant.mSeedType == SeedType.SEED_GRAVEBUSTER && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 				{
 					result.mObjectType = GameObjectType.OBJECT_TYPE_NONE;
 					result.mObject = null;
@@ -7568,13 +7568,13 @@ namespace Lawn
 
 		public bool CanAddGraveStoneAt(int theGridX, int theGridY)
 		{
-			if (this.mGridSquareType[theGridX, theGridY] != GridSquareType.GRIDSQUARE_GRASS && this.mGridSquareType[theGridX, theGridY] != GridSquareType.GRIDSQUARE_HIGH_GROUND)
+			if (mGridSquareType[theGridX, theGridY] != GridSquareType.GRIDSQUARE_GRASS && mGridSquareType[theGridX, theGridY] != GridSquareType.GRIDSQUARE_HIGH_GROUND)
 			{
 				return false;
 			}
 			int num = -1;
 			GridItem gridItem = null;
-			while (this.IterateGridItems(ref gridItem, ref num))
+			while (IterateGridItems(ref gridItem, ref num))
 			{
 				if (gridItem.mGridX == theGridX && gridItem.mGridY == theGridY && (gridItem.mGridItemType == GridItemType.GRIDITEM_GRAVESTONE || gridItem.mGridItemType == GridItemType.GRIDITEM_CRATER || gridItem.mGridItemType == GridItemType.GRIDITEM_LADDER))
 				{
@@ -7588,13 +7588,13 @@ namespace Lawn
 		{
 			int num = -1;
 			GridItem gridItem = null;
-			while (this.IterateGridItems(ref gridItem, ref num))
+			while (IterateGridItems(ref gridItem, ref num))
 			{
-				if (this.mEnableGraveStones && gridItem.mGridItemType == GridItemType.GRIDITEM_GRAVESTONE && gridItem.mGridItemCounter < 100)
+				if (mEnableGraveStones && gridItem.mGridItemType == GridItemType.GRIDITEM_GRAVESTONE && gridItem.mGridItemCounter < 100)
 				{
 					gridItem.mGridItemCounter += 3;
 				}
-				if (gridItem.mGridItemType == GridItemType.GRIDITEM_CRATER && this.mApp.mGameScene == GameScenes.SCENE_PLAYING)
+				if (gridItem.mGridItemType == GridItemType.GRIDITEM_CRATER && mApp.mGameScene == GameScenes.SCENE_PLAYING)
 				{
 					if (gridItem.mGridItemCounter > 0)
 					{
@@ -7613,7 +7613,7 @@ namespace Lawn
 
 		public GridItem AddAGraveStone(int theGridX, int theGridY)
 		{
-			if (!this.doAddGraveStones)
+			if (!doAddGraveStones)
 			{
 				return null;
 			}
@@ -7623,48 +7623,48 @@ namespace Lawn
 			newGridItem.mRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_GRAVE_STONE, theGridY, 3);
 			newGridItem.mGridX = theGridX;
 			newGridItem.mGridY = theGridY;
-			this.mGridItems.Add(newGridItem);
+			mGridItems.Add(newGridItem);
 			return newGridItem;
 		}
 
 		public int GetSurvivalFlagsCompleted()
 		{
-			int numWavesPerFlag = this.GetNumWavesPerFlag();
-			int num = this.mChallenge.mSurvivalStage * this.GetNumWavesPerSurvivalStage() / numWavesPerFlag;
-			if (this.IsFlagWave(this.mCurrentWave - 1) && this.mBoardFadeOutCounter < 0 && this.mNextSurvivalStageCounter == 0)
+			int numWavesPerFlag = GetNumWavesPerFlag();
+			int num = mChallenge.mSurvivalStage * GetNumWavesPerSurvivalStage() / numWavesPerFlag;
+			if (IsFlagWave(mCurrentWave - 1) && mBoardFadeOutCounter < 0 && mNextSurvivalStageCounter == 0)
 			{
-				return (this.mCurrentWave - 1) / numWavesPerFlag + num;
+				return (mCurrentWave - 1) / numWavesPerFlag + num;
 			}
-			return this.mCurrentWave / numWavesPerFlag + num;
+			return mCurrentWave / numWavesPerFlag + num;
 		}
 
 		public bool HasProgressMeter()
 		{
-			return this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST || this.mApp.IsFinalBossLevel() || this.mApp.IsSlotMachineLevel() || this.mApp.IsSquirrelLevel() || this.mApp.IsIZombieLevel() || (this.mProgressMeterWidth != 0 && !this.mApp.IsContinuousChallenge() && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && this.mApp.mGameMode != GameMode.GAMEMODE_TREE_OF_WISDOM && !this.mApp.IsScaryPotterLevel());
+			return mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST || mApp.IsFinalBossLevel() || mApp.IsSlotMachineLevel() || mApp.IsSquirrelLevel() || mApp.IsIZombieLevel() || (mProgressMeterWidth != 0 && !mApp.IsContinuousChallenge() && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && mApp.mGameMode != GameMode.GAMEMODE_TREE_OF_WISDOM && !mApp.IsScaryPotterLevel());
 		}
 
 		public void UpdateCursor()
 		{
 			bool flag = false;
 			bool flag2 = false;
-			int num = this.mApp.mWidgetManager.mLastMouseX - this.mX;
-			int num2 = this.mApp.mWidgetManager.mLastMouseY - this.mY;
-			if (this.mApp.mSeedChooserScreen != null && this.mApp.mSeedChooserScreen.Contains(num + this.mX, num2 + this.mY))
+			int num = mApp.mWidgetManager.mLastMouseX - mX;
+			int num2 = mApp.mWidgetManager.mLastMouseY - mY;
+			if (mApp.mSeedChooserScreen != null && mApp.mSeedChooserScreen.Contains(num + mX, num2 + mY))
 			{
 				return;
 			}
-			if (this.mApp.GetDialogCount() > 0)
+			if (mApp.GetDialogCount() > 0)
 			{
 				return;
 			}
-			if (this.mPaused || this.mBoardFadeOutCounter >= 0 || this.mTimeStopCounter > 0 || this.mApp.mGameScene == GameScenes.SCENE_ZOMBIES_WON)
+			if (mPaused || mBoardFadeOutCounter >= 0 || mTimeStopCounter > 0 || mApp.mGameScene == GameScenes.SCENE_ZOMBIES_WON)
 			{
 				flag = false;
 			}
 			else
 			{
 				HitResult hitResult;
-				this.MouseHitTest(num, num2, out hitResult, false);
+				MouseHitTest(num, num2, out hitResult, false);
 				if (hitResult.mObjectType == GameObjectType.OBJECT_TYPE_MENU_BUTTON || hitResult.mObjectType == GameObjectType.OBJECT_TYPE_STORE_BUTTON || hitResult.mObjectType == GameObjectType.OBJECT_TYPE_SHOVEL || hitResult.mObjectType == GameObjectType.OBJECT_TYPE_WATERING_CAN || hitResult.mObjectType == GameObjectType.OBJECT_TYPE_FERTILIZER || hitResult.mObjectType == GameObjectType.OBJECT_TYPE_BUG_SPRAY || hitResult.mObjectType == GameObjectType.OBJECT_TYPE_PHONOGRAPH || hitResult.mObjectType == GameObjectType.OBJECT_TYPE_CHOCOLATE || hitResult.mObjectType == GameObjectType.OBJECT_TYPE_GLOVE || hitResult.mObjectType == GameObjectType.OBJECT_TYPE_MONEY_SIGN || hitResult.mObjectType == GameObjectType.OBJECT_TYPE_NEXT_GARDEN || hitResult.mObjectType == GameObjectType.OBJECT_TYPE_WHEELBARROW || hitResult.mObjectType == GameObjectType.OBJECT_TYPE_SLOT_MACHINE_HANDLE || hitResult.mObjectType == GameObjectType.OBJECT_TYPE_TREE_FOOD)
 				{
 					flag = true;
@@ -7677,7 +7677,7 @@ namespace Lawn
 						flag = true;
 					}
 				}
-				else if (hitResult.mObjectType == GameObjectType.OBJECT_TYPE_SCARY_POT && this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_NORMAL)
+				else if (hitResult.mObjectType == GameObjectType.OBJECT_TYPE_SCARY_POT && mCursorObject.mCursorType == CursorType.CURSOR_TYPE_NORMAL)
 				{
 					flag = true;
 				}
@@ -7695,24 +7695,24 @@ namespace Lawn
 				}
 				else if (hitResult.mObjectType == GameObjectType.OBJECT_TYPE_PLANT)
 				{
-					if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED && !this.HasLevelAwardDropped())
+					if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED && !HasLevelAwardDropped())
 					{
 						flag2 = true;
 					}
-					if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST && !this.HasLevelAwardDropped())
+					if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST && !HasLevelAwardDropped())
 					{
 						flag2 = true;
 					}
 					Plant plant = (Plant)hitResult.mObject;
-					if (plant.mState == PlantState.STATE_COBCANNON_READY && this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_NORMAL)
+					if (plant.mState == PlantState.STATE_COBCANNON_READY && mCursorObject.mCursorType == CursorType.CURSOR_TYPE_NORMAL)
 					{
 						flag = true;
 					}
 				}
-				else if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_HAMMER)
+				else if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_HAMMER)
 				{
 				}
-				if (this.mChallenge.mBeghouledMouseCapture)
+				if (mChallenge.mBeghouledMouseCapture)
 				{
 					flag2 = true;
 				}
@@ -7729,69 +7729,69 @@ namespace Lawn
 
 		public void UpdateTutorial()
 		{
-			if (this.mTutorialTimer > 0)
+			if (mTutorialTimer > 0)
 			{
-				this.mTutorialTimer--;
+				mTutorialTimer--;
 			}
-			if (this.mTutorialState == TutorialState.TUTORIAL_LEVEL_1_PICK_UP_PEASHOOTER && this.mTutorialTimer == 0)
+			if (mTutorialState == TutorialState.TUTORIAL_LEVEL_1_PICK_UP_PEASHOOTER && mTutorialTimer == 0)
 			{
-				this.DisplayAdvice("[ADVICE_CLICK_PEASHOOTER]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1_STAY, AdviceType.ADVICE_NONE);
-				float num = (float)(this.mSeedBank.mX + this.mSeedBank.mSeedPackets[0].mX);
+				DisplayAdvice("[ADVICE_CLICK_PEASHOOTER]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1_STAY, AdviceType.ADVICE_NONE);
+				float num = (float)(mSeedBank.mX + mSeedBank.mSeedPackets[0].mX);
 				float num2 = 0f;
-				this.TutorialArrowShow((int)(num + (float)(Constants.SMALL_SEEDPACKET_WIDTH / 2) - Constants.InvertAndScale(13f)), (int)num2);
-				this.mTutorialTimer = -1;
+				TutorialArrowShow((int)(num + (float)(Constants.SMALL_SEEDPACKET_WIDTH / 2) - Constants.InvertAndScale(13f)), (int)num2);
+				mTutorialTimer = -1;
 			}
-			if (this.mTutorialState == TutorialState.TUTORIAL_LEVEL_2_PICK_UP_SUNFLOWER || this.mTutorialState == TutorialState.TUTORIAL_LEVEL_2_PLANT_SUNFLOWER || this.mTutorialState == TutorialState.TUTORIAL_LEVEL_2_REFRESH_SUNFLOWER)
+			if (mTutorialState == TutorialState.TUTORIAL_LEVEL_2_PICK_UP_SUNFLOWER || mTutorialState == TutorialState.TUTORIAL_LEVEL_2_PLANT_SUNFLOWER || mTutorialState == TutorialState.TUTORIAL_LEVEL_2_REFRESH_SUNFLOWER)
 			{
-				if (this.mTutorialTimer == 0)
+				if (mTutorialTimer == 0)
 				{
-					this.DisplayAdvice("[ADVICE_PLANT_SUNFLOWER2]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL2, AdviceType.ADVICE_NONE);
-					this.mTutorialTimer = -1;
+					DisplayAdvice("[ADVICE_PLANT_SUNFLOWER2]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL2, AdviceType.ADVICE_NONE);
+					mTutorialTimer = -1;
 				}
-				else if (this.mZombieCountDown == 750 && this.mCurrentWave == 0)
+				else if (mZombieCountDown == 750 && mCurrentWave == 0)
 				{
-					this.DisplayAdvice("[ADVICE_PLANT_SUNFLOWER3]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL2, AdviceType.ADVICE_NONE);
+					DisplayAdvice("[ADVICE_PLANT_SUNFLOWER3]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL2, AdviceType.ADVICE_NONE);
 				}
 			}
-			if ((this.mTutorialState == TutorialState.TUTORIAL_MORESUN_PICK_UP_SUNFLOWER || this.mTutorialState == TutorialState.TUTORIAL_MORESUN_PLANT_SUNFLOWER || this.mTutorialState == TutorialState.TUTORIAL_MORESUN_REFRESH_SUNFLOWER) && this.mTutorialTimer == 0)
+			if ((mTutorialState == TutorialState.TUTORIAL_MORESUN_PICK_UP_SUNFLOWER || mTutorialState == TutorialState.TUTORIAL_MORESUN_PLANT_SUNFLOWER || mTutorialState == TutorialState.TUTORIAL_MORESUN_REFRESH_SUNFLOWER) && mTutorialTimer == 0)
 			{
-				this.DisplayAdvice("[ADVICE_PLANT_SUNFLOWER5]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LATER, AdviceType.ADVICE_PLANT_SUNFLOWER5);
-				this.mTutorialTimer = -1;
+				DisplayAdvice("[ADVICE_PLANT_SUNFLOWER5]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LATER, AdviceType.ADVICE_PLANT_SUNFLOWER5);
+				mTutorialTimer = -1;
 			}
-			if (this.mApp.IsFirstTimeAdventureMode() && this.mLevel >= 3 && this.mLevel != 5 && this.mLevel <= 7 && this.mTutorialState == TutorialState.TUTORIAL_OFF && this.mCurrentWave >= 5 && !Board.gShownMoreSunTutorial && this.mSeedBank.mSeedPackets[1].CanPickUp() && this.CountPlantByType(SeedType.SEED_SUNFLOWER) < 3)
+			if (mApp.IsFirstTimeAdventureMode() && mLevel >= 3 && mLevel != 5 && mLevel <= 7 && mTutorialState == TutorialState.TUTORIAL_OFF && mCurrentWave >= 5 && !Board.gShownMoreSunTutorial && mSeedBank.mSeedPackets[1].CanPickUp() && CountPlantByType(SeedType.SEED_SUNFLOWER) < 3)
 			{
-				Debug.ASSERT(!this.ChooseSeedsOnCurrentLevel());
-				this.DisplayAdvice("[ADVICE_PLANT_SUNFLOWER4]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LATER_STAY, AdviceType.ADVICE_NONE);
+				Debug.ASSERT(!ChooseSeedsOnCurrentLevel());
+				DisplayAdvice("[ADVICE_PLANT_SUNFLOWER4]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LATER_STAY, AdviceType.ADVICE_NONE);
 				GameConstants.gShownMoreSunTutorial = true;
-				this.SetTutorialState(TutorialState.TUTORIAL_MORESUN_PICK_UP_SUNFLOWER);
-				this.mTutorialTimer = 500;
+				SetTutorialState(TutorialState.TUTORIAL_MORESUN_PICK_UP_SUNFLOWER);
+				mTutorialTimer = 500;
 			}
 		}
 
 		public SeedType GetSeedTypeInCursor()
 		{
-			if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_WHEEELBARROW && this.mApp.mZenGarden.GetPottedPlantInWheelbarrow() != null)
+			if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_WHEEELBARROW && mApp.mZenGarden.GetPottedPlantInWheelbarrow() != null)
 			{
-				return this.mApp.mZenGarden.GetPottedPlantInWheelbarrow().mSeedType;
+				return mApp.mZenGarden.GetPottedPlantInWheelbarrow().mSeedType;
 			}
-			if (!this.IsPlantInCursor())
+			if (!IsPlantInCursor())
 			{
 				return SeedType.SEED_NONE;
 			}
-			if (this.mCursorObject.mType == SeedType.SEED_IMITATER)
+			if (mCursorObject.mType == SeedType.SEED_IMITATER)
 			{
-				return this.mCursorObject.mImitaterType;
+				return mCursorObject.mImitaterType;
 			}
-			return this.mCursorObject.mType;
+			return mCursorObject.mType;
 		}
 
 		public int CountPlantByType(SeedType theSeedType)
 		{
 			int num = 0;
-			int count = this.mPlants.Count;
+			int count = mPlants.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Plant plant = this.mPlants[i];
+				Plant plant = mPlants[i];
 				if (!plant.mDead && plant.mSeedType == theSeedType)
 				{
 					num++;
@@ -7802,16 +7802,16 @@ namespace Lawn
 
 		public bool PlantingRequirementsMet(SeedType theSeedType)
 		{
-			return (theSeedType != SeedType.SEED_GATLINGPEA || this.CountPlantByType(SeedType.SEED_REPEATER) != 0) && (theSeedType != SeedType.SEED_WINTERMELON || this.CountPlantByType(SeedType.SEED_MELONPULT) != 0) && (theSeedType != SeedType.SEED_TWINSUNFLOWER || this.CountPlantByType(SeedType.SEED_SUNFLOWER) != 0) && (theSeedType != SeedType.SEED_SPIKEROCK || this.CountPlantByType(SeedType.SEED_SPIKEWEED) != 0) && (theSeedType != SeedType.SEED_COBCANNON || this.HasValidCobCannonSpot()) && (theSeedType != SeedType.SEED_GOLD_MAGNET || this.CountPlantByType(SeedType.SEED_MAGNETSHROOM) != 0) && (theSeedType != SeedType.SEED_GLOOMSHROOM || this.CountPlantByType(SeedType.SEED_FUMESHROOM) != 0) && (theSeedType != SeedType.SEED_CATTAIL || this.CountEmptyPotsOrLilies(SeedType.SEED_LILYPAD) != 0);
+			return (theSeedType != SeedType.SEED_GATLINGPEA || CountPlantByType(SeedType.SEED_REPEATER) != 0) && (theSeedType != SeedType.SEED_WINTERMELON || CountPlantByType(SeedType.SEED_MELONPULT) != 0) && (theSeedType != SeedType.SEED_TWINSUNFLOWER || CountPlantByType(SeedType.SEED_SUNFLOWER) != 0) && (theSeedType != SeedType.SEED_SPIKEROCK || CountPlantByType(SeedType.SEED_SPIKEWEED) != 0) && (theSeedType != SeedType.SEED_COBCANNON || HasValidCobCannonSpot()) && (theSeedType != SeedType.SEED_GOLD_MAGNET || CountPlantByType(SeedType.SEED_MAGNETSHROOM) != 0) && (theSeedType != SeedType.SEED_GLOOMSHROOM || CountPlantByType(SeedType.SEED_FUMESHROOM) != 0) && (theSeedType != SeedType.SEED_CATTAIL || CountEmptyPotsOrLilies(SeedType.SEED_LILYPAD) != 0);
 		}
 
 		public bool HasValidCobCannonSpot()
 		{
-			int count = this.mPlants.Count;
+			int count = mPlants.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Plant plant = this.mPlants[i];
-				if (!plant.mDead && plant.mSeedType == SeedType.SEED_KERNELPULT && this.IsValidCobCannonSpot(plant.mPlantCol, plant.mRow))
+				Plant plant = mPlants[i];
+				if (!plant.mDead && plant.mSeedType == SeedType.SEED_KERNELPULT && IsValidCobCannonSpot(plant.mPlantCol, plant.mRow))
 				{
 					return true;
 				}
@@ -7821,75 +7821,75 @@ namespace Lawn
 
 		public bool IsValidCobCannonSpot(int theGridX, int theGridY)
 		{
-			if (!this.IsValidCobCannonSpotHelper(theGridX, theGridY) || !this.IsValidCobCannonSpotHelper(theGridX + 1, theGridY))
+			if (!IsValidCobCannonSpotHelper(theGridX, theGridY) || !IsValidCobCannonSpotHelper(theGridX + 1, theGridY))
 			{
 				return false;
 			}
-			bool flag = this.GetFlowerPotAt(theGridX, theGridY) != null;
-			bool flag2 = this.GetFlowerPotAt(theGridX + 1, theGridY) != null;
+			bool flag = GetFlowerPotAt(theGridX, theGridY) != null;
+			bool flag2 = GetFlowerPotAt(theGridX + 1, theGridY) != null;
 			return flag == flag2;
 		}
 
 		public bool IsValidCobCannonSpotHelper(int theGridX, int theGridY)
 		{
 			PlantsOnLawn plantsOnLawn = default(PlantsOnLawn);
-			this.GetPlantsOnLawn(theGridX, theGridY, ref plantsOnLawn);
+			GetPlantsOnLawn(theGridX, theGridY, ref plantsOnLawn);
 			if (plantsOnLawn.mPumpkinPlant != null)
 			{
 				return false;
 			}
-			if (!this.mApp.mEasyPlantingCheat)
+			if (!mApp.mEasyPlantingCheat)
 			{
 				return plantsOnLawn.mNormalPlant != null && plantsOnLawn.mNormalPlant.mSeedType == SeedType.SEED_KERNELPULT;
 			}
-			return (plantsOnLawn.mNormalPlant != null && plantsOnLawn.mNormalPlant.mSeedType == SeedType.SEED_KERNELPULT) || this.CanPlantAt(theGridX, theGridY, SeedType.SEED_KERNELPULT) == PlantingReason.PLANTING_OK;
+			return (plantsOnLawn.mNormalPlant != null && plantsOnLawn.mNormalPlant.mSeedType == SeedType.SEED_KERNELPULT) || CanPlantAt(theGridX, theGridY, SeedType.SEED_KERNELPULT) == PlantingReason.PLANTING_OK;
 		}
 
 		public void MouseDownCobcannonFire(int x, int y, int theClickCount)
 		{
-			float num = TodCommon.Distance2D((float)x, (float)y, (float)this.mCobCannonMouseX, (float)this.mCobCannonMouseY);
+			float num = TodCommon.Distance2D((float)x, (float)y, (float)mCobCannonMouseX, (float)mCobCannonMouseY);
 			x = (int)((float)x * Constants.IS);
 			y = (int)((float)y * Constants.IS);
 			if (theClickCount < 0)
 			{
-				this.ClearCursor();
+				ClearCursor();
 				return;
 			}
 			if (y < Constants.LAWN_YMIN)
 			{
-				this.ClearCursor();
+				ClearCursor();
 				return;
 			}
-			if (this.mCobCannonCursorDelayCounter > 0 && num < 50f)
+			if (mCobCannonCursorDelayCounter > 0 && num < 50f)
 			{
 				return;
 			}
-			if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_DUPLICATOR)
+			if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_DUPLICATOR)
 			{
-				this.ClearCursor();
+				ClearCursor();
 				return;
 			}
 			Plant plant = null;
-			if (this.mCursorObject.mCobCannonPlantID != null && this.mPlants.IndexOf(this.mCursorObject.mCobCannonPlantID) >= 0)
+			if (mCursorObject.mCobCannonPlantID != null && mPlants.IndexOf(mCursorObject.mCobCannonPlantID) >= 0)
 			{
-				plant = this.mCursorObject.mCobCannonPlantID;
+				plant = mCursorObject.mCobCannonPlantID;
 			}
 			if (plant == null)
 			{
-				this.ClearCursor();
+				ClearCursor();
 				return;
 			}
 			plant.CobCannonFire(x, y);
-			this.ClearCursor();
+			ClearCursor();
 		}
 
 		public int KillAllZombiesInRadius(int theRow, int theX, int theY, int theRadius, int theRowRange, bool theBurn, int theDamageRangeFlags)
 		{
 			int num = 0;
-			int count = this.mZombies.Count;
+			int count = mZombies.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Zombie zombie = this.mZombies[i];
+				Zombie zombie = mZombies[i];
 				if (!zombie.mDead && zombie.EffectedByDamage((uint)theDamageRangeFlags))
 				{
 					TRect zombieRect = zombie.GetZombieRect();
@@ -7916,11 +7916,11 @@ namespace Lawn
 					}
 				}
 			}
-			int num3 = this.PixelToGridXKeepOnBoard(theX, theY);
-			int num4 = this.PixelToGridYKeepOnBoard(theX, theY);
+			int num3 = PixelToGridXKeepOnBoard(theX, theY);
+			int num4 = PixelToGridYKeepOnBoard(theX, theY);
 			int num5 = -1;
 			GridItem gridItem = null;
-			while (this.IterateGridItems(ref gridItem, ref num5))
+			while (IterateGridItems(ref gridItem, ref num5))
 			{
 				if (gridItem.mGridItemType == GridItemType.GRIDITEM_LADDER)
 				{
@@ -7937,27 +7937,27 @@ namespace Lawn
 
 		public bool IsFlagWave(int theWaveNumber)
 		{
-			if (this.mApp.IsFirstTimeAdventureMode() && this.mLevel == 1)
+			if (mApp.IsFirstTimeAdventureMode() && mLevel == 1)
 			{
 				return false;
 			}
-			int numWavesPerFlag = this.GetNumWavesPerFlag();
+			int numWavesPerFlag = GetNumWavesPerFlag();
 			return theWaveNumber % numWavesPerFlag == numWavesPerFlag - 1;
 		}
 
 		public void DrawHouseDoorTop(Graphics g)
 		{
-			if (this.mBackground == BackgroundType.BACKGROUND_1_DAY)
+			if (mBackground == BackgroundType.BACKGROUND_1_DAY)
 			{
 				g.DrawImage(Resources.IMAGE_BACKGROUND1_GAMEOVER_MASK, Constants.Board_GameOver_Exterior_Overlay_1.X, Constants.Board_GameOver_Exterior_Overlay_1.Y);
 				return;
 			}
-			if (this.mBackground == BackgroundType.BACKGROUND_2_NIGHT)
+			if (mBackground == BackgroundType.BACKGROUND_2_NIGHT)
 			{
 				g.DrawImage(Resources.IMAGE_BACKGROUND2_GAMEOVER_MASK, Constants.Board_GameOver_Exterior_Overlay_2.X, Constants.Board_GameOver_Exterior_Overlay_2.Y);
 				return;
 			}
-			if (this.mBackground == BackgroundType.BACKGROUND_3_POOL)
+			if (mBackground == BackgroundType.BACKGROUND_3_POOL)
 			{
 				if (Zombie.WinningZombieReachedDesiredY)
 				{
@@ -7967,12 +7967,12 @@ namespace Lawn
 			}
 			else
 			{
-				if (this.mBackground == BackgroundType.BACKGROUND_4_FOG)
+				if (mBackground == BackgroundType.BACKGROUND_4_FOG)
 				{
 					g.DrawImage(Resources.IMAGE_BACKGROUND4_GAMEOVER_MASK, Constants.Board_GameOver_Exterior_Overlay_4.X, Constants.Board_GameOver_Exterior_Overlay_4.Y);
 					return;
 				}
-				if (this.mBackground == BackgroundType.BACKGROUND_5_ROOF)
+				if (mBackground == BackgroundType.BACKGROUND_5_ROOF)
 				{
 					if (Zombie.WinningZombieReachedDesiredY)
 					{
@@ -7980,7 +7980,7 @@ namespace Lawn
 						return;
 					}
 				}
-				else if (this.mBackground == BackgroundType.BACKGROUND_6_BOSS && Zombie.WinningZombieReachedDesiredY)
+				else if (mBackground == BackgroundType.BACKGROUND_6_BOSS && Zombie.WinningZombieReachedDesiredY)
 				{
 					g.DrawImage(Resources.IMAGE_BACKGROUND6_GAMEOVER_MASK, Constants.Board_GameOver_Exterior_Overlay_6.X, Constants.Board_GameOver_Exterior_Overlay_6.Y);
 				}
@@ -7989,22 +7989,22 @@ namespace Lawn
 
 		public void DrawHouseDoorBottom(Graphics g)
 		{
-			if (this.mBackground == BackgroundType.BACKGROUND_1_DAY)
+			if (mBackground == BackgroundType.BACKGROUND_1_DAY)
 			{
 				g.DrawImage(Resources.IMAGE_BACKGROUND1_GAMEOVER_INTERIOR_OVERLAY, Constants.Board_GameOver_Interior_Overlay_1.X, Constants.Board_GameOver_Interior_Overlay_1.Y);
 				return;
 			}
-			if (this.mBackground == BackgroundType.BACKGROUND_2_NIGHT)
+			if (mBackground == BackgroundType.BACKGROUND_2_NIGHT)
 			{
 				g.DrawImage(Resources.IMAGE_BACKGROUND2_GAMEOVER_INTERIOR_OVERLAY, Constants.Board_GameOver_Interior_Overlay_2.X, Constants.Board_GameOver_Interior_Overlay_2.Y);
 				return;
 			}
-			if (this.mBackground == BackgroundType.BACKGROUND_3_POOL)
+			if (mBackground == BackgroundType.BACKGROUND_3_POOL)
 			{
 				g.DrawImage(Resources.IMAGE_BACKGROUND3_GAMEOVER_INTERIOR_OVERLAY, Constants.Board_GameOver_Interior_Overlay_3.X, Constants.Board_GameOver_Interior_Overlay_3.Y);
 				return;
 			}
-			if (this.mBackground == BackgroundType.BACKGROUND_4_FOG)
+			if (mBackground == BackgroundType.BACKGROUND_4_FOG)
 			{
 				g.DrawImage(Resources.IMAGE_BACKGROUND4_GAMEOVER_INTERIOR_OVERLAY, Constants.Board_GameOver_Interior_Overlay_4.X, Constants.Board_GameOver_Interior_Overlay_4.Y);
 			}
@@ -8012,10 +8012,10 @@ namespace Lawn
 
 		public Zombie GetBossZombie()
 		{
-			int count = this.mZombies.Count;
+			int count = mZombies.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Zombie zombie = this.mZombies[i];
+				Zombie zombie = mZombies[i];
 				if (!zombie.mDead && zombie.mZombieType == ZombieType.ZOMBIE_BOSS)
 				{
 					return zombie;
@@ -8026,28 +8026,28 @@ namespace Lawn
 
 		public bool HasConveyorBeltSeedBank()
 		{
-			return this.mApp.IsFinalBossLevel() || this.mApp.IsMiniBossLevel() || this.mApp.IsShovelLevel() || this.mApp.IsWallnutBowlingLevel() || this.mApp.IsLittleTroubleLevel() || this.mApp.IsStormyNightLevel() || this.mApp.IsBungeeBlitzLevel() || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_PORTAL_COMBAT || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_COLUMN || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_INVISIGHOUL;
+			return mApp.IsFinalBossLevel() || mApp.IsMiniBossLevel() || mApp.IsShovelLevel() || mApp.IsWallnutBowlingLevel() || mApp.IsLittleTroubleLevel() || mApp.IsStormyNightLevel() || mApp.IsBungeeBlitzLevel() || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_PORTAL_COMBAT || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_COLUMN || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_INVISIGHOUL;
 		}
 
 		public bool StageHasRoof()
 		{
-			return this.mBackground == BackgroundType.BACKGROUND_5_ROOF || this.mBackground == BackgroundType.BACKGROUND_6_BOSS;
+			return mBackground == BackgroundType.BACKGROUND_5_ROOF || mBackground == BackgroundType.BACKGROUND_6_BOSS;
 		}
 
 		public void SpawnZombiesFromPool()
 		{
-			if (this.mIceTrapCounter > 0)
+			if (mIceTrapCounter > 0)
 			{
 				return;
 			}
 			int num;
 			int num2;
-			if (this.mLevel == 21 || this.mLevel == 22 || this.mLevel == 31 || this.mLevel == 32)
+			if (mLevel == 21 || mLevel == 22 || mLevel == 31 || mLevel == 32)
 			{
 				num = 2;
 				num2 = 3;
 			}
-			else if (this.mLevel == 23 || this.mLevel == 24 || this.mLevel == 25 || this.mLevel == 33 || this.mLevel == 34 || this.mLevel == 35)
+			else if (mLevel == 23 || mLevel == 24 || mLevel == 25 || mLevel == 33 || mLevel == 34 || mLevel == 35)
 			{
 				num = 3;
 				num2 = 5;
@@ -8085,9 +8085,9 @@ namespace Lawn
 			{
 				TodWeightedGridArray todWeightedGridArray = TodCommon.TodPickFromWeightedGridArray(Board.aGridArray, num3);
 				todWeightedGridArray.mWeight = 0;
-				ZombieType theZombieType = this.PickGraveRisingZombieType(num2);
+				ZombieType theZombieType = PickGraveRisingZombieType(num2);
 				ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(theZombieType);
-				Zombie zombie = this.AddZombieInRow(theZombieType, todWeightedGridArray.mY, this.mCurrentWave);
+				Zombie zombie = AddZombieInRow(theZombieType, todWeightedGridArray.mY, mCurrentWave);
 				if (zombie == null)
 				{
 					return;
@@ -8101,18 +8101,18 @@ namespace Lawn
 
 		public void SpawnZombiesFromSky()
 		{
-			if (this.mIceTrapCounter > 0)
+			if (mIceTrapCounter > 0)
 			{
 				return;
 			}
 			int num;
 			int num2;
-			if (this.mLevel == 41 || this.mLevel == 42)
+			if (mLevel == 41 || mLevel == 42)
 			{
 				num = 2;
 				num2 = 3;
 			}
-			else if (this.mLevel == 43 || this.mLevel == 44 || this.mLevel == 45)
+			else if (mLevel == 43 || mLevel == 44 || mLevel == 45)
 			{
 				num = 3;
 				num2 = 5;
@@ -8123,7 +8123,7 @@ namespace Lawn
 				num2 = 7;
 			}
 			BungeeDropGrid bungeeDropGrid = new BungeeDropGrid();
-			this.SetupBungeeDrop(bungeeDropGrid);
+			SetupBungeeDrop(bungeeDropGrid);
 			if (num > bungeeDropGrid.mGridArrayCount)
 			{
 				num = bungeeDropGrid.mGridArrayCount;
@@ -8134,8 +8134,8 @@ namespace Lawn
 			}
 			for (int i = 0; i < num; i++)
 			{
-				ZombieType theZombieType = this.PickGraveRisingZombieType(num2);
-				this.BungeeDropZombie(bungeeDropGrid, theZombieType);
+				ZombieType theZombieType = PickGraveRisingZombieType(num2);
+				BungeeDropZombie(bungeeDropGrid, theZombieType);
 				ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(theZombieType);
 				num2 -= zombieDefinition.mZombieValue;
 				num2 = Math.Max(1, num2);
@@ -8144,112 +8144,112 @@ namespace Lawn
 
 		public void PickUpTool(GameObjectType theObjectType)
 		{
-			if (this.mPaused)
+			if (mPaused)
 			{
 				return;
 			}
-			if (this.mApp.mGameScene != GameScenes.SCENE_PLAYING && !this.mCutScene.IsInShovelTutorial())
+			if (mApp.mGameScene != GameScenes.SCENE_PLAYING && !mCutScene.IsInShovelTutorial())
 			{
 				return;
 			}
 			if (theObjectType == GameObjectType.OBJECT_TYPE_SHOVEL)
 			{
-				if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_SHOVEL)
+				if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_SHOVEL)
 				{
-					this.ClearCursor();
+					ClearCursor();
 					return;
 				}
-				if (this.mTutorialState == TutorialState.TUTORIAL_SHOVEL_PICKUP)
+				if (mTutorialState == TutorialState.TUTORIAL_SHOVEL_PICKUP)
 				{
-					this.SetTutorialState(TutorialState.TUTORIAL_SHOVEL_DIG);
+					SetTutorialState(TutorialState.TUTORIAL_SHOVEL_DIG);
 				}
-				this.mCursorObject.mCursorType = CursorType.CURSOR_TYPE_SHOVEL;
-				this.mApp.PlayFoley(FoleyType.FOLEY_SHOVEL);
+				mCursorObject.mCursorType = CursorType.CURSOR_TYPE_SHOVEL;
+				mApp.PlayFoley(FoleyType.FOLEY_SHOVEL);
 			}
 			else if (theObjectType == GameObjectType.OBJECT_TYPE_WATERING_CAN)
 			{
-				if (this.mTutorialState == TutorialState.TUTORIAL_ZEN_GARDEN_PICKUP_WATER)
+				if (mTutorialState == TutorialState.TUTORIAL_ZEN_GARDEN_PICKUP_WATER)
 				{
-					this.mTutorialState = TutorialState.TUTORIAL_ZEN_GARDEN_WATER_PLANT;
-					this.mApp.mPlayerInfo.mZenTutorialMessage = 23;
-					this.DisplayAdvice("[ADVICE_ZEN_GARDEN_WATER_PLANT]", MessageStyle.MESSAGE_STYLE_ZEN_GARDEN_LONG, AdviceType.ADVICE_NONE);
-					this.TutorialArrowRemove();
+					mTutorialState = TutorialState.TUTORIAL_ZEN_GARDEN_WATER_PLANT;
+					mApp.mPlayerInfo.mZenTutorialMessage = 23;
+					DisplayAdvice("[ADVICE_ZEN_GARDEN_WATER_PLANT]", MessageStyle.MESSAGE_STYLE_ZEN_GARDEN_LONG, AdviceType.ADVICE_NONE);
+					TutorialArrowRemove();
 				}
-				this.mCursorObject.mCursorType = CursorType.CURSOR_TYPE_WATERING_CAN;
-				if (this.mApp.mPlayerInfo.mPurchases[13] > 0)
+				mCursorObject.mCursorType = CursorType.CURSOR_TYPE_WATERING_CAN;
+				if (mApp.mPlayerInfo.mPurchases[13] > 0)
 				{
-					this.mIgnoreNextMouseUp = true;
+					mIgnoreNextMouseUp = true;
 				}
-				this.mApp.PlayFoley(FoleyType.FOLEY_DROP);
+				mApp.PlayFoley(FoleyType.FOLEY_DROP);
 			}
 			else if (theObjectType == GameObjectType.OBJECT_TYPE_FERTILIZER)
 			{
-				if (this.mApp.mPlayerInfo.mPurchases[14] > 1000)
+				if (mApp.mPlayerInfo.mPurchases[14] > 1000)
 				{
-					this.mCursorObject.mCursorType = CursorType.CURSOR_TYPE_FERTILIZER;
-					this.mApp.PlayFoley(FoleyType.FOLEY_DROP);
+					mCursorObject.mCursorType = CursorType.CURSOR_TYPE_FERTILIZER;
+					mApp.PlayFoley(FoleyType.FOLEY_DROP);
 				}
 				else
 				{
-					this.mApp.PlaySample(Resources.SOUND_BUZZER);
+					mApp.PlaySample(Resources.SOUND_BUZZER);
 				}
 			}
 			else if (theObjectType == GameObjectType.OBJECT_TYPE_BUG_SPRAY)
 			{
-				if (this.mApp.mPlayerInfo.mPurchases[15] > 1000)
+				if (mApp.mPlayerInfo.mPurchases[15] > 1000)
 				{
-					this.mCursorObject.mCursorType = CursorType.CURSOR_TYPE_BUG_SPRAY;
-					this.mApp.PlayFoley(FoleyType.FOLEY_DROP);
+					mCursorObject.mCursorType = CursorType.CURSOR_TYPE_BUG_SPRAY;
+					mApp.PlayFoley(FoleyType.FOLEY_DROP);
 				}
 				else
 				{
-					this.mApp.PlaySample(Resources.SOUND_BUZZER);
+					mApp.PlaySample(Resources.SOUND_BUZZER);
 				}
 			}
 			else if (theObjectType == GameObjectType.OBJECT_TYPE_PHONOGRAPH)
 			{
-				this.mCursorObject.mCursorType = CursorType.CURSOR_TYPE_PHONOGRAPH;
-				this.mApp.PlayFoley(FoleyType.FOLEY_DROP);
+				mCursorObject.mCursorType = CursorType.CURSOR_TYPE_PHONOGRAPH;
+				mApp.PlayFoley(FoleyType.FOLEY_DROP);
 			}
 			else if (theObjectType == GameObjectType.OBJECT_TYPE_CHOCOLATE)
 			{
-				if (this.mApp.mPlayerInfo.mPurchases[26] > 1000)
+				if (mApp.mPlayerInfo.mPurchases[26] > 1000)
 				{
-					this.mCursorObject.mCursorType = CursorType.CURSOR_TYPE_CHOCOLATE;
-					this.mApp.PlayFoley(FoleyType.FOLEY_DROP);
+					mCursorObject.mCursorType = CursorType.CURSOR_TYPE_CHOCOLATE;
+					mApp.PlayFoley(FoleyType.FOLEY_DROP);
 				}
 				else
 				{
-					this.mApp.PlaySample(Resources.SOUND_BUZZER);
+					mApp.PlaySample(Resources.SOUND_BUZZER);
 				}
 			}
 			else if (theObjectType == GameObjectType.OBJECT_TYPE_GLOVE)
 			{
-				this.mCursorObject.mCursorType = CursorType.CURSOR_TYPE_GLOVE;
-				this.mApp.PlayFoley(FoleyType.FOLEY_DROP);
+				mCursorObject.mCursorType = CursorType.CURSOR_TYPE_GLOVE;
+				mApp.PlayFoley(FoleyType.FOLEY_DROP);
 			}
 			else if (theObjectType == GameObjectType.OBJECT_TYPE_MONEY_SIGN)
 			{
-				this.mCursorObject.mCursorType = CursorType.CURSOR_TYPE_MONEY_SIGN;
-				this.mApp.PlayFoley(FoleyType.FOLEY_DROP);
+				mCursorObject.mCursorType = CursorType.CURSOR_TYPE_MONEY_SIGN;
+				mApp.PlayFoley(FoleyType.FOLEY_DROP);
 			}
 			else if (theObjectType == GameObjectType.OBJECT_TYPE_WHEELBARROW)
 			{
-				this.mCursorObject.mCursorType = CursorType.CURSOR_TYPE_WHEEELBARROW;
-				this.mApp.PlayFoley(FoleyType.FOLEY_DROP);
+				mCursorObject.mCursorType = CursorType.CURSOR_TYPE_WHEEELBARROW;
+				mApp.PlayFoley(FoleyType.FOLEY_DROP);
 			}
 			else if (theObjectType == GameObjectType.OBJECT_TYPE_TREE_FOOD)
 			{
-				if (this.mChallenge.TreeOfWisdomCanFeed())
+				if (mChallenge.TreeOfWisdomCanFeed())
 				{
-					if (this.mApp.mPlayerInfo.mPurchases[28] > 1000)
+					if (mApp.mPlayerInfo.mPurchases[28] > 1000)
 					{
-						this.mCursorObject.mCursorType = CursorType.CURSOR_TYPE_TREE_FOOD;
-						this.mApp.PlayFoley(FoleyType.FOLEY_DROP);
+						mCursorObject.mCursorType = CursorType.CURSOR_TYPE_TREE_FOOD;
+						mApp.PlayFoley(FoleyType.FOLEY_DROP);
 					}
 					else
 					{
-						this.mApp.PlaySample(Resources.SOUND_BUZZER);
+						mApp.PlaySample(Resources.SOUND_BUZZER);
 					}
 				}
 			}
@@ -8257,31 +8257,31 @@ namespace Lawn
 			{
 				Debug.ASSERT(false);
 			}
-			this.mCursorObject.mType = SeedType.SEED_NONE;
+			mCursorObject.mType = SeedType.SEED_NONE;
 		}
 
 		public void TutorialArrowShow(int x, int y)
 		{
-			this.TutorialArrowRemove();
-			TodParticleSystem theParticle = this.mApp.AddTodParticle((float)(x - Constants.Board_Offset_AspectRatio_Correction) * Constants.IS, (float)y * Constants.IS, 800000, ParticleEffect.PARTICLE_SEED_PACKET_PICK);
-			this.mTutorialParticleID = this.mApp.ParticleGetID(theParticle);
+			TutorialArrowRemove();
+			TodParticleSystem theParticle = mApp.AddTodParticle((float)(x - Constants.Board_Offset_AspectRatio_Correction) * Constants.IS, (float)y * Constants.IS, 800000, ParticleEffect.PARTICLE_SEED_PACKET_PICK);
+			mTutorialParticleID = mApp.ParticleGetID(theParticle);
 		}
 
 		public void TutorialArrowRemove()
 		{
-			TodParticleSystem todParticleSystem = this.mApp.ParticleTryToGet(this.mTutorialParticleID);
+			TodParticleSystem todParticleSystem = mApp.ParticleTryToGet(mTutorialParticleID);
 			if (todParticleSystem != null)
 			{
 				todParticleSystem.ParticleSystemDie();
 			}
-			this.mTutorialParticleID = null;
+			mTutorialParticleID = null;
 		}
 
 		public int CountCoinsBeingCollected()
 		{
 			int num = 0;
 			Coin coin = null;
-			while (this.IterateCoins(ref coin))
+			while (IterateCoins(ref coin))
 			{
 				if (coin.mIsBeingCollected && coin.IsMoney())
 				{
@@ -8295,8 +8295,8 @@ namespace Lawn
 		{
 			TodWeightedGridArray todWeightedGridArray = TodCommon.TodPickFromWeightedGridArray(theBungeeDropGrid.mGridArray, theBungeeDropGrid.mGridArrayCount);
 			todWeightedGridArray.mWeight = 1;
-			Zombie zombie = this.AddZombie(ZombieType.ZOMBIE_BUNGEE, this.mCurrentWave);
-			Zombie zombie2 = this.AddZombie(theZombieType, this.mCurrentWave);
+			Zombie zombie = AddZombie(ZombieType.ZOMBIE_BUNGEE, mCurrentWave);
+			Zombie zombie2 = AddZombie(theZombieType, mCurrentWave);
 			Debug.ASSERT(zombie != null && zombie2 != null);
 			zombie.BungeeDropZombie(zombie2, todWeightedGridArray.mX, todWeightedGridArray.mY);
 		}
@@ -8308,10 +8308,10 @@ namespace Lawn
 			{
 				for (int j = 0; j <= 4; j++)
 				{
-					int mGridArrayCount = theBungeeDropGrid.mGridArrayCount;
-					theBungeeDropGrid.mGridArray[mGridArrayCount].mX = i;
-					theBungeeDropGrid.mGridArray[mGridArrayCount].mY = j;
-					theBungeeDropGrid.mGridArray[mGridArrayCount].mWeight = 10000;
+					int aGridArrayCount = theBungeeDropGrid.mGridArrayCount;
+					theBungeeDropGrid.mGridArray[aGridArrayCount].mX = i;
+					theBungeeDropGrid.mGridArray[aGridArrayCount].mY = j;
+					theBungeeDropGrid.mGridArray[aGridArrayCount].mWeight = 10000;
 					theBungeeDropGrid.mGridArrayCount++;
 					Debug.ASSERT(theBungeeDropGrid.mGridArrayCount <= theBungeeDropGrid.mGridArray.Length);
 				}
@@ -8321,11 +8321,11 @@ namespace Lawn
 		public void PutZombieInWave(ZombieType theZombieType, int theWaveNumber, ZombiePicker theZombiePicker)
 		{
 			Debug.ASSERT(theWaveNumber < 100 && theZombiePicker.mZombieCount < 50);
-			this.mZombiesInWave[theWaveNumber, theZombiePicker.mZombieCount] = theZombieType;
+			mZombiesInWave[theWaveNumber, theZombiePicker.mZombieCount] = theZombieType;
 			theZombiePicker.mZombieCount++;
 			if (theZombiePicker.mZombieCount < 50)
 			{
-				this.mZombiesInWave[theWaveNumber, theZombiePicker.mZombieCount] = ZombieType.ZOMBIE_INVALID;
+				mZombiesInWave[theWaveNumber, theZombiePicker.mZombieCount] = ZombieType.ZOMBIE_INVALID;
 			}
 			ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(theZombieType);
 			theZombiePicker.mZombiePoints -= zombieDefinition.mZombieValue;
@@ -8338,9 +8338,9 @@ namespace Lawn
 			for (int i = 0; i < 33; i++)
 			{
 				ZombieType zombieType = (ZombieType)i;
-				if (theZombiePicker.mZombieTypeCount[(int)zombieType] <= 0 && zombieType != ZombieType.ZOMBIE_YETI && Board.CanZombieSpawnOnLevel(zombieType, this.mLevel))
+				if (theZombiePicker.mZombieTypeCount[(int)zombieType] <= 0 && zombieType != ZombieType.ZOMBIE_YETI && Board.CanZombieSpawnOnLevel(zombieType, mLevel))
 				{
-					this.PutZombieInWave(zombieType, theWaveNumber, theZombiePicker);
+					PutZombieInWave(zombieType, theWaveNumber, theZombiePicker);
 				}
 			}
 		}
@@ -8348,7 +8348,7 @@ namespace Lawn
 		public TRect GetShovelButtonRect()
 		{
 			TRect result = new TRect(Constants.UIShovelButtonPosition.X - Constants.Board_Offset_AspectRatio_Correction, Constants.UIShovelButtonPosition.Y, AtlasResources.IMAGE_SHOVELBANK.mWidth, AtlasResources.IMAGE_SHOVELBANK.mHeight);
-			if (this.mApp.IsSquirrelLevel())
+			if (mApp.IsSquirrelLevel())
 			{
 				result.mX = 600;
 			}
@@ -8358,7 +8358,7 @@ namespace Lawn
 		public TRect GetZenShovelButtonRect()
 		{
 			TRect result = new TRect(Constants.ZenGardenTopButtonStart, Constants.UIShovelButtonPosition.Y, AtlasResources.IMAGE_SHOVELBANK_ZEN.mWidth, AtlasResources.IMAGE_SHOVELBANK_ZEN.mHeight);
-			if (this.mApp.IsSlotMachineLevel() || this.mApp.IsSquirrelLevel())
+			if (mApp.IsSlotMachineLevel() || mApp.IsSquirrelLevel())
 			{
 				result.mX = 600;
 			}
@@ -8367,7 +8367,7 @@ namespace Lawn
 
 		public TRect GetZenButtonRect(GameObjectType theObjectType)
 		{
-			TRect zenShovelButtonRect = this.GetZenShovelButtonRect();
+			TRect zenShovelButtonRect = GetZenShovelButtonRect();
 			if (theObjectType == GameObjectType.OBJECT_TYPE_NEXT_GARDEN)
 			{
 				zenShovelButtonRect.mX = Constants.ZenGarden_NextGarden_Pos.X;
@@ -8377,7 +8377,7 @@ namespace Lawn
 			for (int i = 6; i <= 15; i++)
 			{
 				GameObjectType gameObjectType = (GameObjectType)i;
-				if (gameObjectType != GameObjectType.OBJECT_TYPE_TREE_FOOD && !this.CanUseGameObject(gameObjectType))
+				if (gameObjectType != GameObjectType.OBJECT_TYPE_TREE_FOOD && !CanUseGameObject(gameObjectType))
 				{
 					flag = false;
 				}
@@ -8389,7 +8389,7 @@ namespace Lawn
 			for (int j = 6; j < (int)theObjectType; j++)
 			{
 				GameObjectType theGameObject = (GameObjectType)j;
-				if (this.CanUseGameObject(theGameObject))
+				if (CanUseGameObject(theGameObject))
 				{
 					zenShovelButtonRect.mX += AtlasResources.IMAGE_SHOVELBANK_ZEN.GetWidth();
 				}
@@ -8402,14 +8402,14 @@ namespace Lawn
 			Plant newPlant = Plant.GetNewPlant();
 			newPlant.mIsOnBoard = true;
 			newPlant.PlantInitialize(theGridX, theGridY, theSeedType, theImitaterType);
-			this.mPlants.Add(newPlant);
+			mPlants.Add(newPlant);
 			return newPlant;
 		}
 
 		public void DoPlantingEffects(int theGridX, int theGridY, Plant thePlant, bool forAquarium)
 		{
-			int num = this.GridToPixelX(theGridX, theGridY) + 41;
-			int num2 = this.GridToPixelY(theGridX, theGridY) + 74;
+			int num = GridToPixelX(theGridX, theGridY) + 41;
+			int num2 = GridToPixelY(theGridX, theGridY) + 74;
 			if (thePlant != null)
 			{
 				if (thePlant.mSeedType == SeedType.SEED_LILYPAD)
@@ -8423,21 +8423,21 @@ namespace Lawn
 			}
 			if (Plant.IsFlying(thePlant.mSeedType))
 			{
-				this.mApp.PlayFoley(FoleyType.FOLEY_PLANT);
+				mApp.PlayFoley(FoleyType.FOLEY_PLANT);
 				return;
 			}
-			if (forAquarium || this.IsPoolSquare(theGridX, theGridY))
+			if (forAquarium || IsPoolSquare(theGridX, theGridY))
 			{
-				this.mApp.PlayFoley(FoleyType.FOLEY_PLANT_WATER);
+				mApp.PlayFoley(FoleyType.FOLEY_PLANT_WATER);
 				if (forAquarium)
 				{
 					num2 -= 30;
 				}
-				this.mApp.AddTodParticle((float)num, (float)num2, 400000, ParticleEffect.PARTICLE_PLANTING_POOL);
+				mApp.AddTodParticle((float)num, (float)num2, 400000, ParticleEffect.PARTICLE_PLANTING_POOL);
 				return;
 			}
-			this.mApp.PlayFoley(FoleyType.FOLEY_PLANT);
-			this.mApp.AddTodParticle((float)num, (float)num2, 400000, ParticleEffect.PARTICLE_PLANTING);
+			mApp.PlayFoley(FoleyType.FOLEY_PLANT);
+			mApp.AddTodParticle((float)num, (float)num2, 400000, ParticleEffect.PARTICLE_PLANTING);
 		}
 
 		public bool IsFinalSurvivalStage()
@@ -8447,26 +8447,26 @@ namespace Lawn
 
 		public void SurvivalSaveScore()
 		{
-			if (!this.mApp.IsSurvivalMode())
+			if (!mApp.IsSurvivalMode())
 			{
 				return;
 			}
-			int survivalFlagsCompleted = this.GetSurvivalFlagsCompleted();
-			int currentChallengeIndex = this.mApp.GetCurrentChallengeIndex();
-			if (survivalFlagsCompleted > this.mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex])
+			int survivalFlagsCompleted = GetSurvivalFlagsCompleted();
+			int currentChallengeIndex = mApp.GetCurrentChallengeIndex();
+			if (survivalFlagsCompleted > mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex])
 			{
-				this.mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex] = survivalFlagsCompleted;
-				this.mApp.WriteCurrentUserConfig();
+				mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex] = survivalFlagsCompleted;
+				mApp.WriteCurrentUserConfig();
 			}
 		}
 
 		public int CountZombiesOnScreen()
 		{
 			int num = 0;
-			int count = this.mZombies.Count;
+			int count = mZombies.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Zombie zombie = this.mZombies[i];
+				Zombie zombie = mZombies[i];
 				if (!zombie.mDead && zombie.mHasHead && !zombie.IsDeadOrDying() && !zombie.mMindControlled && zombie.IsOnBoard())
 				{
 					num++;
@@ -8477,19 +8477,19 @@ namespace Lawn
 
 		public int GetNumWavesPerSurvivalStage()
 		{
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
 			{
 				return 10;
 			}
-			if (this.mApp.IsSurvivalNormal(this.mApp.mGameMode))
+			if (mApp.IsSurvivalNormal(mApp.mGameMode))
 			{
 				return 10;
 			}
-			if (this.mApp.IsSurvivalHard(this.mApp.mGameMode))
+			if (mApp.IsSurvivalHard(mApp.mGameMode))
 			{
 				return 20;
 			}
-			if (this.mApp.IsSurvivalEndless(this.mApp.mGameMode))
+			if (mApp.IsSurvivalEndless(mApp.mGameMode))
 			{
 				return 20;
 			}
@@ -8500,19 +8500,19 @@ namespace Lawn
 		public int GetLevelRandSeed()
 		{
 			int num = 101;
-			int num2 = this.mBoardRandSeed + (int)this.mApp.mPlayerInfo.mId;
-			if (this.mApp.IsAdventureMode() || this.mApp.IsQuickPlayMode())
+			int num2 = mBoardRandSeed + (int)mApp.mPlayerInfo.mId;
+			if (mApp.IsAdventureMode() || mApp.IsQuickPlayMode())
 			{
-				num2 += this.mLevel + this.mApp.mPlayerInfo.mFinishedAdventure * num;
+				num2 += mLevel + mApp.mPlayerInfo.mFinishedAdventure * num;
 			}
-			else if (this.mApp.IsScaryPotterLevel() || this.mApp.IsIZombieLevel())
+			else if (mApp.IsScaryPotterLevel() || mApp.IsIZombieLevel())
 			{
 				RandomNumbers.Seed();
 				num2 = RandomNumbers.NextNumber();
 			}
 			else
 			{
-				num2 = (int)(num2 + (this.mApp.mGameMode + this.mChallenge.mSurvivalStage * num));
+				num2 = (int)(num2 + (mApp.mGameMode + mChallenge.mSurvivalStage * num));
 			}
 			return num2;
 		}
@@ -8529,7 +8529,7 @@ namespace Lawn
 			}
 			else if (theBossZombie.mZombiePhase == ZombiePhase.PHASE_BOSS_STOMPING)
 			{
-				Reanimation reanimation = this.mApp.ReanimationTryToGet(theBossZombie.mBodyReanimID);
+				Reanimation reanimation = mApp.ReanimationTryToGet(theBossZombie.mBodyReanimID);
 				if (reanimation.mAnimTime > 0.25f && reanimation.mAnimTime < 0.75f)
 				{
 					if (theBossZombie.mTargetRow == 1)
@@ -8562,7 +8562,7 @@ namespace Lawn
 			renderItem.mZPos = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_BOSS, theRow3, 3);
 			renderItem.mBossPart = BossPart.BOSS_PART_BACK_ARM;
 			theCurRenderItem++;
-			Reanimation reanimation2 = this.mApp.ReanimationTryToGet(theBossZombie.mBossFireBallReanimID);
+			Reanimation reanimation2 = mApp.ReanimationTryToGet(theBossZombie.mBossFireBallReanimID);
 			if (reanimation2 != null)
 			{
 				renderItem = theRenderList[theCurRenderItem];
@@ -8575,17 +8575,17 @@ namespace Lawn
 
 		public GridItem GetCraterAt(int theGridX, int theGridY)
 		{
-			return this.GetGridItemAt(GridItemType.GRIDITEM_CRATER, theGridX, theGridY);
+			return GetGridItemAt(GridItemType.GRIDITEM_CRATER, theGridX, theGridY);
 		}
 
 		public GridItem GetGraveStoneAt(int theGridX, int theGridY)
 		{
-			return this.GetGridItemAt(GridItemType.GRIDITEM_GRAVESTONE, theGridX, theGridY);
+			return GetGridItemAt(GridItemType.GRIDITEM_GRAVESTONE, theGridX, theGridY);
 		}
 
 		public GridItem GetLadderAt(int theGridX, int theGridY)
 		{
-			return this.GetGridItemAt(GridItemType.GRIDITEM_LADDER, theGridX, theGridY);
+			return GetGridItemAt(GridItemType.GRIDITEM_LADDER, theGridX, theGridY);
 		}
 
 		public GridItem AddALadder(int theGridX, int theGridY)
@@ -8595,7 +8595,7 @@ namespace Lawn
 			newGridItem.mRenderOrder = 302000 + 10000 * theGridY + 800;
 			newGridItem.mGridX = theGridX;
 			newGridItem.mGridY = theGridY;
-			this.mGridItems.Add(newGridItem);
+			mGridItems.Add(newGridItem);
 			return newGridItem;
 		}
 
@@ -8606,7 +8606,7 @@ namespace Lawn
 			newGridItem.mRenderOrder = 200000 + 10000 * theGridY + 1;
 			newGridItem.mGridX = theGridX;
 			newGridItem.mGridY = theGridY;
-			this.mGridItems.Add(newGridItem);
+			mGridItems.Add(newGridItem);
 			return newGridItem;
 		}
 
@@ -8614,37 +8614,37 @@ namespace Lawn
 		{
 			for (int i = 0; i < Constants.MAX_GRIDSIZEY; i++)
 			{
-				bool flag = (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RESODDED && i <= 4) || ((this.mApp.IsAdventureMode() || this.mApp.IsQuickPlayMode()) && this.mLevel == 35) || (this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && this.mApp.mGameMode != GameMode.GAMEMODE_TREE_OF_WISDOM && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_LAST_STAND && !this.mApp.IsScaryPotterLevel() && !this.mApp.IsSquirrelLevel() && !this.mApp.IsIZombieLevel() && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZOMBIQUARIUM && (!this.StageHasRoof() || this.mApp.mPlayerInfo.mPurchases[23] != 0) && this.mPlantRow[i] != PlantRowType.PLANTROW_DIRT);
+				bool flag = (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RESODDED && i <= 4) || ((mApp.IsAdventureMode() || mApp.IsQuickPlayMode()) && mLevel == 35) || (mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && mApp.mGameMode != GameMode.GAMEMODE_TREE_OF_WISDOM && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_LAST_STAND && !mApp.IsScaryPotterLevel() && !mApp.IsSquirrelLevel() && !mApp.IsIZombieLevel() && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZOMBIQUARIUM && (!StageHasRoof() || mApp.mPlayerInfo.mPurchases[23] != 0) && mPlantRow[i] != PlantRowType.PLANTROW_DIRT);
 				if (flag)
 				{
 					LawnMower newLawnMower = LawnMower.GetNewLawnMower();
 					newLawnMower.LawnMowerInitialize(i);
 					newLawnMower.mVisible = false;
-					this.mLawnMowers.Add(newLawnMower);
+					mLawnMowers.Add(newLawnMower);
 				}
 			}
 		}
 
 		public bool IsPlantInCursor()
 		{
-			return this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_BANK || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_USABLE_COIN || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_GLOVE || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_DUPLICATOR || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_WHEEL_BARROW;
+			return mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_BANK || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_USABLE_COIN || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_GLOVE || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_DUPLICATOR || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_WHEEL_BARROW;
 		}
 
 		public void ClearFogAroundPlant(Plant thePlant, int theSize)
 		{
 			int num = 6;
-			if (this.mFogBlownCountDown > 0 && this.mFogBlownCountDown < 2000)
+			if (mFogBlownCountDown > 0 && mFogBlownCountDown < 2000)
 			{
 				num = 2;
 			}
-			else if (this.mFogBlownCountDown > 0)
+			else if (mFogBlownCountDown > 0)
 			{
 				num = 40;
 			}
-			int num2 = this.LeftFogColumn();
+			int num2 = LeftFogColumn();
 			for (int i = thePlant.mPlantCol - theSize; i <= thePlant.mPlantCol + theSize; i++)
 			{
-				int num3 = i + -(((int)this.mFogOffset + 50) / 100);
+				int num3 = i + -(((int)mFogOffset + 50) / 100);
 				for (int j = thePlant.mRow - theSize; j <= thePlant.mRow + theSize; j++)
 				{
 					if (num3 >= num2 && num3 < Constants.GRIDSIZEX && j >= 0 && j < 7)
@@ -8666,7 +8666,7 @@ namespace Lawn
 						{
 							goto IL_D3;
 						}
-						this.mGridCelFog[num3, j] = Math.Max(this.mGridCelFog[num3, j] - num, 0);
+						mGridCelFog[num3, j] = Math.Max(mGridCelFog[num3, j] - num, 0);
 					}
 					IL_D3:;
 				}
@@ -8677,7 +8677,7 @@ namespace Lawn
 		{
 			int num = -1;
 			TodParticleSystem todParticleSystem = null;
-			while (this.IterateParticles(ref todParticleSystem, ref num))
+			while (IterateParticles(ref todParticleSystem, ref num))
 			{
 				if (todParticleSystem.mEffectType == theEffectType)
 				{
@@ -8688,60 +8688,60 @@ namespace Lawn
 
 		public GridItem GetScaryPotAt(int theGridX, int theGridY)
 		{
-			return this.GetGridItemAt(GridItemType.GRIDITEM_SCARY_POT, theGridX, theGridY);
+			return GetGridItemAt(GridItemType.GRIDITEM_SCARY_POT, theGridX, theGridY);
 		}
 
 		public void PuzzleSaveStreak()
 		{
-			if (!this.mApp.IsEndlessScaryPotter(this.mApp.mGameMode) && !this.mApp.IsEndlessIZombie(this.mApp.mGameMode))
+			if (!mApp.IsEndlessScaryPotter(mApp.mGameMode) && !mApp.IsEndlessIZombie(mApp.mGameMode))
 			{
 				return;
 			}
-			int num = this.mChallenge.mSurvivalStage + 1;
-			int currentChallengeIndex = this.mApp.GetCurrentChallengeIndex();
-			if (num > this.mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex])
+			int num = mChallenge.mSurvivalStage + 1;
+			int currentChallengeIndex = mApp.GetCurrentChallengeIndex();
+			if (num > mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex])
 			{
-				this.mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex] = num;
-				this.mApp.WriteCurrentUserConfig();
+				mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex] = num;
+				mApp.WriteCurrentUserConfig();
 			}
 		}
 
 		public void ClearAdviceImmediately()
 		{
-			this.ClearAdvice(AdviceType.ADVICE_NONE);
-			this.mAdvice.mDuration = 0;
+			ClearAdvice(AdviceType.ADVICE_NONE);
+			mAdvice.mDuration = 0;
 		}
 
 		public bool IsFinalScaryPotterStage()
 		{
-			if (!this.mApp.IsScaryPotterLevel())
+			if (!mApp.IsScaryPotterLevel())
 			{
 				return false;
 			}
-			if (this.mApp.IsAdventureMode() || this.mApp.IsQuickPlayMode())
+			if (mApp.IsAdventureMode() || mApp.IsQuickPlayMode())
 			{
-				return this.mChallenge.mSurvivalStage == 2;
+				return mChallenge.mSurvivalStage == 2;
 			}
-			return !this.mApp.IsEndlessScaryPotter(this.mApp.mGameMode);
+			return !mApp.IsEndlessScaryPotter(mApp.mGameMode);
 		}
 
 		public void DisplayAdviceAgain(string theAdvice, MessageStyle theMessageStyle, AdviceType theHelpIndex)
 		{
-			if (theHelpIndex != AdviceType.ADVICE_NONE && this.mHelpDisplayed[(int)theHelpIndex])
+			if (theHelpIndex != AdviceType.ADVICE_NONE && mHelpDisplayed[(int)theHelpIndex])
 			{
-				this.mHelpDisplayed[(int)theHelpIndex] = false;
+				mHelpDisplayed[(int)theHelpIndex] = false;
 			}
-			this.DisplayAdvice(theAdvice, theMessageStyle, theHelpIndex);
+			DisplayAdvice(theAdvice, theMessageStyle, theHelpIndex);
 		}
 
 		public GridItem GetSquirrelAt(int theGridX, int theGridY)
 		{
-			return this.GetGridItemAt(GridItemType.GRIDITEM_SQUIRREL, theGridX, theGridY);
+			return GetGridItemAt(GridItemType.GRIDITEM_SQUIRREL, theGridX, theGridY);
 		}
 
 		public GridItem GetZenToolAt(int theGridX, int theGridY)
 		{
-			return this.GetGridItemAt(GridItemType.GRIDITEM_ZEN_TOOL, theGridX, theGridY);
+			return GetGridItemAt(GridItemType.GRIDITEM_ZEN_TOOL, theGridX, theGridY);
 		}
 
 		public bool IsPlantInGoldWateringCanRange(int theMouseX, int theMouseY, Plant thePlant)
@@ -8750,27 +8750,27 @@ namespace Lawn
 			int num2 = theMouseX + Constants.ZenGarden_GoldenWater_Size.Width;
 			int num3 = theMouseY + Constants.ZenGarden_GoldenWater_Size.Y;
 			int num4 = theMouseY + Constants.ZenGarden_GoldenWater_Size.Height;
-			return this.GetTopPlantAt(thePlant.mPlantCol, thePlant.mRow, PlantPriority.TOPPLANT_ZEN_TOOL_ORDER) == thePlant && (thePlant.mX + 40 >= num && thePlant.mX + 40 < num2 && thePlant.mY + 40 >= num3 && thePlant.mY + 40 < num4);
+			return GetTopPlantAt(thePlant.mPlantCol, thePlant.mRow, PlantPriority.TOPPLANT_ZEN_TOOL_ORDER) == thePlant && (thePlant.mX + 40 >= num && thePlant.mX + 40 < num2 && thePlant.mY + 40 >= num3 && thePlant.mY + 40 < num4);
 		}
 
 		public bool StageHasZombieWalkInFromRight()
 		{
-			return !this.mApp.IsWhackAZombieLevel() && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ICE && !this.mApp.IsFinalBossLevel() && !this.mApp.IsIZombieLevel() && !this.mApp.IsSquirrelLevel() && !this.mApp.IsScaryPotterLevel() && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && this.mApp.mGameMode != GameMode.GAMEMODE_TREE_OF_WISDOM && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZOMBIQUARIUM;
+			return !mApp.IsWhackAZombieLevel() && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ICE && !mApp.IsFinalBossLevel() && !mApp.IsIZombieLevel() && !mApp.IsSquirrelLevel() && !mApp.IsScaryPotterLevel() && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && mApp.mGameMode != GameMode.GAMEMODE_TREE_OF_WISDOM && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZOMBIQUARIUM;
 		}
 
 		public void PlaceRake()
 		{
-			if (this.mApp.mPlayerInfo.mPurchases[24] == 0)
+			if (mApp.mPlayerInfo.mPurchases[24] == 0)
 			{
 				return;
 			}
 			int num;
-			if (this.mApp.IsScaryPotterLevel())
+			if (mApp.IsScaryPotterLevel())
 			{
 				num = 7;
 				int num2 = -1;
 				GridItem gridItem = null;
-				while (this.IterateGridItems(ref gridItem, ref num2))
+				while (IterateGridItems(ref gridItem, ref num2))
 				{
 					if (gridItem.mGridItemType == GridItemType.GRIDITEM_SCARY_POT && gridItem.mGridX <= num && gridItem.mGridX > 0)
 					{
@@ -8780,7 +8780,7 @@ namespace Lawn
 			}
 			else
 			{
-				if (!this.StageHasZombieWalkInFromRight() || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BOBSLED_BONANZA)
+				if (!StageHasZombieWalkInFromRight() || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BOBSLED_BONANZA)
 				{
 					return;
 				}
@@ -8793,7 +8793,7 @@ namespace Lawn
 			}
 			for (int j = 0; j < Constants.MAX_GRIDSIZEY; j++)
 			{
-				if (j != 5 && this.mPlantRow[j] == PlantRowType.PLANTROW_NORMAL)
+				if (j != 5 && mPlantRow[j] == PlantRowType.PLANTROW_NORMAL)
 				{
 					Board.aPickArray[num3].mWeight = 1;
 					Board.aPickArray[num3].mItem = j;
@@ -8804,24 +8804,24 @@ namespace Lawn
 			{
 				return;
 			}
-			int mGridY = (int)TodCommon.TodPickFromWeightedArray(Board.aPickArray, num3);
-			this.mApp.mPlayerInfo.mPurchases[24]--;
+			int aGridY = (int)TodCommon.TodPickFromWeightedArray(Board.aPickArray, num3);
+			mApp.mPlayerInfo.mPurchases[24]--;
 			GridItem newGridItem = GridItem.GetNewGridItem();
 			newGridItem.mGridItemType = GridItemType.GRIDITEM_RAKE;
 			newGridItem.mGridX = num;
-			newGridItem.mGridY = mGridY;
-			newGridItem.mPosX = (float)this.GridToPixelX(newGridItem.mGridX, newGridItem.mGridY);
-			newGridItem.mPosY = (float)this.GridToPixelY(newGridItem.mGridX, newGridItem.mGridY);
+			newGridItem.mGridY = aGridY;
+			newGridItem.mPosX = (float)GridToPixelX(newGridItem.mGridX, newGridItem.mGridY);
+			newGridItem.mPosY = (float)GridToPixelY(newGridItem.mGridX, newGridItem.mGridY);
 			newGridItem.mRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_GRAVE_STONE, newGridItem.mGridY, 9);
-			this.mGridItems.Add(newGridItem);
-			Reanimation theReanimation = this.CreateRakeReanim(newGridItem.mPosX, newGridItem.mPosY, 0);
-			newGridItem.mGridItemReanimID = this.mApp.ReanimationGetID(theReanimation);
+			mGridItems.Add(newGridItem);
+			Reanimation theReanimation = CreateRakeReanim(newGridItem.mPosX, newGridItem.mPosY, 0);
+			newGridItem.mGridItemReanimID = mApp.ReanimationGetID(theReanimation);
 			newGridItem.mGridItemState = GridItemState.GRIDITEM_STATE_RAKE_ATTRACTING;
 		}
 
 		public Reanimation CreateRakeReanim(float rakeX, float rakeY, int renderOrder)
 		{
-			Reanimation reanimation = this.mApp.AddReanimation(rakeX + 20f, rakeY, renderOrder, ReanimationType.REANIM_RAKE);
+			Reanimation reanimation = mApp.AddReanimation(rakeX + 20f, rakeY, renderOrder, ReanimationType.REANIM_RAKE);
 			reanimation.mAnimRate = 0f;
 			reanimation.mLoopType = ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD;
 			reanimation.mIsAttachment = true;
@@ -8832,7 +8832,7 @@ namespace Lawn
 		{
 			int num = -1;
 			GridItem gridItem = null;
-			while (this.IterateGridItems(ref gridItem, ref num))
+			while (IterateGridItems(ref gridItem, ref num))
 			{
 				if (gridItem.mGridItemType == GridItemType.GRIDITEM_RAKE)
 				{
@@ -8844,15 +8844,15 @@ namespace Lawn
 
 		public bool IsScaryPotterDaveTalking()
 		{
-			return this.mApp.IsScaryPotterLevel() && this.mNextSurvivalStageCounter > 0 && this.mApp.mCrazyDaveState != CrazyDaveState.CRAZY_DAVE_OFF;
+			return mApp.IsScaryPotterLevel() && mNextSurvivalStageCounter > 0 && mApp.mCrazyDaveState != CrazyDaveState.CRAZY_DAVE_OFF;
 		}
 
 		public Zombie GetWinningZombie()
 		{
-			int count = this.mZombies.Count;
+			int count = mZombies.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Zombie zombie = this.mZombies[i];
+				Zombie zombie = mZombies[i];
 				if (!zombie.mDead && zombie.mFromWave == GameConstants.ZOMBIE_WAVE_WINNER)
 				{
 					return zombie;
@@ -8864,20 +8864,20 @@ namespace Lawn
 		public void ResetFPSStats()
 		{
 			int tickCount = Environment.TickCount;
-			this.mStartDrawTime = tickCount;
-			this.mIntervalDrawTime = tickCount;
-			this.mDrawCount = 1;
-			this.mIntervalDrawCountStart = 1;
+			mStartDrawTime = tickCount;
+			mIntervalDrawTime = tickCount;
+			mDrawCount = 1;
+			mIntervalDrawCountStart = 1;
 		}
 
 		public int CountEmptyPotsOrLilies(SeedType theSeedType)
 		{
 			int num = 0;
-			int count = this.mPlants.Count;
+			int count = mPlants.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Plant plant = this.mPlants[i];
-				if (!plant.mDead && plant.mSeedType == theSeedType && this.GetTopPlantAt(plant.mPlantCol, plant.mRow, PlantPriority.TOPPLANT_ONLY_NORMAL_POSITION) == null)
+				Plant plant = mPlants[i];
+				if (!plant.mDead && plant.mSeedType == theSeedType && GetTopPlantAt(plant.mPlantCol, plant.mRow, PlantPriority.TOPPLANT_ONLY_NORMAL_POSITION) == null)
 				{
 					num++;
 				}
@@ -8889,7 +8889,7 @@ namespace Lawn
 		{
 			int num = -1;
 			GridItem gridItem = null;
-			while (this.IterateGridItems(ref gridItem, ref num))
+			while (IterateGridItems(ref gridItem, ref num))
 			{
 				if (gridItem.mGridX == theGridX && gridItem.mGridY == theGridY && gridItem.mGridItemType == theGridItemType)
 				{
@@ -8901,19 +8901,19 @@ namespace Lawn
 
 		public bool ProgressMeterHasFlags()
 		{
-			return (!this.mApp.IsFirstTimeAdventureMode() || this.mLevel != 1) && !this.mApp.IsWhackAZombieLevel() && !this.mApp.IsFinalBossLevel() && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST && !this.mApp.IsSlotMachineLevel() && !this.mApp.IsSquirrelLevel() && !this.mApp.IsIZombieLevel();
+			return (!mApp.IsFirstTimeAdventureMode() || mLevel != 1) && !mApp.IsWhackAZombieLevel() && !mApp.IsFinalBossLevel() && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST && !mApp.IsSlotMachineLevel() && !mApp.IsSquirrelLevel() && !mApp.IsIZombieLevel();
 		}
 
 		public bool IsLastStandFinalStage()
 		{
-			return this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND && this.mChallenge.mSurvivalStage == 4;
+			return mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND && mChallenge.mSurvivalStage == 4;
 		}
 
 		public int GetNumWavesPerFlag()
 		{
-			if (this.mApp.IsFirstTimeAdventureMode() && this.mNumWaves < 10)
+			if (mApp.IsFirstTimeAdventureMode() && mNumWaves < 10)
 			{
-				return this.mNumWaves;
+				return mNumWaves;
 			}
 			return 10;
 		}
@@ -8921,9 +8921,9 @@ namespace Lawn
 		public int GetCurrentPlantCost(SeedType theSeedType, SeedType theImitaterType)
 		{
 			int num = Plant.GetCost(theSeedType, theImitaterType);
-			if (this.PlantUsesAcceleratedPricing(theSeedType))
+			if (PlantUsesAcceleratedPricing(theSeedType))
 			{
-				int num2 = this.CountPlantByType(theSeedType);
+				int num2 = CountPlantByType(theSeedType);
 				num += num2 * 50;
 			}
 			return num;
@@ -8931,27 +8931,27 @@ namespace Lawn
 
 		public bool PlantUsesAcceleratedPricing(SeedType theSeedType)
 		{
-			return Plant.IsUpgrade(theSeedType) && this.mApp.IsSurvivalEndless(this.mApp.mGameMode);
+			return Plant.IsUpgrade(theSeedType) && mApp.IsSurvivalEndless(mApp.mGameMode);
 		}
 
 		public void FreezeEffectsForCutscene(bool theFreeze)
 		{
 			int num = -1;
 			TodParticleSystem todParticleSystem = null;
-			while (this.IterateParticles(ref todParticleSystem, ref num))
+			while (IterateParticles(ref todParticleSystem, ref num))
 			{
 				if (todParticleSystem.mEffectType == ParticleEffect.PARTICLE_GRAVE_BUSTER)
 				{
 					todParticleSystem.mDontUpdate = theFreeze;
 				}
-				if (todParticleSystem.mEffectType == ParticleEffect.PARTICLE_POOL_SPARKLY && this.mIceTrapCounter == 0)
+				if (todParticleSystem.mEffectType == ParticleEffect.PARTICLE_POOL_SPARKLY && mIceTrapCounter == 0)
 				{
 					todParticleSystem.mDontUpdate = theFreeze;
 				}
 			}
 			int num2 = -1;
 			Reanimation reanimation = null;
-			while (this.IterateReanimations(ref reanimation, ref num2))
+			while (IterateReanimations(ref reanimation, ref num2))
 			{
 				if (reanimation.mReanimationType == ReanimationType.REANIM_SLEEPING)
 				{
@@ -8969,15 +8969,15 @@ namespace Lawn
 
 		public void LoadBackgroundImages()
 		{
-			if (this.mBackground == BackgroundType.BACKGROUND_1_DAY)
+			if (mBackground == BackgroundType.BACKGROUND_1_DAY)
 			{
-				this.mApp.DelayLoadBackgroundResource("DelayLoad_Background1");
-				if (this.mLevel <= 4 && this.mApp.IsFirstTimeAdventureMode())
+				mApp.DelayLoadBackgroundResource("DelayLoad_Background1");
+				if (mLevel <= 4 && mApp.IsFirstTimeAdventureMode())
 				{
 					TodCommon.TodLoadResources("DelayLoad_BackgroundUnsodded");
 					return;
 				}
-				if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RESODDED)
+				if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RESODDED)
 				{
 					TodCommon.TodLoadResources("DelayLoad_BackgroundUnsodded");
 					return;
@@ -8985,49 +8985,49 @@ namespace Lawn
 			}
 			else
 			{
-				if (this.mBackground == BackgroundType.BACKGROUND_2_NIGHT)
+				if (mBackground == BackgroundType.BACKGROUND_2_NIGHT)
 				{
-					this.mApp.DelayLoadBackgroundResource("DelayLoad_Background2");
+					mApp.DelayLoadBackgroundResource("DelayLoad_Background2");
 					return;
 				}
-				if (this.mBackground == BackgroundType.BACKGROUND_3_POOL)
+				if (mBackground == BackgroundType.BACKGROUND_3_POOL)
 				{
-					this.mApp.DelayLoadBackgroundResource("DelayLoad_Background3");
+					mApp.DelayLoadBackgroundResource("DelayLoad_Background3");
 					return;
 				}
-				if (this.mBackground == BackgroundType.BACKGROUND_4_FOG)
+				if (mBackground == BackgroundType.BACKGROUND_4_FOG)
 				{
-					this.mApp.DelayLoadBackgroundResource("DelayLoad_Background4");
+					mApp.DelayLoadBackgroundResource("DelayLoad_Background4");
 					return;
 				}
-				if (this.mBackground == BackgroundType.BACKGROUND_5_ROOF)
+				if (mBackground == BackgroundType.BACKGROUND_5_ROOF)
 				{
-					this.mApp.DelayLoadBackgroundResource("DelayLoad_Background5");
+					mApp.DelayLoadBackgroundResource("DelayLoad_Background5");
 					return;
 				}
-				if (this.mBackground == BackgroundType.BACKGROUND_6_BOSS)
+				if (mBackground == BackgroundType.BACKGROUND_6_BOSS)
 				{
-					this.mApp.DelayLoadBackgroundResource("DelayLoad_Background6");
+					mApp.DelayLoadBackgroundResource("DelayLoad_Background6");
 					return;
 				}
-				if (this.mBackground == BackgroundType.BACKGROUND_GREENHOUSE)
+				if (mBackground == BackgroundType.BACKGROUND_GREENHOUSE)
 				{
-					this.mApp.DelayLoadZenGardenBackground("DelayLoad_GreenHouseGarden");
+					mApp.DelayLoadZenGardenBackground("DelayLoad_GreenHouseGarden");
 					return;
 				}
-				if (this.mBackground == BackgroundType.BACKGROUND_TREE_OF_WISDOM)
+				if (mBackground == BackgroundType.BACKGROUND_TREE_OF_WISDOM)
 				{
 					return;
 				}
-				if (this.mBackground == BackgroundType.BACKGROUND_ZOMBIQUARIUM)
+				if (mBackground == BackgroundType.BACKGROUND_ZOMBIQUARIUM)
 				{
-					this.mApp.DelayLoadZenGardenBackground("DelayLoad_Zombiquarium");
-					this.mApp.DelayLoadZenGardenBackground("DelayLoad_GreenHouseOverlay");
+					mApp.DelayLoadZenGardenBackground("DelayLoad_Zombiquarium");
+					mApp.DelayLoadZenGardenBackground("DelayLoad_GreenHouseOverlay");
 					return;
 				}
-				if (this.mBackground == BackgroundType.BACKGROUND_MUSHROOM_GARDEN)
+				if (mBackground == BackgroundType.BACKGROUND_MUSHROOM_GARDEN)
 				{
-					this.mApp.DelayLoadZenGardenBackground("DelayLoad_MushroomGarden");
+					mApp.DelayLoadZenGardenBackground("DelayLoad_MushroomGarden");
 					return;
 				}
 				Debug.ASSERT(false);
@@ -9036,11 +9036,11 @@ namespace Lawn
 
 		public bool CanUseGameObject(GameObjectType theGameObject)
 		{
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
+			if (mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
 			{
 				return theGameObject == GameObjectType.OBJECT_TYPE_TREE_FOOD || theGameObject == GameObjectType.OBJECT_TYPE_NEXT_GARDEN;
 			}
-			if (this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+			if (mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 			{
 				return false;
 			}
@@ -9050,35 +9050,35 @@ namespace Lawn
 			}
 			if (theGameObject == GameObjectType.OBJECT_TYPE_NEXT_GARDEN)
 			{
-				return this.mApp.mPlayerInfo.mPurchases[18] != 0 || this.mApp.mPlayerInfo.mPurchases[25] != 0 || this.mApp.mPlayerInfo.mPurchases[27] != 0;
+				return mApp.mPlayerInfo.mPurchases[18] != 0 || mApp.mPlayerInfo.mPurchases[25] != 0 || mApp.mPlayerInfo.mPurchases[27] != 0;
 			}
 			if (theGameObject == GameObjectType.OBJECT_TYPE_FERTILIZER)
 			{
-				return this.mApp.mPlayerInfo.mPurchases[14] > 0;
+				return mApp.mPlayerInfo.mPurchases[14] > 0;
 			}
 			if (theGameObject == GameObjectType.OBJECT_TYPE_BUG_SPRAY)
 			{
-				return this.mApp.mPlayerInfo.mPurchases[15] > 0;
+				return mApp.mPlayerInfo.mPurchases[15] > 0;
 			}
 			if (theGameObject == GameObjectType.OBJECT_TYPE_PHONOGRAPH)
 			{
-				return this.mApp.mPlayerInfo.mPurchases[16] > 0;
+				return mApp.mPlayerInfo.mPurchases[16] > 0;
 			}
 			if (theGameObject == GameObjectType.OBJECT_TYPE_CHOCOLATE)
 			{
-				return this.mApp.mPlayerInfo.mPurchases[26] > 0;
+				return mApp.mPlayerInfo.mPurchases[26] > 0;
 			}
 			if (theGameObject == GameObjectType.OBJECT_TYPE_WHEELBARROW)
 			{
-				return this.mApp.mPlayerInfo.mPurchases[19] > 0;
+				return mApp.mPlayerInfo.mPurchases[19] > 0;
 			}
 			if (theGameObject == GameObjectType.OBJECT_TYPE_GLOVE)
 			{
-				return this.mApp.mPlayerInfo.mPurchases[17] > 0;
+				return mApp.mPlayerInfo.mPurchases[17] > 0;
 			}
 			if (theGameObject == GameObjectType.OBJECT_TYPE_MONEY_SIGN)
 			{
-				return this.mApp.HasFinishedAdventure();
+				return mApp.HasFinishedAdventure();
 			}
 			if (theGameObject == GameObjectType.OBJECT_TYPE_TREE_FOOD)
 			{
@@ -9090,13 +9090,13 @@ namespace Lawn
 
 		public void SetMustacheMode(bool theEnableMustache)
 		{
-			this.mApp.PlayFoley(FoleyType.FOLEY_POLEVAULT);
-			this.mMustacheMode = theEnableMustache;
-			this.mApp.mMustacheMode = theEnableMustache;
-			int count = this.mZombies.Count;
+			mApp.PlayFoley(FoleyType.FOLEY_POLEVAULT);
+			mMustacheMode = theEnableMustache;
+			mApp.mMustacheMode = theEnableMustache;
+			int count = mZombies.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Zombie zombie = this.mZombies[i];
+				Zombie zombie = mZombies[i];
 				if (!zombie.mDead)
 				{
 					zombie.EnableMustache(theEnableMustache);
@@ -9108,7 +9108,7 @@ namespace Lawn
 		{
 			int num = 0;
 			Coin coin = null;
-			while (this.IterateCoins(ref coin))
+			while (IterateCoins(ref coin))
 			{
 				if (coin.mType == theCoinType)
 				{
@@ -9120,11 +9120,11 @@ namespace Lawn
 
 		public void SetSuperMowerMode(bool theEnableSuperMower)
 		{
-			this.mApp.PlayFoley(FoleyType.FOLEY_ZAMBONI);
-			this.mSuperMowerMode = theEnableSuperMower;
-			this.mApp.mSuperMowerMode = theEnableSuperMower;
+			mApp.PlayFoley(FoleyType.FOLEY_ZAMBONI);
+			mSuperMowerMode = theEnableSuperMower;
+			mApp.mSuperMowerMode = theEnableSuperMower;
 			LawnMower lawnMower = null;
-			while (this.IterateLawnMowers(ref lawnMower))
+			while (IterateLawnMowers(ref lawnMower))
 			{
 				lawnMower.EnableSuperMower(theEnableSuperMower);
 			}
@@ -9132,11 +9132,11 @@ namespace Lawn
 
 		public void DrawZenWheelBarrowButton(Graphics g, int theOffsetY)
 		{
-			TRect zenButtonRect = this.GetZenButtonRect(GameObjectType.OBJECT_TYPE_WHEELBARROW);
-			PottedPlant pottedPlantInWheelbarrow = this.mApp.mZenGarden.GetPottedPlantInWheelbarrow();
-			if (pottedPlantInWheelbarrow != null && this.mCursorObject.mCursorType != CursorType.CURSOR_TYPE_PLANT_FROM_WHEEL_BARROW)
+			TRect zenButtonRect = GetZenButtonRect(GameObjectType.OBJECT_TYPE_WHEELBARROW);
+			PottedPlant pottedPlantInWheelbarrow = mApp.mZenGarden.GetPottedPlantInWheelbarrow();
+			if (pottedPlantInWheelbarrow != null && mCursorObject.mCursorType != CursorType.CURSOR_TYPE_PLANT_FROM_WHEEL_BARROW)
 			{
-				if (this.mChallenge.mChallengeState == ChallengeState.STATECHALLENGE_ZEN_FADING)
+				if (mChallenge.mChallengeState == ChallengeState.STATECHALLENGE_ZEN_FADING)
 				{
 					g.DrawImage(AtlasResources.IMAGE_ZEN_WHEELBARROW, zenButtonRect.mX + Constants.ZenGardenButton_Wheelbarrow_Offset.X, zenButtonRect.mY + Constants.ZenGardenButton_Wheelbarrow_Offset.Y + theOffsetY);
 				}
@@ -9146,9 +9146,9 @@ namespace Lawn
 				}
 				if (pottedPlantInWheelbarrow.mPlantAge != PottedPlantAge.PLANTAGE_SMALL)
 				{
-					PottedPlantAge mPlantAge = pottedPlantInWheelbarrow.mPlantAge;
+					PottedPlantAge aPlantAge = pottedPlantInWheelbarrow.mPlantAge;
 				}
-				this.mApp.mZenGarden.DrawPottedPlant(g, (float)(zenButtonRect.mX + Constants.ZenGardenButton_WheelbarrowPlant_Offset.X), (float)(zenButtonRect.mY + Constants.ZenGardenButton_WheelbarrowPlant_Offset.Y + theOffsetY), pottedPlantInWheelbarrow, 0.6f, true);
+				mApp.mZenGarden.DrawPottedPlant(g, (float)(zenButtonRect.mX + Constants.ZenGardenButton_WheelbarrowPlant_Offset.X), (float)(zenButtonRect.mY + Constants.ZenGardenButton_WheelbarrowPlant_Offset.Y + theOffsetY), pottedPlantInWheelbarrow, 0.6f, true);
 				return;
 			}
 			g.DrawImage(AtlasResources.IMAGE_ZEN_WHEELBARROW, zenButtonRect.mX + Constants.ZenGardenButton_Wheelbarrow_Offset.X, zenButtonRect.mY + Constants.ZenGardenButton_Wheelbarrow_Offset.Y + theOffsetY);
@@ -9157,27 +9157,27 @@ namespace Lawn
 		public void DrawZenButtons(Graphics g)
 		{
 			int num = 0;
-			if (this.mChallenge.mChallengeState == ChallengeState.STATECHALLENGE_ZEN_FADING)
+			if (mChallenge.mChallengeState == ChallengeState.STATECHALLENGE_ZEN_FADING)
 			{
-				num = TodCommon.TodAnimateCurve(50, 0, this.mChallenge.mChallengeStateCounter, 0, -72, TodCurves.CURVE_EASE_IN_OUT);
+				num = TodCommon.TodAnimateCurve(50, 0, mChallenge.mChallengeStateCounter, 0, -72, TodCurves.CURVE_EASE_IN_OUT);
 			}
 			for (int i = 6; i <= 15; i++)
 			{
 				GameObjectType gameObjectType = (GameObjectType)i;
-				if (this.CanUseGameObject(gameObjectType))
+				if (CanUseGameObject(gameObjectType))
 				{
-					TRect zenButtonRect = this.GetZenButtonRect(gameObjectType);
-					if (gameObjectType != GameObjectType.OBJECT_TYPE_NEXT_GARDEN && (this.mApp.mPlayerInfo.mZenGardenTutorialComplete || gameObjectType != GameObjectType.OBJECT_TYPE_MONEY_SIGN))
+					TRect zenButtonRect = GetZenButtonRect(gameObjectType);
+					if (gameObjectType != GameObjectType.OBJECT_TYPE_NEXT_GARDEN && (mApp.mPlayerInfo.mZenGardenTutorialComplete || gameObjectType != GameObjectType.OBJECT_TYPE_MONEY_SIGN))
 					{
 						g.DrawImage(AtlasResources.IMAGE_SHOVELBANK_ZEN, zenButtonRect.mX, zenButtonRect.mY + num);
-						if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_WATERING_CAN + i - 6)
+						if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_WATERING_CAN + i - 6)
 						{
 							goto IL_63E;
 						}
 					}
 					if (gameObjectType == GameObjectType.OBJECT_TYPE_WATERING_CAN)
 					{
-						if (this.mApp.mPlayerInfo.mPurchases[13] != 0)
+						if (mApp.mPlayerInfo.mPurchases[13] != 0)
 						{
 							g.DrawImage(AtlasResources.IMAGE_REANIM_ZENGARDEN_WATERINGCAN1_GOLD, zenButtonRect.mX + Constants.ZenGardenButton_GoldenWateringCan_Offset.X, zenButtonRect.mY + Constants.ZenGardenButton_GoldenWateringCan_Offset.Y + num);
 						}
@@ -9188,15 +9188,15 @@ namespace Lawn
 					}
 					else if (gameObjectType == GameObjectType.OBJECT_TYPE_FERTILIZER)
 					{
-						int num2 = this.mApp.mPlayerInfo.mPurchases[14] - 1000;
+						int num2 = mApp.mPlayerInfo.mPurchases[14] - 1000;
 						if (num2 == 0)
 						{
 							g.SetColorizeImages(true);
 							g.SetColor(new SexyColor(96, 96, 96));
 						}
-						else if (this.mTutorialState == TutorialState.TUTORIAL_ZEN_GARDEN_FERTILIZE_PLANTS)
+						else if (mTutorialState == TutorialState.TUTORIAL_ZEN_GARDEN_FERTILIZE_PLANTS)
 						{
-							SexyColor flashingColor = TodCommon.GetFlashingColor(this.mMainCounter, 75);
+							SexyColor flashingColor = TodCommon.GetFlashingColor(mMainCounter, 75);
 							g.SetColorizeImages(true);
 							g.SetColor(flashingColor);
 						}
@@ -9212,7 +9212,7 @@ namespace Lawn
 					}
 					else if (gameObjectType == GameObjectType.OBJECT_TYPE_BUG_SPRAY)
 					{
-						int num3 = this.mApp.mPlayerInfo.mPurchases[15] - 1000;
+						int num3 = mApp.mPlayerInfo.mPurchases[15] - 1000;
 						if (num3 == 0)
 						{
 							g.SetColorizeImages(true);
@@ -9234,7 +9234,7 @@ namespace Lawn
 					}
 					else if (gameObjectType == GameObjectType.OBJECT_TYPE_CHOCOLATE)
 					{
-						int num4 = this.mApp.mPlayerInfo.mPurchases[26] - 1000;
+						int num4 = mApp.mPlayerInfo.mPurchases[26] - 1000;
 						if (num4 == 0)
 						{
 							g.SetColorizeImages(true);
@@ -9250,35 +9250,35 @@ namespace Lawn
 						}
 						TodCommon.TodDrawString(g, text3, zenButtonRect.mX + Constants.ZenGardenButtonCounterOffset.X, zenButtonRect.mY + Constants.ZenGardenButtonCounterOffset.Y + num, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, DrawStringJustification.DS_ALIGN_RIGHT, 0.6f);
 					}
-					else if (gameObjectType == GameObjectType.OBJECT_TYPE_GLOVE && this.mCursorObject.mCursorType != CursorType.CURSOR_TYPE_PLANT_FROM_GLOVE && this.mCursorObject.mCursorType != CursorType.CURSOR_TYPE_PLANT_FROM_WHEEL_BARROW)
+					else if (gameObjectType == GameObjectType.OBJECT_TYPE_GLOVE && mCursorObject.mCursorType != CursorType.CURSOR_TYPE_PLANT_FROM_GLOVE && mCursorObject.mCursorType != CursorType.CURSOR_TYPE_PLANT_FROM_WHEEL_BARROW)
 					{
 						g.DrawImage(AtlasResources.IMAGE_ZEN_GARDENGLOVE, zenButtonRect.mX + Constants.ZenGardenButton_Glove_Offset.X, zenButtonRect.mY + Constants.ZenGardenButton_Glove_Offset.Y + num);
 					}
-					else if (gameObjectType == GameObjectType.OBJECT_TYPE_MONEY_SIGN && this.mApp.mPlayerInfo.mZenGardenTutorialComplete)
+					else if (gameObjectType == GameObjectType.OBJECT_TYPE_MONEY_SIGN && mApp.mPlayerInfo.mZenGardenTutorialComplete)
 					{
 						g.DrawImage(AtlasResources.IMAGE_ZEN_MONEYSIGN, zenButtonRect.mX + Constants.ZenGardenButton_MoneySign_Offset.X, zenButtonRect.mY + Constants.ZenGardenButton_MoneySign_Offset.Y + num);
 					}
 					else if (gameObjectType == GameObjectType.OBJECT_TYPE_WHEELBARROW)
 					{
-						this.DrawZenWheelBarrowButton(g, num);
+						DrawZenWheelBarrowButton(g, num);
 					}
 					else if (gameObjectType == GameObjectType.OBJECT_TYPE_NEXT_GARDEN)
 					{
-						if (!this.mMenuButton.mBtnNoDraw)
+						if (!mMenuButton.mBtnNoDraw)
 						{
 							g.DrawImage(AtlasResources.IMAGE_ZEN_NEXT_GARDEN, zenButtonRect.mX + Constants.ZenGardenButton_NextGarden_Offset.X, zenButtonRect.mY + Constants.ZenGardenButton_NextGarden_Offset.Y + num);
 						}
 					}
 					else if (gameObjectType == GameObjectType.OBJECT_TYPE_TREE_FOOD)
 					{
-						int num5 = this.mApp.mPlayerInfo.mPurchases[28] - 1000;
+						int num5 = mApp.mPlayerInfo.mPurchases[28] - 1000;
 						if (num5 <= 0)
 						{
 							g.SetColorizeImages(true);
 							g.SetColor(new SexyColor(96, 96, 96));
 							num5 = 0;
 						}
-						if (!this.mChallenge.TreeOfWisdomCanFeed())
+						if (!mChallenge.TreeOfWisdomCanFeed())
 						{
 							g.SetColorizeImages(true);
 							g.SetColor(new SexyColor(96, 96, 96));
@@ -9302,7 +9302,7 @@ namespace Lawn
 			{
 				theY -= 15;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && this.mBackground == BackgroundType.BACKGROUND_GREENHOUSE)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && mBackground == BackgroundType.BACKGROUND_GREENHOUSE)
 			{
 				theY -= 25;
 			}
@@ -9310,13 +9310,13 @@ namespace Lawn
 
 		public void SetFutureMode(bool theEnableFuture)
 		{
-			this.mApp.PlaySample(Resources.SOUND_BOING);
-			this.mFutureMode = theEnableFuture;
-			this.mApp.mFutureMode = theEnableFuture;
-			int count = this.mZombies.Count;
+			mApp.PlaySample(Resources.SOUND_BOING);
+			mFutureMode = theEnableFuture;
+			mApp.mFutureMode = theEnableFuture;
+			int count = mZombies.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Zombie zombie = this.mZombies[i];
+				Zombie zombie = mZombies[i];
 				if (!zombie.mDead)
 				{
 					zombie.EnableFuture(theEnableFuture);
@@ -9326,20 +9326,20 @@ namespace Lawn
 
 		public void SetPinataMode(bool theEnablePinata)
 		{
-			this.mApp.PlayFoley(FoleyType.FOLEY_JUICY);
-			this.mPinataMode = theEnablePinata;
-			this.mApp.mPinataMode = theEnablePinata;
+			mApp.PlayFoley(FoleyType.FOLEY_JUICY);
+			mPinataMode = theEnablePinata;
+			mApp.mPinataMode = theEnablePinata;
 		}
 
 		public void SetDanceMode(bool theEnableDance)
 		{
-			this.mApp.PlayFoley(FoleyType.FOLEY_DANCER);
-			this.mDanceMode = theEnableDance;
-			this.mApp.mDanceMode = theEnableDance;
-			int count = this.mZombies.Count;
+			mApp.PlayFoley(FoleyType.FOLEY_DANCER);
+			mDanceMode = theEnableDance;
+			mApp.mDanceMode = theEnableDance;
+			int count = mZombies.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Zombie zombie = this.mZombies[i];
+				Zombie zombie = mZombies[i];
 				if (!zombie.mDead)
 				{
 					zombie.EnableDanceMode(theEnableDance);
@@ -9349,21 +9349,21 @@ namespace Lawn
 
 		public void SetDaisyMode(bool theEnableDaisy)
 		{
-			this.mApp.PlaySample(Resources.SOUND_LOADINGBAR_FLOWER);
-			this.mDaisyMode = theEnableDaisy;
-			this.mApp.mDaisyMode = theEnableDaisy;
+			mApp.PlaySample(Resources.SOUND_LOADINGBAR_FLOWER);
+			mDaisyMode = theEnableDaisy;
+			mApp.mDaisyMode = theEnableDaisy;
 		}
 
 		public void SetSukhbirMode(bool theEnableSukhbir)
 		{
-			this.mSukhbirMode = theEnableSukhbir;
-			this.mApp.mSukhbirMode = theEnableSukhbir;
+			mSukhbirMode = theEnableSukhbir;
+			mApp.mSukhbirMode = theEnableSukhbir;
 		}
 
 		public bool MouseHitTestPlant(int x, int y, out HitResult theHitResult, bool posScaled)
 		{
 			theHitResult = default(HitResult);
-			if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_COBCANNON_TARGET || this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_HAMMER)
+			if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_COBCANNON_TARGET || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_HAMMER)
 			{
 				return false;
 			}
@@ -9372,24 +9372,24 @@ namespace Lawn
 				x = (int)((float)x * Constants.IS);
 				y = (int)((float)y * Constants.IS);
 			}
-			Plant plant = this.SpecialPlantHitTest(x, y);
+			Plant plant = SpecialPlantHitTest(x, y);
 			if (plant != null)
 			{
 				theHitResult.mObject = plant;
 				theHitResult.mObjectType = GameObjectType.OBJECT_TYPE_PLANT;
 				return true;
 			}
-			int theGridX = this.PixelToGridX(x, y);
-			int theGridY = this.PixelToGridY(x, y);
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+			int theGridX = PixelToGridX(x, y);
+			int theGridY = PixelToGridY(x, y);
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 			{
-				plant = this.GetTopPlantAt(theGridX, theGridY, PlantPriority.TOPPLANT_ZEN_TOOL_ORDER);
-				if (this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_WATERING_CAN && (plant == null || !this.mApp.mZenGarden.PlantCanBeWatered(plant)))
+				plant = GetTopPlantAt(theGridX, theGridY, PlantPriority.TOPPLANT_ZEN_TOOL_ORDER);
+				if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_WATERING_CAN && (plant == null || !mApp.mZenGarden.PlantCanBeWatered(plant)))
 				{
-					int theGridX2 = this.PixelToGridX(x - 30, y - 20);
-					int theGridY2 = this.PixelToGridY(x - 30, y - 20);
-					Plant topPlantAt = this.GetTopPlantAt(theGridX2, theGridY2, PlantPriority.TOPPLANT_ZEN_TOOL_ORDER);
-					if (topPlantAt != null && this.mApp.mZenGarden.PlantCanBeWatered(topPlantAt))
+					int theGridX2 = PixelToGridX(x - 30, y - 20);
+					int theGridY2 = PixelToGridY(x - 30, y - 20);
+					Plant topPlantAt = GetTopPlantAt(theGridX2, theGridY2, PlantPriority.TOPPLANT_ZEN_TOOL_ORDER);
+					if (topPlantAt != null && mApp.mZenGarden.PlantCanBeWatered(topPlantAt))
 					{
 						plant = topPlantAt;
 					}
@@ -9397,13 +9397,13 @@ namespace Lawn
 			}
 			else
 			{
-				plant = this.GetTopPlantAt(theGridX, theGridY, PlantPriority.TOPPLANT_DIGGING_ORDER);
-				if (plant != null && (plant.mSeedType == SeedType.SEED_LILYPAD || plant.mSeedType == SeedType.SEED_FLOWERPOT) && this.GetTopPlantAt(theGridX, theGridY, PlantPriority.TOPPLANT_ONLY_PUMPKIN) != null)
+				plant = GetTopPlantAt(theGridX, theGridY, PlantPriority.TOPPLANT_DIGGING_ORDER);
+				if (plant != null && (plant.mSeedType == SeedType.SEED_LILYPAD || plant.mSeedType == SeedType.SEED_FLOWERPOT) && GetTopPlantAt(theGridX, theGridY, PlantPriority.TOPPLANT_ONLY_PUMPKIN) != null)
 				{
 					plant = null;
 				}
 			}
-			if (plant != null && this.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_CHOCOLATE && !this.mApp.mZenGarden.PlantCanHaveChocolate(plant))
+			if (plant != null && mCursorObject.mCursorType == CursorType.CURSOR_TYPE_CHOCOLATE && !mApp.mZenGarden.PlantCanHaveChocolate(plant))
 			{
 				theHitResult.mObject = null;
 				theHitResult.mObjectType = GameObjectType.OBJECT_TYPE_NONE;
@@ -9420,95 +9420,95 @@ namespace Lawn
 
 		public void DoTypingCheck(KeyCode theKey)
 		{
-			if (this.mApp.mKonamiCheck.Check(theKey))
+			if (mApp.mKonamiCheck.Check(theKey))
 			{
-				this.mApp.PlayFoley(FoleyType.FOLEY_DROP);
+				mApp.PlayFoley(FoleyType.FOLEY_DROP);
 				return;
 			}
-			if (this.mApp.mMustacheCheck.Check(theKey) || this.mApp.mMoustacheCheck.Check(theKey))
+			if (mApp.mMustacheCheck.Check(theKey) || mApp.mMoustacheCheck.Check(theKey))
 			{
-				this.SetMustacheMode(!this.mMustacheMode);
+				SetMustacheMode(!mMustacheMode);
 				return;
 			}
-			if (this.mApp.mSuperMowerCheck.Check(theKey) || this.mApp.mSuperMowerCheck2.Check(theKey))
+			if (mApp.mSuperMowerCheck.Check(theKey) || mApp.mSuperMowerCheck2.Check(theKey))
 			{
-				this.SetSuperMowerMode(!this.mSuperMowerMode);
+				SetSuperMowerMode(!mSuperMowerMode);
 				return;
 			}
-			if (this.mApp.mFutureCheck.Check(theKey))
+			if (mApp.mFutureCheck.Check(theKey))
 			{
-				this.SetFutureMode(!this.mFutureMode);
+				SetFutureMode(!mFutureMode);
 				return;
 			}
-			if (this.mApp.mPinataCheck.Check(theKey))
+			if (mApp.mPinataCheck.Check(theKey))
 			{
-				if (this.mApp.CanDoPinataMode())
+				if (mApp.CanDoPinataMode())
 				{
-					this.SetPinataMode(!this.mPinataMode);
+					SetPinataMode(!mPinataMode);
 					return;
 				}
-				if (this.mApp.mGameScene == GameScenes.SCENE_PLAYING)
+				if (mApp.mGameScene == GameScenes.SCENE_PLAYING)
 				{
-					this.DisplayAdvice("[CANT_USE_CODE]", MessageStyle.MESSAGE_STYLE_BIG_MIDDLE_FAST, AdviceType.ADVICE_NONE);
+					DisplayAdvice("[CANT_USE_CODE]", MessageStyle.MESSAGE_STYLE_BIG_MIDDLE_FAST, AdviceType.ADVICE_NONE);
 				}
-				this.mApp.PlaySample(Resources.SOUND_BUZZER);
+				mApp.PlaySample(Resources.SOUND_BUZZER);
 				return;
 			}
-			else if (this.mApp.mDanceCheck.Check(theKey))
+			else if (mApp.mDanceCheck.Check(theKey))
 			{
-				if (this.mApp.CanDoDanceMode())
+				if (mApp.CanDoDanceMode())
 				{
-					this.SetDanceMode(!this.mDanceMode);
+					SetDanceMode(!mDanceMode);
 					return;
 				}
-				if (this.mApp.mGameScene == GameScenes.SCENE_PLAYING)
+				if (mApp.mGameScene == GameScenes.SCENE_PLAYING)
 				{
-					this.DisplayAdvice("[CANT_USE_CODE]", MessageStyle.MESSAGE_STYLE_BIG_MIDDLE_FAST, AdviceType.ADVICE_NONE);
+					DisplayAdvice("[CANT_USE_CODE]", MessageStyle.MESSAGE_STYLE_BIG_MIDDLE_FAST, AdviceType.ADVICE_NONE);
 				}
-				this.mApp.PlaySample(Resources.SOUND_BUZZER);
+				mApp.PlaySample(Resources.SOUND_BUZZER);
 				return;
 			}
 			else
 			{
-				if (!this.mApp.mDaisyCheck.Check(theKey))
+				if (!mApp.mDaisyCheck.Check(theKey))
 				{
-					if (this.mApp.mSukhbirCheck.Check(theKey))
+					if (mApp.mSukhbirCheck.Check(theKey))
 					{
-						this.SetSukhbirMode(!this.mSukhbirMode);
+						SetSukhbirMode(!mSukhbirMode);
 					}
 					return;
 				}
-				if (this.mApp.CanDoDaisyMode())
+				if (mApp.CanDoDaisyMode())
 				{
-					this.SetDaisyMode(!this.mDaisyMode);
+					SetDaisyMode(!mDaisyMode);
 					return;
 				}
-				if (this.mApp.mGameScene == GameScenes.SCENE_PLAYING)
+				if (mApp.mGameScene == GameScenes.SCENE_PLAYING)
 				{
-					this.DisplayAdvice("[CANT_USE_CODE]", MessageStyle.MESSAGE_STYLE_BIG_MIDDLE_FAST, AdviceType.ADVICE_NONE);
+					DisplayAdvice("[CANT_USE_CODE]", MessageStyle.MESSAGE_STYLE_BIG_MIDDLE_FAST, AdviceType.ADVICE_NONE);
 				}
-				this.mApp.PlaySample(Resources.SOUND_BUZZER);
+				mApp.PlaySample(Resources.SOUND_BUZZER);
 				return;
 			}
 		}
 
 		public void CompleteEndLevelSequenceForSaving()
 		{
-			if (this.CanDropLoot())
+			if (CanDropLoot())
 			{
 				LawnMower lawnMower = null;
-				while (this.IterateLawnMowers(ref lawnMower))
+				while (IterateLawnMowers(ref lawnMower))
 				{
 					if (lawnMower.mMowerState != LawnMowerState.MOWER_TRIGGERED && lawnMower.mMowerState != LawnMowerState.MOWER_SQUISHED)
 					{
 						int coinValue = Coin.GetCoinValue(CoinType.COIN_GOLD);
-						this.mApp.mPlayerInfo.AddCoins(coinValue);
-						this.mCoinsCollected += coinValue;
+						mApp.mPlayerInfo.AddCoins(coinValue);
+						mCoinsCollected += coinValue;
 					}
 				}
 			}
 			Coin coin = null;
-			while (this.IterateCoins(ref coin))
+			while (IterateCoins(ref coin))
 			{
 				if (coin.mIsBeingCollected)
 				{
@@ -9519,16 +9519,16 @@ namespace Lawn
 					coin.Die();
 				}
 			}
-			this.CheckForPostGameAchievements();
-			this.mApp.UpdatePlayerProfileForFinishingLevel();
+			CheckForPostGameAchievements();
+			mApp.UpdatePlayerProfileForFinishingLevel();
 		}
 
 		public void RemoveZombiesForRepick()
 		{
-			int count = this.mZombies.Count;
+			int count = mZombies.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Zombie zombie = this.mZombies[i];
+				Zombie zombie = mZombies[i];
 				if (!zombie.mDead && !zombie.IsDeadOrDying() && zombie.mMindControlled && zombie.mPosX > 720f)
 				{
 					zombie.DieNoLoot(false);
@@ -9538,17 +9538,17 @@ namespace Lawn
 
 		public bool IsSurvivalStageWithRepick()
 		{
-			return this.mApp.IsSurvivalMode() && !this.IsFinalSurvivalStage();
+			return mApp.IsSurvivalMode() && !IsFinalSurvivalStage();
 		}
 
 		public bool IsLastStandStageWithRepick()
 		{
-			return this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND && !this.IsLastStandFinalStage();
+			return mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND && !IsLastStandFinalStage();
 		}
 
 		public bool GrantAchievement(AchievementId theAchievement)
 		{
-			return this.GrantAchievement(theAchievement, true);
+			return GrantAchievement(theAchievement, true);
 		}
 
 		public bool GrantAchievement(AchievementId theAchievement, bool show)
@@ -9558,14 +9558,14 @@ namespace Lawn
 
 		public bool CheckForPostGameAchievements()
 		{
-			if (this.mApp.IsWhackAZombieLevel() || this.mApp.IsScaryPotterLevel() || this.mApp.IsWallnutBowlingLevel())
+			if (mApp.IsWhackAZombieLevel() || mApp.IsScaryPotterLevel() || mApp.IsWallnutBowlingLevel())
 			{
 				return false;
 			}
 			bool flag = false;
-			if (this.mApp.IsAdventureMode() && this.mLevel == 50 && this.mApp.mPlayerInfo.mFinishedAdventure < 1)
+			if (mApp.IsAdventureMode() && mLevel == 50 && mApp.mPlayerInfo.mFinishedAdventure < 1)
 			{
-				flag = (this.GrantAchievement(AchievementId.ACHIEVEMENT_HOME_SECURITY, false) || flag);
+				flag = (GrantAchievement(AchievementId.ACHIEVEMENT_HOME_SECURITY, false) || flag);
 			}
 			return flag;
 		}
@@ -9573,10 +9573,10 @@ namespace Lawn
 		public int GetLiveGargantuarCount()
 		{
 			int num = 0;
-			int count = this.mZombies.Count;
+			int count = mZombies.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Zombie zombie = this.mZombies[i];
+				Zombie zombie = mZombies[i];
 				if (!zombie.mDead && zombie.mHasHead && !zombie.IsDeadOrDying() && zombie.IsOnBoard() && (zombie.mZombieType == ZombieType.ZOMBIE_GARGANTUAR || zombie.mZombieType == ZombieType.ZOMBIE_REDEYE_GARGANTUAR))
 				{
 					num++;
@@ -9607,178 +9607,178 @@ namespace Lawn
 
 		public override bool BackButtonPress()
 		{
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 			{
-				this.mApp.mBoardResult = BoardResult.BOARDRESULT_QUIT;
-				this.TryToSaveGame();
-				this.mApp.DoBackToMain();
+				mApp.mBoardResult = BoardResult.BOARDRESULT_QUIT;
+				TryToSaveGame();
+				mApp.DoBackToMain();
 				return true;
 			}
-			if (!this.CanInteractWithBoardButtons())
+			if (!CanInteractWithBoardButtons())
 			{
 				return true;
 			}
-			this.RefreshSeedPacketFromCursor();
-			this.mApp.DoNewOptions(false);
+			RefreshSeedPacketFromCursor();
+			mApp.DoNewOptions(false);
 			return true;
 		}
 
 		public bool SaveToFile(Sexy.Buffer b)
 		{
-			LeaderBoardComm.RecordResult(LeaderboardGameMode.Adventure, (int)this.mApp.mPlayerInfo.mZombiesKilled);
+			LeaderBoardComm.RecordResult(LeaderboardGameMode.Adventure, (int)mApp.mPlayerInfo.mZombiesKilled);
 			try
 			{
 				EffectSystem.gEffectSystem.SaveToFile(b);
-				b.WriteLong(this.mLevel);
-				b.WriteLong((int)this.mApp.mGameScene);
+				b.WriteLong(mLevel);
+				b.WriteLong((int)mApp.mGameScene);
 				b.WriteLong(Board.mPeashootersPlanted);
-				b.WriteBoolean(this.mNomNomNomAchievementTracker);
-				b.WriteBoolean(this.mNoFungusAmongUsAchievementTracker);
-				b.WriteLong((int)this.mBackground);
-				b.WriteLong(this.mBoardFadeOutCounter);
-				b.WriteLong(this.mBoardRandSeed);
-				b.WriteLong(this.mBonusLawnMowersRemaining);
-				b.WriteBoolean(this.mCatapultPlantsUsed);
-				this.mChallenge.SaveToFile(b);
-				b.WriteLong(this.mChocolateCollected);
-				b.WriteLong(this.mCobCannonCursorDelayCounter);
-				b.WriteLong(this.mCobCannonMouseX);
-				b.WriteLong(this.mCobCannonMouseY);
-				b.WriteLong(this.mCoinBankFadeCount);
-				b.WriteLong(this.mCoins.Count);
-				for (int i = 0; i < this.mCoins.Count; i++)
+				b.WriteBoolean(mNomNomNomAchievementTracker);
+				b.WriteBoolean(mNoFungusAmongUsAchievementTracker);
+				b.WriteLong((int)mBackground);
+				b.WriteLong(mBoardFadeOutCounter);
+				b.WriteLong(mBoardRandSeed);
+				b.WriteLong(mBonusLawnMowersRemaining);
+				b.WriteBoolean(mCatapultPlantsUsed);
+				mChallenge.SaveToFile(b);
+				b.WriteLong(mChocolateCollected);
+				b.WriteLong(mCobCannonCursorDelayCounter);
+				b.WriteLong(mCobCannonMouseX);
+				b.WriteLong(mCobCannonMouseY);
+				b.WriteLong(mCoinBankFadeCount);
+				b.WriteLong(mCoins.Count);
+				for (int i = 0; i < mCoins.Count; i++)
 				{
-					this.mCoins[i].SaveToFile(b);
+					mCoins[i].SaveToFile(b);
 				}
-				b.WriteLong(this.mCoinsCollected);
-				b.WriteLong(this.mCollectedCoinStreak);
-				b.WriteLong(this.mCurrentWave);
-				this.mCursorObject.SaveToFile(b);
-				b.WriteBoolean(this.mDaisyMode);
-				b.WriteBoolean(this.mDanceMode);
-				b.WriteLong(this.mDiamondsCollected);
-				b.WriteLong(this.mDoomsUsed);
-				b.WriteBoolean(this.mDroppedFirstCoin);
-				b.WriteLong(this.mEffectCounter);
-				b.WriteBoolean(this.mEnableGraveStones);
-				b.WriteBoolean(this.mFinalBossKilled);
-				b.WriteLong(this.mFinalWaveSoundCounter);
-				b.WriteLong(this.mFlagRaiseCounter);
-				b.WriteLong(this.mFogBlownCountDown);
-				b.WriteFloat(this.mFogOffset);
-				b.WriteLong(this.mFwooshCountDown);
-				b.WriteLong(this.mGameID);
-				b.WriteLong(this.mGargantuarsKillsByCornCob);
-				b.WriteLong(this.mGravesCleared);
-				b.WriteLong2DArray(this.mGridCelFog);
-				b.WriteLong2DArray(this.mGridCelLook);
-				b.WriteLong3DArray(this.mGridCelOffset);
-				b.WriteLong(this.mGridItems.Count);
-				for (int j = 0; j < this.mGridItems.Count; j++)
+				b.WriteLong(mCoinsCollected);
+				b.WriteLong(mCollectedCoinStreak);
+				b.WriteLong(mCurrentWave);
+				mCursorObject.SaveToFile(b);
+				b.WriteBoolean(mDaisyMode);
+				b.WriteBoolean(mDanceMode);
+				b.WriteLong(mDiamondsCollected);
+				b.WriteLong(mDoomsUsed);
+				b.WriteBoolean(mDroppedFirstCoin);
+				b.WriteLong(mEffectCounter);
+				b.WriteBoolean(mEnableGraveStones);
+				b.WriteBoolean(mFinalBossKilled);
+				b.WriteLong(mFinalWaveSoundCounter);
+				b.WriteLong(mFlagRaiseCounter);
+				b.WriteLong(mFogBlownCountDown);
+				b.WriteFloat(mFogOffset);
+				b.WriteLong(mFwooshCountDown);
+				b.WriteLong(mGameID);
+				b.WriteLong(mGargantuarsKillsByCornCob);
+				b.WriteLong(mGravesCleared);
+				b.WriteLong2DArray(mGridCelFog);
+				b.WriteLong2DArray(mGridCelLook);
+				b.WriteLong3DArray(mGridCelOffset);
+				b.WriteLong(mGridItems.Count);
+				for (int j = 0; j < mGridItems.Count; j++)
 				{
-					this.mGridItems[j].SaveToFile(b);
+					mGridItems[j].SaveToFile(b);
 				}
-				int length = this.mGridSquareType.GetLength(0);
-				int length2 = this.mGridSquareType.GetLength(1);
+				int length = mGridSquareType.GetLength(0);
+				int length2 = mGridSquareType.GetLength(1);
 				b.WriteLong(length);
 				b.WriteLong(length2);
 				for (int k = 0; k < length; k++)
 				{
 					for (int l = 0; l < length2; l++)
 					{
-						b.WriteLong((int)this.mGridSquareType[k, l]);
+						b.WriteLong((int)mGridSquareType[k, l]);
 					}
 				}
-				b.WriteBooleanArray(this.mHelpDisplayed);
-				b.WriteLong((int)this.mHelpIndex);
-				b.WriteLong(this.mHugeWaveCountDown);
-				b.WriteLongArray(this.mIceMinX);
-				b.WriteLongArray(this.mIceTimer);
-				b.WriteLong(this.mIceTrapCounter);
-				b.WriteBoolean(this.mIgnoreMouseUp);
-				b.WriteBoolean(this.mKilledYeti);
-				b.WriteLong(this.mLastBungeeWave);
-				b.WriteLong(this.mLastToolX);
-				b.WriteLong(this.mLastToolY);
-				b.WriteLong(this.mLastWMUpdateCount);
-				b.WriteLong(this.mLawnMowers.Count);
-				for (int m = 0; m < this.mLawnMowers.Count; m++)
+				b.WriteBooleanArray(mHelpDisplayed);
+				b.WriteLong((int)mHelpIndex);
+				b.WriteLong(mHugeWaveCountDown);
+				b.WriteLongArray(mIceMinX);
+				b.WriteLongArray(mIceTimer);
+				b.WriteLong(mIceTrapCounter);
+				b.WriteBoolean(mIgnoreMouseUp);
+				b.WriteBoolean(mKilledYeti);
+				b.WriteLong(mLastBungeeWave);
+				b.WriteLong(mLastToolX);
+				b.WriteLong(mLastToolY);
+				b.WriteLong(mLastWMUpdateCount);
+				b.WriteLong(mLawnMowers.Count);
+				for (int m = 0; m < mLawnMowers.Count; m++)
 				{
-					this.mLawnMowers[m].SaveToFile(b);
+					mLawnMowers[m].SaveToFile(b);
 				}
-				b.WriteBoolean(this.mLevelAwardSpawned);
-				b.WriteBoolean(this.mLevelComplete);
-				b.WriteLong(this.mLevelFadeCount);
-				b.WriteString(this.mLevelStr);
-				b.WriteLong(this.mMainCounter);
-				b.WriteLong(this.mMaxSunPlants);
-				b.WriteFloat(this.mMinFPS);
-				b.WriteBoolean(this.mMushroomAndCoffeeBeansOnly);
-				b.WriteBoolean(this.mMushroomsUsed);
-				b.WriteLong(this.mNextSurvivalStageCounter);
-				b.WriteLong(this.mNumSunsFallen);
-				b.WriteLong(this.mNumWaves);
-				b.WriteBoolean(this.mNutsUsed);
-				b.WriteLong(this.mOutOfMoneyCounter);
-				b.WriteBoolean(this.mPeaShooterUsed);
-				b.WriteBoolean(this.mPinataMode);
-				b.WriteBoolean(this.mPlanternOrBloverUsed);
-				b.WriteLong(this.mPlants.Count);
-				for (int n = 0; n < this.mPlants.Count; n++)
+				b.WriteBoolean(mLevelAwardSpawned);
+				b.WriteBoolean(mLevelComplete);
+				b.WriteLong(mLevelFadeCount);
+				b.WriteString(mLevelStr);
+				b.WriteLong(mMainCounter);
+				b.WriteLong(mMaxSunPlants);
+				b.WriteFloat(mMinFPS);
+				b.WriteBoolean(mMushroomAndCoffeeBeansOnly);
+				b.WriteBoolean(mMushroomsUsed);
+				b.WriteLong(mNextSurvivalStageCounter);
+				b.WriteLong(mNumSunsFallen);
+				b.WriteLong(mNumWaves);
+				b.WriteBoolean(mNutsUsed);
+				b.WriteLong(mOutOfMoneyCounter);
+				b.WriteBoolean(mPeaShooterUsed);
+				b.WriteBoolean(mPinataMode);
+				b.WriteBoolean(mPlanternOrBloverUsed);
+				b.WriteLong(mPlants.Count);
+				for (int n = 0; n < mPlants.Count; n++)
 				{
-					this.mPlants[n].SaveToFile(b);
+					mPlants[n].SaveToFile(b);
 				}
-				b.WriteLong(this.mPlantsEaten);
-				b.WriteLong(this.mPlantsShoveled);
-				b.WriteLong(this.mPlayTimeActiveLevel);
-				b.WriteLong(this.mPlayTimeInactiveLevel);
-				b.WriteLong(this.mPottedPlantsCollected);
-				b.WriteLong(this.mProgressMeterWidth);
-				b.WriteLong(this.mProjectiles.Count);
-				for (int num = 0; num < this.mProjectiles.Count; num++)
+				b.WriteLong(mPlantsEaten);
+				b.WriteLong(mPlantsShoveled);
+				b.WriteLong(mPlayTimeActiveLevel);
+				b.WriteLong(mPlayTimeInactiveLevel);
+				b.WriteLong(mPottedPlantsCollected);
+				b.WriteLong(mProgressMeterWidth);
+				b.WriteLong(mProjectiles.Count);
+				for (int num = 0; num < mProjectiles.Count; num++)
 				{
-					this.mProjectiles[num].SaveToFile(b);
+					mProjectiles[num].SaveToFile(b);
 				}
-				b.WriteLong(this.mRiseFromGraveCounter);
-				b.WriteLong(this.mRowPickingArray.Length);
-				for (int num2 = 0; num2 < this.mRowPickingArray.Length; num2++)
+				b.WriteLong(mRiseFromGraveCounter);
+				b.WriteLong(mRowPickingArray.Length);
+				for (int num2 = 0; num2 < mRowPickingArray.Length; num2++)
 				{
-					this.mRowPickingArray[num2].SaveToFile(b);
+					mRowPickingArray[num2].SaveToFile(b);
 				}
-				b.WriteLong(this.mScoreNextMowerCounter);
-				b.WriteBoolean(this.mShowShovel);
-				this.mSeedBank.SaveToFile(b);
-				b.WriteLong(this.mSodPosition);
-				b.WriteLong(this.mSpecialGraveStoneX);
-				b.WriteLong(this.mSpecialGraveStoneY);
-				b.WriteLong(this.mSunCountDown);
-				b.WriteLong(this.mSunMoney);
-				b.WriteBoolean(this.mSuperMowerMode);
-				b.WriteLong(this.mTimeStopCounter);
-				b.WriteLong(this.mTotalSpawnedWaves);
-				b.WriteLong(this.mTriggeredLawnMowers);
-				b.WriteLong((int)this.mTutorialState);
-				b.WriteLong(this.mTutorialTimer);
-				b.WriteLongArray(this.mWaveRowGotLawnMowered);
-				b.WriteBooleanArray(this.mZombieAllowed);
-				b.WriteLong(this.mZombieCountDown);
-				b.WriteLong(this.mZombieCountDownStart);
-				b.WriteLong(this.mZombieHealthToNextWave);
-				b.WriteLong(this.mZombieHealthWaveStart);
-				b.WriteLong(this.mZombies.Count);
-				for (int num3 = 0; num3 < this.mZombies.Count; num3++)
+				b.WriteLong(mScoreNextMowerCounter);
+				b.WriteBoolean(mShowShovel);
+				mSeedBank.SaveToFile(b);
+				b.WriteLong(mSodPosition);
+				b.WriteLong(mSpecialGraveStoneX);
+				b.WriteLong(mSpecialGraveStoneY);
+				b.WriteLong(mSunCountDown);
+				b.WriteLong(mSunMoney);
+				b.WriteBoolean(mSuperMowerMode);
+				b.WriteLong(mTimeStopCounter);
+				b.WriteLong(mTotalSpawnedWaves);
+				b.WriteLong(mTriggeredLawnMowers);
+				b.WriteLong((int)mTutorialState);
+				b.WriteLong(mTutorialTimer);
+				b.WriteLongArray(mWaveRowGotLawnMowered);
+				b.WriteBooleanArray(mZombieAllowed);
+				b.WriteLong(mZombieCountDown);
+				b.WriteLong(mZombieCountDownStart);
+				b.WriteLong(mZombieHealthToNextWave);
+				b.WriteLong(mZombieHealthWaveStart);
+				b.WriteLong(mZombies.Count);
+				for (int num3 = 0; num3 < mZombies.Count; num3++)
 				{
-					this.mZombies[num3].SaveToFile(b);
+					mZombies[num3].SaveToFile(b);
 				}
-				length = this.mZombiesInWave.GetLength(0);
-				length2 = this.mZombiesInWave.GetLength(1);
+				length = mZombiesInWave.GetLength(0);
+				length2 = mZombiesInWave.GetLength(1);
 				b.WriteLong(length);
 				b.WriteLong(length2);
 				for (int num4 = 0; num4 < length; num4++)
 				{
 					for (int num5 = 0; num5 < length2; num5++)
 					{
-						b.WriteLong((int)this.mZombiesInWave[num4, num5]);
+						b.WriteLong((int)mZombiesInWave[num4, num5]);
 					}
 				}
 				b.WriteLong(777);

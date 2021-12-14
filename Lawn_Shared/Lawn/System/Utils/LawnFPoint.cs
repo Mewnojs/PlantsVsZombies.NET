@@ -6,8 +6,8 @@ namespace Lawn
 	{
 		public LawnFPoint(float theX, float theY)
 		{
-			this.x = theX;
-			this.y = theY;
+			x = theX;
+			y = theY;
 		}
 
 		public float x;

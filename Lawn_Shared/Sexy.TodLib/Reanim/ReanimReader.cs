@@ -16,7 +16,7 @@ namespace Sexy.TodLib
 			for (int i = 0; i < (int)reanimatorDefinition.mTrackCount; i++)
 			{
 				ReanimatorTrack reanimatorTrack;
-				this.ReadReanimTrack(customContentReader, doScale, out reanimatorTrack);
+				ReadReanimTrack(customContentReader, doScale, out reanimatorTrack);
 				reanimatorDefinition.mTracks[i] = reanimatorTrack;
 			}
 			return reanimatorDefinition;
@@ -30,7 +30,7 @@ namespace Sexy.TodLib
 			for (int i = 0; i < (int)track.mTransformCount; i++)
 			{
 				ReanimatorTransform reanimatorTransform;
-				this.ReadReanimTransform(input, doScale, out reanimatorTransform);
+				ReadReanimTransform(input, doScale, out reanimatorTransform);
 				track.mTransforms[i] = reanimatorTransform;
 			}
 		}

@@ -9,16 +9,16 @@ namespace Sexy
 	{
 		public EncodingParser()
 		{
-			this.mStream = null;
-			this.mFirstChar = false;
+			mStream = null;
+			mFirstChar = false;
 		}
 
 		public virtual void Dispose()
 		{
-			if (this.mStream != null)
+			if (mStream != null)
 			{
-				this.mStream.Close();
-				this.mStream = null;
+				mStream.Close();
+				mStream = null;
 			}
 		}
 
@@ -26,23 +26,23 @@ namespace Sexy
 		{
 			try
 			{
-				this.mStream = new StreamReader(TitleContainer.OpenStream(theFileName));
+				mStream = new StreamReader(TitleContainer.OpenStream(theFileName));
 			}
 			catch
 			{
-				this.mStream = null;
+				mStream = null;
 				return false;
 			}
-			this.mFirstChar = true;
+			mFirstChar = true;
 			return true;
 		}
 
 		public virtual bool CloseFile()
 		{
-			if (this.mStream != null)
+			if (mStream != null)
 			{
-				this.mStream.Close();
-				this.mStream = null;
+				mStream.Close();
+				mStream = null;
 				return true;
 			}
 			return false;
@@ -50,33 +50,33 @@ namespace Sexy
 
 		public virtual bool EndOfFile()
 		{
-			return this.mBufferedText.Count <= 0 && (this.mStream == null || this.mStream.EndOfStream);
+			return mBufferedText.Count <= 0 && (mStream == null || mStream.EndOfStream);
 		}
 
 		public virtual void SetStringSource(string theString)
 		{
 			int length = theString.Length;
-			this.mBufferedText.Capacity = length;
+			mBufferedText.Capacity = length;
 			for (int i = 0; i < length; i++)
 			{
-				this.mBufferedText[i] = theString[length - i - 1];
+				mBufferedText[i] = theString[length - i - 1];
 			}
 		}
 
 		public virtual EncodingParser.GetCharReturnType GetChar(ref char theChar)
 		{
-			if (this.mBufferedText.Count != 0)
+			if (mBufferedText.Count != 0)
 			{
-				theChar = this.mBufferedText[0];
-				this.mBufferedText.RemoveAt(0);
+				theChar = mBufferedText[0];
+				mBufferedText.RemoveAt(0);
 				return EncodingParser.GetCharReturnType.SUCCESSFUL;
 			}
-			if (this.mStream == null || this.mStream.EndOfStream)
+			if (mStream == null || mStream.EndOfStream)
 			{
 				return EncodingParser.GetCharReturnType.END_OF_FILE;
 			}
 			bool flag = false;
-			if (this.GetNextChar(ref theChar))
+			if (GetNextChar(ref theChar))
 			{
 				return EncodingParser.GetCharReturnType.SUCCESSFUL;
 			}
@@ -89,7 +89,7 @@ namespace Sexy
 
 		private bool GetNextChar(ref char theChar)
 		{
-			int num = this.mStream.Read();
+			int num = mStream.Read();
 			if (num == -1)
 			{
 				return false;
@@ -100,13 +100,13 @@ namespace Sexy
 
 		public virtual bool PutChar(char theChar)
 		{
-			this.mBufferedText.Add(theChar);
+			mBufferedText.Add(theChar);
 			return true;
 		}
 
 		public virtual bool PutString(string theString)
 		{
-			this.mBufferedText.AddRange(theString);
+			mBufferedText.AddRange(theString);
 			return true;
 		}
 

@@ -21,83 +21,83 @@ namespace Sexy.TodLib
 
 		public void PrepareForReuse()
 		{
-			this.Reset();
+			Reset();
 			TodParticleSystem.unusedObjects.Push(this);
 		}
 
 		private TodParticleSystem()
 		{
-			this.Reset();
+			Reset();
 		}
 
 		private void Reset()
 		{
-			this.mEffectType = ParticleEffect.PARTICLE_NONE;
-			for (int i = 0; i < this.mEmitterList.Count; i++)
+			mEffectType = ParticleEffect.PARTICLE_NONE;
+			for (int i = 0; i < mEmitterList.Count; i++)
 			{
-				this.mEmitterList[i].PrepareForReuse();
+				mEmitterList[i].PrepareForReuse();
 			}
-			this.mEmitterList.Clear();
-			this.mParticleDef = null;
-			this.mParticleHolder = null;
-			this.mDead = false;
-			this.mDontUpdate = false;
-			this.mIsAttachment = false;
-			this.mRenderOrder = 0;
-			this.mActive = false;
+			mEmitterList.Clear();
+			mParticleDef = null;
+			mParticleHolder = null;
+			mDead = false;
+			mDontUpdate = false;
+			mIsAttachment = false;
+			mRenderOrder = 0;
+			mActive = false;
 		}
 
 		public void Dispose()
 		{
-			this.ParticleSystemDie();
+			ParticleSystemDie();
 		}
 
 		public void TodParticleInitializeFromDef(float theX, float theY, int theRenderOrder, TodParticleDefinition theDefinition, ParticleEffect theEffectType)
 		{
-			this.mParticleDef = theDefinition;
-			this.mRenderOrder = theRenderOrder;
-			this.mEffectType = theEffectType;
+			mParticleDef = theDefinition;
+			mRenderOrder = theRenderOrder;
+			mEffectType = theEffectType;
 			for (int i = 0; i < theDefinition.mEmitterDefCount; i++)
 			{
 				TodEmitterDefinition todEmitterDefinition = theDefinition.mEmitterDefs[i];
 				if (!Definition.FloatTrackIsSet(ref todEmitterDefinition.mCrossFadeDuration))
 				{
-					if (TodCommon.TestBit((uint)todEmitterDefinition.mParticleFlags, 7) && this.mParticleHolder.IsOverLoaded())
+					if (TodCommon.TestBit((uint)todEmitterDefinition.mParticleFlags, 7) && mParticleHolder.IsOverLoaded())
 					{
-						this.ParticleSystemDie();
+						ParticleSystemDie();
 						return;
 					}
 					TodParticleEmitter newTodParticleEmitter = TodParticleEmitter.GetNewTodParticleEmitter();
 					newTodParticleEmitter.mActive = true;
-					this.mParticleHolder.mEmitters.Add(newTodParticleEmitter);
+					mParticleHolder.mEmitters.Add(newTodParticleEmitter);
 					newTodParticleEmitter.TodEmitterInitialize(theX, theY, this, todEmitterDefinition);
 					TodParticleEmitter todParticleEmitter = newTodParticleEmitter;
-					this.mEmitterList.Add(todParticleEmitter);
+					mEmitterList.Add(todParticleEmitter);
 				}
 			}
 		}
 
 		public void ParticleSystemDie()
 		{
-			for (int i = 0; i < this.mEmitterList.Count; i++)
+			for (int i = 0; i < mEmitterList.Count; i++)
 			{
-				TodParticleEmitter todParticleEmitter = this.mEmitterList[i];
+				TodParticleEmitter todParticleEmitter = mEmitterList[i];
 				todParticleEmitter.DeleteAll();
 				todParticleEmitter.PrepareForReuse();
-				this.mParticleHolder.mEmitters.Remove(todParticleEmitter);
+				mParticleHolder.mEmitters.Remove(todParticleEmitter);
 			}
-			this.mEmitterList.Clear();
-			this.mDead = true;
+			mEmitterList.Clear();
+			mDead = true;
 		}
 
 		public void Update()
 		{
-			if (this.mDontUpdate)
+			if (mDontUpdate)
 			{
 				return;
 			}
 			bool flag = false;
-			foreach (TodParticleEmitter todParticleEmitter in this.mEmitterList)
+			foreach (TodParticleEmitter todParticleEmitter in mEmitterList)
 			{
 				TodParticleEmitter todParticleEmitter2 = todParticleEmitter;
 				todParticleEmitter2.Update();
@@ -117,14 +117,14 @@ namespace Sexy.TodLib
 			}
 			if (!flag)
 			{
-				this.mDead = true;
+				mDead = true;
 			}
 		}
 
 		public void Draw(Graphics g, bool doScale)
 		{
 			g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
-			foreach (TodParticleEmitter todParticleEmitter in this.mEmitterList)
+			foreach (TodParticleEmitter todParticleEmitter in mEmitterList)
 			{
 				todParticleEmitter.Draw(g, doScale);
 			}
@@ -132,7 +132,7 @@ namespace Sexy.TodLib
 
 		public void SystemMove(float theX, float theY)
 		{
-			foreach (TodParticleEmitter todParticleEmitter in this.mEmitterList)
+			foreach (TodParticleEmitter todParticleEmitter in mEmitterList)
 			{
 				TodParticleEmitter todParticleEmitter2 = todParticleEmitter;
 				todParticleEmitter2.SystemMove(theX, theY);
@@ -141,7 +141,7 @@ namespace Sexy.TodLib
 
 		public void OverrideColor(string theEmitterName, SexyColor theColor)
 		{
-			foreach (TodParticleEmitter todParticleEmitter in this.mEmitterList)
+			foreach (TodParticleEmitter todParticleEmitter in mEmitterList)
 			{
 				TodParticleEmitter todParticleEmitter2 = todParticleEmitter;
 				if (theEmitterName == null || string.Compare(theEmitterName, todParticleEmitter2.mEmitterDef.mName) == 0)
@@ -153,7 +153,7 @@ namespace Sexy.TodLib
 
 		public void OverrideExtraAdditiveDraw(string theEmitterName, bool theEnableExtraAdditiveDraw)
 		{
-			foreach (TodParticleEmitter todParticleEmitter in this.mEmitterList)
+			foreach (TodParticleEmitter todParticleEmitter in mEmitterList)
 			{
 				TodParticleEmitter todParticleEmitter2 = todParticleEmitter;
 				if (theEmitterName == null || string.Compare(theEmitterName, todParticleEmitter2.mEmitterDef.mName) == 0)
@@ -165,7 +165,7 @@ namespace Sexy.TodLib
 
 		public void OverrideImage(string theEmitterName, Image theImage)
 		{
-			foreach (TodParticleEmitter todParticleEmitter in this.mEmitterList)
+			foreach (TodParticleEmitter todParticleEmitter in mEmitterList)
 			{
 				TodParticleEmitter todParticleEmitter2 = todParticleEmitter;
 				if (theEmitterName == null || string.Compare(theEmitterName, todParticleEmitter2.mEmitterDef.mName) == 0)
@@ -177,7 +177,7 @@ namespace Sexy.TodLib
 
 		public void OverrideFrame(string theEmitterName, int theFrame)
 		{
-			foreach (TodParticleEmitter todParticleEmitter in this.mEmitterList)
+			foreach (TodParticleEmitter todParticleEmitter in mEmitterList)
 			{
 				TodParticleEmitter todParticleEmitter2 = todParticleEmitter;
 				if (theEmitterName == null || string.Compare(theEmitterName, todParticleEmitter2.mEmitterDef.mName) == 0)
@@ -189,7 +189,7 @@ namespace Sexy.TodLib
 
 		public void OverrideScale(string theEmitterName, float theScale)
 		{
-			foreach (TodParticleEmitter todParticleEmitter in this.mEmitterList)
+			foreach (TodParticleEmitter todParticleEmitter in mEmitterList)
 			{
 				TodParticleEmitter todParticleEmitter2 = todParticleEmitter;
 				if (theEmitterName == null || string.Compare(theEmitterName, todParticleEmitter2.mEmitterDef.mName) == 0)
@@ -201,7 +201,7 @@ namespace Sexy.TodLib
 
 		public void CrossFade(string theCrossFadeEmitter)
 		{
-			TodEmitterDefinition todEmitterDefinition = this.FindEmitterDefByName(theCrossFadeEmitter);
+			TodEmitterDefinition todEmitterDefinition = FindEmitterDefByName(theCrossFadeEmitter);
 			if (todEmitterDefinition == null)
 			{
 				Debug.OutputDebug<string>(Common.StrFormat_("Can't find cross fade emitter: {0}\n", theCrossFadeEmitter));
@@ -212,24 +212,24 @@ namespace Sexy.TodLib
 				Debug.OutputDebug<string>(Common.StrFormat_("Can't cross fade without duration set: {0}\n", theCrossFadeEmitter));
 				return;
 			}
-			if (this.mParticleHolder.mEmitters.Count + this.mEmitterList.Count > this.mParticleHolder.mEmitters.Capacity)
+			if (mParticleHolder.mEmitters.Count + mEmitterList.Count > mParticleHolder.mEmitters.Capacity)
 			{
 				Debug.OutputDebug<string>("Too many emitters to cross fade\n");
-				this.ParticleSystemDie();
+				ParticleSystemDie();
 				return;
 			}
-			for (int i = 0; i < this.mEmitterList.Count; i++)
+			for (int i = 0; i < mEmitterList.Count; i++)
 			{
-				TodParticleEmitter todParticleEmitter = this.mEmitterList[i];
+				TodParticleEmitter todParticleEmitter = mEmitterList[i];
 				TodParticleEmitter todParticleEmitter2 = todParticleEmitter;
 				if (todParticleEmitter2.mEmitterDef != todEmitterDefinition)
 				{
 					TodParticleEmitter newTodParticleEmitter = TodParticleEmitter.GetNewTodParticleEmitter();
 					newTodParticleEmitter.TodEmitterInitialize(todParticleEmitter2.mSystemCenter.x, todParticleEmitter2.mSystemCenter.y, this, todEmitterDefinition);
 					newTodParticleEmitter.mActive = true;
-					this.mParticleHolder.mEmitters.Add(newTodParticleEmitter);
+					mParticleHolder.mEmitters.Add(newTodParticleEmitter);
 					TodParticleEmitter todParticleEmitter3 = newTodParticleEmitter;
-					this.mEmitterList.Add(todParticleEmitter3);
+					mEmitterList.Add(todParticleEmitter3);
 					todParticleEmitter2.CrossFadeEmitter(newTodParticleEmitter);
 				}
 			}
@@ -237,7 +237,7 @@ namespace Sexy.TodLib
 
 		public TodParticleEmitter FindEmitterByName(string theEmitterName)
 		{
-			foreach (TodParticleEmitter todParticleEmitter in this.mEmitterList)
+			foreach (TodParticleEmitter todParticleEmitter in mEmitterList)
 			{
 				TodParticleEmitter todParticleEmitter2 = todParticleEmitter;
 				if (string.Compare(todParticleEmitter2.mEmitterDef.mName, theEmitterName) == 0)
@@ -250,9 +250,9 @@ namespace Sexy.TodLib
 
 		public TodEmitterDefinition FindEmitterDefByName(string theEmitterName)
 		{
-			for (int i = 0; i < this.mParticleDef.mEmitterDefCount; i++)
+			for (int i = 0; i < mParticleDef.mEmitterDefCount; i++)
 			{
-				TodEmitterDefinition todEmitterDefinition = this.mParticleDef.mEmitterDefs[i];
+				TodEmitterDefinition todEmitterDefinition = mParticleDef.mEmitterDefs[i];
 				if (string.Compare(todEmitterDefinition.mName, theEmitterName) == 0)
 				{
 					return todEmitterDefinition;

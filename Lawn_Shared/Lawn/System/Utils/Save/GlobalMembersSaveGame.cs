@@ -25,12 +25,12 @@ namespace Lawn
 
 		public static bool LawnSaveGame(Board mBoard, string theFilePath)
 		{
-			LawnApp mApp = mBoard.mApp;
+			LawnApp app = mBoard.mApp;
 			GlobalMembersSaveGame.SaveGameContext saveGameContext = new GlobalMembersSaveGame.SaveGameContext();
 			saveGameContext.mFailed = false;
 			saveGameContext.mReading = false;
 			GlobalMembersSaveGame.SyncBoard(ref saveGameContext, mBoard);
-			if (!mApp.WriteBufferToFile(theFilePath, saveGameContext.mBuffer))
+			if (!app.WriteBufferToFile(theFilePath, saveGameContext.mBuffer))
 			{
 				return false;
 			}

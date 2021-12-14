@@ -7,28 +7,28 @@ namespace Sexy.TodLib
 	{
 		public void Dispose()
 		{
-			this.DisposeHolder();
+			DisposeHolder();
 		}
 
 		public void InitializeHolder()
 		{
-			this.mAttachments.Clear();
+			mAttachments.Clear();
 		}
 
 		public void DisposeHolder()
 		{
-			for (int i = 0; i < this.mAttachments.Count; i++)
+			for (int i = 0; i < mAttachments.Count; i++)
 			{
-				this.mAttachments[i].PrepareForReuse();
+				mAttachments[i].PrepareForReuse();
 			}
-			this.mAttachments.Clear();
+			mAttachments.Clear();
 		}
 
 		public Attachment AllocAttachment()
 		{
 			Attachment newAttachment = Attachment.GetNewAttachment();
 			newAttachment.mActive = true;
-			this.mAttachments.Add(newAttachment);
+			mAttachments.Add(newAttachment);
 			return newAttachment;
 		}
 

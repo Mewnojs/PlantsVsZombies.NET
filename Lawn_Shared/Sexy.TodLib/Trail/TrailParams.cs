@@ -6,8 +6,8 @@ namespace Sexy.TodLib
 	{
 		public TrailParams(TrailType aTrailType, string aTrailFileName)
 		{
-			this.mTrailType = aTrailType;
-			this.mTrailFileName = aTrailFileName;
+			mTrailType = aTrailType;
+			mTrailFileName = aTrailFileName;
 		}
 
 		public TrailType mTrailType;

@@ -35,10 +35,10 @@ namespace Microsoft.Xna.Framework.GamerServices
         public MonoLiveGuide(Game game)
             : base(game)
         {
-            this.Enabled = false;
-            this.Visible = false;
+            Enabled = false;
+            Visible = false;
             //Guide.IsVisible = false;
-            this.DrawOrder = Int32.MaxValue;
+            DrawOrder = Int32.MaxValue;
         }
 
         public override void Initialize()
@@ -79,9 +79,9 @@ namespace Microsoft.Xna.Framework.GamerServices
 
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(this.Game.GraphicsDevice);
+            spriteBatch = new SpriteBatch(Game.GraphicsDevice);
 
-            signInProgress = Circle(this.Game.GraphicsDevice, 10);
+            signInProgress = Circle(Game.GraphicsDevice, 10);
 
             base.LoadContent();
         }
@@ -95,7 +95,7 @@ namespace Microsoft.Xna.Framework.GamerServices
         {
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
 
-            Vector2 center = new Vector2(this.Game.GraphicsDevice.PresentationParameters.BackBufferWidth / 2, this.Game.GraphicsDevice.PresentationParameters.BackBufferHeight - 100);
+            Vector2 center = new Vector2(Game.GraphicsDevice.PresentationParameters.BackBufferWidth / 2, Game.GraphicsDevice.PresentationParameters.BackBufferHeight - 100);
             Vector2 loc = Vector2.Zero;
             alphaColor.A = startalpha;
             for (int i = 0; i < 12; i++)
@@ -139,8 +139,8 @@ namespace Microsoft.Xna.Framework.GamerServices
 
                 Gamer.SignedInGamers.Add(sig);
 
-                this.Visible = false;
-                this.Enabled = false;
+                Visible = false;
+                Enabled = false;
                 //Guide.IsVisible = false;
                 gt = TimeSpan.Zero;
             }

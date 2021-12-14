@@ -88,13 +88,13 @@ namespace Sexy
 			return "";
 		}
 
-		internal static string CommaSeperate_(int mDispPoints)
+		internal static string CommaSeperate_(int theDispPoints)
 		{
-			if (mDispPoints == 0)
+			if (theDispPoints == 0)
 			{
 				return "0";
 			}
-			return string.Format("{0:#,#}", mDispPoints);
+			return string.Format("{0:#,#}", theDispPoints);
 		}
 
 		internal static string GetDocumentsDir()

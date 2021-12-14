@@ -7,7 +7,7 @@ namespace Sexy
 	{
 		public void Dispose()
 		{
-			this.mSound.Dispose();
+			mSound.Dispose();
 		}
 
 		public float mBaseVolume = 1f;

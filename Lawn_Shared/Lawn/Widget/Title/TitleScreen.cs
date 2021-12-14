@@ -28,31 +28,31 @@ namespace Lawn
 
 		public TitleScreen(LawnApp theApp)
 		{
-			this.mApp = theApp;
-			this.mCurBarWidth = 0f;
-			this.mTotalBarWidth = Constants.InvertAndScale(314f);
-			this.mBarVel = 0.2f;
-			this.mBarStartProgress = 0f;
-			this.mPrevLoadingPercent = 0f;
-			this.mTitleAge = 0;
-			this.mNeedRegister = false;
-			this.mRegisterClicked = false;
-			this.mNeedShowRegisterBox = false;
-			this.mLoadingThreadComplete = false;
-			this.mNeedToInit = true;
-			this.mQuickLoadKey = KeyCode.KEYCODE_UNKNOWN;
-			this.mTitleState = TitleState.TITLESTATE_WAITING_FOR_FIRST_DRAW;
-			this.mTitleStateDuration = 0;
-			this.mTitleStateCounter = 0;
-			this.mLoaderScreenIsLoaded = false;
-			this.mNeedToUnpackAtlas = true;
-			this.mStartButton = new HyperlinkWidget(0, this);
-			this.mStartButton.mColor = new SexyColor(218, 184, 33);
-			this.mStartButton.mOverColor = new SexyColor(250, 90, 15);
-			this.mStartButton.mUnderlineSize = 0;
-			this.mStartButton.mDisabled = true;
-			this.mStartButton.mVisible = false;
-			this.mNextImageIndex = 0;
+			mApp = theApp;
+			mCurBarWidth = 0f;
+			mTotalBarWidth = Constants.InvertAndScale(314f);
+			mBarVel = 0.2f;
+			mBarStartProgress = 0f;
+			mPrevLoadingPercent = 0f;
+			mTitleAge = 0;
+			mNeedRegister = false;
+			mRegisterClicked = false;
+			mNeedShowRegisterBox = false;
+			mLoadingThreadComplete = false;
+			mNeedToInit = true;
+			mQuickLoadKey = KeyCode.KEYCODE_UNKNOWN;
+			mTitleState = TitleState.TITLESTATE_WAITING_FOR_FIRST_DRAW;
+			mTitleStateDuration = 0;
+			mTitleStateCounter = 0;
+			mLoaderScreenIsLoaded = false;
+			mNeedToUnpackAtlas = true;
+			mStartButton = new HyperlinkWidget(0, this);
+			mStartButton.mColor = new SexyColor(218, 184, 33);
+			mStartButton.mOverColor = new SexyColor(250, 90, 15);
+			mStartButton.mUnderlineSize = 0;
+			mStartButton.mDisabled = true;
+			mStartButton.mVisible = false;
+			mNextImageIndex = 0;
 			TitleScreen.PreflightImages = new Image[]
 			{
 				Resources.IMAGE_PLANTSZOMBIES,
@@ -78,81 +78,81 @@ namespace Lawn
 				Resources.IMAGE_REANIM_ZOMBIESWON,
 				Resources.IMAGE_SCARY_POT
 			};
-			this.aTriggerPoint[0] = 0.11f * this.mTotalBarWidth;
-			this.aTriggerPoint[1] = 0.32f * this.mTotalBarWidth;
-			this.aTriggerPoint[2] = 0.52f * this.mTotalBarWidth;
-			this.aTriggerPoint[3] = 0.72f * this.mTotalBarWidth;
-			this.aTriggerPoint[4] = 0.906f * this.mTotalBarWidth;
+			aTriggerPoint[0] = 0.11f * mTotalBarWidth;
+			aTriggerPoint[1] = 0.32f * mTotalBarWidth;
+			aTriggerPoint[2] = 0.52f * mTotalBarWidth;
+			aTriggerPoint[3] = 0.72f * mTotalBarWidth;
+			aTriggerPoint[4] = 0.906f * mTotalBarWidth;
 		}
 
 		public override void Dispose()
 		{
 			if (Main.LOW_MEMORY_DEVICE)
 			{
-				this.mApp.mResourceManager.DeleteResources("Init");
-				this.mApp.mResourceManager.DeleteResources("LoaderBar");
+				mApp.mResourceManager.DeleteResources("Init");
+				mApp.mResourceManager.DeleteResources("LoaderBar");
 			}
-			this.mStartButton.Dispose();
+			mStartButton.Dispose();
 		}
 
 		public override void Update()
 		{
 			base.Update();
-			if (this.mApp.mShutdown)
+			if (mApp.mShutdown)
 			{
 				return;
 			}
-			this.MarkDirty();
-			if (this.mTitleState == TitleState.TITLESTATE_WAITING_FOR_FIRST_DRAW)
+			MarkDirty();
+			if (mTitleState == TitleState.TITLESTATE_WAITING_FOR_FIRST_DRAW)
 			{
-				this.mApp.mMusic.MusicTitleScreenInit();
-				this.mApp.StartLoadingThread();
-				this.mTitleState = TitleState.TITLESTATE_POPCAP_LOGO;
-				this.mTitleStateDuration = 200;
-				this.mTitleStateCounter = this.mTitleStateDuration;
+				mApp.mMusic.MusicTitleScreenInit();
+				mApp.StartLoadingThread();
+				mTitleState = TitleState.TITLESTATE_POPCAP_LOGO;
+				mTitleStateDuration = 200;
+				mTitleStateCounter = mTitleStateDuration;
 			}
-			if (this.mQuickLoadKey != KeyCode.KEYCODE_UNKNOWN && this.mTitleState != TitleState.TITLESTATE_SCREEN)
+			if (mQuickLoadKey != KeyCode.KEYCODE_UNKNOWN && mTitleState != TitleState.TITLESTATE_SCREEN)
 			{
-				this.mTitleState = TitleState.TITLESTATE_SCREEN;
-				this.mTitleStateDuration = 0;
-				this.mTitleStateCounter = 100;
+				mTitleState = TitleState.TITLESTATE_SCREEN;
+				mTitleStateDuration = 0;
+				mTitleStateCounter = 100;
 			}
-			this.mTitleAge += 3;
-			if (this.mTitleStateCounter > 0)
+			mTitleAge += 3;
+			if (mTitleStateCounter > 0)
 			{
-				this.mTitleStateCounter -= 3;
+				mTitleStateCounter -= 3;
 			}
-			if (this.mTitleState == TitleState.TITLESTATE_POPCAP_LOGO)
+			if (mTitleState == TitleState.TITLESTATE_POPCAP_LOGO)
 			{
-				if (this.mTitleStateCounter <= 0)
+				if (mTitleStateCounter <= 0)
 				{
-					this.mTitleState = TitleState.TITLESTATE_SCREEN;
-					this.mTitleStateDuration = 100;
-					this.mTitleStateCounter = this.mTitleStateDuration;
+					mTitleState = TitleState.TITLESTATE_SCREEN;
+					mTitleStateDuration = 100;
+					mTitleStateCounter = mTitleStateDuration;
 				}
 				return;
 			}
-			if (!this.mLoaderScreenIsLoaded)
+			if (!mLoaderScreenIsLoaded)
 			{
 				return;
 			}
-			if (this.mNeedToUnpackAtlas)
+			if (mNeedToUnpackAtlas)
 			{
 				AtlasResources.mAtlasResources.UnpackLoadingAtlasImages();
-				this.mNeedToUnpackAtlas = false;
+				mNeedToUnpackAtlas = false;
 			}
-			float num = (float)this.mApp.GetLoadingThreadProgress();
-			if (this.mNeedToInit)
+			float num = (float)mApp.GetLoadingThreadProgress();
+			if (mNeedToInit)
 			{
-				this.mNeedToInit = false;
-				this.mStartButton.mLabel = TodStringFile.TodStringTranslate("[LOADING]");
-				this.mStartButton.SetFont(Resources.FONT_BRIANNETOD16);
-				this.mStartButton.Resize(this.mWidth / 2 - AtlasResources.IMAGE_LOADBAR_DIRT.mWidth / 2, (int)(Constants.S * 650f), (int)this.mTotalBarWidth, (int)Constants.InvertAndScale(18f));
-				this.mStartButton.mVisible = true;
+				mNeedToInit = false;
+				mStartButton.mLabel = TodStringFile.TodStringTranslate("[LOADING]");
+				mStartButton.SetFont(Resources.FONT_BRIANNETOD16);
+				mStartButton.Resize(mWidth / 2 - AtlasResources.IMAGE_LOADBAR_DIRT.mWidth / 2, (int)(Constants.S * 650f), (int)mTotalBarWidth, (int)Constants.InvertAndScale(18f));
+				mStartButton.mVisible = true;
 				float num2;
 				if (num > 1E-06f)
 				{
-					num2 = (float)this.mTitleAge / num;
+					num2 = (float)mTitleAge / num;
 				}
 				else
 				{
@@ -160,96 +160,96 @@ namespace Lawn
 				}
 				float num3 = num2 * (1f - num);
 				num3 = TodCommon.ClampFloat(num3, 100f, 3000f);
-				this.mBarVel = this.mTotalBarWidth / num3;
-				this.mBarStartProgress = Math.Min(num, 0.9f);
+				mBarVel = mTotalBarWidth / num3;
+				mBarStartProgress = Math.Min(num, 0.9f);
 			}
-			float num4 = (num - this.mBarStartProgress) / (1f - this.mBarStartProgress);
+			float num4 = (num - mBarStartProgress) / (1f - mBarStartProgress);
 			int theY;
-			if (this.mTitleStateCounter > 10)
+			if (mTitleStateCounter > 10)
 			{
-				theY = TodCommon.TodAnimateCurve(60, 10, this.mTitleStateCounter, (int)(Constants.S * 731f), (int)(Constants.S * 532f), TodCurves.CURVE_EASE_IN);
+				theY = TodCommon.TodAnimateCurve(60, 10, mTitleStateCounter, (int)(Constants.S * 731f), (int)(Constants.S * 532f), TodCurves.CURVE_EASE_IN);
 			}
 			else
 			{
-				theY = TodCommon.TodAnimateCurve(10, 0, this.mTitleStateCounter, (int)(Constants.S * 532f), (int)(Constants.S * 523f), TodCurves.CURVE_BOUNCE);
+				theY = TodCommon.TodAnimateCurve(10, 0, mTitleStateCounter, (int)(Constants.S * 532f), (int)(Constants.S * 523f), TodCurves.CURVE_BOUNCE);
 			}
-			this.mStartButton.Resize(this.mStartButton.mX, theY, (int)this.mTotalBarWidth, this.mStartButton.mHeight);
-			if (this.mTitleStateCounter > 0)
+			mStartButton.Resize(mStartButton.mX, theY, (int)mTotalBarWidth, mStartButton.mHeight);
+			if (mTitleStateCounter > 0)
 			{
 				return;
 			}
-			this.mApp.mEffectSystem.Update();
-			float num5 = this.mCurBarWidth;
-			this.mCurBarWidth += this.mBarVel;
-			if (!this.mLoadingThreadComplete)
+			mApp.mEffectSystem.Update();
+			float num5 = mCurBarWidth;
+			mCurBarWidth += mBarVel;
+			if (!mLoadingThreadComplete)
 			{
-				if (this.mCurBarWidth > this.mTotalBarWidth * 0.99f)
+				if (mCurBarWidth > mTotalBarWidth * 0.99f)
 				{
-					this.mCurBarWidth = this.mTotalBarWidth * 0.99f;
+					mCurBarWidth = mTotalBarWidth * 0.99f;
 				}
 			}
-			else if (this.mCurBarWidth > this.mTotalBarWidth)
+			else if (mCurBarWidth > mTotalBarWidth)
 			{
-				if (this.mApp.mRestoreLocation == RestoreLocation.RESTORE_BOARD)
+				if (mApp.mRestoreLocation == RestoreLocation.RESTORE_BOARD)
 				{
-					this.mApp.LoadingCompleted();
+					mApp.LoadingCompleted();
 				}
 				else
 				{
-					this.mStartButton.mLabel = TodStringFile.TodStringTranslate("[CLICK_TO_START]");
-					this.mCurBarWidth = this.mTotalBarWidth;
+					mStartButton.mLabel = TodStringFile.TodStringTranslate("[CLICK_TO_START]");
+					mCurBarWidth = mTotalBarWidth;
 				}
 			}
-			if (num4 > this.mPrevLoadingPercent + 0.01f || this.mLoadingThreadComplete)
+			if (num4 > mPrevLoadingPercent + 0.01f || mLoadingThreadComplete)
 			{
-				float num6 = TodCommon.TodAnimateCurveFloatTime(0f, 1f, num4, 0f, this.mTotalBarWidth, TodCurves.CURVE_EASE_IN);
-				float num7 = num6 - this.mCurBarWidth;
+				float num6 = TodCommon.TodAnimateCurveFloatTime(0f, 1f, num4, 0f, mTotalBarWidth, TodCurves.CURVE_EASE_IN);
+				float num7 = num6 - mCurBarWidth;
 				float num8 = TodCommon.TodAnimateCurveFloatTime(0f, 1f, num4, 0.0001f, 1E-05f, TodCurves.CURVE_LINEAR);
-				if (this.mLoadingThreadComplete)
+				if (mLoadingThreadComplete)
 				{
 					num8 = 0.0001f;
 				}
-				this.mBarVel += num7 * Math.Abs(num7) * num8;
+				mBarVel += num7 * Math.Abs(num7) * num8;
 				float num9 = TodCommon.TodAnimateCurveFloatTime(0f, 1f, num4, 0.2f, 0.01f, TodCurves.CURVE_LINEAR);
 				float num10 = 2f;
-				if (this.mApp.mTodCheatKeys)
+				if (mApp.mTodCheatKeys)
 				{
 					num9 = 0f;
 					num10 = 100f;
 				}
-				if (this.mBarVel < num9)
+				if (mBarVel < num9)
 				{
-					this.mBarVel = num9;
+					mBarVel = num9;
 				}
-				else if (this.mBarVel > num10)
+				else if (mBarVel > num10)
 				{
-					this.mBarVel = num10;
+					mBarVel = num10;
 				}
-				this.mPrevLoadingPercent = num4;
+				mPrevLoadingPercent = num4;
 			}
-			if (GameConstants.TESTING_LOAD_BAR && this.mBarVel > 0.5f)
+			if (GameConstants.TESTING_LOAD_BAR && mBarVel > 0.5f)
 			{
-				this.mBarVel = 0.5f;
+				mBarVel = 0.5f;
 			}
-			if (!this.mLoadingThreadComplete && this.mApp.mLoadingThreadCompleted)
+			if (!mLoadingThreadComplete && mApp.mLoadingThreadCompleted)
 			{
 				LawnApp.PreallocateMemory();
-				this.mLoadingThreadComplete = true;
-				this.mStartButton.SetDisabled(false);
-				this.mStartButton.SetVisible(true);
+				mLoadingThreadComplete = true;
+				mStartButton.SetDisabled(false);
+				mStartButton.SetVisible(true);
 			}
 			for (int i = 0; i < 5; i++)
 			{
-				if (this.aTriggerPoint[i] > num5 && this.aTriggerPoint[i] <= this.mCurBarWidth)
+				if (aTriggerPoint[i] > num5 && aTriggerPoint[i] <= mCurBarWidth)
 				{
 					ReanimationType theReanimationType = ReanimationType.REANIM_LOADBAR_SPROUT;
 					if (i == 4)
 					{
 						theReanimationType = ReanimationType.REANIM_LOADBAR_ZOMBIEHEAD;
 					}
-					float num11 = (float)Constants.TitleScreen_ReanimStart_X + this.aTriggerPoint[i];
-					float num12 = (float)this.mStartButton.mY - Constants.InvertAndScale(42f);
-					Reanimation reanimation = this.mApp.AddReanimation(num11, num12, 0, theReanimationType, false);
+					float num11 = (float)Constants.TitleScreen_ReanimStart_X + aTriggerPoint[i];
+					float num12 = (float)mStartButton.mY - Constants.InvertAndScale(42f);
+					Reanimation reanimation = mApp.AddReanimation(num11, num12, 0, theReanimationType, false);
 					reanimation.mLoopType = ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD;
 					reanimation.mAnimRate = 18f;
 					if (i == 1 || i == 3)
@@ -267,12 +267,12 @@ namespace Lawn
 					}
 					if (i == 4)
 					{
-						this.mApp.PlaySample(Resources.SOUND_LOADINGBAR_FLOWER);
-						this.mApp.PlaySample(Resources.SOUND_LOADINGBAR_ZOMBIE);
+						mApp.PlaySample(Resources.SOUND_LOADINGBAR_FLOWER);
+						mApp.PlaySample(Resources.SOUND_LOADINGBAR_ZOMBIE);
 					}
 					else
 					{
-						this.mApp.PlaySample(Resources.SOUND_LOADINGBAR_FLOWER);
+						mApp.PlaySample(Resources.SOUND_LOADINGBAR_FLOWER);
 					}
 				}
 			}
@@ -282,77 +282,77 @@ namespace Lawn
 		{
 			g.SetLinearBlend(true);
 			base.Draw(g);
-			if (this.mTitleState == TitleState.TITLESTATE_POPCAP_LOGO)
+			if (mTitleState == TitleState.TITLESTATE_POPCAP_LOGO)
 			{
 				g.SetColor(SexyColor.Black);
-				g.FillRect(0, 0, this.mWidth, this.mHeight);
+				g.FillRect(0, 0, mWidth, mHeight);
 				int num = 50;
 				int theAlpha = 255;
-				if (this.mTitleStateCounter < this.mTitleStateDuration - num)
+				if (mTitleStateCounter < mTitleStateDuration - num)
 				{
-					theAlpha = TodCommon.TodAnimateCurve(num, 0, this.mTitleStateCounter, 255, 0, TodCurves.CURVE_LINEAR);
+					theAlpha = TodCommon.TodAnimateCurve(num, 0, mTitleStateCounter, 255, 0, TodCurves.CURVE_LINEAR);
 				}
 				g.SetColorizeImages(true);
 				g.SetColor(new SexyColor(255, 255, 255, theAlpha));
 				if (Constants.Language != Constants.LanguageIndex.de)
 				{
-					g.DrawImage(Resources.IMAGE_POPCAP_LOGO, (this.mWidth - Resources.IMAGE_POPCAP_LOGO.mWidth) / 2, (this.mHeight - Resources.IMAGE_POPCAP_LOGO.mHeight) / 2);
+					g.DrawImage(Resources.IMAGE_POPCAP_LOGO, (mWidth - Resources.IMAGE_POPCAP_LOGO.mWidth) / 2, (mHeight - Resources.IMAGE_POPCAP_LOGO.mHeight) / 2);
 				}
 				else
 				{
-					g.DrawImage(Resources.IMAGE_POPCAP_LOGO_REGISTERED, (this.mWidth - Resources.IMAGE_POPCAP_LOGO_REGISTERED.mWidth) / 2, (this.mHeight - Resources.IMAGE_POPCAP_LOGO_REGISTERED.mHeight) / 2);
+					g.DrawImage(Resources.IMAGE_POPCAP_LOGO_REGISTERED, (mWidth - Resources.IMAGE_POPCAP_LOGO_REGISTERED.mWidth) / 2, (mHeight - Resources.IMAGE_POPCAP_LOGO_REGISTERED.mHeight) / 2);
 				}
 				g.SetColorizeImages(false);
 				return;
 			}
-			if (!this.mLoaderScreenIsLoaded)
+			if (!mLoaderScreenIsLoaded)
 			{
 				g.SetColor(SexyColor.Black);
-				g.FillRect(0, 0, this.mWidth, this.mHeight);
+				g.FillRect(0, 0, mWidth, mHeight);
 				return;
 			}
-			this.PreflightNextImage(g);
+			PreflightNextImage(g);
 			g.DrawImage(Resources.IMAGE_TITLESCREEN, 0, 0);
-			if (this.mNeedToInit)
+			if (mNeedToInit)
 			{
 				return;
 			}
 			int theY;
-			if (this.mTitleStateCounter > 60)
+			if (mTitleStateCounter > 60)
 			{
-				theY = TodCommon.TodAnimateCurve(100, 60, this.mTitleStateCounter, (int)Constants.InvertAndScale(-150f), (int)Constants.InvertAndScale(10f), TodCurves.CURVE_EASE_IN);
+				theY = TodCommon.TodAnimateCurve(100, 60, mTitleStateCounter, (int)Constants.InvertAndScale(-150f), (int)Constants.InvertAndScale(10f), TodCurves.CURVE_EASE_IN);
 			}
 			else
 			{
-				theY = TodCommon.TodAnimateCurve(60, 50, this.mTitleStateCounter, (int)Constants.InvertAndScale(10f), (int)Constants.InvertAndScale(15f), TodCurves.CURVE_BOUNCE);
+				theY = TodCommon.TodAnimateCurve(60, 50, mTitleStateCounter, (int)Constants.InvertAndScale(10f), (int)Constants.InvertAndScale(15f), TodCurves.CURVE_BOUNCE);
 			}
-			g.DrawImage(Resources.IMAGE_PVZ_LOGO, this.mWidth / 2 - Resources.IMAGE_PVZ_LOGO.mWidth / 2, theY);
-			int mX = this.mStartButton.mX;
-			int num2 = this.mStartButton.mY - (int)Constants.InvertAndScale(34f);
-			g.DrawImage(AtlasResources.IMAGE_LOADBAR_DIRT, (float)mX, (float)num2 + Constants.InvertAndScale(18f));
-			if (this.mCurBarWidth >= this.mTotalBarWidth)
+			g.DrawImage(Resources.IMAGE_PVZ_LOGO, mWidth / 2 - Resources.IMAGE_PVZ_LOGO.mWidth / 2, theY);
+			int grassX = mStartButton.mX;
+			int grassY = mStartButton.mY - (int)Constants.InvertAndScale(34f);
+			g.DrawImage(AtlasResources.IMAGE_LOADBAR_DIRT, (float)grassX, (float)grassY + Constants.InvertAndScale(18f));
+			if (mCurBarWidth >= mTotalBarWidth)
 			{
-				g.DrawImage(AtlasResources.IMAGE_LOADBAR_GRASS, mX, num2);
-				if (this.mLoadingThreadComplete)
+				g.DrawImage(AtlasResources.IMAGE_LOADBAR_GRASS, grassX, grassY);
+				if (mLoadingThreadComplete)
 				{
-					this.DrawToPreload(g);
+					DrawToPreload(g);
 				}
 			}
 			else
 			{
 				Graphics @new = Graphics.GetNew(g);
-				@new.ClipRect(mX, num2, (int)this.mCurBarWidth, AtlasResources.IMAGE_LOADBAR_GRASS.mHeight);
-				@new.DrawImage(AtlasResources.IMAGE_LOADBAR_GRASS, mX, num2);
-				float num3 = this.mCurBarWidth * 0.94f;
+				@new.ClipRect(grassX, grassY, (int)mCurBarWidth, AtlasResources.IMAGE_LOADBAR_GRASS.mHeight);
+				@new.DrawImage(AtlasResources.IMAGE_LOADBAR_GRASS, grassX, grassY);
+				float num3 = mCurBarWidth * 0.94f;
 				float rad = -num3 / 180f * 3.1415927f * 2f;
-				float num4 = TodCommon.TodAnimateCurveFloatTime(0f, this.mTotalBarWidth, this.mCurBarWidth, 1f, 0.5f, TodCurves.CURVE_LINEAR);
+				float num4 = TodCommon.TodAnimateCurveFloatTime(0f, mTotalBarWidth, mCurBarWidth, 1f, 0.5f, TodCurves.CURVE_LINEAR);
 				SexyTransform2D sexyTransform2D = default(SexyTransform2D);
-				TodCommon.TodScaleRotateTransformMatrix(ref sexyTransform2D.mMatrix, (float)mX + Constants.InvertAndScale(11f) + num3, (float)num2 - Constants.InvertAndScale(3f) - Constants.InvertAndScale(35f) * num4 + Constants.InvertAndScale(35f), rad, num4, num4);
+				TodCommon.TodScaleRotateTransformMatrix(ref sexyTransform2D.mMatrix, (float)grassX + Constants.InvertAndScale(11f) + num3, (float)grassY - Constants.InvertAndScale(3f) - Constants.InvertAndScale(35f) * num4 + Constants.InvertAndScale(35f), rad, num4, num4);
 				TRect theSrcRect = new TRect(0, 0, AtlasResources.IMAGE_REANIM_LOAD_SODROLLCAP.mWidth, AtlasResources.IMAGE_REANIM_LOAD_SODROLLCAP.mHeight);
 				TodCommon.TodBltMatrix(g, AtlasResources.IMAGE_REANIM_LOAD_SODROLLCAP, sexyTransform2D.mMatrix, ref g.mClipRect, SexyColor.White, g.mDrawMode, theSrcRect);
 				@new.PrepareForReuse();
 			}
-			foreach (Reanimation reanimation in this.mApp.mEffectSystem.mReanimationHolder.mReanimations)
+			foreach (Reanimation reanimation in mApp.mEffectSystem.mReanimationHolder.mReanimations)
 			{
 				reanimation.Draw(g);
 			}
@@ -366,23 +366,23 @@ namespace Lawn
 		public override void AddedToManager(WidgetManager theWidgetManager)
 		{
 			base.AddedToManager(theWidgetManager);
-			theWidgetManager.AddWidget(this.mStartButton);
+			theWidgetManager.AddWidget(mStartButton);
 		}
 
 		public override void RemovedFromManager(WidgetManager theWidgetManager)
 		{
 			base.RemovedFromManager(theWidgetManager);
-			theWidgetManager.RemoveWidget(this.mStartButton);
+			theWidgetManager.RemoveWidget(mStartButton);
 		}
 
 		public virtual void ButtonPress(int theId)
 		{
-			this.mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
+			mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
 		}
 
 		public override bool BackButtonPress()
 		{
-			this.mApp.AppExit();
+			mApp.AppExit();
 			return true;
 		}
 
@@ -391,10 +391,10 @@ namespace Lawn
 			switch (theId)
 			{
 			case 0:
-				this.mApp.LoadingCompleted();
+				mApp.LoadingCompleted();
 				return;
 			case 1:
-				this.mRegisterClicked = true;
+				mRegisterClicked = true;
 				return;
 			default:
 				return;
@@ -403,24 +403,24 @@ namespace Lawn
 
 		public override void MouseDown(int x, int y, int theClickCount)
 		{
-			if (this.mLoadingThreadComplete)
+			if (mLoadingThreadComplete)
 			{
-				this.mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
-				this.mApp.LoadingCompleted();
+				mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
+				mApp.LoadingCompleted();
 			}
 		}
 
 		public override void KeyDown(KeyCode theKey)
 		{
-			if (this.mLoadingThreadComplete)
+			if (mLoadingThreadComplete)
 			{
-				this.mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
-				this.mApp.LoadingCompleted();
+				mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
+				mApp.LoadingCompleted();
 				return;
 			}
-			if (this.mApp.mTodCheatKeys && this.mApp.mPlayerInfo != null)
+			if (mApp.mTodCheatKeys && mApp.mPlayerInfo != null)
 			{
-				this.mQuickLoadKey = theKey;
+				mQuickLoadKey = theKey;
 			}
 		}
 
@@ -434,10 +434,10 @@ namespace Lawn
 
 		public void PreflightNextImage(Graphics g)
 		{
-			if (this.mNextImageIndex < TitleScreen.PreflightImages.Length && TitleScreen.PreflightImages[this.mNextImageIndex] != null)
+			if (mNextImageIndex < TitleScreen.PreflightImages.Length && TitleScreen.PreflightImages[mNextImageIndex] != null)
 			{
-				g.DrawImage(TitleScreen.PreflightImages[this.mNextImageIndex], 0, 0, new TRect(0, 0, 1, 1));
-				this.mNextImageIndex++;
+				g.DrawImage(TitleScreen.PreflightImages[mNextImageIndex], 0, 0, new TRect(0, 0, 1, 1));
+				mNextImageIndex++;
 			}
 		}
 

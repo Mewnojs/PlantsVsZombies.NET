@@ -25,48 +25,48 @@ namespace Lawn
 
 		public void PrepareForReuse()
 		{
-			this.Reset();
+			Reset();
 			RenderItem.unusedObjects.Push(this);
 		}
 
 		private RenderItem()
 		{
-			this.Reset();
+			Reset();
 		}
 
 		private void Reset()
 		{
 			long num = RenderItem.nextId;
 			RenderItem.nextId = num + 1L;
-			this.id = num;
+			id = num;
 			if (RenderItem.nextId == 9223372036854775807L)
 			{
 				RenderItem.nextId = 0L;
 			}
-			this.mRenderObjectType = (RenderObjectType)0;
-			this.mZPos = 0;
-			this.mGameObject = null;
-			this.mPlant = null;
-			this.mZombie = null;
-			this.mCoin = null;
-			this.mProjectile = null;
-			this.mCursorPreview = null;
-			this.mParticleSytem = null;
-			this.mReanimation = null;
-			this.mGridItem = null;
-			this.mMower = null;
-			this.mGameObject = null;
-			this.mPlant = null;
-			this.mZombie = null;
-			this.mCoin = null;
-			this.mProjectile = null;
-			this.mCursorPreview = null;
-			this.mParticleSytem = null;
-			this.mReanimation = null;
-			this.mGridItem = null;
-			this.mMower = null;
-			this.mBossPart = BossPart.BOSS_PART_BACK_LEG;
-			this.mBoardGridY = 0;
+			mRenderObjectType = (RenderObjectType)0;
+			mZPos = 0;
+			mGameObject = null;
+			mPlant = null;
+			mZombie = null;
+			mCoin = null;
+			mProjectile = null;
+			mCursorPreview = null;
+			mParticleSytem = null;
+			mReanimation = null;
+			mGridItem = null;
+			mMower = null;
+			mGameObject = null;
+			mPlant = null;
+			mZombie = null;
+			mCoin = null;
+			mProjectile = null;
+			mCursorPreview = null;
+			mParticleSytem = null;
+			mReanimation = null;
+			mGridItem = null;
+			mMower = null;
+			mBossPart = BossPart.BOSS_PART_BACK_LEG;
+			mBoardGridY = 0;
 		}
 
 		public static int CompareByZ(RenderItem a, RenderItem b)
@@ -93,11 +93,11 @@ namespace Lawn
 		int IComparable.CompareTo(object toCompare)
 		{
 			RenderItem renderItem = (RenderItem)toCompare;
-			if (this.mZPos == renderItem.mZPos)
+			if (mZPos == renderItem.mZPos)
 			{
-				return this.id.CompareTo(renderItem.id);
+				return id.CompareTo(renderItem.id);
 			}
-			return this.mZPos.CompareTo(renderItem.mZPos);
+			return mZPos.CompareTo(renderItem.mZPos);
 		}
 
 		public RenderObjectType mRenderObjectType;

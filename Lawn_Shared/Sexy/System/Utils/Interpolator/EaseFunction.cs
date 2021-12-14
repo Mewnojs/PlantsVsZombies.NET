@@ -6,49 +6,49 @@ namespace Sexy
 	{
 		public EaseFunction()
 		{
-			this.setup(1f, 1f, 0.5f, 0.5f);
+			setup(1f, 1f, 0.5f, 0.5f);
 		}
 
 		public EaseFunction(float v0, float v1, float a, float b)
 		{
-			this.setup(v0, v1, a, b);
+			setup(v0, v1, a, b);
 		}
 
 		public void setup(float v0, float v1, float a, float b)
 		{
-			this.m_v0 = v0;
-			this.m_v1 = v1;
-			this.m_a = a;
-			this.m_b = b;
-			this.m_vc = (2f - this.m_a * this.m_v0 - (1f - this.m_b) * this.m_v1) / (this.m_b - this.m_a + 1f);
-			this.m_afactor = ((0f == this.m_a) ? 0f : ((this.m_vc - this.m_v0) / (2f * this.m_a)));
-			this.m_bfactor = ((1f == this.m_b) ? 0f : ((this.m_v1 - this.m_vc) / (2f * (1f - this.m_b))));
-			this.m_atotal = this.m_a * (this.m_a * this.m_afactor + this.m_v0);
-			this.m_btotal = (this.m_b - this.m_a) * this.m_vc + this.m_atotal;
+			m_v0 = v0;
+			m_v1 = v1;
+			m_a = a;
+			m_b = b;
+			m_vc = (2f - m_a * m_v0 - (1f - m_b) * m_v1) / (m_b - m_a + 1f);
+			m_afactor = ((0f == m_a) ? 0f : ((m_vc - m_v0) / (2f * m_a)));
+			m_bfactor = ((1f == m_b) ? 0f : ((m_v1 - m_vc) / (2f * (1f - m_b))));
+			m_atotal = m_a * (m_a * m_afactor + m_v0);
+			m_btotal = (m_b - m_a) * m_vc + m_atotal;
 		}
 
 		public float Tick(float t)
 		{
-			if (t < this.m_a)
+			if (t < m_a)
 			{
-				return t * (t * this.m_afactor + this.m_v0);
+				return t * (t * m_afactor + m_v0);
 			}
-			if (t < this.m_b)
+			if (t < m_b)
 			{
-				return (t - this.m_a) * this.m_vc + this.m_atotal;
+				return (t - m_a) * m_vc + m_atotal;
 			}
-			float num = t - this.m_b;
-			return num * (num * this.m_bfactor + this.m_vc) + this.m_btotal;
+			float num = t - m_b;
+			return num * (num * m_bfactor + m_vc) + m_btotal;
 		}
 
 		public float Tick(float t, float tmax)
 		{
-			return this.Tick(t / tmax);
+			return Tick(t / tmax);
 		}
 
 		public float Tick(float t, float tmin, float tmax)
 		{
-			return this.Tick(t / (tmax - tmin));
+			return Tick(t / (tmax - tmin));
 		}
 
 		public static readonly EaseFunction EaseNone = new EaseFunction(1f, 1f, 0.5f, 0.5f);

@@ -11,20 +11,20 @@ namespace Lawn
 
 		public TypingCheck(string thePhrase)
 		{
-			this.SetPhrase(thePhrase);
+			SetPhrase(thePhrase);
 		}
 
 		public void SetPhrase(string thePhrase)
 		{
 			for (int i = 0; i < thePhrase.Length; i++)
 			{
-				this.AddChar(thePhrase[i]);
+				AddChar(thePhrase[i]);
 			}
 		}
 
 		public void AddKeyCode(KeyCode theCode)
 		{
-			this.mPhrase += (sbyte)theCode;
+			mPhrase += (sbyte)theCode;
 		}
 
 		public void AddChar(char theChar)
@@ -33,19 +33,19 @@ namespace Lawn
 
 		public bool Check(KeyCode theCode)
 		{
-			this.mRecentTyping += (sbyte)theCode;
-			int length = this.mPhrase.Length;
+			mRecentTyping += (sbyte)theCode;
+			int length = mPhrase.Length;
 			if (length == 0)
 			{
 				return false;
 			}
-			if (this.mRecentTyping.Length > length)
+			if (mRecentTyping.Length > length)
 			{
-				this.mRecentTyping = this.mRecentTyping.Substring(1, length);
+				mRecentTyping = mRecentTyping.Substring(1, length);
 			}
-			if (this.mRecentTyping == this.mPhrase)
+			if (mRecentTyping == mPhrase)
 			{
-				this.mRecentTyping = string.Empty;
+				mRecentTyping = string.Empty;
 				return true;
 			}
 			return false;

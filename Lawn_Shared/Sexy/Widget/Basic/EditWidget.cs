@@ -9,42 +9,42 @@ namespace Sexy
 	{
 		public EditWidget(int theId, EditListener theEditListener, string title, string description)
 		{
-			this.mTitle = TodStringFile.TodStringTranslate(title);
-			this.mDescription = TodStringFile.TodStringTranslate(description);
-			this.mId = theId;
-			this.mEditListener = theEditListener;
-			this.mFont = null;
-			this.mMaxChars = -1;
-			this.mPasswordChar = " ";
-			this.mEditing = false;
-			this.mAcceptsEmptyText = false;
-			this.mFont = new Font();
-			this.SetColors(EditWidget.gEditWidgetColors, 5);
+			mTitle = TodStringFile.TodStringTranslate(title);
+			mDescription = TodStringFile.TodStringTranslate(description);
+			mId = theId;
+			mEditListener = theEditListener;
+			mFont = null;
+			mMaxChars = -1;
+			mPasswordChar = " ";
+			mEditing = false;
+			mAcceptsEmptyText = false;
+			mFont = new Font();
+			SetColors(EditWidget.gEditWidgetColors, 5);
 		}
 
 		protected string GetDisplayString()
 		{
-			if (this.mPasswordChar == " ")
+			if (mPasswordChar == " ")
 			{
-				return this.mString;
+				return mString;
 			}
-			if (this.mPasswordDisplayString.Length != this.mString.Length)
+			if (mPasswordDisplayString.Length != mString.Length)
 			{
-				this.mPasswordDisplayString = this.mPasswordDisplayString + this.mString.Length.ToString() + this.mPasswordChar;
+				mPasswordDisplayString = mPasswordDisplayString + mString.Length.ToString() + mPasswordChar;
 			}
-			return this.mPasswordDisplayString;
+			return mPasswordDisplayString;
 		}
 
 		public virtual void SetFont(Font theFont)
 		{
-			this.mFont.Dispose();
-			this.mFont = theFont.Duplicate();
+			mFont.Dispose();
+			mFont = theFont.Duplicate();
 		}
 
 		public virtual void SetText(string theText)
 		{
-			this.mString = theText;
-			this.MarkDirty();
+			mString = theText;
+			MarkDirty();
 		}
 
 		public override void Resize(TRect frame)
@@ -55,7 +55,7 @@ namespace Sexy
 		public override void Resize(int theX, int theY, int theWidth, int theHeight)
 		{
 			base.Resize(theX, theY, theWidth, theHeight);
-			this.RehupBounds();
+			RehupBounds();
 		}
 
 		public override void Draw(Graphics g)
@@ -64,9 +64,9 @@ namespace Sexy
 
 		public override void Update()
 		{
-			if (this.callbackDone)
+			if (callbackDone)
 			{
-				this.DoKeyboardCallback();
+				DoKeyboardCallback();
 			}
 			base.Update();
 		}
@@ -81,7 +81,7 @@ namespace Sexy
 			base.GotFocus();
 			if (!Guide.IsVisible)
 			{
-				Guide.BeginShowKeyboardInput(PlayerIndex.One, this.mTitle, this.mDescription, this.mString, new AsyncCallback(this.KeyboardCallback), null);
+				Guide.BeginShowKeyboardInput(PlayerIndex.One, mTitle, mDescription, mString, new AsyncCallback(KeyboardCallback), null);
 			}
 		}
 
@@ -93,24 +93,24 @@ namespace Sexy
 		private void KeyboardCallback(IAsyncResult result)
 		{
 			string text = Guide.EndShowKeyboardInput(result);
-			this.inputCancelled = (text == null);
-			if (!this.inputCancelled)
+			inputCancelled = (text == null);
+			if (!inputCancelled)
 			{
-				this.mString = text;
+				mString = text;
 			}
-			this.callbackDone = true;
+			callbackDone = true;
 		}
 
 		private void DoKeyboardCallback()
 		{
-			this.callbackDone = false;
-			if (this.mString == null)
+			callbackDone = false;
+			if (mString == null)
 			{
-				this.LostFocus();
-				this.EditingEnded(this.mString);
+				LostFocus();
+				EditingEnded(mString);
 				return;
 			}
-			this.EditingEnded(this.mString);
+			EditingEnded(mString);
 		}
 
 		public override void LostFocus()
@@ -124,9 +124,9 @@ namespace Sexy
 
 		public virtual void EditingEnded(string theString)
 		{
-			this.mEditing = false;
-			this.mString = theString;
-			this.mEditListener.EditWidgetText(this.mId + (this.inputCancelled ? 1000 : 0), this.mString);
+			mEditing = false;
+			mString = theString;
+			mEditListener.EditWidgetText(mId + (inputCancelled ? 1000 : 0), mString);
 		}
 
 		public virtual bool ShouldChangeCharacters(int theRangeStart, int theRangeLength, string theReplacementChars)
@@ -136,17 +136,17 @@ namespace Sexy
 
 		public virtual bool ShouldClear()
 		{
-			bool flag = this.mEditListener.ShouldClear();
+			bool flag = mEditListener.ShouldClear();
 			if (flag)
 			{
-				this.mString = "";
+				mString = "";
 			}
 			return flag;
 		}
 
 		public override void Dispose()
 		{
-			this.mFont = null;
+			mFont = null;
 		}
 
 		internal static int[,] gEditWidgetColors = new int[,]

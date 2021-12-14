@@ -7,7 +7,7 @@ namespace Sexy
 	{
 		public void PrepareForReuse()
 		{
-			this.Reset();
+			Reset();
 			PreModalInfo.unusedObjects.Push(this);
 		}
 
@@ -22,15 +22,15 @@ namespace Sexy
 
 		private void Reset()
 		{
-			this.mBaseModalWidget = null;
-			this.mPrevBaseModalWidget = null;
-			this.mPrevFocusWidget = null;
-			this.mPrevBelowModalFlagsMod = default(FlagsMod);
+			mBaseModalWidget = null;
+			mPrevBaseModalWidget = null;
+			mPrevFocusWidget = null;
+			mPrevBelowModalFlagsMod = default(FlagsMod);
 		}
 
 		private PreModalInfo()
 		{
-			this.Reset();
+			Reset();
 		}
 
 		public Widget mBaseModalWidget;

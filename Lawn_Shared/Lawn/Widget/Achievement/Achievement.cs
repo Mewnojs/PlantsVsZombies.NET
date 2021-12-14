@@ -6,9 +6,9 @@ namespace Lawn
 	{
 		public Achievement(int aImageId, string aName, string aDesc)
 		{
-			this.mImageId = aImageId;
-			this.mName = aName;
-			this.mDesc = aDesc;
+			mImageId = aImageId;
+			mName = aName;
+			mDesc = aDesc;
 		}
 
 		public int mImageId;

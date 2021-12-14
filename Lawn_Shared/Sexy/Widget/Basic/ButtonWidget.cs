@@ -9,11 +9,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mLabelP;
+				return mLabelP;
 			}
 			set
 			{
-				this.mLabelP = value;
+				mLabelP = value;
 			}
 		}
 
@@ -26,7 +26,7 @@ namespace Sexy
 		{
 			if (theRect.mWidth != 0)
 			{
-				g.DrawImage(this.mButtonImage, x, y, new TRect(theRect));
+				g.DrawImage(mButtonImage, x, y, new TRect(theRect));
 				return;
 			}
 			g.DrawImage(theImage, x, y);
@@ -34,171 +34,171 @@ namespace Sexy
 
 		protected virtual void Reset(int theId, ButtonListener theButtonListener)
 		{
-			this.Reset();
-			this.mId = theId;
-			this.mFont = null;
-			this.mLabelJustify = 0;
-			this.mButtonImage = null;
-			this.mOverImage = null;
-			this.mDownImage = null;
-			this.mDisabledImage = null;
-			this.mInverted = false;
-			this.mBtnNoDraw = false;
-			this.mFrameNoDraw = false;
-			this.mButtonListener = theButtonListener;
-			this.mHasAlpha = true;
-			this.mOverAlpha = 0.0;
-			this.mOverAlphaSpeed = 0.0;
-			this.mOverAlphaFadeInSpeed = 0.0;
-			this.SetColors(GlobalMembersButtonWidget.gButtonWidgetColors, 6);
+			Reset();
+			mId = theId;
+			mFont = null;
+			mLabelJustify = 0;
+			mButtonImage = null;
+			mOverImage = null;
+			mDownImage = null;
+			mDisabledImage = null;
+			mInverted = false;
+			mBtnNoDraw = false;
+			mFrameNoDraw = false;
+			mButtonListener = theButtonListener;
+			mHasAlpha = true;
+			mOverAlpha = 0.0;
+			mOverAlphaSpeed = 0.0;
+			mOverAlphaFadeInSpeed = 0.0;
+			SetColors(GlobalMembersButtonWidget.gButtonWidgetColors, 6);
 		}
 
 		public ButtonWidget(int theId, ButtonListener theButtonListener)
 		{
-			this.Reset(theId, theButtonListener);
+			Reset(theId, theButtonListener);
 		}
 
 		public virtual void SetFont(Font theFont)
 		{
-			this.mFont = theFont.Duplicate();
+			mFont = theFont.Duplicate();
 		}
 
 		public virtual bool IsButtonDown()
 		{
-			return this.mIsDown && this.mIsOver && !this.mDisabled;
+			return mIsDown && mIsOver && !mDisabled;
 		}
 
 		public override void Draw(Graphics g)
 		{
-			if (this.mBtnNoDraw)
+			if (mBtnNoDraw)
 			{
 				return;
 			}
-			bool flag = this.mIsDown && this.mIsOver && !this.mDisabled;
-			flag ^= this.mInverted;
+			bool flag = mIsDown && mIsOver && !mDisabled;
+			flag ^= mInverted;
 			int num = 0;
 			int num2 = 0;
-			int num3 = this.mTranslateWhenDown ? 1 : 0;
-			if (this.mFont != null)
+			int num3 = mTranslateWhenDown ? 1 : 0;
+			if (mFont != null)
 			{
-				if (this.mLabelJustify == 0)
+				if (mLabelJustify == 0)
 				{
-					num = (this.mWidth - this.mFont.StringWidth(this.mLabel)) / 2;
+					num = (mWidth - mFont.StringWidth(mLabel)) / 2;
 				}
-				else if (this.mLabelJustify == 1)
+				else if (mLabelJustify == 1)
 				{
-					num = this.mWidth - this.mFont.StringWidth(this.mLabel);
+					num = mWidth - mFont.StringWidth(mLabel);
 				}
-				num2 = (this.mHeight + this.mFont.GetAscent() - this.mFont.GetAscent() / 6 - 1) / 2;
+				num2 = (mHeight + mFont.GetAscent() - mFont.GetAscent() / 6 - 1) / 2;
 			}
-			g.SetFont(this.mFont);
-			if (this.mButtonImage == null && this.mDownImage == null)
+			g.SetFont(mFont);
+			if (mButtonImage == null && mDownImage == null)
 			{
-				if (!this.mFrameNoDraw)
+				if (!mFrameNoDraw)
 				{
-					g.SetColor(this.mColors[5]);
-					g.FillRect(0, 0, this.mWidth, this.mHeight);
+					g.SetColor(mColors[5]);
+					g.FillRect(0, 0, mWidth, mHeight);
 				}
 				if (flag)
 				{
-					if (!this.mFrameNoDraw)
+					if (!mFrameNoDraw)
 					{
-						g.SetColor(this.mColors[2]);
-						g.FillRect(0, 0, this.mWidth - 1, 1);
-						g.FillRect(0, 0, 1, this.mHeight - 1);
-						g.SetColor(this.mColors[3]);
-						g.FillRect(0, this.mHeight - 1, this.mWidth, 1);
-						g.FillRect(this.mWidth - 1, 0, 1, this.mHeight);
-						g.SetColor(this.mColors[4]);
-						g.FillRect(1, 1, this.mWidth - 3, 1);
-						g.FillRect(1, 1, 1, this.mHeight - 3);
+						g.SetColor(mColors[2]);
+						g.FillRect(0, 0, mWidth - 1, 1);
+						g.FillRect(0, 0, 1, mHeight - 1);
+						g.SetColor(mColors[3]);
+						g.FillRect(0, mHeight - 1, mWidth, 1);
+						g.FillRect(mWidth - 1, 0, 1, mHeight);
+						g.SetColor(mColors[4]);
+						g.FillRect(1, 1, mWidth - 3, 1);
+						g.FillRect(1, 1, 1, mHeight - 3);
 					}
-					if (this.mIsOver)
+					if (mIsOver)
 					{
-						g.SetColor(this.mColors[1]);
+						g.SetColor(mColors[1]);
 					}
 					else
 					{
-						g.SetColor(this.mColors[0]);
+						g.SetColor(mColors[0]);
 					}
-					g.DrawString(this.mLabel, num + num3, num2 + num3);
+					g.DrawString(mLabel, num + num3, num2 + num3);
 					return;
 				}
-				if (!this.mFrameNoDraw)
+				if (!mFrameNoDraw)
 				{
-					g.SetColor(this.mColors[3]);
-					g.FillRect(0, 0, this.mWidth - 1, 1);
-					g.FillRect(0, 0, 1, this.mHeight - 1);
-					g.SetColor(this.mColors[2]);
-					g.FillRect(0, this.mHeight - 1, this.mWidth, 1);
-					g.FillRect(this.mWidth - 1, 0, 1, this.mHeight);
-					g.SetColor(this.mColors[4]);
-					g.FillRect(1, this.mHeight - 2, this.mWidth - 2, 1);
-					g.FillRect(this.mWidth - 2, 1, 1, this.mHeight - 2);
+					g.SetColor(mColors[3]);
+					g.FillRect(0, 0, mWidth - 1, 1);
+					g.FillRect(0, 0, 1, mHeight - 1);
+					g.SetColor(mColors[2]);
+					g.FillRect(0, mHeight - 1, mWidth, 1);
+					g.FillRect(mWidth - 1, 0, 1, mHeight);
+					g.SetColor(mColors[4]);
+					g.FillRect(1, mHeight - 2, mWidth - 2, 1);
+					g.FillRect(mWidth - 2, 1, 1, mHeight - 2);
 				}
-				if (this.mIsOver)
+				if (mIsOver)
 				{
-					g.SetColor(this.mColors[1]);
+					g.SetColor(mColors[1]);
 				}
 				else
 				{
-					g.SetColor(this.mColors[0]);
+					g.SetColor(mColors[0]);
 				}
-				g.DrawString(this.mLabel, num, num2);
+				g.DrawString(mLabel, num, num2);
 				return;
 			}
 			else
 			{
 				if (!flag)
 				{
-					if (this.mDisabled && this.HaveButtonImage(this.mDisabledImage, new TRect(this.mDisabledRect)))
+					if (mDisabled && HaveButtonImage(mDisabledImage, new TRect(mDisabledRect)))
 					{
-						this.DrawButtonImage(g, this.mDisabledImage, new TRect(this.mDisabledRect), 0, 0);
+						DrawButtonImage(g, mDisabledImage, new TRect(mDisabledRect), 0, 0);
 					}
-					else if (this.mOverAlpha > 0.0 && this.HaveButtonImage(this.mOverImage, new TRect(this.mOverRect)))
+					else if (mOverAlpha > 0.0 && HaveButtonImage(mOverImage, new TRect(mOverRect)))
 					{
-						if (this.HaveButtonImage(this.mButtonImage, new TRect(this.mNormalRect)) && this.mOverAlpha < 1.0)
+						if (HaveButtonImage(mButtonImage, new TRect(mNormalRect)) && mOverAlpha < 1.0)
 						{
-							this.DrawButtonImage(g, this.mButtonImage, new TRect(this.mNormalRect), 0, 0);
+							DrawButtonImage(g, mButtonImage, new TRect(mNormalRect), 0, 0);
 						}
 						g.SetColorizeImages(true);
-						g.SetColor(new Color(255, 255, 255, (int)(this.mOverAlpha * 255.0)));
-						this.DrawButtonImage(g, this.mOverImage, new TRect(this.mOverRect), 0, 0);
+						g.SetColor(new Color(255, 255, 255, (int)(mOverAlpha * 255.0)));
+						DrawButtonImage(g, mOverImage, new TRect(mOverRect), 0, 0);
 						g.SetColorizeImages(false);
 					}
-					else if ((this.mIsOver || this.mIsDown) && this.HaveButtonImage(this.mOverImage, new TRect(this.mOverRect)))
+					else if ((mIsOver || mIsDown) && HaveButtonImage(mOverImage, new TRect(mOverRect)))
 					{
-						this.DrawButtonImage(g, this.mOverImage, new TRect(this.mOverRect), 0, 0);
+						DrawButtonImage(g, mOverImage, new TRect(mOverRect), 0, 0);
 					}
-					else if (this.HaveButtonImage(this.mButtonImage, new TRect(this.mNormalRect)))
+					else if (HaveButtonImage(mButtonImage, new TRect(mNormalRect)))
 					{
-						this.DrawButtonImage(g, this.mButtonImage, new TRect(this.mNormalRect), 0, 0);
+						DrawButtonImage(g, mButtonImage, new TRect(mNormalRect), 0, 0);
 					}
-					if (this.mIsOver)
+					if (mIsOver)
 					{
-						g.SetColor(this.mColors[1]);
+						g.SetColor(mColors[1]);
 					}
 					else
 					{
-						g.SetColor(this.mColors[0]);
+						g.SetColor(mColors[0]);
 					}
-					g.DrawString(this.mLabel, num, num2);
+					g.DrawString(mLabel, num, num2);
 					return;
 				}
-				if (this.HaveButtonImage(this.mDownImage, new TRect(this.mDownRect)))
+				if (HaveButtonImage(mDownImage, new TRect(mDownRect)))
 				{
-					this.DrawButtonImage(g, this.mDownImage, new TRect(this.mDownRect), 0, 0);
+					DrawButtonImage(g, mDownImage, new TRect(mDownRect), 0, 0);
 				}
-				else if (this.HaveButtonImage(this.mOverImage, new TRect(this.mOverRect)))
+				else if (HaveButtonImage(mOverImage, new TRect(mOverRect)))
 				{
-					this.DrawButtonImage(g, this.mOverImage, new TRect(this.mOverRect), num3, num3);
+					DrawButtonImage(g, mOverImage, new TRect(mOverRect), num3, num3);
 				}
 				else
 				{
-					this.DrawButtonImage(g, this.mButtonImage, new TRect(this.mNormalRect), num3, num3);
+					DrawButtonImage(g, mButtonImage, new TRect(mNormalRect), num3, num3);
 				}
-				g.SetColor(this.mColors[1]);
-				g.DrawString(this.mLabel, num + num3, num2 + num3);
+				g.SetColor(mColors[1]);
+				g.DrawString(mLabel, num + num3, num2 + num3);
 				return;
 			}
 		}
@@ -206,48 +206,48 @@ namespace Sexy
 		public override void SetDisabled(bool isDisabled)
 		{
 			base.SetDisabled(isDisabled);
-			if (this.HaveButtonImage(this.mDisabledImage, new TRect(this.mDisabledRect)))
+			if (HaveButtonImage(mDisabledImage, new TRect(mDisabledRect)))
 			{
-				this.MarkDirty();
+				MarkDirty();
 			}
 		}
 
 		public override void MouseEnter()
 		{
 			base.MouseEnter();
-			if (this.mOverAlphaFadeInSpeed == 0.0 && this.mOverAlpha > 0.0)
+			if (mOverAlphaFadeInSpeed == 0.0 && mOverAlpha > 0.0)
 			{
-				this.mOverAlpha = 0.0;
+				mOverAlpha = 0.0;
 			}
-			if (this.mIsDown || this.HaveButtonImage(this.mOverImage, new TRect(this.mOverRect)) || this.mColors[1] != this.mColors[0])
+			if (mIsDown || HaveButtonImage(mOverImage, new TRect(mOverRect)) || mColors[1] != mColors[0])
 			{
-				this.MarkDirty();
+				MarkDirty();
 			}
-			this.mButtonListener.ButtonMouseEnter(this.mId);
+			mButtonListener.ButtonMouseEnter(mId);
 		}
 
 		public override void MouseLeave()
 		{
 			base.MouseLeave();
-			if (this.mOverAlphaSpeed == 0.0 && this.mOverAlpha > 0.0)
+			if (mOverAlphaSpeed == 0.0 && mOverAlpha > 0.0)
 			{
-				this.mOverAlpha = 0.0;
+				mOverAlpha = 0.0;
 			}
-			else if (this.mOverAlphaSpeed > 0.0 && this.mOverAlpha == 0.0)
+			else if (mOverAlphaSpeed > 0.0 && mOverAlpha == 0.0)
 			{
-				this.mOverAlpha = 1.0;
+				mOverAlpha = 1.0;
 			}
-			if (this.mIsDown || this.HaveButtonImage(this.mOverImage, new TRect(this.mOverRect)) || this.mColors[1] != this.mColors[0])
+			if (mIsDown || HaveButtonImage(mOverImage, new TRect(mOverRect)) || mColors[1] != mColors[0])
 			{
-				this.MarkDirty();
+				MarkDirty();
 			}
-			this.mButtonListener.ButtonMouseLeave(this.mId);
+			mButtonListener.ButtonMouseLeave(mId);
 		}
 
 		public override void MouseMove(int theX, int theY)
 		{
 			base.MouseMove(theX, theY);
-			this.mButtonListener.ButtonMouseMove(this.mId, theX, theY);
+			mButtonListener.ButtonMouseMove(mId, theX, theY);
 		}
 
 		public override void MouseDown(int theX, int theY, int theClickCount)
@@ -258,8 +258,8 @@ namespace Sexy
 		public override void MouseDown(int theX, int theY, int theBtnNum, int theClickCount)
 		{
 			base.MouseDown(theX, theY, theBtnNum, theClickCount);
-			this.mButtonListener.ButtonPress(this.mId, theClickCount);
-			this.MarkDirty();
+			mButtonListener.ButtonPress(mId, theClickCount);
+			MarkDirty();
 		}
 
 		public override void MouseUp(int theX, int theY, int theClickCount)
@@ -270,51 +270,51 @@ namespace Sexy
 		public override void MouseUp(int theX, int theY, int theBtnNum, int theClickCount)
 		{
 			base.MouseUp(theX, theY, theBtnNum, theClickCount);
-			if (this.mIsOver && this.mWidgetManager.mHasFocus)
+			if (mIsOver && mWidgetManager.mHasFocus)
 			{
-				this.mButtonListener.ButtonDepress(this.mId);
+				mButtonListener.ButtonDepress(mId);
 			}
-			this.MarkDirty();
+			MarkDirty();
 		}
 
 		public override void Update()
 		{
 			base.Update();
-			if (this.mIsDown && this.mIsOver)
+			if (mIsDown && mIsOver)
 			{
-				this.mButtonListener.ButtonDownTick(this.mId);
+				mButtonListener.ButtonDownTick(mId);
 			}
-			if (!this.mIsDown && !this.mIsOver && this.mOverAlpha > 0.0)
+			if (!mIsDown && !mIsOver && mOverAlpha > 0.0)
 			{
-				if (this.mOverAlphaSpeed > 0.0)
+				if (mOverAlphaSpeed > 0.0)
 				{
-					this.mOverAlpha -= this.mOverAlphaSpeed;
-					if (this.mOverAlpha < 0.0)
+					mOverAlpha -= mOverAlphaSpeed;
+					if (mOverAlpha < 0.0)
 					{
-						this.mOverAlpha = 0.0;
+						mOverAlpha = 0.0;
 					}
 				}
 				else
 				{
-					this.mOverAlpha = 0.0;
+					mOverAlpha = 0.0;
 				}
-				this.MarkDirty();
+				MarkDirty();
 				return;
 			}
-			if (this.mIsOver && this.mOverAlphaFadeInSpeed > 0.0 && this.mOverAlpha < 1.0)
+			if (mIsOver && mOverAlphaFadeInSpeed > 0.0 && mOverAlpha < 1.0)
 			{
-				this.mOverAlpha += this.mOverAlphaFadeInSpeed;
-				if (this.mOverAlpha > 1.0)
+				mOverAlpha += mOverAlphaFadeInSpeed;
+				if (mOverAlpha > 1.0)
 				{
-					this.mOverAlpha = 1.0;
+					mOverAlpha = 1.0;
 				}
-				this.MarkDirty();
+				MarkDirty();
 			}
 		}
 
 		public override void Dispose()
 		{
-			this.mFont = null;
+			mFont = null;
 		}
 
 		public int mId;

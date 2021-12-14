@@ -7,14 +7,14 @@ namespace Sexy
 	{
 		public ParticleRes()
 		{
-			this.mType = ResType.ResType_Particle;
+			mType = ResType.ResType_Particle;
 		}
 
 		public override void DeleteResource()
 		{
-			if (this.mParticle != null)
+			if (mParticle != null)
 			{
-				this.mParticle = null;
+				mParticle = null;
 			}
 			base.DeleteResource();
 		}

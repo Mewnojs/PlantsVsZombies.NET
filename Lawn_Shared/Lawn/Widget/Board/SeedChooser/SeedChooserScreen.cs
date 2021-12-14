@@ -16,118 +16,118 @@ namespace Lawn
 
 		public SeedChooserScreen()
 		{
-			this.mApp = (LawnApp)GlobalStaticVars.gSexyAppBase;
-			this.mBoard = this.mApp.mBoard;
-			this.mClip = false;
-			this.mSeedsInFlight = 0;
-			this.mSeedsInBank = 0;
-			this.mLastMouseX = -1;
-			this.mLastMouseY = -1;
-			this.mChooseState = SeedChooserState.CHOOSE_NORMAL;
-			this.mViewLawnTime = 0;
-			this.mDoStartButton = false;
-			this.mSeedPacketsWidget = new SeedPacketsWidget(this.mApp, this.Has12Rows() ? 12 : 11, false, this);
-			this.mScrollWidget = new ScrollWidget();
-			this.mScrollWidget.Resize(Constants.SCROLL_AREA_OFFSET_X, Constants.SCROLL_AREA_OFFSET_Y, this.mSeedPacketsWidget.mWidth + (int)Constants.InvertAndScale(10f), (int)Constants.InvertAndScale(227f));
-			this.mScrollWidget.AddWidget(this.mSeedPacketsWidget);
-			this.mScrollWidget.EnableIndicators(AtlasResources.IMAGE_SCROLL_INDICATOR);
-			this.mSeedPacketsWidget.Move(0, 0);
-			this.AddWidget(this.mScrollWidget);
-			this.mStartButton = new GameButton(100, this);
-			this.mStartButton.SetLabel("[PLAY_BUTTON]");
-			this.mStartButton.mButtonImage = AtlasResources.IMAGE_SEEDCHOOSER_SMALL_BUTTON;
-			this.mStartButton.mOverImage = null;
-			this.mStartButton.mDownImage = AtlasResources.IMAGE_SEEDCHOOSER_SMALL_BUTTON_PRESSED;
-			this.mStartButton.mDisabledImage = AtlasResources.IMAGE_SEEDCHOOSER_SMALL_BUTTON_DISABLED;
-			this.mStartButton.mOverOverlayImage = null;
-			this.mStartButton.SetFont(Resources.FONT_DWARVENTODCRAFT15);
-			this.mStartButton.mColors[1] = new SexyColor(255, 231, 26);
-			this.mStartButton.mColors[0] = new SexyColor(255, 231, 26);
-			this.mStartButton.Resize((int)Constants.InvertAndScale(147f), (int)Constants.InvertAndScale(280f), (int)Constants.InvertAndScale(67f), this.mStartButton.mButtonImage.GetHeight());
-			this.mStartButton.mTextOffsetX = 0;
-			this.mStartButton.mTextOffsetX = 0;
-			this.mStartButton.mTextPushOffsetX = 1;
-			this.mStartButton.mTextPushOffsetY = 3;
-			this.EnableStartButton(false);
-			this.mMenuButton = new GameButton(104, this);
-			this.mMenuButton.SetLabel("[MENU_BUTTON]");
-			this.mMenuButton.Resize(Constants.UIMenuButtonPosition.X + Constants.Board_Offset_AspectRatio_Correction, Constants.UIMenuButtonPosition.Y, Constants.UIMenuButtonWidth, AtlasResources.IMAGE_BUTTON_LEFT.mHeight);
-			this.mMenuButton.mDrawStoneButton = true;
-			this.mRandomButton = new GameButton(101, this);
-			this.mRandomButton.SetLabel("(Debug Play)");
-			this.mRandomButton.mButtonImage = AtlasResources.IMAGE_BLANK;
-			this.mRandomButton.mOverImage = AtlasResources.IMAGE_BLANK;
-			this.mRandomButton.mDownImage = AtlasResources.IMAGE_BLANK;
-			this.mRandomButton.SetFont(Resources.FONT_BRIANNETOD12);
-			this.mRandomButton.mColors[0] = new SexyColor(255, 240, 0);
-			this.mRandomButton.mColors[1] = new SexyColor(200, 200, 255);
-			this.mRandomButton.Resize((int)Constants.InvertAndScale(332f), (int)Constants.InvertAndScale(546f), (int)Constants.InvertAndScale(100f), (int)Constants.InvertAndScale(30f));
-			if (!this.mApp.mTodCheatKeys)
+			mApp = (LawnApp)GlobalStaticVars.gSexyAppBase;
+			mBoard = mApp.mBoard;
+			mClip = false;
+			mSeedsInFlight = 0;
+			mSeedsInBank = 0;
+			mLastMouseX = -1;
+			mLastMouseY = -1;
+			mChooseState = SeedChooserState.CHOOSE_NORMAL;
+			mViewLawnTime = 0;
+			mDoStartButton = false;
+			mSeedPacketsWidget = new SeedPacketsWidget(mApp, Has12Rows() ? 12 : 11, false, this);
+			mScrollWidget = new ScrollWidget();
+			mScrollWidget.Resize(Constants.SCROLL_AREA_OFFSET_X, Constants.SCROLL_AREA_OFFSET_Y, mSeedPacketsWidget.mWidth + (int)Constants.InvertAndScale(10f), (int)Constants.InvertAndScale(227f));
+			mScrollWidget.AddWidget(mSeedPacketsWidget);
+			mScrollWidget.EnableIndicators(AtlasResources.IMAGE_SCROLL_INDICATOR);
+			mSeedPacketsWidget.Move(0, 0);
+			AddWidget(mScrollWidget);
+			mStartButton = new GameButton(100, this);
+			mStartButton.SetLabel("[PLAY_BUTTON]");
+			mStartButton.mButtonImage = AtlasResources.IMAGE_SEEDCHOOSER_SMALL_BUTTON;
+			mStartButton.mOverImage = null;
+			mStartButton.mDownImage = AtlasResources.IMAGE_SEEDCHOOSER_SMALL_BUTTON_PRESSED;
+			mStartButton.mDisabledImage = AtlasResources.IMAGE_SEEDCHOOSER_SMALL_BUTTON_DISABLED;
+			mStartButton.mOverOverlayImage = null;
+			mStartButton.SetFont(Resources.FONT_DWARVENTODCRAFT15);
+			mStartButton.mColors[1] = new SexyColor(255, 231, 26);
+			mStartButton.mColors[0] = new SexyColor(255, 231, 26);
+			mStartButton.Resize((int)Constants.InvertAndScale(147f), (int)Constants.InvertAndScale(280f), (int)Constants.InvertAndScale(67f), mStartButton.mButtonImage.GetHeight());
+			mStartButton.mTextOffsetX = 0;
+			mStartButton.mTextOffsetX = 0;
+			mStartButton.mTextPushOffsetX = 1;
+			mStartButton.mTextPushOffsetY = 3;
+			EnableStartButton(false);
+			mMenuButton = new GameButton(104, this);
+			mMenuButton.SetLabel("[MENU_BUTTON]");
+			mMenuButton.Resize(Constants.UIMenuButtonPosition.X + Constants.Board_Offset_AspectRatio_Correction, Constants.UIMenuButtonPosition.Y, Constants.UIMenuButtonWidth, AtlasResources.IMAGE_BUTTON_LEFT.mHeight);
+			mMenuButton.mDrawStoneButton = true;
+			mRandomButton = new GameButton(101, this);
+			mRandomButton.SetLabel("(Debug Play)");
+			mRandomButton.mButtonImage = AtlasResources.IMAGE_BLANK;
+			mRandomButton.mOverImage = AtlasResources.IMAGE_BLANK;
+			mRandomButton.mDownImage = AtlasResources.IMAGE_BLANK;
+			mRandomButton.SetFont(Resources.FONT_BRIANNETOD12);
+			mRandomButton.mColors[0] = new SexyColor(255, 240, 0);
+			mRandomButton.mColors[1] = new SexyColor(200, 200, 255);
+			mRandomButton.Resize((int)Constants.InvertAndScale(332f), (int)Constants.InvertAndScale(546f), (int)Constants.InvertAndScale(100f), (int)Constants.InvertAndScale(30f));
+			if (!mApp.mTodCheatKeys)
 			{
-				this.mRandomButton.mBtnNoDraw = true;
-				this.mRandomButton.mDisabled = true;
+				mRandomButton.mBtnNoDraw = true;
+				mRandomButton.mDisabled = true;
 			}
-			this.mViewLawnButton = new GameButton(102, this);
-			this.mViewLawnButton.SetLabel("[VIEW_LAWN]");
-			this.mViewLawnButton.mButtonImage = AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2;
-			this.mViewLawnButton.mOverImage = AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2_GLOW;
-			this.mViewLawnButton.mDownImage = null;
-			this.mViewLawnButton.SetFont(Resources.FONT_BRIANNETOD12);
-			this.mViewLawnButton.mColors[0] = new SexyColor(42, 42, 90);
-			this.mViewLawnButton.mColors[1] = new SexyColor(42, 42, 90);
-			this.mViewLawnButton.Resize((int)Constants.InvertAndScale(22f), (int)Constants.InvertAndScale(300f), (int)Constants.InvertAndScale(111f), (int)Constants.InvertAndScale(26f));
-			this.mViewLawnButton.mParentWidget = this;
-			this.mViewLawnButton.mTextOffsetY = 1;
-			if (!this.mBoard.mCutScene.IsSurvivalRepick())
+			mViewLawnButton = new GameButton(102, this);
+			mViewLawnButton.SetLabel("[VIEW_LAWN]");
+			mViewLawnButton.mButtonImage = AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2;
+			mViewLawnButton.mOverImage = AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2_GLOW;
+			mViewLawnButton.mDownImage = null;
+			mViewLawnButton.SetFont(Resources.FONT_BRIANNETOD12);
+			mViewLawnButton.mColors[0] = new SexyColor(42, 42, 90);
+			mViewLawnButton.mColors[1] = new SexyColor(42, 42, 90);
+			mViewLawnButton.Resize((int)Constants.InvertAndScale(22f), (int)Constants.InvertAndScale(300f), (int)Constants.InvertAndScale(111f), (int)Constants.InvertAndScale(26f));
+			mViewLawnButton.mParentWidget = this;
+			mViewLawnButton.mTextOffsetY = 1;
+			if (!mBoard.mCutScene.IsSurvivalRepick())
 			{
-				this.mViewLawnButton.mBtnNoDraw = true;
-				this.mViewLawnButton.mDisabled = true;
+				mViewLawnButton.mBtnNoDraw = true;
+				mViewLawnButton.mDisabled = true;
 			}
-			this.mAlmanacButton = new GameButton(103, this);
-			this.mAlmanacButton.SetLabel("[ALMANAC_BUTTON]");
-			this.mAlmanacButton.mButtonImage = AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2;
-			this.mAlmanacButton.mOverImage = AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2_GLOW;
-			this.mAlmanacButton.mDownImage = null;
-			this.mAlmanacButton.SetFont(Resources.FONT_BRIANNETOD12);
-			this.mAlmanacButton.mColors[0] = new SexyColor(42, 42, 90);
-			this.mAlmanacButton.mColors[1] = new SexyColor(42, 42, 90);
-			this.mAlmanacButton.Resize((int)Constants.InvertAndScale(63f), (int)Constants.InvertAndScale(286f), AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2.mWidth, (int)Constants.InvertAndScale(26f));
-			this.mAlmanacButton.mParentWidget = this;
-			this.mAlmanacButton.mTextOffsetY = (int)Constants.InvertAndScale(2f);
-			this.mStoreButton = new GameButton(105, this);
-			this.mStoreButton.SetLabel("[SHOP_BUTTON]");
-			this.mStoreButton.mButtonImage = AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2;
-			this.mStoreButton.mOverImage = AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2_GLOW;
-			this.mStoreButton.mDownImage = null;
-			this.mStoreButton.SetFont(Resources.FONT_BRIANNETOD12);
-			this.mStoreButton.mColors[0] = new SexyColor(42, 42, 90);
-			this.mStoreButton.mColors[1] = new SexyColor(42, 42, 90);
-			this.mStoreButton.Resize((int)Constants.InvertAndScale(218f), (int)Constants.InvertAndScale(286f), AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2.mWidth, (int)Constants.InvertAndScale(26f));
-			this.mStoreButton.mParentWidget = this;
-			this.mStoreButton.mTextOffsetY = (int)Constants.InvertAndScale(2f);
-			this.mImitaterButton = new GameButton(106, this);
-			this.mImitaterButton.mButtonImage = null;
-			this.mImitaterButton.mOverImage = null;
-			this.mImitaterButton.mDownImage = null;
-			this.mImitaterButton.mDisabledImage = null;
-			this.mImitaterButton.Resize((int)Constants.InvertAndScale(310f), (int)Constants.InvertAndScale(27f), Constants.SMALL_SEEDPACKET_WIDTH, Constants.SMALL_SEEDPACKET_HEIGHT);
-			this.mImitaterButton.mParentWidget = this;
-			if (!this.mApp.CanShowAlmanac())
+			mAlmanacButton = new GameButton(103, this);
+			mAlmanacButton.SetLabel("[ALMANAC_BUTTON]");
+			mAlmanacButton.mButtonImage = AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2;
+			mAlmanacButton.mOverImage = AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2_GLOW;
+			mAlmanacButton.mDownImage = null;
+			mAlmanacButton.SetFont(Resources.FONT_BRIANNETOD12);
+			mAlmanacButton.mColors[0] = new SexyColor(42, 42, 90);
+			mAlmanacButton.mColors[1] = new SexyColor(42, 42, 90);
+			mAlmanacButton.Resize((int)Constants.InvertAndScale(63f), (int)Constants.InvertAndScale(286f), AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2.mWidth, (int)Constants.InvertAndScale(26f));
+			mAlmanacButton.mParentWidget = this;
+			mAlmanacButton.mTextOffsetY = (int)Constants.InvertAndScale(2f);
+			mStoreButton = new GameButton(105, this);
+			mStoreButton.SetLabel("[SHOP_BUTTON]");
+			mStoreButton.mButtonImage = AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2;
+			mStoreButton.mOverImage = AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2_GLOW;
+			mStoreButton.mDownImage = null;
+			mStoreButton.SetFont(Resources.FONT_BRIANNETOD12);
+			mStoreButton.mColors[0] = new SexyColor(42, 42, 90);
+			mStoreButton.mColors[1] = new SexyColor(42, 42, 90);
+			mStoreButton.Resize((int)Constants.InvertAndScale(218f), (int)Constants.InvertAndScale(286f), AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2.mWidth, (int)Constants.InvertAndScale(26f));
+			mStoreButton.mParentWidget = this;
+			mStoreButton.mTextOffsetY = (int)Constants.InvertAndScale(2f);
+			mImitaterButton = new GameButton(106, this);
+			mImitaterButton.mButtonImage = null;
+			mImitaterButton.mOverImage = null;
+			mImitaterButton.mDownImage = null;
+			mImitaterButton.mDisabledImage = null;
+			mImitaterButton.Resize((int)Constants.InvertAndScale(310f), (int)Constants.InvertAndScale(27f), Constants.SMALL_SEEDPACKET_WIDTH, Constants.SMALL_SEEDPACKET_HEIGHT);
+			mImitaterButton.mParentWidget = this;
+			if (!mApp.CanShowAlmanac())
 			{
-				this.mAlmanacButton.mBtnNoDraw = true;
-				this.mAlmanacButton.mDisabled = true;
+				mAlmanacButton.mBtnNoDraw = true;
+				mAlmanacButton.mDisabled = true;
 			}
-			if (!this.mApp.CanShowStore())
+			if (!mApp.CanShowStore())
 			{
-				this.mStoreButton.mBtnNoDraw = true;
-				this.mStoreButton.mDisabled = true;
+				mStoreButton.mBtnNoDraw = true;
+				mStoreButton.mDisabled = true;
 			}
 			for (int i = 0; i < 49; i++)
 			{
-				SeedType mSeedType = (SeedType)i;
+				SeedType seedType = (SeedType)i;
 				ChosenSeed chosenSeed = new ChosenSeed();
-				chosenSeed.mSeedType = mSeedType;
-				this.GetSeedPositionInChooser(i, ref chosenSeed.mX, ref chosenSeed.mY);
+				chosenSeed.mSeedType = seedType;
+				GetSeedPositionInChooser(i, ref chosenSeed.mX, ref chosenSeed.mY);
 				chosenSeed.mTimeStartMotion = 0;
 				chosenSeed.mTimeEndMotion = 0;
 				chosenSeed.mStartX = chosenSeed.mX;
@@ -144,24 +144,24 @@ namespace Lawn
 				{
 					chosenSeed.mSeedState = ChosenSeedState.SEED_PACKET_HIDDEN;
 				}
-				this.mChosenSeeds[i] = chosenSeed;
+				mChosenSeeds[i] = chosenSeed;
 			}
-			if (this.mBoard.mCutScene.IsSurvivalRepick())
+			if (mBoard.mCutScene.IsSurvivalRepick())
 			{
-				for (int j = 0; j < this.mBoard.mSeedBank.mNumPackets; j++)
+				for (int j = 0; j < mBoard.mSeedBank.mNumPackets; j++)
 				{
-					SeedPacket seedPacket = this.mBoard.mSeedBank.mSeedPackets[j];
-					SeedType mPacketType = seedPacket.mPacketType;
-					ChosenSeed chosenSeed2 = this.mChosenSeeds[(int)mPacketType];
+					SeedPacket seedPacket = mBoard.mSeedBank.mSeedPackets[j];
+					SeedType packetType = seedPacket.mPacketType;
+					ChosenSeed chosenSeed2 = mChosenSeeds[(int)packetType];
 					chosenSeed2.mRefreshing = seedPacket.mRefreshing;
 					chosenSeed2.mRefreshCounter = seedPacket.mRefreshCounter;
 				}
-				this.mBoard.mSeedBank.mNumPackets = 0;
+				mBoard.mSeedBank.mNumPackets = 0;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_SEEING_STARS)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_SEEING_STARS)
 			{
-				ChosenSeed chosenSeed3 = this.mChosenSeeds[29];
-				chosenSeed3.mY = this.mBoard.GetSeedPacketPositionY(0);
+				ChosenSeed chosenSeed3 = mChosenSeeds[29];
+				chosenSeed3.mY = mBoard.GetSeedPacketPositionY(0);
 				chosenSeed3.mX = 0;
 				chosenSeed3.mEndX = chosenSeed3.mX;
 				chosenSeed3.mEndY = chosenSeed3.mY;
@@ -169,110 +169,110 @@ namespace Lawn
 				chosenSeed3.mStartY = chosenSeed3.mY;
 				chosenSeed3.mSeedState = ChosenSeedState.SEED_IN_BANK;
 				chosenSeed3.mSeedIndexInBank = 0;
-				this.mSeedsInBank++;
+				mSeedsInBank++;
 			}
-			if (this.mApp.IsAdventureMode() && !this.mApp.IsFirstTimeAdventureMode())
+			if (mApp.IsAdventureMode() && !mApp.IsFirstTimeAdventureMode())
 			{
-				this.CrazyDavePickSeeds();
+				CrazyDavePickSeeds();
 			}
-			this.UpdateImitaterButton();
-			for (int k = 0; k < this.mPickWarningsWaved.Length; k++)
+			UpdateImitaterButton();
+			for (int k = 0; k < mPickWarningsWaved.Length; k++)
 			{
-				this.mPickWarningsWaved[k] = false;
+				mPickWarningsWaved[k] = false;
 			}
 		}
 
 		public override void Dispose()
 		{
-			this.mStartButton.Dispose();
-			this.mRandomButton.Dispose();
-			this.mViewLawnButton.Dispose();
-			this.mAlmanacButton.Dispose();
-			this.mImitaterButton.Dispose();
-			this.mStoreButton.Dispose();
-			this.mMenuButton.Dispose();
-			this.RemoveAllWidgets(true);
+			mStartButton.Dispose();
+			mRandomButton.Dispose();
+			mViewLawnButton.Dispose();
+			mAlmanacButton.Dispose();
+			mImitaterButton.Dispose();
+			mStoreButton.Dispose();
+			mMenuButton.Dispose();
+			RemoveAllWidgets(true);
 		}
 
 		public override void Update()
 		{
 			base.Update();
-			this.mLastMouseX = this.mApp.mWidgetManager.mLastMouseX;
-			this.mLastMouseY = this.mApp.mWidgetManager.mLastMouseY;
-			this.mSeedChooserAge += 3;
+			mLastMouseX = mApp.mWidgetManager.mLastMouseX;
+			mLastMouseY = mApp.mWidgetManager.mLastMouseY;
+			mSeedChooserAge += 3;
 			for (int i = 0; i < 49; i++)
 			{
 				SeedType theSeedType = (SeedType)i;
-				if (this.mApp.HasSeedType(theSeedType))
+				if (mApp.HasSeedType(theSeedType))
 				{
-					ChosenSeed chosenSeed = this.mChosenSeeds[i];
+					ChosenSeed chosenSeed = mChosenSeeds[i];
 					if (chosenSeed.mSeedState == ChosenSeedState.SEED_FLYING_TO_BANK || chosenSeed.mSeedState == ChosenSeedState.SEED_FLYING_TO_CHOOSER)
 					{
-						chosenSeed.mX = TodCommon.TodAnimateCurve(chosenSeed.mTimeStartMotion, chosenSeed.mTimeEndMotion, this.mSeedChooserAge, chosenSeed.mStartX, chosenSeed.mEndX, TodCurves.CURVE_EASE_IN_OUT);
-						chosenSeed.mY = TodCommon.TodAnimateCurve(chosenSeed.mTimeStartMotion, chosenSeed.mTimeEndMotion, this.mSeedChooserAge, chosenSeed.mStartY, chosenSeed.mEndY, TodCurves.CURVE_EASE_IN_OUT);
+						chosenSeed.mX = TodCommon.TodAnimateCurve(chosenSeed.mTimeStartMotion, chosenSeed.mTimeEndMotion, mSeedChooserAge, chosenSeed.mStartX, chosenSeed.mEndX, TodCurves.CURVE_EASE_IN_OUT);
+						chosenSeed.mY = TodCommon.TodAnimateCurve(chosenSeed.mTimeStartMotion, chosenSeed.mTimeEndMotion, mSeedChooserAge, chosenSeed.mStartY, chosenSeed.mEndY, TodCurves.CURVE_EASE_IN_OUT);
 					}
-					if (chosenSeed.mSeedState == ChosenSeedState.SEED_FLYING_TO_BANK && this.mSeedChooserAge >= chosenSeed.mTimeEndMotion)
+					if (chosenSeed.mSeedState == ChosenSeedState.SEED_FLYING_TO_BANK && mSeedChooserAge >= chosenSeed.mTimeEndMotion)
 					{
-						this.LandFlyingSeed(ref chosenSeed);
+						LandFlyingSeed(ref chosenSeed);
 					}
-					if (chosenSeed.mSeedState == ChosenSeedState.SEED_FLYING_TO_CHOOSER && this.mSeedChooserAge >= chosenSeed.mTimeEndMotion)
+					if (chosenSeed.mSeedState == ChosenSeedState.SEED_FLYING_TO_CHOOSER && mSeedChooserAge >= chosenSeed.mTimeEndMotion)
 					{
-						this.LandFlyingSeed(ref chosenSeed);
+						LandFlyingSeed(ref chosenSeed);
 					}
 				}
 			}
-			this.mStartButton.Update();
-			this.mRandomButton.Update();
-			this.mViewLawnButton.Update();
-			this.mAlmanacButton.Update();
-			this.mImitaterButton.Update();
-			this.mStoreButton.Update();
-			this.mMenuButton.Update();
-			this.UpdateViewLawn();
-			if (this.mDoStartButton)
+			mStartButton.Update();
+			mRandomButton.Update();
+			mViewLawnButton.Update();
+			mAlmanacButton.Update();
+			mImitaterButton.Update();
+			mStoreButton.Update();
+			mMenuButton.Update();
+			UpdateViewLawn();
+			if (mDoStartButton)
 			{
-				this.mDoStartButton = false;
-				this.OnStartButton();
+				mDoStartButton = false;
+				OnStartButton();
 			}
-			this.MarkDirty();
+			MarkDirty();
 		}
 
 		public override void Draw(Graphics g)
 		{
-			if (this.mApp.GetDialog(Dialogs.DIALOG_STORE) != null || this.mApp.GetDialog(Dialogs.DIALOG_ALMANAC) != null)
+			if (mApp.GetDialog(Dialogs.DIALOG_STORE) != null || mApp.GetDialog(Dialogs.DIALOG_ALMANAC) != null)
 			{
 				return;
 			}
 			g.SetLinearBlend(true);
-			if (!this.mBoard.ChooseSeedsOnCurrentLevel())
+			if (!mBoard.ChooseSeedsOnCurrentLevel())
 			{
 				return;
 			}
-			if (this.mBoard.mCutScene != null && this.mBoard.mCutScene.IsBeforePreloading())
+			if (mBoard.mCutScene != null && mBoard.mCutScene.IsBeforePreloading())
 			{
 				return;
 			}
 			g.DrawImage(AtlasResources.IMAGE_SEEDCHOOSER_BACKGROUND_TOP, Constants.SeedChooserScreen_Background_Top.X, Constants.SeedChooserScreen_Background_Top.Y);
 			g.DrawImage(AtlasResources.IMAGE_SEEDCHOOSER_BACKGROUND_MIDDLE, Constants.SeedChooserScreen_Background_Middle.X, Constants.SeedChooserScreen_Background_Middle.Y, AtlasResources.IMAGE_SEEDCHOOSER_BACKGROUND_MIDDLE.mWidth, Constants.SeedChooserScreen_Background_Middle_Height);
 			g.DrawImage(AtlasResources.IMAGE_SEEDCHOOSER_BACKGROUND_BOTTOM, Constants.SeedChooserScreen_Background_Bottom.X, Constants.SeedChooserScreen_Background_Bottom.Y);
-			if (this.mApp.HasSeedType(SeedType.SEED_IMITATER))
+			if (mApp.HasSeedType(SeedType.SEED_IMITATER))
 			{
 				g.DrawImage(AtlasResources.IMAGE_SEEDCHOOSER_IMITATERADDON, (int)Constants.InvertAndScale(304f), (int)Constants.InvertAndScale(18f));
-				if (!this.mImitaterButton.mDisabled)
+				if (!mImitaterButton.mDisabled)
 				{
-					g.DrawImageCel(AtlasResources.IMAGE_SEEDPACKETS, this.mImitaterButton.mX, this.mImitaterButton.mY, 48);
+					g.DrawImageCel(AtlasResources.IMAGE_SEEDPACKETS, mImitaterButton.mX, mImitaterButton.mY, 48);
 				}
 			}
-			int mNumPackets = this.mBoard.mSeedBank.mNumPackets;
-			for (int i = 0; i < mNumPackets; i++)
+			int numPackets = mBoard.mSeedBank.mNumPackets;
+			for (int i = 0; i < numPackets; i++)
 			{
-				SeedType seedType = this.FindSeedInBank(i);
+				SeedType seedType = FindSeedInBank(i);
 				int num = 0;
 				int num2 = 0;
-				this.GetSeedPositionInBank(i, ref num, ref num2);
+				GetSeedPositionInBank(i, ref num, ref num2);
 				if (seedType != SeedType.SEED_NONE)
 				{
-					ChosenSeed chosenSeed = this.mChosenSeeds[(int)seedType];
+					ChosenSeed chosenSeed = mChosenSeeds[(int)seedType];
 					SeedPacket.DrawSmallSeedPacket(g, (float)num, (float)num2, seedType, chosenSeed.mImitaterType, 0f, 255, true, false, true, true);
 					if (chosenSeed.mCrazyDavePicked)
 					{
@@ -285,15 +285,15 @@ namespace Lawn
 				}
 			}
 			base.DeferOverlay();
-			this.mStartButton.Draw(g);
-			this.mRandomButton.Draw(g);
-			this.mViewLawnButton.Draw(g);
-			this.mAlmanacButton.Draw(g);
-			this.mStoreButton.Draw(g);
+			mStartButton.Draw(g);
+			mRandomButton.Draw(g);
+			mViewLawnButton.Draw(g);
+			mAlmanacButton.Draw(g);
+			mStoreButton.Draw(g);
 			Graphics @new = Graphics.GetNew(g);
-			@new.mTransX -= this.mX;
-			@new.mTransY -= this.mY;
-			this.mMenuButton.Draw(@new);
+			@new.mTransX -= mX;
+			@new.mTransY -= mY;
+			mMenuButton.Draw(@new);
 			@new.PrepareForReuse();
 		}
 
@@ -301,25 +301,25 @@ namespace Lawn
 		{
 			g.SetColor(Constants.SeedChooserScreen_BackColour);
 			g.SetColorizeImages(true);
-			if (this.mSeedPacketsWidget.mY < 0)
+			if (mSeedPacketsWidget.mY < 0)
 			{
-				g.DrawImage(AtlasResources.IMAGE_ALMANAC_PLANTS_TOPGRADIENT, this.mScrollWidget.mX + Constants.SeedChooserScreen_Gradient_Top.X, Constants.SeedChooserScreen_Gradient_Top.Y, Constants.SeedChooserScreen_Gradient_Top.Width, Constants.SeedChooserScreen_Gradient_Top.Height);
+				g.DrawImage(AtlasResources.IMAGE_ALMANAC_PLANTS_TOPGRADIENT, mScrollWidget.mX + Constants.SeedChooserScreen_Gradient_Top.X, Constants.SeedChooserScreen_Gradient_Top.Y, Constants.SeedChooserScreen_Gradient_Top.Width, Constants.SeedChooserScreen_Gradient_Top.Height);
 			}
-			if ((float)(this.mSeedPacketsWidget.mY + this.mSeedPacketsWidget.mHeight) > Constants.InvertAndScale(227f))
+			if ((float)(mSeedPacketsWidget.mY + mSeedPacketsWidget.mHeight) > Constants.InvertAndScale(227f))
 			{
-				g.DrawImage(AtlasResources.IMAGE_ALMANAC_PLANTS_BOTTOMGRADIENT, this.mScrollWidget.mX + Constants.SeedChooserScreen_Gradient_Bottom.X, Constants.SeedChooserScreen_Gradient_Bottom.Y, Constants.SeedChooserScreen_Gradient_Bottom.Width, Constants.SeedChooserScreen_Gradient_Bottom.Height);
+				g.DrawImage(AtlasResources.IMAGE_ALMANAC_PLANTS_BOTTOMGRADIENT, mScrollWidget.mX + Constants.SeedChooserScreen_Gradient_Bottom.X, Constants.SeedChooserScreen_Gradient_Bottom.Y, Constants.SeedChooserScreen_Gradient_Bottom.Width, Constants.SeedChooserScreen_Gradient_Bottom.Height);
 			}
 			g.SetColorizeImages(false);
 			bool flag = false;
 			for (int i = 0; i < 49; i++)
 			{
 				SeedType theSeedType = (SeedType)i;
-				if (this.mApp.HasSeedType(theSeedType))
+				if (mApp.HasSeedType(theSeedType))
 				{
-					ChosenSeed chosenSeed = this.mChosenSeeds[i];
+					ChosenSeed chosenSeed = mChosenSeeds[i];
 					if (chosenSeed.mSeedState == ChosenSeedState.SEED_FLYING_TO_BANK)
 					{
-						g.SetClipRect(0, 0, this.mWidth, this.mHeight);
+						g.SetClipRect(0, 0, mWidth, mHeight);
 					}
 					else
 					{
@@ -327,7 +327,7 @@ namespace Lawn
 						{
 							goto IL_170;
 						}
-						g.SetClipRect(0, 0, this.mWidth, this.mScrollWidget.mY + this.mScrollWidget.mHeight);
+						g.SetClipRect(0, 0, mWidth, mScrollWidget.mY + mScrollWidget.mHeight);
 						g.HardwareClip();
 						flag = true;
 					}
@@ -348,136 +348,136 @@ namespace Lawn
 
 		public override bool BackButtonPress()
 		{
-			int mId = this.mMenuButton.mId;
-			this.ButtonPress(mId);
-			this.ButtonDepress(mId);
+			int id = mMenuButton.mId;
+			ButtonPress(id);
+			ButtonDepress(id);
 			return true;
 		}
 
 		public virtual void ButtonDepress(int theId)
 		{
-			if (this.mSeedsInFlight > 0 || this.mChooseState == SeedChooserState.CHOOSE_VIEW_LAWN)
+			if (mSeedsInFlight > 0 || mChooseState == SeedChooserState.CHOOSE_VIEW_LAWN)
 			{
 				return;
 			}
-			if (!this.mMouseVisible)
+			if (!mMouseVisible)
 			{
 				return;
 			}
 			if (theId == 102)
 			{
-				this.mChooseState = SeedChooserState.CHOOSE_VIEW_LAWN;
-				this.mMenuButton.mDisabled = true;
-				this.mViewLawnTime = 0;
+				mChooseState = SeedChooserState.CHOOSE_VIEW_LAWN;
+				mMenuButton.mDisabled = true;
+				mViewLawnTime = 0;
 			}
 			else if (theId == 103)
 			{
-				this.mApp.DoAlmanacDialog(SeedType.SEED_NONE, ZombieType.ZOMBIE_INVALID, this);
+				mApp.DoAlmanacDialog(SeedType.SEED_NONE, ZombieType.ZOMBIE_INVALID, this);
 			}
 			else
 			{
 				if (theId == 105)
 				{
-					StoreScreen storeScreen = this.mApp.ShowStoreScreen(this);
+					StoreScreen storeScreen = mApp.ShowStoreScreen(this);
 					storeScreen.mBackButton.mButtonImage = AtlasResources.IMAGE_STORE_CONTINUEBUTTON;
 					storeScreen.mBackButton.mDownImage = AtlasResources.IMAGE_STORE_CONTINUEBUTTONDOWN;
 					return;
 				}
 				if (theId == 104)
 				{
-					this.mMenuButton.mIsOver = false;
-					this.mMenuButton.mIsDown = false;
-					this.mApp.DoNewOptions(false);
+					mMenuButton.mIsOver = false;
+					mMenuButton.mIsDown = false;
+					mApp.DoNewOptions(false);
 				}
 			}
-			if (this.mApp.GetSeedsAvailable() < this.mBoard.mSeedBank.mNumPackets)
+			if (mApp.GetSeedsAvailable() < mBoard.mSeedBank.mNumPackets)
 			{
 				return;
 			}
 			if (theId == 100)
 			{
-				this.OnStartButton();
+				OnStartButton();
 				return;
 			}
 			if (theId == 101)
 			{
-				this.PickRandomSeeds();
+				PickRandomSeeds();
 			}
 		}
 
 		public override void MouseDown(int x, int y, int theClickCount)
 		{
 			base.MouseDown(x, y, theClickCount);
-			if (this.mSeedsInFlight > 0)
+			if (mSeedsInFlight > 0)
 			{
 				for (int i = 0; i < 49; i++)
 				{
-					ChosenSeed chosenSeed = this.mChosenSeeds[i];
-					this.LandFlyingSeed(ref chosenSeed);
+					ChosenSeed chosenSeed = mChosenSeeds[i];
+					LandFlyingSeed(ref chosenSeed);
 				}
 			}
-			if (this.mChooseState == SeedChooserState.CHOOSE_VIEW_LAWN)
+			if (mChooseState == SeedChooserState.CHOOSE_VIEW_LAWN)
 			{
-				this.CancelLawnView();
+				CancelLawnView();
 				return;
 			}
-			this.mStartButton.Update();
-			this.mRandomButton.Update();
-			this.mViewLawnButton.Update();
-			this.mAlmanacButton.Update();
-			this.mImitaterButton.Update();
-			this.mStoreButton.Update();
-			this.mMenuButton.Update();
-			if (this.mRandomButton.IsMouseOver())
+			mStartButton.Update();
+			mRandomButton.Update();
+			mViewLawnButton.Update();
+			mAlmanacButton.Update();
+			mImitaterButton.Update();
+			mStoreButton.Update();
+			mMenuButton.Update();
+			if (mRandomButton.IsMouseOver())
 			{
-				this.mApp.PlaySample(Resources.SOUND_TAP);
-				this.ButtonDepress(101);
+				mApp.PlaySample(Resources.SOUND_TAP);
+				ButtonDepress(101);
 				return;
 			}
-			if (this.mViewLawnButton.IsMouseOver())
+			if (mViewLawnButton.IsMouseOver())
 			{
-				this.mApp.PlaySample(Resources.SOUND_TAP);
-				this.ButtonDepress(102);
+				mApp.PlaySample(Resources.SOUND_TAP);
+				ButtonDepress(102);
 				return;
 			}
-			if (this.mMenuButton.IsMouseOver())
+			if (mMenuButton.IsMouseOver())
 			{
-				this.mApp.PlaySample(Resources.SOUND_GRAVEBUTTON);
+				mApp.PlaySample(Resources.SOUND_GRAVEBUTTON);
 			}
-			if (this.mStartButton.IsMouseOver())
+			if (mStartButton.IsMouseOver())
 			{
-				this.mApp.PlaySample(Resources.SOUND_TAP);
+				mApp.PlaySample(Resources.SOUND_TAP);
 			}
-			if (this.mAlmanacButton.IsMouseOver())
+			if (mAlmanacButton.IsMouseOver())
 			{
-				this.mApp.PlaySample(Resources.SOUND_TAP);
+				mApp.PlaySample(Resources.SOUND_TAP);
 			}
-			if (this.mStoreButton.IsMouseOver())
+			if (mStoreButton.IsMouseOver())
 			{
-				this.mApp.PlaySample(Resources.SOUND_TAP);
+				mApp.PlaySample(Resources.SOUND_TAP);
 			}
-			if (!this.mImitaterButton.IsMouseOver())
+			if (!mImitaterButton.IsMouseOver())
 			{
 				for (int j = 0; j < 49; j++)
 				{
-					ChosenSeed chosenSeed2 = this.mApp.mSeedChooserScreen.mChosenSeeds[j];
+					ChosenSeed chosenSeed2 = mApp.mSeedChooserScreen.mChosenSeeds[j];
 					if (chosenSeed2.mSeedState == ChosenSeedState.SEED_IN_BANK && x >= chosenSeed2.mX && y >= chosenSeed2.mY && x < chosenSeed2.mX + Constants.SMALL_SEEDPACKET_WIDTH && y < chosenSeed2.mY + Constants.SMALL_SEEDPACKET_HEIGHT)
 					{
-						this.ClickedSeedInBank(ref chosenSeed2);
+						ClickedSeedInBank(ref chosenSeed2);
 						return;
 					}
 				}
 				return;
 			}
-			if (this.mSeedsInBank == this.mBoard.mSeedBank.mNumPackets)
+			if (mSeedsInBank == mBoard.mSeedBank.mNumPackets)
 			{
 				return;
 			}
-			this.mApp.PlaySample(Resources.SOUND_TAP);
+			mApp.PlaySample(Resources.SOUND_TAP);
 			ImitaterDialog imitaterDialog = new ImitaterDialog();
-			this.mApp.AddDialog(imitaterDialog.mId, imitaterDialog);
-			imitaterDialog.Resize((this.mWidth - imitaterDialog.mWidth) / 2, (this.mHeight - imitaterDialog.mHeight) / 2, imitaterDialog.mWidth, imitaterDialog.mHeight);
-			this.mApp.mWidgetManager.SetFocus(imitaterDialog);
+			mApp.AddDialog(imitaterDialog.mId, imitaterDialog);
+			imitaterDialog.Resize((mWidth - imitaterDialog.mWidth) / 2, (mHeight - imitaterDialog.mHeight) / 2, imitaterDialog.mWidth, imitaterDialog.mHeight);
+			mApp.mWidgetManager.SetFocus(imitaterDialog);
 		}
 
 		public override void MouseUp(int x, int y, int theClickCount)
@@ -486,103 +486,103 @@ namespace Lawn
 			{
 				return;
 			}
-			if (this.mMenuButton.IsMouseOver())
+			if (mMenuButton.IsMouseOver())
 			{
-				this.ButtonDepress(104);
+				ButtonDepress(104);
 				return;
 			}
-			if (this.mStartButton.IsMouseOver())
+			if (mStartButton.IsMouseOver())
 			{
-				this.ButtonDepress(100);
+				ButtonDepress(100);
 				return;
 			}
-			if (this.mAlmanacButton.IsMouseOver())
+			if (mAlmanacButton.IsMouseOver())
 			{
-				this.ButtonDepress(103);
+				ButtonDepress(103);
 				return;
 			}
-			if (this.mStoreButton.IsMouseOver())
+			if (mStoreButton.IsMouseOver())
 			{
-				this.ButtonDepress(105);
+				ButtonDepress(105);
 				return;
 			}
-			if (this.mImitaterButton.IsMouseOver())
+			if (mImitaterButton.IsMouseOver())
 			{
-				this.ButtonDepress(106);
+				ButtonDepress(106);
 			}
 		}
 
 		public override void KeyChar(SexyChar theChar)
 		{
-			if (this.mChooseState == SeedChooserState.CHOOSE_VIEW_LAWN && (theChar.value_type == ' ' || theChar.value_type == '\r' || theChar.value_type == '\u001b'))
+			if (mChooseState == SeedChooserState.CHOOSE_VIEW_LAWN && (theChar.value_type == ' ' || theChar.value_type == '\r' || theChar.value_type == '\u001b'))
 			{
-				this.CancelLawnView();
+				CancelLawnView();
 				return;
 			}
-			if (this.mApp.mTodCheatKeys && theChar == KeyCode.KEYCODE_ESCAPE)
+			if (mApp.mTodCheatKeys && theChar == KeyCode.KEYCODE_ESCAPE)
 			{
-				this.PickRandomSeeds();
+				PickRandomSeeds();
 				return;
 			}
-			this.mBoard.KeyChar(theChar);
+			mBoard.KeyChar(theChar);
 		}
 
 		public override void KeyDown(KeyCode theKey)
 		{
-			this.mBoard.DoTypingCheck(theKey);
+			mBoard.DoTypingCheck(theKey);
 		}
 
 		public void GetSeedPositionInChooser(int theIndex, ref int x, ref int y)
 		{
 			if (theIndex == 48)
 			{
-				x = this.mImitaterButton.mX;
-				y = this.mImitaterButton.mY;
+				x = mImitaterButton.mX;
+				y = mImitaterButton.mY;
 				return;
 			}
-			this.mSeedPacketsWidget.GetSeedPosition((SeedType)theIndex, ref x, ref y);
+			mSeedPacketsWidget.GetSeedPosition((SeedType)theIndex, ref x, ref y);
 			x += Constants.SCROLL_AREA_OFFSET_X;
 			y += Constants.SCROLL_AREA_OFFSET_Y;
 		}
 
 		public void GetSeedPositionInBank(int theIndex, ref int x, ref int y)
 		{
-			y = this.mBoard.mSeedBank.mY + this.mBoard.GetSeedPacketPositionY(theIndex) - this.mY;
-			x = this.mBoard.mSeedBank.mX;
+			y = mBoard.mSeedBank.mY + mBoard.GetSeedPacketPositionY(theIndex) - mY;
+			x = mBoard.mSeedBank.mX;
 		}
 
 		public void ClickedSeedInChooser(ref ChosenSeed theChosenSeed)
 		{
-			if (this.mSeedsInBank == this.mBoard.mSeedBank.mNumPackets || !this.mApp.HasSeedType(theChosenSeed.mSeedType))
+			if (mSeedsInBank == mBoard.mSeedBank.mNumPackets || !mApp.HasSeedType(theChosenSeed.mSeedType))
 			{
 				return;
 			}
-			if (this.mApp.mPlayerInfo.mNeedsGrayedPlantWarning)
+			if (mApp.mPlayerInfo.mNeedsGrayedPlantWarning)
 			{
-				uint num = this.SeedNotRecommendedToPick(theChosenSeed.mSeedType);
+				uint num = SeedNotRecommendedToPick(theChosenSeed.mSeedType);
 				if (num != 0U)
 				{
-					this.mApp.mPlayerInfo.mNeedsGrayedPlantWarning = false;
-					this.mApp.DoDialog(16, true, "[DIALOG_WARNING]", "[NOT_RECOMMENDED_FOR_LEVEL]", "[DIALOG_BUTTON_OK]", 3);
+					mApp.mPlayerInfo.mNeedsGrayedPlantWarning = false;
+					mApp.DoDialog(16, true, "[DIALOG_WARNING]", "[NOT_RECOMMENDED_FOR_LEVEL]", "[DIALOG_BUTTON_OK]", 3);
 					return;
 				}
 			}
-			theChosenSeed.mTimeStartMotion = this.mSeedChooserAge;
-			theChosenSeed.mTimeEndMotion = this.mSeedChooserAge + 25;
-			this.GetSeedPositionInChooser((int)theChosenSeed.mSeedType, ref theChosenSeed.mStartX, ref theChosenSeed.mStartY);
+			theChosenSeed.mTimeStartMotion = mSeedChooserAge;
+			theChosenSeed.mTimeEndMotion = mSeedChooserAge + 25;
+			GetSeedPositionInChooser((int)theChosenSeed.mSeedType, ref theChosenSeed.mStartX, ref theChosenSeed.mStartY);
 			if (theChosenSeed.mSeedType != SeedType.SEED_IMITATER)
 			{
-				theChosenSeed.mStartY += this.mSeedPacketsWidget.mY;
+				theChosenSeed.mStartY += mSeedPacketsWidget.mY;
 			}
-			this.GetSeedPositionInBank(this.mSeedsInBank, ref theChosenSeed.mEndX, ref theChosenSeed.mEndY);
+			GetSeedPositionInBank(mSeedsInBank, ref theChosenSeed.mEndX, ref theChosenSeed.mEndY);
 			theChosenSeed.mSeedState = ChosenSeedState.SEED_FLYING_TO_BANK;
-			theChosenSeed.mSeedIndexInBank = this.mSeedsInBank;
-			this.mSeedsInFlight++;
-			this.mSeedsInBank++;
-			this.mApp.PlaySample(Resources.SOUND_TAP);
-			if (this.mSeedsInBank == this.mBoard.mSeedBank.mNumPackets)
+			theChosenSeed.mSeedIndexInBank = mSeedsInBank;
+			mSeedsInFlight++;
+			mSeedsInBank++;
+			mApp.PlaySample(Resources.SOUND_TAP);
+			if (mSeedsInBank == mBoard.mSeedBank.mNumPackets)
 			{
-				this.EnableStartButton(true);
+				EnableStartButton(true);
 			}
 		}
 
@@ -590,40 +590,40 @@ namespace Lawn
 		{
 			if (theChosenSeed.mSeedState == ChosenSeedState.SEED_IN_BANK && theChosenSeed.mCrazyDavePicked)
 			{
-				this.mApp.PlaySample(Resources.SOUND_BUZZER);
+				mApp.PlaySample(Resources.SOUND_BUZZER);
 				return;
 			}
-			for (int i = theChosenSeed.mSeedIndexInBank + 1; i < this.mBoard.mSeedBank.mNumPackets; i++)
+			for (int i = theChosenSeed.mSeedIndexInBank + 1; i < mBoard.mSeedBank.mNumPackets; i++)
 			{
-				SeedType seedType = this.FindSeedInBank(i);
+				SeedType seedType = FindSeedInBank(i);
 				if (seedType != SeedType.SEED_NONE)
 				{
-					ChosenSeed chosenSeed = this.mChosenSeeds[(int)seedType];
-					chosenSeed.mTimeStartMotion = this.mSeedChooserAge;
-					chosenSeed.mTimeEndMotion = this.mSeedChooserAge + 15;
+					ChosenSeed chosenSeed = mChosenSeeds[(int)seedType];
+					chosenSeed.mTimeStartMotion = mSeedChooserAge;
+					chosenSeed.mTimeEndMotion = mSeedChooserAge + 15;
 					chosenSeed.mStartX = chosenSeed.mX;
 					chosenSeed.mStartY = chosenSeed.mY;
-					this.GetSeedPositionInBank(i - 1, ref chosenSeed.mEndX, ref chosenSeed.mEndY);
+					GetSeedPositionInBank(i - 1, ref chosenSeed.mEndX, ref chosenSeed.mEndY);
 					chosenSeed.mSeedState = ChosenSeedState.SEED_FLYING_TO_BANK;
 					chosenSeed.mSeedIndexInBank = i - 1;
-					this.mSeedsInFlight++;
+					mSeedsInFlight++;
 				}
 			}
-			theChosenSeed.mTimeStartMotion = this.mSeedChooserAge;
-			theChosenSeed.mTimeEndMotion = this.mSeedChooserAge + 25;
+			theChosenSeed.mTimeStartMotion = mSeedChooserAge;
+			theChosenSeed.mTimeEndMotion = mSeedChooserAge + 25;
 			theChosenSeed.mStartX = theChosenSeed.mX;
 			theChosenSeed.mStartY = theChosenSeed.mY;
-			this.GetSeedPositionInChooser((int)theChosenSeed.mSeedType, ref theChosenSeed.mEndX, ref theChosenSeed.mEndY);
+			GetSeedPositionInChooser((int)theChosenSeed.mSeedType, ref theChosenSeed.mEndX, ref theChosenSeed.mEndY);
 			if (theChosenSeed.mSeedType != SeedType.SEED_IMITATER)
 			{
-				theChosenSeed.mEndY += this.mSeedPacketsWidget.mY;
+				theChosenSeed.mEndY += mSeedPacketsWidget.mY;
 			}
 			theChosenSeed.mSeedState = ChosenSeedState.SEED_FLYING_TO_CHOOSER;
 			theChosenSeed.mSeedIndexInBank = 0;
-			this.mSeedsInFlight++;
-			this.mSeedsInBank--;
-			this.EnableStartButton(false);
-			this.mApp.PlaySample(Resources.SOUND_TAP);
+			mSeedsInFlight++;
+			mSeedsInBank--;
+			EnableStartButton(false);
+			mApp.PlaySample(Resources.SOUND_TAP);
 		}
 
 		public SeedType FindSeedInBank(int theIndexInBank)
@@ -631,9 +631,9 @@ namespace Lawn
 			for (int i = 0; i < 49; i++)
 			{
 				SeedType seedType = (SeedType)i;
-				if (this.mApp.HasSeedType(seedType))
+				if (mApp.HasSeedType(seedType))
 				{
-					ChosenSeed chosenSeed = this.mChosenSeeds[i];
+					ChosenSeed chosenSeed = mChosenSeeds[i];
 					if (chosenSeed.mSeedState == ChosenSeedState.SEED_IN_BANK && chosenSeed.mSeedIndexInBank == theIndexInBank)
 					{
 						return seedType;
@@ -645,19 +645,19 @@ namespace Lawn
 
 		public void EnableStartButton(bool theEnabled)
 		{
-			this.mStartButton.SetDisabled(!theEnabled);
+			mStartButton.SetDisabled(!theEnabled);
 			if (theEnabled)
 			{
-				this.mStartButton.mColors[0] = new SexyColor(255, 231, 26);
+				mStartButton.mColors[0] = new SexyColor(255, 231, 26);
 				return;
 			}
-			this.mStartButton.mColors[0] = new SexyColor(64, 64, 64);
+			mStartButton.mColors[0] = new SexyColor(64, 64, 64);
 		}
 
 		public uint SeedNotRecommendedToPick(SeedType theSeedType)
 		{
-			uint num = this.mBoard.SeedNotRecommendedForLevel(theSeedType);
-			if (TodCommon.TestBit(num, 0) && this.PickedPlantType(SeedType.SEED_INSTANT_COFFEE))
+			uint num = mBoard.SeedNotRecommendedForLevel(theSeedType);
+			if (TodCommon.TestBit(num, 0) && PickedPlantType(SeedType.SEED_INSTANT_COFFEE))
 			{
 				TodCommon.SetBit(ref num, 0, 0);
 			}
@@ -666,34 +666,34 @@ namespace Lawn
 
 		public bool SeedNotAllowedToPick(SeedType theSeedType)
 		{
-			return this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND && (theSeedType == SeedType.SEED_SUNFLOWER || theSeedType == SeedType.SEED_SUNSHROOM || theSeedType == SeedType.SEED_TWINSUNFLOWER || theSeedType == SeedType.SEED_SEASHROOM || theSeedType == SeedType.SEED_PUFFSHROOM);
+			return mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND && (theSeedType == SeedType.SEED_SUNFLOWER || theSeedType == SeedType.SEED_SUNSHROOM || theSeedType == SeedType.SEED_TWINSUNFLOWER || theSeedType == SeedType.SEED_SEASHROOM || theSeedType == SeedType.SEED_PUFFSHROOM);
 		}
 
 		public void CloseSeedChooser()
 		{
-			Debug.ASSERT(this.mBoard.mSeedBank.mNumPackets == this.mBoard.GetNumSeedsInBank());
-			for (int i = 0; i < this.mBoard.mSeedBank.mNumPackets; i++)
+			Debug.ASSERT(mBoard.mSeedBank.mNumPackets == mBoard.GetNumSeedsInBank());
+			for (int i = 0; i < mBoard.mSeedBank.mNumPackets; i++)
 			{
-				SeedType seedType = this.FindSeedInBank(i);
-				ChosenSeed chosenSeed = this.mChosenSeeds[(int)seedType];
-				SeedPacket seedPacket = this.mBoard.mSeedBank.mSeedPackets[i];
+				SeedType seedType = FindSeedInBank(i);
+				ChosenSeed chosenSeed = mChosenSeeds[(int)seedType];
+				SeedPacket seedPacket = mBoard.mSeedBank.mSeedPackets[i];
 				seedPacket.SetPacketType(seedType, chosenSeed.mImitaterType);
 				if (chosenSeed.mRefreshing)
 				{
-					seedPacket.mRefreshCounter = this.mChosenSeeds[(int)seedType].mRefreshCounter;
+					seedPacket.mRefreshCounter = mChosenSeeds[(int)seedType].mRefreshCounter;
 					seedPacket.mRefreshTime = Plant.GetRefreshTime(seedPacket.mPacketType, seedPacket.mImitaterType);
 					seedPacket.mRefreshing = true;
 					seedPacket.mActive = false;
 				}
 			}
-			this.mBoard.mCutScene.EndSeedChooser();
+			mBoard.mCutScene.EndSeedChooser();
 		}
 
 		public bool PickedPlantType(SeedType theSeedType)
 		{
 			for (int i = 0; i < 49; i++)
 			{
-				ChosenSeed chosenSeed = this.mChosenSeeds[i];
+				ChosenSeed chosenSeed = mChosenSeeds[i];
 				if (chosenSeed.mSeedState == ChosenSeedState.SEED_IN_BANK)
 				{
 					if (chosenSeed.mSeedType == theSeedType)
@@ -711,133 +711,133 @@ namespace Lawn
 
 		public void OnStartButton()
 		{
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_SEEING_STARS && !this.PickedPlantType(SeedType.SEED_STARFRUIT) && !this.DisplayRepickWarningDialog(0, "[SEED_CHOOSER_SEEING_STARS_WARNING]"))
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_SEEING_STARS && !PickedPlantType(SeedType.SEED_STARFRUIT) && !DisplayRepickWarningDialog(0, "[SEED_CHOOSER_SEEING_STARS_WARNING]"))
 			{
 				return;
 			}
-			if (this.mApp.IsFirstTimeAdventureMode() && this.mBoard.mLevel == 11 && !this.PickedPlantType(SeedType.SEED_PUFFSHROOM) && !this.DisplayRepickWarningDialog(1, "[SEED_CHOOSER_PUFFSHROOM_WARNING]"))
+			if (mApp.IsFirstTimeAdventureMode() && mBoard.mLevel == 11 && !PickedPlantType(SeedType.SEED_PUFFSHROOM) && !DisplayRepickWarningDialog(1, "[SEED_CHOOSER_PUFFSHROOM_WARNING]"))
 			{
 				return;
 			}
-			if (!this.PickedPlantType(SeedType.SEED_SUNFLOWER) && !this.PickedPlantType(SeedType.SEED_TWINSUNFLOWER) && !this.PickedPlantType(SeedType.SEED_SUNSHROOM) && !this.mBoard.mCutScene.IsSurvivalRepick() && this.mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
+			if (!PickedPlantType(SeedType.SEED_SUNFLOWER) && !PickedPlantType(SeedType.SEED_TWINSUNFLOWER) && !PickedPlantType(SeedType.SEED_SUNSHROOM) && !mBoard.mCutScene.IsSurvivalRepick() && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
 			{
-				if (this.mApp.IsFirstTimeAdventureMode() && this.mBoard.mLevel == 11)
+				if (mApp.IsFirstTimeAdventureMode() && mBoard.mLevel == 11)
 				{
-					if (!this.DisplayRepickWarningDialog(2, "[SEED_CHOOSER_NIGHT_SUN_WARNING]"))
+					if (!DisplayRepickWarningDialog(2, "[SEED_CHOOSER_NIGHT_SUN_WARNING]"))
 					{
 						return;
 					}
 				}
-				else if (!this.DisplayRepickWarningDialog(3, "[SEED_CHOOSER_SUN_WARNING]"))
+				else if (!DisplayRepickWarningDialog(3, "[SEED_CHOOSER_SUN_WARNING]"))
 				{
 					return;
 				}
 			}
-			if (this.mBoard.StageHasPool() && !this.PickedPlantType(SeedType.SEED_LILYPAD) && !this.PickedPlantType(SeedType.SEED_SEASHROOM) && !this.PickedPlantType(SeedType.SEED_TANGLEKELP) && !this.mBoard.mCutScene.IsSurvivalRepick())
+			if (mBoard.StageHasPool() && !PickedPlantType(SeedType.SEED_LILYPAD) && !PickedPlantType(SeedType.SEED_SEASHROOM) && !PickedPlantType(SeedType.SEED_TANGLEKELP) && !mBoard.mCutScene.IsSurvivalRepick())
 			{
-				if (this.mApp.IsFirstTimeAdventureMode() && this.mBoard.mLevel == 21)
+				if (mApp.IsFirstTimeAdventureMode() && mBoard.mLevel == 21)
 				{
-					if (!this.DisplayRepickWarningDialog(4, "[SEED_CHOOSER_LILY_WARNING]"))
+					if (!DisplayRepickWarningDialog(4, "[SEED_CHOOSER_LILY_WARNING]"))
 					{
 						return;
 					}
 				}
-				else if (!this.DisplayRepickWarningDialog(5, "[SEED_CHOOSER_POOL_WARNING]"))
+				else if (!DisplayRepickWarningDialog(5, "[SEED_CHOOSER_POOL_WARNING]"))
 				{
 					return;
 				}
 			}
-			if (this.mBoard.StageHasRoof() && !this.PickedPlantType(SeedType.SEED_FLOWERPOT) && this.mApp.HasSeedType(SeedType.SEED_FLOWERPOT) && !this.DisplayRepickWarningDialog(6, "[SEED_CHOOSER_ROOF_WARNING]"))
+			if (mBoard.StageHasRoof() && !PickedPlantType(SeedType.SEED_FLOWERPOT) && mApp.HasSeedType(SeedType.SEED_FLOWERPOT) && !DisplayRepickWarningDialog(6, "[SEED_CHOOSER_ROOF_WARNING]"))
 			{
 				return;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ART_CHALLENGE_1 && !this.PickedPlantType(SeedType.SEED_WALLNUT) && !this.DisplayRepickWarningDialog(7, "[SEED_CHOOSER_ART_WALLNUT_WARNING]"))
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ART_CHALLENGE_1 && !PickedPlantType(SeedType.SEED_WALLNUT) && !DisplayRepickWarningDialog(7, "[SEED_CHOOSER_ART_WALLNUT_WARNING]"))
 			{
 				return;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ART_CHALLENGE_2 && (!this.PickedPlantType(SeedType.SEED_STARFRUIT) || !this.PickedPlantType(SeedType.SEED_UMBRELLA) || !this.PickedPlantType(SeedType.SEED_WALLNUT)) && !this.DisplayRepickWarningDialog(8, "[SEED_CHOOSER_ART_2_WARNING]"))
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ART_CHALLENGE_2 && (!PickedPlantType(SeedType.SEED_STARFRUIT) || !PickedPlantType(SeedType.SEED_UMBRELLA) || !PickedPlantType(SeedType.SEED_WALLNUT)) && !DisplayRepickWarningDialog(8, "[SEED_CHOOSER_ART_2_WARNING]"))
 			{
 				return;
 			}
-			if (this.FlyersAreComing() && !this.FlyProtectionCurrentlyPlanted() && !this.PickedPlantType(SeedType.SEED_CATTAIL) && !this.PickedPlantType(SeedType.SEED_CACTUS) && !this.PickedPlantType(SeedType.SEED_BLOVER) && !this.DisplayRepickWarningDialog(9, "[SEED_CHOOSER_FLYER_WARNING]"))
+			if (FlyersAreComing() && !FlyProtectionCurrentlyPlanted() && !PickedPlantType(SeedType.SEED_CATTAIL) && !PickedPlantType(SeedType.SEED_CACTUS) && !PickedPlantType(SeedType.SEED_BLOVER) && !DisplayRepickWarningDialog(9, "[SEED_CHOOSER_FLYER_WARNING]"))
 			{
 				return;
 			}
-			if (!this.CheckSeedUpgrade(10, SeedType.SEED_GATLINGPEA, SeedType.SEED_REPEATER) || !this.CheckSeedUpgrade(11, SeedType.SEED_WINTERMELON, SeedType.SEED_MELONPULT) || !this.CheckSeedUpgrade(12, SeedType.SEED_TWINSUNFLOWER, SeedType.SEED_SUNFLOWER) || !this.CheckSeedUpgrade(13, SeedType.SEED_SPIKEROCK, SeedType.SEED_SPIKEWEED) || !this.CheckSeedUpgrade(14, SeedType.SEED_COBCANNON, SeedType.SEED_KERNELPULT) || !this.CheckSeedUpgrade(15, SeedType.SEED_GOLD_MAGNET, SeedType.SEED_MAGNETSHROOM) || !this.CheckSeedUpgrade(16, SeedType.SEED_GLOOMSHROOM, SeedType.SEED_FUMESHROOM) || !this.CheckSeedUpgrade(17, SeedType.SEED_CATTAIL, SeedType.SEED_LILYPAD))
+			if (!CheckSeedUpgrade(10, SeedType.SEED_GATLINGPEA, SeedType.SEED_REPEATER) || !CheckSeedUpgrade(11, SeedType.SEED_WINTERMELON, SeedType.SEED_MELONPULT) || !CheckSeedUpgrade(12, SeedType.SEED_TWINSUNFLOWER, SeedType.SEED_SUNFLOWER) || !CheckSeedUpgrade(13, SeedType.SEED_SPIKEROCK, SeedType.SEED_SPIKEWEED) || !CheckSeedUpgrade(14, SeedType.SEED_COBCANNON, SeedType.SEED_KERNELPULT) || !CheckSeedUpgrade(15, SeedType.SEED_GOLD_MAGNET, SeedType.SEED_MAGNETSHROOM) || !CheckSeedUpgrade(16, SeedType.SEED_GLOOMSHROOM, SeedType.SEED_FUMESHROOM) || !CheckSeedUpgrade(17, SeedType.SEED_CATTAIL, SeedType.SEED_LILYPAD))
 			{
 				return;
 			}
-			this.CloseSeedChooser();
+			CloseSeedChooser();
 		}
 
 		public bool DisplayRepickWarningDialog(int theWarningId, string theMessage)
 		{
-			if (this.mPickWarningsWaved[theWarningId])
+			if (mPickWarningsWaved[theWarningId])
 			{
 				return true;
 			}
-			this.mPendingWarningId = theWarningId;
-			this.mApp.LawnMessageBox(28, "[DIALOG_WARNING]", theMessage, "[DIALOG_BUTTON_YES]", "[REPICK_BUTTON]", 1, this);
+			mPendingWarningId = theWarningId;
+			mApp.LawnMessageBox(28, "[DIALOG_WARNING]", theMessage, "[DIALOG_BUTTON_YES]", "[REPICK_BUTTON]", 1, this);
 			return false;
 		}
 
 		public void UpdateViewLawn()
 		{
-			if (this.mChooseState != SeedChooserState.CHOOSE_VIEW_LAWN)
+			if (mChooseState != SeedChooserState.CHOOSE_VIEW_LAWN)
 			{
 				return;
 			}
-			this.mViewLawnTime++;
-			if (this.mViewLawnTime == 100)
+			mViewLawnTime++;
+			if (mViewLawnTime == 100)
 			{
-				this.mBoard.DisplayAdviceAgain("[CLICK_TO_CONTINUE]", MessageStyle.MESSAGE_STYLE_HINT_STAY, AdviceType.ADVICE_CLICK_TO_CONTINUE);
+				mBoard.DisplayAdviceAgain("[CLICK_TO_CONTINUE]", MessageStyle.MESSAGE_STYLE_HINT_STAY, AdviceType.ADVICE_CLICK_TO_CONTINUE);
 			}
-			else if (this.mViewLawnTime == 251)
+			else if (mViewLawnTime == 251)
 			{
-				this.mViewLawnTime = 250;
+				mViewLawnTime = 250;
 			}
 			int num = 800;
-			if (this.mViewLawnTime <= 100)
+			if (mViewLawnTime <= 100)
 			{
 				int thePositionStart = -Constants.BOARD_OFFSET + Constants.BACKGROUND_IMAGE_WIDTH - num;
 				int thePositionEnd = 0;
-				int num2 = TodCommon.TodAnimateCurve(0, 100, this.mViewLawnTime, thePositionStart, thePositionEnd, TodCurves.CURVE_EASE_IN_OUT);
-				this.mBoard.Move((int)((float)(-(float)num2) * Constants.S), 0);
+				int num2 = TodCommon.TodAnimateCurve(0, 100, mViewLawnTime, thePositionStart, thePositionEnd, TodCurves.CURVE_EASE_IN_OUT);
+				mBoard.Move((int)((float)(-(float)num2) * Constants.S), 0);
 				int thePositionStart2 = Constants.SEED_CHOOSER_OFFSETSCREEN_OFFSET - 265;
 				int seed_CHOOSER_OFFSETSCREEN_OFFSET = Constants.SEED_CHOOSER_OFFSETSCREEN_OFFSET;
-				int num3 = TodCommon.TodAnimateCurve(0, 40, this.mViewLawnTime, thePositionStart2, seed_CHOOSER_OFFSETSCREEN_OFFSET, TodCurves.CURVE_EASE_IN_OUT);
-				this.Move(0, (int)((float)num3 * Constants.S));
+				int num3 = TodCommon.TodAnimateCurve(0, 40, mViewLawnTime, thePositionStart2, seed_CHOOSER_OFFSETSCREEN_OFFSET, TodCurves.CURVE_EASE_IN_OUT);
+				Move(0, (int)((float)num3 * Constants.S));
 				return;
 			}
-			if (this.mViewLawnTime > 100 && this.mViewLawnTime <= 250)
+			if (mViewLawnTime > 100 && mViewLawnTime <= 250)
 			{
-				this.mBoard.Move(0, 0);
-				this.Move(0, Constants.SEED_CHOOSER_OFFSETSCREEN_OFFSET);
+				mBoard.Move(0, 0);
+				Move(0, Constants.SEED_CHOOSER_OFFSETSCREEN_OFFSET);
 				return;
 			}
-			if (this.mViewLawnTime > 250 && this.mViewLawnTime <= 350)
+			if (mViewLawnTime > 250 && mViewLawnTime <= 350)
 			{
-				this.mBoard.ClearAdvice(AdviceType.ADVICE_CLICK_TO_CONTINUE);
+				mBoard.ClearAdvice(AdviceType.ADVICE_CLICK_TO_CONTINUE);
 				int thePositionStart3 = 0;
 				int thePositionEnd2 = -Constants.BOARD_OFFSET + Constants.BACKGROUND_IMAGE_WIDTH - num;
-				int num4 = TodCommon.TodAnimateCurve(250, 350, this.mViewLawnTime, thePositionStart3, thePositionEnd2, TodCurves.CURVE_EASE_IN_OUT);
-				this.mBoard.Move((int)((float)(-(float)num4) * Constants.S), 0);
+				int num4 = TodCommon.TodAnimateCurve(250, 350, mViewLawnTime, thePositionStart3, thePositionEnd2, TodCurves.CURVE_EASE_IN_OUT);
+				mBoard.Move((int)((float)(-(float)num4) * Constants.S), 0);
 				int seed_CHOOSER_OFFSETSCREEN_OFFSET2 = Constants.SEED_CHOOSER_OFFSETSCREEN_OFFSET;
 				int thePositionEnd3 = Constants.SEED_CHOOSER_OFFSETSCREEN_OFFSET - 265;
-				int num5 = TodCommon.TodAnimateCurve(310, 350, this.mViewLawnTime, seed_CHOOSER_OFFSETSCREEN_OFFSET2, thePositionEnd3, TodCurves.CURVE_EASE_IN_OUT);
-				this.Move(0, (int)((float)num5 * Constants.S));
+				int num5 = TodCommon.TodAnimateCurve(310, 350, mViewLawnTime, seed_CHOOSER_OFFSETSCREEN_OFFSET2, thePositionEnd3, TodCurves.CURVE_EASE_IN_OUT);
+				Move(0, (int)((float)num5 * Constants.S));
 				return;
 			}
-			this.mChooseState = SeedChooserState.CHOOSE_NORMAL;
-			this.mViewLawnTime = 0;
-			this.mMenuButton.mDisabled = false;
+			mChooseState = SeedChooserState.CHOOSE_NORMAL;
+			mViewLawnTime = 0;
+			mMenuButton.mDisabled = false;
 		}
 
 		public void CancelLawnView()
 		{
-			if (this.mChooseState == SeedChooserState.CHOOSE_VIEW_LAWN && this.mViewLawnTime > 100 && this.mViewLawnTime <= 250)
+			if (mChooseState == SeedChooserState.CHOOSE_VIEW_LAWN && mViewLawnTime > 100 && mViewLawnTime <= 250)
 			{
-				this.mViewLawnTime = 251;
+				mViewLawnTime = 251;
 			}
 		}
 
@@ -850,7 +850,7 @@ namespace Lawn
 				theChosenSeed.mSeedState = ChosenSeedState.SEED_IN_BANK;
 				theChosenSeed.mX = theChosenSeed.mEndX;
 				theChosenSeed.mY = theChosenSeed.mEndY;
-				this.mSeedsInFlight--;
+				mSeedsInFlight--;
 				return;
 			}
 			if (theChosenSeed.mSeedState == ChosenSeedState.SEED_FLYING_TO_CHOOSER)
@@ -860,22 +860,22 @@ namespace Lawn
 				theChosenSeed.mSeedState = ChosenSeedState.SEED_IN_CHOOSER;
 				theChosenSeed.mX = theChosenSeed.mEndX;
 				theChosenSeed.mY = theChosenSeed.mEndY;
-				this.mSeedsInFlight--;
+				mSeedsInFlight--;
 				if (theChosenSeed.mSeedType == SeedType.SEED_IMITATER)
 				{
 					theChosenSeed.mSeedState = ChosenSeedState.SEED_PACKET_HIDDEN;
 					theChosenSeed.mImitaterType = SeedType.SEED_NONE;
-					this.UpdateImitaterButton();
+					UpdateImitaterButton();
 				}
 			}
 		}
 
 		public bool FlyProtectionCurrentlyPlanted()
 		{
-			int count = this.mBoard.mPlants.Count;
+			int count = mBoard.mPlants.Count;
 			for (int i = 0; i < count; i++)
 			{
-				Plant plant = this.mBoard.mPlants[i];
+				Plant plant = mBoard.mPlants[i];
 				if (!plant.mDead && (plant.mSeedType == SeedType.SEED_CATTAIL || plant.mSeedType == SeedType.SEED_CACTUS))
 				{
 					return true;
@@ -886,11 +886,11 @@ namespace Lawn
 
 		public bool FlyersAreComing()
 		{
-			for (int i = 0; i < this.mBoard.mNumWaves; i++)
+			for (int i = 0; i < mBoard.mNumWaves; i++)
 			{
 				for (int j = 0; j < 50; j++)
 				{
-					ZombieType zombieType = this.mBoard.mZombiesInWave[i, j];
+					ZombieType zombieType = mBoard.mZombiesInWave[i, j];
 					if (zombieType == ZombieType.ZOMBIE_INVALID)
 					{
 						break;
@@ -908,10 +908,10 @@ namespace Lawn
 		{
 			for (int i = 0; i < 49; i++)
 			{
-				ChosenSeed chosenSeed = this.mChosenSeeds[i];
+				ChosenSeed chosenSeed = mChosenSeeds[i];
 				if (chosenSeed.mSeedState == ChosenSeedState.SEED_IN_BANK)
 				{
-					this.GetSeedPositionInBank(chosenSeed.mSeedIndexInBank, ref chosenSeed.mX, ref chosenSeed.mY);
+					GetSeedPositionInBank(chosenSeed.mSeedIndexInBank, ref chosenSeed.mX, ref chosenSeed.mY);
 					chosenSeed.mStartX = chosenSeed.mX;
 					chosenSeed.mStartY = chosenSeed.mY;
 					chosenSeed.mEndX = chosenSeed.mX;
@@ -919,40 +919,40 @@ namespace Lawn
 				}
 				else if (chosenSeed.mSeedState == ChosenSeedState.SEED_IN_CHOOSER)
 				{
-					this.GetSeedPositionInChooser(i, ref chosenSeed.mX, ref chosenSeed.mY);
+					GetSeedPositionInChooser(i, ref chosenSeed.mX, ref chosenSeed.mY);
 					chosenSeed.mStartX = chosenSeed.mX;
 					chosenSeed.mStartY = chosenSeed.mY;
 					chosenSeed.mEndX = chosenSeed.mX;
 					chosenSeed.mEndY = chosenSeed.mY;
 				}
 			}
-			if (this.mSeedsInBank == this.mBoard.mSeedBank.mNumPackets)
+			if (mSeedsInBank == mBoard.mSeedBank.mNumPackets)
 			{
-				this.EnableStartButton(true);
+				EnableStartButton(true);
 			}
 			else
 			{
-				this.EnableStartButton(false);
+				EnableStartButton(false);
 			}
-			this.UpdateImitaterButton();
+			UpdateImitaterButton();
 		}
 
 		public void UpdateImitaterButton()
 		{
-			if (!this.mApp.HasSeedType(SeedType.SEED_IMITATER))
+			if (!mApp.HasSeedType(SeedType.SEED_IMITATER))
 			{
-				this.mImitaterButton.mBtnNoDraw = true;
-				this.mImitaterButton.mDisabled = true;
+				mImitaterButton.mBtnNoDraw = true;
+				mImitaterButton.mDisabled = true;
 				return;
 			}
-			this.mImitaterButton.mBtnNoDraw = false;
+			mImitaterButton.mBtnNoDraw = false;
 			bool disabled = false;
-			ChosenSeed chosenSeed = this.mChosenSeeds[48];
+			ChosenSeed chosenSeed = mChosenSeeds[48];
 			if (chosenSeed.mSeedState != ChosenSeedState.SEED_PACKET_HIDDEN)
 			{
 				disabled = true;
 			}
-			this.mImitaterButton.SetDisabled(disabled);
+			mImitaterButton.SetDisabled(disabled);
 		}
 
 		public void CrazyDavePickSeeds()
@@ -965,8 +965,8 @@ namespace Lawn
 			{
 				SeedType seedType = (SeedType)j;
 				SeedChooserScreen.aSeedArray[j].mItem = (int)seedType;
-				uint num = this.SeedNotRecommendedToPick(seedType);
-				if (!this.mApp.HasSeedType(seedType) || num != 0U || this.SeedNotAllowedToPick(seedType) || Plant.IsUpgrade(seedType) || seedType == SeedType.SEED_IMITATER || seedType == SeedType.SEED_UMBRELLA || seedType == SeedType.SEED_BLOVER)
+				uint num = SeedNotRecommendedToPick(seedType);
+				if (!mApp.HasSeedType(seedType) || num != 0U || SeedNotAllowedToPick(seedType) || Plant.IsUpgrade(seedType) || seedType == SeedType.SEED_IMITATER || seedType == SeedType.SEED_UMBRELLA || seedType == SeedType.SEED_BLOVER)
 				{
 					SeedChooserScreen.aSeedArray[j].mWeight = 0;
 				}
@@ -975,26 +975,26 @@ namespace Lawn
 					SeedChooserScreen.aSeedArray[j].mWeight = 1;
 				}
 			}
-			if (this.mBoard.mZombieAllowed[22] || this.mBoard.mZombieAllowed[20])
+			if (mBoard.mZombieAllowed[22] || mBoard.mZombieAllowed[20])
 			{
 				SeedChooserScreen.aSeedArray[37].mWeight = 1;
 			}
-			if (this.mBoard.mZombieAllowed[16] || this.mBoard.StageHasFog())
+			if (mBoard.mZombieAllowed[16] || mBoard.StageHasFog())
 			{
 				SeedChooserScreen.aSeedArray[27].mWeight = 1;
 			}
-			if (this.mBoard.StageHasRoof())
+			if (mBoard.StageHasRoof())
 			{
 				SeedChooserScreen.aSeedArray[22].mWeight = 0;
 			}
-			int levelRandSeed = this.mBoard.GetLevelRandSeed();
+			int levelRandSeed = mBoard.GetLevelRandSeed();
 			RandomNumbers.Seed(levelRandSeed);
 			for (int k = 0; k < 3; k++)
 			{
-				SeedType seedType2 = (SeedType)this.PickFromWeightedArrayUsingSpecialRandSeed(SeedChooserScreen.aSeedArray, 49);
+				SeedType seedType2 = (SeedType)PickFromWeightedArrayUsingSpecialRandSeed(SeedChooserScreen.aSeedArray, 49);
 				SeedChooserScreen.aSeedArray[(int)seedType2].mWeight = 0;
-				ChosenSeed chosenSeed = this.mChosenSeeds[(int)seedType2];
-				chosenSeed.mY = this.mBoard.GetSeedPacketPositionY(k);
+				ChosenSeed chosenSeed = mChosenSeeds[(int)seedType2];
+				chosenSeed.mY = mBoard.GetSeedPacketPositionY(k);
 				chosenSeed.mX = 0;
 				chosenSeed.mEndX = chosenSeed.mX;
 				chosenSeed.mEndY = chosenSeed.mY;
@@ -1003,7 +1003,7 @@ namespace Lawn
 				chosenSeed.mSeedState = ChosenSeedState.SEED_IN_BANK;
 				chosenSeed.mSeedIndexInBank = k;
 				chosenSeed.mCrazyDavePicked = true;
-				this.mSeedsInBank++;
+				mSeedsInBank++;
 			}
 		}
 
@@ -1031,18 +1031,18 @@ namespace Lawn
 
 		public bool CheckSeedUpgrade(int theWarningId, SeedType theSeedTypeTo, SeedType theSeedTypeFrom)
 		{
-			if (this.mApp.IsSurvivalMode() || this.mPickWarningsWaved[theWarningId])
+			if (mApp.IsSurvivalMode() || mPickWarningsWaved[theWarningId])
 			{
 				return true;
 			}
-			if (this.PickedPlantType(theSeedTypeTo) && !this.PickedPlantType(theSeedTypeFrom))
+			if (PickedPlantType(theSeedTypeTo) && !PickedPlantType(theSeedTypeFrom))
 			{
 				string text = TodStringFile.TodStringTranslate("[SEED_CHOOSER_UPGRADE_WARNING]");
 				string nameString = Plant.GetNameString(theSeedTypeTo, SeedType.SEED_NONE);
 				string nameString2 = Plant.GetNameString(theSeedTypeFrom, SeedType.SEED_NONE);
 				text = TodCommon.TodReplaceString(text, "{UPGRADE_TO}", nameString);
 				text = TodCommon.TodReplaceString(text, "{UPGRADE_FROM}", nameString2);
-				if (!this.DisplayRepickWarningDialog(theWarningId, text))
+				if (!DisplayRepickWarningDialog(theWarningId, text))
 				{
 					return false;
 				}
@@ -1052,62 +1052,62 @@ namespace Lawn
 
 		public void PickRandomSeeds()
 		{
-			for (int i = this.mSeedsInBank; i < this.mBoard.mSeedBank.mNumPackets; i++)
+			for (int i = mSeedsInBank; i < mBoard.mSeedBank.mNumPackets; i++)
 			{
 				int num;
 				SeedType seedType;
 				do
 				{
-					num = RandomNumbers.NextNumber(this.mApp.GetSeedsAvailable());
+					num = RandomNumbers.NextNumber(mApp.GetSeedsAvailable());
 					seedType = (SeedType)num;
 				}
-				while (!this.mApp.HasSeedType(seedType) || seedType == SeedType.SEED_IMITATER || this.mChosenSeeds[num].mSeedState != ChosenSeedState.SEED_IN_CHOOSER);
-				ChosenSeed chosenSeed = this.mChosenSeeds[num];
+				while (!mApp.HasSeedType(seedType) || seedType == SeedType.SEED_IMITATER || mChosenSeeds[num].mSeedState != ChosenSeedState.SEED_IN_CHOOSER);
+				ChosenSeed chosenSeed = mChosenSeeds[num];
 				chosenSeed.mTimeStartMotion = 0;
 				chosenSeed.mTimeEndMotion = 0;
 				chosenSeed.mStartX = chosenSeed.mX;
 				chosenSeed.mStartY = chosenSeed.mY;
-				this.GetSeedPositionInBank(i, ref chosenSeed.mEndX, ref chosenSeed.mEndY);
+				GetSeedPositionInBank(i, ref chosenSeed.mEndX, ref chosenSeed.mEndY);
 				chosenSeed.mSeedState = ChosenSeedState.SEED_IN_BANK;
 				chosenSeed.mSeedIndexInBank = i;
-				this.mSeedsInBank++;
+				mSeedsInBank++;
 			}
 			for (int j = 0; j < 49; j++)
 			{
-				ChosenSeed chosenSeed2 = this.mChosenSeeds[j];
-				this.LandFlyingSeed(ref chosenSeed2);
+				ChosenSeed chosenSeed2 = mChosenSeeds[j];
+				LandFlyingSeed(ref chosenSeed2);
 			}
-			this.CloseSeedChooser();
+			CloseSeedChooser();
 		}
 
 		public bool Has12Rows()
 		{
-			return this.mApp.HasFinishedAdventure() || (this.mApp.HasSeedType(SeedType.SEED_GATLINGPEA) || this.mApp.HasSeedType(SeedType.SEED_TWINSUNFLOWER) || this.mApp.HasSeedType(SeedType.SEED_GLOOMSHROOM) || this.mApp.HasSeedType(SeedType.SEED_CATTAIL) || this.mApp.HasSeedType(SeedType.SEED_WINTERMELON) || this.mApp.HasSeedType(SeedType.SEED_GATLINGPEA) || this.mApp.HasSeedType(SeedType.SEED_GOLD_MAGNET) || this.mApp.HasSeedType(SeedType.SEED_COBCANNON));
+			return mApp.HasFinishedAdventure() || (mApp.HasSeedType(SeedType.SEED_GATLINGPEA) || mApp.HasSeedType(SeedType.SEED_TWINSUNFLOWER) || mApp.HasSeedType(SeedType.SEED_GLOOMSHROOM) || mApp.HasSeedType(SeedType.SEED_CATTAIL) || mApp.HasSeedType(SeedType.SEED_WINTERMELON) || mApp.HasSeedType(SeedType.SEED_GATLINGPEA) || mApp.HasSeedType(SeedType.SEED_GOLD_MAGNET) || mApp.HasSeedType(SeedType.SEED_COBCANNON));
 		}
 
 		public bool SeedNotAllowedDuringTrial(SeedType theSeedType)
 		{
-			return this.mApp.IsTrialStageLocked() && (theSeedType == SeedType.SEED_SQUASH || theSeedType == SeedType.SEED_THREEPEATER);
+			return mApp.IsTrialStageLocked() && (theSeedType == SeedType.SEED_SQUASH || theSeedType == SeedType.SEED_THREEPEATER);
 		}
 
 		public void BackFromStore()
 		{
-			StoreScreen storeScreen = (StoreScreen)this.mApp.GetDialog(Dialogs.DIALOG_STORE);
-			this.mApp.KillDialog(4);
-			this.mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_CHOOSE_YOUR_SEEDS);
+			StoreScreen storeScreen = (StoreScreen)mApp.GetDialog(Dialogs.DIALOG_STORE);
+			mApp.KillDialog(4);
+			mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_CHOOSE_YOUR_SEEDS);
 		}
 
 		public void BackFromAlmanac()
 		{
-			this.mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_CHOOSE_YOUR_SEEDS);
+			mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_CHOOSE_YOUR_SEEDS);
 		}
 
 		public void LawnMessageBoxDone(int theResult)
 		{
 			if (theResult == 1000)
 			{
-				this.mPickWarningsWaved[this.mPendingWarningId] = true;
-				this.mDoStartButton = true;
+				mPickWarningsWaved[mPendingWarningId] = true;
+				mDoStartButton = true;
 			}
 		}
 
@@ -1117,17 +1117,17 @@ namespace Lawn
 			{
 				return;
 			}
-			if (this.SeedNotAllowedToPick(theSeedType))
+			if (SeedNotAllowedToPick(theSeedType))
 			{
-				this.mApp.DoDialog(16, true, string.Empty, "[NOT_ALLOWED_ON_THIS_LEVEL]", "[DIALOG_BUTTON_OK]", 3);
+				mApp.DoDialog(16, true, string.Empty, "[NOT_ALLOWED_ON_THIS_LEVEL]", "[DIALOG_BUTTON_OK]", 3);
 				return;
 			}
-			if (theSeedType >= SeedType.SEED_PEASHOOTER && theSeedType < (SeedType)this.mChosenSeeds.Length)
+			if (theSeedType >= SeedType.SEED_PEASHOOTER && theSeedType < (SeedType)mChosenSeeds.Length)
 			{
-				ChosenSeed chosenSeed = this.mChosenSeeds[(int)theSeedType];
+				ChosenSeed chosenSeed = mChosenSeeds[(int)theSeedType];
 				if (chosenSeed.mSeedState == ChosenSeedState.SEED_IN_CHOOSER)
 				{
-					this.ClickedSeedInChooser(ref chosenSeed);
+					ClickedSeedInChooser(ref chosenSeed);
 				}
 			}
 		}

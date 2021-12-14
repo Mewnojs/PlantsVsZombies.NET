@@ -7,31 +7,31 @@ namespace Sexy.TodLib
 	{
 		public void Dispose()
 		{
-			this.DisposeHolder();
+			DisposeHolder();
 		}
 
 		public void InitializeHolder()
 		{
-			this.mTrails.Capacity = 128;
+			mTrails.Capacity = 128;
 		}
 
 		public void DisposeHolder()
 		{
-			if (this.mTrails != null)
+			if (mTrails != null)
 			{
-				this.mTrails.Clear();
+				mTrails.Clear();
 			}
 		}
 
 		public Trail AllocTrail(int theRenderOrder, TrailType theTrailType)
 		{
 			TrailDefinition theDefinition = GlobalMembersTrail.gTrailDefArray[(int)theTrailType];
-			return this.AllocTrailFromDef(theRenderOrder, theDefinition);
+			return AllocTrailFromDef(theRenderOrder, theDefinition);
 		}
 
 		public Trail AllocTrailFromDef(int theRenderOrder, TrailDefinition theDefinition)
 		{
-			if (this.mTrails.Count == this.mTrails.Capacity)
+			if (mTrails.Count == mTrails.Capacity)
 			{
 				return null;
 			}
@@ -40,7 +40,7 @@ namespace Sexy.TodLib
 			trail.mDefinition = theDefinition;
 			float theInterp = TodCommon.RandRangeFloat(0f, 1f);
 			trail.mTrailDuration = (int)Definition.FloatTrackEvaluate(ref trail.mDefinition.mTrailDuration, 0f, theInterp);
-			this.mTrails.Add(trail);
+			mTrails.Add(trail);
 			return trail;
 		}
 

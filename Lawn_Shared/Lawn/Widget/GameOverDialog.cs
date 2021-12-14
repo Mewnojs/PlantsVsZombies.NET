@@ -7,18 +7,18 @@ namespace Lawn
 	{
 		public GameOverDialog(string theMessage, bool theShowChallengeName) : base((LawnApp)GlobalStaticVars.gSexyAppBase, null, 17, true, "[GAME_OVER]", theMessage, "", 3)
 		{
-			this.mMenuButton = null;
-			this.mLawnYesButton.SetLabel("[TRY_AGAIN]");
-			this.mLawnYesButton.mId = 1;
+			mMenuButton = null;
+			mLawnYesButton.SetLabel("[TRY_AGAIN]");
+			mLawnYesButton.mId = 1;
 			if (theMessage.length() == 0)
 			{
-				this.mContentInsets.mTop = this.mContentInsets.mTop + 15;
+				mContentInsets.mTop = mContentInsets.mTop + 15;
 			}
 			base.CalcSize(30, 20);
-			this.Resize((Constants.BOARD_WIDTH - this.mWidth) / 2, (Constants.BOARD_HEIGHT - this.mHeight) / 2, this.mWidth, this.mHeight);
-			this.mClip = false;
-			this.mMenuButton = GameButton.MakeButton(1000, this, "[MAIN_MENU_BUTTON]");
-			this.mMenuButton.Resize(Constants.UIMenuButtonPosition.X - this.mX + Constants.Board_Offset_AspectRatio_Correction, Constants.UIMenuButtonPosition.Y - this.mY, Constants.UIMenuButtonWidth, AtlasResources.IMAGE_BUTTON_LEFT.mHeight);
+			Resize((Constants.BOARD_WIDTH - mWidth) / 2, (Constants.BOARD_HEIGHT - mHeight) / 2, mWidth, mHeight);
+			mClip = false;
+			mMenuButton = GameButton.MakeButton(1000, this, "[MAIN_MENU_BUTTON]");
+			mMenuButton.Resize(Constants.UIMenuButtonPosition.X - mX + Constants.Board_Offset_AspectRatio_Correction, Constants.UIMenuButtonPosition.Y - mY, Constants.UIMenuButtonWidth, AtlasResources.IMAGE_BUTTON_LEFT.mHeight);
 			GlobalStaticVars.gLawnApp.mBoard.mShowShovel = false;
 			GlobalStaticVars.gLawnApp.mBoard.mMenuButton.mBtnNoDraw = true;
 		}
@@ -29,47 +29,47 @@ namespace Lawn
 			{
 				if (theId == 1000)
 				{
-					this.mApp.KillDialog(17);
-					this.mApp.EndLevel();
-					this.mApp.ShowGameSelector();
+					mApp.KillDialog(17);
+					mApp.EndLevel();
+					mApp.ShowGameSelector();
 				}
 				return;
 			}
-			this.mApp.KillDialog(17);
-			this.mApp.KillBoard();
-			if (this.mApp.IsSurvivalMode())
+			mApp.KillDialog(17);
+			mApp.KillBoard();
+			if (mApp.IsSurvivalMode())
 			{
-				this.mApp.ShowChallengeScreen(ChallengePage.CHALLENGE_PAGE_SURVIVAL);
+				mApp.ShowChallengeScreen(ChallengePage.CHALLENGE_PAGE_SURVIVAL);
 				return;
 			}
-			if (this.mApp.IsPuzzleMode())
+			if (mApp.IsPuzzleMode())
 			{
-				this.mApp.FinishInGameRestartConfirmDialog(true);
+				mApp.FinishInGameRestartConfirmDialog(true);
 				return;
 			}
-			if (this.mApp.IsAdventureMode() || this.mApp.IsQuickPlayMode())
+			if (mApp.IsAdventureMode() || mApp.IsQuickPlayMode())
 			{
-				this.mApp.FinishInGameRestartConfirmDialog(true);
+				mApp.FinishInGameRestartConfirmDialog(true);
 				return;
 			}
-			this.mApp.FinishInGameRestartConfirmDialog(true);
+			mApp.FinishInGameRestartConfirmDialog(true);
 		}
 
 		public override void AddedToManager(WidgetManager theWidgetManager)
 		{
 			base.AddedToManager(theWidgetManager);
-			if (this.mMenuButton != null)
+			if (mMenuButton != null)
 			{
-				this.AddWidget(this.mMenuButton);
+				AddWidget(mMenuButton);
 			}
 		}
 
 		public override void RemovedFromManager(WidgetManager theWidgetManager)
 		{
 			base.RemovedFromManager(theWidgetManager);
-			if (this.mMenuButton != null)
+			if (mMenuButton != null)
 			{
-				this.RemoveWidget(this.mMenuButton);
+				RemoveWidget(mMenuButton);
 			}
 		}
 

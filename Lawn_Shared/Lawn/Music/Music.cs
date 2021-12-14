@@ -7,158 +7,158 @@ namespace Lawn
 	{
 		public Music()
 		{
-			this.mApp = (LawnApp)GlobalStaticVars.gSexyAppBase;
-			this.mMusicInterface = this.mApp.mMusicInterface;
-			this.mPaused = false;
-			this.mMusicDisabled = false;
-			this.mCurMusicTune = MusicTune.MUSIC_TUNE_NONE;
+			mApp = (LawnApp)GlobalStaticVars.gSexyAppBase;
+			mMusicInterface = mApp.mMusicInterface;
+			mPaused = false;
+			mMusicDisabled = false;
+			mCurMusicTune = MusicTune.MUSIC_TUNE_NONE;
 		}
 
 		public void MusicTitleScreenInit()
 		{
-			this.LoadSong(MusicTune.MUSIC_TUNE_TITLE_CRAZY_DAVE_MAIN_THEME, "crazydave");
-			this.PlayMusic(MusicTune.MUSIC_TUNE_TITLE_CRAZY_DAVE_MAIN_THEME);
+			LoadSong(MusicTune.MUSIC_TUNE_TITLE_CRAZY_DAVE_MAIN_THEME, "crazydave");
+			PlayMusic(MusicTune.MUSIC_TUNE_TITLE_CRAZY_DAVE_MAIN_THEME);
 		}
 
 		public void MusicInit()
 		{
-			this.LoadSong(MusicTune.MUSIC_TUNE_DAY_GRASSWALK, "day");
-			this.mApp.mCompletedLoadingThreadTasks += 3500;
-			this.LoadSong(MusicTune.MUSIC_TUNE_NIGHT_MOONGRAINS, "night");
-			this.mApp.mCompletedLoadingThreadTasks += 3500;
-			this.LoadSong(MusicTune.MUSIC_TUNE_POOL_WATERYGRAVES, "pool");
-			this.mApp.mCompletedLoadingThreadTasks += 3500;
-			this.LoadSong(MusicTune.MUSIC_TUNE_FOG_RIGORMORMIST, "fog");
-			this.mApp.mCompletedLoadingThreadTasks += 3500;
-			this.LoadSong(MusicTune.MUSIC_TUNE_ROOF_GRAZETHEROOF, "roof");
-			this.mApp.mCompletedLoadingThreadTasks += 3500;
-			this.LoadSong(MusicTune.MUSIC_TUNE_CHOOSE_YOUR_SEEDS, "chooseyourseeds");
-			this.mApp.mCompletedLoadingThreadTasks += 3500;
-			this.LoadSong(MusicTune.MUSIC_TUNE_FINAL_BOSS_BRAINIAC_MANIAC, "boss");
-			this.mApp.mCompletedLoadingThreadTasks += 3500;
-			this.LoadSong(MusicTune.MUSIC_TUNE_PUZZLE_CEREBRAWL, "cerebrawl");
-			this.mApp.mCompletedLoadingThreadTasks += 3500;
-			this.LoadSong(MusicTune.MUSIC_TUNE_MINIGAME_LOONBOON, "loonboon");
-			this.mApp.mCompletedLoadingThreadTasks += 3500;
-			this.LoadSong(MusicTune.MUSIC_TUNE_CONVEYER, "conveyor");
-			this.mApp.mCompletedLoadingThreadTasks += 3500;
-			this.LoadSong(MusicTune.MUSIC_TUNE_ZEN_GARDEN, "zengarden");
-			this.mApp.mCompletedLoadingThreadTasks += 3500;
+			LoadSong(MusicTune.MUSIC_TUNE_DAY_GRASSWALK, "day");
+			mApp.mCompletedLoadingThreadTasks += 3500;
+			LoadSong(MusicTune.MUSIC_TUNE_NIGHT_MOONGRAINS, "night");
+			mApp.mCompletedLoadingThreadTasks += 3500;
+			LoadSong(MusicTune.MUSIC_TUNE_POOL_WATERYGRAVES, "pool");
+			mApp.mCompletedLoadingThreadTasks += 3500;
+			LoadSong(MusicTune.MUSIC_TUNE_FOG_RIGORMORMIST, "fog");
+			mApp.mCompletedLoadingThreadTasks += 3500;
+			LoadSong(MusicTune.MUSIC_TUNE_ROOF_GRAZETHEROOF, "roof");
+			mApp.mCompletedLoadingThreadTasks += 3500;
+			LoadSong(MusicTune.MUSIC_TUNE_CHOOSE_YOUR_SEEDS, "chooseyourseeds");
+			mApp.mCompletedLoadingThreadTasks += 3500;
+			LoadSong(MusicTune.MUSIC_TUNE_FINAL_BOSS_BRAINIAC_MANIAC, "boss");
+			mApp.mCompletedLoadingThreadTasks += 3500;
+			LoadSong(MusicTune.MUSIC_TUNE_PUZZLE_CEREBRAWL, "cerebrawl");
+			mApp.mCompletedLoadingThreadTasks += 3500;
+			LoadSong(MusicTune.MUSIC_TUNE_MINIGAME_LOONBOON, "loonboon");
+			mApp.mCompletedLoadingThreadTasks += 3500;
+			LoadSong(MusicTune.MUSIC_TUNE_CONVEYER, "conveyor");
+			mApp.mCompletedLoadingThreadTasks += 3500;
+			LoadSong(MusicTune.MUSIC_TUNE_ZEN_GARDEN, "zengarden");
+			mApp.mCompletedLoadingThreadTasks += 3500;
 		}
 
 		public void StopAllMusic()
 		{
-			this.mMusicInterface.StopMusic(0f);
-			this.mCurMusicTune = MusicTune.MUSIC_TUNE_NONE;
-			this.mPaused = false;
+			mMusicInterface.StopMusic(0f);
+			mCurMusicTune = MusicTune.MUSIC_TUNE_NONE;
+			mPaused = false;
 		}
 
 		public void StartGameMusic()
 		{
-			Debug.ASSERT(this.mApp.mBoard != null);
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || this.mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
+			Debug.ASSERT(mApp.mBoard != null);
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
 			{
-				this.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_ZEN_GARDEN);
+				MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_ZEN_GARDEN);
 				return;
 			}
-			if (this.mApp.IsFinalBossLevel())
+			if (mApp.IsFinalBossLevel())
 			{
-				this.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_FINAL_BOSS_BRAINIAC_MANIAC);
+				MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_FINAL_BOSS_BRAINIAC_MANIAC);
 				return;
 			}
-			if (this.mApp.IsWallnutBowlingLevel() || this.mApp.IsWhackAZombieLevel() || this.mApp.IsLittleTroubleLevel() || this.mApp.IsBungeeBlitzLevel() || this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_SPEED)
+			if (mApp.IsWallnutBowlingLevel() || mApp.IsWhackAZombieLevel() || mApp.IsLittleTroubleLevel() || mApp.IsBungeeBlitzLevel() || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_SPEED)
 			{
-				this.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_MINIGAME_LOONBOON);
+				MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_MINIGAME_LOONBOON);
 				return;
 			}
-			if ((this.mApp.IsAdventureMode() || this.mApp.IsQuickPlayMode()) && (this.mApp.mPlayerInfo.mLevel == 10 || this.mApp.mPlayerInfo.mLevel == 20 || this.mApp.mPlayerInfo.mLevel == 30))
+			if ((mApp.IsAdventureMode() || mApp.IsQuickPlayMode()) && (mApp.mPlayerInfo.mLevel == 10 || mApp.mPlayerInfo.mLevel == 20 || mApp.mPlayerInfo.mLevel == 30))
 			{
-				this.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_CONVEYER);
+				MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_CONVEYER);
 				return;
 			}
-			if (this.mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_COLUMN)
+			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_COLUMN)
 			{
-				this.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_CONVEYER);
+				MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_CONVEYER);
 				return;
 			}
-			if (this.mApp.IsStormyNightLevel())
+			if (mApp.IsStormyNightLevel())
 			{
-				this.StopAllMusic();
+				StopAllMusic();
 				return;
 			}
-			if (this.mApp.IsScaryPotterLevel() || this.mApp.IsIZombieLevel())
+			if (mApp.IsScaryPotterLevel() || mApp.IsIZombieLevel())
 			{
-				this.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_PUZZLE_CEREBRAWL);
+				MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_PUZZLE_CEREBRAWL);
 				return;
 			}
-			if (this.mApp.mBoard.mBackground == BackgroundType.BACKGROUND_4_FOG)
+			if (mApp.mBoard.mBackground == BackgroundType.BACKGROUND_4_FOG)
 			{
-				this.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_FOG_RIGORMORMIST);
+				MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_FOG_RIGORMORMIST);
 				return;
 			}
-			if (this.mApp.mBoard.StageIsNight())
+			if (mApp.mBoard.StageIsNight())
 			{
-				this.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_NIGHT_MOONGRAINS);
+				MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_NIGHT_MOONGRAINS);
 				return;
 			}
-			if (this.mApp.mBoard.StageHasPool())
+			if (mApp.mBoard.StageHasPool())
 			{
-				this.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_POOL_WATERYGRAVES);
+				MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_POOL_WATERYGRAVES);
 				return;
 			}
-			if (this.mApp.mBoard.StageHasRoof())
+			if (mApp.mBoard.StageHasRoof())
 			{
-				this.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_ROOF_GRAZETHEROOF);
+				MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_ROOF_GRAZETHEROOF);
 				return;
 			}
-			this.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_DAY_GRASSWALK);
+			MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_DAY_GRASSWALK);
 		}
 
 		public void GameMusicPause(bool thePause)
 		{
-			if (thePause && !this.mPaused && this.mCurMusicTune != MusicTune.MUSIC_TUNE_NONE)
+			if (thePause && !mPaused && mCurMusicTune != MusicTune.MUSIC_TUNE_NONE)
 			{
-				if (this.mMusicInterface.IsPlaying((int)this.mCurMusicTune))
+				if (mMusicInterface.IsPlaying((int)mCurMusicTune))
 				{
-					this.mMusicInterface.PauseMusic();
+					mMusicInterface.PauseMusic();
 				}
-				this.mPaused = true;
+				mPaused = true;
 				return;
 			}
-			if (!thePause && this.mPaused)
+			if (!thePause && mPaused)
 			{
-				if (this.mCurMusicTune != MusicTune.MUSIC_TUNE_NONE)
+				if (mCurMusicTune != MusicTune.MUSIC_TUNE_NONE)
 				{
-					if (this.mMusicInterface.IsPlaying((int)this.mCurMusicTune))
+					if (mMusicInterface.IsPlaying((int)mCurMusicTune))
 					{
-						this.mMusicInterface.ResumeMusic();
+						mMusicInterface.ResumeMusic();
 					}
 					else
 					{
-						this.PlayMusic(this.mCurMusicTune);
+						PlayMusic(mCurMusicTune);
 					}
 				}
-				this.mPaused = false;
+				mPaused = false;
 			}
 		}
 
 		public void MakeSureMusicIsPlaying(MusicTune theMusicTune)
 		{
-			if (this.mCurMusicTune == theMusicTune)
+			if (mCurMusicTune == theMusicTune)
 			{
 				return;
 			}
-			this.StopAllMusic();
-			this.PlayMusic(theMusicTune);
+			StopAllMusic();
+			PlayMusic(theMusicTune);
 		}
 
 		public void FadeOut(int aFadeOutDuration)
 		{
-			if (this.mCurMusicTune != MusicTune.MUSIC_TUNE_NONE)
+			if (mCurMusicTune != MusicTune.MUSIC_TUNE_NONE)
 			{
-				this.mMusicInterface.StopMusic((float)aFadeOutDuration / 100f);
-				this.mCurMusicTune = MusicTune.MUSIC_TUNE_NONE;
-				this.mPaused = false;
+				mMusicInterface.StopMusic((float)aFadeOutDuration / 100f);
+				mCurMusicTune = MusicTune.MUSIC_TUNE_NONE;
+				mPaused = false;
 			}
 		}
 
@@ -169,7 +169,7 @@ namespace Lawn
 
 		private void LoadSong(MusicTune theMusicTune, string theFileName)
 		{
-			if (!this.mMusicInterface.LoadMusic((int)theMusicTune, GlobalStaticVars.GetResourceDir() + "music/" + theFileName))
+			if (!mMusicInterface.LoadMusic((int)theMusicTune, GlobalStaticVars.GetResourceDir() + "music/" + theFileName))
 			{
 				Console.Write("Failed to load music file {0}\n", theFileName);
 			}
@@ -177,18 +177,18 @@ namespace Lawn
 
 		private void MusicDispose()
 		{
-			this.StopAllMusic();
-			this.mMusicInterface.UnloadAllMusic();
+			StopAllMusic();
+			mMusicInterface.UnloadAllMusic();
 		}
 
 		private void PlayMusic(MusicTune theMusicTune)
 		{
-			if (this.mMusicDisabled)
+			if (mMusicDisabled)
 			{
 				return;
 			}
-			this.mCurMusicTune = theMusicTune;
-			this.mMusicInterface.PlayMusic((int)theMusicTune, true);
+			mCurMusicTune = theMusicTune;
+			mMusicInterface.PlayMusic((int)theMusicTune, true);
 		}
 
 		public LawnApp mApp;

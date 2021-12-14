@@ -6,18 +6,18 @@ namespace Sexy
 	{
 		public Insets(int theLeft, int theTop, int theRight, int theBottom)
 		{
-			this.mLeft = theLeft;
-			this.mTop = theTop;
-			this.mRight = theRight;
-			this.mBottom = theBottom;
+			mLeft = theLeft;
+			mTop = theTop;
+			mRight = theRight;
+			mBottom = theBottom;
 		}
 
 		public Insets(Insets theInsets)
 		{
-			this.mLeft = theInsets.mLeft;
-			this.mTop = theInsets.mTop;
-			this.mRight = theInsets.mRight;
-			this.mBottom = theInsets.mBottom;
+			mLeft = theInsets.mLeft;
+			mTop = theInsets.mTop;
+			mRight = theInsets.mRight;
+			mBottom = theInsets.mBottom;
 		}
 
 		public int mLeft;

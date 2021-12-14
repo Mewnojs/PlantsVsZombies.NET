@@ -24,17 +24,17 @@ namespace Sexy
 			Main.graphics.PreferredBackBufferWidth = 800;
 			Main.graphics.PreferredBackBufferHeight = 480;
 			GraphicsState.mGraphicsDeviceManager.SupportedOrientations = Constants.SupportedOrientations;
-			GraphicsState.mGraphicsDeviceManager.DeviceCreated += new EventHandler<EventArgs>(this.graphics_DeviceCreated);
-			GraphicsState.mGraphicsDeviceManager.DeviceReset += new EventHandler<EventArgs>(this.graphics_DeviceReset);
-			GraphicsState.mGraphicsDeviceManager.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(this.mGraphicsDeviceManager_PreparingDeviceSettings);
+			GraphicsState.mGraphicsDeviceManager.DeviceCreated += new EventHandler<EventArgs>(graphics_DeviceCreated);
+			GraphicsState.mGraphicsDeviceManager.DeviceReset += new EventHandler<EventArgs>(graphics_DeviceReset);
+			GraphicsState.mGraphicsDeviceManager.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(mGraphicsDeviceManager_PreparingDeviceSettings);
 			base.TargetElapsedTime = TimeSpan.FromSeconds(0.03333333333333333);
-			base.Exiting += new EventHandler<EventArgs>(this.Main_Exiting);
+			base.Exiting += new EventHandler<EventArgs>(Main_Exiting);
 			//PhoneApplicationService.Current.UserIdleDetectionMode = 0;
 			//PhoneApplicationService.Current.Launching += new EventHandler<LaunchingEventArgs>(this.Game_Launching);
 			//PhoneApplicationService.Current.Activated += new EventHandler<ActivatedEventArgs>(this.Game_Activated);
 			//PhoneApplicationService.Current.Closing += new EventHandler<ClosingEventArgs>(this.Current_Closing);
 			//PhoneApplicationService.Current.Deactivated += new EventHandler<DeactivatedEventArgs>(this.Current_Deactivated);
-			this.IsMouseVisible = true;
+			IsMouseVisible = true;
 		}
 
 		/*private void Current_Deactivated(object sender, DeactivatedEventArgs e)
@@ -98,7 +98,7 @@ namespace Sexy
 
 		protected override void Initialize()
 		{
-			base.Window.OrientationChanged += new EventHandler<EventArgs>(this.Window_OrientationChanged);
+			base.Window.OrientationChanged += new EventHandler<EventArgs>(Window_OrientationChanged);
 			Main.GamerServicesComp = new GamerServicesComponent(this);
 			base.Components.Add(Main.GamerServicesComp);
 			ReportAchievement.Initialise();
@@ -150,7 +150,7 @@ namespace Sexy
 			{
 				base.Exit();
 			}
-			this.HandleInput(gameTime);
+			HandleInput(gameTime);
 			GlobalStaticVars.gSexyAppBase.UpdateApp();
 			if (!Main.trialModeChecked)
 			{
@@ -160,7 +160,7 @@ namespace Sexy
 				Main.trialModeCachedValue = Guide.IsTrialMode;
 				if (flag != Main.trialModeCachedValue && flag)
 				{
-					this.LeftTrialMode();
+					LeftTrialMode();
 				}
 			}
 			try
@@ -187,7 +187,7 @@ namespace Sexy
 			{
 				GlobalStaticVars.gSexyAppBase.LeftTrialMode();
 			}
-			this.Window_OrientationChanged(null, null);
+			Window_OrientationChanged(null, null);
 		}
 
 		public static void SuppressNextDraw()
@@ -217,7 +217,7 @@ namespace Sexy
 
 		private void Window_OrientationChanged(object sender, EventArgs e)
 		{
-			this.SetupInterfaceOrientation();
+			SetupInterfaceOrientation();
 		}
 
 		private void SetupInterfaceOrientation()
@@ -270,7 +270,7 @@ namespace Sexy
 			}
 
 			GamePadState state = GamePad.GetState(PlayerIndex.One);
-			if (state.Buttons.Back == ButtonState.Pressed && this.previousGamepadState.Buttons.Back == ButtonState.Released)
+			if (state.Buttons.Back == ButtonState.Pressed && previousGamepadState.Buttons.Back == ButtonState.Released)
 			{
 				GlobalStaticVars.gSexyAppBase.BackButtonPress();
 			}
@@ -309,8 +309,8 @@ namespace Sexy
 					GlobalStaticVars.gSexyAppBase.TouchesCanceled();
 				}
 			}
-			this.previousGamepadState = state;
-			this.previousMouseState = msstate;
+			previousGamepadState = state;
+			previousMouseState = msstate;
 		}
 
 		protected override void OnActivated(object sender, EventArgs args)

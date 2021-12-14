@@ -5,21 +5,21 @@ internal class AtlasResources
 {
 	public void ExtractResources()
 	{
-		this.UnpackDaveAtlasImages();
-		this.UnpackAlmanacUIAtlasImages();
-		this.UnpackParticlesAtlasImages();
-		this.UnpackCharredZombiesAtlasImages();
-		this.UnpackPlantsZombiesAtlasImages();
-		this.UnpackSeedAtlasAtlasImages();
-		this.UnpackQuickplayAtlasImages();
-		this.UnpackLoadingAtlasImages();
-		this.UnpackDialogAtlasImages();
-		this.UnpackCachedAtlasImages();
-		this.UnpackGoodiesAtlasImages();
-		this.UnpackLoc_enAtlasImages();
-		this.UnpackZengardenAtlasImages();
-		this.UnpackPileAtlasImages();
-		this.UnpackMiniGamesAtlasImages();
+		UnpackDaveAtlasImages();
+		UnpackAlmanacUIAtlasImages();
+		UnpackParticlesAtlasImages();
+		UnpackCharredZombiesAtlasImages();
+		UnpackPlantsZombiesAtlasImages();
+		UnpackSeedAtlasAtlasImages();
+		UnpackQuickplayAtlasImages();
+		UnpackLoadingAtlasImages();
+		UnpackDialogAtlasImages();
+		UnpackCachedAtlasImages();
+		UnpackGoodiesAtlasImages();
+		UnpackLoc_enAtlasImages();
+		UnpackZengardenAtlasImages();
+		UnpackPileAtlasImages();
+		UnpackMiniGamesAtlasImages();
 	}
 
 	public virtual void UnpackDaveAtlasImages()
@@ -17578,8 +17578,8 @@ internal class AtlasResources
 	{
 		public AtlasStringTable(string strId, int imgId)
 		{
-			this.mStringId = strId;
-			this.mImageId = imgId;
+			mStringId = strId;
+			mImageId = imgId;
 		}
 
 		public string mStringId;

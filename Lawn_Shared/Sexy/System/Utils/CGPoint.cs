@@ -7,18 +7,18 @@ namespace Sexy
 	{
 		public CGPoint(float x, float y)
 		{
-			this.mVector = new Vector2(x, y);
+			mVector = new Vector2(x, y);
 		}
 
 		public float X
 		{
 			get
 			{
-				return this.mVector.X;
+				return mVector.X;
 			}
 			set
 			{
-				this.mVector.X = value;
+				mVector.X = value;
 			}
 		}
 
@@ -26,11 +26,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mVector.X;
+				return mVector.X;
 			}
 			set
 			{
-				this.mVector.X = value;
+				mVector.X = value;
 			}
 		}
 
@@ -38,11 +38,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mVector.X;
+				return mVector.X;
 			}
 			set
 			{
-				this.mVector.X = value;
+				mVector.X = value;
 			}
 		}
 
@@ -50,11 +50,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mVector.Y;
+				return mVector.Y;
 			}
 			set
 			{
-				this.mVector.Y = value;
+				mVector.Y = value;
 			}
 		}
 
@@ -62,11 +62,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mVector.Y;
+				return mVector.Y;
 			}
 			set
 			{
-				this.mVector.Y = value;
+				mVector.Y = value;
 			}
 		}
 
@@ -74,11 +74,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mVector.Y;
+				return mVector.Y;
 			}
 			set
 			{
-				this.mVector.Y = value;
+				mVector.Y = value;
 			}
 		}
 
@@ -99,7 +99,7 @@ namespace Sexy
 
 		public override string ToString()
 		{
-			return this.mVector.ToString();
+			return mVector.ToString();
 		}
 
 		private Vector2 mVector;

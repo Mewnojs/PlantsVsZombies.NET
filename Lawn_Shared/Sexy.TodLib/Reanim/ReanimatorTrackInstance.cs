@@ -25,40 +25,40 @@ namespace Sexy.TodLib
 
 		public void PrepareForReuse()
 		{
-			this.Reset();
+			Reset();
 			ReanimatorTrackInstance.unusedObjects.Push(this);
 		}
 
 		public override string ToString()
 		{
-			return string.Format("Group: {0}", this.mRenderGroup);
+			return string.Format("Group: {0}", mRenderGroup);
 		}
 
 		private ReanimatorTrackInstance()
 		{
-			this.Reset();
+			Reset();
 		}
 
 		private void Reset()
 		{
-			if (this.mBlendTransform != null)
+			if (mBlendTransform != null)
 			{
-				this.mBlendTransform.PrepareForReuse();
+				mBlendTransform.PrepareForReuse();
 			}
-			this.mBlendTransform = null;
-			this.mBlendCounter = 0;
-			this.mBlendTime = 0;
-			this.mShakeOverride = 0f;
-			this.mShakeX = 0f;
-			this.mShakeY = 0f;
-			this.mAttachmentID = null;
-			this.mRenderGroup = 0;
-			this.mIgnoreClipRect = false;
-			this.mTruncateDisappearingFrames = true;
-			this.mImageOverride = null;
-			this.mTrackColor = new SexyColor(Color.White);
-			this.mIgnoreColorOverride = false;
-			this.mIgnoreExtraAdditiveColor = false;
+			mBlendTransform = null;
+			mBlendCounter = 0;
+			mBlendTime = 0;
+			mShakeOverride = 0f;
+			mShakeX = 0f;
+			mShakeY = 0f;
+			mAttachmentID = null;
+			mRenderGroup = 0;
+			mIgnoreClipRect = false;
+			mTruncateDisappearingFrames = true;
+			mImageOverride = null;
+			mTrackColor = new SexyColor(Color.White);
+			mIgnoreColorOverride = false;
+			mIgnoreExtraAdditiveColor = false;
 		}
 
 		public byte mBlendCounter;

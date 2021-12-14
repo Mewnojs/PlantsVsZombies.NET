@@ -6,8 +6,8 @@ namespace Sexy
 	{
 		public void CopyFrom(FlagsMod source)
 		{
-			this.mAddFlags = source.mAddFlags;
-			this.mRemoveFlags = source.mRemoveFlags;
+			mAddFlags = source.mAddFlags;
+			mRemoveFlags = source.mRemoveFlags;
 		}
 
 		public int mAddFlags;

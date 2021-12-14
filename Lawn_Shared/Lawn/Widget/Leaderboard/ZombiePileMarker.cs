@@ -7,8 +7,8 @@ namespace Lawn
 	{
 		public ZombiePileMarker()
 		{
-			this.mHeight = 0;
-			this.mGamer = null;
+			mHeight = 0;
+			mGamer = null;
 		}
 
 		public Gamer mGamer;

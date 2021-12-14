@@ -6,8 +6,8 @@ namespace Sexy.TodLib
 	{
 		public ParticleParams(ParticleEffect aParticleEffect, string aParticleName)
 		{
-			this.mParticleEffect = aParticleEffect;
-			this.mParticleFileName = aParticleName;
+			mParticleEffect = aParticleEffect;
+			mParticleFileName = aParticleName;
 		}
 
 		public ParticleEffect mParticleEffect;

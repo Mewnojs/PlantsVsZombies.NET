@@ -6,7 +6,7 @@ namespace Sexy
 	{
 		public LevelRes()
 		{
-			this.mLevelNumber = -1;
+			mLevelNumber = -1;
 		}
 
 		public override void DeleteResource()

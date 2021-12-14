@@ -65,87 +65,87 @@ namespace Lawn
 
 		public CreditScreen(LawnApp theApp)
 		{
-			this.mApp = theApp;
-			this.mMainMenuButton = GameButton.MakeButton(1, this, "[CREDITS_MAIN_MENU_BUTTON]");
-			this.mMainMenuButton.Resize(Constants.CreditScreen_MainMenu.X, Constants.CreditScreen_MainMenu.Y, Constants.CreditScreen_MainMenu.Width, Constants.CreditScreen_MainMenu.Height);
-			this.mMainMenuButton.SetVisible(false);
-			this.mReplayButton = GameButton.MakeNewButton(0, this, "[CREDITS_REPLAY_BUTTON]", Resources.FONT_HOUSEOFTERROR16, AtlasResources.IMAGE_CREDITS_PLAYBUTTON, null, null);
-			this.mReplayButton.mTextDownOffsetX = 1;
-			this.mReplayButton.mTextDownOffsetY = 1;
-			this.mReplayButton.mColors[0] = new SexyColor(255, 255, 255);
-			this.mReplayButton.mColors[1] = new SexyColor(213, 159, 43);
-			this.mReplayButton.Resize(Constants.CreditScreen_ReplayButton.X, Constants.CreditScreen_ReplayButton.Y, Constants.CreditScreen_ReplayButton.Width, Constants.CreditScreen_ReplayButton.Height);
-			this.mReplayButton.mTextOffsetX = Constants.CreditScreen_ReplayButton_TextOffset.X;
-			this.mReplayButton.mTextOffsetY = Constants.CreditScreen_ReplayButton_TextOffset.Y;
-			this.mReplayButton.SetVisible(false);
-			this.mNumSections = 0;
+			mApp = theApp;
+			mMainMenuButton = GameButton.MakeButton(1, this, "[CREDITS_MAIN_MENU_BUTTON]");
+			mMainMenuButton.Resize(Constants.CreditScreen_MainMenu.X, Constants.CreditScreen_MainMenu.Y, Constants.CreditScreen_MainMenu.Width, Constants.CreditScreen_MainMenu.Height);
+			mMainMenuButton.SetVisible(false);
+			mReplayButton = GameButton.MakeNewButton(0, this, "[CREDITS_REPLAY_BUTTON]", Resources.FONT_HOUSEOFTERROR16, AtlasResources.IMAGE_CREDITS_PLAYBUTTON, null, null);
+			mReplayButton.mTextDownOffsetX = 1;
+			mReplayButton.mTextDownOffsetY = 1;
+			mReplayButton.mColors[0] = new SexyColor(255, 255, 255);
+			mReplayButton.mColors[1] = new SexyColor(213, 159, 43);
+			mReplayButton.Resize(Constants.CreditScreen_ReplayButton.X, Constants.CreditScreen_ReplayButton.Y, Constants.CreditScreen_ReplayButton.Width, Constants.CreditScreen_ReplayButton.Height);
+			mReplayButton.mTextOffsetX = Constants.CreditScreen_ReplayButton_TextOffset.X;
+			mReplayButton.mTextOffsetY = Constants.CreditScreen_ReplayButton_TextOffset.Y;
+			mReplayButton.SetVisible(false);
+			mNumSections = 0;
 			for (;;)
 			{
-				Debug.ASSERT(this.mNumSections < 57);
-				string theString = Common.StrFormat_("[CREDITS_ROLES{0}]", this.mNumSections + 1);
+				Debug.ASSERT(mNumSections < 57);
+				string theString = Common.StrFormat_("[CREDITS_ROLES{0}]", mNumSections + 1);
 				if (!TodStringFile.TodStringListExists(theString))
 				{
 					break;
 				}
-				this.mRoles[this.mNumSections] = TodStringFile.TodStringTranslate(theString);
-				if (this.mRoles[this.mNumSections] == "-")
+				mRoles[mNumSections] = TodStringFile.TodStringTranslate(theString);
+				if (mRoles[mNumSections] == "-")
 				{
-					this.mRoles[this.mNumSections] = " ";
+					mRoles[mNumSections] = " ";
 				}
-				theString = Common.StrFormat_("[CREDITS_NAMES{0}]", this.mNumSections + 1);
-				this.mNames[this.mNumSections] = TodStringFile.TodStringTranslate(theString);
-				if (this.mNames[this.mNumSections] == "-")
+				theString = Common.StrFormat_("[CREDITS_NAMES{0}]", mNumSections + 1);
+				mNames[mNumSections] = TodStringFile.TodStringTranslate(theString);
+				if (mNames[mNumSections] == "-")
 				{
-					this.mNames[this.mNumSections] = " ";
+					mNames[mNumSections] = " ";
 				}
-				this.mNumSections++;
+				mNumSections++;
 			}
-			this.mCreditsHeight = this.GetCreditsHeight();
-			this.RestartScroll();
-			if (this.mApp.HasFinishedAdventure())
+			mCreditsHeight = GetCreditsHeight();
+			RestartScroll();
+			if (mApp.HasFinishedAdventure())
 			{
-				this.mApp.mMusic.StopAllMusic();
-				this.mVideoLoading = true;
-				this.mVideoFinished = false;
-				this.mDidInitialDraw = false;
-				this.mNeedToStartPlaying = true;
+				mApp.mMusic.StopAllMusic();
+				mVideoLoading = true;
+				mVideoFinished = false;
+				mDidInitialDraw = false;
+				mNeedToStartPlaying = true;
 				return;
 			}
-			this.mVideoLoading = false;
-			this.mVideoFinished = true;
-			this.mDidInitialDraw = false;
-			this.mNeedToStartPlaying = false;
-			this.mMainMenuButton.SetVisible(true);
-			this.mMainMenuButton.Move(this.mApp.mWidth / 2 - this.mMainMenuButton.mWidth / 2, this.mMainMenuButton.mY);
+			mVideoLoading = false;
+			mVideoFinished = true;
+			mDidInitialDraw = false;
+			mNeedToStartPlaying = false;
+			mMainMenuButton.SetVisible(true);
+			mMainMenuButton.Move(mApp.mWidth / 2 - mMainMenuButton.mWidth / 2, mMainMenuButton.mY);
 		}
 
 		public override void Dispose()
 		{
-			this.mReplayButton.Dispose();
-			this.mMainMenuButton.Dispose();
-			this.RemoveAllWidgets(true);
+			mReplayButton.Dispose();
+			mMainMenuButton.Dispose();
+			RemoveAllWidgets(true);
 		}
 
 		public void AppGotFocus()
 		{
-			if (!this.mNeedToStartPlaying && !this.videoDone)
+			if (!mNeedToStartPlaying && !videoDone)
 			{
-				this.mApp.MoviePlayerPlaybackDidFinish();
-				this.videoDone = true;
+				mApp.MoviePlayerPlaybackDidFinish();
+				videoDone = true;
 			}
 		}
 
 		public void DrawCredits(Graphics g)
 		{
-			g.SetClipRect(0, 0, this.mWidth, Constants.CreditScreen_TextClip);
+			g.SetClipRect(0, 0, mWidth, Constants.CreditScreen_TextClip);
 			g.HardwareClip();
 			Resources.FONT_HOUSEOFTERROR16.EnableLayer(0, false);
-			int num = (int)this.mCreditsY;
+			int num = (int)mCreditsY;
 			int num2 = 0;
-			while (num2 < this.mNumSections && num <= Constants.BOARD_HEIGHT)
+			while (num2 < mNumSections && num <= Constants.BOARD_HEIGHT)
 			{
-				num = CreditScreen.DrawSection(g, this.mRoles[num2], this.mNames[num2], num) + (int)(Constants.S * 5f);
-				if (this.mRoles[num2].Length == 0 || this.mRoles[num2][0] != '^')
+				num = CreditScreen.DrawSection(g, mRoles[num2], mNames[num2], num) + (int)(Constants.S * 5f);
+				if (mRoles[num2].Length == 0 || mRoles[num2][0] != '^')
 				{
 					num += (int)(Constants.S * 15f);
 				}
@@ -161,10 +161,10 @@ namespace Lawn
 			@new.BeginFrame();
 			@new.SetClipRect(0, 0, 0, 0);
 			int num = 0;
-			for (int i = 0; i < this.mNumSections; i++)
+			for (int i = 0; i < mNumSections; i++)
 			{
-				num = CreditScreen.DrawSection(@new, this.mRoles[i], this.mNames[i], num) + (int)(Constants.S * 5f);
-				if (this.mRoles[i].Length == 0 || this.mRoles[i][0] != '^')
+				num = CreditScreen.DrawSection(@new, mRoles[i], mNames[i], num) + (int)(Constants.S * 5f);
+				if (mRoles[i].Length == 0 || mRoles[i][0] != '^')
 				{
 					num += (int)(Constants.S * 15f);
 				}
@@ -178,11 +178,11 @@ namespace Lawn
 		{
 			g.SetLinearBlend(true);
 			g.SetColor(SexyColor.Black);
-			if (!this.mVideoLoading)
+			if (!mVideoLoading)
 			{
-				this.DrawCredits(g);
+				DrawCredits(g);
 			}
-			this.mDidInitialDraw = true;
+			mDidInitialDraw = true;
 		}
 
 		public override void MouseUp(int x, int y, int theClickCount)
@@ -191,23 +191,23 @@ namespace Lawn
 
 		public override void TouchBegan(_Touch touch)
 		{
-			this.touching = true;
-			this.touchStartPosition = touch.location;
+			touching = true;
+			touchStartPosition = touch.location;
 			base.TouchBegan(touch);
 		}
 
 		public override void TouchEnded(_Touch touch)
 		{
-			this.touching = false;
+			touching = false;
 			base.TouchEnded(touch);
 		}
 
 		public override void TouchMoved(_Touch touch)
 		{
-			if (this.touching)
+			if (touching)
 			{
-				this.mCreditsY += touch.location.y - this.touchStartPosition.y;
-				this.touchStartPosition = touch.location;
+				mCreditsY += touch.location.y - touchStartPosition.y;
+				touchStartPosition = touch.location;
 			}
 			base.TouchMoved(touch);
 		}
@@ -215,112 +215,112 @@ namespace Lawn
 		public override void AddedToManager(WidgetManager theWidgetManager)
 		{
 			base.AddedToManager(theWidgetManager);
-			this.AddWidget(this.mMainMenuButton);
-			this.AddWidget(this.mReplayButton);
+			AddWidget(mMainMenuButton);
+			AddWidget(mReplayButton);
 		}
 
 		public override void RemovedFromManager(WidgetManager theWidgetManager)
 		{
 			base.RemovedFromManager(theWidgetManager);
-			this.RemoveWidget(this.mMainMenuButton);
-			this.RemoveWidget(this.mReplayButton);
+			RemoveWidget(mMainMenuButton);
+			RemoveWidget(mReplayButton);
 		}
 
 		public void ButtonPress(int theId)
 		{
-			this.touching = false;
+			touching = false;
 			if (theId == 1)
 			{
-				this.mApp.PlaySample(Resources.SOUND_GRAVEBUTTON);
+				mApp.PlaySample(Resources.SOUND_GRAVEBUTTON);
 			}
 			if (theId == 0)
 			{
-				this.mApp.PlaySample(Resources.SOUND_TAP);
+				mApp.PlaySample(Resources.SOUND_TAP);
 			}
 		}
 
 		public void ButtonDepress(int theId)
 		{
-			this.touching = false;
+			touching = false;
 			if (theId == 1)
 			{
-				this.mApp.KillCreditScreen();
-				this.mApp.DoBackToMain();
+				mApp.KillCreditScreen();
+				mApp.DoBackToMain();
 			}
 			if (theId == 0)
 			{
-				this.mApp.KillCreditScreen();
-				this.mApp.ShowCreditScreen();
+				mApp.KillCreditScreen();
+				mApp.ShowCreditScreen();
 			}
 		}
 
 		public override bool BackButtonPress()
 		{
-			this.mApp.KillCreditScreen();
-			this.mApp.ShowGameSelectorWithOptions();
+			mApp.KillCreditScreen();
+			mApp.ShowGameSelectorWithOptions();
 			return true;
 		}
 
 		public override void Update()
 		{
-			if (this.touching)
+			if (touching)
 			{
 				return;
 			}
-			this.mCreditsY -= 3f * Constants.InvertAndScale(0.25f);
-			if (this.mCreditsY < (float)(-(float)(this.mCreditsHeight + Constants.CreditScreen_TextStart)))
+			mCreditsY -= 3f * Constants.InvertAndScale(0.25f);
+			if (mCreditsY < (float)(-(float)(mCreditsHeight + Constants.CreditScreen_TextStart)))
 			{
-				this.RestartScroll();
+				RestartScroll();
 			}
-			if (this.mCreditsY > (float)Constants.CreditScreen_TextEnd)
+			if (mCreditsY > (float)Constants.CreditScreen_TextEnd)
 			{
-				this.RestartScroll();
+				RestartScroll();
 			}
-			if (this.mDidInitialDraw && this.mNeedToStartPlaying)
+			if (mDidInitialDraw && mNeedToStartPlaying)
 			{
-				this.mApp.LostFocus();
-				if (this.mApp.PlayMovie(VideoType.Credits, MOVIESCALINGMODE.MOVIESCALINGMODE_NONE, MOVIECONTROLMODE.MOVIECONTROLMODE_DEFAULT, SexyColor.Black))
+				mApp.LostFocus();
+				if (mApp.PlayMovie(VideoType.Credits, MOVIESCALINGMODE.MOVIESCALINGMODE_NONE, MOVIECONTROLMODE.MOVIECONTROLMODE_DEFAULT, SexyColor.Black))
 				{
-					this.videoDone = false;
+					videoDone = false;
 				}
 				else
 				{
-					this.videoDone = true;
-					this.VideoFinished();
+					videoDone = true;
+					VideoFinished();
 				}
-				this.mNeedToStartPlaying = false;
+				mNeedToStartPlaying = false;
 			}
 		}
 
 		public void RestartScroll()
 		{
-			this.mCreditsY = (float)Constants.CreditScreen_TextEnd;
+			mCreditsY = (float)Constants.CreditScreen_TextEnd;
 		}
 
 		public void VideoLoaded(bool succeeded)
 		{
-			this.mVideoLoading = false;
+			mVideoLoading = false;
 			if (!succeeded)
 			{
-				this.VideoFinished();
+				VideoFinished();
 			}
 		}
 
 		public void VideoFinished()
 		{
-			this.mVideoFinished = true;
-			this.mVideoLoading = false;
-			this.mReplayButton.SetVisible(true);
-			this.mMainMenuButton.SetVisible(true);
+			mVideoFinished = true;
+			mVideoLoading = false;
+			mReplayButton.SetVisible(true);
+			mMainMenuButton.SetVisible(true);
 			if (MusicInterface.USER_MUSIC_PLAYING)
 			{
 				MediaPlayer.Resume();
 			}
 			else
 			{
-				this.mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_DAY_GRASSWALK);
+				mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_DAY_GRASSWALK);
 			}
-			this.RestartScroll();
+			RestartScroll();
 		}
 
 		public void ButtonMouseMove(int id, int x, int y)

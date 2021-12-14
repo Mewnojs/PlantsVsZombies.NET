@@ -8,15 +8,15 @@ namespace Lawn
 	{
 		public ChallengeScreenWidget(LawnApp theApp)
 		{
-			this.mApp = theApp;
-			this.mWidth = 280;
-			this.mHeight = 220;
+			mApp = theApp;
+			mWidth = 280;
+			mHeight = 220;
 		}
 
 		public void SetSize(int width, int height)
 		{
-			this.mWidth = width;
-			this.mHeight = height;
+			mWidth = width;
+			mHeight = height;
 		}
 
 		public override void Draw(Graphics g)
@@ -25,7 +25,7 @@ namespace Lawn
 			for (int i = 0; i < ChallengeScreen.gChallengeDefs.Length; i++)
 			{
 				ChallengeDefinition challengeDefinition = ChallengeScreen.gChallengeDefs[i];
-				ButtonWidget buttonWidget = this.mApp.mChallengeScreen.mChallengeButton[i];
+				ButtonWidget buttonWidget = mApp.mChallengeScreen.mChallengeButton[i];
 				if (buttonWidget.mVisible)
 				{
 					int num = buttonWidget.mX;
@@ -35,7 +35,7 @@ namespace Lawn
 						num++;
 						num2++;
 					}
-					int num3 = this.mApp.mChallengeScreen.AccomplishmentsNeeded(i);
+					int num3 = mApp.mChallengeScreen.AccomplishmentsNeeded(i);
 					if (num3 <= 1)
 					{
 						if (buttonWidget.mDisabled)
@@ -43,33 +43,33 @@ namespace Lawn
 							g.SetColor(new SexyColor(92, 92, 92));
 							g.SetColorizeImages(true);
 						}
-						if (i == this.mApp.mChallengeScreen.mUnlockChallengeIndex)
+						if (i == mApp.mChallengeScreen.mUnlockChallengeIndex)
 						{
-							if (this.mApp.mChallengeScreen.mUnlockState == UnlockingState.UNLOCKING_SHAKING)
+							if (mApp.mChallengeScreen.mUnlockState == UnlockingState.UNLOCKING_SHAKING)
 							{
 								g.SetColor(new SexyColor(92, 92, 92));
 							}
-							else if (this.mApp.mChallengeScreen.mUnlockState == UnlockingState.UNLOCKING_FADING)
+							else if (mApp.mChallengeScreen.mUnlockState == UnlockingState.UNLOCKING_FADING)
 							{
-								int num4 = TodCommon.TodAnimateCurve(50, 25, this.mApp.mChallengeScreen.mUnlockStateCounter, 92, 255, TodCurves.CURVE_LINEAR);
+								int num4 = TodCommon.TodAnimateCurve(50, 25, mApp.mChallengeScreen.mUnlockStateCounter, 92, 255, TodCurves.CURVE_LINEAR);
 								g.SetColor(new SexyColor(num4, num4, num4));
 							}
 							g.SetColorizeImages(true);
 						}
-						ChallengePage mPageIndex = this.mApp.mChallengeScreen.mPageIndex;
+						ChallengePage pageIndex = mApp.mChallengeScreen.mPageIndex;
 						g.SetColorizeImages(false);
 						if (buttonWidget.mIsOver)
 						{
-							int mUnlockChallengeIndex = this.mApp.mChallengeScreen.mUnlockChallengeIndex;
+							int unlockChallengeIndex = mApp.mChallengeScreen.mUnlockChallengeIndex;
 						}
 					}
 					SexyColor theColor = new SexyColor(42, 42, 90);
-					if (buttonWidget.mIsOver && i != this.mApp.mChallengeScreen.mUnlockChallengeIndex)
+					if (buttonWidget.mIsOver && i != mApp.mChallengeScreen.mUnlockChallengeIndex)
 					{
 						theColor = new SexyColor(250, 40, 40);
 					}
 					string text = TodStringFile.TodStringTranslate(challengeDefinition.mChallengeName);
-					if (i == this.mApp.mChallengeScreen.mUnlockChallengeIndex && this.mApp.mChallengeScreen.mUnlockState == UnlockingState.UNLOCKING_SHAKING)
+					if (i == mApp.mChallengeScreen.mUnlockChallengeIndex && mApp.mChallengeScreen.mUnlockState == UnlockingState.UNLOCKING_SHAKING)
 					{
 						text = "?";
 					}
@@ -85,7 +85,7 @@ namespace Lawn
 					else
 					{
 						int num6 = num5 / 2 - 1;
-						if (this.mApp.mChallengeScreen.mPageIndex == ChallengePage.CHALLENGE_PAGE_SURVIVAL && !buttonWidget.mDisabled)
+						if (mApp.mChallengeScreen.mPageIndex == ChallengePage.CHALLENGE_PAGE_SURVIVAL && !buttonWidget.mDisabled)
 						{
 							num6 = 7;
 						}
@@ -109,12 +109,12 @@ namespace Lawn
 							TodCommon.TodDrawString(g, theText2, num + 22, num2 + 65, Resources.FONT_BRIANNETOD12, theColor, DrawStringJustification.DS_ALIGN_CENTER);
 						}
 					}
-					int num10 = this.mApp.mPlayerInfo.mChallengeRecords[i];
-					if (i == this.mApp.mChallengeScreen.mUnlockChallengeIndex)
+					int num10 = mApp.mPlayerInfo.mChallengeRecords[i];
+					if (i == mApp.mChallengeScreen.mUnlockChallengeIndex)
 					{
-						if (this.mApp.mChallengeScreen.mUnlockState == UnlockingState.UNLOCKING_FADING)
+						if (mApp.mChallengeScreen.mUnlockState == UnlockingState.UNLOCKING_FADING)
 						{
-							int theAlpha = TodCommon.TodAnimateCurve(25, 0, this.mApp.mChallengeScreen.mUnlockStateCounter, 255, 0, TodCurves.CURVE_LINEAR);
+							int theAlpha = TodCommon.TodAnimateCurve(25, 0, mApp.mChallengeScreen.mUnlockStateCounter, 255, 0, TodCurves.CURVE_LINEAR);
 							g.SetColor(new SexyColor(255, 255, 255, theAlpha));
 							g.SetColorizeImages(true);
 						}
@@ -122,11 +122,11 @@ namespace Lawn
 					}
 					else if (num10 > 0)
 					{
-						if (this.mApp.HasBeatenChallenge(challengeDefinition.mChallengeMode))
+						if (mApp.HasBeatenChallenge(challengeDefinition.mChallengeMode))
 						{
 							g.DrawImage(AtlasResources.IMAGE_TROPHY, num - base.M(3), num2 - base.M1(2));
 						}
-						else if (this.mApp.IsEndlessScaryPotter(challengeDefinition.mChallengeMode) || this.mApp.IsEndlessIZombie(challengeDefinition.mChallengeMode))
+						else if (mApp.IsEndlessScaryPotter(challengeDefinition.mChallengeMode) || mApp.IsEndlessIZombie(challengeDefinition.mChallengeMode))
 						{
 							string theText3 = TodCommon.TodReplaceNumberString("[LONGEST_STREAK]", "{STREAK}", num10);
 							TRect theRect = new TRect(num, num2 + 15, 96, 200);
@@ -136,7 +136,7 @@ namespace Lawn
 					}
 					else
 					{
-						bool mDisabled = buttonWidget.mDisabled;
+						bool disabled = buttonWidget.mDisabled;
 					}
 				}
 			}

@@ -27,28 +27,28 @@ namespace Sexy.TodLib
 				todEmitterDefinition.mEmitterType = (EmitterType)input.ReadInt32();
 				todEmitterDefinition.mName = input.ReadString();
 				todEmitterDefinition.mOnDuration = input.ReadString();
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSystemDuration);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mCrossFadeDuration);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSpawnRate);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSpawnMinActive);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSpawnMaxActive);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSpawnMaxLaunched);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mEmitterRadius);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mEmitterOffsetX);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mEmitterOffsetY);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mEmitterBoxX);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mEmitterBoxY);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mEmitterSkewX);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mEmitterSkewY);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mEmitterPath);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleDuration);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mLaunchSpeed);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mLaunchAngle);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSystemRed);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSystemGreen);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSystemBlue);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSystemAlpha);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSystemBrightness);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSystemDuration);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mCrossFadeDuration);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSpawnRate);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSpawnMinActive);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSpawnMaxActive);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSpawnMaxLaunched);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mEmitterRadius);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mEmitterOffsetX);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mEmitterOffsetY);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mEmitterBoxX);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mEmitterBoxY);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mEmitterSkewX);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mEmitterSkewY);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mEmitterPath);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleDuration);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mLaunchSpeed);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mLaunchAngle);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSystemRed);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSystemGreen);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSystemBlue);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSystemAlpha);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSystemBrightness);
 				todEmitterDefinition.mParticleFieldCount = input.ReadInt32();
 				todEmitterDefinition.mParticleFields = new ParticleField[todEmitterDefinition.mParticleFieldCount];
 				for (int k = 0; k < todEmitterDefinition.mParticleFieldCount; k++)
@@ -57,8 +57,8 @@ namespace Sexy.TodLib
 				}
 				for (int l = 0; l < todEmitterDefinition.mParticleFieldCount; l++)
 				{
-					this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleFields[l].mX);
-					this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleFields[l].mY);
+					ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleFields[l].mX);
+					ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleFields[l].mY);
 					todEmitterDefinition.mParticleFields[l].mFieldType = (ParticleFieldType)input.ReadInt32();
 				}
 				todEmitterDefinition.mSystemFieldCount = input.ReadInt32();
@@ -69,26 +69,26 @@ namespace Sexy.TodLib
 				}
 				for (int n = 0; n < todEmitterDefinition.mSystemFieldCount; n++)
 				{
-					this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSystemFields[n].mX);
-					this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSystemFields[n].mY);
+					ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSystemFields[n].mX);
+					ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mSystemFields[n].mY);
 					todEmitterDefinition.mSystemFields[n].mFieldType = (ParticleFieldType)input.ReadInt32();
 				}
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleRed);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleGreen);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleBlue);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleAlpha);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleBrightness);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleSpinAngle);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleSpinSpeed);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleScale);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleStretch);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mCollisionReflect);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mCollisionSpin);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mClipTop);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mClipBottom);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mClipLeft);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mClipRight);
-				this.ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mAnimationRate);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleRed);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleGreen);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleBlue);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleAlpha);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleBrightness);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleSpinAngle);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleSpinSpeed);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleScale);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mParticleStretch);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mCollisionReflect);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mCollisionSpin);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mClipTop);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mClipBottom);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mClipLeft);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mClipRight);
+				ReadFloatParameterTrack(ref input, ref todEmitterDefinition.mAnimationRate);
 				todParticleDefinition.mEmitterDefs[j] = todEmitterDefinition;
 			}
 			return todParticleDefinition;

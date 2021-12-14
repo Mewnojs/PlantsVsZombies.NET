@@ -9,70 +9,70 @@ namespace Sexy
 		{
 			if (loadIdentity)
 			{
-				this.mMatrix = Matrix.Identity;
+				mMatrix = Matrix.Identity;
 			}
 			else
 			{
-				this.mMatrix = default(Matrix);
+				mMatrix = default(Matrix);
 			}
-			this.isInitialised = true;
+			isInitialised = true;
 		}
 
 		public void LoadIdentity()
 		{
-			this.mMatrix = Matrix.Identity;
-			this.isInitialised = true;
+			mMatrix = Matrix.Identity;
+			isInitialised = true;
 		}
 
 		public SexyTransform2D(Matrix theMatrix)
 		{
-			this.mMatrix = theMatrix;
-			this.isInitialised = true;
+			mMatrix = theMatrix;
+			isInitialised = true;
 		}
 
 		private void Initiliase()
 		{
-			this.mMatrix = Matrix.Identity;
-			this.isInitialised = true;
+			mMatrix = Matrix.Identity;
+			isInitialised = true;
 		}
 
 		public void Translate(float tx, float ty)
 		{
-			if (!this.isInitialised)
+			if (!isInitialised)
 			{
-				this.Initiliase();
+				Initiliase();
 			}
 			Matrix matrix = Matrix.CreateTranslation(tx, ty, 0f);
-			Matrix.Multiply(ref this.mMatrix, ref matrix, out this.mMatrix);
+			Matrix.Multiply(ref mMatrix, ref matrix, out mMatrix);
 		}
 
 		public void RotateRad(float rot)
 		{
-			if (!this.isInitialised)
+			if (!isInitialised)
 			{
-				this.Initiliase();
+				Initiliase();
 			}
 			Matrix matrix = Matrix.CreateRotationZ(rot);
-			Matrix.Multiply(ref this.mMatrix, ref matrix, out this.mMatrix);
+			Matrix.Multiply(ref mMatrix, ref matrix, out mMatrix);
 		}
 
 		public void RotateDeg(float rot)
 		{
-			if (!this.isInitialised)
+			if (!isInitialised)
 			{
-				this.Initiliase();
+				Initiliase();
 			}
-			this.RotateRad(3.1415927f * rot / 180f);
+			RotateRad(3.1415927f * rot / 180f);
 		}
 
 		public void Scale(float sx, float sy)
 		{
-			if (!this.isInitialised)
+			if (!isInitialised)
 			{
-				this.Initiliase();
+				Initiliase();
 			}
 			Matrix matrix = Matrix.CreateScale(sx, sy, 1f);
-			Matrix.Multiply(ref this.mMatrix, ref matrix, out this.mMatrix);
+			Matrix.Multiply(ref mMatrix, ref matrix, out mMatrix);
 		}
 
 		public static bool operator ==(SexyTransform2D a, SexyTransform2D b)
@@ -87,7 +87,7 @@ namespace Sexy
 
 		public override int GetHashCode()
 		{
-			return this.mMatrix.GetHashCode();
+			return mMatrix.GetHashCode();
 		}
 
 		public override bool Equals(object obj)

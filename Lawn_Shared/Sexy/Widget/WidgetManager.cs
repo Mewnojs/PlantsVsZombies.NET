@@ -7,11 +7,11 @@ namespace Sexy
 	{
 		public int GetWidgetFlags()
 		{
-			if (!this.mHasFocus)
+			if (!mHasFocus)
 			{
-				return GlobalMembersFlags.GetModFlags(this.mWidgetFlags, this.mLostFocusFlagsMod);
+				return GlobalMembersFlags.GetModFlags(mWidgetFlags, mLostFocusFlagsMod);
 			}
-			return this.mWidgetFlags;
+			return mWidgetFlags;
 		}
 
 		protected void MouseEnter(Widget theWidget)
@@ -36,64 +36,64 @@ namespace Sexy
 
 		protected void SetBaseModal(Widget theWidget, FlagsMod theBelowFlagsMod)
 		{
-			this.mBaseModalWidget = theWidget;
-			this.mBelowModalFlagsMod.CopyFrom(theBelowFlagsMod);
-			if (this.mOverWidget != null && (this.mBelowModalFlagsMod.mRemoveFlags & 16) != 0 && this.IsBelow(this.mOverWidget, this.mBaseModalWidget))
+			mBaseModalWidget = theWidget;
+			mBelowModalFlagsMod.CopyFrom(theBelowFlagsMod);
+			if (mOverWidget != null && (mBelowModalFlagsMod.mRemoveFlags & 16) != 0 && IsBelow(mOverWidget, mBaseModalWidget))
 			{
-				Widget theWidget2 = this.mOverWidget;
-				this.mOverWidget = null;
-				this.MouseLeave(theWidget2);
+				Widget theWidget2 = mOverWidget;
+				mOverWidget = null;
+				MouseLeave(theWidget2);
 			}
-			if (this.mLastDownWidget != null && (this.mBelowModalFlagsMod.mRemoveFlags & 16) != 0 && this.IsBelow(this.mLastDownWidget, this.mBaseModalWidget))
+			if (mLastDownWidget != null && (mBelowModalFlagsMod.mRemoveFlags & 16) != 0 && IsBelow(mLastDownWidget, mBaseModalWidget))
 			{
-				Widget theWidget3 = this.mLastDownWidget;
-				int theDownCode = this.mDownButtons;
-				this.mDownButtons = 0;
-				this.mLastDownWidget = null;
-				this.DoMouseUps(theWidget3, theDownCode);
+				Widget theWidget3 = mLastDownWidget;
+				int theDownCode = mDownButtons;
+				mDownButtons = 0;
+				mLastDownWidget = null;
+				DoMouseUps(theWidget3, theDownCode);
 			}
-			if (this.mFocusWidget != null && (this.mBelowModalFlagsMod.mRemoveFlags & 32) != 0 && this.IsBelow(this.mFocusWidget, this.mBaseModalWidget))
+			if (mFocusWidget != null && (mBelowModalFlagsMod.mRemoveFlags & 32) != 0 && IsBelow(mFocusWidget, mBaseModalWidget))
 			{
-				Widget widget = this.mFocusWidget;
-				this.mFocusWidget = null;
+				Widget widget = mFocusWidget;
+				mFocusWidget = null;
 				widget.LostFocus();
 			}
 		}
 
 		public WidgetManager(SexyAppBase theApp)
 		{
-			this.mApp = theApp;
-			this.mMinDeferredOverlayPriority = int.MaxValue;
-			this.mWidgetManager = this;
-			this.mMouseIn = false;
-			this.mDefaultTab = null;
-			this.mImage = null;
-			this.mLastHadTransients = false;
-			this.mFocusWidget = null;
-			this.mLastDownWidget = null;
-			this.mOverWidget = null;
-			this.mBaseModalWidget = null;
-			this.mDefaultBelowModalFlagsMod.mRemoveFlags = 48;
-			this.mWidth = 0;
-			this.mHeight = 0;
-			this.mHasFocus = true;
-			this.mUpdateCnt = 0;
-			this.mFrameCnt = 0U;
-			this.mLastMouseX = WidgetManager.NO_TOUCH_MOUSE_POS.mX;
-			this.mLastMouseY = WidgetManager.NO_TOUCH_MOUSE_POS.mY;
-			this.mLastDownButtonId = 0;
-			this.mDownButtons = 0;
-			this.mActualDownButtons = 0;
-			this.mWidgetFlags = 61;
+			mApp = theApp;
+			mMinDeferredOverlayPriority = int.MaxValue;
+			mWidgetManager = this;
+			mMouseIn = false;
+			mDefaultTab = null;
+			mImage = null;
+			mLastHadTransients = false;
+			mFocusWidget = null;
+			mLastDownWidget = null;
+			mOverWidget = null;
+			mBaseModalWidget = null;
+			mDefaultBelowModalFlagsMod.mRemoveFlags = 48;
+			mWidth = 0;
+			mHeight = 0;
+			mHasFocus = true;
+			mUpdateCnt = 0;
+			mFrameCnt = 0U;
+			mLastMouseX = WidgetManager.NO_TOUCH_MOUSE_POS.mX;
+			mLastMouseY = WidgetManager.NO_TOUCH_MOUSE_POS.mY;
+			mLastDownButtonId = 0;
+			mDownButtons = 0;
+			mActualDownButtons = 0;
+			mWidgetFlags = 61;
 			for (int i = 0; i < 255; i++)
 			{
-				this.mKeyDown[i] = false;
+				mKeyDown[i] = false;
 			}
 		}
 
 		public override void Dispose()
 		{
-			this.FreeResources();
+			FreeResources();
 			base.Dispose();
 		}
 
@@ -105,41 +105,41 @@ namespace Sexy
 		{
 			PreModalInfo newPreModalInfo = PreModalInfo.GetNewPreModalInfo();
 			newPreModalInfo.mBaseModalWidget = theWidget;
-			newPreModalInfo.mPrevBaseModalWidget = this.mBaseModalWidget;
-			newPreModalInfo.mPrevFocusWidget = this.mFocusWidget;
-			newPreModalInfo.mPrevBelowModalFlagsMod.CopyFrom(this.mBelowModalFlagsMod);
-			this.mPreModalInfoList.Add(newPreModalInfo);
-			this.SetBaseModal(theWidget, theBelowFlagsMod);
+			newPreModalInfo.mPrevBaseModalWidget = mBaseModalWidget;
+			newPreModalInfo.mPrevFocusWidget = mFocusWidget;
+			newPreModalInfo.mPrevBelowModalFlagsMod.CopyFrom(mBelowModalFlagsMod);
+			mPreModalInfoList.Add(newPreModalInfo);
+			SetBaseModal(theWidget, theBelowFlagsMod);
 		}
 
 		public void AddBaseModal(Widget theWidget)
 		{
-			this.AddBaseModal(theWidget, this.mDefaultBelowModalFlagsMod);
+			AddBaseModal(theWidget, mDefaultBelowModalFlagsMod);
 		}
 
 		public void RemoveBaseModal(Widget theWidget)
 		{
-			Debug.ASSERT(this.mPreModalInfoList.Count > 0);
+			Debug.ASSERT(mPreModalInfoList.Count > 0);
 			bool flag = true;
-			while (this.mPreModalInfoList.Count > 0)
+			while (mPreModalInfoList.Count > 0)
 			{
-				PreModalInfo preModalInfo = this.mPreModalInfoList.Last<PreModalInfo>();
+				PreModalInfo preModalInfo = mPreModalInfoList.Last<PreModalInfo>();
 				if (flag && preModalInfo.mBaseModalWidget != theWidget)
 				{
 					return;
 				}
-				bool flag2 = preModalInfo.mPrevBaseModalWidget != null || this.mPreModalInfoList.Count == 1;
-				this.SetBaseModal(preModalInfo.mPrevBaseModalWidget, preModalInfo.mPrevBelowModalFlagsMod);
-				if (this.mFocusWidget == null)
+				bool flag2 = preModalInfo.mPrevBaseModalWidget != null || mPreModalInfoList.Count == 1;
+				SetBaseModal(preModalInfo.mPrevBaseModalWidget, preModalInfo.mPrevBelowModalFlagsMod);
+				if (mFocusWidget == null)
 				{
-					this.mFocusWidget = preModalInfo.mPrevFocusWidget;
-					if (this.mFocusWidget != null)
+					mFocusWidget = preModalInfo.mPrevFocusWidget;
+					if (mFocusWidget != null)
 					{
-						this.mFocusWidget.GotFocus();
+						mFocusWidget.GotFocus();
 					}
 				}
-				this.mPreModalInfoList.Last<PreModalInfo>().PrepareForReuse();
-				this.mPreModalInfoList.RemoveLast<PreModalInfo>();
+				mPreModalInfoList.Last<PreModalInfo>().PrepareForReuse();
+				mPreModalInfoList.RemoveLast<PreModalInfo>();
 				if (flag2)
 				{
 					return;
@@ -150,51 +150,51 @@ namespace Sexy
 
 		public void Resize(int theWidth, int theHeight)
 		{
-			this.mWidth = theWidth;
-			this.mHeight = theHeight;
+			mWidth = theWidth;
+			mHeight = theHeight;
 		}
 
 		public override void DisableWidget(Widget theWidget)
 		{
-			if (this.mOverWidget == theWidget)
+			if (mOverWidget == theWidget)
 			{
-				Widget theWidget2 = this.mOverWidget;
-				this.mOverWidget = null;
-				this.MouseLeave(theWidget2);
+				Widget theWidget2 = mOverWidget;
+				mOverWidget = null;
+				MouseLeave(theWidget2);
 			}
-			if (this.mLastDownWidget == theWidget)
+			if (mLastDownWidget == theWidget)
 			{
-				Widget theWidget3 = this.mLastDownWidget;
-				this.mLastDownWidget = null;
-				this.DoMouseUps(theWidget3, this.mDownButtons);
-				this.mDownButtons = 0;
+				Widget theWidget3 = mLastDownWidget;
+				mLastDownWidget = null;
+				DoMouseUps(theWidget3, mDownButtons);
+				mDownButtons = 0;
 			}
-			if (this.mFocusWidget == theWidget)
+			if (mFocusWidget == theWidget)
 			{
-				Widget widget = this.mFocusWidget;
-				this.mFocusWidget = null;
+				Widget widget = mFocusWidget;
+				mFocusWidget = null;
 				widget.LostFocus();
 			}
-			if (this.mBaseModalWidget == theWidget)
+			if (mBaseModalWidget == theWidget)
 			{
-				this.mBaseModalWidget = null;
+				mBaseModalWidget = null;
 			}
 		}
 
 		public Widget GetAnyWidgetAt(int x, int y, out int theWidgetX, out int theWidgetY)
 		{
 			bool flag;
-			return base.GetWidgetAtHelper(x, y, this.GetWidgetFlags(), out flag, out theWidgetX, out theWidgetY);
+			return base.GetWidgetAtHelper(x, y, GetWidgetFlags(), out flag, out theWidgetX, out theWidgetY);
 		}
 
 		public Widget GetWidgetAt(float x, float y, out int theWidgetX, out int theWidgetY)
 		{
-			return this.GetWidgetAt((int)x, (int)y, out theWidgetX, out theWidgetY);
+			return GetWidgetAt((int)x, (int)y, out theWidgetX, out theWidgetY);
 		}
 
 		public Widget GetWidgetAt(int x, int y, out int theWidgetX, out int theWidgetY)
 		{
-			Widget widget = this.GetAnyWidgetAt(x, y, out theWidgetX, out theWidgetY);
+			Widget widget = GetAnyWidgetAt(x, y, out theWidgetX, out theWidgetY);
 			if (widget != null && widget.mDisabled)
 			{
 				widget = null;
@@ -204,86 +204,86 @@ namespace Sexy
 
 		public Widget GetWidgetAt(float x, float y)
 		{
-			return this.GetWidgetAt((int)x, (int)y);
+			return GetWidgetAt((int)x, (int)y);
 		}
 
 		public Widget GetWidgetAt(int x, int y)
 		{
 			int num;
 			int num2;
-			return this.GetWidgetAt(x, y, out num, out num2);
+			return GetWidgetAt(x, y, out num, out num2);
 		}
 
 		public override void SetFocus(Widget aWidget)
 		{
-			if (aWidget == this.mFocusWidget)
+			if (aWidget == mFocusWidget)
 			{
 				return;
 			}
-			if (this.mFocusWidget != null)
+			if (mFocusWidget != null)
 			{
-				this.mFocusWidget.LostFocus();
+				mFocusWidget.LostFocus();
 			}
 			if (aWidget != null && aWidget.mWidgetManager == this)
 			{
-				this.mFocusWidget = aWidget;
-				if (this.mHasFocus && this.mFocusWidget != null)
+				mFocusWidget = aWidget;
+				if (mHasFocus && mFocusWidget != null)
 				{
-					this.mFocusWidget.GotFocus();
+					mFocusWidget.GotFocus();
 					return;
 				}
 			}
 			else
 			{
-				this.mFocusWidget = null;
+				mFocusWidget = null;
 			}
 		}
 
 		public void GotFocus()
 		{
-			if (!this.mHasFocus)
+			if (!mHasFocus)
 			{
-				this.mHasFocus = true;
-				if (this.mFocusWidget != null)
+				mHasFocus = true;
+				if (mFocusWidget != null)
 				{
-					this.mFocusWidget.GotFocus();
+					mFocusWidget.GotFocus();
 				}
 			}
 		}
 
 		public void LostFocus()
 		{
-			if (this.mHasFocus)
+			if (mHasFocus)
 			{
-				this.mActualDownButtons = 0;
+				mActualDownButtons = 0;
 				for (int i = 0; i < 255; i++)
 				{
-					if (this.mKeyDown[i])
+					if (mKeyDown[i])
 					{
-						this.KeyUp((KeyCode)i);
+						KeyUp((KeyCode)i);
 					}
 				}
-				this.mHasFocus = false;
-				if (this.mFocusWidget != null)
+				mHasFocus = false;
+				if (mFocusWidget != null)
 				{
-					this.mFocusWidget.LostFocus();
+					mFocusWidget.LostFocus();
 				}
 			}
 		}
 
 		public void InitModalFlags(ref ModalFlags theModalFlags)
 		{
-			theModalFlags.mIsOver = (this.mBaseModalWidget == null);
-			theModalFlags.mOverFlags = this.GetWidgetFlags();
-			theModalFlags.mUnderFlags = GlobalMembersFlags.GetModFlags(theModalFlags.mOverFlags, this.mBelowModalFlagsMod);
+			theModalFlags.mIsOver = (mBaseModalWidget == null);
+			theModalFlags.mOverFlags = GetWidgetFlags();
+			theModalFlags.mUnderFlags = GlobalMembersFlags.GetModFlags(theModalFlags.mOverFlags, mBelowModalFlagsMod);
 		}
 
 		public void DrawWidgetsTo(Graphics g)
 		{
-			this.mCurG = g;
+			mCurG = g;
 			ModalFlags theFlags = default(ModalFlags);
-			this.InitModalFlags(ref theFlags);
-			foreach (Widget widget in this.mWidgets)
+			InitModalFlags(ref theFlags);
+			foreach (Widget widget in mWidgets)
 			{
 				if (widget.mVisible)
 				{
@@ -294,7 +294,7 @@ namespace Sexy
 					@new.PrepareForReuse();
 				}
 			}
-			this.mCurG = null;
+			mCurG = null;
 		}
 
 		public void DoMouseUps(Widget theWidget, int theDownCode)
@@ -310,27 +310,27 @@ namespace Sexy
 				if ((theDownCode & 1 << i) != 0)
 				{
 					theWidget.mIsDown = false;
-					theWidget.MouseUp(this.mLastMouseX - theWidget.mX, this.mLastMouseY - theWidget.mY, array[i]);
+					theWidget.MouseUp(mLastMouseX - theWidget.mX, mLastMouseY - theWidget.mY, array[i]);
 				}
 			}
 		}
 
 		public void DoMouseUps()
 		{
-			if (this.mLastDownWidget != null && this.mDownButtons != 0)
+			if (mLastDownWidget != null && mDownButtons != 0)
 			{
-				this.DoMouseUps(this.mLastDownWidget, this.mDownButtons);
-				this.mDownButtons = 0;
-				this.mLastDownWidget = null;
+				DoMouseUps(mLastDownWidget, mDownButtons);
+				mDownButtons = 0;
+				mLastDownWidget = null;
 			}
 		}
 
 		public void DeferOverlay(Widget theWidget, int thePriority)
 		{
-			this.mDeferredOverlayWidgets.Add(WidgetOverlayPair.GetNewWidgetOverlayPair(theWidget, thePriority));
-			if (thePriority < this.mMinDeferredOverlayPriority)
+			mDeferredOverlayWidgets.Add(WidgetOverlayPair.GetNewWidgetOverlayPair(theWidget, thePriority));
+			if (thePriority < mMinDeferredOverlayPriority)
 			{
-				this.mMinDeferredOverlayPriority = thePriority;
+				mMinDeferredOverlayPriority = thePriority;
 			}
 		}
 
@@ -339,20 +339,20 @@ namespace Sexy
 			for (;;)
 			{
 				int num = int.MaxValue;
-				for (int i = 0; i < this.mDeferredOverlayWidgets.Count; i++)
+				for (int i = 0; i < mDeferredOverlayWidgets.Count; i++)
 				{
-					Widget aWidget = this.mDeferredOverlayWidgets[i].aWidget;
+					Widget aWidget = mDeferredOverlayWidgets[i].aWidget;
 					if (aWidget != null)
 					{
-						int aPriority = this.mDeferredOverlayWidgets[i].aPriority;
-						if (aPriority == this.mMinDeferredOverlayPriority)
+						int aPriority = mDeferredOverlayWidgets[i].aPriority;
+						if (aPriority == mMinDeferredOverlayPriority)
 						{
-							Graphics @new = Graphics.GetNew(this.mCurG);
+							Graphics @new = Graphics.GetNew(mCurG);
 							@new.Translate(aWidget.mX, aWidget.mY);
 							@new.SetFastStretch(!@new.Is3D());
 							@new.SetLinearBlend(@new.Is3D());
 							aWidget.DrawOverlay(@new, aPriority);
-							this.mDeferredOverlayWidgets[i].Clear();
+							mDeferredOverlayWidgets[i].Clear();
 							@new.PrepareForReuse();
 						}
 						else if (aPriority < num)
@@ -361,7 +361,7 @@ namespace Sexy
 						}
 					}
 				}
-				this.mMinDeferredOverlayPriority = num;
+				mMinDeferredOverlayPriority = num;
 				if (num == 2147483647)
 				{
 					break;
@@ -371,27 +371,27 @@ namespace Sexy
 					return;
 				}
 			}
-			for (int j = 0; j < this.mDeferredOverlayWidgets.Count; j++)
+			for (int j = 0; j < mDeferredOverlayWidgets.Count; j++)
 			{
-				this.mDeferredOverlayWidgets[j].PrepareForReuse();
+				mDeferredOverlayWidgets[j].PrepareForReuse();
 			}
-			this.mDeferredOverlayWidgets.Clear();
+			mDeferredOverlayWidgets.Clear();
 		}
 
 		public bool DrawScreen()
 		{
 			ModalFlags theFlags = default(ModalFlags);
-			this.InitModalFlags(ref theFlags);
+			InitModalFlags(ref theFlags);
 			bool result = true;
-			this.mMinDeferredOverlayPriority = int.MaxValue;
+			mMinDeferredOverlayPriority = int.MaxValue;
 			Graphics @new = Graphics.GetNew();
-			this.mCurG = @new;
+			mCurG = @new;
 			Graphics new2 = Graphics.GetNew(@new);
 			new2.Reset();
-			bool flag = this.mApp.Is3DAccelerated();
-			for (LinkedListNode<Widget> linkedListNode = this.mWidgets.First; linkedListNode != null; linkedListNode = linkedListNode.Next)
+			bool flag = mApp.Is3DAccelerated();
+			for (LinkedListNode<Widget> linkedListNode = mWidgets.First; linkedListNode != null; linkedListNode = linkedListNode.Next)
 			{
-				if (linkedListNode.Value == this.mWidgetManager.mBaseModalWidget)
+				if (linkedListNode.Value == mWidgetManager.mBaseModalWidget)
 				{
 					theFlags.mIsOver = true;
 				}
@@ -406,8 +406,8 @@ namespace Sexy
 					new3.PrepareForReuse();
 				}
 			}
-			this.FlushDeferredOverlayWidgets(int.MaxValue);
-			this.mCurG = null;
+			FlushDeferredOverlayWidgets(int.MaxValue);
+			mCurG = null;
 			@new.PrepareForReuse();
 			new2.PrepareForReuse();
 			return result;
@@ -415,7 +415,7 @@ namespace Sexy
 
 		public override bool BackButtonPress()
 		{
-			for (LinkedListNode<Widget> linkedListNode = this.mWidgets.Last; linkedListNode != null; linkedListNode = linkedListNode.Previous)
+			for (LinkedListNode<Widget> linkedListNode = mWidgets.Last; linkedListNode != null; linkedListNode = linkedListNode.Previous)
 			{
 				Widget value = linkedListNode.Value;
 				if (!value.mDisabled && value.BackButtonPress())
@@ -429,63 +429,63 @@ namespace Sexy
 		public bool UpdateFrame()
 		{
 			ModalFlags theFlags = default(ModalFlags);
-			this.InitModalFlags(ref theFlags);
-			this.mUpdateCnt++;
-			this.mLastWMUpdateCount = this.mUpdateCnt;
-			this.UpdateAll(theFlags);
+			InitModalFlags(ref theFlags);
+			mUpdateCnt++;
+			mLastWMUpdateCount = mUpdateCnt;
+			UpdateAll(theFlags);
 			return true;
 		}
 
 		public bool UpdateFrameF(float theFrac)
 		{
 			ModalFlags theFlags = default(ModalFlags);
-			this.InitModalFlags(ref theFlags);
+			InitModalFlags(ref theFlags);
 			base.UpdateFAll(theFlags, theFrac);
 			return true;
 		}
 
 		public void SetPopupCommandWidget(Widget theList)
 		{
-			this.mPopupCommandWidget = theList;
-			this.AddWidget(this.mPopupCommandWidget);
+			mPopupCommandWidget = theList;
+			AddWidget(mPopupCommandWidget);
 		}
 
 		public void RemovePopupCommandWidget()
 		{
-			if (this.mPopupCommandWidget != null)
+			if (mPopupCommandWidget != null)
 			{
-				Widget theWidget = this.mPopupCommandWidget;
-				this.mPopupCommandWidget = null;
-				this.RemoveWidget(theWidget);
+				Widget theWidget = mPopupCommandWidget;
+				mPopupCommandWidget = null;
+				RemoveWidget(theWidget);
 			}
 		}
 
 		public void MousePosition(float x, float y)
 		{
-			this.MousePosition((int)x, (int)y);
+			MousePosition((int)x, (int)y);
 		}
 
 		public void MousePosition(int x, int y)
 		{
-			int num = this.mLastMouseX;
-			int num2 = this.mLastMouseY;
-			this.mLastMouseX = x;
-			this.mLastMouseY = y;
+			int num = mLastMouseX;
+			int num2 = mLastMouseY;
+			mLastMouseX = x;
+			mLastMouseY = y;
 			int x2;
 			int y2;
-			Widget widgetAt = this.GetWidgetAt(x, y, out x2, out y2);
-			if (widgetAt != this.mOverWidget)
+			Widget widgetAt = GetWidgetAt(x, y, out x2, out y2);
+			if (widgetAt != mOverWidget)
 			{
-				Widget widget = this.mOverWidget;
-				this.mOverWidget = null;
+				Widget widget = mOverWidget;
+				mOverWidget = null;
 				if (widget != null)
 				{
-					this.MouseLeave(widget);
+					MouseLeave(widget);
 				}
-				this.mOverWidget = widgetAt;
+				mOverWidget = widgetAt;
 				if (widgetAt != null)
 				{
-					this.MouseEnter(widgetAt);
+					MouseEnter(widgetAt);
 					widgetAt.MouseMove(x, y);
 					return;
 				}
@@ -498,23 +498,23 @@ namespace Sexy
 
 		public void RehupMouse()
 		{
-			if (this.mLastDownWidget != null)
+			if (mLastDownWidget != null)
 			{
-				if (this.mOverWidget != null)
+				if (mOverWidget != null)
 				{
-					Widget widgetAt = this.GetWidgetAt(this.mLastMouseX, this.mLastMouseY);
-					if (widgetAt != this.mLastDownWidget)
+					Widget widgetAt = GetWidgetAt(mLastMouseX, mLastMouseY);
+					if (widgetAt != mLastDownWidget)
 					{
-						Widget theWidget = this.mOverWidget;
-						this.mOverWidget = null;
-						this.MouseLeave(theWidget);
+						Widget theWidget = mOverWidget;
+						mOverWidget = null;
+						MouseLeave(theWidget);
 						return;
 					}
 				}
 			}
-			else if (this.mMouseIn)
+			else if (mMouseIn)
 			{
-				this.MousePosition(this.mLastMouseX, this.mLastMouseY);
+				MousePosition(mLastMouseX, mLastMouseY);
 			}
 		}
 
@@ -554,13 +554,13 @@ namespace Sexy
 
 		public void TouchBegan(_Touch touch)
 		{
-			this.mLastInputUpdateCnt = this.mUpdateCnt;
-			this.mActualDownButtons |= 1;
-			this.MousePosition(touch.location.X, touch.location.Y);
-			Widget widgetAt = this.GetWidgetAt(touch.location.X, touch.location.Y);
-			if (this.mLastDownWidget != null)
+			mLastInputUpdateCnt = mUpdateCnt;
+			mActualDownButtons |= 1;
+			MousePosition(touch.location.X, touch.location.Y);
+			Widget widgetAt = GetWidgetAt(touch.location.X, touch.location.Y);
+			if (mLastDownWidget != null)
 			{
-				widgetAt = this.mLastDownWidget;
+				widgetAt = mLastDownWidget;
 			}
 			if (widgetAt != null)
 			{
@@ -568,14 +568,14 @@ namespace Sexy
 				CGMaths.CGPointTranslate(ref touch.location, -tpoint.mX, -tpoint.mY);
 				CGMaths.CGPointTranslate(ref touch.previousLocation, -tpoint.mX, -tpoint.mY);
 			}
-			this.mLastDownButtonId = 1;
-			this.mDownButtons |= 1;
-			this.mLastDownWidget = widgetAt;
+			mLastDownButtonId = 1;
+			mDownButtons |= 1;
+			mLastDownWidget = widgetAt;
 			if (widgetAt != null)
 			{
 				if (widgetAt.WantsFocus())
 				{
-					this.SetFocus(widgetAt);
+					SetFocus(widgetAt);
 				}
 				widgetAt.mIsDown = true;
 				widgetAt.TouchBegan(touch);
@@ -584,47 +584,47 @@ namespace Sexy
 
 		public void TouchMoved(_Touch touch)
 		{
-			this.mLastInputUpdateCnt = this.mUpdateCnt;
-			this.mMouseIn = true;
-			this.mLastMouseX = (int)touch.location.X;
-			this.mLastMouseY = (int)touch.location.Y;
-			if (this.mLastDownWidget != null)
+			mLastInputUpdateCnt = mUpdateCnt;
+			mMouseIn = true;
+			mLastMouseX = (int)touch.location.X;
+			mLastMouseY = (int)touch.location.Y;
+			if (mLastDownWidget != null)
 			{
-				Widget widgetAt = this.GetWidgetAt(touch.location.X, touch.location.Y);
-				TPoint tpoint = this.mLastDownWidget.GetAbsPos();
+				Widget widgetAt = GetWidgetAt(touch.location.X, touch.location.Y);
+				TPoint tpoint = mLastDownWidget.GetAbsPos();
 				CGMaths.CGPointTranslate(ref touch.location, -tpoint.mX, -tpoint.mY);
 				CGMaths.CGPointTranslate(ref touch.previousLocation, -tpoint.mX, -tpoint.mY);
-				this.mLastDownWidget.TouchMoved(touch);
-				if (widgetAt == this.mLastDownWidget && widgetAt != null)
+				mLastDownWidget.TouchMoved(touch);
+				if (widgetAt == mLastDownWidget && widgetAt != null)
 				{
-					if (this.mOverWidget == null)
+					if (mOverWidget == null)
 					{
-						this.mOverWidget = this.mLastDownWidget;
-						this.MouseEnter(this.mOverWidget);
+						mOverWidget = mLastDownWidget;
+						MouseEnter(mOverWidget);
 						return;
 					}
 				}
-				else if (this.mOverWidget != null)
+				else if (mOverWidget != null)
 				{
-					Widget theWidget = this.mOverWidget;
-					this.mOverWidget = null;
-					this.MouseLeave(theWidget);
+					Widget theWidget = mOverWidget;
+					mOverWidget = null;
+					MouseLeave(theWidget);
 				}
 			}
 		}
 
 		public void TouchEnded(_Touch touch)
 		{
-			this.mLastInputUpdateCnt = this.mUpdateCnt;
+			mLastInputUpdateCnt = mUpdateCnt;
 			int num = 1;
-			this.mActualDownButtons &= ~num;
-			if (this.mLastDownWidget != null && (this.mDownButtons & num) != 0)
+			mActualDownButtons &= ~num;
+			if (mLastDownWidget != null && (mDownButtons & num) != 0)
 			{
-				Widget widget = this.mLastDownWidget;
-				this.mDownButtons &= ~num;
-				if (this.mDownButtons == 0)
+				Widget widget = mLastDownWidget;
+				mDownButtons &= ~num;
+				if (mDownButtons == 0)
 				{
-					this.mLastDownWidget = null;
+					mLastDownWidget = null;
 				}
 				TPoint tpoint = widget.GetAbsPos();
 				CGMaths.CGPointTranslate(ref touch.location, -tpoint.mX, -tpoint.mY);
@@ -634,9 +634,9 @@ namespace Sexy
 			}
 			else
 			{
-				this.mDownButtons &= ~num;
+				mDownButtons &= ~num;
 			}
-			this.MousePosition(WidgetManager.NO_TOUCH_MOUSE_POS.mX, WidgetManager.NO_TOUCH_MOUSE_POS.mY);
+			MousePosition(WidgetManager.NO_TOUCH_MOUSE_POS.mX, WidgetManager.NO_TOUCH_MOUSE_POS.mY);
 		}
 
 		public void TouchesCanceled()
@@ -645,67 +645,67 @@ namespace Sexy
 
 		public bool KeyChar(SexyChar theChar)
 		{
-			this.mLastInputUpdateCnt = this.mUpdateCnt;
-			if (theChar == KeyCode.KEYCODE_TAB && this.mKeyDown[17])
+			mLastInputUpdateCnt = mUpdateCnt;
+			if (theChar == KeyCode.KEYCODE_TAB && mKeyDown[17])
 			{
-				if (this.mDefaultTab != null)
+				if (mDefaultTab != null)
 				{
-					this.mDefaultTab.KeyChar(theChar);
+					mDefaultTab.KeyChar(theChar);
 				}
 				return true;
 			}
-			if (this.mFocusWidget != null)
+			if (mFocusWidget != null)
 			{
-				this.mFocusWidget.KeyChar(theChar);
+				mFocusWidget.KeyChar(theChar);
 			}
 			return true;
 		}
 
 		public bool KeyDown(KeyCode key)
 		{
-			this.mLastInputUpdateCnt = this.mUpdateCnt;
+			mLastInputUpdateCnt = mUpdateCnt;
 			if (key >= KeyCode.KEYCODE_UNKNOWN && key < (KeyCode)255)
 			{
-				this.mKeyDown[(int)key] = true;
+				mKeyDown[(int)key] = true;
 			}
-			if (this.mFocusWidget != null)
+			if (mFocusWidget != null)
 			{
-				this.mFocusWidget.KeyDown(key);
+				mFocusWidget.KeyDown(key);
 			}
 			return true;
 		}
 
 		public bool KeyUp(KeyCode key)
 		{
-			this.mLastInputUpdateCnt = this.mUpdateCnt;
+			mLastInputUpdateCnt = mUpdateCnt;
 			if (key >= KeyCode.KEYCODE_UNKNOWN && key < (KeyCode)255)
 			{
-				this.mKeyDown[(int)key] = false;
+				mKeyDown[(int)key] = false;
 			}
-			if (key == KeyCode.KEYCODE_TAB && this.mKeyDown[17])
+			if (key == KeyCode.KEYCODE_TAB && mKeyDown[17])
 			{
 				return true;
 			}
-			if (this.mFocusWidget != null)
+			if (mFocusWidget != null)
 			{
-				this.mFocusWidget.KeyUp(key);
+				mFocusWidget.KeyUp(key);
 			}
 			return true;
 		}
 
 		public bool IsLeftButtonDown()
 		{
-			return (this.mActualDownButtons & 1) != 0;
+			return (mActualDownButtons & 1) != 0;
 		}
 
 		public bool IsMiddleButtonDown()
 		{
-			return (this.mActualDownButtons & 4) != 0;
+			return (mActualDownButtons & 4) != 0;
 		}
 
 		public bool IsRightButtonDown()
 		{
-			return (this.mActualDownButtons & 2) != 0;
+			return (mActualDownButtons & 2) != 0;
 		}
 
 		public static TPoint NO_TOUCH_MOUSE_POS = new TPoint(-1, -1);

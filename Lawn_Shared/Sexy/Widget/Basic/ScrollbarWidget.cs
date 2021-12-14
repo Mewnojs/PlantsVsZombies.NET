@@ -6,345 +6,345 @@ namespace Sexy
 	{
 		public ScrollbarWidget(int theId, ScrollListener theScrollListener)
 		{
-			this.mId = theId;
-			this.mScrollListener = theScrollListener;
-			this.SetDisabled(true);
-			this.mUpButton = new ScrollbuttonWidget(0, this);
-			this.mUpButton.SetDisabled(true);
-			this.mDownButton = new ScrollbuttonWidget(1, this);
-			this.mDownButton.SetDisabled(true);
-			this.mInvisIfNoScroll = false;
-			this.mPressedOnThumb = false;
-			this.mValue = 0.0;
-			this.mMaxValue = 0.0;
-			this.mPageSize = 0.0;
-			this.mUpdateAcc = 0;
-			this.mButtonAcc = 0;
-			this.mUpdateMode = 0;
-			this.mHorizontal = false;
-			this.mThumbImage = null;
-			this.mBarImage = null;
-			this.mPagingImage = null;
-			this.mButtonLength = 0;
-			this.AddWidget(this.mUpButton);
-			this.AddWidget(this.mDownButton);
-			this.SetColors(ScrollbarWidget.gScrollbarWidgetWidgetColors, 6);
+			mId = theId;
+			mScrollListener = theScrollListener;
+			SetDisabled(true);
+			mUpButton = new ScrollbuttonWidget(0, this);
+			mUpButton.SetDisabled(true);
+			mDownButton = new ScrollbuttonWidget(1, this);
+			mDownButton.SetDisabled(true);
+			mInvisIfNoScroll = false;
+			mPressedOnThumb = false;
+			mValue = 0.0;
+			mMaxValue = 0.0;
+			mPageSize = 0.0;
+			mUpdateAcc = 0;
+			mButtonAcc = 0;
+			mUpdateMode = 0;
+			mHorizontal = false;
+			mThumbImage = null;
+			mBarImage = null;
+			mPagingImage = null;
+			mButtonLength = 0;
+			AddWidget(mUpButton);
+			AddWidget(mDownButton);
+			SetColors(ScrollbarWidget.gScrollbarWidgetWidgetColors, 6);
 		}
 
 		public override void Dispose()
 		{
-			if (this.mUpButton != null)
+			if (mUpButton != null)
 			{
-				this.RemoveWidget(this.mUpButton);
+				RemoveWidget(mUpButton);
 			}
-			if (this.mDownButton != null)
+			if (mDownButton != null)
 			{
-				this.RemoveWidget(this.mDownButton);
+				RemoveWidget(mDownButton);
 			}
 		}
 
 		public virtual void SetInvisIfNoScroll(bool invisIfNoScroll)
 		{
-			this.mInvisIfNoScroll = invisIfNoScroll;
-			if (this.mInvisIfNoScroll)
+			mInvisIfNoScroll = invisIfNoScroll;
+			if (mInvisIfNoScroll)
 			{
-				this.SetVisible(false);
-				this.mDownButton.SetVisible(false);
-				this.mUpButton.SetVisible(false);
+				SetVisible(false);
+				mDownButton.SetVisible(false);
+				mUpButton.SetVisible(false);
 			}
 		}
 
 		public virtual void SetMaxValue(double theNewMaxValue)
 		{
-			this.mMaxValue = theNewMaxValue;
-			this.ClampValue();
-			this.MarkDirty();
+			mMaxValue = theNewMaxValue;
+			ClampValue();
+			MarkDirty();
 		}
 
 		public virtual void SetPageSize(double theNewPageSize)
 		{
-			this.mPageSize = theNewPageSize;
-			this.ClampValue();
-			this.MarkDirty();
+			mPageSize = theNewPageSize;
+			ClampValue();
+			MarkDirty();
 		}
 
 		public virtual void SetValue(double theNewValue)
 		{
-			this.mValue = theNewValue;
-			this.ClampValue();
-			this.mScrollListener.ScrollPosition(this.mId, this.mValue);
-			this.MarkDirty();
+			mValue = theNewValue;
+			ClampValue();
+			mScrollListener.ScrollPosition(mId, mValue);
+			MarkDirty();
 		}
 
 		public virtual void SetHorizontal(bool isHorizontal)
 		{
-			this.mHorizontal = isHorizontal;
-			this.mDownButton.mHorizontal = this.mHorizontal;
-			this.mUpButton.mHorizontal = this.mHorizontal;
+			mHorizontal = isHorizontal;
+			mDownButton.mHorizontal = mHorizontal;
+			mUpButton.mHorizontal = mHorizontal;
 		}
 
 		public virtual void SetButtonImages(Image button, Image down)
 		{
-			this.SetButtonImages(button, down, null);
+			SetButtonImages(button, down, null);
 		}
 
 		public virtual void SetButtonImages(Image button, Image down, Image disabled)
 		{
-			this.mUpButton.mButtonImage = button;
-			this.mUpButton.mDownImage = down;
-			this.mUpButton.mDisabledImage = disabled;
-			this.mDownButton.mButtonImage = button;
-			this.mDownButton.mDownImage = down;
-			this.mDownButton.mDisabledImage = disabled;
+			mUpButton.mButtonImage = button;
+			mUpButton.mDownImage = down;
+			mUpButton.mDisabledImage = disabled;
+			mDownButton.mButtonImage = button;
+			mDownButton.mDownImage = down;
+			mDownButton.mDisabledImage = disabled;
 		}
 
 		public virtual void SetThumbImage(Image img)
 		{
-			this.mThumbImage = img;
+			mThumbImage = img;
 		}
 
 		public virtual void SetBarImages(Image theBarImage)
 		{
-			this.SetBarImages(theBarImage, null);
+			SetBarImages(theBarImage, null);
 		}
 
 		public virtual void SetBarImages(Image theBarImage, Image thePagingImage)
 		{
-			this.mBarImage = theBarImage;
-			this.mPagingImage = thePagingImage;
+			mBarImage = theBarImage;
+			mPagingImage = thePagingImage;
 		}
 
 		public virtual void SetButtonColors(int[,] theColors, int theNumColors)
 		{
-			this.mUpButton.SetColors(theColors, theNumColors);
-			this.mDownButton.SetColors(theColors, theNumColors);
+			mUpButton.SetColors(theColors, theNumColors);
+			mDownButton.SetColors(theColors, theNumColors);
 		}
 
 		public virtual void SetButtonColor(int theIdx, SexyColor theColor)
 		{
-			this.mUpButton.SetColor(theIdx, theColor);
-			this.mDownButton.SetColor(theIdx, theColor);
+			mUpButton.SetColor(theIdx, theColor);
+			mDownButton.SetColor(theIdx, theColor);
 		}
 
 		public virtual void ResizeScrollbarWidget(int theX, int theY, int theWidth, int theHeight)
 		{
-			this.Resize(theX, theY, theWidth, theHeight);
+			Resize(theX, theY, theWidth, theHeight);
 			int num;
-			if (this.mHorizontal)
+			if (mHorizontal)
 			{
 				theY = (theX = 0);
 				num = theHeight;
-				if (this.mButtonLength > 0)
+				if (mButtonLength > 0)
 				{
-					num = this.mButtonLength;
+					num = mButtonLength;
 				}
-				this.mUpButton.Resize(theX, theY, num, theHeight);
-				this.mDownButton.Resize(theX + theWidth - num, theY, num, theHeight);
+				mUpButton.Resize(theX, theY, num, theHeight);
+				mDownButton.Resize(theX + theWidth - num, theY, num, theHeight);
 				return;
 			}
 			theY = (theX = 0);
 			num = theWidth;
-			if (this.mButtonLength > 0)
+			if (mButtonLength > 0)
 			{
-				num = this.mButtonLength;
+				num = mButtonLength;
 			}
-			this.mUpButton.Resize(theX, theY, theWidth, num);
-			this.mDownButton.Resize(theX, theY + theHeight - num, theWidth, num);
+			mUpButton.Resize(theX, theY, theWidth, num);
+			mDownButton.Resize(theX, theY + theHeight - num, theWidth, num);
 		}
 
 		public virtual bool AtBottom()
 		{
-			return this.mMaxValue - this.mPageSize - this.mValue <= 1.0;
+			return mMaxValue - mPageSize - mValue <= 1.0;
 		}
 
 		public virtual void GoToBottom()
 		{
-			this.mValue = this.mMaxValue - this.mPageSize;
-			this.ClampValue();
-			this.SetValue(this.mValue);
+			mValue = mMaxValue - mPageSize;
+			ClampValue();
+			SetValue(mValue);
 		}
 
 		public virtual void DrawThumb(Graphics g, int theX, int theY, int theWidth, int theHeight)
 		{
-			if (this.mThumbImage == null)
+			if (mThumbImage == null)
 			{
-				g.SetColor(this.GetColor(2));
+				g.SetColor(GetColor(2));
 				g.FillRect(theX, theY, theWidth, theHeight);
-				g.SetColor(this.GetColor(5));
+				g.SetColor(GetColor(5));
 				g.FillRect(theX + 1, theY + 1, theWidth - 2, 1);
 				g.FillRect(theX + 1, theY + 1, 1, theHeight - 2);
-				g.SetColor(this.GetColor(3));
+				g.SetColor(GetColor(3));
 				g.FillRect(theX, theY + theHeight - 1, theWidth, 1);
 				g.FillRect(theX + theWidth - 1, theY, 1, theHeight);
-				g.SetColor(this.GetColor(4));
+				g.SetColor(GetColor(4));
 				g.FillRect(theX + 1, theY + theHeight - 2, theWidth - 2, 1);
 				g.FillRect(theX + theWidth - 2, theY + 1, 1, theHeight - 2);
 				return;
 			}
-			g.DrawImageBox(new TRect(theX, theY, theWidth, theHeight), this.mThumbImage);
+			g.DrawImageBox(new TRect(theX, theY, theWidth, theHeight), mThumbImage);
 		}
 
 		public virtual void DrawThumb(Graphics g, TRect theRect)
 		{
-			this.DrawThumb(g, theRect.mX, theRect.mY, theRect.mWidth, theRect.mHeight);
+			DrawThumb(g, theRect.mX, theRect.mY, theRect.mWidth, theRect.mHeight);
 		}
 
 		public virtual int GetTrackSize()
 		{
-			if (this.mButtonLength > 0)
+			if (mButtonLength > 0)
 			{
-				if (this.mHorizontal)
+				if (mHorizontal)
 				{
-					return this.mWidth - 2 * this.mButtonLength;
+					return mWidth - 2 * mButtonLength;
 				}
-				return this.mHeight - 2 * this.mButtonLength;
+				return mHeight - 2 * mButtonLength;
 			}
 			else
 			{
-				if (this.mHorizontal)
+				if (mHorizontal)
 				{
-					return this.mWidth - 2 * this.mUpButton.mWidth;
+					return mWidth - 2 * mUpButton.mWidth;
 				}
-				return this.mHeight - 2 * this.mUpButton.mWidth;
+				return mHeight - 2 * mUpButton.mWidth;
 			}
 		}
 
 		public virtual int GetThumbSize()
 		{
-			if (this.mPageSize > this.mMaxValue)
+			if (mPageSize > mMaxValue)
 			{
 				return 0;
 			}
-			int num = (int)((double)this.GetTrackSize() * this.mPageSize / this.mMaxValue + 0.5);
+			int num = (int)((double)GetTrackSize() * mPageSize / mMaxValue + 0.5);
 			return Math.Max(8, num);
 		}
 
 		public virtual int GetThumbPosition()
 		{
-			if (this.mPageSize > this.mMaxValue)
+			if (mPageSize > mMaxValue)
 			{
 				return 0;
 			}
-			return (int)(this.mValue * (double)(this.GetTrackSize() - this.GetThumbSize()) / (this.mMaxValue - this.mPageSize) + 0.5);
+			return (int)(mValue * (double)(GetTrackSize() - GetThumbSize()) / (mMaxValue - mPageSize) + 0.5);
 		}
 
 		public override void Draw(Graphics g)
 		{
-			int thumbSize = this.GetThumbSize();
+			int thumbSize = GetThumbSize();
 			int num;
-			if (this.mHorizontal)
+			if (mHorizontal)
 			{
-				num = (this.mWidth - this.GetTrackSize()) / 2;
+				num = (mWidth - GetTrackSize()) / 2;
 			}
 			else
 			{
-				num = (this.mHeight - this.GetTrackSize()) / 2;
+				num = (mHeight - GetTrackSize()) / 2;
 			}
-			int thumbPosition = this.GetThumbPosition();
+			int thumbPosition = GetThumbPosition();
 			TRect trect;
 			TRect trect2;
 			TRect theRect;
-			if (this.mHorizontal)
+			if (mHorizontal)
 			{
-				trect = new TRect(num, 0, thumbPosition + thumbSize / 2, this.mHeight);
-				trect2 = new TRect(thumbPosition + thumbSize / 2 + num, 0, this.GetTrackSize() - thumbPosition - thumbSize / 2, this.mHeight);
-				theRect = new TRect(thumbPosition + num, 0, thumbSize, this.mHeight);
+				trect = new TRect(num, 0, thumbPosition + thumbSize / 2, mHeight);
+				trect2 = new TRect(thumbPosition + thumbSize / 2 + num, 0, GetTrackSize() - thumbPosition - thumbSize / 2, mHeight);
+				theRect = new TRect(thumbPosition + num, 0, thumbSize, mHeight);
 			}
 			else
 			{
-				trect = new TRect(0, num, this.mWidth, thumbPosition + thumbSize / 2);
-				trect2 = new TRect(0, thumbPosition + thumbSize / 2 + num, this.mWidth, this.GetTrackSize() - thumbPosition - thumbSize / 2);
-				theRect = new TRect(0, thumbPosition + num, this.mWidth, thumbSize);
+				trect = new TRect(0, num, mWidth, thumbPosition + thumbSize / 2);
+				trect2 = new TRect(0, thumbPosition + thumbSize / 2 + num, mWidth, GetTrackSize() - thumbPosition - thumbSize / 2);
+				theRect = new TRect(0, thumbPosition + num, mWidth, thumbSize);
 			}
-			if (this.mUpdateMode == 1)
+			if (mUpdateMode == 1)
 			{
-				if (this.mPagingImage != null)
+				if (mPagingImage != null)
 				{
-					g.DrawImageBox(trect, this.mPagingImage);
+					g.DrawImageBox(trect, mPagingImage);
 				}
 				else
 				{
-					g.SetColor(this.GetColor(1));
+					g.SetColor(GetColor(1));
 					g.FillRect(trect);
 				}
 			}
-			else if (this.mBarImage != null)
+			else if (mBarImage != null)
 			{
-				g.DrawImageBox(trect, this.mBarImage);
+				g.DrawImageBox(trect, mBarImage);
 			}
 			else
 			{
-				g.SetColor(this.GetColor(0));
+				g.SetColor(GetColor(0));
 				g.FillRect(trect);
 			}
-			if (this.mUpdateMode == 2)
+			if (mUpdateMode == 2)
 			{
-				if (this.mPagingImage != null)
+				if (mPagingImage != null)
 				{
-					g.DrawImageBox(trect2, this.mPagingImage);
+					g.DrawImageBox(trect2, mPagingImage);
 				}
 				else
 				{
-					g.SetColor(this.GetColor(1));
+					g.SetColor(GetColor(1));
 					g.FillRect(trect2);
 				}
 			}
-			else if (this.mBarImage != null)
+			else if (mBarImage != null)
 			{
-				g.DrawImageBox(trect2, this.mBarImage);
+				g.DrawImageBox(trect2, mBarImage);
 			}
 			else
 			{
-				g.SetColor(this.GetColor(0));
+				g.SetColor(GetColor(0));
 				g.FillRect(trect2);
 			}
 			if (thumbSize > 0)
 			{
-				this.DrawThumb(g, theRect);
+				DrawThumb(g, theRect);
 			}
 		}
 
 		public virtual void ClampValue()
 		{
-			double num = this.mValue;
-			if (this.mValue > this.mMaxValue - this.mPageSize)
+			double num = mValue;
+			if (mValue > mMaxValue - mPageSize)
 			{
-				this.mValue = this.mMaxValue - this.mPageSize;
+				mValue = mMaxValue - mPageSize;
 			}
-			if (this.mValue < 0.0)
+			if (mValue < 0.0)
 			{
-				this.mValue = 0.0;
+				mValue = 0.0;
 			}
-			bool flag = this.mPageSize < this.mMaxValue;
-			this.SetDisabled(!flag);
-			this.mUpButton.SetDisabled(!flag);
-			this.mDownButton.SetDisabled(!flag);
-			if (this.mInvisIfNoScroll)
+			bool flag = mPageSize < mMaxValue;
+			SetDisabled(!flag);
+			mUpButton.SetDisabled(!flag);
+			mDownButton.SetDisabled(!flag);
+			if (mInvisIfNoScroll)
 			{
-				this.SetVisible(flag);
-				this.mDownButton.SetVisible(flag);
-				this.mUpButton.SetVisible(flag);
+				SetVisible(flag);
+				mDownButton.SetVisible(flag);
+				mUpButton.SetVisible(flag);
 			}
-			if (this.mValue != num)
+			if (mValue != num)
 			{
-				this.mScrollListener.ScrollPosition(this.mId, this.mValue);
+				mScrollListener.ScrollPosition(mId, mValue);
 			}
 		}
 
 		public virtual void SetThumbPosition(int thePosition)
 		{
-			this.SetValue((double)thePosition * (this.mMaxValue - this.mPageSize) / (double)(this.GetTrackSize() - this.GetThumbSize()));
+			SetValue((double)thePosition * (mMaxValue - mPageSize) / (double)(GetTrackSize() - GetThumbSize()));
 		}
 
 		public virtual void ButtonPress(int theId)
 		{
-			this.mButtonAcc = 0;
+			mButtonAcc = 0;
 			if (theId == 0)
 			{
-				this.SetValue(this.mValue - 1.0);
+				SetValue(mValue - 1.0);
 				return;
 			}
-			this.SetValue(this.mValue + 1.0);
+			SetValue(mValue + 1.0);
 		}
 
 		public virtual void ButtonDepress(int theId)
@@ -355,50 +355,50 @@ namespace Sexy
 		{
 			if (theId == 0)
 			{
-				if (++this.mButtonAcc >= 25)
+				if (++mButtonAcc >= 25)
 				{
-					this.SetValue(this.mValue - 1.0);
-					this.mButtonAcc = 24;
+					SetValue(mValue - 1.0);
+					mButtonAcc = 24;
 					return;
 				}
 			}
-			else if (++this.mButtonAcc >= 25)
+			else if (++mButtonAcc >= 25)
 			{
-				this.SetValue(this.mValue + 1.0);
-				this.mButtonAcc = 24;
+				SetValue(mValue + 1.0);
+				mButtonAcc = 24;
 			}
 		}
 
 		public override void Update()
 		{
 			base.Update();
-			switch (this.mUpdateMode)
+			switch (mUpdateMode)
 			{
 			case 1:
-				if (this.ThumbCompare(this.mLastMouseX, this.mLastMouseY) != -1)
+				if (ThumbCompare(mLastMouseX, mLastMouseY) != -1)
 				{
-					this.mUpdateMode = 0;
-					this.MarkDirty();
+					mUpdateMode = 0;
+					MarkDirty();
 					return;
 				}
-				if (++this.mUpdateAcc >= 25)
+				if (++mUpdateAcc >= 25)
 				{
-					this.SetValue(this.mValue - this.mPageSize);
-					this.mUpdateAcc = 20;
+					SetValue(mValue - mPageSize);
+					mUpdateAcc = 20;
 					return;
 				}
 				break;
 			case 2:
-				if (this.ThumbCompare(this.mLastMouseX, this.mLastMouseY) != 1)
+				if (ThumbCompare(mLastMouseX, mLastMouseY) != 1)
 				{
-					this.mUpdateMode = 0;
-					this.MarkDirty();
+					mUpdateMode = 0;
+					MarkDirty();
 					return;
 				}
-				if (++this.mUpdateAcc >= 25)
+				if (++mUpdateAcc >= 25)
 				{
-					this.SetValue(this.mValue + this.mPageSize);
-					this.mUpdateAcc = 20;
+					SetValue(mValue + mPageSize);
+					mUpdateAcc = 20;
 				}
 				break;
 			default:
@@ -409,19 +409,19 @@ namespace Sexy
 		public virtual int ThumbCompare(int x, int y)
 		{
 			int num;
-			if (this.mHorizontal)
+			if (mHorizontal)
 			{
-				num = x - (this.mWidth - this.GetTrackSize()) / 2;
+				num = x - (mWidth - GetTrackSize()) / 2;
 			}
 			else
 			{
-				num = y - (this.mHeight - this.GetTrackSize()) / 2;
+				num = y - (mHeight - GetTrackSize()) / 2;
 			}
-			if (num < this.GetThumbPosition())
+			if (num < GetThumbPosition())
 			{
 				return -1;
 			}
-			if (num >= this.GetThumbPosition() + this.GetThumbSize())
+			if (num >= GetThumbPosition() + GetThumbSize())
 			{
 				return 1;
 			}
@@ -436,56 +436,56 @@ namespace Sexy
 		public override void MouseDown(int x, int y, int theBtnNum, int theClickCount)
 		{
 			base.MouseDown(x, y, theBtnNum, theClickCount);
-			if (!this.mDisabled)
+			if (!mDisabled)
 			{
-				switch (this.ThumbCompare(x, y))
+				switch (ThumbCompare(x, y))
 				{
 				case -1:
-					this.SetValue(this.mValue - this.mPageSize);
-					this.mUpdateMode = 1;
-					this.mUpdateAcc = 0;
+					SetValue(mValue - mPageSize);
+					mUpdateMode = 1;
+					mUpdateAcc = 0;
 					break;
 				case 0:
-					this.mPressedOnThumb = true;
-					this.mMouseDownThumbPos = this.GetThumbPosition();
-					this.mMouseDownX = x;
-					this.mMouseDownY = y;
+					mPressedOnThumb = true;
+					mMouseDownThumbPos = GetThumbPosition();
+					mMouseDownX = x;
+					mMouseDownY = y;
 					break;
 				case 1:
-					this.SetValue(this.mValue + this.mPageSize);
-					this.mUpdateMode = 2;
-					this.mUpdateAcc = 0;
+					SetValue(mValue + mPageSize);
+					mUpdateMode = 2;
+					mUpdateAcc = 0;
 					break;
 				}
 			}
-			this.mLastMouseX = x;
-			this.mLastMouseY = y;
+			mLastMouseX = x;
+			mLastMouseY = y;
 		}
 
 		public override void MouseUp(int x, int y, int theBtnNum, int theClickCount)
 		{
 			base.MouseUp(x, y, theBtnNum, theClickCount);
-			this.mUpdateMode = 0;
-			this.mPressedOnThumb = false;
-			this.MarkDirty();
+			mUpdateMode = 0;
+			mPressedOnThumb = false;
+			MarkDirty();
 		}
 
 		public override void MouseDrag(int x, int y)
 		{
 			base.MouseDrag(x, y);
-			if (this.mPressedOnThumb)
+			if (mPressedOnThumb)
 			{
-				if (this.mHorizontal)
+				if (mHorizontal)
 				{
-					this.SetThumbPosition(this.mMouseDownThumbPos + x - this.mMouseDownX);
+					SetThumbPosition(mMouseDownThumbPos + x - mMouseDownX);
 				}
 				else
 				{
-					this.SetThumbPosition(this.mMouseDownThumbPos + y - this.mMouseDownY);
+					SetThumbPosition(mMouseDownThumbPos + y - mMouseDownY);
 				}
 			}
-			this.mLastMouseX = x;
-			this.mLastMouseY = y;
+			mLastMouseX = x;
+			mLastMouseY = y;
 		}
 
 		public override void RemoveAllWidgets(bool doDelete, bool recursive)
@@ -493,14 +493,14 @@ namespace Sexy
 			base.RemoveAllWidgets(doDelete, recursive);
 			if (doDelete)
 			{
-				this.mUpButton = null;
-				this.mDownButton = null;
+				mUpButton = null;
+				mDownButton = null;
 			}
 		}
 
 		public void ButtonPress(int theId, int theClickCount)
 		{
-			this.ButtonPress(theId);
+			ButtonPress(theId);
 		}
 
 		public void ButtonMouseEnter(int theId)

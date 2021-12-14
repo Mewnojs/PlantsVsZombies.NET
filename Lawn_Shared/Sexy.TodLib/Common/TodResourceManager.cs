@@ -11,7 +11,7 @@ namespace Sexy.TodLib
 
 		public bool FindImagePath(Image theImage, ref string thePath)
 		{
-			foreach (KeyValuePair<string, BaseRes> keyValuePair in this.mImageMap)
+			foreach (KeyValuePair<string, BaseRes> keyValuePair in mImageMap)
 			{
 				ImageRes imageRes = (ImageRes)keyValuePair.Value;
 				if (imageRes.mImage == theImage)
@@ -30,8 +30,8 @@ namespace Sexy.TodLib
 			bool flag = false;
 			while (!flag)
 			{
-				flag = this.mCurResGroupListItr.MoveNext();
-				BaseRes baseRes = this.mCurResGroupListItr.Current;
+				flag = mCurResGroupListItr.MoveNext();
+				BaseRes baseRes = mCurResGroupListItr.Current;
 				if (!baseRes.mFromProgram)
 				{
 					switch (baseRes.mType)
@@ -82,7 +82,7 @@ namespace Sexy.TodLib
 			PerfTimer perfTimer = default(PerfTimer);
 			perfTimer.Start();
 			base.StartLoadResources(theGroup);
-			while (!GlobalStaticVars.gSexyAppBase.mShutdown && this.TodLoadNextResource())
+			while (!GlobalStaticVars.gSexyAppBase.mShutdown && TodLoadNextResource())
 			{
 			}
 			if (GlobalStaticVars.gSexyAppBase.mShutdown)
@@ -93,7 +93,7 @@ namespace Sexy.TodLib
 			{
 				return false;
 			}
-			this.mLoadedGroups.Add(theGroup);
+			mLoadedGroups.Add(theGroup);
 			Math.Max((int)perfTimer.GetDuration(), 0);
 			return true;
 		}

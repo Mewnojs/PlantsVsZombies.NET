@@ -10,11 +10,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mVert.Color;
+				return mVert.Color;
 			}
 			set
 			{
-				this.mVert.Color = value;
+				mVert.Color = value;
 			}
 		}
 
@@ -22,11 +22,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mVert.Position.X;
+				return mVert.Position.X;
 			}
 			set
 			{
-				this.mVert.Position.X = value;
+				mVert.Position.X = value;
 			}
 		}
 
@@ -34,11 +34,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mVert.Position.Y;
+				return mVert.Position.Y;
 			}
 			set
 			{
-				this.mVert.Position.Y = value;
+				mVert.Position.Y = value;
 			}
 		}
 
@@ -46,11 +46,11 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mVert.TextureCoordinate.X;
+				return mVert.TextureCoordinate.X;
 			}
 			set
 			{
-				this.mVert.TextureCoordinate.X = value;
+				mVert.TextureCoordinate.X = value;
 			}
 		}
 
@@ -58,33 +58,33 @@ namespace Sexy
 		{
 			get
 			{
-				return this.mVert.TextureCoordinate.Y;
+				return mVert.TextureCoordinate.Y;
 			}
 			set
 			{
-				this.mVert.TextureCoordinate.Y = value;
+				mVert.TextureCoordinate.Y = value;
 			}
 		}
 
 		public TriVertex(float theX, float theY)
 		{
-			this.mVert.Position = new Vector3(theX, theY, 0f);
-			this.mVert.Color = Color.White;
-			this.mVert.TextureCoordinate = Vector2.Zero;
+			mVert.Position = new Vector3(theX, theY, 0f);
+			mVert.Color = Color.White;
+			mVert.TextureCoordinate = Vector2.Zero;
 		}
 
 		public TriVertex(float theX, float theY, float theU, float theV)
 		{
-			this.mVert.Position = new Vector3(theX, theY, 0f);
-			this.mVert.TextureCoordinate = new Vector2(theU, theV);
-			this.mVert.Color = Color.White;
+			mVert.Position = new Vector3(theX, theY, 0f);
+			mVert.TextureCoordinate = new Vector2(theU, theV);
+			mVert.Color = Color.White;
 		}
 
 		public TriVertex(float theX, float theY, float theU, float theV, Color theColor)
 		{
-			this.mVert.Position = new Vector3(theX, theY, 0f);
-			this.mVert.TextureCoordinate = new Vector2(theU, theV);
-			this.mVert.Color = theColor;
+			mVert.Position = new Vector3(theX, theY, 0f);
+			mVert.TextureCoordinate = new Vector2(theU, theV);
+			mVert.Color = theColor;
 		}
 
 		public VertexPositionColorTexture mVert;

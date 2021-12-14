@@ -9,30 +9,30 @@ namespace Sexy
 		public XNAMusicInterface(SexyAppBase theApp)
 		{
 			MusicInterface.USER_MUSIC_PLAYING = !MediaPlayer.GameHasControl;
-			this.mEnabled = false;
-			this.mContent = theApp.mContentManager;
-			this.mCurrentSong = -1;
-			this.mFadeOut = false;
+			mEnabled = false;
+			mContent = theApp.mContentManager;
+			mCurrentSong = -1;
+			mFadeOut = false;
 			for (int i = 0; i < XNAMusicInterfaceConstants.MAX_SONGS; i++)
 			{
-				this.mSongs[i] = null;
+				mSongs[i] = null;
 			}
 		}
 
 		public override void Dispose()
 		{
-			this.UnloadAllMusic();
+			UnloadAllMusic();
 			base.Dispose();
 		}
 
 		public override void Enable(bool enable)
 		{
-			this.mEnabled = enable;
+			mEnabled = enable;
 		}
 
 		public override bool LoadMusic(int theSongId, string theFileName)
 		{
-			this.mSongs[theSongId] = this.mContent.Load<Song>(theFileName);
+			mSongs[theSongId] = mContent.Load<Song>(theFileName);
 			return true;
 		}
 
@@ -42,20 +42,20 @@ namespace Sexy
 			{
 				if (!MusicInterface.USER_MUSIC_PLAYING)
 				{
-					if (theSongid != this.mCurrentSong || MediaPlayer.State != MediaState.Playing)
+					if (theSongid != mCurrentSong || MediaPlayer.State != MediaState.Playing)
 					{
-						this.isStopped = false;
+						isStopped = false;
 						if (theSongid >= 0)
 						{
-							this.mCurrentSong = theSongid;
-							Song song = this.mSongs[theSongid];
+							mCurrentSong = theSongid;
+							Song song = mSongs[theSongid];
 							if (!(song == null))
 							{
 								MediaPlayer.Play(song);
-								if (!this.mHasPlayed)
+								if (!mHasPlayed)
 								{
-									this.mHasPlayed = true;
-									this.SetVolume(this.mFirstPlayVolume);
+									mHasPlayed = true;
+									SetVolume(mFirstPlayVolume);
 								}
 								MediaPlayer.IsRepeating = loop;
 							}
@@ -75,11 +75,11 @@ namespace Sexy
 			{
 				return;
 			}
-			this.mCurrentSong = -1;
+			mCurrentSong = -1;
 			try
 			{
 				MediaPlayer.Stop();
-				this.isStopped = true;
+				isStopped = true;
 			}
 			catch (Exception)
 			{
@@ -102,14 +102,14 @@ namespace Sexy
 
 		public override void ResumeMusic()
 		{
-			this.isStopped = false;
+			isStopped = false;
 			if (MusicInterface.USER_MUSIC_PLAYING)
 			{
 				return;
 			}
 			try
 			{
-				if (!this.isStopped)
+				if (!isStopped)
 				{
 					MediaPlayer.Resume();
 				}
@@ -121,20 +121,20 @@ namespace Sexy
 
 		public override void UnloadMusic(int theSongId)
 		{
-			if (theSongId == this.mCurrentSong)
+			if (theSongId == mCurrentSong)
 			{
 				try
 				{
-					this.StopMusic();
+					StopMusic();
 				}
 				catch (Exception)
 				{
 				}
 			}
-			if (this.mSongs[theSongId] != null)
+			if (mSongs[theSongId] != null)
 			{
-				this.mSongs[theSongId].Dispose();
-				this.mSongs[theSongId] = null;
+				mSongs[theSongId].Dispose();
+				mSongs[theSongId] = null;
 			}
 		}
 
@@ -142,14 +142,14 @@ namespace Sexy
 		{
 			try
 			{
-				this.StopMusic();
+				StopMusic();
 			}
 			catch (Exception)
 			{
 			}
 			for (int i = 0; i < XNAMusicInterfaceConstants.MAX_SONGS; i++)
 			{
-				this.UnloadMusic(i);
+				UnloadMusic(i);
 			}
 		}
 
@@ -163,19 +163,19 @@ namespace Sexy
 			catch (Exception)
 			{
 			}
-			return this.mCurrentSong == theSongId && flag;
+			return mCurrentSong == theSongId && flag;
 		}
 
 		public override void SetVolume(float theVolume)
 		{
-			if (!this.mHasPlayed)
+			if (!mHasPlayed)
 			{
-				this.mFirstPlayVolume = theVolume;
+				mFirstPlayVolume = theVolume;
 				return;
 			}
 			try
 			{
-				this.maxVolume = (MediaPlayer.Volume = theVolume * 0.5f);
+				maxVolume = (MediaPlayer.Volume = theVolume * 0.5f);
 			}
 			catch (Exception)
 			{
@@ -184,16 +184,16 @@ namespace Sexy
 
 		public override float GetVolume()
 		{
-			return this.maxVolume * 2f;
+			return maxVolume * 2f;
 		}
 
 		public override void Update()
 		{
 			try
 			{
-				if (this.mFadeOut)
+				if (mFadeOut)
 				{
-					this.StopMusic(0f);
+					StopMusic(0f);
 				}
 			}
 			catch (Exception)
@@ -205,7 +205,7 @@ namespace Sexy
 		{
 			for (int i = 0; i < XNAMusicInterfaceConstants.MAX_SONGS; i++)
 			{
-				if (this.mSongs[i] == null)
+				if (mSongs[i] == null)
 				{
 					return i;
 				}

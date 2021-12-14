@@ -6,16 +6,16 @@ namespace Sexy
 	{
 		public FontRes()
 		{
-			this.mType = ResType.ResType_Font;
-			this.mDefault = false;
+			mType = ResType.ResType_Font;
+			mDefault = false;
 		}
 
 		public override void DeleteResource()
 		{
-			if (this.mFont != null)
+			if (mFont != null)
 			{
-				this.mFont.Dispose();
-				this.mFont = null;
+				mFont.Dispose();
+				mFont = null;
 			}
 			base.DeleteResource();
 		}

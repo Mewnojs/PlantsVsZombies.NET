@@ -17,13 +17,13 @@ namespace Lawn
 
 		public ZombiePileWidget(LawnApp theApp)
 		{
-			this.mApp = theApp;
-			this.mWidth = Constants.BOARD_WIDTH;
-			this.mPileHeight = (int)(this.mApp.mPlayerInfo.mZombiesKilled / (long)ZombiePileWidget.mZombieScale);
-			this.mPileHeight = Math.Min(this.mPileHeight, ZombiePileWidget.maxHeight);
-			this.mHeight = Constants.BOARD_HEIGHT + this.CalculatePileHeight(this.mPileHeight) + 300;
-			this.mY = -this.mHeight;
-			this.mScreenTop = this.mHeight - Constants.BOARD_HEIGHT;
+			mApp = theApp;
+			mWidth = Constants.BOARD_WIDTH;
+			mPileHeight = (int)(mApp.mPlayerInfo.mZombiesKilled / (long)ZombiePileWidget.mZombieScale);
+			mPileHeight = Math.Min(mPileHeight, ZombiePileWidget.maxHeight);
+			mHeight = Constants.BOARD_HEIGHT + CalculatePileHeight(mPileHeight) + 300;
+			mY = -mHeight;
+			mScreenTop = mHeight - Constants.BOARD_HEIGHT;
 			List<ZombiePileObject> list = new List<ZombiePileObject>();
 			list.Add(new ZombiePileObject(5, ZombiePileObjectType.OBJECT_YELLOW_CLOUD));
 			list.Add(new ZombiePileObject(15, ZombiePileObjectType.OBJECT_YELLOW_CLOUD));
@@ -38,70 +38,70 @@ namespace Lawn
 			List<ZombiePileObject> list2 = new List<ZombiePileObject>();
 			for (int i = 0; i < 100; i++)
 			{
-				list2.Add(new ZombiePileObject(180 + this.rand.Next(4) - 2, ZombiePileObjectType.OBJECT_GEM0 + this.rand.Next(7)));
+				list2.Add(new ZombiePileObject(180 + rand.Next(4) - 2, ZombiePileObjectType.OBJECT_GEM0 + rand.Next(7)));
 			}
 			list2.Sort(new Comparison<ZombiePileObject>(ZombiePileWidget.SortGems));
 			list.AddRange(list2);
 			list.Add(new ZombiePileObject(200, ZombiePileObjectType.OBJECT_BLACKHOLE));
-			if (!theApp.mPlayerInfo.mSeenLeaderboardArrow && this.mPileHeight >= 1)
+			if (!theApp.mPlayerInfo.mSeenLeaderboardArrow && mPileHeight >= 1)
 			{
 				list.Add(new ZombiePileObject(0, ZombiePileObjectType.OBJECT_ARROW));
 				theApp.mPlayerInfo.mSeenLeaderboardArrow = true;
 			}
-			this.gPileObjects = list.ToArray();
-			this.SetObjectYVals();
-			this.spaceColor = Color.Black;
-			this.skyColor = new Color(134, 169, 197);
-			int num = Constants.BOARD_HEIGHT + this.CalculatePileHeight(ZombiePileWidget.maxHeight);
-			int num2 = Constants.BOARD_HEIGHT + this.CalculatePileHeight(ZombiePileWidget.skyEndHeight);
-			int num3 = Constants.BOARD_HEIGHT + this.CalculatePileHeight(ZombiePileWidget.spaceStartHeight);
-			this.skyBottomLeft = new TriVertex(-1f, (float)this.mScreenTop);
-			this.skyBottomRight = new TriVertex((float)Constants.BOARD_WIDTH, (float)this.mScreenTop);
-			this.transferBottomLeft = new TriVertex(-1f, (float)(this.mHeight - num2));
-			this.transferBottomRight = new TriVertex((float)Constants.BOARD_WIDTH, (float)(this.mHeight - num2));
-			this.spaceBottomLeft = new TriVertex(-1f, (float)(this.mHeight - num3));
-			this.spaceBottomRight = new TriVertex((float)Constants.BOARD_WIDTH, (float)(this.mHeight - num3));
-			this.spaceTopLeft = new TriVertex(-1f, (float)(this.mHeight - num));
-			this.spaceTopRight = new TriVertex((float)Constants.BOARD_WIDTH, (float)(this.mHeight - num));
-			this.screenBottomLeft = new TriVertex(-1f, (float)this.mHeight);
-			this.screenBottomRight = new TriVertex((float)Constants.BOARD_WIDTH, (float)this.mHeight);
-			this.mVasebreakerButton = GameButton.MakeNewButton(3, this, "", null, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_VASEBREAKER, null, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_VASEBREAKER_HIGHLIGHT);
-			this.mVasebreakerButton.Resize(Constants.LeaderboardScreen_Vasebreaker_Button_X, this.mScreenTop + Constants.LeaderboardScreen_Vasebreaker_Button_Y, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_VASEBREAKER_HIGHLIGHT.mWidth, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_VASEBREAKER_HIGHLIGHT.mHeight);
-			this.mVasebreakerButton.mTranslateX = (this.mVasebreakerButton.mTranslateY = 0);
-			this.mIZombieButton = GameButton.MakeNewButton(4, this, "", null, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_IZOMBIE, null, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_IZOMBIE_HIGHLIGHT);
-			this.mIZombieButton.Resize(Constants.LeaderboardScreen_IZombie_Button_X, this.mScreenTop + Constants.LeaderboardScreen_IZombie_Button_Y, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_IZOMBIE_HIGHLIGHT.mWidth, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_IZOMBIE_HIGHLIGHT.mHeight);
-			this.mIZombieButton.mTranslateX = (this.mIZombieButton.mTranslateY = 0);
-			this.mZombiesKilledButton = GameButton.MakeNewButton(5, this, "", null, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_KILLED, null, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_KILLED_HIGHLIGHT);
-			this.mZombiesKilledButton.Resize(Constants.LeaderboardScreen_Killed_Button_X, this.mScreenTop + Constants.LeaderboardScreen_Killed_Button_Y, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_KILLED_HIGHLIGHT.mWidth, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_KILLED_HIGHLIGHT.mHeight);
-			this.mZombiesKilledButton.mTranslateX = (this.mZombiesKilledButton.mTranslateY = 0);
-			this.mBackButton = GameButton.MakeNewButton(0, this, "", null, AtlasResources.IMAGE_PILE_LEADERBOARD_BACK_BUTTON, AtlasResources.IMAGE_PILE_LEADERBOARD_BACK_BUTTON, AtlasResources.IMAGE_PILE_LEADERBOARD_BACK_BUTTON_HIGHLIGHT);
-			this.mBackButton.Resize(0, this.mScreenTop + Constants.BOARD_HEIGHT - AtlasResources.IMAGE_PILE_LEADERBOARD_BACK_BUTTON.mHeight, AtlasResources.IMAGE_PILE_LEADERBOARD_BACK_BUTTON.mWidth, AtlasResources.IMAGE_PILE_LEADERBOARD_BACK_BUTTON.mHeight);
-			this.mBackButton.mTranslateX = (this.mBackButton.mTranslateY = 0);
-			this.AddWidget(this.mVasebreakerButton);
-			this.AddWidget(this.mIZombieButton);
-			this.AddWidget(this.mZombiesKilledButton);
-			this.AddWidget(this.mBackButton);
+			gPileObjects = list.ToArray();
+			SetObjectYVals();
+			spaceColor = Color.Black;
+			skyColor = new Color(134, 169, 197);
+			int num = Constants.BOARD_HEIGHT + CalculatePileHeight(ZombiePileWidget.maxHeight);
+			int num2 = Constants.BOARD_HEIGHT + CalculatePileHeight(ZombiePileWidget.skyEndHeight);
+			int num3 = Constants.BOARD_HEIGHT + CalculatePileHeight(ZombiePileWidget.spaceStartHeight);
+			skyBottomLeft = new TriVertex(-1f, (float)mScreenTop);
+			skyBottomRight = new TriVertex((float)Constants.BOARD_WIDTH, (float)mScreenTop);
+			transferBottomLeft = new TriVertex(-1f, (float)(mHeight - num2));
+			transferBottomRight = new TriVertex((float)Constants.BOARD_WIDTH, (float)(mHeight - num2));
+			spaceBottomLeft = new TriVertex(-1f, (float)(mHeight - num3));
+			spaceBottomRight = new TriVertex((float)Constants.BOARD_WIDTH, (float)(mHeight - num3));
+			spaceTopLeft = new TriVertex(-1f, (float)(mHeight - num));
+			spaceTopRight = new TriVertex((float)Constants.BOARD_WIDTH, (float)(mHeight - num));
+			screenBottomLeft = new TriVertex(-1f, (float)mHeight);
+			screenBottomRight = new TriVertex((float)Constants.BOARD_WIDTH, (float)mHeight);
+			mVasebreakerButton = GameButton.MakeNewButton(3, this, "", null, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_VASEBREAKER, null, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_VASEBREAKER_HIGHLIGHT);
+			mVasebreakerButton.Resize(Constants.LeaderboardScreen_Vasebreaker_Button_X, mScreenTop + Constants.LeaderboardScreen_Vasebreaker_Button_Y, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_VASEBREAKER_HIGHLIGHT.mWidth, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_VASEBREAKER_HIGHLIGHT.mHeight);
+			mVasebreakerButton.mTranslateX = (mVasebreakerButton.mTranslateY = 0);
+			mIZombieButton = GameButton.MakeNewButton(4, this, "", null, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_IZOMBIE, null, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_IZOMBIE_HIGHLIGHT);
+			mIZombieButton.Resize(Constants.LeaderboardScreen_IZombie_Button_X, mScreenTop + Constants.LeaderboardScreen_IZombie_Button_Y, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_IZOMBIE_HIGHLIGHT.mWidth, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_IZOMBIE_HIGHLIGHT.mHeight);
+			mIZombieButton.mTranslateX = (mIZombieButton.mTranslateY = 0);
+			mZombiesKilledButton = GameButton.MakeNewButton(5, this, "", null, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_KILLED, null, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_KILLED_HIGHLIGHT);
+			mZombiesKilledButton.Resize(Constants.LeaderboardScreen_Killed_Button_X, mScreenTop + Constants.LeaderboardScreen_Killed_Button_Y, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_KILLED_HIGHLIGHT.mWidth, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_KILLED_HIGHLIGHT.mHeight);
+			mZombiesKilledButton.mTranslateX = (mZombiesKilledButton.mTranslateY = 0);
+			mBackButton = GameButton.MakeNewButton(0, this, "", null, AtlasResources.IMAGE_PILE_LEADERBOARD_BACK_BUTTON, AtlasResources.IMAGE_PILE_LEADERBOARD_BACK_BUTTON, AtlasResources.IMAGE_PILE_LEADERBOARD_BACK_BUTTON_HIGHLIGHT);
+			mBackButton.Resize(0, mScreenTop + Constants.BOARD_HEIGHT - AtlasResources.IMAGE_PILE_LEADERBOARD_BACK_BUTTON.mHeight, AtlasResources.IMAGE_PILE_LEADERBOARD_BACK_BUTTON.mWidth, AtlasResources.IMAGE_PILE_LEADERBOARD_BACK_BUTTON.mHeight);
+			mBackButton.mTranslateX = (mBackButton.mTranslateY = 0);
+			AddWidget(mVasebreakerButton);
+			AddWidget(mIZombieButton);
+			AddWidget(mZombiesKilledButton);
+			AddWidget(mBackButton);
 			LeaderBoardComm.LoadResults(LeaderboardGameMode.Adventure);
-			this.friendMarkers = new ZombiePileMarker[10];
+			friendMarkers = new ZombiePileMarker[10];
 			int num4 = (int)((double)num3 * 1.75 * 0.20000000298023224);
-			this.stars = new ZombiePileWidget.Star[this.mPileHeight * 10];
-			for (int j = 0; j < this.stars.Length; j++)
+			stars = new ZombiePileWidget.Star[mPileHeight * 10];
+			for (int j = 0; j < stars.Length; j++)
 			{
-				this.stars[j] = new ZombiePileWidget.Star(new Point(this.rand.Next(this.mWidth), this.rand.Next(num4)), (float)this.rand.NextDouble() / 2f, this.rand.Next(3));
+				stars[j] = new ZombiePileWidget.Star(new Point(rand.Next(mWidth), rand.Next(num4)), (float)rand.NextDouble() / 2f, rand.Next(3));
 			}
 		}
 
 		public override bool DoScroll(_Touch touch)
 		{
-			CGPoint absPos = this.GetAbsPos();
+			CGPoint absPos = GetAbsPos();
 			int theX = (int)(touch.location.x - absPos.x);
 			int theY = (int)(touch.location.y - absPos.y);
-			return !this.mBackButton.Contains(theX, theY) && !this.mIZombieButton.Contains(theX, theY) && !this.mZombiesKilledButton.Contains(theX, theY) && !this.mVasebreakerButton.Contains(theX, theY);
+			return !mBackButton.Contains(theX, theY) && !mIZombieButton.Contains(theX, theY) && !mZombiesKilledButton.Contains(theX, theY) && !mVasebreakerButton.Contains(theX, theY);
 		}
 
 		public void SetGray(bool aGrayed)
 		{
-			this.mGrayed = aGrayed;
+			mGrayed = aGrayed;
 		}
 
 		public int CalculatePileHeight(int height)
@@ -138,8 +138,8 @@ namespace Lawn
 		public override void Update()
 		{
 			base.Update();
-			this.UpdatePileObjects();
-			if (!this.mLoadedFriends)
+			UpdatePileObjects();
+			if (!mLoadedFriends)
 			{
 				int num = LeaderBoardComm.LoadResults(LeaderboardGameMode.Adventure);
 				if (num >= 0)
@@ -147,9 +147,9 @@ namespace Lawn
 					int signedInGamerIndex = LeaderBoardComm.GetSignedInGamerIndex(LeaderboardState.Adventure);
 					int num2 = LeaderBoardComm.LoadResults(LeaderboardGameMode.Adventure);
 					long leaderboardScore = LeaderBoardComm.GetLeaderboardScore(signedInGamerIndex, LeaderboardState.Adventure);
-					if (leaderboardScore > this.mApp.mPlayerInfo.mZombiesKilled)
+					if (leaderboardScore > mApp.mPlayerInfo.mZombiesKilled)
 					{
-						this.mApp.mPlayerInfo.mZombiesKilled = leaderboardScore;
+						mApp.mPlayerInfo.mZombiesKilled = leaderboardScore;
 					}
 					bool flag = false;
 					int num3 = 1;
@@ -164,7 +164,7 @@ namespace Lawn
 							ZombiePileMarker zombiePileMarker = new ZombiePileMarker();
 							zombiePileMarker.mGamer = leaderboardGamer;
 							zombiePileMarker.mHeight = num5;
-							this.friendMarkers[num4] = zombiePileMarker;
+							friendMarkers[num4] = zombiePileMarker;
 							num4++;
 						}
 						if (num4 >= 5)
@@ -179,7 +179,7 @@ namespace Lawn
 							ZombiePileMarker zombiePileMarker2 = new ZombiePileMarker();
 							zombiePileMarker2.mGamer = leaderboardGamer2;
 							zombiePileMarker2.mHeight = num6;
-							this.friendMarkers[num4] = zombiePileMarker2;
+							friendMarkers[num4] = zombiePileMarker2;
 							num4++;
 						}
 						if (num4 >= 5 || (signedInGamerIndex - num3 <= 0 && signedInGamerIndex + num3 > num2))
@@ -188,7 +188,7 @@ namespace Lawn
 						}
 						num3++;
 					}
-					this.mLoadedFriends = true;
+					mLoadedFriends = true;
 				}
 			}
 		}
@@ -199,37 +199,37 @@ namespace Lawn
 
 		public override void Draw(Graphics g)
 		{
-			g.DrawImage(Resources.IMAGE_LEADERBOARDSCREEN_BACKGROUND, 0, this.mScreenTop);
-			g.DrawTriangle(this.skyBottomLeft, this.skyColor, this.skyBottomRight, this.skyColor, this.transferBottomLeft, this.skyColor, Graphics.DrawMode.DRAWMODE_NORMAL);
-			g.DrawTriangle(this.skyBottomRight, this.skyColor, this.transferBottomRight, this.skyColor, this.transferBottomLeft, this.skyColor, Graphics.DrawMode.DRAWMODE_NORMAL);
-			g.DrawTriangle(this.transferBottomLeft, this.skyColor, this.transferBottomRight, this.skyColor, this.spaceBottomLeft, this.skyColor, Graphics.DrawMode.DRAWMODE_NORMAL);
-			g.DrawTriangle(this.transferBottomRight, this.skyColor, this.spaceBottomRight, this.skyColor, this.spaceBottomLeft, this.skyColor, Graphics.DrawMode.DRAWMODE_NORMAL);
-			g.DrawTriangle(this.spaceBottomLeft, this.spaceColor, this.spaceBottomRight, this.spaceColor, this.spaceTopLeft, this.spaceColor, Graphics.DrawMode.DRAWMODE_NORMAL);
-			g.DrawTriangle(this.spaceBottomRight, this.spaceColor, this.spaceTopRight, this.spaceColor, this.spaceTopLeft, this.spaceColor, Graphics.DrawMode.DRAWMODE_NORMAL);
-			g.DrawImage(Resources.IMAGE_EDGE_OF_SPACE, 0, (int)this.spaceBottomLeft.y - Resources.IMAGE_EDGE_OF_SPACE.mHeight / 2, Constants.BOARD_WIDTH, Resources.IMAGE_EDGE_OF_SPACE.mHeight);
-			float y = this.spaceBottomRight.y;
+			g.DrawImage(Resources.IMAGE_LEADERBOARDSCREEN_BACKGROUND, 0, mScreenTop);
+			g.DrawTriangle(skyBottomLeft, skyColor, skyBottomRight, skyColor, transferBottomLeft, skyColor, Graphics.DrawMode.DRAWMODE_NORMAL);
+			g.DrawTriangle(skyBottomRight, skyColor, transferBottomRight, skyColor, transferBottomLeft, skyColor, Graphics.DrawMode.DRAWMODE_NORMAL);
+			g.DrawTriangle(transferBottomLeft, skyColor, transferBottomRight, skyColor, spaceBottomLeft, skyColor, Graphics.DrawMode.DRAWMODE_NORMAL);
+			g.DrawTriangle(transferBottomRight, skyColor, spaceBottomRight, skyColor, spaceBottomLeft, skyColor, Graphics.DrawMode.DRAWMODE_NORMAL);
+			g.DrawTriangle(spaceBottomLeft, spaceColor, spaceBottomRight, spaceColor, spaceTopLeft, spaceColor, Graphics.DrawMode.DRAWMODE_NORMAL);
+			g.DrawTriangle(spaceBottomRight, spaceColor, spaceTopRight, spaceColor, spaceTopLeft, spaceColor, Graphics.DrawMode.DRAWMODE_NORMAL);
+			g.DrawImage(Resources.IMAGE_EDGE_OF_SPACE, 0, (int)spaceBottomLeft.y - Resources.IMAGE_EDGE_OF_SPACE.mHeight / 2, Constants.BOARD_WIDTH, Resources.IMAGE_EDGE_OF_SPACE.mHeight);
+			float y = spaceBottomRight.y;
 			int board_HEIGHT = Constants.BOARD_HEIGHT;
 			int a = 255;
 			g.SetColorizeImages(true);
 			Color color = new Color(255, 255, 255, a);
 			g.SetColor(color);
-			int mTransY = g.mTransY;
-			g.mTransY = (int)((float)mTransY * 0.2f);
-			for (int i = 0; i < this.stars.Length; i++)
+			int transY = g.mTransY;
+			g.mTransY = (int)((float)transY * 0.2f);
+			for (int i = 0; i < stars.Length; i++)
 			{
-				g.SetScale(this.stars[i].size);
-				color.A = (byte)(200 + this.rand.Next(55));
+				g.SetScale(stars[i].size);
+				color.A = (byte)(200 + rand.Next(55));
 				g.SetColor(color);
-				g.DrawImageCel(AtlasResources.IMAGE_ICE_SPARKLES, this.stars[i].pos.X, this.stars[i].pos.Y, this.stars[i].cel, 0);
+				g.DrawImageCel(AtlasResources.IMAGE_ICE_SPARKLES, stars[i].pos.X, stars[i].pos.Y, stars[i].cel, 0);
 			}
 			g.SetScale(1f);
 			g.SetColor(Color.White);
-			g.mTransY = mTransY;
-			this.DrawPileObjects(g);
-			int num = this.mScreenTop - 100;
+			g.mTransY = transY;
+			DrawPileObjects(g);
+			int num = mScreenTop - 100;
 			int num2 = 0;
 			int num3 = 0;
-			for (int j = 0; j < this.mPileHeight; j++)
+			for (int j = 0; j < mPileHeight; j++)
 			{
 				num2++;
 				switch (num2)
@@ -257,59 +257,59 @@ namespace Lawn
 				}
 				num -= num3 - ZombiePileWidget.mZombieSpace;
 			}
-			if (this.mPileHeight == ZombiePileWidget.maxHeight)
+			if (mPileHeight == ZombiePileWidget.maxHeight)
 			{
 				g.DrawImage(AtlasResources.IMAGE_PILE_ZOMBIE_PILE_TOP, Constants.Leaderboard_Pile_1_X + 35, num - 20);
 			}
-			g.DrawImage(AtlasResources.IMAGE_PILE_ZOMBIE_PILE_2B, Constants.Leaderboard_Pile_1_X, this.mScreenTop - 80);
-			g.DrawImage(AtlasResources.IMAGE_PILE_ZOMBIE_PILE_BASE, Constants.LeaderboardScreen_PileBase_X, this.mScreenTop + Constants.LeaderboardScreen_PileBase_Y);
-			g.DrawImage(AtlasResources.IMAGE_PILE_CLOUD_RING, 0, (int)this.spaceBottomLeft.y - Resources.IMAGE_EDGE_OF_SPACE.mHeight / 2 + Constants.LeaderboardScreen_EdgeOfSpace_Overlay_Offset, Constants.BOARD_WIDTH, Resources.IMAGE_EDGE_OF_SPACE.mHeight);
-			if (this.mLoadedFriends)
+			g.DrawImage(AtlasResources.IMAGE_PILE_ZOMBIE_PILE_2B, Constants.Leaderboard_Pile_1_X, mScreenTop - 80);
+			g.DrawImage(AtlasResources.IMAGE_PILE_ZOMBIE_PILE_BASE, Constants.LeaderboardScreen_PileBase_X, mScreenTop + Constants.LeaderboardScreen_PileBase_Y);
+			g.DrawImage(AtlasResources.IMAGE_PILE_CLOUD_RING, 0, (int)spaceBottomLeft.y - Resources.IMAGE_EDGE_OF_SPACE.mHeight / 2 + Constants.LeaderboardScreen_EdgeOfSpace_Overlay_Offset, Constants.BOARD_WIDTH, Resources.IMAGE_EDGE_OF_SPACE.mHeight);
+			if (mLoadedFriends)
 			{
-				this.DrawPileMarkers(g);
+				DrawPileMarkers(g);
 			}
 			base.DeferOverlay();
 		}
 
 		public void DrawPileMarkers(Graphics g)
 		{
-			for (int i = 0; i < this.friendMarkers.Length; i++)
+			for (int i = 0; i < friendMarkers.Length; i++)
 			{
-				if (this.friendMarkers[i] != null && this.friendMarkers[i].mGamer != null)
+				if (friendMarkers[i] != null && friendMarkers[i].mGamer != null)
 				{
-					int num = this.mScreenTop - this.CalculatePileHeight(this.friendMarkers[i].mHeight) - AtlasResources.IMAGE_PILE_SIGN_OVERLAY.mHeight / 2;
+					int num = mScreenTop - CalculatePileHeight(friendMarkers[i].mHeight) - AtlasResources.IMAGE_PILE_SIGN_OVERLAY.mHeight / 2;
 					g.DrawImage(AtlasResources.IMAGE_PILE_BALLOON, 108, num - 152);
 					g.DrawImage(AtlasResources.IMAGE_PILE_SIGN_OVERLAY, 0, num);
-					Image gamerImage = LeaderBoardComm.GetGamerImage(this.friendMarkers[i].mGamer);
+					Image gamerImage = LeaderBoardComm.GetGamerImage(friendMarkers[i].mGamer);
 					if (gamerImage != null)
 					{
 						g.DrawImage(gamerImage, 51, num + 61);
 					}
-					TodCommon.TodDrawString(g, this.friendMarkers[i].mGamer.Gamertag, 126, num + 79, Resources.FONT_DWARVENTODCRAFT15, SexyColor.White, 211, DrawStringJustification.DS_ALIGN_LEFT);
+					TodCommon.TodDrawString(g, friendMarkers[i].mGamer.Gamertag, 126, num + 79, Resources.FONT_DWARVENTODCRAFT15, SexyColor.White, 211, DrawStringJustification.DS_ALIGN_LEFT);
 				}
 			}
 		}
 
 		public void SetObjectYVals()
 		{
-			for (int i = 0; i < this.gPileObjects.Length; i++)
+			for (int i = 0; i < gPileObjects.Length; i++)
 			{
-				this.gPileObjects[i].mY = (int)((float)this.mScreenTop * 0.4f - (float)this.CalculatePileHeight(this.gPileObjects[i].mHeight) * 0.4f);
-				if (this.gPileObjects[i].mType == ZombiePileObjectType.OBJECT_ARROW)
+				gPileObjects[i].mY = (int)((float)mScreenTop * 0.4f - (float)CalculatePileHeight(gPileObjects[i].mHeight) * 0.4f);
+				if (gPileObjects[i].mType == ZombiePileObjectType.OBJECT_ARROW)
 				{
-					this.gPileObjects[i].mY = this.mScreenTop - this.CalculatePileHeight(this.gPileObjects[i].mHeight);
+					gPileObjects[i].mY = mScreenTop - CalculatePileHeight(gPileObjects[i].mHeight);
 				}
 			}
 		}
 
 		public void DrawPileObjects(Graphics g)
 		{
-			int mTransY = g.mTransY;
-			g.mTransY = (int)((float)mTransY * 0.4f);
-			for (int i = 0; i < this.gPileObjects.Length; i++)
+			int transY = g.mTransY;
+			g.mTransY = (int)((float)transY * 0.4f);
+			for (int i = 0; i < gPileObjects.Length; i++)
 			{
-				ZombiePileObject zombiePileObject = this.gPileObjects[i];
-				if (zombiePileObject.mHeight <= this.mPileHeight)
+				ZombiePileObject zombiePileObject = gPileObjects[i];
+				if (zombiePileObject.mHeight <= mPileHeight)
 				{
 					switch (zombiePileObject.mType)
 					{
@@ -345,19 +345,19 @@ namespace Lawn
 						Matrix world = Matrix.Identity;
 						new TRect(0, 0, Resources.IMAGE_BLACKHOLE.mWidth, Resources.IMAGE_BLACKHOLE.mHeight);
 						int num = (int)((float)g.mTransY / 0.4f * 1.6f);
-						this.blackHoleView = Matrix.CreateLookAt(new Vector3(0f, (float)(-(float)num), -1000f), Vector3.Zero, Vector3.UnitY);
-						this.blackHoleVerts[0].Position.Y = (float)(-(float)Resources.IMAGE_BLACKHOLE.mHeight) / 4f - (float)num;
-						this.blackHoleVerts[1].Position.Y = (float)(-(float)Resources.IMAGE_BLACKHOLE.mHeight) / 4f - (float)num;
-						this.blackHoleVerts[2].Position.Y = (float)Resources.IMAGE_BLACKHOLE.mHeight / 4f - (float)num;
-						this.blackHoleVerts[3].Position.Y = (float)Resources.IMAGE_BLACKHOLE.mHeight / 4f - (float)num;
+						blackHoleView = Matrix.CreateLookAt(new Vector3(0f, (float)(-(float)num), -1000f), Vector3.Zero, Vector3.UnitY);
+						blackHoleVerts[0].Position.Y = (float)(-(float)Resources.IMAGE_BLACKHOLE.mHeight) / 4f - (float)num;
+						blackHoleVerts[1].Position.Y = (float)(-(float)Resources.IMAGE_BLACKHOLE.mHeight) / 4f - (float)num;
+						blackHoleVerts[2].Position.Y = (float)Resources.IMAGE_BLACKHOLE.mHeight / 4f - (float)num;
+						blackHoleVerts[3].Position.Y = (float)Resources.IMAGE_BLACKHOLE.mHeight / 4f - (float)num;
 						Vector3 vector = new Vector3(0f, (float)num, 0f);
 						Vector3 position = new Vector3(-60f, 80f, 0f);
 						world = Matrix.CreateTranslation(vector) * Matrix.CreateScale(4f) * Matrix.CreateRotationZ(zombiePileObject.mCounter) * Matrix.CreateRotationX(-0.85f) * Matrix.CreateTranslation(-vector) * Matrix.CreateTranslation(position);
-						g.DrawImageWithBasicEffect(Resources.IMAGE_BLACKHOLE, this.blackHoleVerts, this.blackHoleIndices, world, this.blackHoleView, this.blackHoleProjection);
+						g.DrawImageWithBasicEffect(Resources.IMAGE_BLACKHOLE, blackHoleVerts, blackHoleIndices, world, blackHoleView, blackHoleProjection);
 						break;
 					}
 					case ZombiePileObjectType.OBJECT_ARROW:
-						g.DrawImageRotatedScaled(AtlasResources.IMAGE_DOWNARROW, 160f, (float)(zombiePileObject.mY + (int)zombiePileObject.mOffsetY + mTransY + 50), 3.141592653589793, (float)(AtlasResources.IMAGE_DOWNARROW.mWidth / 2), (float)(AtlasResources.IMAGE_DOWNARROW.mHeight / 2), new TRect?(new TRect(0, 0, AtlasResources.IMAGE_DOWNARROW.mWidth, AtlasResources.IMAGE_DOWNARROW.mHeight)), 10, 10);
+						g.DrawImageRotatedScaled(AtlasResources.IMAGE_DOWNARROW, 160f, (float)(zombiePileObject.mY + (int)zombiePileObject.mOffsetY + transY + 50), 3.141592653589793, (float)(AtlasResources.IMAGE_DOWNARROW.mWidth / 2), (float)(AtlasResources.IMAGE_DOWNARROW.mHeight / 2), new TRect?(new TRect(0, 0, AtlasResources.IMAGE_DOWNARROW.mWidth, AtlasResources.IMAGE_DOWNARROW.mHeight)), 10, 10);
 						break;
 					case ZombiePileObjectType.OBJECT_GEM0:
 					case ZombiePileObjectType.OBJECT_GEM1:
@@ -375,15 +375,15 @@ namespace Lawn
 					}
 				}
 			}
-			g.mTransY = mTransY;
+			g.mTransY = transY;
 		}
 
 		public void UpdatePileObjects()
 		{
-			for (int i = 0; i < this.gPileObjects.Length; i++)
+			for (int i = 0; i < gPileObjects.Length; i++)
 			{
-				ZombiePileObject zombiePileObject = this.gPileObjects[i];
-				if (zombiePileObject.mHeight <= this.mPileHeight)
+				ZombiePileObject zombiePileObject = gPileObjects[i];
+				if (zombiePileObject.mHeight <= mPileHeight)
 				{
 					switch (zombiePileObject.mType)
 					{
@@ -481,55 +481,55 @@ namespace Lawn
 						}
 						break;
 					}
-					this.gPileObjects[i] = zombiePileObject;
+					gPileObjects[i] = zombiePileObject;
 				}
 			}
 		}
 
 		public void ButtonPress(int theId)
 		{
-			this.mApp.PlaySample(Resources.SOUND_GRAVEBUTTON);
+			mApp.PlaySample(Resources.SOUND_GRAVEBUTTON);
 		}
 
 		public void ButtonDepress(int theId)
 		{
 			if (theId == 0)
 			{
-				this.mApp.KillLeaderboardScreen();
-				this.mApp.DoBackToMain(false);
+				mApp.KillLeaderboardScreen();
+				mApp.DoBackToMain(false);
 				return;
 			}
 			if (theId == 4)
 			{
-				this.ShowLeaderboard(LeaderBoardType.LEADERBOARD_TYPE_IZOMBIE);
+				ShowLeaderboard(LeaderBoardType.LEADERBOARD_TYPE_IZOMBIE);
 				return;
 			}
 			if (theId == 3)
 			{
-				this.ShowLeaderboard(LeaderBoardType.LEADERBOARD_TYPE_VASEBREAKER);
+				ShowLeaderboard(LeaderBoardType.LEADERBOARD_TYPE_VASEBREAKER);
 				return;
 			}
 			if (theId == 5)
 			{
-				this.ShowLeaderboard(LeaderBoardType.LEADERBOARD_TYPE_KILLED);
+				ShowLeaderboard(LeaderBoardType.LEADERBOARD_TYPE_KILLED);
 			}
 		}
 
 		public void ShowLeaderboard(LeaderBoardType aType)
 		{
-			this.mApp.ShowLeaderboardDialog(aType);
+			mApp.ShowLeaderboardDialog(aType);
 		}
 
 		public override bool BackButtonPress()
 		{
-			this.mApp.KillLeaderboardScreen();
-			this.mApp.DoBackToMain(false);
+			mApp.KillLeaderboardScreen();
+			mApp.DoBackToMain(false);
 			return true;
 		}
 
 		public override void MouseUp(int x, int y, int theClickCount)
 		{
-			ScrollWidget scrollWidget = (ScrollWidget)this.mParent;
+			ScrollWidget scrollWidget = (ScrollWidget)mParent;
 			scrollWidget.ScrollToBottom(true);
 		}
 
@@ -547,7 +547,7 @@ namespace Lawn
 
 		public void ButtonMouseEnter(int id)
 		{
-			this.mApp.PlayFoley(FoleyType.FOLEY_BLEEP);
+			mApp.PlayFoley(FoleyType.FOLEY_BLEEP);
 		}
 
 		public void ButtonMouseTick(int id)
@@ -558,13 +558,13 @@ namespace Lawn
 		{
 			if (id != 0)
 			{
-				this.mApp.PlaySample(Resources.SOUND_GRAVEBUTTON);
+				mApp.PlaySample(Resources.SOUND_GRAVEBUTTON);
 			}
 			else
 			{
-				this.mApp.PlaySample(Resources.SOUND_TAP);
+				mApp.PlaySample(Resources.SOUND_TAP);
 			}
-			this.mApp.PlayFoley(FoleyType.FOLEY_BLEEP);
+			mApp.PlayFoley(FoleyType.FOLEY_BLEEP);
 		}
 
 		public void ButtonDownTick(int id)

@@ -314,31 +314,31 @@ namespace Lawn
 		public static int GetRectOverlap(TRect rect1, TRect rect2)
 		{
 			int num;
-			int mX2;
+			int aX2;
 			int num2;
 			if (rect1.mX < rect2.mX)
 			{
-				int mX = rect1.mX;
+				int aX = rect1.mX;
 				num = rect1.mX + rect1.mWidth;
-				mX2 = rect2.mX;
+				aX2 = rect2.mX;
 				num2 = rect2.mX + rect2.mWidth;
 			}
 			else
 			{
-				int mX3 = rect2.mX;
+				int aX3 = rect2.mX;
 				num = rect2.mX + rect2.mWidth;
-				mX2 = rect1.mX;
+				aX2 = rect1.mX;
 				num2 = rect1.mX + rect1.mWidth;
 			}
-			if (num <= mX2)
+			if (num <= aX2)
 			{
-				return num - mX2;
+				return num - aX2;
 			}
 			if (num <= num2)
 			{
-				return num - mX2;
+				return num - aX2;
 			}
-			return num2 - mX2;
+			return num2 - aX2;
 		}
 
 		public static bool GetCircleRectOverlap(int theCircleX, int theCircleY, int theRadius, TRect theRect)

@@ -16,7 +16,7 @@ namespace Sexy.TodLib
 
 		public void PrepareForReuse()
 		{
-			this.Reset();
+			Reset();
 			TodWeightedArray.unusedObjects.Push(this);
 		}
 
@@ -26,8 +26,8 @@ namespace Sexy.TodLib
 
 		public void Reset()
 		{
-			this.mItem = null;
-			this.mWeight = 0;
+			mItem = null;
+			mWeight = 0;
 		}
 
 		public object mItem;

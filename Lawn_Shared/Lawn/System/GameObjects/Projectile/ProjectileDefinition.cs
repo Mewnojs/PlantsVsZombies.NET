@@ -6,9 +6,9 @@ namespace Lawn
 	{
 		public ProjectileDefinition(ProjectileType theType, int theRow, int theDamage)
 		{
-			this.mProjectileType = theType;
-			this.mImageRow = theRow;
-			this.mDamage = theDamage;
+			mProjectileType = theType;
+			mImageRow = theRow;
+			mDamage = theDamage;
 		}
 
 		public ProjectileType mProjectileType;

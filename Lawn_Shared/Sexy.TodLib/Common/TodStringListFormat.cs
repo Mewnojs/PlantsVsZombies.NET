@@ -6,27 +6,27 @@ namespace Sexy.TodLib
 	{
 		public TodStringListFormat()
 		{
-			this.Reset();
+			Reset();
 		}
 
 		public void Reset()
 		{
-			this.mFormatName = null;
-			this.mNewFont = null;
-			this.mNewColor = default(SexyColor);
-			this.mBaseColor = default(SexyColor);
-			this.mLineSpacingOffset = 0;
-			this.mFormatFlags = 0U;
+			mFormatName = null;
+			mNewFont = null;
+			mNewColor = default(SexyColor);
+			mBaseColor = default(SexyColor);
+			mLineSpacingOffset = 0;
+			mFormatFlags = 0U;
 		}
 
 		public TodStringListFormat(string aFormatName, Font aNewFont, SexyColor aNewColor, int aLineSpacingOffset, uint aFormatFlags)
 		{
-			this.mFormatName = aFormatName;
-			this.mNewFont = aNewFont;
-			this.mNewColor = aNewColor;
-			this.mBaseColor = aNewColor;
-			this.mLineSpacingOffset = aLineSpacingOffset;
-			this.mFormatFlags = aFormatFlags;
+			mFormatName = aFormatName;
+			mNewFont = aNewFont;
+			mNewColor = aNewColor;
+			mBaseColor = aNewColor;
+			mLineSpacingOffset = aLineSpacingOffset;
+			mFormatFlags = aFormatFlags;
 		}
 
 		public SexyColor mBaseColor = default(SexyColor);

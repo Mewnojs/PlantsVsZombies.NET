@@ -5,86 +5,86 @@ public class DataArray<T> where T : class, new()
 {
 	public DataArray()
 	{
-		this.mBlock = null;
-		this.mMaxUsedCount = 0U;
-		this.mMaxSize = 0U;
-		this.mFreeListHead = 0;
-		this.mSize = 0U;
-		this.mNextKey = 1U;
-		this.mName = null;
+		mBlock = null;
+		mMaxUsedCount = 0U;
+		mMaxSize = 0U;
+		mFreeListHead = 0;
+		mSize = 0U;
+		mNextKey = 1U;
+		mName = null;
 	}
 
 	public void Dispose()
 	{
-		this.DataArrayDispose();
+		DataArrayDispose();
 	}
 
 	public void DataArrayInitialize(uint theMaxSize, string theName)
 	{
-		Debug.ASSERT(this.mBlock == null);
+		Debug.ASSERT(mBlock == null);
 		Debug.ASSERT(theMaxSize <= 65536U);
-		if (this.mBlock == null || (long)this.mBlock.Length != (long)((ulong)theMaxSize))
+		if (mBlock == null || (long)mBlock.Length != (long)((ulong)theMaxSize))
 		{
-			this.mBlock = new T[theMaxSize];
+			mBlock = new T[theMaxSize];
 		}
-		for (int i = 0; i < this.mBlock.Length; i++)
+		for (int i = 0; i < mBlock.Length; i++)
 		{
-			this.mBlock[i] = default(T);
+			mBlock[i] = default(T);
 		}
-		this.mMaxSize = theMaxSize;
-		this.mName = theName;
-		this.mNextKey = 1U;
+		mMaxSize = theMaxSize;
+		mName = theName;
+		mNextKey = 1U;
 	}
 
 	public void DataArrayDispose()
 	{
-		if (this.mBlock != null)
+		if (mBlock != null)
 		{
-			this.DataArrayFreeAll();
-			this.mBlock = null;
-			this.mMaxUsedCount = 0U;
-			this.mMaxSize = 0U;
-			this.mFreeListHead = 0;
-			this.mSize = 0U;
-			this.mName = null;
+			DataArrayFreeAll();
+			mBlock = null;
+			mMaxUsedCount = 0U;
+			mMaxSize = 0U;
+			mFreeListHead = 0;
+			mSize = 0U;
+			mName = null;
 		}
 	}
 
 	public void DataArrayFreeAll()
 	{
 		int num = 0;
-		while ((long)num < (long)((ulong)this.mMaxSize))
+		while ((long)num < (long)((ulong)mMaxSize))
 		{
-			this.mBlock[num] = default(T);
+			mBlock[num] = default(T);
 			num++;
 		}
-		this.mMaxUsedCount = 0U;
-		this.mFreeListHead = 0;
+		mMaxUsedCount = 0U;
+		mFreeListHead = 0;
 	}
 
 	public bool IterateNext(ref T theItem)
 	{
 		if (theItem == null)
 		{
-			theItem = this.DataArrayGet(1U);
+			theItem = DataArrayGet(1U);
 			return true;
 		}
-		int nextValidIndex = this.GetNextValidIndex((uint)(this.DataArrayGetID(theItem) - 1));
-		if ((long)nextValidIndex >= (long)((ulong)this.mMaxUsedCount))
+		int nextValidIndex = GetNextValidIndex((uint)(DataArrayGetID(theItem) - 1));
+		if ((long)nextValidIndex >= (long)((ulong)mMaxUsedCount))
 		{
 			theItem = default(T);
 			return false;
 		}
-		theItem = this.mBlock[nextValidIndex];
+		theItem = mBlock[nextValidIndex];
 		return true;
 	}
 
 	private int GetNextValidIndex(uint index)
 	{
 		int num = (int)(index + 1U);
-		while ((long)num < (long)((ulong)this.mMaxSize))
+		while ((long)num < (long)((ulong)mMaxSize))
 		{
-			if (this.mBlock[num] != null)
+			if (mBlock[num] != null)
 			{
 				return num;
 			}
@@ -96,9 +96,9 @@ public class DataArray<T> where T : class, new()
 	private int GetNextFreeIndex(uint index)
 	{
 		int num = (int)(index + 1U);
-		while ((long)num < (long)((ulong)this.mMaxSize))
+		while ((long)num < (long)((ulong)mMaxSize))
 		{
-			if (this.mBlock[num] == null)
+			if (mBlock[num] == null)
 			{
 				return num;
 			}
@@ -110,33 +110,33 @@ public class DataArray<T> where T : class, new()
 	public T DataArrayAlloc()
 	{
 		uint num;
-		if ((long)this.mFreeListHead == (long)((ulong)this.mMaxUsedCount))
+		if ((long)mFreeListHead == (long)((ulong)mMaxUsedCount))
 		{
-			num = this.mMaxUsedCount;
-			this.mMaxUsedCount += 1U;
-			this.mFreeListHead = (int)this.mMaxUsedCount;
+			num = mMaxUsedCount;
+			mMaxUsedCount += 1U;
+			mFreeListHead = (int)mMaxUsedCount;
 		}
 		else
 		{
-			num = (uint)this.mFreeListHead;
-			this.mFreeListHead = this.GetNextFreeIndex((uint)this.mFreeListHead);
+			num = (uint)mFreeListHead;
+			mFreeListHead = GetNextFreeIndex((uint)mFreeListHead);
 		}
 		T t = Activator.CreateInstance<T>();
-		this.mBlock[(int)((UIntPtr)num)] = t;
+		mBlock[(int)((UIntPtr)num)] = t;
 		return t;
 	}
 
 	public void DataArrayFree(T theItem)
 	{
 		int num = 0;
-		while ((long)num < (long)((ulong)this.mMaxSize))
+		while ((long)num < (long)((ulong)mMaxSize))
 		{
-			if (this.mBlock[num] == theItem)
+			if (mBlock[num] == theItem)
 			{
-				this.mBlock[num] = default(T);
-				if (num < this.mFreeListHead)
+				mBlock[num] = default(T);
+				if (num < mFreeListHead)
 				{
-					this.mFreeListHead = num;
+					mFreeListHead = num;
 				}
 				return;
 			}
@@ -146,24 +146,24 @@ public class DataArray<T> where T : class, new()
 
 	public T DataArrayGet(uint theId)
 	{
-		return this.mBlock[(int)((UIntPtr)theId)];
+		return mBlock[(int)((UIntPtr)theId)];
 	}
 
 	public T DataArrayTryToGet(uint theId)
 	{
-		if (theId >= this.mMaxSize)
+		if (theId >= mMaxSize)
 		{
 			return default(T);
 		}
-		return this.mBlock[(int)((UIntPtr)theId)];
+		return mBlock[(int)((UIntPtr)theId)];
 	}
 
 	public int DataArrayGetID(T theItem)
 	{
 		int num = 0;
-		while ((long)num < (long)((ulong)this.mMaxSize))
+		while ((long)num < (long)((ulong)mMaxSize))
 		{
-			if (this.mBlock[num] == theItem)
+			if (mBlock[num] == theItem)
 			{
 				return num;
 			}

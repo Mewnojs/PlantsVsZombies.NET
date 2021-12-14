@@ -6,10 +6,10 @@ namespace Sexy.TodLib
 	{
 		public FoleyParams(FoleyType aFoleyType, float aPitchRange, int[] aIDs, uint aFoleyFlags)
 		{
-			this.mFoleyType = aFoleyType;
-			this.mPitchRange = aPitchRange;
-			this.mSfxID = aIDs;
-			this.mFoleyFlags = aFoleyFlags;
+			mFoleyType = aFoleyType;
+			mPitchRange = aPitchRange;
+			mSfxID = aIDs;
+			mFoleyFlags = aFoleyFlags;
 		}
 
 		public FoleyType mFoleyType;

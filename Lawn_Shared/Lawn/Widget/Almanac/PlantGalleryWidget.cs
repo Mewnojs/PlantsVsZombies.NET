@@ -7,17 +7,17 @@ namespace Lawn
 	{
 		public PlantGalleryWidget(AlmanacDialog theDialog)
 		{
-			this.mDialog = theDialog;
-			this.mWidth = Constants.PlantGallerySize.X;
-			this.mHeight = Constants.PlantGallerySize.Y;
+			mDialog = theDialog;
+			mWidth = Constants.PlantGallerySize.X;
+			mHeight = Constants.PlantGallerySize.Y;
 		}
 
 		public override void MouseUp(int x, int y, int theClickCount)
 		{
-			SeedType seedType = this.SeedHitTest(x, y);
+			SeedType seedType = SeedHitTest(x, y);
 			if (seedType != SeedType.SEED_NONE)
 			{
-				this.mDialog.PlantSelected(seedType);
+				mDialog.PlantSelected(seedType);
 			}
 		}
 
@@ -26,11 +26,11 @@ namespace Lawn
 			for (int i = 0; i < GameConstants.NUM_ALMANAC_SEEDS; i++)
 			{
 				SeedType seedType = (SeedType)i;
-				if (this.mDialog.mApp.HasSeedType(seedType))
+				if (mDialog.mApp.HasSeedType(seedType))
 				{
 					int num = 0;
 					int num2 = 0;
-					this.GetSeedPosition(seedType, ref num, ref num2);
+					GetSeedPosition(seedType, ref num, ref num2);
 					int small_SEEDPACKET_WIDTH = Constants.SMALL_SEEDPACKET_WIDTH;
 					int small_SEEDPACKET_HEIGHT = Constants.SMALL_SEEDPACKET_HEIGHT;
 					if (x >= num && y >= num2 && x < num + small_SEEDPACKET_WIDTH && y < num2 + small_SEEDPACKET_HEIGHT)
@@ -66,8 +66,8 @@ namespace Lawn
 					SeedType seedType = (SeedType)j;
 					int num = 0;
 					int num2 = 0;
-					this.GetSeedPosition(seedType, ref num, ref num2);
-					if (!this.mDialog.mApp.HasSeedType(seedType))
+					GetSeedPosition(seedType, ref num, ref num2);
+					if (!mDialog.mApp.HasSeedType(seedType))
 					{
 						g.DrawImage(AtlasResources.IMAGE_ALMANAC_PLANTBLANK, num, num2);
 					}

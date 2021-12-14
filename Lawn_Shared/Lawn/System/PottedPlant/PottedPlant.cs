@@ -8,53 +8,53 @@ namespace Lawn
 	{
 		public void InitializePottedPlant(SeedType theSeedType)
 		{
-			this.mSeedType = theSeedType;
-			this.mDrawVariation = DrawVariation.VARIATION_NORMAL;
-			this.mLastWateredTime.AddTicks(0L);
-			this.mFacing = (PottedPlant.FacingDirection)TodCommon.RandRangeInt(0, 1);
-			this.mPlantAge = PottedPlantAge.PLANTAGE_SPROUT;
-			this.mTimesFed = 0;
-			this.mWhichZenGarden = GardenType.GARDEN_MAIN;
-			this.mFeedingsPerGrow = TodCommon.RandRangeInt(3, 5);
-			this.mPlantNeed = PottedPlantNeed.PLANTNEED_NONE;
+			mSeedType = theSeedType;
+			mDrawVariation = DrawVariation.VARIATION_NORMAL;
+			mLastWateredTime.AddTicks(0L);
+			mFacing = (PottedPlant.FacingDirection)TodCommon.RandRangeInt(0, 1);
+			mPlantAge = PottedPlantAge.PLANTAGE_SPROUT;
+			mTimesFed = 0;
+			mWhichZenGarden = GardenType.GARDEN_MAIN;
+			mFeedingsPerGrow = TodCommon.RandRangeInt(3, 5);
+			mPlantNeed = PottedPlantNeed.PLANTNEED_NONE;
 		}
 
 		public void Save(Sexy.Buffer b)
 		{
-			b.WriteLong((int)this.mSeedType);
-			b.WriteLong((int)this.mWhichZenGarden);
-			b.WriteLong(this.mX);
-			b.WriteLong(this.mY);
-			b.WriteLong((int)this.mFacing);
-			b.WriteDateTime(this.mLastWateredTime);
-			b.WriteLong((int)this.mDrawVariation);
-			b.WriteLong((int)this.mPlantAge);
-			b.WriteLong(this.mTimesFed);
-			b.WriteLong(this.mFeedingsPerGrow);
-			b.WriteLong((int)this.mPlantNeed);
-			b.WriteDateTime(this.mLastNeedFulfilledTime);
-			b.WriteDateTime(this.mLastFertilizedTime);
-			b.WriteDateTime(this.mLastChocolateTime);
-			b.WriteLongArray(this.mFutureAttribute);
+			b.WriteLong((int)mSeedType);
+			b.WriteLong((int)mWhichZenGarden);
+			b.WriteLong(mX);
+			b.WriteLong(mY);
+			b.WriteLong((int)mFacing);
+			b.WriteDateTime(mLastWateredTime);
+			b.WriteLong((int)mDrawVariation);
+			b.WriteLong((int)mPlantAge);
+			b.WriteLong(mTimesFed);
+			b.WriteLong(mFeedingsPerGrow);
+			b.WriteLong((int)mPlantNeed);
+			b.WriteDateTime(mLastNeedFulfilledTime);
+			b.WriteDateTime(mLastFertilizedTime);
+			b.WriteDateTime(mLastChocolateTime);
+			b.WriteLongArray(mFutureAttribute);
 		}
 
 		public void Load(Sexy.Buffer b)
 		{
-			this.mSeedType = (SeedType)b.ReadLong();
-			this.mWhichZenGarden = (GardenType)b.ReadLong();
-			this.mX = b.ReadLong();
-			this.mY = b.ReadLong();
-			this.mFacing = (PottedPlant.FacingDirection)b.ReadLong();
-			this.mLastWateredTime = b.ReadDateTime();
-			this.mDrawVariation = (DrawVariation)b.ReadLong();
-			this.mPlantAge = (PottedPlantAge)b.ReadLong();
-			this.mTimesFed = b.ReadLong();
-			this.mFeedingsPerGrow = b.ReadLong();
-			this.mPlantNeed = (PottedPlantNeed)b.ReadLong();
-			this.mLastNeedFulfilledTime = b.ReadDateTime();
-			this.mLastFertilizedTime = b.ReadDateTime();
-			this.mLastChocolateTime = b.ReadDateTime();
-			this.mFutureAttribute = b.ReadLongArray();
+			mSeedType = (SeedType)b.ReadLong();
+			mWhichZenGarden = (GardenType)b.ReadLong();
+			mX = b.ReadLong();
+			mY = b.ReadLong();
+			mFacing = (PottedPlant.FacingDirection)b.ReadLong();
+			mLastWateredTime = b.ReadDateTime();
+			mDrawVariation = (DrawVariation)b.ReadLong();
+			mPlantAge = (PottedPlantAge)b.ReadLong();
+			mTimesFed = b.ReadLong();
+			mFeedingsPerGrow = b.ReadLong();
+			mPlantNeed = (PottedPlantNeed)b.ReadLong();
+			mLastNeedFulfilledTime = b.ReadDateTime();
+			mLastFertilizedTime = b.ReadDateTime();
+			mLastChocolateTime = b.ReadDateTime();
+			mFutureAttribute = b.ReadLongArray();
 		}
 
 		public SeedType mSeedType;

@@ -4,32 +4,32 @@ public struct PerfTimer
 {
 	private void CalcDuration()
 	{
-		this.mEnd = Environment.TickCount;
-		this.mDuration = this.mEnd - this.mStart;
+		mEnd = Environment.TickCount;
+		mDuration = mEnd - mStart;
 	}
 
 	public void Start()
 	{
-		this.mRunning = true;
-		this.mStart = Environment.TickCount;
+		mRunning = true;
+		mStart = Environment.TickCount;
 	}
 
 	public void Stop()
 	{
-		if (this.mRunning)
+		if (mRunning)
 		{
-			this.CalcDuration();
-			this.mRunning = false;
+			CalcDuration();
+			mRunning = false;
 		}
 	}
 
 	public double GetDuration()
 	{
-		if (this.mRunning)
+		if (mRunning)
 		{
-			this.CalcDuration();
+			CalcDuration();
 		}
-		return (double)this.mDuration;
+		return (double)mDuration;
 	}
 
 	private bool mRunning;

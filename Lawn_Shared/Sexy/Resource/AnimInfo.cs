@@ -7,20 +7,20 @@ namespace Sexy
 	{
 		public AnimInfo()
 		{
-			this.mAnimType = AnimType.AnimType_None;
-			this.mFrameDelay = 1;
-			this.mNumCels = 1;
-			this.mTotalAnimTime = 0;
+			mAnimType = AnimType.AnimType_None;
+			mFrameDelay = 1;
+			mNumCels = 1;
+			mTotalAnimTime = 0;
 		}
 
 		public AnimInfo(AnimInfo anotherAnim)
 		{
-			this.mAnimType = anotherAnim.mAnimType;
-			this.mFrameDelay = anotherAnim.mFrameDelay;
-			this.mNumCels = anotherAnim.mNumCels;
-			this.mTotalAnimTime = anotherAnim.mTotalAnimTime;
-			this.mPerFrameDelay = anotherAnim.mPerFrameDelay;
-			this.mFrameMap = anotherAnim.mFrameMap;
+			mAnimType = anotherAnim.mAnimType;
+			mFrameDelay = anotherAnim.mFrameDelay;
+			mNumCels = anotherAnim.mNumCels;
+			mTotalAnimTime = anotherAnim.mTotalAnimTime;
+			mPerFrameDelay = anotherAnim.mPerFrameDelay;
+			mFrameMap = anotherAnim.mFrameMap;
 		}
 
 		public void Dispose()
@@ -29,122 +29,122 @@ namespace Sexy
 
 		public void SetPerFrameDelay(int theFrame, int theTime)
 		{
-			if (this.mPerFrameDelay.Count <= theFrame)
+			if (mPerFrameDelay.Count <= theFrame)
 			{
-				this.mPerFrameDelay.Capacity = theFrame + 1;
+				mPerFrameDelay.Capacity = theFrame + 1;
 			}
-			this.mPerFrameDelay[theFrame] = theTime;
+			mPerFrameDelay[theFrame] = theTime;
 		}
 
 		public void Compute(int theNumCels)
 		{
-			this.Compute(theNumCels, 0, 0);
+			Compute(theNumCels, 0, 0);
 		}
 
 		public void Compute(int theNumCels, int theBeginFrameTime)
 		{
-			this.Compute(theNumCels, theBeginFrameTime, 0);
+			Compute(theNumCels, theBeginFrameTime, 0);
 		}
 
 		public void Compute(int theNumCels, int theBeginFrameTime, int theEndFrameTime)
 		{
-			this.mNumCels = theNumCels;
-			if (this.mNumCels <= 0)
+			mNumCels = theNumCels;
+			if (mNumCels <= 0)
 			{
-				this.mNumCels = 1;
+				mNumCels = 1;
 			}
-			if (this.mFrameDelay <= 0)
+			if (mFrameDelay <= 0)
 			{
-				this.mFrameDelay = 1;
+				mFrameDelay = 1;
 			}
-			if (this.mAnimType == AnimType.AnimType_PingPong && this.mNumCels > 1)
+			if (mAnimType == AnimType.AnimType_PingPong && mNumCels > 1)
 			{
-				this.mFrameMap.Capacity = theNumCels * 2 - 2;
+				mFrameMap.Capacity = theNumCels * 2 - 2;
 				int num = 0;
 				for (int i = 0; i < theNumCels; i++)
 				{
-					this.mFrameMap[num++] = i;
+					mFrameMap[num++] = i;
 				}
 				for (int i = theNumCels - 2; i >= 1; i--)
 				{
-					this.mFrameMap[num++] = i;
+					mFrameMap[num++] = i;
 				}
 			}
-			if (this.mFrameMap.Count != 0)
+			if (mFrameMap.Count != 0)
 			{
-				this.mNumCels = this.mFrameMap.Count;
+				mNumCels = mFrameMap.Count;
 			}
 			if (theBeginFrameTime > 0)
 			{
-				this.SetPerFrameDelay(0, theBeginFrameTime);
+				SetPerFrameDelay(0, theBeginFrameTime);
 			}
 			if (theEndFrameTime > 0)
 			{
-				this.SetPerFrameDelay(this.mNumCels - 1, theEndFrameTime);
+				SetPerFrameDelay(mNumCels - 1, theEndFrameTime);
 			}
-			if (this.mPerFrameDelay.Count != 0)
+			if (mPerFrameDelay.Count != 0)
 			{
-				this.mTotalAnimTime = 0;
-				this.mPerFrameDelay.Capacity = this.mNumCels;
-				for (int i = 0; i < this.mNumCels; i++)
+				mTotalAnimTime = 0;
+				mPerFrameDelay.Capacity = mNumCels;
+				for (int i = 0; i < mNumCels; i++)
 				{
-					if (this.mPerFrameDelay[i] <= 0)
+					if (mPerFrameDelay[i] <= 0)
 					{
-						this.mPerFrameDelay[i] = this.mFrameDelay;
+						mPerFrameDelay[i] = mFrameDelay;
 					}
-					this.mTotalAnimTime += this.mPerFrameDelay[i];
+					mTotalAnimTime += mPerFrameDelay[i];
 				}
 			}
 			else
 			{
-				this.mTotalAnimTime = this.mFrameDelay * this.mNumCels;
+				mTotalAnimTime = mFrameDelay * mNumCels;
 			}
-			if (this.mFrameMap.Count != 0)
+			if (mFrameMap.Count != 0)
 			{
-				this.mFrameMap.Capacity = this.mNumCels;
+				mFrameMap.Capacity = mNumCels;
 			}
 		}
 
 		public int GetPerFrameCel(int theTime)
 		{
-			for (int i = 0; i < this.mNumCels; i++)
+			for (int i = 0; i < mNumCels; i++)
 			{
-				theTime -= this.mPerFrameDelay[i];
+				theTime -= mPerFrameDelay[i];
 				if (theTime < 0)
 				{
 					return i;
 				}
 			}
-			return this.mNumCels - 1;
+			return mNumCels - 1;
 		}
 
 		public int GetCel(int theTime)
 		{
-			if (this.mAnimType == AnimType.AnimType_Once && theTime >= this.mTotalAnimTime)
+			if (mAnimType == AnimType.AnimType_Once && theTime >= mTotalAnimTime)
 			{
-				if (this.mFrameMap.Count != 0)
+				if (mFrameMap.Count != 0)
 				{
-					return this.mFrameMap[this.mFrameMap.Count - 1];
+					return mFrameMap[mFrameMap.Count - 1];
 				}
-				return this.mNumCels - 1;
+				return mNumCels - 1;
 			}
 			else
 			{
-				theTime %= this.mTotalAnimTime;
+				theTime %= mTotalAnimTime;
 				int num;
-				if (this.mPerFrameDelay.Count != 0)
+				if (mPerFrameDelay.Count != 0)
 				{
-					num = this.GetPerFrameCel(theTime);
+					num = GetPerFrameCel(theTime);
 				}
 				else
 				{
-					num = theTime / this.mFrameDelay % this.mNumCels;
+					num = theTime / mFrameDelay % mNumCels;
 				}
-				if (this.mFrameMap.Count == 0)
+				if (mFrameMap.Count == 0)
 				{
 					return num;
 				}
-				return this.mFrameMap[num];
+				return mFrameMap[num];
 			}
 		}
 

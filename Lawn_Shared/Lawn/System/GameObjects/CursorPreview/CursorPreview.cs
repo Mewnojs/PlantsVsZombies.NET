@@ -7,13 +7,13 @@ namespace Lawn
 	{
 		public CursorPreview()
 		{
-			this.mX = 0;
-			this.mY = 0;
-			this.mWidth = 80;
-			this.mHeight = 80;
-			this.mGridX = 0;
-			this.mGridY = 0;
-			this.mVisible = false;
+			mX = 0;
+			mY = 0;
+			mWidth = 80;
+			mHeight = 80;
+			mGridX = 0;
+			mGridY = 0;
+			mVisible = false;
 		}
 
 		public void Update()
@@ -32,7 +32,7 @@ namespace Lawn
 
 		public void Draw(Graphics g)
 		{
-			SeedType seedTypeInCursor = this.mBoard.GetSeedTypeInCursor();
+			SeedType seedTypeInCursor = mBoard.GetSeedTypeInCursor();
 		}
 
 		public int mGridX;

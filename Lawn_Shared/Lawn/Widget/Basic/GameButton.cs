@@ -11,57 +11,57 @@ namespace Lawn
 		{
 			get
 			{
-				return this.label;
+				return label;
 			}
 			set
 			{
-				this.label = value;
-				this.CalculateTextScale();
+				label = value;
+				CalculateTextScale();
 			}
 		}
 
 		public GameButton(int theId, Widget parent)
 		{
-			this.mApp = (LawnApp)GlobalStaticVars.gSexyAppBase;
-			this.mId = theId;
-			this.mFont = null;
-			this.mLabelJustify = 0;
-			this.mButtonImage = null;
-			this.mOverImage = null;
-			this.mOverOverlayImage = null;
-			this.mDownImage = null;
-			this.mDisabledImage = null;
-			this.mInverted = false;
-			this.mBtnNoDraw = false;
-			this.mFrameNoDraw = false;
-			this.mDisabled = false;
-			this.mIsDown = false;
-			this.mIsOver = false;
-			this.mX = 0;
-			this.mY = 0;
-			this.mWidth = 0;
-			this.mHeight = 0;
-			this.mParentWidget = parent;
-			this.mDrawStoneButton = false;
-			this.mTextOffsetX = 0;
-			this.mTextOffsetY = 0;
-			this.mButtonOffsetX = 0;
-			this.mButtonOffsetY = 0;
-			this.mOverAlpha = 0.0;
-			this.mOverAlphaSpeed = 0.0;
-			this.mOverAlphaFadeInSpeed = 0.0;
+			mApp = (LawnApp)GlobalStaticVars.gSexyAppBase;
+			mId = theId;
+			mFont = null;
+			mLabelJustify = 0;
+			mButtonImage = null;
+			mOverImage = null;
+			mOverOverlayImage = null;
+			mDownImage = null;
+			mDisabledImage = null;
+			mInverted = false;
+			mBtnNoDraw = false;
+			mFrameNoDraw = false;
+			mDisabled = false;
+			mIsDown = false;
+			mIsOver = false;
+			mX = 0;
+			mY = 0;
+			mWidth = 0;
+			mHeight = 0;
+			mParentWidget = parent;
+			mDrawStoneButton = false;
+			mTextOffsetX = 0;
+			mTextOffsetY = 0;
+			mButtonOffsetX = 0;
+			mButtonOffsetY = 0;
+			mOverAlpha = 0.0;
+			mOverAlphaSpeed = 0.0;
+			mOverAlphaFadeInSpeed = 0.0;
 			for (int i = 0; i < 6; i++)
 			{
-				this.mColors[i] = GameConstants.gGameButtonColors[i];
+				mColors[i] = GameConstants.gGameButtonColors[i];
 			}
-			this.mFont = Resources.FONT_DWARVENTODCRAFT15;
+			mFont = Resources.FONT_DWARVENTODCRAFT15;
 		}
 
 		public void Dispose()
 		{
-			if (this.mFont != null)
+			if (mFont != null)
 			{
-				this.mFont.Dispose();
+				mFont.Dispose();
 			}
 		}
 
@@ -74,226 +74,226 @@ namespace Lawn
 		{
 			if (theRect.mWidth != 0)
 			{
-				g.DrawImage(this.mButtonImage, x + this.mButtonOffsetX, y + this.mButtonOffsetY, theRect);
+				g.DrawImage(mButtonImage, x + mButtonOffsetX, y + mButtonOffsetY, theRect);
 				return;
 			}
-			g.DrawImage(theImage, x + this.mButtonOffsetX, y + this.mButtonOffsetY);
+			g.DrawImage(theImage, x + mButtonOffsetX, y + mButtonOffsetY);
 		}
 
 		public void SetFont(Font theFont)
 		{
-			if (this.mFont != null)
+			if (mFont != null)
 			{
-				this.mFont.Dispose();
+				mFont.Dispose();
 			}
-			this.mFont = theFont.Duplicate();
+			mFont = theFont.Duplicate();
 		}
 
 		public bool IsButtonDown()
 		{
-			return this.mIsDown && this.mIsOver && !this.mDisabled && !this.mBtnNoDraw;
+			return mIsDown && mIsOver && !mDisabled && !mBtnNoDraw;
 		}
 
 		public void Draw(Graphics g)
 		{
-			if (this.mBtnNoDraw)
+			if (mBtnNoDraw)
 			{
 				return;
 			}
-			bool flag = this.mIsDown && this.mIsOver && !this.mDisabled;
-			flag ^= this.mInverted;
-			bool flag2 = this.mIsOver && !this.mDisabled;
-			if (this.mDrawStoneButton)
+			bool flag = mIsDown && mIsOver && !mDisabled;
+			flag ^= mInverted;
+			bool flag2 = mIsOver && !mDisabled;
+			if (mDrawStoneButton)
 			{
-				GameButton.DrawStoneButton(g, this.mX, this.mY, this.mWidth, this.mHeight, flag, flag2, this.mLabel, this.mFont, this.mFontScale);
+				GameButton.DrawStoneButton(g, mX, mY, mWidth, mHeight, flag, flag2, mLabel, mFont, mFontScale);
 				return;
 			}
-			g.mTransX += this.mX;
-			g.mTransY += this.mY;
-			int num = this.mTextOffsetX;
-			int num2 = this.mTextOffsetY;
-			if (this.mFont != null && this.mLabelJustify == 1)
+			g.mTransX += mX;
+			g.mTransY += mY;
+			int num = mTextOffsetX;
+			int num2 = mTextOffsetY;
+			if (mFont != null && mLabelJustify == 1)
 			{
-				num += this.mWidth - this.mFont.StringWidth(this.mLabel);
+				num += mWidth - mFont.StringWidth(mLabel);
 			}
-			g.SetFont(this.mFont);
+			g.SetFont(mFont);
 			if (!flag)
 			{
-				if (this.mDisabled && this.HaveButtonImage(this.mDisabledImage, this.mDisabledRect))
+				if (mDisabled && HaveButtonImage(mDisabledImage, mDisabledRect))
 				{
-					this.DrawButtonImage(g, this.mDisabledImage, this.mDisabledRect, 0, 0);
+					DrawButtonImage(g, mDisabledImage, mDisabledRect, 0, 0);
 				}
-				else if (this.mOverAlpha > 0.0 && this.HaveButtonImage(this.mOverImage, this.mOverRect))
+				else if (mOverAlpha > 0.0 && HaveButtonImage(mOverImage, mOverRect))
 				{
-					if (this.HaveButtonImage(this.mButtonImage, this.mNormalRect) && this.mOverAlpha < 1.0)
+					if (HaveButtonImage(mButtonImage, mNormalRect) && mOverAlpha < 1.0)
 					{
-						this.DrawButtonImage(g, this.mButtonImage, this.mNormalRect, 0, 0);
+						DrawButtonImage(g, mButtonImage, mNormalRect, 0, 0);
 					}
 					g.SetColorizeImages(true);
-					g.SetColor(new SexyColor(255, 255, 255, (int)(this.mOverAlpha * 255.0)));
-					this.DrawButtonImage(g, this.mOverImage, this.mOverRect, 0, 0);
+					g.SetColor(new SexyColor(255, 255, 255, (int)(mOverAlpha * 255.0)));
+					DrawButtonImage(g, mOverImage, mOverRect, 0, 0);
 					g.SetColorizeImages(false);
 				}
-				else if (flag2 && this.HaveButtonImage(this.mOverImage, this.mOverRect))
+				else if (flag2 && HaveButtonImage(mOverImage, mOverRect))
 				{
-					this.DrawButtonImage(g, this.mOverImage, this.mOverRect, 0, 0);
+					DrawButtonImage(g, mOverImage, mOverRect, 0, 0);
 				}
-				else if (this.HaveButtonImage(this.mButtonImage, this.mNormalRect))
+				else if (HaveButtonImage(mButtonImage, mNormalRect))
 				{
-					this.DrawButtonImage(g, this.mButtonImage, this.mNormalRect, 0, 0);
+					DrawButtonImage(g, mButtonImage, mNormalRect, 0, 0);
 				}
 				if (flag2)
 				{
-					g.SetColor(this.mColors[1]);
+					g.SetColor(mColors[1]);
 				}
 				else
 				{
-					g.SetColor(this.mColors[0]);
+					g.SetColor(mColors[0]);
 				}
-				g.SetScale(this.mFontScale);
-				if (this.mLabelJustify == 0)
+				g.SetScale(mFontScale);
+				if (mLabelJustify == 0)
 				{
-					num += (this.mWidth - this.mFont.StringWidth(this.mLabel)) / 2 + 1;
+					num += (mWidth - mFont.StringWidth(mLabel)) / 2 + 1;
 				}
-				num2 += (this.mHeight + this.mFont.GetAscent()) / 2;
-				g.DrawString(this.mLabel, num, num2);
+				num2 += (mHeight + mFont.GetAscent()) / 2;
+				g.DrawString(mLabel, num, num2);
 				g.SetScale(1f);
-				if (flag2 && this.mOverOverlayImage != null)
+				if (flag2 && mOverOverlayImage != null)
 				{
 					g.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
-					this.DrawButtonImage(g, this.mOverOverlayImage, this.mNormalRect, 0, 0);
+					DrawButtonImage(g, mOverOverlayImage, mNormalRect, 0, 0);
 					g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
 				}
 			}
 			else
 			{
-				if (this.HaveButtonImage(this.mDownImage, this.mDownRect))
+				if (HaveButtonImage(mDownImage, mDownRect))
 				{
-					this.DrawButtonImage(g, this.mDownImage, this.mDownRect, 0, 0);
+					DrawButtonImage(g, mDownImage, mDownRect, 0, 0);
 				}
-				else if (this.HaveButtonImage(this.mOverImage, this.mOverRect))
+				else if (HaveButtonImage(mOverImage, mOverRect))
 				{
-					this.DrawButtonImage(g, this.mOverImage, this.mOverRect, 1, 1);
+					DrawButtonImage(g, mOverImage, mOverRect, 1, 1);
 				}
 				else
 				{
-					this.DrawButtonImage(g, this.mButtonImage, this.mNormalRect, 1, 1);
+					DrawButtonImage(g, mButtonImage, mNormalRect, 1, 1);
 				}
-				g.SetColor(this.mColors[1]);
-				g.SetScale(this.mFontScale);
-				if (this.mLabelJustify == 0)
+				g.SetColor(mColors[1]);
+				g.SetScale(mFontScale);
+				if (mLabelJustify == 0)
 				{
-					num += (this.mWidth - this.mFont.StringWidth(this.mLabel)) / 2 + 1;
+					num += (mWidth - mFont.StringWidth(mLabel)) / 2 + 1;
 				}
-				num2 += (this.mHeight + this.mFont.GetAscent()) / 2;
-				g.DrawString(this.mLabel, num + this.mTextPushOffsetX, num2 + this.mTextPushOffsetY);
+				num2 += (mHeight + mFont.GetAscent()) / 2;
+				g.DrawString(mLabel, num + mTextPushOffsetX, num2 + mTextPushOffsetY);
 				g.SetScale(1f);
-				if (flag2 && this.mOverOverlayImage != null)
+				if (flag2 && mOverOverlayImage != null)
 				{
 					g.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
-					this.DrawButtonImage(g, this.mOverOverlayImage, this.mNormalRect, 0, 0);
+					DrawButtonImage(g, mOverOverlayImage, mNormalRect, 0, 0);
 					g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
 				}
 			}
-			g.mTransX -= this.mX;
-			g.mTransY -= this.mY;
+			g.mTransX -= mX;
+			g.mTransY -= mY;
 		}
 
 		public void SetDisabled(bool isDisabled)
 		{
-			this.mDisabled = isDisabled;
+			mDisabled = isDisabled;
 		}
 
 		public bool IsMouseOver()
 		{
-			return this.mIsOver && !this.mDisabled && !this.mBtnNoDraw;
+			return mIsOver && !mDisabled && !mBtnNoDraw;
 		}
 
 		public void Update()
 		{
-			int num = this.mApp.mWidgetManager.mLastMouseX;
-			int num2 = this.mApp.mWidgetManager.mLastMouseY;
-			if (this.mParentWidget != null)
+			int num = mApp.mWidgetManager.mLastMouseX;
+			int num2 = mApp.mWidgetManager.mLastMouseY;
+			if (mParentWidget != null)
 			{
-				CGPoint absPos = this.mParentWidget.GetAbsPos();
+				CGPoint absPos = mParentWidget.GetAbsPos();
 				num -= (int)absPos.mX;
 				num2 -= (int)absPos.mY;
 			}
-			if (num >= this.mX && num < this.mX + this.mWidth && num2 >= this.mY && num2 < this.mY + this.mHeight)
+			if (num >= mX && num < mX + mWidth && num2 >= mY && num2 < mY + mHeight)
 			{
-				this.mIsOver = true;
+				mIsOver = true;
 			}
 			else
 			{
-				this.mIsOver = false;
+				mIsOver = false;
 			}
-			if ((this.mApp.mWidgetManager.mDownButtons & 5) != 0)
+			if ((mApp.mWidgetManager.mDownButtons & 5) != 0)
 			{
-				this.mIsDown = true;
+				mIsDown = true;
 			}
 			else
 			{
-				this.mIsDown = false;
+				mIsDown = false;
 			}
-			if ((this.mApp.mWidgetManager.mFocusWidget == null || this.mApp.mWidgetManager.mFocusWidget != this.mParentWidget) && this.mApp.GetDialogCount() > 0)
+			if ((mApp.mWidgetManager.mFocusWidget == null || mApp.mWidgetManager.mFocusWidget != mParentWidget) && mApp.GetDialogCount() > 0)
 			{
-				this.mIsDown = false;
-				this.mIsOver = false;
+				mIsDown = false;
+				mIsOver = false;
 			}
-			if (!this.mIsDown && !this.mIsOver && this.mOverAlpha > 0.0)
+			if (!mIsDown && !mIsOver && mOverAlpha > 0.0)
 			{
-				if (this.mOverAlphaSpeed <= 0.0)
+				if (mOverAlphaSpeed <= 0.0)
 				{
-					this.mOverAlpha = 0.0;
+					mOverAlpha = 0.0;
 					return;
 				}
-				this.mOverAlpha -= this.mOverAlphaSpeed;
-				if (this.mOverAlpha < 0.0)
+				mOverAlpha -= mOverAlphaSpeed;
+				if (mOverAlpha < 0.0)
 				{
-					this.mOverAlpha = 0.0;
+					mOverAlpha = 0.0;
 					return;
 				}
 			}
-			else if (this.mIsOver && this.mOverAlphaFadeInSpeed > 0.0 && this.mOverAlpha < 1.0)
+			else if (mIsOver && mOverAlphaFadeInSpeed > 0.0 && mOverAlpha < 1.0)
 			{
-				if (this.mOverAlphaFadeInSpeed > 0.0)
+				if (mOverAlphaFadeInSpeed > 0.0)
 				{
-					this.mOverAlpha += this.mOverAlphaFadeInSpeed;
-					if (this.mOverAlpha > 1.0)
+					mOverAlpha += mOverAlphaFadeInSpeed;
+					if (mOverAlpha > 1.0)
 					{
-						this.mOverAlpha = 1.0;
+						mOverAlpha = 1.0;
 						return;
 					}
 				}
 				else
 				{
-					this.mOverAlpha = 1.0;
+					mOverAlpha = 1.0;
 				}
 			}
 		}
 
 		public void Resize(int theX, int theY, int theWidth, int theHeight)
 		{
-			this.mX = theX;
-			this.mY = theY;
-			this.mWidth = theWidth;
-			this.mHeight = theHeight;
-			this.CalculateTextScale();
+			mX = theX;
+			mY = theY;
+			mWidth = theWidth;
+			mHeight = theHeight;
+			CalculateTextScale();
 		}
 
 		private void CalculateTextScale()
 		{
-			this.mFontScale = 1f;
-			if (this.mFont != null)
+			mFontScale = 1f;
+			if (mFont != null)
 			{
-				Vector2 vector = this.mFont.MeasureString(this.mLabel);
-				this.mTextHeight = vector.Y;
-				if (this.mWidth > 0)
+				Vector2 vector = mFont.MeasureString(mLabel);
+				mTextHeight = vector.Y;
+				if (mWidth > 0)
 				{
-					int num = (int)((float)this.mWidth - Constants.S * 30f);
+					int num = (int)((float)mWidth - Constants.S * 30f);
 					if (vector.X > (float)num)
 					{
-						this.mFontScale = (float)num / vector.X;
+						mFontScale = (float)num / vector.X;
 					}
 				}
 			}
@@ -301,8 +301,8 @@ namespace Lawn
 
 		public void SetLabel(string theLabel)
 		{
-			this.mLabel = TodStringFile.TodStringTranslate(theLabel);
-			this.CalculateTextScale();
+			mLabel = TodStringFile.TodStringTranslate(theLabel);
+			CalculateTextScale();
 		}
 
 		public static NewLawnButton MakeNewButton(int theId, ButtonListener theListener, string theText, Font theFont, Image theImageNormal, Image theImageOver, Image theImageDown)

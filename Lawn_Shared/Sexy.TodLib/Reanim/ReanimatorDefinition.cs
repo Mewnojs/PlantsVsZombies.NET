@@ -6,16 +6,16 @@ namespace Sexy.TodLib
 	{
 		public ReanimatorDefinition()
 		{
-			this.mFPS = 12f;
-			this.mTrackCount = 0;
-			this.mReanimAtlas = null;
+			mFPS = 12f;
+			mTrackCount = 0;
+			mReanimAtlas = null;
 		}
 
 		public void ExtractImages()
 		{
-			for (int i = 0; i < this.mTracks.Length; i++)
+			for (int i = 0; i < mTracks.Length; i++)
 			{
-				this.mTracks[i].ExtractImages();
+				mTracks[i].ExtractImages();
 			}
 		}
 

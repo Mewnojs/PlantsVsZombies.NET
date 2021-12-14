@@ -7,9 +7,9 @@ namespace Sexy.TodLib
 	{
 		public void SetTransform(ReanimatorTransform transform)
 		{
-			this.mPosition = new Vector2(transform.mTransX, transform.mTransY);
-			this.mRotation = 0.0;
-			this.mScale = new Vector2(transform.mScaleX, transform.mScaleY);
+			mPosition = new Vector2(transform.mTransX, transform.mTransY);
+			mRotation = 0.0;
+			mScale = new Vector2(transform.mScaleX, transform.mScaleY);
 		}
 
 		public TRect mClipRect;
