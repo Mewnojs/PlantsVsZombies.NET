@@ -9,7 +9,7 @@ namespace Sexy
 		{
 			get
 			{
-				return (int)Color.R;
+				return Color.R;
 			}
 			set
 			{
@@ -21,7 +21,7 @@ namespace Sexy
 		{
 			get
 			{
-				return (int)Color.G;
+				return Color.G;
 			}
 			set
 			{
@@ -33,7 +33,7 @@ namespace Sexy
 		{
 			get
 			{
-				return (int)Color.B;
+				return Color.B;
 			}
 			set
 			{
@@ -45,11 +45,11 @@ namespace Sexy
 		{
 			get
 			{
-				return (int)Color.A;
+				return Color.A;
 			}
 			set
 			{
-				float scale = (float)value / 255f;
+				float scale = value / 255f;
 				Color *= scale;
 				Color.A = (byte)value;
 			}
@@ -73,17 +73,17 @@ namespace Sexy
 
 		public static SexyColor Premultiply(SexyColor col)
 		{
-			col.mRed = (int)((float)(col.mRed * col.mAlpha) / 255f);
-			col.mGreen = (int)((float)(col.mGreen * col.mAlpha) / 255f);
-			col.mBlue = (int)((float)(col.mBlue * col.mAlpha) / 255f);
+			col.mRed = (int)(col.mRed * col.mAlpha / 255f);
+			col.mGreen = (int)(col.mGreen * col.mAlpha / 255f);
+			col.mBlue = (int)(col.mBlue * col.mAlpha / 255f);
 			return col;
 		}
 
 		public void PremultiplyAlpha()
 		{
-			mRed = (int)((float)(mRed * mAlpha) / 255f);
-			mGreen = (int)((float)(mGreen * mAlpha) / 255f);
-			mBlue = (int)((float)(mBlue * mAlpha) / 255f);
+			mRed = (int)(mRed * mAlpha / 255f);
+			mGreen = (int)(mGreen * mAlpha / 255f);
+			mBlue = (int)(mBlue * mAlpha / 255f);
 		}
 
 		public SexyColor(int theRed, int theGreen, int theBlue)
@@ -101,14 +101,14 @@ namespace Sexy
 			Color = new Color(theRed, theGreen, theBlue, theAlpha);
 			if (premultiply)
 			{
-				Color = Color.Multiply(Color, (float)theAlpha / 255f);
+				Color = Color.Multiply(Color, theAlpha / 255f);
 				Color.A = (byte)theAlpha;
 			}
 		}
 
 		public SexyColor(string theElements)
 		{
-			Color = new Color((int)theElements[0], (int)theElements[1], (int)theElements[2], 255);
+			Color = new Color(theElements[0], theElements[1], theElements[2], 255);
 		}
 
 		public SexyColor(Color theColor)
@@ -123,13 +123,13 @@ namespace Sexy
 				switch (theIdx)
 				{
 				case 0:
-					return (int)Color.R;
+					return Color.R;
 				case 1:
-					return (int)Color.G;
+					return Color.G;
 				case 2:
-					return (int)Color.B;
+					return Color.B;
 				case 3:
-					return (int)Color.A;
+					return Color.A;
 				default:
 					return 0;
 				}

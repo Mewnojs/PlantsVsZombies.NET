@@ -22,7 +22,7 @@ namespace Sexy
 		{
 			get
 			{
-				return (int)((float)height * mScaleY * FrameworkConstants.Font_Scale);
+				return (int)(height * mScaleY * FrameworkConstants.Font_Scale);
 			}
 			set
 			{
@@ -204,7 +204,7 @@ namespace Sexy
 
 		public int GetAscent()
 		{
-			return (int)((float)mAscent * scale.Y);
+			return (int)(mAscent * scale.Y);
 		}
 
 		public int GetAscentPadding()
@@ -238,7 +238,7 @@ namespace Sexy
 					num = mFonts[i].LineSpacing;
 				}
 			}
-			return (int)((float)num * scale.Y);
+			return (int)(num * scale.Y);
 		}
 
 		public int StringWidth(string theString)
@@ -275,12 +275,12 @@ namespace Sexy
 				{
 					if (char.IsWhiteSpace(theString[j]))
 					{
-						num2 += (float)StringWidth(SpaceChar);
+						num2 += StringWidth(SpaceChar);
 					}
 					else
 					{
 						drawStringBuilder[0] = theString[j];
-						num2 += (float)(StringWidth(drawStringBuilder) - characterOffsetMagic);
+						num2 += StringWidth(drawStringBuilder) - characterOffsetMagic;
 					}
 				}
 				if (num2 > num)
@@ -360,12 +360,12 @@ namespace Sexy
 					}
 				}
 			}
-			return (int)((float)num * scale.Y);
+			return (int)(num * scale.Y);
 		}
 
 		public Vector2 MeasureString(string theString)
 		{
-			return new Vector2((float)StringWidth(theString), (float)StringHeight(theString));
+			return new Vector2(StringWidth(theString), StringHeight(theString));
 		}
 
 		public int CharWidth(char theChar)
@@ -385,7 +385,7 @@ namespace Sexy
 			{
 				return;
 			}
-			Vector2 value = new Vector2((float)theX, (float)theY);
+			Vector2 value = new Vector2(theX, theY);
 			Vector2 value2 = value + mOffsets[layer] * mScaleX * FrameworkConstants.Font_Scale;
 			if (!string.IsNullOrEmpty(theString) && mCharOffsets.ContainsKey(theString[0]))
 			{
@@ -395,7 +395,7 @@ namespace Sexy
 			{
 				if (char.IsWhiteSpace(theString[i]))
 				{
-					value2.X += (float)StringWidth(SpaceChar);
+					value2.X += StringWidth(SpaceChar);
 				}
 				else
 				{
@@ -403,8 +403,8 @@ namespace Sexy
 					if (mCharOffsets.ContainsKey(theString[i]))
 					{
 						Vector2 position = value2 + mCharOffsets[theString[i]] * mScaleX * FrameworkConstants.Font_Scale;
-						Graphics.spriteBatch.DrawString(mFonts[layer], drawStringBuilder, position, theColor, 0f, Vector2.Zero, scale, SpriteEffects.None, 1f - (float)layer / (float)mFonts.Count);
-						value2.X += (float)(StringWidth(drawStringBuilder) - characterOffsetMagic);
+						Graphics.spriteBatch.DrawString(mFonts[layer], drawStringBuilder, position, theColor, 0f, Vector2.Zero, scale, SpriteEffects.None, 1f - layer / (float)mFonts.Count);
+						value2.X += StringWidth(drawStringBuilder) - characterOffsetMagic;
 					}
 				}
 			}
@@ -430,7 +430,7 @@ namespace Sexy
 				return;
 			}
 			g.EndDrawImageTransformed();
-			Vector2 value = new Vector2((float)theX, (float)theY);
+			Vector2 value = new Vector2(theX, theY);
 			for (int i = 0; i < mFonts.Count; i++)
 			{
 				if (enabledLayers[i])
@@ -440,7 +440,7 @@ namespace Sexy
 					{
 						if (char.IsWhiteSpace(theString[j]))
 						{
-							value2.X += (float)StringWidth(SpaceChar);
+							value2.X += StringWidth(SpaceChar);
 						}
 						else
 						{
@@ -448,8 +448,8 @@ namespace Sexy
 							if (mCharOffsets.ContainsKey(theString[j]))
 							{
 								Vector2 position = value2 + mCharOffsets[theString[j]] * mScaleX * FrameworkConstants.Font_Scale;
-								Graphics.spriteBatch.DrawString(mFonts[i], drawStringBuilder, position, theColor, 0f, Vector2.Zero, scale, SpriteEffects.None, 1f - (float)i / (float)mFonts.Count);
-								value2.X += (float)(StringWidth(drawStringBuilder) - characterOffsetMagic);
+								Graphics.spriteBatch.DrawString(mFonts[i], drawStringBuilder, position, theColor, 0f, Vector2.Zero, scale, SpriteEffects.None, 1f - i / (float)mFonts.Count);
+								value2.X += StringWidth(drawStringBuilder) - characterOffsetMagic;
 							}
 						}
 					}

@@ -80,7 +80,7 @@ namespace Sexy
 				return false;
 			}
 			TPoint tpoint = (TPoint)obj;
-			return mX == (float)tpoint.mX && mY == (float)tpoint.mY;
+			return mX == tpoint.mX && mY == tpoint.mY;
 		}
 
 		public override int GetHashCode()
@@ -110,12 +110,12 @@ namespace Sexy
 
 		public static TPointFloat operator *(TPointFloat a, int s)
 		{
-			return new TPointFloat(a.mPoint.X * (float)s, a.mPoint.Y * (float)s);
+			return new TPointFloat(a.mPoint.X * s, a.mPoint.Y * s);
 		}
 
 		public static TPointFloat operator /(TPointFloat a, int s)
 		{
-			return new TPointFloat(a.mPoint.X / (float)s, a.mPoint.Y / (float)s);
+			return new TPointFloat(a.mPoint.X / s, a.mPoint.Y / s);
 		}
 
 		public override string ToString()

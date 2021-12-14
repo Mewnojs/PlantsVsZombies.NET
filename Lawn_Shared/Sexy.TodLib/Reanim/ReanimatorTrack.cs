@@ -21,7 +21,7 @@ namespace Sexy.TodLib
 		{
 			mName = name;
 			mTransformCount = (short)transformCount;
-			mTransforms = new ReanimatorTransform[(int)mTransformCount];
+			mTransforms = new ReanimatorTransform[mTransformCount];
 		}
 
 		public override string ToString()

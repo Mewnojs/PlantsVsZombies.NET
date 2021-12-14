@@ -148,13 +148,13 @@ namespace Lawn
 		{
 			int num = mBoard.GridToPixelX(mGridX, mGridY);
 			int num2 = mBoard.GridToPixelY(mGridX, mGridY);
-			TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_REANIM_ZOMBIE_LADDER_5, ((float)num + 25f) * Constants.S, ((float)num2 - 4f) * Constants.S, 0.8f, 0.8f);
+			TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_REANIM_ZOMBIE_LADDER_5, (num + 25f) * Constants.S, (num2 - 4f) * Constants.S, 0.8f, 0.8f);
 		}
 
 		public void DrawCrater(Graphics g)
 		{
-			float num = (float)mBoard.GridToPixelX(mGridX, mGridY) - 8f;
-			float num2 = (float)mBoard.GridToPixelY(mGridX, mGridY) + 40f;
+			float num = mBoard.GridToPixelX(mGridX, mGridY) - 8f;
+			float num2 = mBoard.GridToPixelY(mGridX, mGridY) + 40f;
 			if (mGridItemCounter < 25)
 			{
 				int theAlpha = TodCommon.TodAnimateCurve(25, 0, mGridItemCounter, 255, 0, TodCurves.CURVE_LINEAR);
@@ -178,9 +178,9 @@ namespace Lawn
 				{
 					theCelCol = 1;
 				}
-				float num3 = (float)mGridY * 3.1415927f + (float)mGridX * 3.1415927f * 0.25f;
-				float num4 = (float)mBoard.mMainCounter * 3.1415927f * 2f / 200f;
-				float num5 = (float)Math.Sin((double)(num3 + num4)) * 2f;
+				float num3 = mGridY * 3.1415927f + mGridX * 3.1415927f * 0.25f;
+				float num4 = mBoard.mMainCounter * 3.1415927f * 2f / 200f;
+				float num5 = (float)Math.Sin(num3 + num4) * 2f;
 				num2 += num5;
 			}
 			else if (mBoard.StageHasRoof())
@@ -230,8 +230,8 @@ namespace Lawn
 			int num = mBoard.mGridCelLook[mGridX, mGridY];
 			int num2 = mBoard.mGridCelOffset[mGridX, mGridY, 0];
 			int num3 = mBoard.mGridCelOffset[mGridX, mGridY, 1];
-			int num4 = (int)((float)AtlasResources.IMAGE_TOMBSTONES.GetCelWidth() * Constants.IS);
-			int num5 = (int)((float)AtlasResources.IMAGE_TOMBSTONES.GetCelHeight() * Constants.IS);
+			int num4 = (int)(AtlasResources.IMAGE_TOMBSTONES.GetCelWidth() * Constants.IS);
+			int num5 = (int)(AtlasResources.IMAGE_TOMBSTONES.GetCelHeight() * Constants.IS);
 			int num6 = num % 5;
 			int num7;
 			if (mGridY == 0)
@@ -255,15 +255,15 @@ namespace Lawn
 			{
 				num11 = TodCommon.TodAnimateCurve(400, 0, topPlantAt.mStateCountdown, 10, 40, TodCurves.CURVE_LINEAR);
 			}
-			TRect theSrcRect = new TRect((int)((float)(num4 * num6) * Constants.S), (int)((float)(num5 * num7 + num11) * Constants.S), (int)((float)num4 * Constants.S), (int)((float)(num8 - num9 - num11) * Constants.S));
+			TRect theSrcRect = new TRect((int)(num4 * num6 * Constants.S), (int)((num5 * num7 + num11) * Constants.S), (int)(num4 * Constants.S), (int)((num8 - num9 - num11) * Constants.S));
 			int num12 = mBoard.GridToPixelX(mGridX, mGridY) - 4 + num2;
 			int num13 = mBoard.GridToPixelY(mGridX, mGridY) + num5 + num3;
-			g.DrawImage(AtlasResources.IMAGE_TOMBSTONES, (int)((float)num12 * Constants.S), (int)((double)((float)(num13 - num8 + num11) * Constants.S) + 0.5), theSrcRect);
-			int num14 = (int)((float)num10 * Constants.S);
+			g.DrawImage(AtlasResources.IMAGE_TOMBSTONES, (int)(num12 * Constants.S), (int)((num13 - num8 + num11) * Constants.S + 0.5), theSrcRect);
+			int num14 = (int)(num10 * Constants.S);
 			if (num14 >= (int)Constants.InvertAndScale(34f))
 			{
-				TRect theSrcRect2 = new TRect(AtlasResources.IMAGE_TOMBSTONE_MOUNDS.GetCelWidth() * num6, AtlasResources.IMAGE_TOMBSTONE_MOUNDS.GetCelHeight() * num7, AtlasResources.IMAGE_TOMBSTONE_MOUNDS.GetCelWidth(), (int)((float)num10 * Constants.S) - (int)Constants.InvertAndScale(34f));
-				g.DrawImage(AtlasResources.IMAGE_TOMBSTONE_MOUNDS, (int)((float)num12 * Constants.S), (int)((float)(num13 - num10) * Constants.S) + (int)Constants.InvertAndScale(34f), theSrcRect2);
+				TRect theSrcRect2 = new TRect(AtlasResources.IMAGE_TOMBSTONE_MOUNDS.GetCelWidth() * num6, AtlasResources.IMAGE_TOMBSTONE_MOUNDS.GetCelHeight() * num7, AtlasResources.IMAGE_TOMBSTONE_MOUNDS.GetCelWidth(), (int)(num10 * Constants.S) - (int)Constants.InvertAndScale(34f));
+				g.DrawImage(AtlasResources.IMAGE_TOMBSTONE_MOUNDS, (int)(num12 * Constants.S), (int)((num13 - num10) * Constants.S) + (int)Constants.InvertAndScale(34f), theSrcRect2);
 			}
 		}
 
@@ -290,7 +290,7 @@ namespace Lawn
 			int num2 = mBoard.mGridCelOffset[mGridX, mGridY, 1];
 			int num3 = mBoard.GridToPixelX(mGridX, mGridY) + 14 + num;
 			int num4 = mBoard.GridToPixelY(mGridX, mGridY) + 78 + num2;
-			mApp.AddTodParticle((float)num3, (float)num4, mRenderOrder + 1, ParticleEffect.PARTICLE_GRAVE_STONE_RISE);
+			mApp.AddTodParticle(num3, num4, mRenderOrder + 1, ParticleEffect.PARTICLE_GRAVE_STONE_RISE);
 			mApp.PlayFoley(FoleyType.FOLEY_DIRT_RISE);
 		}
 
@@ -353,15 +353,15 @@ namespace Lawn
 			}
 			if (mBoard.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_CHOCOLATE && !mApp.mZenGarden.IsStinkyHighOnChocolate())
 			{
-				g.DrawImage(AtlasResources.IMAGE_PLANTSPEECHBUBBLE, (float)Constants.ZenGarden_StinkySpeechBubble_Pos.X + Constants.S * mPosX, (float)Constants.ZenGarden_StinkySpeechBubble_Pos.Y + Constants.S * mPosY);
-				TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_CHOCOLATE, (float)Constants.ZenGarden_Chocolate_Pos.X + mPosX * Constants.S, (float)Constants.ZenGarden_Chocolate_Pos.Y + mPosY * Constants.S, 0.44f, 0.44f);
+				g.DrawImage(AtlasResources.IMAGE_PLANTSPEECHBUBBLE, Constants.ZenGarden_StinkySpeechBubble_Pos.X + Constants.S * mPosX, Constants.ZenGarden_StinkySpeechBubble_Pos.Y + Constants.S * mPosY);
+				TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_CHOCOLATE, Constants.ZenGarden_Chocolate_Pos.X + mPosX * Constants.S, Constants.ZenGarden_Chocolate_Pos.Y + mPosY * Constants.S, 0.44f, 0.44f);
 			}
 		}
 
 		public void OpenPortal()
 		{
-			float num = (float)mGridX * 80f - 6f;
-			float num2 = (float)mBoard.GridToPixelY(0, mGridY) - 65f;
+			float num = mGridX * 80f - 6f;
+			float num2 = mBoard.GridToPixelY(0, mGridY) - 65f;
 			Reanimation reanimation = mApp.ReanimationTryToGet(mGridItemReanimID);
 			if (reanimation == null)
 			{
@@ -444,35 +444,35 @@ namespace Lawn
 			int num3 = mBoard.GridToPixelY(mGridX, mGridY) - 15;
 			if (mTransparentCounter > 0)
 			{
-				g.DrawImageCel(Resources.IMAGE_SCARY_POT, (int)((float)num2 * Constants.S), (int)((float)num3 * Constants.S), num, 0);
+				g.DrawImageCel(Resources.IMAGE_SCARY_POT, (int)(num2 * Constants.S), (int)(num3 * Constants.S), num, 0);
 				Graphics @new = Graphics.GetNew(g);
 				if (mScaryPotType == ScaryPotType.SCARYPOT_SEED)
 				{
 					@new.mScaleX = 0.7f;
 					@new.mScaleY = 0.7f;
-					SeedPacket.DrawSmallSeedPacket(@new, (float)(num2 + Constants.GridItem_ScaryPot_SeedPacket_Offset.X) * Constants.S, (float)(num3 + Constants.GridItem_ScaryPot_SeedPacket_Offset.Y) * Constants.S, mSeedType, SeedType.SEED_NONE, 0f, 255, false, false, true, false);
+					SeedPacket.DrawSmallSeedPacket(@new, (num2 + Constants.GridItem_ScaryPot_SeedPacket_Offset.X) * Constants.S, (num3 + Constants.GridItem_ScaryPot_SeedPacket_Offset.Y) * Constants.S, mSeedType, SeedType.SEED_NONE, 0f, 255, false, false, true, false);
 				}
 				else if (mScaryPotType == ScaryPotType.SCARYPOT_ZOMBIE)
 				{
 					@new.mScaleX = 0.4f;
 					@new.mScaleY = 0.4f;
-					float num4 = (float)Constants.GridItem_ScaryPot_Zombie_Offset.X;
-					float num5 = (float)Constants.GridItem_ScaryPot_Zombie_Offset.Y;
+					float num4 = Constants.GridItem_ScaryPot_Zombie_Offset.X;
+					float num5 = Constants.GridItem_ScaryPot_Zombie_Offset.Y;
 					if (mZombieType == ZombieType.ZOMBIE_FOOTBALL)
 					{
 						@new.mScaleX = 0.4f;
 						@new.mScaleY = 0.4f;
-						num4 = (float)Constants.GridItem_ScaryPot_ZombieFootball_Offset.X;
-						num5 = (float)Constants.GridItem_ScaryPot_ZombieFootball_Offset.Y;
+						num4 = Constants.GridItem_ScaryPot_ZombieFootball_Offset.X;
+						num5 = Constants.GridItem_ScaryPot_ZombieFootball_Offset.Y;
 					}
 					if (mZombieType == ZombieType.ZOMBIE_GARGANTUAR)
 					{
 						@new.mScaleX = 0.3f;
 						@new.mScaleY = 0.3f;
-						num4 += (float)Constants.GridItem_ScaryPot_ZombieGargantuar_Offset.X;
-						num5 += (float)Constants.GridItem_ScaryPot_ZombieGargantuar_Offset.Y;
+						num4 += Constants.GridItem_ScaryPot_ZombieGargantuar_Offset.X;
+						num5 += Constants.GridItem_ScaryPot_ZombieGargantuar_Offset.Y;
 					}
-					mApp.mReanimatorCache.DrawCachedZombie(@new, ((float)num2 + num4) * Constants.S, ((float)num3 + num5) * Constants.S, mZombieType);
+					mApp.mReanimatorCache.DrawCachedZombie(@new, (num2 + num4) * Constants.S, (num3 + num5) * Constants.S, mZombieType);
 				}
 				else if (mScaryPotType == ScaryPotType.SCARYPOT_SUN)
 				{
@@ -482,8 +482,8 @@ namespace Lawn
 					newReanimation.OverrideScale(0.5f, 0.5f);
 					for (int i = 0; i < num6; i++)
 					{
-						float num7 = (float)Constants.GridItem_ScaryPot_Sun_Offset.X;
-						float num8 = (float)Constants.GridItem_ScaryPot_Sun_Offset.Y;
+						float num7 = Constants.GridItem_ScaryPot_Sun_Offset.X;
+						float num8 = Constants.GridItem_ScaryPot_Sun_Offset.Y;
 						switch (i)
 						{
 						case 1:
@@ -503,7 +503,7 @@ namespace Lawn
 							num8 += -15f;
 							break;
 						}
-						newReanimation.SetPosition(((float)num2 + num7) * Constants.S, ((float)num3 + num8) * Constants.S);
+						newReanimation.SetPosition((num2 + num7) * Constants.S, (num3 + num8) * Constants.S);
 						newReanimation.Draw(g);
 					}
 					newReanimation.PrepareForReuse();
@@ -513,7 +513,7 @@ namespace Lawn
 				g.SetColorizeImages(true);
 				g.SetColor(new SexyColor(255, 255, 255, theAlpha));
 			}
-			g.DrawImageCel(Resources.IMAGE_SCARY_POT, (int)((float)num2 * Constants.S), (int)((float)num3 * Constants.S), num, 1);
+			g.DrawImageCel(Resources.IMAGE_SCARY_POT, (int)(num2 * Constants.S), (int)(num3 * Constants.S), num, 1);
 			if (mHighlighted)
 			{
 				g.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
@@ -522,7 +522,7 @@ namespace Lawn
 				{
 					g.SetColor(new SexyColor(255, 255, 255, 196));
 				}
-				g.DrawImageCel(Resources.IMAGE_SCARY_POT, (int)((float)num2 * Constants.S), (int)((float)num3 * Constants.S), num, 1);
+				g.DrawImageCel(Resources.IMAGE_SCARY_POT, (int)(num2 * Constants.S), (int)(num3 * Constants.S), num, 1);
 				g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
 			}
 			g.SetColorizeImages(false);
@@ -580,8 +580,8 @@ namespace Lawn
 			{
 				reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_pulse, ReanimLoopType.REANIM_LOOP, 0, 12f);
 				ParticleEffect theEffect = ParticleEffect.PARTICLE_PORTAL_CIRCLE;
-				float num = (float)mGridX * 80f + 13f;
-				float num2 = (float)mBoard.GridToPixelY(0, mGridY) - 39f;
+				float num = mGridX * 80f + 13f;
+				float num2 = mBoard.GridToPixelY(0, mGridY) - 39f;
 				if (mGridItemType == GridItemType.GRIDITEM_PORTAL_SQUARE)
 				{
 					theEffect = ParticleEffect.PARTICLE_PORTAL_SQUARE;
@@ -737,8 +737,8 @@ namespace Lawn
 					g.SetColor(new SexyColor(255, 255, 255, theAlpha));
 					g.SetColorizeImages(true);
 					reanimation.mAnimTime = motionTrailFrame.mAnimTime;
-					float num3 = (float)g.mTransX;
-					float num4 = (float)g.mTransY;
+					float num3 = g.mTransX;
+					float num4 = g.mTransY;
 					g.mTransX += (int)(num * Constants.S);
 					g.mTransY += (int)(num2 * Constants.S);
 					reanimation.Draw(g);

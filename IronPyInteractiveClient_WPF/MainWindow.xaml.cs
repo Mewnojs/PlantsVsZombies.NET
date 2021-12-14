@@ -118,7 +118,7 @@ namespace IronPyInteractiveClient_WPF
             ws.Connect();
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             TextAdd(mTextOutputHiddenSuffix + pyCommandInput.Text + "\n", true, DateTime.UtcNow.ToFileTime());
             mTextOutputHiddenSuffix = "";
@@ -129,7 +129,7 @@ namespace IronPyInteractiveClient_WPF
 
         private WebSocket ws;
 
-        private void pyCommandInput_TextChanged(object sender, TextChangedEventArgs e)
+        private void PyCommandInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             //FlushBoard(false);
         }
@@ -190,7 +190,7 @@ namespace IronPyInteractiveClient_WPF
             return ref mTextOutputHardenString;
         }
 
-        private void wsConnBtn_Click(object sender, RoutedEventArgs e)
+        private void WsConnBtn_Click(object sender, RoutedEventArgs e)
         {
             if (!mWSConnected)
             {
@@ -217,13 +217,13 @@ namespace IronPyInteractiveClient_WPF
 
         private bool mWSConnected = false;
 
-        private void pyCommandInput_KeyDown(object sender, KeyEventArgs e)
+        private void PyCommandInput_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)
                 pyCommandSendBtn.IsDefault = true;
         }
 
-        private void pyCommandInput_KeyUp(object sender, KeyEventArgs e)
+        private void PyCommandInput_KeyUp(object sender, KeyEventArgs e)
         {
             if ((e.Key == Key.LeftCtrl && Keyboard.IsKeyUp(Key.RightCtrl)) ||
             (e.Key == Key.RightCtrl && Keyboard.IsKeyUp(Key.LeftCtrl)))

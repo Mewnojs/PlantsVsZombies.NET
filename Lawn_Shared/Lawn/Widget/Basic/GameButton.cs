@@ -290,10 +290,10 @@ namespace Lawn
 				mTextHeight = vector.Y;
 				if (mWidth > 0)
 				{
-					int num = (int)((float)mWidth - Constants.S * 30f);
-					if (vector.X > (float)num)
+					int num = (int)(mWidth - Constants.S * 30f);
+					if (vector.X > num)
 					{
-						mFontScale = (float)num / vector.X;
+						mFontScale = num / vector.X;
 					}
 				}
 			}

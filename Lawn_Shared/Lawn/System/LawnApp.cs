@@ -1157,12 +1157,12 @@ namespace Lawn
 			FinishModelessDialogs();
 			LawnDialog lawnDialog = DoDialog(19, true, "[GAME_PAUSED]", "", "[RESUME_GAME]", 3);
 			int num = Math.Max(Resources.FONT_DWARVENTODCRAFT15.StringWidth(TodStringFile.TodStringTranslate("[GAME_PAUSED]")), Resources.FONT_DWARVENTODCRAFT15.StringWidth(TodStringFile.TodStringTranslate("[RESUME_GAME]")));
-			if ((float)num < Constants.InvertAndScale(125f))
+			if (num < Constants.InvertAndScale(125f))
 			{
 				num = (int)Constants.InvertAndScale(125f);
 			}
 			int num2 = AtlasResources.IMAGE_DIALOG_TOPLEFT.mWidth + num + AtlasResources.IMAGE_DIALOG_TOPRIGHT.mWidth;
-			lawnDialog.mReanimation.AddReanimation((float)(num2 / 2) - Constants.InvertAndScale(85f), Constants.InvertAndScale(30f), ReanimationType.REANIM_ZOMBIE_NEWSPAPER);
+			lawnDialog.mReanimation.AddReanimation(num2 / 2 - Constants.InvertAndScale(85f), Constants.InvertAndScale(30f), ReanimationType.REANIM_ZOMBIE_NEWSPAPER);
 			lawnDialog.mSpaceAfterHeader = (int)Constants.InvertAndScale(65f);
 			lawnDialog.CalcSize((int)Constants.InvertAndScale(20f), (int)Constants.InvertAndScale(10f), num);
 			LawnApp.CenterDialog(lawnDialog, lawnDialog.mWidth, lawnDialog.mHeight);
@@ -1295,7 +1295,7 @@ namespace Lawn
 				PlayerInfo anyProfile = mProfileMgr.GetAnyProfile();
 				if (!MediaPlayer.GameHasControl)
 				{
-					anyProfile.mMusicVolume = (double)MediaPlayer.Volume;
+					anyProfile.mMusicVolume = MediaPlayer.Volume;
 				}
 				mPlayerInfo = anyProfile;
 			}

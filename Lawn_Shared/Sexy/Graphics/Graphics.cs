@@ -194,7 +194,7 @@ namespace Sexy
 			SetRenderTarget(mDestImage);
 		}
 
-		public void Init()
+		public new void Init()
 		{
 			Graphics.gSpriteBatch = new SpriteBatch(GraphicsState.mGraphicsDeviceManager.GraphicsDevice);
 			Graphics.gPrimitiveBatch = new PrimitiveBatch(GraphicsState.mGraphicsDeviceManager.GraphicsDevice);
@@ -360,16 +360,16 @@ namespace Sexy
 
 		public static void PremultiplyColour(ref Color c)
 		{
-			float scale = (float)c.A / 255f;
+			float scale = c.A / 255f;
 			c *= scale;
 		}
 
 		public static void PremultiplyColour(ref SexyColor c)
 		{
-			float num = (float)c.mAlpha / 255f;
-			c.mRed = (int)((float)c.mRed * num);
-			c.mGreen = (int)((float)c.mGreen * num);
-			c.mBlue = (int)((float)c.mBlue * num);
+			float num = c.mAlpha / 255f;
+			c.mRed = (int)(c.mRed * num);
+			c.mGreen = (int)(c.mGreen * num);
+			c.mBlue = (int)(c.mBlue * num);
 		}
 
 		public void SetColor(Color theColor)
@@ -524,13 +524,13 @@ namespace Sexy
 		public void DrawStringLayer(string theString, int theX, int theY, int theLayer, int maxWidth)
 		{
 			float num = 1f;
-			float num2 = (float)mFont.StringWidth(theString);
-			if (num2 > (float)maxWidth)
+			float num2 = mFont.StringWidth(theString);
+			if (num2 > maxWidth)
 			{
-				num = (float)maxWidth / num2;
+				num = maxWidth / num2;
 			}
 			SetScale(num);
-			DrawStringLayer(theString, theX, theY - (int)((num - 1f) * (float)mFont.GetHeight() / 2f), theLayer);
+			DrawStringLayer(theString, theX, theY - (int)((num - 1f) * mFont.GetHeight() / 2f), theLayer);
 			SetScale(1f);
 		}
 
@@ -577,18 +577,18 @@ namespace Sexy
 		{
 			for (int i = 0; i < theNumVertices; i++)
 			{
-				Vector2 vertex = new Vector2((float)(theVertexList[i].mX + mTransX), (float)(theVertexList[i].mY + mTransY));
+				Vector2 vertex = new Vector2(theVertexList[i].mX + mTransX, theVertexList[i].mY + mTransY);
 				Graphics.primitiveBatch.AddVertex(vertex, base.mColor);
 			}
 		}
 
 		private void PrepareRectsForClipping(ref TRect source, ref TRect destination)
 		{
-			destination.mX += (int)(mScaleOrigX * (float)destination.mWidth * ((1f - mScaleX) / 2f));
-			destination.mY += (int)(mScaleOrigY * (float)destination.mHeight * ((1f - mScaleY) / 2f));
-			destination.mWidth = (int)((float)destination.mWidth * mScaleX);
-			destination.mHeight = (int)((float)destination.mHeight * mScaleY);
-			Vector2 vector = new Vector2((float)destination.mWidth / (float)((source.mWidth != 0) ? source.mWidth : destination.mWidth), (float)destination.mHeight / (float)((source.mHeight != 0) ? source.mHeight : destination.mHeight));
+			destination.mX += (int)(mScaleOrigX * destination.mWidth * ((1f - mScaleX) / 2f));
+			destination.mY += (int)(mScaleOrigY * destination.mHeight * ((1f - mScaleY) / 2f));
+			destination.mWidth = (int)(destination.mWidth * mScaleX);
+			destination.mHeight = (int)(destination.mHeight * mScaleY);
+			Vector2 vector = new Vector2(destination.mWidth / (float)((source.mWidth != 0) ? source.mWidth : destination.mWidth), destination.mHeight / (float)((source.mHeight != 0) ? source.mHeight : destination.mHeight));
 			if (vector.X == 0f)
 			{
 				vector.X = 1f;
@@ -597,12 +597,12 @@ namespace Sexy
 			{
 				vector.Y = 1f;
 			}
-			int num = Math.Max(0, (int)((float)(mClipRect.mX - destination.mX) / vector.X));
-			int num2 = Math.Max(0, (int)((float)(mClipRect.mY - destination.mY) / vector.Y));
+			int num = Math.Max(0, (int)((mClipRect.mX - destination.mX) / vector.X));
+			int num2 = Math.Max(0, (int)((mClipRect.mY - destination.mY) / vector.Y));
 			source.mX += num;
 			source.mY += num2;
-			source.mWidth += -num + Math.Min(0, (int)((float)(mClipRect.mX + mClipRect.mWidth - (destination.mX + destination.mWidth)) / vector.X));
-			source.mHeight += -num2 + Math.Min(0, (int)((float)(mClipRect.mY + mClipRect.mHeight - (destination.mY + destination.mHeight)) / vector.Y));
+			source.mWidth += -num + Math.Min(0, (int)((mClipRect.mX + mClipRect.mWidth - (destination.mX + destination.mWidth)) / vector.X));
+			source.mHeight += -num2 + Math.Min(0, (int)((mClipRect.mY + mClipRect.mHeight - (destination.mY + destination.mHeight)) / vector.Y));
 			destination = mClipRect.Intersection(destination);
 		}
 
@@ -688,7 +688,7 @@ namespace Sexy
 		{
 			BeginPrimitiveBatch(theImage);
 			TRect destination = new TRect(-mTransX, -mTransY, theImage.GetCelWidth(), theImage.GetCelHeight());
-			Vector2 center2 = center ? new Vector2((float)theSrcRect.mWidth * 0.5f, (float)theSrcRect.mHeight * 0.5f) : Vector2.Zero;
+			Vector2 center2 = center ? new Vector2(theSrcRect.mWidth * 0.5f, theSrcRect.mHeight * 0.5f) : Vector2.Zero;
 			if (add)
 			{
 				theColor.A = 0;
@@ -821,7 +821,7 @@ namespace Sexy
 		{
 			theSrcRect.mX += theImage.mS;
 			theSrcRect.mY += theImage.mT;
-			DrawImageRotatedF(theImage, (float)theX, (float)theY, theRot, theSrcRect);
+			DrawImageRotatedF(theImage, theX, theY, theRot, theSrcRect);
 		}
 
 		public void DrawImageRotated(Image theImage, int theX, int theY, double theRot, int theRotCenterX, int theRotCenterY)
@@ -831,7 +831,7 @@ namespace Sexy
 
 		public void DrawImageRotated(Image theImage, int theX, int theY, double theRot, int theRotCenterX, int theRotCenterY, TRect theSrcRect)
 		{
-			DrawImageRotatedF(theImage, (float)theX, (float)theY, theRot, (float)theRotCenterX, (float)theRotCenterY, new TRect?(theSrcRect));
+			DrawImageRotatedF(theImage, theX, theY, theRot, theRotCenterX, theRotCenterY, new TRect?(theSrcRect));
 		}
 
 		public void DrawImageRotatedF(Image theImage, float theX, float theY, double theRot)
@@ -843,7 +843,7 @@ namespace Sexy
 		{
 			int num = theSrcRect.mWidth / 2;
 			int num2 = theSrcRect.mHeight / 2;
-			DrawImageRotatedF(theImage, theX, theY, theRot, (float)num, (float)num2, new TRect?(theSrcRect));
+			DrawImageRotatedF(theImage, theX, theY, theRot, num, num2, new TRect?(theSrcRect));
 		}
 
 		public void DrawImageRotatedF(Image theImage, float theX, float theY, double theRot, float theRotCenterX, float theRotCenterY)
@@ -863,11 +863,11 @@ namespace Sexy
 			{
 				TRect source = new TRect(theImage.mS, theImage.mT, theImage.mWidth, theImage.mHeight);
 				TRect destination = new TRect((int)theX, (int)theY, stretchedHeight, stretchedWidth);
-				Graphics.primitiveBatch.DrawRotatedScaled(theImage, destination, source, new Vector2(theRotCenterX, theRotCenterY), (float)theRot, new Vector2((float)theImage.mWidth / (float)stretchedWidth, (float)theImage.mHeight / (float)stretchedHeight), mColorizeImages ? base.mColor : Color.White, false, true, PrimitiveBatchEffects.None);
+				Graphics.primitiveBatch.DrawRotatedScaled(theImage, destination, source, new Vector2(theRotCenterX, theRotCenterY), (float)theRot, new Vector2(theImage.mWidth / (float)stretchedWidth, theImage.mHeight / (float)stretchedHeight), mColorizeImages ? base.mColor : Color.White, false, true, PrimitiveBatchEffects.None);
 				return;
 			}
 			TRect destination2 = new TRect((int)theX, (int)theY, stretchedHeight, stretchedWidth);
-			Graphics.primitiveBatch.DrawRotatedScaled(theImage, destination2, theSrcRect.Value, new Vector2(theRotCenterX, theRotCenterY), (float)theRot, new Vector2((float)theSrcRect.Value.mWidth / (float)stretchedWidth, (float)theSrcRect.Value.mHeight / (float)stretchedHeight), mColorizeImages ? base.mColor : Color.White, false, true, PrimitiveBatchEffects.None);
+			Graphics.primitiveBatch.DrawRotatedScaled(theImage, destination2, theSrcRect.Value, new Vector2(theRotCenterX, theRotCenterY), (float)theRot, new Vector2(theSrcRect.Value.mWidth / (float)stretchedWidth, theSrcRect.Value.mHeight / (float)stretchedHeight), mColorizeImages ? base.mColor : Color.White, false, true, PrimitiveBatchEffects.None);
 		}
 
 		public void DrawTriangle(TriVertex p1, TriVertex p2, TriVertex p3, Color theColor, Graphics.DrawMode theDrawMode)
@@ -1104,7 +1104,7 @@ namespace Sexy
 			Font.CachedStringInfo wordWrappedSubStrings = mFont.GetWordWrappedSubStrings(theLine, theRect);
 			theRect.mX += mTransX;
 			theRect.mY += mTransY;
-			Vector2 vector = new Vector2((float)theRect.mX, (float)theRect.mY);
+			Vector2 vector = new Vector2(theRect.mX, theRect.mY);
 			mFont.GetHeight();
 			if (centerVertically)
 			{
@@ -1113,14 +1113,14 @@ namespace Sexy
 				{
 					num += wordWrappedSubStrings.StringDimensions[i].Y;
 				}
-				vector.Y += (float)(theRect.mHeight / 2) - num / 2f;
+				vector.Y += theRect.mHeight / 2 - num / 2f;
 			}
 			for (int j = 0; j < wordWrappedSubStrings.Strings.Length; j++)
 			{
-				vector.X = (float)theRect.mX;
+				vector.X = theRect.mX;
 				if (theJustification == 0)
 				{
-					vector.X += ((float)theRect.mWidth - wordWrappedSubStrings.StringDimensions[j].X) / 2f;
+					vector.X += (theRect.mWidth - wordWrappedSubStrings.StringDimensions[j].X) / 2f;
 				}
 				mFont.DrawStringLayer(this, (int)(vector.X + 0.5f), (int)(vector.Y + 0.5f), wordWrappedSubStrings.Strings[j], base.mColor, layer);
 				vector.Y += wordWrappedSubStrings.StringDimensions[j].Y;
@@ -1153,7 +1153,7 @@ namespace Sexy
 			Font.CachedStringInfo wordWrappedSubStrings = mFont.GetWordWrappedSubStrings(theLine, theRect);
 			theRect.mX += mTransX;
 			theRect.mY += mTransY;
-			Vector2 vector = new Vector2((float)theRect.mX, (float)theRect.mY);
+			Vector2 vector = new Vector2(theRect.mX, theRect.mY);
 			mFont.GetHeight();
 			if (centerVertically)
 			{
@@ -1162,14 +1162,14 @@ namespace Sexy
 				{
 					num += wordWrappedSubStrings.StringDimensions[i].Y;
 				}
-				vector.Y += (float)(theRect.mHeight / 2) - num / 2f;
+				vector.Y += theRect.mHeight / 2 - num / 2f;
 			}
 			for (int j = 0; j < wordWrappedSubStrings.Strings.Length; j++)
 			{
-				vector.X = (float)theRect.mX;
+				vector.X = theRect.mX;
 				if (theJustification == 0)
 				{
-					vector.X += ((float)theRect.mWidth - wordWrappedSubStrings.StringDimensions[j].X) / 2f;
+					vector.X += (theRect.mWidth - wordWrappedSubStrings.StringDimensions[j].X) / 2f;
 				}
 				if (doDraw)
 				{
@@ -1274,7 +1274,7 @@ namespace Sexy
 			tempTriangles[0, 0] = p1;
 			tempTriangles[0, 1] = p2;
 			tempTriangles[0, 2] = p3;
-			DrawTrianglesTex(tempTriangles, 1, new Color?(theColor), theDrawMode, theTexture, (float)mTransX, (float)mTransY, blend);
+			DrawTrianglesTex(tempTriangles, 1, new Color?(theColor), theDrawMode, theTexture, mTransX, mTransY, blend);
 		}
 
 		public void DrawTriangleTex(Image theTexture, TriVertex v1, TriVertex v2, TriVertex v3)
@@ -1284,17 +1284,17 @@ namespace Sexy
 
 		public void DrawTrianglesTex(Image theTexture, TriVertex[,] theVertices, int theNumTriangles)
 		{
-			DrawTrianglesTex(theVertices, theNumTriangles, new Color?(mColorizeImages ? base.mColor : Color.White), mDrawMode, theTexture, (float)mTransX, (float)mTransY, mLinearBlend);
+			DrawTrianglesTex(theVertices, theNumTriangles, new Color?(mColorizeImages ? base.mColor : Color.White), mDrawMode, theTexture, mTransX, mTransY, mLinearBlend);
 		}
 
 		public void DrawTrianglesTex(Image theTexture, TriVertex[,] theVertices, int theNumTriangles, Color? theColor, Graphics.DrawMode theDrawMode)
 		{
-			DrawTrianglesTex(theVertices, theNumTriangles, theColor, theDrawMode, theTexture, (float)mTransX, (float)mTransY, mLinearBlend);
+			DrawTrianglesTex(theVertices, theNumTriangles, theColor, theDrawMode, theTexture, mTransX, mTransY, mLinearBlend);
 		}
 
 		public void DrawTrianglesTex(SamplerState st, Image theTexture, TriVertex[,] theVertices, int theNumTriangles, Color? theColor, Graphics.DrawMode theDrawMode)
 		{
-			DrawTrianglesTex(st, theVertices, theNumTriangles, theColor, theDrawMode, theTexture, (float)mTransX, (float)mTransY, mLinearBlend);
+			DrawTrianglesTex(st, theVertices, theNumTriangles, theColor, theDrawMode, theTexture, mTransX, mTransY, mLinearBlend);
 		}
 
 		public void DrawTrianglesTex(TriVertex[,] theVertices, int theNumTriangles, Color? theColor, Graphics.DrawMode theDrawMode, Image theTexture, float tx, float ty, bool blend)
@@ -1321,8 +1321,8 @@ namespace Sexy
 				{
 					int width = theTexture.Texture.Width;
 					int height = theTexture.Texture.Height;
-					theVertices[i, j].u = (theVertices[i, j].u * (float)theTexture.GetWidth() + (float)theTexture.mS) / (float)width;
-					theVertices[i, j].v = (theVertices[i, j].v * (float)theTexture.GetHeight() + (float)theTexture.mT) / (float)height;
+					theVertices[i, j].u = (theVertices[i, j].u * theTexture.GetWidth() + theTexture.mS) / width;
+					theVertices[i, j].v = (theVertices[i, j].v * theTexture.GetHeight() + theTexture.mT) / height;
 				}
 			}
 			SetupDrawMode(theDrawMode);
@@ -1372,8 +1372,8 @@ namespace Sexy
 				{
 					int width = triangleBatchTexture.Texture.Width;
 					int height = triangleBatchTexture.Texture.Height;
-					theVertices[i, j].u = (theVertices[i, j].u * (float)triangleBatchTexture.GetWidth() + (float)triangleBatchTexture.mS) / (float)width;
-					theVertices[i, j].v = (theVertices[i, j].v * (float)triangleBatchTexture.GetHeight() + (float)triangleBatchTexture.mT) / (float)height;
+					theVertices[i, j].u = (theVertices[i, j].u * triangleBatchTexture.GetWidth() + triangleBatchTexture.mS) / width;
+					theVertices[i, j].v = (theVertices[i, j].v * triangleBatchTexture.GetHeight() + triangleBatchTexture.mT) / height;
 				}
 			}
 			Graphics.primitiveBatch.AddTriVertices(theVertices, theNumTriangles, theColor);

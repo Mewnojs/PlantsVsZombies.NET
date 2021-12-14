@@ -36,9 +36,9 @@ namespace Sexy
 		{
 			return new CGPoint
 			{
-				X = (float)(minuend.x - subtrahend.x),
-				Y = (float)(minuend.y - subtrahend.y)
-			};
+				X = minuend.x - subtrahend.x,
+				Y = minuend.y - subtrahend.y
+            };
 		}
 
 		internal static float CGVectorNorm(CGPoint v)
@@ -59,8 +59,8 @@ namespace Sexy
 
 		internal static void CGPointTranslate(ref CGPoint point, int tx, int ty)
 		{
-			point.X += (float)tx;
-			point.Y += (float)ty;
+			point.X += tx;
+			point.Y += ty;
 		}
 
 		internal static void CGPointTranslate(ref Point point, int tx, int ty)

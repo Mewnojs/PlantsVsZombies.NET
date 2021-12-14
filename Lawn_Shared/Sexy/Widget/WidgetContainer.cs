@@ -299,9 +299,9 @@ namespace Sexy
 		{
 			if (mParent == null)
 			{
-				return new CGPoint((float)mX, (float)mY);
+				return new CGPoint(mX, mY);
 			}
-			return new CGPoint((float)mX, (float)mY) + mParent.GetAbsPos();
+			return new CGPoint(mX, mY) + mParent.GetAbsPos();
 		}
 
 		public virtual void MarkDirty()
@@ -514,7 +514,7 @@ namespace Sexy
 
 		protected int S(int i)
 		{
-			return (int)((float)i * Constants.S);
+			return (int)(i * Constants.S);
 		}
 
 		protected int M(int i)

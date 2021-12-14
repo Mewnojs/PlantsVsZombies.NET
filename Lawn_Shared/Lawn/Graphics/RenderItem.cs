@@ -43,7 +43,7 @@ namespace Lawn
 			{
 				RenderItem.nextId = 0L;
 			}
-			mRenderObjectType = (RenderObjectType)0;
+			mRenderObjectType = 0;
 			mZPos = 0;
 			mGameObject = null;
 			mPlant = null;

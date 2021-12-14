@@ -23,7 +23,7 @@ public class DataArray<T> where T : class, new()
 	{
 		Debug.ASSERT(mBlock == null);
 		Debug.ASSERT(theMaxSize <= 65536U);
-		if (mBlock == null || (long)mBlock.Length != (long)((ulong)theMaxSize))
+		if (mBlock == null || mBlock.Length != (long)((ulong)theMaxSize))
 		{
 			mBlock = new T[theMaxSize];
 		}
@@ -53,7 +53,7 @@ public class DataArray<T> where T : class, new()
 	public void DataArrayFreeAll()
 	{
 		int num = 0;
-		while ((long)num < (long)((ulong)mMaxSize))
+		while (num < (long)((ulong)mMaxSize))
 		{
 			mBlock[num] = default(T);
 			num++;
@@ -70,7 +70,7 @@ public class DataArray<T> where T : class, new()
 			return true;
 		}
 		int nextValidIndex = GetNextValidIndex((uint)(DataArrayGetID(theItem) - 1));
-		if ((long)nextValidIndex >= (long)((ulong)mMaxUsedCount))
+		if (nextValidIndex >= (long)((ulong)mMaxUsedCount))
 		{
 			theItem = default(T);
 			return false;
@@ -82,7 +82,7 @@ public class DataArray<T> where T : class, new()
 	private int GetNextValidIndex(uint index)
 	{
 		int num = (int)(index + 1U);
-		while ((long)num < (long)((ulong)mMaxSize))
+		while (num < (long)((ulong)mMaxSize))
 		{
 			if (mBlock[num] != null)
 			{
@@ -96,7 +96,7 @@ public class DataArray<T> where T : class, new()
 	private int GetNextFreeIndex(uint index)
 	{
 		int num = (int)(index + 1U);
-		while ((long)num < (long)((ulong)mMaxSize))
+		while (num < (long)((ulong)mMaxSize))
 		{
 			if (mBlock[num] == null)
 			{
@@ -110,7 +110,7 @@ public class DataArray<T> where T : class, new()
 	public T DataArrayAlloc()
 	{
 		uint num;
-		if ((long)mFreeListHead == (long)((ulong)mMaxUsedCount))
+		if (mFreeListHead == (long)((ulong)mMaxUsedCount))
 		{
 			num = mMaxUsedCount;
 			mMaxUsedCount += 1U;
@@ -129,7 +129,7 @@ public class DataArray<T> where T : class, new()
 	public void DataArrayFree(T theItem)
 	{
 		int num = 0;
-		while ((long)num < (long)((ulong)mMaxSize))
+		while (num < (long)((ulong)mMaxSize))
 		{
 			if (mBlock[num] == theItem)
 			{
@@ -161,7 +161,7 @@ public class DataArray<T> where T : class, new()
 	public int DataArrayGetID(T theItem)
 	{
 		int num = 0;
-		while ((long)num < (long)((ulong)mMaxSize))
+		while (num < (long)((ulong)mMaxSize))
 		{
 			if (mBlock[num] == theItem)
 			{

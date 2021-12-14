@@ -152,7 +152,7 @@ namespace Lawn
 				float num2;
 				if (num > 1E-06f)
 				{
-					num2 = (float)mTitleAge / num;
+					num2 = mTitleAge / num;
 				}
 				else
 				{
@@ -247,8 +247,8 @@ namespace Lawn
 					{
 						theReanimationType = ReanimationType.REANIM_LOADBAR_ZOMBIEHEAD;
 					}
-					float num11 = (float)Constants.TitleScreen_ReanimStart_X + aTriggerPoint[i];
-					float num12 = (float)mStartButton.mY - Constants.InvertAndScale(42f);
+					float num11 = Constants.TitleScreen_ReanimStart_X + aTriggerPoint[i];
+					float num12 = mStartButton.mY - Constants.InvertAndScale(42f);
 					Reanimation reanimation = mApp.AddReanimation(num11, num12, 0, theReanimationType, false);
 					reanimation.mLoopType = ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD;
 					reanimation.mAnimRate = 18f;
@@ -329,7 +329,7 @@ namespace Lawn
 			g.DrawImage(Resources.IMAGE_PVZ_LOGO, mWidth / 2 - Resources.IMAGE_PVZ_LOGO.mWidth / 2, theY);
 			int grassX = mStartButton.mX;
 			int grassY = mStartButton.mY - (int)Constants.InvertAndScale(34f);
-			g.DrawImage(AtlasResources.IMAGE_LOADBAR_DIRT, (float)grassX, (float)grassY + Constants.InvertAndScale(18f));
+			g.DrawImage(AtlasResources.IMAGE_LOADBAR_DIRT, grassX, grassY + Constants.InvertAndScale(18f));
 			if (mCurBarWidth >= mTotalBarWidth)
 			{
 				g.DrawImage(AtlasResources.IMAGE_LOADBAR_GRASS, grassX, grassY);
@@ -347,7 +347,7 @@ namespace Lawn
 				float rad = -num3 / 180f * 3.1415927f * 2f;
 				float num4 = TodCommon.TodAnimateCurveFloatTime(0f, mTotalBarWidth, mCurBarWidth, 1f, 0.5f, TodCurves.CURVE_LINEAR);
 				SexyTransform2D sexyTransform2D = default(SexyTransform2D);
-				TodCommon.TodScaleRotateTransformMatrix(ref sexyTransform2D.mMatrix, (float)grassX + Constants.InvertAndScale(11f) + num3, (float)grassY - Constants.InvertAndScale(3f) - Constants.InvertAndScale(35f) * num4 + Constants.InvertAndScale(35f), rad, num4, num4);
+				TodCommon.TodScaleRotateTransformMatrix(ref sexyTransform2D.mMatrix, grassX + Constants.InvertAndScale(11f) + num3, grassY - Constants.InvertAndScale(3f) - Constants.InvertAndScale(35f) * num4 + Constants.InvertAndScale(35f), rad, num4, num4);
 				TRect theSrcRect = new TRect(0, 0, AtlasResources.IMAGE_REANIM_LOAD_SODROLLCAP.mWidth, AtlasResources.IMAGE_REANIM_LOAD_SODROLLCAP.mHeight);
 				TodCommon.TodBltMatrix(g, AtlasResources.IMAGE_REANIM_LOAD_SODROLLCAP, sexyTransform2D.mMatrix, ref g.mClipRect, SexyColor.White, g.mDrawMode, theSrcRect);
 				@new.PrepareForReuse();

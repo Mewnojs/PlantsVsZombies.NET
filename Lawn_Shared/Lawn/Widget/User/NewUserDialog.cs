@@ -29,7 +29,7 @@ namespace Lawn
 		public override void Resize(int theX, int theY, int theWidth, int theHeight)
 		{
 			base.Resize(theX, theY, theWidth, theHeight);
-			mNameEditWidget.Resize(mContentInsets.mLeft + (int)Constants.InvertAndScale(12f), (int)Constants.InvertAndScale((float)(mIsRename ? 143 : 170)), mWidth - mContentInsets.mLeft - mContentInsets.mRight - (int)Constants.InvertAndScale(24f), (int)Constants.InvertAndScale(28f));
+			mNameEditWidget.Resize(mContentInsets.mLeft + (int)Constants.InvertAndScale(12f), (int)Constants.InvertAndScale(mIsRename ? 143 : 170), mWidth - mContentInsets.mLeft - mContentInsets.mRight - (int)Constants.InvertAndScale(24f), (int)Constants.InvertAndScale(28f));
 		}
 
 		public override void AddedToManager(WidgetManager theWidgetManager)

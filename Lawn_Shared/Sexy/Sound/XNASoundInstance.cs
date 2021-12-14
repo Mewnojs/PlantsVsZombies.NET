@@ -79,7 +79,7 @@ namespace Sexy
 
 		public override void SetBasePan(int theBasePan)
 		{
-			mBasePan = (float)theBasePan / 100f;
+			mBasePan = theBasePan / 100f;
 		}
 
 		public override void AdjustPitch(double theNumSteps)
@@ -94,7 +94,7 @@ namespace Sexy
 
 		public override void SetPan(int thePosition)
 		{
-			mPan = (float)thePosition / 10000f;
+			mPan = thePosition / 10000f;
 		}
 
 		public override bool Play(bool looping)
@@ -136,7 +136,7 @@ namespace Sexy
 
 		public override double GetVolume()
 		{
-			return (double)mVolume;
+			return mVolume;
 		}
 
 		public override bool IsReleased()

@@ -28,7 +28,7 @@ namespace Sexy
 			}
 			g.SetFont(mFont);
 			g.DrawString(mLabel, theX, num);
-			mUnderlineOffset = (int)((float)mFont.GetHeight() + Constants.InvertAndScale(3f));
+			mUnderlineOffset = (int)(mFont.GetHeight() + Constants.InvertAndScale(3f));
 			for (int i = 0; i < mUnderlineSize; i++)
 			{
 				g.FillRect(theX, num + mUnderlineOffset + i, mFont.StringWidth(mLabel), 1);

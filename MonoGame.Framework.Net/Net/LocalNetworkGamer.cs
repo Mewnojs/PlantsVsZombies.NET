@@ -94,7 +94,7 @@ namespace Microsoft.Xna.Framework.Net
 				CommandReceiveData crd;
 				
 				// we will peek at the value first to see if we can process it
-				crd = (CommandReceiveData)receivedData.Peek();
+				crd = receivedData.Peek();
 				
 				if (offset + crd.data.Length > data.Length)
 					throw new ArgumentOutOfRangeException("data","The length + offset is greater than parameter can hold.");
@@ -126,7 +126,7 @@ namespace Microsoft.Xna.Framework.Net
 					data.Reset(0);
 
 					// take it off the queue
-					CommandReceiveData crd = (CommandReceiveData)receivedData.Dequeue();
+					CommandReceiveData crd = receivedData.Dequeue();
 					
 					// lets make sure that we can handle the data
 					if (data.Length < crd.data.Length) {

@@ -60,7 +60,7 @@ namespace Sexy
 
 		public void ScrollToMin(bool animated)
 		{
-			SetScrollOffset(CGMaths.CGPointMake((float)mScrollInsets.mLeft, (float)mScrollInsets.mTop), animated);
+			SetScrollOffset(CGMaths.CGPointMake(mScrollInsets.mLeft, mScrollInsets.mTop), animated);
 		}
 
 		public void ScrollToBottom(bool animated)
@@ -84,12 +84,12 @@ namespace Sexy
 		{
 			if (!mIsDown)
 			{
-				float num = (float)(rect.mX + rect.mWidth);
-				float num2 = (float)(rect.mY + rect.mHeight);
-				float num3 = Math.Max(Math.Min(0f, mScrollMin.x), (float)(-(float)rect.mX));
-				float num4 = Math.Max(Math.Min(0f, mScrollMin.y), (float)(-(float)rect.mY));
-				float num5 = Math.Min(mScrollMax.x, (float)mWidth - num);
-				float num6 = Math.Min(mScrollMax.y, (float)mHeight - num2);
+				float num = rect.mX + rect.mWidth;
+				float num2 = rect.mY + rect.mHeight;
+				float num3 = Math.Max(Math.Min(0f, mScrollMin.x), (float)(-rect.mX));
+				float num4 = Math.Max(Math.Min(0f, mScrollMin.y), (float)(-rect.mY));
+				float num5 = Math.Min(mScrollMax.x, mWidth - num);
+				float num6 = Math.Min(mScrollMax.y, mHeight - num2);
 				SetScrollOffset(new CGPoint
 				{
 					x = Math.Min(num5, Math.Max(num3, mScrollOffset.x)),
@@ -157,8 +157,8 @@ namespace Sexy
 				mCurrentPageVertical = Math.Max(0, Math.Min(vpage, mPageCountVertical - 1));
 				SetScrollOffset(new CGPoint
 				{
-					x = (float)mScrollInsets.mLeft - (float)mCurrentPageHorizontal * mPageSize.x,
-					y = (float)mScrollInsets.mTop - (float)mCurrentPageVertical * mPageSize.y
+					x = mScrollInsets.mLeft - mCurrentPageHorizontal * mPageSize.x,
+					y = mScrollInsets.mTop - mCurrentPageVertical * mPageSize.y
 				}, animated);
 			}
 		}
@@ -267,7 +267,7 @@ namespace Sexy
 					}
 				}
 				mScrollTouchReference = touch.location;
-				mScrollOffsetReference = CGMaths.CGPointMake((float)mClient.mX, (float)mClient.mY);
+				mScrollOffsetReference = CGMaths.CGPointMake(mClient.mX, mClient.mY);
 				mScrollOffset = mScrollOffsetReference;
 				mScrollLastTimestamp = touch.timestamp;
 				mScrollTracking = false;
@@ -312,7 +312,7 @@ namespace Sexy
 				CGPoint b = GetAbsPos() - mClientLastDown.GetAbsPos();
 				CGPoint a = new CGPoint(touch.location.X, touch.location.Y);
 				CGPoint cgpoint2 = a + b;
-				CGPoint a2 = new CGPoint(cgpoint2.mX + (float)mClientLastDown.mX, cgpoint2.mY + (float)mClientLastDown.mY);
+				CGPoint a2 = new CGPoint(cgpoint2.mX + mClientLastDown.mX, cgpoint2.mY + mClientLastDown.mY);
 				bool flag = mClientLastDown.GetInsetRect().Contains(a2);
 				if (flag && !mClientLastDown.mIsOver)
 				{
@@ -553,14 +553,14 @@ namespace Sexy
 				g.SetColorizeImages(true);
 				if ((mScrollPractical & ScrollWidget.ScrollMode.SCROLL_HORIZONTAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED)
 				{
-					float num = (float)mWidth / (float)mClient.Width();
+					float num = mWidth / (float)mClient.Width();
 					int num2 = mWidth - insets.mLeft - insets.mRight - (((mScrollMode & ScrollWidget.ScrollMode.SCROLL_VERTICAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED) ? width : 0);
-					int num3 = (int)((float)num2 * num);
+					int num3 = (int)(num2 * num);
 					int num4 = num2 - num3;
-					float num5 = (float)Math.Min(0, mWidth - mClient.mWidth - mScrollInsets.mRight);
-					float num6 = (float)mScrollInsets.mLeft;
+					float num5 = Math.Min(0, mWidth - mClient.mWidth - mScrollInsets.mRight);
+					float num6 = mScrollInsets.mLeft;
 					float num7 = 1f - (mScrollOffset.x - num5) / (num6 - num5);
-					int num8 = (int)((float)num4 * num7);
+					int num8 = (int)(num4 * num7);
 					int num9 = num8 + num3;
 					num8 = Math.Min(Math.Max(0, num8), num2 - width);
 					num9 = Math.Min(Math.Max(width, num9), num2);
@@ -573,14 +573,14 @@ namespace Sexy
 				}
 				if ((mScrollPractical & ScrollWidget.ScrollMode.SCROLL_VERTICAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED)
 				{
-					float num10 = (float)mHeight / (float)mClient.Height();
+					float num10 = mHeight / (float)mClient.Height();
 					int num11 = mHeight - insets.mTop - insets.mBottom - (((mScrollMode & ScrollWidget.ScrollMode.SCROLL_HORIZONTAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED) ? height : 0);
-					int num12 = (int)((float)num11 * num10);
+					int num12 = (int)(num11 * num10);
 					int num13 = num11 - num12;
-					float num14 = (float)Math.Min(0, mHeight - mClient.mHeight - mScrollInsets.mBottom);
-					float num15 = (float)mScrollInsets.mTop;
+					float num14 = Math.Min(0, mHeight - mClient.mHeight - mScrollInsets.mBottom);
+					float num15 = mScrollInsets.mTop;
 					float num16 = 1f - (mScrollOffset.y - num14) / (num15 - num14);
-					int num17 = (int)((float)num13 * num16);
+					int num17 = (int)(num13 * num16);
 					int num18 = num17 + num12;
 					num17 = Math.Min(Math.Max(0, num17), num11 - height);
 					num18 = Math.Min(Math.Max(height, num18), num11);
@@ -632,16 +632,16 @@ namespace Sexy
 		{
 			CGPoint cgpoint = CGMaths.CGPointSubtract(new CGPoint
 			{
-				x = (float)mScrollInsets.mLeft + mPageSize.x / 2f,
-				y = (float)mScrollInsets.mTop + mPageSize.y / 2f
+				x = mScrollInsets.mLeft + mPageSize.x / 2f,
+				y = mScrollInsets.mTop + mPageSize.y / 2f
 			}, mScrollOffset);
-			int num = (int)Math.Floor((double)(cgpoint.x / mPageSize.x));
-			int num2 = (int)Math.Floor((double)(cgpoint.y / mPageSize.y));
+			int num = (int)Math.Floor(cgpoint.x / mPageSize.x);
+			int num2 = (int)Math.Floor(cgpoint.y / mPageSize.y);
 			num = Math.Max(0, Math.Min(num, mPageCountHorizontal - 1));
 			num2 = Math.Max(0, Math.Min(num2, mPageCountVertical - 1));
 			CGPoint cgpoint2 = default(CGPoint);
-			cgpoint2.x = (float)mScrollInsets.mLeft - (float)num * mPageSize.x;
-			cgpoint2.y = (float)mScrollInsets.mTop - (float)num2 * mPageSize.y;
+			cgpoint2.x = mScrollInsets.mLeft - num * mPageSize.x;
+			cgpoint2.y = mScrollInsets.mTop - num2 * mPageSize.y;
 			if (mScrollVelocity.x > 40f && cgpoint2.x < mScrollOffset.x)
 			{
 				num--;
@@ -686,9 +686,9 @@ namespace Sexy
 					double num2 = touch.timestamp - mScrollLastTimestamp;
 					if (num2 > 0.0)
 					{
-						double num3 = (double)num / num2;
+						double num3 = num / num2;
 						double num4 = Math.Min(1.0, num2 / 0.10000000149011612);
-						mScrollVelocity.x = (float)(num4 * num3 + (1.0 - num4) * (double)mScrollVelocity.x);
+						mScrollVelocity.x = (float)(num4 * num3 + (1.0 - num4) * mScrollVelocity.x);
 					}
 				}
 			}
@@ -713,9 +713,9 @@ namespace Sexy
 					double num6 = touch.timestamp - mScrollLastTimestamp;
 					if (num6 > 0.0)
 					{
-						double num7 = (double)num5 / num6;
+						double num7 = num5 / num6;
 						double num8 = Math.Min(1.0, num6 / 0.10000000149011612);
-						mScrollVelocity.y = (float)(num8 * num7 + (1.0 - num8) * (double)mScrollVelocity.y);
+						mScrollVelocity.y = (float)(num8 * num7 + (1.0 - num8) * mScrollVelocity.y);
 					}
 				}
 			}
@@ -757,10 +757,10 @@ namespace Sexy
 				num4 = num2;
 				widgetAtHelper = mClient;
 			}
-			touch.previousLocation.X = touch.previousLocation.X + ((float)num3 - touch.location.X);
-			touch.previousLocation.Y = touch.previousLocation.Y + ((float)num4 - touch.location.Y);
-			touch.location.X = (float)num3;
-			touch.location.Y = (float)num4;
+			touch.previousLocation.X = touch.previousLocation.X + (num3 - touch.location.X);
+			touch.previousLocation.Y = touch.previousLocation.Y + (num4 - touch.location.Y);
+			touch.location.X = num3;
+			touch.location.Y = num4;
 			return widgetAtHelper;
 		}
 
@@ -779,10 +779,10 @@ namespace Sexy
 		{
 			if (mClient != null)
 			{
-				mScrollMin.x = (float)(mWidth - mClient.mWidth - mScrollInsets.mRight);
-				mScrollMin.y = (float)(mHeight - mClient.mHeight - mScrollInsets.mBottom);
-				mScrollMax.x = (float)mScrollInsets.mLeft;
-				mScrollMax.y = (float)mScrollInsets.mTop;
+				mScrollMin.x = mWidth - mClient.mWidth - mScrollInsets.mRight;
+				mScrollMin.y = mHeight - mClient.mHeight - mScrollInsets.mBottom;
+				mScrollMax.x = mScrollInsets.mLeft;
+				mScrollMax.y = mScrollInsets.mTop;
 				int num = ((mScrollMin.x < mScrollMax.x) ? 1 : 0) | ((mScrollMin.y < mScrollMax.y) ? 2 : 0);
 				mScrollPractical = (mScrollMode & (ScrollWidget.ScrollMode)num);
 			}
@@ -793,12 +793,12 @@ namespace Sexy
 			}
 			if (mPagingEnabled)
 			{
-				mPageSize.x = (float)(mWidth - mScrollInsets.mLeft - mScrollInsets.mRight);
-				mPageSize.y = (float)(mHeight - mScrollInsets.mTop - mScrollInsets.mBottom);
+				mPageSize.x = mWidth - mScrollInsets.mLeft - mScrollInsets.mRight;
+				mPageSize.y = mHeight - mScrollInsets.mTop - mScrollInsets.mBottom;
 				if (mClient != null)
 				{
-					mPageCountHorizontal = (int)Math.Floor((double)((float)mClient.Width() / mPageSize.x));
-					mPageCountVertical = (int)Math.Floor((double)((float)mClient.Height() / mPageSize.y));
+					mPageCountHorizontal = (int)Math.Floor(mClient.Width() / mPageSize.x);
+					mPageCountVertical = (int)Math.Floor(mClient.Height() / mPageSize.y);
 					return;
 				}
 				mPageCountHorizontal = (mPageCountVertical = 0);

@@ -42,7 +42,7 @@ namespace Lawn
 						int num = 0;
 						int num2 = 0;
 						GetZombiePosition(zombieType, ref num, ref num2);
-						if (x >= num && y >= num2 && (float)x < (float)num + Constants.InvertAndScale(76f) && (float)y < (float)num2 + Constants.InvertAndScale(76f))
+						if (x >= num && y >= num2 && x < num + Constants.InvertAndScale(76f) && y < num2 + Constants.InvertAndScale(76f))
 						{
 							return zombieType;
 						}
@@ -66,8 +66,8 @@ namespace Lawn
 				y = Constants.Almanac_ImpPosition.Y;
 				return;
 			}
-			x = (int)((int)theZombieType % 3 * Constants.Almanac_ZombieSpace.X);
-			y = (int)(5 + (int)theZombieType / 3 * Constants.Almanac_ZombieSpace.Y);
+			x = (int)theZombieType % 3 * Constants.Almanac_ZombieSpace.X;
+			y = 5 + (int)theZombieType / 3 * Constants.Almanac_ZombieSpace.Y;
 		}
 
 		public bool ZombieIsShown(ZombieType theZombieType)
@@ -110,7 +110,7 @@ namespace Lawn
 							@new.SetColor(new SexyColor(0, 0, 0, 64));
 							@new.SetColorizeImages(true);
 						}
-						mDialog.mApp.mReanimatorCache.DrawCachedZombie(@new, (float)(num + (int)Constants.InvertAndScale((float)AlmanacDialog.ZombieOffsets[(int)zombieType2].mX)), (float)(num2 + (int)Constants.InvertAndScale((float)AlmanacDialog.ZombieOffsets[(int)zombieType2].mY)), zombieType2);
+						mDialog.mApp.mReanimatorCache.DrawCachedZombie(@new, num + (int)Constants.InvertAndScale(AlmanacDialog.ZombieOffsets[(int)zombieType2].mX), num2 + (int)Constants.InvertAndScale(AlmanacDialog.ZombieOffsets[(int)zombieType2].mY), zombieType2);
 						@new.SetColorizeImages(false);
 						g.DrawImage(AtlasResources.IMAGE_ALMANAC_ZOMBIEWINDOW2, num + Constants.ZombieGalleryWidget_Window_Offset.X, num2 + Constants.ZombieGalleryWidget_Window_Offset.Y);
 						@new.PrepareForReuse();

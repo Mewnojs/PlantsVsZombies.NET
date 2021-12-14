@@ -12,7 +12,7 @@ namespace Lawn
 			renderItem.mRenderObjectType = theRenderObjectType;
 			renderItem.mZPos = theGameObject.mRenderOrder;
 			renderItem.mGameObject = theGameObject;
-			renderItem.id = (long)theCurRenderItem;
+			renderItem.id = theCurRenderItem;
 			theCurRenderItem++;
 		}
 
@@ -24,7 +24,7 @@ namespace Lawn
 			renderItem.mZPos = theGameObject.mRenderOrder;
 			renderItem.mGameObject = theGameObject;
 			renderItem.mCursorPreview = (CursorPreview)theGameObject;
-			renderItem.id = (long)theCurRenderItem;
+			renderItem.id = theCurRenderItem;
 			theCurRenderItem++;
 		}
 
@@ -36,7 +36,7 @@ namespace Lawn
 			renderItem.mZPos = theGameObject.mRenderOrder;
 			renderItem.mGameObject = theGameObject;
 			renderItem.mPlant = (Plant)theGameObject;
-			renderItem.id = (long)theCurRenderItem;
+			renderItem.id = theCurRenderItem;
 			theCurRenderItem++;
 		}
 
@@ -48,7 +48,7 @@ namespace Lawn
 			renderItem.mZPos = theGameObject.mRenderOrder;
 			renderItem.mGameObject = theGameObject;
 			renderItem.mZombie = (Zombie)theGameObject;
-			renderItem.id = (long)theCurRenderItem;
+			renderItem.id = theCurRenderItem;
 			theCurRenderItem++;
 		}
 
@@ -60,7 +60,7 @@ namespace Lawn
 			renderItem.mZPos = theGameObject.mRenderOrder;
 			renderItem.mGameObject = theGameObject;
 			renderItem.mProjectile = (Projectile)theGameObject;
-			renderItem.id = (long)theCurRenderItem;
+			renderItem.id = theCurRenderItem;
 			theCurRenderItem++;
 		}
 
@@ -72,7 +72,7 @@ namespace Lawn
 			renderItem.mZPos = theGameObject.mRenderOrder;
 			renderItem.mGameObject = theGameObject;
 			renderItem.mCoin = (Coin)theGameObject;
-			renderItem.id = (long)theCurRenderItem;
+			renderItem.id = theCurRenderItem;
 			theCurRenderItem++;
 		}
 
@@ -83,7 +83,7 @@ namespace Lawn
 			renderItem.mRenderObjectType = theRenderObjectType;
 			renderItem.mZPos = thePosZ;
 			renderItem.mGameObject = null;
-			renderItem.id = (long)theCurRenderItem;
+			renderItem.id = theCurRenderItem;
 			theCurRenderItem++;
 		}
 

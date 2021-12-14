@@ -1284,7 +1284,7 @@ namespace Sexy
 			if (flag)
 			{
 				mLoadedCount++;
-				mProgress = (double)mLoadedCount / (double)mTotalResources;
+				mProgress = mLoadedCount / (double)mTotalResources;
 				Debug.OutputDebug<string>(mProgress.ToString());
 			}
 			return flag;
@@ -1399,9 +1399,9 @@ namespace Sexy
 
 		private void PremultiplyPixel(ref Color c)
 		{
-			c.R = (byte)((float)(c.R * c.A) / 255f);
-			c.G = (byte)((float)(c.G * c.A) / 255f);
-			c.B = (byte)((float)(c.B * c.A) / 255f);
+			c.R = (byte)(c.R * c.A / 255f);
+			c.G = (byte)(c.G * c.A / 255f);
+			c.B = (byte)(c.B * c.A / 255f);
 		}
 
 		private bool DoLoadImage(ImageRes theRes)
@@ -1484,11 +1484,11 @@ namespace Sexy
 								char c = xmlReader["character"].ToCharArray()[0];
 								if (!string.IsNullOrEmpty(text))
 								{
-									zero.X = (float)Convert.ToInt32(text);
+									zero.X = Convert.ToInt32(text);
 								}
 								if (!string.IsNullOrEmpty(text2))
 								{
-									zero.Y = (float)Convert.ToInt32(text2);
+									zero.Y = Convert.ToInt32(text2);
 								}
 								font.AddCharacterOffset(c, zero);
 							}
@@ -1521,11 +1521,11 @@ namespace Sexy
 									string text5 = xmlReader["yOffset"];
 									if (!string.IsNullOrEmpty(text4))
 									{
-										zero2.X = (float)Convert.ToInt32(text4);
+										zero2.X = Convert.ToInt32(text4);
 									}
 									if (!string.IsNullOrEmpty(text5))
 									{
-										zero2.Y = (float)Convert.ToInt32(text5);
+										zero2.Y = Convert.ToInt32(text5);
 									}
 								}
 							}

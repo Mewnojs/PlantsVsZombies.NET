@@ -273,7 +273,7 @@ namespace Lawn
 				if (seedType != SeedType.SEED_NONE)
 				{
 					ChosenSeed chosenSeed = mChosenSeeds[(int)seedType];
-					SeedPacket.DrawSmallSeedPacket(g, (float)num, (float)num2, seedType, chosenSeed.mImitaterType, 0f, 255, true, false, true, true);
+					SeedPacket.DrawSmallSeedPacket(g, num, num2, seedType, chosenSeed.mImitaterType, 0f, 255, true, false, true, true);
 					if (chosenSeed.mCrazyDavePicked)
 					{
 						g.DrawImage(AtlasResources.IMAGE_LOCK, num, num2 + (int)Constants.InvertAndScale(13f));
@@ -305,7 +305,7 @@ namespace Lawn
 			{
 				g.DrawImage(AtlasResources.IMAGE_ALMANAC_PLANTS_TOPGRADIENT, mScrollWidget.mX + Constants.SeedChooserScreen_Gradient_Top.X, Constants.SeedChooserScreen_Gradient_Top.Y, Constants.SeedChooserScreen_Gradient_Top.Width, Constants.SeedChooserScreen_Gradient_Top.Height);
 			}
-			if ((float)(mSeedPacketsWidget.mY + mSeedPacketsWidget.mHeight) > Constants.InvertAndScale(227f))
+			if (mSeedPacketsWidget.mY + mSeedPacketsWidget.mHeight > Constants.InvertAndScale(227f))
 			{
 				g.DrawImage(AtlasResources.IMAGE_ALMANAC_PLANTS_BOTTOMGRADIENT, mScrollWidget.mX + Constants.SeedChooserScreen_Gradient_Bottom.X, Constants.SeedChooserScreen_Gradient_Bottom.Y, Constants.SeedChooserScreen_Gradient_Bottom.Width, Constants.SeedChooserScreen_Gradient_Bottom.Height);
 			}
@@ -331,7 +331,7 @@ namespace Lawn
 						g.HardwareClip();
 						flag = true;
 					}
-					SeedPacket.DrawSmallSeedPacket(g, (float)chosenSeed.mX, (float)chosenSeed.mY, chosenSeed.mSeedType, chosenSeed.mImitaterType, 0f, 255, true, false, true, true);
+					SeedPacket.DrawSmallSeedPacket(g, chosenSeed.mX, chosenSeed.mY, chosenSeed.mSeedType, chosenSeed.mImitaterType, 0f, 255, true, false, true, true);
 				}
 				IL_170:;
 			}
@@ -802,11 +802,11 @@ namespace Lawn
 				int thePositionStart = -Constants.BOARD_OFFSET + Constants.BACKGROUND_IMAGE_WIDTH - num;
 				int thePositionEnd = 0;
 				int num2 = TodCommon.TodAnimateCurve(0, 100, mViewLawnTime, thePositionStart, thePositionEnd, TodCurves.CURVE_EASE_IN_OUT);
-				mBoard.Move((int)((float)(-(float)num2) * Constants.S), 0);
+				mBoard.Move((int)((float)(-num2) * Constants.S), 0);
 				int thePositionStart2 = Constants.SEED_CHOOSER_OFFSETSCREEN_OFFSET - 265;
 				int seed_CHOOSER_OFFSETSCREEN_OFFSET = Constants.SEED_CHOOSER_OFFSETSCREEN_OFFSET;
 				int num3 = TodCommon.TodAnimateCurve(0, 40, mViewLawnTime, thePositionStart2, seed_CHOOSER_OFFSETSCREEN_OFFSET, TodCurves.CURVE_EASE_IN_OUT);
-				Move(0, (int)((float)num3 * Constants.S));
+				Move(0, (int)(num3 * Constants.S));
 				return;
 			}
 			if (mViewLawnTime > 100 && mViewLawnTime <= 250)
@@ -821,11 +821,11 @@ namespace Lawn
 				int thePositionStart3 = 0;
 				int thePositionEnd2 = -Constants.BOARD_OFFSET + Constants.BACKGROUND_IMAGE_WIDTH - num;
 				int num4 = TodCommon.TodAnimateCurve(250, 350, mViewLawnTime, thePositionStart3, thePositionEnd2, TodCurves.CURVE_EASE_IN_OUT);
-				mBoard.Move((int)((float)(-(float)num4) * Constants.S), 0);
+				mBoard.Move((int)((float)(-num4) * Constants.S), 0);
 				int seed_CHOOSER_OFFSETSCREEN_OFFSET2 = Constants.SEED_CHOOSER_OFFSETSCREEN_OFFSET;
 				int thePositionEnd3 = Constants.SEED_CHOOSER_OFFSETSCREEN_OFFSET - 265;
 				int num5 = TodCommon.TodAnimateCurve(310, 350, mViewLawnTime, seed_CHOOSER_OFFSETSCREEN_OFFSET2, thePositionEnd3, TodCurves.CURVE_EASE_IN_OUT);
-				Move(0, (int)((float)num5 * Constants.S));
+				Move(0, (int)(num5 * Constants.S));
 				return;
 			}
 			mChooseState = SeedChooserState.CHOOSE_NORMAL;
@@ -1015,7 +1015,7 @@ namespace Lawn
 				num += theArray[i].mWeight;
 			}
 			Debug.ASSERT(num > 0);
-			int num2 = (int)RandomNumbers.NextNumber(num);
+			int num2 = RandomNumbers.NextNumber(num);
 			int num3 = 0;
 			for (int j = 0; j < theCount; j++)
 			{

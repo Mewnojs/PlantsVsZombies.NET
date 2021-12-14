@@ -90,7 +90,7 @@ namespace Sexy
 
 		public float Magnitude()
 		{
-			return (float)Math.Sqrt((double)Norm());
+			return (float)Math.Sqrt(Norm());
 		}
 
 		public SexyVector3 Normalize()

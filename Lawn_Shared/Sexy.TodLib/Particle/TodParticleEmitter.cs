@@ -153,7 +153,7 @@ namespace Sexy.TodLib
 					flag = true;
 				}
 			}
-			mSystemTimeValue = (float)mSystemAge / (float)(mSystemDuration - 1);
+			mSystemTimeValue = mSystemAge / (float)(mSystemDuration - 1);
 			for (int i = 0; i < mEmitterDef.mSystemFieldCount; i++)
 			{
 				ParticleField theParticleField = mEmitterDef.mSystemFields[i];
@@ -229,19 +229,19 @@ namespace Sexy.TodLib
 			theParams.mRedIsSet = false;
 			theParams.mRedIsSet |= Definition.FloatTrackIsSet(ref todEmitterDefinition.mSystemRed);
 			theParams.mRedIsSet |= Definition.FloatTrackIsSet(ref todEmitterDefinition.mParticleRed);
-			theParams.mRedIsSet |= ((float)particleEmitter.mColorOverride.mRed != 1f);
+			theParams.mRedIsSet |= (particleEmitter.mColorOverride.mRed != 1f);
 			theParams.mGreenIsSet = false;
 			theParams.mGreenIsSet |= Definition.FloatTrackIsSet(ref todEmitterDefinition.mSystemGreen);
 			theParams.mGreenIsSet |= Definition.FloatTrackIsSet(ref todEmitterDefinition.mParticleGreen);
-			theParams.mGreenIsSet |= ((float)particleEmitter.mColorOverride.mGreen != 1f);
+			theParams.mGreenIsSet |= (particleEmitter.mColorOverride.mGreen != 1f);
 			theParams.mBlueIsSet = false;
 			theParams.mBlueIsSet |= Definition.FloatTrackIsSet(ref todEmitterDefinition.mSystemBlue);
 			theParams.mBlueIsSet |= Definition.FloatTrackIsSet(ref todEmitterDefinition.mParticleBlue);
-			theParams.mBlueIsSet |= ((float)particleEmitter.mColorOverride.mBlue != 1f);
+			theParams.mBlueIsSet |= (particleEmitter.mColorOverride.mBlue != 1f);
 			theParams.mAlphaIsSet = false;
 			theParams.mAlphaIsSet |= Definition.FloatTrackIsSet(ref todEmitterDefinition.mSystemAlpha);
 			theParams.mAlphaIsSet |= Definition.FloatTrackIsSet(ref todEmitterDefinition.mParticleAlpha);
-			theParams.mAlphaIsSet |= ((float)particleEmitter.mColorOverride.mAlpha != 1f);
+			theParams.mAlphaIsSet |= (particleEmitter.mColorOverride.mAlpha != 1f);
 			theParams.mParticleScaleIsSet = false;
 			theParams.mParticleScaleIsSet |= Definition.FloatTrackIsSet(ref todEmitterDefinition.mParticleScale);
 			theParams.mParticleScaleIsSet |= (particleEmitter.mScaleOverride != 1f);
@@ -252,7 +252,7 @@ namespace Sexy.TodLib
 			theParams.mSpinPositionIsSet |= TodCommon.TestBit((uint)todEmitterDefinition.mParticleFlags, 0);
 			theParams.mSpinPositionIsSet |= TodCommon.TestBit((uint)todEmitterDefinition.mParticleFlags, 1);
 			theParams.mPositionIsSet = false;
-			theParams.mPositionIsSet |= ((float)todEmitterDefinition.mParticleFieldCount > 0f);
+			theParams.mPositionIsSet |= (todEmitterDefinition.mParticleFieldCount > 0f);
 			theParams.mPositionIsSet |= Definition.FloatTrackIsSet(ref todEmitterDefinition.mEmitterRadius);
 			theParams.mPositionIsSet |= Definition.FloatTrackIsSet(ref todEmitterDefinition.mEmitterOffsetX);
 			theParams.mPositionIsSet |= Definition.FloatTrackIsSet(ref todEmitterDefinition.mEmitterOffsetY);
@@ -269,10 +269,10 @@ namespace Sexy.TodLib
 			float num9 = particleEmitter.ParticleTrackEvaluate(ref todEmitterDefinition.mParticleAlpha, theParticle, ParticleTracks.TRACK_PARTICLE_ALPHA);
 			float num10 = particleEmitter.ParticleTrackEvaluate(ref todEmitterDefinition.mParticleBrightness, theParticle, ParticleTracks.TRACK_PARTICLE_BRIGHTNESS);
 			float num11 = num10 * num5;
-			theParams.mRed = num6 * num * (float)particleEmitter.mColorOverride.mRed * num11;
-			theParams.mGreen = num7 * num2 * (float)particleEmitter.mColorOverride.mGreen * num11;
-			theParams.mBlue = num8 * num3 * (float)particleEmitter.mColorOverride.mBlue * num11;
-			theParams.mAlpha = num9 * num4 * (float)particleEmitter.mColorOverride.mAlpha;
+			theParams.mRed = num6 * num * particleEmitter.mColorOverride.mRed * num11;
+			theParams.mGreen = num7 * num2 * particleEmitter.mColorOverride.mGreen * num11;
+			theParams.mBlue = num8 * num3 * particleEmitter.mColorOverride.mBlue * num11;
+			theParams.mAlpha = num9 * num4 * particleEmitter.mColorOverride.mAlpha;
 			theParams.mPosX = theParticle.mPosition.x;
 			theParams.mPosY = theParticle.mPosition.y;
 			theParams.mParticleScale = particleEmitter.ParticleTrackEvaluate(ref todEmitterDefinition.mParticleScale, theParticle, ParticleTracks.TRACK_PARTICLE_SCALE);
@@ -289,7 +289,7 @@ namespace Sexy.TodLib
 				ParticleRenderParams particleRenderParams = default(ParticleRenderParams);
 				if (TodParticleEmitter.GetRenderParams(todParticle, ref particleRenderParams))
 				{
-					float theFraction = (float)theParticle.mParticleAge / (float)(todParticle.mCrossFadeDuration - 1);
+					float theFraction = theParticle.mParticleAge / (float)(todParticle.mCrossFadeDuration - 1);
 					theParams.mRed = TodParticleGlobal.CrossFadeLerp(particleRenderParams.mRed, theParams.mRed, particleRenderParams.mRedIsSet, theParams.mRedIsSet, theFraction);
 					theParams.mGreen = TodParticleGlobal.CrossFadeLerp(particleRenderParams.mGreen, theParams.mGreen, particleRenderParams.mGreenIsSet, theParams.mGreenIsSet, theFraction);
 					theParams.mBlue = TodParticleGlobal.CrossFadeLerp(particleRenderParams.mBlue, theParams.mBlue, particleRenderParams.mBlueIsSet, theParams.mBlueIsSet, theFraction);
@@ -333,8 +333,8 @@ namespace Sexy.TodLib
 			{
 				return;
 			}
-			particleRenderParams.mPosX += (float)g.mTransX;
-			particleRenderParams.mPosY += (float)g.mTransY;
+			particleRenderParams.mPosX += g.mTransX;
+			particleRenderParams.mPosY += g.mTransY;
 			TodParticle theParticle2;
 			if (mImageOverride != null || mEmitterDef.mImage != null)
 			{
@@ -366,7 +366,7 @@ namespace Sexy.TodLib
 			}
 			mSpawnAccum += Definition.FloatTrackEvaluate(ref todParticleEmitter.mEmitterDef.mSpawnRate, todParticleEmitter.mSystemTimeValue, todParticleEmitter.mTrackInterp[0]) * 0.01f;
 			int num = (int)mSpawnAccum;
-			mSpawnAccum -= (float)num;
+			mSpawnAccum -= num;
 			int num2 = (int)Definition.FloatTrackEvaluate(ref todParticleEmitter.mEmitterDef.mSpawnMinActive, todParticleEmitter.mSystemTimeValue, todParticleEmitter.mTrackInterp[1]);
 			if (num2 >= 0)
 			{
@@ -433,7 +433,7 @@ namespace Sexy.TodLib
 			{
 				return false;
 			}
-			theParticle.mParticleTimeValue = (float)theParticle.mParticleAge / (float)(theParticle.mParticleDuration - 1);
+			theParticle.mParticleTimeValue = theParticle.mParticleAge / (float)(theParticle.mParticleDuration - 1);
 			for (int i = 0; i < mEmitterDef.mParticleFieldCount; i++)
 			{
 				ParticleField theParticleField = mEmitterDef.mParticleFields[i];
@@ -509,7 +509,7 @@ namespace Sexy.TodLib
 			}
 			else if (mEmitterDef.mEmitterType == EmitterType.EMITTER_CIRCLE_EVEN_SPACING)
 			{
-				num2 = 6.2831855f * (float)theIndex / (float)theSpawnCount;
+				num2 = 6.2831855f * theIndex / theSpawnCount;
 				num2 += TodCommon.DegToRad(Definition.FloatTrackEvaluate(ref mEmitterDef.mLaunchAngle, mSystemTimeValue, theInterp5));
 			}
 			else if (Definition.FloatTrackIsConstantZero(ref mEmitterDef.mLaunchAngle))
@@ -526,8 +526,8 @@ namespace Sexy.TodLib
 			{
 				float theInterp6 = RandomNumbers.NextNumber(1f);
 				float num5 = Definition.FloatTrackEvaluate(ref mEmitterDef.mEmitterRadius, mSystemTimeValue, theInterp6);
-				num3 = (float)Math.Sin((double)num2) * num5;
-				num4 = (float)Math.Cos((double)num2) * num5;
+				num3 = (float)Math.Sin(num2) * num5;
+				num4 = (float)Math.Cos(num2) * num5;
 			}
 			else if (mEmitterDef.mEmitterType == EmitterType.EMITTER_BOX)
 			{
@@ -574,8 +574,8 @@ namespace Sexy.TodLib
 			float num16 = Definition.FloatTrackEvaluate(ref mEmitterDef.mEmitterSkewY, mSystemTimeValue, theInterp10);
 			newTodParticle.mPosition.x = mSystemCenter.x + num3 + num4 * num15;
 			newTodParticle.mPosition.y = mSystemCenter.y + num4 + num3 * num16;
-			newTodParticle.mVelocity.x = (float)Math.Sin((double)num2) * num;
-			newTodParticle.mVelocity.y = (float)Math.Cos((double)num2) * num;
+			newTodParticle.mVelocity.x = (float)Math.Sin(num2) * num;
+			newTodParticle.mVelocity.y = (float)Math.Cos(num2) * num;
 			float num17 = Definition.FloatTrackEvaluate(ref mEmitterDef.mEmitterOffsetX, mSystemTimeValue, theInterp3);
 			float num18 = Definition.FloatTrackEvaluate(ref mEmitterDef.mEmitterOffsetY, mSystemTimeValue, theInterp4);
 			TodParticle todParticle = newTodParticle;
@@ -772,10 +772,10 @@ namespace Sexy.TodLib
 				{
 					num11 = theParticle.mParticleDuration - 1;
 				}
-				theParticle.mPosition.x = theParticle.mPosition.x - num9 * ((float)RandomNumbers.NextNumber() * 0f * 2f - 1f);
-				theParticle.mPosition.y = theParticle.mPosition.y - num10 * ((float)RandomNumbers.NextNumber() * 0f * 2f - 1f);
-				theParticle.mPosition.x = theParticle.mPosition.x + num * ((float)RandomNumbers.NextNumber() * 0f * 2f - 1f);
-				theParticle.mPosition.y = theParticle.mPosition.y + num2 * ((float)RandomNumbers.NextNumber() * 0f * 2f - 1f);
+				theParticle.mPosition.x = theParticle.mPosition.x - num9 * (RandomNumbers.NextNumber() * 0f * 2f - 1f);
+				theParticle.mPosition.y = theParticle.mPosition.y - num10 * (RandomNumbers.NextNumber() * 0f * 2f - 1f);
+				theParticle.mPosition.x = theParticle.mPosition.x + num * (RandomNumbers.NextNumber() * 0f * 2f - 1f);
+				theParticle.mPosition.y = theParticle.mPosition.y + num2 * (RandomNumbers.NextNumber() * 0f * 2f - 1f);
 				return;
 			}
 			case ParticleFieldType.FIELD_CIRCLE:

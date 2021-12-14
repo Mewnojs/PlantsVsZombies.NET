@@ -49,7 +49,7 @@ namespace Lawn
 			}
 			if (aType == ZombiePileObjectType.OBJECT_YELLOW_CLOUD)
 			{
-				mCounter = (float)ZombiePileObject.rand.Next(Constants.BOARD_WIDTH);
+				mCounter = ZombiePileObject.rand.Next(Constants.BOARD_WIDTH);
 			}
 			if (aType == ZombiePileObjectType.OBJECT_ASTRONAUT)
 			{
@@ -62,7 +62,7 @@ namespace Lawn
 				return;
 			}
 			mReanim = null;
-			mOffsetX = (float)ZombiePileObject.rand.Next(Constants.BOARD_WIDTH);
+			mOffsetX = ZombiePileObject.rand.Next(Constants.BOARD_WIDTH);
 		}
 
 		public const float maxGemSpeedX = 5f;

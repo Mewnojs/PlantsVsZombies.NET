@@ -160,7 +160,7 @@ namespace Lawn
 		public bool MouseHitTest(int x, int y, out HitResult theHitResult)
 		{
 			theHitResult = default(HitResult);
-			if ((float)x > (float)mWidth * Constants.S - 50f)
+			if (x > mWidth * Constants.S - 50f)
 			{
 				return false;
 			}

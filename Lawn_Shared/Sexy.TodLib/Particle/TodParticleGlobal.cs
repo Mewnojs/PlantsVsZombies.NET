@@ -135,12 +135,12 @@ namespace Sexy.TodLib
 			}
 			else if (Definition.FloatTrackIsSet(ref emitterDef.mAnimationRate))
 			{
-				num = (int)(theParticle.mAnimationTimeValue * (float)emitterDef.mImageFrames);
+				num = (int)(theParticle.mAnimationTimeValue * emitterDef.mImageFrames);
 				num = TodCommon.ClampInt(num, 0, emitterDef.mImageFrames - 1);
 			}
 			else if (emitterDef.mAnimated != 0)
 			{
-				num = (int)(theParticle.mParticleTimeValue * (float)emitterDef.mImageFrames);
+				num = (int)(theParticle.mParticleTimeValue * emitterDef.mImageFrames);
 				num = TodCommon.ClampInt(num, 0, emitterDef.mImageFrames - 1);
 			}
 			else
@@ -162,16 +162,16 @@ namespace Sexy.TodLib
 			float num4 = Definition.FloatTrackEvaluate(ref emitterDef.mClipBottom, theParticle.mParticleTimeValue, theParticle.mParticleInterp[12]);
 			float num5 = Definition.FloatTrackEvaluate(ref emitterDef.mClipLeft, theParticle.mParticleTimeValue, theParticle.mParticleInterp[13]);
 			float num6 = Definition.FloatTrackEvaluate(ref emitterDef.mClipRight, theParticle.mParticleTimeValue, theParticle.mParticleInterp[14]);
-			theParams.mPosX += num5 * (float)celWidth;
-			theParams.mPosY += num3 * (float)celHeight;
-			trect.mX += TodCommon.FloatRoundToInt(num5 * (float)celWidth);
-			trect.mY += TodCommon.FloatRoundToInt(num3 * (float)celHeight);
-			trect.mWidth -= TodCommon.FloatRoundToInt((num5 + num6) * (float)celWidth);
-			trect.mHeight -= TodCommon.FloatRoundToInt((num3 + num4) * (float)celHeight);
+			theParams.mPosX += num5 * celWidth;
+			theParams.mPosY += num3 * celHeight;
+			trect.mX += TodCommon.FloatRoundToInt(num5 * celWidth);
+			trect.mY += TodCommon.FloatRoundToInt(num3 * celHeight);
+			trect.mWidth -= TodCommon.FloatRoundToInt((num5 + num6) * celWidth);
+			trect.mHeight -= TodCommon.FloatRoundToInt((num3 + num4) * celHeight);
 			if (TodCommon.TestBit((uint)emitterDef.mParticleFlags, 2))
 			{
-				theParams.mPosX = (float)TodCommon.FloatRoundToInt(theParams.mPosX);
-				theParams.mPosY = (float)TodCommon.FloatRoundToInt(theParams.mPosY);
+				theParams.mPosX = TodCommon.FloatRoundToInt(theParams.mPosX);
+				theParams.mPosY = TodCommon.FloatRoundToInt(theParams.mPosY);
 			}
 			Graphics.DrawMode drawMode = g.mDrawMode;
 			if (TodCommon.TestBit((uint)emitterDef.mParticleFlags, 8))
@@ -194,11 +194,11 @@ namespace Sexy.TodLib
 			int trectWidth = trect.mWidth;
 			int trectHeight = trect.mHeight;
 			g.SetDrawMode(drawMode);
-			g.DrawImageRotatedScaled(image, new TRect((int)theParams.mPosX, (int)theParams.mPosY, trect.mWidth, trect.mHeight), new TRect(trect.mX, trect.mY, trect.mWidth, trect.mHeight), particleEmitter.mExtraAdditiveDrawOverride ? SexyColor.White : theColor, theParams.mSpinPosition, new Vector2(theParams.mParticleScale, theParams.mParticleScale * theParams.mParticleStretch), new Vector2((float)(trect.mWidth / 2), (float)(trect.mHeight / 2)));
+			g.DrawImageRotatedScaled(image, new TRect((int)theParams.mPosX, (int)theParams.mPosY, trect.mWidth, trect.mHeight), new TRect(trect.mX, trect.mY, trect.mWidth, trect.mHeight), particleEmitter.mExtraAdditiveDrawOverride ? SexyColor.White : theColor, theParams.mSpinPosition, new Vector2(theParams.mParticleScale, theParams.mParticleScale * theParams.mParticleStretch), new Vector2(trect.mWidth / 2, trect.mHeight / 2));
 			if (particleEmitter.mExtraAdditiveDrawOverride)
 			{
 				g.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
-				g.DrawImageRotatedScaled(image, new TRect((int)theParams.mPosX, (int)theParams.mPosY, trect.mWidth, trect.mHeight), new TRect(trect.mX, trect.mY, trect.mWidth, trect.mHeight), theColor, theParams.mSpinPosition, new Vector2(theParams.mParticleScale, theParams.mParticleScale * theParams.mParticleStretch), new Vector2((float)(trect.mWidth / 2), (float)(trect.mHeight / 2)));
+				g.DrawImageRotatedScaled(image, new TRect((int)theParams.mPosX, (int)theParams.mPosY, trect.mWidth, trect.mHeight), new TRect(trect.mX, trect.mY, trect.mWidth, trect.mHeight), theColor, theParams.mSpinPosition, new Vector2(theParams.mParticleScale, theParams.mParticleScale * theParams.mParticleStretch), new Vector2(trect.mWidth / 2, trect.mHeight / 2));
 			}
 		}
 

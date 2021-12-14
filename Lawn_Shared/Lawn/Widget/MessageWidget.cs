@@ -41,13 +41,13 @@ namespace Lawn
 			if (mReanimType != ReanimationType.REANIM_NONE && mDuration > 0)
 			{
 				mMessageStyleNext = theMessageStyle;
-				mLabelNext = string.Copy(text).ToCharArray();
+				mLabelNext = text.ToCharArray();//string.Copy(text).ToCharArray();
 				mDuration = Math.Min(mDuration, 100 + mSlideOffTime + 1);
 				return;
 			}
 			ClearReanim();
 			mLabel = text;
-			mLabelString = string.Copy(text);
+			mLabelString = text;//string.Copy(text);
 			mLabelStringList.Clear();
 			for (int i = 0; i < mLabel.Length; i++)
 			{
@@ -249,14 +249,14 @@ namespace Lawn
 				Debug.ASSERT(false);
 				break;
 			}
-			num2 = (int)((float)num2 * Constants.S);
+			num2 = (int)(num2 * Constants.S);
 			if (mReanimType != ReanimationType.REANIM_NONE)
 			{
 				if (font == Resources.FONT_CONTINUUMBOLD14)
 				{
-					DrawReanimatedText(g, Resources.FONT_CONTINUUMBOLD14OUTLINE, SexyColor.Black, (float)num2);
+					DrawReanimatedText(g, Resources.FONT_CONTINUUMBOLD14OUTLINE, SexyColor.Black, num2);
 				}
-				DrawReanimatedText(g, font, theColor, (float)num2);
+				DrawReanimatedText(g, font, theColor, num2);
 				return;
 			}
 			if (num3 != 255)
@@ -376,14 +376,14 @@ namespace Lawn
 					}
 					ReanimatorTransform reanimatorTransform;
 					reanimation.GetCurrentTransform(2, out reanimatorTransform, false);
-					int num = TodCommon.ClampInt(TodCommon.FloatRoundToInt(reanimatorTransform.mAlpha * (float)theColor.mAlpha), 0, 255);
+					int num = TodCommon.ClampInt(TodCommon.FloatRoundToInt(reanimatorTransform.mAlpha * theColor.mAlpha), 0, 255);
 					if (num <= 0)
 					{
 						return;
 					}
 					SexyColor theColor2 = theColor;
 					theColor2.mAlpha = num;
-					reanimatorTransform.mTransX += reanimation.mOverlayMatrix.mMatrix.M41 + (float)Constants.ReanimTextCenterOffsetX - (float)(Constants.Board_Offset_AspectRatio_Correction / 2);
+					reanimatorTransform.mTransX += reanimation.mOverlayMatrix.mMatrix.M41 + Constants.ReanimTextCenterOffsetX - Constants.Board_Offset_AspectRatio_Correction / 2;
 					reanimatorTransform.mTransY += reanimation.mOverlayMatrix.mMatrix.M42 + thePosY - 300f * Constants.S;
 					if (mReanimType == ReanimationType.REANIM_TEXT_FADE_ON && mDisplayTime - mDuration < mSlideOffTime)
 					{
@@ -416,7 +416,7 @@ namespace Lawn
 					int num5 = num3;
 					num3 = i + 1;
 					string theString = new string(mLabel[num5], num4);
-					array[num] = (float)font.StringWidth(theString);
+					array[num] = font.StringWidth(theString);
 					num2 = Math.Max(num2, array[num]);
 					num++;
 				}
@@ -430,13 +430,13 @@ namespace Lawn
 				reanimation.mIsAttachment = true;
 				reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_enter, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 0f);
 				mTextReanimID[j] = mApp.ReanimationGetID(reanimation);
-				num6 += (float)font.CharWidth(mLabel[j]);
+				num6 += font.CharWidth(mLabel[j]);
 				if (mLabel[j] == '\n')
 				{
 					num++;
 					Debug.ASSERT(num < 5);
 					num6 = -array[num] * 0.5f;
-					num7 += (float)font.GetLineSpacing();
+					num7 += font.GetLineSpacing();
 				}
 			}
 		}

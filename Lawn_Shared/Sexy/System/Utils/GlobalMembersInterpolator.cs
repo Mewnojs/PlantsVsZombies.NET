@@ -21,7 +21,7 @@ namespace Sexy
 
 		public static int tlerp(float t, int a, int b)
 		{
-			return (int)((float)a + t * (float)(b - a));
+			return (int)(a + t * (b - a));
 		}
 
 		internal const bool kTween = true;

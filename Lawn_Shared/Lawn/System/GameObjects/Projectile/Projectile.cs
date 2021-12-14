@@ -147,14 +147,14 @@ namespace Lawn
 		{
 			int num = mBoard.PixelToGridXKeepOnBoard(theX, theY);
 			mProjectileType = theProjectileType;
-			mPosX = (float)theX;
-			mPosY = (float)theY;
+			mPosX = theX;
+			mPosY = theY;
 			mPosZ = 0f;
 			mVelX = 0f;
 			mVelY = 0f;
 			mVelZ = 0f;
 			mAccZ = 0f;
-			mShadowY = (float)mBoard.GridToPixelY(num, theRow) + 67f;
+			mShadowY = mBoard.GridToPixelY(num, theRow) + 67f;
 			mMotionType = ProjectileMotion.MOTION_STRAIGHT;
 			mFrame = 0;
 			mNumFrames = 1;
@@ -175,7 +175,7 @@ namespace Lawn
 			{
 				mOnHighGround = false;
 			}
-			if (mBoard.StageHasRoof() && (float)theX < 480f)
+			if (mBoard.StageHasRoof() && theX < 480f)
 			{
 				mShadowY -= 12f;
 			}
@@ -216,8 +216,8 @@ namespace Lawn
 			}
 			else if (mProjectileType == ProjectileType.PROJECTILE_COBBIG)
 			{
-				mWidth = (int)((float)AtlasResources.IMAGE_REANIM_COBCANNON_COB.GetWidth() * Constants.IS);
-				mHeight = (int)((float)AtlasResources.IMAGE_REANIM_COBCANNON_COB.GetHeight() * Constants.IS);
+				mWidth = (int)(AtlasResources.IMAGE_REANIM_COBCANNON_COB.GetWidth() * Constants.IS);
+				mHeight = (int)(AtlasResources.IMAGE_REANIM_COBCANNON_COB.GetHeight() * Constants.IS);
 				mRotation = 1.5707964f;
 			}
 			else if (mProjectileType == ProjectileType.PROJECTILE_PUFF)
@@ -387,10 +387,10 @@ namespace Lawn
 				}
 				else
 				{
-					float num2 = mPosX + (float)celWidth * 0.5f;
-					float num3 = mPosZ + mPosY + (float)celHeight * 0.5f;
+					float num2 = mPosX + celWidth * 0.5f;
+					float num3 = mPosZ + mPosY + celHeight * 0.5f;
 					SexyTransform2D sexyTransform2D = default(SexyTransform2D);
-					TodCommon.TodScaleRotateTransformMatrix(ref sexyTransform2D.mMatrix, num2 * Constants.S + (float)mBoard.mX, num3 * Constants.S + (float)mBoard.mY, mRotation, num, num);
+					TodCommon.TodScaleRotateTransformMatrix(ref sexyTransform2D.mMatrix, num2 * Constants.S + mBoard.mX, num3 * Constants.S + mBoard.mY, mRotation, num, num);
 					TodCommon.TodBltMatrix(g, image, sexyTransform2D.mMatrix, ref g.mClipRect, SexyColor.White, g.mDrawMode, theSrcRect);
 				}
 			}
@@ -412,8 +412,8 @@ namespace Lawn
 			int theCelCol = 0;
 			float num = 1f;
 			float num2 = 1f;
-			float num3 = mPosX - (float)mX;
-			float num4 = mPosY - (float)mY;
+			float num3 = mPosX - mX;
+			float num4 = mPosY - mY;
 			int num5 = mBoard.PixelToGridXKeepOnBoard(mX, mY);
 			bool flag = false;
 			if (mBoard.mGridSquareType[num5, mRow] == GridSquareType.GRIDSQUARE_HIGH_GROUND)
@@ -422,11 +422,11 @@ namespace Lawn
 			}
 			if (mOnHighGround && !flag)
 			{
-				num4 += (float)Constants.HIGH_GROUND_HEIGHT;
+				num4 += Constants.HIGH_GROUND_HEIGHT;
 			}
 			else if (!mOnHighGround && flag)
 			{
-				num4 += (float)(-(float)Constants.HIGH_GROUND_HEIGHT);
+				num4 += (float)(-Constants.HIGH_GROUND_HEIGHT);
 			}
 			if (mBoard.StageIsNight())
 			{
@@ -579,8 +579,8 @@ namespace Lawn
 			{
 				if (theZombie != null)
 				{
-					float num5 = num3 + 52f - (float)theZombie.mX;
-					float num6 = num4 - (float)theZombie.mY;
+					float num5 = num3 + 52f - theZombie.mX;
+					float num6 = num4 - theZombie.mY;
 					if (theZombie.mZombiePhase == ZombiePhase.PHASE_SNORKEL_WALKING_IN_POOL || theZombie.mZombiePhase == ZombiePhase.PHASE_DOLPHIN_WALKING_IN_POOL)
 					{
 						num6 += 60f;
@@ -589,7 +589,7 @@ namespace Lawn
 					{
 						num5 -= 80f;
 					}
-					else if (mPosX > (float)(theZombie.mX + 40) && mMotionType != ProjectileMotion.MOTION_LOBBED)
+					else if (mPosX > theZombie.mX + 40 && mMotionType != ProjectileMotion.MOTION_LOBBED)
 					{
 						num5 -= 60f;
 					}
@@ -670,7 +670,7 @@ namespace Lawn
 				Die();
 				return;
 			}
-			if (mPosX > (float)(Constants.WIDE_BOARD_WIDTH + 40) || mPosX + (float)mWidth < 0f)
+			if (mPosX > Constants.WIDE_BOARD_WIDTH + 40 || mPosX + mWidth < 0f)
 			{
 				Die();
 				return;
@@ -684,7 +684,7 @@ namespace Lawn
 					TRect projectileRect = GetProjectileRect();
 					TRect zombieRect = zombie.GetZombieRect();
 					int rectOverlap = GameConstants.GetRectOverlap(projectileRect, zombieRect);
-					if (rectOverlap >= 0 && mPosY > (float)zombieRect.mY && mPosY < (float)(zombieRect.mY + zombieRect.mHeight))
+					if (rectOverlap >= 0 && mPosY > zombieRect.mY && mPosY < zombieRect.mY + zombieRect.mHeight)
 					{
 						DoImpact(zombie);
 					}
@@ -781,7 +781,7 @@ namespace Lawn
 				mPosX = mCobTargetX;
 				mRow = mCobTargetRow;
 				int theGridX = mBoard.PixelToGridXKeepOnBoard((int)mCobTargetX, 0);
-				mPosY = (float)mBoard.GridToPixelY(theGridX, mCobTargetRow);
+				mPosY = mBoard.GridToPixelY(theGridX, mCobTargetRow);
 				mShadowY = mPosY + 67f;
 				mRotation = -1.5707964f;
 			}
@@ -1046,16 +1046,16 @@ namespace Lawn
 				if (zombie != null && zombie.EffectedByDamage((uint)mDamageRangeFlags))
 				{
 					TRect zombieRect = zombie.GetZombieRect();
-					SexyVector2 lhs = new SexyVector2(zombie.ZombieTargetLeadX(0f), (float)(zombieRect.mY + zombieRect.mHeight / 2));
-					SexyVector2 rhs = new SexyVector2(mPosX + (float)(mWidth / 2), mPosY + (float)(mHeight / 2));
+					SexyVector2 lhs = new SexyVector2(zombie.ZombieTargetLeadX(0f), zombieRect.mY + zombieRect.mHeight / 2);
+					SexyVector2 rhs = new SexyVector2(mPosX + mWidth / 2, mPosY + mHeight / 2);
 					SexyVector2 sexyVector = (lhs - rhs).Normalize();
 					SexyVector2 sexyVector2 = new SexyVector2(mVelX, mVelY);
-					sexyVector2.mVector += sexyVector.mVector * (0.001f * (float)mProjectileAge);
+					sexyVector2.mVector += sexyVector.mVector * (0.001f * mProjectileAge);
 					sexyVector2 = sexyVector2.Normalize();
 					sexyVector2.mVector *= 2f;
 					mVelX = sexyVector2.x;
 					mVelY = sexyVector2.y;
-					mRotation = (float)(-(float)Math.Atan2((double)mVelY, (double)mVelX));
+					mRotation = -(float)Math.Atan2(mVelY, mVelX);
 				}
 				mPosY += 3f * mVelY;
 				mPosX += 3f * mVelX;

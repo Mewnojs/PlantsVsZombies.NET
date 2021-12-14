@@ -920,7 +920,7 @@ namespace Sexy
 			Constants.UICoinBankPosition = new Point(110 - Constants.Board_Offset_AspectRatio_Correction, 479);
 			Constants.Board_Cutscene_ExtraScroll = 170;
 			Constants.Board_SunCoinRange = 550;
-			Constants.Board_SunCoin_CollectTarget = new Point(115 - (int)((float)Constants.Board_Offset_AspectRatio_Correction * Constants.IS), 5);
+			Constants.Board_SunCoin_CollectTarget = new Point(115 - (int)(Board_Offset_AspectRatio_Correction * Constants.IS), 5);
 			Constants.Board_Cel_Y_Values_Normal = new int[]
 			{
 				80,
@@ -1481,7 +1481,7 @@ namespace Sexy
 			Constants.UICoinBankPosition = new Point(110 - Constants.Board_Offset_AspectRatio_Correction, 479);
 			Constants.Board_Cutscene_ExtraScroll = 170;
 			Constants.Board_SunCoinRange = 550;
-			Constants.Board_SunCoin_CollectTarget = new Point(115 - (int)((float)Constants.Board_Offset_AspectRatio_Correction * Constants.IS), 5);
+			Constants.Board_SunCoin_CollectTarget = new Point(115 - (int)(Board_Offset_AspectRatio_Correction * Constants.IS), 5);
 			Constants.Board_Cel_Y_Values_Normal = new int[]
 			{
 				80,

@@ -27,7 +27,7 @@ namespace Sexy
 			}
 			uint count = (uint)mPieces.Count;
 			int num = 0;
-			while ((long)num < (long)((ulong)count))
+			while (num < (long)((ulong)count))
 			{
 				if (inX < mPoints[num + 1].mX)
 				{

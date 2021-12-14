@@ -77,7 +77,7 @@ namespace Lawn
 
 		public override int GetPreferredHeight(int theWidth)
 		{
-			return (int)Constants.InvertAndScale((float)((mFromGameSelector || mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO) ? 310 : 340));
+			return (int)Constants.InvertAndScale((mFromGameSelector || mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO) ? 310 : 340);
 		}
 
 		public override void AddedToManager(WidgetManager theWidgetManager)

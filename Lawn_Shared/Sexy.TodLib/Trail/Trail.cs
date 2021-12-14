@@ -44,7 +44,7 @@ namespace Sexy.TodLib
 			{
 				return;
 			}
-			float theTimeValue = (float)mTrailAge / (float)(mTrailDuration - 1);
+			float theTimeValue = mTrailAge / (float)(mTrailDuration - 1);
 			int theNumTriangles = (mNumTrailPoints - 1) * 2;
 			TriVertex[,] array = new TriVertex[38, 3];
 			bool flag = false;
@@ -77,8 +77,8 @@ namespace Sexy.TodLib
 				}
 				TrailPoint trailPoint = mTrailPoints[i];
 				TrailPoint trailPoint2 = mTrailPoints[i + 1];
-				float num = 1f - (float)i / (float)(mNumTrailPoints - 1);
-				float num2 = 1f - (float)(i + 1) / (float)(mNumTrailPoints - 1);
+				float num = 1f - i / (float)(mNumTrailPoints - 1);
+				float num2 = 1f - (i + 1) / (float)(mNumTrailPoints - 1);
 				float num3 = Definition.FloatTrackEvaluate(ref mDefinition.mWidthOverLength, num, mTrailInterp[0]);
 				float num4 = Definition.FloatTrackEvaluate(ref mDefinition.mWidthOverLength, num2, mTrailInterp[0]);
 				float num5 = Definition.FloatTrackEvaluate(ref mDefinition.mWidthOverTime, theTimeValue, mTrailInterp[1]);
@@ -87,8 +87,8 @@ namespace Sexy.TodLib
 				float num8 = Definition.FloatTrackEvaluate(ref mDefinition.mAlphaOverLength, num2, mTrailInterp[2]);
 				float num9 = Definition.FloatTrackEvaluate(ref mDefinition.mAlphaOverTime, theTimeValue, mTrailInterp[3]);
 				float num10 = Definition.FloatTrackEvaluate(ref mDefinition.mAlphaOverTime, theTimeValue, mTrailInterp[3]);
-				int colorAlpha = TodCommon.ClampInt(TodCommon.FloatRoundToInt(num7 * num9 * (float)mColorOverride.mAlpha), 0, 255);
-				int color2Alpha = TodCommon.ClampInt(TodCommon.FloatRoundToInt(num8 * num10 * (float)mColorOverride.mAlpha), 0, 255);
+				int colorAlpha = TodCommon.ClampInt(TodCommon.FloatRoundToInt(num7 * num9 * mColorOverride.mAlpha), 0, 255);
+				int color2Alpha = TodCommon.ClampInt(TodCommon.FloatRoundToInt(num8 * num10 * mColorOverride.mAlpha), 0, 255);
 				SexyColor aColor = mColorOverride;
 				SexyColor aColor2 = mColorOverride;
 				aColor.mAlpha = colorAlpha;

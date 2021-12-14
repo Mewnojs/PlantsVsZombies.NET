@@ -81,7 +81,7 @@ namespace Lawn
 
             public static void Initialize()
             {
-                object DebugExec(string code)
+                static object DebugExec(string code)
                 {
                     Debug.OutputDebug($"[Python]{code}");
                     return mPyEnj.Execute(code);

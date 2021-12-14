@@ -132,9 +132,9 @@ namespace Sexy.TodLib
 					char c2 = (char)(num >> 8 & 255);
 					char c3 = (char)(num >> 16 & 255);
 					char c4 = (char)(num >> 24);
-					float num2 = (float)c / 255f;
-					float num3 = (float)c2 / 255f;
-					float num4 = (float)c3 / 255f;
+					float num2 = c / 255f;
+					float num3 = c2 / 255f;
+					float num4 = c3 / 255f;
 					float h;
 					float num5;
 					float num6;
@@ -145,7 +145,7 @@ namespace Sexy.TodLib
 					int num7 = TodCommon.ClampInt((int)(num2 * 255f), 0, 255);
 					int num8 = TodCommon.ClampInt((int)(num3 * 255f), 0, 255);
 					int num9 = TodCommon.ClampInt((int)(num4 * 255f), 0, 255);
-					array[j + i * theImage.Texture.Width] = ((int)((int)c4 << 24) | num9 << 16 | num8 << 8 | num7);
+					array[j + i * theImage.Texture.Width] = (c4 << 24 | num9 << 16 | num8 << 8 | num7);
 				}
 			}
 			theImage.Texture.SetData<int>(array);
@@ -199,7 +199,7 @@ namespace Sexy.TodLib
 			float num3 = (num - num2) / num;
 			h *= 6f;
 			int num4 = TodCommon.ClampInt((int)h, 0, 5);
-			float num5 = h - (float)num4;
+			float num5 = h - num4;
 			float num6 = num * num3 * num5;
 			float num7 = num2 + num6;
 			float num8 = num - num6;

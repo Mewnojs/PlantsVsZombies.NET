@@ -646,8 +646,8 @@ namespace Lawn
 				g.SetScale(1f, 0.5f, 0f, 0f);
 				Image imageInAtlasById = AtlasResources.GetImageInAtlasById((int)(10300 + mSeedType));
 				g.SetColorizeImages(true);
-				g.SetColor(new Color(255, 255, 255, (int)(255f * Math.Min(1f, (float)mDisappearCountdown / 100f))));
-				Plant.DrawSeedType(g, mSeedType, mImitaterType, DrawVariation.VARIATION_NORMAL, num * Constants.S + (float)(imageInAtlasById.GetCelWidth() / 2) + (float)Constants.Plant_Squished_Offset.X, num2 * Constants.S + (float)imageInAtlasById.GetCelHeight() + (float)Constants.Plant_Squished_Offset.Y);
+				g.SetColor(new Color(255, 255, 255, (int)(255f * Math.Min(1f, mDisappearCountdown / 100f))));
+				Plant.DrawSeedType(g, mSeedType, mImitaterType, DrawVariation.VARIATION_NORMAL, num * Constants.S + imageInAtlasById.GetCelWidth() / 2 + Constants.Plant_Squished_Offset.X, num2 * Constants.S + imageInAtlasById.GetCelHeight() + Constants.Plant_Squished_Offset.Y);
 				g.SetScale(1f, 1f, 0f, 0f);
 				g.SetColorizeImages(false);
 				return;
@@ -703,8 +703,8 @@ namespace Lawn
 				{
 					num3 = mApp.mAppCounter;
 				}
-				float num4 = (float)(num3 + mRow * 97 + mPlantCol * 61) * 0.03f;
-				float num5 = (float)Math.Sin((double)num4) * 2f;
+				float num4 = (num3 + mRow * 97 + mPlantCol * 61) * 0.03f;
+				float num5 = (float)Math.Sin(num4) * 2f;
 				num2 += num5;
 			}
 			if (flag && plant.mBodyReanimID.mActive)
@@ -772,7 +772,7 @@ namespace Lawn
 						g.SetColorizeImages(true);
 						g.SetColor(new Color(150, 255, 150, 255));
 					}
-					TodCommon.TodDrawImageCelF(g, AtlasResources.IMAGE_CACHED_MARIGOLD, (float)Constants.ZenGarden_Marigold_Sprout_Offset.X, (float)Constants.ZenGarden_Marigold_Sprout_Offset.Y, 0, 0);
+					TodCommon.TodDrawImageCelF(g, AtlasResources.IMAGE_CACHED_MARIGOLD, Constants.ZenGarden_Marigold_Sprout_Offset.X, Constants.ZenGarden_Marigold_Sprout_Offset.Y, 0, 0);
 					if (mGloveGrabbed)
 					{
 						g.SetColorizeImages(false);
@@ -857,7 +857,7 @@ namespace Lawn
 					{
 						mBoard.GrantAchievement(AchievementId.ACHIEVEMENT_EXPLODONATOR, true);
 					}
-					mApp.AddTodParticle((float)num, (float)num2, 400000, ParticleEffect.PARTICLE_POWIE);
+					mApp.AddTodParticle(num, num2, 400000, ParticleEffect.PARTICLE_POWIE);
 					mApp.Vibrate();
 					mBoard.ShakeBoard(3, -4);
 					Die();
@@ -868,7 +868,7 @@ namespace Lawn
 					mApp.PlaySample(Resources.SOUND_DOOMSHROOM);
 					mBoard.KillAllZombiesInRadius(mRow, num, num2, 250, 3, true, damageRangeFlags);
 					KillAllPlantsNearDoom();
-					mApp.AddTodParticle((float)num, (float)num2, 400000, ParticleEffect.PARTICLE_DOOM);
+					mApp.AddTodParticle(num, num2, 400000, ParticleEffect.PARTICLE_DOOM);
 					GridItem gridItem = mBoard.AddACrater(mPlantCol, mRow);
 					gridItem.mGridItemCounter = 18000;
 					mBoard.ShakeBoard(3, -4);
@@ -909,7 +909,7 @@ namespace Lawn
 					{
 						mApp.PlayFoley(FoleyType.FOLEY_FROZEN);
 						IceZombies();
-						mApp.AddTodParticle((float)num, (float)num2, 400000, ParticleEffect.PARTICLE_ICE_TRAP);
+						mApp.AddTodParticle(num, num2, 400000, ParticleEffect.PARTICLE_ICE_TRAP);
 						Die();
 						return;
 					}
@@ -920,7 +920,7 @@ namespace Lawn
 						mApp.PlaySample(Resources.SOUND_POTATO_MINE);
 						mBoard.KillAllZombiesInRadius(mRow, num, num2, 60, 0, false, damageRangeFlags);
 						int aRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_PARTICLE, mRow, 0);
-						mApp.AddTodParticle((float)num + 20f, (float)num2, aRenderOrder, ParticleEffect.PARTICLE_POTATO_MINE);
+						mApp.AddTodParticle(num + 20f, num2, aRenderOrder, ParticleEffect.PARTICLE_POTATO_MINE);
 						mBoard.ShakeBoard(3, -4);
 						mApp.Vibrate();
 						Die();
@@ -1192,7 +1192,7 @@ namespace Lawn
 			if (mSeedType == SeedType.SEED_SNOWPEA)
 			{
 				int aRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_LAWN_MOWER, mRow, 1);
-				mApp.AddTodParticle((float)(num + 8), (float)(num2 + 13), aRenderOrder, ParticleEffect.PARTICLE_SNOWPEA_PUFF);
+				mApp.AddTodParticle(num + 8, num2 + 13, aRenderOrder, ParticleEffect.PARTICLE_SNOWPEA_PUFF);
 			}
 			Projectile projectile = mBoard.AddProjectile(num, num2, mRenderOrder + -1, theRow, projectileType);
 			projectile.mDamageRangeFlags = GetDamageRangeFlags(thePlantWeapon);
@@ -1204,8 +1204,8 @@ namespace Lawn
 				{
 					TRect zombieRect = theTargetZombie.GetZombieRect();
 					float num11 = theTargetZombie.ZombieTargetLeadX(50f);
-					num12 = num11 - (float)num - 30f;
-					num13 = (float)(zombieRect.mY - num2);
+					num12 = num11 - num - 30f;
+					num13 = zombieRect.mY - num2;
 					if (theTargetZombie.mZombiePhase == ZombiePhase.PHASE_DOLPHIN_RIDING)
 					{
 						num12 -= 60f;
@@ -1221,12 +1221,12 @@ namespace Lawn
 					if (theTargetZombie.mZombieType == ZombieType.ZOMBIE_BOSS)
 					{
 						int num14 = mBoard.GridToPixelY(8, mRow);
-						num13 = (float)(num14 - num2);
+						num13 = num14 - num2;
 					}
 				}
 				else
 				{
-					num12 = 700f - (float)num;
+					num12 = 700f - num;
 					num13 = 0f;
 				}
 				if (num12 < 40f)
@@ -1290,7 +1290,7 @@ namespace Lawn
 					projectile.mVelY = 0f;
 					projectile.mAccZ = 0f;
 					projectile.mVelZ = -8f;
-					projectile.mCobTargetX = (float)(mTargetX - 40);
+					projectile.mCobTargetX = mTargetX - 40;
 					projectile.mCobTargetRow = mBoard.PixelToGridYKeepOnBoard(mTargetX, mTargetY);
 				}
 			}
@@ -1401,7 +1401,7 @@ namespace Lawn
 								int distance = -zombieRect.mX;
 								if (mSeedType == SeedType.SEED_CATTAIL)
 								{
-									distance = -(int)TodCommon.Distance2D((float)mX + 40f, (float)mY + 40f, (float)(zombieRect.mX + zombieRect.mWidth / 2), (float)(zombieRect.mY + zombieRect.mHeight / 2));
+									distance = -(int)TodCommon.Distance2D(mX + 40f, mY + 40f, zombieRect.mX + zombieRect.mWidth / 2, zombieRect.mY + zombieRect.mHeight / 2);
 									if (theZombieItem.IsFlying())
 									{
 										distance += 10000;	// prority for balloon
@@ -2434,7 +2434,7 @@ namespace Lawn
 					{
 						if (mBoard.IsPoolSquare(theGridX, mRow))
 						{
-							mApp.AddReanimation((float)(mX - 11), (float)(mY + 20), mRenderOrder + 1, ReanimationType.REANIM_SPLASH);
+							mApp.AddReanimation(mX - 11, mY + 20, mRenderOrder + 1, ReanimationType.REANIM_SPLASH);
 							mApp.PlayFoley(FoleyType.FOLEY_SPLAT);
 							mApp.PlaySample(Resources.SOUND_ZOMBIESPLASH);
 							Die();
@@ -2449,7 +2449,7 @@ namespace Lawn
 						{
 							num2 -= 11f;
 						}
-						mApp.AddTodParticle((float)(mX + 40), (float)mY + num2, mRenderOrder + 4, ParticleEffect.PARTICLE_DUST_SQUASH);
+						mApp.AddTodParticle(mX + 40, mY + num2, mRenderOrder + 4, ParticleEffect.PARTICLE_DUST_SQUASH);
 						return;
 					}
 				}
@@ -2604,7 +2604,7 @@ namespace Lawn
 					graveStoneAt.GridItemDie();
 					mBoard.mGravesCleared++;
 				}
-				mApp.AddTodParticle((float)(mX + 40), (float)(mY + 40), mRenderOrder + 4, ParticleEffect.PARTICLE_GRAVE_BUSTER_DIE);
+				mApp.AddTodParticle(mX + 40, mY + 40, mRenderOrder + 4, ParticleEffect.PARTICLE_GRAVE_BUSTER_DIE);
 				Die();
 				mBoard.DropLootPiece(mX + 40, mY, 12);
 			}
@@ -2617,7 +2617,7 @@ namespace Lawn
 			{
 				todParticleSystem.ParticleSystemDie();
 			}
-			TodParticleSystem todParticleSystem2 = mApp.AddTodParticle((float)thePosX, (float)thePosY, theRenderPostition, theEffect);
+			TodParticleSystem todParticleSystem2 = mApp.AddTodParticle(thePosX, thePosY, theRenderPostition, theEffect);
 			if (todParticleSystem2 != null)
 			{
 				mParticleID = mApp.ParticleGetID(todParticleSystem2);
@@ -2758,15 +2758,15 @@ namespace Lawn
 							{
 								zombieRect.mWidth += 10;
 							}
-							float theTime = TodCommon.Distance2D((float)num, (float)num2, (float)(zombieRect.mX + zombieRect.mWidth / 2), (float)(zombieRect.mY + zombieRect.mHeight / 2)) / 3.33f;
-							int num3 = (int)(zombie.ZombieTargetLeadX(theTime) - (float)(zombieRect.mWidth / 2));
+							float theTime = TodCommon.Distance2D(num, num2, zombieRect.mX + zombieRect.mWidth / 2, zombieRect.mY + zombieRect.mHeight / 2) / 3.33f;
+							int num3 = (int)(zombie.ZombieTargetLeadX(theTime) - zombieRect.mWidth / 2);
 							if (num3 + zombieRect.mWidth > num && num3 < num)
 							{
 								return true;
 							}
 							int num4 = num3 + zombieRect.mWidth / 2;
 							int num5 = zombieRect.mY + zombieRect.mHeight / 2;
-							float num6 = TodCommon.RadToDeg((float)Math.Atan2((double)((float)(num5 - num2)), (double)((float)(num4 - num))));
+							float num6 = TodCommon.RadToDeg((float)Math.Atan2((float)(num5 - num2), (float)(num4 - num)));
 							if (Math.Abs(zombie.mRow - mRow) < 2)
 							{
 								if (num6 > 20f && num6 < 40f)
@@ -2976,7 +2976,7 @@ namespace Lawn
 				MagnetItem magnetItem = mMagnetItems[i];
 				if (magnetItem.mItemType != MagnetItemType.MAGNET_ITEM_NONE)
 				{
-					SexyVector2 sexyVector = new SexyVector2((float)mX + magnetItem.mDestOffsetX - magnetItem.mPosX, (float)mY + magnetItem.mDestOffsetY - magnetItem.mPosY);
+					SexyVector2 sexyVector = new SexyVector2(mX + magnetItem.mDestOffsetX - magnetItem.mPosX, mY + magnetItem.mDestOffsetY - magnetItem.mPosY);
 					float num = sexyVector.Magnitude();
 					if (num >= 20f)
 					{
@@ -3047,8 +3047,8 @@ namespace Lawn
 						}
 						if (GameConstants.GetCircleRectOverlap(mX, mY + 20, theRadius, zombieRect))
 						{
-							float num4 = TodCommon.Distance2D((float)mX, (float)mY, (float)zombieRect.mX, (float)zombieRect.mY);
-							num4 += (float)Math.Abs(num3) * 80f;
+							float num4 = TodCommon.Distance2D(mX, mY, zombieRect.mX, zombieRect.mY);
+							num4 += Math.Abs(num3) * 80f;
 							if (zombie == null || num4 < num2)
 							{
 								zombie = zombie2;
@@ -3077,8 +3077,8 @@ namespace Lawn
 					int num9 = Math.Max(Math.Abs(num7), Math.Abs(num8));
 					if (num9 <= 2)
 					{
-						float num10 = (float)num9;
-						num10 += (float)Math.Abs(num8) * 0.05f;
+						float num10 = num9;
+						num10 += Math.Abs(num8) * 0.05f;
 						if (gridItem == null || num10 < num5)
 						{
 							gridItem = gridItem2;
@@ -3095,8 +3095,8 @@ namespace Lawn
 				mApp.PlayFoley(FoleyType.FOLEY_MAGNETSHROOM);
 				gridItem.GridItemDie();
 				MagnetItem freeMagnetItem = GetFreeMagnetItem();
-				freeMagnetItem.mPosX = (float)(mBoard.GridToPixelX(gridItem.mGridX, gridItem.mGridY) + 40);
-				freeMagnetItem.mPosY = (float)mBoard.GridToPixelY(gridItem.mGridX, gridItem.mGridY);
+				freeMagnetItem.mPosX = mBoard.GridToPixelX(gridItem.mGridX, gridItem.mGridY) + 40;
+				freeMagnetItem.mPosY = mBoard.GridToPixelY(gridItem.mGridX, gridItem.mGridY);
 				freeMagnetItem.mDestOffsetX = TodCommon.RandRangeFloat(-10f, 10f) + 10f;
 				freeMagnetItem.mDestOffsetY = TodCommon.RandRangeFloat(-10f, 10f);
 				freeMagnetItem.mItemType = MagnetItemType.MAGNET_ITEM_LADDER_PLACED;
@@ -3231,11 +3231,11 @@ namespace Lawn
 					}
 					if (num3 == 1f)
 					{
-						g.DrawImageCel(theImageStrip, (int)((magnetItem.mPosX - (float)mX + num) * Constants.S), (int)((magnetItem.mPosY - (float)mY + num2) * Constants.S), theCelCol, theCelRow);
+						g.DrawImageCel(theImageStrip, (int)((magnetItem.mPosX - mX + num) * Constants.S), (int)((magnetItem.mPosY - mY + num2) * Constants.S), theCelCol, theCelRow);
 					}
 					else
 					{
-						TodCommon.TodDrawImageCelScaledF(g, theImageStrip, (magnetItem.mPosX - (float)mX + num) * Constants.S, (magnetItem.mPosY - (float)mY + num2) * Constants.S, theCelCol, 0, num3, num3);
+						TodCommon.TodDrawImageCelScaledF(g, theImageStrip, (magnetItem.mPosX - mX + num) * Constants.S, (magnetItem.mPosY - mY + num2) * Constants.S, theCelCol, 0, num3, num3);
 					}
 				}
 			}
@@ -3279,7 +3279,7 @@ namespace Lawn
 				{
 					int num = mX + mWidth / 2;
 					int num2 = mY + mHeight / 2;
-					mApp.AddTodParticle((float)num, (float)num2, mRenderOrder, ParticleEffect.PARTICLE_POTATO_MINE_RISE);
+					mApp.AddTodParticle(num, num2, mRenderOrder, ParticleEffect.PARTICLE_POTATO_MINE_RISE);
 					PlayBodyReanim(GlobalMembersReanimIds.ReanimTrackId_anim_rise, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, 18f);
 					mState = PlantState.STATE_POTATO_RISING;
 					mApp.PlayFoley(FoleyType.FOLEY_DIRT_RISE);
@@ -3399,7 +3399,7 @@ namespace Lawn
 				if (imageOverride != image2)
 				{
 					reanimation.SetImageOverride(theTrackName, image2);
-					mApp.AddTodParticle((float)num, (float)num2, mRenderOrder + 4, ParticleEffect.PARTICLE_WALLNUT_EAT_LARGE);
+					mApp.AddTodParticle(num, num2, mRenderOrder + 4, ParticleEffect.PARTICLE_WALLNUT_EAT_LARGE);
 				}
 			}
 			else if (mPlantHealth < mPlantMaxHealth * 2 / 3)
@@ -3407,7 +3407,7 @@ namespace Lawn
 				if (imageOverride != image)
 				{
 					reanimation.SetImageOverride(theTrackName, image);
-					mApp.AddTodParticle((float)num, (float)num2, mRenderOrder + 4, ParticleEffect.PARTICLE_WALLNUT_EAT_LARGE);
+					mApp.AddTodParticle(num, num2, mRenderOrder + 4, ParticleEffect.PARTICLE_WALLNUT_EAT_LARGE);
 				}
 			}
 			else
@@ -3442,8 +3442,8 @@ namespace Lawn
 			mIsAsleep = theIsAsleep;
 			if (theIsAsleep)
 			{
-				float num = (float)mX + 50f;
-				float num2 = (float)mY + 40f;
+				float num = mX + 50f;
+				float num2 = mY + 40f;
 				if (mSeedType == SeedType.SEED_FUMESHROOM)
 				{
 					num += 12f;
@@ -3746,7 +3746,7 @@ namespace Lawn
 			{
 				if (mBoard != null)
 				{
-					num3 += (float)(mBoard.GridToPixelY(mPlantCol, mRow) - mY);
+					num3 += mBoard.GridToPixelY(mPlantCol, mRow) - mY;
 				}
 				num3 += 5f;
 			}
@@ -3991,8 +3991,8 @@ namespace Lawn
 				theZombie.GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_anim_bucket, ref freeMagnetItem.mPosX, ref freeMagnetItem.mPosY);
 				theZombie.ReanimShowPrefix("anim_bucket", -1);
 				theZombie.ReanimShowPrefix("anim_hair", 0);
-				freeMagnetItem.mPosX -= (float)(AtlasResources.IMAGE_REANIM_ZOMBIE_BUCKET1.mWidth / 2);
-				freeMagnetItem.mPosY -= (float)(AtlasResources.IMAGE_REANIM_ZOMBIE_BUCKET1.mHeight / 2);
+				freeMagnetItem.mPosX -= AtlasResources.IMAGE_REANIM_ZOMBIE_BUCKET1.mWidth / 2;
+				freeMagnetItem.mPosY -= AtlasResources.IMAGE_REANIM_ZOMBIE_BUCKET1.mHeight / 2;
 				freeMagnetItem.mDestOffsetX = TodCommon.RandRangeFloat(-10f, 10f) + 25f;
 				freeMagnetItem.mDestOffsetY = TodCommon.RandRangeFloat(-10f, 10f) + 20f;
 				freeMagnetItem.mItemType = MagnetItemType.MAGNET_ITEM_PAIL_1 + helmDamageIndex;
@@ -4023,8 +4023,8 @@ namespace Lawn
 					theZombie.StartWalkAnim(0);
 				}
 				theZombie.GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_anim_screendoor, ref freeMagnetItem.mPosX, ref freeMagnetItem.mPosY);
-				freeMagnetItem.mPosX -= (float)(AtlasResources.IMAGE_REANIM_ZOMBIE_SCREENDOOR1.mWidth / 2);
-				freeMagnetItem.mPosY -= (float)(AtlasResources.IMAGE_REANIM_ZOMBIE_SCREENDOOR1.mHeight / 2);
+				freeMagnetItem.mPosX -= AtlasResources.IMAGE_REANIM_ZOMBIE_SCREENDOOR1.mWidth / 2;
+				freeMagnetItem.mPosY -= AtlasResources.IMAGE_REANIM_ZOMBIE_SCREENDOOR1.mHeight / 2;
 				freeMagnetItem.mDestOffsetX = TodCommon.RandRangeFloat(-10f, 10f) + 30f;
 				freeMagnetItem.mDestOffsetY = TodCommon.RandRangeFloat(-10f, 10f);
 				freeMagnetItem.mItemType = MagnetItemType.MAGNET_ITEM_DOOR_1 + shieldDamageIndex;
@@ -4035,8 +4035,8 @@ namespace Lawn
 				theZombie.DetachShield();
 				freeMagnetItem.mPosX = theZombie.mPosX + 31f;
 				freeMagnetItem.mPosY = theZombie.mPosY + 20f;
-				freeMagnetItem.mPosX -= (float)(AtlasResources.IMAGE_REANIM_ZOMBIE_LADDER_5.GetCelWidth() / 2);
-				freeMagnetItem.mPosY -= (float)(AtlasResources.IMAGE_REANIM_ZOMBIE_LADDER_5.GetCelHeight() / 2);
+				freeMagnetItem.mPosX -= AtlasResources.IMAGE_REANIM_ZOMBIE_LADDER_5.GetCelWidth() / 2;
+				freeMagnetItem.mPosY -= AtlasResources.IMAGE_REANIM_ZOMBIE_LADDER_5.GetCelHeight() / 2;
 				freeMagnetItem.mDestOffsetX = TodCommon.RandRangeFloat(-10f, 10f) + 30f;
 				freeMagnetItem.mDestOffsetY = TodCommon.RandRangeFloat(-10f, 10f);
 				freeMagnetItem.mItemType = MagnetItemType.MAGNET_ITEM_LADDER_1 + shieldDamageIndex2;
@@ -4068,8 +4068,8 @@ namespace Lawn
 				theZombie.ReanimShowTrack(ref GlobalMembersReanimIds.ReanimTrackId_zombie_jackbox_box, -1);
 				theZombie.ReanimShowTrack(ref GlobalMembersReanimIds.ReanimTrackId_zombie_jackbox_handle, -1);
 				theZombie.GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_jackbox_box, ref freeMagnetItem.mPosX, ref freeMagnetItem.mPosY);
-				freeMagnetItem.mPosX -= (float)(AtlasResources.IMAGE_REANIM_ZOMBIE_JACKBOX_BOX.mWidth / 2);
-				freeMagnetItem.mPosY -= (float)(AtlasResources.IMAGE_REANIM_ZOMBIE_JACKBOX_BOX.mHeight / 2);
+				freeMagnetItem.mPosX -= AtlasResources.IMAGE_REANIM_ZOMBIE_JACKBOX_BOX.mWidth / 2;
+				freeMagnetItem.mPosY -= AtlasResources.IMAGE_REANIM_ZOMBIE_JACKBOX_BOX.mHeight / 2;
 				freeMagnetItem.mDestOffsetX = TodCommon.RandRangeFloat(-10f, 10f) + 20f;
 				freeMagnetItem.mDestOffsetY = TodCommon.RandRangeFloat(-10f, 10f) + 15f;
 				freeMagnetItem.mItemType = MagnetItemType.MAGNET_ITEM_JACK_IN_THE_BOX;
@@ -4078,8 +4078,8 @@ namespace Lawn
 			{
 				theZombie.DiggerLoseAxe();
 				theZombie.GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_digger_pickaxe, ref freeMagnetItem.mPosX, ref freeMagnetItem.mPosY);
-				freeMagnetItem.mPosX -= (float)(AtlasResources.IMAGE_REANIM_ZOMBIE_DIGGER_PICKAXE.mWidth / 2);
-				freeMagnetItem.mPosY -= (float)(AtlasResources.IMAGE_REANIM_ZOMBIE_DIGGER_PICKAXE.mHeight / 2);
+				freeMagnetItem.mPosX -= AtlasResources.IMAGE_REANIM_ZOMBIE_DIGGER_PICKAXE.mWidth / 2;
+				freeMagnetItem.mPosY -= AtlasResources.IMAGE_REANIM_ZOMBIE_DIGGER_PICKAXE.mHeight / 2;
 				freeMagnetItem.mDestOffsetX = TodCommon.RandRangeFloat(-10f, 10f) + 45f;
 				freeMagnetItem.mDestOffsetY = TodCommon.RandRangeFloat(-10f, 10f) + 15f;
 				freeMagnetItem.mItemType = MagnetItemType.MAGNET_ITEM_PICK_AXE;
@@ -4168,7 +4168,7 @@ namespace Lawn
 					mApp.PlaySample(Resources.SOUND_BOWLINGIMPACT2);
 					int theDamageRangeFlags = GetDamageRangeFlags(PlantWeapon.WEAPON_PRIMARY) | 32;
 					mBoard.KillAllZombiesInRadius(mRow, num4, num5, 90, 1, true, theDamageRangeFlags);
-					mApp.AddTodParticle((float)num4, (float)num5, 400000, ParticleEffect.PARTICLE_POWIE);
+					mApp.AddTodParticle(num4, num5, 400000, ParticleEffect.PARTICLE_POWIE);
 					mBoard.ShakeBoard(3, -4);
 					Die();
 					return;
@@ -4373,8 +4373,8 @@ namespace Lawn
 				Projectile projectile = mBoard.AddProjectile(theX, theY, mRenderOrder + -1, mRow, ProjectileType.PROJECTILE_STAR);
 				projectile.mDamageRangeFlags = GetDamageRangeFlags(PlantWeapon.WEAPON_PRIMARY);
 				projectile.mMotionType = ProjectileMotion.MOTION_STAR;
-				float velX = (float)Math.Cos((double)TodCommon.DegToRad(30f)) * 3.33f;
-				float velY = (float)Math.Sin((double)TodCommon.DegToRad(30f)) * 3.33f;
+				float velX = (float)Math.Cos(TodCommon.DegToRad(30f)) * 3.33f;
+				float velY = (float)Math.Sin(TodCommon.DegToRad(30f)) * 3.33f;
 				switch (i)
 				{
 				case 0:
@@ -4455,9 +4455,9 @@ namespace Lawn
 				if (mStateCountdown == 21)
 				{
 					int aRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_PARTICLE, mRow, 0);
-					Reanimation reanimation2 = mApp.AddReanimation((float)(mX - 23), (float)(mY + 7), aRenderOrder, ReanimationType.REANIM_SPLASH);
+					Reanimation reanimation2 = mApp.AddReanimation(mX - 23, mY + 7, aRenderOrder, ReanimationType.REANIM_SPLASH);
 					reanimation2.OverrideScale(1.3f, 1.3f);
-					mApp.AddTodParticle((float)(mX + 31), (float)(mY + 64), aRenderOrder, ParticleEffect.PARTICLE_PLANTING_POOL);
+					mApp.AddTodParticle(mX + 31, mY + 64, aRenderOrder, ParticleEffect.PARTICLE_PLANTING_POOL);
 					mApp.PlayFoley(FoleyType.FOLEY_ZOMBIE_ENTERING_WATER);
 				}
 				if (mStateCountdown <= 0)
@@ -4851,7 +4851,7 @@ namespace Lawn
 				MagnetItem magnetItem = mMagnetItems[i];
 				if (magnetItem.mItemType != MagnetItemType.MAGNET_ITEM_NONE)
 				{
-					SexyVector2 sexyVector = new SexyVector2((float)mX + magnetItem.mDestOffsetX - magnetItem.mPosX, (float)mY + magnetItem.mDestOffsetY - magnetItem.mPosY);
+					SexyVector2 sexyVector = new SexyVector2(mX + magnetItem.mDestOffsetX - magnetItem.mPosX, mY + magnetItem.mDestOffsetY - magnetItem.mPosY);
 					float num = sexyVector.Magnitude();
 					if (num < 20f)
 					{
@@ -5038,7 +5038,7 @@ namespace Lawn
 			{
 				if ((coin2.mType == CoinType.COIN_SILVER || coin2.mType == CoinType.COIN_GOLD || coin2.mType == CoinType.COIN_DIAMOND) && coin2.mCoinMotion != CoinMotion.COIN_MOTION_FROM_PRESENT && !coin2.mIsBeingCollected && coin2.mCoinAge >= 50)
 				{
-					float num2 = TodCommon.Distance2D((float)mX + 40f, (float)mY + 40f, coin2.mPosX + (float)(coin2.mWidth / 2), coin2.mPosY + (float)(coin2.mHeight / 2));
+					float num2 = TodCommon.Distance2D(mX + 40f, mY + 40f, coin2.mPosX + coin2.mWidth / 2, coin2.mPosY + coin2.mHeight / 2);
 					if (coin == null || num2 < num)
 					{
 						coin = coin2;
@@ -5108,7 +5108,7 @@ namespace Lawn
 				Reanimation reanimation = mApp.ReanimationGet(mBodyReanimID);
 				if (reanimation.ShouldTriggerTimedEvent(0.8f))
 				{
-					mApp.AddTodParticle((float)(mX + 40), (float)(mY + 40), 400000, ParticleEffect.PARTICLE_IMITATER_MORPH);
+					mApp.AddTodParticle(mX + 40, mY + 40, 400000, ParticleEffect.PARTICLE_IMITATER_MORPH);
 				}
 				if (reanimation.mLoopCount > 0)
 				{
@@ -5395,7 +5395,7 @@ namespace Lawn
 					MagnetItem magnetItem2 = mMagnetItems[j];
 					if (magnetItem2.mItemType != MagnetItemType.MAGNET_ITEM_NONE)
 					{
-						SexyVector2 sexyVector = new SexyVector2((float)mX + magnetItem2.mDestOffsetX - magnetItem2.mPosX, (float)mY + magnetItem2.mDestOffsetY - magnetItem2.mPosY);
+						SexyVector2 sexyVector = new SexyVector2(mX + magnetItem2.mDestOffsetX - magnetItem2.mPosX, mY + magnetItem2.mDestOffsetY - magnetItem2.mPosY);
 						float num = sexyVector.Magnitude();
 						if (num > 20f)
 						{
@@ -5638,9 +5638,9 @@ namespace Lawn
 				{
 					num2 = GlobalStaticVars.gLawnApp.mAppCounter;
 				}
-				float num3 = (float)theRow * 3.1415927f + (float)theCol * 3.1415927f * 0.25f;
-				float num4 = (float)num2 * 3.1415927f * 2f / 200f;
-				float num5 = (float)Math.Sin((double)(num3 + num4)) * 2f;
+				float num3 = theRow * 3.1415927f + theCol * 3.1415927f * 0.25f;
+				float num4 = num2 * 3.1415927f * 2f / 200f;
+				float num5 = (float)Math.Sin(num3 + num4) * 2f;
 				num += num5;
 			}
 			if (theBoard != null && (thePlant == null || !thePlant.mSquished) && thePlant.mInFlowerPot)

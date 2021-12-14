@@ -81,8 +81,8 @@ namespace Lawn
         {
             if (mCursorType != CursorType.CURSOR_TYPE_NORMAL)
             {
-                int theX = (int)((float)mX * Constants.IS);
-                int theY = (int)((float)mY * Constants.IS);
+                int theX = (int)(mX * Constants.IS);
+                int theY = (int)(mY * Constants.IS);
                 int num;
                 int num2;
                 if (mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_BANK)
@@ -139,14 +139,14 @@ namespace Lawn
             switch (mCursorType)
             {
                 case CursorType.CURSOR_TYPE_SHOVEL:
-                    if (mBoard.mIgnoreMouseUp || (float)mX * Constants.IS < (float)Constants.LAWN_XMIN || (float)mY * Constants.IS < (float)Constants.LAWN_YMIN)
+                    if (mBoard.mIgnoreMouseUp || mX * Constants.IS < Constants.LAWN_XMIN || mY * Constants.IS < Constants.LAWN_YMIN)
                     {
                         return;
                     }
                     int imgShovelWidth = AtlasResources.IMAGE_SHOVEL_HI_RES.mWidth;
                     int imgShovelHeight = AtlasResources.IMAGE_SHOVEL_HI_RES.mHeight;
                     g.SetColor(SexyColor.White);
-                    int num = (int)TodCommon.TodAnimateCurveFloat(0, 39, mBoard.mEffectCounter % 40, 0f, (float)(imgShovelWidth / 2), TodCurves.CURVE_BOUNCE_SLOW_MIDDLE);
+                    int num = (int)TodCommon.TodAnimateCurveFloat(0, 39, mBoard.mEffectCounter % 40, 0f, imgShovelWidth / 2, TodCurves.CURVE_BOUNCE_SLOW_MIDDLE);
                     g.DrawImage(AtlasResources.IMAGE_SHOVEL_HI_RES, num, -imgShovelHeight - num, imgShovelWidth, imgShovelHeight);
                     return;
                 case CursorType.CURSOR_TYPE_HAMMER:
@@ -154,7 +154,7 @@ namespace Lawn
                     reanimation.Draw(g);
                     return;
                 case CursorType.CURSOR_TYPE_COBCANNON_TARGET:
-                    if ((float)mX * Constants.IS < (float)Constants.LAWN_XMIN || (float)mY * Constants.IS < (float)Constants.LAWN_YMIN)
+                    if (mX * Constants.IS < Constants.LAWN_XMIN || mY * Constants.IS < Constants.LAWN_YMIN)
                     {
                         return;
                     }
@@ -211,7 +211,7 @@ namespace Lawn
                     return;
                 case CursorType.CURSOR_TYPE_PLANT_FROM_BANK:
                 case CursorType.CURSOR_TYPE_PLANT_FROM_USABLE_COIN:
-                    if (mBoard.mIgnoreMouseUp || (float)mX * Constants.IS < (float)Constants.LAWN_XMIN || (float)mY * Constants.IS < (float)Constants.LAWN_YMIN)
+                    if (mBoard.mIgnoreMouseUp || mX * Constants.IS < Constants.LAWN_XMIN || mY * Constants.IS < Constants.LAWN_YMIN)
                     {
                         return;
                     }

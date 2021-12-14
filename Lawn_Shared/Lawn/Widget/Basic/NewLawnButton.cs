@@ -120,7 +120,7 @@ namespace Lawn
 			{
 				return base.IsPointVisible(x, y);
 			}
-			SexyVector2 theCheckPoint = new SexyVector2((float)x, (float)y);
+			SexyVector2 theCheckPoint = new SexyVector2(x, y);
 			return TodCommon.TodIsPointInPolygon(mPolygonShape, 4, theCheckPoint);
 		}
 

@@ -215,7 +215,7 @@ namespace Sexy
 			{
 				return 0;
 			}
-			int num = (int)((double)GetTrackSize() * mPageSize / mMaxValue + 0.5);
+			int num = (int)(GetTrackSize() * mPageSize / mMaxValue + 0.5);
 			return Math.Max(8, num);
 		}
 
@@ -225,7 +225,7 @@ namespace Sexy
 			{
 				return 0;
 			}
-			return (int)(mValue * (double)(GetTrackSize() - GetThumbSize()) / (mMaxValue - mPageSize) + 0.5);
+			return (int)(mValue * (GetTrackSize() - GetThumbSize()) / (mMaxValue - mPageSize) + 0.5);
 		}
 
 		public override void Draw(Graphics g)
@@ -333,7 +333,7 @@ namespace Sexy
 
 		public virtual void SetThumbPosition(int thePosition)
 		{
-			SetValue((double)thePosition * (mMaxValue - mPageSize) / (double)(GetTrackSize() - GetThumbSize()));
+			SetValue(thePosition * (mMaxValue - mPageSize) / (GetTrackSize() - GetThumbSize()));
 		}
 
 		public virtual void ButtonPress(int theId)

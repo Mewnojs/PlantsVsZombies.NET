@@ -9,7 +9,7 @@ namespace Sexy.TodLib
 		public static float PixelAligned(float num)
 		{
 			int num2 = (int)(num * Constants.S + 0.5f);
-			return (float)num2 * Constants.IS;
+			return num2 * Constants.IS;
 		}
 
 		public static float FloatLerp(float start, float end, float t)
@@ -72,7 +72,7 @@ namespace Sexy.TodLib
 
 		public static float Distance2D(float x1, float y1, float x2, float y2)
 		{
-			return (float)Math.Sqrt((double)((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
+			return (float)Math.Sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 		}
 
 		public static float DegToRad(float theAngle)
@@ -144,10 +144,10 @@ namespace Sexy.TodLib
 				num = TodCommon.TodCurveInvQuad(TodCommon.TodCurveBounce(theTime));
 				goto IL_101;
 			case TodCurves.CURVE_SIN_WAVE:
-				num = (float)Math.Sin((double)(theTime * 3.1415927f * 2f));
+				num = (float)Math.Sin(theTime * 3.1415927f * 2f);
 				goto IL_101;
 			case TodCurves.CURVE_EASE_SIN_WAVE:
-				num = (float)Math.Sin((double)(TodCommon.TodCurveS(theTime) * 3.1415927f * 2f));
+				num = (float)Math.Sin(TodCommon.TodCurveS(theTime) * 3.1415927f * 2f);
 				goto IL_101;
 			}
 			Debug.ASSERT(false);
@@ -167,13 +167,13 @@ namespace Sexy.TodLib
 		{
 			int num = theTimeAge - theTimeStart;
 			int num2 = theTimeEnd - theTimeStart;
-			float theTime = (float)num / (float)num2;
+			float theTime = num / (float)num2;
 			return TodCommon.TodCurveEvaluateClamped(theTime, thePositionStart, thePositionEnd, theCurve);
 		}
 
 		public static int TodAnimateCurve(int theTimeStart, int theTimeEnd, int theTimeAge, int thePositionStart, int thePositionEnd, TodCurves theCurve)
 		{
-			return TodCommon.FloatRoundToInt(TodCommon.TodAnimateCurveFloat(theTimeStart, theTimeEnd, theTimeAge, (float)thePositionStart, (float)thePositionEnd, theCurve));
+			return TodCommon.FloatRoundToInt(TodCommon.TodAnimateCurveFloat(theTimeStart, theTimeEnd, theTimeAge, thePositionStart, thePositionEnd, theCurve));
 		}
 
 		public static object TodPickFromWeightedArray(TodWeightedArray[] theArray, int theCount)
@@ -297,12 +297,12 @@ namespace Sexy.TodLib
 		public static void TodDrawString(Graphics g, string theText, int thePosX, int thePosY, Font theFont, SexyColor theColor, int maxWidth, DrawStringJustification theJustification)
 		{
 			float num = 1f;
-			float num2 = (float)theFont.StringWidth(TodStringFile.TodStringTranslate(theText));
-			if (num2 > (float)maxWidth)
+			float num2 = theFont.StringWidth(TodStringFile.TodStringTranslate(theText));
+			if (num2 > maxWidth)
 			{
-				num = (float)maxWidth / num2;
+				num = maxWidth / num2;
 			}
-			TodCommon.TodDrawString(g, theText, thePosX, thePosY - (int)((num - 1f) * (float)theFont.GetHeight() / 2f), theFont, theColor, theJustification, num);
+			TodCommon.TodDrawString(g, theText, thePosX, thePosY - (int)((num - 1f) * theFont.GetHeight() / 2f), theFont, theColor, theJustification, num);
 		}
 
 		public static void TodDrawString(Graphics g, string theText, int thePosX, int thePosY, Font theFont, SexyColor theColor, DrawStringJustification theJustification, float scale)
@@ -383,7 +383,7 @@ namespace Sexy.TodLib
 			int celWidth = theImageStrip.GetCelWidth();
 			int celHeight = theImageStrip.GetCelHeight();
 			TRect theSrcRect = new TRect(celWidth * theCelCol, celHeight * theCelRow, celWidth, celHeight);
-			TRect theDestRect = new TRect(thePosX, thePosY, TodCommon.FloatRoundToInt((float)celWidth * theScaleX), TodCommon.FloatRoundToInt((float)celHeight * theScaleY));
+			TRect theDestRect = new TRect(thePosX, thePosY, TodCommon.FloatRoundToInt(celWidth * theScaleX), TodCommon.FloatRoundToInt(celHeight * theScaleY));
 			g.DrawImage(theImageStrip, theDestRect, theSrcRect);
 		}
 
@@ -409,8 +409,8 @@ namespace Sexy.TodLib
 				return;
 			}
 			Matrix identity = Matrix.Identity;
-			identity.M41 = (float)celWidth * 0.5f * theScaleX + thePosX + (float)g.mTransX;
-			identity.M42 = (float)celHeight * 0.5f * theScaleY + thePosY + (float)g.mTransY;
+			identity.M41 = celWidth * 0.5f * theScaleX + thePosX + g.mTransX;
+			identity.M42 = celHeight * 0.5f * theScaleY + thePosY + g.mTransY;
 			identity.M11 = theScaleX;
 			identity.M22 = theScaleY;
 			SexyColor aColor = g.mColorizeImages ? new SexyColor(g.mColor) : SexyColor.White;
@@ -429,8 +429,8 @@ namespace Sexy.TodLib
 				return;
 			}
 			Matrix identity = Matrix.Identity;
-			identity.M41 = (float)celWidth * 0.5f + thePosX + (float)g.mTransX;
-			identity.M42 = (float)celHeight * 0.5f + thePosY + (float)g.mTransY;
+			identity.M41 = celWidth * 0.5f + thePosX + g.mTransX;
+			identity.M42 = celHeight * 0.5f + thePosY + g.mTransY;
 			identity.M11 = theScaleX;
 			identity.M22 = theScaleY;
 			SexyColor aColor = g.mColorizeImages ? new SexyColor(g.mColor) : SexyColor.White;
@@ -446,8 +446,8 @@ namespace Sexy.TodLib
 			}
 			TRect theSrcRect = new TRect(0, 0, theImage.mWidth, theImage.mHeight);
 			Matrix identity = Matrix.Identity;
-			identity.M41 = (float)theImage.mWidth * 0.5f * theScaleX + thePosX + (float)g.mTransX;
-			identity.M42 = (float)theImage.mHeight * 0.5f * theScaleY + thePosY + (float)g.mTransY;
+			identity.M41 = theImage.mWidth * 0.5f * theScaleX + thePosX + g.mTransX;
+			identity.M42 = theImage.mHeight * 0.5f * theScaleY + thePosY + g.mTransY;
 			identity.M11 = theScaleX;
 			identity.M22 = theScaleY;
 			SexyColor aColor = g.mColorizeImages ? new SexyColor(g.mColor) : SexyColor.White;
@@ -475,8 +475,8 @@ namespace Sexy.TodLib
 				celRect.mHeight--;
 			}
 			Matrix identity = Matrix.Identity;
-			identity.M41 = (float)celRect.mWidth * 0.5f + thePosX + (float)g.mTransX;
-			identity.M42 = (float)celRect.mHeight * 0.5f + thePosY + (float)g.mTransY;
+			identity.M41 = celRect.mWidth * 0.5f + thePosX + g.mTransX;
+			identity.M42 = celRect.mHeight * 0.5f + thePosY + g.mTransY;
 			identity.M11 = theScaleX;
 			identity.M22 = theScaleY;
 			SexyColor aColor = g.mColorizeImages ? new SexyColor(g.mColor) : SexyColor.White;
@@ -694,12 +694,12 @@ namespace Sexy.TodLib
 
 		public static float TodCurvePoly(float theTime, float thePoly)
 		{
-			return (float)Math.Pow((double)theTime, (double)thePoly);
+			return (float)Math.Pow(theTime, thePoly);
 		}
 
 		public static float TodCurveInvPoly(float theTime, float thePoly)
 		{
-			return (float)Math.Pow((double)(theTime - 1f), (double)thePoly) + 1f;
+			return (float)Math.Pow(theTime - 1f, thePoly) + 1f;
 		}
 
 		public static float TodCurvePolyS(float theTime, float thePoly)
@@ -717,7 +717,7 @@ namespace Sexy.TodLib
 			{
 				return 1f;
 			}
-			return 1f - (float)Math.Sqrt((double)(1f - theTime * theTime));
+			return 1f - (float)Math.Sqrt(1f - theTime * theTime);
 		}
 
 		public static float TodCurveInvCircle(float theTime)
@@ -726,7 +726,7 @@ namespace Sexy.TodLib
 			{
 				return 0f;
 			}
-			return (float)Math.Sqrt((double)(1f - (theTime - 1f) * (theTime - 1f)));
+			return (float)Math.Sqrt(1f - (theTime - 1f) * (theTime - 1f));
 		}
 
 		public static float TodCurveBounce(float theTime)
@@ -763,22 +763,22 @@ namespace Sexy.TodLib
 
 		public static void SexyMatrix3ExtractScale(Matrix m, ref float theScaleX, ref float theScaleY)
 		{
-			float num = (float)Math.Atan2((double)m.M11, (double)m.M21);
+			float num = (float)Math.Atan2(m.M11, m.M21);
 			if (Math.Abs(num) < 0.7853982f || Math.Abs(num) > 2.3561945f)
 			{
-				theScaleX = m.M21 / (float)Math.Cos((double)num);
+				theScaleX = m.M21 / (float)Math.Cos(num);
 			}
 			else
 			{
-				theScaleX = m.M11 / (float)Math.Sin((double)num);
+				theScaleX = m.M11 / (float)Math.Sin(num);
 			}
-			float num2 = (float)Math.Atan2((double)m.M22, (double)m.M12);
+			float num2 = (float)Math.Atan2(m.M22, m.M12);
 			if (Math.Abs(num2) < 0.7853982f || Math.Abs(num2) > 2.3561945f)
 			{
-				theScaleY = m.M12 / (float)Math.Cos((double)num2);
+				theScaleY = m.M12 / (float)Math.Cos(num2);
 				return;
 			}
-			theScaleY = m.M22 / (float)Math.Sin((double)num2);
+			theScaleY = m.M22 / (float)Math.Sin(num2);
 		}
 
 		public static SexyColor ColorAdd(SexyColor theColor1, SexyColor theColor2)

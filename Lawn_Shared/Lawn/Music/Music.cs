@@ -156,7 +156,7 @@ namespace Lawn
 		{
 			if (mCurMusicTune != MusicTune.MUSIC_TUNE_NONE)
 			{
-				mMusicInterface.StopMusic((float)aFadeOutDuration / 100f);
+				mMusicInterface.StopMusic(aFadeOutDuration / 100f);
 				mCurMusicTune = MusicTune.MUSIC_TUNE_NONE;
 				mPaused = false;
 			}

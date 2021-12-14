@@ -51,8 +51,8 @@ namespace Sexy
 			//num = Math.Max(16, num);
 			//num2 = Math.Max(16, num2);
 			mOwnsTexture = true;
-			mMaxS = (float)mWidth / (float)num;
-			mMaxT = (float)mHeight / (float)num2;
+			mMaxS = mWidth / (float)num;
+			mMaxT = mHeight / (float)num2;
 			renderTarget = new RenderTarget2D(GlobalStaticVars.g.GraphicsDevice, num, num2);
 			Texture = renderTarget;
 		}

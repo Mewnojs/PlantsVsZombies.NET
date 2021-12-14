@@ -50,8 +50,8 @@ namespace Lawn
 				y = Constants.Almanac_ImitatorPosition.Y;
 				return;
 			}
-			x = (int)(Constants.Almanac_SeedOffset.X + (int)theSeedType % 4 * (Constants.SMALL_SEEDPACKET_WIDTH + Constants.Almanac_SeedSpace.X));
-			y = (int)(Constants.Almanac_SeedOffset.X + (int)theSeedType / 4 * (Constants.SMALL_SEEDPACKET_HEIGHT + Constants.Almanac_SeedSpace.Y));
+			x = Constants.Almanac_SeedOffset.X + (int)theSeedType % 4 * (Constants.SMALL_SEEDPACKET_WIDTH + Constants.Almanac_SeedSpace.X);
+			y = Constants.Almanac_SeedOffset.X + (int)theSeedType / 4 * (Constants.SMALL_SEEDPACKET_HEIGHT + Constants.Almanac_SeedSpace.Y);
 		}
 
 		public override void Draw(Graphics g)
@@ -73,7 +73,7 @@ namespace Lawn
 					}
 					else
 					{
-						SeedPacket.DrawSmallSeedPacket(g, (float)num, (float)num2, seedType, SeedType.SEED_NONE, 0f, 255, seedType != SeedType.SEED_IMITATER && flag, false, flag2, seedType != SeedType.SEED_IMITATER && flag2);
+						SeedPacket.DrawSmallSeedPacket(g, num, num2, seedType, SeedType.SEED_NONE, 0f, 255, seedType != SeedType.SEED_IMITATER && flag, false, flag2, seedType != SeedType.SEED_IMITATER && flag2);
 					}
 				}
 				flag = true;

@@ -221,7 +221,7 @@ namespace Lawn
 			}
 			if (IsScrolledLeftAtStart())
 			{
-				mBoard.Move((int)((float)Constants.BOARD_OFFSET * Constants.S), 0);
+				mBoard.Move((int)(Constants.BOARD_OFFSET * Constants.S), 0);
 			}
 			if (IsNonScrollingCutscene() && mCrazyDaveTime == 0)
 			{
@@ -482,18 +482,18 @@ namespace Lawn
 			int num5 = Constants.BOARD_OFFSET;
 			if (!IsScrolledLeftAtStart())
 			{
-				num5 = (int)(Constants.IS * (float)Constants.Board_Offset_AspectRatio_Correction);
+				num5 = (int)(Constants.IS * Constants.Board_Offset_AspectRatio_Correction);
 			}
 			if (mCutsceneTime <= num)
 			{
-				mBoard.Move((int)((float)num5 * Constants.S), 0);
+				mBoard.Move((int)(num5 * Constants.S), 0);
 			}
 			if (mCutsceneTime > num && mCutsceneTime <= num2)
 			{
 				int thePositionStart = -num5;
 				int thePositionEnd = -Constants.BOARD_OFFSET + Constants.BACKGROUND_IMAGE_WIDTH - Constants.WIDE_BOARD_WIDTH + Constants.Board_Cutscene_ExtraScroll;
 				int num6 = CalcPosition(num, num2, thePositionStart, thePositionEnd);
-				mBoard.Move(-(int)((float)num6 * Constants.S), 0);
+				mBoard.Move(-(int)(num6 * Constants.S), 0);
 			}
 			if (mBoard.ChooseSeedsOnCurrentLevel())
 			{
@@ -522,10 +522,10 @@ namespace Lawn
 			}
 			if (mCutsceneTime > num3)
 			{
-				int thePositionStart3 = Constants.BACKGROUND_IMAGE_WIDTH - Constants.WIDE_BOARD_WIDTH - Constants.BOARD_OFFSET + Constants.Board_Cutscene_ExtraScroll + (int)(Constants.IS * (float)Constants.Board_Offset_AspectRatio_Correction);
+				int thePositionStart3 = Constants.BACKGROUND_IMAGE_WIDTH - Constants.WIDE_BOARD_WIDTH - Constants.BOARD_OFFSET + Constants.Board_Cutscene_ExtraScroll + (int)(Constants.IS * Constants.Board_Offset_AspectRatio_Correction);
 				int thePositionEnd3 = 0;
 				int num11 = CalcPosition(num3, num4, thePositionStart3, thePositionEnd3);
-				mBoard.Move(-(int)((float)num11 * Constants.S) + Constants.Board_Offset_AspectRatio_Correction, 0);
+				mBoard.Move(-(int)(num11 * Constants.S) + Constants.Board_Offset_AspectRatio_Correction, 0);
 			}
 			int num12 = 0;
 			if (!mBoard.ChooseSeedsOnCurrentLevel())
@@ -556,22 +556,22 @@ namespace Lawn
 					mApp.PlayFoley(FoleyType.FOLEY_DIGGER);
 					if (mBoard.mLevel == 1)
 					{
-						mApp.AddReanimation((float)Constants.BOARD_EDGE, 0f, 400000, ReanimationType.REANIM_SODROLL, false);
-						mApp.AddTodParticle((float)(Constants.CutScene_ExtraRoom_1_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM), (float)Constants.CutScene_ExtraRoom_1_Particle_Pos.Y, 400001, ParticleEffect.PARTICLE_SOD_ROLL);
+						mApp.AddReanimation(Constants.BOARD_EDGE, 0f, 400000, ReanimationType.REANIM_SODROLL, false);
+						mApp.AddTodParticle(Constants.CutScene_ExtraRoom_1_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM, Constants.CutScene_ExtraRoom_1_Particle_Pos.Y, 400001, ParticleEffect.PARTICLE_SOD_ROLL);
 					}
 					else if (mBoard.mLevel == 2)
 					{
-						mApp.AddReanimation((float)Constants.BOARD_EDGE - 10f, (float)Constants.CutScene_SodRoll_1_Pos * Constants.S, 400000, ReanimationType.REANIM_SODROLL, false);
-						mApp.AddReanimation((float)Constants.BOARD_EDGE - 10f, (float)Constants.CutScene_SodRoll_2_Pos * Constants.S, 400000, ReanimationType.REANIM_SODROLL, false);
-						mApp.AddTodParticle((float)(Constants.CutScene_ExtraRoom_2_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM), (float)Constants.CutScene_ExtraRoom_2_Particle_Pos.Y, 400001, ParticleEffect.PARTICLE_SOD_ROLL);
-						mApp.AddTodParticle((float)(Constants.CutScene_ExtraRoom_3_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM), (float)Constants.CutScene_ExtraRoom_3_Particle_Pos.Y, 400001, ParticleEffect.PARTICLE_SOD_ROLL);
+						mApp.AddReanimation(Constants.BOARD_EDGE - 10f, Constants.CutScene_SodRoll_1_Pos * Constants.S, 400000, ReanimationType.REANIM_SODROLL, false);
+						mApp.AddReanimation(Constants.BOARD_EDGE - 10f, Constants.CutScene_SodRoll_2_Pos * Constants.S, 400000, ReanimationType.REANIM_SODROLL, false);
+						mApp.AddTodParticle(Constants.CutScene_ExtraRoom_2_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM, Constants.CutScene_ExtraRoom_2_Particle_Pos.Y, 400001, ParticleEffect.PARTICLE_SOD_ROLL);
+						mApp.AddTodParticle(Constants.CutScene_ExtraRoom_3_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM, Constants.CutScene_ExtraRoom_3_Particle_Pos.Y, 400001, ParticleEffect.PARTICLE_SOD_ROLL);
 					}
 					else if (mBoard.mLevel == 4)
 					{
-						mApp.AddReanimation((float)(Constants.CutScene_SodRoll_3_Pos.X + Constants.BOARD_EDGE) + 10f, (float)Constants.CutScene_SodRoll_3_Pos.Y * Constants.S, 400000, ReanimationType.REANIM_SODROLL, false);
-						mApp.AddReanimation((float)(Constants.CutScene_SodRoll_4_Pos.X + Constants.BOARD_EDGE) + 10f, (float)Constants.CutScene_SodRoll_4_Pos.Y * Constants.S, 400000, ReanimationType.REANIM_SODROLL, false);
-						mApp.AddTodParticle((float)(Constants.CutScene_ExtraRoom_4_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM), (float)Constants.CutScene_ExtraRoom_4_Particle_Pos.Y, 400001, ParticleEffect.PARTICLE_SOD_ROLL);
-						mApp.AddTodParticle((float)(Constants.CutScene_ExtraRoom_5_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM), (float)Constants.CutScene_ExtraRoom_5_Particle_Pos.Y, 400001, ParticleEffect.PARTICLE_SOD_ROLL);
+						mApp.AddReanimation(Constants.CutScene_SodRoll_3_Pos.X + Constants.BOARD_EDGE + 10f, Constants.CutScene_SodRoll_3_Pos.Y * Constants.S, 400000, ReanimationType.REANIM_SODROLL, false);
+						mApp.AddReanimation(Constants.CutScene_SodRoll_4_Pos.X + Constants.BOARD_EDGE + 10f, Constants.CutScene_SodRoll_4_Pos.Y * Constants.S, 400000, ReanimationType.REANIM_SODROLL, false);
+						mApp.AddTodParticle(Constants.CutScene_ExtraRoom_4_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM, Constants.CutScene_ExtraRoom_4_Particle_Pos.Y, 400001, ParticleEffect.PARTICLE_SOD_ROLL);
+						mApp.AddTodParticle(Constants.CutScene_ExtraRoom_5_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM, Constants.CutScene_ExtraRoom_5_Particle_Pos.Y, 400001, ParticleEffect.PARTICLE_SOD_ROLL);
 					}
 				}
 				if (mCutsceneTime == num17)
@@ -605,7 +605,7 @@ namespace Lawn
 						{
 							lawnMower.mVisible = true;
 							int num20 = CalcPosition(num19, theTimeEnd2, -80, -21) + Constants.BOARD_EXTRA_ROOM;
-							lawnMower.mPosX = (float)num20;
+							lawnMower.mPosX = num20;
 						}
 					}
 				}
@@ -646,7 +646,7 @@ namespace Lawn
 			{
 				int x2 = Constants.CutScene_ReadySetPlant_Pos.X;
 				int y = Constants.CutScene_ReadySetPlant_Pos.Y;
-				mApp.AddReanimation((float)x2 * Constants.IS, (float)y * Constants.IS, 900000, ReanimationType.REANIM_READYSETPLANT);
+				mApp.AddReanimation(x2 * Constants.IS, y * Constants.IS, 900000, ReanimationType.REANIM_READYSETPLANT);
 				mApp.PlaySample(Resources.SOUND_READYSETPLANT);
 				mApp.IsFinalBossLevel();
 			}
@@ -797,8 +797,8 @@ namespace Lawn
 			}
 			Zombie zombie = mBoard.AddZombieInRow(theZombieType, 0, GameConstants.ZOMBIE_WAVE_CUTSCENE);
 			Debug.ASSERT(zombie != null);
-			zombie.mPosX = (float)(830 + 56 * theGridX + 110);
-			zombie.mPosY = (float)(70 + 90 * theGridY);
+			zombie.mPosX = 830 + 56 * theGridX + 110;
+			zombie.mPosY = 70 + 90 * theGridY;
 			if (theGridX % 2 == 1)
 			{
 				zombie.mPosY += 30f;
@@ -810,7 +810,7 @@ namespace Lawn
 			}
 			if (mBoard.StageHasRoof())
 			{
-				zombie.mPosY -= (float)(7 * (5 - theGridX) - 2 * (5 - theGridY) + 5);
+				zombie.mPosY -= 7 * (5 - theGridX) - 2 * (5 - theGridY) + 5;
 				zombie.mPosX -= 5f;
 			}
 			if (theZombieType == ZombieType.ZOMBIE_ZAMBONI)
@@ -820,28 +820,28 @@ namespace Lawn
 			}
 			else if (mApp.IsLittleTroubleLevel())
 			{
-				zombie.mPosY += (float)(RandomNumbers.NextNumber(50) - 25);
-				zombie.mPosX += (float)(RandomNumbers.NextNumber(50) - 25);
+				zombie.mPosY += RandomNumbers.NextNumber(50) - 25;
+				zombie.mPosX += RandomNumbers.NextNumber(50) - 25;
 			}
 			else if (Is2x2Zombie(theZombieType))
 			{
-				zombie.mPosX += (float)(-20 + RandomNumbers.NextNumber(15));
+				zombie.mPosX += -20 + RandomNumbers.NextNumber(15);
 			}
 			else if (theGridY == 4 && (mApp.CanShowAlmanac() || mApp.CanShowStore()))
 			{
-				zombie.mPosX += (float)RandomNumbers.NextNumber(15);
+				zombie.mPosX += RandomNumbers.NextNumber(15);
 			}
 			else
 			{
-				zombie.mPosY += (float)RandomNumbers.NextNumber(15);
-				zombie.mPosX += (float)RandomNumbers.NextNumber(15);
+				zombie.mPosY += RandomNumbers.NextNumber(15);
+				zombie.mPosX += RandomNumbers.NextNumber(15);
 			}
 			int num = theGridY * 2 + theGridX % 2;
 			zombie.mRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_LAWN, 0, num * 2);
 			if (theZombieType == ZombieType.ZOMBIE_BUNGEE)
 			{
 				zombie.mRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_GROUND, 0, 0);
-				zombie.mPosX = 950f + (float)theGridX * 50f;
+				zombie.mPosX = 950f + theGridX * 50f;
 				zombie.mPosY = 50f;
 				zombie.mRow = 0;
 			}
@@ -961,8 +961,8 @@ namespace Lawn
 		{
 			if (mCutsceneTime > CutScene.LostTimePanRightStart && mCutsceneTime <= CutScene.LostTimePanRightEnd)
 			{
-				int num = CalcPosition(CutScene.TimePanRightStart, CutScene.TimePanRightEnd, (int)((float)Constants.Board_Offset_AspectRatio_Correction * Constants.IS), Constants.BOARD_OFFSET);
-				mBoard.Move((int)((float)num * Constants.S), 0);
+				int num = CalcPosition(CutScene.TimePanRightStart, CutScene.TimePanRightEnd, (int)(Constants.Board_Offset_AspectRatio_Correction * Constants.IS), Constants.BOARD_OFFSET);
+				mBoard.Move((int)(num * Constants.S), 0);
 			}
 			if (mCutsceneTime == CutScene.LostTimeBrainGraphicStart - 400 || mCutsceneTime == CutScene.LostTimeBrainGraphicStart - 900)
 			{
@@ -1531,7 +1531,7 @@ namespace Lawn
 				ClearUpsellBoard();
 				mApp.PlaySample(Resources.SOUND_FINALWAVE);
 				mUpsellHideBoard = true;
-				mApp.AddTodParticle((float)Constants.CutScene_Upsell_TerraCotta_Arrow.X, (float)Constants.CutScene_Upsell_TerraCotta_Arrow.Y, 900000, ParticleEffect.PARTICLE_UPSELL_ARROW);
+				mApp.AddTodParticle(Constants.CutScene_Upsell_TerraCotta_Arrow.X, Constants.CutScene_Upsell_TerraCotta_Arrow.Y, 900000, ParticleEffect.PARTICLE_UPSELL_ARROW);
 			}
 			if (mCrazyDaveLastTalkIndex == 3316)
 			{
@@ -1616,7 +1616,7 @@ namespace Lawn
 		public void AddUpsellZombie(ZombieType theZombieType, int thePixelX, int theGridY)
 		{
 			Zombie zombie = mBoard.AddZombieInRow(theZombieType, theGridY, 0);
-			zombie.mPosX = (float)thePixelX;
+			zombie.mPosX = thePixelX;
 			zombie.mPosY = zombie.GetPosYBasedOnRow(theGridY);
 			zombie.SetRow(theGridY);
 			zombie.mX = (int)zombie.mPosX;
@@ -1903,7 +1903,7 @@ namespace Lawn
 			if (mCrazyDaveLastTalkIndex == 3315)
 			{
 				Reanimation newReanimation = Reanimation.GetNewReanimation();
-				newReanimation.ReanimationInitializeType((float)Constants.CutScene_Upsell_TerraCotta_Pot.X, (float)Constants.CutScene_Upsell_TerraCotta_Pot.Y, ReanimationType.REANIM_FLOWER_POT);
+				newReanimation.ReanimationInitializeType(Constants.CutScene_Upsell_TerraCotta_Pot.X, Constants.CutScene_Upsell_TerraCotta_Pot.Y, ReanimationType.REANIM_FLOWER_POT);
 				newReanimation.SetFramesForLayer("anim_zengarden");
 				newReanimation.OverrideScale(1.3f, 1.3f);
 				newReanimation.Draw(g);
@@ -1944,12 +1944,12 @@ namespace Lawn
 			if (mCutsceneTime > CutScene.TimeIntro_LogoStart && mCutsceneTime <= CutScene.TimeIntro_PanRightEnd)
 			{
 				float num2 = TodCommon.TodAnimateCurveFloat(CutScene.TimeIntro_LogoStart, CutScene.TimeIntro_LogoEnd, mCutsceneTime, 5f, 1f, TodCurves.CURVE_EASE_OUT);
-				TRect theRect = new TRect(Constants.BOARD_WIDTH / 2 - mBoard.mX - (int)((float)Constants.BOARD_WIDTH * 0.5f * num2), Constants.BOARD_HEIGHT / 2 - mBoard.mY - (int)(75f * num2), (int)((float)Constants.BOARD_WIDTH * num2), (int)((float)Constants.CutScene_LogoBackRect_Height * num2));
+				TRect theRect = new TRect(Constants.BOARD_WIDTH / 2 - mBoard.mX - (int)(Constants.BOARD_WIDTH * 0.5f * num2), Constants.BOARD_HEIGHT / 2 - mBoard.mY - (int)(75f * num2), (int)(Constants.BOARD_WIDTH * num2), (int)(Constants.CutScene_LogoBackRect_Height * num2));
 				g.SetColor(new SexyColor(0, 0, 0, 128));
 				g.SetColorizeImages(true);
 				g.FillRect(theRect);
 				g.SetColorizeImages(false);
-				TodCommon.TodDrawImageScaledF(g, Resources.IMAGE_PVZ_LOGO, (float)(Constants.BOARD_WIDTH / 2 - mBoard.mX) - (float)Resources.IMAGE_PVZ_LOGO.mWidth * 0.5f * num2, (float)(Constants.BOARD_HEIGHT / 2 - mBoard.mY) - (float)Resources.IMAGE_PVZ_LOGO.mHeight * 0.5f * num2, num2, num2);
+				TodCommon.TodDrawImageScaledF(g, Resources.IMAGE_PVZ_LOGO, Constants.BOARD_WIDTH / 2 - mBoard.mX - Resources.IMAGE_PVZ_LOGO.mWidth * 0.5f * num2, Constants.BOARD_HEIGHT / 2 - mBoard.mY - Resources.IMAGE_PVZ_LOGO.mHeight * 0.5f * num2, num2, num2);
 			}
 			if (mCutsceneTime > CutScene.TimeIntro_FadeOut && mCutsceneTime <= CutScene.TimeIntro_FadeOutEnd)
 			{
@@ -1969,7 +1969,7 @@ namespace Lawn
 		public void UpdateIntro()
 		{
 			int num = TodCommon.TodAnimateCurve(CutScene.TimeIntro_PanRightStart, CutScene.TimeIntro_PanRightEnd, mCutsceneTime, -100, 100, TodCurves.CURVE_LINEAR);
-			mBoard.Move((int)((float)(-(float)num) * Constants.S), 0);
+			mBoard.Move((int)((float)(-num) * Constants.S), 0);
 			if (mCutsceneTime == 10)
 			{
 				LoadIntroBoard();
@@ -1980,7 +1980,7 @@ namespace Lawn
 			}
 			if (mCutsceneTime == CutScene.TimeIntro_LogoEnd)
 			{
-				mApp.AddTodParticle((float)Constants.CutScene_LogoEnd_Particle_Pos.X, (float)Constants.CutScene_LogoEnd_Particle_Pos.Y, 400000, ParticleEffect.PARTICLE_SCREEN_FLASH);
+				mApp.AddTodParticle(Constants.CutScene_LogoEnd_Particle_Pos.X, Constants.CutScene_LogoEnd_Particle_Pos.Y, 400000, ParticleEffect.PARTICLE_SCREEN_FLASH);
 				mApp.mMuteSoundsForCutscene = false;
 				mApp.PlaySample(Resources.SOUND_HUGE_WAVE);
 				mApp.mMuteSoundsForCutscene = true;

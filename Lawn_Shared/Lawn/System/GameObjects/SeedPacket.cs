@@ -141,31 +141,31 @@ namespace Lawn
 				int num2 = trect.mY + Constants.Challenge_SlotMachine_Y_Offset;
 				float num3 = 0.9f;
 				int challenge_SlotMachine_ClipHeight = Constants.Challenge_SlotMachine_ClipHeight;
-				float num4 = (float)AtlasResources.IMAGE_SEEDPACKETS.GetCelWidth() * num3;
-				int num5 = num2 - Constants.Challenge_SlotMachine_Y_Pos + TodCommon.FloatRoundToInt(mSlotMachiningPosition * (float)(-(float)challenge_SlotMachine_ClipHeight));
+				float num4 = AtlasResources.IMAGE_SEEDPACKETS.GetCelWidth() * num3;
+				int num5 = num2 - Constants.Challenge_SlotMachine_Y_Pos + TodCommon.FloatRoundToInt(mSlotMachiningPosition * (float)(-challenge_SlotMachine_ClipHeight));
 				Graphics @new = Graphics.GetNew(g);
 				@new.mTransY = 0;
 				@new.mTransX = mBoard.mX;
 				int challenge_SlotMachine_Gap = Constants.Challenge_SlotMachine_Gap;
-				int num6 = trect.mX + Constants.Challenge_SlotMachine_Offset + mIndex * TodCommon.FloatRoundToInt((float)challenge_SlotMachine_Gap + num4);
+				int num6 = trect.mX + Constants.Challenge_SlotMachine_Offset + mIndex * TodCommon.FloatRoundToInt(challenge_SlotMachine_Gap + num4);
 				int challenge_SlotMachine_Shadow_Offset = Constants.Challenge_SlotMachine_Shadow_Offset;
 				@new.ClipRect(num6, num2, (int)num4, challenge_SlotMachine_ClipHeight);
 				@new.HardwareClip();
 				if (mSlotMachineCountDown > 0)
 				{
-					DrawSeedPacketSlotMachine(@new, (float)num6, (float)num5, mPacketType, SeedType.SEED_NONE, theGrayness, num3);
-					DrawSeedPacketSlotMachine(@new, (float)num6, (float)num5 + (float)AtlasResources.IMAGE_SEEDPACKETS.GetCelHeight() * num3 - (float)challenge_SlotMachine_Shadow_Offset, mSlotMachiningNextSeed, SeedType.SEED_NONE, theGrayness, num3);
+					DrawSeedPacketSlotMachine(@new, num6, num5, mPacketType, SeedType.SEED_NONE, theGrayness, num3);
+					DrawSeedPacketSlotMachine(@new, num6, num5 + AtlasResources.IMAGE_SEEDPACKETS.GetCelHeight() * num3 - challenge_SlotMachine_Shadow_Offset, mSlotMachiningNextSeed, SeedType.SEED_NONE, theGrayness, num3);
 				}
 				else
 				{
-					DrawSeedPacketSlotMachine(@new, (float)num6, (float)num5, mPacketType, SeedType.SEED_NONE, theGrayness, num3);
+					DrawSeedPacketSlotMachine(@new, num6, num5, mPacketType, SeedType.SEED_NONE, theGrayness, num3);
 				}
 				@new.EndHardwareClip();
 				@new.PrepareForReuse();
 				return;
 			}
 			bool theDrawCostBackground = !mBoard.HasConveyorBeltSeedBank() && !mApp.IsSlotMachineLevel();
-			SeedPacket.DrawSmallSeedPacket(g, 0f, (float)mOffsetY, mPacketType, mImitaterType, 0f, theGrayness, false, true, true, theDrawCostBackground);
+			SeedPacket.DrawSmallSeedPacket(g, 0f, mOffsetY, mPacketType, mImitaterType, 0f, theGrayness, false, true, true, theDrawCostBackground);
 		}
 
 		public void Draw(Graphics g)
@@ -174,7 +174,7 @@ namespace Lawn
 			{
 				return;
 			}
-			SeedPacket.DrawSmallSeedPacket(g, 0f, (float)mOffsetY, mPacketType, mImitaterType, 0f, 255, true, true, false, false);
+			SeedPacket.DrawSmallSeedPacket(g, 0f, mOffsetY, mPacketType, mImitaterType, 0f, 255, true, true, false, false);
 		}
 
 		public void DrawOverlay(Graphics g)
@@ -188,15 +188,15 @@ namespace Lawn
 			}
 			if (mSlotMachineCountDown > 0)
 			{
-				int num = TodCommon.FloatRoundToInt(mSlotMachiningPosition * (float)(-(float)mHeight));
+				int num = TodCommon.FloatRoundToInt(mSlotMachiningPosition * (float)(-mHeight));
 				Graphics @new = Graphics.GetNew(g);
 				@new.ClipRect(0, 0, mWidth, mHeight);
-				SeedPacket.DrawSmallSeedPacket(@new, 0f, (float)num, mPacketType, SeedType.SEED_NONE, 0f, 128, false, false, false, false);
-				SeedPacket.DrawSmallSeedPacket(@new, 0f, (float)(num + mHeight), mSlotMachiningNextSeed, SeedType.SEED_NONE, 0f, 128, false, false, false, false);
+				SeedPacket.DrawSmallSeedPacket(@new, 0f, num, mPacketType, SeedType.SEED_NONE, 0f, 128, false, false, false, false);
+				SeedPacket.DrawSmallSeedPacket(@new, 0f, num + mHeight, mSlotMachiningNextSeed, SeedType.SEED_NONE, 0f, 128, false, false, false, false);
 				@new.PrepareForReuse();
 				return;
 			}
-			SeedPacket.DrawSmallSeedPacket(g, 0f, (float)mOffsetY, mPacketType, mImitaterType, thePercentDark, theGrayness, false, true, false, false);
+			SeedPacket.DrawSmallSeedPacket(g, 0f, mOffsetY, mPacketType, mImitaterType, thePercentDark, theGrayness, false, true, false, false);
 			if (flag)
 			{
 				g.DrawImage(AtlasResources.IMAGE_SELECTED_PACKET, Constants.SeedPacket_Selector_Pos.X, mOffsetY - Constants.SeedPacket_Selector_Pos.Y);
@@ -298,11 +298,11 @@ namespace Lawn
 					x2 = Constants.SeedPacket_Cost.X;
 					y2 = Constants.SeedPacket_Cost.Y;
 				}
-				g.DrawImageF(theImage, x + (float)x2, y + (float)y2);
+				g.DrawImageF(theImage, x + x2, y + y2);
 			}
 			if (thePercentDark > 0f)
 			{
-				int theHeight = TodCommon.FloatRoundToInt((float)Constants.SMALL_SEEDPACKET_HEIGHT * thePercentDark) + 2;
+				int theHeight = TodCommon.FloatRoundToInt(Constants.SMALL_SEEDPACKET_HEIGHT * thePercentDark) + 2;
 				g.SetColor(new SexyColor(0, 0, 0, 150));
 				g.FillRect((int)x, (int)y, Constants.SMALL_SEEDPACKET_WIDTH, theHeight);
 			}
@@ -351,12 +351,12 @@ namespace Lawn
 				return;
 			}
 			g.SetScale(0.75f, 0.5f, 0f, 0f);
-			g.DrawImage(AtlasResources.IMAGE_ALMANAC_ZOMBIEWINDOW, x + (float)Constants.IZombie_SeedOffset.X, y + (float)Constants.IZombie_SeedOffset.Y);
+			g.DrawImage(AtlasResources.IMAGE_ALMANAC_ZOMBIEWINDOW, x + Constants.IZombie_SeedOffset.X, y + Constants.IZombie_SeedOffset.Y);
 			Graphics @new = Graphics.GetNew(g);
 			@new.SetScale(1f);
 			@new.ClipRect((int)x + Constants.IZombie_ClipOffset.X, (int)y + Constants.IZombie_ClipOffset.Y, Constants.IZombie_ClipOffset.Width, Constants.IZombie_ClipOffset.Height);
 			@new.HardwareClip();
-			theApp.mReanimatorCache.DrawCachedZombie(@new, x + (float)Constants.ZombieOffsets[(int)izombieTypeFromSeed].X * g.mScaleX, y + (float)Constants.ZombieOffsets[(int)izombieTypeFromSeed].Y * g.mScaleY, izombieTypeFromSeed);
+			theApp.mReanimatorCache.DrawCachedZombie(@new, x + Constants.ZombieOffsets[(int)izombieTypeFromSeed].X * g.mScaleX, y + Constants.ZombieOffsets[(int)izombieTypeFromSeed].Y * g.mScaleY, izombieTypeFromSeed);
 			@new.SetColorizeImages(false);
 			@new.EndHardwareClip();
 			@new.PrepareForReuse();
@@ -436,7 +436,7 @@ namespace Lawn
 			g.SetColorizeImages(false);
 		}
 
-		public void MouseDown(int x, int y, int theClickCount)
+		public void MouseDown(int theX, int theY, int theClickCount)
 		{
 			if (mBoard.mPaused || mApp.mGameScene != GameScenes.SCENE_PLAYING)
 			{
@@ -802,7 +802,7 @@ namespace Lawn
 				}
 				else
 				{
-					num = (float)(mRefreshTime - mRefreshCounter) / (float)mRefreshTime;
+					num = (mRefreshTime - mRefreshCounter) / (float)mRefreshTime;
 				}
 			}
 			SeedType theSeedType = mPacketType;

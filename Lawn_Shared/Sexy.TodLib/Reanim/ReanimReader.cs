@@ -12,8 +12,8 @@ namespace Sexy.TodLib
 			bool doScale = customContentReader.ReadBoolean();
 			reanimatorDefinition.mFPS = customContentReader.ReadSingle();
 			reanimatorDefinition.mTrackCount = (short)customContentReader.ReadInt32();
-			reanimatorDefinition.mTracks = new ReanimatorTrack[(int)reanimatorDefinition.mTrackCount];
-			for (int i = 0; i < (int)reanimatorDefinition.mTrackCount; i++)
+			reanimatorDefinition.mTracks = new ReanimatorTrack[reanimatorDefinition.mTrackCount];
+			for (int i = 0; i < reanimatorDefinition.mTrackCount; i++)
 			{
 				ReanimatorTrack reanimatorTrack;
 				ReadReanimTrack(customContentReader, doScale, out reanimatorTrack);
@@ -27,7 +27,7 @@ namespace Sexy.TodLib
 			string name = input.ReadString();
 			int transformCount = input.ReadInt32();
 			track = new ReanimatorTrack(name, transformCount);
-			for (int i = 0; i < (int)track.mTransformCount; i++)
+			for (int i = 0; i < track.mTransformCount; i++)
 			{
 				ReanimatorTransform reanimatorTransform;
 				ReadReanimTransform(input, doScale, out reanimatorTransform);

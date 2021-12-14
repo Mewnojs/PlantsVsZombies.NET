@@ -125,7 +125,7 @@ namespace Sexy.TodLib
 			foleyTypeData.mLastVariationPlayed = num3;
 			if (aPitch != 0f)
 			{
-				soundInstance.AdjustPitch((double)(aPitch / 10f));
+				soundInstance.AdjustPitch(aPitch / 10f);
 			}
 			if (TodCommon.TestBit(foleyParams.mFoleyFlags, 3))
 			{

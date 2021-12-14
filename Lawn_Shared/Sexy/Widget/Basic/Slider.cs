@@ -60,7 +60,7 @@ namespace Sexy
 				int height = mThumbImage.GetHeight();
 				int num = width / 2;
 				int num2 = mWidth - width;
-				TPoint tpoint = new TPoint((int)((double)num + mVal * (double)num2), mHeight / 2);
+				TPoint tpoint = new TPoint((int)(num + mVal * num2), mHeight / 2);
 				TRect destRect = new TRect(0, 0, tpoint.mX, mHeight);
 				TRect destRect2 = new TRect(tpoint.mX, 0, mWidth - tpoint.mX, mHeight);
 				DrawStretchableImage(g, mTrackMinImage, destRect);
@@ -85,7 +85,7 @@ namespace Sexy
 			}
 			if (mThumbImage != null)
 			{
-				g.DrawImage(mThumbImage, (int)(mVal * (double)((float)(mWidth - mThumbImage.GetWidth()) + Constants.InvertAndScale(1f))), (mHeight - mThumbImage.GetHeight()) / 2);
+				g.DrawImage(mThumbImage, (int)(mVal * (mWidth - mThumbImage.GetWidth() + Constants.InvertAndScale(1f))), (mHeight - mThumbImage.GetHeight()) / 2);
 			}
 		}
 
@@ -105,14 +105,14 @@ namespace Sexy
 
 		public override void MouseDown(int x, int y, int theMagicCode)
 		{
-			int num = (int)(mVal * (double)(mWidth - mThumbImage.GetWidth()));
+			int num = (int)(mVal * (mWidth - mThumbImage.GetWidth()));
 			if (x >= num && x < num + mThumbImage.GetWidth())
 			{
 				mDragging = true;
 				mRelX = x - num;
 				return;
 			}
-			double value = (double)x / (double)mWidth;
+			double value = x / (double)mWidth;
 			SetValue(value);
 		}
 
@@ -121,7 +121,7 @@ namespace Sexy
 			if (mDragging)
 			{
 				double num = mVal;
-				mVal = (double)(x - mRelX) / (double)(mWidth - mThumbImage.GetWidth());
+				mVal = (x - mRelX) / (double)(mWidth - mThumbImage.GetWidth());
 				if (mVal < 0.0)
 				{
 					mVal = 0.0;

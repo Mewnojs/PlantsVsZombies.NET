@@ -31,7 +31,7 @@ namespace Sexy
 		{
 			get
 			{
-				return (double)mMusicInterface.GetVolume();
+				return mMusicInterface.GetVolume();
 			}
 			set
 			{
@@ -536,7 +536,7 @@ namespace Sexy
 			{
 				return 0.0;
 			}
-			return ((double)mResourceManager.mLoadedCount + (double)ReanimatorXnaHelpers.mLoadedResources) / (double)(mResourceManager.mTotalResources + ReanimatorXnaHelpers.mTotalResources);
+			return (mResourceManager.mLoadedCount + (double)ReanimatorXnaHelpers.mLoadedResources) / (mResourceManager.mTotalResources + ReanimatorXnaHelpers.mTotalResources);
 		}
 
 		public SexyColor HSLToRGB(int h, int s, int l)

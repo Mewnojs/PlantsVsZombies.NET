@@ -266,7 +266,7 @@ namespace Lawn
 			Graphics @new = Graphics.GetNew(g);
 			@new.mTransX += Constants.StoreScreen_RetardedDave_Offset_X;
 			Graphics graphics = @new;
-			graphics.mTransY = graphics.mTransY;
+			//graphics.mTransY = graphics.mTransY;
 			mApp.DrawCrazyDave(@new);
 			@new.PrepareForReuse();
 			if (mHatchTimer == 0 && mHatchOpen)

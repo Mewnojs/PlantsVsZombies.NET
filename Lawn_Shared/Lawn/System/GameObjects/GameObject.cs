@@ -112,12 +112,12 @@ namespace Lawn
 			{
 				return false;
 			}
-			mPrevTransX = (float)g.mTransX;
-			mPrevTransY = (float)g.mTransY;
+			mPrevTransX = g.mTransX;
+			mPrevTransY = g.mTransY;
 			if (mPosScaled)
 			{
-				g.mTransX += (int)((float)mX * Constants.S);
-				g.mTransY += (int)((float)mY * Constants.S);
+				g.mTransX += (int)(mX * Constants.S);
+				g.mTransY += (int)(mY * Constants.S);
 			}
 			else
 			{
@@ -135,8 +135,8 @@ namespace Lawn
 
 		public void MakeParentGraphicsFrame(Graphics g)
 		{
-			g.mTransX -= (int)((float)mX * Constants.S);
-			g.mTransY -= (int)((float)mY * Constants.S);
+			g.mTransX -= (int)(mX * Constants.S);
+			g.mTransY -= (int)(mY * Constants.S);
 		}
 
 		public LawnApp mApp;

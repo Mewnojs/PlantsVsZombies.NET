@@ -207,12 +207,12 @@ namespace Lawn
 			base.Resize(theX, theY, theWidth, theHeight);
 			int width = mStartButton.mButtonImage.GetWidth();
 			int height = mStartButton.mButtonImage.GetHeight();
-			mStartButton.Resize(mWidth / 2 - width / 2, mHeight - height - (int)(Constants.S * (float)Constants.AwardScreen_ContinueButton_Offset), width, height);
+			mStartButton.Resize(mWidth / 2 - width / 2, mHeight - height - (int)(Constants.S * Constants.AwardScreen_ContinueButton_Offset), width, height);
 			mStartButton.mTextOffsetY = (int)Constants.InvertAndScale(1f);
 			mStartButton.mParentWidget = this;
 			width = mContinueButton.mButtonImage.GetWidth();
 			height = mContinueButton.mButtonImage.GetHeight();
-			mContinueButton.Resize(mWidth / 2 - width / 2, mHeight - height - (int)(Constants.S * (float)Constants.AwardScreen_ContinueButton_Offset), width, height);
+			mContinueButton.Resize(mWidth / 2 - width / 2, mHeight - height - (int)(Constants.S * Constants.AwardScreen_ContinueButton_Offset), width, height);
 			mMenuButton.Resize(Constants.AwardScreen_MenuButton.X, Constants.AwardScreen_MenuButton.Y, AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2.mWidth, AtlasResources.IMAGE_SEEDCHOOSER_BUTTON2.mHeight);
 		}
 
@@ -535,7 +535,7 @@ namespace Lawn
 			DrawBottom(g, "[NEW_PLANT]", nameString, theMessage);
 			int x = Constants.AwardScreen_Seed_Pos.X;
 			int y = Constants.AwardScreen_Seed_Pos.Y;
-			SeedPacket.DrawSmallSeedPacket(g, (float)x, (float)y, awardSeedForLevel, SeedType.SEED_NONE, 0f, 255, true, false, true, true);
+			SeedPacket.DrawSmallSeedPacket(g, x, y, awardSeedForLevel, SeedType.SEED_NONE, 0f, 255, true, false, true, true);
 		}
 
 		public void DrawAchievements(Graphics g)

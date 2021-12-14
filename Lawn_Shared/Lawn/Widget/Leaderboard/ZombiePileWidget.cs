@@ -19,7 +19,7 @@ namespace Lawn
 		{
 			mApp = theApp;
 			mWidth = Constants.BOARD_WIDTH;
-			mPileHeight = (int)(mApp.mPlayerInfo.mZombiesKilled / (long)ZombiePileWidget.mZombieScale);
+			mPileHeight = (int)(mApp.mPlayerInfo.mZombiesKilled / mZombieScale);
 			mPileHeight = Math.Min(mPileHeight, ZombiePileWidget.maxHeight);
 			mHeight = Constants.BOARD_HEIGHT + CalculatePileHeight(mPileHeight) + 300;
 			mY = -mHeight;
@@ -55,16 +55,16 @@ namespace Lawn
 			int num = Constants.BOARD_HEIGHT + CalculatePileHeight(ZombiePileWidget.maxHeight);
 			int num2 = Constants.BOARD_HEIGHT + CalculatePileHeight(ZombiePileWidget.skyEndHeight);
 			int num3 = Constants.BOARD_HEIGHT + CalculatePileHeight(ZombiePileWidget.spaceStartHeight);
-			skyBottomLeft = new TriVertex(-1f, (float)mScreenTop);
-			skyBottomRight = new TriVertex((float)Constants.BOARD_WIDTH, (float)mScreenTop);
-			transferBottomLeft = new TriVertex(-1f, (float)(mHeight - num2));
-			transferBottomRight = new TriVertex((float)Constants.BOARD_WIDTH, (float)(mHeight - num2));
-			spaceBottomLeft = new TriVertex(-1f, (float)(mHeight - num3));
-			spaceBottomRight = new TriVertex((float)Constants.BOARD_WIDTH, (float)(mHeight - num3));
-			spaceTopLeft = new TriVertex(-1f, (float)(mHeight - num));
-			spaceTopRight = new TriVertex((float)Constants.BOARD_WIDTH, (float)(mHeight - num));
-			screenBottomLeft = new TriVertex(-1f, (float)mHeight);
-			screenBottomRight = new TriVertex((float)Constants.BOARD_WIDTH, (float)mHeight);
+			skyBottomLeft = new TriVertex(-1f, mScreenTop);
+			skyBottomRight = new TriVertex(Constants.BOARD_WIDTH, mScreenTop);
+			transferBottomLeft = new TriVertex(-1f, mHeight - num2);
+			transferBottomRight = new TriVertex(Constants.BOARD_WIDTH, mHeight - num2);
+			spaceBottomLeft = new TriVertex(-1f, mHeight - num3);
+			spaceBottomRight = new TriVertex(Constants.BOARD_WIDTH, mHeight - num3);
+			spaceTopLeft = new TriVertex(-1f, mHeight - num);
+			spaceTopRight = new TriVertex(Constants.BOARD_WIDTH, mHeight - num);
+			screenBottomLeft = new TriVertex(-1f, mHeight);
+			screenBottomRight = new TriVertex(Constants.BOARD_WIDTH, mHeight);
 			mVasebreakerButton = GameButton.MakeNewButton(3, this, "", null, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_VASEBREAKER, null, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_VASEBREAKER_HIGHLIGHT);
 			mVasebreakerButton.Resize(Constants.LeaderboardScreen_Vasebreaker_Button_X, mScreenTop + Constants.LeaderboardScreen_Vasebreaker_Button_Y, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_VASEBREAKER_HIGHLIGHT.mWidth, AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEADERBOARD_VASEBREAKER_HIGHLIGHT.mHeight);
 			mVasebreakerButton.mTranslateX = (mVasebreakerButton.mTranslateY = 0);
@@ -83,7 +83,7 @@ namespace Lawn
 			AddWidget(mBackButton);
 			LeaderBoardComm.LoadResults(LeaderboardGameMode.Adventure);
 			friendMarkers = new ZombiePileMarker[10];
-			int num4 = (int)((double)num3 * 1.75 * 0.20000000298023224);
+			int num4 = (int)(num3 * 1.75 * 0.20000000298023224);
 			stars = new ZombiePileWidget.Star[mPileHeight * 10];
 			for (int j = 0; j < stars.Length; j++)
 			{
@@ -159,7 +159,7 @@ namespace Lawn
 						if (signedInGamerIndex + num3 < num2)
 						{
 							Gamer leaderboardGamer = LeaderBoardComm.GetLeaderboardGamer(signedInGamerIndex + num3, LeaderboardState.Adventure);
-							int num5 = (int)(LeaderBoardComm.GetLeaderboardScore(signedInGamerIndex + num3, LeaderboardState.Adventure) / (long)ZombiePileWidget.mZombieScale);
+							int num5 = (int)(LeaderBoardComm.GetLeaderboardScore(signedInGamerIndex + num3, LeaderboardState.Adventure) / mZombieScale);
 							num5 = Math.Min(num5, ZombiePileWidget.maxHeight);
 							ZombiePileMarker zombiePileMarker = new ZombiePileMarker();
 							zombiePileMarker.mGamer = leaderboardGamer;
@@ -174,7 +174,7 @@ namespace Lawn
 						if (signedInGamerIndex - num3 >= 0)
 						{
 							Gamer leaderboardGamer2 = LeaderBoardComm.GetLeaderboardGamer(signedInGamerIndex - num3, LeaderboardState.Adventure);
-							int num6 = (int)(LeaderBoardComm.GetLeaderboardScore(signedInGamerIndex - num3, LeaderboardState.Adventure) / (long)ZombiePileWidget.mZombieScale);
+							int num6 = (int)(LeaderBoardComm.GetLeaderboardScore(signedInGamerIndex - num3, LeaderboardState.Adventure) / mZombieScale);
 							num6 = Math.Min(num6, ZombiePileWidget.maxHeight);
 							ZombiePileMarker zombiePileMarker2 = new ZombiePileMarker();
 							zombiePileMarker2.mGamer = leaderboardGamer2;
@@ -214,7 +214,7 @@ namespace Lawn
 			Color color = new Color(255, 255, 255, a);
 			g.SetColor(color);
 			int transY = g.mTransY;
-			g.mTransY = (int)((float)transY * 0.2f);
+			g.mTransY = (int)(transY * 0.2f);
 			for (int i = 0; i < stars.Length; i++)
 			{
 				g.SetScale(stars[i].size);
@@ -294,7 +294,7 @@ namespace Lawn
 		{
 			for (int i = 0; i < gPileObjects.Length; i++)
 			{
-				gPileObjects[i].mY = (int)((float)mScreenTop * 0.4f - (float)CalculatePileHeight(gPileObjects[i].mHeight) * 0.4f);
+				gPileObjects[i].mY = (int)(mScreenTop * 0.4f - CalculatePileHeight(gPileObjects[i].mHeight) * 0.4f);
 				if (gPileObjects[i].mType == ZombiePileObjectType.OBJECT_ARROW)
 				{
 					gPileObjects[i].mY = mScreenTop - CalculatePileHeight(gPileObjects[i].mHeight);
@@ -305,7 +305,7 @@ namespace Lawn
 		public void DrawPileObjects(Graphics g)
 		{
 			int transY = g.mTransY;
-			g.mTransY = (int)((float)transY * 0.4f);
+			g.mTransY = (int)(transY * 0.4f);
 			for (int i = 0; i < gPileObjects.Length; i++)
 			{
 				ZombiePileObject zombiePileObject = gPileObjects[i];
@@ -314,19 +314,19 @@ namespace Lawn
 					switch (zombiePileObject.mType)
 					{
 					case ZombiePileObjectType.OBJECT_BALLOON:
-						g.DrawImage(AtlasResources.IMAGE_PILE_BALLOON, 40f, (float)zombiePileObject.mY + zombiePileObject.mOffsetY);
+						g.DrawImage(AtlasResources.IMAGE_PILE_BALLOON, 40f, zombiePileObject.mY + zombiePileObject.mOffsetY);
 						break;
 					case ZombiePileObjectType.OBJECT_YELLOW_CLOUD:
 						g.DrawImage(AtlasResources.IMAGE_PILE_YELLOW_CLOUD, (int)zombiePileObject.mOffsetX, zombiePileObject.mY + (int)zombiePileObject.mOffsetY, AtlasResources.IMAGE_PILE_YELLOW_CLOUD.mWidth, AtlasResources.IMAGE_PILE_YELLOW_CLOUD.mHeight);
 						break;
 					case ZombiePileObjectType.OBJECT_AIRPLANE:
-						g.DrawImage(AtlasResources.IMAGE_PILE_AIRPLANE, zombiePileObject.mOffsetX, (float)zombiePileObject.mY + zombiePileObject.mOffsetY);
+						g.DrawImage(AtlasResources.IMAGE_PILE_AIRPLANE, zombiePileObject.mOffsetX, zombiePileObject.mY + zombiePileObject.mOffsetY);
 						break;
 					case ZombiePileObjectType.OBJECT_MOON:
 						g.DrawImage(AtlasResources.IMAGE_PILE_MOON, 40, zombiePileObject.mY);
 						break;
 					case ZombiePileObjectType.OBJECT_SATELLITE:
-						g.DrawImage(AtlasResources.IMAGE_PILE_SATELLITE, zombiePileObject.mOffsetX, (float)zombiePileObject.mY + zombiePileObject.mOffsetY);
+						g.DrawImage(AtlasResources.IMAGE_PILE_SATELLITE, zombiePileObject.mOffsetX, zombiePileObject.mY + zombiePileObject.mOffsetY);
 						break;
 					case ZombiePileObjectType.OBJECT_PEGGLE_URSAMAJOR:
 						g.DrawImage(AtlasResources.IMAGE_PILE_PEGGLE_URSAMAJOR, 30, zombiePileObject.mY);
@@ -344,20 +344,20 @@ namespace Lawn
 					{
 						Matrix world = Matrix.Identity;
 						new TRect(0, 0, Resources.IMAGE_BLACKHOLE.mWidth, Resources.IMAGE_BLACKHOLE.mHeight);
-						int num = (int)((float)g.mTransY / 0.4f * 1.6f);
-						blackHoleView = Matrix.CreateLookAt(new Vector3(0f, (float)(-(float)num), -1000f), Vector3.Zero, Vector3.UnitY);
-						blackHoleVerts[0].Position.Y = (float)(-(float)Resources.IMAGE_BLACKHOLE.mHeight) / 4f - (float)num;
-						blackHoleVerts[1].Position.Y = (float)(-(float)Resources.IMAGE_BLACKHOLE.mHeight) / 4f - (float)num;
-						blackHoleVerts[2].Position.Y = (float)Resources.IMAGE_BLACKHOLE.mHeight / 4f - (float)num;
-						blackHoleVerts[3].Position.Y = (float)Resources.IMAGE_BLACKHOLE.mHeight / 4f - (float)num;
-						Vector3 vector = new Vector3(0f, (float)num, 0f);
+						int num = (int)(g.mTransY / 0.4f * 1.6f);
+						blackHoleView = Matrix.CreateLookAt(new Vector3(0f, (float)(-num), -1000f), Vector3.Zero, Vector3.UnitY);
+						blackHoleVerts[0].Position.Y = (float)(-Resources.IMAGE_BLACKHOLE.mHeight) / 4f - num;
+						blackHoleVerts[1].Position.Y = (float)(-Resources.IMAGE_BLACKHOLE.mHeight) / 4f - num;
+						blackHoleVerts[2].Position.Y = Resources.IMAGE_BLACKHOLE.mHeight / 4f - num;
+						blackHoleVerts[3].Position.Y = Resources.IMAGE_BLACKHOLE.mHeight / 4f - num;
+						Vector3 vector = new Vector3(0f, num, 0f);
 						Vector3 position = new Vector3(-60f, 80f, 0f);
 						world = Matrix.CreateTranslation(vector) * Matrix.CreateScale(4f) * Matrix.CreateRotationZ(zombiePileObject.mCounter) * Matrix.CreateRotationX(-0.85f) * Matrix.CreateTranslation(-vector) * Matrix.CreateTranslation(position);
 						g.DrawImageWithBasicEffect(Resources.IMAGE_BLACKHOLE, blackHoleVerts, blackHoleIndices, world, blackHoleView, blackHoleProjection);
 						break;
 					}
 					case ZombiePileObjectType.OBJECT_ARROW:
-						g.DrawImageRotatedScaled(AtlasResources.IMAGE_DOWNARROW, 160f, (float)(zombiePileObject.mY + (int)zombiePileObject.mOffsetY + transY + 50), 3.141592653589793, (float)(AtlasResources.IMAGE_DOWNARROW.mWidth / 2), (float)(AtlasResources.IMAGE_DOWNARROW.mHeight / 2), new TRect?(new TRect(0, 0, AtlasResources.IMAGE_DOWNARROW.mWidth, AtlasResources.IMAGE_DOWNARROW.mHeight)), 10, 10);
+						g.DrawImageRotatedScaled(AtlasResources.IMAGE_DOWNARROW, 160f, zombiePileObject.mY + (int)zombiePileObject.mOffsetY + transY + 50, 3.141592653589793, AtlasResources.IMAGE_DOWNARROW.mWidth / 2, AtlasResources.IMAGE_DOWNARROW.mHeight / 2, new TRect?(new TRect(0, 0, AtlasResources.IMAGE_DOWNARROW.mWidth, AtlasResources.IMAGE_DOWNARROW.mHeight)), 10, 10);
 						break;
 					case ZombiePileObjectType.OBJECT_GEM0:
 					case ZombiePileObjectType.OBJECT_GEM1:
@@ -369,7 +369,7 @@ namespace Lawn
 					{
 						float num2 = Math.Abs(zombiePileObject.gemSpeedX / 5f);
 						num2 = 1f / num2;
-						g.DrawImageRotatedScaled(zombiePileObject.gemImage, (float)((int)zombiePileObject.mOffsetX + g.mTransX), (float)(zombiePileObject.mY + (int)zombiePileObject.mOffsetY + g.mTransY), (double)zombiePileObject.mCounter, (float)((int)((float)zombiePileObject.gemImage.mWidth / num2)), (float)((int)((float)zombiePileObject.gemImage.mHeight / num2)), new TRect?(new TRect(0, 0, zombiePileObject.gemImage.mWidth, zombiePileObject.gemImage.mHeight)), (int)(num2 * (float)zombiePileObject.gemImage.mWidth), (int)(num2 * (float)zombiePileObject.gemImage.mHeight));
+						g.DrawImageRotatedScaled(zombiePileObject.gemImage, (int)zombiePileObject.mOffsetX + g.mTransX, zombiePileObject.mY + (int)zombiePileObject.mOffsetY + g.mTransY, zombiePileObject.mCounter, (int)(zombiePileObject.gemImage.mWidth / num2), (int)(zombiePileObject.gemImage.mHeight / num2), new TRect?(new TRect(0, 0, zombiePileObject.gemImage.mWidth, zombiePileObject.gemImage.mHeight)), (int)(num2 * zombiePileObject.gemImage.mWidth), (int)(num2 * zombiePileObject.gemImage.mHeight));
 						break;
 					}
 					}
@@ -389,28 +389,28 @@ namespace Lawn
 					{
 					case ZombiePileObjectType.OBJECT_BALLOON:
 						zombiePileObject.mCounter += 0.1f;
-						if ((double)zombiePileObject.mCounter > 6.283185307179586)
+						if (zombiePileObject.mCounter > 6.283185307179586)
 						{
 							zombiePileObject.mCounter -= 6.2831855f;
 						}
-						zombiePileObject.mOffsetY = (float)((int)(Math.Sin((double)zombiePileObject.mCounter) * 5.0));
+						zombiePileObject.mOffsetY = (int)(Math.Sin(zombiePileObject.mCounter) * 5.0);
 						break;
 					case ZombiePileObjectType.OBJECT_YELLOW_CLOUD:
 						zombiePileObject.mCounter -= 1f;
-						zombiePileObject.mOffsetX = (float)((int)zombiePileObject.mCounter);
-						if (zombiePileObject.mOffsetX < (float)(-(float)AtlasResources.IMAGE_PILE_YELLOW_CLOUD.mWidth))
+						zombiePileObject.mOffsetX = (int)zombiePileObject.mCounter;
+						if (zombiePileObject.mOffsetX < (float)(-AtlasResources.IMAGE_PILE_YELLOW_CLOUD.mWidth))
 						{
-							zombiePileObject.mCounter = (float)Constants.BOARD_WIDTH;
-							zombiePileObject.mOffsetX = (float)((int)zombiePileObject.mCounter);
+							zombiePileObject.mCounter = Constants.BOARD_WIDTH;
+							zombiePileObject.mOffsetX = (int)zombiePileObject.mCounter;
 						}
 						break;
 					case ZombiePileObjectType.OBJECT_AIRPLANE:
 						zombiePileObject.mOffsetX += 6f;
 						zombiePileObject.mOffsetY += zombiePileObject.mCounter;
 						zombiePileObject.mCounter -= 0.01f * zombiePileObject.mCounter;
-						if (zombiePileObject.mOffsetX > (float)Constants.BOARD_WIDTH)
+						if (zombiePileObject.mOffsetX > Constants.BOARD_WIDTH)
 						{
-							zombiePileObject.mOffsetX = (float)(-2 * AtlasResources.IMAGE_PILE_AIRPLANE.mWidth);
+							zombiePileObject.mOffsetX = -2 * AtlasResources.IMAGE_PILE_AIRPLANE.mWidth;
 							zombiePileObject.mOffsetY = -100f;
 							zombiePileObject.mCounter = 3f;
 						}
@@ -418,20 +418,20 @@ namespace Lawn
 					case ZombiePileObjectType.OBJECT_SATELLITE:
 						zombiePileObject.mOffsetX -= 9f;
 						zombiePileObject.mOffsetY += 1f;
-						if (zombiePileObject.mOffsetX < (float)(-(float)AtlasResources.IMAGE_PILE_SATELLITE.mWidth))
+						if (zombiePileObject.mOffsetX < (float)(-AtlasResources.IMAGE_PILE_SATELLITE.mWidth))
 						{
-							zombiePileObject.mOffsetX = (float)(Constants.BOARD_WIDTH + AtlasResources.IMAGE_PILE_SATELLITE.mWidth);
+							zombiePileObject.mOffsetX = Constants.BOARD_WIDTH + AtlasResources.IMAGE_PILE_SATELLITE.mWidth;
 							zombiePileObject.mOffsetY = -50f;
 						}
 						break;
 					case ZombiePileObjectType.OBJECT_ASTRONAUT:
 						zombiePileObject.mReanim.Update();
 						zombiePileObject.mCounter += 0.025f;
-						if ((double)zombiePileObject.mCounter > 6.283185307179586)
+						if (zombiePileObject.mCounter > 6.283185307179586)
 						{
 							zombiePileObject.mCounter -= 6.2831855f;
 						}
-						zombiePileObject.mOffsetY = (float)(-(float)((int)(Math.Sin((double)zombiePileObject.mCounter) * 80.0)));
+						zombiePileObject.mOffsetY = -(int)(Math.Sin(zombiePileObject.mCounter) * 80.0);
 						zombiePileObject.mOffsetX -= 6f;
 						if (zombiePileObject.mReanim.mLastFrameTime > 0.95f)
 						{
@@ -441,18 +441,18 @@ namespace Lawn
 						break;
 					case ZombiePileObjectType.OBJECT_BLACKHOLE:
 						zombiePileObject.mCounter += 0.05f;
-						if ((double)zombiePileObject.mCounter > 6.283185307179586)
+						if (zombiePileObject.mCounter > 6.283185307179586)
 						{
 							zombiePileObject.mCounter -= 6.2831855f;
 						}
 						break;
 					case ZombiePileObjectType.OBJECT_ARROW:
 						zombiePileObject.mCounter += 0.1f;
-						if ((double)zombiePileObject.mCounter > 6.283185307179586)
+						if (zombiePileObject.mCounter > 6.283185307179586)
 						{
 							zombiePileObject.mCounter -= 6.2831855f;
 						}
-						zombiePileObject.mOffsetY = (float)((int)(Math.Sin((double)zombiePileObject.mCounter) * 10.0));
+						zombiePileObject.mOffsetY = (int)(Math.Sin(zombiePileObject.mCounter) * 10.0);
 						break;
 					case ZombiePileObjectType.OBJECT_GEM0:
 					case ZombiePileObjectType.OBJECT_GEM1:
@@ -466,16 +466,16 @@ namespace Lawn
 						zombiePileObject.mOffsetY += zombiePileObject.gemSpeedY;
 						if (zombiePileObject.gemSpeedX > 0f)
 						{
-							if (zombiePileObject.mOffsetX > (float)(Constants.BOARD_WIDTH + 200))
+							if (zombiePileObject.mOffsetX > Constants.BOARD_WIDTH + 200)
 							{
-								zombiePileObject.mOffsetX = (float)(-(float)zombiePileObject.gemImage.mWidth - 100);
+								zombiePileObject.mOffsetX = -(float)zombiePileObject.gemImage.mWidth - 100;
 								zombiePileObject.mOffsetY = 50f;
 								zombiePileObject.mCounter = 0f;
 							}
 						}
-						else if (zombiePileObject.mOffsetX < (float)(-(float)zombiePileObject.gemImage.mWidth))
+						else if (zombiePileObject.mOffsetX < (float)(-zombiePileObject.gemImage.mWidth))
 						{
-							zombiePileObject.mOffsetX = (float)(Constants.BOARD_WIDTH + 200);
+							zombiePileObject.mOffsetX = Constants.BOARD_WIDTH + 200;
 							zombiePileObject.mOffsetY = 50f;
 							zombiePileObject.mCounter = 0f;
 						}
@@ -629,10 +629,10 @@ namespace Lawn
 
 		private VertexPositionTexture[] blackHoleVerts = new VertexPositionTexture[]
 		{
-			new VertexPositionTexture(new Vector3((float)(-(float)Resources.IMAGE_BLACKHOLE.mWidth) / 4f, (float)(-(float)Resources.IMAGE_BLACKHOLE.mHeight) / 4f, 0f), new Vector2(0f, 1f)),
-			new VertexPositionTexture(new Vector3((float)Resources.IMAGE_BLACKHOLE.mWidth / 4f, (float)(-(float)Resources.IMAGE_BLACKHOLE.mHeight) / 4f, 0f), new Vector2(1f, 1f)),
-			new VertexPositionTexture(new Vector3((float)(-(float)Resources.IMAGE_BLACKHOLE.mWidth) / 4f, (float)Resources.IMAGE_BLACKHOLE.mHeight / 4f, 0f), new Vector2(0f, 0f)),
-			new VertexPositionTexture(new Vector3((float)Resources.IMAGE_BLACKHOLE.mWidth / 4f, (float)Resources.IMAGE_BLACKHOLE.mHeight / 4f, 0f), new Vector2(1f, 0f))
+			new VertexPositionTexture(new Vector3((float)(-Resources.IMAGE_BLACKHOLE.mWidth) / 4f, (float)(-Resources.IMAGE_BLACKHOLE.mHeight) / 4f, 0f), new Vector2(0f, 1f)),
+			new VertexPositionTexture(new Vector3(Resources.IMAGE_BLACKHOLE.mWidth / 4f, (float)(-Resources.IMAGE_BLACKHOLE.mHeight) / 4f, 0f), new Vector2(1f, 1f)),
+			new VertexPositionTexture(new Vector3((float)(-Resources.IMAGE_BLACKHOLE.mWidth) / 4f, Resources.IMAGE_BLACKHOLE.mHeight / 4f, 0f), new Vector2(0f, 0f)),
+			new VertexPositionTexture(new Vector3(Resources.IMAGE_BLACKHOLE.mWidth / 4f, Resources.IMAGE_BLACKHOLE.mHeight / 4f, 0f), new Vector2(1f, 0f))
 		};
 
 		private short[] blackHoleIndices = new short[]

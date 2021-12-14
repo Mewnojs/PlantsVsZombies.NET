@@ -96,7 +96,7 @@ namespace Sexy.TodLib
 			if (mDefinition.mTrackCount != 0)
 			{
 				mFrameCount = mDefinition.mTracks[0].mTransformCount;
-				for (int i = 0; i < (int)mDefinition.mTrackCount; i++)
+				for (int i = 0; i < mDefinition.mTrackCount; i++)
 				{
 					ReanimatorTrackInstance newReanimatorTrackInstance = ReanimatorTrackInstance.GetNewReanimatorTrackInstance();
 					mTrackInstances[i] = newReanimatorTrackInstance;
@@ -121,7 +121,7 @@ namespace Sexy.TodLib
 			}
 			mActive = false;
 			mDead = true;
-			for (int i = 0; i < (int)mDefinition.mTrackCount; i++)
+			for (int i = 0; i < mDefinition.mTrackCount; i++)
 			{
 				ReanimatorTrackInstance reanimatorTrackInstance = mTrackInstances[i];
 				GlobalMembersAttachment.AttachmentDie(ref reanimatorTrackInstance.mAttachmentID);
@@ -140,7 +140,7 @@ namespace Sexy.TodLib
 				return;
 			}
 			mLastFrameTime = mAnimTime;
-			mAnimTime += ReanimatorXnaHelpers.SECONDS_PER_UPDATE * mAnimRate / (float)mFrameCount;
+			mAnimTime += ReanimatorXnaHelpers.SECONDS_PER_UPDATE * mAnimRate / mFrameCount;
 			if (mAnimRate > 0f)
 			{
 				if (mLoopType != ReanimLoopType.REANIM_LOOP)
@@ -212,7 +212,7 @@ namespace Sexy.TodLib
 				}
 			}
 			IL_1C4:
-			int trackCount = (int)mDefinition.mTrackCount;
+			int trackCount = mDefinition.mTrackCount;
 			for (int i = 0; i < trackCount; i++)
 			{
 				ReanimatorTrackInstance reanimatorTrackInstance = mTrackInstances[i];
@@ -254,7 +254,7 @@ namespace Sexy.TodLib
 			{
 				return;
 			}
-			for (int i = 0; i < (int)mDefinition.mTrackCount; i++)
+			for (int i = 0; i < mDefinition.mTrackCount; i++)
 			{
 				ReanimatorTrackInstance reanimatorTrackInstance = mTrackInstances[i];
 				if (reanimatorTrackInstance.mRenderGroup == theRenderGroup)
@@ -298,19 +298,19 @@ namespace Sexy.TodLib
 			SexyColor trackColor = reanimatorTrackInstance.mTrackColor;
 			if (!reanimatorTrackInstance.mIgnoreColorOverride)
 			{
-				trackColor.Color.R = (byte)((float)(mColorOverride.mRed * trackColor.mRed) / 255f);
-				trackColor.Color.G = (byte)((float)(mColorOverride.mGreen * trackColor.mGreen) / 255f);
-				trackColor.Color.B = (byte)((float)(mColorOverride.mBlue * trackColor.mBlue) / 255f);
-				trackColor.Color.A = (byte)((float)(mColorOverride.mAlpha * trackColor.mAlpha) / 255f);
+				trackColor.Color.R = (byte)(mColorOverride.mRed * trackColor.mRed / 255f);
+				trackColor.Color.G = (byte)(mColorOverride.mGreen * trackColor.mGreen / 255f);
+				trackColor.Color.B = (byte)(mColorOverride.mBlue * trackColor.mBlue / 255f);
+				trackColor.Color.A = (byte)(mColorOverride.mAlpha * trackColor.mAlpha / 255f);
 			}
 			if (g.mColorizeImages)
 			{
-				trackColor.Color.R = (byte)((float)((int)g.mColor.R * trackColor.mRed) / 255f);
-				trackColor.Color.G = (byte)((float)((int)g.mColor.G * trackColor.mGreen) / 255f);
-				trackColor.Color.B = (byte)((float)((int)g.mColor.B * trackColor.mBlue) / 255f);
-				trackColor.Color.A = (byte)((float)((int)g.mColor.A * trackColor.mAlpha) / 255f);
+				trackColor.Color.R = (byte)(g.mColor.R * trackColor.mRed / 255f);
+				trackColor.Color.G = (byte)(g.mColor.G * trackColor.mGreen / 255f);
+				trackColor.Color.B = (byte)(g.mColor.B * trackColor.mBlue / 255f);
+				trackColor.Color.A = (byte)(g.mColor.A * trackColor.mAlpha / 255f);
 			}
-			int num = TodCommon.ClampInt((int)(reanimatorTransform.mAlpha * (float)trackColor.mAlpha + 0.5f), 0, 255);
+			int num = TodCommon.ClampInt((int)(reanimatorTransform.mAlpha * trackColor.mAlpha + 0.5f), 0, 255);
 			if (num <= 0)
 			{
 				reanimatorTransform.PrepareForReuse();
@@ -345,16 +345,16 @@ namespace Sexy.TodLib
 			float num3 = 0f;
 			if (image != null)
 			{
-				float num4 = (float)image.GetCelWidth();
-				float num5 = (float)image.GetCelHeight();
+				float num4 = image.GetCelWidth();
+				float num5 = image.GetCelHeight();
 				num2 = num4 * 0.5f;
 				num3 = num5 * 0.5f;
 			}
 			else if (reanimatorTransform.mFont != null && !string.IsNullOrEmpty(reanimatorTransform.mText))
 			{
-				float num6 = (float)reanimatorTransform.mFont.StringWidth(reanimatorTransform.mText);
+				float num6 = reanimatorTransform.mFont.StringWidth(reanimatorTransform.mText);
 				num2 = -num6 * 0.5f;
-				num3 = (float)reanimatorTransform.mFont.mAscent;
+				num3 = reanimatorTransform.mFont.mAscent;
 			}
 			else
 			{
@@ -392,8 +392,8 @@ namespace Sexy.TodLib
 				M32 = 0f,
 				M33 = 1f,
 				M34 = 0f,
-				M41 = num11 * mOverlayMatrix.mMatrix.M11 + num12 * mOverlayMatrix.mMatrix.M21 + mOverlayMatrix.mMatrix.M41 + (float)g.mTransX + reanimatorTrackInstance.mShakeX - 0.5f,
-				M42 = num11 * mOverlayMatrix.mMatrix.M12 + num12 * mOverlayMatrix.mMatrix.M22 + mOverlayMatrix.mMatrix.M42 + (float)g.mTransY + reanimatorTrackInstance.mShakeY - 0.5f,
+				M41 = num11 * mOverlayMatrix.mMatrix.M11 + num12 * mOverlayMatrix.mMatrix.M21 + mOverlayMatrix.mMatrix.M41 + g.mTransX + reanimatorTrackInstance.mShakeX - 0.5f,
+				M42 = num11 * mOverlayMatrix.mMatrix.M12 + num12 * mOverlayMatrix.mMatrix.M22 + mOverlayMatrix.mMatrix.M42 + g.mTransY + reanimatorTrackInstance.mShakeY - 0.5f,
 				M43 = 0f,
 				M44 = 1f
 			};
@@ -463,7 +463,7 @@ namespace Sexy.TodLib
 			int num = (int)(aTransformCurrent.mFrame + 0.5f);
 			if (num >= 0 && reanimatorTrackInstance.mBlendCounter > 0)
 			{
-				float theBlendFactor = (float)reanimatorTrackInstance.mBlendCounter / (float)reanimatorTrackInstance.mBlendTime;
+				float theBlendFactor = reanimatorTrackInstance.mBlendCounter / (float)reanimatorTrackInstance.mBlendTime;
 				ReanimatorTransform reanimatorTransform;
 				ReanimatorXnaHelpers.BlendTransform(out reanimatorTransform, ref aTransformCurrent, ref reanimatorTrackInstance.mBlendTransform, theBlendFactor);
 				if (aTransformCurrent != null)
@@ -477,8 +477,8 @@ namespace Sexy.TodLib
 		public void GetTransformAtTime(int theTrackIndex, out ReanimatorTransform aTransform, ReanimatorFrameTime theFrameTime, bool nullIfInvalidFrame)
 		{
 			ReanimatorTrack reanimatorTrack = mDefinition.mTracks[theTrackIndex];
-			ReanimatorTransform reanimatorTransform = reanimatorTrack.mTransforms[(int)theFrameTime.mAnimFrameBeforeInt];
-			ReanimatorTransform reanimatorTransform2 = reanimatorTrack.mTransforms[(int)theFrameTime.mAnimFrameAfterInt];
+			ReanimatorTransform reanimatorTransform = reanimatorTrack.mTransforms[theFrameTime.mAnimFrameBeforeInt];
+			ReanimatorTransform reanimatorTransform2 = reanimatorTrack.mTransforms[theFrameTime.mAnimFrameAfterInt];
 			if (nullIfInvalidFrame && (reanimatorTransform.mFrame == -1f || (reanimatorTransform.mFrame != -1f && reanimatorTransform2.mFrame == -1f && theFrameTime.mFraction > 0f && mTrackInstances[theTrackIndex].mTruncateDisappearingFrames)))
 			{
 				aTransform = null;
@@ -537,14 +537,14 @@ namespace Sexy.TodLib
 			int num;
 			if (mLoopType == ReanimLoopType.REANIM_PLAY_ONCE_FULL_LAST_FRAME || mLoopType == ReanimLoopType.REANIM_LOOP_FULL_LAST_FRAME || mLoopType == ReanimLoopType.REANIM_PLAY_ONCE_FULL_LAST_FRAME_AND_HOLD)
 			{
-				num = (int)mFrameCount;
+				num = mFrameCount;
 			}
 			else
 			{
-				num = (int)(mFrameCount - 1);
+				num = mFrameCount - 1;
 			}
-			float num2 = (float)mFrameStart + (float)num * mAnimTime;
-			float num3 = (float)((int)num2);
+			float num2 = mFrameStart + num * mAnimTime;
+			float num3 = (int)num2;
 			theFrameTime.mFraction = num2 - num3;
 			theFrameTime.mAnimFrameBeforeInt = (short)(num3 + 0.5f);
 			if (theFrameTime.mAnimFrameBeforeInt >= mFrameStart + mFrameCount - 1)
@@ -561,7 +561,7 @@ namespace Sexy.TodLib
 
 		public int FindTrackIndex(string theTrackName)
 		{
-			for (int i = 0; i < (int)mDefinition.mTrackCount; i++)
+			for (int i = 0; i < mDefinition.mTrackCount; i++)
 			{
 				string trackName = mDefinition.mTracks[i].mName;
 				string text = Reanimation.ToLower(theTrackName);
@@ -682,7 +682,7 @@ namespace Sexy.TodLib
 		public bool TrackExists(string theTrackName)
 		{
 			string text = Reanimation.ToLower(theTrackName);
-			for (int i = 0; i < (int)mDefinition.mTrackCount; i++)
+			for (int i = 0; i < mDefinition.mTrackCount; i++)
 			{
 				string text2 = Reanimation.ToLower(mDefinition.mTracks[i].mName);
 				if (text == text2)
@@ -696,7 +696,7 @@ namespace Sexy.TodLib
 		public void StartBlend(byte theBlendTime)
 		{
 			mGetFrameTime = true;
-			for (int i = 0; i < (int)mDefinition.mTrackCount; i++)
+			for (int i = 0; i < mDefinition.mTrackCount; i++)
 			{
 				ReanimatorTransform reanimatorTransform;
 				GetCurrentTransform(i, out reanimatorTransform, true);
@@ -715,8 +715,8 @@ namespace Sexy.TodLib
 							reanimatorTrackInstance.mBlendTransform.PrepareForReuse();
 						}
 						reanimatorTrackInstance.mBlendTransform = reanimatorTransform;
-						reanimatorTrackInstance.mBlendCounter = (byte)((float)theBlendTime / 3f);
-						reanimatorTrackInstance.mBlendTime = (byte)((float)theBlendTime / 3f);
+						reanimatorTrackInstance.mBlendCounter = (byte)(theBlendTime / 3f);
+						reanimatorTrackInstance.mBlendTime = (byte)(theBlendTime / 3f);
 						reanimatorTrackInstance.mBlendTransform.mFont = null;
 						reanimatorTrackInstance.mBlendTransform.mText = string.Empty;
 						reanimatorTrackInstance.mBlendTransform.mImage = null;
@@ -758,8 +758,8 @@ namespace Sexy.TodLib
 			ReanimatorFrameTime reanimatorFrameTime;
 			GetFrameTime(out reanimatorFrameTime);
 			ReanimatorTrack reanimatorTrack = mDefinition.mTracks[aTrackIndex];
-			ReanimatorTransform reanimatorTransform = reanimatorTrack.mTransforms[(int)reanimatorFrameTime.mAnimFrameBeforeInt];
-			ReanimatorTransform reanimatorTransform2 = reanimatorTrack.mTransforms[(int)reanimatorFrameTime.mAnimFrameAfterInt];
+			ReanimatorTransform reanimatorTransform = reanimatorTrack.mTransforms[reanimatorFrameTime.mAnimFrameBeforeInt];
+			ReanimatorTransform reanimatorTransform2 = reanimatorTrack.mTransforms[reanimatorFrameTime.mAnimFrameAfterInt];
 			return (reanimatorTransform2.mTransX - reanimatorTransform.mTransX) * ReanimatorXnaHelpers.SECONDS_PER_UPDATE * mAnimRate;
 		}
 
@@ -780,7 +780,7 @@ namespace Sexy.TodLib
 		public void ShowOnlyTrack(string theTrackName)
 		{
 			string text = theTrackName.ToLower();
-			for (int i = 0; i < (int)mDefinition.mTrackCount; i++)
+			for (int i = 0; i < mDefinition.mTrackCount; i++)
 			{
 				ReanimatorTrack reanimatorTrack = mDefinition.mTracks[i];
 				ReanimatorTrackInstance reanimatorTrackInstance = mTrackInstances[i];
@@ -818,11 +818,11 @@ namespace Sexy.TodLib
 			{
 				int celWidth = image.GetCelWidth();
 				int celHeight = image.GetCelHeight();
-				Matrix.CreateTranslation((float)celWidth * 0.5f, (float)celHeight * 0.5f, 0f, out Reanimation.tempMatrix);
+				Matrix.CreateTranslation(celWidth * 0.5f, celHeight * 0.5f, 0f, out Reanimation.tempMatrix);
 			}
 			else if (reanimatorTransform.mFont != null && !string.IsNullOrEmpty(reanimatorTransform.mText))
 			{
-				Matrix.CreateTranslation(0f, (float)reanimatorTransform.mFont.mAscent, 0f, out Reanimation.tempMatrix);
+				Matrix.CreateTranslation(0f, reanimatorTransform.mFont.mAscent, 0f, out Reanimation.tempMatrix);
 			}
 			SexyTransform2D sexyTransform2D = default(SexyTransform2D);
 			Reanimation.MatrixFromTransform(reanimatorTransform, out sexyTransform2D.mMatrix);
@@ -855,11 +855,11 @@ namespace Sexy.TodLib
 			{
 				int celWidth = image.GetCelWidth();
 				int celHeight = image.GetCelHeight();
-				Matrix.CreateTranslation((float)celWidth * 0.5f, (float)celHeight * 0.5f, 0f, out Reanimation.tempMatrix);
+				Matrix.CreateTranslation(celWidth * 0.5f, celHeight * 0.5f, 0f, out Reanimation.tempMatrix);
 			}
 			else if (reanimatorTransform.mFont != null && !string.IsNullOrEmpty(reanimatorTransform.mText))
 			{
-				Matrix.CreateTranslation(0f, (float)reanimatorTransform.mFont.mAscent, 0f, out Reanimation.tempMatrix);
+				Matrix.CreateTranslation(0f, reanimatorTransform.mFont.mAscent, 0f, out Reanimation.tempMatrix);
 			}
 			SexyTransform2D sexyTransform2D = default(SexyTransform2D);
 			Reanimation.MatrixFromTransform(reanimatorTransform, out sexyTransform2D.mMatrix);
@@ -872,7 +872,7 @@ namespace Sexy.TodLib
 		public void AssignRenderGroupToTrack(string theTrackName, int theRenderGroup)
 		{
 			string text = Reanimation.ToLower(theTrackName);
-			for (int i = 0; i < (int)mDefinition.mTrackCount; i++)
+			for (int i = 0; i < mDefinition.mTrackCount; i++)
 			{
 				ReanimatorTrack reanimatorTrack = mDefinition.mTracks[i];
 				string text2 = Reanimation.ToLower(reanimatorTrack.mName);
@@ -888,7 +888,7 @@ namespace Sexy.TodLib
 		{
 			int length = theTrackName.Length;
 			string s = Reanimation.ToLower(theTrackName);
-			for (int i = 0; i < (int)mDefinition.mTrackCount; i++)
+			for (int i = 0; i < mDefinition.mTrackCount; i++)
 			{
 				ReanimatorTrack reanimatorTrack = mDefinition.mTracks[i];
 				if (reanimatorTrack.mName.Length >= length)
@@ -904,7 +904,7 @@ namespace Sexy.TodLib
 
 		public void PropogateColorToAttachments()
 		{
-			for (int i = 0; i < (int)mDefinition.mTrackCount; i++)
+			for (int i = 0; i < mDefinition.mTrackCount; i++)
 			{
 				ReanimatorTrackInstance reanimatorTrackInstance = mTrackInstances[i];
 				GlobalMembersAttachment.AttachmentPropogateColor(reanimatorTrackInstance.mAttachmentID, mColorOverride, mEnableExtraAdditiveDraw, mExtraAdditiveColor, mEnableExtraOverlayDraw, mExtraOverlayColor);
@@ -1001,7 +1001,7 @@ namespace Sexy.TodLib
 			GetFrameTime(out reanimatorFrameTime);
 			int num = FindTrackIndex(theTrackName);
 			ReanimatorTrack reanimatorTrack = mDefinition.mTracks[num];
-			ReanimatorTransform reanimatorTransform = reanimatorTrack.mTransforms[(int)reanimatorFrameTime.mAnimFrameAfterInt];
+			ReanimatorTransform reanimatorTransform = reanimatorTrack.mTransforms[reanimatorFrameTime.mAnimFrameAfterInt];
 			return reanimatorTransform.mFrame >= 0f;
 		}
 
@@ -1009,7 +1009,7 @@ namespace Sexy.TodLib
 		{
 			if (string.IsNullOrEmpty(theTrackName))
 			{
-				for (int i = 0; i < (int)mDefinition.mTrackCount; i++)
+				for (int i = 0; i < mDefinition.mTrackCount; i++)
 				{
 					ReanimatorTrackInstance reanimatorTrackInstance = mTrackInstances[i];
 					reanimatorTrackInstance.mTruncateDisappearingFrames = theTruncateDisappearingFrames;
@@ -1069,19 +1069,19 @@ namespace Sexy.TodLib
 			short num2;
 			for (num2 = 0; num2 < reanimatorTrack.mTransformCount; num2 += 1)
 			{
-				ReanimatorTransform reanimatorTransform = reanimatorTrack.mTransforms[(int)num2];
+				ReanimatorTransform reanimatorTransform = reanimatorTrack.mTransforms[num2];
 				if (reanimatorTransform.mFrame >= 0f)
 				{
 					theFrameStart = num2;
 					break;
 				}
 			}
-			for (int i = (int)(reanimatorTrack.mTransformCount - 1); i >= (int)num2; i--)
+			for (int i = reanimatorTrack.mTransformCount - 1; i >= num2; i--)
 			{
 				ReanimatorTransform reanimatorTransform2 = reanimatorTrack.mTransforms[i];
 				if (reanimatorTransform2.mFrame >= 0f)
 				{
-					theFrameCount = (short)(i - (int)theFrameStart + 1);
+					theFrameCount = (short)(i - theFrameStart + 1);
 					return;
 				}
 			}
@@ -1146,7 +1146,7 @@ namespace Sexy.TodLib
 				reanimation.mLoopType = attacherInfo.mLoopType;
 			}
 			SexyColor theColor = TodCommon.ColorsMultiply(mColorOverride, reanimatorTrackInstance.mTrackColor);
-			theColor.mAlpha = TodCommon.ClampInt(TodCommon.FloatRoundToInt(reanimatorTransform.mAlpha * (float)theColor.mAlpha), 0, 255);
+			theColor.mAlpha = TodCommon.ClampInt(TodCommon.FloatRoundToInt(reanimatorTransform.mAlpha * theColor.mAlpha), 0, 255);
 			GlobalMembersAttachment.AttachmentPropogateColor(reanimatorTrackInstance.mAttachmentID, theColor, mEnableExtraAdditiveDraw, mExtraAdditiveColor, mEnableExtraOverlayDraw, mExtraOverlayColor);
 		}
 
@@ -1222,13 +1222,13 @@ namespace Sexy.TodLib
 			ReanimatorTrack reanimatorTrack = mDefinition.mTracks[theTrackIndex];
 			ReanimatorFrameTime reanimatorFrameTime;
 			GetFrameTime(out reanimatorFrameTime);
-			int num = (int)reanimatorFrameTime.mAnimFrameBeforeInt;
-			while (num > (int)mFrameStart && !(reanimatorTrack.mTransforms[num - 1].mText != reanimatorTrack.mTransforms[num].mText))
+			int num = reanimatorFrameTime.mAnimFrameBeforeInt;
+			while (num > mFrameStart && !(reanimatorTrack.mTransforms[num - 1].mText != reanimatorTrack.mTransforms[num].mText))
 			{
 				num--;
 			}
-			int num2 = (int)reanimatorFrameTime.mAnimFrameBeforeInt;
-			while (num2 < (int)(mFrameStart + mFrameCount - 1) && !(reanimatorTrack.mTransforms[num2 + 1].mText != reanimatorTrack.mTransforms[num2].mText))
+			int num2 = reanimatorFrameTime.mAnimFrameBeforeInt;
+			while (num2 < mFrameStart + mFrameCount - 1 && !(reanimatorTrack.mTransforms[num2 + 1].mText != reanimatorTrack.mTransforms[num2].mText))
 			{
 				num2++;
 			}
@@ -1241,7 +1241,7 @@ namespace Sexy.TodLib
 				return;
 			}
 			float num4 = -(reanimatorTransform2.mTransX - reanimatorTransform.mTransX);
-			float num5 = (float)num3 / mAnimRate;
+			float num5 = num3 / mAnimRate;
 			if (TodCommon.FloatApproxEqual(num5, 0f))
 			{
 				theAttachReanim.mAnimRate = 0f;
@@ -1249,8 +1249,8 @@ namespace Sexy.TodLib
 			}
 			int num6 = theAttachReanim.FindTrackIndex("_ground");
 			ReanimatorTrack reanimatorTrack2 = theAttachReanim.mDefinition.mTracks[num6];
-			ReanimatorTransform reanimatorTransform3 = reanimatorTrack2.mTransforms[(int)theAttachReanim.mFrameStart];
-			ReanimatorTransform reanimatorTransform4 = reanimatorTrack2.mTransforms[(int)(theAttachReanim.mFrameStart + theAttachReanim.mFrameCount - 1)];
+			ReanimatorTransform reanimatorTransform3 = reanimatorTrack2.mTransforms[theAttachReanim.mFrameStart];
+			ReanimatorTransform reanimatorTransform4 = reanimatorTrack2.mTransforms[theAttachReanim.mFrameStart + theAttachReanim.mFrameCount - 1];
 			float num7 = reanimatorTransform4.mTransX - reanimatorTransform3.mTransX;
 			if (num7 < ReanimatorXnaHelpers.EPSILON || num4 < ReanimatorXnaHelpers.EPSILON)
 			{
@@ -1268,7 +1268,7 @@ namespace Sexy.TodLib
 			{
 				attachEffect.mOffset.mMatrix.M13 = num10 - num9;
 			}
-			theAttachReanim.mAnimRate = num8 * (float)theAttachReanim.mFrameCount / num5;
+			theAttachReanim.mAnimRate = num8 * theAttachReanim.mFrameCount / num5;
 		}
 
 		public bool IsAnimPlaying(string theTrackName)
@@ -1294,8 +1294,8 @@ namespace Sexy.TodLib
 			{
 				float m = theTransform.M11;
 				float m2 = theTransform.M22;
-				int theX = TodCommon.FloatRoundToInt(theTransform.M41 - m * (float)theSrcRect.mWidth * 0.5f);
-				int theY = TodCommon.FloatRoundToInt(theTransform.M42 - m2 * (float)theSrcRect.mHeight * 0.5f);
+				int theX = TodCommon.FloatRoundToInt(theTransform.M41 - m * theSrcRect.mWidth * 0.5f);
+				int theY = TodCommon.FloatRoundToInt(theTransform.M42 - m2 * theSrcRect.mHeight * 0.5f);
 				Graphics.DrawMode drawMode = g.GetDrawMode();
 				g.SetDrawMode(theDrawMode);
 				TRect clipRect = g.mClipRect;
@@ -1306,8 +1306,8 @@ namespace Sexy.TodLib
 				}
 				else
 				{
-					int theWidth = TodCommon.FloatRoundToInt(m * (float)theSrcRect.mWidth);
-					int theHeight = TodCommon.FloatRoundToInt(m2 * (float)theSrcRect.mHeight);
+					int theWidth = TodCommon.FloatRoundToInt(m * theSrcRect.mWidth);
+					int theHeight = TodCommon.FloatRoundToInt(m2 * theSrcRect.mHeight);
 					TRect theDestRect = new TRect(theX, theY, theWidth, theHeight);
 					g.DrawImage(theImage, theDestRect, theSrcRect);
 				}
@@ -1324,7 +1324,7 @@ namespace Sexy.TodLib
 			{
 				return this;
 			}
-			for (int i = 0; i < (int)mDefinition.mTrackCount; i++)
+			for (int i = 0; i < mDefinition.mTrackCount; i++)
 			{
 				ReanimatorTrackInstance reanimatorTrackInstance = mTrackInstances[i];
 				Reanimation reanimation = GlobalMembersAttachment.FindReanimAttachment(reanimatorTrackInstance.mAttachmentID);

@@ -545,7 +545,7 @@ namespace Lawn
 							renderItem.mZPos = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_PARTICLE, 0, plant.mY);
 							renderItem.mGameObject = plant;
 							renderItem.mPlant = plant;
-							renderItem.id = (long)num;
+							renderItem.id = num;
 							num++;
 						}
 						if ((plant.mSeedType == SeedType.SEED_MAGNETSHROOM || plant.mSeedType == SeedType.SEED_GOLD_MAGNET) && plant.DrawMagnetItemsOnTop())
@@ -555,7 +555,7 @@ namespace Lawn
 							renderItem2.mZPos = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_TOP, 0, -1);
 							renderItem2.mGameObject = plant;
 							renderItem2.mPlant = plant;
-							renderItem2.id = (long)num;
+							renderItem2.id = num;
 							num++;
 						}
 					}
@@ -588,7 +588,7 @@ namespace Lawn
 								renderItem3.mZPos = 200000 + 10000 * zombie.mRow + 3;
 								renderItem3.mGameObject = zombie;
 								renderItem3.mZombie = zombie;
-								renderItem3.id = (long)num;
+								renderItem3.id = num;
 								num++;
 							}
 							if (zombie.mZombieType == ZombieType.ZOMBIE_BUNGEE)
@@ -598,7 +598,7 @@ namespace Lawn
 								renderItem4.mZPos = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_PROJECTILE, zombie.mRow, 1);
 								renderItem4.mGameObject = zombie;
 								renderItem4.mZombie = zombie;
-								renderItem4.id = (long)num;
+								renderItem4.id = num;
 								num++;
 							}
 						}
@@ -616,7 +616,7 @@ namespace Lawn
 						renderItem5.mZPos = 305000 + 10000 * projectile.mRow + 3;
 						renderItem5.mGameObject = projectile;
 						renderItem5.mProjectile = projectile;
-						renderItem5.id = (long)num;
+						renderItem5.id = num;
 						num++;
 					}
 				}
@@ -627,7 +627,7 @@ namespace Lawn
 					renderItem6.mRenderObjectType = RenderObjectType.RENDER_ITEM_MOWER;
 					renderItem6.mZPos = lawnMower.mRenderOrder;
 					renderItem6.mMower = lawnMower;
-					renderItem6.id = (long)num;
+					renderItem6.id = num;
 					num++;
 				}
 				int num3 = -1;
@@ -640,7 +640,7 @@ namespace Lawn
 						renderItem7.mRenderObjectType = RenderObjectType.RENDER_ITEM_PARTICLE;
 						renderItem7.mZPos = todParticleSystem.mRenderOrder;
 						renderItem7.mParticleSytem = todParticleSystem;
-						renderItem7.id = (long)num;
+						renderItem7.id = num;
 						num++;
 					}
 				}
@@ -654,7 +654,7 @@ namespace Lawn
 						renderItem8.mRenderObjectType = RenderObjectType.RENDER_ITEM_REANIMATION;
 						renderItem8.mZPos = reanimation.mRenderOrder;
 						renderItem8.mReanimation = reanimation;
-						renderItem8.id = (long)num;
+						renderItem8.id = num;
 						num++;
 					}
 				}
@@ -666,7 +666,7 @@ namespace Lawn
 					renderItem9.mRenderObjectType = RenderObjectType.RENDER_ITEM_GRID_ITEM;
 					renderItem9.mZPos = gridItem.mRenderOrder;
 					renderItem9.mGridItem = gridItem;
-					renderItem9.id = (long)num;
+					renderItem9.id = num;
 					num++;
 					if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && gridItem.mGridItemType == GridItemType.GRIDITEM_STINKY)
 					{
@@ -686,7 +686,7 @@ namespace Lawn
 					renderItem11.mRenderObjectType = RenderObjectType.RENDER_ITEM_ICE;
 					renderItem11.mBoardGridY = k;
 					renderItem11.mZPos = GetIceZPos(k);
-					renderItem11.id = (long)num;
+					renderItem11.id = num;
 					num++;
 				}
 			}
@@ -730,7 +730,7 @@ namespace Lawn
 			for (int l = 0; l < num; l++)
 			{
 				RenderItem renderItem12 = aRenderList[l];
-				if (renderItem12.mRenderObjectType != (RenderObjectType)0)
+				if (renderItem12.mRenderObjectType != 0)
 				{
 					RenderObjectType aRenderObjectType = renderItem12.mRenderObjectType;
 					if (aRenderObjectType != RenderObjectType.RENDER_ITEM_ICE)
@@ -757,7 +757,7 @@ namespace Lawn
 			for (int m = 0; m < num; m++)
 			{
 				RenderItem renderItem13 = aRenderList[m];
-				if (renderItem13.mRenderObjectType != (RenderObjectType)0)
+				if (renderItem13.mRenderObjectType != 0)
 				{
 					switch (renderItem13.mRenderObjectType)
 					{
@@ -1202,7 +1202,7 @@ namespace Lawn
 			mOutOfMoneyCounter = 0;
 			if (StageHasFog())
 			{
-				mFogOffset = 1065f - (float)LeftFogColumn() * 80f;
+				mFogOffset = 1065f - LeftFogColumn() * 80f;
 				mFogBlownCountDown = 200;
 			}
 			mChallenge.InitLevel();
@@ -2101,7 +2101,7 @@ namespace Lawn
 			}
 			else
 			{
-				if (((float)mLastToolX >= (float)Constants.LAWN_XMIN * Constants.S || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN) && IsPlantInCursor())
+				if ((mLastToolX >= Constants.LAWN_XMIN * Constants.S || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN) && IsPlantInCursor())
 				{
 					if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_GLOVE && mCursorObject.mGlovePlantID != null)
 					{
@@ -2110,18 +2110,18 @@ namespace Lawn
 					MouseUpWithPlant(mLastToolX, mLastToolY, theClickCount);
 					return;
 				}
-				if (((float)mLastToolX < (float)Constants.LAWN_XMIN * Constants.S || (float)mLastToolY >= (float)Constants.LAWN_YMIN * Constants.S) && mCursorObject.mCursorType == CursorType.CURSOR_TYPE_SHOVEL)
+				if ((mLastToolX < Constants.LAWN_XMIN * Constants.S || mLastToolY >= Constants.LAWN_YMIN * Constants.S) && mCursorObject.mCursorType == CursorType.CURSOR_TYPE_SHOVEL)
 				{
 					MouseDownWithTool(mLastToolX, mLastToolY, theClickCount, mCursorObject.mCursorType, false);
 					return;
 				}
-				if ((float)mLastToolX >= (float)Constants.LAWN_XMIN * Constants.S && (float)mLastToolY >= (float)Constants.LAWN_YMIN * Constants.S && mCursorObject.mCursorType == CursorType.CURSOR_TYPE_COBCANNON_TARGET)
+				if (mLastToolX >= Constants.LAWN_XMIN * Constants.S && mLastToolY >= Constants.LAWN_YMIN * Constants.S && mCursorObject.mCursorType == CursorType.CURSOR_TYPE_COBCANNON_TARGET)
 				{
 					MouseDownCobcannonFire(mLastToolX, mLastToolY, theClickCount);
 					mLastToolX = (mLastToolY = -1);
 					return;
 				}
-				if ((mCursorObject.mCursorType == CursorType.CURSOR_TYPE_FERTILIZER || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_BUG_SPRAY || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PHONOGRAPH || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_CHOCOLATE || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_GLOVE || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_MONEY_SIGN || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_WHEEELBARROW || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_TREE_FOOD || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_WATERING_CAN) && (float)mLastToolY >= (float)Constants.ZEN_YMIN * Constants.S)
+				if ((mCursorObject.mCursorType == CursorType.CURSOR_TYPE_FERTILIZER || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_BUG_SPRAY || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PHONOGRAPH || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_CHOCOLATE || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_GLOVE || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_MONEY_SIGN || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_WHEEELBARROW || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_TREE_FOOD || mCursorObject.mCursorType == CursorType.CURSOR_TYPE_WATERING_CAN) && mLastToolY >= Constants.ZEN_YMIN * Constants.S)
 				{
 					MouseDownWithTool(x, y, theClickCount, mCursorObject.mCursorType, false);
 					return;
@@ -3117,7 +3117,7 @@ namespace Lawn
 			if (StageHasPool() && mPoolSparklyParticleID == null)
 			{
 				int aRenderOrder = 220000;
-				TodParticleSystem theParticle = mApp.AddTodParticle((float)(450 + Constants.BOARD_EXTRA_ROOM), 295f, aRenderOrder, ParticleEffect.PARTICLE_POOL_SPARKLY);
+				TodParticleSystem theParticle = mApp.AddTodParticle(450 + Constants.BOARD_EXTRA_ROOM, 295f, aRenderOrder, ParticleEffect.PARTICLE_POOL_SPARKLY);
 				mPoolSparklyParticleID = mApp.ParticleGetID(theParticle);
 			}
 			UpdateGridItems();
@@ -3168,7 +3168,7 @@ namespace Lawn
 				int num2 = tickCount - mIntervalDrawTime;
 				if (num2 > 10000)
 				{
-					float num3 = ((float)num * 1000f + 500f) / (float)num2;
+					float num3 = (num * 1000f + 500f) / num2;
 					if (num3 < mMinFPS)
 					{
 						mMinFPS = num3;
@@ -3224,14 +3224,14 @@ namespace Lawn
 			GameMode aGameMode = mApp.mGameMode;
 			if (mLevel == 1 && mApp.IsFirstTimeAdventureMode())
 			{
-				g.DrawImage(Resources.IMAGE_BACKGROUND1UNSODDED, -((float)Constants.BOARD_OFFSET * Constants.S), 0f);
+				g.DrawImage(Resources.IMAGE_BACKGROUND1UNSODDED, -(Constants.BOARD_OFFSET * Constants.S), 0f);
 				int theWidth = TodCommon.TodAnimateCurve(0, 950, mSodPosition, 0, AtlasResources.IMAGE_SOD1ROW.GetWidth(), TodCurves.CURVE_LINEAR);
 				TRect theSrcRect = new TRect(0, 0, theWidth, AtlasResources.IMAGE_SOD1ROW.GetHeight());
 				g.DrawImage(AtlasResources.IMAGE_SOD1ROW, (int)((float)(-(float)Constants.BOARD_OFFSET + 239) * Constants.S), (int)(265f * Constants.S), theSrcRect);
 			}
 			else if (((mLevel == 2 || mLevel == 3) && mApp.IsFirstTimeAdventureMode()) || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RESODDED)
 			{
-				g.DrawImage(Resources.IMAGE_BACKGROUND1UNSODDED, (float)(-(float)Constants.BOARD_OFFSET) * Constants.S, 0f);
+				g.DrawImage(Resources.IMAGE_BACKGROUND1UNSODDED, (float)(-Constants.BOARD_OFFSET) * Constants.S, 0f);
 				g.DrawImage(AtlasResources.IMAGE_SOD1ROW, (float)(-(float)Constants.BOARD_OFFSET + 239) * Constants.S, 265f * Constants.S);
 				int theWidth2 = TodCommon.TodAnimateCurve(0, 950, mSodPosition, 0, AtlasResources.IMAGE_SOD3ROW.GetWidth(), TodCurves.CURVE_LINEAR);
 				TRect theSrcRect2 = new TRect(0, 0, theWidth2, AtlasResources.IMAGE_SOD3ROW.GetHeight());
@@ -3239,10 +3239,10 @@ namespace Lawn
 			}
 			else if (mLevel == 4 && mApp.IsFirstTimeAdventureMode())
 			{
-				g.DrawImage(Resources.IMAGE_BACKGROUND1UNSODDED, (float)(-(float)Constants.BOARD_OFFSET) * Constants.S, 0f);
+				g.DrawImage(Resources.IMAGE_BACKGROUND1UNSODDED, (float)(-Constants.BOARD_OFFSET) * Constants.S, 0f);
 				g.DrawImage(AtlasResources.IMAGE_SOD3ROW, (float)(-(float)Constants.BOARD_OFFSET + 235) * Constants.S, 149f * Constants.S);
 				int num = TodCommon.TodAnimateCurve(0, 950, mSodPosition, 0, 773, TodCurves.CURVE_LINEAR);
-				TRect theSrcRect3 = new TRect((int)(232f * Constants.S), 0, (int)((float)num * Constants.S), Resources.IMAGE_BACKGROUND1.GetHeight());
+				TRect theSrcRect3 = new TRect((int)(232f * Constants.S), 0, (int)(num * Constants.S), Resources.IMAGE_BACKGROUND1.GetHeight());
 				g.DrawImage(Resources.IMAGE_BACKGROUND1, (int)((float)(-(float)Constants.BOARD_OFFSET + 232) * Constants.S), 0, theSrcRect3);
 			}
 			else if (image != null)
@@ -3253,7 +3253,7 @@ namespace Lawn
 				}
 				else
 				{
-					g.DrawImage(image, (int)((float)(-(float)Constants.BOARD_OFFSET) * Constants.S), 0);
+					g.DrawImage(image, (int)((float)(-Constants.BOARD_OFFSET) * Constants.S), 0);
 				}
 			}
 			if (mApp.mGameScene == GameScenes.SCENE_ZOMBIES_WON)
@@ -3279,7 +3279,7 @@ namespace Lawn
 
 		public void DrawCursorOnBackground(Graphics g)
 		{
-			if (mTimeStopCounter == 0 && (!mApp.IsWhackAZombieLevel() || mCursorObject.mCursorType != CursorType.CURSOR_TYPE_HAMMER) && mIsDown && (float)mLastToolX >= (float)Constants.LAWN_XMIN * Constants.S && mCursorObject.BeginDraw(g))
+			if (mTimeStopCounter == 0 && (!mApp.IsWhackAZombieLevel() || mCursorObject.mCursorType != CursorType.CURSOR_TYPE_HAMMER) && mIsDown && mLastToolX >= Constants.LAWN_XMIN * Constants.S && mCursorObject.BeginDraw(g))
 			{
 				mCursorObject.DrawGroundLayer(g);
 				mCursorObject.EndDraw(g);
@@ -3288,7 +3288,7 @@ namespace Lawn
 
 		public void DrawCursorOverlay(Graphics g)
 		{
-			if (mTimeStopCounter == 0 && mIsDown && ((float)mLastToolX >= (float)Constants.LAWN_XMIN * Constants.S || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN) && mCursorObject.BeginDraw(g))
+			if (mTimeStopCounter == 0 && mIsDown && (mLastToolX >= Constants.LAWN_XMIN * Constants.S || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN) && mCursorObject.BeginDraw(g))
 			{
 				mCursorObject.DrawTopLayer(g);
 				mCursorObject.EndDraw(g);
@@ -3702,8 +3702,8 @@ namespace Lawn
 		{
 			if (!posScaled)
 			{
-				x = (int)((float)x * Constants.IS);
-				y = (int)((float)y * Constants.IS);
+				x = (int)(x * Constants.IS);
+				y = (int)(y * Constants.IS);
 			}
 			theHitResult = default(HitResult);
 			if (mBoardFadeOutCounter >= 0)
@@ -3729,8 +3729,8 @@ namespace Lawn
 				return true;
 			}
 			TRect shovelButtonRect = GetShovelButtonRect();
-			x = (int)((float)x * Constants.S);
-			y = (int)((float)y * Constants.S);
+			x = (int)(x * Constants.S);
+			y = (int)(y * Constants.S);
 			if (mSeedBank.MouseHitTest(x, y, out theHitResult))
 			{
 				if (mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_BANK)
@@ -3796,14 +3796,14 @@ namespace Lawn
 					}
 				}
 			}
-			x = (int)((float)x * Constants.IS);
-			y = (int)((float)y * Constants.IS);
+			x = (int)(x * Constants.IS);
+			y = (int)(y * Constants.IS);
 			if (mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM && mCursorObject.mCursorType == CursorType.CURSOR_TYPE_TREE_FOOD && mChallenge.TreeOfWisdomHitTest(x, y, theHitResult))
 			{
 				return true;
 			}
-			x = (int)((float)x * Constants.S);
-			y = (int)((float)y * Constants.S);
+			x = (int)(x * Constants.S);
+			y = (int)(y * Constants.S);
 			if ((mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM) && CanInteractWithBoardButtons())
 			{
 				for (int i = 6; i <= 15; i++)
@@ -3885,8 +3885,8 @@ namespace Lawn
 				return;
 			}
 			SeedType seedTypeInCursor = GetSeedTypeInCursor();
-			int num = PlantingPixelToGridX((int)((float)x * Constants.IS), (int)((float)y * Constants.IS), seedTypeInCursor);
-			int num2 = PlantingPixelToGridY((int)((float)x * Constants.IS), (int)((float)y * Constants.IS), seedTypeInCursor);
+			int num = PlantingPixelToGridX((int)(x * Constants.IS), (int)(y * Constants.IS), seedTypeInCursor);
+			int num2 = PlantingPixelToGridY((int)(x * Constants.IS), (int)(y * Constants.IS), seedTypeInCursor);
 			if (num < 0 || num >= Constants.GRIDSIZEX || num2 < 0 || num2 >= Constants.MAX_GRIDSIZEY)
 			{
 				RefreshSeedPacketFromCursor();
@@ -4219,8 +4219,8 @@ namespace Lawn
 			{
 				if (posScaled)
 				{
-					x = (int)(Constants.S * (float)x);
-					y = (int)(Constants.S * (float)y);
+					x = (int)(Constants.S * x);
+					y = (int)(Constants.S * y);
 					posScaled = false;
 				}
 				if (y < Constants.ZEN_YMIN)
@@ -4231,8 +4231,8 @@ namespace Lawn
 			}
 			if (!posScaled)
 			{
-				x = (int)((float)x * Constants.IS);
-				y = (int)((float)y * Constants.IS);
+				x = (int)(x * Constants.IS);
+				y = (int)(y * Constants.IS);
 			}
 			if (theClickCount < 0)
 			{
@@ -4664,7 +4664,7 @@ namespace Lawn
 				Zombie zombie = mZombies[i];
 				if (!zombie.mDead && zombie != aZombie)
 				{
-					if ((float)zombie.GetZombieRect().mX < -50f || zombie.mZombiePhase == ZombiePhase.PHASE_RISING_FROM_GRAVE || zombie.mZombiePhase == ZombiePhase.PHASE_DANCER_RISING)
+					if (zombie.GetZombieRect().mX < -50f || zombie.mZombiePhase == ZombiePhase.PHASE_RISING_FROM_GRAVE || zombie.mZombiePhase == ZombiePhase.PHASE_DANCER_RISING)
 					{
 						zombie.DieNoLoot(false);
 					}
@@ -4693,12 +4693,12 @@ namespace Lawn
 				int aSurvivalStage = mChallenge.mSurvivalStage;
 				if (mApp.IsEndlessScaryPotter(mApp.mGameMode))
 				{
-					mApp.mPlayerInfo.mVasebreakerScore = Math.Max(mApp.mPlayerInfo.mVasebreakerScore, (long)aSurvivalStage);
+					mApp.mPlayerInfo.mVasebreakerScore = Math.Max(mApp.mPlayerInfo.mVasebreakerScore, aSurvivalStage);
 					LeaderBoardComm.RecordResult(LeaderboardGameMode.Vasebreaker, (int)mApp.mPlayerInfo.mVasebreakerScore);
 				}
 				else if (mApp.IsEndlessIZombie(mApp.mGameMode))
 				{
-					mApp.mPlayerInfo.mIZombieScore = Math.Max(mApp.mPlayerInfo.mIZombieScore, (long)aSurvivalStage);
+					mApp.mPlayerInfo.mIZombieScore = Math.Max(mApp.mPlayerInfo.mIZombieScore, aSurvivalStage);
 					LeaderBoardComm.RecordResult(LeaderboardGameMode.IZombie, (int)mApp.mPlayerInfo.mIZombieScore);
 				}
 				theMessage = TodCommon.TodReplaceNumberString("[ENDLESS_PUZZLE_DEATH_MESSAGE]", "{STREAK}", aSurvivalStage);
@@ -4953,7 +4953,7 @@ namespace Lawn
 			}
 			else
 			{
-				mZombieHealthToNextWave = (int)(TodCommon.RandRangeFloat(0.5f, 0.65f) * (float)mZombieHealthWaveStart);
+				mZombieHealthToNextWave = (int)(TodCommon.RandRangeFloat(0.5f, 0.65f) * mZombieHealthWaveStart);
 				if (mApp.IsLittleTroubleLevel() || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_COLUMN || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
 				{
 					mZombieCountDown = 750;
@@ -5066,7 +5066,7 @@ namespace Lawn
 				{
 					num += zombie.mBodyHealth;
 					num += zombie.mHelmHealth;
-					num += (int)((float)zombie.mShieldHealth * 0.2f);
+					num += (int)(zombie.mShieldHealth * 0.2f);
 					num += zombie.mFlyingHealth;
 				}
 			}
@@ -5308,15 +5308,15 @@ namespace Lawn
 
 		public void DrawIce(Graphics g, int y)
 		{
-			int theY = (int)((float)(GridToPixelY(8, y) + 20) * Constants.S);
+			int theY = (int)((GridToPixelY(8, y) + 20) * Constants.S);
 			int height = AtlasResources.IMAGE_ICE.GetHeight();
-			int num = TodCommon.ClampInt((int)((float)(255 * mIceTimer[y]) / 10f), 0, 255);
+			int num = TodCommon.ClampInt((int)(255 * mIceTimer[y] / 10f), 0, 255);
 			if (num < 255)
 			{
 				g.SetColorizeImages(true);
 				g.SetColor(new SexyColor(255, 255, 255, num, true));
 			}
-			int num2 = (int)((float)mIceMinX[y] * Constants.S);
+			int num2 = (int)(mIceMinX[y] * Constants.S);
 			int num3 = 8;
 			int num4 = num2 + num3;
 			int width = AtlasResources.IMAGE_ICE.GetWidth();
@@ -5356,14 +5356,14 @@ namespace Lawn
 			aColor.mRed = (aColor.mGreen = (aColor.mBlue = 50));
 			g.SetColor(aColor);
 			TPoint[] celPosition = GetCelPosition(theCol, theRow);
-			celPosition[0].mX = (int)((float)celPosition[0].mX * Constants.S);
-			celPosition[0].mY = (int)((float)celPosition[0].mY * Constants.S);
-			celPosition[1].mX = (int)((float)celPosition[1].mX * Constants.S);
-			celPosition[1].mY = (int)((float)celPosition[1].mY * Constants.S);
-			celPosition[2].mX = (int)((float)celPosition[2].mX * Constants.S);
-			celPosition[2].mY = (int)((float)celPosition[2].mY * Constants.S);
-			celPosition[3].mX = (int)((float)celPosition[3].mX * Constants.S);
-			celPosition[3].mY = (int)((float)celPosition[3].mY * Constants.S);
+			celPosition[0].mX = (int)(celPosition[0].mX * Constants.S);
+			celPosition[0].mY = (int)(celPosition[0].mY * Constants.S);
+			celPosition[1].mX = (int)(celPosition[1].mX * Constants.S);
+			celPosition[1].mY = (int)(celPosition[1].mY * Constants.S);
+			celPosition[2].mX = (int)(celPosition[2].mX * Constants.S);
+			celPosition[2].mY = (int)(celPosition[2].mY * Constants.S);
+			celPosition[3].mX = (int)(celPosition[3].mX * Constants.S);
+			celPosition[3].mY = (int)(celPosition[3].mY * Constants.S);
 			g.SetColorizeImages(true);
 			g.FillRect(new TRect(Board.mCelPoints[0].mX, Board.mCelPoints[0].mY, Board.mCelPoints[2].mX - Board.mCelPoints[0].mX, Board.mCelPoints[2].mY - Board.mCelPoints[0].mY));
 			g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
@@ -5886,7 +5886,7 @@ namespace Lawn
 				if (flag)
 				{
 					int num2 = Math.Min(zombiePicker.mZombiePoints, 8);
-					zombiePicker.mZombiePoints = (int)((float)zombiePicker.mZombiePoints * 2.5f);
+					zombiePicker.mZombiePoints = (int)(zombiePicker.mZombiePoints * 2.5f);
 					if (mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS_2)
 					{
 						for (int k = 0; k < num2; k++)
@@ -6048,18 +6048,18 @@ namespace Lawn
 					num4 += num6 * 12;
 					num5 += num6 * 12;
 				}
-				float num7 = (float)(mZombieCountDownStart - mZombieCountDown) / (float)mZombieCountDownStart;
+				float num7 = (mZombieCountDownStart - mZombieCountDown) / (float)mZombieCountDownStart;
 				if (mZombieHealthToNextWave != -1)
 				{
 					int num8 = TotalZombiesHealthInWave(mCurrentWave - 1);
 					int num9 = Math.Max(mZombieHealthWaveStart - mZombieHealthToNextWave, 1);
-					float num10 = (float)(num9 - num8 + mZombieHealthToNextWave) / (float)num9;
+					float num10 = (num9 - num8 + mZombieHealthToNextWave) / (float)num9;
 					if (num10 > num7)
 					{
 						num7 = num10;
 					}
 				}
-				int num11 = num4 + TodCommon.FloatRoundToInt((float)(num5 - num4) * num7);
+				int num11 = num4 + TodCommon.FloatRoundToInt((num5 - num4) * num7);
 				num11 = TodCommon.ClampInt(num11, 1, 150);
 				int num12 = num11 - mProgressMeterWidth;
 				if (num12 > num3 && Board.IsInModRange(mMainCounter, 5))
@@ -6683,7 +6683,7 @@ namespace Lawn
 			UpdateGameObjects();
 			if (StageHasFog() && mFogBlownCountDown > 0)
 			{
-				float num = 1065f - (float)LeftFogColumn() * 80f + (float)Constants.BOARD_EXTRA_ROOM;
+				float num = 1065f - LeftFogColumn() * 80f + Constants.BOARD_EXTRA_ROOM;
 				if (mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
 				{
 					mFogOffset = TodCommon.TodAnimateCurveFloat(200, 0, mFogBlownCountDown, num, 0f, TodCurves.CURVE_EASE_OUT);
@@ -6838,15 +6838,15 @@ namespace Lawn
 					{
 						int num2 = mGridCelLook[i, j % Constants.MAX_GRIDSIZEY];
 						int theCelCol = num2 % 8;
-						float num3 = (float)(i * 80) + mFogOffset - 15f;
-						float num4 = (float)(j * 85) + 20f;
-						int num5 = (int)(255f - (float)num2 * 1.5f);
+						float num3 = i * 80 + mFogOffset - 15f;
+						float num4 = j * 85 + 20f;
+						int num5 = (int)(255f - num2 * 1.5f);
 						int num6 = 255 - num2;
-						float num7 = (float)mMainCounter * 3.1415927f * 2f / 900f;
-						float num8 = (float)mMainCounter * 3.1415927f * 2f / 500f;
-						float num9 = 3f * (float)i * 3.1415927f * 2f / (float)Constants.GRIDSIZEX;
-						float num10 = 3f * (float)j * 3.1415927f * 2f / 7f;
-						float num11 = (float)(13.0 + 4.0 * Math.Sin((double)(num10 + num7)) + 8.0 * Math.Sin((double)(num9 + num8)));
+						float num7 = mMainCounter * 3.1415927f * 2f / 900f;
+						float num8 = mMainCounter * 3.1415927f * 2f / 500f;
+						float num9 = 3f * i * 3.1415927f * 2f / Constants.GRIDSIZEX;
+						float num10 = 3f * j * 3.1415927f * 2f / 7f;
+						float num11 = (float)(13.0 + 4.0 * Math.Sin(num10 + num7) + 8.0 * Math.Sin(num9 + num8));
 						num5 -= (int)(num11 * 1.5f);
 						num6 -= (int)num11;
 						g.SetColorizeImages(true);
@@ -6855,7 +6855,7 @@ namespace Lawn
 						if (i == Constants.GRIDSIZEX - 1)
 						{
 							int num12 = 120;
-							g.DrawImageCel(image_FOG, (int)((num3 + (float)num12) * Constants.S), (int)(num4 * Constants.S), theCelCol, 0);
+							g.DrawImageCel(image_FOG, (int)((num3 + num12) * Constants.S), (int)(num4 * Constants.S), theCelCol, 0);
 						}
 						g.SetColorizeImages(false);
 					}
@@ -7016,7 +7016,7 @@ namespace Lawn
 			int num5 = num4;
 			if (!mApp.mZenGarden.CanDropChocolate())
 			{
-				num5 = num5;
+				//num5 = num5;
 			}
 			else if ((mApp.IsAdventureMode() || mApp.IsQuickPlayMode()) && !mApp.IsFirstTimeAdventureMode())
 			{
@@ -7177,13 +7177,13 @@ namespace Lawn
 				return;
 			}
 			CoinType theCoinType = CoinType.COIN_GOLD;
-			AddCoin((int)(bottomLawnMower.mPosX + (float)Constants.LawnMower_Coin_Offset.X), (int)(bottomLawnMower.mPosY + (float)Constants.LawnMower_Coin_Offset.Y), theCoinType, CoinMotion.COIN_MOTION_LAWNMOWER_COIN);
+			AddCoin((int)(bottomLawnMower.mPosX + Constants.LawnMower_Coin_Offset.X), (int)(bottomLawnMower.mPosY + Constants.LawnMower_Coin_Offset.Y), theCoinType, CoinMotion.COIN_MOTION_LAWNMOWER_COIN);
 			SoundInstance soundInstance = mApp.mSoundManager.GetSoundInstance((uint)Resources.SOUND_POINTS);
 			if (soundInstance != null)
 			{
 				soundInstance.Play(false, true);
-				float num = TodCommon.ClampFloat(6f - (float)CountUntriggerLawnMowers(), 0f, 6f);
-				soundInstance.AdjustPitch((double)num);
+				float num = TodCommon.ClampFloat(6f - CountUntriggerLawnMowers(), 0f, 6f);
+				soundInstance.AdjustPitch(num);
 			}
 			else
 			{
@@ -7257,13 +7257,13 @@ namespace Lawn
 			{
 				float num = 0f;
 				int num2 = 440 + Constants.BOARD_EXTRA_ROOM;
-				if (thePosX < (float)num2)
+				if (thePosX < num2)
 				{
-					num = ((float)num2 - thePosX) * 0.25f;
+					num = (num2 - thePosX) * 0.25f;
 				}
-				return (float)GridToPixelY(8, theRow) + num;
+				return GridToPixelY(8, theRow) + num;
 			}
-			return (float)GridToPixelY(0, theRow);
+			return GridToPixelY(0, theRow);
 		}
 
 		public void NextWaveComing()
@@ -7285,7 +7285,7 @@ namespace Lawn
 				}
 				if (flag)
 				{
-					mApp.AddReanimation(0f + (float)Constants.BOARD_EXTRA_ROOM, 30f, 800000, ReanimationType.REANIM_FINAL_WAVE);
+					mApp.AddReanimation(0f + Constants.BOARD_EXTRA_ROOM, 30f, 800000, ReanimationType.REANIM_FINAL_WAVE);
 					mFinalWaveSoundCounter = 60;
 				}
 			}
@@ -7378,7 +7378,7 @@ namespace Lawn
 			{
 				if (mPlants.Count == 0)
 				{
-					float num = (float)(mSeedBank.mX + mSeedBank.mSeedPackets[0].mX + Constants.SMALL_SEEDPACKET_WIDTH / 2) - Constants.InvertAndScale(13f);
+					float num = mSeedBank.mX + mSeedBank.mSeedPackets[0].mX + Constants.SMALL_SEEDPACKET_WIDTH / 2 - Constants.InvertAndScale(13f);
 					float num2 = 0f;
 					TutorialArrowShow((int)num, (int)num2);
 					DisplayAdvice("[ADVICE_CLICK_SEED_PACKET]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1_STAY, AdviceType.ADVICE_NONE);
@@ -7415,8 +7415,8 @@ namespace Lawn
 			}
 			else if (theTutorialState == TutorialState.TUTORIAL_LEVEL_2_PICK_UP_SUNFLOWER || theTutorialState == TutorialState.TUTORIAL_MORESUN_PICK_UP_SUNFLOWER)
 			{
-				float num3 = (float)(mSeedBank.mX + mSeedBank.mSeedPackets[1].mX) + Constants.InvertAndScale(13f);
-				float num4 = (float)(mSeedBank.mY + mSeedBank.mSeedPackets[1].mY);
+				float num3 = mSeedBank.mX + mSeedBank.mSeedPackets[1].mX + Constants.InvertAndScale(13f);
+				float num4 = mSeedBank.mY + mSeedBank.mSeedPackets[1].mY;
 				TutorialArrowShow((int)num3, (int)num4);
 			}
 			else if (theTutorialState == TutorialState.TUTORIAL_LEVEL_2_PLANT_SUNFLOWER || theTutorialState == TutorialState.TUTORIAL_LEVEL_2_REFRESH_SUNFLOWER || theTutorialState == TutorialState.TUTORIAL_MORESUN_PLANT_SUNFLOWER || theTutorialState == TutorialState.TUTORIAL_MORESUN_REFRESH_SUNFLOWER)
@@ -7473,7 +7473,7 @@ namespace Lawn
 				{
 					reanimation.ReanimationDie();
 				}
-				float num = 750f * (float)i / 11f + 10f + (float)Constants.BOARD_EXTRA_ROOM;
+				float num = 750f * i / 11f + 10f + Constants.BOARD_EXTRA_ROOM;
 				float theY = GetPosYBasedOnRow(num + 10f, theRow) - 10f;
 				int aRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_PARTICLE, theRow, 1);
 				Reanimation reanimation2 = mApp.AddReanimation(num, theY, aRenderOrder, ReanimationType.REANIM_JALAPENO_FIRE);
@@ -7531,15 +7531,15 @@ namespace Lawn
 						{
 							num = 0f;
 						}
-						float num2 = TodCommon.Distance2D((float)x, (float)y, (float)plant.mX + 40f, (float)plant.mY + 40f);
-						if (num2 >= num && num2 <= 50f && (float)y > (float)plant.mY + 25f)
+						float num2 = TodCommon.Distance2D(x, y, plant.mX + 40f, plant.mY + 40f);
+						if (num2 >= num && num2 <= 50f && y > plant.mY + 25f)
 						{
 							return plant;
 						}
 					}
 					if (Plant.IsFlying(plant.mSeedType))
 					{
-						float num3 = TodCommon.Distance2D((float)x, (float)y, (float)plant.mX + 40f, (float)plant.mY);
+						float num3 = TodCommon.Distance2D(x, y, plant.mX + 40f, plant.mY);
 						if (num3 < 15f)
 						{
 							return plant;
@@ -7736,9 +7736,9 @@ namespace Lawn
 			if (mTutorialState == TutorialState.TUTORIAL_LEVEL_1_PICK_UP_PEASHOOTER && mTutorialTimer == 0)
 			{
 				DisplayAdvice("[ADVICE_CLICK_PEASHOOTER]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1_STAY, AdviceType.ADVICE_NONE);
-				float num = (float)(mSeedBank.mX + mSeedBank.mSeedPackets[0].mX);
+				float num = mSeedBank.mX + mSeedBank.mSeedPackets[0].mX;
 				float num2 = 0f;
-				TutorialArrowShow((int)(num + (float)(Constants.SMALL_SEEDPACKET_WIDTH / 2) - Constants.InvertAndScale(13f)), (int)num2);
+				TutorialArrowShow((int)(num + Constants.SMALL_SEEDPACKET_WIDTH / 2 - Constants.InvertAndScale(13f)), (int)num2);
 				mTutorialTimer = -1;
 			}
 			if (mTutorialState == TutorialState.TUTORIAL_LEVEL_2_PICK_UP_SUNFLOWER || mTutorialState == TutorialState.TUTORIAL_LEVEL_2_PLANT_SUNFLOWER || mTutorialState == TutorialState.TUTORIAL_LEVEL_2_REFRESH_SUNFLOWER)
@@ -7847,9 +7847,9 @@ namespace Lawn
 
 		public void MouseDownCobcannonFire(int x, int y, int theClickCount)
 		{
-			float num = TodCommon.Distance2D((float)x, (float)y, (float)mCobCannonMouseX, (float)mCobCannonMouseY);
-			x = (int)((float)x * Constants.IS);
-			y = (int)((float)y * Constants.IS);
+			float num = TodCommon.Distance2D(x, y, mCobCannonMouseX, mCobCannonMouseY);
+			x = (int)(x * Constants.IS);
+			y = (int)(y * Constants.IS);
 			if (theClickCount < 0)
 			{
 				ClearCursor();
@@ -8263,7 +8263,7 @@ namespace Lawn
 		public void TutorialArrowShow(int x, int y)
 		{
 			TutorialArrowRemove();
-			TodParticleSystem theParticle = mApp.AddTodParticle((float)(x - Constants.Board_Offset_AspectRatio_Correction) * Constants.IS, (float)y * Constants.IS, 800000, ParticleEffect.PARTICLE_SEED_PACKET_PICK);
+			TodParticleSystem theParticle = mApp.AddTodParticle((x - Constants.Board_Offset_AspectRatio_Correction) * Constants.IS, y * Constants.IS, 800000, ParticleEffect.PARTICLE_SEED_PACKET_PICK);
 			mTutorialParticleID = mApp.ParticleGetID(theParticle);
 		}
 
@@ -8433,11 +8433,11 @@ namespace Lawn
 				{
 					num2 -= 30;
 				}
-				mApp.AddTodParticle((float)num, (float)num2, 400000, ParticleEffect.PARTICLE_PLANTING_POOL);
+				mApp.AddTodParticle(num, num2, 400000, ParticleEffect.PARTICLE_PLANTING_POOL);
 				return;
 			}
 			mApp.PlayFoley(FoleyType.FOLEY_PLANT);
-			mApp.AddTodParticle((float)num, (float)num2, 400000, ParticleEffect.PARTICLE_PLANTING);
+			mApp.AddTodParticle(num, num2, 400000, ParticleEffect.PARTICLE_PLANTING);
 		}
 
 		public bool IsFinalSurvivalStage()
@@ -8810,8 +8810,8 @@ namespace Lawn
 			newGridItem.mGridItemType = GridItemType.GRIDITEM_RAKE;
 			newGridItem.mGridX = num;
 			newGridItem.mGridY = aGridY;
-			newGridItem.mPosX = (float)GridToPixelX(newGridItem.mGridX, newGridItem.mGridY);
-			newGridItem.mPosY = (float)GridToPixelY(newGridItem.mGridX, newGridItem.mGridY);
+			newGridItem.mPosX = GridToPixelX(newGridItem.mGridX, newGridItem.mGridY);
+			newGridItem.mPosY = GridToPixelY(newGridItem.mGridX, newGridItem.mGridY);
 			newGridItem.mRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_GRAVE_STONE, newGridItem.mGridY, 9);
 			mGridItems.Add(newGridItem);
 			Reanimation theReanimation = CreateRakeReanim(newGridItem.mPosX, newGridItem.mPosY, 0);
@@ -9148,7 +9148,7 @@ namespace Lawn
 				{
 					PottedPlantAge aPlantAge = pottedPlantInWheelbarrow.mPlantAge;
 				}
-				mApp.mZenGarden.DrawPottedPlant(g, (float)(zenButtonRect.mX + Constants.ZenGardenButton_WheelbarrowPlant_Offset.X), (float)(zenButtonRect.mY + Constants.ZenGardenButton_WheelbarrowPlant_Offset.Y + theOffsetY), pottedPlantInWheelbarrow, 0.6f, true);
+				mApp.mZenGarden.DrawPottedPlant(g, zenButtonRect.mX + Constants.ZenGardenButton_WheelbarrowPlant_Offset.X, zenButtonRect.mY + Constants.ZenGardenButton_WheelbarrowPlant_Offset.Y + theOffsetY, pottedPlantInWheelbarrow, 0.6f, true);
 				return;
 			}
 			g.DrawImage(AtlasResources.IMAGE_ZEN_WHEELBARROW, zenButtonRect.mX + Constants.ZenGardenButton_Wheelbarrow_Offset.X, zenButtonRect.mY + Constants.ZenGardenButton_Wheelbarrow_Offset.Y + theOffsetY);
@@ -9369,8 +9369,8 @@ namespace Lawn
 			}
 			if (!posScaled)
 			{
-				x = (int)((float)x * Constants.IS);
-				y = (int)((float)y * Constants.IS);
+				x = (int)(x * Constants.IS);
+				y = (int)(y * Constants.IS);
 			}
 			Plant plant = SpecialPlantHitTest(x, y);
 			if (plant != null)

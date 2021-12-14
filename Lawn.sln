@@ -13,6 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IronPyInteractiveClient_WPF
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "IronPyInteractiveDef_Shared", "IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.shproj", "{B98F5710-197F-420E-82EB-5A7750239CEB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{90143681-10B1-42C3-8EA2-DD23A4618429}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Lawn_Shared\Lawn_Shared.projitems*{1a95301d-4238-4ccd-9b56-38537e891b16}*SharedItemsImports = 13

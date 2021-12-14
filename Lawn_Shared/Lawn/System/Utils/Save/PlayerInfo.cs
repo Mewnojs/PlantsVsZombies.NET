@@ -206,9 +206,9 @@ namespace Lawn
 					mStinkyPosX = buffer.ReadLong();
 					mStinkyPosY = buffer.ReadLong();
 					mUseSeq = (uint)buffer.ReadLong();
-					mZombiesKilled = (long)buffer.ReadLong();
-					mVasebreakerScore = (long)buffer.ReadLong();
-					mIZombieScore = (long)buffer.ReadLong();
+					mZombiesKilled = buffer.ReadLong();
+					mVasebreakerScore = buffer.ReadLong();
+					mIZombieScore = buffer.ReadLong();
 					mMiniGamesUnlocked = buffer.ReadLong();
 					mMiniGamesUnlockable = buffer.ReadLong();
 					mVasebreakerUnlocked = buffer.ReadLong();

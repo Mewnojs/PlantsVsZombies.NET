@@ -48,7 +48,7 @@ namespace Lawn
 			}
 			if (theItemType == StoreItem.STORE_ITEM_PLANT_IMITATER)
 			{
-				SeedPacket.DrawSmallSeedPacket(g, (float)(aPosX + Constants.StoreScreen_Imitater_Offset_X), (float)(aPosY + Constants.StoreScreen_Imitater_Offset_Y), SeedType.SEED_IMITATER, SeedType.SEED_NONE, 0f, 255, false, false, true, false);
+				SeedPacket.DrawSmallSeedPacket(g, aPosX + Constants.StoreScreen_Imitater_Offset_X, aPosY + Constants.StoreScreen_Imitater_Offset_Y, SeedType.SEED_IMITATER, SeedType.SEED_NONE, 0f, 255, false, false, true, false);
 				return;
 			}
 			if (theItemType == StoreItem.STORE_ITEM_FIRSTAID)
@@ -108,11 +108,11 @@ namespace Lawn
 				LawnApp gLawnApp = GlobalStaticVars.gLawnApp;
 				GlobalMembersStoreScreen.tempPottedPlant.InitializePottedPlant(SeedType.SEED_MARIGOLD);
 				GlobalMembersStoreScreen.tempPottedPlant.mFacing = PottedPlant.FacingDirection.FACING_RIGHT;
-				gLawnApp.mZenGarden.DrawPottedPlantIcon(g, (float)(aPosX + Constants.StoreScreen_PotPlant_Offset.X), (float)(aPosY + Constants.StoreScreen_PotPlant_Offset.Y), GlobalMembersStoreScreen.tempPottedPlant);
+				gLawnApp.mZenGarden.DrawPottedPlantIcon(g, aPosX + Constants.StoreScreen_PotPlant_Offset.X, aPosY + Constants.StoreScreen_PotPlant_Offset.Y, GlobalMembersStoreScreen.tempPottedPlant);
 				return;
 			}
 			SeedType theSeedType = (SeedType)(theItemType + 40);
-			SeedPacket.DrawSmallSeedPacket(g, (float)(aPosX + -3), (float)(aPosY + Constants.StoreScreen_Default_Offset_Y), theSeedType, SeedType.SEED_NONE, 0f, 255, false, false, true, false);
+			SeedPacket.DrawSmallSeedPacket(g, aPosX + -3, aPosY + Constants.StoreScreen_Default_Offset_Y, theSeedType, SeedType.SEED_NONE, 0f, 255, false, false, true, false);
 		}
 
 		internal static void DrawStoreItem(Graphics g, int aPosX, int aPosY, StoreItem theItemType, bool isComingSoon, bool isSoldOut, int aQuantity, int aCost)

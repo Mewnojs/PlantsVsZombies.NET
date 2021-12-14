@@ -55,7 +55,7 @@ namespace Lawn
 			mBoard = mApp.mBoard;
 			mRow = theRow;
 			mRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_LAWN_MOWER, theRow, 0);
-			mPosX = -160f + (float)Constants.BOARD_EXTRA_ROOM;
+			mPosX = -160f + Constants.BOARD_EXTRA_ROOM;
 			mPosY = mBoard.GetPosYBasedOnRow(mPosX + 40f, theRow) + 23f;
 			mDead = false;
 			mMowerState = LawnMowerState.MOWER_READY;
@@ -139,7 +139,7 @@ namespace Lawn
 			if (mMowerState == LawnMowerState.MOWER_ROLLING_IN)
 			{
 				mRollingInCounter += 3;
-				mPosX = TodCommon.TodAnimateCurveFloat(0, 100, mRollingInCounter, -160f, -21f, TodCurves.CURVE_EASE_IN_OUT) + (float)Constants.BOARD_EXTRA_ROOM;
+				mPosX = TodCommon.TodAnimateCurveFloat(0, 100, mRollingInCounter, -160f, -21f, TodCurves.CURVE_EASE_IN_OUT) + Constants.BOARD_EXTRA_ROOM;
 				if (mRollingInCounter >= 100)
 				{
 					mMowerState = LawnMowerState.MOWER_READY;
@@ -203,7 +203,7 @@ namespace Lawn
 				mApp.mSoundSystem.StopFoley(FoleyType.FOLEY_LAWNMOWER);
 				Die();
 			}
-			if (mPosX > (float)Constants.WIDE_BOARD_WIDTH)
+			if (mPosX > Constants.WIDE_BOARD_WIDTH)
 			{
 				Die();
 			}
@@ -255,13 +255,13 @@ namespace Lawn
 				{
 					int num5 = 2;
 					int num6 = -2;
-					TodCommon.TodDrawImageCelCenterScaledF(g, AtlasResources.IMAGE_PLANTSHADOW, num3 * Constants.S + (float)num5 * Constants.IS, num4 * Constants.S + (float)num6 * Constants.IS, 0, theScaleX, theScaleY);
+					TodCommon.TodDrawImageCelCenterScaledF(g, AtlasResources.IMAGE_PLANTSHADOW, num3 * Constants.S + num5 * Constants.IS, num4 * Constants.S + num6 * Constants.IS, 0, theScaleX, theScaleY);
 				}
 				else
 				{
 					int num7 = 2;
 					int num8 = -2;
-					TodCommon.TodDrawImageCelCenterScaledF(g, AtlasResources.IMAGE_PLANTSHADOW2, num3 * Constants.S + (float)num7 * Constants.IS, num4 * Constants.S + (float)num8 * Constants.IS, 0, theScaleX, theScaleY);
+					TodCommon.TodDrawImageCelCenterScaledF(g, AtlasResources.IMAGE_PLANTSHADOW2, num3 * Constants.S + num7 * Constants.IS, num4 * Constants.S + num8 * Constants.IS, 0, theScaleX, theScaleY);
 				}
 			}
 			Graphics @new = Graphics.GetNew(g);

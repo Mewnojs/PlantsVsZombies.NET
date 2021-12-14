@@ -17,8 +17,8 @@ namespace Lawn
 
 		public void GetSeedPosition(SeedType theSeedType, ref int theX, ref int theY)
 		{
-			theX = (int)((int)theSeedType % 4 * (Constants.SMALL_SEEDPACKET_WIDTH + Constants.SEED_PACKET_HORIZ_GAP));
-			theY = (int)((int)theSeedType / 4 * (Constants.SMALL_SEEDPACKET_HEIGHT + Constants.SEED_PACKET_VERT_GAP));
+			theX = (int)theSeedType % 4 * (Constants.SMALL_SEEDPACKET_WIDTH + Constants.SEED_PACKET_HORIZ_GAP);
+			theY = (int)theSeedType / 4 * (Constants.SMALL_SEEDPACKET_HEIGHT + Constants.SEED_PACKET_VERT_GAP);
 		}
 
 		public override void Dispose()
@@ -71,11 +71,11 @@ namespace Lawn
 						{
 							if (mImitaters)
 							{
-								SeedPacket.DrawSmallSeedPacket(g, (float)num2, (float)num3, SeedType.SEED_IMITATER, seedType, 0f, 255, theDrawCost, false, theDrawBackground, theDrawBackground);
+								SeedPacket.DrawSmallSeedPacket(g, num2, num3, SeedType.SEED_IMITATER, seedType, 0f, 255, theDrawCost, false, theDrawBackground, theDrawBackground);
 							}
 							else
 							{
-								SeedPacket.DrawSmallSeedPacket(g, (float)num2, (float)num3, seedType, SeedType.SEED_NONE, 0f, 55, theDrawCost, false, theDrawBackground, theDrawBackground);
+								SeedPacket.DrawSmallSeedPacket(g, num2, num3, seedType, SeedType.SEED_NONE, 0f, 55, theDrawCost, false, theDrawBackground, theDrawBackground);
 							}
 						}
 					}
@@ -110,14 +110,14 @@ namespace Lawn
 						int num5 = 0;
 						int num6 = 0;
 						GetSeedPosition(chosenSeed2.mSeedType, ref num5, ref num6);
-						float num7 = (float)(flag ? 115 : 255);
+						float num7 = flag ? 115 : 255;
 						if (mImitaters)
 						{
-							SeedPacket.DrawSmallSeedPacket(g, (float)num5, (float)num6, SeedType.SEED_IMITATER, chosenSeed2.mSeedType, 0f, (int)num7, theDrawCost, false, theDrawBackground, theDrawBackground);
+							SeedPacket.DrawSmallSeedPacket(g, num5, num6, SeedType.SEED_IMITATER, chosenSeed2.mSeedType, 0f, (int)num7, theDrawCost, false, theDrawBackground, theDrawBackground);
 						}
 						else
 						{
-							SeedPacket.DrawSmallSeedPacket(g, (float)num5, (float)num6, chosenSeed2.mSeedType, chosenSeed2.mImitaterType, 0f, (int)num7, theDrawCost, false, theDrawBackground, theDrawBackground);
+							SeedPacket.DrawSmallSeedPacket(g, num5, num6, chosenSeed2.mSeedType, chosenSeed2.mImitaterType, 0f, (int)num7, theDrawCost, false, theDrawBackground, theDrawBackground);
 						}
 					}
 				}

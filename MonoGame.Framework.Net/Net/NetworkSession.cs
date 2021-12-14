@@ -677,7 +677,7 @@ namespace Microsoft.Xna.Framework.Net
 			// Updates the state of the multiplayer session. 
 			try {
 				while (commandQueue.Count > 0 && networkPeer.IsReady) {
-					var command = (CommandEvent)commandQueue.Dequeue();
+					var command = commandQueue.Dequeue();
 					
 					// for some screwed up reason we are dequeueing something
 					// that is null so we will just continue.  I am not sure
@@ -782,11 +782,11 @@ namespace Microsoft.Xna.Framework.Net
 					// Have to find an example of how this is used so that I can figure out how to pass
 					// the EndReason
 					throw new NotImplementedException();//EventHelpers.Raise(this, SessionEnded, new NetworkSessionEndedEventArgs(NetworkSessionEndReason.HostEndedSession));
-				break;
+				//break;
 			case NetworkSessionState.Playing:
 
 					throw new NotImplementedException(); //EventHelpers.Raise(this, GameStarted, new GameStartedEventArgs());
-				break;
+				//break;
 			}
 			
 			// if changing from playing to lobby
@@ -832,15 +832,15 @@ namespace Microsoft.Xna.Framework.Net
 
 			throw new NotImplementedException(); //EventHelpers.Raise(this, GamerJoined, new GamerJoinedEventArgs(gamer));
 			
-			if (networkPeer !=  null && (command.State & GamerStates.Local) == 0) {
+			//if (networkPeer !=  null && (command.State & GamerStates.Local) == 0) {
 				
-				networkPeer.SendPeerIntroductions(gamer);
-			}
+			//	networkPeer.SendPeerIntroductions(gamer);
+			//}
 			
-			if (networkPeer != null)
-			{
-				networkPeer.UpdateLiveSession(this);
-			}
+			//if (networkPeer != null)
+			//{
+			//	networkPeer.UpdateLiveSession(this);
+			//}
 			
 			
 		}

@@ -21,7 +21,7 @@ namespace Sexy
 
 		public void SetupMatrices()
 		{
-			basicEffect.View = Matrix.CreateOrthographicOffCenter(0f, (float)device.PresentationParameters.BackBufferWidth, (float)device.PresentationParameters.BackBufferHeight, 0f, 0f, 1f);
+			basicEffect.View = Matrix.CreateOrthographicOffCenter(0f, device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight, 0f, 0f, 1f);
 			screenWidth = device.PresentationParameters.BackBufferWidth;
 			screenHeight = device.PresentationParameters.BackBufferHeight;
 		}
@@ -53,7 +53,7 @@ namespace Sexy
 
 		public void DrawRotatedScaled(Image img, TRect destination, TRect source, Vector2 center, float rotation, Vector2 scale, Color colour, bool extraOffset, bool sourceOffsetsUsed, PrimitiveBatchEffects effects)
 		{
-			Matrix? matrix = new Matrix?(Matrix.CreateTranslation((float)(-(float)OffsetX), (float)(-(float)OffsetY), 0f) * Matrix.CreateScale(scale.X, scale.Y, 1f) * Matrix.CreateRotationZ(rotation) * Matrix.CreateTranslation((float)destination.mX, (float)destination.mY, 0f));
+			Matrix? matrix = new Matrix?(Matrix.CreateTranslation((float)(-OffsetX), (float)(-OffsetY), 0f) * Matrix.CreateScale(scale.X, scale.Y, 1f) * Matrix.CreateRotationZ(rotation) * Matrix.CreateTranslation(destination.mX, destination.mY, 0f));
 			destination.mX = 0;
 			destination.mY = 0;
 			destination.mWidth = source.mWidth;
@@ -95,31 +95,31 @@ namespace Sexy
 			}
 			bool flag = effects == PrimitiveBatchEffects.MirrorHorizontally;
 			bool flag2 = effects == PrimitiveBatchEffects.MirrorVertically;
-			float y = (float)(source.mY + (flag2 ? source.mHeight : 0)) / (float)img.Texture.Height;
-			float y2 = (float)(source.mY + (flag2 ? 0 : source.mHeight)) / (float)img.Texture.Height;
-			float x = (float)(source.mX + (flag ? source.mWidth : 0)) / (float)img.Texture.Width;
-			float x2 = (float)(source.mX + (flag ? 0 : source.mWidth)) / (float)img.Texture.Width;
+			float y = (source.mY + (flag2 ? source.mHeight : 0)) / (float)img.Texture.Height;
+			float y2 = (source.mY + (flag2 ? 0 : source.mHeight)) / (float)img.Texture.Height;
+			float x = (source.mX + (flag ? source.mWidth : 0)) / (float)img.Texture.Width;
+			float x2 = (source.mX + (flag ? 0 : source.mWidth)) / (float)img.Texture.Width;
 			float z = 0f;
-			vertex.Position.X = (float)destination.mX;
-			vertex.Position.Y = (float)destination.mY;
+			vertex.Position.X = destination.mX;
+			vertex.Position.Y = destination.mY;
 			vertex.Position.Z = z;
 			vertex.TextureCoordinate.X = x;
 			vertex.TextureCoordinate.Y = y;
 			AddVertex(ref vertex);
 			short num = (short)(positionInBuffer - 1);
-			vertex.Position.X = (float)(destination.mX + destination.mWidth);
-			vertex.Position.Y = (float)destination.mY;
+			vertex.Position.X = destination.mX + destination.mWidth;
+			vertex.Position.Y = destination.mY;
 			vertex.TextureCoordinate.X = x2;
 			AddVertex(ref vertex);
 			short num2 = (short)(positionInBuffer - 1);
-			vertex.Position.X = (float)destination.mX;
-			vertex.Position.Y = (float)(destination.mY + destination.mHeight);
+			vertex.Position.X = destination.mX;
+			vertex.Position.Y = destination.mY + destination.mHeight;
 			vertex.TextureCoordinate.X = x;
 			vertex.TextureCoordinate.Y = y2;
 			AddVertex(ref vertex);
 			short num3 = (short)(positionInBuffer - 1);
-			vertex.Position.X = (float)(destination.mX + destination.mWidth);
-			vertex.Position.Y = (float)(destination.mY + destination.mHeight);
+			vertex.Position.X = destination.mX + destination.mWidth;
+			vertex.Position.Y = destination.mY + destination.mHeight;
 			vertex.TextureCoordinate.X = x2;
 			AddVertex(ref vertex);
 			short num4 = (short)(positionInBuffer - 1);
@@ -224,8 +224,8 @@ namespace Sexy
 			{
 				Flush();
 			}
-			vertex.X += (float)OffsetX;
-			vertex.Y += (float)OffsetY;
+			vertex.X += OffsetX;
+			vertex.Y += OffsetY;
 			if (mHasTransform)
 			{
 				Vector2.Transform(ref vertex, ref Transform, out vertex);
@@ -255,8 +255,8 @@ namespace Sexy
 			{
 				Flush();
 			}
-			vertex.Position.X = vertex.Position.X + (float)OffsetX;
-			vertex.Position.Y = vertex.Position.Y + (float)OffsetY;
+			vertex.Position.X = vertex.Position.X + OffsetX;
+			vertex.Position.Y = vertex.Position.Y + OffsetY;
 			if (mHasTransform)
 			{
 				Vector3.Transform(ref vertex.Position, ref Transform, out vertex.Position);

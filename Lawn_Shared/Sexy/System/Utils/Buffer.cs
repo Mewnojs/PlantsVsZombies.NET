@@ -66,15 +66,15 @@ namespace Sexy
 				int num2 = 0;
 				if (c >= '0' && c <= '9')
 				{
-					num2 = (int)(c - '0');
+					num2 = c - '0';
 				}
 				else if (c >= 'A' && c <= 'F')
 				{
-					num2 = (int)(c - 'A' + '\n');
+					num2 = c - 'A' + '\n';
 				}
 				else if (c >= 'a' && c <= 'f')
 				{
-					num2 = (int)(c - 'f' + '\n');
+					num2 = c - 'f' + '\n';
 				}
 				num += num2 << (7 - i) * 4;
 			}
@@ -83,7 +83,7 @@ namespace Sexy
 			for (int j = num; j > 0; j -= num4)
 			{
 				char c2 = theString[num3++];
-				int theNum = Buffer.gWebDecodeMap[(int)c2];
+				int theNum = Buffer.gWebDecodeMap[c2];
 				num4 = Math.Min(j, 6);
 				WriteNumBits(theNum, num4);
 			}

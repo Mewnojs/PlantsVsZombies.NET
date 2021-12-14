@@ -268,11 +268,11 @@ namespace Lawn
 				return;
 			}
 			mCreditsY -= 3f * Constants.InvertAndScale(0.25f);
-			if (mCreditsY < (float)(-(float)(mCreditsHeight + Constants.CreditScreen_TextStart)))
+			if (mCreditsY < (float)(-(mCreditsHeight + Constants.CreditScreen_TextStart)))
 			{
 				RestartScroll();
 			}
-			if (mCreditsY > (float)Constants.CreditScreen_TextEnd)
+			if (mCreditsY > Constants.CreditScreen_TextEnd)
 			{
 				RestartScroll();
 			}
@@ -294,7 +294,7 @@ namespace Lawn
 
 		public void RestartScroll()
 		{
-			mCreditsY = (float)Constants.CreditScreen_TextEnd;
+			mCreditsY = Constants.CreditScreen_TextEnd;
 		}
 
 		public void VideoLoaded(bool succeeded)

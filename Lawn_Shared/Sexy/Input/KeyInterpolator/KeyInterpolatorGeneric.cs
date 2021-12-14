@@ -23,7 +23,7 @@ namespace Sexy
 			bool flag = !mEaseFuncSet;
 			int num = mKeys.GetKeyAfter(mKey);
 			bool flag2 = false;
-			while (!flag2 && tick >= (float)num)
+			while (!flag2 && tick >= num)
 			{
 				mKey = num;
 				int keyAfter = mKeys.GetKeyAfter(num);
@@ -39,7 +39,7 @@ namespace Sexy
 				flag = true;
 			}
 			int firstKey = mKeys.GetFirstKey();
-			while (mKey != firstKey && tick < (float)mKey)
+			while (mKey != firstKey && tick < mKey)
 			{
 				num = mKey;
 				mKey = mKeys.GetKeyBefore(mKey);
@@ -49,7 +49,7 @@ namespace Sexy
 			{
 				return mKeys[mKey].value;
 			}
-			if (tick < (float)mKey)
+			if (tick < mKey)
 			{
 				return mKeys[mKey].value;
 			}
@@ -60,8 +60,8 @@ namespace Sexy
 			T result;
 			if (mKeys[num].tween)
 			{
-				float num2 = (float)num - (float)mKey;
-				float num3 = tick - (float)mKey;
+				float num2 = num - (float)mKey;
+				float num3 = tick - mKey;
 				float t = num3 / num2;
 				float f = mEaseFunc.Tick(t);
 				result = GetLerpResult(f, mKeys[mKey].value, mKeys[num].value);

@@ -213,7 +213,7 @@ namespace Lawn
 			int num6 = Math.Max(mButtonMinWidth, AtlasResources.IMAGE_BUTTON_LEFT.mWidth + AtlasResources.IMAGE_BUTTON_MIDDLE.mWidth + AtlasResources.IMAGE_BUTTON_RIGHT.mWidth);
 			if (mLawnYesButton != null && mLawnNoButton != null)
 			{
-				int num7 = (int)(0.8f * (float)Math.Max(mLawnYesButton.mFont.StringWidth(mLawnYesButton.mLabel), mLawnNoButton.mFont.StringWidth(mLawnNoButton.mLabel)));
+				int num7 = (int)(0.8f * Math.Max(mLawnYesButton.mFont.StringWidth(mLawnYesButton.mLabel), mLawnNoButton.mFont.StringWidth(mLawnNoButton.mLabel)));
 				if (num7 > num6)
 				{
 					num6 = num7;
@@ -245,7 +245,7 @@ namespace Lawn
 			}
 			if (mReanimation.mReanim != null)
 			{
-				mReanimation.Resize((int)mReanimation.mPosX, (int)((float)Constants.DIALOG_HEADER_OFFSET + mReanimation.mPosY), mReanimation.mWidth, mReanimation.mHeight);
+				mReanimation.Resize((int)mReanimation.mPosX, (int)(Constants.DIALOG_HEADER_OFFSET + mReanimation.mPosY), mReanimation.mWidth, mReanimation.mHeight);
 			}
 			mX = mApp.mWidth / 2 - mWidth / 2;
 			mY = mApp.mHeight / 2 - mHeight / 2;

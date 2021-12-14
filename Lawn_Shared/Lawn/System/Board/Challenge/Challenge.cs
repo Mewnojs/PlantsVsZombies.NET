@@ -256,7 +256,7 @@ namespace Lawn
 			{
 				TRect trect = SlotMachineGetHandleRect();
 				ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_SLOT_MACHINE_HANDLE, true);
-				Reanimation reanimation = mApp.AddReanimation((float)trect.mX - 243f, (float)trect.mY + 50f, 0, ReanimationType.REANIM_SLOT_MACHINE_HANDLE);
+				Reanimation reanimation = mApp.AddReanimation(trect.mX - 243f, trect.mY + 50f, 0, ReanimationType.REANIM_SLOT_MACHINE_HANDLE);
 				reanimation.mIsAttachment = true;
 				reanimation.mAnimRate = 0f;
 				mReanimChallenge = mApp.ReanimationGetID(reanimation);
@@ -654,14 +654,14 @@ namespace Lawn
 				return;
 			}
 			mBeghouledMouseCapture = true;
-			mBeghouledMouseDownX = (int)((float)x * Constants.IS);
-			mBeghouledMouseDownY = (int)((float)y * Constants.IS);
+			mBeghouledMouseDownX = (int)(x * Constants.IS);
+			mBeghouledMouseDownY = (int)(y * Constants.IS);
 		}
 
 		public void BeghouledDragUpdate(int x, int y)
 		{
-			x = (int)((float)x * Constants.IS);
-			y = (int)((float)y * Constants.IS);
+			x = (int)(x * Constants.IS);
+			y = (int)(y * Constants.IS);
 			int num = x - mBeghouledMouseDownX;
 			int num2 = y - mBeghouledMouseDownY;
 			if (Math.Abs(num) < 10 && Math.Abs(num2) < 10)
@@ -1142,8 +1142,8 @@ namespace Lawn
 			if (flag && (thePlant.mState == PlantState.STATE_MAGNETSHROOM_CHARGING || thePlant.mState == PlantState.STATE_MAGNETSHROOM_SUCKING))
 			{
 				MagnetItem magnetItem = thePlant.mMagnetItems[0];
-				magnetItem.mPosX += (float)num4;
-				magnetItem.mPosY += (float)num5;
+				magnetItem.mPosX += num4;
+				magnetItem.mPosY += num5;
 			}
 			return flag;
 		}
@@ -1248,16 +1248,16 @@ namespace Lawn
 					if (artChallengeSeed != SeedType.SEED_NONE && mBoard.GetTopPlantAt(j, i, PlantPriority.TOPPLANT_ONLY_NORMAL_POSITION) == null)
 					{
 						TPoint[] celPosition = mBoard.GetCelPosition(j, i);
-						celPosition[0].mX = (int)((float)celPosition[0].mX * Constants.S);
-						celPosition[0].mY = (int)((float)celPosition[0].mY * Constants.S);
-						celPosition[1].mX = (int)((float)celPosition[1].mX * Constants.S);
-						celPosition[1].mY = (int)((float)celPosition[1].mY * Constants.S);
-						celPosition[2].mX = (int)((float)celPosition[2].mX * Constants.S);
-						celPosition[2].mY = (int)((float)celPosition[2].mY * Constants.S);
-						celPosition[3].mX = (int)((float)celPosition[3].mX * Constants.S);
-						celPosition[3].mY = (int)((float)celPosition[3].mY * Constants.S);
-						float thePosX = (float)(celPosition[0].x + (celPosition[2].x - celPosition[0].x) / 2);
-						float thePosY = (float)(celPosition[2].y - Constants.Challenge_SeeingStars_StarfruitPreview_Offset_Y);
+						celPosition[0].mX = (int)(celPosition[0].mX * Constants.S);
+						celPosition[0].mY = (int)(celPosition[0].mY * Constants.S);
+						celPosition[1].mX = (int)(celPosition[1].mX * Constants.S);
+						celPosition[1].mY = (int)(celPosition[1].mY * Constants.S);
+						celPosition[2].mX = (int)(celPosition[2].mX * Constants.S);
+						celPosition[2].mY = (int)(celPosition[2].mY * Constants.S);
+						celPosition[3].mX = (int)(celPosition[3].mX * Constants.S);
+						celPosition[3].mY = (int)(celPosition[3].mY * Constants.S);
+						float thePosX = celPosition[0].x + (celPosition[2].x - celPosition[0].x) / 2;
+						float thePosY = celPosition[2].y - Constants.Challenge_SeeingStars_StarfruitPreview_Offset_Y;
 						Plant.DrawSeedType(g, artChallengeSeed, SeedType.SEED_NONE, DrawVariation.VARIATION_NORMAL, thePosX, thePosY);
 					}
 				}
@@ -1320,7 +1320,7 @@ namespace Lawn
 				if (artChallengeSeed != SeedType.SEED_NONE && artChallengeSeed == thePlant.mSeedType)
 				{
 					mApp.PlayFoley(FoleyType.FOLEY_ART_CHALLENGE);
-					mApp.AddTodParticle((float)(thePlant.mX + 40), (float)(thePlant.mY + 40), 400000, ParticleEffect.PARTICLE_PRESENT_PICKUP);
+					mApp.AddTodParticle(thePlant.mX + 40, thePlant.mY + 40, 400000, ParticleEffect.PARTICLE_PRESENT_PICKUP);
 					CheckForCompleteArtChallenge(thePlant.mPlantCol, thePlant.mRow);
 				}
 			}
@@ -1399,7 +1399,7 @@ namespace Lawn
 					{
 						int num = mBoard.GridToPixelX(j, i) - 8;
 						int num2 = mBoard.GridToPixelY(j, i) + 40;
-						g.DrawImageCel(AtlasResources.IMAGE_CRATER, (int)((float)num * Constants.S), (int)((float)num2 * Constants.S), 1, 0);
+						g.DrawImageCel(AtlasResources.IMAGE_CRATER, (int)(num * Constants.S), (int)(num2 * Constants.S), 1, 0);
 					}
 				}
 			}
@@ -1929,8 +1929,8 @@ namespace Lawn
 			reanimation.Draw(@new);
 			if (mSlotMachineRollCount < 3 && mBoard.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_NORMAL && mChallengeState != ChallengeState.STATECHALLENGE_SLOT_MACHINE_ROLLING && !mBoard.HasLevelAwardDropped())
 			{
-				byte b = (byte)(150.0 * Math.Sin((double)mBoard.mMainCounter % 150.0 / 150.0 * 3.1415927410125732));
-				SexyColor aColor = new SexyColor((int)b, (int)b, (int)b, 255);
+				byte b = (byte)(150.0 * Math.Sin(mBoard.mMainCounter % 150.0 / 150.0 * 3.1415927410125732));
+				SexyColor aColor = new SexyColor(b, b, b, 255);
 				@new.SetColorizeImages(true);
 				@new.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
 				@new.SetColor(aColor);
@@ -2039,7 +2039,7 @@ namespace Lawn
 					}
 				}
 			}
-			float theMax = (float)TodCommon.TodAnimateCurve(1, 12, mBoard.mCurrentWave, 1, 3, TodCurves.CURVE_EASE_IN);
+			float theMax = TodCommon.TodAnimateCurve(1, 12, mBoard.mCurrentWave, 1, 3, TodCurves.CURVE_EASE_IN);
 			if (num4 > num7)
 			{
 				num4 = num7;
@@ -2113,8 +2113,8 @@ namespace Lawn
 
 		public void MouseDownWhackAZombie(int x, int y)
 		{
-			x = (int)((float)x * Constants.IS);
-			y = (int)((float)y * Constants.IS);
+			x = (int)(x * Constants.IS);
+			y = (int)(y * Constants.IS);
 			Reanimation reanimation = mApp.ReanimationGet(mBoard.mCursorObject.mReanimCursorID);
 			reanimation.mAnimTime = 0.2f;
 			mApp.PlayFoley(FoleyType.FOLEY_SWING);
@@ -2149,7 +2149,7 @@ namespace Lawn
 					return;
 				}
 				mApp.PlayFoley(FoleyType.FOLEY_BONK);
-				mApp.AddTodParticle(TodCommon.PixelAligned((float)x - 3f), TodCommon.PixelAligned((float)y + 9f), 800000, ParticleEffect.PARTICLE_POW);
+				mApp.AddTodParticle(TodCommon.PixelAligned(x - 3f), TodCommon.PixelAligned(y + 9f), 800000, ParticleEffect.PARTICLE_POW);
 				zombie.DieWithLoot();
 				mBoard.ClearCursor();
 			}
@@ -2420,8 +2420,8 @@ namespace Lawn
 			{
 				return;
 			}
-			float num = (float)(mBoard.GridToPixelX(theGridX, theGridY) + 40);
-			float num2 = (float)(mBoard.GridToPixelY(theGridX, theGridY) + 40);
+			float num = mBoard.GridToPixelX(theGridX, theGridY) + 40;
+			float num2 = mBoard.GridToPixelY(theGridX, theGridY) + 40;
 			CoinType theCoinType;
 			if (mApp.IsAdventureMode() && mApp.IsFirstTimeAdventureMode())
 			{
@@ -2457,8 +2457,8 @@ namespace Lawn
 		public void BeghouledScore(int x, int y, int theNumPlants, bool theIsHorizontal)
 		{
 			mApp.PlayFoley(FoleyType.FOLEY_ART_CHALLENGE);
-			float num = (float)mBoard.GridToPixelX(x, y);
-			float num2 = (float)mBoard.GridToPixelY(x, y);
+			float num = mBoard.GridToPixelX(x, y);
+			float num2 = mBoard.GridToPixelY(x, y);
 			if (theIsHorizontal)
 			{
 				if (theNumPlants == 3)
@@ -2529,7 +2529,7 @@ namespace Lawn
 				num3 = TodCommon.ClampInt(num3, 1, 5);
 				for (int i = 0; i < num3; i++)
 				{
-					mBoard.AddCoin((int)(num - 10f + 20f * (float)i), (int)num2, CoinType.COIN_SUN, CoinMotion.COIN_MOTION_COIN);
+					mBoard.AddCoin((int)(num - 10f + 20f * i), (int)num2, CoinType.COIN_SUN, CoinMotion.COIN_MOTION_COIN);
 				}
 			}
 			mBeghouledMatchesThisMove++;
@@ -2539,7 +2539,7 @@ namespace Lawn
 		{
 			RandomNumbers.Seed(mBoard.mMainCounter / 6);
 			int num = TodCommon.TodAnimateCurve(150, 0, theTime, 255 - theMaxAmount, 255, TodCurves.CURVE_LINEAR);
-			int theAlpha = TodCommon.ClampInt((int)((float)num + RandomNumbers.NextNumber(64f) - 32f), 0, 255);
+			int theAlpha = TodCommon.ClampInt((int)(num + RandomNumbers.NextNumber(64f) - 32f), 0, 255);
 			g.SetColor(new SexyColor(0, 0, 0, theAlpha));
 			g.FillRect(-1000, -1000, Constants.BOARD_WIDTH + 2000, Constants.BOARD_HEIGHT + 2000);
 			int theAlpha2 = TodCommon.TodAnimateCurve(150, 75, theTime, theMaxAmount, 0, TodCurves.CURVE_LINEAR);
@@ -3081,17 +3081,17 @@ namespace Lawn
 						if (otherPortal != null)
 						{
 							int num4 = num - zombie.mX;
-							num4 = (int)((float)num4 * 0.5f);
+							num4 = (int)(num4 * 0.5f);
 							if (zombie.IsWalkingBackwards())
 							{
 								num4 -= 60;
 							}
 							zombie.mLastPortalX = otherPortal.mGridX;
 							zombie.mX = otherPortal.mGridX * 80 - num4;
-							zombie.mPosX = (float)zombie.mX;
+							zombie.mPosX = zombie.mX;
 							zombie.SetRow(otherPortal.mGridY);
 							zombie.mY = (int)zombie.GetPosYBasedOnRow(otherPortal.mGridY);
-							zombie.mPosY = (float)zombie.mY;
+							zombie.mPosY = zombie.mY;
 							zombie.cachedZombieRectUpToDate = false;
 						}
 					}
@@ -3116,11 +3116,11 @@ namespace Lawn
 							int num10 = otherPortal2.mGridY - thePortal.mGridY;
 							int num11 = num10 * 100;
 							projectile.mX = otherPortal2.mGridX * 80 - num9 + 90;
-							projectile.mPosX = (float)projectile.mX;
+							projectile.mPosX = projectile.mX;
 							projectile.mRow = otherPortal2.mGridY;
 							projectile.mY += num11;
-							projectile.mPosY = (float)projectile.mY;
-							projectile.mShadowY += (float)num11;
+							projectile.mPosY = projectile.mY;
+							projectile.mShadowY += num11;
 							projectile.mLastPortalX = otherPortal2.mGridX;
 							projectile.mRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_PROJECTILE, projectile.mRow, 0);
 						}
@@ -3142,9 +3142,9 @@ namespace Lawn
 						{
 							int num15 = otherPortal3.mGridY - thePortal.mGridY;
 							int num16 = num15 * 100;
-							lawnMower.mPosX = (float)(otherPortal3.mGridX * 80 + 25);
+							lawnMower.mPosX = otherPortal3.mGridX * 80 + 25;
 							lawnMower.mRow = otherPortal3.mGridY;
-							lawnMower.mPosY = (float)num16;
+							lawnMower.mPosY = num16;
 							lawnMower.mLastPortalX = otherPortal3.mGridX;
 							lawnMower.mRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_LAWN_MOWER, lawnMower.mRow, 0);
 							lawnMower.Update();
@@ -3496,8 +3496,8 @@ namespace Lawn
 
 		public void ZombiquariumMouseDown(int x, int y)
 		{
-			x = (int)((float)x * Constants.IS);
-			y = (int)((float)y * Constants.IS);
+			x = (int)(x * Constants.IS);
+			y = (int)(y * Constants.IS);
 			if (x < 80 || x > 720 || y < 90 || y > 430)
 			{
 				return;
@@ -3532,8 +3532,8 @@ namespace Lawn
 			newGridItem.mGridX = 0;
 			newGridItem.mGridY = 0;
 			newGridItem.mGridItemCounter = 0;
-			newGridItem.mPosX = (float)x - 15f;
-			newGridItem.mPosY = (float)y - 15f;
+			newGridItem.mPosX = x - 15f;
+			newGridItem.mPosY = y - 15f;
 			mApp.PlaySample(Resources.SOUND_TAP);
 			mBoard.mGridItems.Add(newGridItem);
 		}
@@ -3559,8 +3559,8 @@ namespace Lawn
 			if (num >= 110 && mBoard.mTutorialState == TutorialState.TUTORIAL_OFF)
 			{
 				mBoard.mTutorialState = TutorialState.TUTORIAL_ZOMBIQUARIUM_BUY_SNORKEL;
-				float num2 = (float)(mBoard.mSeedBank.mX + mBoard.mSeedBank.mSeedPackets[0].mX);
-				float num3 = (float)(mBoard.mSeedBank.mY + mBoard.mSeedBank.mSeedPackets[0].mY);
+				float num2 = mBoard.mSeedBank.mX + mBoard.mSeedBank.mSeedPackets[0].mX;
+				float num3 = mBoard.mSeedBank.mY + mBoard.mSeedBank.mSeedPackets[0].mY;
 				mBoard.TutorialArrowShow((int)num2, (int)num3);
 				mBoard.DisplayAdvice("[ADVICE_ZOMBIQUARIUM_BUY_SNORKEL]", MessageStyle.MESSAGE_STYLE_HINT_TALL_FAST, AdviceType.ADVICE_ZOMBIQUARIUM_BUY_SNORKEL);
 			}
@@ -3573,8 +3573,8 @@ namespace Lawn
 			if (num >= 1000 && mBoard.mTutorialState == TutorialState.TUTORIAL_ZOMBIQUARIUM_BOUGHT_SNORKEL)
 			{
 				mBoard.mTutorialState = TutorialState.TUTORIAL_ZOMBIQUARIUM_CLICK_TROPHY;
-				float num4 = (float)(mBoard.mSeedBank.mX + mBoard.mSeedBank.mSeedPackets[1].mX);
-				float num5 = (float)(mBoard.mSeedBank.mY + mBoard.mSeedBank.mSeedPackets[1].mY);
+				float num4 = mBoard.mSeedBank.mX + mBoard.mSeedBank.mSeedPackets[1].mX;
+				float num5 = mBoard.mSeedBank.mY + mBoard.mSeedBank.mSeedPackets[1].mY;
 				mBoard.TutorialArrowShow((int)num4, (int)num5);
 				mBoard.DisplayAdvice("[ADVICE_ZOMBIQUARIUM_CLICK_TROPHY]", MessageStyle.MESSAGE_STYLE_HINT_TALL_FAST, AdviceType.ADVICE_ZOMBIQUARIUM_CLICK_TROPHY);
 			}
@@ -3680,7 +3680,7 @@ namespace Lawn
 			case ScaryPotType.SCARYPOT_ZOMBIE:
 			{
 				Zombie zombie = mBoard.AddZombieInRow(theScaryPot.mZombieType, theScaryPot.mGridY, 0);
-				zombie.mPosX = (float)num;
+				zombie.mPosX = num;
 				break;
 			}
 			case ScaryPotType.SCARYPOT_SUN:
@@ -3717,15 +3717,15 @@ namespace Lawn
 			mApp.PlayFoley(FoleyType.FOLEY_VASE_BREAKING);
 			if (theScaryPot.mGridItemState == GridItemState.GRIDITEM_STATE_SCARY_POT_LEAF)
 			{
-				mApp.AddTodParticle((float)(num + 20), (float)num2, 200000, ParticleEffect.PARTICLE_VASE_SHATTER_LEAF);
+				mApp.AddTodParticle(num + 20, num2, 200000, ParticleEffect.PARTICLE_VASE_SHATTER_LEAF);
 				return;
 			}
 			if (theScaryPot.mGridItemState == GridItemState.GRIDITEM_STATE_SCARY_POT_ZOMBIE)
 			{
-				mApp.AddTodParticle((float)(num + 20), (float)num2, 200000, ParticleEffect.PARTICLE_VASE_SHATTER_ZOMBIE);
+				mApp.AddTodParticle(num + 20, num2, 200000, ParticleEffect.PARTICLE_VASE_SHATTER_ZOMBIE);
 				return;
 			}
-			mApp.AddTodParticle((float)(num + 20), (float)num2, 200000, ParticleEffect.PARTICLE_VASE_SHATTER);
+			mApp.AddTodParticle(num + 20, num2, 200000, ParticleEffect.PARTICLE_VASE_SHATTER);
 		}
 
 		public void ScaryPotterJackExplode(int aPosX, int aPosY)
@@ -4089,7 +4089,7 @@ namespace Lawn
 			mChallengeGridY = theScaryPot.mGridY;
 			int num = mBoard.GridToPixelX(theScaryPot.mGridX, theScaryPot.mGridY);
 			int num2 = mBoard.GridToPixelY(theScaryPot.mGridX, theScaryPot.mGridY);
-			Reanimation reanimation = mApp.AddReanimation((float)num, (float)num2, 400000, ReanimationType.REANIM_HAMMER);
+			Reanimation reanimation = mApp.AddReanimation(num, num2, 400000, ReanimationType.REANIM_HAMMER);
 			reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_open_pot, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 40f);
 			mReanimChallenge = mApp.ReanimationGetID(reanimation);
 			mChallengeState = ChallengeState.STATECHALLENGE_SCARY_POTTER_MALLETING;
@@ -4175,8 +4175,8 @@ namespace Lawn
 				mApp.PlayFoley(FoleyType.FOLEY_DROP);
 				return;
 			}
-			int num = mBoard.PlantingPixelToGridX((int)((float)x * Constants.IS), (int)((float)y * Constants.IS), mBoard.mCursorObject.mType);
-			int num2 = mBoard.PlantingPixelToGridY((int)((float)x * Constants.IS), (int)((float)y * Constants.IS), mBoard.mCursorObject.mType);
+			int num = mBoard.PlantingPixelToGridX((int)(x * Constants.IS), (int)(y * Constants.IS), mBoard.mCursorObject.mType);
+			int num2 = mBoard.PlantingPixelToGridY((int)(x * Constants.IS), (int)(y * Constants.IS), mBoard.mCursorObject.mType);
 			if (num == -1 || num2 == -1)
 			{
 				mBoard.RefreshSeedPacketFromCursor();
@@ -4332,8 +4332,8 @@ namespace Lawn
 			{
 				return;
 			}
-			float num = (float)g.mTransX;
-			float num2 = (float)g.mTransY;
+			float num = g.mTransX;
+			float num2 = g.mTransY;
 			g.SetColorizeImages(true);
 			g.mTransX = (int)(num + Constants.S * 4f);
 			g.mTransY = (int)(num2 + Constants.S * 4f);
@@ -4412,8 +4412,8 @@ namespace Lawn
 				newGridItem.mGridY = i;
 				newGridItem.mRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_PLANT, newGridItem.mGridY, 0);
 				newGridItem.mGridItemCounter = 70;
-				newGridItem.mPosX = (float)mBoard.GridToPixelX(newGridItem.mGridX, newGridItem.mGridY) - 40f;
-				newGridItem.mPosY = (float)mBoard.GridToPixelY(newGridItem.mGridX, newGridItem.mGridY) + 40f;
+				newGridItem.mPosX = mBoard.GridToPixelX(newGridItem.mGridX, newGridItem.mGridY) - 40f;
+				newGridItem.mPosY = mBoard.GridToPixelY(newGridItem.mGridX, newGridItem.mGridY) + 40f;
 				mBoard.mGridItems.Add(newGridItem);
 			}
 			if (mApp.mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_1)
@@ -4669,8 +4669,8 @@ namespace Lawn
 				for (int l = 0; l < 4; l++)
 				{
 					float num6 = 1.7f;
-					float thePosX = ((float)num4 + (float)k * 100f) * num6 + (float)num;
-					float thePosY = ((float)num5 + (float)l * 100f) * num6;
+					float thePosX = (num4 + k * 100f) * num6 + num;
+					float thePosY = (num5 + l * 100f) * num6;
 					TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_RAIN, thePosX, thePosY, num6, num6);
 				}
 			}
@@ -4770,7 +4770,7 @@ namespace Lawn
 			if (theSquirrel.mGridItemState == GridItemState.GRIDITEM_STATE_SQUIRREL_ZOMBIE)
 			{
 				Zombie zombie = mBoard.AddZombieInRow(ZombieType.ZOMBIE_NORMAL, theSquirrel.mGridY, 0);
-				zombie.mPosX = (float)mBoard.GridToPixelX(theSquirrel.mGridX, theSquirrel.mGridY);
+				zombie.mPosX = mBoard.GridToPixelX(theSquirrel.mGridX, theSquirrel.mGridY);
 				theSquirrel.GridItemDie();
 				mBoard.DisplayAdvice("[ADVICE_SQUIRREL_ZOMBIE]", MessageStyle.MESSAGE_STYLE_HINT_FAST, AdviceType.ADVICE_NONE);
 				return;
@@ -4861,8 +4861,8 @@ namespace Lawn
 			{
 				return;
 			}
-			float num = (float)mBoard.GridToPixelX(theSquirrel.mGridX, theSquirrel.mGridY);
-			float num2 = (float)mBoard.GridToPixelY(theSquirrel.mGridX, theSquirrel.mGridY);
+			float num = mBoard.GridToPixelX(theSquirrel.mGridX, theSquirrel.mGridY);
+			float num2 = mBoard.GridToPixelY(theSquirrel.mGridX, theSquirrel.mGridY);
 			mApp.AddTodParticle(num + 40f, num2 + 40f, topPlantAt.mRenderOrder + 1, ParticleEffect.PARTICLE_WALLNUT_EAT_SMALL);
 			topPlantAt.mBeghouledFlashCountdown = Math.Max(topPlantAt.mBeghouledFlashCountdown, 25);
 		}
@@ -5309,8 +5309,8 @@ namespace Lawn
 
 		public void BeghouledTwistMouseDown(int x, int y)
 		{
-			x = (int)((float)x * Constants.IS);
-			y = (int)((float)y * Constants.IS);
+			x = (int)(x * Constants.IS);
+			y = (int)(y * Constants.IS);
 			if (mBoard.HasLevelAwardDropped())
 			{
 				return;
@@ -5488,8 +5488,8 @@ namespace Lawn
 				{
 					theCoinType = CoinType.COIN_AWARD_BAG_DIAMOND;
 				}
-				float num2 = (float)(mBoard.GridToPixelX(theGridX, theGridY) + 40);
-				float num3 = (float)(mBoard.GridToPixelY(theGridX, theGridY) + 40);
+				float num2 = mBoard.GridToPixelX(theGridX, theGridY) + 40;
+				float num3 = mBoard.GridToPixelY(theGridX, theGridY) + 40;
 				mBoard.AddCoin((int)num2, (int)num3, theCoinType, CoinMotion.COIN_MOTION_COIN);
 				return;
 			}
@@ -5503,12 +5503,12 @@ namespace Lawn
 			{
 				zombie.mTargetCol = theGridX;
 				zombie.SetRow(theGridY);
-				zombie.mPosX = (float)mBoard.GridToPixelX(theGridX, theGridY);
+				zombie.mPosX = mBoard.GridToPixelX(theGridX, theGridY);
 				zombie.mPosY = zombie.GetPosYBasedOnRow(theGridY);
 				zombie.mRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_GRAVE_STONE, theGridY, 7);
 				return;
 			}
-			zombie.mPosX = (float)mBoard.GridToPixelX(theGridX, theGridY) - 30f;
+			zombie.mPosX = mBoard.GridToPixelX(theGridX, theGridY) - 30f;
 		}
 
 		public void WhackAZombieUpdate()
@@ -5651,7 +5651,7 @@ namespace Lawn
 					num3 = 52;
 				}
 				string theText = Common.StrFormat_("[TREE_OF_WISDOM_%d]", mTreeOfWisdomTalkIndex);
-				TRect theRect = new TRect((int)((float)(num2 + 25) * Constants.S), (int)((float)(num3 + 6) * Constants.S), 233, 144);
+				TRect theRect = new TRect((int)((num2 + 25) * Constants.S), (int)((num3 + 6) * Constants.S), 233, 144);
 				TodStringFile.TodDrawStringWrapped(g, theText, theRect, Resources.FONT_BRIANNETOD16, SexyColor.Black, DrawStringJustification.DS_ALIGN_CENTER_VERTICAL_MIDDLE);
 			}
 			int num4 = num;
@@ -5667,8 +5667,8 @@ namespace Lawn
 			if (num4 >= 50)
 			{
 				string theString = TodCommon.TodReplaceNumberString("[TREE_OF_WISDOM_HIEGHT]", "{HEIGHT}", num4);
-				float num6 = (float)Resources.FONT_HOUSEOFTERROR16.StringWidth(theString) * num5;
-				float num7 = (float)Resources.FONT_HOUSEOFTERROR16.mAscent * num5;
+				float num6 = Resources.FONT_HOUSEOFTERROR16.StringWidth(theString) * num5;
+				float num7 = Resources.FONT_HOUSEOFTERROR16.mAscent * num5;
 				Matrix theMatrix = default(Matrix);
 				TodCommon.TodScaleTransformMatrix(ref theMatrix, 400f - num6 * 0.5f, 20f + num7 * 0.5f, num5, num5);
 				TodCommon.TodDrawStringMatrix(g, Resources.FONT_HOUSEOFTERROR16, theMatrix, theString, new SexyColor(255, 255, 255));

@@ -109,8 +109,8 @@ namespace Sexy
 				continue;
 				IL_8D:
 				text = text.Insert(theString.Length, "%");
-				text = text.Insert(theString.Length, Convert.ToString(array[(int)(c >> 4 & '\u000f')]));
-				text = text.Insert(theString.Length, Convert.ToString(array[(int)(c & '\u000f')]));
+				text = text.Insert(theString.Length, Convert.ToString(array[c >> 4 & '\u000f']));
+				text = text.Insert(theString.Length, Convert.ToString(array[c & '\u000f']));
 				goto IL_E6;
 				IL_D3:
 				text = text.Insert(theString.Length, Convert.ToString(c));

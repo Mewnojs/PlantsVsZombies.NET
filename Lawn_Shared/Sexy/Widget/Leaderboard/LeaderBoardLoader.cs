@@ -18,7 +18,7 @@ namespace Sexy
 		{
 			get
 			{
-				if ((DateTime.UtcNow - resultsReceived).TotalSeconds < (double)CACHE_DURATION)
+				if ((DateTime.UtcNow - resultsReceived).TotalSeconds < CACHE_DURATION)
 				{
 					return LeaderBoardLoader.LoaderState.Loaded;
 				}

@@ -13,7 +13,7 @@ namespace Sexy
 			mContent = theApp.mContentManager;
 			mInstances = new List<XNASoundInstance>();
 			int num = 0;
-			while ((long)num < (long)((ulong)XNASoundConstants.MAX_SOUNDS))
+			while (num < (long)((ulong)XNASoundConstants.MAX_SOUNDS))
 			{
 				mSounds[num] = null;
 				num++;
@@ -51,7 +51,7 @@ namespace Sexy
 		public override int LoadSound(string theFilename)
 		{
 			int num = 0;
-			while ((long)num < (long)((ulong)XNASoundConstants.MAX_SOUNDS))
+			while (num < (long)((ulong)XNASoundConstants.MAX_SOUNDS))
 			{
 				if (mInstances[num] == null)
 				{
@@ -91,7 +91,7 @@ namespace Sexy
 			{
 				if (mInstances[i].SoundId == theSfxID)
 				{
-					mInstances[i].SetBaseVolume((double)mSounds[(int)((UIntPtr)theSfxID)].mBaseVolume);
+					mInstances[i].SetBaseVolume(mSounds[(int)((UIntPtr)theSfxID)].mBaseVolume);
 				}
 			}
 			return true;
@@ -103,7 +103,7 @@ namespace Sexy
 			{
 				return false;
 			}
-			mSounds[(int)((UIntPtr)theSfxID)].mBasePan = (float)theBasePan / 100f;
+			mSounds[(int)((UIntPtr)theSfxID)].mBasePan = theBasePan / 100f;
 			for (int i = 0; i < mInstances.Count; i++)
 			{
 				if (mInstances[i].SoundId == theSfxID)
@@ -140,7 +140,7 @@ namespace Sexy
 
 		public override double GetMasterVolume()
 		{
-			return (double)SoundEffect.MasterVolume;
+			return SoundEffect.MasterVolume;
 		}
 
 		public override void SetMasterVolume(double theVolume)
@@ -163,7 +163,7 @@ namespace Sexy
 		public override int GetFreeSoundId()
 		{
 			int num = 0;
-			while ((long)num < (long)((ulong)XNASoundConstants.MAX_SOUNDS))
+			while (num < (long)((ulong)XNASoundConstants.MAX_SOUNDS))
 			{
 				if (mSounds[num] == null)
 				{
@@ -178,7 +178,7 @@ namespace Sexy
 		{
 			int num = 0;
 			int num2 = 0;
-			while ((long)num2 < (long)((ulong)XNASoundConstants.MAX_SOUNDS))
+			while (num2 < (long)((ulong)XNASoundConstants.MAX_SOUNDS))
 			{
 				if (mSounds[num2] != null)
 				{

@@ -10,8 +10,8 @@ namespace Lawn
 		{
 			for (int i = 0; i < QuickPlayWidget.ZombieThumbTab.Length; i++)
 			{
-				QuickPlayWidget.ZombieThumbTab[i].x = (int)Constants.InvertAndScale((float)QuickPlayWidget.ZombieThumbTab[i].x);
-				QuickPlayWidget.ZombieThumbTab[i].y = (int)Constants.InvertAndScale((float)QuickPlayWidget.ZombieThumbTab[i].y);
+				QuickPlayWidget.ZombieThumbTab[i].x = (int)Constants.InvertAndScale(ZombieThumbTab[i].x);
+				QuickPlayWidget.ZombieThumbTab[i].y = (int)Constants.InvertAndScale(ZombieThumbTab[i].y);
 			}
 		}
 
@@ -60,7 +60,7 @@ namespace Lawn
 					}
 					if (QuickPlayWidget.ZombieThumbTab[num4].type == ZombieType.ZOMBIE_BUNGEE)
 					{
-						g.DrawImage(AtlasResources.IMAGE_BUNGEECORD, (float)(num + num5) + Constants.InvertAndScale(33f), (float)(QuickPlayWidget.ZombieThumbTab[num4].y + Constants.QuickPlayWidget_Bungee_Y));
+						g.DrawImage(AtlasResources.IMAGE_BUNGEECORD, num + num5 + Constants.InvertAndScale(33f), QuickPlayWidget.ZombieThumbTab[num4].y + Constants.QuickPlayWidget_Bungee_Y);
 					}
 					DrawZombieThumbnail(g, QuickPlayWidget.ZombieThumbTab[num4].type, num + num5, QuickPlayWidget.ZombieThumbTab[num4].y, mirror);
 					num4++;
@@ -158,7 +158,7 @@ namespace Lawn
 			{
 				g.mScaleX = -g.mScaleX;
 			}
-			mApp.mReanimatorCache.DrawCachedZombie(g, (float)theX, (float)theY, theZombieType);
+			mApp.mReanimatorCache.DrawCachedZombie(g, theX, theY, theZombieType);
 			g.mScaleX = scaleX;
 		}
 

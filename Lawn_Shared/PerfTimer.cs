@@ -29,7 +29,7 @@ public struct PerfTimer
 		{
 			CalcDuration();
 		}
-		return (double)mDuration;
+		return mDuration;
 	}
 
 	private bool mRunning;

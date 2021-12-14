@@ -239,7 +239,7 @@ namespace Lawn
 				return;
 			}
 			g.SetLinearBlend(true);
-			g.DrawImage(AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEAVES, (float)Constants.MAIN_MENU_ORIGIN_X, Constants.InvertAndScale(287f));
+			g.DrawImage(AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEAVES, Constants.MAIN_MENU_ORIGIN_X, Constants.InvertAndScale(287f));
 			if (mApp.mPlayerInfo == null)
 			{
 				return;
@@ -266,22 +266,22 @@ namespace Lawn
 				}
 				if (mAdventureButton.mIsDown)
 				{
-					num += (float)Constants.GameSelector_LevelNumber_ButtonDown_Offset;
-					num3 += (float)Constants.GameSelector_LevelNumber_ButtonDown_Offset;
-					num2 += (float)Constants.GameSelector_LevelNumber_ButtonDown_Offset;
-					num4 += (float)Constants.GameSelector_LevelNumber_ButtonDown_Offset;
+					num += Constants.GameSelector_LevelNumber_ButtonDown_Offset;
+					num3 += Constants.GameSelector_LevelNumber_ButtonDown_Offset;
+					num2 += Constants.GameSelector_LevelNumber_ButtonDown_Offset;
+					num4 += Constants.GameSelector_LevelNumber_ButtonDown_Offset;
 				}
 				g.SetColorizeImages(true);
 				g.SetColor(mAdventureButton.mColors[5]);
-				TodCommon.TodDrawImageCelF(g, AtlasResources.IMAGE_SELECTORSCREEN_LEVELNUMBERS, (float)(Constants.MAIN_MENU_ORIGIN_X + Constants.GameSelector_LevelNumber_1_Pos.X) + num, (float)Constants.GameSelector_LevelNumber_1_Pos.Y + num2, num5, 0);
+				TodCommon.TodDrawImageCelF(g, AtlasResources.IMAGE_SELECTORSCREEN_LEVELNUMBERS, Constants.MAIN_MENU_ORIGIN_X + Constants.GameSelector_LevelNumber_1_Pos.X + num, Constants.GameSelector_LevelNumber_1_Pos.Y + num2, num5, 0);
 				if (num6 < 10)
 				{
-					TodCommon.TodDrawImageCelF(g, AtlasResources.IMAGE_SELECTORSCREEN_LEVELNUMBERS, (float)(Constants.MAIN_MENU_ORIGIN_X + Constants.GameSelector_LevelNumber_2_Pos.X) + num3, (float)Constants.GameSelector_LevelNumber_2_Pos.Y + num4, num6, 0);
+					TodCommon.TodDrawImageCelF(g, AtlasResources.IMAGE_SELECTORSCREEN_LEVELNUMBERS, Constants.MAIN_MENU_ORIGIN_X + Constants.GameSelector_LevelNumber_2_Pos.X + num3, Constants.GameSelector_LevelNumber_2_Pos.Y + num4, num6, 0);
 				}
 				else if (num6 == 10)
 				{
-					TodCommon.TodDrawImageCelF(g, AtlasResources.IMAGE_SELECTORSCREEN_LEVELNUMBERS, (float)(Constants.MAIN_MENU_ORIGIN_X + Constants.GameSelector_LevelNumber_2_Pos.X) + num3, (float)Constants.GameSelector_LevelNumber_2_Pos.Y + num4, 1, 0);
-					TodCommon.TodDrawImageCelF(g, AtlasResources.IMAGE_SELECTORSCREEN_LEVELNUMBERS, (float)(Constants.MAIN_MENU_ORIGIN_X + Constants.GameSelector_LevelNumber_3_Pos.X) + num3, (float)Constants.GameSelector_LevelNumber_3_Pos.Y + num4, 0, 0);
+					TodCommon.TodDrawImageCelF(g, AtlasResources.IMAGE_SELECTORSCREEN_LEVELNUMBERS, Constants.MAIN_MENU_ORIGIN_X + Constants.GameSelector_LevelNumber_2_Pos.X + num3, Constants.GameSelector_LevelNumber_2_Pos.Y + num4, 1, 0);
+					TodCommon.TodDrawImageCelF(g, AtlasResources.IMAGE_SELECTORSCREEN_LEVELNUMBERS, Constants.MAIN_MENU_ORIGIN_X + Constants.GameSelector_LevelNumber_3_Pos.X + num3, Constants.GameSelector_LevelNumber_3_Pos.Y + num4, 0, 0);
 				}
 				g.SetColor(new SexyColor(255, 255, 255));
 				g.FillRect(Constants.MAIN_MENU_ORIGIN_X + Constants.GameSelector_LevelNumber_Bar.X + (int)num, Constants.GameSelector_LevelNumber_Bar.Y + (int)num2, Constants.GameSelector_LevelNumber_Bar.Width, Constants.GameSelector_LevelNumber_Bar.Height);
@@ -297,10 +297,10 @@ namespace Lawn
 				int theTrackIndex = reanimation.FindTrackIndex(GlobalMembersReanimIds.ReanimTrackId_welcome);
 				SexyTransform2D sexyTransform2D = default(SexyTransform2D);
 				reanimation.GetAttachmentOverlayMatrix(theTrackIndex, out sexyTransform2D);
-				float num7 = (float)Resources.FONT_BRIANNETOD16.StringWidth(welcomeString);
+				float num7 = Resources.FONT_BRIANNETOD16.StringWidth(welcomeString);
 				SexyTransform2D sexyTransform2D2 = default(SexyTransform2D);
-				sexyTransform2D2.Translate((float)(Constants.GameSelector_PlayerName_Pos.X - (int)(num7 * 0.5f) + Constants.MAIN_MENU_ORIGIN_X + mX), (float)(Constants.GameSelector_PlayerName_Pos.Y + mY));
-				sexyTransform2D2.Translate((float)(-(float)g.mTransX), (float)(-(float)g.mTransY));
+				sexyTransform2D2.Translate(Constants.GameSelector_PlayerName_Pos.X - (int)(num7 * 0.5f) + Constants.MAIN_MENU_ORIGIN_X + mX, Constants.GameSelector_PlayerName_Pos.Y + mY);
+				sexyTransform2D2.Translate((float)(-g.mTransX), (float)(-g.mTransY));
 				TodCommon.TodDrawStringMatrix(g, Resources.FONT_BRIANNETOD16, sexyTransform2D.mMatrix * sexyTransform2D2.mMatrix, welcomeString, new SexyColor(255, 245, 200));
 			}
 			if (mApp.mPlayerInfo != null)

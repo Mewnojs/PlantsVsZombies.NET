@@ -272,8 +272,8 @@ namespace Lawn
 				mZombie = Zombie.GetNewZombie();
 				mZombie.mBoard = null;
 				mZombie.ZombieInitialize(0, ZombieType.ZOMBIE_NORMAL, false, null, GameConstants.ZOMBIE_WAVE_UI);
-				mZombie.mPosX = (float)Constants.Almanac_IndexZombiePos.X;
-				mZombie.mPosY = (float)Constants.Almanac_IndexZombiePos.Y;
+				mZombie.mPosX = Constants.Almanac_IndexZombiePos.X;
+				mZombie.mPosY = Constants.Almanac_IndexZombiePos.Y;
 				mIndexButton.mBtnNoDraw = true;
 				return;
 			}
@@ -320,8 +320,8 @@ namespace Lawn
 			if (mZombie != null && !ZombieHasSilhouette(mZombie.mZombieType))
 			{
 				Graphics @new = Graphics.GetNew(g);
-				@new.mTransX += (int)((float)mZombie.mX * Constants.S);
-				@new.mTransY += (int)((float)mZombie.mY * Constants.S);
+				@new.mTransX += (int)(mZombie.mX * Constants.S);
+				@new.mTransY += (int)(mZombie.mY * Constants.S);
 				@new.SetClipRect(ref Constants.Almanac_ZombieClipRect);
 				if (mZombie.mZombieType == ZombieType.ZOMBIE_ZAMBONI)
 				{
@@ -429,27 +429,27 @@ namespace Lawn
 		public void SetupPlant()
 		{
 			ClearPlantsAndZombies();
-			float num = (float)Constants.Almanac_PlantPosition.X;
-			float num2 = (float)Constants.Almanac_PlantPosition.Y;
+			float num = Constants.Almanac_PlantPosition.X;
+			float num2 = Constants.Almanac_PlantPosition.Y;
 			if (mSelectedSeed == SeedType.SEED_TALLNUT)
 			{
-				num2 += (float)((int)Constants.InvertAndScale(18f));
+				num2 += (int)Constants.InvertAndScale(18f);
 			}
 			if (mSelectedSeed == SeedType.SEED_COBCANNON)
 			{
-				num += (float)((int)Constants.InvertAndScale(-20f));
+				num += (int)Constants.InvertAndScale(-20f);
 			}
 			if (mSelectedSeed == SeedType.SEED_FLOWERPOT)
 			{
-				num2 += (float)((int)Constants.InvertAndScale(-20f));
+				num2 += (int)Constants.InvertAndScale(-20f);
 			}
 			if (mSelectedSeed == SeedType.SEED_INSTANT_COFFEE)
 			{
-				num2 += (float)((int)Constants.InvertAndScale(20f));
+				num2 += (int)Constants.InvertAndScale(20f);
 			}
 			if (mSelectedSeed == SeedType.SEED_GRAVEBUSTER)
 			{
-				num2 += (float)((int)Constants.InvertAndScale(35f));
+				num2 += (int)Constants.InvertAndScale(35f);
 			}
 			mPlant = Plant.GetNewPlant();
 			mPlant.mBoard = null;
@@ -539,8 +539,8 @@ namespace Lawn
 			mZombie.mBoard = null;
 			mZombie.ZombieInitialize(0, mSelectedZombie, false, null, GameConstants.ZOMBIE_WAVE_UI);
 			mZombie.mScaleZombie = 1f;
-			mZombie.mPosX = (float)Constants.Almanac_ZombiePosition.X;
-			mZombie.mPosY = (float)Constants.Almanac_ZombiePosition.Y;
+			mZombie.mPosX = Constants.Almanac_ZombiePosition.X;
+			mZombie.mPosY = Constants.Almanac_ZombiePosition.Y;
 			string text = "";
 			ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(mSelectedZombie);
 			string text2;

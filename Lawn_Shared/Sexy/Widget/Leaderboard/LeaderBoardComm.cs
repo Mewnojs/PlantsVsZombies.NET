@@ -58,7 +58,7 @@ namespace Sexy
 					LeaderboardIdentity leaderboardId = LeaderboardIdentity.Create(LeaderboardKey.BestScoreLifeTime, leaderboardNumber);
 					LeaderboardWriter leaderboardWriter = gamer.LeaderboardWriter;
 					LeaderboardEntry leaderboard = leaderboardWriter.GetLeaderboard(leaderboardId);
-					leaderboard.Rating = (long)score;
+					leaderboard.Rating = score;
 					foreach (LeaderBoardLoader leaderBoardLoader in LeaderBoardComm.leaderboardLoaders)
 					{
 						leaderBoardLoader.ResetCache();

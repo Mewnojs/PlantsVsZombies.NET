@@ -32,7 +32,7 @@ namespace Sexy.TodLib
 			{
 				return false;
 			}
-			for (int i = 0; i < (int)theDefinition.mTrackCount; i++)
+			for (int i = 0; i < theDefinition.mTrackCount; i++)
 			{
 				ReanimatorTrack reanimatorTrack = theDefinition.mTracks[i];
 				if (reanimatorTrack.mName == "zombie_butter")
@@ -52,7 +52,7 @@ namespace Sexy.TodLib
 				string anImageName = string.Empty;
 				Font aFont = null;
 				string aText = string.Empty;
-				for (int j = 0; j < (int)reanimatorTrack.mTransformCount; j++)
+				for (int j = 0; j < reanimatorTrack.mTransformCount; j++)
 				{
 					ReanimatorTransform reanimatorTransform = reanimatorTrack.mTransforms[j];
 					ReanimatorXnaHelpers.ReanimationFillInMissingData(ref num2, ref reanimatorTransform.mTransX);
@@ -106,11 +106,11 @@ namespace Sexy.TodLib
 				theDefinition.mReanimAtlas.ReanimAtlasDispose();
 				theDefinition.mReanimAtlas = null;
 			}
-			for (int i = 0; i < (int)theDefinition.mTrackCount; i++)
+			for (int i = 0; i < theDefinition.mTrackCount; i++)
 			{
 				ReanimatorTrack reanimatorTrack = theDefinition.mTracks[i];
 				string text = null;
-				for (int j = 0; j < (int)reanimatorTrack.mTransformCount; j++)
+				for (int j = 0; j < reanimatorTrack.mTransformCount; j++)
 				{
 					ReanimatorTransform reanimatorTransform = reanimatorTrack.mTransforms[j];
 					if (!string.IsNullOrEmpty(reanimatorTransform.mText) && reanimatorTransform.mText == text)
@@ -136,7 +136,7 @@ namespace Sexy.TodLib
 			{
 				ReanimationParams reanimationParams = theReanimationParamArray[i];
 				ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(reanimationParams.mReanimationType, true);
-				ReanimatorXnaHelpers.mLoadingProgress = (double)i / (double)(ReanimatorXnaHelpers.gReanimationParamArraySize - 1);
+				ReanimatorXnaHelpers.mLoadingProgress = i / (double)(ReanimatorXnaHelpers.gReanimationParamArraySize - 1);
 				ReanimatorXnaHelpers.mLoadedResources++;
 			}
 		}

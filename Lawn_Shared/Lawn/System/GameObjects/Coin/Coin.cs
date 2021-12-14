@@ -21,8 +21,8 @@ namespace Lawn
 			mWidth = (int)Constants.InvertAndScale(23f);
 			mHeight = (int)Constants.InvertAndScale(23f);
 			mType = theCoinType;
-			mPosX = (float)theX;
-			mPosY = (float)theY;
+			mPosX = theX;
+			mPosY = theY;
 			mDisappearCounter = 0;
 			mIsBeingCollected = false;
 			mFadeCount = 0;
@@ -41,12 +41,12 @@ namespace Lawn
 			int num = Constants.LAWN_XMIN + (int)Constants.InvertAndScale(40f);
 			if (num + mWidth < Constants.LAWN_XMIN && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 			{
-				mPosX = (float)(num + mWidth);
+				mPosX = num + mWidth;
 			}
 			if (IsSun())
 			{
-				float num2 = (float)mWidth * Constants.IS * 0.5f;
-				float num3 = (float)mHeight * Constants.IS * 0.5f;
+				float num2 = mWidth * Constants.IS * 0.5f;
+				float num3 = mHeight * Constants.IS * 0.5f;
 				Reanimation reanimation = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_SUN);
 				reanimation.SetPosition((mPosX + num2) * Constants.S, (mPosY + num3) * Constants.S);
 				reanimation.mLoopType = ReanimLoopType.REANIM_LOOP;
@@ -268,8 +268,8 @@ namespace Lawn
 				mHeight = AtlasResources.IMAGE_PRESENT.GetCelHeight();
 				mRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_ABOVE_UI, 0, 0);
 			}
-			mWidth = (int)((float)mWidth * Constants.IS);
-			mHeight = (int)((float)mHeight * Constants.IS);
+			mWidth = (int)(mWidth * Constants.IS);
+			mHeight = (int)(mHeight * Constants.IS);
 			switch (mCoinMotion)
 			{
 			case CoinMotion.COIN_MOTION_FROM_SKY:
@@ -328,9 +328,9 @@ namespace Lawn
 				Debug.ASSERT(false);
 				break;
 			}
-			if (mCoinMotion != CoinMotion.COIN_MOTION_LAWNMOWER_COIN && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && mPosX - (float)mWidth < (float)Constants.LAWN_XMIN)
+			if (mCoinMotion != CoinMotion.COIN_MOTION_LAWNMOWER_COIN && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && mPosX - mWidth < Constants.LAWN_XMIN)
 			{
-				mPosX = (float)(Constants.LAWN_XMIN + mWidth);
+				mPosX = Constants.LAWN_XMIN + mWidth;
 			}
 			mScale *= GetSunScale();
 			if (CoinGetsBouncyArrow())
@@ -353,7 +353,7 @@ namespace Lawn
 			GlobalMembersAttachment.AttachmentDie(ref mAttachmentID);
 		}
 
-		public void MouseDown(int x, int y, int theClickCount)
+		public void MouseDown(int theX, int theY, int theClickCount)
 		{
 			if (mBoard == null || mBoard.mPaused || mApp.mGameScene != GameScenes.SCENE_PLAYING)
 			{
@@ -377,8 +377,8 @@ namespace Lawn
 		public bool MouseHitTest(int theX, int theY, out HitResult theHitResult)
 		{
 			theHitResult = default(HitResult);
-			theX = (int)((float)theX * Constants.IS);
-			theY = (int)((float)theY * Constants.IS);
+			theX = (int)(theX * Constants.IS);
+			theY = (int)(theY * Constants.IS);
 			int num = 0;
 			if (mType == CoinType.COIN_AWARD_PRESENT || IsPresentWithAdvice() || mType == CoinType.COIN_PRESENT_PLANT)
 			{
@@ -399,7 +399,7 @@ namespace Lawn
 			{
 				num2 = 50;
 			}
-			bool flag = !mDead && (!mIsBeingCollected || (mType == CoinType.COIN_USABLE_SEED_PACKET && mBoard.mIgnoreNextMouseUpSeedPacket)) && (mType != CoinType.COIN_USABLE_SEED_PACKET || mBoard == null || mBoard.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_NORMAL || mApp.IsWhackAZombieLevel() || mBoard.mIgnoreNextMouseUpSeedPacket) && ((float)theX >= mPosX - (float)num2 && (float)theX < mPosX + (float)mWidth + (float)num2 && (float)theY >= mPosY + (float)num - (float)num2 && (float)theY < mPosY + (float)mHeight + (float)num + (float)num2 + (float)num3);
+			bool flag = !mDead && (!mIsBeingCollected || (mType == CoinType.COIN_USABLE_SEED_PACKET && mBoard.mIgnoreNextMouseUpSeedPacket)) && (mType != CoinType.COIN_USABLE_SEED_PACKET || mBoard == null || mBoard.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_NORMAL || mApp.IsWhackAZombieLevel() || mBoard.mIgnoreNextMouseUpSeedPacket) && (theX >= mPosX - num2 && theX < mPosX + mWidth + num2 && theY >= mPosY + num - num2 && theY < mPosY + mHeight + num + num2 + num3);
 			if (flag)
 			{
 				theHitResult.mObject = this;
@@ -513,7 +513,7 @@ namespace Lawn
 			if (mType == CoinType.COIN_SILVER || mType == CoinType.COIN_GOLD)
 			{
 				g.SetColorizeImages(true);
-				TodCommon.TodDrawImageCenterScaledF(g, AtlasResources.IMAGE_REANIM_COINGLOW, (mPosX - (float)Constants.Coin_Glow_Offset.X) * Constants.S, (mPosY - (float)Constants.Coin_Glow_Offset.Y) * Constants.S, mScale, mScale);
+				TodCommon.TodDrawImageCenterScaledF(g, AtlasResources.IMAGE_REANIM_COINGLOW, (mPosX - Constants.Coin_Glow_Offset.X) * Constants.S, (mPosY - Constants.Coin_Glow_Offset.Y) * Constants.S, mScale, mScale);
 				g.SetColorizeImages(false);
 			}
 			Image theImageStrip = null;
@@ -541,7 +541,7 @@ namespace Lawn
 				}
 				if (mType == CoinType.COIN_FINAL_SEED_PACKET)
 				{
-					TodCommon.TodDrawImageCenterScaledF(g, AtlasResources.IMAGE_SEEDPACKETS, (float)((int)(mPosX * Constants.S)), (float)((int)(mPosY * Constants.S)), mScale, mScale, (int)Coin.LoadedSeedType, true);
+					TodCommon.TodDrawImageCenterScaledF(g, AtlasResources.IMAGE_SEEDPACKETS, (int)(mPosX * Constants.S), (int)(mPosY * Constants.S), mScale, mScale, (int)Coin.LoadedSeedType, true);
 					return;
 				}
 				if (mType == CoinType.COIN_PRESENT_PLANT || mType == CoinType.COIN_AWARD_PRESENT)
@@ -577,8 +577,8 @@ namespace Lawn
 					theImageStrip = AtlasResources.IMAGE_MONEYBAG_HI_RES;
 					if (mScale == 1f)
 					{
-						num2 -= (float)(mWidth / 4 + 10);
-						num3 -= (float)(mHeight / 4);
+						num2 -= mWidth / 4 + 10;
+						num3 -= mHeight / 4;
 					}
 					num *= 0.5f;
 				}
@@ -589,15 +589,15 @@ namespace Lawn
 				else if (mType == CoinType.COIN_TROPHY)
 				{
 					theImageStrip = AtlasResources.IMAGE_TROPHY_HI_RES;
-					num2 -= (float)(mWidth / 2);
-					num3 -= (float)(mHeight / 2);
+					num2 -= mWidth / 2;
+					num3 -= mHeight / 2;
 					num *= 0.5f;
 				}
 				else if (mType == CoinType.COIN_SHOVEL)
 				{
 					theImageStrip = AtlasResources.IMAGE_SHOVEL_HI_RES;
-					num2 -= (float)Constants.Coin_Shovel_Offset.X;
-					num3 -= (float)Constants.Coin_Shovel_Offset.Y;
+					num2 -= Constants.Coin_Shovel_Offset.X;
+					num3 -= Constants.Coin_Shovel_Offset.Y;
 					num *= 0.5f;
 				}
 				else if (mType == CoinType.COIN_CARKEYS)
@@ -618,8 +618,8 @@ namespace Lawn
 				}
 				else if (mType == CoinType.COIN_WATERING_CAN)
 				{
-					num2 -= (float)Constants.Coin_Shovel_Offset.X;
-					num3 -= (float)Constants.Coin_Shovel_Offset.Y;
+					num2 -= Constants.Coin_Shovel_Offset.X;
+					num3 -= Constants.Coin_Shovel_Offset.Y;
 					theImageStrip = AtlasResources.IMAGE_REANIM_ZENGARDEN_WATERINGCAN1;
 				}
 				else if (mType == CoinType.COIN_NOTE)
@@ -649,7 +649,7 @@ namespace Lawn
 							int num4 = 0;
 							num4++;
 						}
-						SeedPacket.DrawSmallSeedPacket(g, (float)((int)(mPosX * Constants.S)), (float)((int)(mPosY * Constants.S)), mUsableSeedType, SeedType.SEED_NONE, 0f, theGrayness, false, false, true, false);
+						SeedPacket.DrawSmallSeedPacket(g, (int)(mPosX * Constants.S), (int)(mPosY * Constants.S), mUsableSeedType, SeedType.SEED_NONE, 0f, theGrayness, false, false, true, false);
 						g.SetColorizeImages(false);
 						return;
 					}
@@ -815,8 +815,8 @@ namespace Lawn
 				}
 				else if (!flag && mApp.Is3DAccelerated() && !mApp.IsQuickPlayMode())
 				{
-					float num = (float)(mWidth / 2);
-					float num2 = (float)(mHeight / 2);
+					float num = mWidth / 2;
+					float num2 = mHeight / 2;
 					TodParticleSystem theParticleSystem = mApp.AddTodParticle(mPosX + num, mPosY + num2, mRenderOrder - 1, ParticleEffect.PARTICLE_SEED_PACKET_PICKUP);
 					GlobalMembersAttachment.AttachParticle(ref mAttachmentID, theParticleSystem, num, num2);
 				}
@@ -916,9 +916,9 @@ namespace Lawn
 
 		private static void CheckRange_X(ref float thePosX, int theWidth, CoinMotion theCoinMotion)
 		{
-			if (thePosX > (float)(800 - theWidth) && theCoinMotion != CoinMotion.COIN_MOTION_FROM_BOSS)
+			if (thePosX > 800 - theWidth && theCoinMotion != CoinMotion.COIN_MOTION_FROM_BOSS)
 			{
-				thePosX = (float)(800 - theWidth);
+				thePosX = 800 - theWidth;
 				return;
 			}
 			if (thePosX < 0f)
@@ -948,7 +948,7 @@ namespace Lawn
 					Collect();
 				}
 			}
-			else if (mPosY + mVelY < (float)mGroundY)
+			else if (mPosY + mVelY < mGroundY)
 			{
 				mPosY += 3f * mVelY;
 				if (mCoinMotion == CoinMotion.COIN_MOTION_FROM_PLANT)
@@ -960,9 +960,9 @@ namespace Lawn
 					mVelY += 3f * Constants.InvertAndScale(0.15f);
 				}
 				mPosX += 3f * mVelX;
-				if (mPosX > (float)(800 - mWidth) && mCoinMotion != CoinMotion.COIN_MOTION_FROM_BOSS)
+				if (mPosX > 800 - mWidth && mCoinMotion != CoinMotion.COIN_MOTION_FROM_BOSS)
 				{
-					mPosX = (float)(800 - mWidth);
+					mPosX = 800 - mWidth;
 					mVelX = Constants.InvertAndScale(-0.4f - TodCommon.RandRangeFloat(0f, 0.4f));
 				}
 				else if (mPosX < 0f)
@@ -975,16 +975,16 @@ namespace Lawn
 			{
 				if (mNeedsBouncyArrow && !mHasBouncyArrow)
 				{
-					float num = (float)(mWidth / 2);
-					float num2 = (float)(mHeight / 2) - Constants.InvertAndScale(60f);
+					float num = mWidth / 2;
+					float num2 = mHeight / 2 - Constants.InvertAndScale(60f);
 					if (mType == CoinType.COIN_TROPHY)
 					{
 						num += Constants.InvertAndScale(2f);
 					}
 					else if (mType == CoinType.COIN_AWARD_MONEY_BAG || mType == CoinType.COIN_AWARD_BAG_DIAMOND)
 					{
-						num += (float)Constants.Coin_MoneyBag_Offset.X;
-						num2 += (float)Constants.Coin_MoneyBag_Offset.Y;
+						num += Constants.Coin_MoneyBag_Offset.X;
+						num2 += Constants.Coin_MoneyBag_Offset.Y;
 					}
 					else if (mType == CoinType.COIN_AWARD_PRESENT || IsPresentWithAdvice())
 					{
@@ -992,38 +992,38 @@ namespace Lawn
 					}
 					else if (IsMoney())
 					{
-						num += (float)Constants.Coin_Silver_Award_Offset.X;
-						num2 += (float)Constants.Coin_Silver_Award_Offset.Y;
+						num += Constants.Coin_Silver_Award_Offset.X;
+						num2 += Constants.Coin_Silver_Award_Offset.Y;
 					}
 					else if (mType == CoinType.COIN_NOTE)
 					{
-						num += (float)Constants.Coin_Note_Offset.X;
-						num2 += (float)Constants.Coin_Note_Offset.Y;
+						num += Constants.Coin_Note_Offset.X;
+						num2 += Constants.Coin_Note_Offset.Y;
 					}
 					else if (mType == CoinType.COIN_ALMANAC)
 					{
-						num += (float)Constants.Coin_Almanac_Offset.X;
-						num2 += (float)Constants.Coin_Almanac_Offset.Y;
+						num += Constants.Coin_Almanac_Offset.X;
+						num2 += Constants.Coin_Almanac_Offset.Y;
 					}
 					else if (mType == CoinType.COIN_SHOVEL)
 					{
-						num += (float)Constants.Coin_Shovel_Offset.X;
-						num2 += (float)Constants.Coin_Shovel_Offset.Y;
+						num += Constants.Coin_Shovel_Offset.X;
+						num2 += Constants.Coin_Shovel_Offset.Y;
 					}
 					else if (mType == CoinType.COIN_CARKEYS)
 					{
-						num += (float)Constants.Coin_CarKeys_Offset.X;
-						num2 += (float)Constants.Coin_CarKeys_Offset.Y;
+						num += Constants.Coin_CarKeys_Offset.X;
+						num2 += Constants.Coin_CarKeys_Offset.Y;
 					}
 					else if (mType == CoinType.COIN_TACO)
 					{
-						num += (float)Constants.Coin_Taco_Offset.X;
-						num2 += (float)Constants.Coin_Taco_Offset.Y;
+						num += Constants.Coin_Taco_Offset.X;
+						num2 += Constants.Coin_Taco_Offset.Y;
 					}
 					else if (mType == CoinType.COIN_BACON)
 					{
-						num += (float)Constants.Coin_Bacon_Offset.X;
-						num2 += (float)Constants.Coin_Bacon_Offset.Y;
+						num += Constants.Coin_Bacon_Offset.X;
+						num2 += Constants.Coin_Bacon_Offset.Y;
 					}
 					ParticleEffect theEffect;
 					if (mType == CoinType.COIN_FINAL_SEED_PACKET)
@@ -1047,8 +1047,8 @@ namespace Lawn
 					mHitGround = true;
 					PlayGroundSound();
 				}
-				mPosY = (float)mGroundY;
-				mPosX = (float)TodCommon.FloatRoundToInt(mPosX);
+				mPosY = mGroundY;
+				mPosX = TodCommon.FloatRoundToInt(mPosX);
 				if ((mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_LAST_STAND || mBoard == null || mBoard.mChallenge.mChallengeState == ChallengeState.STATECHALLENGE_LAST_STAND_ONSLAUGHT) && !IsLevelAward() && !IsPresentWithAdvice())
 				{
 					mDisappearCounter += 3;
@@ -1233,29 +1233,29 @@ namespace Lawn
 			if (IsLevelAward())
 			{
 				mScale = TodCommon.TodAnimateCurveFloat(0, 400, mDisappearCounter, 1.01f, 2f, TodCurves.CURVE_EASE_IN_OUT);
-				mPosX = TodCommon.TodAnimateCurveFloat(0, 350, mDisappearCounter, mCollectX, (float)num, TodCurves.CURVE_EASE_OUT);
-				mPosY = TodCommon.TodAnimateCurveFloat(0, 350, mDisappearCounter, mCollectY, (float)num2, TodCurves.CURVE_EASE_OUT);
+				mPosX = TodCommon.TodAnimateCurveFloat(0, 350, mDisappearCounter, mCollectX, num, TodCurves.CURVE_EASE_OUT);
+				mPosY = TodCommon.TodAnimateCurveFloat(0, 350, mDisappearCounter, mCollectY, num2, TodCurves.CURVE_EASE_OUT);
 				return;
 			}
-			float num3 = Math.Abs(mPosX - (float)num);
-			float num4 = Math.Abs(mPosY - (float)num2);
-			if (mPosX > (float)num)
+			float num3 = Math.Abs(mPosX - num);
+			float num4 = Math.Abs(mPosY - num2);
+			if (mPosX > num)
 			{
 				mPosX -= num3 / 7f;
 			}
-			else if (mPosX < (float)num)
+			else if (mPosX < num)
 			{
 				mPosX += num3 / 7f;
 			}
-			if (mPosY > (float)num2)
+			if (mPosY > num2)
 			{
 				mPosY -= num4 / 7f;
 			}
-			else if (mPosY < (float)num2)
+			else if (mPosY < num2)
 			{
 				mPosY += num4 / 7f;
 			}
-			mCollectionDistance = (float)Math.Sqrt((double)(num4 * num4 + num3 * num3));
+			mCollectionDistance = (float)Math.Sqrt(num4 * num4 + num3 * num3);
 			if (IsPresentWithAdvice())
 			{
 				if (mCollectionDistance < Constants.InvertAndScale(15f))
@@ -1356,12 +1356,12 @@ namespace Lawn
 			Debug.ASSERT(mBoard != null);
 			for (int i = 0; i < theNumCoins; i++)
 			{
-				float num = 1.5707964f + 3.1415927f * (float)(i + 1) / (float)(theNumCoins + 1);
+				float num = 1.5707964f + 3.1415927f * (i + 1) / (theNumCoins + 1);
 				float num2 = mPosX + 20f;
 				float num3 = mPosY;
 				Coin coin = mBoard.AddCoin((int)num2, (int)num3, theCoinType, CoinMotion.COIN_MOTION_FROM_PRESENT);
-				coin.mVelX = 5f * (float)Math.Sin((double)num);
-				coin.mVelY = 5f * (float)Math.Cos((double)num);
+				coin.mVelX = 5f * (float)Math.Sin(num);
+				coin.mVelY = 5f * (float)Math.Cos(num);
 			}
 		}
 

@@ -82,7 +82,7 @@ namespace Sexy
 			int num = (mItemHeight != -1) ? mItemHeight : mFont.GetHeight();
 			if (mHeight > num + 8)
 			{
-				pageSize = ((double)mHeight - 8.0) / (double)num;
+				pageSize = (mHeight - 8.0) / num;
 			}
 			mPageSize = pageSize;
 			if (mScrollbar != null)
@@ -151,7 +151,7 @@ namespace Sexy
 			}
 			if (mScrollbar != null)
 			{
-				mScrollbar.SetMaxValue((double)mLines.Count);
+				mScrollbar.SetMaxValue(mLines.Count);
 			}
 			return result;
 		}
@@ -227,7 +227,7 @@ namespace Sexy
 			}
 			if (mScrollbar != null)
 			{
-				mScrollbar.SetMaxValue((double)mLines.Count);
+				mScrollbar.SetMaxValue(mLines.Count);
 			}
 		}
 
@@ -249,7 +249,7 @@ namespace Sexy
 			}
 			if (mScrollbar != null)
 			{
-				mScrollbar.SetMaxValue((double)mLines.Count);
+				mScrollbar.SetMaxValue(mLines.Count);
 			}
 		}
 
@@ -307,7 +307,7 @@ namespace Sexy
 			}
 			for (int i = num; i <= num2; i++)
 			{
-				int num4 = (int)Constants.InvertAndScale(4f) + (int)(((double)i - mPosition) * (double)height);
+				int num4 = (int)Constants.InvertAndScale(4f) + (int)((i - mPosition) * height);
 				if (i == mSelectIdx || (i == mHiliteIdx && mDrawSelectWhenHilited))
 				{
 					new2.SetColor(mColors[4]);
@@ -367,7 +367,7 @@ namespace Sexy
 			y -= (int)absPos.y;
 			y -= (int)Constants.InvertAndScale(4f);
 			int num = (mItemHeight != -1) ? mItemHeight : mFont.GetHeight();
-			int num2 = (int)((double)y / (double)num + mPosition);
+			int num2 = (int)(y / (double)num + mPosition);
 			if (num2 < 0 || num2 >= mLines.Count)
 			{
 				num2 = -1;
@@ -395,12 +395,12 @@ namespace Sexy
 				int num = 5;
 				if (theDelta > 0)
 				{
-					mScrollbar.SetValue(mScrollbar.mValue - (double)num);
+					mScrollbar.SetValue(mScrollbar.mValue - num);
 					return;
 				}
 				if (theDelta < 0)
 				{
-					mScrollbar.SetValue(mScrollbar.mValue + (double)num);
+					mScrollbar.SetValue(mScrollbar.mValue + num);
 				}
 			}
 		}
