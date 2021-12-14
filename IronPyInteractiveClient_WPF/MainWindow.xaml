@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IronPyInteractiveClient_WPF"
         mc:Ignorable="d"
-        Title="DebugWindow" Height="405" Width="800" MinHeight="120" MinWidth="200">
+        Title="DebugWindow" Height="405" Width="800" MinHeight="180" MinWidth="240">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -26,11 +26,24 @@
         </ScrollViewer>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="pyCommandInput" Height="40" Text="import Lawn,Sexy; " TextWrapping="Wrap" Grid.Column="0" Margin="0,0,0,0" TextChanged="pyCommandInput_TextChanged" KeyDown="pyCommandInput_KeyDown" KeyUp="pyCommandInput_KeyUp" AcceptsReturn="True" AcceptsTab="True"/>
-            <Button x:Name="pyCommandSendBtn" Content="Send(Ctrl+Enter)" Click="button_Click" Grid.Column="1" Margin="3,3,3,3" IsDefault="False" IsEnabled="False"/>
+            <TextBox x:Name="pyCommandInput" Height="40" Text="import Lawn,Sexy; " TextWrapping="Wrap" Grid.Column="1" TextChanged="pyCommandInput_TextChanged" KeyDown="pyCommandInput_KeyDown" KeyUp="pyCommandInput_KeyUp" AcceptsReturn="True" AcceptsTab="True"/>
+            <Button x:Name="pyCommandSendBtn" Content="Send(Ctrl+Enter)" Click="button_Click" Grid.Column="2" Margin="3,3,3,3" IsDefault="False" IsEnabled="False"/>
+            <Grid  Grid.Column="0" Width="30">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TextBlock x:Name="pyPromptSign" HorizontalAlignment="Left" TextWrapping="Wrap" Text="   "  Margin="3,0,0,0"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Button x:Name="Btn_clearScreen" Content="🧹" HorizontalAlignment="Stretch" Margin="3,3,3,3" VerticalAlignment="Stretch" Click="Btn_clearScreen_Click" />
+                </Grid>
+            </Grid>
         </Grid>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
@@ -38,5 +51,6 @@
             </Grid.ColumnDefinitions>
             <TextBlock Height="16" Name="pyCaption" VerticalAlignment="Center" Text="Not Connected" Background="WhiteSmoke"/>
         </Grid>
+
     </Grid>
 </Window>

@@ -28,7 +28,8 @@ namespace IronPyInteractiveClient_WPF
         public MainWindow()
         {
             InitializeComponent();
-            Task t = new Task(() => {
+            Task t = new Task(() =>
+            {
                 for (; ; )
                 {
                     Thread.Sleep(10000);
@@ -44,16 +45,24 @@ namespace IronPyInteractiveClient_WPF
         private void TextAdd(string s, bool isScrollNeeded, long timestamp)
         {
             mTextOutputPool.AddwithTime(new KeyValuePair<long, string>(timestamp, s));
-            mTextJoinNeeded = true;
+            mIsTextFlushNeeded = true;
             FlushBoard(true);
         }
 
-        public delegate void CaptionAddDelegate(string caption);
+        public delegate void CaptionAddDelegate(string caption, bool isFlushNeeded);
         public CaptionAddDelegate captionAddDelegate;
-        private void CaptionAdd(string newCaption)
+        private void CaptionAdd(string newCaption, bool isFlushNeeded)
         {
             pyCaption.Text = newCaption;
-            FlushBoard(false);
+            if (isFlushNeeded) { FlushBoard(false); }
+        }
+
+        public delegate void ExecutionCompletedDelegate(object exception);
+        public ExecutionCompletedDelegate executionCompletedDelegate;
+        private void ExecutionCompleted(object exception)
+        {
+            pyPromptSign.Text = mPromptStr_Rest;
+            mTextOutputHiddenSuffix += ">>> ";
         }
 
         private void WSConnect(string addr)
@@ -61,7 +70,8 @@ namespace IronPyInteractiveClient_WPF
             ws = new WebSocket(addr);
             ws.OnMessage += (sender, e) =>
             {
-                TextAddDelegate textAddDelegate = new TextAddDelegate(TextAdd);
+                executionCompletedDelegate = new ExecutionCompletedDelegate(ExecutionCompleted);
+                textAddDelegate = new TextAddDelegate(TextAdd);
                 try
                 {
                     JObject jo = JObject.Parse(e.Data);
@@ -80,37 +90,39 @@ namespace IronPyInteractiveClient_WPF
                                 executionEvent.statuscode == ExecutionEventResult.error
                                 ? $"{executionEvent.errortype}: {executionEvent.result}\n"
                                 : (executionEvent.result != null ? $"{executionEvent.result}\n" : "")
-                            ) + ">>> ", true, executionEvent.timestamp);
+                            )/* + ">>> "*/, true, executionEvent.timestamp);
                             ;
+                            pyOutput.Dispatcher.Invoke(executionCompletedDelegate, System.Windows.Threading.DispatcherPriority.Render,
+                                executionEvent.errortype);
                             break;
                     }
                 }
-                catch (Exception ex) 
+                catch (Exception ex)
                 {
                     MessageBox.Show($"{ex.GetType()}: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-
-
             };
             ws.OnClose += (sender, e) =>
             {
-                CaptionAddDelegate captionAddDelegate = new CaptionAddDelegate(CaptionAdd);
-                pyCaption.Dispatcher.Invoke(captionAddDelegate, System.Windows.Threading.DispatcherPriority.Render, "Connection Closed");
-                connected = false;
+                captionAddDelegate = new CaptionAddDelegate(CaptionAdd);
+                mWSConnected = false;
+                pyCaption.Dispatcher.Invoke(captionAddDelegate, System.Windows.Threading.DispatcherPriority.Render, "Connection Closed", true);
             };
             ws.OnError += (sender, e) =>
              {
-                 CaptionAddDelegate captionAddDelegate = new CaptionAddDelegate(CaptionAdd);
-                 pyCaption.Dispatcher.Invoke(captionAddDelegate, System.Windows.Threading.DispatcherPriority.Render, $"Error:{e}");
+                 captionAddDelegate = new CaptionAddDelegate(CaptionAdd);
+                 pyCaption.Dispatcher.Invoke(captionAddDelegate, System.Windows.Threading.DispatcherPriority.Render, $"Error:{e}", true);
              };
 
-            connected = true;
+            mWSConnected = true;
             ws.Connect();
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            TextAdd(pyCommandInput.Text + "\n", true, DateTime.UtcNow.ToFileTime());
+            TextAdd(mTextOutputHiddenSuffix + pyCommandInput.Text + "\n", true, DateTime.UtcNow.ToFileTime());
+            mTextOutputHiddenSuffix = "";
+            pyPromptSign.Text = mPromptStr_Working;
             ws.SendAsync(pyCommandInput.Text, e => { });
             pyCommandInput.Text = "";
         }
@@ -119,113 +131,121 @@ namespace IronPyInteractiveClient_WPF
 
         private void pyCommandInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            FlushBoard(false);
+            //FlushBoard(false);
         }
 
         public void FlushBoard(bool isScrollNeeded)
         {
-            pyOutput.Text = TextJoin(pyCommandInput.Text);
-            wsConnBtn.Content = !connected ? "Connect" : "Disconnect";
-            if (pyCommandSendBtn != null) { pyCommandSendBtn.IsEnabled = connected; }
+            pyOutput.Text = TextJoin();
+            wsConnBtn.Content = !mWSConnected ? "Connect" : "Disconnect";
+            if (!mWSConnected)
+            {
+                pyPromptSign.Text = mPromptStr_NotAvailable;
+            }
+            if (pyCommandSendBtn != null) { pyCommandSendBtn.IsEnabled = mWSConnected; }
             if (isScrollNeeded) scrollText.ScrollToEnd();
         }
 
-        private string TextJoin(string commandCurrent) 
+        private ref string TextJoin()
         {
-            if (!mTextJoinNeeded) 
+            if (!mIsTextFlushNeeded)
             {
-                return mTextOutputHarden + (mTextJoinCache + commandCurrent);
+                return ref mTextOutputHardenString;
             }
+            mTextOutputHarden.Append(mTextOutputHardenLineCharCache);
+            mTextOutputHarden.Remove(mTextJoinCacheIndex, mTextOutputHarden.Length - mTextJoinCacheIndex);
             StringBuilder result = new StringBuilder();
             long time = DateTime.UtcNow.ToFileTime();
             int countstobedeleted = 0;
-            for (int i = 0; i < mTextOutputPool.Count; i++) 
+            for (int i = 0; i < mTextOutputPool.Count; i++)
             {
                 if (time - mTextOutputPool[i].Key >= mTextOutputPoolTimeout || mTextOutputPool.Count - i > mTextOutputPoolMaxSize)
                 {
                     mTextOutputHarden.Append(mTextOutputPool[i].Value);
                     countstobedeleted = i + 1;
                 }
-                else 
+                else
                 {
                     result.Append(mTextOutputPool[i].Value);
                 }
             }
-            if (countstobedeleted != 0) 
+            if (countstobedeleted != 0)
             {
                 mTextOutputPool.RemoveRange(0, countstobedeleted);
             }
-            mTextJoinCache = result;
-            mTextJoinNeeded = false;
-            return mTextOutputHarden + (mTextJoinCache + commandCurrent);
+            mTextJoinCacheIndex = mTextOutputHarden.Length;
+            mTextOutputHarden.Append(result);
+            if (mTextOutputHarden.Length >= 1 && mTextOutputHarden[^1] == '\n')
+            {
+                mTextOutputHarden.Remove(mTextOutputHarden.Length - 1, 1);
+                mTextOutputHardenLineCharCache += '\n';
+                if (mTextOutputHarden.Length >= 1 && mTextOutputHarden[^1] == '\r')
+                {
+                    mTextOutputHarden.Remove(mTextOutputHarden.Length - 1, 1);
+                    mTextOutputHardenLineCharCache += '\r';
+                }
+            }
+            mIsTextFlushNeeded = false;
+            mTextOutputHardenString = mTextOutputHarden.ToString();
+            return ref mTextOutputHardenString;
         }
 
         private void wsConnBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (!connected)
+            if (!mWSConnected)
             {
                 string addr = wsAddrInput.Text;
-                CaptionAdd("Connecting...");
-                Task task = new Task(() => { 
+                CaptionAdd("Connecting...", true);
+                Task task = new Task(() =>
+                {
                     WSConnect(addr);
-                    CaptionAddDelegate captionAddDelegate = new CaptionAddDelegate(CaptionAdd);
+                    captionAddDelegate = new CaptionAddDelegate(CaptionAdd);
                     pyCaption.Dispatcher.Invoke(captionAddDelegate, System.Windows.Threading.DispatcherPriority.Render,
-                        connected ? "Connected" : "Failed to Connect"
+                        mWSConnected ? "Connected" : "Failed to Connect", true
                     );
-                }
-                );
+                    if (mWSConnected) GetLogoDisplay();
+                });
                 task.Start();
-                //WSConnect();
-                
             }
             else
             {
-                connected = false;
+                mWSConnected = false;
                 ws.Close();
-                CaptionAdd("Not Connected");
+                CaptionAdd("Not Connected", true);
             }
-
-            //connected = !connected;
-            
         }
 
-
-        private bool connected = false;
+        private bool mWSConnected = false;
 
         private void pyCommandInput_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)
-            {
                 pyCommandSendBtn.IsDefault = true;
-            }
         }
 
         private void pyCommandInput_KeyUp(object sender, KeyEventArgs e)
         {
-            if ((e.Key == Key.LeftCtrl && Keyboard.IsKeyUp(Key.RightCtrl)) || (e.Key == Key.RightCtrl && Keyboard.IsKeyUp(Key.LeftCtrl)))
-            {
-                pyCommandSendBtn.IsDefault= false;
-            }
+            if ((e.Key == Key.LeftCtrl && Keyboard.IsKeyUp(Key.RightCtrl)) ||
+            (e.Key == Key.RightCtrl && Keyboard.IsKeyUp(Key.LeftCtrl)))
+                pyCommandSendBtn.IsDefault = false;
         }
 
-        internal class TextQueueList : List<KeyValuePair<long, string>> 
+        internal class TextQueueList : List<KeyValuePair<long, string>>
         {
-            public void AddwithTime(KeyValuePair<long, string> item) 
+            public void AddwithTime(KeyValuePair<long, string> item)
             {
                 long k = item.Key;
-                if (mTextOutputPool.Count == 0 || k >= mTextOutputPool[^1].Key) 
+                if (mTextOutputPool.Count == 0 || k >= mTextOutputPool[^1].Key)
                 {
-                    mTextOutputPool.Add(item);
-                    return;
+                    mTextOutputPool.Add(item);return;
                 }
-                if (k <= mTextOutputPool[0].Key) 
+                if (k <= mTextOutputPool[0].Key)
                 {
-                    mTextOutputPool.Insert(0, item);
-                    return;
+                    mTextOutputPool.Insert(0, item);return;
                 }
                 int mi = 0, ma = mTextOutputPool.Count, a = 0, b = 0, i = 0;
                 int cmpresult;
-                for (; ; ) 
+                for (; ; )
                 {
                     a = (ma - mi) / 2;
                     b = ma - mi - a;
@@ -233,15 +253,13 @@ namespace IronPyInteractiveClient_WPF
                     cmpresult = mTextOutputPool[i].Key.CompareTo(k);
                     if (cmpresult == 0)
                     {
-                        mTextOutputPool.Insert(i, item);
-                        return;
+                        mTextOutputPool.Insert(i, item);return;
                     }
                     else if (cmpresult < 0)
                     {
                         if (b <= 1)
                         {
-                            mTextOutputPool.Insert(i+1, item);
-                            return;
+                            mTextOutputPool.Insert(i + 1, item);return;
                         }
                         mi = i;
                     }
@@ -249,22 +267,58 @@ namespace IronPyInteractiveClient_WPF
                     {
                         if (a <= 1)
                         {
-                            mTextOutputPool.Insert(i, item);
-                            return;
+                            mTextOutputPool.Insert(i, item);return;
                         }
                         ma = i;
                     }
                 }
-                
+
             }
         }
 
+        private void GetLogoDisplay()
+        {
+            ws.SendAsync(
+                "__import__('sys').stdout.write('IronPython '+__import__('sys').version+'\\nType \"help\", \"copyright\", " +
+                "\"credits\" or \"license\" for more information.\\n');", (x) => { });
+        }
+
         private static TextQueueList mTextOutputPool = new TextQueueList();
-        private StringBuilder mTextOutputHarden = new StringBuilder(">>> ");
+        private StringBuilder mTextOutputHarden = new StringBuilder("");
+        private string mTextOutputHardenLineCharCache = "";
+        private string mTextOutputHardenString;
+        private string mTextOutputHiddenSuffix = "";
         private long mTextOutputPoolTimeout = 10 * 10000000;
         private int mTextOutputPoolMaxSize = 2048;
-        private bool mTextJoinNeeded = true;
-        private StringBuilder mTextJoinCache;
+        private bool mIsTextFlushNeeded = true;
+        private int mTextJoinCacheIndex;
+        private readonly string mPromptStr_Rest = ">>>";
+        private readonly string mPromptStr_Working = "<...>";
+        private readonly string mPromptStr_NotAvailable = "   ";
 
+        private void Btn_clearScreen_Click(object sender, RoutedEventArgs e)
+        {
+            Reset();
+            mIsTextFlushNeeded = true;
+            FlushBoard(true);
+            string s = pyCaption.Text;
+            CaptionAdd("Cleared!", false);
+            Task.Run(async delegate
+            {
+                await Task.Delay(1500);
+                captionAddDelegate = new CaptionAddDelegate(CaptionAdd);
+                pyCaption.Dispatcher.Invoke(captionAddDelegate, System.Windows.Threading.DispatcherPriority.Render,
+                    s, false);
+            });
+        }
+
+        private void Reset()
+        {
+            mTextOutputHarden.Clear();
+            mTextOutputPool.Clear();
+            mTextOutputHardenLineCharCache = "";
+            mTextJoinCacheIndex = 0;
+            mTextOutputHiddenSuffix = "";
+        }
     }
 }
