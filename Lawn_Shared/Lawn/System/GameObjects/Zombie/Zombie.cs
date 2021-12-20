@@ -1447,12 +1447,8 @@ namespace Lawn
             UpdateReanim();
         }
 
-        public delegate bool DieNoLootEventHandler(Zombie sender, bool giveAchievements);
-        public static event DieNoLootEventHandler DieNoLootEvent;
         public void DieNoLoot(bool giveAchievements)
         {
-            object t = DieNoLootEvent?.Invoke(this, giveAchievements);
-            if (!(bool)(t ?? true)) return;
             StopZombieSound();
             GlobalMembersAttachment.AttachmentDie(ref mAttachmentID);
             mApp.RemoveReanimation(ref mBodyReanimID);

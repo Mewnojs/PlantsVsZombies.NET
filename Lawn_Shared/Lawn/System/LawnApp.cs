@@ -3568,6 +3568,29 @@ namespace Lawn
 				mCreditScreen.VideoFinished();
 			}
 		}
+		public override void DrawGame(GameTime gameTime)
+		{
+			GlobalStaticVars.g.BeginFrame();
+			this.mWidgetManager.DrawScreen();
+			if (/*_showDebugScreen*/true)
+				DrawDebugInfo(gameTime);
+			GlobalStaticVars.g.EndFrame();
+		}
+		public void DrawDebugInfo(GameTime gameTime)
+		{
+			Action<string, SexyColor, SexyColor, int, int, int, int> drawStringWithOutline = (str, textColor, outlineColor, x, y, dx, dy) =>
+			{
+				GlobalStaticVars.g.SetColor(outlineColor);
+				GlobalStaticVars.g.SetFont(Resources.FONT_CONTINUUMBOLD14);
+				GlobalStaticVars.g.DrawString(str, x + dx, y + dy);
+				GlobalStaticVars.g.SetColor(textColor);
+				GlobalStaticVars.g.DrawString(str, x, y);
+			};
+			var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+			mFrameCounter.Update(deltaTime);
+			drawStringWithOutline(string.Format("FPS: {0:N3}", mFrameCounter.AverageFramesPerSecond), new SexyColor(180, 255, 90), new SexyColor(20, 20, 20), 0, 0, 1, 1);
+			//drawStringWithOutline(string.Format("TP60F: {0:N3}", _tp60f), new SexyColor(180, 255, 90), new SexyColor(20, 20, 20), 120, 0, 1, 1);
+		}
 
 		public int GetAchievementIcon(AchievementId theAchievement)
 		{
@@ -3775,7 +3798,9 @@ namespace Lawn
 
 		private bool pileLoaded;
 
-		private class TableTmp
+        private FrameCounter mFrameCounter = new FrameCounter();
+
+        private class TableTmp
 		{
 			public TableTmp(int aNormal, int aAdditive)
 			{

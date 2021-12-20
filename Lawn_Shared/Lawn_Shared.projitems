@@ -212,6 +212,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)PerfTimer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RandomNumbers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Resources.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sexy\Graphics\FrameCounter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\System\Utils\BlendStates.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\Widget\Achievement\AchievementId.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\Widget\Achievement\AchievementItem.cs" />
@@ -472,7 +473,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Sexy.TodLib\Foley\" />
     <Folder Include="$(MSBuildThisFileDirectory)Sexy\Input\KeyInterpolator\" />
     <Folder Include="$(MSBuildThisFileDirectory)Sexy\Sound\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Sexy\Graphics\" />
     <Folder Include="$(MSBuildThisFileDirectory)Sexy\System\Flags\" />
     <Folder Include="$(MSBuildThisFileDirectory)Sexy\System\Utils\Profiler\" />
     <Folder Include="$(MSBuildThisFileDirectory)Sexy\System\Achievement\" />

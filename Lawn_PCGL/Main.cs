@@ -35,7 +35,6 @@ namespace Sexy
 			//PhoneApplicationService.Current.Closing += new EventHandler<ClosingEventArgs>(this.Current_Closing);
 			//PhoneApplicationService.Current.Deactivated += new EventHandler<DeactivatedEventArgs>(this.Current_Deactivated);
 			IsMouseVisible = true;
-			//IsFixedTimeStep = false;
 		}
 
 		/*private void Current_Deactivated(object sender, DeactivatedEventArgs e)
