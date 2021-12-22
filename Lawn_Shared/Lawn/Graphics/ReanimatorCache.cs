@@ -11,21 +11,25 @@ namespace Lawn
         {
             for (int i = 0; i < (int)SeedType.NUM_SEED_TYPES; i++)
             {
-                mCachedPlants.Add(null);
+                mPlantImages.Add(null);
             }
             for (int i = 0; i < (int)LawnMowerType.NUM_MOWER_TYPES; i++)
             {
-                mCachedMowers.Add(null);
+                mLawnMowers.Add(null);
             }
             for (int i = 0; i < (int)ZombieType.NUM_CACHED_ZOMBIE_TYPES; i++)
             {
-                mCachedZombies.Add(null);
+                mZombieImages.Add(null);
             }
             mApp = GlobalStaticVars.gLawnApp;
         }
 
         public void ReanimatorCacheDispose()
         {
+            mLawnMowers = null;
+            mPlantImages = null;
+            mImageVariationList = null;
+            mZombieImages = null;
         }
 
         /*public void DrawCachedPlant(Graphics g, float centerX, float btmY, SeedType theSeedType, DrawVariation theDrawVariation)
@@ -49,17 +53,17 @@ namespace Lawn
             MemoryImage image = null;
             if (theDrawVariation == DrawVariation.VARIATION_NORMAL || theDrawVariation == DrawVariation.VARIATION_IMITATER || theDrawVariation == DrawVariation.VARIATION_IMITATER_LESS)
             {
-                if (mCachedPlants[(int)theSeedType] == null)
+                if (mPlantImages[(int)theSeedType] == null)
                 {
                     Debug.OutputDebug("(!!) ReanimatorCache uninitialized plant variation (%d).\n", theSeedType);
                     return;
                 }
-                image = mCachedPlants[(int)theSeedType];
+                image = mPlantImages[(int)theSeedType];
             }
             else 
             {
                 
-                if (!mCachedPlantVariations.TryGetValue(new CachedPlantVariation
+                if (!mImageVariationList.TryGetValue(new CachedPlantVariation
                 {
                     mSeedType = theSeedType,
                     mDrawVariation = theDrawVariation
@@ -90,22 +94,22 @@ namespace Lawn
         }
         public void DrawCachedZombieNew(Graphics g, float thePosX, float thePosY, ZombieType theZombieType)
         {
-            if (mCachedZombies[(int)theZombieType] == null)
+            if (mZombieImages[(int)theZombieType] == null)
             {
                 Debug.OutputDebug("(!!) ReanimatorCache uninitialized zombie variation (%d).\n", theZombieType);
                 return;
             }
-            TodCommon.TodDrawImageScaledF(g, mCachedZombies[(int)theZombieType], thePosX + Constants.S * -20, thePosY + Constants.S * -20, g.mScaleX, g.mScaleY);
+            TodCommon.TodDrawImageScaledF(g, mZombieImages[(int)theZombieType], thePosX + Constants.S * -20, thePosY + Constants.S * -20, g.mScaleX, g.mScaleY);
         }
 
         public void DrawCachedMower(Graphics g, float thePosX, float thePosY, LawnMowerType mowerType)
         {
-            if (mCachedMowers[(int)mowerType] == null)
+            if (mLawnMowers[(int)mowerType] == null)
             {
                 Debug.OutputDebug("(!!) ReanimatorCache uninitialized mower variation (%d).\n", mowerType);
                 return;
             }
-            TodCommon.TodDrawImageScaledF(g, mCachedMowers[(int)mowerType], thePosX - (Constants.S * 20), thePosY, g.mScaleX, g.mScaleY);
+            TodCommon.TodDrawImageScaledF(g, mLawnMowers[(int)mowerType], thePosX - (Constants.S * 20), thePosY, g.mScaleX, g.mScaleY);
             
         }
 
@@ -220,14 +224,14 @@ namespace Lawn
             MemoryImage result = null;
             if (drawVariation == DrawVariation.VARIATION_NORMAL)
             {
-                if (mCachedPlants[(int)seedType] != null)
+                if (mPlantImages[(int)seedType] != null)
                 {
-                    return mCachedPlants[(int)seedType];
+                    return mPlantImages[(int)seedType];
                 }
             }
             else
             {
-                if (mCachedPlantVariations.TryGetValue(new CachedPlantVariation
+                if (mImageVariationList.TryGetValue(new CachedPlantVariation
                 {
                     mSeedType = seedType,
                     mDrawVariation = drawVariation
@@ -293,11 +297,11 @@ namespace Lawn
                 }
                 if (drawVariation == DrawVariation.VARIATION_NORMAL)
                 {
-                    mCachedPlants[(int)seedType] = result;
+                    mPlantImages[(int)seedType] = result;
                 }
                 else
                 {
-                    mCachedPlantVariations[new CachedPlantVariation
+                    mImageVariationList[new CachedPlantVariation
                     {
                         mSeedType = seedType,
                         mDrawVariation = drawVariation
@@ -312,9 +316,9 @@ namespace Lawn
 
         public MemoryImage MakeCachedMowerFrame(LawnMowerType mowerType)
         {
-            if (mCachedMowers[(int)mowerType] != null)
+            if (mLawnMowers[(int)mowerType] != null)
             {
-                return mCachedMowers[(int)mowerType];
+                return mLawnMowers[(int)mowerType];
             }
             MemoryImage result = MakeBlankCanvasImage((int)(Constants.S * 90), (int)(Constants.S * 100));
             lock (ResourceManager.DrawLocker)
@@ -348,7 +352,7 @@ namespace Lawn
                         break;
                 }
                 DrawReanimatorFrame(g, (Constants.S * x), (Constants.S * y), reanimtype, trackname, DrawVariation.VARIATION_NORMAL);
-                mCachedMowers[(int)mowerType] = result;
+                mLawnMowers[(int)mowerType] = result;
 
                 g.EndFrame();
                 g.SetRenderTarget(null);
@@ -359,9 +363,9 @@ namespace Lawn
 
         public MemoryImage MakeCachedZombieFrame(ZombieType zombieType)
         {
-            if (mCachedZombies[(int)zombieType] != null)
+            if (mZombieImages[(int)zombieType] != null)
             {
-                return mCachedZombies[(int)zombieType];
+                return mZombieImages[(int)zombieType];
             }
             MemoryImage result = null;
             if (zombieType == ZombieType.ZOMBIE_ZAMBONI)
@@ -452,7 +456,7 @@ namespace Lawn
                     DrawReanimatorFrame(g, Constants.S * x, Constants.S * y, reanimationType, trackName, DrawVariation.VARIATION_NORMAL);
                 }
 
-                mCachedZombies[(int)zombieType] = result;
+                mZombieImages[(int)zombieType] = result;
                 g.EndFrame();
                 g.SetRenderTarget(null);
                 g.PrepareForReuse();
@@ -464,13 +468,13 @@ namespace Lawn
 
         public void SaveCachedImages() { }
 
-        public Dictionary<CachedPlantVariation, MemoryImage> mCachedPlantVariations = new Dictionary<CachedPlantVariation, MemoryImage>();
+        public Dictionary<CachedPlantVariation, MemoryImage> mImageVariationList = new Dictionary<CachedPlantVariation, MemoryImage>();
 
-        public List<MemoryImage> mCachedPlants = new List<MemoryImage>();
+        public List<MemoryImage> mPlantImages = new List<MemoryImage>();
 
-        public List<MemoryImage> mCachedMowers = new List<MemoryImage>();
+        public List<MemoryImage> mLawnMowers = new List<MemoryImage>();
 
-        public List<MemoryImage> mCachedZombies = new List<MemoryImage>();
+        public List<MemoryImage> mZombieImages = new List<MemoryImage>();
 
         public LawnApp mApp;
 

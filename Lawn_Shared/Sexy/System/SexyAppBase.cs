@@ -936,5 +936,9 @@ namespace Sexy
 		//public static MediaPlayerLauncher VideoPlayer = new MediaPlayerLauncher();
 
 		protected bool wantToShowUpdateMessage;
+
+		protected FrameCounter mFrameCounter = new FrameCounter();
+
+		protected bool mDebugScreenEnabled;
 	}
 }

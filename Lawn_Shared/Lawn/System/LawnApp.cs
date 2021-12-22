@@ -1236,6 +1236,7 @@ namespace Lawn
 					mReanimatorCache.ReanimatorCacheDispose();
 					mReanimatorCache = null;
 				}
+				FilterEffect.FilterEffectDisposeForApp();
 				TodParticleGlobal.TodParticleFreeDefinitions();
 				ReanimatorXnaHelpers.ReanimatorFreeDefinitions();
 				Coin.CoinFreeTextures();
@@ -3572,7 +3573,7 @@ namespace Lawn
 		{
 			GlobalStaticVars.g.BeginFrame();
 			this.mWidgetManager.DrawScreen();
-			if (/*_showDebugScreen*/true)
+			if (mDebugScreenEnabled)
 				DrawDebugInfo(gameTime);
 			GlobalStaticVars.g.EndFrame();
 		}
@@ -3797,8 +3798,6 @@ namespace Lawn
 		private bool mainMenuLoaded;
 
 		private bool pileLoaded;
-
-        private FrameCounter mFrameCounter = new FrameCounter();
 
         private class TableTmp
 		{

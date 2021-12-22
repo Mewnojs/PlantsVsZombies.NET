@@ -17,6 +17,7 @@ namespace Sexy.TodLib
 
 		public static void FilterEffectDisposeForApp()
 		{
+			gFilterMap = null;
 		}
 
 		public static void FilterEffectInitTexture(Texture2D texture, FilterEffectType theFilterEffect) 
