@@ -9,10 +9,9 @@ namespace Lawn
 	{
 		public bool LoadFromFile(Sexy.Buffer b)
 		{
-			EffectSystem.gEffectSystem.LoadFromFile(b);
-			doAddGraveStones = false;
-			mLevel = b.ReadLong();
-			if (mApp.mGameMode == GameMode.GAMEMODE_ADVENTURE && mLevel != mApp.mPlayerInfo.mLevel)
+			this.doAddGraveStones = false;
+			this.mLevel = b.ReadLong();
+			if (this.mApp.mGameMode == GameMode.GAMEMODE_ADVENTURE && this.mLevel != this.mApp.mPlayerInfo.mLevel)
 			{
 				throw new Exception("Board Level does not match player level.");
 			}
@@ -9628,9 +9627,8 @@ namespace Lawn
 			LeaderBoardComm.RecordResult(LeaderboardGameMode.Adventure, (int)mApp.mPlayerInfo.mZombiesKilled);
 			try
 			{
-				EffectSystem.gEffectSystem.SaveToFile(b);
-				b.WriteLong(mLevel);
-				b.WriteLong((int)mApp.mGameScene);
+				b.WriteLong(this.mLevel);
+				b.WriteLong((int)this.mApp.mGameScene);
 				b.WriteLong(Board.mPeashootersPlanted);
 				b.WriteBoolean(mNomNomNomAchievementTracker);
 				b.WriteBoolean(mNoFungusAmongUsAchievementTracker);

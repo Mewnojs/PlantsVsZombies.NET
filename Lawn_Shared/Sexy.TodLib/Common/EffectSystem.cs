@@ -142,22 +142,6 @@ namespace Sexy.TodLib
 			}
 		}
 
-		public void SaveToFile(Sexy.Buffer b)
-        {
-			mParticleHolder.SaveToFile(b);
-			//mTrailHolder.SaveToFile(b);
-			//mReanimationHolder.SaveToFile(b);
-			//mAttachmentHolder.SaveToFile(b);
-		}
-
-		public void LoadFromFile(Sexy.Buffer b)
-		{
-			mParticleHolder.LoadFromFile(b);
-			//mTrailHolder.LoadFromFile(b);
-			//mReanimationHolder.LoadFromFile(b);
-			//mAttachmentHolder.LoadFromFile(b);
-		}
-
 		public static EffectSystem gEffectSystem;
 
 		public TodParticleHolder mParticleHolder;
