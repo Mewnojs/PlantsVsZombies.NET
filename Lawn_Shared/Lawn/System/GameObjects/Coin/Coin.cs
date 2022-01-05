@@ -353,7 +353,7 @@ namespace Lawn
 			GlobalMembersAttachment.AttachmentDie(ref mAttachmentID);
 		}
 
-		public void MouseDown(int theX, int theY, int theClickCount)
+		public void MouseDown(int x, int y, int theClickCount)
 		{
 			if (mBoard == null || mBoard.mPaused || mApp.mGameScene != GameScenes.SCENE_PLAYING)
 			{

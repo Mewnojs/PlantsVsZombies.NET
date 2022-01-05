@@ -9,6 +9,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
     <StartupObject>LAWN.PlantsVsZombies</StartupObject>
+    <AssemblyName>Lawn</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
@@ -16,6 +17,7 @@
   <ItemGroup>
     <PackageReference Include="IronPython" Version="2.7.11" />
     <PackageReference Include="Lidgren.Network.Core2" Version="1.0.0" />
+    <PackageReference Include="MLEM.Data" Version="5.2.0" />
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="WebSocketSharp.NetCore" Version="1.0.0" />

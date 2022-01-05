@@ -21,7 +21,14 @@ namespace Lawn
 			return mContentInsets.mTop + mBackgroundInsets.mTop + (int)Constants.InvertAndScale(54f) + Constants.DIALOG_HEADER_OFFSET;
 		}
 
-		public LawnDialog(LawnApp theApp, Image theButtonComponentImage, int theId, bool isModal, string theDialogHeader, string theDialogLines, string theDialogFooter, int theButtonMode) : base(null, theButtonComponentImage, theId, isModal, theDialogHeader, theDialogLines, string.Empty, 0)
+		public LawnDialog(LawnApp theApp,
+                    Image theButtonComponentImage,
+                    int theId,
+                    bool isModal,
+                    string theDialogHeader,
+                    string theDialogLines,
+                    string theDialogFooter,
+                    int theButtonMode) : base(null, theButtonComponentImage, theId, isModal, theDialogHeader, theDialogLines, string.Empty, 0)
 		{
 			mTextAlign = 2;
 			mApp = theApp;

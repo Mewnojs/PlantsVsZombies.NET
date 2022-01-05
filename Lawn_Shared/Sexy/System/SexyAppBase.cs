@@ -246,7 +246,7 @@ namespace Sexy
 
 		public void LoadingThreadProcStub()
 		{
-			LoadingThreadProc();
+			LoadingThreadProc(); 
 			mLoadingThreadCompleted = true;
 		}
 
@@ -256,6 +256,11 @@ namespace Sexy
 
 		public virtual void LoadingThreadCompleted()
 		{
+		}
+
+		public virtual IEnumerable<bool> LoadingThreadAfterWorks()
+		{
+			yield return true;
 		}
 
 		public bool FileExists(string filename)
@@ -301,8 +306,16 @@ namespace Sexy
 			mUpdateCount++;
 			if (mLoadingThreadCompleted && !mLoaded)
 			{
-				mLoaded = true;
-				LoadingThreadCompleted();
+				if (mLoadingThreadAfterWorksSteps == null) 
+				{
+					mLoadingThreadAfterWorksSteps = LoadingThreadAfterWorks();
+					mLoadingThreadAfterWorksEnumerator = mLoadingThreadAfterWorksSteps.GetEnumerator();
+				}
+				if (!mLoadingThreadAfterWorksEnumerator.MoveNext()) 
+				{
+					LoadingThreadCompleted();
+					mLoaded = true;
+				}
 			}
 			UpdateFrames();
 			return true;
@@ -940,5 +953,11 @@ namespace Sexy
 		protected FrameCounter mFrameCounter = new FrameCounter();
 
 		protected bool mDebugScreenEnabled;
-	}
+
+		private IEnumerable<bool> mLoadingThreadAfterWorksSteps;
+
+		private IEnumerator<bool> mLoadingThreadAfterWorksEnumerator;
+
+        public ScreenScales mScreenScales = new ScreenScales();
+    }
 }

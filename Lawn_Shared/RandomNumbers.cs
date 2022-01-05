@@ -1,8 +1,8 @@
 ﻿using System;
 
-internal static class RandomNumbers
+public/*internal*/ static class RandomNumbers
 {
-	internal static int NextNumber()
+	public/*internal*/ static int NextNumber()
 	{
 		if (RandomNumbers.r == null)
 		{
@@ -11,7 +11,7 @@ internal static class RandomNumbers
 		return RandomNumbers.r.Next();
 	}
 
-	internal static int NextNumber(int ceiling)
+	public/*internal*/ static int NextNumber(int ceiling)
 	{
 		if (RandomNumbers.r == null)
 		{
@@ -20,7 +20,7 @@ internal static class RandomNumbers
 		return RandomNumbers.r.Next(ceiling);
 	}
 
-	internal static float NextNumber(float ceiling)
+	public/*internal*/ static float NextNumber(float ceiling)
 	{
 		if (RandomNumbers.r == null)
 		{
@@ -29,12 +29,12 @@ internal static class RandomNumbers
 		return (float)RandomNumbers.r.NextDouble() * ceiling;
 	}
 
-	internal static void Seed()
+	public/*internal*/ static void Seed()
 	{
 		RandomNumbers.r = new Random();
 	}
 
-	internal static void Seed(int seed)
+	public/*internal*/ static void Seed(int seed)
 	{
 		RandomNumbers.r = new Random(seed);
 	}

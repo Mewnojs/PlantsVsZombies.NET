@@ -212,6 +212,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)PerfTimer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RandomNumbers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Resources.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sexy\FreeScaling\ScreenScales.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\Graphics\FrameCounter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\System\Utils\BlendStates.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\Widget\Achievement\AchievementId.cs" />
@@ -261,7 +262,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\Widget\InterfaceWidgets.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\System\Utils\Interpolator\Interpolator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\System\IReusable.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Sexy\Input\KeyCode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sexy\Input\KeyCodes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\Input\KeyInterpolator\KeyInterpolator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\Input\KeyInterpolator\KeyInterpolatorFloat.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\Input\KeyInterpolator\KeyInterpolatorGeneric.cs" />

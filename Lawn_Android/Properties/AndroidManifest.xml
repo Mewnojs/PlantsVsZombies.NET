@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="Lawn_Android.Lawn_Android" android:versionCode="1" android:versionName="1.0">
-  <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
-  <application android:label="Lawn_Android"></application>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="net.pvz.team2508" android:versionName="0.1.1.5" android:installLocation="auto" android:versionCode="001105000">
+	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
+	<application android:label="植物大战僵尸" android:icon="@drawable/Icon"></application>
 </manifest>

@@ -110,7 +110,7 @@ namespace Lawn
                 public override void Flush()
                 {
                     base.Flush();
-                    FlushEvent.Invoke(this);
+                    FlushEvent?.Invoke(this);
                     GetStringBuilder().Clear();
                 }
 

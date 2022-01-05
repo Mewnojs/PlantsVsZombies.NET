@@ -20,9 +20,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lawn_PCGL", "Lawn_PCGL\Lawn_PCGL.csproj", "{C6266476-DEDF-4955-8218-61F10B130CD1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lawn_Android", "Lawn_Android\Lawn_Android.csproj", "{3A153E0C-2F08-4F96-A1A3-5E2CA3176DCC}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Lawn_Shared\Lawn_Shared.projitems*{1a95301d-4238-4ccd-9b56-38537e891b16}*SharedItemsImports = 13
+		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{3a153e0c-2f08-4f96-a1a3-5e2ca3176dcc}*SharedItemsImports = 4
+		Lawn_Shared\Lawn_Shared.projitems*{3a153e0c-2f08-4f96-a1a3-5e2ca3176dcc}*SharedItemsImports = 4
+		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{3a153e0c-2f08-4f96-a1a3-5e2ca3176dcc}*SharedItemsImports = 4
 		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{7ab353b4-582f-478b-9833-76fccb686a30}*SharedItemsImports = 5
 		Lawn_Shared\Lawn_Shared.projitems*{7ab353b4-582f-478b-9833-76fccb686a30}*SharedItemsImports = 5
 		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{7ab353b4-582f-478b-9833-76fccb686a30}*SharedItemsImports = 5
@@ -50,6 +55,12 @@ Global
 		{C6266476-DEDF-4955-8218-61F10B130CD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6266476-DEDF-4955-8218-61F10B130CD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6266476-DEDF-4955-8218-61F10B130CD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A153E0C-2F08-4F96-A1A3-5E2CA3176DCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A153E0C-2F08-4F96-A1A3-5E2CA3176DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A153E0C-2F08-4F96-A1A3-5E2CA3176DCC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{3A153E0C-2F08-4F96-A1A3-5E2CA3176DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A153E0C-2F08-4F96-A1A3-5E2CA3176DCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A153E0C-2F08-4F96-A1A3-5E2CA3176DCC}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

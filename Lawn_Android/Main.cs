@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Diagnostics;
 using Lawn;
 //using Microsoft.Phone.Info;
 //using Microsoft.Phone.Shell;
@@ -8,68 +9,130 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
-using System.Threading;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
 
 namespace Sexy
 {
 	public class Main : Game
 	{
+		private void GameSpecificCheatInputCheck()
+		{
+		}
+
+		private static void SetupForResolution()
+		{
+			Strings.Culture = CultureInfo.CurrentCulture;
+			if (Strings.Culture.TwoLetterISOLanguageName == "fr")
+			{
+				Constants.Language = Constants.LanguageIndex.fr;
+			}
+			else if (Strings.Culture.TwoLetterISOLanguageName == "de")
+			{
+				Constants.Language = Constants.LanguageIndex.de;
+			}
+			else if (Strings.Culture.TwoLetterISOLanguageName == "es")
+			{
+				Constants.Language = Constants.LanguageIndex.es;
+			}
+			else if (Strings.Culture.TwoLetterISOLanguageName == "it")
+			{
+				Constants.Language = Constants.LanguageIndex.it;
+			}
+			else
+			{
+				Constants.Language = Constants.LanguageIndex.en;
+			}
+			//if ((Main.graphics.GraphicsDevice.PresentationParameters.BackBufferWidth == 480 && Main.graphics.GraphicsDevice.PresentationParameters.BackBufferHeight == 800) || (Main.graphics.GraphicsDevice.PresentationParameters.BackBufferWidth == 800 && Main.graphics.GraphicsDevice.PresentationParameters.BackBufferHeight == 480))
+			{
+				AtlasResources.mAtlasResources = new AtlasResources_480x800();
+				//Constants.Load1080x1920();
+
+				//Constants.LoadVirtual_480x800();
+				Constants.Load480x800();
+				return;
+			}
+			throw new Exception("Unsupported Resolution");
+		}
+
 		public Main()
 		{
 			Main.SetupTileSchedule();
 			Main.graphics = Graphics.GetNew(this);
-			Main.SetLowMem();
-			Main.graphics.IsFullScreen = false;
-			Guide.SimulateTrialMode = false;
-			Main.graphics.PreferredBackBufferWidth = 800;
-			Main.graphics.PreferredBackBufferHeight = 480;
+			//Main.SetLowMem();
+			Main.graphics.IsFullScreen = true;
+			//Guide.SimulateTrialMode = false;
+
+			//GraphicsState.mGraphicsDeviceManager.PreferredBackBufferWidth = 800;
+			//GraphicsState.mGraphicsDeviceManager.PreferredBackBufferHeight = 480;
+
 			GraphicsState.mGraphicsDeviceManager.SupportedOrientations = Constants.SupportedOrientations;
-			GraphicsState.mGraphicsDeviceManager.DeviceCreated += new EventHandler<EventArgs>(graphics_DeviceCreated);
-			GraphicsState.mGraphicsDeviceManager.DeviceReset += new EventHandler<EventArgs>(graphics_DeviceReset);
-			GraphicsState.mGraphicsDeviceManager.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(mGraphicsDeviceManager_PreparingDeviceSettings);
-			base.TargetElapsedTime = TimeSpan.FromSeconds(0.03333333333333333);
-			base.Exiting += new EventHandler<EventArgs>(Main_Exiting);
-			Window.AllowUserResizing = true;
+			GraphicsState.mGraphicsDeviceManager.DeviceCreated += new EventHandler<EventArgs>(this.graphics_DeviceCreated);
+			GraphicsState.mGraphicsDeviceManager.DeviceReset += new EventHandler<EventArgs>(this.graphics_DeviceReset);
+			GraphicsState.mGraphicsDeviceManager.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(this.mGraphicsDeviceManager_PreparingDeviceSettings);
+			base.TargetElapsedTime = TimeSpan.FromSeconds(1.0/30);
+			base.Exiting += new EventHandler<EventArgs>(this.Main_Exiting);
+
+			//base.Window.AllowUserResizing = true;
 			base.Window.ClientSizeChanged += new EventHandler<EventArgs>(this.OnResize);
+
 			//PhoneApplicationService.Current.UserIdleDetectionMode = 0;
 			//PhoneApplicationService.Current.Launching += new EventHandler<LaunchingEventArgs>(this.Game_Launching);
 			//PhoneApplicationService.Current.Activated += new EventHandler<ActivatedEventArgs>(this.Game_Activated);
 			//PhoneApplicationService.Current.Closing += new EventHandler<ClosingEventArgs>(this.Current_Closing);
 			//PhoneApplicationService.Current.Deactivated += new EventHandler<DeactivatedEventArgs>(this.Current_Deactivated);
-			IsMouseVisible = true;
-			//IsFixedTimeStep = false;
 		}
+
+
+		//private void Current_Deactivated(object sender, DeactivatedEventArgs e)
+		//{
+		//	GlobalStaticVars.gSexyAppBase.Tombstoned();
+		//}
+
+
+		//private void Current_Closing(object sender, ClosingEventArgs e)
+		//{
+		//	//PhoneApplicationService.Current.State.Clear();
+		//}
+
+
+		//private void Game_Activated(object sender, ActivatedEventArgs e)
+		//{
+		//}
+
+
+		//private void Game_Launching(object sender, LaunchingEventArgs e)
+		//{
+		//	PhoneApplicationService.Current.State.Clear();
+		//}
 
 		public void OnResize(object sender, EventArgs e)
 		{
 			int DefaultW = 800;
 			int DefaultH = 480;
 			Rectangle bounds = Window.ClientBounds;
+			int W, H;
+			if ((bounds.Height * DefaultW) >= (bounds.Width * DefaultH))
+			{
+				W = bounds.Width;
+				H = (int)(DefaultH * bounds.Width / DefaultW);
+			}
+			else
+			{
+				W = (int)(DefaultW * bounds.Height / DefaultH);
+				H = bounds.Height;
+			}
 			if (GlobalStaticVars.gSexyAppBase != null)
 			{
-				GlobalStaticVars.gSexyAppBase.mScreenScales.Init(bounds.Width, bounds.Height, DefaultW, DefaultH);
+				GlobalStaticVars.gSexyAppBase.mScreenScales.Init(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height, DefaultW, DefaultH);
 				Graphics.Resized();
 			}
-		}
 
-		/*private void Current_Deactivated(object sender, DeactivatedEventArgs e)
-		{
-			GlobalStaticVars.gSexyAppBase.Tombstoned();
+			GraphicsState.mGraphicsDeviceManager.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+			GraphicsState.mGraphicsDeviceManager.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+			GraphicsState.mGraphicsDeviceManager.ApplyChanges();
 		}
-
-		private void Current_Closing(object sender, ClosingEventArgs e)
-		{
-			PhoneApplicationService.Current.State.Clear();
-		}
-
-		private void Game_Activated(object sender, ActivatedEventArgs e)
-		{
-		}
-
-		private void Game_Launching(object sender, LaunchingEventArgs e)
-		{
-			PhoneApplicationService.Current.State.Clear();
-		}*/
 
 		public static bool RunWhenLocked
 		{
@@ -113,22 +176,20 @@ namespace Sexy
 
 		protected override void Initialize()
 		{
-			base.Window.OrientationChanged += new EventHandler<EventArgs>(Window_OrientationChanged);
-			Main.GamerServicesComp = new GamerServicesComponent(this);
-			base.Components.Add(Main.GamerServicesComp);
+			this.IsMouseVisible = true;
+			base.Window.OrientationChanged += new EventHandler<EventArgs>(this.Window_OrientationChanged);
 			ReportAchievement.Initialise();
-			IronPyInteractive.Serve();
 			base.Initialize();
-			// Window Scaling
-			GlobalStaticVars.gSexyAppBase.mScreenScales.Init(1600, 960, 800, 480);
-			Main.graphics.PreferredBackBufferWidth = 1600;
-			Main.graphics.PreferredBackBufferHeight = 960;
+			GlobalStaticVars.gSexyAppBase.mScreenScales.Init(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height, 800, 480);
+			Main.graphics.PreferredBackBufferWidth = 800;
+			Main.graphics.PreferredBackBufferHeight = 480;
 			GraphicsState.mGraphicsDeviceManager.ApplyChanges();
-		}
+			//GlobalStaticVars.gSexyAppBase.mIMEHandler = new MonoGame.IMEHelper.AndroidIMEHandler(this);
+			//GlobalStaticVars.gSexyAppBase.mIMEHandler.TextInput += (s, e) =>
+			{
+				//GlobalStaticVars.gSexyAppBase.KeyChar(new SexyChar(e.Character));
+			};
 
-		protected override void OnExiting(object sender, EventArgs args) 
-		{
-			IronPyInteractive.Stop();		
 		}
 
 		protected override void LoadContent()
@@ -153,10 +214,14 @@ namespace Sexy
 		public void CompensateForSlowUpdate()
 		{
 			//base.ResetElapsedTime();
+			if (_gameTimer != null)
+			{
+				_gameTimer.Reset();
+				_gameTimer.Start();
+			}
 		}
 
 		public static bool LOW_MEMORY_DEVICE { get; private set; }
-
 		public static bool DO_LOW_MEMORY_OPTIONS { get; private set; }
 
 		protected override void Update(GameTime gameTime)
@@ -167,38 +232,37 @@ namespace Sexy
 			}
 			if (GlobalStaticVars.gSexyAppBase.WantsToExit)
 			{
+				GlobalStaticVars.gSexyAppBase.WantsToExit = false;
+				Main_Exiting(null, null);
 				base.Exit();
+				Activity.Finish();
+				Process.GetCurrentProcess().Kill();
 			}
-			HandleInput(gameTime);
+			this.HandleInput(gameTime);
 			GlobalStaticVars.gSexyAppBase.UpdateApp();
 			if (!Main.trialModeChecked)
 			{
 				Main.trialModeChecked = true;
 				bool flag = Main.trialModeCachedValue;
-				Main.SetLowMem();
-				Main.trialModeCachedValue = Guide.IsTrialMode;
+				//Main.SetLowMem();
+				Main.trialModeCachedValue = false; // Guide.IsTrialMode;
 				if (flag != Main.trialModeCachedValue && flag)
 				{
-					LeftTrialMode();
+					this.LeftTrialMode();
 				}
 			}
-			try
-			{
-				base.Update(gameTime);
-			}
-			catch (GameUpdateRequiredException)
-			{
-				GlobalStaticVars.gSexyAppBase.ShowUpdateRequiredMessage();
-			}
+
+			base.Update(gameTime);
 		}
 
-		private static void SetLowMem()
-		{
-			//object obj;
-			//DeviceExtendedProperties.TryGetValue("DeviceTotalMemory", ref obj);
-			Main.DO_LOW_MEMORY_OPTIONS = false;//(Main.LOW_MEMORY_DEVICE = ((long)obj / 1024L / 1024L <= 256L));
-			Main.LOW_MEMORY_DEVICE = false;
-		}
+
+		//private static void SetLowMem()
+		//{
+		//	object obj;
+		//	DeviceExtendedProperties.TryGetValue("DeviceTotalMemory", ref obj);
+		//	Main.DO_LOW_MEMORY_OPTIONS = (Main.LOW_MEMORY_DEVICE = ((long)obj / 1024L / 1024L <= 256L));
+		//	Main.LOW_MEMORY_DEVICE = false;
+		//}
 
 		private void LeftTrialMode()
 		{
@@ -206,13 +270,14 @@ namespace Sexy
 			{
 				GlobalStaticVars.gSexyAppBase.LeftTrialMode();
 			}
-			Window_OrientationChanged(null, null);
+			this.Window_OrientationChanged(null, null);
 		}
 
 		public static void SuppressNextDraw()
 		{
 			Main.wantToSuppressDraw = true;
 		}
+
 
 		public static SignedInGamer GetGamer()
 		{
@@ -236,7 +301,7 @@ namespace Sexy
 
 		private void Window_OrientationChanged(object sender, EventArgs e)
 		{
-			SetupInterfaceOrientation();
+			this.SetupInterfaceOrientation();
 		}
 
 		private void SetupInterfaceOrientation()
@@ -258,6 +323,7 @@ namespace Sexy
 			{
 				Main.SetupOrientationMatrix(Main.orientationUsed);
 			}
+			
 			lock (ResourceManager.DrawLocker)
 			{
 				base.GraphicsDevice.Clear(Color.Black);
@@ -272,29 +338,17 @@ namespace Sexy
 			{
 				return;
 			}
-			MouseState msstate = Mouse.GetState();
-			_Touch mstouch = default(_Touch);
-			ScreenScales s = GlobalStaticVars.gSexyAppBase.mScreenScales;
-			mstouch.location = s.InvMapTouch(new CGPoint(msstate.Position.X, msstate.Position.Y));
-			if (msstate.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
-			{
-				GlobalStaticVars.gSexyAppBase.TouchBegan(mstouch);
-			}
-			else if (msstate.LeftButton == ButtonState.Pressed && previousMouseState.Position != msstate.Position)
-			{
-				GlobalStaticVars.gSexyAppBase.TouchMoved(mstouch);
-			}
-			else if (msstate.LeftButton == ButtonState.Released && previousMouseState.LeftButton == ButtonState.Pressed)
-			{
-				GlobalStaticVars.gSexyAppBase.TouchEnded(mstouch);
-			}
-
 			GamePadState state = GamePad.GetState(PlayerIndex.One);
-			if (state.Buttons.Back == ButtonState.Pressed && previousGamepadState.Buttons.Back == ButtonState.Released)
+			if (state.Buttons.Back == ButtonState.Pressed && this.previousGamepadState.Buttons.Back == ButtonState.Released)
 			{
 				GlobalStaticVars.gSexyAppBase.BackButtonPress();
 			}
 			TouchCollection state2 = TouchPanel.GetState();
+
+
+
+
+			ScreenScales s = GlobalStaticVars.gSexyAppBase.mScreenScales;
 			bool flag = false;
 			foreach (TouchLocation touchLocation in state2)
 			{
@@ -329,10 +383,19 @@ namespace Sexy
 					GlobalStaticVars.gSexyAppBase.TouchesCanceled();
 				}
 			}
-			previousGamepadState = state;
-			previousMouseState = msstate;
-		}
+			
 
+			this.previousGamepadState = state;
+			
+		}
+		
+
+		private void Window_TextInput(object sender, TextInputEventArgs e)
+		{
+			//GlobalStaticVars.gSexyAppBase.KeyChar(new SexyChar(e.Character));
+
+			//this.Window.Title = builder.ToString();
+		}
 		protected override void OnActivated(object sender, EventArgs args)
 		{
 			Main.trialModeChecked = false;
@@ -349,13 +412,16 @@ namespace Sexy
 
 		protected override void OnDeactivated(object sender, EventArgs args)
 		{
-			GlobalStaticVars.gSexyAppBase.LostFocus();
-			if (!GlobalStaticVars.gSexyAppBase.mMusicInterface.isStopped)
-			{
-				GlobalStaticVars.gSexyAppBase.mMusicInterface.PauseMusic();
-			}
-			GlobalStaticVars.gSexyAppBase.AppEnteredBackground();
-			base.OnDeactivated(sender, args);
+			if (GlobalStaticVars.gSexyAppBase != null)//
+			{//
+				GlobalStaticVars.gSexyAppBase.LostFocus();
+				if (!GlobalStaticVars.gSexyAppBase.mMusicInterface.isStopped)
+				{
+					GlobalStaticVars.gSexyAppBase.mMusicInterface.PauseMusic();
+				}
+				GlobalStaticVars.gSexyAppBase.AppEnteredBackground();
+				base.OnDeactivated(sender, args);
+			}//
 		}
 
 		public static bool IsInTrialMode
@@ -366,49 +432,11 @@ namespace Sexy
 			}
 		}
 
-		private void GameSpecificCheatInputCheck()
-		{
-		}
-
-		private static void SetupForResolution()
-		{
-			Strings.Culture = CultureInfo.CurrentCulture;
-			if (Strings.Culture.TwoLetterISOLanguageName == "fr")
-			{
-				Constants.Language = Constants.LanguageIndex.fr;
-			}
-			else if (Strings.Culture.TwoLetterISOLanguageName == "de")
-			{
-				Constants.Language = Constants.LanguageIndex.de;
-			}
-			else if (Strings.Culture.TwoLetterISOLanguageName == "es")
-			{
-				Constants.Language = Constants.LanguageIndex.es;
-			}
-			else if (Strings.Culture.TwoLetterISOLanguageName == "it")
-			{
-				Constants.Language = Constants.LanguageIndex.it;
-			}
-			else
-			{
-				Constants.Language = Constants.LanguageIndex.en;
-			}
-			//if ((Main.graphics.GraphicsDevice.PresentationParameters.BackBufferWidth == 480 && Main.graphics.GraphicsDevice.PresentationParameters.BackBufferHeight == 800) || (Main.graphics.GraphicsDevice.PresentationParameters.BackBufferWidth == 800 && Main.graphics.GraphicsDevice.PresentationParameters.BackBufferHeight == 480))
-			//{
-				AtlasResources.mAtlasResources = new AtlasResources_480x800();
-				Constants.Load480x800();
-				return;
-			//}
-			throw new Exception("Unsupported Resolution");
-		}
-
 		private static SexyTransform2D orientationTransform;
 
 		private static UI_ORIENTATION orientationUsed;
 
 		private static bool newOrientation;
-
-		public static GamerServicesComponent GamerServicesComp;
 
 		public static bool trialModeChecked = false;
 
@@ -423,6 +451,14 @@ namespace Sexy
 		private static bool wantToSuppressDraw;
 
 		private GamePadState previousGamepadState = default(GamePadState);
-        private MouseState previousMouseState = default(MouseState);
-    }
+
+		private MouseState previousMouseState = default(MouseState);
+
+		private KeyboardState previousKeyboardState = default(KeyboardState);
+
+		public static GamerServicesComponent GamerServicesComp;
+
+		private Stopwatch _gameTimer = new Stopwatch();
+
+	}
 }

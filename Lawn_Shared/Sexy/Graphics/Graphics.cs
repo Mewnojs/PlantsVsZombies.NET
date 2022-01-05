@@ -233,13 +233,16 @@ namespace Sexy
 			}
 			BlendState blendState = (mDrawMode == Graphics.DrawMode.DRAWMODE_ADDITIVE) ? Graphics.additiveState : BlendState.AlphaBlend;
 			GraphicsDevice.BlendState = blendState;
+			//
+			var matrix = GlobalStaticVars.gSexyAppBase.mScreenScales.ScaleMatrix * GlobalStaticVars.gSexyAppBase.mScreenScales.TranslationMatrix;
+			//
 			if (Graphics.gTransformStack.empty<SexyTransform2D>())
 			{
-				Graphics.spriteBatch.Begin(sortmode, blendState, Graphics.NormalSamplerState, null, rasterState);
+				Graphics.spriteBatch.Begin(sortmode, blendState, Graphics.NormalSamplerState, null, rasterState, null, matrix);
 			}
 			else
 			{
-				Graphics.spriteBatch.Begin(sortmode, blendState, Graphics.NormalSamplerState, null, rasterState, null, Graphics.gTransformStack.Peek().mMatrix);
+				Graphics.spriteBatch.Begin(sortmode, blendState, Graphics.NormalSamplerState, null, rasterState, null, Graphics.gTransformStack.Peek().mMatrix * matrix);
 			}
 			Graphics.spritebatchBegan = true;
 		}
@@ -252,6 +255,11 @@ namespace Sexy
 		}
 
 		public static void OrientationChanged()
+		{
+			Graphics.primitiveBatch.SetupMatrices();
+		}
+
+		public static void Resized()
 		{
 			Graphics.primitiveBatch.SetupMatrices();
 		}
@@ -1455,10 +1463,13 @@ namespace Sexy
 		{
 			EndFrame();
 			TRect aRect = mClipRect;
+			GlobalStaticVars.gSexyAppBase.mScreenScales.Scale(ref aRect);
 			aRect = aRect.Intersection(new TRect(0, 0, base.mScreenWidth, base.mScreenHeight));
 			GraphicsDevice.ScissorRectangle = aRect;
 			Graphics.hardwareClippingEnabled = true;
-			Graphics.hardwareClippedRectangle = mClipRect;
+			TRect bRect = mClipRect;
+			GlobalStaticVars.gSexyAppBase.mScreenScales.Scale(ref bRect);
+			Graphics.hardwareClippedRectangle = bRect;
 			BeginFrame(Graphics.hardwareClipState, spriteSortMode);
 		}
 
@@ -1480,6 +1491,7 @@ namespace Sexy
 			EndFrame();
 			theClip.mX += mTransX;
 			theClip.mY += mTransY;
+			GlobalStaticVars.gSexyAppBase.mScreenScales.Scale(ref theClip);
 			Rectangle rectangle = theClip.Intersection(new TRect(0, 0, base.mScreenWidth, base.mScreenHeight));
 			Graphics.hardwareClippingEnabled = true;
 			Graphics.hardwareClippedRectangle = (TRect)rectangle;

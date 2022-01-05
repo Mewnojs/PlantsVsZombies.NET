@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Graphics.PackedVector;
 using Sexy.TodLib;
+using MLEM.Data;
 
 namespace Sexy
 {
@@ -1317,87 +1318,116 @@ namespace Sexy
 		private Texture2D LoadTextureFromStream(string filename, bool premultiply, ImageRes.TextureFormat format, SurfaceFormat lowMemorySurfaceFormat)
 		{
 			Texture2D texture2D = null;
-			GraphicsDevice graphicsDevice = GlobalStaticVars.g.GraphicsDevice;
-			using (Stream stream = TitleContainer.OpenStream("Content/" + filename + "." + format.ToString()))
+			using (Stream stream = TitleContainer.OpenStream("Content/" + filename + "." + format.ToString().ToLower()))
 			{
-				texture2D = Texture2D.FromStream(graphicsDevice, stream);
+				texture2D = Texture2D.FromStream(GlobalStaticVars.g.GraphicsDevice, stream);
 			}
-			bool flag = false;
+			
 			if (!premultiply)
 			{
 				return texture2D;
 			}
-			lock (ResourceManager.DrawLocker)
-			{
-				if (texture2D.Width * texture2D.Height < 4194304)
+			else
+            {
+				if (System.Threading.Thread.CurrentThread.IsBackground
+                    || System.Threading.Thread.CurrentThread.IsThreadPoolThread)
 				{
-					RenderTarget2D renderTarget2D = null;
-					try
-					{
-						flag = true;
-						lock (SexyAppBase.SplashScreenDrawLock)
-						{
-							if (Main.DO_LOW_MEMORY_OPTIONS)
-							{
-								renderTarget2D = new RenderTarget2D(graphicsDevice, texture2D.Width, texture2D.Height, false, lowMemorySurfaceFormat, DepthFormat.None, 0, RenderTargetUsage.DiscardContents);
-							}
-							else
-							{
-								renderTarget2D = new RenderTarget2D(graphicsDevice, texture2D.Width, texture2D.Height, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.DiscardContents);
-							}
-							graphicsDevice.SetRenderTarget(renderTarget2D);
-							graphicsDevice.Clear(Color.Black);
-							ResourceManager.imageLoadSpritebatch.Begin(SpriteSortMode.Immediate, BlendStates.blendColorLoadState);
-							ResourceManager.imageLoadSpritebatch.Draw(texture2D, texture2D.Bounds, Color.White);
-							ResourceManager.imageLoadSpritebatch.End();
-							ResourceManager.imageLoadSpritebatch.Begin(SpriteSortMode.Immediate, BlendStates.imageLoadBlendAlpha);
-							ResourceManager.imageLoadSpritebatch.Draw(texture2D, texture2D.Bounds, Color.White);
-							ResourceManager.imageLoadSpritebatch.End();
-							graphicsDevice.SetRenderTarget(null);
-							texture2D.Dispose();
-							return renderTarget2D;
-						}
-					}
-					catch (Exception ex)
-					{
-						flag = false;
-						string message = ex.Message;
-						if (renderTarget2D != null)
-						{
-							renderTarget2D.Dispose();
-						}
-					}
+					GlobalStaticVars.gLawnApp.mTexturesToBePremultiplied.Push(texture2D);
 				}
-			}
-			if (!flag)
-			{
-				Color[] array = new Color[texture2D.Width * texture2D.Height];
-				texture2D.GetData<Color>(array);
-				for (int i = 0; i < array.Length; i++)
-				{
-					PremultiplyPixel(ref array[i]);
+				else 
+				{ 
+					texture2D = PremultiplyTexture(texture2D, false); 
 				}
-				if (Main.DO_LOW_MEMORY_OPTIONS)
-				{
-					Texture2D texture2D2 = new Texture2D(graphicsDevice, texture2D.Width, texture2D.Height, false, SurfaceFormat.Bgra4444);
-					Bgra4444[] array2 = new Bgra4444[array.Length];
-					for (int j = 0; j < array2.Length; j++)
-					{
-						array2[j] = new Bgra4444(array[j].ToVector4());
-					}
-					texture2D2.SetData<Bgra4444>(array2);
-					texture2D.Dispose();
-					texture2D = texture2D2;
-				}
-				else
-				{
-					texture2D.SetData<Color>(array);
-				}
-			}
-			return texture2D;
-		}
+				return texture2D;
+            }
+        }
 
-		private void PremultiplyPixel(ref Color c)
+        internal Texture2D PremultiplyTexture(/*SurfaceFormat lowMemorySurfaceFormat, */Texture2D texture2D, bool doRefTexture)
+        {
+			bool flag = false;
+			GraphicsDevice graphicsDevice = GlobalStaticVars.g.GraphicsDevice;
+			lock (ResourceManager.DrawLocker)
+            {
+                if (texture2D.Width * texture2D.Height < 4194304)
+                {
+                    RenderTarget2D renderTarget2D = null;
+                    try
+                    {
+                        flag = true;
+                        lock (SexyAppBase.SplashScreenDrawLock)
+                        {
+                            if (Main.DO_LOW_MEMORY_OPTIONS)
+                            {
+								throw new NotImplementedException();//renderTarget2D = new RenderTarget2D(graphicsDevice, texture2D.Width, texture2D.Height, false, lowMemorySurfaceFormat, DepthFormat.None, 0, RenderTargetUsage.DiscardContents);
+                            }
+                            else
+                            {
+                                renderTarget2D = new RenderTarget2D(graphicsDevice, texture2D.Width, texture2D.Height, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.DiscardContents);
+                            }
+                            graphicsDevice.SetRenderTarget(renderTarget2D);
+                            graphicsDevice.Clear(Color.Black);
+                            ResourceManager.imageLoadSpritebatch.Begin(SpriteSortMode.Immediate, BlendStates.blendColorLoadState);
+                            ResourceManager.imageLoadSpritebatch.Draw(texture2D, texture2D.Bounds, Color.White);
+                            ResourceManager.imageLoadSpritebatch.End();
+                            ResourceManager.imageLoadSpritebatch.Begin(SpriteSortMode.Immediate, BlendStates.imageLoadBlendAlpha);
+                            ResourceManager.imageLoadSpritebatch.Draw(texture2D, texture2D.Bounds, Color.White);
+                            ResourceManager.imageLoadSpritebatch.End();
+                            graphicsDevice.SetRenderTarget(null);
+							if (doRefTexture) 
+							{
+								Color[] colordata = new Color[renderTarget2D.Width * renderTarget2D.Height];
+								renderTarget2D.GetData<Color>(colordata);
+								texture2D.SetData<Color>(colordata);
+								renderTarget2D.Dispose();
+								return texture2D;
+							} 
+							else 
+							{
+								texture2D.Dispose();
+								return renderTarget2D;
+							}
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        flag = false;
+                        string message = ex.Message;
+                        if (renderTarget2D != null)
+                        {
+                            renderTarget2D.Dispose();
+                        }
+                    }
+                }
+            }
+            if (!flag)
+            {
+                Color[] array = new Color[texture2D.Width * texture2D.Height];
+                texture2D.GetData<Color>(array);
+                for (int i = 0; i < array.Length; i++)
+                {
+                    PremultiplyPixel(ref array[i]);
+                }
+                if (Main.DO_LOW_MEMORY_OPTIONS)
+                {
+                    Texture2D texture2D2 = new Texture2D(graphicsDevice, texture2D.Width, texture2D.Height, false, SurfaceFormat.Bgra4444);
+                    Bgra4444[] array2 = new Bgra4444[array.Length];
+                    for (int j = 0; j < array2.Length; j++)
+                    {
+                        array2[j] = new Bgra4444(array[j].ToVector4());
+                    }
+                    texture2D2.SetData<Bgra4444>(array2);
+                    texture2D.Dispose();
+                    texture2D = texture2D2;
+                }
+                else
+                {
+                    texture2D.SetData<Color>(array);
+                }
+            }
+            return texture2D;
+        }
+
+        private void PremultiplyPixel(ref Color c)
 		{
 			c.R = (byte)(c.R * c.A / 255f);
 			c.G = (byte)(c.G * c.A / 255f);

@@ -238,55 +238,50 @@ namespace Lawn
             }
             PickRandomSpeed();
             mBodyHealth = 270;
-            RenderLayer theRenderLayer = RenderLayer.RENDER_LAYER_ZOMBIE;
-            int theLayerOffset = 4;
-            ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(mZombieType);
-            if (zombieDefinition.mReanimationType != ReanimationType.REANIM_NONE)
+            RenderLayer aRenderLayer = RenderLayer.RENDER_LAYER_ZOMBIE;
+            int aRenderOffset = 4;
+            ZombieDefinition aZombieDef = Zombie.GetZombieDefinition(mZombieType);
+            if (aZombieDef.mReanimationType != ReanimationType.REANIM_NONE)
             {
-                LoadReanim(zombieDefinition.mReanimationType);
+                LoadReanim(aZombieDef.mReanimationType);
             }
-            if (theType == ZombieType.ZOMBIE_NORMAL)
+            switch (mZombieType)
             {
+            case ZombieType.ZOMBIE_NORMAL:
                 LoadPlainZombieReanim();
-            }
-            else if (theType == ZombieType.ZOMBIE_DUCKY_TUBE)
-            {
+                break;
+            case ZombieType.ZOMBIE_DUCKY_TUBE:
                 LoadPlainZombieReanim();
-            }
-            else if (theType == ZombieType.ZOMBIE_TRAFFIC_CONE)
-            {
+                break;
+            case ZombieType.ZOMBIE_TRAFFIC_CONE:
                 LoadPlainZombieReanim();
                 ReanimShowPrefix("anim_cone", 0);
                 ReanimShowPrefix("anim_hair", -1);
                 mHelmType = HelmType.HELMTYPE_TRAFFIC_CONE;
                 mHelmHealth = 370;
-            }
-            else if (theType == ZombieType.ZOMBIE_PAIL)
-            {
+                break;
+            case ZombieType.ZOMBIE_PAIL:
                 LoadPlainZombieReanim();
                 ReanimShowPrefix("anim_bucket", 0);
                 ReanimShowPrefix("anim_hair", -1);
                 mHelmType = HelmType.HELMTYPE_PAIL;
                 mHelmHealth = 1100;
-            }
-            else if (theType == ZombieType.ZOMBIE_DOOR)
-            {
+                break;
+            case ZombieType.ZOMBIE_DOOR:
                 mShieldType = ShieldType.SHIELDTYPE_DOOR;
                 mShieldHealth = 1100;
                 mPosX += 60f;
                 LoadPlainZombieReanim();
                 AttachShield();
-            }
-            else if (theType == ZombieType.ZOMBIE_YETI)
-            {
+                break;
+            case ZombieType.ZOMBIE_YETI:
                 mBodyHealth = 1350;
                 mPhaseCounter = TodCommon.RandRangeInt(1500, 2000);
                 mHasObject = true;
                 mZombieAttackRect = new TRect(20, 0, 50, 115);
                 mPosX += 60f;
-            }
-            else if (theType == ZombieType.ZOMBIE_LADDER)
-            {
+                break;
+            case ZombieType.ZOMBIE_LADDER:
                 mBodyHealth = 500;
                 mShieldType = ShieldType.SHIELDTYPE_LADDER;
                 mShieldHealth = 500;
@@ -297,8 +292,8 @@ namespace Lawn
                     StartWalkAnim(0);
                 }
                 AttachShield();
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_BUNGEE)
+                break;
+            case ZombieType.ZOMBIE_BUNGEE:
             {
                 mBodyHealth = 450;
                 mAnimFrames = 4;
@@ -319,36 +314,37 @@ namespace Lawn
                     mPhaseCounter = TodCommon.RandRangeInt(0, 200);
                 }
                 PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_drop, ReanimLoopType.REANIM_LOOP, 0, 24f);
-                Reanimation reanimation = mApp.ReanimationGet(mBodyReanimID);
-                reanimation.AssignRenderGroupToPrefix("Zombie_bungi_rightarm_lower2", GameConstants.RENDER_GROUP_ARMS);
-                reanimation.AssignRenderGroupToPrefix("Zombie_bungi_rightarm_hand2", GameConstants.RENDER_GROUP_ARMS);
-                reanimation.AssignRenderGroupToPrefix("Zombie_bungi_leftarm_lower2", GameConstants.RENDER_GROUP_ARMS);
-                reanimation.AssignRenderGroupToPrefix("Zombie_bungi_leftarm_hand2", GameConstants.RENDER_GROUP_ARMS);
-                reanimation.SetTruncateDisappearingFrames(string.Empty, false);
-                theRenderLayer = RenderLayer.RENDER_LAYER_GRAVE_STONE;
-                theLayerOffset = 7;
+                Reanimation aBodyReanim = mApp.ReanimationGet(mBodyReanimID);
+                aBodyReanim.AssignRenderGroupToPrefix("Zombie_bungi_rightarm_lower2", GameConstants.RENDER_GROUP_ARMS);
+                aBodyReanim.AssignRenderGroupToPrefix("Zombie_bungi_rightarm_hand2", GameConstants.RENDER_GROUP_ARMS);
+                aBodyReanim.AssignRenderGroupToPrefix("Zombie_bungi_leftarm_lower2", GameConstants.RENDER_GROUP_ARMS);
+                aBodyReanim.AssignRenderGroupToPrefix("Zombie_bungi_leftarm_hand2", GameConstants.RENDER_GROUP_ARMS);
+                aBodyReanim.SetTruncateDisappearingFrames(string.Empty, false);
+                aRenderLayer = RenderLayer.RENDER_LAYER_GRAVE_STONE;
+                aRenderOffset = 7;
                 mZombieRect = new TRect(-20, 22, 110, 94);
                 mZombieAttackRect = new TRect(0, 0, 0, 0);
                 mVariant = false;
+                break;
             }
-            else if (mZombieType == ZombieType.ZOMBIE_FOOTBALL)
-            {
+
+            case ZombieType.ZOMBIE_FOOTBALL:
                 mZombieRect = new TRect(50, 0, 57, 115);
                 ReanimShowPrefix("anim_hair", -1);
                 mHelmType = HelmType.HELMTYPE_FOOTBALL;
                 mHelmHealth = 1400;
                 mAnimTicksPerFrame = 6;
                 mVariant = false;
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_DIGGER)
+                break;
+            case ZombieType.ZOMBIE_DIGGER:
             {
                 mHelmType = HelmType.HELMTYPE_DIGGER;
                 mHelmHealth = 100;
                 mVariant = false;
                 mHasObject = true;
                 mZombieRect = new TRect(50, 0, 28, 115);
-                Reanimation reanimation2 = mApp.ReanimationGet(mBodyReanimID);
-                reanimation2.SetTruncateDisappearingFrames(string.Empty, false);
+                Reanimation aBodyReanim = mApp.ReanimationGet(mBodyReanimID);
+                aBodyReanim.SetTruncateDisappearingFrames(string.Empty, false);
                 if (!IsOnBoard())
                 {
                     mZombiePhase = ZombiePhase.PHASE_DIGGER_CUTSCENE;
@@ -357,13 +353,15 @@ namespace Lawn
                 {
                     mZombiePhase = ZombiePhase.PHASE_DIGGER_TUNNELING;
                     AddAttachedParticle(60, 100, ParticleEffect.PARTICLE_DIGGER_TUNNEL);
-                    theLayerOffset = 7;
+                    aRenderOffset = 7;
                     PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_dig, ReanimLoopType.REANIM_LOOP_FULL_LAST_FRAME, 0, 12f);
                     PickRandomSpeed();
                 }
+
+                break;
             }
-            else if (mZombieType == ZombieType.ZOMBIE_POLEVAULTER)
-            {
+
+            case ZombieType.ZOMBIE_POLEVAULTER:
                 mBodyHealth = 500;
                 mAnimTicksPerFrame = 6;
                 mZombiePhase = ZombiePhase.PHASE_POLEVAULTER_PRE_VAULT;
@@ -383,9 +381,8 @@ namespace Lawn
                 {
                     mZombieAttackRect = new TRect(-29, 0, 70, 115);
                 }
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_DOLPHIN_RIDER)
-            {
+                break;
+            case ZombieType.ZOMBIE_DOLPHIN_RIDER:
                 mBodyHealth = 500;
                 mAnimTicksPerFrame = 6;
                 mZombiePhase = ZombiePhase.PHASE_DOLPHIN_WALKING;
@@ -397,8 +394,9 @@ namespace Lawn
                 }
                 SetupWaterTrack(ref GlobalMembersReanimIds.ReanimTrackId_zombie_dolphinrider_whitewater);
                 SetupWaterTrack(ref GlobalMembersReanimIds.ReanimTrackId_zombie_dolphinrider_dolphininwater);
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_GARGANTUAR || mZombieType == ZombieType.ZOMBIE_REDEYE_GARGANTUAR)
+                break;
+            case ZombieType.ZOMBIE_GARGANTUAR:
+            case ZombieType.ZOMBIE_REDEYE_GARGANTUAR:
             {
                 mBodyHealth = 3000;
                 mAnimFrames = 24;
@@ -409,7 +407,7 @@ namespace Lawn
                 mZombieRect = new TRect(-17, -38, 125, 154);
                 mZombieAttackRect = new TRect(-30, -38, 89, 154);
                 mVariant = false;
-                theLayerOffset = 8;
+                aRenderOffset = 8;
                 mHasObject = true;
                 int num = RandomNumbers.NextNumber(100);
                 int num2;
@@ -429,35 +427,36 @@ namespace Lawn
                 {
                     num2 = 0;
                 }
-                Reanimation reanimation3 = mApp.ReanimationGet(mBodyReanimID);
+                Reanimation aBodyReanim = mApp.ReanimationGet(mBodyReanimID);
                 if (num2 == 2)
                 {
-                    reanimation3.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_gargantuar_telephonepole, AtlasResources.IMAGE_REANIM_ZOMBIE_GARGANTUAR_ZOMBIE);
+                    aBodyReanim.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_gargantuar_telephonepole, AtlasResources.IMAGE_REANIM_ZOMBIE_GARGANTUAR_ZOMBIE);
                 }
                 else if (num2 == 1)
                 {
-                    reanimation3.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_gargantuar_telephonepole, AtlasResources.IMAGE_REANIM_ZOMBIE_GARGANTUAR_DUCKXING);
+                    aBodyReanim.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_gargantuar_telephonepole, AtlasResources.IMAGE_REANIM_ZOMBIE_GARGANTUAR_DUCKXING);
                 }
                 if (mZombieType == ZombieType.ZOMBIE_REDEYE_GARGANTUAR)
                 {
-                    reanimation3.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_anim_head1, AtlasResources.IMAGE_REANIM_ZOMBIE_GARGANTUAR_HEAD_REDEYE);
+                    aBodyReanim.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_anim_head1, AtlasResources.IMAGE_REANIM_ZOMBIE_GARGANTUAR_HEAD_REDEYE);
                     mBodyHealth = 6000;
                 }
+
+                break;
             }
-            else if (mZombieType == ZombieType.ZOMBIE_ZAMBONI)
-            {
+
+            case ZombieType.ZOMBIE_ZAMBONI:
                 mBodyHealth = 1350;
                 mAnimFrames = 2;
                 mAnimTicksPerFrame = 8;
                 mPosX = Constants.WIDE_BOARD_WIDTH + RandomNumbers.NextNumber(10) + 20;
-                theLayerOffset = 8;
+                aRenderOffset = 8;
                 PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_drive, ReanimLoopType.REANIM_LOOP, 0, 12f);
                 mZombieRect = new TRect(0, -13, 153, 140);
                 mZombieAttackRect = new TRect(10, -13, 133, 140);
                 mVariant = false;
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_CATAPULT)
-            {
+                break;
+            case ZombieType.ZOMBIE_CATAPULT:
                 mBodyHealth = 850;
                 mPosX = Constants.WIDE_BOARD_WIDTH + 25 + RandomNumbers.NextNumber(10);
                 mSummonCounter = 20;
@@ -472,17 +471,16 @@ namespace Lawn
                 mZombieRect = new TRect(0, -13, 153, 140);
                 mZombieAttackRect = new TRect(10, -13, 133, 140);
                 mVariant = false;
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_SNORKEL)
-            {
+                break;
+            case ZombieType.ZOMBIE_SNORKEL:
                 mZombieRect = new TRect(12, 0, 62, 115);
                 mZombieAttackRect = new TRect(-5, 0, 55, 115);
                 SetupWaterTrack(ref GlobalMembersReanimIds.ReanimTrackId_zombie_snorkle_whitewater);
                 SetupWaterTrack(ref GlobalMembersReanimIds.ReanimTrackId_zombie_snorkle_whitewater2);
                 mVariant = false;
                 mZombiePhase = ZombiePhase.PHASE_SNORKEL_WALKING;
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_JACK_IN_THE_BOX)
+                break;
+            case ZombieType.ZOMBIE_JACK_IN_THE_BOX:
             {
                 mBodyHealth = 500;
                 mAnimTicksPerFrame = 6;
@@ -501,34 +499,37 @@ namespace Lawn
                 {
                     mZombiePhase = ZombiePhase.PHASE_JACK_IN_THE_BOX_RUNNING;
                 }
+
+                break;
             }
-            else if (mZombieType == ZombieType.ZOMBIE_BOBSLED)
+
+            case ZombieType.ZOMBIE_BOBSLED:
             {
-                theLayerOffset = 3;
+                aRenderOffset = 3;
                 if (theParentZombie != null)
                 {
-                    int num4 = 0;
-                    while (num4 < 3 && theParentZombie.mFollowerZombieID[num4] != null)
+                    int iFollower = 0;
+                    while (iFollower < 3 && theParentZombie.mFollowerZombieID[iFollower] != null)
                     {
-                        num4++;
+                        iFollower++;
                     }
-                    Debug.ASSERT(num4 < 3);
-                    theParentZombie.mFollowerZombieID[num4] = mBoard.ZombieGetID(this);
+                    Debug.ASSERT(iFollower < 3);
+                    theParentZombie.mFollowerZombieID[iFollower] = mBoard.ZombieGetID(this);
                     mRelatedZombieID = mBoard.ZombieGetID(theParentZombie);
-                    mPosX = theParentZombie.mPosX + (num4 + 1) * 50;
-                    if (num4 == 0)
+                    mPosX = theParentZombie.mPosX + (iFollower + 1) * 50;
+                    if (iFollower == 0)
                     {
-                        theLayerOffset = 1;
+                        aRenderOffset = 1;
                         mAltitude = 9f;
                     }
-                    else if (num4 == 1)
+                    else if (iFollower == 1)
                     {
-                        theLayerOffset = 2;
+                        aRenderOffset = 2;
                         mAltitude = -7f;
                     }
                     else
                     {
-                        theLayerOffset = 0;
+                        aRenderOffset = 0;
                         mAltitude = 9f;
                     }
                 }
@@ -547,29 +548,34 @@ namespace Lawn
                 if (theFromWave == GameConstants.ZOMBIE_WAVE_CUTSCENE)
                 {
                     PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_jump, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 20f);
-                    Reanimation reanimation4 = mApp.ReanimationGet(mBodyReanimID);
-                    reanimation4.mAnimTime = 1f;
+                    mApp.ReanimationGet(mBodyReanimID)
+                        .mAnimTime = 1f;
                     mAltitude = 18f;
                 }
                 else if (IsOnBoard())
                 {
                     PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_push, ReanimLoopType.REANIM_LOOP, 0, 30f);
                 }
+
+                break;
             }
-            else if (theType == ZombieType.ZOMBIE_FLAG)
+
+            case ZombieType.ZOMBIE_FLAG:
             {
                 mHasObject = true;
                 LoadPlainZombieReanim();
-                Reanimation reanimation5 = mApp.ReanimationGet(mBodyReanimID);
-                Reanimation reanimation6 = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_ZOMBIE_FLAGPOLE);
-                reanimation6.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_zombie_flag, ReanimLoopType.REANIM_LOOP, 0, 15f);
-                mSpecialHeadReanimID = mApp.ReanimationGetID(reanimation6);
-                ReanimatorTrackInstance trackInstanceByName = reanimation5.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_zombie_flaghand);
-                GlobalMembersAttachment.AttachReanim(ref trackInstanceByName.mAttachmentID, reanimation6, 0f, 0f);
-                reanimation5.mFrameBasePose = 0;
+                Reanimation aBodyReanim = mApp.ReanimationGet(mBodyReanimID);
+                Reanimation aFlagPoleReanim = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_ZOMBIE_FLAGPOLE);
+                aFlagPoleReanim.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_zombie_flag, ReanimLoopType.REANIM_LOOP, 0, 15f);
+                mSpecialHeadReanimID = mApp.ReanimationGetID(aFlagPoleReanim);
+                ReanimatorTrackInstance aTrackInstance = aBodyReanim.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_zombie_flaghand);
+                GlobalMembersAttachment.AttachReanim(ref aTrackInstance.mAttachmentID, aFlagPoleReanim, 0f, 0f);
+                aBodyReanim.mFrameBasePose = 0;
                 mPosX = Constants.WIDE_BOARD_WIDTH;
+                break;
             }
-            else if (mZombieType == ZombieType.ZOMBIE_POGO)
+
+            case ZombieType.ZOMBIE_POGO:
             {
                 mVariant = false;
                 mZombiePhase = ZombiePhase.PHASE_POGO_BOUNCING;
@@ -578,19 +584,20 @@ namespace Lawn
                 mBodyHealth = 500;
                 mZombieAttackRect = new TRect(10, 0, 30, 115);
                 PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_pogo, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 40f);
-                Reanimation reanimation7 = mApp.ReanimationGet(mBodyReanimID);
-                reanimation7.mAnimTime = 1f;
+                mApp.ReanimationGet(mBodyReanimID)
+                    .mAnimTime = 1f;
+                break;
             }
-            else if (theType == ZombieType.ZOMBIE_NEWSPAPER)
-            {
+
+            case ZombieType.ZOMBIE_NEWSPAPER:
                 mZombieAttackRect = new TRect(20, 0, 50, 115);
                 mZombiePhase = ZombiePhase.PHASE_NEWSPAPER_READING;
                 mShieldType = ShieldType.SHIELDTYPE_NEWSPAPER;
                 mShieldHealth = 150;
                 mVariant = false;
                 AttachShield();
-            }
-            else if (theType == ZombieType.ZOMBIE_BALLOON)
+                break;
+            case ZombieType.ZOMBIE_BALLOON:
             {
                 Reanimation reanimation8 = mApp.ReanimationGet(mBodyReanimID);
                 reanimation8.SetTruncateDisappearingFrames(string.Empty, false);
@@ -605,17 +612,18 @@ namespace Lawn
                     float animRate = TodCommon.RandRangeFloat(8f, 10f);
                     SetAnimRate(animRate);
                 }
-                Reanimation reanimation9 = mApp.AddReanimation(0f, 0f, 0, zombieDefinition.mReanimationType);
-                reanimation9.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_propeller);
-                reanimation9.mLoopType = ReanimLoopType.REANIM_LOOP_FULL_LAST_FRAME;
-                reanimation9.AttachToAnotherReanimation(ref reanimation8, GlobalMembersReanimIds.ReanimTrackId_hat);
+                Reanimation aBodyReanim = mApp.AddReanimation(0f, 0f, 0, aZombieDef.mReanimationType);
+                aBodyReanim.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_propeller);
+                aBodyReanim.mLoopType = ReanimLoopType.REANIM_LOOP_FULL_LAST_FRAME;
+                aBodyReanim.AttachToAnotherReanimation(ref reanimation8, GlobalMembersReanimIds.ReanimTrackId_hat);
                 mFlyingHealth = 20;
                 mZombieRect = new TRect(36, 30, 42, 115);
                 mZombieAttackRect = new TRect(20, 30, 50, 115);
                 mVariant = false;
+                break;
             }
-            else if (theType == ZombieType.ZOMBIE_DANCER)
-            {
+
+            case ZombieType.ZOMBIE_DANCER:
                 if (!IsOnBoard())
                 {
                     PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_moonwalk, ReanimLoopType.REANIM_LOOP, 0, 12f);
@@ -629,9 +637,8 @@ namespace Lawn
                 }
                 mBodyHealth = 500;
                 mVariant = false;
-            }
-            else if (theType == ZombieType.ZOMBIE_BACKUP_DANCER)
-            {
+                break;
+            case ZombieType.ZOMBIE_BACKUP_DANCER:
                 if (!IsOnBoard())
                 {
                     PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_armraise, ReanimLoopType.REANIM_LOOP, 0, 12f);
@@ -639,9 +646,8 @@ namespace Lawn
                 ReanimShowPrefix("Zombie_disco_outerarm_upper_bone", -1);
                 mZombiePhase = ZombiePhase.PHASE_DANCER_DANCING_LEFT;
                 mVariant = false;
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_IMP)
-            {
+                break;
+            case ZombieType.ZOMBIE_IMP:
                 if (!IsOnBoard())
                 {
                     PlayZombieReanim(ref Reanimation.ReanimTrackId_anim_walk, ReanimLoopType.REANIM_LOOP, 0, 12f);
@@ -650,14 +656,13 @@ namespace Lawn
                 {
                     mBodyHealth = 70;
                 }
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_BOSS)
-            {
+                break;
+            case ZombieType.ZOMBIE_BOSS:
                 mPosX = Constants.BOARD_EXTRA_ROOM;
                 mPosY = 0f;
                 mZombieRect = new TRect(700, 80, 90, 430);
-                mZombieAttackRect = default(TRect);
-                theRenderLayer = RenderLayer.RENDER_LAYER_TOP;
+                mZombieAttackRect = default;
+                aRenderLayer = RenderLayer.RENDER_LAYER_TOP;
                 if (mApp.IsAdventureMode() || mApp.IsQuickPlayMode())
                 {
                     mBodyHealth = 40000;
@@ -678,137 +683,149 @@ namespace Lawn
                     PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_head_idle, ReanimLoopType.REANIM_LOOP, 0, 12f);
                 }
                 BossSetupReanim();
-            }
-            else if (theType == ZombieType.ZOMBIE_PEA_HEAD)
+                break;
+            case ZombieType.ZOMBIE_PEA_HEAD:
             {
                 LoadPlainZombieReanim();
                 ReanimShowPrefix("anim_hair", -1);
                 ReanimShowPrefix("anim_head2", -1);
-                Reanimation reanimation10 = mApp.ReanimationGet(mBodyReanimID);
+                Reanimation aBodyReanim = mApp.ReanimationGet(mBodyReanimID);
                 if (IsOnBoard())
                 {
-                    reanimation10.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_walk2);
+                    aBodyReanim.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_walk2);
                 }
-                ReanimatorTrackInstance trackInstanceByName2 = reanimation10.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_anim_head1);
-                trackInstanceByName2.mImageOverride = AtlasResources.IMAGE_BLANK;
-                Reanimation reanimation11 = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_PEASHOOTER);
-                reanimation11.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_head_idle, ReanimLoopType.REANIM_LOOP, 0, 15f);
-                mSpecialHeadReanimID = mApp.ReanimationGetID(reanimation11);
-                AttachEffect attachEffect = GlobalMembersAttachment.AttachReanim(ref trackInstanceByName2.mAttachmentID, reanimation11, 0f, 0f);
-                reanimation10.mFrameBasePose = 0;
-                TodCommon.TodScaleRotateTransformMatrix(ref attachEffect.mOffset.mMatrix, 65f * Constants.S, -8f * Constants.S, 0.2f, -1f, 1f);
+                ReanimatorTrackInstance aTrackInstance = aBodyReanim.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_anim_head1);
+                aTrackInstance.mImageOverride = AtlasResources.IMAGE_BLANK;
+                Reanimation aPeaHeadReanim = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_PEASHOOTER);
+                aPeaHeadReanim.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_head_idle, ReanimLoopType.REANIM_LOOP, 0, 15f);
+                mSpecialHeadReanimID = mApp.ReanimationGetID(aPeaHeadReanim);
+                AttachEffect aAttachEffect = GlobalMembersAttachment.AttachReanim(ref aTrackInstance.mAttachmentID, aPeaHeadReanim, 0f, 0f);
+                aBodyReanim.mFrameBasePose = 0;
+                TodCommon.TodScaleRotateTransformMatrix(ref aAttachEffect.mOffset.mMatrix, 65f * Constants.S, -8f * Constants.S, 0.2f, -1f, 1f);
                 mPhaseCounter = 150;
                 mVariant = false;
+                break;
             }
-            else if (theType == ZombieType.ZOMBIE_WALLNUT_HEAD)
+
+            case ZombieType.ZOMBIE_WALLNUT_HEAD:
             {
                 LoadPlainZombieReanim();
                 ReanimShowPrefix("anim_hair", -1);
                 ReanimShowPrefix("anim_head", -1);
                 ReanimShowPrefix("Zombie_tie", -1);
-                Reanimation reanimation12 = mApp.ReanimationGet(mBodyReanimID);
+                Reanimation aBodyReanim = mApp.ReanimationGet(mBodyReanimID);
                 if (IsOnBoard())
                 {
-                    reanimation12.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_walk2);
+                    aBodyReanim.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_walk2);
                 }
-                ReanimatorTrackInstance trackInstanceByName3 = reanimation12.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_zombie_body);
-                Reanimation reanimation13 = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_WALLNUT);
-                reanimation13.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.REANIM_LOOP, 0, 15f);
-                mSpecialHeadReanimID = mApp.ReanimationGetID(reanimation13);
-                AttachEffect attachEffect2 = GlobalMembersAttachment.AttachReanim(ref trackInstanceByName3.mAttachmentID, reanimation13, 0f, 0f);
-                reanimation12.mFrameBasePose = 0;
-                TodCommon.TodScaleRotateTransformMatrix(ref attachEffect2.mOffset.mMatrix, 50f * Constants.S, 0f, 0.2f, -0.8f, 0.8f);
+                ReanimatorTrackInstance aTrackInstance = aBodyReanim.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_zombie_body);
+                Reanimation aWallnutHeadReanim = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_WALLNUT);
+                aWallnutHeadReanim.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.REANIM_LOOP, 0, 15f);
+                mSpecialHeadReanimID = mApp.ReanimationGetID(aWallnutHeadReanim);
+                AttachEffect aAttachEffect = GlobalMembersAttachment.AttachReanim(ref aTrackInstance.mAttachmentID, aWallnutHeadReanim, 0f, 0f);
+                aBodyReanim.mFrameBasePose = 0;
+                TodCommon.TodScaleRotateTransformMatrix(ref aAttachEffect.mOffset.mMatrix, 50f * Constants.S, 0f, 0.2f, -0.8f, 0.8f);
                 mHelmType = HelmType.HELMTYPE_WALLNUT;
                 mHelmHealth = 1100;
                 mVariant = false;
+                break;
             }
-            else if (theType == ZombieType.ZOMBIE_TALLNUT_HEAD)
+
+            case ZombieType.ZOMBIE_TALLNUT_HEAD:
             {
                 LoadPlainZombieReanim();
                 ReanimShowPrefix("anim_hair", -1);
                 ReanimShowPrefix("anim_head", -1);
                 ReanimShowPrefix("Zombie_tie", -1);
-                Reanimation reanimation14 = mApp.ReanimationGet(mBodyReanimID);
+                Reanimation aBodyReanim = mApp.ReanimationGet(mBodyReanimID);
                 if (IsOnBoard())
                 {
-                    reanimation14.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_walk2);
+                    aBodyReanim.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_walk2);
                 }
-                ReanimatorTrackInstance trackInstanceByName4 = reanimation14.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_zombie_body);
-                Reanimation reanimation15 = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_TALLNUT);
-                reanimation15.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.REANIM_LOOP, 0, 15f);
-                mSpecialHeadReanimID = mApp.ReanimationGetID(reanimation15);
-                AttachEffect attachEffect3 = GlobalMembersAttachment.AttachReanim(ref trackInstanceByName4.mAttachmentID, reanimation15, 0f, 0f);
-                reanimation14.mFrameBasePose = 0;
-                TodCommon.TodScaleRotateTransformMatrix(ref attachEffect3.mOffset.mMatrix, 37f * Constants.S, 0f, 0.2f, -0.8f, 0.8f);
+                ReanimatorTrackInstance aTrackInstance = aBodyReanim.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_zombie_body);
+                Reanimation aTallnutHeadReanim = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_TALLNUT);
+                aTallnutHeadReanim.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.REANIM_LOOP, 0, 15f);
+                mSpecialHeadReanimID = mApp.ReanimationGetID(aTallnutHeadReanim);
+                AttachEffect aAttachEffect = GlobalMembersAttachment.AttachReanim(ref aTrackInstance.mAttachmentID, aTallnutHeadReanim, 0f, 0f);
+                aBodyReanim.mFrameBasePose = 0;
+                TodCommon.TodScaleRotateTransformMatrix(ref aAttachEffect.mOffset.mMatrix, 37f * Constants.S, 0f, 0.2f, -0.8f, 0.8f);
                 mHelmType = HelmType.HELMTYPE_TALLNUT;
                 mHelmHealth = 2200;
                 mVariant = false;
                 mPosX += 30f;
+                break;
             }
-            else if (mZombieType == ZombieType.ZOMBIE_JALAPENO_HEAD)
+
+            case ZombieType.ZOMBIE_JALAPENO_HEAD:
             {
                 LoadPlainZombieReanim();
                 ReanimShowPrefix("anim_hair", -1);
                 ReanimShowPrefix("anim_head", -1);
                 ReanimShowPrefix("Zombie_tie", -1);
-                Reanimation reanimation16 = mApp.ReanimationGet(mBodyReanimID);
+                Reanimation aBodyReanim = mApp.ReanimationGet(mBodyReanimID);
                 if (IsOnBoard())
                 {
-                    reanimation16.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_walk2);
+                    aBodyReanim.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_walk2);
                 }
-                ReanimatorTrackInstance trackInstanceByName5 = reanimation16.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_zombie_body);
-                Reanimation reanimation17 = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_JALAPENO);
-                reanimation17.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.REANIM_LOOP, 0, 15f);
-                mSpecialHeadReanimID = mApp.ReanimationGetID(reanimation17);
-                AttachEffect attachEffect4 = GlobalMembersAttachment.AttachReanim(ref trackInstanceByName5.mAttachmentID, reanimation17, 0f, 0f);
-                reanimation16.mFrameBasePose = 0;
-                TodCommon.TodScaleRotateTransformMatrix(ref attachEffect4.mOffset.mMatrix, 55f * Constants.S, -5f * Constants.S, 0.2f, -1f, 1f);
+                ReanimatorTrackInstance aTrackInstance = aBodyReanim.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_zombie_body);
+                Reanimation aJalapenoHeadReanim = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_JALAPENO);
+                aJalapenoHeadReanim.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.REANIM_LOOP, 0, 15f);
+                mSpecialHeadReanimID = mApp.ReanimationGetID(aJalapenoHeadReanim);
+                AttachEffect aAttachEffect = GlobalMembersAttachment.AttachReanim(ref aTrackInstance.mAttachmentID, aJalapenoHeadReanim, 0f, 0f);
+                aBodyReanim.mFrameBasePose = 0;
+                TodCommon.TodScaleRotateTransformMatrix(ref aAttachEffect.mOffset.mMatrix, 55f * Constants.S, -5f * Constants.S, 0.2f, -1f, 1f);
                 mVariant = false;
                 mBodyHealth = 500;
                 int num5 = 275 + RandomNumbers.NextNumber(175);
                 mPhaseCounter = (int)(num5 / mVelX) * GameConstants.ZOMBIE_LIMP_SPEED_FACTOR;
+                break;
             }
-            else if (theType == ZombieType.ZOMBIE_GATLING_HEAD)
+
+            case ZombieType.ZOMBIE_GATLING_HEAD:
             {
                 LoadPlainZombieReanim();
                 ReanimShowPrefix("anim_hair", -1);
                 ReanimShowPrefix("anim_head2", -1);
-                Reanimation reanimation18 = mApp.ReanimationGet(mBodyReanimID);
+                Reanimation aBodyReanim = mApp.ReanimationGet(mBodyReanimID);
                 if (IsOnBoard())
                 {
-                    reanimation18.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_walk2);
+                    aBodyReanim.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_walk2);
                 }
-                ReanimatorTrackInstance trackInstanceByName6 = reanimation18.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_anim_head1);
-                trackInstanceByName6.mImageOverride = AtlasResources.IMAGE_BLANK;
-                Reanimation reanimation19 = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_GATLINGPEA);
-                reanimation19.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_head_idle, ReanimLoopType.REANIM_LOOP, 0, 15f);
-                mSpecialHeadReanimID = mApp.ReanimationGetID(reanimation19);
-                AttachEffect attachEffect5 = GlobalMembersAttachment.AttachReanim(ref trackInstanceByName6.mAttachmentID, reanimation19, 0f, 0f);
-                reanimation18.mFrameBasePose = 0;
-                TodCommon.TodScaleRotateTransformMatrix(ref attachEffect5.mOffset.mMatrix, 65f * Constants.S, -18f * Constants.S, 0.2f, -1f, 1f);
+                ReanimatorTrackInstance aTrackInstance = aBodyReanim.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_anim_head1);
+                aTrackInstance.mImageOverride = AtlasResources.IMAGE_BLANK;
+                Reanimation aGatlingHeadReanim = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_GATLINGPEA);
+                aGatlingHeadReanim.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_head_idle, ReanimLoopType.REANIM_LOOP, 0, 15f);
+                mSpecialHeadReanimID = mApp.ReanimationGetID(aGatlingHeadReanim);
+                AttachEffect aAttachEffect = GlobalMembersAttachment.AttachReanim(ref aTrackInstance.mAttachmentID, aGatlingHeadReanim, 0f, 0f);
+                aBodyReanim.mFrameBasePose = 0;
+                TodCommon.TodScaleRotateTransformMatrix(ref aAttachEffect.mOffset.mMatrix, 65f * Constants.S, -18f * Constants.S, 0.2f, -1f, 1f);
                 mPhaseCounter = 150;
                 mVariant = false;
+                break;
             }
-            else if (theType == ZombieType.ZOMBIE_SQUASH_HEAD)
+
+            case ZombieType.ZOMBIE_SQUASH_HEAD:
             {
                 LoadPlainZombieReanim();
                 ReanimShowPrefix("anim_hair", -1);
                 ReanimShowPrefix("anim_head2", -1);
-                Reanimation reanimation20 = mApp.ReanimationGet(mBodyReanimID);
+                Reanimation aBodyReanim = mApp.ReanimationGet(mBodyReanimID);
                 if (IsOnBoard())
                 {
-                    reanimation20.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_walk2);
+                    aBodyReanim.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_walk2);
                 }
-                ReanimatorTrackInstance trackInstanceByName7 = reanimation20.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_anim_head1);
-                trackInstanceByName7.mImageOverride = AtlasResources.IMAGE_BLANK;
-                Reanimation reanimation21 = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_SQUASH);
-                reanimation21.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.REANIM_LOOP, 0, 15f);
-                mSpecialHeadReanimID = mApp.ReanimationGetID(reanimation21);
-                AttachEffect attachEffect6 = GlobalMembersAttachment.AttachReanim(ref trackInstanceByName7.mAttachmentID, reanimation21, 0f, 0f);
-                reanimation20.mFrameBasePose = 0;
-                TodCommon.TodScaleRotateTransformMatrix(ref attachEffect6.mOffset.mMatrix, 55f * Constants.S, -15f * Constants.S, 0.2f, -0.75f, 0.75f);
+                ReanimatorTrackInstance aTrackInstance = aBodyReanim.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_anim_head1);
+                aTrackInstance.mImageOverride = AtlasResources.IMAGE_BLANK;
+                Reanimation aSquashHeadReanim = mApp.AddReanimation(0f, 0f, 0, ReanimationType.REANIM_SQUASH);
+                aSquashHeadReanim.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.REANIM_LOOP, 0, 15f);
+                mSpecialHeadReanimID = mApp.ReanimationGetID(aSquashHeadReanim);
+                AttachEffect aAttachEffect = GlobalMembersAttachment.AttachReanim(ref aTrackInstance.mAttachmentID, aSquashHeadReanim, 0f, 0f);
+                aBodyReanim.mFrameBasePose = 0;
+                TodCommon.TodScaleRotateTransformMatrix(ref aAttachEffect.mOffset.mMatrix, 55f * Constants.S, -15f * Constants.S, 0.2f, -0.75f, 0.75f);
                 mZombiePhase = ZombiePhase.PHASE_SQUASH_PRE_LAUNCH;
                 mVariant = false;
+                break;
+            }
             }
             if (mApp.IsLittleTroubleLevel() && (IsOnBoard() || theFromWave == GameConstants.ZOMBIE_WAVE_CUTSCENE))
             {
@@ -830,7 +847,7 @@ namespace Lawn
             mDead = false;
             mX = (int)mPosX;
             mY = (int)mPosY;
-            mRenderOrder = Board.MakeRenderOrder(theRenderLayer, mRow, theLayerOffset);
+            mRenderOrder = Board.MakeRenderOrder(aRenderLayer, mRow, aRenderOffset);
             if (mZombieHeight == ZombieHeight.HEIGHT_ZOMBIQUARIUM)
             {
                 mBodyMaxHealth = 300;
@@ -891,34 +908,34 @@ namespace Lawn
                 Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
                 if (reanimation != null)
                 {
-                    float theEventTime = 0.14f;
-                    float theEventTime2 = 0.68f;
+                    float aLeftHandTime = 0.14f;
+                    float aRightHandTime = 0.68f;
                     if (mZombieType == ZombieType.ZOMBIE_POLEVAULTER)
                     {
-                        theEventTime = 0.38f;
-                        theEventTime2 = 0.8f;
+                        aLeftHandTime = 0.38f;
+                        aRightHandTime = 0.8f;
                     }
                     else if (mZombieType == ZombieType.ZOMBIE_NEWSPAPER || mZombieType == ZombieType.ZOMBIE_LADDER)
                     {
-                        theEventTime = 0.42f;
-                        theEventTime2 = 0.42f;
+                        aLeftHandTime = 0.42f;
+                        aRightHandTime = 0.42f;
                     }
                     else if (mZombieType == ZombieType.ZOMBIE_JACK_IN_THE_BOX)
                     {
-                        theEventTime = 0.53f;
-                        theEventTime2 = 0.53f;
+                        aLeftHandTime = 0.53f;
+                        aRightHandTime = 0.53f;
                     }
                     else if (mZombieType == ZombieType.ZOMBIE_BOBSLED)
                     {
-                        theEventTime = 0.33f;
-                        theEventTime2 = 0.83f;
+                        aLeftHandTime = 0.33f;
+                        aRightHandTime = 0.83f;
                     }
                     else if (mZombieType == ZombieType.ZOMBIE_IMP)
                     {
-                        theEventTime = 0.33f;
-                        theEventTime2 = 0.79f;
+                        aLeftHandTime = 0.33f;
+                        aRightHandTime = 0.79f;
                     }
-                    if (reanimation.ShouldTriggerTimedEvent(theEventTime) || reanimation.ShouldTriggerTimedEvent(theEventTime2))
+                    if (reanimation.ShouldTriggerTimedEvent(aLeftHandTime) || reanimation.ShouldTriggerTimedEvent(aRightHandTime))
                     {
                         AnimateChewSound();
                         AnimateChewEffect();
@@ -1505,30 +1522,30 @@ namespace Lawn
             {
                 return;
             }
-            ZombieDrawPosition zombieDrawPosition = default(ZombieDrawPosition);
-            GetDrawPos(ref zombieDrawPosition);
+            ZombieDrawPosition aDrawPos = default(ZombieDrawPosition);
+            GetDrawPos(ref aDrawPos);
             if (mApp.mGameScene == GameScenes.SCENE_ZOMBIES_WON && !SetupDrawZombieWon(g))
             {
                 return;
             }
             if (mIceTrapCounter > 0)
             {
-                DrawIceTrap(g, ref zombieDrawPosition, false);
+                DrawIceTrap(g, ref aDrawPos, false);
             }
             if (mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_INVISIGHOUL || mFromWave == GameConstants.ZOMBIE_WAVE_UI)
             {
                 if (mBodyReanimID != null)
                 {
-                    DrawReanim(g, ref zombieDrawPosition, 0);
+                    DrawReanim(g, ref aDrawPos, 0);
                 }
                 else
                 {
-                    DrawZombie(g, ref zombieDrawPosition);
+                    DrawZombie(g, ref aDrawPos);
                 }
             }
             if (mIceTrapCounter > 0)
             {
-                DrawIceTrap(g, ref zombieDrawPosition, true);
+                DrawIceTrap(g, ref aDrawPos, true);
             }
             if (mButteredCounter > 0)
             {
@@ -1542,7 +1559,7 @@ namespace Lawn
                 }
                 if (IsZombotany() || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_INVISIGHOUL)
                 {
-                    DrawButter(g, ref zombieDrawPosition);
+                    DrawButter(g, ref aDrawPos);
                 }
             }
             else if (mIsButterShowing)
@@ -1555,18 +1572,21 @@ namespace Lawn
             }
             if (mAttachmentID != null)
             {
-                Graphics @new = Graphics.GetNew(g);
-                base.MakeParentGraphicsFrame(@new);
-                @new.mTransY += (int)(zombieDrawPosition.mBodyY * Constants.S);
-                if (zombieDrawPosition.mClipHeight > GameConstants.CLIP_HEIGHT_LIMIT)
+                Graphics theParticleGraphics = Graphics.GetNew(g);
+                base.MakeParentGraphicsFrame(theParticleGraphics);
+                theParticleGraphics.mTransY += (int)(aDrawPos.mBodyY * Constants.S);
+                if (aDrawPos.mClipHeight > GameConstants.CLIP_HEIGHT_LIMIT)
                 {
-                    float num = 120f - zombieDrawPosition.mClipHeight + 21f;
-                    float anImageOffsetX = zombieDrawPosition.mImageOffsetX;
-                    float num2 = zombieDrawPosition.mImageOffsetY - 28f;
-                    @new.ClipRect((int)((mX + anImageOffsetX - 400f) * Constants.S), (int)((mY + num2) * Constants.S), (int)(920f * Constants.S), (int)(num * Constants.S));
+                    float aDrawHeight = 120f - aDrawPos.mClipHeight + 21f;
+                    float anImageOffsetX = aDrawPos.mImageOffsetX;
+                    float anOffsetY = aDrawPos.mImageOffsetY - 28f;
+                    theParticleGraphics.ClipRect((int)((mX + anImageOffsetX - 400f) * Constants.S),
+                                                 (int)((mY + anOffsetY) * Constants.S),
+                                                 (int)(920f * Constants.S),
+                                                 (int)(aDrawHeight * Constants.S));
                 }
-                GlobalMembersAttachment.AttachmentDraw(mAttachmentID, @new, false, true);
-                @new.PrepareForReuse();
+                GlobalMembersAttachment.AttachmentDraw(mAttachmentID, theParticleGraphics, false, true);
+                theParticleGraphics.PrepareForReuse();
             }
             g.ClearClipRect();
         }
@@ -1721,46 +1741,43 @@ namespace Lawn
 
         public void DrawBungeeCord(Graphics g, int theOffsetX, int theOffsetY)
         {
-            int num = (int)(AtlasResources.IMAGE_BUNGEECORD.GetCelHeight() * mScaleZombie);
-            float num2 = 0f;
-            float num3 = 0f;
-            GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_bungi_body, ref num2, ref num3);
-            bool flag = false;
+            int aCordCelHeight = (int)(AtlasResources.IMAGE_BUNGEECORD.GetCelHeight() * mScaleZombie);
+            float aPosX = 0f;
+            float aPosY = 0f;
+            GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_bungi_body, ref aPosX, ref aPosY);
+            bool aSetClip = false;
             if (IsOnBoard() && mApp.IsFinalBossLevel())
             {
                 Zombie bossZombie = mBoard.GetBossZombie();
-                int num4 = 55;
+                int aClipAmount = 55;
                 if (bossZombie.mZombiePhase == ZombiePhase.PHASE_BOSS_BUNGEES_LEAVE)
                 {
                     Reanimation reanimation = mApp.ReanimationGet(bossZombie.mBodyReanimID);
-                    num4 = (int)TodCommon.TodAnimateCurveFloatTime(0f, 0.2f, reanimation.mAnimTime, 55f, 0f, TodCurves.CURVE_LINEAR);
+                    aClipAmount = (int)TodCommon.TodAnimateCurveFloatTime(0f, 0.2f, reanimation.mAnimTime, 55f, 0f, TodCurves.CURVE_LINEAR);
                 }
                 if (mTargetCol > bossZombie.mTargetCol)
                 {
-                    g.SetClipRect(new TRect(-g.mTransX, (int)(num4 * Constants.S) - g.mTransY, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT));
-                    flag = true;
+                    g.SetClipRect(new TRect(-g.mTransX, (int)(aClipAmount * Constants.S) - g.mTransY, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT));
+                    aSetClip = true;
                 }
             }
-            bool colorizeImages = g.mColorizeImages;
-            Color color = g.mColor;
             if (mZombiePhase == ZombiePhase.PHASE_ZOMBIE_BURNED)
             {
-                int a = TodCommon.ClampInt((int)(255 * mZombieFade / 30f), 0, 255);
-                g.SetColor(new Color(0, 0, 0, a));
+                g.SetColor(new Color(0, 0, 0, TodCommon.ClampInt((int)(255 * mZombieFade / 30f), 0, 255)));
                 g.SetColorizeImages(true);
             }
-            for (float num5 = num3 - num; num5 > (float)(-num); num5 -= num)
+            for (float y = aPosY - aCordCelHeight; y > (float)(-aCordCelHeight); y -= aCordCelHeight)
             {
                 float thePosX = theOffsetX + Constants.Zombie_Bungee_Offset.X - 4f / mScaleZombie;
-                float thePosY = num5 - mPosY - Constants.Zombie_Bungee_Offset.Y;
+                float thePosY = y - mPosY - Constants.Zombie_Bungee_Offset.Y;
                 TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_BUNGEECORD, thePosX, thePosY, mScaleZombie, mScaleZombie);
             }
             if (mZombiePhase == ZombiePhase.PHASE_ZOMBIE_BURNED)
             {
-                g.SetColor(color, false);
-                g.SetColorizeImages(colorizeImages);
+                g.SetColor(g.mColor, false);
+                g.SetColorizeImages(g.mColorizeImages);
             }
-            if (flag)
+            if (aSetClip)
             {
                 g.ClearClipRect();
             }
@@ -1820,16 +1837,17 @@ namespace Lawn
                 }
                 mOnHighGround = true;
             }
-            float num = mBoard.GetPosYBasedOnRow(mPosX + 40f, theRow) - 30f;
-            if (mZombieType == ZombieType.ZOMBIE_BALLOON)
+            float aPosY = mBoard.GetPosYBasedOnRow(mPosX + 40f, theRow) - 30f;
+            switch (mZombieType)
             {
-                num -= 30f;
+            case ZombieType.ZOMBIE_BALLOON:
+                aPosY -= 30f;
+                break;
+            case ZombieType.ZOMBIE_POGO:
+                aPosY -= 16f;
+                break;
             }
-            if (mZombieType == ZombieType.ZOMBIE_POGO)
-            {
-                num -= 16f;
-            }
-            return num;
+            return aPosY;
         }
 
         public void ApplyChill(bool theIsIceTrap)
@@ -1864,9 +1882,9 @@ namespace Lawn
             if (mZombiePhase == ZombiePhase.PHASE_BUNGEE_DIVING || mZombiePhase == ZombiePhase.PHASE_BUNGEE_DIVING_SCREAMING)
             {
                 float num = GameConstants.BUNGEE_ZOMBIE_HEIGHT - 404f;
-                float num2 = mAltitude;
+                float aOldAltitude = mAltitude;
                 mAltitude -= 24f;
-                if (mAltitude <= num && num2 > num && mRelatedZombieID == null)
+                if (mAltitude <= num && aOldAltitude > num && mRelatedZombieID == null)
                 {
                     mApp.PlayFoley(FoleyType.FOLEY_GRASSSTEP);
                 }
@@ -2106,14 +2124,14 @@ namespace Lawn
                     }
                     mZombiePhase = ZombiePhase.PHASE_POLEVAULTER_IN_VAULT;
                     PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_jump, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, 24f);
-                    Reanimation reanimation = mApp.ReanimationGet(mBodyReanimID);
-                    float num = reanimation.mFrameCount / reanimation.mAnimRate * 100f;
-                    int num2 = mX - plant.mX - 80;
+                    Reanimation aReanim = mApp.ReanimationGet(mBodyReanimID);
+                    float aAnimDuration = aReanim.mFrameCount / aReanim.mAnimRate * 100f;
+                    int aJumpDistance = mX - plant.mX - 80;
                     if (mApp.IsWallnutBowlingLevel())
                     {
-                        num2 = 0;
+                        aJumpDistance = 0;
                     }
-                    mVelX = num2 / num;
+                    mVelX = aJumpDistance / aAnimDuration;
                     mHasObject = false;
                 }
                 if (mApp.IsIZombieLevel() && mBoard.mChallenge.IZombieGetBrainTarget(this) != null)
@@ -2125,9 +2143,9 @@ namespace Lawn
             }
             else if (mZombiePhase == ZombiePhase.PHASE_POLEVAULTER_IN_VAULT)
             {
-                Reanimation reanimation2 = mApp.ReanimationGet(mBodyReanimID);
+                Reanimation aReanim2 = mApp.ReanimationGet(mBodyReanimID);
                 bool flag = false;
-                if (reanimation2.mAnimTime > 0.6f && reanimation2.mAnimTime <= 0.7f)
+                if (aReanim2.mAnimTime > 0.6f && aReanim2.mAnimTime <= 0.7f)
                 {
                     Plant plant2 = FindPlantTarget(Zombie.ZombieAttackType.ATTACKTYPE_VAULT);
                     if (plant2 != null && plant2.mSeedType == SeedType.SEED_TALLNUT)
@@ -2140,16 +2158,16 @@ namespace Lawn
                         mZombieHeight = ZombieHeight.HEIGHT_FALLING;
                     }
                 }
-                if (reanimation2.mLoopCount > 0)
+                if (aReanim2.mLoopCount > 0)
                 {
                     flag = true;
                     mPosX -= 150f;
                 }
-                if (reanimation2.ShouldTriggerTimedEvent(0.2f))
+                if (aReanim2.ShouldTriggerTimedEvent(0.2f))
                 {
                     mApp.PlayFoley(FoleyType.FOLEY_GRASSSTEP);
                 }
-                if (reanimation2.ShouldTriggerTimedEvent(0.4f))
+                if (aReanim2.ShouldTriggerTimedEvent(0.4f))
                 {
                     mApp.PlayFoley(FoleyType.FOLEY_POLEVAULT);
                 }
@@ -2161,10 +2179,10 @@ namespace Lawn
                     StartWalkAnim(0);
                     return;
                 }
-                float num3 = mPosX;
-                mPosX -= 150f * reanimation2.mAnimTime;
+                float aOldPosX = mPosX;
+                mPosX -= 150f * aReanim2.mAnimTime;
                 mPosY = GetPosYBasedOnRow(mRow);
-                mPosX = num3;
+                mPosX = aOldPosX;
             }
         }
 
@@ -2299,14 +2317,12 @@ namespace Lawn
 
         public void PickBungeeZombieTarget(int theColumn)
         {
-            int num = CountBungeesTargetingSunFlowers();
-            int num2 = mBoard.CountSunFlowers();
-            bool flag = true;
-            if (num == num2 - 1)
+            bool aAllowSunflowerTarget = true;
+            if (CountBungeesTargetingSunFlowers() == mBoard.CountSunFlowers() - 1)
             {
-                flag = false;
+                aAllowSunflowerTarget = false;
             }
-            int num3 = 0;
+            int aPickCount = 0;
             for (int i = 0; i < Zombie.aPicks.Length; i++)
             {
                 Zombie.aPicks[i].Reset();
@@ -2317,36 +2333,37 @@ namespace Lawn
                 {
                     for (int k = 0; k < Constants.MAX_GRIDSIZEY; k++)
                     {
-                        int weight = 1;
+                        int aWeight = 1;
                         if (mBoard.GetGraveStoneAt(j, k) == null && mBoard.mGridSquareType[j, k] != GridSquareType.GRIDSQUARE_DIRT)
                         {
                             Plant topPlantAt = mBoard.GetTopPlantAt(j, k, PlantPriority.TOPPLANT_BUNGEE_ORDER);
                             if (topPlantAt != null)
                             {
-                                if ((!flag && topPlantAt.MakesSun()) || topPlantAt.mSeedType == SeedType.SEED_GRAVEBUSTER || topPlantAt.mSeedType == SeedType.SEED_COBCANNON)
+                                if ((!aAllowSunflowerTarget && topPlantAt.MakesSun())
+                                    || topPlantAt.mSeedType == SeedType.SEED_GRAVEBUSTER
+                                    || topPlantAt.mSeedType == SeedType.SEED_COBCANNON)
                                 {
-                                    goto IL_10A;
+                                    continue;
                                 }
-                                weight = 10000;
+                                aWeight = 10000;
                             }
                             if (!mBoard.BungeeIsTargetingCell(j, k))
                             {
-                                Zombie.aPicks[num3].mX = j;
-                                Zombie.aPicks[num3].mY = k;
-                                Zombie.aPicks[num3].mWeight = weight;
-                                num3++;
+                                Zombie.aPicks[aPickCount].mX = j;
+                                Zombie.aPicks[aPickCount].mY = k;
+                                Zombie.aPicks[aPickCount].mWeight = aWeight;
+                                aPickCount++;
                             }
                         }
-                        IL_10A:;
                     }
                 }
             }
-            if (num3 == 0)
+            if (aPickCount == 0)
             {
                 DieNoLoot(false);
                 return;
             }
-            TodWeightedGridArray todWeightedGridArray = TodCommon.TodPickFromWeightedGridArray(Zombie.aPicks, num3);
+            TodWeightedGridArray todWeightedGridArray = TodCommon.TodPickFromWeightedGridArray(Zombie.aPicks, aPickCount);
             mTargetCol = todWeightedGridArray.mX;
             SetRow(todWeightedGridArray.mY);
             mPosX = mBoard.GridToPixelX(mTargetCol, mRow);
@@ -2374,19 +2391,17 @@ namespace Lawn
 
         public Plant FindPlantTarget(Zombie.ZombieAttackType theAttackType)
         {
-            TRect zombieAttackRect = GetZombieAttackRect();
-            int count = mBoard.mPlants.Count;
-            for (int i = 0; i < count; i++)
+            TRect aAttackRect = GetZombieAttackRect();
+            for (int i = 0; i < mBoard.mPlants.Count; i++)
             {
-                Plant plant = mBoard.mPlants[i];
-                if (!plant.mDead && mRow == plant.mRow)
+                Plant aPlant = mBoard.mPlants[i];
+                if (!aPlant.mDead && mRow == aPlant.mRow)
                 {
-                    TRect plantRect = plant.GetPlantRect();
-                    int rectOverlap = GameConstants.GetRectOverlap(zombieAttackRect, plantRect);
-                    int num = (mZombieType == ZombieType.ZOMBIE_DIGGER) ? 5 : 20;
-                    if (rectOverlap >= num && CanTargetPlant(plant, theAttackType))
+                    TRect aPlantRect = aPlant.GetPlantRect();
+                    int rectOverlap = GameConstants.GetRectOverlap(aAttackRect, aPlantRect);
+                    if (rectOverlap >= ((mZombieType == ZombieType.ZOMBIE_DIGGER) ? 5 : 20) && CanTargetPlant(aPlant, theAttackType))
                     {
-                        return plant;
+                        return aPlant;
                     }
                 }
             }
@@ -2395,18 +2410,18 @@ namespace Lawn
 
         public void CheckSquish(Zombie.ZombieAttackType theAttackType)
         {
-            TRect zombieAttackRect = GetZombieAttackRect();
+            TRect aAttackRect = GetZombieAttackRect();
             int count = mBoard.mPlants.Count;
             for (int i = 0; i < count; i++)
             {
-                Plant plant = mBoard.mPlants[i];
-                if (!plant.mDead && mRow == plant.mRow)
+                Plant aPlant = mBoard.mPlants[i];
+                if (!aPlant.mDead && mRow == aPlant.mRow)
                 {
-                    TRect plantRect = plant.GetPlantRect();
-                    int rectOverlap = GameConstants.GetRectOverlap(zombieAttackRect, plantRect);
-                    if (rectOverlap >= 20 && CanTargetPlant(plant, theAttackType) && !plant.IsSpiky())
+                    TRect aPlantRect = aPlant.GetPlantRect();
+                    int rectOverlap = GameConstants.GetRectOverlap(aAttackRect, aPlantRect);
+                    if (rectOverlap >= 20 && CanTargetPlant(aPlant, theAttackType) && !aPlant.IsSpiky())
                     {
-                        SquishAllInSquare(plant.mPlantCol, plant.mRow, theAttackType);
+                        SquishAllInSquare(aPlant.mPlantCol, aPlant.mRow, theAttackType);
                         break;
                     }
                 }
@@ -2444,42 +2459,42 @@ namespace Lawn
                 ReanimIgnoreClipRect(GlobalMembersReanimIds.ReanimTrackId_zombie_whitewater, false);
                 ReanimIgnoreClipRect(GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_hand, false);
                 ReanimIgnoreClipRect(GlobalMembersReanimIds.ReanimTrackId_zombie_innerarm3, false);
-                Reanimation reanimation = mApp.ReanimationGet(mBodyReanimID);
+                Reanimation aReanim = mApp.ReanimationGet(mBodyReanimID);
                 TodParticleSystem todParticleSystem = mApp.AddTodParticle(0f, 0f, 0, ParticleEffect.PARTICLE_ZOMBIE_SEAWEED);
                 OverrideParticleScale(todParticleSystem);
                 if (mZombieType == ZombieType.ZOMBIE_TRAFFIC_CONE && todParticleSystem != null)
                 {
-                    reanimation.AttachParticleToTrack(GlobalMembersReanimIds.ReanimTrackId_anim_cone, ref todParticleSystem, 37f * Constants.S, 20f * Constants.S);
+                    aReanim.AttachParticleToTrack(GlobalMembersReanimIds.ReanimTrackId_anim_cone, ref todParticleSystem, 37f * Constants.S, 20f * Constants.S);
                 }
                 else if (mZombieType == ZombieType.ZOMBIE_PAIL && todParticleSystem != null)
                 {
-                    reanimation.AttachParticleToTrack(GlobalMembersReanimIds.ReanimTrackId_anim_bucket, ref todParticleSystem, 37f * Constants.S, 20f * Constants.S);
+                    aReanim.AttachParticleToTrack(GlobalMembersReanimIds.ReanimTrackId_anim_bucket, ref todParticleSystem, 37f * Constants.S, 20f * Constants.S);
                 }
                 else if (todParticleSystem != null)
                 {
-                    reanimation.AttachParticleToTrack(GlobalMembersReanimIds.ReanimTrackId_anim_head1, ref todParticleSystem, 30f * Constants.S, 20f * Constants.S);
+                    aReanim.AttachParticleToTrack(GlobalMembersReanimIds.ReanimTrackId_anim_head1, ref todParticleSystem, 30f * Constants.S, 20f * Constants.S);
                 }
                 PoolSplash(false);
                 return;
             }
-            int num = (int)mPosX + 60;
-            int num2 = (int)mPosY + 110;
+            int aParticleX = (int)mPosX + 60;
+            int aParticleY = (int)mPosY + 110;
             if (IsOnHighGround())
             {
-                num2 -= Constants.HIGH_GROUND_HEIGHT;
+                aParticleY -= Constants.HIGH_GROUND_HEIGHT;
             }
             int aRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_PARTICLE, theRow, 0);
-            ParticleEffect theEffect = ParticleEffect.PARTICLE_ZOMBIE_RISE;
             if (mApp.IsWhackAZombieLevel())
             {
-                theEffect = ParticleEffect.PARTICLE_WHACK_A_ZOMBIE_RISE;
                 mApp.PlayFoley(FoleyType.FOLEY_DIRT_RISE);
+                mApp.AddTodParticle(aParticleX, aParticleY, aRenderOrder, ParticleEffect.PARTICLE_WHACK_A_ZOMBIE_RISE);
             }
             else
             {
                 mApp.PlayFoley(FoleyType.FOLEY_GRAVESTONE_RUMBLE);
+                mApp.AddTodParticle(aParticleX, aParticleY, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_RISE);
             }
-            mApp.AddTodParticle(num, num2, aRenderOrder, theEffect);
+            
         }
 
         public void UpdateZombieRiseFromGrave()
@@ -2559,11 +2574,11 @@ namespace Lawn
             else if (mZombieHeight == ZombieHeight.HEIGHT_IN_TO_POOL)
             {
                 mAltitude -= 3f;
-                int num = -40;
-                num *= (int)mScaleZombie;
-                if (mAltitude <= num)
+                int aDepth = -40;
+                aDepth *= (int)mScaleZombie;
+                if (mAltitude <= aDepth)
                 {
-                    mAltitude = num;
+                    mAltitude = aDepth;
                     mZombieHeight = ZombieHeight.HEIGHT_ZOMBIE_NORMAL;
                     StartWalkAnim(0);
                     return;
@@ -2593,34 +2608,30 @@ namespace Lawn
             {
                 return;
             }
-            int theGridX = mBoard.PixelToGridX(mX + 75, mY);
-            int theGridX2 = mBoard.PixelToGridX(mX + 45, mY);
-            bool flag = false;
-            if (mBoard.IsPoolSquare(theGridX, mRow) && mBoard.IsPoolSquare(theGridX2, mRow) && mPosX < 800f)
+
+            if (mBoard.IsPoolSquare(mBoard.PixelToGridX(mX + 75, mY), mRow)
+                && mBoard.IsPoolSquare(mBoard.PixelToGridX(mX + 45, mY), mRow)
+                && mPosX < 800f)
             {
-                flag = true;
-            }
-            if (!mInPool && flag)
-            {
-                if (mBoard.mIceTrapCounter > 0)
+                if (!mInPool)
                 {
-                    mIceTrapCounter = mBoard.mIceTrapCounter;
-                    ApplyChill(true);
-                    return;
+                    if (mBoard.mIceTrapCounter > 0)
+                    {
+                        mIceTrapCounter = mBoard.mIceTrapCounter;
+                        ApplyChill(true);
+                        return;
+                    }
+                    mZombieHeight = ZombieHeight.HEIGHT_IN_TO_POOL;
+                    mInPool = true;
+                    PoolSplash(true);
                 }
-                mZombieHeight = ZombieHeight.HEIGHT_IN_TO_POOL;
-                mInPool = true;
-                PoolSplash(true);
+                mUsesClipping = true;
             }
-            else if (mInPool && !flag)
+            else if (mInPool)
             {
                 mZombieHeight = ZombieHeight.HEIGHT_OUT_OF_POOL;
                 StartWalkAnim(0);
                 PoolSplash(false);
-            }
-            if (flag)
-            {
-                mUsesClipping = true;
             }
         }
 
@@ -2633,113 +2644,100 @@ namespace Lawn
                 theDrawPos.mHeadX = 47;
                 theDrawPos.mHeadY = 4;
             }
-            else if (mFrame == 0)
-            {
-                theDrawPos.mHeadX = 50;
-                theDrawPos.mHeadY = 2;
-            }
-            else if (mFrame == 1)
-            {
-                theDrawPos.mHeadX = 49;
-                theDrawPos.mHeadY = 1;
-            }
-            else if (mFrame == 2)
-            {
-                theDrawPos.mHeadX = 49;
-                theDrawPos.mHeadY = 2;
-            }
-            else if (mFrame == 3)
-            {
-                theDrawPos.mHeadX = 48;
-                theDrawPos.mHeadY = 4;
-            }
-            else if (mFrame == 4)
-            {
-                theDrawPos.mHeadX = 48;
-                theDrawPos.mHeadY = 5;
-            }
-            else if (mFrame == 5)
-            {
-                theDrawPos.mHeadX = 48;
-                theDrawPos.mHeadY = 4;
-            }
-            else if (mFrame == 6)
-            {
-                theDrawPos.mHeadX = 48;
-                theDrawPos.mHeadY = 2;
-            }
-            else if (mFrame == 7)
-            {
-                theDrawPos.mHeadX = 49;
-                theDrawPos.mHeadY = 1;
-            }
-            else if (mFrame == 8)
-            {
-                theDrawPos.mHeadX = 49;
-                theDrawPos.mHeadY = 2;
-            }
-            else if (mFrame == 9)
-            {
-                theDrawPos.mHeadX = 50;
-                theDrawPos.mHeadY = 4;
-            }
-            else if (mFrame == 10)
-            {
-                theDrawPos.mHeadX = 50;
-                theDrawPos.mHeadY = 5;
-            }
             else
             {
-                theDrawPos.mHeadX = 50;
-                theDrawPos.mHeadY = 4;
+                switch (mFrame)
+                {
+                case 0:
+                    theDrawPos.mHeadX = 50;
+                    theDrawPos.mHeadY = 2;
+                    break;
+                case 1:
+                    theDrawPos.mHeadX = 49;
+                    theDrawPos.mHeadY = 1;
+                    break;
+                case 2:
+                    theDrawPos.mHeadX = 49;
+                    theDrawPos.mHeadY = 2;
+                    break;
+                case 3:
+                    theDrawPos.mHeadX = 48;
+                    theDrawPos.mHeadY = 4;
+                    break;
+                case 4:
+                    theDrawPos.mHeadX = 48;
+                    theDrawPos.mHeadY = 5;
+                    break;
+                case 5:
+                    theDrawPos.mHeadX = 48;
+                    theDrawPos.mHeadY = 4;
+                    break;
+                case 6:
+                    theDrawPos.mHeadX = 48;
+                    theDrawPos.mHeadY = 2;
+                    break;
+                case 7:
+                    theDrawPos.mHeadX = 49;
+                    theDrawPos.mHeadY = 1;
+                    break;
+                case 8:
+                    theDrawPos.mHeadX = 49;
+                    theDrawPos.mHeadY = 2;
+                    break;
+                case 9:
+                    theDrawPos.mHeadX = 50;
+                    theDrawPos.mHeadY = 4;
+                    break;
+                case 10:
+                    theDrawPos.mHeadX = 50;
+                    theDrawPos.mHeadY = 5;
+                    break;
+                default:
+                    theDrawPos.mHeadX = 50;
+                    theDrawPos.mHeadY = 4;
+                    break;
+                }
             }
             theDrawPos.mArmY = theDrawPos.mHeadY / 2;
-            if (mZombieType != ZombieType.ZOMBIE_DOLPHIN_RIDER)
+            switch (mZombieType)
             {
-                if (mZombieType == ZombieType.ZOMBIE_FOOTBALL)
-                {
-                    theDrawPos.mImageOffsetY += -16f;
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_YETI)
-                {
-                    theDrawPos.mImageOffsetY += -20f;
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_CATAPULT)
-                {
-                    theDrawPos.mImageOffsetX += -25f;
-                    theDrawPos.mImageOffsetY += -18f;
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_POGO)
-                {
-                    theDrawPos.mImageOffsetY += 16f;
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_BALLOON)
-                {
-                    theDrawPos.mImageOffsetY += 17f;
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_POLEVAULTER)
-                {
-                    theDrawPos.mImageOffsetX += -6f;
-                    theDrawPos.mImageOffsetY += -11f;
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_ZAMBONI)
-                {
-                    theDrawPos.mImageOffsetX += 68f;
-                    theDrawPos.mImageOffsetY += -23f;
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_GARGANTUAR || mZombieType == ZombieType.ZOMBIE_REDEYE_GARGANTUAR)
-                {
-                    theDrawPos.mImageOffsetY += -8f;
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_BOBSLED)
-                {
-                    theDrawPos.mImageOffsetY += -12f;
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_DANCER || mZombieType == ZombieType.ZOMBIE_BACKUP_DANCER)
-                {
-                    theDrawPos.mImageOffsetY += 15f;
-                }
+            case ZombieType.ZOMBIE_FOOTBALL:
+                theDrawPos.mImageOffsetY += -16f;
+                break;
+            case ZombieType.ZOMBIE_YETI:
+                theDrawPos.mImageOffsetY += -20f;
+                break;
+            case ZombieType.ZOMBIE_CATAPULT:
+                theDrawPos.mImageOffsetX += -25f;
+                theDrawPos.mImageOffsetY += -18f;
+                break;
+            case ZombieType.ZOMBIE_POGO:
+                theDrawPos.mImageOffsetY += 16f;
+                break;
+            case ZombieType.ZOMBIE_BALLOON:
+                theDrawPos.mImageOffsetY += 17f;
+                break;
+            case ZombieType.ZOMBIE_POLEVAULTER:
+                theDrawPos.mImageOffsetX += -6f;
+                theDrawPos.mImageOffsetY += -11f;
+                break;
+            case ZombieType.ZOMBIE_ZAMBONI:
+                theDrawPos.mImageOffsetX += 68f;
+                theDrawPos.mImageOffsetY += -23f;
+                break;
+            case ZombieType.ZOMBIE_GARGANTUAR:
+            case ZombieType.ZOMBIE_REDEYE_GARGANTUAR:
+                theDrawPos.mImageOffsetY += -8f;
+                break;
+            case ZombieType.ZOMBIE_BOBSLED:
+                theDrawPos.mImageOffsetY += -12f;
+                break;
+            case ZombieType.ZOMBIE_DANCER:
+            case ZombieType.ZOMBIE_BACKUP_DANCER:
+                theDrawPos.mImageOffsetY += 15f;
+                break;
             }
+
             if (mZombiePhase == ZombiePhase.PHASE_RISING_FROM_GRAVE)
             {
                 theDrawPos.mBodyY = -mAltitude;
@@ -2758,145 +2756,159 @@ namespace Lawn
                     return;
                 }
             }
-            else if (mZombieType == ZombieType.ZOMBIE_DOLPHIN_RIDER)
-            {
-                theDrawPos.mBodyY = -mAltitude;
-                theDrawPos.mClipHeight = GameConstants.CLIP_HEIGHT_OFF;
-                if (mZombiePhase == ZombiePhase.PHASE_DOLPHIN_INTO_POOL)
-                {
-                    Reanimation reanimation = mBodyReanimID;
-                    if (reanimation.mAnimTime >= 0.56f && reanimation.mAnimTime <= 0.65f)
-                    {
-                        theDrawPos.mClipHeight = 0f;
-                        return;
-                    }
-                    if (reanimation.mAnimTime >= 0.75f)
-                    {
-                        theDrawPos.mClipHeight = -mAltitude - 10f;
-                        return;
-                    }
-                }
-                else if (mZombiePhase == ZombiePhase.PHASE_DOLPHIN_RIDING)
-                {
-                    theDrawPos.mImageOffsetX += 70f;
-                    if (mZombieHeight == ZombieHeight.HEIGHT_DRAGGED_UNDER)
-                    {
-                        theDrawPos.mClipHeight = -mAltitude - 15f;
-                        return;
-                    }
-                    theDrawPos.mClipHeight = -mAltitude - 10f;
-                    return;
-                }
-                else if (mZombiePhase == ZombiePhase.PHASE_DOLPHIN_IN_JUMP)
-                {
-                    theDrawPos.mImageOffsetX += 70f + mAltitude;
-                    Reanimation reanimation2 = mBodyReanimID;
-                    if (reanimation2.mAnimTime <= 0.06f)
-                    {
-                        theDrawPos.mClipHeight = -mAltitude - 10f;
-                        return;
-                    }
-                    if (reanimation2.mAnimTime >= 0.5f && reanimation2.mAnimTime <= 0.76f)
-                    {
-                        theDrawPos.mClipHeight = -13f;
-                        return;
-                    }
-                }
-                else if (mZombiePhase == ZombiePhase.PHASE_DOLPHIN_WALKING_IN_POOL || mZombiePhase == ZombiePhase.PHASE_ZOMBIE_DYING)
-                {
-                    theDrawPos.mImageOffsetY += 50f;
-                    if (mZombiePhase == ZombiePhase.PHASE_ZOMBIE_DYING)
-                    {
-                        theDrawPos.mClipHeight = -mAltitude + 44f;
-                        return;
-                    }
-                    if (mZombieHeight == ZombieHeight.HEIGHT_DRAGGED_UNDER)
-                    {
-                        theDrawPos.mClipHeight = -mAltitude + 36f;
-                        return;
-                    }
-                }
-                else
-                {
-                    if (mZombiePhase == ZombiePhase.PHASE_DOLPHIN_WALKING && mZombieHeight == ZombieHeight.HEIGHT_OUT_OF_POOL)
-                    {
-                        theDrawPos.mClipHeight = -mAltitude;
-                        return;
-                    }
-                    if (mZombiePhase == ZombiePhase.PHASE_DOLPHIN_WALKING_WITHOUT_DOLPHIN && mZombieHeight == ZombieHeight.HEIGHT_OUT_OF_POOL)
-                    {
-                        theDrawPos.mClipHeight = -mAltitude;
-                        return;
-                    }
-                }
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_SNORKEL)
-            {
-                theDrawPos.mBodyY = -mAltitude;
-                theDrawPos.mClipHeight = GameConstants.CLIP_HEIGHT_OFF;
-                if (mZombiePhase == ZombiePhase.PHASE_SNORKEL_INTO_POOL)
-                {
-                    Reanimation reanimation3 = mBodyReanimID;
-                    if (reanimation3.mAnimTime >= 0.8f)
-                    {
-                        theDrawPos.mClipHeight = -10f;
-                        return;
-                    }
-                }
-                else if (mInPool)
-                {
-                    theDrawPos.mClipHeight = -mAltitude - 5f;
-                    theDrawPos.mClipHeight += 20f - 20f * mScaleZombie;
-                    return;
-                }
-            }
-            else if (mInPool)
-            {
-                theDrawPos.mBodyY = -mAltitude;
-                theDrawPos.mClipHeight = -mAltitude - 7f;
-                theDrawPos.mClipHeight += 10f - 10f * mScaleZombie;
-                if (mIsEating)
-                {
-                    theDrawPos.mClipHeight += 7f;
-                    return;
-                }
-            }
-            else if (mZombiePhase == ZombiePhase.PHASE_DANCER_RISING)
-            {
-                theDrawPos.mBodyY = -mAltitude;
-                theDrawPos.mClipHeight = -mAltitude;
-                if (IsOnHighGround())
-                {
-                    theDrawPos.mBodyY -= Constants.HIGH_GROUND_HEIGHT;
-                    return;
-                }
-            }
-            else if (mZombiePhase == ZombiePhase.PHASE_DIGGER_RISING || mZombiePhase == ZombiePhase.PHASE_DIGGER_RISE_WITHOUT_AXE)
-            {
-                theDrawPos.mBodyY = -mAltitude;
-                if (mPhaseCounter > 20)
-                {
-                    theDrawPos.mClipHeight = -mAltitude;
-                    return;
-                }
-                theDrawPos.mClipHeight = GameConstants.CLIP_HEIGHT_OFF;
-                return;
-            }
             else
             {
-                if (mZombieType == ZombieType.ZOMBIE_BUNGEE)
+                switch (mZombieType)
+                {
+                case ZombieType.ZOMBIE_DOLPHIN_RIDER:
                 {
                     theDrawPos.mBodyY = -mAltitude;
-                    theDrawPos.mImageOffsetX += -18f;
-                    if (IsOnHighGround())
-                    {
-                        theDrawPos.mBodyY -= Constants.HIGH_GROUND_HEIGHT;
-                    }
                     theDrawPos.mClipHeight = GameConstants.CLIP_HEIGHT_OFF;
-                    return;
+                    switch (mZombiePhase)
+                    {
+                    case ZombiePhase.PHASE_DOLPHIN_INTO_POOL:
+                    {
+                        Reanimation reanimation = mBodyReanimID;
+                        if (reanimation.mAnimTime >= 0.56f && reanimation.mAnimTime <= 0.65f)
+                        {
+                            theDrawPos.mClipHeight = 0f;
+                            return;
+                        }
+                        if (reanimation.mAnimTime >= 0.75f)
+                        {
+                            theDrawPos.mClipHeight = -mAltitude - 10f;
+                            return;
+                        }
+                        break;
+                    }
+
+                    case ZombiePhase.PHASE_DOLPHIN_RIDING:
+                        theDrawPos.mImageOffsetX += 70f;
+                        if (mZombieHeight == ZombieHeight.HEIGHT_DRAGGED_UNDER)
+                        {
+                            theDrawPos.mClipHeight = -mAltitude - 15f;
+                            return;
+                        }
+                        theDrawPos.mClipHeight = -mAltitude - 10f;
+                        return;
+                    case ZombiePhase.PHASE_DOLPHIN_IN_JUMP:
+                    {
+                        theDrawPos.mImageOffsetX += 70f + mAltitude;
+                        Reanimation reanimation2 = mBodyReanimID;
+                        if (reanimation2.mAnimTime <= 0.06f)
+                        {
+                            theDrawPos.mClipHeight = -mAltitude - 10f;
+                            return;
+                        }
+                        if (reanimation2.mAnimTime >= 0.5f && reanimation2.mAnimTime <= 0.76f)
+                        {
+                            theDrawPos.mClipHeight = -13f;
+                            return;
+                        }
+
+                        break;
+                    }
+
+                    case ZombiePhase.PHASE_DOLPHIN_WALKING_IN_POOL:
+                    case ZombiePhase.PHASE_ZOMBIE_DYING:
+                        theDrawPos.mImageOffsetY += 50f;
+                        if (mZombiePhase == ZombiePhase.PHASE_ZOMBIE_DYING)
+                        {
+                            theDrawPos.mClipHeight = -mAltitude + 44f;
+                            return;
+                        }
+                        if (mZombieHeight == ZombieHeight.HEIGHT_DRAGGED_UNDER)
+                        {
+                            theDrawPos.mClipHeight = -mAltitude + 36f;
+                            return;
+                        }
+                        break;
+                    case ZombiePhase.PHASE_DOLPHIN_WALKING when mZombieHeight == ZombieHeight.HEIGHT_OUT_OF_POOL:
+                        theDrawPos.mClipHeight = -mAltitude;
+                        return;
+                    case ZombiePhase.PHASE_DOLPHIN_WALKING_WITHOUT_DOLPHIN when mZombieHeight == ZombieHeight.HEIGHT_OUT_OF_POOL:
+                        theDrawPos.mClipHeight = -mAltitude;
+                        return;
+                    }
+                    break;
                 }
-                theDrawPos.mBodyY = -mAltitude;
-                theDrawPos.mClipHeight = GameConstants.CLIP_HEIGHT_OFF;
+
+                case ZombieType.ZOMBIE_SNORKEL:
+                {
+                    theDrawPos.mBodyY = -mAltitude;
+                    theDrawPos.mClipHeight = GameConstants.CLIP_HEIGHT_OFF;
+                    if (mZombiePhase == ZombiePhase.PHASE_SNORKEL_INTO_POOL)
+                    {
+                        Reanimation reanimation3 = mBodyReanimID;
+                        if (reanimation3.mAnimTime >= 0.8f)
+                        {
+                            theDrawPos.mClipHeight = -10f;
+                            return;
+                        }
+                    }
+                    else if (mInPool)
+                    {
+                        theDrawPos.mClipHeight = -mAltitude - 5f;
+                        theDrawPos.mClipHeight += 20f - 20f * mScaleZombie;
+                        return;
+                    }
+                    break;
+                }
+
+                default:
+                    if (mInPool)
+                    {
+                        theDrawPos.mBodyY = -mAltitude;
+                        theDrawPos.mClipHeight = -mAltitude - 7f;
+                        theDrawPos.mClipHeight += 10f - 10f * mScaleZombie;
+                        if (mIsEating)
+                        {
+                            theDrawPos.mClipHeight += 7f;
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        switch (mZombiePhase)
+                        {
+                        case ZombiePhase.PHASE_DANCER_RISING:
+                            theDrawPos.mBodyY = -mAltitude;
+                            theDrawPos.mClipHeight = -mAltitude;
+                            if (IsOnHighGround())
+                            {
+                                theDrawPos.mBodyY -= Constants.HIGH_GROUND_HEIGHT;
+                                return;
+                            }
+                            break;
+                        case ZombiePhase.PHASE_DIGGER_RISING:
+                        case ZombiePhase.PHASE_DIGGER_RISE_WITHOUT_AXE:
+                            theDrawPos.mBodyY = -mAltitude;
+                            if (mPhaseCounter > 20)
+                            {
+                                theDrawPos.mClipHeight = -mAltitude;
+                                return;
+                            }
+                            theDrawPos.mClipHeight = GameConstants.CLIP_HEIGHT_OFF;
+                            return;
+                        default:
+                            if (mZombieType == ZombieType.ZOMBIE_BUNGEE)
+                            {
+                                theDrawPos.mBodyY = -mAltitude;
+                                theDrawPos.mImageOffsetX += -18f;
+                                if (IsOnHighGround())
+                                {
+                                    theDrawPos.mBodyY -= Constants.HIGH_GROUND_HEIGHT;
+                                }
+                                theDrawPos.mClipHeight = GameConstants.CLIP_HEIGHT_OFF;
+                                return;
+                            }
+                            theDrawPos.mBodyY = -mAltitude;
+                            theDrawPos.mClipHeight = GameConstants.CLIP_HEIGHT_OFF;
+                            break;
+                        }
+                    }
+                    break;
+                }
             }
         }
 
@@ -3064,9 +3076,9 @@ namespace Lawn
             }
             mBoard.mLevelAwardSpawned = true;
             mApp.mBoardResult = BoardResult.BOARDRESULT_WON;
-            TRect zombieRect = GetZombieRect();
-            int num = zombieRect.mX + zombieRect.mWidth / 2;
-            int theY = zombieRect.mY + zombieRect.mHeight / 2;
+            TRect aZombieRect = GetZombieRect();
+            int aCenterX = aZombieRect.mX + aZombieRect.mWidth / 2;
+            int aCenterY = aZombieRect.mY + aZombieRect.mHeight / 2;
             if (!mBoard.IsSurvivalStageWithRepick())
             {
                 mBoard.RemoveAllZombies();
@@ -3140,7 +3152,7 @@ namespace Lawn
                 mApp.PlayFoley(FoleyType.FOLEY_SPAWN_SUN);
                 for (int i = 0; i < 10; i++)
                 {
-                    mBoard.AddCoin(num + i * 5, theY, CoinType.COIN_SUN, CoinMotion.COIN_MOTION_COIN);
+                    mBoard.AddCoin(aCenterX + i * 5, aCenterY, CoinType.COIN_SUN, CoinMotion.COIN_MOTION_COIN);
                 }
             }
             else if (!mApp.IsAdventureMode())
@@ -3166,7 +3178,7 @@ namespace Lawn
             if (coinType != CoinType.COIN_NONE)
             {
                 mApp.PlayFoley(FoleyType.FOLEY_SPAWN_SUN);
-                mBoard.AddCoin(num, theY, coinType, theCoinMotion);
+                mBoard.AddCoin(aCenterX, aCenterY, coinType, theCoinMotion);
             }
             mDroppedLoot = true;
             return true;
@@ -3257,25 +3269,23 @@ namespace Lawn
                 if (mPhaseCounter <= 0)
                 {
                     mApp.PlayFoley(FoleyType.FOLEY_EXPLOSION);
-                    int num = mX + mWidth / 2;
-                    int num2 = mY + mHeight / 2;
-                    int num3 = 127;
+                    int aPosX = mX + mWidth / 2;
+                    int aPosY = mY + mHeight / 2;
                     if (mMindControlled)
                     {
-                        mBoard.KillAllZombiesInRadius(mRow, num, num2, Constants.JackInTheBoxZombieRadius, 1, true, num3);
+                        mBoard.KillAllZombiesInRadius(mRow, aPosX, aPosY, Constants.JackInTheBoxZombieRadius, 1, true, 0x7F);
                     }
                     else
                     {
-                        num3 |= 128;
-                        mBoard.KillAllZombiesInRadius(mRow, num, num2, Constants.JackInTheBoxZombieRadius, 1, true, num3);
-                        mBoard.KillAllPlantsInRadius(num, num2, Constants.JackInTheBoxPlantRadius);
+                        mBoard.KillAllZombiesInRadius(mRow, aPosX, aPosY, Constants.JackInTheBoxZombieRadius, 1, true, 0xFF);
+                        mBoard.KillAllPlantsInRadius(aPosX, aPosY, Constants.JackInTheBoxPlantRadius);
                     }
-                    mApp.AddTodParticle(num, num2, 400000, ParticleEffect.PARTICLE_JACKEXPLODE);
+                    mApp.AddTodParticle(aPosX, aPosY, 400000, ParticleEffect.PARTICLE_JACKEXPLODE);
                     mBoard.ShakeBoard(4, -6);
                     DieNoLoot(false);
                     if (mApp.IsScaryPotterLevel())
                     {
-                        mBoard.mChallenge.ScaryPotterJackExplode(num, num2);
+                        mBoard.mChallenge.ScaryPotterJackExplode(aPosX, aPosY);
                     }
                 }
             }
@@ -3304,22 +3314,22 @@ namespace Lawn
             }
             if (mZombieHeight == ZombieHeight.HEIGHT_ZOMBIE_NORMAL)
             {
-                float posYBasedOnRow = GetPosYBasedOnRow(mRow);
-                if (mPosY < posYBasedOnRow)
+                float aDesiredY = GetPosYBasedOnRow(mRow);
+                if (mPosY < aDesiredY)
                 {
-                    mPosY += 3f * Math.Min(1f, posYBasedOnRow - mPosY);
-                    if (mPosY > posYBasedOnRow)
+                    mPosY += 3f * Math.Min(1f, aDesiredY - mPosY);
+                    if (mPosY > aDesiredY)
                     {
-                        mPosY = posYBasedOnRow;
+                        mPosY = aDesiredY;
                         return;
                     }
                 }
-                else if (mPosY > posYBasedOnRow)
+                else if (mPosY > aDesiredY)
                 {
-                    mPosY -= 3f * Math.Min(1f, mPosY - posYBasedOnRow);
-                    if (mPosY < posYBasedOnRow)
+                    mPosY -= 3f * Math.Min(1f, mPosY - aDesiredY);
+                    if (mPosY < aDesiredY)
                     {
-                        mPosY = posYBasedOnRow;
+                        mPosY = aDesiredY;
                     }
                 }
             }
@@ -3336,12 +3346,12 @@ namespace Lawn
             {
                 cachedZombieRect.mX = mWidth - cachedZombieRect.mX - cachedZombieRect.mWidth;
             }
-            ZombieDrawPosition zombieDrawPosition = default(ZombieDrawPosition);
-            GetDrawPos(ref zombieDrawPosition);
-            cachedZombieRect.Offset(mX, mY + (int)zombieDrawPosition.mBodyY);
-            if (zombieDrawPosition.mClipHeight > GameConstants.CLIP_HEIGHT_LIMIT)
+            ZombieDrawPosition aDrawPos = default(ZombieDrawPosition);
+            GetDrawPos(ref aDrawPos);
+            cachedZombieRect.Offset(mX, mY + (int)aDrawPos.mBodyY);
+            if (aDrawPos.mClipHeight > GameConstants.CLIP_HEIGHT_LIMIT)
             {
-                cachedZombieRect.mHeight = cachedZombieRect.mHeight - (int)zombieDrawPosition.mClipHeight;
+                cachedZombieRect.mHeight = cachedZombieRect.mHeight - (int)aDrawPos.mClipHeight;
             }
             cachedZombieRectUpToDate = true;
             return cachedZombieRect;
@@ -3358,12 +3368,12 @@ namespace Lawn
             {
                 result.mX = mWidth - result.mX - result.mWidth;
             }
-            ZombieDrawPosition zombieDrawPosition = default(ZombieDrawPosition);
-            GetDrawPos(ref zombieDrawPosition);
-            result.Offset(mX, mY + (int)zombieDrawPosition.mBodyY);
-            if (zombieDrawPosition.mClipHeight > GameConstants.CLIP_HEIGHT_LIMIT)
+            ZombieDrawPosition aDrawPos = default(ZombieDrawPosition);
+            GetDrawPos(ref aDrawPos);
+            result.Offset(mX, mY + (int)aDrawPos.mBodyY);
+            if (aDrawPos.mClipHeight > GameConstants.CLIP_HEIGHT_LIMIT)
             {
-                result.mHeight -= (int)zombieDrawPosition.mClipHeight;
+                result.mHeight -= (int)aDrawPos.mClipHeight;
             }
             return result;
         }
@@ -3377,47 +3387,47 @@ namespace Lawn
             Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
             if (reanimation != null)
             {
-                float num;
+                float aSpeed;
                 if (IsBouncingPogo() || mZombiePhase == ZombiePhase.PHASE_BALLOON_FLYING || mZombiePhase == ZombiePhase.PHASE_DOLPHIN_RIDING || mZombiePhase == ZombiePhase.PHASE_SNORKEL_WALKING_IN_POOL || mZombieType == ZombieType.ZOMBIE_CATAPULT)
                 {
-                    num = mVelX * 3f;
+                    aSpeed = mVelX * 3f;
                     if (IsMovingAtChilledSpeed())
                     {
-                        num *= GameConstants.CHILLED_SPEED_FACTOR;
+                        aSpeed *= GameConstants.CHILLED_SPEED_FACTOR;
                     }
                 }
                 else if (mZombieType == ZombieType.ZOMBIE_ZAMBONI || mZombiePhase == ZombiePhase.PHASE_DIGGER_TUNNELING || mZombiePhase == ZombiePhase.PHASE_DOLPHIN_IN_JUMP || IsBobsledTeamWithSled() || mZombiePhase == ZombiePhase.PHASE_POLEVAULTER_IN_VAULT || mZombiePhase == ZombiePhase.PHASE_SNORKEL_INTO_POOL)
                 {
-                    num = mVelX * 3f;
+                    aSpeed = mVelX * 3f;
                 }
                 else if (mHasGroundTrack)
                 {
                     mGroundTrackIndex = reanimation.GetTrackIndex(Reanimation.ReanimTrackId__ground);
-                    num = reanimation.GetTrackVelocity(mGroundTrackIndex) * mScaleZombie;
+                    aSpeed = reanimation.GetTrackVelocity(mGroundTrackIndex) * mScaleZombie;
                 }
                 else
                 {
-                    num = mVelX * 3f;
+                    aSpeed = mVelX * 3f;
                     if (IsMovingAtChilledSpeed())
                     {
-                        num *= GameConstants.CHILLED_SPEED_FACTOR;
+                        aSpeed *= GameConstants.CHILLED_SPEED_FACTOR;
                     }
                 }
                 if (mApp.mGameScene == GameScenes.SCENE_ZOMBIES_WON)
                 {
                     ZombieType zombieType = mZombieType;
-                    if (num > 0.3f)
+                    if (aSpeed > 0.3f)
                     {
-                        num = 0.3f;
+                        aSpeed = 0.3f;
                     }
                 }
                 if (IsWalkingBackwards() || mZombiePhase == ZombiePhase.PHASE_DANCER_DANCING_IN)
                 {
-                    mPosX += num;
+                    mPosX += aSpeed;
                 }
                 else
                 {
-                    mPosX -= num;
+                    mPosX -= aSpeed;
                 }
                 if (mZombieType == ZombieType.ZOMBIE_FOOTBALL && mFromWave != GameConstants.ZOMBIE_WAVE_WINNER)
                 {
@@ -3602,21 +3612,21 @@ namespace Lawn
             mAltitude = 0f;
             mZombieRect = new TRect(36, 0, 42, 115);
             StartWalkAnim(0);
-            Reanimation reanimation = mApp.ReanimationGet(mBodyReanimID);
+            Reanimation aFirstZombieReanim = mApp.ReanimationGet(mBodyReanimID);
             for (int i = 0; i < 3; i++)
             {
-                Zombie zombie = mBoard.ZombieGet(mFollowerZombieID[i]);
-                zombie.mZombiePhase = ZombiePhase.PHASE_BOBSLED_CRASHING;
-                zombie.mPhaseCounter = GameConstants.BOBSLED_CRASH_TIME;
-                zombie.mPosY = GetPosYBasedOnRow(mRow);
-                zombie.mAltitude = 0f;
-                zombie.StartWalkAnim(0);
-                Reanimation reanimation2 = mApp.ReanimationGet(zombie.mBodyReanimID);
-                if (reanimation2 != null)
+                Zombie aFolowerZombie = mBoard.ZombieGet(mFollowerZombieID[i]);
+                aFolowerZombie.mZombiePhase = ZombiePhase.PHASE_BOBSLED_CRASHING;
+                aFolowerZombie.mPhaseCounter = GameConstants.BOBSLED_CRASH_TIME;
+                aFolowerZombie.mPosY = GetPosYBasedOnRow(mRow);
+                aFolowerZombie.mAltitude = 0f;
+                aFolowerZombie.StartWalkAnim(0);
+                Reanimation aFollowerZombieReanim = mApp.ReanimationGet(aFolowerZombie.mBodyReanimID);
+                if (aFollowerZombieReanim != null)
                 {
-                    zombie.mVelX = mVelX;
-                    reanimation2.mAnimTime = TodCommon.RandRangeFloat(0f, 1f);
-                    reanimation2.mAnimRate = reanimation.mAnimRate;
+                    aFolowerZombie.mVelX = mVelX;
+                    aFollowerZombieReanim.mAnimTime = TodCommon.RandRangeFloat(0f, 1f);
+                    aFollowerZombieReanim.mAnimRate = aFirstZombieReanim.mAnimRate;
                 }
             }
         }
@@ -3667,9 +3677,8 @@ namespace Lawn
             {
                 aParticle.OverrideColor(null, GameConstants.ZOMBIE_MINDCONTROLLED_COLOR);
                 aParticle.OverrideExtraAdditiveDraw(null, true);
-                return;
             }
-            if (mChilledCounter > 0 || mIceTrapCounter > 0)
+            else if (mChilledCounter > 0 || mIceTrapCounter > 0)
             {
                 aParticle.OverrideColor(null, new SexyColor(75, 75, 255, 255));
                 aParticle.OverrideExtraAdditiveDraw(null, true);
@@ -3678,40 +3687,39 @@ namespace Lawn
 
         public void OverrideParticleScale(TodParticleSystem aParticle)
         {
-            if (aParticle == null)
-            {
-                return;
-            }
-            aParticle.OverrideScale(null, mScaleZombie);
+            aParticle?.OverrideScale(null, mScaleZombie);
         }
 
         public void PoolSplash(bool theInToPoolSound)
         {
-            float num = 23f;
-            float num2 = 78f;
+            float aOffsetX = 23f;
+            float aOffsetY = 78f;
             if (mZombiePhase == ZombiePhase.PHASE_SNORKEL_WALKING_IN_POOL)
             {
-                num += -37f;
-                num2 += -8f;
+                aOffsetX += -37f;
+                aOffsetY += -8f;
             }
-            int num3;
+            int aOffsetY_v;
             if (mAltitude == 0f)
             {
-                num3 = (int)(num2 * mScaleZombie);
+                aOffsetY_v = (int)(aOffsetY * mScaleZombie);
             }
             else
             {
-                num3 = (int)num2;
+                aOffsetY_v = (int)aOffsetY;
             }
-            Reanimation reanimation = mApp.AddReanimation(mX + (int)(num * mScaleZombie), mY + num3, mRenderOrder + 1, ReanimationType.REANIM_SPLASH);
-            reanimation.OverrideScale(0.8f, 0.8f);
-            mApp.AddTodParticle(mX + num + 37f, mY + num2 + 42f, mRenderOrder + 1, ParticleEffect.PARTICLE_PLANTING_POOL);
+            mApp.AddReanimation(mX + (int)(aOffsetX * mScaleZombie), mY + aOffsetY_v, mRenderOrder + 1, ReanimationType.REANIM_SPLASH)
+                .OverrideScale(0.8f, 0.8f);
+            mApp.AddTodParticle(mX + aOffsetX + 37f, mY + aOffsetY + 42f, mRenderOrder + 1, ParticleEffect.PARTICLE_PLANTING_POOL);
             if (theInToPoolSound)
             {
                 mApp.PlayFoley(FoleyType.FOLEY_ZOMBIESPLASH);
-                return;
             }
-            mApp.PlayFoley(FoleyType.FOLEY_PLANT_WATER);
+            else 
+            { 
+                mApp.PlayFoley(FoleyType.FOLEY_PLANT_WATER); 
+            }
+            
         }
 
         public void UpdateZombieFlyer()
@@ -3757,21 +3765,21 @@ namespace Lawn
             {
                 return;
             }
-            float num = 40f;
+            float aHeight = 40f;
             if (mZombiePhase >= ZombiePhase.PHASE_POGO_HIGH_BOUNCE_1 && mZombiePhase <= ZombiePhase.PHASE_POGO_HIGH_BOUNCE_6)
             {
-                num = 50f + 20f * (mZombiePhase - ZombiePhase.PHASE_POGO_HIGH_BOUNCE_1);
+                aHeight = 50f + 20f * (mZombiePhase - ZombiePhase.PHASE_POGO_HIGH_BOUNCE_1);
             }
             else if (mZombiePhase == ZombiePhase.PHASE_POGO_FORWARD_BOUNCE_2)
             {
-                num = 90f;
+                aHeight = 90f;
             }
             else if (mZombiePhase == ZombiePhase.PHASE_POGO_FORWARD_BOUNCE_7)
             {
-                num = 170f;
+                aHeight = 170f;
             }
-            float num2 = 9f;
-            mAltitude = TodCommon.TodAnimateCurveFloat(GameConstants.POGO_BOUNCE_TIME, 0, mPhaseCounter, num2, num + num2, TodCurves.CURVE_BOUNCE_SLOW_MIDDLE);
+            float aDeflection = 9f;
+            mAltitude = TodCommon.TodAnimateCurveFloat(GameConstants.POGO_BOUNCE_TIME, 0, mPhaseCounter, aDeflection, aHeight + aDeflection, TodCurves.CURVE_BOUNCE_SLOW_MIDDLE);
             mFrame = TodCommon.ClampInt(3 - (int)mAltitude / 3, 0, 3);
             if (mPhaseCounter >= 8 && mPhaseCounter < 11)
             {
@@ -4016,13 +4024,13 @@ namespace Lawn
             }
             if (!TodCommon.TestBit(theDamageFlags, 4))
             {
-                ZombieDrawPosition zombieDrawPosition = default(ZombieDrawPosition);
-                GetDrawPos(ref zombieDrawPosition);
+                ZombieDrawPosition aDrawPos = default(ZombieDrawPosition);
+                GetDrawPos(ref aDrawPos);
                 int aRenderOrder = mRenderOrder + 1;
-                float theX = 0f;
-                float num = 0f;
-                GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_pogo_stick, ref theX, ref num);
-                TodParticleSystem aParticle = mApp.AddTodParticle(theX, num + 30f, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_POGO);
+                float aPosX = 0f;
+                float aPosY = 0f;
+                GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_pogo_stick, ref aPosX, ref aPosY);
+                TodParticleSystem aParticle = mApp.AddTodParticle(aPosX, aPosY + 30f, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_POGO);
                 OverrideParticleScale(aParticle);
             }
             Debug.ASSERT(mZombiePhase != ZombiePhase.PHASE_ZOMBIE_DYING && mZombiePhase != ZombiePhase.PHASE_ZOMBIE_BURNED && !mDead);
@@ -4078,8 +4086,9 @@ namespace Lawn
                     }
                 }
             }
-            if (mZombiePhase == ZombiePhase.PHASE_DANCER_DANCING_IN)
+            switch (mZombiePhase)
             {
+            case ZombiePhase.PHASE_DANCER_DANCING_IN:
                 if (!mHasHead)
                 {
                     return;
@@ -4091,34 +4100,33 @@ namespace Lawn
                     PickRandomSpeed();
                 }
                 return;
-            }
-            else
+            case ZombiePhase.PHASE_DANCER_SNAPPING_FINGERS:
+            case ZombiePhase.PHASE_DANCER_SNAPPING_FINGERS_WITH_LIGHT:
             {
-                if (mZombiePhase == ZombiePhase.PHASE_DANCER_SNAPPING_FINGERS || mZombiePhase == ZombiePhase.PHASE_DANCER_SNAPPING_FINGERS_WITH_LIGHT)
+                Reanimation reanimation = mApp.ReanimationGet(mBodyReanimID);
+                if (reanimation.mLoopCount > 0)
                 {
-                    Reanimation reanimation = mApp.ReanimationGet(mBodyReanimID);
-                    if (reanimation.mLoopCount > 0)
+                    if (mZombiePhase == ZombiePhase.PHASE_DANCER_SNAPPING_FINGERS && mBoard.CountZombiesOnScreen() <= 15)
                     {
-                        if (mZombiePhase == ZombiePhase.PHASE_DANCER_SNAPPING_FINGERS && mBoard.CountZombiesOnScreen() <= 15)
-                        {
-                            mApp.PlayFoley(FoleyType.FOLEY_DANCER);
-                        }
-                        SummonBackupDancers();
-                        mZombiePhase = ZombiePhase.PHASE_DANCER_SNAPPING_FINGERS_HOLD;
-                        mPhaseCounter = 200;
+                        mApp.PlayFoley(FoleyType.FOLEY_DANCER);
                     }
+                    SummonBackupDancers();
+                    mZombiePhase = ZombiePhase.PHASE_DANCER_SNAPPING_FINGERS_HOLD;
+                    mPhaseCounter = 200;
+                }
+                return;
+            }
+
+            case ZombiePhase.PHASE_DANCER_SNAPPING_FINGERS_HOLD:
+                if (mPhaseCounter > 0)
+                {
                     return;
                 }
-                if (mZombiePhase == ZombiePhase.PHASE_DANCER_SNAPPING_FINGERS_HOLD)
-                {
-                    if (mPhaseCounter > 0)
-                    {
-                        return;
-                    }
-                    mZombiePhase = ZombiePhase.PHASE_DANCER_DANCING_LEFT;
-                    PlayZombieReanim(ref Reanimation.ReanimTrackId_anim_walk, ReanimLoopType.REANIM_LOOP, 20, 0f);
-                }
-                ZombiePhase dancerPhase = GetDancerPhase();
+                mZombiePhase = ZombiePhase.PHASE_DANCER_DANCING_LEFT;
+                PlayZombieReanim(ref Reanimation.ReanimTrackId_anim_walk, ReanimLoopType.REANIM_LOOP, 20, 0f);
+                break;
+            }
+            ZombiePhase dancerPhase = GetDancerPhase();
                 if (dancerPhase != mZombiePhase)
                 {
                     if (dancerPhase == ZombiePhase.PHASE_DANCER_DANCING_LEFT)
@@ -4144,7 +4152,6 @@ namespace Lawn
                     mSummonCounter = 100;
                 }
                 return;
-            }
         }
 
         public Zombie SummonBackupDancer(int theRow, int thePosX)
@@ -4153,33 +4160,33 @@ namespace Lawn
             {
                 return null;
             }
-            Zombie zombie = mBoard.AddZombie(ZombieType.ZOMBIE_BACKUP_DANCER, mFromWave);
-            if (zombie == null)
+            Zombie aZombie = mBoard.AddZombie(ZombieType.ZOMBIE_BACKUP_DANCER, mFromWave);
+            if (aZombie == null)
             {
                 return null;
             }
-            zombie.mPosX = thePosX;
-            zombie.mPosY = GetPosYBasedOnRow(theRow);
-            zombie.SetRow(theRow);
-            zombie.mX = (int)zombie.mPosX;
-            zombie.mY = (int)zombie.mPosY;
-            zombie.mZombiePhase = ZombiePhase.PHASE_DANCER_RISING;
-            zombie.mPhaseCounter = 150;
-            zombie.mAltitude = Constants.ZOMBIE_BACKUP_DANCER_RISE_HEIGHT;
-            zombie.mUsesClipping = true;
-            zombie.mRelatedZombieID = mBoard.ZombieGetID(this);
-            zombie.SetAnimRate(0f);
-            zombie.mMindControlled = mMindControlled;
-            int num = (int)zombie.mPosX + 60;
-            int num2 = (int)zombie.mPosY + 110;
-            if (zombie.IsOnHighGround())
+            aZombie.mPosX = thePosX;
+            aZombie.mPosY = GetPosYBasedOnRow(theRow);
+            aZombie.SetRow(theRow);
+            aZombie.mX = (int)aZombie.mPosX;
+            aZombie.mY = (int)aZombie.mPosY;
+            aZombie.mZombiePhase = ZombiePhase.PHASE_DANCER_RISING;
+            aZombie.mPhaseCounter = 150;
+            aZombie.mAltitude = Constants.ZOMBIE_BACKUP_DANCER_RISE_HEIGHT;
+            aZombie.mUsesClipping = true;
+            aZombie.mRelatedZombieID = mBoard.ZombieGetID(this);
+            aZombie.SetAnimRate(0f);
+            aZombie.mMindControlled = mMindControlled;
+            int aParticleX = (int)aZombie.mPosX + 60;
+            int aParticleY = (int)aZombie.mPosY + 110;
+            if (aZombie.IsOnHighGround())
             {
-                num2 -= Constants.HIGH_GROUND_HEIGHT;
+                aParticleY -= Constants.HIGH_GROUND_HEIGHT;
             }
             int aRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_PARTICLE, theRow, 0);
-            mApp.AddTodParticle(num, num2, aRenderOrder, ParticleEffect.PARTICLE_DANCER_RISE);
+            mApp.AddTodParticle(aParticleX, aParticleY, aRenderOrder, ParticleEffect.PARTICLE_DANCER_RISE);
             mApp.PlayFoley(FoleyType.FOLEY_GRAVESTONE_RUMBLE);
-            return mBoard.ZombieGetID(zombie);
+            return mBoard.ZombieGetID(aZombie);
         }
 
         public void SummonBackupDancers()
@@ -4308,40 +4315,40 @@ namespace Lawn
             if (mYuckyFaceCounter == GameConstants.YUCKI_HOLD_TIME)
             {
                 StartWalkAnim(20);
-                bool flag = true;
-                bool flag2 = true;
-                bool flag3 = mBoard.mPlantRow[mRow] == PlantRowType.PLANTROW_POOL;
+                bool aCanGoDown = true;
+                bool aCanGoUp = true;
+                bool aIsThisRowWaterFilled = mBoard.mPlantRow[mRow] == PlantRowType.PLANTROW_POOL;
                 if (!mBoard.RowCanHaveZombies(mRow - 1))
                 {
-                    flag = false;
+                    aCanGoDown = false;
                 }
-                else if (mBoard.mPlantRow[mRow - 1] == PlantRowType.PLANTROW_POOL && !flag3)
+                else if (mBoard.mPlantRow[mRow - 1] == PlantRowType.PLANTROW_POOL && !aIsThisRowWaterFilled)
                 {
-                    flag = false;
+                    aCanGoDown = false;
                 }
-                else if (mBoard.mPlantRow[mRow - 1] != PlantRowType.PLANTROW_POOL && flag3)
+                else if (mBoard.mPlantRow[mRow - 1] != PlantRowType.PLANTROW_POOL && aIsThisRowWaterFilled)
                 {
-                    flag = false;
+                    aCanGoDown = false;
                 }
                 if (!mBoard.RowCanHaveZombies(mRow + 1))
                 {
-                    flag2 = false;
+                    aCanGoUp = false;
                 }
-                else if (mBoard.mPlantRow[mRow + 1] == PlantRowType.PLANTROW_POOL && !flag3)
+                else if (mBoard.mPlantRow[mRow + 1] == PlantRowType.PLANTROW_POOL && !aIsThisRowWaterFilled)
                 {
-                    flag2 = false;
+                    aCanGoUp = false;
                 }
-                else if (mBoard.mPlantRow[mRow + 1] != PlantRowType.PLANTROW_POOL && flag3)
+                else if (mBoard.mPlantRow[mRow + 1] != PlantRowType.PLANTROW_POOL && aIsThisRowWaterFilled)
                 {
-                    flag2 = false;
+                    aCanGoUp = false;
                 }
-                if (flag && !flag2)
+                if (aCanGoDown && !aCanGoUp)
                 {
                     mBoard.ZombieSwitchRow(this, mRow - 1);
                     SetRow(mRow - 1);
                     return;
                 }
-                if (!flag && flag2)
+                if (!aCanGoDown && aCanGoUp)
                 {
                     mBoard.ZombieSwitchRow(this, mRow + 1);
                     mYuckyToRow = mRow + 1;
@@ -4349,7 +4356,7 @@ namespace Lawn
                     mRow = mYuckyToRow;
                     return;
                 }
-                if (flag && flag2)
+                if (aCanGoDown && aCanGoUp)
                 {
                     if (RandomNumbers.NextNumber(2) == 0)
                     {
@@ -4380,45 +4387,44 @@ namespace Lawn
             {
                 return;
             }
-            float num = 46f;
-            float num2 = 92f + theDrawPos.mBodyY;
-            float num3 = 1f;
-            if (mZombieType == ZombieType.ZOMBIE_POGO)
+            float aOffsetX = 46f;
+            float aOffsetY = 92f + theDrawPos.mBodyY;
+            float aScale = 1f;
+
+            switch (mZombieType)
             {
-                num -= 10f;
-                num2 += 20f;
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_GARGANTUAR || mZombieType == ZombieType.ZOMBIE_REDEYE_GARGANTUAR)
-            {
-                num -= 20f;
-                num2 -= 7f;
-                num3 = 1.6f;
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_BUNGEE)
-            {
-                num -= 45f;
-                num2 -= 23f;
-                num3 = 1.2f;
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_DIGGER)
-            {
-                num -= 27f;
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_CATAPULT)
-            {
-                num += 32f;
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_BALLOON)
-            {
-                num -= 9f;
-                num2 += 27f;
+                case ZombieType.ZOMBIE_POGO:
+                    aOffsetX -= 10f;
+                    aOffsetY += 20f;
+                    break;
+                case ZombieType.ZOMBIE_GARGANTUAR:
+                case ZombieType.ZOMBIE_REDEYE_GARGANTUAR:
+                    aOffsetX -= 20f;
+                    aOffsetY -= 7f;
+                    aScale = 1.6f;
+                    break;
+                case ZombieType.ZOMBIE_BUNGEE:
+                    aOffsetX -= 45f;
+                    aOffsetY -= 23f;
+                    aScale = 1.2f;
+                    break;
+                case ZombieType.ZOMBIE_DIGGER:
+                    aOffsetX -= 27f;
+                    break;
+                case ZombieType.ZOMBIE_CATAPULT:
+                    aOffsetX += 32f;
+                    break;
+                case ZombieType.ZOMBIE_BALLOON:
+                    aOffsetX -= 9f;
+                    aOffsetY += 27f;
+                    break;
             }
             if (theFront)
             {
-                TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_ICETRAP, num * Constants.S, num2 * Constants.S, num3, num3);
+                TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_ICETRAP, aOffsetX * Constants.S, aOffsetY * Constants.S, aScale, aScale);
                 return;
             }
-            TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_ICETRAP2, num * Constants.S, num2 * Constants.S, num3, num3);
+            TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_ICETRAP2, aOffsetX * Constants.S, aOffsetY * Constants.S, aScale, aScale);
         }
 
         public bool HitIceTrap()
@@ -4487,163 +4493,146 @@ namespace Lawn
 
         public void DrawReanim(Graphics g, ref ZombieDrawPosition theDrawPos, int theBaseRenderGroup)
         {
-            Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
-            if (reanimation == null)
+            Reanimation aReanim = mApp.ReanimationTryToGet(mBodyReanimID);
+            if (aReanim == null)
             {
                 return;
             }
             g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
             float anImageOffsetX = theDrawPos.mImageOffsetX;
-            float num = theDrawPos.mImageOffsetY + theDrawPos.mBodyY;
-            ZombieType zombieType = mZombieType;
-            if (zombieType <= ZombieType.ZOMBIE_SNORKEL)
+            float anImageOffsetY = theDrawPos.mImageOffsetY + theDrawPos.mBodyY;
+            switch (mZombieType)
             {
-                switch (zombieType)
+            case ZombieType.ZOMBIE_NORMAL:
+                anImageOffsetY -= (int)(Constants.Zombie_ClipOffset_Normal * mScaleZombie);
+                break;
+            case ZombieType.ZOMBIE_FLAG:
+                anImageOffsetY -= (int)(Constants.Zombie_ClipOffset_Pail * mScaleZombie);
+                break;
+            case ZombieType.ZOMBIE_TRAFFIC_CONE:
+            case ZombieType.ZOMBIE_PAIL:
+                anImageOffsetY -= (int)(Constants.Zombie_ClipOffset_Pail * mScaleZombie);
+                break;
+            case ZombieType.ZOMBIE_POLEVAULTER:
+                anImageOffsetY -= (int)(Constants.Zombie_ClipOffset_Default * mScaleZombie);
+                break;
+            case ZombieType.ZOMBIE_SNORKEL:
+            {
+                if (mZombiePhase == ZombiePhase.PHASE_ZOMBIE_DYING || mZombiePhase == ZombiePhase.PHASE_SNORKEL_WALKING)
                 {
-                    case ZombieType.ZOMBIE_NORMAL:
-                        num -= (int)(Constants.Zombie_ClipOffset_Normal * mScaleZombie);
-                        goto IL_1CC;
-                    case ZombieType.ZOMBIE_FLAG:
-                        num -= (int)(Constants.Zombie_ClipOffset_Pail * mScaleZombie);
-                        goto IL_1CC;
-                    case ZombieType.ZOMBIE_TRAFFIC_CONE:
-                    case ZombieType.ZOMBIE_PAIL:
-                        num -= (int)(Constants.Zombie_ClipOffset_Pail * mScaleZombie);
-                        goto IL_1CC;
-                    case ZombieType.ZOMBIE_POLEVAULTER:
-                        break;
-                    default:
-                        if (zombieType == ZombieType.ZOMBIE_SNORKEL)
-                        {
-                            if (mZombiePhase == ZombiePhase.PHASE_ZOMBIE_DYING || mZombiePhase == ZombiePhase.PHASE_SNORKEL_WALKING)
-                            {
-                                if (mScaleZombie == 1f)
-                                {
-                                    num -= (int)(Constants.Zombie_ClipOffset_Snorkel_Dying * mScaleZombie);
-                                }
-                                else
-                                {
-                                    num -= Constants.Zombie_ClipOffset_Snorkel_Dying_Small;
-                                    mUsesClipping = true;
-                                }
-                            }
-                            else if (mZombiePhase == ZombiePhase.PHASE_SNORKEL_INTO_POOL && mScaleZombie != 1f)
-                            {
-                                num -= Constants.Zombie_ClipOffset_Snorkel_intoPool_Small;
-                            }
-                            else
-                            {
-                                num -= (int)(Constants.Zombie_ClipOffset_Snorkel * mScaleZombie);
-                            }
-                            if (draggedByTangleKelp)
-                            {
-                                num -= (int)(Constants.Zombie_ClipOffset_Snorkel_Grabbed * mScaleZombie);
-                                mUsesClipping = true;
-                                goto IL_1CC;
-                            }
-                            goto IL_1CC;
-                        }
-                        break;
+                    if (mScaleZombie == 1f)
+                    {
+                        anImageOffsetY -= (int)(Constants.Zombie_ClipOffset_Snorkel_Dying * mScaleZombie);
+                    }
+                    else
+                    {
+                        anImageOffsetY -= Constants.Zombie_ClipOffset_Snorkel_Dying_Small;
+                        mUsesClipping = true;
+                    }
                 }
+                else if (mZombiePhase == ZombiePhase.PHASE_SNORKEL_INTO_POOL && mScaleZombie != 1f)
+                {
+                    anImageOffsetY -= Constants.Zombie_ClipOffset_Snorkel_intoPool_Small;
+                }
+                else
+                {
+                    anImageOffsetY -= (int)(Constants.Zombie_ClipOffset_Snorkel * mScaleZombie);
+                }
+                if (draggedByTangleKelp)
+                {
+                    anImageOffsetY -= (int)(Constants.Zombie_ClipOffset_Snorkel_Grabbed * mScaleZombie);
+                    mUsesClipping = true;
+                    break;
+                }
+                break;
             }
-            else
-            {
-                if (zombieType == ZombieType.ZOMBIE_DOLPHIN_RIDER)
-                {
-                    num -= (int)(Constants.Zombie_ClipOffset_Dolphin_Into_Pool * mScaleZombie);
-                    goto IL_1CC;
-                }
-                if (zombieType == ZombieType.ZOMBIE_DIGGER)
-                {
-                    num -= (int)(Constants.Zombie_ClipOffset_Digger * mScaleZombie);
-                    goto IL_1CC;
-                }
-                switch (zombieType)
-                {
-                    case ZombieType.ZOMBIE_PEA_HEAD:
-                    case ZombieType.ZOMBIE_WALLNUT_HEAD:
-                    case ZombieType.ZOMBIE_JALAPENO_HEAD:
-                    case ZombieType.ZOMBIE_GATLING_HEAD:
-                    case ZombieType.ZOMBIE_TALLNUT_HEAD:
-                        num -= (int)(Constants.Zombie_ClipOffset_PeaHead_InPool * mScaleZombie);
-                        goto IL_1CC;
-                }
+            case ZombieType.ZOMBIE_DOLPHIN_RIDER:
+                anImageOffsetY -= (int)(Constants.Zombie_ClipOffset_Dolphin_Into_Pool * mScaleZombie);
+                break;
+            case ZombieType.ZOMBIE_DIGGER:
+                anImageOffsetY -= (int)(Constants.Zombie_ClipOffset_Digger * mScaleZombie);
+                break;
+            case ZombieType.ZOMBIE_PEA_HEAD:
+            case ZombieType.ZOMBIE_WALLNUT_HEAD:
+            case ZombieType.ZOMBIE_JALAPENO_HEAD:
+            case ZombieType.ZOMBIE_GATLING_HEAD:
+            case ZombieType.ZOMBIE_TALLNUT_HEAD:
+                anImageOffsetY -= (int)(Constants.Zombie_ClipOffset_PeaHead_InPool * mScaleZombie);
+                break;
+            default: anImageOffsetY -= (int)(Constants.Zombie_ClipOffset_Default * mScaleZombie); break;
             }
-            num -= (int)(Constants.Zombie_ClipOffset_Default * mScaleZombie);
-            IL_1CC:
-            ZombiePhase zombiePhase = mZombiePhase;
-            if (zombiePhase != ZombiePhase.PHASE_RISING_FROM_GRAVE)
+            if (mZombiePhase != ZombiePhase.PHASE_RISING_FROM_GRAVE)
             {
-                if (zombiePhase == ZombiePhase.PHASE_SNORKEL_INTO_POOL)
+                if (mZombiePhase == ZombiePhase.PHASE_SNORKEL_INTO_POOL)
                 {
-                    num -= (int)(Constants.Zombie_ClipOffset_Snorkel_Into_Pool * mScaleZombie);
+                    anImageOffsetY -= (int)(Constants.Zombie_ClipOffset_Snorkel_Into_Pool * mScaleZombie);
                 }
             }
             else if (mScaleZombie == 1f)
             {
-                num += (int)(Constants.Zombie_ClipOffset_RisingFromGrave * mScaleZombie);
+                anImageOffsetY += (int)(Constants.Zombie_ClipOffset_RisingFromGrave * mScaleZombie);
             }
             else
             {
-                num += (int)(Constants.Zombie_ClipOffset_RisingFromGrave_Small * mScaleZombie);
+                anImageOffsetY += (int)(Constants.Zombie_ClipOffset_RisingFromGrave_Small * mScaleZombie);
             }
             if (mZombieType == ZombieType.ZOMBIE_NORMAL && mZombiePhase == ZombiePhase.PHASE_ZOMBIE_NORMAL && mInPool)
             {
                 if (mScaleZombie == 1f)
                 {
-                    num += Constants.Zombie_ClipOffset_Normal_In_Pool;
+                    anImageOffsetY += Constants.Zombie_ClipOffset_Normal_In_Pool;
                 }
                 else
                 {
-                    num += Constants.Zombie_ClipOffset_Normal_In_Pool_SMALL;
+                    anImageOffsetY += Constants.Zombie_ClipOffset_Normal_In_Pool_SMALL;
                 }
             }
             if (mZombieType == ZombieType.ZOMBIE_TRAFFIC_CONE && mZombiePhase == ZombiePhase.PHASE_ZOMBIE_NORMAL && mInPool && mScaleZombie != 1f)
             {
-                num += Constants.Zombie_ClipOffset_TrafficCone_In_Pool_SMALL;
+                anImageOffsetY += Constants.Zombie_ClipOffset_TrafficCone_In_Pool_SMALL;
             }
             if (mZombieType == ZombieType.ZOMBIE_NORMAL && mZombiePhase == ZombiePhase.PHASE_ZOMBIE_DYING && mInPool)
             {
                 if (mScaleZombie == 1f)
                 {
-                    num += Constants.Zombie_ClipOffset_Normal_In_Pool;
+                    anImageOffsetY += Constants.Zombie_ClipOffset_Normal_In_Pool;
                 }
                 else
                 {
-                    num += Constants.Zombie_ClipOffset_Normal_In_Pool_SMALL;
+                    anImageOffsetY += Constants.Zombie_ClipOffset_Normal_In_Pool_SMALL;
                 }
             }
             if (mZombieType == ZombieType.ZOMBIE_FLAG && mInPool)
             {
-                num += Constants.Zombie_ClipOffset_Flag_In_Pool;
+                anImageOffsetY += Constants.Zombie_ClipOffset_Flag_In_Pool;
             }
             if (mScaleZombie != 1f && mAltitude != 0f && mZombiePhase != ZombiePhase.PHASE_RISING_FROM_GRAVE && mInPool)
             {
-                num -= mAltitude;
+                anImageOffsetY -= mAltitude;
             }
             if (theDrawPos.mClipHeight > GameConstants.CLIP_HEIGHT_LIMIT)
             {
                 float num2 = 120f - theDrawPos.mClipHeight + 71f;
-                g.SetClipRect((int)((anImageOffsetX - 200f) * Constants.S), (int)(num * Constants.S), (int)(520f * Constants.S), (int)(num2 * Constants.S));
+                g.SetClipRect((int)((anImageOffsetX - 200f) * Constants.S), (int)(anImageOffsetY * Constants.S), (int)(520f * Constants.S), (int)(num2 * Constants.S));
             }
             if (mUsesClipping)
             {
                 g.mClipRect.mX = g.mClipRect.mX + 1;
                 g.HardwareClip();
             }
-            int num3 = 255;
+            int aFadeAlpha = 255;
             if (mZombieFade >= 0)
             {
-                num3 = TodCommon.ClampInt((int)(255 * mZombieFade / 30f), 0, 255);
+                aFadeAlpha = TodCommon.ClampInt((int)(255 * mZombieFade / 30f), 0, 255);
             }
-            SexyColor zombie_MINDCONTROLLED_COLOR = new SexyColor(255, 255, 255, num3);
-            SexyColor sexyColor = SexyColor.Black;
-            bool enableExtraAdditiveDraw = false;
+            SexyColor aColorOverride = new SexyColor(255, 255, 255, aFadeAlpha);
+            SexyColor aExtraAdditiveColor = SexyColor.Black;
+            bool aEnableExtraAdditiveDraw = false;
             if (mZombiePhase == ZombiePhase.PHASE_ZOMBIE_BURNED)
             {
-                zombie_MINDCONTROLLED_COLOR = new SexyColor(0, 0, 0, num3);
-                sexyColor = SexyColor.Black;
-                enableExtraAdditiveDraw = false;
+                aColorOverride = new SexyColor(0, 0, 0, aFadeAlpha);
+                aExtraAdditiveColor = SexyColor.Black;
+                aEnableExtraAdditiveDraw = false;
             }
             else if (mZombieType == ZombieType.ZOMBIE_BOSS && mZombiePhase != ZombiePhase.PHASE_ZOMBIE_DYING && mBodyHealth < mBodyMaxHealth / GameConstants.BOSS_FLASH_HEALTH_FRACTION)
             {
@@ -4651,97 +4640,96 @@ namespace Lawn
                 if (mChilledCounter > 0 || mIceTrapCounter > 0)
                 {
                     int num5 = TodCommon.TodAnimateCurve(0, 39, mBoard.mMainCounter % 40, 65, 75, TodCurves.CURVE_BOUNCE);
-                    zombie_MINDCONTROLLED_COLOR = new SexyColor(num5, num5, num4, num3);
+                    aColorOverride = new SexyColor(num5, num5, num4, aFadeAlpha);
                 }
                 else
                 {
-                    zombie_MINDCONTROLLED_COLOR = new SexyColor(num4, num4, num4, num3);
+                    aColorOverride = new SexyColor(num4, num4, num4, aFadeAlpha);
                 }
-                sexyColor = SexyColor.Black;
-                enableExtraAdditiveDraw = false;
+                aExtraAdditiveColor = SexyColor.Black;
+                aEnableExtraAdditiveDraw = false;
             }
             else if (mMindControlled)
             {
-                zombie_MINDCONTROLLED_COLOR = GameConstants.ZOMBIE_MINDCONTROLLED_COLOR;
-                zombie_MINDCONTROLLED_COLOR.mAlpha = num3;
-                sexyColor = zombie_MINDCONTROLLED_COLOR;
-                enableExtraAdditiveDraw = true;
+                aColorOverride = GameConstants.ZOMBIE_MINDCONTROLLED_COLOR;
+                aColorOverride.mAlpha = aFadeAlpha;
+                aExtraAdditiveColor = aColorOverride;
+                aEnableExtraAdditiveDraw = true;
             }
             else if (mChilledCounter > 0 || mIceTrapCounter > 0)
             {
-                zombie_MINDCONTROLLED_COLOR = new SexyColor(75, 75, 255, num3);
-                sexyColor = zombie_MINDCONTROLLED_COLOR;
-                enableExtraAdditiveDraw = true;
+                aColorOverride = new SexyColor(75, 75, 255, aFadeAlpha);
+                aExtraAdditiveColor = aColorOverride;
+                aEnableExtraAdditiveDraw = true;
             }
             else if (mZombieHeight == ZombieHeight.HEIGHT_ZOMBIQUARIUM && mBodyHealth < 100)
             {
-                zombie_MINDCONTROLLED_COLOR = new SexyColor(100, 150, 25, num3);
-                sexyColor = zombie_MINDCONTROLLED_COLOR;
-                enableExtraAdditiveDraw = true;
+                aColorOverride = new SexyColor(100, 150, 25, aFadeAlpha);
+                aExtraAdditiveColor = aColorOverride;
+                aEnableExtraAdditiveDraw = true;
             }
             if (mJustGotShotCounter > 0 && !IsBobsledTeamWithSled() && !GlobalStaticVars.gLowFramerate)
             {
                 int num6 = mJustGotShotCounter * 10;
                 SexyColor theColor = new SexyColor(num6, num6, num6, 255);
-                sexyColor = TodCommon.ColorAdd(theColor, sexyColor);
-                enableExtraAdditiveDraw = true;
+                aExtraAdditiveColor = TodCommon.ColorAdd(theColor, aExtraAdditiveColor);
+                aEnableExtraAdditiveDraw = true;
             }
-            reanimation.mColorOverride = zombie_MINDCONTROLLED_COLOR;
-            reanimation.mExtraAdditiveColor = sexyColor;
-            reanimation.mEnableExtraAdditiveDraw = enableExtraAdditiveDraw;
-            if (mZombieType == ZombieType.ZOMBIE_BOBSLED)
+            aReanim.mColorOverride = aColorOverride;
+            aReanim.mExtraAdditiveColor = aExtraAdditiveColor;
+            aReanim.mEnableExtraAdditiveDraw = aEnableExtraAdditiveDraw;
+            switch (mZombieType)
             {
+            case ZombieType.ZOMBIE_BOBSLED:
                 DrawBobsledReanim(g, ref theDrawPos, true);
-                reanimation.DrawRenderGroup(g, theBaseRenderGroup);
+                aReanim.DrawRenderGroup(g, theBaseRenderGroup);
                 DrawBobsledReanim(g, ref theDrawPos, false);
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_BUNGEE)
-            {
+                break;
+            case ZombieType.ZOMBIE_BUNGEE:
                 DrawBungeeReanim(g, ref theDrawPos);
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_DANCER)
-            {
+                break;
+            case ZombieType.ZOMBIE_DANCER:
                 DrawDancerReanim(g, ref theDrawPos);
-            }
-            else
-            {
-                reanimation.DrawRenderGroup(g, theBaseRenderGroup);
+                break;
+            default:
+                aReanim.DrawRenderGroup(g, theBaseRenderGroup);
+                break;
             }
             if (mShieldType != ShieldType.SHIELDTYPE_NONE)
             {
                 if (mZombiePhase == ZombiePhase.PHASE_ZOMBIE_BURNED)
                 {
-                    reanimation.mColorOverride = new SexyColor(0, 0, 0, num3);
-                    reanimation.mExtraAdditiveColor = SexyColor.Black;
-                    reanimation.mEnableExtraAdditiveDraw = false;
+                    aReanim.mColorOverride = new SexyColor(0, 0, 0, aFadeAlpha);
+                    aReanim.mExtraAdditiveColor = SexyColor.Black;
+                    aReanim.mEnableExtraAdditiveDraw = false;
                 }
                 else if (mShieldJustGotShotCounter > 0)
                 {
-                    reanimation.mColorOverride = new SexyColor(255, 255, 255, num3);
-                    reanimation.mExtraAdditiveColor = SexyColor.White;
-                    reanimation.mEnableExtraAdditiveDraw = true;
+                    aReanim.mColorOverride = new SexyColor(255, 255, 255, aFadeAlpha);
+                    aReanim.mExtraAdditiveColor = SexyColor.White;
+                    aReanim.mEnableExtraAdditiveDraw = true;
                 }
                 else
                 {
-                    reanimation.mColorOverride = new SexyColor(255, 255, 255, num3);
-                    reanimation.mExtraAdditiveColor = SexyColor.Black;
-                    reanimation.mEnableExtraAdditiveDraw = false;
+                    aReanim.mColorOverride = new SexyColor(255, 255, 255, aFadeAlpha);
+                    aReanim.mExtraAdditiveColor = SexyColor.Black;
+                    aReanim.mEnableExtraAdditiveDraw = false;
                 }
-                float num7 = 0f;
+                float aShieldHitOffset = 0f;
                 if (mShieldRecoilCounter > 0)
                 {
-                    num7 = TodCommon.TodAnimateCurveFloat(12, 0, mShieldRecoilCounter, 3f, 0f, TodCurves.CURVE_LINEAR);
+                    aShieldHitOffset = TodCommon.TodAnimateCurveFloat(12, 0, mShieldRecoilCounter, 3f, 0f, TodCurves.CURVE_LINEAR);
                 }
-                g.mTransX += (int)num7;
-                reanimation.DrawRenderGroup(g, GameConstants.RENDER_GROUP_SHIELD);
-                g.mTransX -= (int)num7;
+                g.mTransX += (int)aShieldHitOffset;
+                aReanim.DrawRenderGroup(g, GameConstants.RENDER_GROUP_SHIELD);
+                g.mTransX -= (int)aShieldHitOffset;
             }
             if (mShieldType == ShieldType.SHIELDTYPE_NEWSPAPER || mShieldType == ShieldType.SHIELDTYPE_DOOR || mShieldType == ShieldType.SHIELDTYPE_LADDER)
             {
-                reanimation.mColorOverride = zombie_MINDCONTROLLED_COLOR;
-                reanimation.mExtraAdditiveColor = sexyColor;
-                reanimation.mEnableExtraAdditiveDraw = enableExtraAdditiveDraw;
-                reanimation.DrawRenderGroup(g, GameConstants.RENDER_GROUP_OVER_SHIELD);
+                aReanim.mColorOverride = aColorOverride;
+                aReanim.mExtraAdditiveColor = aExtraAdditiveColor;
+                aReanim.mEnableExtraAdditiveDraw = aEnableExtraAdditiveDraw;
+                aReanim.DrawRenderGroup(g, GameConstants.RENDER_GROUP_OVER_SHIELD);
             }
             g.ClearClipRect();
             if (mUsesClipping)
@@ -4933,8 +4921,8 @@ namespace Lawn
             {
                 return;
             }
-            Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
-            if (reanimation == null)
+            Reanimation aReanim = mApp.ReanimationTryToGet(mBodyReanimID);
+            if (aReanim == null)
             {
                 return;
             }
@@ -4979,16 +4967,14 @@ namespace Lawn
                 {
                     return;
                 }
-                int num = reanimation.FindTrackIndex(Reanimation.ReanimTrackId__ground);
-                ReanimatorTrack reanimatorTrack = reanimation.mDefinition.mTracks[num];
-                ReanimatorTransform reanimatorTransform = reanimatorTrack.mTransforms[reanimation.mFrameStart];
-                ReanimatorTransform reanimatorTransform2 = reanimatorTrack.mTransforms[reanimation.mFrameStart + reanimation.mFrameCount - 1];
-                float num2 = reanimatorTransform2.mTransX - reanimatorTransform.mTransX;
-                if (num2 < 1E-06f)
+                ReanimatorTrack aTrack = aReanim.mDefinition.mTracks[aReanim.FindTrackIndex(Reanimation.ReanimTrackId__ground)];
+                float aDistance = aTrack.mTransforms[aReanim.mFrameStart + aReanim.mFrameCount - 1].mTransX
+                             - aTrack.mTransforms[aReanim.mFrameStart].mTransX;
+                if (aDistance < 1E-06f)
                 {
                     return;
                 }
-                float num3 = reanimation.mFrameCount / num2;
+                float num3 = aReanim.mFrameCount / aDistance;
                 float theAnimRate = mVelX * num3 * 47f / mScaleZombie;
                 ApplyAnimRate(theAnimRate);
                 return;
@@ -4997,12 +4983,7 @@ namespace Lawn
 
         public void ReanimShowPrefix(string theTrackPrefix, int theRenderGroup)
         {
-            Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
-            if (reanimation == null)
-            {
-                return;
-            }
-            reanimation.AssignRenderGroupToPrefix(theTrackPrefix, theRenderGroup);
+            mApp.ReanimationTryToGet(mBodyReanimID)?.AssignRenderGroupToPrefix(theTrackPrefix, theRenderGroup);
         }
 
         public void DetachPlantHead()
@@ -5023,8 +5004,8 @@ namespace Lawn
             {
                 return;
             }
-            Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
-            if (reanimation == null || !reanimation.TrackExists(GlobalMembersReanimIds.ReanimTrackId_anim_death))
+            Reanimation aBodyReanim = mApp.ReanimationTryToGet(mBodyReanimID);
+            if (aBodyReanim == null || !aBodyReanim.TrackExists(GlobalMembersReanimIds.ReanimTrackId_anim_death))
             {
                 DieNoLoot(true);
                 return;
@@ -5086,64 +5067,64 @@ namespace Lawn
             {
                 mZombieHeight = ZombieHeight.HEIGHT_FALLING;
             }
-            float theAnimRate;
+            float aDeathAnimRate;
             if (mZombieType == ZombieType.ZOMBIE_FOOTBALL)
             {
-                theAnimRate = 24f;
+                aDeathAnimRate = 24f;
             }
             else if (mZombieType == ZombieType.ZOMBIE_GARGANTUAR || mZombieType == ZombieType.ZOMBIE_REDEYE_GARGANTUAR)
             {
-                theAnimRate = 14f;
+                aDeathAnimRate = 14f;
                 mApp.PlayFoley(FoleyType.FOLEY_GARGANTUDEATH);
             }
             else if (mZombieType == ZombieType.ZOMBIE_SNORKEL)
             {
-                theAnimRate = 14f;
+                aDeathAnimRate = 14f;
             }
             else if (mZombieType == ZombieType.ZOMBIE_DIGGER)
             {
-                theAnimRate = 18f;
+                aDeathAnimRate = 18f;
             }
             else if (mZombieType == ZombieType.ZOMBIE_YETI)
             {
-                theAnimRate = 14f;
+                aDeathAnimRate = 14f;
             }
             else if (mZombieType == ZombieType.ZOMBIE_BOSS)
             {
-                theAnimRate = 18f;
+                aDeathAnimRate = 18f;
                 BossDie();
                 Reanimation reanimation2 = mApp.ReanimationGet(mSpecialHeadReanimID);
-                reanimation2.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_death, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, theAnimRate);
+                reanimation2.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_death, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, aDeathAnimRate);
             }
             else
             {
-                theAnimRate = TodCommon.RandRangeFloat(24f, 30f);
+                aDeathAnimRate = TodCommon.RandRangeFloat(24f, 30f);
             }
             string text = GlobalMembersReanimIds.ReanimTrackId_anim_death;
             int num = RandomNumbers.NextNumber(100);
             bool flag = mApp.HasFinishedAdventure() || mBoard.mLevel > 5;
-            if (mInPool && reanimation.TrackExists(GlobalMembersReanimIds.ReanimTrackId_anim_waterdeath))
+            if (mInPool && aBodyReanim.TrackExists(GlobalMembersReanimIds.ReanimTrackId_anim_waterdeath))
             {
                 text = GlobalMembersReanimIds.ReanimTrackId_anim_waterdeath;
                 ReanimIgnoreClipRect(GlobalMembersReanimIds.ReanimTrackId_zombie_duckytube, false);
             }
-            else if (num == 99 && reanimation.TrackExists(GlobalMembersReanimIds.ReanimTrackId_anim_superlongdeath) && flag && mChilledCounter == 0 && mBoard.CountZombiesOnScreen() <= 5)
+            else if (num == 99 && aBodyReanim.TrackExists(GlobalMembersReanimIds.ReanimTrackId_anim_superlongdeath) && flag && mChilledCounter == 0 && mBoard.CountZombiesOnScreen() <= 5)
             {
-                theAnimRate = 14f;
+                aDeathAnimRate = 14f;
                 text = GlobalMembersReanimIds.ReanimTrackId_anim_superlongdeath;
             }
-            else if (num > 50 && reanimation.TrackExists(GlobalMembersReanimIds.ReanimTrackId_anim_death2))
+            else if (num > 50 && aBodyReanim.TrackExists(GlobalMembersReanimIds.ReanimTrackId_anim_death2))
             {
                 text = GlobalMembersReanimIds.ReanimTrackId_anim_death2;
             }
-            PlayZombieReanim(ref text, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, theAnimRate);
+            PlayZombieReanim(ref text, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, aDeathAnimRate);
             ReanimShowPrefix("anim_tongue", -1);
         }
 
         public void UpdateDeath()
         {
-            Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
-            if (reanimation == null)
+            Reanimation aReanim = mApp.ReanimationTryToGet(mBodyReanimID);
+            if (aReanim == null)
             {
                 DieNoLoot(true);
                 return;
@@ -5154,84 +5135,84 @@ namespace Lawn
             }
             if (mZombieType == ZombieType.ZOMBIE_GARGANTUAR || mZombieType == ZombieType.ZOMBIE_REDEYE_GARGANTUAR)
             {
-                if (reanimation.ShouldTriggerTimedEvent(0.89f))
+                if (aReanim.ShouldTriggerTimedEvent(0.89f))
                 {
                     mBoard.ShakeBoard(0, 3);
                 }
-                else if (reanimation.ShouldTriggerTimedEvent(0.98f))
+                else if (aReanim.ShouldTriggerTimedEvent(0.98f))
                 {
                     mBoard.ShakeBoard(0, 1);
                 }
             }
-            float num = -1f;
+            float aFallTime = -1f;
             if (mInPool || mZombieType == ZombieType.ZOMBIE_SNORKEL || mZombieType == ZombieType.ZOMBIE_ZAMBONI || mZombieType == ZombieType.ZOMBIE_DOLPHIN_RIDER || mZombieType == ZombieType.ZOMBIE_BUNGEE || mZombieType == ZombieType.ZOMBIE_CATAPULT || mZombieType == ZombieType.ZOMBIE_IMP || mZombieType == ZombieType.ZOMBIE_BOSS)
             {
-                num = -1f;
+                aFallTime = -1f;
             }
             else if (mZombieType == ZombieType.ZOMBIE_NORMAL || mZombieType == ZombieType.ZOMBIE_FLAG || mZombieType == ZombieType.ZOMBIE_TRAFFIC_CONE || mZombieType == ZombieType.ZOMBIE_PAIL || mZombieType == ZombieType.ZOMBIE_DOOR || mZombieType == ZombieType.ZOMBIE_PEA_HEAD || mZombieType == ZombieType.ZOMBIE_WALLNUT_HEAD || mZombieType == ZombieType.ZOMBIE_TALLNUT_HEAD || mZombieType == ZombieType.ZOMBIE_JALAPENO_HEAD || mZombieType == ZombieType.ZOMBIE_GATLING_HEAD || mZombieType == ZombieType.ZOMBIE_SQUASH_HEAD || mZombieType == ZombieType.ZOMBIE_DUCKY_TUBE)
             {
-                if (reanimation.IsAnimPlaying(GlobalMembersReanimIds.ReanimTrackId_anim_superlongdeath))
+                if (aReanim.IsAnimPlaying(GlobalMembersReanimIds.ReanimTrackId_anim_superlongdeath))
                 {
-                    num = 0.788f;
+                    aFallTime = 0.788f;
                 }
-                else if (reanimation.IsAnimPlaying(GlobalMembersReanimIds.ReanimTrackId_anim_death2))
+                else if (aReanim.IsAnimPlaying(GlobalMembersReanimIds.ReanimTrackId_anim_death2))
                 {
-                    num = 0.71f;
+                    aFallTime = 0.71f;
                 }
                 else
                 {
-                    num = 0.77f;
+                    aFallTime = 0.77f;
                 }
             }
             else if (mZombieType == ZombieType.ZOMBIE_POLEVAULTER)
             {
-                num = 0.68f;
+                aFallTime = 0.68f;
             }
             else if (mZombieType == ZombieType.ZOMBIE_FOOTBALL)
             {
-                num = 0.52f;
+                aFallTime = 0.52f;
             }
             else if (mZombieType == ZombieType.ZOMBIE_NEWSPAPER)
             {
-                num = 0.63f;
+                aFallTime = 0.63f;
             }
             else if (mZombieType == ZombieType.ZOMBIE_DANCER || mZombieType == ZombieType.ZOMBIE_BACKUP_DANCER)
             {
-                num = 0.83f;
+                aFallTime = 0.83f;
             }
             else if (mZombieType == ZombieType.ZOMBIE_BOBSLED)
             {
-                num = 0.81f;
+                aFallTime = 0.81f;
             }
             else if (mZombieType == ZombieType.ZOMBIE_JACK_IN_THE_BOX)
             {
-                num = 0.64f;
+                aFallTime = 0.64f;
             }
             else if (mZombieType == ZombieType.ZOMBIE_BALLOON)
             {
-                num = 0.68f;
+                aFallTime = 0.68f;
             }
             else if (mZombieType == ZombieType.ZOMBIE_DIGGER)
             {
-                num = 0.85f;
+                aFallTime = 0.85f;
             }
             else if (mZombieType == ZombieType.ZOMBIE_POGO)
             {
-                num = 0.84f;
+                aFallTime = 0.84f;
             }
             else if (mZombieType == ZombieType.ZOMBIE_YETI)
             {
-                num = 0.68f;
+                aFallTime = 0.68f;
             }
             else if (mZombieType == ZombieType.ZOMBIE_LADDER)
             {
-                num = 0.62f;
+                aFallTime = 0.62f;
             }
             else if (mZombieType == ZombieType.ZOMBIE_GARGANTUAR || mZombieType == ZombieType.ZOMBIE_REDEYE_GARGANTUAR)
             {
-                num = 0.86f;
+                aFallTime = 0.86f;
             }
-            if (num > 0f && reanimation.ShouldTriggerTimedEvent(num))
+            if (aFallTime > 0f && aReanim.ShouldTriggerTimedEvent(aFallTime))
             {
                 mApp.PlayFoley(FoleyType.FOLEY_ZOMBIE_FALLING);
                 if (mZombieType == ZombieType.ZOMBIE_GARGANTUAR || mZombieType == ZombieType.ZOMBIE_REDEYE_GARGANTUAR)
@@ -5246,30 +5227,30 @@ namespace Lawn
             }
             if (mZombieType == ZombieType.ZOMBIE_BOSS)
             {
-                if (reanimation.ShouldTriggerTimedEvent(0.1f) || reanimation.ShouldTriggerTimedEvent(0.12f) || reanimation.ShouldTriggerTimedEvent(0.15f) || reanimation.ShouldTriggerTimedEvent(0.19f) || reanimation.ShouldTriggerTimedEvent(0.2f) || reanimation.ShouldTriggerTimedEvent(0.26f) || reanimation.ShouldTriggerTimedEvent(0.3f) || reanimation.ShouldTriggerTimedEvent(0.4f) || reanimation.ShouldTriggerTimedEvent(0.42f) || reanimation.ShouldTriggerTimedEvent(0.5f) || reanimation.ShouldTriggerTimedEvent(0.58f) || reanimation.ShouldTriggerTimedEvent(0.61f) || reanimation.ShouldTriggerTimedEvent(0.71f))
+                if (aReanim.ShouldTriggerTimedEvent(0.1f) || aReanim.ShouldTriggerTimedEvent(0.12f) || aReanim.ShouldTriggerTimedEvent(0.15f) || aReanim.ShouldTriggerTimedEvent(0.19f) || aReanim.ShouldTriggerTimedEvent(0.2f) || aReanim.ShouldTriggerTimedEvent(0.26f) || aReanim.ShouldTriggerTimedEvent(0.3f) || aReanim.ShouldTriggerTimedEvent(0.4f) || aReanim.ShouldTriggerTimedEvent(0.42f) || aReanim.ShouldTriggerTimedEvent(0.5f) || aReanim.ShouldTriggerTimedEvent(0.58f) || aReanim.ShouldTriggerTimedEvent(0.61f) || aReanim.ShouldTriggerTimedEvent(0.71f))
                 {
-                    float theX = TodCommon.RandRangeFloat(600f, 750f);
-                    float theY = TodCommon.RandRangeFloat(50f, 300f);
-                    mApp.AddTodParticle(theX, theY, 400000, ParticleEffect.PARTICLE_BOSS_EXPLOSION);
+                    float aExplosionPosX = TodCommon.RandRangeFloat(600f, 750f);
+                    float aExplosionPosY = TodCommon.RandRangeFloat(50f, 300f);
+                    mApp.AddTodParticle(aExplosionPosX, aExplosionPosY, 400000, ParticleEffect.PARTICLE_BOSS_EXPLOSION);
                     mApp.PlayFoley(FoleyType.FOLEY_BOSS_EXPLOSION_SMALL);
                 }
-                Reanimation reanimation2 = mApp.ReanimationTryToGet(mSpecialHeadReanimID);
-                if (reanimation.ShouldTriggerTimedEvent(0.93f))
+                Reanimation aReanim2 = mApp.ReanimationTryToGet(mSpecialHeadReanimID);
+                if (aReanim.ShouldTriggerTimedEvent(0.93f))
                 {
                     mBoard.ShakeBoard(1, 2);
                     mApp.PlayFoley(FoleyType.FOLEY_BOSS_EXPLOSION_SMALL);
                     mApp.PlayFoley(FoleyType.FOLEY_THUMP);
                     mApp.Vibrate();
                 }
-                if (reanimation.ShouldTriggerTimedEvent(0.99f))
+                if (aReanim.ShouldTriggerTimedEvent(0.99f))
                 {
-                    reanimation2.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_flag, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, 30f);
+                    aReanim2.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_flag, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, 30f);
                 }
-                if (reanimation2.IsAnimPlaying(GlobalMembersReanimIds.ReanimTrackId_anim_flag) && reanimation2.mLoopCount > 0)
+                if (aReanim2.IsAnimPlaying(GlobalMembersReanimIds.ReanimTrackId_anim_flag) && aReanim2.mLoopCount > 0)
                 {
-                    reanimation2.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_flag_loop, ReanimLoopType.REANIM_LOOP, 20, 17f);
+                    aReanim2.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_flag_loop, ReanimLoopType.REANIM_LOOP, 20, 17f);
                 }
-                if (reanimation.mLoopCount > 0)
+                if (aReanim.mLoopCount > 0)
                 {
                     DropLoot();
                 }
@@ -5279,8 +5260,8 @@ namespace Lawn
                 mPhaseCounter -= 3;
                 if (mPhaseCounter <= 0)
                 {
-                    reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
-                    if (reanimation.IsTrackShowing(GlobalMembersReanimIds.ReanimTrackId_anim_wheelie2))
+                    aReanim = mApp.ReanimationTryToGet(mBodyReanimID);
+                    if (aReanim.IsTrackShowing(GlobalMembersReanimIds.ReanimTrackId_anim_wheelie2))
                     {
                         mApp.AddTodParticle(mPosX + 80f, mPosY + 60f, mRenderOrder + 1, ParticleEffect.PARTICLE_ZAMBONI_EXPLOSION2);
                     }
@@ -5304,7 +5285,7 @@ namespace Lawn
                 }
                 return;
             }
-            if (mZombieFade == -1 && reanimation.mLoopCount > 0 && mZombieType != ZombieType.ZOMBIE_BOSS)
+            if (mZombieFade == -1 && aReanim.mLoopCount > 0 && mZombieType != ZombieType.ZOMBIE_BOSS)
             {
                 if (mInPool)
                 {
@@ -5317,177 +5298,174 @@ namespace Lawn
 
         public void DrawShadow(Graphics g)
         {
-            ZombieDrawPosition zombieDrawPosition = default(ZombieDrawPosition);
-            GetDrawPos(ref zombieDrawPosition);
+            ZombieDrawPosition aDrawPos = default(ZombieDrawPosition);
+            GetDrawPos(ref aDrawPos);
             if (mApp.mGameScene == GameScenes.SCENE_ZOMBIES_WON && !SetupDrawZombieWon(g))
             {
                 return;
             }
-            int num = 0;
-            float num2 = zombieDrawPosition.mImageOffsetX;
-            float num3 = zombieDrawPosition.mImageOffsetY + zombieDrawPosition.mBodyY;
-            float num4 = mScaleZombie;
-            num2 += mScaleZombie * 20f - 20f;
+            int aUseShadow2 = 0;
+            float aShadowOffsetX = aDrawPos.mImageOffsetX;
+            float aShadowOffsetY = aDrawPos.mImageOffsetY + aDrawPos.mBodyY;
+            float aScale = mScaleZombie;
+            aShadowOffsetX += mScaleZombie * 20f - 20f;
             if (IsOnBoard() && mBoard.StageIsNight())
             {
-                num = 1;
+                aUseShadow2 = 1;
             }
-            if (mZombieType == ZombieType.ZOMBIE_FOOTBALL)
+            switch (mZombieType)
             {
+            case ZombieType.ZOMBIE_FOOTBALL:
                 if (IsWalkingBackwards())
                 {
-                    num2 += -11f * mScaleZombie;
+                    aShadowOffsetX += -11f * mScaleZombie;
                 }
                 else
                 {
-                    num2 += 20f + 21f * mScaleZombie;
+                    aShadowOffsetX += 20f + 21f * mScaleZombie;
                 }
-                num3 += 16f;
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_NEWSPAPER)
-            {
+                aShadowOffsetY += 16f;
+                break;
+            case ZombieType.ZOMBIE_NEWSPAPER:
                 if (IsWalkingBackwards())
                 {
-                    num2 += 5f;
+                    aShadowOffsetX += 5f;
                 }
                 else
                 {
-                    num2 += 29f;
+                    aShadowOffsetX += 29f;
                 }
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_POLEVAULTER)
-            {
+                break;
+            case ZombieType.ZOMBIE_POLEVAULTER:
                 if (IsWalkingBackwards())
                 {
-                    num2 += -5f;
+                    aShadowOffsetX += -5f;
                 }
                 else
                 {
-                    num2 += 36f;
+                    aShadowOffsetX += 36f;
                 }
-                num3 += 11f;
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_BOBSLED)
-            {
+                aShadowOffsetY += 11f;
+                break;
+            case ZombieType.ZOMBIE_BOBSLED:
                 if (IsWalkingBackwards())
                 {
-                    num2 += 13f;
+                    aShadowOffsetX += 13f;
                 }
                 else
                 {
-                    num2 += 20f;
+                    aShadowOffsetX += 20f;
                 }
-                num3 += 13f;
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_IMP)
-            {
-                num4 *= 0.6f;
-                num3 += 7f;
+                aShadowOffsetY += 13f;
+                break;
+            case ZombieType.ZOMBIE_IMP:
+                aScale *= 0.6f;
+                aShadowOffsetY += 7f;
                 if (IsWalkingBackwards())
                 {
-                    num2 += 13f;
+                    aShadowOffsetX += 13f;
                 }
                 else
                 {
-                    num2 += 25f;
+                    aShadowOffsetX += 25f;
                 }
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_DIGGER)
-            {
-                num3 += 5f;
+                break;
+            case ZombieType.ZOMBIE_DIGGER:
+                aShadowOffsetY += 5f;
                 if (IsWalkingBackwards())
                 {
-                    num2 += 14f;
+                    aShadowOffsetX += 14f;
                 }
                 else
                 {
-                    num2 += 17f;
+                    aShadowOffsetX += 17f;
                 }
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_SNORKEL)
-            {
-                num3 += 5f;
+                break;
+            case ZombieType.ZOMBIE_SNORKEL:
+                aShadowOffsetY += 5f;
                 if (IsWalkingBackwards())
                 {
-                    num2 += -2f;
+                    aShadowOffsetX += -2f;
                 }
                 else
                 {
-                    num2 += 35f;
+                    aShadowOffsetX += 35f;
                 }
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_DOLPHIN_RIDER)
-            {
-                num3 += 11f;
+                break;
+            case ZombieType.ZOMBIE_DOLPHIN_RIDER:
+                aShadowOffsetY += 11f;
                 if (IsWalkingBackwards())
                 {
-                    num2 += 15f;
+                    aShadowOffsetX += 15f;
                 }
                 else
                 {
-                    num2 += 19f;
+                    aShadowOffsetX += 19f;
                 }
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_YETI)
-            {
-                num3 += 20f;
+                break;
+            case ZombieType.ZOMBIE_YETI:
+                aShadowOffsetY += 20f;
                 if (IsWalkingBackwards())
                 {
-                    num2 += 20f;
+                    aShadowOffsetX += 20f;
                 }
                 else
                 {
-                    num2 += 3f;
+                    aShadowOffsetX += 3f;
                 }
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_GARGANTUAR || mZombieType == ZombieType.ZOMBIE_REDEYE_GARGANTUAR)
-            {
-                num4 *= 1.5f;
-                num2 += 27f;
-                num3 += 7f;
-            }
-            else if (mApp.ReanimationTryToGet(mBodyReanimID) != null)
-            {
-                if (IsWalkingBackwards())
+                break;
+            case ZombieType.ZOMBIE_GARGANTUAR:
+            case ZombieType.ZOMBIE_REDEYE_GARGANTUAR:
+                aScale *= 1.5f;
+                aShadowOffsetX += 27f;
+                aShadowOffsetY += 7f;
+                break;
+            default:
+                if (mApp.ReanimationTryToGet(mBodyReanimID) != null)
                 {
-                    num2 += 11f;
+                    if (IsWalkingBackwards())
+                    {
+                        aShadowOffsetX += 11f;
+                    }
+                    else
+                    {
+                        aShadowOffsetX += 23f;
+                    }
+                }
+                else if (IsWalkingBackwards())
+                {
+                    aShadowOffsetX += -2f;
                 }
                 else
                 {
-                    num2 += 23f;
+                    aShadowOffsetX += 35f;
                 }
+
+                break;
             }
-            else if (IsWalkingBackwards())
+            switch (mZombieType)
             {
-                num2 += -2f;
-            }
-            else
-            {
-                num2 += 35f;
-            }
-            if (mZombieType == ZombieType.ZOMBIE_NEWSPAPER)
-            {
-                num3 += 4f;
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_BALLOON)
-            {
-                num3 += 13f;
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_BUNGEE)
-            {
-                num2 += -12f;
-                num4 = TodCommon.TodAnimateCurveFloat(GameConstants.BUNGEE_ZOMBIE_HEIGHT - 1000, 100, (int)mAltitude, 0.1f, 1.5f, TodCurves.CURVE_LINEAR);
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_DANCER || mZombieType == ZombieType.ZOMBIE_BACKUP_DANCER)
-            {
-                num3 -= 18f;
+            case ZombieType.ZOMBIE_NEWSPAPER:
+                aShadowOffsetY += 4f;
+                break;
+            case ZombieType.ZOMBIE_BALLOON:
+                aShadowOffsetY += 13f;
+                break;
+            case ZombieType.ZOMBIE_BUNGEE:
+                aShadowOffsetX += -12f;
+                aScale = TodCommon.TodAnimateCurveFloat(GameConstants.BUNGEE_ZOMBIE_HEIGHT - 1000, 100, (int)mAltitude, 0.1f, 1.5f, TodCurves.CURVE_LINEAR);
+                break;
+            case ZombieType.ZOMBIE_DANCER:
+            case ZombieType.ZOMBIE_BACKUP_DANCER:
+                aShadowOffsetY -= 18f;
+                break;
             }
             if (mZombieHeight == ZombieHeight.HEIGHT_UP_LADDER || mZombieHeight == ZombieHeight.HEIGHT_FALLING || mZombiePhase == ZombiePhase.PHASE_IMP_GETTING_THROWN || mZombieType == ZombieType.ZOMBIE_BUNGEE || IsBouncingPogo() || IsFlying())
             {
-                num3 += mAltitude;
+                aShadowOffsetY += mAltitude;
                 if (mOnHighGround)
                 {
-                    num3 -= Constants.HIGH_GROUND_HEIGHT;
+                    aShadowOffsetY -= Constants.HIGH_GROUND_HEIGHT;
                 }
             }
             if (mUsesClipping)
@@ -5496,19 +5474,19 @@ namespace Lawn
             }
             if (mInPool)
             {
-                num3 += 67f;
-                TodCommon.TodDrawImageCenterScaledF(g, AtlasResources.IMAGE_WHITEWATER_SHADOW, num2 * Constants.S, num3 * Constants.S, num4, num4);
+                aShadowOffsetY += 67f;
+                TodCommon.TodDrawImageCenterScaledF(g, AtlasResources.IMAGE_WHITEWATER_SHADOW, aShadowOffsetX * Constants.S, aShadowOffsetY * Constants.S, aScale, aScale);
             }
             else
             {
-                num3 += 92f;
-                if (num == 0)
+                aShadowOffsetY += 92f;
+                if (aUseShadow2 == 0)
                 {
-                    TodCommon.TodDrawImageCenterScaledF(g, AtlasResources.IMAGE_PLANTSHADOW, num2 * Constants.S, num3 * Constants.S, num4, num4);
+                    TodCommon.TodDrawImageCenterScaledF(g, AtlasResources.IMAGE_PLANTSHADOW, aShadowOffsetX * Constants.S, aShadowOffsetY * Constants.S, aScale, aScale);
                 }
                 else
                 {
-                    TodCommon.TodDrawImageCenterScaledF(g, AtlasResources.IMAGE_PLANTSHADOW2, num2 * Constants.S, num3 * Constants.S, num4, num4);
+                    TodCommon.TodDrawImageCenterScaledF(g, AtlasResources.IMAGE_PLANTSHADOW2, aShadowOffsetX * Constants.S, aShadowOffsetY * Constants.S, aScale, aScale);
                 }
             }
             if (mUsesClipping)
@@ -5520,7 +5498,26 @@ namespace Lawn
 
         public bool HasShadow()
         {
-            return mZombiePhase != ZombiePhase.PHASE_ZOMBIE_DYING && mZombiePhase != ZombiePhase.PHASE_DIGGER_RISING && mZombiePhase != ZombiePhase.PHASE_DIGGER_TUNNELING_PAUSE_WITHOUT_AXE && mZombiePhase != ZombiePhase.PHASE_DIGGER_RISE_WITHOUT_AXE && mZombiePhase != ZombiePhase.PHASE_DIGGER_TUNNELING && mZombiePhase != ZombiePhase.PHASE_RISING_FROM_GRAVE && mZombiePhase != ZombiePhase.PHASE_DANCER_RISING && mZombiePhase != ZombiePhase.PHASE_BOBSLED_BOARDING && mZombiePhase != ZombiePhase.PHASE_POLEVAULTER_IN_VAULT && mZombiePhase != ZombiePhase.PHASE_DOLPHIN_INTO_POOL && mZombiePhase != ZombiePhase.PHASE_SNORKEL_INTO_POOL && mZombieType != ZombieType.ZOMBIE_ZAMBONI && mZombieType != ZombieType.ZOMBIE_CATAPULT && mZombieType != ZombieType.ZOMBIE_BOSS && (mZombieType != ZombieType.ZOMBIE_BUNGEE || (IsOnBoard() && !mHitUmbrella)) && mZombieHeight != ZombieHeight.HEIGHT_DRAGGED_UNDER && mZombieHeight != ZombieHeight.HEIGHT_IN_TO_CHIMNEY && mZombieHeight != ZombieHeight.HEIGHT_GETTING_BUNGEE_DROPPED && !mInPool && (mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_INVISIGHOUL || mFromWave == GameConstants.ZOMBIE_WAVE_UI);
+            return mZombiePhase != ZombiePhase.PHASE_ZOMBIE_DYING
+                && mZombiePhase != ZombiePhase.PHASE_DIGGER_RISING
+                && mZombiePhase != ZombiePhase.PHASE_DIGGER_TUNNELING_PAUSE_WITHOUT_AXE
+                && mZombiePhase != ZombiePhase.PHASE_DIGGER_RISE_WITHOUT_AXE
+                && mZombiePhase != ZombiePhase.PHASE_DIGGER_TUNNELING
+                && mZombiePhase != ZombiePhase.PHASE_RISING_FROM_GRAVE
+                && mZombiePhase != ZombiePhase.PHASE_DANCER_RISING
+                && mZombiePhase != ZombiePhase.PHASE_BOBSLED_BOARDING
+                && mZombiePhase != ZombiePhase.PHASE_POLEVAULTER_IN_VAULT
+                && mZombiePhase != ZombiePhase.PHASE_DOLPHIN_INTO_POOL
+                && mZombiePhase != ZombiePhase.PHASE_SNORKEL_INTO_POOL
+                && mZombieType != ZombieType.ZOMBIE_ZAMBONI
+                && mZombieType != ZombieType.ZOMBIE_CATAPULT
+                && mZombieType != ZombieType.ZOMBIE_BOSS
+                && (mZombieType != ZombieType.ZOMBIE_BUNGEE || (IsOnBoard() && !mHitUmbrella))
+                && mZombieHeight != ZombieHeight.HEIGHT_DRAGGED_UNDER
+                && mZombieHeight != ZombieHeight.HEIGHT_IN_TO_CHIMNEY
+                && mZombieHeight != ZombieHeight.HEIGHT_GETTING_BUNGEE_DROPPED
+                && !mInPool
+                && (mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_INVISIGHOUL || mFromWave == GameConstants.ZOMBIE_WAVE_UI);
         }
 
         public Reanimation LoadReanim(ReanimationType theReanimationType)
@@ -5587,13 +5584,12 @@ namespace Lawn
                 }
             }
             int shieldDamageIndex = GetShieldDamageIndex();
-            int num = Math.Min(mShieldHealth, theDamage);
-            int result = theDamage - num;
-            mShieldHealth -= num;
+            int aDamageRemaining = theDamage - Math.Min(mShieldHealth, theDamage);
+            mShieldHealth -= Math.Min(mShieldHealth, theDamage);
             if (mShieldHealth == 0)
             {
                 DropShield(theDamageFlags);
-                return result;
+                return aDamageRemaining;
             }
             int shieldDamageIndex2 = GetShieldDamageIndex();
             if (shieldDamageIndex != shieldDamageIndex2 || justLoaded)
@@ -5630,7 +5626,7 @@ namespace Lawn
                     reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_ladder_1, AtlasResources.IMAGE_REANIM_ZOMBIE_LADDER_1_DAMAGE2);
                 }
             }
-            return result;
+            return aDamageRemaining;
         }
 
         public int TakeHelmDamage(int theDamage, uint theDamageFlags)
@@ -5640,9 +5636,8 @@ namespace Lawn
                 mJustGotShotCounter = 25;
             }
             int helmDamageIndex = GetHelmDamageIndex();
-            int num = Math.Min(mHelmHealth, theDamage);
-            int result = theDamage - num;
-            mHelmHealth -= num;
+            int aDamageRemaining = theDamage - Math.Min(mHelmHealth, theDamage);
+            mHelmHealth -= Math.Min(mHelmHealth, theDamage);
             if (TodCommon.TestBit(theDamageFlags, 2))
             {
                 ApplyChill(false);
@@ -5650,7 +5645,7 @@ namespace Lawn
             if (mHelmHealth == 0)
             {
                 DropHelm(theDamageFlags);
-                return result;
+                return aDamageRemaining;
             }
             int helmDamageIndex2 = GetHelmDamageIndex();
             if ((helmDamageIndex != helmDamageIndex2 && mBodyReanimID.mActive) || (justLoaded && mBodyReanimID.mActive))
@@ -5726,7 +5721,7 @@ namespace Lawn
                     }
                 }
             }
-            return result;
+            return aDamageRemaining;
         }
 
         public void TakeBodyDamage(int theDamage, uint theDamageFlags)
@@ -5861,29 +5856,28 @@ namespace Lawn
 
         public void AttachShield()
         {
-            Reanimation reanimation = mApp.ReanimationGet(mBodyReanimID);
-            string theTrackName = string.Empty;
+            string aTrackName = string.Empty;
             if (mShieldType == ShieldType.SHIELDTYPE_DOOR)
             {
                 ShowDoorArms(true);
                 ReanimShowPrefix("Zombie_outerarm_screendoor", GameConstants.RENDER_GROUP_OVER_SHIELD);
-                theTrackName = GlobalMembersReanimIds.ReanimTrackId_anim_screendoor;
+                aTrackName = GlobalMembersReanimIds.ReanimTrackId_anim_screendoor;
             }
             else if (mShieldType == ShieldType.SHIELDTYPE_NEWSPAPER)
             {
                 ReanimShowPrefix("Zombie_paper_hands", GameConstants.RENDER_GROUP_OVER_SHIELD);
-                theTrackName = GlobalMembersReanimIds.ReanimTrackId_zombie_paper_paper;
+                aTrackName = GlobalMembersReanimIds.ReanimTrackId_zombie_paper_paper;
             }
             else if (mShieldType == ShieldType.SHIELDTYPE_LADDER)
             {
                 ReanimShowPrefix("Zombie_outerarm", GameConstants.RENDER_GROUP_OVER_SHIELD);
-                theTrackName = GlobalMembersReanimIds.ReanimTrackId_zombie_ladder_1;
+                aTrackName = GlobalMembersReanimIds.ReanimTrackId_zombie_ladder_1;
             }
             else
             {
                 Debug.ASSERT(false);
             }
-            reanimation.AssignRenderGroupToTrack(theTrackName, GameConstants.RENDER_GROUP_SHIELD);
+            mApp.ReanimationGet(mBodyReanimID).AssignRenderGroupToTrack(aTrackName, GameConstants.RENDER_GROUP_SHIELD);
         }
 
         public void DetachShield()
@@ -5926,8 +5920,8 @@ namespace Lawn
 
         public void UpdateReanim()
         {
-            Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
-            if (reanimation == null || reanimation.mDead)
+            Reanimation aBodyReanim = mApp.ReanimationTryToGet(mBodyReanimID);
+            if (aBodyReanim == null || aBodyReanim.mDead)
             {
                 return;
             }
@@ -5935,49 +5929,47 @@ namespace Lawn
             if (mZombieType == ZombieType.ZOMBIE_CATAPULT)
             {
                 flag = true;
-                int bodyDamageIndex = GetBodyDamageIndex();
-                bool flag2 = mSummonCounter == 0;
-                if (bodyDamageIndex == 2 || mZombiePhase == ZombiePhase.PHASE_ZOMBIE_DYING)
+                if (GetBodyDamageIndex() == 2 || mZombiePhase == ZombiePhase.PHASE_ZOMBIE_DYING)
                 {
-                    reanimation = mApp.ReanimationGet(mBodyReanimID);
-                    Image currentTrackImage = reanimation.GetCurrentTrackImage(GlobalMembersReanimIds.ReanimTrackId_zombie_catapult_pole);
-                    if (currentTrackImage == AtlasResources.IMAGE_REANIM_ZOMBIE_CATAPULT_POLE_WITHBALL && !flag2)
+                    aBodyReanim = mApp.ReanimationGet(mBodyReanimID);
+                    Image currentTrackImage = aBodyReanim.GetCurrentTrackImage(GlobalMembersReanimIds.ReanimTrackId_zombie_catapult_pole);
+                    if (currentTrackImage == AtlasResources.IMAGE_REANIM_ZOMBIE_CATAPULT_POLE_WITHBALL && mSummonCounter != 0)
                     {
-                        reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_catapult_pole, AtlasResources.IMAGE_REANIM_ZOMBIE_CATAPULT_POLE_DAMAGE_WITHBALL);
+                        aBodyReanim.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_catapult_pole, AtlasResources.IMAGE_REANIM_ZOMBIE_CATAPULT_POLE_DAMAGE_WITHBALL);
                     }
                     else
                     {
-                        reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_catapult_pole, AtlasResources.IMAGE_REANIM_ZOMBIE_CATAPULT_POLE_DAMAGE);
+                        aBodyReanim.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_catapult_pole, AtlasResources.IMAGE_REANIM_ZOMBIE_CATAPULT_POLE_DAMAGE);
                     }
                 }
-                else if (flag2)
+                else if (mSummonCounter == 0)
                 {
-                    reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_catapult_pole, AtlasResources.IMAGE_REANIM_ZOMBIE_CATAPULT_POLE);
+                    aBodyReanim.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_catapult_pole, AtlasResources.IMAGE_REANIM_ZOMBIE_CATAPULT_POLE);
                 }
             }
-            ZombieDrawPosition zombieDrawPosition = default(ZombieDrawPosition);
-            GetDrawPos(ref zombieDrawPosition);
-            float num = zombieDrawPosition.mImageOffsetX;
-            float num2 = zombieDrawPosition.mImageOffsetY + zombieDrawPosition.mBodyY - 28f;
-            num += 15f;
-            num2 += 20f;
+            ZombieDrawPosition aDrawPos = default(ZombieDrawPosition);
+            GetDrawPos(ref aDrawPos);
+            float anOffsetX = aDrawPos.mImageOffsetX;
+            float anOffsetY = aDrawPos.mImageOffsetY + aDrawPos.mBodyY - 28f;
+            anOffsetX += 15f;
+            anOffsetY += 20f;
             if ((mZombieType == ZombieType.ZOMBIE_ZAMBONI || mZombieType == ZombieType.ZOMBIE_CATAPULT) && mZombiePhase != ZombiePhase.PHASE_ZOMBIE_BURNED)
             {
                 if (mZombiePhase == ZombiePhase.PHASE_ZOMBIE_DYING)
                 {
-                    float num3 = TodCommon.TodAnimateCurveFloatTime(0.7f, 1f, reanimation.mAnimTime, 0f, 1f, TodCurves.CURVE_EASE_OUT);
-                    num += TodCommon.RandRangeFloat(-num3, num3);
-                    num2 += TodCommon.RandRangeFloat(-num3, num3);
+                    float aShakeRange = TodCommon.TodAnimateCurveFloatTime(0.7f, 1f, aBodyReanim.mAnimTime, 0f, 1f, TodCurves.CURVE_EASE_OUT);
+                    anOffsetX += TodCommon.RandRangeFloat(-aShakeRange, aShakeRange);
+                    anOffsetY += TodCommon.RandRangeFloat(-aShakeRange, aShakeRange);
                 }
                 else if (mBodyHealth < 200)
                 {
-                    num += TodCommon.RandRangeFloat(-1f, 1f);
-                    num2 += TodCommon.RandRangeFloat(-1f, 1f);
+                    anOffsetX += TodCommon.RandRangeFloat(-1f, 1f);
+                    anOffsetY += TodCommon.RandRangeFloat(-1f, 1f);
                 }
             }
             if (mZombieType == ZombieType.ZOMBIE_FOOTBALL && mScaleZombie < 1f)
             {
-                num2 += 20f - mScaleZombie * 20f;
+                anOffsetY += 20f - mScaleZombie * 20f;
             }
             bool flag3 = false;
             if (IsWalkingBackwards())
@@ -5999,63 +5991,63 @@ namespace Lawn
             }
             if (flag3)
             {
-                num += 90f * mScaleZombie;
+                anOffsetX += 90f * mScaleZombie;
             }
-            Matrix identity = Matrix.Identity;
-            identity.M11 = mScaleZombie;
-            identity.M22 = mScaleZombie;
-            identity.M41 = (num + 30f - mScaleZombie * 30f) * Constants.S;
-            identity.M42 = (num2 + 120f - mScaleZombie * 120f) * Constants.S;
+            Matrix aOverlayMatrix = Matrix.Identity;
+            aOverlayMatrix.M11 = mScaleZombie;
+            aOverlayMatrix.M22 = mScaleZombie;
+            aOverlayMatrix.M41 = (anOffsetX + 30f - mScaleZombie * 30f) * Constants.S;
+            aOverlayMatrix.M42 = (anOffsetY + 120f - mScaleZombie * 120f) * Constants.S;
             if (flag3)
             {
-                identity.M11 = -mScaleZombie;
+                aOverlayMatrix.M11 = -mScaleZombie;
             }
-            if (reanimation.mOverlayMatrix.mMatrix != identity)
+            if (aBodyReanim.mOverlayMatrix.mMatrix != aOverlayMatrix)
             {
                 flag = true;
-                reanimation.mOverlayMatrix.mMatrix = identity;
+                aBodyReanim.mOverlayMatrix.mMatrix = aOverlayMatrix;
             }
             Reanimation reanimation2 = mApp.ReanimationTryToGet(mMoweredReanimID);
             if (reanimation2 != null)
             {
                 reanimation2.Update();
-                SexyTransform2D sexyTransform2D = default(SexyTransform2D);
-                reanimation2.GetAttachmentOverlayMatrix(0, out sexyTransform2D);
-                sexyTransform2D.mMatrix.M11 = sexyTransform2D.mMatrix.M11 * reanimation.mOverlayMatrix.mMatrix.M11;
-                sexyTransform2D.mMatrix.M21 = sexyTransform2D.mMatrix.M21 * reanimation.mOverlayMatrix.mMatrix.M11;
-                sexyTransform2D.mMatrix.M12 = sexyTransform2D.mMatrix.M12 * reanimation.mOverlayMatrix.mMatrix.M22;
-                sexyTransform2D.mMatrix.M22 = sexyTransform2D.mMatrix.M22 * reanimation.mOverlayMatrix.mMatrix.M22;
-                sexyTransform2D.mMatrix.M41 = sexyTransform2D.mMatrix.M41 * reanimation.mOverlayMatrix.mMatrix.M11;
-                sexyTransform2D.mMatrix.M42 = sexyTransform2D.mMatrix.M42 * reanimation.mOverlayMatrix.mMatrix.M22;
-                sexyTransform2D.mMatrix.M41 = sexyTransform2D.mMatrix.M41 + reanimation.mOverlayMatrix.mMatrix.M22;
-                sexyTransform2D.mMatrix.M42 = sexyTransform2D.mMatrix.M42 + reanimation.mOverlayMatrix.mMatrix.M42;
-                if (reanimation.mOverlayMatrix != sexyTransform2D)
+                SexyTransform2D aTransform = default(SexyTransform2D);
+                reanimation2.GetAttachmentOverlayMatrix(0, out aTransform);
+                aTransform.mMatrix.M11 = aTransform.mMatrix.M11 * aBodyReanim.mOverlayMatrix.mMatrix.M11;
+                aTransform.mMatrix.M21 = aTransform.mMatrix.M21 * aBodyReanim.mOverlayMatrix.mMatrix.M11;
+                aTransform.mMatrix.M12 = aTransform.mMatrix.M12 * aBodyReanim.mOverlayMatrix.mMatrix.M22;
+                aTransform.mMatrix.M22 = aTransform.mMatrix.M22 * aBodyReanim.mOverlayMatrix.mMatrix.M22;
+                aTransform.mMatrix.M41 = aTransform.mMatrix.M41 * aBodyReanim.mOverlayMatrix.mMatrix.M11;
+                aTransform.mMatrix.M42 = aTransform.mMatrix.M42 * aBodyReanim.mOverlayMatrix.mMatrix.M22;
+                aTransform.mMatrix.M41 = aTransform.mMatrix.M41 + aBodyReanim.mOverlayMatrix.mMatrix.M22;
+                aTransform.mMatrix.M42 = aTransform.mMatrix.M42 + aBodyReanim.mOverlayMatrix.mMatrix.M42;
+                if (aBodyReanim.mOverlayMatrix != aTransform)
                 {
                     flag = true;
-                    reanimation.mOverlayMatrix = sexyTransform2D;
+                    aBodyReanim.mOverlayMatrix = aTransform;
                 }
             }
-            reanimation.Update();
+            aBodyReanim.Update();
             if (flag)
             {
-                reanimation.PropogateColorToAttachments();
+                aBodyReanim.PropogateColorToAttachments();
             }
         }
 
         public void GetTrackPosition(ref string theTrackName, ref float thePosX, ref float thePosY)
         {
-            Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
-            if (reanimation == null)
+            Reanimation reanimation_v = mApp.ReanimationTryToGet(mBodyReanimID);
+            if (reanimation_v == null)
             {
                 thePosX = mPosX;
                 thePosY = mPosY;
                 return;
             }
-            int theTrackIndex = reanimation.FindTrackIndex(theTrackName);
-            SexyTransform2D sexyTransform2D = default(SexyTransform2D);
-            reanimation.GetTrackTranslationMatrix(theTrackIndex, ref sexyTransform2D);
-            thePosX = sexyTransform2D.mMatrix.M41 * Constants.IS + mPosX;
-            thePosY = sexyTransform2D.mMatrix.M42 * Constants.IS + mPosY;
+            int theTrackIndex = reanimation_v.FindTrackIndex(theTrackName);
+            SexyTransform2D aSexyTransform2D = default(SexyTransform2D);
+            reanimation_v.GetTrackTranslationMatrix(theTrackIndex, ref aSexyTransform2D);
+            thePosX = aSexyTransform2D.mMatrix.M41 * Constants.IS + mPosX;
+            thePosY = aSexyTransform2D.mMatrix.M42 * Constants.IS + mPosY;
         }
 
         public void LoadPlainZombieReanim()
@@ -6108,12 +6100,7 @@ namespace Lawn
 
         public void ReanimShowTrack(ref string theTrackName, int theRenderGroup)
         {
-            Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
-            if (reanimation == null)
-            {
-                return;
-            }
-            reanimation.AssignRenderGroupToTrack(theTrackName, theRenderGroup);
+            mApp.ReanimationTryToGet(mBodyReanimID)?.AssignRenderGroupToTrack(theTrackName, theRenderGroup);
         }
 
         public void PlayZombieAppearSound()
@@ -6220,18 +6207,18 @@ namespace Lawn
             int aRenderOrder = mRenderOrder + 1;
             ZombieDrawPosition zombieDrawPosition = default(ZombieDrawPosition);
             GetDrawPos(ref zombieDrawPosition);
-            float num = mPosX + zombieDrawPosition.mImageOffsetX + zombieDrawPosition.mHeadX + 11f;
-            float num2 = mPosY + zombieDrawPosition.mImageOffsetY + zombieDrawPosition.mHeadY + zombieDrawPosition.mBodyY + 21f;
+            float aPosX = mPosX + zombieDrawPosition.mImageOffsetX + zombieDrawPosition.mHeadX + 11f;
+            float aPosY = mPosY + zombieDrawPosition.mImageOffsetY + zombieDrawPosition.mHeadY + zombieDrawPosition.mBodyY + 21f;
             if (mBodyReanimID != null)
             {
-                GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_anim_head1, ref num, ref num2);
+                GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_anim_head1, ref aPosX, ref aPosY);
             }
             ParticleEffect theEffect = ParticleEffect.PARTICLE_ZOMBIE_HEAD;
             if (mZombiePhase == ZombiePhase.PHASE_ZOMBIE_MOWERED)
             {
                 theEffect = ParticleEffect.PARTICLE_MOWERED_ZOMBIE_HEAD;
-                num -= 40f;
-                num2 -= 50f;
+                aPosX -= 40f;
+                aPosY -= 50f;
             }
             else if (mInPool)
             {
@@ -6264,7 +6251,7 @@ namespace Lawn
             {
                 DropFlag();
             }
-            TodParticleSystem todParticleSystem = mApp.AddTodParticle(num, num2, aRenderOrder, theEffect);
+            TodParticleSystem todParticleSystem = mApp.AddTodParticle(aPosX, aPosY, aRenderOrder, theEffect);
             OverrideParticleColor(todParticleSystem);
             OverrideParticleScale(todParticleSystem);
             if (todParticleSystem != null && mZombieType == ZombieType.ZOMBIE_DANCER)
@@ -6272,7 +6259,7 @@ namespace Lawn
                 todParticleSystem.OverrideImage(null, AtlasResources.IMAGE_REANIM_ZOMBIE_HEAD_DISCO);
                 todParticleSystem.OverrideScale(null, 1.2f);
                 ReanimShowPrefix("Zombie_disco_glasses", -1);
-                TodParticleSystem todParticleSystem2 = mApp.AddTodParticle(num, num2, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_MUSTACHE);
+                TodParticleSystem todParticleSystem2 = mApp.AddTodParticle(aPosX, aPosY, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_MUSTACHE);
                 OverrideParticleColor(todParticleSystem2);
                 OverrideParticleScale(todParticleSystem2);
                 if (todParticleSystem2 != null)
@@ -6285,7 +6272,7 @@ namespace Lawn
                 todParticleSystem.OverrideImage(null, AtlasResources.IMAGE_REANIM_ZOMBIE_DANCER_BACKUP_HEAD);
                 todParticleSystem.OverrideScale(null, 1.2f);
                 ReanimShowPrefix("Zombie_backup_stash", -1);
-                todParticleSystem = mApp.AddTodParticle(num, num2, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_MUSTACHE);
+                todParticleSystem = mApp.AddTodParticle(aPosX, aPosY, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_MUSTACHE);
                 OverrideParticleColor(todParticleSystem);
                 OverrideParticleScale(todParticleSystem);
                 if (todParticleSystem != null)
@@ -6293,7 +6280,7 @@ namespace Lawn
                     todParticleSystem.OverrideImage(null, AtlasResources.IMAGE_REANIM_ZOMBIE_BACKUP_STASH);
                 }
                 ReanimShowPrefix("anim_head2", -1);
-                todParticleSystem = mApp.AddTodParticle(num, num2, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_MUSTACHE);
+                todParticleSystem = mApp.AddTodParticle(aPosX, aPosY, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_MUSTACHE);
                 OverrideParticleColor(todParticleSystem);
                 OverrideParticleScale(todParticleSystem);
                 if (todParticleSystem != null)
@@ -6341,7 +6328,7 @@ namespace Lawn
             if (mBoard.mMustacheMode && reanimation2.TrackExists(GlobalMembersReanimIds.ReanimTrackId_zombie_mustache))
             {
                 ReanimShowPrefix("Zombie_mustache", -1);
-                TodParticleSystem todParticleSystem3 = mApp.AddTodParticle(num, num2, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_MUSTACHE);
+                TodParticleSystem todParticleSystem3 = mApp.AddTodParticle(aPosX, aPosY, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_MUSTACHE);
                 OverrideParticleColor(todParticleSystem3);
                 OverrideParticleScale(todParticleSystem3);
                 Image imageOverride = reanimation2.GetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_mustache);
@@ -6372,7 +6359,7 @@ namespace Lawn
                 }
                 if (num3 != -1)
                 {
-                    TodParticleSystem todParticleSystem4 = mApp.AddTodParticle(num, num2, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_FUTURE_GLASSES);
+                    TodParticleSystem todParticleSystem4 = mApp.AddTodParticle(aPosX, aPosY, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_FUTURE_GLASSES);
                     OverrideParticleColor(todParticleSystem4);
                     OverrideParticleScale(todParticleSystem4);
                     if (todParticleSystem4 != null)
@@ -6383,7 +6370,7 @@ namespace Lawn
             }
             if (mBoard.mPinataMode && mZombiePhase != ZombiePhase.PHASE_ZOMBIE_MOWERED)
             {
-                TodParticleSystem aParticle = mApp.AddTodParticle(num, num2, aRenderOrder, ParticleEffect.PARTICLE_PINATA);
+                TodParticleSystem aParticle = mApp.AddTodParticle(aPosX, aPosY, aRenderOrder, ParticleEffect.PARTICLE_PINATA);
                 OverrideParticleScale(aParticle);
             }
             mApp.PlayFoley(FoleyType.FOLEY_LIMBS_POP);
@@ -6413,11 +6400,17 @@ namespace Lawn
             }
             if (thePlant.IsSpiky())
             {
-                return mZombieType == ZombieType.ZOMBIE_GARGANTUAR || mZombieType == ZombieType.ZOMBIE_REDEYE_GARGANTUAR || mZombieType == ZombieType.ZOMBIE_ZAMBONI || (mBoard.IsPoolSquare(thePlant.mPlantCol, thePlant.mRow) || mBoard.GetFlowerPotAt(thePlant.mPlantCol, thePlant.mRow) != null);
+                return mZombieType == ZombieType.ZOMBIE_GARGANTUAR
+                    || mZombieType == ZombieType.ZOMBIE_REDEYE_GARGANTUAR
+                    || mZombieType == ZombieType.ZOMBIE_ZAMBONI
+                    || (mBoard.IsPoolSquare(thePlant.mPlantCol, thePlant.mRow) || mBoard.GetFlowerPotAt(thePlant.mPlantCol, thePlant.mRow) != null);
             }
             if (theAttackType == Zombie.ZombieAttackType.ATTACKTYPE_DRIVE_OVER)
             {
-                if (thePlant.mSeedType == SeedType.SEED_CHERRYBOMB || thePlant.mSeedType == SeedType.SEED_JALAPENO || thePlant.mSeedType == SeedType.SEED_BLOVER || thePlant.mSeedType == SeedType.SEED_SQUASH)
+                if (thePlant.mSeedType == SeedType.SEED_CHERRYBOMB
+                    || thePlant.mSeedType == SeedType.SEED_JALAPENO
+                    || thePlant.mSeedType == SeedType.SEED_BLOVER
+                    || thePlant.mSeedType == SeedType.SEED_SQUASH)
                 {
                     return false;
                 }
@@ -6429,7 +6422,9 @@ namespace Lawn
             if (mZombiePhase == ZombiePhase.PHASE_LADDER_CARRYING || mZombiePhase == ZombiePhase.PHASE_LADDER_PLACING)
             {
                 bool flag = false;
-                if (thePlant.mSeedType == SeedType.SEED_WALLNUT || thePlant.mSeedType == SeedType.SEED_TALLNUT || thePlant.mSeedType == SeedType.SEED_PUMPKINSHELL)
+                if (thePlant.mSeedType == SeedType.SEED_WALLNUT
+                    || thePlant.mSeedType == SeedType.SEED_TALLNUT
+                    || thePlant.mSeedType == SeedType.SEED_PUMPKINSHELL)
                 {
                     flag = true;
                 }
@@ -6448,16 +6443,16 @@ namespace Lawn
             }
             if (theAttackType == Zombie.ZombieAttackType.ATTACKTYPE_CHEW)
             {
-                Plant topPlantAt = mBoard.GetTopPlantAt(thePlant.mPlantCol, thePlant.mRow, PlantPriority.TOPPLANT_EATING_ORDER);
-                if (topPlantAt != thePlant && topPlantAt != null && CanTargetPlant(topPlantAt, theAttackType))
+                Plant topPlantAt_v = mBoard.GetTopPlantAt(thePlant.mPlantCol, thePlant.mRow, PlantPriority.TOPPLANT_EATING_ORDER);
+                if (topPlantAt_v != thePlant && topPlantAt_v != null && CanTargetPlant(topPlantAt_v, theAttackType))
                 {
                     return false;
                 }
             }
             if (theAttackType == Zombie.ZombieAttackType.ATTACKTYPE_VAULT)
             {
-                Plant topPlantAt2 = mBoard.GetTopPlantAt(thePlant.mPlantCol, thePlant.mRow, PlantPriority.TOPPLANT_ONLY_NORMAL_POSITION);
-                if (topPlantAt2 != thePlant && topPlantAt2 != null && CanTargetPlant(topPlantAt2, theAttackType))
+                Plant topPlantAt2_v = mBoard.GetTopPlantAt(thePlant.mPlantCol, thePlant.mRow, PlantPriority.TOPPLANT_ONLY_NORMAL_POSITION);
+                if (topPlantAt2_v != thePlant && topPlantAt2_v != null && CanTargetPlant(topPlantAt2_v, theAttackType))
                 {
                     return false;
                 }
@@ -6532,59 +6527,48 @@ namespace Lawn
 
         public Plant FindCatapultTarget()
         {
-            Plant plant = null;
-            int count = mBoard.mPlants.Count;
-            for (int i = 0; i < count; i++)
+            Plant result_v = null;
+            for (int i = 0; i < mBoard.mPlants.Count; i++)
             {
-                Plant plant2 = mBoard.mPlants[i];
-                if (!plant2.mDead && mRow == plant2.mRow && mX >= plant2.mX + 100 && !plant2.NotOnGround() && !plant2.IsSpiky() && (plant == null || plant2.mPlantCol < plant.mPlantCol))
+                Plant aPlant = mBoard.mPlants[i];
+                if (!aPlant.mDead && mRow == aPlant.mRow && mX >= aPlant.mX + 100 && !aPlant.NotOnGround() && !aPlant.IsSpiky() && (result_v == null || aPlant.mPlantCol < result_v.mPlantCol))
                 {
-                    plant = mBoard.GetTopPlantAt(plant2.mPlantCol, plant2.mRow, PlantPriority.TOPPLANT_CATAPULT_ORDER);
+                    result_v = mBoard.GetTopPlantAt(aPlant.mPlantCol, aPlant.mRow, PlantPriority.TOPPLANT_CATAPULT_ORDER);
                 }
             }
-            return plant;
+            return result_v;
         }
 
         public void ZombieCatapultFire(Plant thePlant)
         {
-            float num = mPosX + 113f;
-            float num2 = mPosY - 44f;
-            int num3;
-            int num4;
-            if (thePlant != null)
-            {
-                num3 = thePlant.mX;
-                num4 = thePlant.mY;
-            }
-            else
-            {
-                num3 = (int)mPosX - 300;
-                num4 = 0;
-            }
+            float aOriginX = mPosX + 113f;
+            float aOriginY = mPosY - 44f;
+            int aTargetX = thePlant?.mX ?? (int)mPosX - 300;
+            int aTargetY = thePlant?.mY ?? 0;
             mApp.PlayFoley(FoleyType.FOLEY_BASKETBALL);
-            Projectile projectile = mBoard.AddProjectile((int)num, (int)num2, mRenderOrder, mRow, ProjectileType.PROJECTILE_BASKETBALL);
-            float num5 = num - num3 - 20f;
-            float num6 = num4 - num2;
-            if (num5 < 40f)
+            Projectile projectile_v = mBoard.AddProjectile((int)aOriginX, (int)aOriginY, mRenderOrder, mRow, ProjectileType.PROJECTILE_BASKETBALL);
+            float aRangeX = aOriginX - aTargetX - 20f;
+            float aRangeY = aTargetY - aOriginY;
+            if (aRangeX < 40f)
             {
-                num5 = 40f;
+                aRangeX = 40f;
             }
-            projectile.mMotionType = ProjectileMotion.MOTION_LOBBED;
-            float num7 = 120f;
-            projectile.mVelX = -num5 / num7;
-            projectile.mVelY = 0f;
-            projectile.mVelZ = -7f + num6 / num7;
-            projectile.mAccZ = 0.115f;
+            projectile_v.mMotionType = ProjectileMotion.MOTION_LOBBED;
+            float k_v = 120f;
+            projectile_v.mVelX = -aRangeX / k_v;
+            projectile_v.mVelY = 0f;
+            projectile_v.mVelZ = -7f + aRangeY / k_v;
+            projectile_v.mAccZ = 0.115f;
         }
 
         public void UpdateClimbingLadder()
         {
-            float num = mAltitude;
+            float aDistOffGround = mAltitude;
             if (mOnHighGround)
             {
-                num -= Constants.HIGH_GROUND_HEIGHT;
+                aDistOffGround -= Constants.HIGH_GROUND_HEIGHT;
             }
-            int theGridX = mBoard.PixelToGridXKeepOnBoard((int)(mX + 5 + num * 0.5f), mY);
+            int theGridX = mBoard.PixelToGridXKeepOnBoard((int)(mX + 5 + aDistOffGround * 0.5f), mY);
             if (mBoard.GetLadderAt(theGridX, mRow) == null)
             {
                 mZombieHeight = ZombieHeight.HEIGHT_FALLING;
@@ -6595,12 +6579,12 @@ namespace Lawn
             {
                 mPosX -= 0.5f;
             }
-            float num2 = 90f;
+            float aTargetHeight = 90f;
             if (mOnHighGround)
             {
-                num2 += Constants.HIGH_GROUND_HEIGHT;
+                aTargetHeight += Constants.HIGH_GROUND_HEIGHT;
             }
-            if (mAltitude >= num2)
+            if (mAltitude >= aTargetHeight)
             {
                 mZombieHeight = ZombieHeight.HEIGHT_FALLING;
             }
@@ -6656,51 +6640,50 @@ namespace Lawn
                 }
                 return;
             }
-            float num = mPosX - 460f;
+            float aThrowingDistance = mPosX - 460f;
             if (mZombiePhase == ZombiePhase.PHASE_GARGANTUAR_THROWING)
             {
-                Reanimation reanimation2 = mApp.ReanimationGet(mBodyReanimID);
-                if (reanimation2.ShouldTriggerTimedEvent(0.74f))
+                Reanimation aBodyReanim = mApp.ReanimationGet(mBodyReanimID);
+                if (aBodyReanim.ShouldTriggerTimedEvent(0.74f))
                 {
                     mHasObject = false;
                     ReanimShowPrefix("Zombie_imp", -1);
                     ReanimShowTrack(ref GlobalMembersReanimIds.ReanimTrackId_zombie_gargantuar_whiterope, -1);
                     mApp.PlayFoley(FoleyType.FOLEY_SWING);
-                    Zombie zombie = mBoard.AddZombie(ZombieType.ZOMBIE_IMP, mFromWave);
-                    if (zombie == null)
+                    Zombie aZombieImp = mBoard.AddZombie(ZombieType.ZOMBIE_IMP, mFromWave);
+                    if (aZombieImp == null)
                     {
                         return;
                     }
-                    float num2 = 40f;
+                    float aMinThrowDistance = 40f;
                     if (mBoard.StageHasRoof())
                     {
-                        num -= 180f;
-                        num2 = -140f;
+                        aThrowingDistance -= 180f;
+                        aMinThrowDistance = -140f;
                     }
-                    if (num < num2)
+                    if (aThrowingDistance < aMinThrowDistance)
                     {
-                        num = num2;
+                        aThrowingDistance = aMinThrowDistance;
                     }
-                    else if (num > 140f)
+                    else if (aThrowingDistance > 140f)
                     {
-                        num -= TodCommon.RandRangeFloat(0f, 100f);
+                        aThrowingDistance -= TodCommon.RandRangeFloat(0f, 100f);
                     }
-                    zombie.mPosX = mPosX - 133f;
-                    zombie.mPosY = GetPosYBasedOnRow(mRow);
-                    zombie.SetRow(mRow);
-                    zombie.mVariant = false;
-                    zombie.mRenderOrder = mRenderOrder + 1;
-                    zombie.mZombiePhase = ZombiePhase.PHASE_IMP_GETTING_THROWN;
-                    zombie.mAltitude = 88f;
-                    zombie.mVelX = 3f;
-                    zombie.mChilledCounter = mChilledCounter;
-                    float num3 = num / zombie.mVelX;
-                    zombie.mVelZ = 0.5f * num3 * GameConstants.THOWN_ZOMBIE_GRAVITY;
-                    zombie.PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_thrown, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 18f);
-                    zombie.UpdateReanim();
+                    aZombieImp.mPosX = mPosX - 133f;
+                    aZombieImp.mPosY = GetPosYBasedOnRow(mRow);
+                    aZombieImp.SetRow(mRow);
+                    aZombieImp.mVariant = false;
+                    aZombieImp.mRenderOrder = mRenderOrder + 1;
+                    aZombieImp.mZombiePhase = ZombiePhase.PHASE_IMP_GETTING_THROWN;
+                    aZombieImp.mAltitude = 88f;
+                    aZombieImp.mVelX = 3f;
+                    aZombieImp.mChilledCounter = mChilledCounter;
+                    aZombieImp.mVelZ = 0.5f * (aThrowingDistance / aZombieImp.mVelX) * GameConstants.THOWN_ZOMBIE_GRAVITY;
+                    aZombieImp.PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_thrown, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 18f);
+                    aZombieImp.UpdateReanim();
                     mApp.PlayFoley(FoleyType.FOLEY_IMP);
                 }
-                if (reanimation2.mLoopCount > 0)
+                if (aBodyReanim.mLoopCount > 0)
                 {
                     mZombiePhase = ZombiePhase.PHASE_ZOMBIE_NORMAL;
                     StartWalkAnim(20);
@@ -6711,7 +6694,7 @@ namespace Lawn
             {
                 return;
             }
-            if (mHasObject && mBodyHealth < mBodyMaxHealth / 2 && num > 40f)
+            if (mHasObject && mBodyHealth < mBodyMaxHealth / 2 && aThrowingDistance > 40f)
             {
                 mZombiePhase = ZombiePhase.PHASE_GARGANTUAR_THROWING;
                 PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_throw, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, 24f);
@@ -6835,44 +6818,44 @@ namespace Lawn
             else
             {
                 ReanimationType theReanimationType = ReanimationType.REANIM_ZOMBIE_CHARRED;
-                float num = mPosX + 22f;
-                float num2 = mPosY - 10f;
+                float aCharredPosX = mPosX + 22f;
+                float aCharredPosY = mPosY - 10f;
                 if (mZombieType == ZombieType.ZOMBIE_BALLOON)
                 {
-                    num2 += 31f;
+                    aCharredPosY += 31f;
                 }
                 if (mZombieType == ZombieType.ZOMBIE_IMP)
                 {
-                    num -= 6f;
+                    aCharredPosX -= 6f;
                     theReanimationType = ReanimationType.REANIM_ZOMBIE_CHARRED_IMP;
                 }
                 if (mZombieType == ZombieType.ZOMBIE_DIGGER)
                 {
                     if (IsWalkingBackwards())
                     {
-                        num += 14f;
+                        aCharredPosX += 14f;
                     }
                     theReanimationType = ReanimationType.REANIM_ZOMBIE_CHARRED_DIGGER;
                 }
                 if (mZombieType == ZombieType.ZOMBIE_ZAMBONI)
                 {
-                    num += 61f;
-                    num2 += -16f;
+                    aCharredPosX += 61f;
+                    aCharredPosY += -16f;
                     theReanimationType = ReanimationType.REANIM_ZOMBIE_CHARRED_ZAMBONI;
                 }
                 if (mZombieType == ZombieType.ZOMBIE_CATAPULT)
                 {
-                    num += -36f;
-                    num2 += -20f;
+                    aCharredPosX += -36f;
+                    aCharredPosY += -20f;
                     theReanimationType = ReanimationType.REANIM_ZOMBIE_CHARRED_CATAPULT;
                 }
                 if (mZombieType == ZombieType.ZOMBIE_GARGANTUAR || mZombieType == ZombieType.ZOMBIE_REDEYE_GARGANTUAR)
                 {
-                    num += -15f;
-                    num2 += -10f;
+                    aCharredPosX += -15f;
+                    aCharredPosY += -10f;
                     theReanimationType = ReanimationType.REANIM_ZOMBIE_CHARRED_GARGANTUAR;
                 }
-                Reanimation reanimation4 = mApp.AddReanimation(num, num2, mRenderOrder, theReanimationType);
+                Reanimation reanimation4 = mApp.AddReanimation(aCharredPosX, aCharredPosY, mRenderOrder, theReanimationType);
                 reanimation4.mAnimRate *= TodCommon.RandRangeFloat(0.9f, 1.1f);
                 if (mZombiePhase == ZombiePhase.PHASE_DIGGER_WALKING_WITHOUT_AXE)
                 {
@@ -6971,18 +6954,18 @@ namespace Lawn
             {
                 return null;
             }
-            TRect zombieAttackRect = GetZombieAttackRect();
+            TRect aAttackRect = GetZombieAttackRect();
             int count = mBoard.mZombies.Count;
             for (int i = 0; i < count; i++)
             {
-                Zombie zombie = mBoard.mZombies[i];
-                if (!zombie.mDead && mMindControlled != zombie.mMindControlled && !zombie.IsFlying() && zombie.mZombiePhase != ZombiePhase.PHASE_DIGGER_TUNNELING && zombie.mZombiePhase != ZombiePhase.PHASE_BUNGEE_DIVING && zombie.mZombiePhase != ZombiePhase.PHASE_BUNGEE_DIVING_SCREAMING && zombie.mZombiePhase != ZombiePhase.PHASE_BUNGEE_RISING && zombie.mZombieHeight != ZombieHeight.HEIGHT_GETTING_BUNGEE_DROPPED && !zombie.IsDeadOrDying() && zombie.mRow == mRow)
+                Zombie aZombie = mBoard.mZombies[i];
+                if (!aZombie.mDead && mMindControlled != aZombie.mMindControlled && !aZombie.IsFlying() && aZombie.mZombiePhase != ZombiePhase.PHASE_DIGGER_TUNNELING && aZombie.mZombiePhase != ZombiePhase.PHASE_BUNGEE_DIVING && aZombie.mZombiePhase != ZombiePhase.PHASE_BUNGEE_DIVING_SCREAMING && aZombie.mZombiePhase != ZombiePhase.PHASE_BUNGEE_RISING && aZombie.mZombieHeight != ZombieHeight.HEIGHT_GETTING_BUNGEE_DROPPED && !aZombie.IsDeadOrDying() && aZombie.mRow == mRow)
                 {
-                    TRect zombieRect = zombie.GetZombieRect();
-                    int rectOverlap = GameConstants.GetRectOverlap(zombieAttackRect, zombieRect);
-                    if (rectOverlap >= 20 || (rectOverlap >= 0 && zombie.mIsEating))
+                    TRect aZombieRect = aZombie.GetZombieRect();
+                    int rectOverlap = GameConstants.GetRectOverlap(aAttackRect, aZombieRect);
+                    if (rectOverlap >= 20 || (rectOverlap >= 0 && aZombie.mIsEating))
                     {
-                        return zombie;
+                        return aZombie;
                     }
                 }
             }
@@ -6995,12 +6978,12 @@ namespace Lawn
             lastPlayedReanimLoopType = theLoopType;
             lastPlayedReanimBlendTime = theBlendTime;
             lastPlayedReanimAnimRate = theAnimRate;
-            Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
-            if (reanimation == null)
+            Reanimation aReanim = mApp.ReanimationTryToGet(mBodyReanimID);
+            if (aReanim == null)
             {
                 return;
             }
-            reanimation.PlayReanim(theTrackName, theLoopType, theBlendTime, theAnimRate);
+            aReanim.PlayReanim(theTrackName, theLoopType, theBlendTime, theAnimRate);
             if (theAnimRate != 0f)
             {
                 mOrginalAnimRate = theAnimRate;
@@ -7027,28 +7010,29 @@ namespace Lawn
                     mAltitude = Constants.HIGH_GROUND_HEIGHT;
                 }
             }
-            ZombiePhase dancerPhase = GetDancerPhase();
-            if (dancerPhase != mZombiePhase)
+            ZombiePhase aDancerPhase = GetDancerPhase();
+            if (aDancerPhase == mZombiePhase)
             {
-                if (dancerPhase == ZombiePhase.PHASE_DANCER_DANCING_LEFT)
-                {
-                    mZombiePhase = dancerPhase;
-                    PlayZombieReanim(ref Reanimation.ReanimTrackId_anim_walk, ReanimLoopType.REANIM_LOOP, 10, 0f);
-                    return;
-                }
-                if (dancerPhase == ZombiePhase.PHASE_DANCER_WALK_TO_RAISE)
-                {
-                    mZombiePhase = dancerPhase;
-                    PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_armraise, ReanimLoopType.REANIM_LOOP, 10, 18f);
-                    Reanimation reanimation = mApp.ReanimationGet(mBodyReanimID);
-                    reanimation.mAnimTime = 0.6f;
-                    return;
-                }
-                if (dancerPhase == ZombiePhase.PHASE_DANCER_RAISE_LEFT_1 || dancerPhase == ZombiePhase.PHASE_DANCER_RAISE_RIGHT_1 || dancerPhase == ZombiePhase.PHASE_DANCER_RAISE_LEFT_2 || dancerPhase == ZombiePhase.PHASE_DANCER_RAISE_RIGHT_2)
-                {
-                    mZombiePhase = dancerPhase;
-                    PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_armraise, ReanimLoopType.REANIM_LOOP, 10, 18f);
-                }
+                return;
+            }
+            else if (aDancerPhase == ZombiePhase.PHASE_DANCER_DANCING_LEFT)
+            {
+                mZombiePhase = aDancerPhase;
+                PlayZombieReanim(ref Reanimation.ReanimTrackId_anim_walk, ReanimLoopType.REANIM_LOOP, 10, 0f);
+                return;
+            }
+            else if (aDancerPhase == ZombiePhase.PHASE_DANCER_WALK_TO_RAISE)
+            {
+                mZombiePhase = aDancerPhase;
+                PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_armraise, ReanimLoopType.REANIM_LOOP, 10, 18f);
+                Reanimation reanimation = mApp.ReanimationGet(mBodyReanimID);
+                reanimation.mAnimTime = 0.6f;
+                return;
+            }
+            else if (aDancerPhase == ZombiePhase.PHASE_DANCER_RAISE_LEFT_1 || aDancerPhase == ZombiePhase.PHASE_DANCER_RAISE_RIGHT_1 || aDancerPhase == ZombiePhase.PHASE_DANCER_RAISE_LEFT_2 || aDancerPhase == ZombiePhase.PHASE_DANCER_RAISE_RIGHT_2)
+            {
+                mZombiePhase = aDancerPhase;
+                PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_armraise, ReanimLoopType.REANIM_LOOP, 10, 18f);
             }
         }
 
@@ -7133,12 +7117,17 @@ namespace Lawn
                 PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_walk_nopaper, ReanimLoopType.REANIM_LOOP, theBlendTime, 0f);
                 return;
             }
-            if (mInPool && mZombieHeight != ZombieHeight.HEIGHT_IN_TO_POOL && mZombieHeight != ZombieHeight.HEIGHT_OUT_OF_POOL && reanimation.TrackExists(GlobalMembersReanimIds.ReanimTrackId_anim_swim))
+            if (mInPool
+                && mZombieHeight != ZombieHeight.HEIGHT_IN_TO_POOL
+                && mZombieHeight != ZombieHeight.HEIGHT_OUT_OF_POOL
+                && reanimation.TrackExists(GlobalMembersReanimIds.ReanimTrackId_anim_swim))
             {
                 PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_swim, ReanimLoopType.REANIM_LOOP, theBlendTime, 0f);
                 return;
             }
-            if ((mZombieType == ZombieType.ZOMBIE_NORMAL || mZombieType == ZombieType.ZOMBIE_TRAFFIC_CONE || mZombieType == ZombieType.ZOMBIE_PAIL) && mBoard.mDanceMode)
+            if ((mZombieType == ZombieType.ZOMBIE_NORMAL
+                || mZombieType == ZombieType.ZOMBIE_TRAFFIC_CONE
+                || mZombieType == ZombieType.ZOMBIE_PAIL) && mBoard.mDanceMode)
             {
                 PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_dance, ReanimLoopType.REANIM_LOOP, theBlendTime, 0f);
                 return;
@@ -7169,12 +7158,12 @@ namespace Lawn
             {
                 return null;
             }
-            Reanimation reanimation = mApp.AddReanimation(mX + thePosX, mY + thePosY, 0, theReanimType);
-            if (reanimation != null)
+            Reanimation reanimation_v = mApp.AddReanimation(mX + thePosX, mY + thePosY, 0, theReanimType);
+            if (reanimation_v != null)
             {
-                GlobalMembersAttachment.AttachReanim(ref mAttachmentID, reanimation, thePosX * Constants.S, thePosY * Constants.S);
+                GlobalMembersAttachment.AttachReanim(ref mAttachmentID, reanimation_v, thePosX * Constants.S, thePosY * Constants.S);
             }
-            return reanimation;
+            return reanimation_v;
         }
 
         public void DragUnder()
@@ -7186,20 +7175,20 @@ namespace Lawn
 
         public static void SetupDoorArms(Reanimation aReanim, bool theShow)
         {
-            int theRenderGroup = 0;
-            int theRenderGroup2 = -1;
+            int theRenderGroup_v = 0;
+            int theRenderGroup2_v = -1;
             if (theShow)
             {
-                theRenderGroup = -1;
-                theRenderGroup2 = 0;
+                theRenderGroup_v = -1;
+                theRenderGroup2_v = 0;
             }
-            aReanim.AssignRenderGroupToPrefix("Zombie_outerarm_hand", theRenderGroup);
-            aReanim.AssignRenderGroupToPrefix("Zombie_outerarm_lower", theRenderGroup);
-            aReanim.AssignRenderGroupToPrefix("Zombie_outerarm_upper", theRenderGroup);
-            aReanim.AssignRenderGroupToPrefix("anim_innerarm", theRenderGroup);
-            aReanim.AssignRenderGroupToPrefix("Zombie_outerarm_screendoor", theRenderGroup2);
-            aReanim.AssignRenderGroupToPrefix("Zombie_innerarm_screendoor", theRenderGroup2);
-            aReanim.AssignRenderGroupToPrefix("Zombie_innerarm_screendoor_hand", theRenderGroup2);
+            aReanim.AssignRenderGroupToPrefix("Zombie_outerarm_hand", theRenderGroup_v);
+            aReanim.AssignRenderGroupToPrefix("Zombie_outerarm_lower", theRenderGroup_v);
+            aReanim.AssignRenderGroupToPrefix("Zombie_outerarm_upper", theRenderGroup_v);
+            aReanim.AssignRenderGroupToPrefix("anim_innerarm", theRenderGroup_v);
+            aReanim.AssignRenderGroupToPrefix("Zombie_outerarm_screendoor", theRenderGroup2_v);
+            aReanim.AssignRenderGroupToPrefix("Zombie_innerarm_screendoor", theRenderGroup2_v);
+            aReanim.AssignRenderGroupToPrefix("Zombie_innerarm_screendoor_hand", theRenderGroup2_v);
         }
 
         public static void SetupReanimLayers(Reanimation aReanim, ZombieType theZombieType)
@@ -7259,43 +7248,42 @@ namespace Lawn
 
         public void DrawButter(Graphics g, ref ZombieDrawPosition theDrawPos)
         {
-            float num = mPosX + theDrawPos.mImageOffsetX + theDrawPos.mHeadX + 11f;
-            float num2 = mPosY + theDrawPos.mImageOffsetY + theDrawPos.mHeadY + theDrawPos.mBodyY + 21f;
-            float num3 = 1f;
+            float aOffsetX = mPosX + theDrawPos.mImageOffsetX + theDrawPos.mHeadX + 11f;
+            float aOffsetY = mPosY + theDrawPos.mImageOffsetY + theDrawPos.mHeadY + theDrawPos.mBodyY + 21f;
+            float aScale = 1f;
             if (mBodyReanimID != null)
             {
-                GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_anim_head1, ref num, ref num2);
+                GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_anim_head1, ref aOffsetX, ref aOffsetY);
             }
-            num += -mPosX;
-            num2 += -mPosY;
-            if (mZombieType == ZombieType.ZOMBIE_SQUASH_HEAD)
+            aOffsetX += -mPosX;
+            aOffsetY += -mPosY;
+            switch (mZombieType)
             {
-                num += 6f;
-                num2 -= 9f;
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_WALLNUT_HEAD)
-            {
-                num -= 10f;
+            case ZombieType.ZOMBIE_SQUASH_HEAD:
+                aOffsetX += 6f;
+                aOffsetY -= 9f;
+                break;
+            case ZombieType.ZOMBIE_WALLNUT_HEAD:
+                aOffsetX -= 10f;
                 if (mInPool && mIsEating)
                 {
-                    num -= 5f;
-                    num2 += 10f;
+                    aOffsetX -= 5f;
+                    aOffsetY += 10f;
                 }
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_TALLNUT_HEAD)
-            {
-                num -= 30f;
-                num2 -= 30f;
+                break;
+            case ZombieType.ZOMBIE_TALLNUT_HEAD:
+                aOffsetX -= 30f;
+                aOffsetY -= 30f;
                 if (mInPool && mIsEating)
                 {
-                    num2 += 10f;
+                    aOffsetY += 10f;
                 }
+                break;
+            case ZombieType.ZOMBIE_GATLING_HEAD:
+                aOffsetY -= 10f;
+                break;
             }
-            else if (mZombieType == ZombieType.ZOMBIE_GATLING_HEAD)
-            {
-                num2 -= 10f;
-            }
-            TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_REANIM_CORNPULT_BUTTER_SPLAT, num * Constants.S + 0f, num2 * Constants.S - 6f, num3, num3);
+            TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_REANIM_CORNPULT_BUTTER_SPLAT, aOffsetX * Constants.S + 0f, aOffsetY * Constants.S - 6f, aScale, aScale);
         }
 
         public bool IsImmobilizied()
@@ -7313,7 +7301,11 @@ namespace Lawn
             {
                 return;
             }
-            if (mZombieType == ZombieType.ZOMBIE_ZAMBONI || mZombieType == ZombieType.ZOMBIE_BOSS || IsTangleKelpTarget() || IsBobsledTeamWithSled() || IsFlying())
+            if (mZombieType == ZombieType.ZOMBIE_ZAMBONI
+                || mZombieType == ZombieType.ZOMBIE_BOSS
+                || IsTangleKelpTarget()
+                || IsBobsledTeamWithSled()
+                || IsFlying())
             {
                 return;
             }
@@ -7324,25 +7316,32 @@ namespace Lawn
                 zombie.mRelatedZombieID = null;
                 mRelatedZombieID = null;
             }
-            if (mZombieType == ZombieType.ZOMBIE_POGO)
+            switch (mZombieType)
             {
+            case ZombieType.ZOMBIE_POGO:
                 mAltitude = 0f;
                 if (mOnHighGround)
                 {
                     mAltitude += Constants.HIGH_GROUND_HEIGHT;
                 }
-            }
-            if (mZombieType == ZombieType.ZOMBIE_BALLOON)
-            {
+                break;
+            case ZombieType.ZOMBIE_BALLOON:
                 BalloonPropellerHatSpin(false);
-            }
-            if (mZombieType == ZombieType.ZOMBIE_PEA_HEAD || mZombieType == ZombieType.ZOMBIE_WALLNUT_HEAD || mZombieType == ZombieType.ZOMBIE_TALLNUT_HEAD || mZombieType == ZombieType.ZOMBIE_JALAPENO_HEAD || mZombieType == ZombieType.ZOMBIE_GATLING_HEAD || mZombieType == ZombieType.ZOMBIE_SQUASH_HEAD)
+                break;
+            case ZombieType.ZOMBIE_PEA_HEAD:
+            case ZombieType.ZOMBIE_WALLNUT_HEAD:
+            case ZombieType.ZOMBIE_TALLNUT_HEAD:
+            case ZombieType.ZOMBIE_JALAPENO_HEAD:
+            case ZombieType.ZOMBIE_GATLING_HEAD:
+            case ZombieType.ZOMBIE_SQUASH_HEAD:
             {
                 Reanimation reanimation = mApp.ReanimationTryToGet(mSpecialHeadReanimID);
                 if (reanimation != null)
                 {
                     reanimation.mAnimRate = 0f;
                 }
+                break;
+            }
             }
             UpdateAnimSpeed();
             StopZombieSound();
@@ -7376,9 +7375,9 @@ namespace Lawn
                 mVelZ -= GameConstants.THOWN_ZOMBIE_GRAVITY;
                 mAltitude += mVelZ;
                 mPosX -= mVelX;
-                float num = GetPosYBasedOnRow(mRow) - mPosY;
-                mPosY += num;
-                mAltitude += num;
+                float aDiffY = GetPosYBasedOnRow(mRow) - mPosY;
+                mPosY += aDiffY;
+                mAltitude += aDiffY;
                 if (mAltitude <= 0f)
                 {
                     mAltitude = 0f;
@@ -7400,14 +7399,17 @@ namespace Lawn
 
         public void SquishAllInSquare(int theX, int theY, Zombie.ZombieAttackType theAttackType)
         {
-            int count = mBoard.mPlants.Count;
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < mBoard.mPlants.Count; i++)
             {
-                Plant plant = mBoard.mPlants[i];
-                if (!plant.mDead && theY == plant.mRow && theX == plant.mPlantCol && (theAttackType != Zombie.ZombieAttackType.ATTACKTYPE_DRIVE_OVER || !plant.IsSpiky()) && plant.mSeedType != SeedType.SEED_SPIKEROCK)
+                Plant aPlant = mBoard.mPlants[i];
+                if (!aPlant.mDead
+                    && theY == aPlant.mRow
+                    && theX == aPlant.mPlantCol
+                    && (theAttackType != Zombie.ZombieAttackType.ATTACKTYPE_DRIVE_OVER || !aPlant.IsSpiky())
+                    && aPlant.mSeedType != SeedType.SEED_SPIKEROCK)
                 {
                     mBoard.mPlantsEaten++;
-                    plant.Squish();
+                    aPlant.Squish();
                 }
             }
         }
@@ -7458,12 +7460,12 @@ namespace Lawn
         public void DrawBobsledReanim(Graphics g, ref ZombieDrawPosition theDrawPos, bool theBeforeZombie)
         {
             int bobsledPosition = GetBobsledPosition();
-            bool flag = false;
-            bool flag2 = false;
-            Zombie zombie;
+            bool aDrawFront = false;
+            bool aDrawBack = false;
+            Zombie aZombieLeader;
             if (mFromWave == GameConstants.ZOMBIE_WAVE_CUTSCENE)
             {
-                zombie = this;
+                aZombieLeader = this;
             }
             else
             {
@@ -7473,38 +7475,38 @@ namespace Lawn
                 }
                 if (bobsledPosition == 0)
                 {
-                    zombie = this;
+                    aZombieLeader = this;
                 }
                 else
                 {
-                    zombie = mBoard.ZombieGet(mRelatedZombieID);
+                    aZombieLeader = mBoard.ZombieGet(mRelatedZombieID);
                 }
             }
             if (mFromWave == GameConstants.ZOMBIE_WAVE_CUTSCENE)
             {
                 if (theBeforeZombie)
                 {
-                    flag2 = true;
+                    aDrawBack = true;
                 }
                 else
                 {
-                    flag = true;
+                    aDrawFront = true;
                 }
             }
             else if (mZombiePhase == ZombiePhase.PHASE_BOBSLED_CRASHING)
             {
                 if (bobsledPosition == 0 && !theBeforeZombie)
                 {
-                    flag = true;
-                    flag2 = true;
+                    aDrawFront = true;
+                    aDrawBack = true;
                 }
             }
             else if (mZombiePhase == ZombiePhase.PHASE_BOBSLED_SLIDING || mZombiePhase == ZombiePhase.PHASE_ZOMBIE_BURNED)
             {
                 if (bobsledPosition == 2 && theBeforeZombie)
                 {
-                    flag = true;
-                    flag2 = true;
+                    aDrawFront = true;
+                    aDrawBack = true;
                 }
             }
             else if (mZombiePhase == ZombiePhase.PHASE_BOBSLED_BOARDING)
@@ -7514,85 +7516,85 @@ namespace Lawn
                 {
                     if (bobsledPosition == 2 && theBeforeZombie)
                     {
-                        flag = true;
-                        flag2 = true;
+                        aDrawFront = true;
+                        aDrawBack = true;
                     }
                 }
                 else if (bobsledPosition == 0 && !theBeforeZombie)
                 {
-                    flag = true;
+                    aDrawFront = true;
                 }
                 else if (bobsledPosition == 3 && theBeforeZombie)
                 {
-                    flag2 = true;
+                    aDrawBack = true;
                 }
             }
-            int num = 255;
-            float num2 = theDrawPos.mImageOffsetX + zombie.mPosX - mPosX - 76f;
-            float num3 = 15f;
-            int num4;
+            int aAlpha = 255;
+            float aOffsetX = theDrawPos.mImageOffsetX + aZombieLeader.mPosX - mPosX - 76f;
+            float aOffsetY = 15f;
+            int aBobsledDamageStatus;
             if (mZombiePhase == ZombiePhase.PHASE_BOBSLED_CRASHING)
             {
-                num4 = 3;
-                num = TodCommon.TodAnimateCurve(30, 0, mPhaseCounter, 255, 0, TodCurves.CURVE_LINEAR);
-                num2 += (GameConstants.BOBSLED_CRASH_TIME - mPhaseCounter) * mVelX / GameConstants.ZOMBIE_LIMP_SPEED_FACTOR;
-                num2 -= TodCommon.TodAnimateCurveFloat(GameConstants.BOBSLED_CRASH_TIME, 0, mPhaseCounter, 0f, 50f, TodCurves.CURVE_EASE_OUT);
-                num3 += TodCommon.TodAnimateCurveFloat(GameConstants.BOBSLED_CRASH_TIME, 75, mPhaseCounter, 5f, 10f, TodCurves.CURVE_LINEAR);
+                aBobsledDamageStatus = 3;
+                aAlpha = TodCommon.TodAnimateCurve(30, 0, mPhaseCounter, 255, 0, TodCurves.CURVE_LINEAR);
+                aOffsetX += (GameConstants.BOBSLED_CRASH_TIME - mPhaseCounter) * mVelX / GameConstants.ZOMBIE_LIMP_SPEED_FACTOR;
+                aOffsetX -= TodCommon.TodAnimateCurveFloat(GameConstants.BOBSLED_CRASH_TIME, 0, mPhaseCounter, 0f, 50f, TodCurves.CURVE_EASE_OUT);
+                aOffsetY += TodCommon.TodAnimateCurveFloat(GameConstants.BOBSLED_CRASH_TIME, 75, mPhaseCounter, 5f, 10f, TodCurves.CURVE_LINEAR);
             }
             else
             {
-                num4 = zombie.GetHelmDamageIndex();
+                aBobsledDamageStatus = aZombieLeader.GetHelmDamageIndex();
             }
-            if (num != 255)
+            if (aAlpha != 255)
             {
                 g.SetColorizeImages(true);
-                g.SetColor(new SexyColor(255, 255, 255, num));
+                g.SetColor(new SexyColor(255, 255, 255, aAlpha));
             }
-            Image theImage;
-            if (num4 == 0)
+            Image aImage;
+            if (aBobsledDamageStatus == 0)
             {
-                theImage = AtlasResources.IMAGE_ZOMBIE_BOBSLED1;
+                aImage = AtlasResources.IMAGE_ZOMBIE_BOBSLED1;
             }
-            else if (num4 == 1)
+            else if (aBobsledDamageStatus == 1)
             {
-                theImage = AtlasResources.IMAGE_ZOMBIE_BOBSLED2;
+                aImage = AtlasResources.IMAGE_ZOMBIE_BOBSLED2;
             }
-            else if (num4 == 2)
+            else if (aBobsledDamageStatus == 2)
             {
-                theImage = AtlasResources.IMAGE_ZOMBIE_BOBSLED3;
+                aImage = AtlasResources.IMAGE_ZOMBIE_BOBSLED3;
             }
             else
             {
-                theImage = AtlasResources.IMAGE_ZOMBIE_BOBSLED4;
+                aImage = AtlasResources.IMAGE_ZOMBIE_BOBSLED4;
             }
             if (mZombiePhase == ZombiePhase.PHASE_ZOMBIE_BURNED)
             {
                 g.SetColorizeImages(true);
                 g.SetColor(SexyColor.Black);
             }
-            num2 *= Constants.S;
-            num3 *= Constants.S;
-            if (flag2 && num4 != 3)
+            aOffsetX *= Constants.S;
+            aOffsetY *= Constants.S;
+            if (aDrawBack && aBobsledDamageStatus != 3)
             {
-                g.DrawImageF(AtlasResources.IMAGE_ZOMBIE_BOBSLED_INSIDE, num2, num3);
+                g.DrawImageF(AtlasResources.IMAGE_ZOMBIE_BOBSLED_INSIDE, aOffsetX, aOffsetY);
             }
-            if (flag)
+            if (aDrawFront)
             {
-                g.DrawImageF(theImage, num2, num3);
+                g.DrawImageF(aImage, aOffsetX, aOffsetY);
             }
-            if (zombie.mJustGotShotCounter > 0)
+            if (aZombieLeader.mJustGotShotCounter > 0)
             {
                 g.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
                 g.SetColorizeImages(true);
-                int num5 = zombie.mJustGotShotCounter * 10;
+                int num5 = aZombieLeader.mJustGotShotCounter * 10;
                 g.SetColor(new SexyColor(num5, num5, num5, 255));
-                if (flag2 && num4 != 3)
+                if (aDrawBack && aBobsledDamageStatus != 3)
                 {
-                    g.DrawImageF(AtlasResources.IMAGE_ZOMBIE_BOBSLED_INSIDE, num2, num3);
+                    g.DrawImageF(AtlasResources.IMAGE_ZOMBIE_BOBSLED_INSIDE, aOffsetX, aOffsetY);
                 }
-                if (flag)
+                if (aDrawFront)
                 {
-                    g.DrawImageF(theImage, num2, num3);
+                    g.DrawImageF(aImage, aOffsetX, aOffsetY);
                 }
                 g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
             }
@@ -7767,18 +7769,16 @@ namespace Lawn
 
         public void ReanimIgnoreClipRect(string theTrackName, bool theIgnoreClipRect)
         {
-            Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
-            if (reanimation == null)
+            Reanimation reanimation_v = mApp.ReanimationTryToGet(mBodyReanimID);
+            if (reanimation_v == null)
             {
                 return;
             }
-            for (int i = 0; i < reanimation.mDefinition.mTrackCount; i++)
+            for (int i = 0; i < reanimation_v.mDefinition.mTrackCount; i++)
             {
-                ReanimatorTrack reanimatorTrack = reanimation.mDefinition.mTracks[i];
-                ReanimatorTrackInstance reanimatorTrackInstance = reanimation.mTrackInstances[i];
-                if (reanimatorTrack.mName == theTrackName)
+                if (reanimation_v.mDefinition.mTracks[i].mName == theTrackName)
                 {
-                    reanimatorTrackInstance.mIgnoreClipRect = theIgnoreClipRect;
+                    reanimation_v.mTrackInstances[i].mIgnoreClipRect = theIgnoreClipRect;
                 }
             }
             mUsesClipping = !theIgnoreClipRect;
@@ -7797,11 +7797,7 @@ namespace Lawn
             {
                 return;
             }
-            reanimation.mAnimRate = theAnimRate;
-            if (IsMovingAtChilledSpeed())
-            {
-                reanimation.mAnimRate *= 0.5f;
-            }
+            reanimation.mAnimRate = IsMovingAtChilledSpeed() ? theAnimRate * 0.5f : theAnimRate;
         }
 
         public bool IsDeadOrDying()
@@ -7811,108 +7807,99 @@ namespace Lawn
 
         public void DrawDancerReanim(Graphics g, ref ZombieDrawPosition theDrawPos)
         {
-            bool flag = false;
-            SexyColor aColor = default(SexyColor);
-            float zombie_Dancer_Spotlight_Scale = Constants.Zombie_Dancer_Spotlight_Scale;
-            float num = Constants.Zombie_Dancer_Spotlight_Offset.X;
+            SexyColor aSpotLightColor = default(SexyColor);
             if (mZombiePhase != ZombiePhase.PHASE_DANCER_DANCING_IN && mZombiePhase != ZombiePhase.PHASE_DANCER_SNAPPING_FINGERS && mZombiePhase != ZombiePhase.PHASE_ZOMBIE_NORMAL && mZombiePhase != ZombiePhase.PHASE_ZOMBIE_DYING && mApp.mGameScene != GameScenes.SCENE_ZOMBIES_WON)
             {
-                flag = true;
-                int num2 = mZombieAge / 100 * 7 % 5;
-                if (mZombieAge < 700)
-                {
-                    num2 = 0;
-                }
-                switch (num2)
+                switch (mZombieAge >= 700 ? mZombieAge / 100 * 7 % 5 : 0)
                 {
                     case 0:
-                        aColor = new SexyColor(250, 250, 160);
+                        aSpotLightColor = new SexyColor(250, 250, 160);
                         break;
                     case 1:
-                        aColor = new SexyColor(114, 234, 170);
+                        aSpotLightColor = new SexyColor(114, 234, 170);
                         break;
                     case 2:
-                        aColor = new SexyColor(216, 126, 202);
+                        aSpotLightColor = new SexyColor(216, 126, 202);
                         break;
                     case 3:
-                        aColor = new SexyColor(90, 110, 140);
+                        aSpotLightColor = new SexyColor(90, 110, 140);
                         break;
                     case 4:
-                        aColor = new SexyColor(240, 90, 130);
+                        aSpotLightColor = new SexyColor(240, 90, 130);
                         break;
                 }
                 g.SetColorizeImages(true);
-                g.SetColor(aColor);
-                TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_SPOTLIGHT2, num * Constants.S, Constants.Zombie_Dancer_Spotlight_Offset.Y * Constants.S, zombie_Dancer_Spotlight_Scale, zombie_Dancer_Spotlight_Scale);
+                g.SetColor(aSpotLightColor);
+                TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_SPOTLIGHT2, Constants.Zombie_Dancer_Spotlight_Offset.X * Constants.S, Constants.Zombie_Dancer_Spotlight_Offset.Y * Constants.S, Constants.Zombie_Dancer_Spotlight_Scale, Constants.Zombie_Dancer_Spotlight_Scale);
+                g.SetColorizeImages(false);
+                mApp.ReanimationTryToGet(mBodyReanimID).DrawRenderGroup(g, 0);
+                g.SetColorizeImages(true);
+                g.SetColor(aSpotLightColor);
+                TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_SPOTLIGHT, (Constants.Zombie_Dancer_Spotlight_Pos.X + (float)Constants.Zombie_Dancer_Spotlight_Offset.X) * Constants.S, (Constants.Zombie_Dancer_Spotlight_Pos.Y + Constants.Zombie_Dancer_Spotlight_Offset.Y) * Constants.S, Constants.Zombie_Dancer_Spotlight_Scale, Constants.Zombie_Dancer_Spotlight_Scale);
                 g.SetColorizeImages(false);
             }
-            Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
-            reanimation.DrawRenderGroup(g, 0);
-            if (flag)
+            else 
             {
-                g.SetColorizeImages(true);
-                g.SetColor(aColor);
-                TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_SPOTLIGHT, (Constants.Zombie_Dancer_Spotlight_Pos.X + num) * Constants.S, (Constants.Zombie_Dancer_Spotlight_Pos.Y + Constants.Zombie_Dancer_Spotlight_Offset.Y) * Constants.S, zombie_Dancer_Spotlight_Scale, zombie_Dancer_Spotlight_Scale);
-                g.SetColorizeImages(false);
+                mApp.ReanimationTryToGet(mBodyReanimID).DrawRenderGroup(g, 0);
             }
         }
 
         public void DrawBungeeReanim(Graphics g, ref ZombieDrawPosition theDrawPos)
         {
-            Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
-            float num = Constants.InvertAndScale(-22f);
-            float num2 = Constants.InvertAndScale(14f) + theDrawPos.mBodyY + theDrawPos.mImageOffsetY;
-            DrawBungeeCord(g, (int)num, (int)num2);
-            reanimation.DrawRenderGroup(g, 0);
-            Zombie zombie = null;
-            int num3 = -1;
+            Reanimation aReanim = mApp.ReanimationTryToGet(mBodyReanimID);
+            float anOffsetX = Constants.InvertAndScale(-22f);
+            float anOffsetY = Constants.InvertAndScale(14f) + theDrawPos.mBodyY + theDrawPos.mImageOffsetY;
+            DrawBungeeCord(g, (int)anOffsetX, (int)anOffsetY);
+            aReanim.DrawRenderGroup(g, 0);
+            Zombie aZombie = null;
+            int iZombie = -1;
             if (mBoard != null)
             {
-                num3 = mBoard.mZombies.IndexOf(mRelatedZombieID);
+                iZombie = mBoard.mZombies.IndexOf(mRelatedZombieID);
             }
-            if (num3 != -1)
+            if (iZombie != -1)
             {
-                zombie = mBoard.mZombies[num3];
+                aZombie = mBoard.mZombies[iZombie];
             }
-            if (zombie != null)
+            if (aZombie != null)
             {
-                Graphics @new = Graphics.GetNew(g);
-                @new.mTransY += (int)(-mAltitude * Constants.S);
-                @new.mTransX += (int)((zombie.mPosX - mPosX) * Constants.S);
-                ZombieDrawPosition zombieDrawPosition = default(ZombieDrawPosition);
-                zombie.GetDrawPos(ref zombieDrawPosition);
-                zombie.DrawReanim(@new, ref zombieDrawPosition, 0);
-                @new.PrepareForReuse();
+                Graphics aDroppedGraphics = Graphics.GetNew(g);
+                aDroppedGraphics.mTransY += (int)(-mAltitude * Constants.S);
+                aDroppedGraphics.mTransX += (int)((aZombie.mPosX - mPosX) * Constants.S);
+                ZombieDrawPosition aDroppedDrawPos = default(ZombieDrawPosition);
+                aZombie.GetDrawPos(ref aDroppedDrawPos);
+                aZombie.DrawReanim(aDroppedGraphics, ref aDroppedDrawPos, 0);
+                aDroppedGraphics.PrepareForReuse();
             }
             else
             {
-                Plant plant = null;
-                int num4 = -1;
+                Plant aPlant = null;
+                int iPlant = -1;
                 if (mBoard != null)
                 {
-                    num4 = mBoard.mPlants.IndexOf(mTargetPlantID);
+                    iPlant = mBoard.mPlants.IndexOf(mTargetPlantID);
                 }
-                if (num4 != -1)
+                if (iPlant != -1)
                 {
-                    plant = mBoard.mPlants[num4];
+                    aPlant = mBoard.mPlants[iPlant];
                 }
-                if (plant != null)
+                if (aPlant != null)
                 {
-                    Graphics new2 = Graphics.GetNew(g);
-                    new2.mTransY += (int)((30f - mAltitude) * Constants.S);
-                    if (mZombiePhase == ZombiePhase.PHASE_BUNGEE_RISING && (plant.mSeedType == SeedType.SEED_SPIKEWEED || plant.mSeedType == SeedType.SEED_SPIKEROCK))
+                    Graphics aPlantGraphics = Graphics.GetNew(g);
+                    aPlantGraphics.mTransY += (int)((30f - mAltitude) * Constants.S);
+                    if (mZombiePhase == ZombiePhase.PHASE_BUNGEE_RISING && (aPlant.mSeedType == SeedType.SEED_SPIKEWEED || aPlant.mSeedType == SeedType.SEED_SPIKEROCK))
                     {
-                        new2.mTransY -= 34;
+                        aPlantGraphics.mTransY -= 34;
                     }
-                    if (plant.mPlantCol <= 4 && mBoard.StageHasRoof())
+                    if (aPlant.mPlantCol <= 4 && mBoard.StageHasRoof())
                     {
-                        new2.mTransY += 10;
+                        aPlantGraphics.mTransY += 10;
                     }
-                    plant.Draw(new2);
-                    new2.PrepareForReuse();
+                    aPlant.Draw(aPlantGraphics);
+                    aPlantGraphics.PrepareForReuse();
                 }
             }
-            reanimation.DrawRenderGroup(g, GameConstants.RENDER_GROUP_ARMS);
+            aReanim.DrawRenderGroup(g, GameConstants.RENDER_GROUP_ARMS);
         }
 
         public void DrawBungeeTarget(Graphics g)
@@ -7938,17 +7925,17 @@ namespace Lawn
                 return;
             }
             g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
-            ZombieDrawPosition zombieDrawPosition = default(ZombieDrawPosition);
-            GetDrawPos(ref zombieDrawPosition);
-            float num = mX + Constants.Zombie_Bungee_Target_Offset.X;
-            float num2 = mY + Constants.Zombie_Bungee_Target_Offset.Y + zombieDrawPosition.mBodyY + zombieDrawPosition.mImageOffsetY;
+            ZombieDrawPosition aDrawPos = default(ZombieDrawPosition);
+            GetDrawPos(ref aDrawPos);
+            float aTargetX = mX + Constants.Zombie_Bungee_Target_Offset.X;
+            float aTargetY = mY + Constants.Zombie_Bungee_Target_Offset.Y + aDrawPos.mBodyY + aDrawPos.mImageOffsetY;
             if (mZombiePhase == ZombiePhase.PHASE_BUNGEE_DIVING || mZombiePhase == ZombiePhase.PHASE_BUNGEE_DIVING_SCREAMING)
             {
-                num += TodCommon.TodAnimateCurveFloat(GameConstants.BUNGEE_ZOMBIE_HEIGHT, GameConstants.BUNGEE_ZOMBIE_HEIGHT - 400, (int)mAltitude, 30f, 0f, TodCurves.CURVE_LINEAR);
-                num2 += TodCommon.TodAnimateCurveFloat(GameConstants.BUNGEE_ZOMBIE_HEIGHT, GameConstants.BUNGEE_ZOMBIE_HEIGHT - 400, (int)mAltitude, -600f, 0f, TodCurves.CURVE_LINEAR);
+                aTargetX += TodCommon.TodAnimateCurveFloat(GameConstants.BUNGEE_ZOMBIE_HEIGHT, GameConstants.BUNGEE_ZOMBIE_HEIGHT - 400, (int)mAltitude, 30f, 0f, TodCurves.CURVE_LINEAR);
+                aTargetY += TodCommon.TodAnimateCurveFloat(GameConstants.BUNGEE_ZOMBIE_HEIGHT, GameConstants.BUNGEE_ZOMBIE_HEIGHT - 400, (int)mAltitude, -600f, 0f, TodCurves.CURVE_LINEAR);
             }
-            num2 += mAltitude;
-            g.DrawImageF(AtlasResources.IMAGE_BUNGEETARGET, num * Constants.S, num2 * Constants.S);
+            aTargetY += mAltitude;
+            g.DrawImageF(AtlasResources.IMAGE_BUNGEETARGET, aTargetX * Constants.S, aTargetY * Constants.S);
         }
 
         public void BungeeDie()
@@ -8038,17 +8025,20 @@ namespace Lawn
             {
                 return false;
             }
-            if (mBoard.mBackground == BackgroundType.BACKGROUND_1_DAY || mBoard.mBackground == BackgroundType.BACKGROUND_2_NIGHT)
+            switch (mBoard.mBackground)
             {
-                g.ClipRect((int)((-123 - mX) * Constants.S) + Constants.Zombie_GameOver_ClipOffset_1, (int)((float)(-mY) * Constants.S), 800, 600);
-            }
-            else if (mBoard.mBackground == BackgroundType.BACKGROUND_3_POOL || mBoard.mBackground == BackgroundType.BACKGROUND_4_FOG)
-            {
-                g.ClipRect((int)((-172 - mX) * Constants.S) + Constants.Zombie_GameOver_ClipOffset_2, (int)((float)(-mY) * Constants.S), 800, 600);
-            }
-            else if (mBoard.mBackground == BackgroundType.BACKGROUND_5_ROOF || mBoard.mBackground == BackgroundType.BACKGROUND_6_BOSS)
-            {
-                g.ClipRect((int)((-95 - mX) * Constants.S) + Constants.Zombie_GameOver_ClipOffset_3, (int)((float)(-mY) * Constants.S), 800, 600);
+                case BackgroundType.BACKGROUND_1_DAY:
+                case BackgroundType.BACKGROUND_2_NIGHT:
+                    g.ClipRect((int)((-123 - mX) * Constants.S) + Constants.Zombie_GameOver_ClipOffset_1, (int)(-mY * Constants.S), 800, 600);
+                    break;
+                case BackgroundType.BACKGROUND_3_POOL:
+                case BackgroundType.BACKGROUND_4_FOG:
+                    g.ClipRect((int)((-172 - mX) * Constants.S) + Constants.Zombie_GameOver_ClipOffset_2, (int)(-mY * Constants.S), 800, 600);
+                    break;
+                case BackgroundType.BACKGROUND_5_ROOF:
+                case BackgroundType.BACKGROUND_6_BOSS:
+                    g.ClipRect((int)((-95 - mX) * Constants.S) + Constants.Zombie_GameOver_ClipOffset_3, (int)(-mY * Constants.S), 800, 600);
+                    break;
             }
             return true;
         }
@@ -8092,20 +8082,20 @@ namespace Lawn
             {
                 mVelX -= 0.0005f;
             }
-            int num = (int)mPosX + 118;
+            int num_v = (int)mPosX + 118;
             if (mBoard.StageHasRoof())
             {
-                num = Math.Max(num, 500);
+                num_v = Math.Max(num_v, 500);
             }
             else
             {
-                num = Math.Max(num, 25);
+                num_v = Math.Max(num_v, 25);
             }
-            if (num < mBoard.mIceMinX[mRow])
+            if (num_v < mBoard.mIceMinX[mRow])
             {
-                mBoard.mIceMinX[mRow] = num;
+                mBoard.mIceMinX[mRow] = num_v;
             }
-            if (num < 860)
+            if (num_v < 860)
             {
                 mBoard.mIceTimer[mRow] = 3000;
                 if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BOBSLED_BONANZA)
@@ -8159,141 +8149,126 @@ namespace Lawn
 
         private void SetupReanimForLostArm(uint theDamageFlags)
         {
-            if (mZombieType == ZombieType.ZOMBIE_FOOTBALL)
+            switch (mZombieType)
             {
+            case ZombieType.ZOMBIE_FOOTBALL:
                 ReanimShowPrefix("Zombie_football_leftarm_lower", -1);
                 ReanimShowPrefix("Zombie_football_leftarm_hand", -1);
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_NEWSPAPER)
-            {
+                break;
+            case ZombieType.ZOMBIE_NEWSPAPER:
                 ReanimShowTrack(ref GlobalMembersReanimIds.ReanimTrackId_zombie_paper_hands, -1);
                 ReanimShowTrack(ref GlobalMembersReanimIds.ReanimTrackId_zombie_paper_leftarm_lower, -1);
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_POLEVAULTER)
-            {
+                break;
+            case ZombieType.ZOMBIE_POLEVAULTER:
                 ReanimShowTrack(ref GlobalMembersReanimIds.ReanimTrackId_zombie_polevaulter_outerarm_lower, -1);
                 ReanimShowTrack(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_hand, -1);
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_DANCER)
-            {
+                break;
+            case ZombieType.ZOMBIE_DANCER:
                 ReanimShowPrefix("Zombie_disco_outerarm_lower", -1);
                 ReanimShowPrefix("Zombie_disco_outerhand_point", -1);
                 ReanimShowPrefix("Zombie_disco_outerhand", -1);
                 ReanimShowPrefix("Zombie_disco_outerarm_upper", -1);
-            }
-            else if (mZombieType == ZombieType.ZOMBIE_BACKUP_DANCER)
-            {
+                break;
+            case ZombieType.ZOMBIE_BACKUP_DANCER:
                 ReanimShowPrefix("Zombie_disco_outerarm_lower", -1);
                 ReanimShowPrefix("Zombie_disco_outerhand", -1);
-            }
-            else
-            {
+                break;
+            default:
                 ReanimShowPrefix("Zombie_outerarm_lower", -1);
                 ReanimShowPrefix("Zombie_outerarm_hand", -1);
+                break;
             }
-            ZombieDrawPosition zombieDrawPosition = default(ZombieDrawPosition);
-            GetDrawPos(ref zombieDrawPosition);
-            float num = mPosX + zombieDrawPosition.mImageOffsetX + 45f;
-            float num2 = mPosY + zombieDrawPosition.mImageOffsetY + zombieDrawPosition.mBodyY + 78f;
+            ZombieDrawPosition aDrawPos = default(ZombieDrawPosition);
+            GetDrawPos(ref aDrawPos);
+            float aPosX = mPosX + aDrawPos.mImageOffsetX + 45f;
+            float aPosY = mPosY + aDrawPos.mImageOffsetY + aDrawPos.mBodyY + 78f;
             if (IsWalkingBackwards())
             {
-                num += 36f;
+                aPosX += 36f;
             }
             Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
             if (reanimation != null)
             {
-                if (mZombieType == ZombieType.ZOMBIE_FOOTBALL)
+                switch (mZombieType)
                 {
-                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_football_leftarm_hand, ref num, ref num2);
+                case ZombieType.ZOMBIE_FOOTBALL:
+                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_football_leftarm_hand, ref aPosX, ref aPosY);
                     reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_football_leftarm_upper, AtlasResources.IMAGE_REANIM_ZOMBIE_FOOTBALL_LEFTARM_UPPER2);
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_NEWSPAPER)
-                {
-                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_paper_leftarm_lower, ref num, ref num2);
+                    break;
+                case ZombieType.ZOMBIE_NEWSPAPER:
+                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_paper_leftarm_lower, ref aPosX, ref aPosY);
                     reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_paper_leftarm_upper, AtlasResources.IMAGE_REANIM_ZOMBIE_PAPER_LEFTARM_UPPER2);
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_POLEVAULTER)
-                {
-                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_polevaulter_outerarm_lower, ref num, ref num2);
+                    break;
+                case ZombieType.ZOMBIE_POLEVAULTER:
+                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_polevaulter_outerarm_lower, ref aPosX, ref aPosY);
                     reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_polevaulter_outerarm_upper, AtlasResources.IMAGE_REANIM_ZOMBIE_POLEVAULTER_OUTERARM_UPPER2);
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_BALLOON)
-                {
-                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_lower, ref num, ref num2);
+                    break;
+                case ZombieType.ZOMBIE_BALLOON:
+                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_lower, ref aPosX, ref aPosY);
                     reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_upper, AtlasResources.IMAGE_REANIM_ZOMBIE_BALLOON_OUTERARM_UPPER2);
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_IMP)
-                {
-                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_lower, ref num, ref num2);
+                    break;
+                case ZombieType.ZOMBIE_IMP:
+                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_lower, ref aPosX, ref aPosY);
                     reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_imp_outerarm_upper, AtlasResources.IMAGE_REANIM_ZOMBIE_IMP_ARM1_BONE);
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_DIGGER)
-                {
-                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_lower, ref num, ref num2);
+                    break;
+                case ZombieType.ZOMBIE_DIGGER:
+                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_lower, ref aPosX, ref aPosY);
                     reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_digger_outerarm_upper, AtlasResources.IMAGE_REANIM_ZOMBIE_DIGGER_OUTERARM_UPPER2);
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_BOBSLED)
-                {
-                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_lower, ref num, ref num2);
+                    break;
+                case ZombieType.ZOMBIE_BOBSLED:
+                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_lower, ref aPosX, ref aPosY);
                     reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_dolphinrider_outerarm_upper, AtlasResources.IMAGE_REANIM_ZOMBIE_BOBSLED_OUTERARM_UPPER2);
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_JACK_IN_THE_BOX)
-                {
-                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_jackbox_outerarm_lower, ref num, ref num2);
+                    break;
+                case ZombieType.ZOMBIE_JACK_IN_THE_BOX:
+                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_jackbox_outerarm_lower, ref aPosX, ref aPosY);
                     reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_jackbox_outerarm_lower, AtlasResources.IMAGE_REANIM_ZOMBIE_JACKBOX_OUTERARM_LOWER2);
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_SNORKEL)
-                {
-                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_lower, ref num, ref num2);
+                    break;
+                case ZombieType.ZOMBIE_SNORKEL:
+                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_lower, ref aPosX, ref aPosY);
                     reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_snorkle_outerarm_upper, AtlasResources.IMAGE_REANIM_ZOMBIE_SNORKLE_OUTERARM_UPPER2);
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_DOLPHIN_RIDER)
-                {
-                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_lower, ref num, ref num2);
+                    break;
+                case ZombieType.ZOMBIE_DOLPHIN_RIDER:
+                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_lower, ref aPosX, ref aPosY);
                     reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_dolphinrider_outerarm_upper, AtlasResources.IMAGE_REANIM_ZOMBIE_DOLPHINRIDER_OUTERARM_UPPER2);
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_POGO)
-                {
-                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_lower, ref num, ref num2);
+                    break;
+                case ZombieType.ZOMBIE_POGO:
+                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_lower, ref aPosX, ref aPosY);
                     reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_upper, AtlasResources.IMAGE_REANIM_ZOMBIE_POGO_OUTERARM_UPPER2);
                     reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_pogo_stickhands, AtlasResources.IMAGE_REANIM_ZOMBIE_POGO_STICKHANDS2);
                     reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_pogo_stick, AtlasResources.IMAGE_REANIM_ZOMBIE_POGO_STICKDAMAGE2);
                     reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_pogo_stick2, AtlasResources.IMAGE_REANIM_ZOMBIE_POGO_STICK2DAMAGE2);
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_FLAG)
+                    break;
+                case ZombieType.ZOMBIE_FLAG:
                 {
-                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_lower, ref num, ref num2);
+                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_lower, ref aPosX, ref aPosY);
                     reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_upper, AtlasResources.IMAGE_REANIM_ZOMBIE_OUTERARM_UPPER2);
                     Reanimation reanimation2 = mApp.ReanimationTryToGet(mSpecialHeadReanimID);
                     if (reanimation2 != null)
                     {
                         reanimation2.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_flag, AtlasResources.IMAGE_REANIM_ZOMBIE_FLAG3);
                     }
+                    break;
                 }
-                else if (mZombieType == ZombieType.ZOMBIE_DANCER)
-                {
-                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_disco_outerhand, ref num, ref num2);
+                case ZombieType.ZOMBIE_DANCER:
+                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_disco_outerhand, ref aPosX, ref aPosY);
                     ReanimShowPrefix("Zombie_disco_outerarm_upper_bone", 0);
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_BACKUP_DANCER)
-                {
-                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_disco_outerhand, ref num, ref num2);
+                    break;
+                case ZombieType.ZOMBIE_BACKUP_DANCER:
+                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_disco_outerhand, ref aPosX, ref aPosY);
                     ReanimShowPrefix("Zombie_disco_outerarm_upper_bone", 0);
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_LADDER)
-                {
-                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_hand, ref num, ref num2);
+                    break;
+                case ZombieType.ZOMBIE_LADDER:
+                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_hand, ref aPosX, ref aPosY);
                     reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_ladder_outerarm_upper, AtlasResources.IMAGE_REANIM_ZOMBIE_LADDER_OUTERARM_UPPER2);
-                }
-                else if (mZombieType == ZombieType.ZOMBIE_YETI)
-                {
-                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_hand, ref num, ref num2);
+                    break;
+                case ZombieType.ZOMBIE_YETI:
+                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_hand, ref aPosX, ref aPosY);
                     reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_yeti_outerarm_upper, AtlasResources.IMAGE_REANIM_ZOMBIE_YETI_OUTERARM_UPPER2);
-                }
-                else
-                {
-                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_lower, ref num, ref num2);
+                    break;
+                default:
+                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_lower, ref aPosX, ref aPosY);
                     reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_zombie_outerarm_upper, AtlasResources.IMAGE_REANIM_ZOMBIE_OUTERARM_UPPER2);
+                    break;
                 }
             }
             if (!mInPool && !TodCommon.TestBit(theDamageFlags, 4))
@@ -8305,66 +8280,54 @@ namespace Lawn
                 }
                 if (mZombiePhase == ZombiePhase.PHASE_ZOMBIE_MOWERED)
                 {
-                    num -= 40f;
-                    num2 -= 50f;
+                    aPosX -= 40f;
+                    aPosY -= 50f;
                 }
-                TodParticleSystem todParticleSystem = mApp.AddTodParticle(num, num2, mRenderOrder + 1, theEffect);
-                OverrideParticleColor(todParticleSystem);
-                OverrideParticleScale(todParticleSystem);
-                if (todParticleSystem != null)
+                TodParticleSystem aTodParticleSystem = mApp.AddTodParticle(aPosX, aPosY, mRenderOrder + 1, theEffect);
+                OverrideParticleColor(aTodParticleSystem);
+                OverrideParticleScale(aTodParticleSystem);
+                if (aTodParticleSystem != null)
                 {
-                    if (mZombieType == ZombieType.ZOMBIE_FOOTBALL)
+                    switch (mZombieType)
                     {
-                        todParticleSystem.OverrideImage(null, AtlasResources.IMAGE_REANIM_ZOMBIE_FOOTBALL_LEFTARM_HAND);
+                    case ZombieType.ZOMBIE_FOOTBALL:
+                        aTodParticleSystem.OverrideImage(null, AtlasResources.IMAGE_REANIM_ZOMBIE_FOOTBALL_LEFTARM_HAND);
                         return;
-                    }
-                    if (mZombieType == ZombieType.ZOMBIE_NEWSPAPER)
-                    {
-                        todParticleSystem.OverrideImage(null, AtlasResources.IMAGE_REANIM_ZOMBIE_PAPER_LEFTARM_LOWER);
+                    case ZombieType.ZOMBIE_NEWSPAPER:
+                        aTodParticleSystem.OverrideImage(null, AtlasResources.IMAGE_REANIM_ZOMBIE_PAPER_LEFTARM_LOWER);
                         return;
-                    }
-                    if (mZombieType == ZombieType.ZOMBIE_DANCER)
-                    {
+                    case ZombieType.ZOMBIE_DANCER:
                         ReanimShowPrefix("Zombie_disco_outerarm_lower", -1);
                         ReanimShowPrefix("Zombie_disco_outerhand_point", -1);
                         ReanimShowPrefix("Zombie_disco_outerhand", -1);
                         ReanimShowPrefix("Zombie_disco_outerarm_upper", -1);
                         return;
-                    }
-                    if (mZombieType == ZombieType.ZOMBIE_BACKUP_DANCER)
-                    {
+                    case ZombieType.ZOMBIE_BACKUP_DANCER:
                         ReanimShowPrefix("Zombie_disco_outerarm_lower", -1);
                         ReanimShowPrefix("Zombie_disco_outerhand", -1);
                         return;
-                    }
-                    if (mZombieType == ZombieType.ZOMBIE_BOBSLED)
-                    {
-                        todParticleSystem.OverrideImage(null, AtlasResources.IMAGE_REANIM_ZOMBIE_BOBSLED_OUTERARM_HAND);
+                    case ZombieType.ZOMBIE_BOBSLED:
+                        aTodParticleSystem.OverrideImage(null, AtlasResources.IMAGE_REANIM_ZOMBIE_BOBSLED_OUTERARM_HAND);
                         return;
-                    }
-                    if (mZombieType == ZombieType.ZOMBIE_IMP)
-                    {
-                        todParticleSystem.OverrideImage(null, AtlasResources.IMAGE_REANIM_ZOMBIE_IMP_ARM2);
+                    case ZombieType.ZOMBIE_IMP:
+                        aTodParticleSystem.OverrideImage(null, AtlasResources.IMAGE_REANIM_ZOMBIE_IMP_ARM2);
                         return;
-                    }
-                    if (mZombieType == ZombieType.ZOMBIE_YETI)
-                    {
-                        todParticleSystem.OverrideImage(null, AtlasResources.IMAGE_REANIM_ZOMBIE_YETI_OUTERARM_HAND);
+                    case ZombieType.ZOMBIE_YETI:
+                        aTodParticleSystem.OverrideImage(null, AtlasResources.IMAGE_REANIM_ZOMBIE_YETI_OUTERARM_HAND);
                         return;
-                    }
-                    if (mZombieType == ZombieType.ZOMBIE_JACK_IN_THE_BOX)
-                    {
-                        todParticleSystem.OverrideImage(null, AtlasResources.IMAGE_ZOMBIEJACKBOXARM);
+                    case ZombieType.ZOMBIE_JACK_IN_THE_BOX:
+                        aTodParticleSystem.OverrideImage(null, AtlasResources.IMAGE_ZOMBIEJACKBOXARM);
                         return;
-                    }
-                    if (mZombieType == ZombieType.ZOMBIE_DIGGER)
-                    {
-                        todParticleSystem.OverrideImage(null, AtlasResources.IMAGE_ZOMBIEDIGGERARM);
+                    case ZombieType.ZOMBIE_DIGGER:
+                        aTodParticleSystem.OverrideImage(null, AtlasResources.IMAGE_ZOMBIEDIGGERARM);
                         return;
-                    }
-                    if (mZombieType == ZombieType.ZOMBIE_POLEVAULTER || mZombieType == ZombieType.ZOMBIE_BALLOON || mZombieType == ZombieType.ZOMBIE_DOLPHIN_RIDER || mZombieType == ZombieType.ZOMBIE_POGO || mZombieType == ZombieType.ZOMBIE_LADDER)
-                    {
-                        todParticleSystem.OverrideImage(null, AtlasResources.IMAGE_REANIM_ZOMBIE_OUTERARM_HAND);
+                    case ZombieType.ZOMBIE_POLEVAULTER:
+                    case ZombieType.ZOMBIE_BALLOON:
+                    case ZombieType.ZOMBIE_DOLPHIN_RIDER:
+                    case ZombieType.ZOMBIE_POGO:
+                    case ZombieType.ZOMBIE_LADDER:
+                        aTodParticleSystem.OverrideImage(null, AtlasResources.IMAGE_REANIM_ZOMBIE_OUTERARM_HAND);
+                        break;
                     }
                 }
             }
@@ -8459,18 +8422,21 @@ namespace Lawn
             GetDrawPos(ref zombieDrawPosition);
             int aRenderOrder = mRenderOrder + 1;
             TodParticleSystem aParticle = null;
-            if (mShieldType == ShieldType.SHIELDTYPE_DOOR)
+            switch (mShieldType)
+            {
+            case ShieldType.SHIELDTYPE_DOOR:
             {
                 DetachShield();
                 if (!TodCommon.TestBit(theDamageFlags, 4))
                 {
-                    float theX = 0f;
-                    float theY = 0f;
-                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_anim_screendoor, ref theX, ref theY);
-                    aParticle = mApp.AddTodParticle(theX, theY, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_DOOR);
+                    float aPosX = 0f;
+                    float aPosY = 0f;
+                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_anim_screendoor, ref aPosX, ref aPosY);
+                    aParticle = mApp.AddTodParticle(aPosX, aPosY, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_DOOR);
                 }
+                break;
             }
-            else if (mShieldType == ShieldType.SHIELDTYPE_NEWSPAPER)
+            case ShieldType.SHIELDTYPE_NEWSPAPER:
             {
                 StopEating();
                 if (mYuckyFace)
@@ -8484,10 +8450,10 @@ namespace Lawn
                 DetachShield();
                 if (!TodCommon.TestBit(theDamageFlags, 4))
                 {
-                    float theX2 = 0f;
-                    float theY2 = 0f;
-                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_paper_paper, ref theX2, ref theY2);
-                    aParticle = mApp.AddTodParticle(theX2, theY2, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_NEWSPAPER);
+                    float aPosX = 0f;
+                    float aPosY = 0f;
+                    GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_paper_paper, ref aPosX, ref aPosY);
+                    aParticle = mApp.AddTodParticle(aPosX, aPosY, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_NEWSPAPER);
                 }
                 if (!TodCommon.TestBit(theDamageFlags, 4) && !TodCommon.TestBit(theDamageFlags, 0))
                 {
@@ -8495,16 +8461,19 @@ namespace Lawn
                     AddAttachedReanim(-11, 0, ReanimationType.REANIM_ZOMBIE_SURPRISE);
                     mSurprised = true;
                 }
+                break;
             }
-            else if (mShieldType == ShieldType.SHIELDTYPE_LADDER)
+            case ShieldType.SHIELDTYPE_LADDER:
             {
                 DetachShield();
                 if (!TodCommon.TestBit(theDamageFlags, 4))
                 {
-                    float theX3 = mPosX + 31f;
-                    float theY3 = mPosY + 80f;
-                    aParticle = mApp.AddTodParticle(theX3, theY3, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_LADDER);
+                    float aPosX = mPosX + 31f;
+                    float aPosY = mPosY + 80f;
+                    aParticle = mApp.AddTodParticle(aPosX, aPosY, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_LADDER);
                 }
+                break;
+            }
             }
             OverrideParticleScale(aParticle);
             mHasShield = false;
@@ -8808,13 +8777,12 @@ namespace Lawn
 
         public void BossRVLanding()
         {
-            int count = mBoard.mPlants.Count;
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < mBoard.mPlants.Count; i++)
             {
-                Plant plant = mBoard.mPlants[i];
-                if (!plant.mDead && plant.mRow >= mTargetRow && plant.mRow <= mTargetRow + 1 && plant.mPlantCol >= mTargetCol && plant.mPlantCol <= mTargetCol + 2)
+                Plant aPlant = mBoard.mPlants[i];
+                if (!aPlant.mDead && aPlant.mRow >= mTargetRow && aPlant.mRow <= mTargetRow + 1 && aPlant.mPlantCol >= mTargetCol && aPlant.mPlantCol <= mTargetCol + 2)
                 {
-                    plant.Squish();
+                    aPlant.Squish();
                 }
             }
             mBoard.ShakeBoard(1, 2);
@@ -8834,13 +8802,12 @@ namespace Lawn
 
         public void BossStompContact()
         {
-            int count = mBoard.mPlants.Count;
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < mBoard.mPlants.Count; i++)
             {
-                Plant plant = mBoard.mPlants[i];
-                if (!plant.mDead && plant.mRow >= mTargetRow && plant.mRow <= mTargetRow + 1 && plant.mPlantCol >= 5)
+                Plant aPlant = mBoard.mPlants[i];
+                if (!aPlant.mDead && aPlant.mRow >= mTargetRow && aPlant.mRow <= mTargetRow + 1 && aPlant.mPlantCol >= 5)
                 {
-                    plant.Squish();
+                    aPlant.Squish();
                 }
             }
             mBoard.ShakeBoard(1, 4);
@@ -8850,20 +8817,20 @@ namespace Lawn
 
         public bool BossAreBungeesDone()
         {
-            int num = 0;
+            int num_v = 0;
             for (int i = 0; i < 3; i++)
             {
-                Zombie zombie = mBoard.ZombieTryToGet(mFollowerZombieID[i]);
-                if (zombie != null)
+                Zombie aZombie_v = mBoard.ZombieTryToGet(mFollowerZombieID[i]);
+                if (aZombie_v != null)
                 {
-                    if (zombie.mZombiePhase == ZombiePhase.PHASE_BUNGEE_RISING)
+                    if (aZombie_v.mZombiePhase == ZombiePhase.PHASE_BUNGEE_RISING)
                     {
                         return true;
                     }
-                    num++;
+                    num_v++;
                 }
             }
-            return num == 0;
+            return num_v == 0;
         }
 
         public void BossBungeeSpawn()
@@ -8992,12 +8959,12 @@ namespace Lawn
             mZombiePhase = ZombiePhase.PHASE_BOSS_STOMPING;
             mBossStompCounter = TodCommon.RandRangeInt(5500, 6500);
             int num = 0;
-            int[] array = new int[4];
+            int[] aRowArray = new int[4];
             for (int i = 0; i < 4; i++)
             {
                 if (BossCanStompRow(i))
                 {
-                    array[num] = i;
+                    aRowArray[num] = i;
                     num++;
                 }
             }
@@ -9005,7 +8972,7 @@ namespace Lawn
             {
                 return;
             }
-            mTargetRow = TodCommon.TodPickFromArray(array, num);
+            mTargetRow = TodCommon.TodPickFromArray(aRowArray, num);
             string text = string.Empty;
             switch (mTargetRow)
             {
@@ -9031,11 +8998,10 @@ namespace Lawn
 
         public bool BossCanStompRow(int theRow)
         {
-            int count = mBoard.mPlants.Count;
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < mBoard.mPlants.Count; i++)
             {
-                Plant plant = mBoard.mPlants[i];
-                if (!plant.mDead && !plant.NotOnGround() && plant.mRow >= theRow && plant.mRow <= theRow + 1 && plant.mPlantCol >= 5)
+                Plant aPlant = mBoard.mPlants[i];
+                if (!aPlant.mDead && !aPlant.NotOnGround() && aPlant.mRow >= theRow && aPlant.mRow <= theRow + 1 && aPlant.mPlantCol >= 5)
                 {
                     return true;
                 }
@@ -9081,14 +9047,14 @@ namespace Lawn
         public void BossHeadSpitContact()
         {
             Debug.ASSERT(mApp.ReanimationTryToGet(mBossFireBallReanimID) == null);
-            float num = 550f + mPosX;
-            float theY = mBoard.GetPosYBasedOnRow(num, mFireballRow) + GameConstants.BOSS_BALL_OFFSET_Y;
+            float aPosX = 550f + mPosX;
+            float aPosY = mBoard.GetPosYBasedOnRow(aPosX, mFireballRow) + GameConstants.BOSS_BALL_OFFSET_Y;
             int aRenderOrder = mRenderOrder + 1;
             Reanimation reanimation;
             if (mIsFireBall)
             {
-                num -= 95f;
-                reanimation = mApp.AddReanimation(num, theY, aRenderOrder, ReanimationType.REANIM_BOSS_FIREBALL);
+                aPosX -= 95f;
+                reanimation = mApp.AddReanimation(aPosX, aPosY, aRenderOrder, ReanimationType.REANIM_BOSS_FIREBALL);
                 reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_form, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 16f);
                 reanimation.mIsAttachment = true;
                 reanimation.AssignRenderGroupToTrack(GlobalMembersReanimIds.ReanimTrackId_additive, GameConstants.RENDER_GROUP_BOSS_FIREBALL_ADDITIVE);
@@ -9096,15 +9062,14 @@ namespace Lawn
             }
             else
             {
-                num -= 95f;
-                reanimation = mApp.AddReanimation(num, theY, aRenderOrder, ReanimationType.REANIM_BOSS_ICEBALL);
+                aPosX -= 95f;
+                reanimation = mApp.AddReanimation(aPosX, aPosY, aRenderOrder, ReanimationType.REANIM_BOSS_ICEBALL);
                 reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_form, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 16f);
                 reanimation.mIsAttachment = true;
                 reanimation.AssignRenderGroupToTrack(GlobalMembersReanimIds.ReanimTrackId_ice_highlight, GameConstants.RENDER_GROUP_BOSS_FIREBALL_ADDITIVE);
             }
             mBossFireBallReanimID = mApp.ReanimationGetID(reanimation);
-            Reanimation reanimation2 = mApp.ReanimationTryToGet(mSpecialHeadReanimID);
-            reanimation2.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_laugh, ReanimLoopType.REANIM_LOOP, 20, 18f);
+            mApp.ReanimationTryToGet(mSpecialHeadReanimID).PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_laugh, ReanimLoopType.REANIM_LOOP, 20, 18f);
             mApp.PlayFoley(FoleyType.FOLEY_HYDRAULIC_SHORT);
         }
 
@@ -9160,68 +9125,72 @@ namespace Lawn
 
         public void UpdateBossFireball()
         {
-            Reanimation reanimation = mApp.ReanimationTryToGet(mBossFireBallReanimID);
-            if (reanimation == null)
+            Reanimation aBossFireballReanim = mApp.ReanimationTryToGet(mBossFireBallReanimID);
+            if (aBossFireballReanim == null)
             {
                 return;
             }
-            float trackVelocity = reanimation.GetTrackVelocity(Reanimation.ReanimTrackId__ground);
-            float num = reanimation.mOverlayMatrix.mMatrix.M41 * Constants.IS;
-            num -= trackVelocity;
-            reanimation.mOverlayMatrix.mMatrix.M41 = num * Constants.S;
-            float num2 = mBoard.GetPosYBasedOnRow(num + 75f, mFireballRow) + GameConstants.BOSS_BALL_OFFSET_Y;
-            reanimation.mOverlayMatrix.mMatrix.M42 = num2 * Constants.S;
-            if (num < -180f + Constants.BOARD_EXTRA_ROOM)
+            float aSpeed = aBossFireballReanim.GetTrackVelocity(Reanimation.ReanimTrackId__ground);
+            float aBallPosX = aBossFireballReanim.mOverlayMatrix.mMatrix.M41 * Constants.IS;
+            aBallPosX -= aSpeed;
+            aBossFireballReanim.mOverlayMatrix.mMatrix.M41 = aBallPosX * Constants.S;
+            float aBallPosY = mBoard.GetPosYBasedOnRow(aBallPosX + 75f, mFireballRow) + GameConstants.BOSS_BALL_OFFSET_Y;
+            aBossFireballReanim.mOverlayMatrix.mMatrix.M42 = aBallPosY * Constants.S;
+            if (aBallPosX < -180f + Constants.BOARD_EXTRA_ROOM)
             {
-                reanimation.ReanimationDie();
+                aBossFireballReanim.ReanimationDie();
                 mBossFireBallReanimID = null;
             }
-            int theX = mBoard.PixelToGridX((int)num + 75, (int)num2);
+            int theX = mBoard.PixelToGridX((int)aBallPosX + 75, (int)aBallPosY);
             SquishAllInSquare(theX, mFireballRow, Zombie.ZombieAttackType.ATTACKTYPE_DRIVE_OVER);
             foreach (LawnMower lawnMower in mBoard.mLawnMowers)
             {
-                if (!lawnMower.mDead && lawnMower.mMowerState != LawnMowerState.MOWER_SQUISHED && lawnMower.mRow == mFireballRow && lawnMower.mPosX > num && lawnMower.mPosX < num + 50f)
+                if (!lawnMower.mDead && lawnMower.mMowerState != LawnMowerState.MOWER_SQUISHED && lawnMower.mRow == mFireballRow && lawnMower.mPosX > aBallPosX && lawnMower.mPosX < aBallPosX + 50f)
                 {
                     lawnMower.SquishMower();
                 }
             }
             if (mIsFireBall)
             {
-                if (reanimation.mLoopType == ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD && reanimation.mLoopCount > 0)
+                if (aBossFireballReanim.mLoopType == ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD && aBossFireballReanim.mLoopCount > 0)
                 {
-                    reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_role, ReanimLoopType.REANIM_LOOP, 0, 2f);
-                    reanimation.mRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_PARTICLE, mFireballRow, 0);
+                    aBossFireballReanim.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_role, ReanimLoopType.REANIM_LOOP, 0, 2f);
+                    aBossFireballReanim.mRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_PARTICLE, mFireballRow, 0);
                 }
-                if (reanimation.mLoopType == ReanimLoopType.REANIM_LOOP && RandomNumbers.NextNumber(10) == 0)
+                if (aBossFireballReanim.mLoopType == ReanimLoopType.REANIM_LOOP && RandomNumbers.NextNumber(10) == 0)
                 {
-                    float num3 = num + 100f + TodCommon.RandRangeFloat(0f, 20f);
-                    float theY = mBoard.GetPosYBasedOnRow(num3 - 40f, mFireballRow) + 90f + TodCommon.RandRangeFloat(-50f, 0f);
-                    int aRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_GRAVE_STONE, mFireballRow, 6);
-                    mApp.AddTodParticle(num3, theY, aRenderOrder, ParticleEffect.PARTICLE_FIREBALL_TRAIL);
+                    float aPosX1 = aBallPosX + 100f + TodCommon.RandRangeFloat(0f, 20f);
+                    float aPosY1 = mBoard.GetPosYBasedOnRow(aPosX1 - 40f, mFireballRow) + 90f + TodCommon.RandRangeFloat(-50f, 0f);
+                    mApp.AddTodParticle(aPosX1,
+                                        aPosY1,
+                                        Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_GRAVE_STONE, mFireballRow, 6),
+                                        ParticleEffect.PARTICLE_FIREBALL_TRAIL);
                 }
             }
             else
             {
-                if (reanimation.mLoopType == ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD && reanimation.mLoopCount > 0)
+                if (aBossFireballReanim.mLoopType == ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD && aBossFireballReanim.mLoopCount > 0)
                 {
-                    reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_role, ReanimLoopType.REANIM_LOOP, 0, 2f);
-                    reanimation.mRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_PARTICLE, mFireballRow, 0);
+                    aBossFireballReanim.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_role, ReanimLoopType.REANIM_LOOP, 0, 2f);
+                    aBossFireballReanim.mRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_PARTICLE, mFireballRow, 0);
                 }
-                if (reanimation.mLoopType == ReanimLoopType.REANIM_LOOP && RandomNumbers.NextNumber(10) == 0)
+                if (aBossFireballReanim.mLoopType == ReanimLoopType.REANIM_LOOP && RandomNumbers.NextNumber(10) == 0)
                 {
-                    float num4 = num + 100f + TodCommon.RandRangeFloat(0f, 20f);
-                    float theY2 = mBoard.GetPosYBasedOnRow(num4 - 40f, mFireballRow) + 90f + TodCommon.RandRangeFloat(-50f, 0f);
-                    int aRenderOrder2 = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_GRAVE_STONE, mFireballRow, 6);
-                    mApp.AddTodParticle(num4, theY2, aRenderOrder2, ParticleEffect.PARTICLE_ICEBALL_TRAIL);
+                    float aPosX2 = aBallPosX + 100f + TodCommon.RandRangeFloat(0f, 20f);
+                    float aPosY2 = mBoard.GetPosYBasedOnRow(aPosX2 - 40f, mFireballRow) + 90f + TodCommon.RandRangeFloat(-50f, 0f);
+                    mApp.AddTodParticle(aPosX2,
+                                        aPosY2,
+                                        Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_GRAVE_STONE, mFireballRow, 6),
+                                        ParticleEffect.PARTICLE_ICEBALL_TRAIL);
                 }
             }
-            reanimation.Update();
+            aBossFireballReanim.Update();
         }
 
         public void BossDestroyFireball()
         {
-            Reanimation reanimation = mApp.ReanimationTryToGet(mBossFireBallReanimID);
-            if (reanimation == null)
+            Reanimation aReanimation_v = mApp.ReanimationTryToGet(mBossFireBallReanimID);
+            if (aReanimation_v == null)
             {
                 return;
             }
@@ -9229,19 +9198,19 @@ namespace Lawn
             {
                 return;
             }
-            float num = reanimation.mOverlayMatrix.mMatrix.M41 * Constants.IS + 80f;
-            float num2 = reanimation.mOverlayMatrix.mMatrix.M42 * Constants.IS + 40f;
+            float aPosX = aReanimation_v.mOverlayMatrix.mMatrix.M41 * Constants.IS + 80f;
+            float aPosY = aReanimation_v.mOverlayMatrix.mMatrix.M42 * Constants.IS + 40f;
             for (int i = 0; i < 6; i++)
             {
-                float num3 = 1.5707964f + 6.2831855f * i / 6f;
-                float theX = num + 60f * (float)Math.Sin(num3);
-                float theY = num2 + 60f * (float)Math.Cos(num3);
-                Reanimation reanimation2 = mApp.AddReanimation(theX, theY, 400000, ReanimationType.REANIM_JALAPENO_FIRE);
-                reanimation2.mLoopType = ReanimLoopType.REANIM_PLAY_ONCE_FULL_LAST_FRAME;
-                reanimation2.mAnimTime = 0.2f;
-                reanimation2.mAnimRate = TodCommon.RandRangeFloat(20f, 25f);
+                float aAngle = 1.5707964f + 6.2831855f * i / 6f;
+                float theX = aPosX + 60f * (float)Math.Sin(aAngle);
+                float theY = aPosY + 60f * (float)Math.Cos(aAngle);
+                Reanimation aFireBallReanim = mApp.AddReanimation(theX, theY, 400000, ReanimationType.REANIM_JALAPENO_FIRE);
+                aFireBallReanim.mLoopType = ReanimLoopType.REANIM_PLAY_ONCE_FULL_LAST_FRAME;
+                aFireBallReanim.mAnimTime = 0.2f;
+                aFireBallReanim.mAnimRate = TodCommon.RandRangeFloat(20f, 25f);
             }
-            reanimation.ReanimationDie();
+            aReanimation_v.ReanimationDie();
             mBossFireBallReanimID = null;
             mBoard.RemoveParticleByType(ParticleEffect.PARTICLE_FIREBALL_TRAIL);
         }
@@ -9252,8 +9221,8 @@ namespace Lawn
             {
                 return;
             }
-            Reanimation reanimation = mApp.ReanimationTryToGet(mBossFireBallReanimID);
-            if (reanimation == null)
+            Reanimation aReanimation_v = mApp.ReanimationTryToGet(mBossFireBallReanimID);
+            if (aReanimation_v == null)
             {
                 return;
             }
@@ -9261,10 +9230,10 @@ namespace Lawn
             {
                 return;
             }
-            float theX = reanimation.mOverlayMatrix.mMatrix.M41 * Constants.IS + 80f;
-            float theY = reanimation.mOverlayMatrix.mMatrix.M42 * Constants.IS + 80f;
+            float theX = aReanimation_v.mOverlayMatrix.mMatrix.M41 * Constants.IS + 80f;
+            float theY = aReanimation_v.mOverlayMatrix.mMatrix.M42 * Constants.IS + 80f;
             mApp.AddTodParticle(theX, theY, 400000, ParticleEffect.PARTICLE_ICEBALL_DEATH);
-            reanimation.ReanimationDie();
+            aReanimation_v.ReanimationDie();
             mBossFireBallReanimID = null;
             mBoard.RemoveParticleByType(ParticleEffect.PARTICLE_ICEBALL_TRAIL);
         }
@@ -9320,8 +9289,8 @@ namespace Lawn
 
         public void ShowYuckyFace(bool theShow)
         {
-            Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
-            if (reanimation == null)
+            Reanimation reanimation_v = mApp.ReanimationTryToGet(mBodyReanimID);
+            if (reanimation_v == null)
             {
                 return;
             }
@@ -9329,22 +9298,20 @@ namespace Lawn
             {
                 if (theShow)
                 {
-                    Image yuckyFaceImage = GetYuckyFaceImage();
-                    reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_anim_head1, yuckyFaceImage);
-                    reanimation.AssignRenderGroupToTrack(GlobalMembersReanimIds.ReanimTrackId_anim_head2, -1);
-                    reanimation.AssignRenderGroupToTrack(GlobalMembersReanimIds.ReanimTrackId_anim_head_jaw, -1);
-                    reanimation.AssignRenderGroupToTrack(GlobalMembersReanimIds.ReanimTrackId_anim_tongue, -1);
+                    reanimation_v.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_anim_head1, GetYuckyFaceImage());
+                    reanimation_v.AssignRenderGroupToTrack(GlobalMembersReanimIds.ReanimTrackId_anim_head2, -1);
+                    reanimation_v.AssignRenderGroupToTrack(GlobalMembersReanimIds.ReanimTrackId_anim_head_jaw, -1);
+                    reanimation_v.AssignRenderGroupToTrack(GlobalMembersReanimIds.ReanimTrackId_anim_tongue, -1);
                     return;
                 }
                 if (mHasHead)
                 {
-                    Image theImage = null;
-                    reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_anim_head1, theImage);
-                    reanimation.AssignRenderGroupToTrack(GlobalMembersReanimIds.ReanimTrackId_anim_head2, 0);
-                    reanimation.AssignRenderGroupToTrack(GlobalMembersReanimIds.ReanimTrackId_anim_head_jaw, 0);
+                    reanimation_v.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_anim_head1, null);
+                    reanimation_v.AssignRenderGroupToTrack(GlobalMembersReanimIds.ReanimTrackId_anim_head2, 0);
+                    reanimation_v.AssignRenderGroupToTrack(GlobalMembersReanimIds.ReanimTrackId_anim_head_jaw, 0);
                     if (mVariant)
                     {
-                        reanimation.AssignRenderGroupToTrack(GlobalMembersReanimIds.ReanimTrackId_anim_tongue, 0);
+                        reanimation_v.AssignRenderGroupToTrack(GlobalMembersReanimIds.ReanimTrackId_anim_tongue, 0);
                     }
                 }
             }
@@ -9777,10 +9744,10 @@ namespace Lawn
             ReanimShowTrack(ref GlobalMembersReanimIds.ReanimTrackId_zombie_flaghand, -1);
             ReanimShowTrack(ref GlobalMembersReanimIds.ReanimTrackId_zombie_innerarm_screendoor, -1);
             mHasObject = false;
-            float num = 0f;
-            float num2 = 0f;
-            GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_flaghand, ref num, ref num2);
-            TodParticleSystem aParticle = mApp.AddTodParticle(num + 6f, num2 - 45f, mRenderOrder + 1, ParticleEffect.PARTICLE_ZOMBIE_FLAG);
+            float aFlagPosX = 0f;
+            float aFlagPosY = 0f;
+            GetTrackPosition(ref GlobalMembersReanimIds.ReanimTrackId_zombie_flaghand, ref aFlagPosX, ref aFlagPosY);
+            TodParticleSystem aParticle = mApp.AddTodParticle(aFlagPosX + 6f, aFlagPosY - 45f, mRenderOrder + 1, ParticleEffect.PARTICLE_ZOMBIE_FLAG);
             OverrideParticleColor(aParticle);
             OverrideParticleScale(aParticle);
         }
@@ -9901,12 +9868,12 @@ namespace Lawn
             {
                 Reanimation reanimation = mApp.ReanimationGet(mBodyReanimID);
                 int theTrackIndex = reanimation.FindTrackIndex(GlobalMembersReanimIds.ReanimTrackId_boss_jaw);
-                ReanimatorTransform reanimatorTransform;
-                reanimation.GetCurrentTransform(theTrackIndex, out reanimatorTransform, false);
-                float theX = mPosX + reanimatorTransform.mTransX * Constants.IS + 100f;
-                float theY = mPosY + reanimatorTransform.mTransY * Constants.IS + 50f;
-                mApp.AddTodParticle(theX, theY, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_BOSS_FIREBALL);
-                reanimatorTransform.PrepareForReuse();
+                ReanimatorTransform aTransform;
+                reanimation.GetCurrentTransform(theTrackIndex, out aTransform, false);
+                float aFlamePosX = mPosX + aTransform.mTransX * Constants.IS + 100f;
+                float aFlamePosY = mPosY + aTransform.mTransY * Constants.IS + 50f;
+                mApp.AddTodParticle(aFlamePosX, aFlamePosY, aRenderOrder, ParticleEffect.PARTICLE_ZOMBIE_BOSS_FIREBALL);
+                aTransform.PrepareForReuse();
             }
             else
             {
@@ -9949,42 +9916,34 @@ namespace Lawn
             }
             if (mPhaseCounter >= 36 && mPhaseCounter < 39)
             {
-                Reanimation reanimation = mApp.ReanimationGet(mSpecialHeadReanimID);
-                if (reanimation != null)
-                {
-                    reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_shooting, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, 35f);
-                    return;
-                }
+                mApp.ReanimationGet(mSpecialHeadReanimID)?.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_shooting, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, 35f);
+                return;
             }
             else if (mPhaseCounter <= 0)
             {
-                Reanimation reanimation2 = mApp.ReanimationGet(mSpecialHeadReanimID);
-                if (reanimation2 != null)
-                {
-                    reanimation2.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_head_idle, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, 15f);
-                }
+                mApp.ReanimationGet(mSpecialHeadReanimID)?.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_head_idle, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, 15f);
                 mApp.PlayFoley(FoleyType.FOLEY_THROW);
-                Reanimation reanimation3 = mApp.ReanimationGet(mBodyReanimID);
-                if (reanimation3 != null)
+                Reanimation reanimation_v = mApp.ReanimationGet(mBodyReanimID);
+                if (reanimation_v != null)
                 {
-                    int theTrackIndex = reanimation3.FindTrackIndex(GlobalMembersReanimIds.ReanimTrackId_anim_head1);
-                    ReanimatorTransform reanimatorTransform;
-                    reanimation3.GetCurrentTransform(theTrackIndex, out reanimatorTransform, false);
-                    float num = mPosX + reanimatorTransform.mTransX * Constants.IS - 9f;
-                    float num2 = mPosY + reanimatorTransform.mTransY * Constants.IS + 6f - mAltitude;
-                    ProjectileType projectileType = ProjectileType.PROJECTILE_ZOMBIE_PEA;
+                    reanimation_v.GetCurrentTransform(
+                        reanimation_v.FindTrackIndex(GlobalMembersReanimIds.ReanimTrackId_anim_head1),
+                        out ReanimatorTransform aTransForm,
+                        false);
+                    float aOriginX = mPosX + aTransForm.mTransX * Constants.IS - 9f;
+                    float aOriginY = mPosY + aTransForm.mTransY * Constants.IS + 6f - mAltitude;
                     if (mMindControlled)
                     {
-                        num += 90f * mScaleZombie;
-                        projectileType = ProjectileType.PROJECTILE_ZOMBIE_PEA_MIND_CONTROL;
+                        aOriginX += 90f * mScaleZombie;
+                        mBoard.AddProjectile((int)aOriginX, (int)aOriginY, mRenderOrder, mRow, ProjectileType.PROJECTILE_ZOMBIE_PEA_MIND_CONTROL);
                     }
-                    Projectile projectile = mBoard.AddProjectile((int)num, (int)num2, mRenderOrder, mRow, projectileType);
-                    if (!mMindControlled)
+                    else
                     {
-                        projectile.mMotionType = ProjectileMotion.MOTION_BACKWARDS;
+                        mBoard.AddProjectile((int)aOriginX, (int)aOriginY, mRenderOrder, mRow, ProjectileType.PROJECTILE_ZOMBIE_PEA)
+                            .mMotionType = ProjectileMotion.MOTION_BACKWARDS;
                     }
                     mPhaseCounter = 150;
-                    reanimatorTransform.PrepareForReuse();
+                    aTransForm.PrepareForReuse();
                 }
             }
         }
@@ -10041,14 +10000,14 @@ namespace Lawn
                 int count = mBoard.mPlants.Count;
                 for (int i = 0; i < count; i++)
                 {
-                    Plant plant = mBoard.mPlants[i];
-                    if (!plant.mDead)
+                    Plant aPlant = mBoard.mPlants[i];
+                    if (!aPlant.mDead)
                     {
-                        plant.GetPlantRect();
-                        if (mRow == plant.mRow && !plant.NotOnGround())
+                        TRect aPlantRect = aPlant.GetPlantRect();
+                        if (mRow == aPlant.mRow && !aPlant.NotOnGround())
                         {
                             mBoard.mPlantsEaten++;
-                            plant.Die();
+                            aPlant.Die();
                         }
                     }
                 }
@@ -10141,54 +10100,54 @@ namespace Lawn
                     reanimation.mAnimRate = TodCommon.RandRangeFloat(15f, 20f);
                 }
             }
-            float num4 = (float)Math.Cos(num);
-            float num5 = (float)Math.Sin(num);
+            float aVelX = (float)Math.Cos(num);
+            float aVelY = (float)Math.Sin(num);
             bool flag = false;
-            if (mPosX < 0f && num4 < 0f)
+            if (mPosX < 0f && aVelX < 0f)
             {
                 flag = true;
             }
-            else if (mPosX > 680f && num4 > 0f)
+            else if (mPosX > 680f && aVelX > 0f)
             {
                 flag = true;
             }
-            else if (mPosY < 100f && num5 < 0f)
+            else if (mPosY < 100f && aVelY < 0f)
             {
                 flag = true;
             }
-            else if (mPosY > 400f && num5 > 0f)
+            else if (mPosY > 400f && aVelY > 0f)
             {
                 flag = true;
             }
-            float num6 = 0.5f;
+            float aMaxSpeed = 0.5f;
             if (flag)
             {
-                num6 = num2 * 0.3f;
+                aMaxSpeed = num2 * 0.3f;
                 mPhaseCounter = Math.Min(100, mPhaseCounter);
             }
             else if (mZombiePhase == ZombiePhase.PHASE_ZOMBIQUARIUM_ACCEL)
             {
-                num6 = 0.5f;
+                aMaxSpeed = 0.5f;
             }
             else if (mZombiePhase == ZombiePhase.PHASE_ZOMBIQUARIUM_BACK_AND_FORTH)
             {
-                if (mPosX >= 200f || num4 < 0f)
+                if (mPosX >= 200f || aVelX < 0f)
                 {
                 }
-                if (mPosX <= 550f || num4 > 0f)
+                if (mPosX <= 550f || aVelX > 0f)
                 {
                 }
-                num6 = 0.3f;
+                aMaxSpeed = 0.3f;
             }
             else if (mZombiePhase == ZombiePhase.PHASE_ZOMBIQUARIUM_DRIFT || mZombiePhase == ZombiePhase.PHASE_ZOMBIQUARIUM_BITE)
             {
-                num6 = 0.05f;
+                aMaxSpeed = 0.05f;
             }
-            num2 = Math.Min(num6, num2 + 0.01f);
-            num4 *= num2;
-            num5 *= num2;
-            mPosX += num4;
-            mPosY += num5;
+            num2 = Math.Min(aMaxSpeed, num2 + 0.01f);
+            aVelX *= num2;
+            aVelY *= num2;
+            mPosX += aVelX;
+            mPosY += aVelY;
             if (!mBoard.HasLevelAwardDropped())
             {
                 if (mSummonCounter > 0)
@@ -10222,29 +10181,29 @@ namespace Lawn
             {
                 return false;
             }
-            GridItem gridItem = null;
-            float num = 0f;
+            GridItem aTargetGridItem = null;
+            float aDiatanceClosest = 0f;
             float num2 = 15f;
             float num3 = 15f;
             float num4 = 50f;
             float num5 = 40f;
-            int num6 = -1;
-            GridItem gridItem2 = null;
-            while (mBoard.IterateGridItems(ref gridItem2, ref num6))
+            int i = -1;
+            GridItem aGridItem = null;
+            while (mBoard.IterateGridItems(ref aGridItem, ref i))
             {
-                if (gridItem2.mGridItemType == GridItemType.GRIDITEM_BRAIN && gridItem2.mGridItemCounter >= 15)
+                if (aGridItem.mGridItemType == GridItemType.GRIDITEM_BRAIN && aGridItem.mGridItemCounter >= 15)
                 {
-                    float num7 = TodCommon.Distance2D(gridItem2.mPosX + num2, gridItem2.mPosY + num3, mPosX + num4, mPosY + num5);
-                    if (gridItem == null || num7 < num)
+                    float aDistance = TodCommon.Distance2D(aGridItem.mPosX + num2, aGridItem.mPosY + num3, mPosX + num4, mPosY + num5);
+                    if (aTargetGridItem == null || aDistance < aDiatanceClosest)
                     {
-                        num = num7;
-                        gridItem = gridItem2;
+                        aDiatanceClosest = aDistance;
+                        aTargetGridItem = aGridItem;
                     }
                 }
             }
-            if (gridItem != null && num < 50f)
+            if (aTargetGridItem != null && aDiatanceClosest < 50f)
             {
-                gridItem.GridItemDie();
+                aTargetGridItem.GridItemDie();
                 mApp.PlayFoley(FoleyType.FOLEY_SLURP);
                 mBodyHealth = Math.Min(mBodyMaxHealth, mBodyHealth + 200);
                 PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_aquarium_bite, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 10, 24f);
@@ -10252,10 +10211,10 @@ namespace Lawn
                 mPhaseCounter = 200;
                 return false;
             }
-            if (gridItem != null)
+            if (aTargetGridItem != null)
             {
-                float num8 = gridItem.mPosX + num2 - (mPosX + num4);
-                float num9 = gridItem.mPosY + num3 - (mPosY + num5);
+                float num8 = aTargetGridItem.mPosX + num2 - (mPosX + num4);
+                float num9 = aTargetGridItem.mPosY + num3 - (mPosY + num5);
                 float num10 = mVelZ;
                 num10 = (float)Math.Atan2(num9, num8);
                 if (num10 < 0f)
@@ -10276,75 +10235,71 @@ namespace Lawn
             }
             if (mPhaseCounter >= 99 && mPhaseCounter < 102)
             {
-                Reanimation reanimation = mApp.ReanimationGet(mSpecialHeadReanimID);
-                reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_shooting, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, 38f);
+                mApp.ReanimationGet(mSpecialHeadReanimID).PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_shooting, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, 38f);
                 return;
             }
             if ((mPhaseCounter >= 18 && mPhaseCounter < 21) || (mPhaseCounter >= 36 && mPhaseCounter < 39) || (mPhaseCounter >= 51 && mPhaseCounter < 54) || (mPhaseCounter >= 69 && mPhaseCounter < 72))
             {
                 mApp.PlayFoley(FoleyType.FOLEY_THROW);
-                Reanimation reanimation2 = mApp.ReanimationGet(mBodyReanimID);
-                if (reanimation2 != null)
+                Reanimation reanimation_v = mApp.ReanimationGet(mBodyReanimID);
+                if (reanimation_v != null)
                 {
-                    int theTrackIndex = reanimation2.FindTrackIndex(GlobalMembersReanimIds.ReanimTrackId_anim_head1);
-                    ReanimatorTransform reanimatorTransform;
-                    reanimation2.GetCurrentTransform(theTrackIndex, out reanimatorTransform, false);
-                    float num = mPosX + reanimatorTransform.mTransX * Constants.IS - 9f;
-                    float num2 = mPosY + reanimatorTransform.mTransY * Constants.IS + 6f;
-                    ProjectileType projectileType = ProjectileType.PROJECTILE_ZOMBIE_PEA;
+                    int theTrackIndex = reanimation_v.FindTrackIndex(GlobalMembersReanimIds.ReanimTrackId_anim_head1);
+                    ReanimatorTransform aTransForm;
+                    reanimation_v.GetCurrentTransform(theTrackIndex, out aTransForm, false);
+                    float aOriginX = mPosX + aTransForm.mTransX * Constants.IS - 9f;
+                    float aOriginY = mPosY + aTransForm.mTransY * Constants.IS + 6f;
                     if (mMindControlled)
                     {
-                        num += 90f * mScaleZombie;
-                        projectileType = ProjectileType.PROJECTILE_ZOMBIE_PEA_MIND_CONTROL;
+                        aOriginX += 90f * mScaleZombie;
+                        mBoard.AddProjectile((int)aOriginX, (int)aOriginY, mRenderOrder, mRow, ProjectileType.PROJECTILE_ZOMBIE_PEA_MIND_CONTROL);
                     }
-                    Projectile projectile = mBoard.AddProjectile((int)num, (int)num2, mRenderOrder, mRow, projectileType);
-                    if (!mMindControlled)
+                    else
                     {
-                        projectile.mMotionType = ProjectileMotion.MOTION_BACKWARDS;
+                        mBoard.AddProjectile((int)aOriginX, (int)aOriginY, mRenderOrder, mRow, ProjectileType.PROJECTILE_ZOMBIE_PEA)
+                            .mMotionType = ProjectileMotion.MOTION_BACKWARDS;
                     }
-                    reanimatorTransform.PrepareForReuse();
+                    aTransForm.PrepareForReuse();
                     return;
                 }
             }
             else if (mPhaseCounter <= 0)
             {
-                Reanimation reanimation3 = mApp.ReanimationGet(mSpecialHeadReanimID);
-                reanimation3.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_head_idle, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, 15f);
+                mApp.ReanimationGet(mSpecialHeadReanimID).PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_head_idle, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, 15f);
                 mPhaseCounter = 150;
             }
         }
 
         public void UpdateZombieSquashHead()
         {
-            float num = 6f;
-            float num2 = -21f;
+            float aPosX = 6f;
+            float aPosY = -21f;
             if (mHasHead && mIsEating && mZombiePhase == ZombiePhase.PHASE_SQUASH_PRE_LAUNCH)
             {
                 StopEating();
                 PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.REANIM_LOOP, 20, 12f);
                 mHasHead = false;
-                Reanimation reanimation = mApp.ReanimationGet(mSpecialHeadReanimID);
-                reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_jumpup, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, 24f);
-                reanimation.mRenderOrder = mRenderOrder + 1;
-                reanimation.SetPosition((mPosX + num) * Constants.S, (mPosY + num2) * Constants.S);
+                Reanimation mSpecialHeadReanim = mApp.ReanimationGet(mSpecialHeadReanimID);
+                mSpecialHeadReanim.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_jumpup, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, 24f);
+                mSpecialHeadReanim.mRenderOrder = mRenderOrder + 1;
+                mSpecialHeadReanim.SetPosition((mPosX + aPosX) * Constants.S, (mPosY + aPosY) * Constants.S);
                 Reanimation reanimation2 = mApp.ReanimationGet(mBodyReanimID);
                 ReanimatorTrackInstance trackInstanceByName = reanimation2.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_anim_head1);
                 GlobalMembersAttachment.AttachmentDetach(ref trackInstanceByName.mAttachmentID);
-                reanimation.mOverlayMatrix.mMatrix.M11 = 0.75f;
-                reanimation.mOverlayMatrix.mMatrix.M12 = 0f;
-                reanimation.mOverlayMatrix.mMatrix.M22 = 0.75f;
-                reanimation.mOverlayMatrix.mMatrix.M21 = 0f;
+                mSpecialHeadReanim.mOverlayMatrix.mMatrix.M11 = 0.75f;
+                mSpecialHeadReanim.mOverlayMatrix.mMatrix.M12 = 0f;
+                mSpecialHeadReanim.mOverlayMatrix.mMatrix.M22 = 0.75f;
+                mSpecialHeadReanim.mOverlayMatrix.mMatrix.M21 = 0f;
                 mZombiePhase = ZombiePhase.PHASE_SQUASH_RISING;
                 mPhaseCounter = 95;
             }
             if (mZombiePhase == ZombiePhase.PHASE_SQUASH_RISING)
             {
-                int num3 = mBoard.PixelToGridXKeepOnBoard(mX, mY);
-                int num4 = mBoard.GridToPixelX(num3, mRow);
-                int num5 = TodCommon.TodAnimateCurve(50, 20, mPhaseCounter, 0, num4 - (int)mPosX, TodCurves.CURVE_EASE_IN_OUT);
-                int num6 = TodCommon.TodAnimateCurve(50, 20, mPhaseCounter, 0, -20, TodCurves.CURVE_EASE_IN_OUT);
+                int aX = mBoard.GridToPixelX(mBoard.PixelToGridXKeepOnBoard(mX, mY), mRow);
+                int aDestX = TodCommon.TodAnimateCurve(50, 20, mPhaseCounter, 0, aX - (int)mPosX, TodCurves.CURVE_EASE_IN_OUT);
+                int aDestY = TodCommon.TodAnimateCurve(50, 20, mPhaseCounter, 0, -20, TodCurves.CURVE_EASE_IN_OUT);
                 Reanimation reanimation = mApp.ReanimationGet(mSpecialHeadReanimID);
-                reanimation.SetPosition((mPosX + num + num5) * Constants.S, (mPosY + num2 + num6) * Constants.S);
+                reanimation.SetPosition((mPosX + aPosX + aDestX) * Constants.S, (mPosY + aPosY + aDestY) * Constants.S);
                 if (mPhaseCounter <= 0)
                 {
                     reanimation = mApp.ReanimationGet(mSpecialHeadReanimID);
@@ -10355,15 +10310,13 @@ namespace Lawn
             }
             if (mZombiePhase == ZombiePhase.PHASE_SQUASH_FALLING)
             {
-                int num7 = TodCommon.TodAnimateCurve(10, 0, mPhaseCounter, -20, 74, TodCurves.CURVE_LINEAR);
-                int num3 = mBoard.PixelToGridXKeepOnBoard(mX, mY);
-                int num8 = mBoard.GridToPixelX(num3, mRow);
+                int aDestY = TodCommon.TodAnimateCurve(10, 0, mPhaseCounter, -20, 74, TodCurves.CURVE_LINEAR);
+                int aDestX = mBoard.GridToPixelX(mBoard.PixelToGridXKeepOnBoard(mX, mY), mRow);
                 Reanimation reanimation = mApp.ReanimationGet(mSpecialHeadReanimID);
-                reanimation.SetPosition((mPosX + num + num8 - mPosX) * Constants.S, (mPosY + num2 + num7) * Constants.S);
+                reanimation.SetPosition((mPosX + aPosX + aDestX - mPosX) * Constants.S, (mPosY + aPosY + aDestY) * Constants.S);
                 if (mPhaseCounter >= 4 && mPhaseCounter < 7)
                 {
-                    num3 = mBoard.PixelToGridXKeepOnBoard(mX, mY);
-                    SquishAllInSquare(num3, mRow, Zombie.ZombieAttackType.ATTACKTYPE_CHEW);
+                    SquishAllInSquare(mBoard.PixelToGridXKeepOnBoard(mX, mY), mRow, Zombie.ZombieAttackType.ATTACKTYPE_CHEW);
                 }
                 if (mPhaseCounter <= 0)
                 {
@@ -10375,8 +10328,8 @@ namespace Lawn
             }
             if (mZombiePhase == ZombiePhase.PHASE_SQUASH_DONE_FALLING && mPhaseCounter <= 0)
             {
-                Reanimation reanimation = mApp.ReanimationGet(mSpecialHeadReanimID);
-                reanimation.ReanimationDie();
+                Reanimation aSpecialHeadReanim = mApp.ReanimationGet(mSpecialHeadReanimID);
+                aSpecialHeadReanim.ReanimationDie();
                 mSpecialHeadReanimID = null;
                 TakeDamage(1800, 9U);
             }
@@ -10384,11 +10337,10 @@ namespace Lawn
 
         public bool IsTanglekelpTarget()
         {
-            int count = mBoard.mPlants.Count;
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < mBoard.mPlants.Count; i++)
             {
-                Plant plant = mBoard.mPlants[i];
-                if (!plant.mDead && plant.mState == PlantState.STATE_TANGLEKELP_GRABBING && plant.mTargetZombieID == mBoard.ZombieGetID(this))
+                Plant aPlant = mBoard.mPlants[i];
+                if (!aPlant.mDead && aPlant.mState == PlantState.STATE_TANGLEKELP_GRABBING && aPlant.mTargetZombieID == mBoard.ZombieGetID(this))
                 {
                     return true;
                 }
@@ -10425,11 +10377,10 @@ namespace Lawn
             {
                 return true;
             }
-            int count = mBoard.mPlants.Count;
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < mBoard.mPlants.Count; i++)
             {
-                Plant plant = mBoard.mPlants[i];
-                if (!plant.mDead && plant.mSeedType == SeedType.SEED_TANGLEKELP && plant.mTargetZombieID == mBoard.ZombieGetID(this))
+                Plant aPlant = mBoard.mPlants[i];
+                if (!aPlant.mDead && aPlant.mSeedType == SeedType.SEED_TANGLEKELP && aPlant.mTargetZombieID == mBoard.ZombieGetID(this))
                 {
                     return true;
                 }
@@ -10439,7 +10390,9 @@ namespace Lawn
 
         public bool IsFireResistant()
         {
-            return mZombieType == ZombieType.ZOMBIE_CATAPULT || mZombieType == ZombieType.ZOMBIE_ZAMBONI || (mShieldType == ShieldType.SHIELDTYPE_DOOR || mShieldType == ShieldType.SHIELDTYPE_LADDER);
+            return mZombieType == ZombieType.ZOMBIE_CATAPULT
+                || mZombieType == ZombieType.ZOMBIE_ZAMBONI
+                || (mShieldType == ShieldType.SHIELDTYPE_DOOR || mShieldType == ShieldType.SHIELDTYPE_LADDER);
         }
 
         public void EnableMustache(bool theEnableMustache)
@@ -10452,9 +10405,15 @@ namespace Lawn
             {
                 return;
             }
-            if (mZombieType == ZombieType.ZOMBIE_PEA_HEAD || mZombieType == ZombieType.ZOMBIE_WALLNUT_HEAD || mZombieType == ZombieType.ZOMBIE_TALLNUT_HEAD || mZombieType == ZombieType.ZOMBIE_JALAPENO_HEAD || mZombieType == ZombieType.ZOMBIE_GATLING_HEAD || mZombieType == ZombieType.ZOMBIE_SQUASH_HEAD)
+            switch (mZombieType)
             {
-                return;
+                case ZombieType.ZOMBIE_PEA_HEAD:
+                case ZombieType.ZOMBIE_WALLNUT_HEAD:
+                case ZombieType.ZOMBIE_TALLNUT_HEAD:
+                case ZombieType.ZOMBIE_JALAPENO_HEAD:
+                case ZombieType.ZOMBIE_GATLING_HEAD:
+                case ZombieType.ZOMBIE_SQUASH_HEAD:
+                    return;
             }
             Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
             if (reanimation == null)
@@ -10615,35 +10574,41 @@ namespace Lawn
             {
                 return;
             }
-            if (mZombieType == ZombieType.ZOMBIE_BOBSLED || mZombieType == ZombieType.ZOMBIE_ZAMBONI || mZombieType == ZombieType.ZOMBIE_CATAPULT)
-            {
-                return;
-            }
             if (mBoard.StageHasRoof())
             {
                 return;
             }
-            float num = 20f;
-            float num2 = 100f;
-            if (mZombieType == ZombieType.ZOMBIE_FOOTBALL || mZombieType == ZombieType.ZOMBIE_DANCER || mZombieType == ZombieType.ZOMBIE_BACKUP_DANCER)
+            float aOffsetX = 20f;
+            float aOffsetY = 100f;
+            switch (mZombieType)
             {
-                num += 160f;
-            }
-            if (mZombieType == ZombieType.ZOMBIE_POGO)
-            {
-                num2 += 20f;
-            }
-            if (mZombieType == ZombieType.ZOMBIE_BALLOON)
-            {
-                num2 += 30f;
-                num += 110f;
+                case ZombieType.ZOMBIE_BOBSLED:
+                case ZombieType.ZOMBIE_ZAMBONI:
+                case ZombieType.ZOMBIE_CATAPULT:
+                    return;
+                case ZombieType.ZOMBIE_FOOTBALL:
+                case ZombieType.ZOMBIE_DANCER:
+                case ZombieType.ZOMBIE_BACKUP_DANCER:
+                    aOffsetX += 160f;
+                    break;
+                case ZombieType.ZOMBIE_POGO:
+                    aOffsetY += 20f;
+                    break;
+                case ZombieType.ZOMBIE_BALLOON:
+                    aOffsetY += 30f;
+                    aOffsetX += 110f;
+                    break;
             }
             if (mBoard.StageHasGraveStones())
             {
-                num2 += 15f;
+                aOffsetY += 15f;
             }
-            int aRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_GRAVE_STONE, mRow, 5);
-            mApp.AddTodParticle(mX + Constants.InvertAndScale(num), mY + Constants.InvertAndScale(num2), aRenderOrder, ParticleEffect.PARTICLE_DAISY);
+            mApp.AddTodParticle(
+                mX + Constants.InvertAndScale(aOffsetX), 
+                mY + Constants.InvertAndScale(aOffsetY), 
+                Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_GRAVE_STONE, mRow, 5), 
+                ParticleEffect.PARTICLE_DAISY
+            );
         }
 
         public void EnableDanceMode(bool theEnableDance)

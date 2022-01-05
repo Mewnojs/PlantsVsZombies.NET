@@ -436,7 +436,7 @@ namespace Lawn
 			g.SetColorizeImages(false);
 		}
 
-		public void MouseDown(int theX, int theY, int theClickCount)
+		public void MouseDown(int x, int y, int theClickCount)
 		{
 			if (mBoard.mPaused || mApp.mGameScene != GameScenes.SCENE_PLAYING)
 			{

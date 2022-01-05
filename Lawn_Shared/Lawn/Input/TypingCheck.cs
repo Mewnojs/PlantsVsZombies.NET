@@ -29,6 +29,7 @@ namespace Lawn
 
 		public void AddChar(char theChar)
 		{
+			mPhrase += (sbyte)KeyCodes.GetKeyCodeFromName(theChar.ToString());
 		}
 
 		public bool Check(KeyCode theCode)

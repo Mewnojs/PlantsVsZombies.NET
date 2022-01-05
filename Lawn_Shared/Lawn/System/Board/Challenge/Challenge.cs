@@ -845,7 +845,7 @@ namespace Lawn
 			return false;
 		}
 
-		public bool MouseUp(int theX, int theY)
+		public bool MouseUp(int x, int y)
 		{
 			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED)
 			{

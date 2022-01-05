@@ -6,7 +6,7 @@ using System.Net.Sockets;
 
 using System.Threading;
 using System.ComponentModel;
-using Lidgren.Network;
+//using Lidgren.Network;
 
 namespace Microsoft.Xna.Framework.Net
 {
@@ -19,12 +19,12 @@ namespace Microsoft.Xna.Framework.Net
 	{
 		private BackgroundWorker MGServerWorker = new BackgroundWorker ();
 		bool done = false;
-		NetServer peer;
+		object peer;
 		NetworkSession session;
 		AvailableNetworkSession availableSession;
 		string myLocalAddress = string.Empty;
 		IPEndPoint myLocalEndPoint = null;
-		Dictionary<long, NetConnection> pendingGamers = new Dictionary<long, NetConnection> ();
+		//Dictionary<long, NetConnection> pendingGamers = new Dictionary<long, NetConnection> ();
 		//Dictionary<long, NetConnection> connectedGamers = new Dictionary<long, NetConnection>();
 		bool online = false;
 		private static int port = 3074;
@@ -88,6 +88,7 @@ namespace Microsoft.Xna.Framework.Net
 
 		private void MGServer_DoWork (object sender, DoWorkEventArgs e)
 		{
+			throw new NotImplementedException(); /*
 			BackgroundWorker worker = sender as BackgroundWorker;
 
 			NetPeerConfiguration config = new NetPeerConfiguration (applicationIdentifier);
@@ -309,22 +310,24 @@ namespace Microsoft.Xna.Framework.Net
 					e.Cancel = true;
 					done = true;
 				}
-			} while (!done);
+			} while (!done);*/
 		}
 
 		private bool AlreadyConnected (IPEndPoint endPoint)
 		{
+			throw new NotImplementedException(); /*
 			foreach (NetConnection player in peer.Connections) {
 				if (player.RemoteEndPoint == endPoint) {
 					return true;
 				}
 			}
 
-			return false;
+			return false;*/
 		}
 
 		private void MGServer_RunWorkerCompleted (object sender, RunWorkerCompletedEventArgs e)
 		{
+			throw new NotImplementedException(); /*
 			if ((e.Cancelled == true)) {
                 //Game.Instance.Log("Canceled");
 			} else if (!(e.Error == null)) {
@@ -341,11 +344,12 @@ namespace Microsoft.Xna.Framework.Net
 				om.Write (peer.Configuration.AppIdentifier);
 				peer.SendUnconnectedMessage (om, m_masterServer); // send message to peer
 			}
-			peer.Shutdown ("app exiting");
+			peer.Shutdown ("app exiting");*/
 		}	
 
 		internal void SendProfile (NetConnection player)
 		{
+			throw new NotImplementedException(); /*
 			NetOutgoingMessage om = peer.CreateMessage ();
 			om.Write ((byte)NetworkMessageType.GamerProfile);
 			om.Write (session.AllGamers.Count);
@@ -354,20 +358,21 @@ namespace Microsoft.Xna.Framework.Net
 			om.Write (session.MaxGamers);
 			om.Write ((int)session.LocalGamers[0].State);
             //Game.Instance.Log("Sent profile to: " + NetUtility.ToHexString(player.RemoteUniqueIdentifier));
-			peer.SendMessage (om, player, NetDeliveryMethod.ReliableOrdered);			
+			peer.SendMessage (om, player, NetDeliveryMethod.ReliableOrdered);	*/		
 		}
 
 		internal void SendProfileRequest (NetConnection player)
 		{
+			throw new NotImplementedException(); /*
 			NetOutgoingMessage om = peer.CreateMessage ();
 			om.Write ((byte)NetworkMessageType.RequestGamerProfile);
             //Game.Instance.Log("Sent profile request to: " + NetUtility.ToHexString(player.RemoteUniqueIdentifier));
-			peer.SendMessage (om, player, NetDeliveryMethod.ReliableOrdered);			
+			peer.SendMessage (om, player, NetDeliveryMethod.ReliableOrdered);	*/		
 		}
 
 		internal void SendPeerIntroductions (NetworkGamer gamer)
 		{
-
+			throw new NotImplementedException(); /*
 			NetConnection playerConnection = null;
 
 			foreach (NetConnection player in peer.Connections) {
@@ -387,27 +392,29 @@ namespace Microsoft.Xna.Framework.Net
 				om.Write (playerConnection.RemoteEndPoint.ToString ()); 
 
 				peer.SendMessage (om, player, NetDeliveryMethod.ReliableOrdered);
-			}
+			}*/
 		}
 
 		internal void SendGamerStateChange (NetworkGamer gamer)
 		{
-            //Game.Instance.Log("SendGamerStateChange " + gamer.RemoteUniqueIdentifier);
+			throw new NotImplementedException(); /*
+												 //Game.Instance.Log("SendGamerStateChange " + gamer.RemoteUniqueIdentifier);
 			NetOutgoingMessage om = peer.CreateMessage ();
 			om.Write ((byte)NetworkMessageType.GamerStateChange);
 			om.Write ((int)gamer.State);
 
-			SendMessage (om, SendDataOptions.Reliable, gamer);
+			SendMessage (om, SendDataOptions.Reliable, gamer);*/
 		}
 
 		internal void SendSessionStateChange ()
 		{
-            //Game.Instance.Log("Send Session State Change");
+			throw new NotImplementedException(); /*
+												 //Game.Instance.Log("Send Session State Change");
 			NetOutgoingMessage om = peer.CreateMessage ();
 			om.Write ((byte)NetworkMessageType.SessionStateChange);
 			om.Write ((int)session.SessionState);
 
-			SendMessage (om, SendDataOptions.Reliable, null);
+			SendMessage (om, SendDataOptions.Reliable, null);*/
 		}		
 
 		public static IPEndPoint ParseIPEndPoint (string endPoint)
@@ -499,7 +506,7 @@ namespace Microsoft.Xna.Framework.Net
 
 		internal void DiscoverPeers ()
 		{
-			peer.DiscoverLocalPeers (port);			    
+			throw new NotImplementedException(); //peer.DiscoverLocalPeers (port);			    
 		}
 
 		internal void SendData (
@@ -520,12 +527,12 @@ namespace Microsoft.Xna.Framework.Net
 		private void SendMessage (NetworkMessageType messageType, byte[] data, SendDataOptions options, NetworkGamer gamer)
 		{
 
-			NetOutgoingMessage om = peer.CreateMessage ();
+			throw new NotImplementedException(); /*NetOutgoingMessage om = peer.CreateMessage ();
 
 			om.Write ((byte)messageType);
 			om.Write (data);
 
-			SendMessage (om, options, gamer);
+			SendMessage (om, options, gamer);*/
 
 		}
 
@@ -540,7 +547,7 @@ namespace Microsoft.Xna.Framework.Net
 			//					if (gamer != null && gamer.RemoteUniqueIdentifier != otherPlayer.RemoteUniqueIdentifier) {
 			//						continue;
 			//					}
-
+			throw new NotImplementedException(); /*
 			NetDeliveryMethod ndm = NetDeliveryMethod.Unreliable;
 			switch (options) {
 			case SendDataOptions.Reliable:
@@ -561,7 +568,8 @@ namespace Microsoft.Xna.Framework.Net
 			peer.SendToAll (om, ndm);
 
 			//				}
-			//			}				
+			//			}			
+			*/
 		}		
 
 		static NetPeer netPeer;
@@ -569,6 +577,7 @@ namespace Microsoft.Xna.Framework.Net
 
 		internal static void Find (NetworkSessionType sessionType)
 		{
+			throw new NotImplementedException(); /*
 			NetPeerConfiguration config = new NetPeerConfiguration (applicationIdentifier);			
 			if (sessionType == NetworkSessionType.PlayerMatch) {
 				config.EnableMessageType (NetIncomingMessageType.UnconnectedData);
@@ -603,13 +612,13 @@ namespace Microsoft.Xna.Framework.Net
 					case NetIncomingMessageType.UnconnectedData:
 						if (msg.SenderEndPoint.Equals (m_masterServer)) {
 							discoveryMsgs.Add (msg);
-							/*
+							
 				* // it's from the master server - must be a host
 				IPEndPoint hostInternal = msg.ReadIPEndPoint();
 				IPEndPoint hostExternal = msg.ReadIPEndPoint();
 
 				m_hostList.Add(new IPEndPoint[] { hostInternal, hostExternal });                            
-				*/
+				
 						}
 						break;
 					case NetIncomingMessageType.VerboseDebugMessage:
@@ -627,7 +636,7 @@ namespace Microsoft.Xna.Framework.Net
 				}
 			} while ((DateTime.UtcNow - now).Seconds <= 2);
 
-			netPeer.Shutdown ("Find shutting down");
+			netPeer.Shutdown ("Find shutting down");*/
 		}
 
 		/// <summary>
@@ -636,17 +645,19 @@ namespace Microsoft.Xna.Framework.Net
 		/// <param name="netPeer"></param>
 		private static void GetServerList (NetPeer netPeer)
 		{
+			throw new NotImplementedException(); /*
 			m_masterServer = new IPEndPoint (NetUtility.Resolve (masterServer), masterserverport);
 
 			NetOutgoingMessage listRequest = netPeer.CreateMessage ();
 			listRequest.Write ((byte)1);
 			listRequest.Write (netPeer.Configuration.AppIdentifier);
-			netPeer.SendUnconnectedMessage (listRequest, m_masterServer);
+			netPeer.SendUnconnectedMessage (listRequest, m_masterServer);*/
 
 		}
 
 		public static void RequestNATIntroduction (IPEndPoint host, NetPeer peer)
 		{
+			throw new NotImplementedException(); /*
 			if (host == null) {
 				return;
 			}
@@ -666,12 +677,12 @@ namespace Microsoft.Xna.Framework.Net
 			om.Write (hostEp);
 			om.Write (peer.Configuration.AppIdentifier); // send the app id
 
-			peer.SendUnconnectedMessage (om, m_masterServer);
+			peer.SendUnconnectedMessage (om, m_masterServer);*/
 		}
 
 		internal static void FindResults (List<AvailableNetworkSession> networkSessions)
 		{
-
+			throw new NotImplementedException(); /*
 			foreach (NetIncomingMessage im in discoveryMsgs) {
 
 				AvailableNetworkSession available = new AvailableNetworkSession ();
@@ -724,11 +735,12 @@ namespace Microsoft.Xna.Framework.Net
 
 				networkSessions.Add (available);
 
-			}
+			}*/
 		}
 
 		internal void UpdateLiveSession (NetworkSession networkSession)
 		{
+			throw new NotImplementedException(); /*
 			if (peer != null && m_masterServer != null && networkSession.IsHost) {
 				NetOutgoingMessage om = peer.CreateMessage ();
 
@@ -742,9 +754,25 @@ namespace Microsoft.Xna.Framework.Net
 				om.Write (new IPEndPoint (adr, port));
 				om.Write (peer.Configuration.AppIdentifier);
 				peer.SendUnconnectedMessage (om, m_masterServer); // send message to peer
-			}
+			}*/
 		}
 
         internal bool IsReady { get { return this.peer != null; } }
-	}
+
+        public class NetConnection
+        {
+        }
+
+        private class NetOutgoingMessage
+        {
+        }
+
+        public class NetPeer
+        {
+        }
+
+        private class NetIncomingMessage
+        {
+        }
+    }
 }

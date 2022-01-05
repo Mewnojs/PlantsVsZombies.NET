@@ -110,18 +110,18 @@ namespace Lawn
 		public override void ButtonDepress(int theId)
 		{
 			base.ButtonDepress(theId);
-			string selName = GetSelName();
-			if (selName.empty())
+			string aSelName = GetSelName();
+			if (aSelName.empty())
 			{
 				return;
 			}
 			switch (theId)
 			{
 			case 0:
-				mApp.DoRenameUserDialog(selName);
+				mApp.DoRenameUserDialog(aSelName);
 				return;
 			case 1:
-				mApp.DoConfirmDeleteUserDialog(selName);
+				mApp.DoConfirmDeleteUserDialog(aSelName);
 				return;
 			default:
 				return;

@@ -1,8 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Scripting.Hosting;
 
-namespace Lawn_Android
+namespace DotNETPvZ_Android
 {
     public class Game1 : Game
     {
@@ -21,6 +22,7 @@ namespace Lawn_Android
             // TODO: Add your initialization logic here
 
             base.Initialize();
+            TitleContainer.OpenStream("Contents/Content/images/" + "480x800/popcap_logo" + "." + "jpg");
         }
 
         protected override void LoadContent()

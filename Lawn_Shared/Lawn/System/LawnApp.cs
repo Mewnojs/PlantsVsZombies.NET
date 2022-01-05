@@ -4,6 +4,7 @@ using System.Threading;
 //using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using Sexy;
 using Sexy.TodLib;
@@ -245,7 +246,7 @@ namespace Lawn
 			GameConstants.Init();
 			if (!TodCommon.TodLoadResources("LoaderBar") || !TodCommon.TodLoadResources("LoaderBarFont"))
 			{
-				return;
+				throw new Exception();//return;
 			}
 			Resources.ExtractLoaderBarFontResources(mResourceManager);
 			Resources.ExtractLoaderBarResources(mResourceManager);
@@ -253,8 +254,8 @@ namespace Lawn
 			Resources.LinkUpResArray();
 			ReanimationParams[] array = new ReanimationParams[]
 			{
-				new ReanimationParams(ReanimationType.REANIM_LOADBAR_SPROUT, "reanim/loadbar_sprout", 1),
-				new ReanimationParams(ReanimationType.REANIM_LOADBAR_ZOMBIEHEAD, "reanim/loadbar_zombiehead", 1)
+				new ReanimationParams(ReanimationType.REANIM_LOADBAR_SPROUT, "reanim/LoadBar_sprout", 1),
+				new ReanimationParams(ReanimationType.REANIM_LOADBAR_ZOMBIEHEAD, "reanim/LoadBar_Zombiehead", 1)
 			};
 			ReanimatorXnaHelpers.ReanimatorLoadDefinitions(ref array, array.Length);
 			TodStringFile.TodStringListLoad("Content/"+"LawnStrings_" + Constants.LanguageSubDir + ".txt");
@@ -282,7 +283,7 @@ namespace Lawn
 			TodStringFile.TodStringListSetColors(GameConstants.gLawnStringFormats, GameConstants.gLawnStringFormatCount);
 			if (mLoadingFailed || mShutdown || mCloseRequest)
 			{
-				return;
+				throw new Exception();
 			}
 			mMusic.MusicInit();
 			mZenGarden = new ZenGarden();
@@ -295,11 +296,6 @@ namespace Lawn
 			if (!mLoadingFailed && !mShutdown)
 			{
 				bool flag = mCloseRequest;
-			}
-			// init filter effects
-			for (int i = 0; i < (int)FilterEffectType.NUM_FILTER_EFFECTS; i++)
-			{
-				FilterEffect.FilterEffectInitTexture(AtlasResources.IMAGE_REANIM_IMITATER_BLINK1.Texture, (FilterEffectType)i);
 			}
 		}
 
@@ -337,53 +333,75 @@ namespace Lawn
 			SexyAppBase.XnaGame.CompensateForSlowUpdate();
 		}
 
-		public override void LoadingThreadCompleted()
-		{
-			PropertiesParser propertiesParser = new PropertiesParser(this);
-			if (propertiesParser.ParsePropertiesFile("properties/content.xml"))
+        public override bool DoUpdateFrames()
+        {
+            return base.DoUpdateFrames();
+        }
+
+        public override void LoadingThreadCompleted()
+        {
+            PropertiesParser propertiesParser = new PropertiesParser(this);
+            if (propertiesParser.ParsePropertiesFile("properties/content.xml"))
+            {
+                string @string = base.GetString("ContentUpdateSitePrefix");
+                if (!string.IsNullOrEmpty(@string))
+                {
+                    Debug.OutputDebug<string>(Common.StrFormat_("Content Update: URL={0}\n", @string));
+                }
+                else
+                {
+                    Debug.OutputDebug<string>("Content Update: Failed to find property 'ContentUpdateSitePrefix'.\n");
+                }
+            }
+            else
+            {
+                Debug.OutputDebug<string>(Common.StrFormat_("Content Update: Failed to parse properties file: {0}\n", propertiesParser.GetErrorText()));
+            }
+            GC.Collect();
+            SexyAppBase.XnaGame.CompensateForSlowUpdate();
+        }
+
+        public override IEnumerable<bool> LoadingThreadAfterWorks()
+        {
+			while (mTexturesToBePremultiplied.Count > 0)
 			{
-				string @string = base.GetString("ContentUpdateSitePrefix");
-				if (!string.IsNullOrEmpty(@string))
-				{
-					Debug.OutputDebug<string>(Common.StrFormat_("Content Update: URL={0}\n", @string));
-				}
-				else
-				{
-					Debug.OutputDebug<string>("Content Update: Failed to find property 'ContentUpdateSitePrefix'.\n");
-				}
+				GlobalStaticVars.gSexyAppBase.mResourceManager.PremultiplyTexture(mTexturesToBePremultiplied.Pop(), true);
+				yield return true;
 			}
-			else
-			{
-				Debug.OutputDebug<string>(Common.StrFormat_("Content Update: Failed to parse properties file: {0}\n", propertiesParser.GetErrorText()));
+			//init filter effects
+			for (int i = 0; i < (int)FilterEffectType.NUM_FILTER_EFFECTS; i++)
+            {
+                FilterEffect.FilterEffectInitTexture(AtlasResources.IMAGE_REANIM_IMITATER_BLINK1.Texture, (FilterEffectType)i);
+				yield return true;
 			}
-			
-			
-			// Cached GameObjects
-			for (SeedType i = 0; i < SeedType.NUM_SEED_TYPES; i++) 
-			{
-				if (i == SeedType.SEED_SPROUT) continue;
-				mReanimatorCache.MakeCachedPlantFrame(i, DrawVariation.VARIATION_NORMAL);
+            // Cached GameObjects
+            for (SeedType i = 0; i < SeedType.NUM_SEED_TYPES; i++)
+            {
+                if (i == SeedType.SEED_SPROUT) continue;
+                mReanimatorCache.MakeCachedPlantFrame(i, DrawVariation.VARIATION_NORMAL);
+				yield return true;
 			}
-			for (LawnMowerType i = 0; i < LawnMowerType.NUM_MOWER_TYPES ; i++)
-			{
-				mReanimatorCache.MakeCachedMowerFrame(i);
+            for (LawnMowerType i = 0; i < LawnMowerType.NUM_MOWER_TYPES; i++)
+            {
+                mReanimatorCache.MakeCachedMowerFrame(i);
+				yield return true;
 			}
-			for (ZombieType i = 0; i < ZombieType.NUM_CACHED_ZOMBIE_TYPES; i++)
-			{
-				if (i == ZombieType.NUM_ZOMBIE_TYPES) continue;
-				mReanimatorCache.MakeCachedZombieFrame(i);
+            for (ZombieType i = 0; i < ZombieType.NUM_CACHED_ZOMBIE_TYPES; i++)
+            {
+                if (i == ZombieType.NUM_ZOMBIE_TYPES) continue;
+                mReanimatorCache.MakeCachedZombieFrame(i);
+				yield return true;
 			}
-			for (DrawVariation j = DrawVariation.VARIATION_MARIGOLD_WHITE; j <= DrawVariation.VARIATION_MARIGOLD_LIGHT_GREEN; j++) 
-			{
-				mReanimatorCache.MakeCachedPlantFrame(SeedType.SEED_MARIGOLD, j);
+            for (DrawVariation j = DrawVariation.VARIATION_MARIGOLD_WHITE; j <= DrawVariation.VARIATION_MARIGOLD_LIGHT_GREEN; j++)
+            {
+                mReanimatorCache.MakeCachedPlantFrame(SeedType.SEED_MARIGOLD, j);
+				yield return true;
 			}
 			//mReanimatorCache.MakeCachedPlantFrame(SeedType.SEED_MARIGOLD, DrawVariation.VARIATION_MARIGOLD_WHITE);
-
-			GC.Collect();
-			SexyAppBase.XnaGame.CompensateForSlowUpdate();
+			//yield return false;
 		}
 
-		public virtual bool DebugKeyDown(int theKey)
+        public virtual bool DebugKeyDown(int theKey)
 		{
 			return false;
 		}
@@ -3798,6 +3816,8 @@ namespace Lawn
 		private bool mainMenuLoaded;
 
 		private bool pileLoaded;
+
+		public Stack<Texture2D> mTexturesToBePremultiplied = new Stack<Texture2D>(); 
 
         private class TableTmp
 		{

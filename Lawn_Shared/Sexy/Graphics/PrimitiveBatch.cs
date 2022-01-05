@@ -21,7 +21,19 @@ namespace Sexy
 
 		public void SetupMatrices()
 		{
-			basicEffect.View = Matrix.CreateOrthographicOffCenter(0f, device.PresentationParameters.BackBufferWidth, device.PresentationParameters.BackBufferHeight, 0f, 0f, 1f);
+			ScreenScales s = GlobalStaticVars.gSexyAppBase.mScreenScales;
+			float offsetX1 = s.mTransX
+				* 480f / (float)device.PresentationParameters.BackBufferHeight;
+			float offsetY1 = s.mTransY
+				* 800f / (float)device.PresentationParameters.BackBufferWidth;
+			float offsetX2 = (float)device.PresentationParameters.BackBufferWidth / s.mScaleFactor - 800
+				- (s.mTransX) * 480f / (float)device.PresentationParameters.BackBufferHeight;
+			float offsetY2 = (float)device.PresentationParameters.BackBufferHeight / s.mScaleFactor-480 
+				- (s.mTransY) * 800f / (float)device.PresentationParameters.BackBufferWidth;
+			basicEffect.View = Matrix.CreateOrthographicOffCenter(0f - offsetX1,
+				800 + offsetX2/*(float)this.device.PresentationParameters.BackBufferWidth*/,
+				480 + offsetY2/*(float)this.device.PresentationParameters.BackBufferHeight*/,
+				0f - offsetY1, 0f, 1f);
 			screenWidth = device.PresentationParameters.BackBufferWidth;
 			screenHeight = device.PresentationParameters.BackBufferHeight;
 		}
@@ -168,7 +180,7 @@ namespace Sexy
 			}
 			if (screenWidth != device.PresentationParameters.BackBufferWidth || screenHeight != device.PresentationParameters.BackBufferHeight)
 			{
-				//this.SetupMatrices();
+				//this.SetupMatrices();	// Causing problem in ReanimatorCache rendering
 			}
 			if (primitiveType == PrimitiveType.LineStrip || primitiveType == PrimitiveType.TriangleStrip)
 			{
