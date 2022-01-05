@@ -2720,7 +2720,7 @@ namespace Lawn
 					TodCommon.TodDrawString(g, "[TAP_TO_CONTINUE]", x + theRect.mWidth / 2, num2 + Constants.RetardedDave_Bubble_TapToContinue_Y, Resources.FONT_PICO129, SexyColor.Black, DrawStringJustification.DS_ALIGN_CENTER);
 				}
 			}
-			reanimation.Draw(g);
+			reanimation.Draw(g, false);
 		}
 
 		public void CrazyDaveDie()

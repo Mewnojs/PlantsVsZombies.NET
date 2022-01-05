@@ -180,6 +180,8 @@ namespace Sexy
 			base.Window.OrientationChanged += new EventHandler<EventArgs>(this.Window_OrientationChanged);
 			ReportAchievement.Initialise();
 			base.Initialize();
+			IronPyInteractive.Serve();
+			// Window scaling
 			GlobalStaticVars.gSexyAppBase.mScreenScales.Init(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height, 800, 480);
 			Main.graphics.PreferredBackBufferWidth = 800;
 			Main.graphics.PreferredBackBufferHeight = 480;

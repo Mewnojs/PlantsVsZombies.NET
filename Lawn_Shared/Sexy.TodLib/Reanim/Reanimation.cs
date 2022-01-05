@@ -242,13 +242,13 @@ namespace Sexy.TodLib
 			}
 		}
 
-		public void Draw(Graphics g)
+		public void Draw(Graphics g, bool isHardwareClipRequired = true)
 		{
 			mGetFrameTime = true;
-			DrawRenderGroup(g, ReanimatorXnaHelpers.RENDER_GROUP_NORMAL);
+			DrawRenderGroup(g, ReanimatorXnaHelpers.RENDER_GROUP_NORMAL, isHardwareClipRequired);
 		}
 
-		public void DrawRenderGroup(Graphics g, int theRenderGroup)
+		public void DrawRenderGroup(Graphics g, int theRenderGroup, bool isHardwareClipRequired = true)
 		{
 			if (mDead)
 			{
@@ -259,7 +259,7 @@ namespace Sexy.TodLib
 				ReanimatorTrackInstance reanimatorTrackInstance = mTrackInstances[i];
 				if (reanimatorTrackInstance.mRenderGroup == theRenderGroup)
 				{
-					bool flag = DrawTrack(g, i, theRenderGroup);
+					bool flag = DrawTrack(g, i, theRenderGroup, isHardwareClipRequired);
 					if (reanimatorTrackInstance.mAttachmentID != null)
 					{
 						Attachment attachmentID = reanimatorTrackInstance.mAttachmentID;
@@ -280,7 +280,7 @@ namespace Sexy.TodLib
 			}
 		}
 
-		private bool DrawTrack(Graphics g, int theTrackIndex, int theRenderGroup)
+		private bool DrawTrack(Graphics g, int theTrackIndex, int theRenderGroup, bool isHardwareClipRequired)
 		{
 			ReanimatorTransform reanimatorTransform;
 			GetCurrentTransform(theTrackIndex, out reanimatorTransform, true);
@@ -419,10 +419,10 @@ namespace Sexy.TodLib
 					int celWidth = image.GetCelWidth();
 					int celHeight = image.GetCelHeight();
 					TRect theSrcRect = new TRect(celWidth * i, celHeight * num14, celWidth, celHeight);
-					ReanimBltMatrix(g, image, ref Reanimation.tempMatrix, ref trect, trackColor, Graphics.DrawMode.DRAWMODE_NORMAL, theSrcRect);
+					ReanimBltMatrix(g, image, ref Reanimation.tempMatrix, ref trect, trackColor, Graphics.DrawMode.DRAWMODE_NORMAL, theSrcRect, isHardwareClipRequired);
 					if (mEnableExtraAdditiveDraw)
 					{
-						ReanimBltMatrix(g, image, ref Reanimation.tempMatrix, ref trect, theColor, Graphics.DrawMode.DRAWMODE_ADDITIVE, theSrcRect);
+						ReanimBltMatrix(g, image, ref Reanimation.tempMatrix, ref trect, theColor, Graphics.DrawMode.DRAWMODE_ADDITIVE, theSrcRect, isHardwareClipRequired);
 					}
 					TodCommon.OffsetForGraphicsTranslation = true;
 				}
@@ -1287,7 +1287,7 @@ namespace Sexy.TodLib
 			mFrameBasePose = num;
 		}
 
-		public void ReanimBltMatrix(Graphics g, Image theImage, ref Matrix theTransform, ref TRect theClipRect, SexyColor theColor, Graphics.DrawMode theDrawMode, TRect theSrcRect)
+		public void ReanimBltMatrix(Graphics g, Image theImage, ref Matrix theTransform, ref TRect theClipRect, SexyColor theColor, Graphics.DrawMode theDrawMode, TRect theSrcRect, bool isHardwareClipRequired)
 		{
 			ReanimationParams reanimationParams = ReanimatorXnaHelpers.gReanimationParamArray[(int)mReanimationType];
 			if (!GlobalStaticVars.gSexyAppBase.Is3DAccelerated() && TodCommon.TestBit((uint)reanimationParams.mReanimParamFlags, 1) && TodCommon.FloatApproxEqual(theTransform.M12, 0f) && TodCommon.FloatApproxEqual(theTransform.M21, 0f) && theTransform.M11 > 0f && theTransform.M22 > 0f && theColor == SexyColor.White)
@@ -1315,7 +1315,22 @@ namespace Sexy.TodLib
 				g.SetClipRect(ref clipRect);
 				return;
 			}
-			TodCommon.TodBltMatrix(g, theImage, ref theTransform, theClipRect, theColor, theDrawMode, theSrcRect, mClip);
+			bool formerHardwareClip;
+			if (isHardwareClipRequired) // 2021-7-19	Solving the malfunction of SPRITES on the BOARD.
+			{
+				formerHardwareClip = g.IsHardWareClipping();
+				g.HardwareClip();   //	Enable HardwareClip
+				TodCommon.TodBltMatrix(g, theImage, ref theTransform, theClipRect, theColor, theDrawMode, theSrcRect, this.mClip);
+				if (formerHardwareClip == false)
+				{
+					g.EndHardwareClip();
+				}   //	Disable HardwareClip
+
+			}
+			else // No hardware clip
+			{
+				TodCommon.TodBltMatrix(g, theImage, ref theTransform, theClipRect, theColor, theDrawMode, theSrcRect, this.mClip);
+			}
 		}
 
 		public Reanimation FindSubReanim(ReanimationType theReanimType)

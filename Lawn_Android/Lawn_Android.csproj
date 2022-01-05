@@ -66,13 +66,16 @@
     </AndroidSigningKeyPass>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AssimpNet, Version=4.1.0.0, Culture=neutral, PublicKeyToken=0d51b391f59f42a6, processorArchitecture=MSIL">
-      <HintPath>..\packages\AssimpNet.4.1.0\lib\netstandard1.3\AssimpNet.dll</HintPath>
+    <Reference Include="IronPython, Version=2.7.11.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.11\lib\netstandard2.0\IronPython.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.Modules, Version=2.7.11.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.11\lib\netstandard2.0\IronPython.Modules.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.SQLite, Version=2.7.11.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.7.11\lib\netstandard2.0\IronPython.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="Java.Interop" />
-    <Reference Include="Lidgren.Network, Version=1.8.0.13, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AscensionGameDev.Lidgren.Network.1.8.0.13\lib\netstandard2.0\Lidgren.Network.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Dynamic, Version=1.3.0.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
       <HintPath>..\packages\DynamicLanguageRuntime.1.3.0\lib\netstandard2.0\Microsoft.Dynamic.dll</HintPath>
@@ -86,14 +89,23 @@
     <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Registry.4.5.0\lib\netstandard2.0\Microsoft.Win32.Registry.dll</HintPath>
     </Reference>
-    <Reference Include="MLEM, Version=5.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MLEM.5.2.0\lib\netstandard2.0\MLEM.dll</HintPath>
+    <Reference Include="Mono.Cecil, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.11.4\lib\netstandard2.0\Mono.Cecil.dll</HintPath>
     </Reference>
-    <Reference Include="MLEM.Data, Version=5.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MLEM.Data.5.2.0\lib\netstandard2.0\MLEM.Data.dll</HintPath>
+    <Reference Include="Mono.Cecil.Mdb, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.11.4\lib\netstandard2.0\Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Unix, Version=7.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Mono.Unix.7.1.0-final.1.21458.1\lib\netstandard2.1\Mono.Unix.dll</HintPath>
+    <Reference Include="Mono.Cecil.Pdb, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.11.4\lib\netstandard2.0\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.11.4\lib\netstandard2.0\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Posix.NETStandard">
+      <HintPath>D:\Users\david\source\repos\plantsvszombies.net\Lawn_Android\Libs\Mono.Posix.NETStandard.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework, Version=3.8.0.1641, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Framework.Android.3.8.0.1641\lib\monoandroid90\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.IMEHelper, Version=0.10.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MonoGame.IMEHelper.Android.0.10.0\lib\monoandroid90\MonoGame.IMEHelper.dll</HintPath>
@@ -101,11 +113,14 @@
     <Reference Include="MonoGame.IMEHelper.Common, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MonoGame.IMEHelper.Common.0.9.0\lib\netstandard2.0\MonoGame.IMEHelper.Common.dll</HintPath>
     </Reference>
+    <Reference Include="MonoMod.RuntimeDetour">
+      <HintPath>D:\Users\david\source\repos\plantsvszombies.net\Lawn_Android\Libs\MonoMod.RuntimeDetour.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.Utils">
+      <HintPath>D:\Users\david\source\repos\plantsvszombies.net\Lawn_Android\Libs\MonoMod.Utils.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.Bson.1.0.2\lib\netstandard2.0\Newtonsoft.Json.Bson.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -134,6 +149,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="Mono.Android" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebSocketSharp.NetCore">
+      <HintPath>D:\Users\david\source\repos\plantsvszombies.net\Lawn_Android\Libs\WebSocketSharp.NetCore.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity1.cs" />
@@ -143,32 +161,12 @@
     <Compile Include="MonoGame.Framework.Net\Platform\Android\GamerServices\Guide.cs" />
     <Compile Include="MonoGame.Framework.Net\Platform\Android\GamerServices\MonoGameGamerServicesHelper.cs" />
     <Compile Include="MonoGame.Framework.Net\Platform\Android\GamerServices\SignedInGamer.cs" />
+    <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable\Icon.png" />
     <AndroidResource Include="Resources\Values\Strings.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\Content\LawnStrings_de.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\Content\LawnStrings_en.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\Content\LawnStrings_es.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\Content\LawnStrings_fr.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\Content\LawnStrings_it.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\Content\resources.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\Content\todresources.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Content\fonts\Arial.xnb" />
@@ -1852,24 +1850,32 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <AndroidAsset Include="Assets\Content\Font.xnb" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\Content\LawnStrings_de.txt" />
+    <AndroidAsset Include="Assets\Content\LawnStrings_en.txt" />
+    <AndroidAsset Include="Assets\Content\LawnStrings_es.txt" />
+    <AndroidAsset Include="Assets\Content\LawnStrings_fr.txt" />
+    <AndroidAsset Include="Assets\Content\LawnStrings_it.txt" />
+    <AndroidAsset Include="Assets\Content\resources.xml" />
+    <AndroidAsset Include="Assets\Content\todresources.xml" />
     <Content Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
-  <Import Project="..\MonoGame.Framework.Net\MonoGame.Framework.Net.projitems" Label="Shared" />
+  <ItemGroup>
+    <Folder Include="Libs\" />
+  </ItemGroup>
   <Import Project="..\Lawn_Shared\Lawn_Shared.projitems" Label="Shared" />
+  <Import Project="..\MonoGame.Framework.Net\MonoGame.Framework.Net.projitems" Label="Shared" />
   <Import Project="..\IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems" Label="Shared" />
+  <Import Project="..\LawnModExtension\LawnModExtension.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <Import Project="..\packages\AssimpNet.4.1.0\build\AssimpNet.targets" Condition="Exists('..\packages\AssimpNet.4.1.0\build\AssimpNet.targets')" />
+  <Import Project="..\packages\MonoGame.Framework.Android.3.8.0.1641\build\MonoGame.Framework.Android.targets" Condition="Exists('..\packages\MonoGame.Framework.Android.3.8.0.1641\build\MonoGame.Framework.Android.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\AssimpNet.4.1.0\build\AssimpNet.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\AssimpNet.4.1.0\build\AssimpNet.targets'))" />
     <Error Condition="!Exists('..\packages\MonoGame.Framework.Android.3.8.0.1641\build\MonoGame.Framework.Android.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MonoGame.Framework.Android.3.8.0.1641\build\MonoGame.Framework.Android.targets'))" />
-    <Error Condition="!Exists('..\packages\Mono.Unix.7.1.0-final.1.21458.1\build\Mono.Unix.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Mono.Unix.7.1.0-final.1.21458.1\build\Mono.Unix.targets'))" />
   </Target>
-  <Import Project="..\packages\MonoGame.Framework.Android.3.8.0.1641\build\MonoGame.Framework.Android.targets" Condition="Exists('..\packages\MonoGame.Framework.Android.3.8.0.1641\build\MonoGame.Framework.Android.targets')" />
-  <Import Project="..\packages\Mono.Unix.7.1.0-final.1.21458.1\build\Mono.Unix.targets" Condition="Exists('..\packages\Mono.Unix.7.1.0-final.1.21458.1\build\Mono.Unix.targets')" />
 </Project>
