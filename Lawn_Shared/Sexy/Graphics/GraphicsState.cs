@@ -60,6 +60,7 @@ namespace Sexy
 			WorldRotation = 0f;
 			mDrawMode = Graphics.DrawMode.DRAWMODE_NORMAL;
 			mClipRect = new TRect(0, 0, mScreenWidth, mScreenHeight);
+			mIsOffscreen = false;
 		}
 
 		public static void Init()
@@ -89,6 +90,7 @@ namespace Sexy
 			mDrawMode = theState.mDrawMode;
 			mColorizeImages = theState.mColorizeImages;
 			WorldRotation = theState.WorldRotation;
+			mIsOffscreen = theState.mIsOffscreen;
 		}
 
 		public void SetWorldRotation(float theRotation)
@@ -143,5 +145,7 @@ namespace Sexy
 		public bool NeedToSetWorldRotation;
 
 		public static GraphicsDeviceManager mGraphicsDeviceManager;
+
+		protected bool mIsOffscreen;
 	}
 }

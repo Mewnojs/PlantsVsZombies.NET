@@ -62,7 +62,7 @@ namespace Sexy
 			Main.graphics = Graphics.GetNew(this);
 			//Main.SetLowMem();
 			Main.graphics.IsFullScreen = true;
-			//Guide.SimulateTrialMode = false;
+			Guide.SimulateTrialMode = false;
 
 			//GraphicsState.mGraphicsDeviceManager.PreferredBackBufferWidth = 800;
 			//GraphicsState.mGraphicsDeviceManager.PreferredBackBufferHeight = 480;
@@ -180,7 +180,18 @@ namespace Sexy
 			base.Window.OrientationChanged += new EventHandler<EventArgs>(this.Window_OrientationChanged);
 			ReportAchievement.Initialise();
 			base.Initialize();
-			IronPyInteractive.Serve();
+#if !DEBUG
+			try
+			{
+#endif
+				IronPyInteractive.Serve();
+#if !DEBUG
+			}
+			catch (Exception e)
+			{
+				Lawn_Android.PvZActivity.mMainActivity.OnException(null, e);
+			}
+#endif
 			// Window scaling
 			GlobalStaticVars.gSexyAppBase.mScreenScales.Init(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height, 800, 480);
 			Main.graphics.PreferredBackBufferWidth = 800;

@@ -24,12 +24,16 @@ namespace Sexy {
                 mTransY = 0;
                 mScaleFactor = (float)(H) / virtualHeight;
             }
+            mWidth = W;
+            mHeight = H;
         }
         public void Init(int screenWidth, int screenHeight, int virtualWidth, int virtualHeight, int transX, int transY)
         {
             mScaleFactor = MathHelper.Min((float)(screenHeight) / virtualHeight, (float)(screenWidth) / virtualWidth);
             mTransX = transX;
             mTransY = transY;
+            mWidth = screenWidth;
+            mHeight = screenHeight;
         }
 
         public float TranslationX
@@ -60,6 +64,8 @@ namespace Sexy {
 
         public int mTransX = 0;
         public int mTransY = 0;
+        public int mWidth;
+        public int mHeight;
         public float mScaleFactor = 1.0f;
         public CGPoint InvMapTouch(CGPoint cGPoint)
         {

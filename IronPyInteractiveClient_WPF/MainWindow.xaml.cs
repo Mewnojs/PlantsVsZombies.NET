@@ -120,7 +120,7 @@ namespace IronPyInteractiveClient_WPF
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            TextAdd(mTextOutputHiddenSuffix + pyCommandInput.Text + "\n", true, DateTime.UtcNow.ToFileTime());
+            TextAdd(mTextOutputHiddenSuffix + pyCommandInput.Text + "\n", true, mTextOutputPool.Last().Key + 1);
             mTextOutputHiddenSuffix = "";
             pyPromptSign.Text = mPromptStr_Working;
             ws.SendAsync(pyCommandInput.Text, e => { });
@@ -215,7 +215,8 @@ namespace IronPyInteractiveClient_WPF
             }
         }
 
-        private bool mWSConnected = false;
+        private bool p_WSConnected = false;
+        public bool mWSConnected { get { return p_WSConnected; } set { p_WSConnected = value; if (value == false) { Reset(false); } } }
 
         private void PyCommandInput_KeyDown(object sender, KeyEventArgs e)
         {
@@ -312,12 +313,15 @@ namespace IronPyInteractiveClient_WPF
             });
         }
 
-        private void Reset()
+        private void Reset(bool clearTextView = true)
         {
-            mTextOutputHarden.Clear();
-            mTextOutputPool.Clear();
-            mTextOutputHardenLineCharCache = "";
-            mTextJoinCacheIndex = 0;
+            if (clearTextView)
+            {
+                mTextOutputHarden.Clear();
+                mTextOutputPool.Clear();
+                mTextOutputHardenLineCharCache = "";
+                mTextJoinCacheIndex = 0;
+            }
             mTextOutputHiddenSuffix = "";
         }
     }

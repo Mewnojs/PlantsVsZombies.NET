@@ -82,6 +82,7 @@ namespace Sexy
 				graphics.mDestImage = theDestImage.RenderTarget;
 				graphics.mClipRect = new TRect(0, 0, graphics.mDestImage.Width, graphics.mDestImage.Height);
 				graphics.SetRenderTarget(graphics.mDestImage);
+				graphics.mIsOffscreen = true;
 				theDestImage.Clear();
 				return graphics;
 			}
@@ -110,6 +111,7 @@ namespace Sexy
 			WorldRotation = 0f;
 			mDrawMode = Graphics.DrawMode.DRAWMODE_NORMAL;
 			mClipRect = new TRect(0, 0, base.mScreenWidth, base.mScreenHeight);
+			mIsOffscreen = false;
 		}
 
 		private protected static bool spritebatchBegan { get; private set; }
@@ -983,6 +985,7 @@ namespace Sexy
 			}
 			else
 			{
+				ScreenScales s = GlobalStaticVars.gSexyAppBase.mScreenScales;
 				aClipRect = new TRect(0, 0, GlobalStaticVars.gSexyAppBase.mWidth, GlobalStaticVars.gSexyAppBase.mHeight);
 			}
 			mClipRect = aClipRect;
@@ -1260,6 +1263,7 @@ namespace Sexy
 			base.mColor = Color.White;
 			mDrawMode = currentlyActiveDrawMode;
 			mColorizeImages = false;
+			mIsOffscreen = false;
 		}
 
 		internal void PrepareDrawing()
@@ -1463,12 +1467,14 @@ namespace Sexy
 		{
 			EndFrame();
 			TRect aRect = mClipRect;
-			GlobalStaticVars.gSexyAppBase.mScreenScales.Scale(ref aRect);
+			if (!mIsOffscreen) // if the graphics isn't on screen, the transformation won't apply
+				GlobalStaticVars.gSexyAppBase.mScreenScales.Scale(ref aRect);
 			aRect = aRect.Intersection(new TRect(0, 0, base.mScreenWidth, base.mScreenHeight));
 			GraphicsDevice.ScissorRectangle = aRect;
 			Graphics.hardwareClippingEnabled = true;
 			TRect bRect = mClipRect;
-			GlobalStaticVars.gSexyAppBase.mScreenScales.Scale(ref bRect);
+			if (!mIsOffscreen)	// see above
+				GlobalStaticVars.gSexyAppBase.mScreenScales.Scale(ref bRect);
 			Graphics.hardwareClippedRectangle = bRect;
 			BeginFrame(Graphics.hardwareClipState, spriteSortMode);
 		}

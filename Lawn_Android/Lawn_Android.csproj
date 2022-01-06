@@ -154,7 +154,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activity1.cs" />
+    <Compile Include="MainActivity.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="MonoGame.Framework.Net\MACRO.cs" />
