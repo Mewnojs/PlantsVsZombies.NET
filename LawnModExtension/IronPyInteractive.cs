@@ -53,8 +53,6 @@ namespace Lawn
                 mStderrWriter.FlushEvent -= OnWriterFlush;
             }
 
-            
-
             public string ExecutionEventJSON(ExecutionEventResult restype, object res, string exceptionType = null)
             {
                 return JsonConvert.SerializeObject(JObject.FromObject(new ExecutionEvent()
@@ -77,8 +75,6 @@ namespace Lawn
                 );
             }
 
-            
-
             public static void Initialize()
             {
                 mPyEnj.SetSearchPaths(new List<string>());
@@ -91,6 +87,15 @@ namespace Lawn
                 DebugExec($"__import__('clr').AddReference('{Assembly.GetExecutingAssembly().GetName().Name}')");
                 mPyEnj.Runtime.IO.SetOutput(mStdoutStream, mStdoutWriter);
                 mPyEnj.Runtime.IO.SetErrorOutput(mStderrStream, mStderrWriter);
+                ConfigureStdlib();
+            }
+
+            private static void ConfigureStdlib()
+            {
+                string libPath = Main.FetchIronPythonStdLib(mPyEnj.LanguageVersion);
+                var searchPaths = mPyEnj.GetSearchPaths();
+                searchPaths.Add(libPath);
+                mPyEnj.SetSearchPaths(searchPaths);
             }
 
             private static readonly ScriptEngine mPyEnj = Python.CreateEngine();

@@ -84,30 +84,36 @@ namespace Sexy
 			//PhoneApplicationService.Current.Deactivated += new EventHandler<DeactivatedEventArgs>(this.Current_Deactivated);
 		}
 
+        internal static string FetchIronPythonStdLib(Version version)
+        {
+			return GlobalStaticVars.gPvZActivity.GetIronPythonStdLibPath(version);
 
-		//private void Current_Deactivated(object sender, DeactivatedEventArgs e)
-		//{
-		//	GlobalStaticVars.gSexyAppBase.Tombstoned();
-		//}
-
-
-		//private void Current_Closing(object sender, ClosingEventArgs e)
-		//{
-		//	//PhoneApplicationService.Current.State.Clear();
-		//}
+        }
 
 
-		//private void Game_Activated(object sender, ActivatedEventArgs e)
-		//{
-		//}
+        //private void Current_Deactivated(object sender, DeactivatedEventArgs e)
+        //{
+        //	GlobalStaticVars.gSexyAppBase.Tombstoned();
+        //}
 
 
-		//private void Game_Launching(object sender, LaunchingEventArgs e)
-		//{
-		//	PhoneApplicationService.Current.State.Clear();
-		//}
+        //private void Current_Closing(object sender, ClosingEventArgs e)
+        //{
+        //	//PhoneApplicationService.Current.State.Clear();
+        //}
 
-		public void OnResize(object sender, EventArgs e)
+
+        //private void Game_Activated(object sender, ActivatedEventArgs e)
+        //{
+        //}
+
+
+        //private void Game_Launching(object sender, LaunchingEventArgs e)
+        //{
+        //	PhoneApplicationService.Current.State.Clear();
+        //}
+
+        public void OnResize(object sender, EventArgs e)
 		{
 			int DefaultW = 800;
 			int DefaultH = 480;
@@ -189,7 +195,7 @@ namespace Sexy
 			}
 			catch (Exception e)
 			{
-				Lawn_Android.PvZActivity.mMainActivity.OnException(null, e);
+				Sexy.GlobalStaticVars.gPvZActivity.OnException(null, e);
 			}
 #endif
 			// Window scaling
@@ -473,5 +479,12 @@ namespace Sexy
 
 		private Stopwatch _gameTimer = new Stopwatch();
 
+	}
+}
+namespace Sexy
+{
+	public static partial class GlobalStaticVars
+	{
+		public static Lawn_Android.PvZActivity gPvZActivity;
 	}
 }

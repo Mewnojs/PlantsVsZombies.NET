@@ -111,7 +111,12 @@ namespace Sexy
 			GlobalStaticVars.gSexyAppBase.AppExit();
 		}
 
-		protected override void Initialize()
+        internal static string FetchIronPythonStdLib(Version version)
+        {
+			return $"./IronPython.StdLib.{version.Major}.{version.Minor}.{version.Build}.zip";
+        }
+
+        protected override void Initialize()
 		{
 			base.Window.OrientationChanged += new EventHandler<EventArgs>(Window_OrientationChanged);
 			Main.GamerServicesComp = new GamerServicesComponent(this);

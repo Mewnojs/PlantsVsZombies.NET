@@ -5,7 +5,9 @@ using Android.Runtime;
 using Android.Views;
 using Microsoft.Xna.Framework;
 using System;
+using System.IO;
 using System.Threading.Tasks;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace Lawn_Android
 {
@@ -28,7 +30,7 @@ namespace Lawn_Android
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            mMainActivity = this;
+            Sexy.GlobalStaticVars.gPvZActivity = this;
 
 #if !DEBUG
 
@@ -64,6 +66,48 @@ namespace Lawn_Android
             aDialog.Show();
         }
 
-        public static PvZActivity mMainActivity;
+        internal string GetIronPythonStdLibPath(Version version)
+        {
+            string libFolderPath = "IronPython/Libs";
+            string libFolderExtPath = GetExternalFilesDir(libFolderPath).AbsolutePath;
+            string packedlibFileName = $"IronPython.StdLib.{version.Major}.{version.Minor}.{version.Build}.zip";
+            string verInfoFileName = "info.txt";
+            string verInfoFilePath = Path.Combine(libFolderExtPath, verInfoFileName);
+            if (File.Exists(verInfoFilePath)) 
+            {
+                using (var s = new StreamReader(verInfoFilePath)) {
+                    string str = s.ReadToEnd();
+                    if (str.StartsWith(packedlibFileName))
+                        return libFolderExtPath; 
+                }
+            }
+
+            int index = Array.IndexOf(Assets.List(libFolderPath), packedlibFileName);
+            if (index != -1)
+            {
+                using (var packedlibStream = new MemoryStream())
+                {
+                    Assets.Open(Path.Combine(libFolderPath, packedlibFileName)).CopyTo(packedlibStream);
+                    packedlibStream.Position = 0;
+                    new FastZip().ExtractZip(
+                        packedlibStream,
+                        GetExternalFilesDir(libFolderPath).AbsolutePath,
+                        FastZip.Overwrite.Always,
+                        (w) => { return true; },
+                        null, null, true, true
+                    );
+                };
+                using (var verInfoWriter = new StreamWriter(verInfoFilePath))
+                {
+                    verInfoWriter.WriteLine(packedlibFileName);
+                    verInfoWriter.Flush();
+                }
+                return libFolderExtPath;
+            }
+            else 
+            {
+                throw new FileNotFoundException($"{packedlibFileName} not found in ANDROID_ASSET/{libFolderPath}");
+            }
+        }
     }
 }
