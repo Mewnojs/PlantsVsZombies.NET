@@ -390,10 +390,10 @@ namespace Lawn
 			mApp.PlayFoley(FoleyType.FOLEY_PORTAL);
 		}
 
-		public void Update(int updateCount)
+		public void Update(/*int updateCount*/)//1update
 		{
 			Reanimation reanimation = mApp.ReanimationTryToGet(mGridItemReanimID);
-			if (reanimation != null && updateCount == 0)
+			if (reanimation != null/* && updateCount == 0*/)
 			{
 				reanimation.Update();
 			}

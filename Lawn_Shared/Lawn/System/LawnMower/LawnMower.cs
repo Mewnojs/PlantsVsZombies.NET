@@ -129,7 +129,8 @@ namespace Lawn
 		{
 			if (mMowerState == LawnMowerState.MOWER_SQUISHED)
 			{
-				mSquishedCounter -= 3;
+				//mSquishedCounter -= 3;
+				mSquishedCounter--;
 				if (mSquishedCounter <= 0)
 				{
 					Die();
@@ -138,7 +139,8 @@ namespace Lawn
 			}
 			if (mMowerState == LawnMowerState.MOWER_ROLLING_IN)
 			{
-				mRollingInCounter += 3;
+				//mRollingInCounter += 3;
+				mRollingInCounter--;
 				mPosX = TodCommon.TodAnimateCurveFloat(0, 100, mRollingInCounter, -160f, -21f, TodCurves.CURVE_EASE_IN_OUT) + Constants.BOARD_EXTRA_ROOM;
 				if (mRollingInCounter >= 100)
 				{
@@ -185,10 +187,11 @@ namespace Lawn
 			}
 			if (mChompCounter > 0)
 			{
-				mChompCounter -= 3;
+				//mChompCounter -= 3;
+				mChompCounter--;
 				num2 = TodCommon.TodAnimateCurveFloat(50, 0, mChompCounter, num2, 1f, TodCurves.CURVE_BOUNCE_SLOW_MIDDLE);
 			}
-			mPosX += 3f * num2;
+			mPosX += /*3f * */num2;
 			mPosY = mBoard.GetPosYBasedOnRow(mPosX + 40f, mRow) + 23f;
 			if (mMowerType == LawnMowerType.LAWNMOWER_POOL)
 			{
@@ -331,7 +334,7 @@ namespace Lawn
 			return new TRect((int)mPosX, (int)mPosY, 50, 80);
 		}
 
-		public void UpdatePool()
+		public void UpdatePool()//3update
 		{
 			bool flag = false;
 			if (mPosX > 150f && mPosX < 770f)

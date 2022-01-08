@@ -2384,7 +2384,7 @@ namespace Lawn
 			PreNewGame(GameMode.GAMEMODE_ADVENTURE, false);
 		}
 
-		public void UpdateCrazyDave()
+		public void UpdateCrazyDave()//3update
 		{
 			Reanimation reanimation = ReanimationTryToGet(mCrazyDaveReanimID);
 			if (reanimation == null)

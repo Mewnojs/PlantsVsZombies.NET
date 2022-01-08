@@ -922,7 +922,7 @@ namespace Lawn
 			}
 		}
 
-		public void Update()
+		public void Update()//1update
 		{
 			if (mApp.IsStormyNightLevel())
 			{
@@ -1950,45 +1950,53 @@ namespace Lawn
 			return new TRect(Constants.Challenge_SlotMachine_Pos.X, Constants.Challenge_SlotMachine_Pos.Y, Resources.IMAGE_SLOTMACHINE_OVERLAY.mWidth, Resources.IMAGE_SLOTMACHINE_OVERLAY.mHeight);
 		}
 
-		public void WhackAZombieSpawning()
+		public void WhackAZombieSpawning()//3update
 		{
 			if (mBoard.mCurrentWave == mBoard.mNumWaves && mBoard.mZombieCountDown == 0)
 			{
 				return;
 			}
-			mBoard.mZombieCountDown -= 3;
+			//mBoard.mZombieCountDown -= 3;
+			mBoard.mZombieCountDown--;
 			int num = 300;
-			if (mBoard.mZombieCountDown >= 100 && mBoard.mZombieCountDown < 103 && mBoard.mCurrentWave > 0)
+			//if (mBoard.mZombieCountDown >= 100 && mBoard.mZombieCountDown < 103 && mBoard.mCurrentWave > 0)
+			if (mBoard.mZombieCountDown == 100 && mBoard.mCurrentWave > 0)
 			{
 				int graveStoneCount = mBoard.GetGraveStoneCount();
 				int num2 = 5;
 				int theGraveCount = Math.Max(1, num2 - graveStoneCount);
 				WhackAZombiePlaceGraves(theGraveCount);
 			}
-			if (mBoard.mZombieCountDown >= 5 && mBoard.mZombieCountDown < 8)
+			//if (mBoard.mZombieCountDown >= 5 && mBoard.mZombieCountDown < 8)
+			if (mBoard.mZombieCountDown == 5)
 			{
 				mBoard.NextWaveComing();
 			}
-			if (mBoard.mZombieCountDown >= 0 && mBoard.mZombieCountDown < 3)
+			//if (mBoard.mZombieCountDown >= 0 && mBoard.mZombieCountDown < 3)
+			if (mBoard.mZombieCountDown == 0)
 			{
 				mBoard.mZombieCountDown = 2000;
 				mBoard.mZombieCountDownStart = mBoard.mZombieCountDown;
 				mBoard.mCurrentWave++;
 				if (mBoard.mCurrentWave == mBoard.mNumWaves)
 				{
-					mChallengeStateCounter = 300;
+					//mChallengeStateCounter = 300;
+					mChallengeStateCounter = 100;
 				}
 				else
 				{
-					mChallengeStateCounter = 3;
+					//mChallengeStateCounter = 3;
+					mChallengeStateCounter = 1;
 				}
 			}
 			else if (mBoard.mZombieCountDown < num)
 			{
 				return;
 			}
-			mChallengeStateCounter -= 3;
-			if (mChallengeStateCounter < 0 || mChallengeStateCounter >= 3)
+			//mChallengeStateCounter -= 3;
+			mChallengeStateCounter--;
+			//if (mChallengeStateCounter < 0 || mChallengeStateCounter >= 3)
+			if (mChallengeStateCounter == 0)
 			{
 				return;
 			}
@@ -2079,7 +2087,7 @@ namespace Lawn
 			}
 		}
 
-		public bool UpdateZombieSpawning()
+		public bool UpdateZombieSpawning()//3update
 		{
 			if (mApp.IsWhackAZombieLevel())
 			{

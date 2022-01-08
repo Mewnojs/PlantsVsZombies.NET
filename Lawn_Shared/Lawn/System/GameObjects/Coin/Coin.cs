@@ -423,14 +423,16 @@ namespace Lawn
 			mFadeCount = 15;
 		}
 
-		public void Update()
+		public void Update()//3update
 		{
-			mCoinAge += 3;
+			//mCoinAge += 3;
+			mCoinAge++;
 			if (mApp.mGameScene != GameScenes.SCENE_PLAYING && mApp.mGameScene != GameScenes.SCENE_AWARD && mBoard != null && !mBoard.mCutScene.ShouldRunUpsellBoard())
 			{
 				return;
 			}
-			if (mFadeCount < 0 || mFadeCount >= 3)
+			//if (mFadeCount < 0 || mFadeCount >= 3)
+			if (mFadeCount != 0)
 			{
 				UpdateFade();
 			}
@@ -897,13 +899,14 @@ namespace Lawn
 			return 0;
 		}
 
-		private void UpdateFade()
+		private void UpdateFade()//3update
 		{
 			if (!mApp.IsEndlessIZombie(mApp.mGameMode) && !mApp.IsEndlessScaryPotter(mApp.mGameMode) && mType != CoinType.COIN_NOTE && IsLevelAward())
 			{
 				return;
 			}
-			mFadeCount -= 3;
+			//mFadeCount -= 3;
+			mFadeCount--;
 			if (mFadeCount >= 0 && mFadeCount < 3)
 			{
 				if (mType == CoinType.COIN_SILVER || mType == CoinType.COIN_GOLD)
@@ -927,7 +930,7 @@ namespace Lawn
 			}
 		}
 
-		private void UpdateFall()
+		private void UpdateFall()//3update
 		{
 			if (IsPresentWithAdvice())
 			{
@@ -939,10 +942,12 @@ namespace Lawn
 			}
 			if (mCoinMotion == CoinMotion.COIN_MOTION_FROM_PRESENT)
 			{
-				mPosX += 3f * mVelX;
-				mPosY += 3f * mVelY;
-				mVelX *= 0.857f;
-				mVelY *= 0.857f;
+				mPosX += /*3f * */mVelX;
+				mPosY += /*3f * */mVelY;
+				//mVelX *= 0.857f;
+				mVelX *= 0.95f;
+				//mVelY *= 0.857f;
+				mVelY *= 0.95f;
 				if (mCoinAge >= 80)
 				{
 					Collect();
@@ -950,16 +955,16 @@ namespace Lawn
 			}
 			else if (mPosY + mVelY < mGroundY)
 			{
-				mPosY += 3f * mVelY;
+				mPosY += /*3f * */mVelY;
 				if (mCoinMotion == CoinMotion.COIN_MOTION_FROM_PLANT)
 				{
-					mVelY += 3f * Constants.InvertAndScale(0.09f);
+					mVelY += /*3f * */Constants.InvertAndScale(0.09f);
 				}
 				else if (mCoinMotion == CoinMotion.COIN_MOTION_COIN || mCoinMotion == CoinMotion.COIN_MOTION_FROM_BOSS)
 				{
-					mVelY += 3f * Constants.InvertAndScale(0.15f);
+					mVelY += /*3f * */Constants.InvertAndScale(0.15f);
 				}
-				mPosX += 3f * mVelX;
+				mPosX += /*3f * */mVelX;
 				if (mPosX > 800 - mWidth && mCoinMotion != CoinMotion.COIN_MOTION_FROM_BOSS)
 				{
 					mPosX = 800 - mWidth;
@@ -1051,7 +1056,8 @@ namespace Lawn
 				mPosX = TodCommon.FloatRoundToInt(mPosX);
 				if ((mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_LAST_STAND || mBoard == null || mBoard.mChallenge.mChallengeState == ChallengeState.STATECHALLENGE_LAST_STAND_ONSLAUGHT) && !IsLevelAward() && !IsPresentWithAdvice())
 				{
-					mDisappearCounter += 3;
+					//mDisappearCounter += 3;
+					mDisappearCounter--;
 					int disappearTime = GetDisappearTime();
 					if (mDisappearCounter >= disappearTime)
 					{
@@ -1064,7 +1070,8 @@ namespace Lawn
 				float sunScale = GetSunScale();
 				if (mScale < sunScale)
 				{
-					mScale += 0.06f;
+					//mScale += 0.06f;
+					mScale += 0.02f;
 					return;
 				}
 				mScale = sunScale;
@@ -1179,7 +1186,7 @@ namespace Lawn
 			}
 		}
 
-		public void UpdateCollected()
+		public void UpdateCollected()//3update
 		{
 			int num;
 			int num2;
@@ -1211,7 +1218,8 @@ namespace Lawn
 			{
 				if (mType == CoinType.COIN_AWARD_PRESENT || mType == CoinType.COIN_PRESENT_PLANT)
 				{
-					mDisappearCounter += 3;
+					//mDisappearCounter += 3;
+					mDisappearCounter--;
 					if (mDisappearCounter >= 200)
 					{
 						StartFade();
@@ -1222,13 +1230,15 @@ namespace Lawn
 				{
 					if (mType == CoinType.COIN_USABLE_SEED_PACKET)
 					{
-						mDisappearCounter += 3;
+						//mDisappearCounter += 3;
+						mDisappearCounter--;
 					}
 					return;
 				}
 				num = Constants.Coin_AwardSeedpacket_Pos.X - mWidth / 2;
 				num2 = Constants.Coin_AwardSeedpacket_Pos.Y - mHeight / 2;
-				mDisappearCounter += 3;
+				//mDisappearCounter += 3;
+				mDisappearCounter--;
 			}
 			if (IsLevelAward())
 			{
@@ -1241,19 +1251,23 @@ namespace Lawn
 			float num4 = Math.Abs(mPosY - num2);
 			if (mPosX > num)
 			{
-				mPosX -= num3 / 7f;
+				//mPosX -= num3 / 7f;
+				mPosX -= num3 / 21f;
 			}
 			else if (mPosX < num)
 			{
-				mPosX += num3 / 7f;
+				//mPosX += num3 / 7f;
+				mPosX += num3 / 21f;
 			}
 			if (mPosY > num2)
 			{
-				mPosY -= num4 / 7f;
+				//mPosY -= num4 / 7f;
+				mPosY -= num4 / 21f;
 			}
 			else if (mPosY < num2)
 			{
-				mPosY += num4 / 7f;
+				//mPosY += num4 / 7f;
+				mPosY += num4 / 21f;
 			}
 			mCollectionDistance = (float)Math.Sqrt(num4 * num4 + num3 * num3);
 			if (IsPresentWithAdvice())
