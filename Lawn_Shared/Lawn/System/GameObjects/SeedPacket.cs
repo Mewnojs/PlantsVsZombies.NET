@@ -77,7 +77,7 @@ namespace Lawn
             return true;
         }
 
-        public void Update()
+        public void Update()//1update
         {
             if (mApp.mGameScene != GameScenes.Playing)
             {

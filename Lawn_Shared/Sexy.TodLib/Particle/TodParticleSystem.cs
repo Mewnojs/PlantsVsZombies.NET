@@ -90,7 +90,7 @@ namespace Sexy.TodLib
             mDead = true;
         }
 
-        public void Update()
+        public void Update()//3update
         {
             if (mDontUpdate)
             {
@@ -100,8 +100,8 @@ namespace Sexy.TodLib
             foreach (TodParticleEmitter todParticleEmitter in mEmitterList)
             {
                 TodParticleEmitter todParticleEmitter2 = todParticleEmitter;
-                todParticleEmitter2.Update();
-                todParticleEmitter2.Update();
+                //todParticleEmitter2.Update();
+                //todParticleEmitter2.Update();
                 todParticleEmitter2.Update();
                 if (Definition.FloatTrackIsSet(ref todParticleEmitter2.mEmitterDef.mCrossFadeDuration))
                 {

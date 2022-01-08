@@ -570,7 +570,7 @@ namespace Lawn
             return 800;
         }
 
-        public void ZenGardenUpdate(int updateCount)
+        public void ZenGardenUpdate(/*int updateCount*/)//1update
         {
             if (mApp.GetDialog(4) != null)
             {

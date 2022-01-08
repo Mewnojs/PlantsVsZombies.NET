@@ -20,7 +20,7 @@ namespace Sexy.TodLib
             }
         }
 
-        public void Update()
+        public void Update()//1update no support
         {
             mTrailAge++;
             if (mTrailAge >= mTrailDuration)

@@ -128,7 +128,7 @@ namespace Sexy.TodLib
             }
         }
 
-        public void Update()
+        public void Update()//3update
         {
             mGetFrameTime = true;
             if (mFrameCount == 0)
@@ -1087,7 +1087,7 @@ namespace Sexy.TodLib
             }
         }
 
-        public void UpdateAttacherTrack(int theTrackIndex)
+        public void UpdateAttacherTrack(int theTrackIndex)//3update
         {
             ReanimatorTrackInstance reanimatorTrackInstance = mTrackInstances[theTrackIndex];
             ReanimatorTransform reanimatorTransform;

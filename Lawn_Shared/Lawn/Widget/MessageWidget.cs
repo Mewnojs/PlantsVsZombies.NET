@@ -100,7 +100,7 @@ namespace Lawn
             mIcon = theIcon;
         }
 
-        public void Update()
+        public void Update()//3update
         {
             if (mApp.mBoard == null || mApp.mBoard.mPaused)
             {
@@ -108,8 +108,10 @@ namespace Lawn
             }
             if (mDuration < 10000 && mDuration > 0)
             {
-                mDuration -= 3;
-                if (mDuration >= 0 && mDuration < 3)
+                //mDuration -= 3;
+                mDuration--;
+                //if (mDuration >= 0 && mDuration < 3)
+                if (mDuration == 0)
                 {
                     mMessageStyle = MessageStyle.Off;
                     mIcon = null;
