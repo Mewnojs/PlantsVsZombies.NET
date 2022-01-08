@@ -4,6 +4,11 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Sexy
 {
+	public class XNAMusicInterfaceConstants
+	{
+		public static int MAX_SONGS = 13;
+	}
+
 	internal class XNAMusicInterface : MusicInterface
 	{
 		public XNAMusicInterface(SexyAppBase theApp)

@@ -4,6 +4,16 @@ using Microsoft.Xna.Framework.GamerServices;
 
 namespace Sexy
 {
+	public/*internal*/ struct TrialAchievementAlert
+	{
+		public TrialAchievementAlert(AchievementId achievement)
+		{
+			this.achievement = achievement;
+		}
+
+		private AchievementId achievement;
+	}
+
 	internal static class ReportAchievement
 	{
 		public static event ReportAchievement.AchievementHandler AchievementsChanged;

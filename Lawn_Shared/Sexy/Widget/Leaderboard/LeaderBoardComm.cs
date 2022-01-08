@@ -377,19 +377,26 @@ namespace Sexy
 			CannotConnect
 		}
 
-		private enum LeaderboardMode
-		{
-			Adventure,
-			IZombie,
-			Vasebreaker,
-			MAX
-		}
-
 		private enum ColumnIndices
 		{
 			Score
 		}
 
 		public delegate void LoadingCompletedHandler();
+	}
+
+	public enum LeaderboardGameMode
+	{
+		Adventure,
+		IZombie,
+		Vasebreaker,
+		Max
+	}
+
+	internal enum LeaderboardState
+	{
+		Adventure,
+		IZombie,
+		Vasebreaker
 	}
 }

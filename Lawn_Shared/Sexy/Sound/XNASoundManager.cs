@@ -5,6 +5,25 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Sexy
 {
+	internal class XNASoundConstants
+	{
+		public static uint MAX_SOUNDS = 256U;
+	}
+
+	internal class XNASoundEntry
+	{
+		public void Dispose()
+		{
+			mSound.Dispose();
+		}
+
+		public float mBaseVolume = 1f;
+
+		public float mBasePan;
+
+		public SoundEffect mSound;
+	}
+
 	internal class XNASoundManager : SoundManager
 	{
 		public XNASoundManager(SexyAppBase theApp)

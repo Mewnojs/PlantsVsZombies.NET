@@ -435,4 +435,12 @@ namespace Sexy
 			CullMode = CullMode.None
 		};
 	}
+
+	[Flags]
+	public/*internal*/ enum PrimitiveBatchEffects
+	{
+		None = 0,
+		MirrorVertically = 1,
+		MirrorHorizontally = 2
+	}
 }

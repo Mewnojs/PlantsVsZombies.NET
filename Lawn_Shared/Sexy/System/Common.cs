@@ -5,6 +5,50 @@ using System.IO.IsolatedStorage;
 
 namespace Sexy
 {
+	public/*internal*/ struct SexyChar
+	{
+		public SexyChar(char c)
+		{
+			value_type = c;
+		}
+
+		public static bool operator ==(SexyChar a, KeyCode b)
+		{
+			return a.Equals(b);
+		}
+
+		public static bool operator !=(SexyChar a, KeyCode b)
+		{
+			return !(a == b);
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (obj is SexyChar)
+			{
+				return value_type == ((SexyChar)obj).value_type;
+			}
+			if (obj is KeyCode)
+			{
+				KeyCode keyCode = (KeyCode)obj;
+				return false;
+			}
+			return false;
+		}
+
+		public override int GetHashCode()
+		{
+			return value_type.GetHashCode();
+		}
+
+		public override string ToString()
+		{
+			return value_type.ToString();
+		}
+
+		public char value_type;
+	}
+
 	internal static class Common
 	{
 		public static double _wtof(string str)
@@ -104,15 +148,15 @@ namespace Sexy
 						goto IL_8D;
 					}
 				}
-				IL_E6:
+			IL_E6:
 				i++;
 				continue;
-				IL_8D:
+			IL_8D:
 				text = text.Insert(theString.Length, "%");
 				text = text.Insert(theString.Length, Convert.ToString(array[c >> 4 & '\u000f']));
 				text = text.Insert(theString.Length, Convert.ToString(array[c & '\u000f']));
 				goto IL_E6;
-				IL_D3:
+			IL_D3:
 				text = text.Insert(theString.Length, Convert.ToString(c));
 				goto IL_E6;
 			}
@@ -266,10 +310,10 @@ namespace Sexy
 					goto IL_37;
 				}
 				text += "&nbsp;";
-				IL_D9:
+			IL_D9:
 				i++;
 				continue;
-				IL_37:
+			IL_37:
 				sbyte b2 = b;
 				if (b2 <= 34)
 				{
@@ -401,7 +445,7 @@ namespace Sexy
 		{
 			int num = 0;
 			IsolatedStorageFile userStoreForApplication;
-			for (;;)
+			for (; ; )
 			{
 				int num2 = theDir.IndexOf('/', num);
 				userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
@@ -515,3 +559,4 @@ namespace Sexy
 		}
 	}
 }
+

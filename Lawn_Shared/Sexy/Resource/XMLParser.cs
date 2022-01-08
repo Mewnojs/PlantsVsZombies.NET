@@ -4,6 +4,44 @@ using System.Xml;
 
 namespace Sexy
 {
+	internal class XMLParam
+	{
+		public string mKey;
+
+		public string mValue;
+	}
+
+	public/*internal*/ class XMLElement
+	{
+		public XMLElementType mType;
+
+		public string mSection;
+
+		public string mValue;
+
+		public string mValueEncoded;
+
+		public string mInstruction;
+
+		public Dictionary<string, string> mAttributes = new Dictionary<string, string>();
+
+		public Dictionary<string, string> mAttributesEncoded = new Dictionary<string, string>();
+
+		public List<Dictionary<string, string>.Enumerator> mAttributeIteratorList = new List<Dictionary<string, string>.Enumerator>();
+
+		public List<Dictionary<string, string>.Enumerator> mAttributeEncodedIteratorList = new List<Dictionary<string, string>.Enumerator>();
+	}
+
+	public enum XMLElementType
+	{
+		TYPE_NONE,
+		TYPE_START,
+		TYPE_END,
+		TYPE_ELEMENT,
+		TYPE_INSTRUCTION,
+		TYPE_COMMENT
+	}
+
 	public/*internal*/ class XMLParser : EncodingParser
 	{
 		protected void Fail(string theErrorText)

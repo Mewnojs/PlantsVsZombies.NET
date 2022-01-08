@@ -3,7 +3,7 @@ using Lawn;
 
 namespace Sexy
 {
-	public /*internal*/ static class GlobalStaticVars
+	public /*internal*/ static partial class GlobalStaticVars
 	{
 		public static LawnApp gLawnApp
 		{

@@ -243,4 +243,13 @@ namespace Sexy.TodLib
 
 		public static List<Dictionary<Texture2D, Texture2D>> gFilterMap = new List<Dictionary<Texture2D, Texture2D>>();
 	}
+
+	public enum FilterEffectType
+	{
+		FILTER_EFFECT_NONE = -1,
+		FILTER_EFFECT_WASHED_OUT,
+		FILTER_EFFECT_LESS_WASHED_OUT,
+		FILTER_EFFECT_WHITE,
+		NUM_FILTER_EFFECTS
+	}
 }

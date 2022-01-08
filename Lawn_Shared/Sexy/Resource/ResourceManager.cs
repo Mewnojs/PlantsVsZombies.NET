@@ -1798,5 +1798,286 @@ namespace Sexy
 		private int loadedBackdrop = -1;
 
 		private List<BaseRes> unloadableResources = new List<BaseRes>();
+
+		public enum ResType
+		{
+			ResType_Image,
+			ResType_Sound,
+			ResType_Font,
+			ResType_Music,
+			ResType_Reanim,
+			ResType_Particle,
+			ResType_Trail
+		}
+
+		public/*internal*/ class BaseRes
+		{
+			~BaseRes()
+			{
+				DeleteResource();
+			}
+
+			public virtual void DeleteResource()
+			{
+			}
+
+			public ResType mType;
+
+			public string mId;
+
+			public string mResGroup;
+
+			public string mPath;
+
+			public bool mFromProgram;
+
+			public Dictionary<string, string> mXMLAttributes;
+
+			public int mUnloadGroup;
+		}
+
+		internal class ImageRes : BaseRes
+		{
+			public ImageRes()
+			{
+				mType = ResType.ResType_Image;
+			}
+
+			public override void DeleteResource()
+			{
+				if (mImage != null)
+				{
+					mImage.Dispose();
+					if (mFormat == ImageRes.TextureFormat.Content && mUnloadGroup > 0)
+					{
+						ResourceManager.mUnloadContentManager[mUnloadGroup].Unload();
+					}
+					mImage = null;
+				}
+				base.DeleteResource();
+			}
+
+			public Image mImage;
+
+			public string mAlphaImage;
+
+			public string mAlphaGridImage;
+
+			public string mVariant;
+
+			public bool mAutoFindAlpha;
+
+			public bool mPalletize;
+
+			public bool mA4R4G4B4;
+
+			public bool mA8R8G8B8;
+
+			public bool mR5G6B5;
+
+			public bool mA1R5G5B5;
+
+			public bool mDDSurface;
+
+			public bool mPurgeBits;
+
+			public bool mMinimizeSubdivisions;
+
+			public int mRows;
+
+			public int mCols;
+
+			public uint mAlphaColor;
+
+			public AnimInfo mAnimInfo = new AnimInfo();
+
+			public SurfaceFormat lowMemorySurfaceFormat = SurfaceFormat.Bgra4444;
+
+			public bool mLanguageSpecific;
+
+			public ImageRes.TextureFormat mFormat = ImageRes.TextureFormat.Png;
+
+			public enum TextureFormat
+			{
+				Content,
+				Png,
+				Jpg
+			}
+		}
+
+		internal class SoundRes : BaseRes
+		{
+			public SoundRes()
+			{
+				mType = ResType.ResType_Sound;
+			}
+
+			public override void DeleteResource()
+			{
+				if (mSoundId >= 0)
+				{
+					GlobalStaticVars.gSexyAppBase.mSoundManager.ReleaseSound((uint)mSoundId);
+					mSoundId = -1;
+				}
+				base.DeleteResource();
+			}
+
+			public int mSoundId;
+
+			public double mVolume;
+
+			public int mPanning;
+		}
+
+		internal class FontRes : BaseRes
+		{
+			public FontRes()
+			{
+				mType = ResType.ResType_Font;
+				mDefault = false;
+			}
+
+			public override void DeleteResource()
+			{
+				if (mFont != null)
+				{
+					mFont.Dispose();
+					mFont = null;
+				}
+				base.DeleteResource();
+			}
+
+			public Font mFont;
+
+			public string mTags;
+
+			public bool mDefault;
+
+			public bool mSysFont;
+
+			public bool mBold;
+
+			public bool mItalic;
+
+			public bool mUnderline;
+
+			public bool mShadow;
+
+			public int mSize;
+		}
+
+		internal class LevelRes : BaseRes
+		{
+			public LevelRes()
+			{
+				mLevelNumber = -1;
+			}
+
+			public override void DeleteResource()
+			{
+				base.DeleteResource();
+			}
+
+			public int mLevelNumber;
+		}
+
+		internal class MusicRes : BaseRes
+		{
+			public MusicRes()
+			{
+				mType = ResType.ResType_Music;
+			}
+
+			public override void DeleteResource()
+			{
+				if (mSongId >= 0)
+				{
+					GlobalStaticVars.gSexyAppBase.mMusicInterface.UnloadMusic(mSongId);
+					mSongId = -1;
+				}
+				base.DeleteResource();
+			}
+
+			public int mSongId;
+		}
+
+		internal class ReanimRes : BaseRes
+		{
+			public ReanimRes()
+			{
+				mType = ResType.ResType_Image;
+			}
+
+			public override void DeleteResource()
+			{
+				if (mReanim != null)
+				{
+					mReanim = null;
+				}
+				base.DeleteResource();
+			}
+
+			public ReanimatorDefinition mReanim;
+		}
+
+		internal class ParticleRes : BaseRes
+		{
+			public ParticleRes()
+			{
+				mType = ResType.ResType_Particle;
+			}
+
+			public override void DeleteResource()
+			{
+				if (mParticle != null)
+				{
+					mParticle = null;
+				}
+				base.DeleteResource();
+			}
+
+			public TodParticleDefinition mParticle;
+		}
+
+		internal class TrailRes : BaseRes
+		{
+			public TrailRes()
+			{
+				mType = ResType.ResType_Trail;
+			}
+
+			public override void DeleteResource()
+			{
+				if (mTrail != null)
+				{
+					mTrail.Dispose();
+					mTrail = null;
+				}
+				base.DeleteResource();
+			}
+
+			public TrailDefinition mTrail;
+		}
+	}
+
+	static class BlendStates
+	{
+		public static BlendState imageLoadBlendAlpha = new BlendState
+		{
+			ColorWriteChannels = ColorWriteChannels.Alpha,
+			AlphaDestinationBlend = Blend.Zero,
+			ColorDestinationBlend = Blend.Zero,
+			AlphaSourceBlend = Blend.One,
+			ColorSourceBlend = Blend.One
+		};
+
+		public static BlendState blendColorLoadState = new BlendState
+		{
+			ColorWriteChannels = (ColorWriteChannels.Red | ColorWriteChannels.Green | ColorWriteChannels.Blue),
+			AlphaDestinationBlend = Blend.Zero,
+			ColorDestinationBlend = Blend.Zero,
+			AlphaSourceBlend = Blend.SourceAlpha,
+			ColorSourceBlend = Blend.SourceAlpha
+		};
 	}
 }

@@ -2,6 +2,75 @@
 
 namespace Sexy.TodLib
 {
+	public/*internal*/ class FoleyInstance
+	{
+		public bool mPaused
+		{
+			get
+			{
+				return _paused && !mInstance.IsReleased();
+			}
+			set
+			{
+				_paused = value;
+			}
+		}
+
+		public FoleyInstance()
+		{
+			mInstance = null;
+			mRefCount = 0;
+			mPaused = false;
+			mStartTime = 0;
+			mPauseOffset = 0;
+		}
+
+		public XNASoundInstance mInstance;
+
+		public int mRefCount;
+
+		private bool _paused;
+
+		public int mStartTime;
+
+		public int mPauseOffset;
+	}
+
+	public/*internal*/ class FoleyTypeData
+	{
+		public FoleyTypeData()
+		{
+			mLastVariationPlayed = -1;
+			for (int i = 0; i < 8; i++)
+			{
+				mFoleyInstances[i] = new FoleyInstance();
+			}
+		}
+
+		public FoleyInstance[] mFoleyInstances = new FoleyInstance[8];
+
+		public int mLastVariationPlayed;
+	}
+
+	public/*internal*/ class FoleyParams
+	{
+		public FoleyParams(FoleyType aFoleyType, float aPitchRange, int[] aIDs, uint aFoleyFlags)
+		{
+			mFoleyType = aFoleyType;
+			mPitchRange = aPitchRange;
+			mSfxID = aIDs;
+			mFoleyFlags = aFoleyFlags;
+		}
+
+		public FoleyType mFoleyType;
+
+		public float mPitchRange;
+
+		public int[] mSfxID = new int[10];
+
+		public uint mFoleyFlags;
+	}
+
 	public/*internal*/ class TodFoley
 	{
 		public TodFoley()
@@ -745,5 +814,14 @@ namespace Sexy.TodLib
 		public static FoleyParams[] gFoleyParamArray;
 
 		public static int gFoleyParamArraySize;
+	}
+
+	public enum FoleyFlags
+	{
+		FOLEYFLAGS_LOOP,
+		FOLEYFLAGS_ONE_AT_A_TIME,
+		FOLEYFLAGS_MUTE_ON_PAUSE,
+		FOLEYFLAGS_USES_MUSIC_VOLUME,
+		FOLEYFLAGS_DONT_REPEAT
 	}
 }

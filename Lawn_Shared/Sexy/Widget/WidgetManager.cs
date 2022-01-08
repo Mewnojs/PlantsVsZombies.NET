@@ -3,6 +3,57 @@ using System.Collections.Generic;
 
 namespace Sexy
 {
+	public/*internal*/ class PreModalInfo
+	{
+		public void PrepareForReuse()
+		{
+			Reset();
+			PreModalInfo.unusedObjects.Push(this);
+		}
+
+		public static PreModalInfo GetNewPreModalInfo()
+		{
+			if (PreModalInfo.unusedObjects.Count > 0)
+			{
+				return PreModalInfo.unusedObjects.Pop();
+			}
+			return new PreModalInfo();
+		}
+
+		private void Reset()
+		{
+			mBaseModalWidget = null;
+			mPrevBaseModalWidget = null;
+			mPrevFocusWidget = null;
+			mPrevBelowModalFlagsMod = default(FlagsMod);
+		}
+
+		private PreModalInfo()
+		{
+			Reset();
+		}
+
+		public Widget mBaseModalWidget;
+
+		public Widget mPrevBaseModalWidget;
+
+		public Widget mPrevFocusWidget;
+
+		public FlagsMod mPrevBelowModalFlagsMod = default(FlagsMod);
+
+		private static Stack<PreModalInfo> unusedObjects = new Stack<PreModalInfo>();
+	}
+
+	public enum WidgetFlags
+	{
+		WIDGETFLAGS_UPDATE = 1,
+		WIDGETFLAGS_MARK_DIRTY,
+		WIDGETFLAGS_DRAW = 4,
+		WIDGETFLAGS_CLIP = 8,
+		WIDGETFLAGS_ALLOW_MOUSE = 16,
+		WIDGETFLAGS_ALLOW_FOCUS = 32
+	}
+
 	public/*internal*/ class WidgetManager : WidgetContainer
 	{
 		public int GetWidgetFlags()
