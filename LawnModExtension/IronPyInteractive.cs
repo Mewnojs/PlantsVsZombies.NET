@@ -77,7 +77,9 @@ namespace Lawn
 
             public static void Initialize()
             {
-                mPyEnj.SetSearchPaths(new List<string>());
+                ConfigureWorkDir();
+                ConfigureStdlib();
+                //mPyEnj.SetSearchPaths(new List<string>());
                 static object DebugExec(string code)
                 {
                     Debug.OutputDebug($"[Python]{code}");
@@ -87,7 +89,6 @@ namespace Lawn
                 DebugExec($"__import__('clr').AddReference('{Assembly.GetExecutingAssembly().GetName().Name}')");
                 mPyEnj.Runtime.IO.SetOutput(mStdoutStream, mStdoutWriter);
                 mPyEnj.Runtime.IO.SetErrorOutput(mStderrStream, mStderrWriter);
-                ConfigureStdlib();
             }
 
             private static void ConfigureStdlib()
@@ -96,6 +97,11 @@ namespace Lawn
                 var searchPaths = mPyEnj.GetSearchPaths();
                 searchPaths.Add(libPath);
                 mPyEnj.SetSearchPaths(searchPaths);
+            }
+
+            private static void ConfigureWorkDir()
+            {
+                Main.IronPythonConfigureWorkDir();
             }
 
             private static readonly ScriptEngine mPyEnj = Python.CreateEngine();

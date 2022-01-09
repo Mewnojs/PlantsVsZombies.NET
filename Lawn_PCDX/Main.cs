@@ -117,6 +117,10 @@ namespace Sexy
 			return $"./IronPython.StdLib.{version.Major}.{version.Minor}.{version.Build}.zip";
         }
 
+        internal static void IronPythonConfigureWorkDir()
+        {
+        }
+
         protected override void Initialize()
 		{
 			base.Window.OrientationChanged += new EventHandler<EventArgs>(Window_OrientationChanged);

@@ -90,6 +90,11 @@ namespace Sexy
 
         }
 
+        internal static void IronPythonConfigureWorkDir()
+        {
+			GlobalStaticVars.gPvZActivity.ConfigureWorkDirAsLocalData();
+
+		}
 
         //private void Current_Deactivated(object sender, DeactivatedEventArgs e)
         //{

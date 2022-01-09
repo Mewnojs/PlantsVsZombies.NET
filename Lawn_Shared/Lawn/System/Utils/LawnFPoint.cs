@@ -2,7 +2,7 @@
 
 namespace Lawn
 {
-	internal class LawnFPoint
+	public/*internal*/ class LawnFPoint
 	{
 		public LawnFPoint(float theX, float theY)
 		{

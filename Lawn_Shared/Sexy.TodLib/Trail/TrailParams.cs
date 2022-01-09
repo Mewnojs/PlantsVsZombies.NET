@@ -2,7 +2,7 @@
 
 namespace Sexy.TodLib
 {
-	internal class TrailParams
+	public/*internal*/ class TrailParams
 	{
 		public TrailParams(TrailType aTrailType, string aTrailFileName)
 		{

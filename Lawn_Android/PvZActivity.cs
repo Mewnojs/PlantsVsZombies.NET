@@ -109,5 +109,10 @@ namespace Lawn_Android
                 throw new FileNotFoundException($"{packedlibFileName} not found in ANDROID_ASSET/{libFolderPath}");
             }
         }
+
+        internal void ConfigureWorkDirAsLocalData()
+        {
+            Directory.SetCurrentDirectory(GetExternalFilesDir("").AbsolutePath);
+        }
     }
 }

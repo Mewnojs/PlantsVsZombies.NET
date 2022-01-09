@@ -2,7 +2,7 @@
 
 namespace Sexy.TodLib
 {
-	internal class TodStringListFormat
+	public/*internal*/ class TodStringListFormat
 	{
 		public TodStringListFormat()
 		{

@@ -2,7 +2,7 @@
 
 namespace Lawn
 {
-	internal class Achievement
+	public/*internal*/ class Achievement
 	{
 		public Achievement(int aImageId, string aName, string aDesc)
 		{

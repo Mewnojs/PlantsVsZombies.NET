@@ -4,7 +4,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-	internal class GameConstants
+	public/*internal*/ class GameConstants
 	{
 		public static void Init()
 		{

@@ -2,7 +2,7 @@
 
 namespace Lawn
 {
-	internal class ZombieAllowedLevels
+	public/*internal*/ class ZombieAllowedLevels
 	{
 		public ZombieAllowedLevels(ZombieType aZombieType, int[] levels)
 		{

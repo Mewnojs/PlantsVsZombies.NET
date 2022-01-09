@@ -2,7 +2,7 @@
 
 namespace Sexy.TodLib
 {
-	internal class ReanimationParams
+	public/*internal*/ class ReanimationParams
 	{
 		public ReanimationParams(ReanimationType aReanimationType, string aReanimFilename) : this(aReanimationType, aReanimFilename, 0)
 		{
