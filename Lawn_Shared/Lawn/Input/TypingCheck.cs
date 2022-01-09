@@ -24,17 +24,17 @@ namespace Lawn
 
 		public void AddKeyCode(KeyCode theCode)
 		{
-			mPhrase += (sbyte)theCode;
+			mPhrase += (char)theCode;
 		}
 
 		public void AddChar(char theChar)
 		{
-			mPhrase += (sbyte)KeyCodes.GetKeyCodeFromName(theChar.ToString());
+			mPhrase += (char)KeyCodes.GetKeyCodeFromName(theChar.ToString());
 		}
 
 		public bool Check(KeyCode theCode)
 		{
-			mRecentTyping += (sbyte)theCode;
+			mRecentTyping += (char)theCode;
 			int length = mPhrase.Length;
 			if (length == 0)
 			{

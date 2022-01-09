@@ -101,15 +101,14 @@ namespace Sexy
 	{
 		public static KeyCode GetKeyCodeFromName(string theKeyName)
 		{
-			string aKeyName = new string(new char[MAX_KEYNAME_LEN]);
+			string aKeyName;// = new string(new char[MAX_KEYNAME_LEN]);
 
 			if (theKeyName.Length >= MAX_KEYNAME_LEN - 1)
 			{
 				return KeyCode.KEYCODE_UNKNOWN;
 			}
 
-			aKeyName = theKeyName;
-			aKeyName.ToUpper();
+			aKeyName = theKeyName.ToUpper();
 
 			if (theKeyName.Length == 1)
 			{

@@ -15,7 +15,7 @@ namespace Lawn
 			string text = string.Empty;
 			if (mApp.mGameMode != GameMode.GAMEMODE_ADVENTURE)
 			{
-				text = Common.StrFormat_("C{0}", mApp.mGameMode);
+				text = Common.StrFormat_("C{0}", (int)mApp.mGameMode);
 			}
 			else if (mApp.HasFinishedAdventure())
 			{
@@ -79,38 +79,49 @@ namespace Lawn
 
 		public bool ApplyCheat()
 		{
-			int num = -1;
-			int finishedAdventure = 0;
+			int level = -1;
+			int gamemode = 0;
 			string text = mLevelEditWidget.mString;
-			int num2 = text.ToLower().IndexOf("f");
-			if (num2 >= 0)
+			int finishedAdventure = 0;
+			int idc = text.ToLower().IndexOf("c");
+			if (idc >= 0)
 			{
-				finishedAdventure = 1;
-			}
-			text = text.ToLower().Replace("f", "");
-			string[] array = text.Split(new char[]
-			{
-				'-'
-			});
-			if (array.Length > 1)
-			{
-				int num3;
-				int.TryParse(array[0], out num3);
-				int num4;
-				int.TryParse(array[1], out num4);
-				num = (num3 - 1) * 10 + num4;
+				text = text.ToLower().Replace("c", "");
+				int.TryParse(text, out gamemode);
+				level = 0;
 			}
 			else
 			{
-				int.TryParse(text, out num);
+				int num2 = text.ToLower().IndexOf("f");
+				if (num2 >= 0)
+				{
+					finishedAdventure = 1;
+				}
+				text = text.ToLower().Replace("f", "");
+				string[] array = text.Split(new char[]
+				{
+				'-'
+				});
+				if (array.Length > 1)
+				{
+					int num3;
+					int.TryParse(array[0], out num3);
+					int num4;
+					int.TryParse(array[1], out num4);
+					level = (num3 - 1) * 10 + num4;
+				}
+				else
+				{
+					int.TryParse(text, out level);
+				}
+				if (level <= 0)
+				{
+					mApp.DoDialog(36, true, "Enter Level", "Invalid Level. Do 'number' or 'area-subarea' or 'Cnumber' or 'Farea-subarea'.", "OK", 3);
+					return false;
+				}
 			}
-			if (num <= 0)
-			{
-				mApp.DoDialog(36, true, "Enter Level", "Invalid Level. Do 'number' or 'area-subarea' or 'Cnumber' or 'Farea-subarea'.", "OK", 3);
-				return false;
-			}
-			mApp.mGameMode = GameMode.GAMEMODE_ADVENTURE;
-			mApp.mPlayerInfo.SetLevel(num);
+			mApp.mGameMode = (GameMode)gamemode;
+			mApp.mPlayerInfo.SetLevel(level);
 			mApp.mPlayerInfo.mFinishedAdventure = finishedAdventure;
 			mApp.WriteCurrentUserConfig();
 			mApp.mBoard.PickBackground();
@@ -124,7 +135,7 @@ namespace Lawn
 
 		public bool AllowText(int theId, ref string theText)
 		{
-			return false;
+			return true;//return false;
 		}
 
 		public EditWidget mLevelEditWidget;

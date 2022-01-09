@@ -114,7 +114,7 @@ namespace Lawn
 			AddWidget(mZenGardenButton);
 			AddWidget(mAchievementsButton);
 
-			if (mApp.mPlayerInfo != null && mApp.mPlayerInfo.mHasUsedCheatKeys)
+			if (mApp.mPlayerInfo != null && mApp.mDebugKeysEnabled)
 			{
 				AddWidget(mChallengePageSurvivalButton);
 				AddWidget(mChallengePageLimboButton);

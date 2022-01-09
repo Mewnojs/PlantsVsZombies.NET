@@ -22,6 +22,16 @@ namespace Sexy
 			return !(a == b);
 		}
 
+		public static bool operator ==(SexyChar a, uint b)
+		{
+			return a.Equals(b);
+		}
+
+		public static bool operator !=(SexyChar a, uint b)
+		{
+			return !(a == b);
+		}
+
 		public override bool Equals(object obj)
 		{
 			if (obj is SexyChar)
@@ -32,6 +42,10 @@ namespace Sexy
 			{
 				KeyCode keyCode = (KeyCode)obj;
 				return false;
+			}
+			if (obj is char || obj is uint) 
+			{
+				return value_type.Equals(obj);
 			}
 			return false;
 		}
@@ -44,6 +58,11 @@ namespace Sexy
 		public override string ToString()
 		{
 			return value_type.ToString();
+		}
+
+		public static implicit operator char(SexyChar value) 
+		{
+			return value.value_type;
 		}
 
 		public char value_type;

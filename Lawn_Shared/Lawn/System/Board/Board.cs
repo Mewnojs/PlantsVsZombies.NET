@@ -2157,841 +2157,844 @@ namespace Lawn
 
 		public override void KeyChar(SexyChar theChar)
 		{
-			char value_type = theChar.value_type;
-			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+			if (mApp.mDebugKeysEnabled)
 			{
-				if (value_type == 'm')
+				char value_type = theChar.value_type;
+				if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
 				{
-					if (mApp.mZenGarden.IsZenGardenFull(true))
-					{
-						return;
-					}
-					PottedPlant pottedPlant = new PottedPlant();
-					pottedPlant.InitializePottedPlant(SeedType.SEED_MARIGOLD);
-					pottedPlant.mPlantAge = PottedPlantAge.PLANTAGE_FULL;
-					pottedPlant.mDrawVariation = (DrawVariation)TodCommon.RandRangeInt(2, 12);
-					mApp.mZenGarden.AddPottedPlant(pottedPlant);
-					return;
-				}
-				else
-				{
-					if (value_type == '+')
-					{
-						while (!mApp.mZenGarden.IsZenGardenFull(true))
-						{
-							SeedType theSeedType = mApp.mZenGarden.PickRandomSeedType();
-							PottedPlant pottedPlant2 = new PottedPlant();
-							pottedPlant2.InitializePottedPlant(theSeedType);
-							pottedPlant2.mPlantAge = PottedPlantAge.PLANTAGE_FULL;
-							mApp.mZenGarden.AddPottedPlant(pottedPlant2);
-						}
-						return;
-					}
-					if (value_type == '-')
-					{
-						mPlants.Clear();
-						mApp.mPlayerInfo.mNumPottedPlants = 0;
-						return;
-					}
-					if (value_type == 'a')
+					if (value_type == 'm')
 					{
 						if (mApp.mZenGarden.IsZenGardenFull(true))
 						{
 							return;
 						}
-						SeedType theSeedType2 = mApp.mZenGarden.PickRandomSeedType();
-						PottedPlant pottedPlant3 = new PottedPlant();
-						pottedPlant3.InitializePottedPlant(theSeedType2);
-						pottedPlant3.mPlantAge = PottedPlantAge.PLANTAGE_SMALL;
-						mApp.mZenGarden.AddPottedPlant(pottedPlant3);
+						PottedPlant pottedPlant = new PottedPlant();
+						pottedPlant.InitializePottedPlant(SeedType.SEED_MARIGOLD);
+						pottedPlant.mPlantAge = PottedPlantAge.PLANTAGE_FULL;
+						pottedPlant.mDrawVariation = (DrawVariation)TodCommon.RandRangeInt(2, 12);
+						mApp.mZenGarden.AddPottedPlant(pottedPlant);
 						return;
 					}
 					else
 					{
-						if (value_type == 'f')
+						if (value_type == '+')
 						{
-							int num = -1;
-							Plant plant = null;
-							while (IteratePlants(ref plant, ref num))
+							while (!mApp.mZenGarden.IsZenGardenFull(true))
 							{
-								if (GetZenToolAt(plant.mPlantCol, plant.mRow) == null && plant.mPottedPlantIndex >= 0)
-								{
-									PottedPlant thePottedPlant = mApp.mZenGarden.PottedPlantFromIndex(plant.mPottedPlantIndex);
-									PottedPlantNeed plantsNeed = mApp.mZenGarden.GetPlantsNeed(thePottedPlant);
-									if (plantsNeed == PottedPlantNeed.PLANTNEED_WATER)
-									{
-										plant.mHighlighted = true;
-										mApp.mZenGarden.MouseDownWithFeedingTool(plant.mX, plant.mY, CursorType.CURSOR_TYPE_WATERING_CAN);
-										return;
-									}
-									if (plantsNeed == PottedPlantNeed.PLANTNEED_FERTILIZER)
-									{
-										plant.mHighlighted = true;
-										if (mApp.mPlayerInfo.mPurchases[14] <= 1000)
-										{
-											mApp.mPlayerInfo.mPurchases[14] = 1001;
-										}
-										mApp.mZenGarden.MouseDownWithFeedingTool(plant.mX, plant.mY, CursorType.CURSOR_TYPE_FERTILIZER);
-										return;
-									}
-									if (plantsNeed == PottedPlantNeed.PLANTNEED_BUGSPRAY)
-									{
-										plant.mHighlighted = true;
-										if (mApp.mPlayerInfo.mPurchases[15] <= 1000)
-										{
-											mApp.mPlayerInfo.mPurchases[15] = 1001;
-										}
-										mApp.mZenGarden.MouseDownWithFeedingTool(plant.mX, plant.mY, CursorType.CURSOR_TYPE_BUG_SPRAY);
-										return;
-									}
-									if (plantsNeed == PottedPlantNeed.PLANTNEED_PHONOGRAPH)
-									{
-										plant.mHighlighted = true;
-										mApp.mZenGarden.MouseDownWithFeedingTool(plant.mX, plant.mY, CursorType.CURSOR_TYPE_PHONOGRAPH);
-										return;
-									}
-								}
+								SeedType theSeedType = mApp.mZenGarden.PickRandomSeedType();
+								PottedPlant pottedPlant2 = new PottedPlant();
+								pottedPlant2.InitializePottedPlant(theSeedType);
+								pottedPlant2.mPlantAge = PottedPlantAge.PLANTAGE_FULL;
+								mApp.mZenGarden.AddPottedPlant(pottedPlant2);
 							}
 							return;
 						}
-						if (value_type == 'r')
+						if (value_type == '-')
 						{
-							int num2 = -1;
-							Plant plant2 = null;
-							while (IteratePlants(ref plant2, ref num2))
-							{
-								if (plant2.mPottedPlantIndex >= 0)
-								{
-									Debug.ASSERT(plant2.mPottedPlantIndex < mApp.mPlayerInfo.mNumPottedPlants);
-									PottedPlant thePottedPlant2 = mApp.mPlayerInfo.mPottedPlant[plant2.mPottedPlantIndex];
-									mApp.mZenGarden.ResetPlantTimers(thePottedPlant2);
-								}
-							}
+							mPlants.Clear();
+							mApp.mPlayerInfo.mNumPottedPlants = 0;
 							return;
 						}
-						if (value_type == 's')
+						if (value_type == 'a')
 						{
-							if (mApp.mZenGarden.IsStinkySleeping())
+							if (mApp.mZenGarden.IsZenGardenFull(true))
 							{
-								mApp.mZenGarden.WakeStinky();
 								return;
 							}
-							mApp.mZenGarden.ResetStinkyTimers();
+							SeedType theSeedType2 = mApp.mZenGarden.PickRandomSeedType();
+							PottedPlant pottedPlant3 = new PottedPlant();
+							pottedPlant3.InitializePottedPlant(theSeedType2);
+							pottedPlant3.mPlantAge = PottedPlantAge.PLANTAGE_SMALL;
+							mApp.mZenGarden.AddPottedPlant(pottedPlant3);
 							return;
 						}
-						else if (value_type == 'c')
+						else
 						{
-							if (mApp.mPlayerInfo.mPurchases[26] < 1000)
+							if (value_type == 'f')
 							{
-								mApp.mPlayerInfo.mPurchases[26] = 1001;
+								int num = -1;
+								Plant plant = null;
+								while (IteratePlants(ref plant, ref num))
+								{
+									if (GetZenToolAt(plant.mPlantCol, plant.mRow) == null && plant.mPottedPlantIndex >= 0)
+									{
+										PottedPlant thePottedPlant = mApp.mZenGarden.PottedPlantFromIndex(plant.mPottedPlantIndex);
+										PottedPlantNeed plantsNeed = mApp.mZenGarden.GetPlantsNeed(thePottedPlant);
+										if (plantsNeed == PottedPlantNeed.PLANTNEED_WATER)
+										{
+											plant.mHighlighted = true;
+											mApp.mZenGarden.MouseDownWithFeedingTool(plant.mX, plant.mY, CursorType.CURSOR_TYPE_WATERING_CAN);
+											return;
+										}
+										if (plantsNeed == PottedPlantNeed.PLANTNEED_FERTILIZER)
+										{
+											plant.mHighlighted = true;
+											if (mApp.mPlayerInfo.mPurchases[14] <= 1000)
+											{
+												mApp.mPlayerInfo.mPurchases[14] = 1001;
+											}
+											mApp.mZenGarden.MouseDownWithFeedingTool(plant.mX, plant.mY, CursorType.CURSOR_TYPE_FERTILIZER);
+											return;
+										}
+										if (plantsNeed == PottedPlantNeed.PLANTNEED_BUGSPRAY)
+										{
+											plant.mHighlighted = true;
+											if (mApp.mPlayerInfo.mPurchases[15] <= 1000)
+											{
+												mApp.mPlayerInfo.mPurchases[15] = 1001;
+											}
+											mApp.mZenGarden.MouseDownWithFeedingTool(plant.mX, plant.mY, CursorType.CURSOR_TYPE_BUG_SPRAY);
+											return;
+										}
+										if (plantsNeed == PottedPlantNeed.PLANTNEED_PHONOGRAPH)
+										{
+											plant.mHighlighted = true;
+											mApp.mZenGarden.MouseDownWithFeedingTool(plant.mX, plant.mY, CursorType.CURSOR_TYPE_PHONOGRAPH);
+											return;
+										}
+									}
+								}
 								return;
 							}
-							mApp.mPlayerInfo.mPurchases[26]++;
-							return;
-						}
-						else if (value_type == ']')
-						{
-							PottedPlant pottedPlantInWheelbarrow = mApp.mZenGarden.GetPottedPlantInWheelbarrow();
-							if (pottedPlantInWheelbarrow != null)
+							if (value_type == 'r')
 							{
-								pottedPlantInWheelbarrow.mSeedType++;
-								if (pottedPlantInWheelbarrow.mSeedType == SeedType.SEED_GATLINGPEA)
+								int num2 = -1;
+								Plant plant2 = null;
+								while (IteratePlants(ref plant2, ref num2))
 								{
-									pottedPlantInWheelbarrow.mSeedType = SeedType.SEED_PEASHOOTER;
+									if (plant2.mPottedPlantIndex >= 0)
+									{
+										Debug.ASSERT(plant2.mPottedPlantIndex < mApp.mPlayerInfo.mNumPottedPlants);
+										PottedPlant thePottedPlant2 = mApp.mPlayerInfo.mPottedPlant[plant2.mPottedPlantIndex];
+										mApp.mZenGarden.ResetPlantTimers(thePottedPlant2);
+									}
 								}
-								if (pottedPlantInWheelbarrow.mSeedType == SeedType.SEED_FLOWERPOT)
+								return;
+							}
+							if (value_type == 's')
+							{
+								if (mApp.mZenGarden.IsStinkySleeping())
+								{
+									mApp.mZenGarden.WakeStinky();
+									return;
+								}
+								mApp.mZenGarden.ResetStinkyTimers();
+								return;
+							}
+							else if (value_type == 'c')
+							{
+								if (mApp.mPlayerInfo.mPurchases[26] < 1000)
+								{
+									mApp.mPlayerInfo.mPurchases[26] = 1001;
+									return;
+								}
+								mApp.mPlayerInfo.mPurchases[26]++;
+								return;
+							}
+							else if (value_type == ']')
+							{
+								PottedPlant pottedPlantInWheelbarrow = mApp.mZenGarden.GetPottedPlantInWheelbarrow();
+								if (pottedPlantInWheelbarrow != null)
 								{
 									pottedPlantInWheelbarrow.mSeedType++;
+									if (pottedPlantInWheelbarrow.mSeedType == SeedType.SEED_GATLINGPEA)
+									{
+										pottedPlantInWheelbarrow.mSeedType = SeedType.SEED_PEASHOOTER;
+									}
+									if (pottedPlantInWheelbarrow.mSeedType == SeedType.SEED_FLOWERPOT)
+									{
+										pottedPlantInWheelbarrow.mSeedType++;
+									}
 								}
+								return;
 							}
-							return;
 						}
 					}
 				}
-			}
-			if (mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
-			{
-				if (value_type == 'f')
+				if (mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
 				{
-					if (mApp.mPlayerInfo.mPurchases[28] <= 1000)
+					if (value_type == 'f')
 					{
-						mApp.mPlayerInfo.mPurchases[28] = 1001;
-					}
-					mChallenge.TreeOfWisdomFertilize();
-					return;
-				}
-				if (value_type == 'g')
-				{
-					mChallenge.TreeOfWisdomGrow();
-					return;
-				}
-				if (value_type == 'b')
-				{
-					mChallenge.mChallengeStateCounter = 1;
-					return;
-				}
-				if (value_type == '0')
-				{
-					int currentChallengeIndex = mApp.GetCurrentChallengeIndex();
-					mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex] = 0;
-					mChallenge.TreeOfWisdomGrow();
-					return;
-				}
-				if (value_type == '1')
-				{
-					int currentChallengeIndex2 = mApp.GetCurrentChallengeIndex();
-					mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex2] = 9;
-					mChallenge.TreeOfWisdomGrow();
-					return;
-				}
-				if (value_type == '2')
-				{
-					int currentChallengeIndex3 = mApp.GetCurrentChallengeIndex();
-					mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex3] = 19;
-					mChallenge.TreeOfWisdomGrow();
-					return;
-				}
-				if (value_type == '3')
-				{
-					int currentChallengeIndex4 = mApp.GetCurrentChallengeIndex();
-					mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex4] = 29;
-					mChallenge.TreeOfWisdomGrow();
-					return;
-				}
-				if (value_type == '4')
-				{
-					int currentChallengeIndex5 = mApp.GetCurrentChallengeIndex();
-					mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex5] = 39;
-					mChallenge.TreeOfWisdomGrow();
-					return;
-				}
-				if (value_type == '5')
-				{
-					int currentChallengeIndex6 = mApp.GetCurrentChallengeIndex();
-					mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex6] = 49;
-					mChallenge.TreeOfWisdomGrow();
-					return;
-				}
-				if (value_type == '6')
-				{
-					int currentChallengeIndex7 = mApp.GetCurrentChallengeIndex();
-					mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex7] = 98;
-					mChallenge.TreeOfWisdomGrow();
-					return;
-				}
-				if (value_type == '7')
-				{
-					int currentChallengeIndex8 = mApp.GetCurrentChallengeIndex();
-					mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex8] = 498;
-					mChallenge.TreeOfWisdomGrow();
-					return;
-				}
-				if (value_type == '8')
-				{
-					int currentChallengeIndex9 = mApp.GetCurrentChallengeIndex();
-					mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex9] = 998;
-					mChallenge.TreeOfWisdomGrow();
-				}
-				return;
-			}
-			else
-			{
-				Zombie bossZombie;
-				if (value_type == '<')
-				{
-					mApp.DoNewOptions(false);
-				}
-				else if (value_type == '2')
-				{
-					AddZombie(ZombieType.ZOMBIE_DIGGER, GameConstants.ZOMBIE_WAVE_DEBUG);
-				}
-				else if (value_type == 'l')
-				{
-					mApp.DoCheatDialog();
-				}
-				else if (value_type == '#')
-				{
-					if (mApp.IsSurvivalMode())
-					{
-						if (mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
+						if (mApp.mPlayerInfo.mPurchases[28] <= 1000)
 						{
-							return;
+							mApp.mPlayerInfo.mPurchases[28] = 1001;
 						}
-						mCurrentWave = mNumWaves;
-						mChallenge.mSurvivalStage += 5;
-						RemoveAllZombies();
-						FadeOutLevel();
-					}
-					else
-					{
-						bossZombie = GetBossZombie();
-						if (bossZombie != null)
-						{
-							bossZombie.ApplyBossSmokeParticles(true);
-						}
-					}
-				}
-				else if (value_type == '!')
-				{
-					mApp.mBoardResult = BoardResult.BOARDRESULT_CHEAT;
-					if (IsLastStandStageWithRepick())
-					{
-						if (mNextSurvivalStageCounter == 0)
-						{
-							mCurrentWave = mNumWaves;
-							RemoveAllZombies();
-							FadeOutLevel();
-						}
-					}
-					else if ((mApp.IsScaryPotterLevel() && !IsFinalScaryPotterStage()) || mApp.IsEndlessIZombie(mApp.mGameMode))
-					{
-						if (mNextSurvivalStageCounter == 0)
-						{
-							RemoveAllZombies();
-							FadeOutLevel();
-						}
-					}
-					else if (mApp.IsSurvivalMode())
-					{
-						if (mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
-						{
-							return;
-						}
-						mCurrentWave = mNumWaves;
-						if (!IsSurvivalStageWithRepick())
-						{
-							RemoveAllZombies();
-						}
-						FadeOutLevel();
-					}
-					else
-					{
-						RemoveAllZombies();
-						FadeOutLevel();
-						mBoardFadeOutCounter = 200;
-					}
-				}
-				else if (value_type == '+')
-				{
-					mApp.mBoardResult = BoardResult.BOARDRESULT_CHEAT;
-					if (IsLastStandStageWithRepick())
-					{
-						if (mNextSurvivalStageCounter == 0)
-						{
-							mCurrentWave = mNumWaves;
-							RemoveAllZombies();
-							FadeOutLevel();
-						}
-					}
-					else if ((mApp.IsScaryPotterLevel() && !IsFinalScaryPotterStage()) || mApp.IsEndlessIZombie(mApp.mGameMode))
-					{
-						if (mNextSurvivalStageCounter == 0)
-						{
-							RemoveAllZombies();
-							FadeOutLevel();
-						}
-					}
-					else if (mApp.IsSurvivalEndless(mApp.mGameMode))
-					{
-						if (mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
-						{
-							return;
-						}
-						mCurrentWave = mNumWaves;
-						RemoveAllZombies();
-						FadeOutLevel();
-					}
-					else if (mApp.IsSurvivalMode())
-					{
-						mChallenge.mSurvivalStage = 5;
-						RemoveAllZombies();
-						FadeOutLevel();
-						mBoardFadeOutCounter = 200;
-					}
-					else
-					{
-						RemoveAllZombies();
-						FadeOutLevel();
-						mBoardFadeOutCounter = 200;
-					}
-				}
-				else if (value_type == '8')
-				{
-					mApp.mEasyPlantingCheat = !mApp.mEasyPlantingCheat;
-				}
-				else if (value_type == '7')
-				{
-					mApp.ToggleSlowMo();
-				}
-				else if (value_type == '6')
-				{
-					mApp.ToggleFastMo();
-				}
-				else if (value_type == 'z')
-				{
-					ClearAdviceImmediately();
-					DisplayAdviceAgain("[ADVICE_HUGE_WAVE]", MessageStyle.MESSAGE_STYLE_HUGE_WAVE, AdviceType.ADVICE_HUGE_WAVE);
-					mHugeWaveCountDown = 750;
-					mDebugTextMode++;
-					if (mDebugTextMode > DebugTextMode.DEBUG_TEXT_COLLISION)
-					{
-						mDebugTextMode = DebugTextMode.DEBUG_TEXT_NONE;
-					}
-				}
-				if (mApp.mGameScene != GameScenes.SCENE_PLAYING)
-				{
-					return;
-				}
-				bossZombie = GetBossZombie();
-				if (bossZombie != null && !bossZombie.IsDeadOrDying())
-				{
-					if (value_type == 'b')
-					{
-						bossZombie.mBossBungeeCounter = 0;
-						return;
-					}
-					if (value_type == 'u')
-					{
-						bossZombie.mSummonCounter = 0;
-						return;
-					}
-					if (value_type == 's')
-					{
-						bossZombie.mBossStompCounter = 0;
-						return;
-					}
-					if (value_type == 'r')
-					{
-						bossZombie.BossRVAttack();
-						return;
-					}
-					if (value_type == 'h')
-					{
-						bossZombie.mBossHeadCounter = 0;
-						return;
-					}
-					if (value_type == 'd')
-					{
-						bossZombie.TakeDamage(10000, 0U);
-						return;
-					}
-				}
-				if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS_2)
-				{
-					if (value_type == 'w')
-					{
-						AddZombie(ZombieType.ZOMBIE_WALLNUT_HEAD, GameConstants.ZOMBIE_WAVE_DEBUG);
-						return;
-					}
-					if (value_type == 't')
-					{
-						AddZombie(ZombieType.ZOMBIE_TALLNUT_HEAD, GameConstants.ZOMBIE_WAVE_DEBUG);
-						return;
-					}
-					if (value_type == 'j')
-					{
-						AddZombie(ZombieType.ZOMBIE_JALAPENO_HEAD, GameConstants.ZOMBIE_WAVE_DEBUG);
+						mChallenge.TreeOfWisdomFertilize();
 						return;
 					}
 					if (value_type == 'g')
 					{
-						AddZombie(ZombieType.ZOMBIE_GATLING_HEAD, GameConstants.ZOMBIE_WAVE_DEBUG);
+						mChallenge.TreeOfWisdomGrow();
 						return;
 					}
-					if (value_type == 's')
+					if (value_type == 'b')
 					{
-						AddZombie(ZombieType.ZOMBIE_SQUASH_HEAD, GameConstants.ZOMBIE_WAVE_DEBUG);
+						mChallenge.mChallengeStateCounter = 1;
 						return;
 					}
+					if (value_type == '0')
+					{
+						int currentChallengeIndex = mApp.GetCurrentChallengeIndex();
+						mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex] = 0;
+						mChallenge.TreeOfWisdomGrow();
+						return;
+					}
+					if (value_type == '1')
+					{
+						int currentChallengeIndex2 = mApp.GetCurrentChallengeIndex();
+						mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex2] = 9;
+						mChallenge.TreeOfWisdomGrow();
+						return;
+					}
+					if (value_type == '2')
+					{
+						int currentChallengeIndex3 = mApp.GetCurrentChallengeIndex();
+						mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex3] = 19;
+						mChallenge.TreeOfWisdomGrow();
+						return;
+					}
+					if (value_type == '3')
+					{
+						int currentChallengeIndex4 = mApp.GetCurrentChallengeIndex();
+						mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex4] = 29;
+						mChallenge.TreeOfWisdomGrow();
+						return;
+					}
+					if (value_type == '4')
+					{
+						int currentChallengeIndex5 = mApp.GetCurrentChallengeIndex();
+						mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex5] = 39;
+						mChallenge.TreeOfWisdomGrow();
+						return;
+					}
+					if (value_type == '5')
+					{
+						int currentChallengeIndex6 = mApp.GetCurrentChallengeIndex();
+						mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex6] = 49;
+						mChallenge.TreeOfWisdomGrow();
+						return;
+					}
+					if (value_type == '6')
+					{
+						int currentChallengeIndex7 = mApp.GetCurrentChallengeIndex();
+						mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex7] = 98;
+						mChallenge.TreeOfWisdomGrow();
+						return;
+					}
+					if (value_type == '7')
+					{
+						int currentChallengeIndex8 = mApp.GetCurrentChallengeIndex();
+						mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex8] = 498;
+						mChallenge.TreeOfWisdomGrow();
+						return;
+					}
+					if (value_type == '8')
+					{
+						int currentChallengeIndex9 = mApp.GetCurrentChallengeIndex();
+						mApp.mPlayerInfo.mChallengeRecords[currentChallengeIndex9] = 998;
+						mChallenge.TreeOfWisdomGrow();
+					}
+					return;
 				}
-				if (value_type == 'q' && mApp.IsSurvivalEndless(mApp.mGameMode))
+				else
 				{
-					mApp.mEasyPlantingCheat = true;
-					for (int i = 0; i < Constants.MAX_GRIDSIZEY; i++)
+					Zombie bossZombie;
+					if (value_type == '<')
 					{
-						for (int j = 0; j < Constants.GRIDSIZEX; j++)
+						mApp.DoNewOptions(false);
+					}
+					else if (value_type == '2')
+					{
+						AddZombie(ZombieType.ZOMBIE_DIGGER, GameConstants.ZOMBIE_WAVE_DEBUG);
+					}
+					else if (value_type == 'l')
+					{
+						mApp.DoCheatDialog();
+					}
+					else if (value_type == '#')
+					{
+						if (mApp.IsSurvivalMode())
 						{
-							if (CanPlantAt(j, i, SeedType.SEED_LILYPAD) == PlantingReason.PLANTING_OK)
+							if (mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
 							{
-								AddPlant(j, i, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+								return;
 							}
-							if (CanPlantAt(j, i, SeedType.SEED_PUMPKINSHELL) == PlantingReason.PLANTING_OK && (j <= 6 || IsPoolSquare(j, i)))
+							mCurrentWave = mNumWaves;
+							mChallenge.mSurvivalStage += 5;
+							RemoveAllZombies();
+							FadeOutLevel();
+						}
+						else
+						{
+							bossZombie = GetBossZombie();
+							if (bossZombie != null)
 							{
-								AddPlant(j, i, SeedType.SEED_PUMPKINSHELL, SeedType.SEED_NONE);
+								bossZombie.ApplyBossSmokeParticles(true);
 							}
-							if (CanPlantAt(j, i, SeedType.SEED_GATLINGPEA) == PlantingReason.PLANTING_OK)
+						}
+					}
+					else if (value_type == '!')
+					{
+						mApp.mBoardResult = BoardResult.BOARDRESULT_CHEAT;
+						if (IsLastStandStageWithRepick())
+						{
+							if (mNextSurvivalStageCounter == 0)
 							{
-								if (j < 5)
+								mCurrentWave = mNumWaves;
+								RemoveAllZombies();
+								FadeOutLevel();
+							}
+						}
+						else if ((mApp.IsScaryPotterLevel() && !IsFinalScaryPotterStage()) || mApp.IsEndlessIZombie(mApp.mGameMode))
+						{
+							if (mNextSurvivalStageCounter == 0)
+							{
+								RemoveAllZombies();
+								FadeOutLevel();
+							}
+						}
+						else if (mApp.IsSurvivalMode())
+						{
+							if (mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
+							{
+								return;
+							}
+							mCurrentWave = mNumWaves;
+							if (!IsSurvivalStageWithRepick())
+							{
+								RemoveAllZombies();
+							}
+							FadeOutLevel();
+						}
+						else
+						{
+							RemoveAllZombies();
+							FadeOutLevel();
+							mBoardFadeOutCounter = 200;
+						}
+					}
+					else if (value_type == '+')
+					{
+						mApp.mBoardResult = BoardResult.BOARDRESULT_CHEAT;
+						if (IsLastStandStageWithRepick())
+						{
+							if (mNextSurvivalStageCounter == 0)
+							{
+								mCurrentWave = mNumWaves;
+								RemoveAllZombies();
+								FadeOutLevel();
+							}
+						}
+						else if ((mApp.IsScaryPotterLevel() && !IsFinalScaryPotterStage()) || mApp.IsEndlessIZombie(mApp.mGameMode))
+						{
+							if (mNextSurvivalStageCounter == 0)
+							{
+								RemoveAllZombies();
+								FadeOutLevel();
+							}
+						}
+						else if (mApp.IsSurvivalEndless(mApp.mGameMode))
+						{
+							if (mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
+							{
+								return;
+							}
+							mCurrentWave = mNumWaves;
+							RemoveAllZombies();
+							FadeOutLevel();
+						}
+						else if (mApp.IsSurvivalMode())
+						{
+							mChallenge.mSurvivalStage = 5;
+							RemoveAllZombies();
+							FadeOutLevel();
+							mBoardFadeOutCounter = 200;
+						}
+						else
+						{
+							RemoveAllZombies();
+							FadeOutLevel();
+							mBoardFadeOutCounter = 200;
+						}
+					}
+					else if (value_type == '8')
+					{
+						mApp.mEasyPlantingCheat = !mApp.mEasyPlantingCheat;
+					}
+					else if (value_type == '7')
+					{
+						mApp.ToggleSlowMo();
+					}
+					else if (value_type == '6')
+					{
+						mApp.ToggleFastMo();
+					}
+					else if (value_type == 'z')
+					{
+						ClearAdviceImmediately();
+						DisplayAdviceAgain("[ADVICE_HUGE_WAVE]", MessageStyle.MESSAGE_STYLE_HUGE_WAVE, AdviceType.ADVICE_HUGE_WAVE);
+						mHugeWaveCountDown = 750;
+						mDebugTextMode++;
+						if (mDebugTextMode > DebugTextMode.DEBUG_TEXT_COLLISION)
+						{
+							mDebugTextMode = DebugTextMode.DEBUG_TEXT_NONE;
+						}
+					}
+					if (mApp.mGameScene != GameScenes.SCENE_PLAYING)
+					{
+						return;
+					}
+					bossZombie = GetBossZombie();
+					if (bossZombie != null && !bossZombie.IsDeadOrDying())
+					{
+						if (value_type == 'b')
+						{
+							bossZombie.mBossBungeeCounter = 0;
+							return;
+						}
+						if (value_type == 'u')
+						{
+							bossZombie.mSummonCounter = 0;
+							return;
+						}
+						if (value_type == 's')
+						{
+							bossZombie.mBossStompCounter = 0;
+							return;
+						}
+						if (value_type == 'r')
+						{
+							bossZombie.BossRVAttack();
+							return;
+						}
+						if (value_type == 'h')
+						{
+							bossZombie.mBossHeadCounter = 0;
+							return;
+						}
+						if (value_type == 'd')
+						{
+							bossZombie.TakeDamage(10000, 0U);
+							return;
+						}
+					}
+					if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS_2)
+					{
+						if (value_type == 'w')
+						{
+							AddZombie(ZombieType.ZOMBIE_WALLNUT_HEAD, GameConstants.ZOMBIE_WAVE_DEBUG);
+							return;
+						}
+						if (value_type == 't')
+						{
+							AddZombie(ZombieType.ZOMBIE_TALLNUT_HEAD, GameConstants.ZOMBIE_WAVE_DEBUG);
+							return;
+						}
+						if (value_type == 'j')
+						{
+							AddZombie(ZombieType.ZOMBIE_JALAPENO_HEAD, GameConstants.ZOMBIE_WAVE_DEBUG);
+							return;
+						}
+						if (value_type == 'g')
+						{
+							AddZombie(ZombieType.ZOMBIE_GATLING_HEAD, GameConstants.ZOMBIE_WAVE_DEBUG);
+							return;
+						}
+						if (value_type == 's')
+						{
+							AddZombie(ZombieType.ZOMBIE_SQUASH_HEAD, GameConstants.ZOMBIE_WAVE_DEBUG);
+							return;
+						}
+					}
+					if (value_type == 'q' && mApp.IsSurvivalEndless(mApp.mGameMode))
+					{
+						mApp.mEasyPlantingCheat = true;
+						for (int i = 0; i < Constants.MAX_GRIDSIZEY; i++)
+						{
+							for (int j = 0; j < Constants.GRIDSIZEX; j++)
+							{
+								if (CanPlantAt(j, i, SeedType.SEED_LILYPAD) == PlantingReason.PLANTING_OK)
 								{
-									AddPlant(j, i, SeedType.SEED_GATLINGPEA, SeedType.SEED_NONE);
+									AddPlant(j, i, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
 								}
-								else if (j == 5)
+								if (CanPlantAt(j, i, SeedType.SEED_PUMPKINSHELL) == PlantingReason.PLANTING_OK && (j <= 6 || IsPoolSquare(j, i)))
 								{
-									AddPlant(j, i, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
+									AddPlant(j, i, SeedType.SEED_PUMPKINSHELL, SeedType.SEED_NONE);
 								}
-								else if (j == 6)
+								if (CanPlantAt(j, i, SeedType.SEED_GATLINGPEA) == PlantingReason.PLANTING_OK)
 								{
-									AddPlant(j, i, SeedType.SEED_SPLITPEA, SeedType.SEED_NONE);
-								}
-								else if (i == 2 || i == 3)
-								{
-									AddPlant(j, i, SeedType.SEED_GLOOMSHROOM, SeedType.SEED_NONE);
-									if (CanPlantAt(j, i, SeedType.SEED_INSTANT_COFFEE) == PlantingReason.PLANTING_OK)
+									if (j < 5)
 									{
-										AddPlant(j, i, SeedType.SEED_INSTANT_COFFEE, SeedType.SEED_NONE);
+										AddPlant(j, i, SeedType.SEED_GATLINGPEA, SeedType.SEED_NONE);
+									}
+									else if (j == 5)
+									{
+										AddPlant(j, i, SeedType.SEED_TORCHWOOD, SeedType.SEED_NONE);
+									}
+									else if (j == 6)
+									{
+										AddPlant(j, i, SeedType.SEED_SPLITPEA, SeedType.SEED_NONE);
+									}
+									else if (i == 2 || i == 3)
+									{
+										AddPlant(j, i, SeedType.SEED_GLOOMSHROOM, SeedType.SEED_NONE);
+										if (CanPlantAt(j, i, SeedType.SEED_INSTANT_COFFEE) == PlantingReason.PLANTING_OK)
+										{
+											AddPlant(j, i, SeedType.SEED_INSTANT_COFFEE, SeedType.SEED_NONE);
+										}
 									}
 								}
 							}
 						}
-					}
-					return;
-				}
-				if (value_type == 'q' && mApp.IsIZombieLevel())
-				{
-					mApp.mEasyPlantingCheat = true;
-					if (mApp.IsIZombieLevel())
-					{
-						for (int k = 0; k < 5; k++)
-						{
-							mChallenge.IZombiePlaceZombie(ZombieType.ZOMBIE_FOOTBALL, 6, k);
-						}
 						return;
 					}
-				}
-				else if (value_type == 'q')
-				{
-					mApp.mEasyPlantingCheat = true;
-					for (int l = 0; l < Constants.MAX_GRIDSIZEY; l++)
+					if (value_type == 'q' && mApp.IsIZombieLevel())
 					{
-						for (int m = 0; m < Constants.GRIDSIZEX; m++)
+						mApp.mEasyPlantingCheat = true;
+						if (mApp.IsIZombieLevel())
 						{
-							if (StageHasRoof() && CanPlantAt(m, l, SeedType.SEED_FLOWERPOT) == PlantingReason.PLANTING_OK)
+							for (int k = 0; k < 5; k++)
 							{
-								AddPlant(m, l, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+								mChallenge.IZombiePlaceZombie(ZombieType.ZOMBIE_FOOTBALL, 6, k);
 							}
-							if (CanPlantAt(m, l, SeedType.SEED_LILYPAD) == PlantingReason.PLANTING_OK)
-							{
-								AddPlant(m, l, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
-							}
-							if (CanPlantAt(m, l, SeedType.SEED_THREEPEATER) == PlantingReason.PLANTING_OK)
-							{
-								AddPlant(m, l, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
-							}
+							return;
 						}
 					}
-					if (!mChallenge.UpdateZombieSpawning())
+					else if (value_type == 'q')
 					{
-						int num3 = Math.Min(mNumWaves - mCurrentWave, 20);
-						for (int n = 0; n < num3; n++)
+						mApp.mEasyPlantingCheat = true;
+						for (int l = 0; l < Constants.MAX_GRIDSIZEY; l++)
 						{
-							SpawnZombieWave();
-						}
-					}
-					if (mApp.IsScaryPotterLevel())
-					{
-						int num4 = -1;
-						GridItem gridItem = null;
-						while (IterateGridItems(ref gridItem, ref num4))
-						{
-							if (gridItem.mGridItemType == GridItemType.GRIDITEM_SCARY_POT)
+							for (int m = 0; m < Constants.GRIDSIZEX; m++)
 							{
-								mChallenge.ScaryPotterOpenPot(gridItem);
+								if (StageHasRoof() && CanPlantAt(m, l, SeedType.SEED_FLOWERPOT) == PlantingReason.PLANTING_OK)
+								{
+									AddPlant(m, l, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+								}
+								if (CanPlantAt(m, l, SeedType.SEED_LILYPAD) == PlantingReason.PLANTING_OK)
+								{
+									AddPlant(m, l, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+								}
+								if (CanPlantAt(m, l, SeedType.SEED_THREEPEATER) == PlantingReason.PLANTING_OK)
+								{
+									AddPlant(m, l, SeedType.SEED_THREEPEATER, SeedType.SEED_NONE);
+								}
 							}
 						}
-						return;
-					}
-				}
-				else if (value_type == ']')
-				{
-					mApp.mEasyPlantingCheat = true;
-					for (int num5 = 0; num5 < Constants.MAX_GRIDSIZEY; num5++)
-					{
-						for (int num6 = 0; num6 < Constants.GRIDSIZEX; num6++)
+						if (!mChallenge.UpdateZombieSpawning())
 						{
-							if (StageHasRoof() && CanPlantAt(num6, num5, SeedType.SEED_FLOWERPOT) == PlantingReason.PLANTING_OK)
+							int num3 = Math.Min(mNumWaves - mCurrentWave, 20);
+							for (int n = 0; n < num3; n++)
 							{
-								AddPlant(num6, num5, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
-							}
-							if (CanPlantAt(num6, num5, SeedType.SEED_LILYPAD) == PlantingReason.PLANTING_OK)
-							{
-								AddPlant(num6, num5, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
-							}
-							if (CanPlantAt(num6, num5, SeedType.SEED_PEASHOOTER) == PlantingReason.PLANTING_OK)
-							{
-								AddPlant(num6, num5, SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
+								SpawnZombieWave();
 							}
 						}
-					}
-					if (!mChallenge.UpdateZombieSpawning())
-					{
-						int num7 = Math.Min(mNumWaves - mCurrentWave, 20);
-						for (int num8 = 0; num8 < num7; num8++)
+						if (mApp.IsScaryPotterLevel())
 						{
-							SpawnZombieWave();
+							int num4 = -1;
+							GridItem gridItem = null;
+							while (IterateGridItems(ref gridItem, ref num4))
+							{
+								if (gridItem.mGridItemType == GridItemType.GRIDITEM_SCARY_POT)
+								{
+									mChallenge.ScaryPotterOpenPot(gridItem);
+								}
+							}
+							return;
 						}
 					}
-					if (mApp.IsScaryPotterLevel())
+					else if (value_type == ']')
 					{
-						int num9 = -1;
-						GridItem gridItem2 = null;
-						while (IterateGridItems(ref gridItem2, ref num9))
+						mApp.mEasyPlantingCheat = true;
+						for (int num5 = 0; num5 < Constants.MAX_GRIDSIZEY; num5++)
 						{
-							if (gridItem2.mGridItemType == GridItemType.GRIDITEM_SCARY_POT)
+							for (int num6 = 0; num6 < Constants.GRIDSIZEX; num6++)
 							{
-								mChallenge.ScaryPotterOpenPot(gridItem2);
+								if (StageHasRoof() && CanPlantAt(num6, num5, SeedType.SEED_FLOWERPOT) == PlantingReason.PLANTING_OK)
+								{
+									AddPlant(num6, num5, SeedType.SEED_FLOWERPOT, SeedType.SEED_NONE);
+								}
+								if (CanPlantAt(num6, num5, SeedType.SEED_LILYPAD) == PlantingReason.PLANTING_OK)
+								{
+									AddPlant(num6, num5, SeedType.SEED_LILYPAD, SeedType.SEED_NONE);
+								}
+								if (CanPlantAt(num6, num5, SeedType.SEED_PEASHOOTER) == PlantingReason.PLANTING_OK)
+								{
+									AddPlant(num6, num5, SeedType.SEED_PEASHOOTER, SeedType.SEED_NONE);
+								}
 							}
 						}
-						return;
-					}
-				}
-				else if (value_type == '[')
-				{
-					if (!mChallenge.UpdateZombieSpawning())
-					{
-						int num10 = 1;
-						for (int num11 = 0; num11 < num10; num11++)
+						if (!mChallenge.UpdateZombieSpawning())
 						{
-							SpawnZombieWave();
+							int num7 = Math.Min(mNumWaves - mCurrentWave, 20);
+							for (int num8 = 0; num8 < num7; num8++)
+							{
+								SpawnZombieWave();
+							}
 						}
-						return;
-					}
-				}
-				else if (value_type == '?' || value_type == '/')
-				{
-					if (mHugeWaveCountDown > 0)
-					{
-						mHugeWaveCountDown = 1;
-						return;
-					}
-					mZombieCountDown = 6;
-					return;
-				}
-				else if (value_type == 'b')
-				{
-					if (mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST)
-					{
-						AddZombie(ZombieType.ZOMBIE_BUNGEE, GameConstants.ZOMBIE_WAVE_DEBUG);
-						return;
-					}
-				}
-				else
-				{
-					if (value_type == 'O')
-					{
-						AddZombie(ZombieType.ZOMBIE_FOOTBALL, GameConstants.ZOMBIE_WAVE_DEBUG);
-						return;
-					}
-					if (value_type == 's')
-					{
-						AddZombie(ZombieType.ZOMBIE_DOOR, GameConstants.ZOMBIE_WAVE_DEBUG);
-						return;
-					}
-					if (value_type == 'L')
-					{
-						AddZombie(ZombieType.ZOMBIE_LADDER, GameConstants.ZOMBIE_WAVE_DEBUG);
-						return;
-					}
-					if (value_type == 'y')
-					{
-						AddZombie(ZombieType.ZOMBIE_YETI, GameConstants.ZOMBIE_WAVE_DEBUG);
-						return;
-					}
-					if (value_type == 'a')
-					{
-						AddZombie(ZombieType.ZOMBIE_FLAG, GameConstants.ZOMBIE_WAVE_DEBUG);
-						return;
-					}
-					if (value_type == 'w')
-					{
-						AddZombie(ZombieType.ZOMBIE_NEWSPAPER, GameConstants.ZOMBIE_WAVE_DEBUG);
-						return;
-					}
-					if (value_type == 'F')
-					{
-						AddZombie(ZombieType.ZOMBIE_BALLOON, GameConstants.ZOMBIE_WAVE_DEBUG);
-						return;
-					}
-					if (value_type == 'n')
-					{
-						if (StageHasPool())
+						if (mApp.IsScaryPotterLevel())
 						{
-							AddZombie(ZombieType.ZOMBIE_SNORKEL, GameConstants.ZOMBIE_WAVE_DEBUG);
+							int num9 = -1;
+							GridItem gridItem2 = null;
+							while (IterateGridItems(ref gridItem2, ref num9))
+							{
+								if (gridItem2.mGridItemType == GridItemType.GRIDITEM_SCARY_POT)
+								{
+									mChallenge.ScaryPotterOpenPot(gridItem2);
+								}
+							}
+							return;
+						}
+					}
+					else if (value_type == '[')
+					{
+						if (!mChallenge.UpdateZombieSpawning())
+						{
+							int num10 = 1;
+							for (int num11 = 0; num11 < num10; num11++)
+							{
+								SpawnZombieWave();
+							}
+							return;
+						}
+					}
+					else if (value_type == '?' || value_type == '/')
+					{
+						if (mHugeWaveCountDown > 0)
+						{
+							mHugeWaveCountDown = 1;
+							return;
+						}
+						mZombieCountDown = 6;
+						return;
+					}
+					else if (value_type == 'b')
+					{
+						if (mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST)
+						{
+							AddZombie(ZombieType.ZOMBIE_BUNGEE, GameConstants.ZOMBIE_WAVE_DEBUG);
 							return;
 						}
 					}
 					else
 					{
-						if (value_type == 'c')
+						if (value_type == 'O')
 						{
-							AddZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, GameConstants.ZOMBIE_WAVE_DEBUG);
+							AddZombie(ZombieType.ZOMBIE_FOOTBALL, GameConstants.ZOMBIE_WAVE_DEBUG);
 							return;
 						}
-						if (value_type == 'm')
+						if (value_type == 's')
 						{
-							AddZombie(ZombieType.ZOMBIE_DANCER, GameConstants.ZOMBIE_WAVE_DEBUG);
+							AddZombie(ZombieType.ZOMBIE_DOOR, GameConstants.ZOMBIE_WAVE_DEBUG);
 							return;
 						}
-						if (value_type == '*')
+						if (value_type == 'L')
 						{
-							Console.Write("CRASHING ON PURPOSE\n");
-							Debug.ASSERT(false);
+							AddZombie(ZombieType.ZOMBIE_LADDER, GameConstants.ZOMBIE_WAVE_DEBUG);
 							return;
 						}
-						if (value_type == ' ')
+						if (value_type == 'y')
 						{
-							mApp.DoPauseDialog();
+							AddZombie(ZombieType.ZOMBIE_YETI, GameConstants.ZOMBIE_WAVE_DEBUG);
 							return;
 						}
-						if (value_type == 'h')
+						if (value_type == 'a')
 						{
-							AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
+							AddZombie(ZombieType.ZOMBIE_FLAG, GameConstants.ZOMBIE_WAVE_DEBUG);
 							return;
 						}
-						if (value_type == 'H')
+						if (value_type == 'w')
 						{
-							AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
-							AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
-							AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
-							AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
-							AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
+							AddZombie(ZombieType.ZOMBIE_NEWSPAPER, GameConstants.ZOMBIE_WAVE_DEBUG);
 							return;
 						}
-						if (value_type == 'D')
+						if (value_type == 'F')
 						{
-							AddZombie(ZombieType.ZOMBIE_DIGGER, GameConstants.ZOMBIE_WAVE_DEBUG);
+							AddZombie(ZombieType.ZOMBIE_BALLOON, GameConstants.ZOMBIE_WAVE_DEBUG);
 							return;
 						}
-						if (value_type == 'p')
-						{
-							AddZombie(ZombieType.ZOMBIE_POLEVAULTER, GameConstants.ZOMBIE_WAVE_DEBUG);
-							return;
-						}
-						if (value_type == 'P')
-						{
-							AddZombie(ZombieType.ZOMBIE_POGO, GameConstants.ZOMBIE_WAVE_DEBUG);
-							return;
-						}
-						if (value_type == 'R')
+						if (value_type == 'n')
 						{
 							if (StageHasPool())
 							{
-								AddZombie(ZombieType.ZOMBIE_DOLPHIN_RIDER, GameConstants.ZOMBIE_WAVE_DEBUG);
+								AddZombie(ZombieType.ZOMBIE_SNORKEL, GameConstants.ZOMBIE_WAVE_DEBUG);
 								return;
 							}
 						}
 						else
 						{
-							if (value_type == 'j')
+							if (value_type == 'c')
 							{
-								AddZombie(ZombieType.ZOMBIE_JACK_IN_THE_BOX, GameConstants.ZOMBIE_WAVE_DEBUG);
+								AddZombie(ZombieType.ZOMBIE_TRAFFIC_CONE, GameConstants.ZOMBIE_WAVE_DEBUG);
 								return;
 							}
-							if (value_type == 'g')
+							if (value_type == 'm')
 							{
-								AddZombie(ZombieType.ZOMBIE_GARGANTUAR, GameConstants.ZOMBIE_WAVE_DEBUG);
+								AddZombie(ZombieType.ZOMBIE_DANCER, GameConstants.ZOMBIE_WAVE_DEBUG);
 								return;
 							}
-							if (value_type == 'G')
+							if (value_type == '*')
 							{
-								AddZombie(ZombieType.ZOMBIE_REDEYE_GARGANTUAR, GameConstants.ZOMBIE_WAVE_DEBUG);
+								Console.Write("CRASHING ON PURPOSE\n");
+								Debug.ASSERT(false);
 								return;
 							}
-							if (value_type == 'i')
+							if (value_type == ' ')
 							{
-								AddZombie(ZombieType.ZOMBIE_ZAMBONI, GameConstants.ZOMBIE_WAVE_DEBUG);
+								mApp.DoPauseDialog();
 								return;
 							}
-							if (value_type == 'C')
+							if (value_type == 'h')
 							{
-								AddZombie(ZombieType.ZOMBIE_CATAPULT, GameConstants.ZOMBIE_WAVE_DEBUG);
+								AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
 								return;
 							}
-							if (value_type == '1')
+							if (value_type == 'H')
 							{
-								Plant topPlantAt = GetTopPlantAt(0, 0, PlantPriority.TOPPLANT_ANY);
-								if (topPlantAt != null)
+								AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
+								AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
+								AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
+								AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
+								AddZombie(ZombieType.ZOMBIE_PAIL, GameConstants.ZOMBIE_WAVE_DEBUG);
+								return;
+							}
+							if (value_type == 'D')
+							{
+								AddZombie(ZombieType.ZOMBIE_DIGGER, GameConstants.ZOMBIE_WAVE_DEBUG);
+								return;
+							}
+							if (value_type == 'p')
+							{
+								AddZombie(ZombieType.ZOMBIE_POLEVAULTER, GameConstants.ZOMBIE_WAVE_DEBUG);
+								return;
+							}
+							if (value_type == 'P')
+							{
+								AddZombie(ZombieType.ZOMBIE_POGO, GameConstants.ZOMBIE_WAVE_DEBUG);
+								return;
+							}
+							if (value_type == 'R')
+							{
+								if (StageHasPool())
 								{
-									topPlantAt.Die();
-									mChallenge.ZombieAtePlant(null, topPlantAt);
+									AddZombie(ZombieType.ZOMBIE_DOLPHIN_RIDER, GameConstants.ZOMBIE_WAVE_DEBUG);
 									return;
 								}
 							}
 							else
 							{
-								if (value_type == 'B')
+								if (value_type == 'j')
 								{
-									mFogBlownCountDown = 2200;
+									AddZombie(ZombieType.ZOMBIE_JACK_IN_THE_BOX, GameConstants.ZOMBIE_WAVE_DEBUG);
 									return;
 								}
-								if (value_type == 't')
+								if (value_type == 'g')
 								{
-									if (!CanAddBobSled())
+									AddZombie(ZombieType.ZOMBIE_GARGANTUAR, GameConstants.ZOMBIE_WAVE_DEBUG);
+									return;
+								}
+								if (value_type == 'G')
+								{
+									AddZombie(ZombieType.ZOMBIE_REDEYE_GARGANTUAR, GameConstants.ZOMBIE_WAVE_DEBUG);
+									return;
+								}
+								if (value_type == 'i')
+								{
+									AddZombie(ZombieType.ZOMBIE_ZAMBONI, GameConstants.ZOMBIE_WAVE_DEBUG);
+									return;
+								}
+								if (value_type == 'C')
+								{
+									AddZombie(ZombieType.ZOMBIE_CATAPULT, GameConstants.ZOMBIE_WAVE_DEBUG);
+									return;
+								}
+								if (value_type == '1')
+								{
+									Plant topPlantAt = GetTopPlantAt(0, 0, PlantPriority.TOPPLANT_ANY);
+									if (topPlantAt != null)
 									{
-										int num12 = RandomNumbers.NextNumber(5);
-										int num13 = 400;
-										if (StageHasPool())
-										{
-											num12 = RandomNumbers.NextNumber(2);
-										}
-										else if (StageHasRoof())
-										{
-											num13 = 500;
-										}
-										mIceTimer[num12] = 3000;
-										mIceMinX[num12] = num13;
-									}
-									AddZombie(ZombieType.ZOMBIE_BOBSLED, GameConstants.ZOMBIE_WAVE_DEBUG);
-									return;
-								}
-								if (value_type == 'r')
-								{
-									SpawnZombiesFromGraves();
-									return;
-								}
-								if (value_type == '0')
-								{
-									AddSunMoney(100);
-									mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
-									return;
-								}
-								if (value_type == '9')
-								{
-									AddSunMoney(999999);
-									mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
-									return;
-								}
-								if (value_type == '$')
-								{
-									mApp.mPlayerInfo.AddCoins(100);
-									mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
-									ShowCoinBank();
-									return;
-								}
-								if (value_type == '-')
-								{
-									mSunMoney -= 100;
-									if (mSunMoney < 0)
-									{
-										mSunMoney = 0;
+										topPlantAt.Die();
+										mChallenge.ZombieAtePlant(null, topPlantAt);
 										return;
 									}
 								}
 								else
 								{
-									if (value_type == '%')
+									if (value_type == 'B')
 									{
+										mFogBlownCountDown = 2200;
 										return;
 									}
-									if (value_type == 'M')
+									if (value_type == 't')
 									{
-										mLawnMowers.Clear();
+										if (!CanAddBobSled())
+										{
+											int num12 = RandomNumbers.NextNumber(5);
+											int num13 = 400;
+											if (StageHasPool())
+											{
+												num12 = RandomNumbers.NextNumber(2);
+											}
+											else if (StageHasRoof())
+											{
+												num13 = 500;
+											}
+											mIceTimer[num12] = 3000;
+											mIceMinX[num12] = num13;
+										}
+										AddZombie(ZombieType.ZOMBIE_BOBSLED, GameConstants.ZOMBIE_WAVE_DEBUG);
+										return;
+									}
+									if (value_type == 'r')
+									{
+										SpawnZombiesFromGraves();
+										return;
+									}
+									if (value_type == '0')
+									{
+										AddSunMoney(100);
+										mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
+										return;
+									}
+									if (value_type == '9')
+									{
+										AddSunMoney(999999);
+										mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
+										return;
+									}
+									if (value_type == '$')
+									{
+										mApp.mPlayerInfo.AddCoins(100);
+										mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
+										ShowCoinBank();
+										return;
+									}
+									if (value_type == '-')
+									{
+										mSunMoney -= 100;
+										if (mSunMoney < 0)
+										{
+											mSunMoney = 0;
+											return;
+										}
+									}
+									else
+									{
+										if (value_type == '%')
+										{
+											return;
+										}
+										if (value_type == 'M')
+										{
+											mLawnMowers.Clear();
+										}
 									}
 								}
 							}
 						}
 					}
+					return;
 				}
-				return;
 			}
 		}
 

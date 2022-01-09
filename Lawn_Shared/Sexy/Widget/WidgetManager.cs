@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MonoGame.IMEHelper;
+using System;
 using System.Collections.Generic;
 
 namespace Sexy
@@ -818,5 +819,7 @@ namespace Sexy
 		protected uint mFrameCnt;
 
 		private List<WidgetOverlayPair> debugList;
+
+		public IMEHandler mIMEHandler;
 	}
 }

@@ -403,7 +403,9 @@ namespace Sexy
 					if (mCharOffsets.ContainsKey(theString[i]))
 					{
 						Vector2 position = value2 + mCharOffsets[theString[i]] * mScaleX * FrameworkConstants.Font_Scale;
+						g.HardwareClip();
 						Graphics.spriteBatch.DrawString(mFonts[layer], drawStringBuilder, position, theColor, 0f, Vector2.Zero, scale, SpriteEffects.None, 1f - layer / (float)mFonts.Count);
+						g.EndHardwareClip();
 						value2.X += StringWidth(drawStringBuilder) - characterOffsetMagic;
 					}
 				}

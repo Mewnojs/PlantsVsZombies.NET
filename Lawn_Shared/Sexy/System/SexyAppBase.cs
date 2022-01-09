@@ -9,6 +9,7 @@ using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.GamerServices;
+using MonoGame.IMEHelper;
 using Sexy.TodLib;
 
 namespace Sexy
@@ -953,6 +954,8 @@ namespace Sexy
 		protected FrameCounter mFrameCounter = new FrameCounter();
 
 		protected bool mDebugScreenEnabled;
+
+		public bool mDebugKeysEnabled;
 
 		private IEnumerable<bool> mLoadingThreadAfterWorksSteps;
 

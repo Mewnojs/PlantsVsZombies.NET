@@ -26,6 +26,7 @@
     <PackageReference Include="MLEM.Data" Version="5.1.0" />
     <PackageReference Include="Mono.Cecil" Version="0.11.4" />
     <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.0.1641" />
+    <PackageReference Include="MonoGame.IMEHelper.WindowsDX" Version="0.10.0" />
     <PackageReference Include="MonoMod.RuntimeDetour" Version="22.1.4.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="WebSocketSharp.NetCore" Version="1.0.1-alpha.4" />
