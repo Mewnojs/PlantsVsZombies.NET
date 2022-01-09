@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using System.Threading;
+using System.Collections.Generic;
 
 namespace Sexy
 {
@@ -129,6 +130,13 @@ namespace Sexy
 			Main.graphics.PreferredBackBufferWidth = 1600;
 			Main.graphics.PreferredBackBufferHeight = 960;
 			GraphicsState.mGraphicsDeviceManager.ApplyChanges();
+			// IME Support
+			GlobalStaticVars.gSexyAppBase.mWidgetManager.mIMEHandler = new MonoGame.IMEHelper.WinFormsIMEHandler(this);
+			GlobalStaticVars.gSexyAppBase.mWidgetManager.mIMEHandler.TextInput += (s, e) =>
+			{
+				Debug.OutputDebug<string>(String.Format("input:{0}", e.Character));
+				GlobalStaticVars.gSexyAppBase.mWidgetManager.KeyChar(new SexyChar(e.Character));
+			};
 		}
 
 		protected override void OnExiting(object sender, EventArgs args) 
@@ -334,8 +342,28 @@ namespace Sexy
 					GlobalStaticVars.gSexyAppBase.TouchesCanceled();
 				}
 			}
+			
+			List<string> keynames = new List<string>();
+			KeyboardState keys = Keyboard.GetState();
+			foreach (Keys it in keys.GetPressedKeys())
+			{
+				if (previousKeyboardState.IsKeyUp(it))
+				{
+				GlobalStaticVars.gSexyAppBase.mWidgetManager.KeyDown((KeyCode)it);
+					keynames.Add(it.ToString());
+				}
+			}
+			foreach (Keys it in previousKeyboardState.GetPressedKeys())
+			{
+				if (keys.IsKeyUp(it))
+				{
+					GlobalStaticVars.gSexyAppBase.mWidgetManager.KeyUp((KeyCode)it);
+				} 
+			}
+
 			previousGamepadState = state;
 			previousMouseState = msstate;
+			previousKeyboardState = keys;
 		}
 
 		protected override void OnActivated(object sender, EventArgs args)
@@ -429,5 +457,6 @@ namespace Sexy
 
 		private GamePadState previousGamepadState = default(GamePadState);
         private MouseState previousMouseState = default(MouseState);
+        private KeyboardState previousKeyboardState;
     }
 }

@@ -26,6 +26,7 @@ namespace Lawn
 			mSfxVolumeSlider.SetValue(theApp.GetSfxVolume());
 			mVibrateCheckbox = LawnCommon.MakeNewCheckbox(8, this, mApp.mPlayerInfo.mDoVibration);
 			mRunWhileLocked = LawnCommon.MakeNewCheckbox(11, this, mApp.mPlayerInfo.mRunWhileLocked);
+			mEnableCheat = LawnCommon.MakeNewCheckbox(12, this, mApp.mDebugKeysEnabled);
 			mLinkCredits = new HyperlinkWidget(10, this);
 			mLinkCredits.SetFont(Resources.FONT_BRIANNETOD12);
 			mLinkCredits.mColor = new SexyColor(255, 255, 136);
@@ -89,7 +90,8 @@ namespace Lawn
 			AddWidget(mMusicVolumeSlider);
 			AddWidget(mSfxVolumeSlider);
 			AddWidget(mVibrateCheckbox);
-			AddWidget(mRunWhileLocked);
+			//AddWidget(mRunWhileLocked);
+			AddWidget(mEnableCheat);
 			AddWidget(mBackToGameButton);
 			AddWidget(mLinkCredits);
 			if (mFromGameSelector)
@@ -106,7 +108,8 @@ namespace Lawn
 			RemoveWidget(mMusicVolumeSlider);
 			RemoveWidget(mSfxVolumeSlider);
 			RemoveWidget(mVibrateCheckbox);
-			RemoveWidget(mRunWhileLocked);
+			//RemoveWidget(mRunWhileLocked);
+			RemoveWidget(mEnableCheat);
 			RemoveWidget(mBackToMainButton);
 			RemoveWidget(mBackToGameButton);
 			RemoveWidget(mRestartButton);
@@ -126,7 +129,8 @@ namespace Lawn
 			mMusicVolumeSlider.Resize(theX2, (int)Constants.InvertAndScale(66f), (int)Constants.InvertAndScale(135f), (int)Constants.InvertAndScale(40f));
 			mSfxVolumeSlider.Resize(theX2, (int)Constants.InvertAndScale(93f), (int)Constants.InvertAndScale(135f), (int)Constants.InvertAndScale(40f));
 			mVibrateCheckbox.Resize(theX2, (int)Constants.InvertAndScale(125f), (int)Constants.InvertAndScale(46f), (int)Constants.InvertAndScale(45f));
-			mRunWhileLocked.Resize(theX2, (int)Constants.InvertAndScale(195f), (int)Constants.InvertAndScale(46f), (int)Constants.InvertAndScale(45f));
+			//mRunWhileLocked.Resize(theX2, (int)Constants.InvertAndScale(195f), (int)Constants.InvertAndScale(46f), (int)Constants.InvertAndScale(45f));
+			mEnableCheat.Resize(theX2, (int)Constants.InvertAndScale(195f), (int)Constants.InvertAndScale(46f), (int)Constants.InvertAndScale(45f));
 			mMusicVolumeSlider.mY += (int)Constants.InvertAndScale(5f);
 			mSfxVolumeSlider.mY += (int)Constants.InvertAndScale(15f);
 			mVibrateCheckbox.mY += (int)Constants.InvertAndScale(25f);
@@ -180,7 +184,8 @@ namespace Lawn
 			TodCommon.TodDrawString(g, mMusicSliderOn ? "[OPTIONS_MUSIC_VOLUME]" : "[OPTIONS_MUSIC_OFF]", Constants.NewOptionsDialog_MusicLabel_X, num + newOptionsDialog_Music_Offset, Resources.FONT_DWARVENTODCRAFT18, theColor, Constants.NewOptionsDialog_VibrationLabel_MaxWidth, DrawStringJustification.DS_ALIGN_RIGHT);
 			TodCommon.TodDrawString(g, "[OPTIONS_SOUND_FX]", Constants.NewOptionsDialog_FXLabel_X, Constants.NewOptionsDialog_FXLabel_Y + newOptionsDialog_FX_Offset, Resources.FONT_DWARVENTODCRAFT18, theColor, Constants.NewOptionsDialog_VibrationLabel_MaxWidth, DrawStringJustification.DS_ALIGN_RIGHT);
 			TodCommon.TodDrawString(g, "[OPTIONS_VABRATION]", Constants.NewOptionsDialog_VibrationLabel_X, Constants.NewOptionsDialog_VibrationLabel_Y + newOptionsDialog_FullScreenOffset, Resources.FONT_DWARVENTODCRAFT18, theColor, Constants.NewOptionsDialog_VibrationLabel_MaxWidth, DrawStringJustification.DS_ALIGN_RIGHT);
-			TodCommon.TodDrawString(g, "[OPTIONS_RUN_LOCKED]", Constants.NewOptionsDialog_VibrationLabel_X, Constants.NewOptionsDialog_LockedLabel_Y + newOptionsDialog_FullScreenOffset, Resources.FONT_DWARVENTODCRAFT18, theColor, Constants.NewOptionsDialog_VibrationLabel_MaxWidth, DrawStringJustification.DS_ALIGN_RIGHT);
+			//TodCommon.TodDrawString(g, "[OPTIONS_RUN_LOCKED]", Constants.NewOptionsDialog_VibrationLabel_X, Constants.NewOptionsDialog_LockedLabel_Y + newOptionsDialog_FullScreenOffset, Resources.FONT_DWARVENTODCRAFT18, theColor, Constants.NewOptionsDialog_VibrationLabel_MaxWidth, DrawStringJustification.DS_ALIGN_RIGHT);
+			TodCommon.TodDrawString(g, "[OPTIONS_ENABLE_CHEAT]", Constants.NewOptionsDialog_VibrationLabel_X, Constants.NewOptionsDialog_LockedLabel_Y + newOptionsDialog_FullScreenOffset, Resources.FONT_DWARVENTODCRAFT18, theColor, Constants.NewOptionsDialog_VibrationLabel_MaxWidth, DrawStringJustification.DS_ALIGN_RIGHT);
 			TodCommon.TodDrawString(g, LawnApp.AppVersionNumber, mWidth / 2, mVersionY, Resources.FONT_PICO129, theColor, DrawStringJustification.DS_ALIGN_CENTER);
 		}
 
@@ -217,23 +222,29 @@ namespace Lawn
 		public override void CheckboxChecked(int theId, bool check)
 		{
 			mApp.PlaySample(Resources.SOUND_BUTTONCLICK);
-			if (theId == 8)
-			{
-				mApp.mPlayerInfo.mDoVibration = check;
+            switch (theId)
+            {
+            case 8:
+                mApp.mPlayerInfo.mDoVibration = check;
+                return;
+            case 11:
+            {
+                SetRunWhenLocked(check);
+                string theDialogHeader = string.Empty;
+                string theDialogLines = string.Empty;
+                theDialogHeader = TodStringFile.TodStringTranslate("[WARNING]");
+                theDialogLines = TodStringFile.TodStringTranslate("[OPTIONS_RUN_LOCKED_MSG]");
+                LawnDialog lawnDialog = mApp.DoDialog(53, true, theDialogHeader, theDialogLines, "", 3);
+                lawnDialog.mLawnYesButton.mLabel = TodStringFile.TodStringTranslate("[DIALOG_BUTTON_OK]");
+                return;
+            }
+			case 12:
+				mApp.mDebugKeysEnabled = check;
 				return;
-			}
-			if (theId != 11)
-			{
-				return;
-			}
-			SetRunWhenLocked(check);
-			string theDialogHeader = string.Empty;
-			string theDialogLines = string.Empty;
-			theDialogHeader = TodStringFile.TodStringTranslate("[WARNING]");
-			theDialogLines = TodStringFile.TodStringTranslate("[OPTIONS_RUN_LOCKED_MSG]");
-			LawnDialog lawnDialog = mApp.DoDialog(53, true, theDialogHeader, theDialogLines, "", 3);
-			lawnDialog.mLawnYesButton.mLabel = TodStringFile.TodStringTranslate("[DIALOG_BUTTON_OK]");
-		}
+            default:
+                return;
+            }
+        }
 
 		public override void ButtonPress(int theId)
 		{
@@ -384,6 +395,8 @@ namespace Lawn
 		public Checkbox mVibrateCheckbox;
 
 		public Checkbox mRunWhileLocked;
+
+		public Checkbox mEnableCheat;
 
 		public string mVersion = string.Empty;
 

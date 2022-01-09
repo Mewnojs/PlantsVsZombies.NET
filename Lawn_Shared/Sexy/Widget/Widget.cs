@@ -92,10 +92,22 @@ namespace Sexy
 		public virtual void SetColors(int[,] theColors, int theNumColors)
 		{
 			mColors.Clear();
-			for (int i = 0; i < theNumColors; i++)
+			switch (theColors.GetLength(1)) 
 			{
-				SetColor(i, new Color(theColors[i, 0], theColors[i, 1], theColors[i, 2]));
+			case 3:
+				for (int i = 0; i < theNumColors; i++)
+				{
+					SetColor(i, new Color(theColors[i, 0], theColors[i, 1], theColors[i, 2]));
+				}
+				break;
+			case 4:
+				for (int i = 0; i < theNumColors; i++)
+				{
+					SetColor(i, new Color(theColors[i, 0], theColors[i, 1], theColors[i, 2], theColors[i, 3]));
+				}
+				break;
 			}
+			
 			MarkDirty();
 		}
 

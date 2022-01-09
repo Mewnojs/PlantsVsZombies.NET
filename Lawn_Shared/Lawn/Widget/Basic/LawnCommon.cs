@@ -9,6 +9,9 @@ namespace Lawn
 		{
 			EditWidget editWidget = new LawnEditWidget(theId, theListener, theDialog, title, description);
 			editWidget.SetFont(Resources.FONT_BRIANNETOD16);
+			editWidget.SetFont(Resources.FONT_BRIANNETOD16);
+			editWidget.SetColors(gLawnEditWidgetColors, 5);
+			editWidget.mBlinkDelay = 14;
 			return editWidget;
 		}
 
@@ -218,9 +221,9 @@ namespace Lawn
 				0
 			},
 			{
-				0,
-				0,
-				0,
+				240,
+				240,
+				255,
 				255
 			},
 			{
