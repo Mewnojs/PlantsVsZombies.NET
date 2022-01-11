@@ -987,7 +987,7 @@ namespace Lawn
             int num = GameConstants.TICKS_BETWEEN_EATS;
             if (mChilledCounter > 0)
             {
-                num *= 6;
+                num *= 2;
             }
             if (mZombieAge % num != 0)
             {
