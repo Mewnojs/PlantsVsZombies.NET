@@ -4143,7 +4143,8 @@ namespace Lawn
 			Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
 			if (reanimation != null && reanimation.TrackExists(Reanimation.ReanimTrackId__ground))
 			{
-				float num = reanimation.GetTrackVelocity(Reanimation.ReanimTrackId__ground) / 4f;
+				//float num = reanimation.GetTrackVelocity(Reanimation.ReanimTrackId__ground) / 4f;
+				float num = reanimation.GetTrackVelocity(Reanimation.ReanimTrackId__ground) * Constants.S;
 				if (mSeedType == SeedType.SEED_GIANT_WALLNUT)
 				{
 					num *= 2f;

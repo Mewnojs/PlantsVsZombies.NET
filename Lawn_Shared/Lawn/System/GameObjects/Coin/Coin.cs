@@ -907,7 +907,8 @@ namespace Lawn
 			}
 			//mFadeCount -= 3;
 			mFadeCount--;
-			if (mFadeCount >= 0 && mFadeCount < 3)
+			//if (mFadeCount >= 0 && mFadeCount < 3)
+			if (mFadeCount == 0)
 			{
 				if (mType == CoinType.COIN_SILVER || mType == CoinType.COIN_GOLD)
 				{
@@ -1219,7 +1220,7 @@ namespace Lawn
 				if (mType == CoinType.COIN_AWARD_PRESENT || mType == CoinType.COIN_PRESENT_PLANT)
 				{
 					//mDisappearCounter += 3;
-					mDisappearCounter--;
+					mDisappearCounter++;
 					if (mDisappearCounter >= 200)
 					{
 						StartFade();
@@ -1231,14 +1232,14 @@ namespace Lawn
 					if (mType == CoinType.COIN_USABLE_SEED_PACKET)
 					{
 						//mDisappearCounter += 3;
-						mDisappearCounter--;
+						mDisappearCounter++;
 					}
 					return;
 				}
 				num = Constants.Coin_AwardSeedpacket_Pos.X - mWidth / 2;
 				num2 = Constants.Coin_AwardSeedpacket_Pos.Y - mHeight / 2;
 				//mDisappearCounter += 3;
-				mDisappearCounter--;
+				mDisappearCounter++;
 			}
 			if (IsLevelAward())
 			{

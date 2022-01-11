@@ -149,7 +149,8 @@ namespace Lawn
 				}
 				else
 				{
-					if (mDuration >= mSlideOffTime && mDuration < mSlideOffTime + 3)
+					//if (mDuration >= mSlideOffTime && mDuration < mSlideOffTime + 3)
+					if (mDuration == mSlideOffTime)
 					{
 						reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_leave, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 0f);
 					}
@@ -356,7 +357,8 @@ namespace Lawn
 
 		public bool IsBeingDisplayed()
 		{
-			return mDuration < 0 || mDuration >= 3;
+			//return mDuration < 0 || mDuration >= 3;
+			return mDuration != 0;
 		}
 
 		public Font GetFont()

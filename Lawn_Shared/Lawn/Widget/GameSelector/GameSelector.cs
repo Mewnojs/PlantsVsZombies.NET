@@ -775,6 +775,7 @@ namespace Lawn
 				mApp.mPlayerInfo.mHasUnlockedMinigames = true;
 				mApp.mPlayerInfo.mHasUnlockedPuzzleMode = true;
 				mApp.mPlayerInfo.mHasUnlockedSurvivalMode = true;
+				mApp.mPlayerInfo.mMiniGamesUnlocked = 19;
 				for (int i = 0; i < 200; i++)
 				{
 					GameMode gameMode = i + GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_1;

@@ -4983,7 +4983,8 @@ namespace Lawn
 				return false;
 			}
 			theZombie.StartEating();
-			gridItem.mGridItemCounter -= 3;
+			//gridItem.mGridItemCounter -= 3;
+			gridItem.mGridItemCounter --;
 			if (gridItem.mGridItemCounter <= 0)
 			{
 				mApp.PlaySample(Resources.SOUND_GULP);

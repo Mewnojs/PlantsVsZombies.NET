@@ -140,7 +140,7 @@ namespace Lawn
 			if (mMowerState == LawnMowerState.MOWER_ROLLING_IN)
 			{
 				//mRollingInCounter += 3;
-				mRollingInCounter--;
+				mRollingInCounter++;
 				mPosX = TodCommon.TodAnimateCurveFloat(0, 100, mRollingInCounter, -160f, -21f, TodCurves.CURVE_EASE_IN_OUT) + Constants.BOARD_EXTRA_ROOM;
 				if (mRollingInCounter >= 100)
 				{
