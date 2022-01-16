@@ -362,9 +362,9 @@ namespace Sexy
 
 		public override void MouseMove(int x, int y)
 		{
-			CGPoint absPos = GetAbsPos();
-			x -= (int)absPos.x;
-			y -= (int)absPos.y;
+			//CGPoint absPos = GetAbsPos();
+			//x -= (int)absPos.x;
+			//y -= (int)absPos.y;
 			y -= (int)Constants.InvertAndScale(4f);
 			int num = (mItemHeight != -1) ? mItemHeight : mFont.GetHeight();
 			int num2 = (int)(y / (double)num + mPosition);

@@ -572,25 +572,187 @@ namespace Sexy
 
 		public bool MouseUp(int x, int y, int theClickCount)
 		{
-			Debug.ASSERT(false);
+			mLastInputUpdateCnt = mUpdateCnt;
+
+			int aMask;
+
+			if (theClickCount < 0)
+			{
+				aMask = 0x02;
+			}
+			else if (theClickCount == 3)
+			{
+				aMask = 0x04;
+			}
+			else
+			{
+				aMask = 0x01;
+			}
+
+			// Make sure that we thought this button was down anyway - possibly not, if we
+			//  disabled the widget already or something
+			mActualDownButtons &= ~aMask;
+			if ((mLastDownWidget != null) && ((mDownButtons & aMask) != 0))
+			{
+				Widget aLastDownWidget = mLastDownWidget;
+
+				mDownButtons &= ~aMask;
+				if (mDownButtons == 0)
+				{
+					mLastDownWidget = null;
+				}
+				CGPoint p = aLastDownWidget.GetAbsPos();
+				aLastDownWidget.mIsDown = false;
+				aLastDownWidget.MouseUp((int)(x - p.x)/* - aLastDownWidget.mX*/, (int)(y - p.y)/* - aLastDownWidget.mY*/, theClickCount);
+			}
+			else
+			{
+				mDownButtons &= ~aMask;
+			}
+
+			MousePosition(x, y);
+
 			return true;
 		}
 
 		public bool MouseDown(int x, int y, int theClickCount)
 		{
-			Debug.ASSERT(false);
+            mLastInputUpdateCnt = mUpdateCnt;
+
+			if (theClickCount < 0)
+			{
+				mActualDownButtons |= 0x02;
+			}
+			else if (theClickCount == 3)
+			{
+				mActualDownButtons |= 0x04;
+			}
+			else
+			{
+				mActualDownButtons |= 0x01;
+			}
+
+			MousePosition(x, y);
+
+			if ((mPopupCommandWidget != null) && (!mPopupCommandWidget.Contains(x, y)))
+			{
+				RemovePopupCommandWidget();
+			}
+
+			int aWidgetX;
+			int aWidgetY;
+			Widget aWidget = GetWidgetAt(x, y, out aWidgetX, out aWidgetY);
+
+			// Begin mouse down options
+			/*
+				// Option 1
+				//This code sets a new widget as the mouse drag focus widget and lets the old
+				//mousedownwidget think the buttons popped up.
+				if ((mLastDownWidget != NULL) && (mLastDownWidget != aWidget))
+				{
+					DoMouseUps(mLastDownWidget, mDownButtons);
+					mDownButtons = 0;
+				}
+			*/
+			// Option 2
+			// This code passes all button downs to the mLastDownWidget
+			if (mLastDownWidget != null)
+			{
+				aWidget = mLastDownWidget;
+			}
+
+			// End mouse down options
+
+			if (theClickCount < 0)
+			{
+				mLastDownButtonId = -1;
+				mDownButtons |= 0x02;
+			}
+			else if (theClickCount == 3)
+			{
+				mLastDownButtonId = 2;
+				mDownButtons |= 0x04;
+			}
+			else
+			{
+				mLastDownButtonId = 1;
+				mDownButtons |= 0x01;
+			}
+
+			mLastDownWidget = aWidget;
+			if (aWidget != null)
+			{
+				if (aWidget.WantsFocus())
+				{
+					SetFocus(aWidget);
+				}
+
+				aWidget.mIsDown = true;
+				aWidget.MouseDown(aWidgetX, aWidgetY, theClickCount);
+			}
+
 			return true;
 		}
 
 		public bool MouseMove(int x, int y)
 		{
-			Debug.ASSERT(false);
+			mLastInputUpdateCnt = mUpdateCnt;
+
+			if (mDownButtons != 0)
+			{
+				return MouseDrag(x, y);
+			}
+
+			mMouseIn = true;
+			MousePosition(x, y);
+
 			return true;
 		}
 
 		public bool MouseDrag(int x, int y)
 		{
-			Debug.ASSERT(false);
+			mLastInputUpdateCnt = mUpdateCnt;
+
+			mMouseIn = true;
+			mLastMouseX = x;
+			mLastMouseY = y;
+
+			if ((mOverWidget != null) && (mOverWidget != mLastDownWidget))
+			{
+				Widget anOverWidget = mOverWidget;
+				mOverWidget = null;
+				MouseLeave(anOverWidget);
+			}
+
+			if (mLastDownWidget != null)
+			{
+				CGPoint anAbsPos = mLastDownWidget.GetAbsPos();
+
+				int aWidgetX = x - (int)anAbsPos.mX;
+				int aWidgetY = y - (int)anAbsPos.mY;
+				mLastDownWidget.MouseDrag(aWidgetX, aWidgetY);
+
+				Widget aWidgetOver = GetWidgetAt(x, y, out _, out _);
+
+				if ((aWidgetOver == mLastDownWidget) && (aWidgetOver != null))
+				{
+					if (mOverWidget == null)
+					{
+						mOverWidget = mLastDownWidget;
+						MouseEnter(mOverWidget);
+					}
+				}
+				else
+				{
+					if (mOverWidget != null)
+					{
+						Widget anOverWidget = mOverWidget;
+						mOverWidget = null;
+						MouseLeave(anOverWidget);
+					}
+				}
+			}
+
 			return true;
 		}
 
@@ -602,11 +764,33 @@ namespace Sexy
 
 		public void MouseWheel(int theDelta)
 		{
+			mLastInputUpdateCnt = mUpdateCnt;
+
+			if (mOverWidget/*mFocusWidget*/ != null)
+				/*mFocusWidget*/mOverWidget.MouseWheel(theDelta);
 		}
 
 		public void TouchBegan(_Touch touch)
 		{
-			mLastInputUpdateCnt = mUpdateCnt;
+            if (mIMEHandler.Enabled && (!mIMEHotWidget?.mIMEHotArea.Contains((int)touch.location.x, (int)touch.location.y) ?? false))
+            {
+                mIMEHotWidget.Resize(mIMEHotWidget.mX, 
+                    (int)(mIMEHandler.VirtualKeyboardHeight == 0 ? mIMEHotWidget.mY : mIMEHotWidget.mOldY),
+                    mIMEHotWidget.mWidth, mIMEHotWidget.mHeight);
+                mIMEHotWidget.mIMEEnabled = false;
+                mIMEHandler.StopTextComposition();
+            }
+            else if (mIMEHotWidget?.mIMEHotArea.Contains((int)touch.location.x, (int)touch.location.y) ?? false)
+            {
+                mIMEHotWidget.mOldY = mIMEHotWidget.mY;
+                mIMEHotWidget.Resize(mIMEHotWidget.mX,
+                    (int)(mIMEHandler.VirtualKeyboardHeight == 0 ? mIMEHotWidget.mY : 120),
+                    mIMEHotWidget.mWidth, mIMEHotWidget.mHeight);
+                mIMEHotWidget.mIMEEnabled = true;
+                mIMEHandler.StartTextComposition();
+            }
+
+            mLastInputUpdateCnt = mUpdateCnt;
 			mActualDownButtons |= 1;
 			MousePosition(touch.location.X, touch.location.Y);
 			Widget widgetAt = GetWidgetAt(touch.location.X, touch.location.Y);
@@ -821,5 +1005,7 @@ namespace Sexy
 		private List<WidgetOverlayPair> debugList;
 
 		public IMEHandler mIMEHandler;
+
+        public IMECompatibleWidget mIMEHotWidget = null;
 	}
 }

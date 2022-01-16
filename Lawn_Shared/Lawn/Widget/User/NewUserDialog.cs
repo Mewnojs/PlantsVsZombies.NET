@@ -23,21 +23,23 @@ namespace Lawn
 
 		public override int GetPreferredHeight(int theWidth)
 		{
-			return GetPreferredHeight(theWidth) + (int)Constants.InvertAndScale(40f);
+            return GetPreferredHeight(theWidth) + (int)Constants.InvertAndScale(40f);
 		}
 
 		public override void Resize(int theX, int theY, int theWidth, int theHeight)
 		{
 			base.Resize(theX, theY, theWidth, theHeight);
-			mNameEditWidget.Resize(mContentInsets.mLeft + (int)Constants.InvertAndScale(12f), (int)Constants.InvertAndScale(mIsRename ? 143 : 170), mWidth - mContentInsets.mLeft - mContentInsets.mRight - (int)Constants.InvertAndScale(24f), (int)Constants.InvertAndScale(28f));
+			mNameEditWidget.Resize(mContentInsets.mLeft
+                + (int)Constants.InvertAndScale(12f), (int)Constants.InvertAndScale(mIsRename ? 143 : 170), mWidth - mContentInsets.mLeft - mContentInsets.mRight - (int)Constants.InvertAndScale(24f), (int)Constants.InvertAndScale(28f));
 		}
 
 		public override void AddedToManager(WidgetManager theWidgetManager)
 		{
-			AddWidget(mNameEditWidget);
+            base.AddedToManager(theWidgetManager);
+            AddWidget(mNameEditWidget);
 			theWidgetManager.SetFocus(mNameEditWidget);
-			RemoveWidget(mLawnNoButton);
-			RemoveWidget(mLawnYesButton);
+			//RemoveWidget(mLawnNoButton);
+			//RemoveWidget(mLawnYesButton);
 		}
 
 		public override void RemovedFromManager(WidgetManager theWidgetManager)
@@ -48,6 +50,8 @@ namespace Lawn
 
 		public override void Draw(Graphics g)
 		{
+            base.Draw(g);
+            LawnCommon.DrawEditBox(g, mNameEditWidget);
 		}
 
 		public override void Update()
@@ -83,16 +87,18 @@ namespace Lawn
 		public void SetName(string theName)
 		{
 			mNameEditWidget.SetText(theName);
+            mNameEditWidget.mCursorPos = theName.Length;
+            mNameEditWidget.mHilitePos = 0;
 		}
 
 		public bool AllowChar(int theId, char theChar)
 		{
-			return false;
+            return true; //false;
 		}
 
 		public bool AllowText(int theId, ref string theText)
 		{
-			return false;
+            return true; //false;
 		}
 
 		public bool ShouldClear()

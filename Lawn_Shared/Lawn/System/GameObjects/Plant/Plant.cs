@@ -2666,6 +2666,14 @@ namespace Lawn
 				GlobalStaticVars.gLawnApp.mReanimatorCache.DrawCachedZombie(g, thePosX, thePosY, theZombieType);
 				return;
 			}
+			if (theSeedType2 == SeedType.SEED_SPROUT) 
+			{
+				Image image = AtlasResources.IMAGE_CACHED_MARIGOLD;
+				int num = (int)(thePosX - (float)(image.mWidth));// * g.mScaleX);
+				int num2 = (int)(thePosY - (float)image.mHeight);// * g.mScaleY);
+				TodCommon.TodDrawImageScaledF(g, image, (float)num, (float)num2, g.mScaleX, g.mScaleY);
+				return;
+			}
 			GlobalStaticVars.gLawnApp.mReanimatorCache.DrawCachedPlant(g, thePosX, thePosY, theSeedType2, DrawVariation.VARIATION_NORMAL);
 		}
 
@@ -4717,11 +4725,11 @@ namespace Lawn
 				flag = true;
 				reanimation.mEnableExtraOverlayDraw = false;
 			}
-			if (mSeedType != SeedType.SEED_SUNFLOWER && mSeedType != SeedType.SEED_TWINSUNFLOWER && mSeedType != SeedType.SEED_SUNSHROOM && reanimation.mEnableExtraAdditiveDraw)
-			{
-				flag = true;
-				reanimation.mEnableExtraAdditiveDraw = false;
-			}
+			//if (mSeedType != SeedType.SEED_SUNFLOWER && mSeedType != SeedType.SEED_TWINSUNFLOWER && mSeedType != SeedType.SEED_SUNSHROOM && reanimation.mEnableExtraAdditiveDraw)
+			//{
+			//	flag = true;
+			//	reanimation.mEnableExtraAdditiveDraw = false;
+			//}
 			if (flag)
 			{
 				reanimation.PropogateColorToAttachments();

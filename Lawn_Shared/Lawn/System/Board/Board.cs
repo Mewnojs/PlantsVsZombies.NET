@@ -7189,7 +7189,7 @@ namespace Lawn
 			}
 			else
 			{
-				Debug.OutputDebug<string>("FAILED TO PLAY SOUND INSTANCE");
+				Debug.Log(DebugType.Error, "FAILED TO PLAY SOUND INSTANCE");
 			}
 			bottomLawnMower.Die();
 		}

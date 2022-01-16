@@ -32,14 +32,14 @@ namespace Sexy
 						found = true;
 						if (value.IsPointVisible(x - value.mX, y - value.mY))
 						{
-							if (theWidgetX != 0)
-							{
+							//if (theWidgetX != 0)
+							//{ //修复首次按下鼠标时坐标为(0, 0)的问题
 								theWidgetX = x - value.mX;
-							}
-							if (theWidgetY != 0)
-							{
+							//}
+							//if (theWidgetY != 0)
+							//{
 								theWidgetY = y - value.mY;
-							}
+							//}
 							return value;
 						}
 					}

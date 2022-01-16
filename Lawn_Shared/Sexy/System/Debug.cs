@@ -4,60 +4,68 @@ namespace Sexy
 {
 	internal static class Debug
 	{
-		public static void Log(Action<string> logger, Type msgtype, string msg) 
+		public static void Log(DebugType msgtype, string msg) 
 		{
 			ConsoleColor fgColor = Console.ForegroundColor;
 			ConsoleColor bgColor = Console.BackgroundColor;
 			Action colorReset = Console.ResetColor;
 			switch (msgtype) 
 			{
-				case Type.Debug:
+				case DebugType.Debug:
 					break;
-				case Type.Info:
+				case DebugType.Info:
 					fgColor = ConsoleColor.Cyan;
 					break;
-				case Type.Warn:
+				case DebugType.Warn:
 					fgColor = ConsoleColor.Yellow;
 					break;
-				case Type.Error:
+				case DebugType.Error:
 					fgColor = ConsoleColor.Red;
 					break;
-				case Type.Fatal:
+				case DebugType.Fatal:
 					fgColor = ConsoleColor.White;
 					bgColor = ConsoleColor.DarkRed;
 					break;
 			}
 			Console.ForegroundColor = fgColor;
 			Console.BackgroundColor = bgColor;
-			logger($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} {msgtype}] {msg}");
+			Logger($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} {msgtype}] {msg}");
 			colorReset();
 		}
 
 		public static void OutputDebug(string format, params object[] t) 
 		{
 #if DEBUG
-			Log(Console.WriteLine, Type.Debug, string.Format(format, t));
+			Log(DebugType.Debug, string.Format(format, t));
 #endif
 		}
 
 		public static void OutputDebug<T>(T t)
 		{
 #if DEBUG
-			Log(Console.WriteLine, Type.Debug, $"{t}");
+			Log(DebugType.Debug, $"{t}");
 #endif
 		}
 
 		public static void ASSERT(bool value)
 		{
+			if (!value) 
+			{
+				Log(DebugType.Fatal, "Assertion Failed");
+				throw new ApplicationException();
+			}
 		}
 
-		public enum Type 
-		{
-			Debug,
-			Info,
-			Warn,
-			Error,
-			Fatal
-		}
+		public static Action<string> Logger = Console.WriteLine;
+
+	}
+
+	public enum DebugType
+	{
+		Debug,
+		Info,
+		Warn,
+		Error,
+		Fatal
 	}
 }

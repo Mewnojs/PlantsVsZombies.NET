@@ -250,7 +250,138 @@ namespace Sexy
 			}
 		}
 
-		public override void TouchBegan(_Touch touch)
+        public override void MouseDown(int x, int y, int theMagicCode)
+        {
+			if (mClient != null)
+			{
+				clientAllowsScroll = mClient.DoScroll(x, y);
+				if (mSeekScrollTarget)
+				{
+					if (mListener != null)
+					{
+						mListener.ScrollTargetInterrupted(this);
+					}
+					if (mPagingEnabled && mPageControl != null)
+					{
+						mPageControl.SetCurrentPage(mCurrentPageHorizontal);
+					}
+				}
+				mScrollTouchReference = CGMaths.CGPointMake(x, y);
+				mScrollOffsetReference = CGMaths.CGPointMake(mClient.mX, mClient.mY);
+				mScrollOffset = mScrollOffsetReference;
+				//mScrollLastTimestamp = touch.timestamp;
+				mScrollTracking = false;
+				mSeekScrollTarget = false;
+				mClientLastDown = GetClientWidgetAt(x, y);
+				mClientLastDown.mIsDown = true;
+				mClientLastDown.mIsOver = true;
+				mClientLastDown.MouseDown(x, y, theMagicCode);
+			}
+		}
+
+		public override void MouseUp(int x, int y, int theMagicCode)
+		{
+			if (mScrollTracking)
+			{
+				/*TouchMotion(touch);
+				mScrollTracking = false;
+				if (mPagingEnabled)
+				{
+					SnapToPage();
+					return;
+				}*/
+			}
+			else if (mClientLastDown != null)
+			{
+				CGPoint b = GetAbsPos() - mClientLastDown.GetAbsPos();
+				CGPoint a = new CGPoint(x, y);
+				//a + b;
+				CGMaths.CGPointTranslate(ref a, b.mX, b.mY);
+				//CGMaths.CGPointTranslate(ref touch.previousLocation, b.mX, b.mY);
+				mClientLastDown.MouseUp((int)a.x, (int)a.y, theMagicCode);
+				mClientLastDown.mIsDown = false;
+				mClientLastDown = null;
+			}
+		}
+
+		public override void MouseDrag(int x, int y)
+		{
+			CGPoint cgpoint = CGMaths.CGPointSubtract(new CGPoint(x, y), mScrollTouchReference);
+			if (mClient != null)
+			{
+				if (clientAllowsScroll)
+				{
+					if (!mScrollTracking
+                        && (mScrollPractical & ScrollWidget.ScrollMode.SCROLL_HORIZONTAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED
+                        && Math.Abs(cgpoint.x) > 4f)
+					{
+						mScrollTracking = true;
+					}
+					if (!mScrollTracking
+                        && (mScrollPractical & ScrollWidget.ScrollMode.SCROLL_VERTICAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED
+                        && Math.Abs(cgpoint.y) > 4f)
+					{
+						mScrollTracking = true;
+					}
+				}
+				if (mScrollTracking && mClientLastDown != null)
+				{
+					mClientLastDown.TouchesCanceled();
+					mClientLastDown.mIsDown = false;
+					mClientLastDown = null;
+				}
+			}
+			if (mScrollTracking)
+			{
+				_Touch touch = new _Touch();
+				touch.location.x = x;
+				touch.location.y = y;
+				TouchMotion(touch);
+				return;
+			}
+			if (mClientLastDown != null)
+			{
+				CGPoint b = GetAbsPos() - mClientLastDown.GetAbsPos();
+				CGPoint a = new CGPoint(x, y);
+				CGPoint cgpoint2 = a + b;
+				CGPoint a2 = new CGPoint(cgpoint2.mX + mClientLastDown.mX, cgpoint2.mY + mClientLastDown.mY);
+				bool flag = mClientLastDown.GetInsetRect().Contains(a2);
+				if (flag && !mClientLastDown.mIsOver)
+				{
+					mClientLastDown.mIsOver = true;
+					mClientLastDown.MouseEnter();
+				}
+				else if (!flag && mClientLastDown.mIsOver)
+				{
+					mClientLastDown.MouseLeave();
+					mClientLastDown.mIsOver = false;
+				}
+				//CGMaths.CGPointTranslate(ref touch.location, b.mX, b.mY);
+				//CGMaths.CGPointTranslate(ref touch.previousLocation, b.mX, b.mY);
+				mClientLastDown.MouseDrag((int)(x + b.mX), (int)(y + b.mY));
+			}
+		}
+
+        public override void MouseWheel(int theDelta)
+        {
+			if ((mScrollPractical & ScrollWidget.ScrollMode.SCROLL_VERTICAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED)
+			{
+				//mScrollOffset.y += theDelta;
+				mScrollVelocity.y += theDelta * 1.4f;
+			}
+			else if ((mScrollPractical & ScrollWidget.ScrollMode.SCROLL_HORIZONTAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED)
+			{
+				//mScrollOffset.x += theDelta;
+				mScrollVelocity.x += theDelta * 1.4f;
+			}
+			//mScrollOffset = cgpoint2;
+			//mScrollLastTimestamp = touch.timestamp;
+			mClient.Move((int)mScrollOffset.x, (int)mScrollOffset.y);
+			//oldTouch = touch.location;
+			//oldTouchTime = touch.timestamp;
+		}
+
+        public override void TouchBegan(_Touch touch)
 		{
 			if (mClient != null)
 			{
@@ -761,6 +892,44 @@ namespace Sexy
 			touch.previousLocation.Y = touch.previousLocation.Y + (num4 - touch.location.Y);
 			touch.location.X = num3;
 			touch.location.Y = num4;
+			return widgetAtHelper;
+		}
+
+		protected Widget GetClientWidgetAt(int x, int y)
+		{
+			int num = (int)x - mClient.mX;
+			int num2 = (int)y - mClient.mY;
+			int theFlags = 16 | mWidgetManager.GetWidgetFlags();
+			Widget widgetAtHelper;
+			int num3;
+			int num4;
+			if (mClientLastDown != null)
+			{
+				CGPoint absPos = mClient.GetAbsPos();
+				CGPoint absPos2 = mClientLastDown.GetAbsPos();
+				widgetAtHelper = mClientLastDown;
+				num3 = (int)(x + absPos.mX - absPos2.mX);
+				num4 = (int)(y + absPos.mY - absPos2.mY);
+			}
+			else
+			{
+				Widget widget = mClient;
+				widget.mWidgetFlagsMod.mRemoveFlags = (widget.mWidgetFlagsMod.mRemoveFlags & -17);
+				bool flag;
+				widgetAtHelper = mClient.GetWidgetAtHelper(num, num2, theFlags, out flag, out num3, out num4);
+				Widget widget2 = mClient;
+				widget2.mWidgetFlagsMod.mRemoveFlags = (widget2.mWidgetFlagsMod.mRemoveFlags | 16);
+			}
+			if (widgetAtHelper == null || widgetAtHelper.mDisabled)
+			{
+				num3 = num;
+				num4 = num2;
+				widgetAtHelper = mClient;
+			}
+			//touch.previousLocation.X = touch.previousLocation.X + (num3 - touch.location.X);
+			//touch.previousLocation.Y = touch.previousLocation.Y + (num4 - touch.location.Y);
+			//touch.location.X = num3;
+			//touch.location.Y = num4;
 			return widgetAtHelper;
 		}
 

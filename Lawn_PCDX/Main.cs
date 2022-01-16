@@ -127,7 +127,7 @@ namespace Sexy
 			Main.GamerServicesComp = new GamerServicesComponent(this);
 			base.Components.Add(Main.GamerServicesComp);
 			ReportAchievement.Initialise();
-			IronPyInteractive.Serve();
+			LawnMod.IronPyInteractive.Serve();
 			base.Initialize();
 			// Window Scaling
 			GlobalStaticVars.gSexyAppBase.mScreenScales.Init(1600, 960, 800, 480);
@@ -145,7 +145,7 @@ namespace Sexy
 
 		protected override void OnExiting(object sender, EventArgs args) 
 		{
-			IronPyInteractive.Stop();		
+			LawnMod.IronPyInteractive.Stop();		
 		}
 
 		protected override void LoadContent()
@@ -155,6 +155,7 @@ namespace Sexy
 			GlobalStaticVars.initialize(this);
 			GlobalStaticVars.mGlobalContent.LoadSplashScreen();
 			GlobalStaticVars.gSexyAppBase.StartLoadingThread();
+			mWidgetManager = GlobalStaticVars.gSexyAppBase.mWidgetManager;
 		}
 
 		protected override void UnloadContent()
@@ -295,16 +296,31 @@ namespace Sexy
 			mstouch.location = s.InvMapTouch(new CGPoint(msstate.Position.X, msstate.Position.Y));
 			if (msstate.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
 			{
-				GlobalStaticVars.gSexyAppBase.TouchBegan(mstouch);
-			}
-			else if (msstate.LeftButton == ButtonState.Pressed && previousMouseState.Position != msstate.Position)
-			{
-				GlobalStaticVars.gSexyAppBase.TouchMoved(mstouch);
+				mWidgetManager.MouseDown((int)mstouch.location.x, (int)mstouch.location.y, 1);
 			}
 			else if (msstate.LeftButton == ButtonState.Released && previousMouseState.LeftButton == ButtonState.Pressed)
 			{
-				GlobalStaticVars.gSexyAppBase.TouchEnded(mstouch);
+				mWidgetManager.MouseUp((int)mstouch.location.x, (int)mstouch.location.y, 1);
 			}
+			if (msstate.RightButton == ButtonState.Pressed && previousMouseState.RightButton == ButtonState.Released)
+			{
+				mWidgetManager.MouseDown((int)mstouch.location.x, (int)mstouch.location.y, -1);
+			}
+			else if (msstate.RightButton == ButtonState.Released && previousMouseState.LeftButton == ButtonState.Pressed)
+			{
+				mWidgetManager.MouseUp((int)mstouch.location.x, (int)mstouch.location.y, -1);
+			}
+			if (msstate.ScrollWheelValue != previousMouseState.ScrollWheelValue) 
+			{
+				mWidgetManager.MouseWheel(msstate.ScrollWheelValue - previousMouseState.ScrollWheelValue);
+			}
+
+			if (previousMouseState.Position != msstate.Position)
+			{
+				mWidgetManager.MouseMove((int)mstouch.location.x, (int)mstouch.location.y);
+			}
+
+
 
 			GamePadState state = GamePad.GetState(PlayerIndex.One);
 			if (state.Buttons.Back == ButtonState.Pressed && previousGamepadState.Buttons.Back == ButtonState.Released)
@@ -462,5 +478,7 @@ namespace Sexy
 		private GamePadState previousGamepadState = default(GamePadState);
         private MouseState previousMouseState = default(MouseState);
         private KeyboardState previousKeyboardState;
+
+		private WidgetManager mWidgetManager;
     }
 }

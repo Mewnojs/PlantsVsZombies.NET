@@ -55,7 +55,7 @@ namespace Lawn
             {
                 if (mPlantImages[(int)theSeedType] == null)
                 {
-                    Debug.OutputDebug("(!!) ReanimatorCache uninitialized plant variation (%d).\n", theSeedType);
+                    Debug.Log(DebugType.Warn, $"(!!) ReanimatorCache uninitialized plant variation ({theSeedType}).\n");
                     return;
                 }
                 image = mPlantImages[(int)theSeedType];
@@ -69,7 +69,7 @@ namespace Lawn
                     mDrawVariation = theDrawVariation
                 }, out image))
                 {
-                    Debug.OutputDebug("(!!) ReanimatorCache uninitialized plant variation (%d)-(%d).\n", theSeedType, theDrawVariation);
+                    Debug.Log(DebugType.Warn, $"(!!) ReanimatorCache uninitialized plant variation ({theSeedType})-({theDrawVariation}).\n");
                     return;
                 }
             }
@@ -96,7 +96,7 @@ namespace Lawn
         {
             if (mZombieImages[(int)theZombieType] == null)
             {
-                Debug.OutputDebug("(!!) ReanimatorCache uninitialized zombie variation (%d).\n", theZombieType);
+                Debug.Log(DebugType.Warn, $"(!!) ReanimatorCache uninitialized zombie variation ({theZombieType}).\n");
                 return;
             }
             TodCommon.TodDrawImageScaledF(g, mZombieImages[(int)theZombieType], thePosX + Constants.S * -20, thePosY + Constants.S * -20, g.mScaleX, g.mScaleY);
@@ -106,7 +106,7 @@ namespace Lawn
         {
             if (mLawnMowers[(int)mowerType] == null)
             {
-                Debug.OutputDebug("(!!) ReanimatorCache uninitialized mower variation (%d).\n", mowerType);
+                Debug.Log(DebugType.Warn, $"(!!) ReanimatorCache uninitialized mower variation ({mowerType}).\n");
                 return;
             }
             TodCommon.TodDrawImageScaledF(g, mLawnMowers[(int)mowerType], thePosX - (Constants.S * 20), thePosY, g.mScaleX, g.mScaleY);

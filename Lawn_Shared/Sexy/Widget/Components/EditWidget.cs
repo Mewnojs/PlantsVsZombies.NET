@@ -6,8 +6,22 @@ using Sexy.TodLib;
 
 namespace Sexy
 {
-	internal class EditWidget : Widget
-	{
+    public class IMECompatibleWidget : Widget 
+    {
+        public bool mIMEEnabled;
+        public TRect mIMEHotArea 
+        {
+            get 
+            {
+                return new TRect(mX, mY + mHeight, mWidth, mHeight);
+            }
+        }
+
+        public int mOldY;
+    }
+
+	internal class EditWidget : IMECompatibleWidget
+    {
 		public EditWidget(int theId, EditListener theEditListener, string title, string description)
 		{
 			mId = theId;
@@ -35,6 +49,7 @@ namespace Sexy
 			mAcceptsEmptyText = false;
 			mFont = new Font();
 			SetColors(EditWidget.gEditWidgetColors, 5);
+            mString = "";
 		}
 
 		protected virtual void ProcessKey(KeyCode theKey, SexyChar theChar)
@@ -505,13 +520,13 @@ namespace Sexy
 		public override void Resize(TRect frame)
 		{
 			base.Resize(frame);
-		}
+        }
 
 		public override void Resize(int theX, int theY, int theWidth, int theHeight)
 		{
 			base.Resize(theX, theY, theWidth, theHeight);
 			RehupBounds();
-		}
+        }
 
 		public override void Draw(Graphics g)
 		{
@@ -604,20 +619,110 @@ namespace Sexy
 		public override void GotFocus()
 		{
 			base.GotFocus();
-			if (!Guide.IsVisible)
-			{
-				var imeHandler = mWidgetManager.mIMEHandler;
-				if (!imeHandler.Enabled)
-					imeHandler.StartTextComposition();
-				//Guide.BeginShowKeyboardInput(PlayerIndex.One, mTitle, mDescription, mString, new AsyncCallback(KeyboardCallback), null);
-			}
+            var imeHandler = mWidgetManager.mIMEHandler;
+            //if (!imeHandler.Enabled) 
+            //{
 
-			mShowingCursor = true;
+            //imeHandler.SetTextInputRect(ref rect);
+
+            mWidgetManager.mIMEHotWidget = this;
+            //base.Resize(mX, (int)(imeHandler.VirtualKeyboardHeight == 0 ? mY : 100), mWidth, mHeight);
+            //}
+            //if (!Guide.IsVisible)
+            //{
+            //Guide.BeginShowKeyboardInput(PlayerIndex.One, mTitle, mDescription, mString, new AsyncCallback(KeyboardCallback), null);
+            //}
+
+            mShowingCursor = true;
 			mBlinkAcc = 0;
 			MarkDirty();
 		}
 
-		public override void KeyChar(SexyChar theChar)
+        public override void MouseDown(int x, int y, int theBtnNum, int theClickCount)
+        {
+            base.MouseDown(x, y, theBtnNum, theClickCount);
+
+            mHilitePos = -1;
+            mCursorPos = GetCharAt(x, y);
+
+            if (theClickCount > 1)
+            {
+                mHadDoubleClick = true;
+                HiliteWord();
+            }
+
+            MarkDirty();
+
+            FocusCursor(false);
+        }
+        public override void MouseUp(int x, int y, int theBtnNum, int theClickCount)
+        {
+            base.MouseUp(x, y, theBtnNum, theClickCount);
+            if (mHilitePos == mCursorPos)
+            {
+                mHilitePos = -1;
+            }
+
+            if (mHadDoubleClick)
+            {
+                mHilitePos = -1;
+                mCursorPos = GetCharAt(x, y);
+
+                mHadDoubleClick = false;
+                HiliteWord();
+            }
+
+            MarkDirty();
+        }
+        public override void MouseDrag(int x, int y)
+        {
+            base.MouseDrag(x, y);
+
+            if (mHilitePos == -1)
+            {
+                mHilitePos = mCursorPos;
+            }
+
+            mCursorPos = GetCharAt(x, y);
+            MarkDirty();
+
+            FocusCursor(false);
+        }
+        public override void MouseEnter()
+        {
+            base.MouseEnter();
+            
+            //mWidgetManager.mApp.SetCursor(AnonymousEnum4.CURSOR_TEXT);
+        }
+        public override void MouseLeave()
+        {
+            base.MouseLeave();
+            
+            //mWidgetManager.mApp.SetCursor(AnonymousEnum4.CURSOR_POINTER);
+        }
+        public virtual int GetCharAt(int x, int y)
+        {
+            int aPos = 0;
+
+            string aString = GetDisplayString();
+
+            for (int i = mLeftPos; i < (int)aString.length(); i++)
+            {
+                string aLoSubStr = aString.Substring(mLeftPos, i - mLeftPos);
+                string aHiSubStr = aString.Substring(mLeftPos, i - mLeftPos + 1);
+
+                int aLoLen = mFont.StringWidth(aLoSubStr);
+                int aHiLen = mFont.StringWidth(aHiSubStr);
+                if (x >= (aLoLen + aHiLen) / 2 + 5)
+                {
+                    aPos = i + 1;
+                }
+            }
+
+            return aPos;
+        }
+
+        public override void KeyChar(SexyChar theChar)
 		{
 			ProcessKey(KeyCode.KEYCODE_UNKNOWN, new SexyChar(theChar));
 			base.KeyChar(theChar);
@@ -660,6 +765,7 @@ namespace Sexy
 		{
 			base.LostFocus();
 			mShowingCursor = false;
+            mWidgetManager.mIMEHotWidget = null;
 			MarkDirty();
 		}
 
@@ -746,7 +852,8 @@ namespace Sexy
 		public int mUndoHilitePos;
 		public int mLastModifyIdx;
 
-		public enum Colors
+
+        public enum Colors
 		{
 			COLOR_BKG,
 			COLOR_OUTLINE,

@@ -11,7 +11,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
     <AssemblyName>LAWN</AssemblyName>
     <StartupObject>LAWN.PlantsVsZombies</StartupObject>
-    <Version>0.1.1.9</Version>
+    <Version>0.1.2.0</Version>
   </PropertyGroup>
   <ItemGroup>
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
@@ -20,13 +20,22 @@
     <PackageReference Include="IronPython" Version="2.7.11" />
     <PackageReference Include="IronPython.StdLib" Version="2.7.11" />
     <PackageReference Include="MLEM.Data" Version="5.2.0" />
+    <PackageReference Include="Mono.Cecil" Version="0.11.4" />
     <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.0.1641" />
     <PackageReference Include="MonoGame.IMEHelper.WindowsDX" Version="0.10.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="WebSocketSharp.NetCore" Version="1.0.1-alpha.4" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MonoMod.RuntimeDetour">
+      <HintPath>..\Lawn_Android\Libs\MonoMod.RuntimeDetour.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.Utils">
+      <HintPath>..\Lawn_Android\Libs\MonoMod.Utils.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   <Import Project="..\Lawn_Shared\Lawn_Shared.projitems" Label="Shared" />
-  <Import Project="..\LawnModExtension\LawnModExtension.projitems" Label="Shared" />
   <Import Project="..\MonoGame.Framework.Net\MonoGame.Framework.Net.projitems" Label="Shared" />
   <Import Project="..\IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems" Label="Shared" />
+  <Import Project="..\LawnModExtension\LawnModExtension.projitems" Label="Shared" />
 </Project>

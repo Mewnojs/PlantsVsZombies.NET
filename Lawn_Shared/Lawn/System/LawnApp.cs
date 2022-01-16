@@ -469,7 +469,11 @@ namespace Lawn
 
 		public void DoCreateUserDialog(bool isOnlyUser)
 		{
-			FinishCreateUserDialog(true);
+            KillDialog(30);
+            var v2 = new NewUserDialog(this, !isOnlyUser);
+            v2.Resize((800 - v2.mWidth) / 2, (600 - v2.mHeight) / 2, v2.mWidth, v2.mHeight);
+            AddDialog(30, v2);
+            //FinishCreateUserDialog(true);
 		}
 
 		public void DoCheatDialog()
@@ -502,7 +506,7 @@ namespace Lawn
 
 		public void FinishCreateUserDialog(bool isYes)
 		{
-			string gamertag = "Player";//Gamer.SignedInGamers[PlayerIndex.One].Gamertag;
+            string gamertag = (GetDialog(30) as NewUserDialog)?.GetName();//"Player";//Gamer.SignedInGamers[PlayerIndex.One].Gamertag;
 			string theDialogLines = "[ENTER_NEW_USER]";
 			if (isYes && gamertag.empty() && mPlayerInfo != null)
 			{
@@ -3639,7 +3643,7 @@ namespace Lawn
 
 		private const string PLACEHOLDER_CRAZYDAVE_0 = "[CRAZY_DAVE_{0}]";
 
-		public static string AppVersionNumber = "1.4";
+		public static string AppVersionNumber = "0.1.2.0";
 
 		public Board mBoard;
 

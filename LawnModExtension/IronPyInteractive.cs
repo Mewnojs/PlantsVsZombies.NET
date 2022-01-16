@@ -12,7 +12,7 @@ using WebSocketSharp.NetCore.Server;
 using WebSocketSharp.NetCore;
 using static IronPyInteractiveDef_Shared.WSEvents;
 
-namespace Lawn
+namespace LawnMod
 {
     class IronPyInteractive
     {
@@ -53,7 +53,7 @@ namespace Lawn
                 mStderrWriter.FlushEvent -= OnWriterFlush;
             }
 
-            public string ExecutionEventJSON(ExecutionEventResult restype, object res, string exceptionType = null)
+            public static string ExecutionEventJSON(ExecutionEventResult restype, object res, string exceptionType = null)
             {
                 return JsonConvert.SerializeObject(JObject.FromObject(new ExecutionEvent()
                 {
@@ -64,7 +64,7 @@ namespace Lawn
                 }, mSerializer));
             }
 
-            public string OutputEventJSON(string bufferName, string msg)
+            public static string OutputEventJSON(string bufferName, string msg)
             {
                 return JsonConvert.SerializeObject(JObject.FromObject(
                     new OutputEvent() {
@@ -89,6 +89,7 @@ namespace Lawn
                 DebugExec($"__import__('clr').AddReference('{Assembly.GetExecutingAssembly().GetName().Name}')");
                 mPyEnj.Runtime.IO.SetOutput(mStdoutStream, mStdoutWriter);
                 mPyEnj.Runtime.IO.SetErrorOutput(mStderrStream, mStderrWriter);
+                RunAllModules();
             }
 
             private static void ConfigureStdlib()
@@ -103,6 +104,32 @@ namespace Lawn
             {
                 Main.IronPythonConfigureWorkDir();
             }
+            private static void RunAllModules() 
+            {
+                string ModuleDirName = "mods";
+                if (Directory.Exists(ModuleDirName))
+                {
+                    foreach (string path in Directory.EnumerateFiles(ModuleDirName))
+                    {
+                        Debug.Log(DebugType.Info, $"Loading <{path}>");
+                        try
+                        {
+                            mPyEnj.ExecuteFile(path);
+                            Debug.Log(DebugType.Info, $"Successfully loaded <{path}>");
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.Log(DebugType.Error, $"{ex.GetType()}: {ex.Message}");
+                            return;
+                        }
+                    }
+                }
+                else 
+                {
+                    Directory.CreateDirectory(ModuleDirName);
+                }
+            }
+
 
             private static readonly ScriptEngine mPyEnj = Python.CreateEngine();
             private static readonly ScriptScope mPyScope = mPyEnj.CreateScope();

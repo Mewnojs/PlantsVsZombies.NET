@@ -43,6 +43,11 @@ namespace Sexy
 			return true;
 		}
 
+		public virtual bool DoScroll(int x, int y)
+		{
+			return true;
+		}
+
 		protected virtual void Reset()
 		{
 			mWidgetManager = null;

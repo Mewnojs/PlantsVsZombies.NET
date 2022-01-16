@@ -631,7 +631,8 @@ namespace Lawn
 				mApp.ShowStoreScreen(this);
 				return;
 			case 113:
-				mApp.BuyGame();
+				//mApp.BuyGame();
+				mApp.DoUserDialog();
 				return;
 			case 114:
 				mApp.DoAlmanacDialog(SeedType.SEED_NONE, ZombieType.ZOMBIE_INVALID, this);

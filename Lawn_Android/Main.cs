@@ -195,7 +195,7 @@ namespace Sexy
 			try
 			{
 #endif
-				IronPyInteractive.Serve();
+				LawnMod.IronPyInteractive.Serve();
 #if !DEBUG
 			}
 			catch (Exception e)
@@ -208,11 +208,20 @@ namespace Sexy
 			Main.graphics.PreferredBackBufferWidth = 800;
 			Main.graphics.PreferredBackBufferHeight = 480;
 			GraphicsState.mGraphicsDeviceManager.ApplyChanges();
-			//GlobalStaticVars.gSexyAppBase.mIMEHandler = new MonoGame.IMEHelper.AndroidIMEHandler(this);
-			//GlobalStaticVars.gSexyAppBase.mIMEHandler.TextInput += (s, e) =>
-			{
-				//GlobalStaticVars.gSexyAppBase.KeyChar(new SexyChar(e.Character));
-			};
+            // IME Support
+            GlobalStaticVars.gSexyAppBase.mWidgetManager.mIMEHandler = new MonoGame.IMEHelper.AndroidIMEHandler(this);
+            GlobalStaticVars.gSexyAppBase.mWidgetManager.mIMEHandler.TextInput += (s, e) =>
+            {
+                if (e.Character >= ' ')
+                {
+                    GlobalStaticVars.gSexyAppBase.mWidgetManager.KeyChar(new SexyChar(e.Character));
+                }
+                else 
+                {
+                    GlobalStaticVars.gSexyAppBase.mWidgetManager.KeyDown((KeyCode)e.Key);
+                    GlobalStaticVars.gSexyAppBase.mWidgetManager.KeyUp((KeyCode)e.Key);
+                }
+            };
 
 		}
 

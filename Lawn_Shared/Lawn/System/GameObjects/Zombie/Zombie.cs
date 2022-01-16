@@ -1761,11 +1761,11 @@ namespace Lawn
                     aSetClip = true;
                 }
             }
-            if (mZombiePhase == ZombiePhase.PHASE_ZOMBIE_BURNED)
-            {
-                g.SetColor(new Color(0, 0, 0, TodCommon.ClampInt((int)(255 * mZombieFade / 30f), 0, 255)));
-                g.SetColorizeImages(true);
-            }
+            //if (mZombiePhase == ZombiePhase.PHASE_ZOMBIE_BURNED)
+            //{
+                //g.SetColor(new Color(0, 0, 0, TodCommon.ClampInt((int)(255 * mZombieFade / 30f), 0, 255)));
+                //g.SetColorizeImages(true); /* 删除此段以修复炸蹦极导致全场变黑问题 */
+            //}
             for (float y = aPosY - aCordCelHeight; y > (float)(-aCordCelHeight); y -= aCordCelHeight)
             {
                 float thePosX = theOffsetX + Constants.Zombie_Bungee_Offset.X - 4f / mScaleZombie;

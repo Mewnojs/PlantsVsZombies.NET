@@ -99,6 +99,14 @@ namespace Lawn
 			return !mBackButton.Contains(theX, theY) && !mIZombieButton.Contains(theX, theY) && !mZombiesKilledButton.Contains(theX, theY) && !mVasebreakerButton.Contains(theX, theY);
 		}
 
+		public override bool DoScroll(int x, int y)
+		{
+			CGPoint absPos = GetAbsPos();
+			int theX = (int)(x - absPos.x);
+			int theY = (int)(y - absPos.y);
+			return !mBackButton.Contains(theX, theY) && !mIZombieButton.Contains(theX, theY) && !mZombiesKilledButton.Contains(theX, theY) && !mVasebreakerButton.Contains(theX, theY);
+		}
+
 		public void SetGray(bool aGrayed)
 		{
 			mGrayed = aGrayed;
