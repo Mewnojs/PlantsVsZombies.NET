@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace Sexy
 {
@@ -36,7 +38,7 @@ namespace Sexy
 		public static void OutputDebug(string format, params object[] t) 
 		{
 #if DEBUG
-			Log(DebugType.Debug, string.Format(format, t));
+            Log(DebugType.Debug, string.Format(format, t));
 #endif
 		}
 
@@ -49,12 +51,24 @@ namespace Sexy
 
 		public static void ASSERT(bool value)
 		{
-			if (!value) 
+#if DEBUG
+            if (!value) 
 			{
-				Log(DebugType.Fatal, "Assertion Failed");
-				throw new ApplicationException();
+                StackTrace st = new StackTrace();
+                StackFrame sf = st.GetFrame(1);
+                MethodBase m = sf.GetMethod();
+                string tracing = ""; 
+                for (int i = 2; i < st.FrameCount; i++) 
+                {
+                    var mm = st.GetFrame(i).GetMethod();
+                    tracing += $"\n\tfrom {mm.DeclaringType}.{ mm.Name}";
+                }
+                Log(DebugType.Fatal, $"Assertion Failed at: \n{m.DeclaringType}.{m.Name}" +
+                    tracing);
+				throw new Exception();
 			}
-		}
+#endif
+        }
 
 		public static Action<string> Logger = Console.WriteLine;
 
