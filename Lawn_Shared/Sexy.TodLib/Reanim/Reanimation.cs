@@ -60,7 +60,7 @@ namespace Sexy.TodLib
 			mAnimRate = 12f;
 			mLastFrameTime = -1f;
 			mDefinition = null;
-			mLoopType = ReanimLoopType.REANIM_PLAY_ONCE;
+			mLoopType = ReanimLoopType.PlayOnce;
 			mDead = false;
 			mFrameStart = 0;
 			mFrameCount = 0;
@@ -75,8 +75,8 @@ namespace Sexy.TodLib
 			mIsAttachment = false;
 			mRenderOrder = 0;
 			mReanimationHolder = null;
-			mFilterEffect = FilterEffectType.FILTER_EFFECT_NONE;
-			mReanimationType = ReanimationType.REANIM_NONE;
+			mFilterEffect = FilterEffectType.None;
+			mReanimationType = ReanimationType.None;
 			mActive = false;
 			mGetFrameTime = true;
 		}
@@ -143,11 +143,11 @@ namespace Sexy.TodLib
 			mAnimTime += ReanimatorXnaHelpers.SECONDS_PER_UPDATE * mAnimRate / mFrameCount;
 			if (mAnimRate > 0f)
 			{
-				if (mLoopType != ReanimLoopType.REANIM_LOOP)
+				if (mLoopType != ReanimLoopType.Loop)
 				{
-					if (mLoopType != ReanimLoopType.REANIM_LOOP_FULL_LAST_FRAME)
+					if (mLoopType != ReanimLoopType.LoopFullLastFrame)
 					{
-						if (mLoopType == ReanimLoopType.REANIM_PLAY_ONCE || mLoopType == ReanimLoopType.REANIM_PLAY_ONCE_FULL_LAST_FRAME)
+						if (mLoopType == ReanimLoopType.PlayOnce || mLoopType == ReanimLoopType.PlayOnceFullLastFrame)
 						{
 							if (mAnimTime >= 1f)
 							{
@@ -160,7 +160,7 @@ namespace Sexy.TodLib
 						}
 						else
 						{
-							if ((mLoopType == ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD || mLoopType == ReanimLoopType.REANIM_PLAY_ONCE_FULL_LAST_FRAME_AND_HOLD) && mAnimTime >= 1f)
+							if ((mLoopType == ReanimLoopType.PlayOnceAndHold || mLoopType == ReanimLoopType.PlayOnceFullLastFrameAndHold) && mAnimTime >= 1f)
 							{
 								mLoopCount = 1;
 								mAnimTime = 1f;
@@ -178,11 +178,11 @@ namespace Sexy.TodLib
 			}
 			else
 			{
-				if (mLoopType != ReanimLoopType.REANIM_LOOP)
+				if (mLoopType != ReanimLoopType.Loop)
 				{
-					if (mLoopType != ReanimLoopType.REANIM_LOOP_FULL_LAST_FRAME)
+					if (mLoopType != ReanimLoopType.LoopFullLastFrame)
 					{
-						if (mLoopType == ReanimLoopType.REANIM_PLAY_ONCE || mLoopType == ReanimLoopType.REANIM_PLAY_ONCE_FULL_LAST_FRAME)
+						if (mLoopType == ReanimLoopType.PlayOnce || mLoopType == ReanimLoopType.PlayOnceFullLastFrame)
 						{
 							if (mAnimTime < 0f)
 							{
@@ -195,7 +195,7 @@ namespace Sexy.TodLib
 						}
 						else
 						{
-							if ((mLoopType == ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD || mLoopType == ReanimLoopType.REANIM_PLAY_ONCE_FULL_LAST_FRAME_AND_HOLD) && mAnimTime < 0f)
+							if ((mLoopType == ReanimLoopType.PlayOnceAndHold || mLoopType == ReanimLoopType.PlayOnceFullLastFrameAndHold) && mAnimTime < 0f)
 							{
 								mLoopCount = 1;
 								mAnimTime = 0f;
@@ -266,7 +266,7 @@ namespace Sexy.TodLib
 						for (int j = 0; j < attachmentID.mNumEffects; j++)
 						{
 							AttachEffect attachEffect = attachmentID.mEffectArray[j];
-							if (attachEffect.mEffectType == EffectType.EFFECT_REANIM)
+							if (attachEffect.mEffectType == EffectType.Reanim)
 							{
 								Reanimation reanimation = (Reanimation)attachEffect.mEffectID;
 								reanimation.mColorOverride = mColorOverride;
@@ -535,7 +535,7 @@ namespace Sexy.TodLib
 			mGetFrameTime = false;
 			theFrameTime = default(ReanimatorFrameTime);
 			int num;
-			if (mLoopType == ReanimLoopType.REANIM_PLAY_ONCE_FULL_LAST_FRAME || mLoopType == ReanimLoopType.REANIM_LOOP_FULL_LAST_FRAME || mLoopType == ReanimLoopType.REANIM_PLAY_ONCE_FULL_LAST_FRAME_AND_HOLD)
+			if (mLoopType == ReanimLoopType.PlayOnceFullLastFrame || mLoopType == ReanimLoopType.LoopFullLastFrame || mLoopType == ReanimLoopType.PlayOnceFullLastFrameAndHold)
 			{
 				num = mFrameCount;
 			}
@@ -1094,7 +1094,7 @@ namespace Sexy.TodLib
 			GetCurrentTransform(theTrackIndex, out reanimatorTransform, false);
 			AttacherInfo attacherInfo;
 			Reanimation.ParseAttacherTrack(reanimatorTransform, out attacherInfo);
-			ReanimationType reanimationType = ReanimationType.REANIM_NONE;
+			ReanimationType reanimationType = ReanimationType.None;
 			if (attacherInfo.mReanimName.Length != 0)
 			{
 				string text = string.Format("reanim\\%s.reanim", attacherInfo.mReanimName);
@@ -1110,7 +1110,7 @@ namespace Sexy.TodLib
 					}
 				}
 			}
-			if (reanimationType == ReanimationType.REANIM_NONE)
+			if (reanimationType == ReanimationType.None)
 			{
 				GlobalMembersAttachment.AttachmentDie(ref reanimatorTrackInstance.mAttachmentID);
 				return;
@@ -1156,7 +1156,7 @@ namespace Sexy.TodLib
 			theAttacherInfo.mReanimName = "";
 			theAttacherInfo.mTrackName = "";
 			theAttacherInfo.mAnimRate = 12f;
-			theAttacherInfo.mLoopType = ReanimLoopType.REANIM_LOOP;
+			theAttacherInfo.mLoopType = ReanimLoopType.Loop;
 			if (theTransform.mFrame == -1f)
 			{
 				return;
@@ -1207,11 +1207,11 @@ namespace Sexy.TodLib
 				}
 				else if (text == "hold")
 				{
-					theAttacherInfo.mLoopType = ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD;
+					theAttacherInfo.mLoopType = ReanimLoopType.PlayOnceAndHold;
 				}
 				else if (text == "once")
 				{
-					theAttacherInfo.mLoopType = ReanimLoopType.REANIM_PLAY_ONCE;
+					theAttacherInfo.mLoopType = ReanimLoopType.PlayOnce;
 				}
 				num2 = theTransform.mText.IndexOf("[", num4 + 1);
 			}

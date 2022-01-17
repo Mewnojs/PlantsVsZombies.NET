@@ -4,23 +4,23 @@ namespace Lawn
 {
 	public enum CursorType
 	{
-		CURSOR_TYPE_NORMAL,
-		CURSOR_TYPE_PLANT_FROM_BANK,
-		CURSOR_TYPE_PLANT_FROM_USABLE_COIN,
-		CURSOR_TYPE_PLANT_FROM_GLOVE,
-		CURSOR_TYPE_PLANT_FROM_DUPLICATOR,
-		CURSOR_TYPE_PLANT_FROM_WHEEL_BARROW,
-		CURSOR_TYPE_SHOVEL,
-		CURSOR_TYPE_HAMMER,
-		CURSOR_TYPE_COBCANNON_TARGET,
-		CURSOR_TYPE_WATERING_CAN,
-		CURSOR_TYPE_FERTILIZER,
-		CURSOR_TYPE_BUG_SPRAY,
-		CURSOR_TYPE_PHONOGRAPH,
-		CURSOR_TYPE_CHOCOLATE,
-		CURSOR_TYPE_GLOVE,
-		CURSOR_TYPE_MONEY_SIGN,
-		CURSOR_TYPE_WHEEELBARROW,
-		CURSOR_TYPE_TREE_FOOD
+		Normal,
+		PlantFromBank,
+		PlantFromUsableCoin,
+		PlantFromGlove,
+		PlantFromDuplicator,
+		PlantFromWheelBarrow,
+		Shovel,
+		Hammer,
+		CobcannonTarget,
+		WateringCan,
+		Fertilizer,
+		BugSpray,
+		Phonograph,
+		Chocolate,
+		Glove,
+		MoneySign,
+		Wheeelbarrow,
+		TreeFood
 	}
 }

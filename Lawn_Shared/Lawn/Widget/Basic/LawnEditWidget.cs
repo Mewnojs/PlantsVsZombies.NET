@@ -14,7 +14,7 @@ namespace Lawn
 		public override void KeyDown(KeyCode theKey)
 		{
 			base.KeyDown(theKey);
-			if (theKey == KeyCode.KEYCODE_ESCAPE)
+			if (theKey == KeyCode.Escape)
 			{
 				mDialog.KeyDown(theKey);
 			}

@@ -2,11 +2,11 @@
 
 namespace Sexy
 {
-	public enum MOVIESCALINGMODE
+	public enum MovieScalingMode
 	{
-		MOVIESCALINGMODE_NONE,
-		MOVIESCALINGMODE_ASPECTFIT,
-		MOVIESCALINGMODE_ASPECTFILL,
-		MOVIESCALINGMODE_FILL
+		None,
+		Aspectfit,
+		Aspectfill,
+		Fill
 	}
 }

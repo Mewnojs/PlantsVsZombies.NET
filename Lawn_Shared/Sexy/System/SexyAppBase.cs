@@ -803,7 +803,7 @@ namespace Sexy
 		{
 		}
 
-		public bool PlayMovie(VideoType video, MOVIESCALINGMODE theMOVIESCALINGMODE, MOVIECONTROLMODE theMOVIECONTROLMODE, SexyColor sexyColor)
+		public bool PlayMovie(VideoType video, MovieScalingMode theMOVIESCALINGMODE, MovieControllMode theMOVIECONTROLMODE, SexyColor sexyColor)
 		{
 			bool flag = true;
 			try

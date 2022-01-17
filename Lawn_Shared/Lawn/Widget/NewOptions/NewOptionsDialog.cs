@@ -43,18 +43,18 @@ namespace Lawn
 			}
 			else
 			{
-				mTallBottom = (mApp.mGameScene != GameScenes.SCENE_LEVEL_INTRO);
+				mTallBottom = (mApp.mGameScene != GameScenes.LevelIntro);
 				mLinkCredits.SetVisible(false);
 			}
-			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ICE || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || mApp.mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM)
+			if (mApp.mGameMode == GameMode.ChallengeIce || mApp.mGameMode == GameMode.ChallengeZenGarden || mApp.mGameMode == GameMode.TreeOfWisdom)
 			{
 				mRestartButton.SetVisible(false);
 			}
-			if (mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO && !mApp.mBoard.mCutScene.IsSurvivalRepick())
+			if (mApp.mGameScene == GameScenes.LevelIntro && !mApp.mBoard.mCutScene.IsSurvivalRepick())
 			{
 				mRestartButton.SetVisible(false);
 			}
-			if (!mApp.CanShowAlmanac() || mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO || mFromGameSelector)
+			if (!mApp.CanShowAlmanac() || mApp.mGameScene == GameScenes.LevelIntro || mFromGameSelector)
 			{
 				mAlmanacButton.SetVisible(false);
 			}
@@ -78,7 +78,7 @@ namespace Lawn
 
 		public override int GetPreferredHeight(int theWidth)
 		{
-			return (int)Constants.InvertAndScale((mFromGameSelector || mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO) ? 310 : 340);
+			return (int)Constants.InvertAndScale((mFromGameSelector || mApp.mGameScene == GameScenes.LevelIntro) ? 310 : 340);
 		}
 
 		public override void AddedToManager(WidgetManager theWidgetManager)
@@ -144,7 +144,7 @@ namespace Lawn
 				mVersionY = Constants.NewOptionsDialog_Version_Low_Y;
 				return;
 			}
-			if (mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
+			if (mApp.mGameScene == GameScenes.LevelIntro)
 			{
 				int num2 = (int)Constants.InvertAndScale(150f);
 				mBackToGameButton.Resize(mWidth / 4 - num2 / 2, theHeight - (int)Constants.InvertAndScale(50f), num2, btnHeight);
@@ -181,12 +181,12 @@ namespace Lawn
 			int newOptionsDialog_FullScreenOffset = Constants.NewOptionsDialog_FullScreenOffset;
 			SexyColor theColor = new SexyColor(107, 109, 145);
 			int num = mMusicSliderOn ? Constants.NewOptionsDialog_MusicLabel_On_Y : Constants.NewOptionsDialog_MusicLabel_Off_Y;
-			TodCommon.TodDrawString(g, mMusicSliderOn ? "[OPTIONS_MUSIC_VOLUME]" : "[OPTIONS_MUSIC_OFF]", Constants.NewOptionsDialog_MusicLabel_X, num + newOptionsDialog_Music_Offset, Resources.FONT_DWARVENTODCRAFT18, theColor, Constants.NewOptionsDialog_VibrationLabel_MaxWidth, DrawStringJustification.DS_ALIGN_RIGHT);
-			TodCommon.TodDrawString(g, "[OPTIONS_SOUND_FX]", Constants.NewOptionsDialog_FXLabel_X, Constants.NewOptionsDialog_FXLabel_Y + newOptionsDialog_FX_Offset, Resources.FONT_DWARVENTODCRAFT18, theColor, Constants.NewOptionsDialog_VibrationLabel_MaxWidth, DrawStringJustification.DS_ALIGN_RIGHT);
-			TodCommon.TodDrawString(g, "[OPTIONS_VABRATION]", Constants.NewOptionsDialog_VibrationLabel_X, Constants.NewOptionsDialog_VibrationLabel_Y + newOptionsDialog_FullScreenOffset, Resources.FONT_DWARVENTODCRAFT18, theColor, Constants.NewOptionsDialog_VibrationLabel_MaxWidth, DrawStringJustification.DS_ALIGN_RIGHT);
-			//TodCommon.TodDrawString(g, "[OPTIONS_RUN_LOCKED]", Constants.NewOptionsDialog_VibrationLabel_X, Constants.NewOptionsDialog_LockedLabel_Y + newOptionsDialog_FullScreenOffset, Resources.FONT_DWARVENTODCRAFT18, theColor, Constants.NewOptionsDialog_VibrationLabel_MaxWidth, DrawStringJustification.DS_ALIGN_RIGHT);
-			TodCommon.TodDrawString(g, "[OPTIONS_ENABLE_CHEAT]", Constants.NewOptionsDialog_VibrationLabel_X, Constants.NewOptionsDialog_LockedLabel_Y + newOptionsDialog_FullScreenOffset, Resources.FONT_DWARVENTODCRAFT18, theColor, Constants.NewOptionsDialog_VibrationLabel_MaxWidth, DrawStringJustification.DS_ALIGN_RIGHT);
-			TodCommon.TodDrawString(g, LawnApp.AppVersionNumber, mWidth / 2, mVersionY, Resources.FONT_PICO129, theColor, DrawStringJustification.DS_ALIGN_CENTER);
+			TodCommon.TodDrawString(g, mMusicSliderOn ? "[OPTIONS_MUSIC_VOLUME]" : "[OPTIONS_MUSIC_OFF]", Constants.NewOptionsDialog_MusicLabel_X, num + newOptionsDialog_Music_Offset, Resources.FONT_DWARVENTODCRAFT18, theColor, Constants.NewOptionsDialog_VibrationLabel_MaxWidth, DrawStringJustification.Right);
+			TodCommon.TodDrawString(g, "[OPTIONS_SOUND_FX]", Constants.NewOptionsDialog_FXLabel_X, Constants.NewOptionsDialog_FXLabel_Y + newOptionsDialog_FX_Offset, Resources.FONT_DWARVENTODCRAFT18, theColor, Constants.NewOptionsDialog_VibrationLabel_MaxWidth, DrawStringJustification.Right);
+			TodCommon.TodDrawString(g, "[OPTIONS_VABRATION]", Constants.NewOptionsDialog_VibrationLabel_X, Constants.NewOptionsDialog_VibrationLabel_Y + newOptionsDialog_FullScreenOffset, Resources.FONT_DWARVENTODCRAFT18, theColor, Constants.NewOptionsDialog_VibrationLabel_MaxWidth, DrawStringJustification.Right);
+			//TodCommon.TodDrawString(g, "[OPTIONS_RUN_LOCKED]", Constants.NewOptionsDialog_VibrationLabel_X, Constants.NewOptionsDialog_LockedLabel_Y + newOptionsDialog_FullScreenOffset, Resources.FONT_DWARVENTODCRAFT18, theColor, Constants.NewOptionsDialog_VibrationLabel_MaxWidth, DrawStringJustification.Right);
+			TodCommon.TodDrawString(g, "[OPTIONS_ENABLE_CHEAT]", Constants.NewOptionsDialog_VibrationLabel_X, Constants.NewOptionsDialog_LockedLabel_Y + newOptionsDialog_FullScreenOffset, Resources.FONT_DWARVENTODCRAFT18, theColor, Constants.NewOptionsDialog_VibrationLabel_MaxWidth, DrawStringJustification.Right);
+			TodCommon.TodDrawString(g, LawnApp.AppVersionNumber, mWidth / 2, mVersionY, Resources.FONT_PICO129, theColor, DrawStringJustification.Center);
 		}
 
 		public virtual void SliderVal(int theId, double theVal)
@@ -265,7 +265,7 @@ namespace Lawn
 			switch (theId)
 			{
 			case 0:
-				mApp.DoAlmanacDialog(SeedType.SEED_NONE, ZombieType.ZOMBIE_INVALID, null);
+				mApp.DoAlmanacDialog(SeedType.None, ZombieType.Invalid, null);
 				return;
 			case 1:
 				if (mApp.mBoard != null && mApp.mBoard.NeedSaveGame())
@@ -278,7 +278,7 @@ namespace Lawn
 					mApp.DoConfirmBackToMain();
 					return;
 				}
-				mApp.mBoardResult = BoardResult.BOARDRESULT_QUIT;
+				mApp.mBoardResult = BoardResult.Quit;
 				mApp.DoBackToMain();
 				return;
 			case 2:
@@ -326,7 +326,7 @@ namespace Lawn
 			case 6:
 				mApp.KillNewOptionsDialog();
 				mApp.KillGameSelector();
-				mApp.ShowAwardScreen(AwardType.AWARD_HELP_ZOMBIE_NOTE, false);
+				mApp.ShowAwardScreen(AwardType.HelpZombieNote, false);
 				return;
 			case 7:
 			{
@@ -361,12 +361,12 @@ namespace Lawn
 			{
 				mApp.mBoard.DoTypingCheck(theKey);
 			}
-			if (theKey == KeyCode.KEYCODE_SPACE || theKey == KeyCode.KEYCODE_RETURN)
+			if (theKey == KeyCode.Space || theKey == KeyCode.Return)
 			{
 				base.ButtonDepress(1000);
 				return;
 			}
-			if (theKey == KeyCode.KEYCODE_ESCAPE)
+			if (theKey == KeyCode.Escape)
 			{
 				base.ButtonDepress(1001);
 			}

@@ -4,19 +4,19 @@ namespace Lawn
 {
 	public/*internal*/ enum PlantingReason
 	{
-		PLANTING_OK,
-		PLANTING_NOT_HERE,
-		PLANTING_ONLY_ON_GRAVES,
-		PLANTING_ONLY_IN_POOL,
-		PLANTING_ONLY_ON_GROUND,
-		PLANTING_NEEDS_POT,
-		PLANTING_NOT_ON_ART,
-		PLANTING_NOT_PASSED_LINE,
-		PLANTING_NEEDS_UPGRADE,
-		PLANTING_NOT_ON_GRAVE,
-		PLANTING_NOT_ON_CRATER,
-		PLANTING_NOT_ON_WATER,
-		PLANTING_NEEDS_GROUND,
-		PLANTING_NEEDS_SLEEPING
+		Ok,
+		NotHere,
+		OnlyOnGraves,
+		OnlyInPool,
+		OnlyOnGround,
+		NeedsPot,
+		NotOnArt,
+		NotPassedLine,
+		NeedsUpgrade,
+		NotOnGrave,
+		NotOnCrater,
+		NotOnWater,
+		NeedsGround,
+		NeedsSleeping
 	}
 }

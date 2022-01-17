@@ -34,7 +34,7 @@ namespace Lawn
 			g.SetColorizeImages(false);
 			GlobalMembersStoreScreen.DrawStoreItem(g, Constants.ConfirmPurchaseDialog_Item_Pos.X, Constants.ConfirmPurchaseDialog_Item_Pos.Y, mItemType, false, false, mQuantity, mCost);
 			trect = Constants.ConfirmPurchaseDialog_Text;
-			TodStringFile.TodDrawStringWrapped(g, mDesc, trect, Resources.FONT_BRIANNETOD12, new SexyColor(40, 50, 90), DrawStringJustification.DS_ALIGN_CENTER_VERTICAL_MIDDLE);
+			TodStringFile.TodDrawStringWrapped(g, mDesc, trect, Resources.FONT_BRIANNETOD12, new SexyColor(40, 50, 90), DrawStringJustification.CenterVerticalMiddle);
 		}
 
 		public StoreItem mItemType;

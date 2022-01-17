@@ -4,16 +4,16 @@ namespace Sexy.TodLib
 {
 	public enum ParticleSystemTracks
 	{
-		TRACK_SPAWN_RATE,
-		TRACK_SPAWN_MIN_ACTIVE,
-		TRACK_SPAWN_MAX_ACTIVE,
-		TRACK_SPAWN_MAX_LAUNCHED,
-		TRACK_EMITTER_PATH,
-		TRACK_SYSTEM_RED,
-		TRACK_SYSTEM_GREEN,
-		TRACK_SYSTEM_BLUE,
-		TRACK_SYSTEM_ALPHA,
-		TRACK_SYSTEM_BRIGHTNESS,
-		NUM_SYSTEM_TRACKS
+		SpawnRate,
+		SpawnMinActive,
+		SpawnMaxActive,
+		SpawnMaxLaunched,
+		EmitterPath,
+		SystemRed,
+		SystemGreen,
+		SystemBlue,
+		SystemAlpha,
+		SystemBrightness,
+		NumSystemTracks
 	}
 }

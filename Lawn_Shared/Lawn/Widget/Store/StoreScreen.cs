@@ -25,7 +25,7 @@ namespace Lawn
 			mBubbleAutoAdvance = false;
 			mAmbientSpeechCountDown = 200;
 			mPreviousAmbientSpeechIndex = -1;
-			mPage = StorePage.STORE_PAGE_SLOT_UPGRADES;
+			mPage = StorePage.SlotUpgrades;
 			mMouseOverItem = StoreItem.STORE_ITEM_INVALID;
 			mHatchTimer = 0;
 			mShakeX = 0;
@@ -36,7 +36,7 @@ namespace Lawn
 			StoreScreen.mCoins.DataArrayInitialize(1024U, "coins");
 			mApp.DelayLoadStoreResource("DelayLoad_Store");
 			Resize(0, 0, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT);
-			mPottedPlantSpecs.InitializePottedPlant(SeedType.SEED_MARIGOLD);
+			mPottedPlantSpecs.InitializePottedPlant(SeedType.Marigold);
 			mPottedPlantSpecs.mDrawVariation = (DrawVariation)TodCommon.RandRangeInt(2, 12);
 			mBackButton = new NewLawnButton(null, 100, this);
 			mBackButton.mDoFinger = true;
@@ -70,7 +70,7 @@ namespace Lawn
 			mNextButton.Resize(Constants.StoreScreen_NextButton_X, Constants.StoreScreen_NextButton_Y, AtlasResources.IMAGE_STORE_NEXTBUTTON.mWidth, AtlasResources.IMAGE_STORE_NEXTBUTTON.mHeight);
 			mOverlayWidget = new StoreScreenOverlay(this);
 			mOverlayWidget.Resize(0, 0, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT);
-			if (!IsPageShown(StorePage.STORE_PAGE_PLANT_UPGRADES))
+			if (!IsPageShown(StorePage.PlantUpgrades))
 			{
 				mPrevButton.mDisabledImage = AtlasResources.IMAGE_STORE_PREVBUTTONDISABLED;
 				mPrevButton.SetDisabled(true);
@@ -99,8 +99,8 @@ namespace Lawn
 
 		public override void Update()
 		{
-			mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_TITLE_CRAZY_DAVE_MAIN_THEME);
-			if (mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || mApp.mBoard == null)
+			mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.TitleCrazyDaveMainTheme);
+			if (mApp.mGameMode != GameMode.ChallengeZenGarden || mApp.mBoard == null)
 			{
 				mApp.UpdateCrazyDave();
 			}
@@ -108,7 +108,7 @@ namespace Lawn
 			{
 				return;
 			}
-			if (mApp.mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_OFF)
+			if (mApp.mCrazyDaveState == CrazyDaveState.Off)
 			{
 				if (mDrawnOnce)
 				{
@@ -117,7 +117,7 @@ namespace Lawn
 				return;
 			}
 			mStoreTime += 3;
-			if (mApp.mCrazyDaveState != CrazyDaveState.CRAZY_DAVE_OFF && mApp.mCrazyDaveState != CrazyDaveState.CRAZY_DAVE_ENTERING)
+			if (mApp.mCrazyDaveState != CrazyDaveState.Off && mApp.mCrazyDaveState != CrazyDaveState.Entering)
 			{
 				if (mHatchTimer > 0)
 				{
@@ -166,7 +166,7 @@ namespace Lawn
 						mBubbleCountDown -= 3;
 						if (mBubbleCountDown >= 0 && mBubbleCountDown < 3)
 						{
-							if (mApp.mSoundSystem.IsFoleyPlaying(FoleyType.FOLEY_CRAZYDAVESHORT) || mApp.mSoundSystem.IsFoleyPlaying(FoleyType.FOLEY_CRAZYDAVELONG) || mApp.mSoundSystem.IsFoleyPlaying(FoleyType.FOLEY_CRAZYDAVEEXTRALONG))
+							if (mApp.mSoundSystem.IsFoleyPlaying(FoleyType.Crazydaveshort) || mApp.mSoundSystem.IsFoleyPlaying(FoleyType.Crazydavelong) || mApp.mSoundSystem.IsFoleyPlaying(FoleyType.Crazydaveextralong))
 							{
 								mBubbleCountDown = 3;
 							}
@@ -235,7 +235,7 @@ namespace Lawn
 		{
 			g.SetLinearBlend(true);
 			mDrawnOnce = true;
-			int theY = TodCommon.TodAnimateCurve(50, 110, mStoreTime, Constants.StoreScreen_StoreSign_Y_Min, Constants.StoreScreen_StoreSign_Y_Max, TodCurves.CURVE_EASE_IN_OUT);
+			int theY = TodCommon.TodAnimateCurve(50, 110, mStoreTime, Constants.StoreScreen_StoreSign_Y_Min, Constants.StoreScreen_StoreSign_Y_Max, TodCurves.EaseInOut);
 			if (mApp.IsNight())
 			{
 				g.DrawImage(Resources.IMAGE_STORE_BACKGROUNDNIGHT, 0, 0);
@@ -343,9 +343,9 @@ namespace Lawn
 				do
 				{
 					mPage--;
-					if (mPage < StorePage.STORE_PAGE_SLOT_UPGRADES)
+					if (mPage < StorePage.SlotUpgrades)
 					{
-						mPage = StorePage.STORE_PAGE_ZEN2;
+						mPage = StorePage.Zen2;
 					}
 				}
 				while (!IsPageShown(mPage));
@@ -359,9 +359,9 @@ namespace Lawn
 				do
 				{
 					mPage++;
-					if (mPage >= StorePage.NUM_STORE_PAGES)
+					if (mPage >= StorePage.NumStorePages)
 					{
-						mPage = StorePage.STORE_PAGE_SLOT_UPGRADES;
+						mPage = StorePage.SlotUpgrades;
 					}
 				}
 				while (!IsPageShown(mPage));
@@ -396,7 +396,7 @@ namespace Lawn
 			if (theChar == 'l')
 			{
 				mApp.mDebugTrialLocked = !mApp.mDebugTrialLocked;
-				mApp.mTrialType = TrialType.TRIAL_STAGELOCKED;
+				mApp.mTrialType = TrialType.Stagelocked;
 			}
 		}
 
@@ -454,7 +454,7 @@ namespace Lawn
 
 		public StoreItem GetStoreItemType(int theSpotIndex)
 		{
-			if (mPage == StorePage.STORE_PAGE_SLOT_UPGRADES)
+			if (mPage == StorePage.SlotUpgrades)
 			{
 				if (theSpotIndex == 0)
 				{
@@ -490,7 +490,7 @@ namespace Lawn
 				}
 				return StoreItem.STORE_ITEM_INVALID;
 			}
-			else if (mPage == StorePage.STORE_PAGE_PLANT_UPGRADES)
+			else if (mPage == StorePage.PlantUpgrades)
 			{
 				if (theSpotIndex == 0)
 				{
@@ -518,7 +518,7 @@ namespace Lawn
 				}
 				return StoreItem.STORE_ITEM_INVALID;
 			}
-			else if (mPage == StorePage.STORE_PAGE_ZEN1)
+			else if (mPage == StorePage.Zen1)
 			{
 				if (theSpotIndex == 0)
 				{
@@ -556,7 +556,7 @@ namespace Lawn
 			}
 			else
 			{
-				if (mPage != StorePage.STORE_PAGE_ZEN2)
+				if (mPage != StorePage.Zen2)
 				{
 					Debug.ASSERT(false);
 					return StoreItem.STORE_ITEM_INVALID;
@@ -902,7 +902,7 @@ namespace Lawn
 			else if (StoreScreen.IsPottedPlant(storeItem))
 			{
 				mApp.mZenGarden.AddPottedPlant(mPottedPlantSpecs);
-				mPottedPlantSpecs.InitializePottedPlant(SeedType.SEED_MARIGOLD);
+				mPottedPlantSpecs.InitializePottedPlant(SeedType.Marigold);
 				mPottedPlantSpecs.mDrawVariation = (DrawVariation)TodCommon.RandRangeInt(2, 12);
 				mApp.mPlayerInfo.mPurchases[(int)storeItem] = LawnCommon.GetCurrentDaysSince2000();
 			}
@@ -972,7 +972,7 @@ namespace Lawn
 		public void EnableButtons(bool theEnable)
 		{
 			bool flag = true;
-			if (!mEasyBuyingCheat && !IsPageShown(StorePage.STORE_PAGE_PLANT_UPGRADES))
+			if (!mEasyBuyingCheat && !IsPageShown(StorePage.PlantUpgrades))
 			{
 				flag = false;
 			}
@@ -1073,7 +1073,7 @@ namespace Lawn
 				mApp.WriteCurrentUserConfig();
 				mApp.PlaySample(Resources.SOUND_DIAMOND);
 				Coin coin = StoreScreen.mCoins.DataArrayAlloc();
-				coin.CoinInitialize(80, 520, CoinType.COIN_DIAMOND, CoinMotion.COIN_MOTION_FROM_PRESENT);
+				coin.CoinInitialize(80, 520, CoinType.Diamond, CoinMotion.FromPresent);
 				coin.mVelX = 0f;
 				coin.mVelY = -5f;
 			}
@@ -1094,20 +1094,20 @@ namespace Lawn
 
 		public void StorePreLoad()
 		{
-			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_CRAZY_DAVE, true);
+			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.CrazyDave, true);
 			mApp.CrazyDaveEnter();
-			Plant.PreloadPlantResources(SeedType.SEED_GATLINGPEA);
-			Plant.PreloadPlantResources(SeedType.SEED_TWINSUNFLOWER);
+			Plant.PreloadPlantResources(SeedType.Gatlingpea);
+			Plant.PreloadPlantResources(SeedType.Twinsunflower);
 			if (mApp.HasFinishedAdventure())
 			{
-				Plant.PreloadPlantResources(SeedType.SEED_TWINSUNFLOWER);
-				Plant.PreloadPlantResources(SeedType.SEED_GLOOMSHROOM);
-				Plant.PreloadPlantResources(SeedType.SEED_CATTAIL);
-				Plant.PreloadPlantResources(SeedType.SEED_WINTERMELON);
-				Plant.PreloadPlantResources(SeedType.SEED_GOLD_MAGNET);
-				Plant.PreloadPlantResources(SeedType.SEED_SPIKEROCK);
-				Plant.PreloadPlantResources(SeedType.SEED_COBCANNON);
-				Plant.PreloadPlantResources(SeedType.SEED_IMITATER);
+				Plant.PreloadPlantResources(SeedType.Twinsunflower);
+				Plant.PreloadPlantResources(SeedType.Gloomshroom);
+				Plant.PreloadPlantResources(SeedType.Cattail);
+				Plant.PreloadPlantResources(SeedType.Wintermelon);
+				Plant.PreloadPlantResources(SeedType.GoldMagnet);
+				Plant.PreloadPlantResources(SeedType.Spikerock);
+				Plant.PreloadPlantResources(SeedType.Cobcannon);
+				Plant.PreloadPlantResources(SeedType.Imitater);
 			}
 		}
 
@@ -1115,9 +1115,9 @@ namespace Lawn
 		{
 			if (mApp.IsTrialStageLocked())
 			{
-				return thePage == StorePage.STORE_PAGE_SLOT_UPGRADES;
+				return thePage == StorePage.SlotUpgrades;
 			}
-			return (thePage != StorePage.STORE_PAGE_ZEN1 || mApp.mPlayerInfo.mZenGardenTutorialComplete || mApp.mZenGarden.mIsTutorial) && (thePage != StorePage.STORE_PAGE_ZEN2 || mApp.mPlayerInfo.mZenGardenTutorialComplete || mApp.HasFinishedAdventure()) && (mApp.HasFinishedAdventure() || thePage != StorePage.STORE_PAGE_PLANT_UPGRADES || mApp.mPlayerInfo.mLevel >= 42);
+			return (thePage != StorePage.Zen1 || mApp.mPlayerInfo.mZenGardenTutorialComplete || mApp.mZenGarden.mIsTutorial) && (thePage != StorePage.Zen2 || mApp.mPlayerInfo.mZenGardenTutorialComplete || mApp.HasFinishedAdventure()) && (mApp.HasFinishedAdventure() || thePage != StorePage.PlantUpgrades || mApp.mPlayerInfo.mLevel >= 42);
 		}
 
 		public override void DrawOverlay(Graphics g)

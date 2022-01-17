@@ -4,18 +4,18 @@ namespace Lawn
 {
 	public enum GridItemType
 	{
-		GRIDITEM_NONE,
-		GRIDITEM_GRAVESTONE,
-		GRIDITEM_CRATER,
-		GRIDITEM_LADDER,
-		GRIDITEM_PORTAL_CIRCLE,
-		GRIDITEM_PORTAL_SQUARE,
-		GRIDITEM_BRAIN,
-		GRIDITEM_SCARY_POT,
-		GRIDITEM_SQUIRREL,
-		GRIDITEM_ZEN_TOOL,
-		GRIDITEM_STINKY,
-		GRIDITEM_RAKE,
-		GRIDITEM_IZOMBIE_BRAIN
+		None,
+		Gravestone,
+		Crater,
+		Ladder,
+		PortalCircle,
+		PortalSquare,
+		Brain,
+		ScaryPot,
+		Squirrel,
+		ZenTool,
+		Stinky,
+		Rake,
+		IzombieBrain
 	}
 }

@@ -28,7 +28,7 @@ namespace Sexy.TodLib
 		public void Reset()
 		{
 			mEffectID = null;
-			mEffectType = EffectType.EFFECT_PARTICLE;
+			mEffectType = EffectType.Particle;
 			mOffset = default(SexyTransform2D);
 			mDontDrawIfParentHidden = false;
 			mDontPropogateColor = false;

@@ -41,14 +41,14 @@ namespace Sexy.TodLib
 				theTrack.mNodes[0].mTime = 0f;
 				theTrack.mNodes[0].mLowValue = theValue;
 				theTrack.mNodes[0].mHighValue = theValue;
-				theTrack.mNodes[0].mCurveType = TodCurves.CURVE_CONSTANT;
-				theTrack.mNodes[0].mDistribution = TodCurves.CURVE_LINEAR;
+				theTrack.mNodes[0].mCurveType = TodCurves.Constant;
+				theTrack.mNodes[0].mDistribution = TodCurves.Linear;
 			}
 		}
 
 		public static bool FloatTrackIsSet(ref FloatParameterTrack theTrack)
 		{
-			return theTrack.mCountNodes != 0 && theTrack.mNodes[0].mCurveType != TodCurves.CURVE_CONSTANT;
+			return theTrack.mCountNodes != 0 && theTrack.mNodes[0].mCurveType != TodCurves.Constant;
 		}
 
 		public static bool FloatTrackIsConstantZero(ref FloatParameterTrack theTrack)

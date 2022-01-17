@@ -2,15 +2,15 @@
 
 namespace Lawn
 {
-	internal enum NotRecommend
-	{
-		NOT_RECOMMENTED_NOCTURNAL,
-		NOT_RECOMMENTED_NEEDS_POOL,
-		NOT_RECOMMENTED_NEEDS_GRAVES,
-		NOT_RECOMMENTED_NEEDS_FOG,
-		NOT_RECOMMENTED_NEEDS_ROOF,
-		NOT_RECOMMENTED_ON_ROOF,
-		NOT_RECOMMENTED_FOR_CHALLENGE,
-		NOT_RECOMMENTED_AT_NIGHT
+	internal enum NotRecommend //Prefix: NOT_RECOMMENTED
+    {
+		Nocturnal,
+		NeedsPool,
+		NeedsGraves,
+		NeedsFog,
+		NeedsRoof,
+		OnRoof,
+		ForChallenge,
+		AtNight
 	}
 }

@@ -4,7 +4,7 @@ namespace Lawn
 {
 	public enum AwardScreens
 	{
-		AwardScreen_Start = 100,
-		AwardScreen_Menu
+		AwardScreenStart = 100,
+		AwardScreenMenu
 	}
 }

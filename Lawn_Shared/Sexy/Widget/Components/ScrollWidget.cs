@@ -312,13 +312,13 @@ namespace Sexy
 				if (clientAllowsScroll)
 				{
 					if (!mScrollTracking
-                        && (mScrollPractical & ScrollWidget.ScrollMode.SCROLL_HORIZONTAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED
+                        && (mScrollPractical & ScrollWidget.ScrollMode.Horizontal) != ScrollWidget.ScrollMode.Disabled
                         && Math.Abs(cgpoint.x) > 4f)
 					{
 						mScrollTracking = true;
 					}
 					if (!mScrollTracking
-                        && (mScrollPractical & ScrollWidget.ScrollMode.SCROLL_VERTICAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED
+                        && (mScrollPractical & ScrollWidget.ScrollMode.Vertical) != ScrollWidget.ScrollMode.Disabled
                         && Math.Abs(cgpoint.y) > 4f)
 					{
 						mScrollTracking = true;
@@ -364,12 +364,12 @@ namespace Sexy
 
         public override void MouseWheel(int theDelta)
         {
-			if ((mScrollPractical & ScrollWidget.ScrollMode.SCROLL_VERTICAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED)
+			if ((mScrollPractical & ScrollWidget.ScrollMode.Vertical) != ScrollWidget.ScrollMode.Disabled)
 			{
 				//mScrollOffset.y += theDelta;
 				mScrollVelocity.y += theDelta * 1.4f;
 			}
-			else if ((mScrollPractical & ScrollWidget.ScrollMode.SCROLL_HORIZONTAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED)
+			else if ((mScrollPractical & ScrollWidget.ScrollMode.Horizontal) != ScrollWidget.ScrollMode.Disabled)
 			{
 				//mScrollOffset.x += theDelta;
 				mScrollVelocity.x += theDelta * 1.4f;
@@ -417,11 +417,11 @@ namespace Sexy
 			{
 				if (clientAllowsScroll)
 				{
-					if (!mScrollTracking && (mScrollPractical & ScrollWidget.ScrollMode.SCROLL_HORIZONTAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED && Math.Abs(cgpoint.x) > 4f)
+					if (!mScrollTracking && (mScrollPractical & ScrollWidget.ScrollMode.Horizontal) != ScrollWidget.ScrollMode.Disabled && Math.Abs(cgpoint.x) > 4f)
 					{
 						mScrollTracking = true;
 					}
-					if (!mScrollTracking && (mScrollPractical & ScrollWidget.ScrollMode.SCROLL_VERTICAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED && Math.Abs(cgpoint.y) > 4f)
+					if (!mScrollTracking && (mScrollPractical & ScrollWidget.ScrollMode.Vertical) != ScrollWidget.ScrollMode.Disabled && Math.Abs(cgpoint.y) > 4f)
 					{
 						mScrollTracking = true;
 					}
@@ -682,10 +682,10 @@ namespace Sexy
 				Insets insets = mIndicatorsInsets;
 				g.SetColor(color);
 				g.SetColorizeImages(true);
-				if ((mScrollPractical & ScrollWidget.ScrollMode.SCROLL_HORIZONTAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED)
+				if ((mScrollPractical & ScrollWidget.ScrollMode.Horizontal) != ScrollWidget.ScrollMode.Disabled)
 				{
 					float num = mWidth / (float)mClient.Width();
-					int num2 = mWidth - insets.mLeft - insets.mRight - (((mScrollMode & ScrollWidget.ScrollMode.SCROLL_VERTICAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED) ? width : 0);
+					int num2 = mWidth - insets.mLeft - insets.mRight - (((mScrollMode & ScrollWidget.ScrollMode.Vertical) != ScrollWidget.ScrollMode.Disabled) ? width : 0);
 					int num3 = (int)(num2 * num);
 					int num4 = num2 - num3;
 					float num5 = Math.Min(0, mWidth - mClient.mWidth - mScrollInsets.mRight);
@@ -702,10 +702,10 @@ namespace Sexy
 					destRect.mHeight = height;
 					ScrollWidget.DrawHorizontalStretchableImage(g, mIndicatorsImage, destRect);
 				}
-				if ((mScrollPractical & ScrollWidget.ScrollMode.SCROLL_VERTICAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED)
+				if ((mScrollPractical & ScrollWidget.ScrollMode.Vertical) != ScrollWidget.ScrollMode.Disabled)
 				{
 					float num10 = mHeight / (float)mClient.Height();
-					int num11 = mHeight - insets.mTop - insets.mBottom - (((mScrollMode & ScrollWidget.ScrollMode.SCROLL_HORIZONTAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED) ? height : 0);
+					int num11 = mHeight - insets.mTop - insets.mBottom - (((mScrollMode & ScrollWidget.ScrollMode.Horizontal) != ScrollWidget.ScrollMode.Disabled) ? height : 0);
 					int num12 = (int)(num11 * num10);
 					int num13 = num11 - num12;
 					float num14 = Math.Min(0, mHeight - mClient.mHeight - mScrollInsets.mBottom);
@@ -741,7 +741,7 @@ namespace Sexy
 			mPageControl = null;
 			mIndicatorsProxy = null;
 			mIndicatorsImage = null;
-			mScrollMode = ScrollWidget.ScrollMode.SCROLL_VERTICAL;
+			mScrollMode = ScrollWidget.ScrollMode.Vertical;
 			mScrollInsets = new Insets(0, 0, 0, 0);
 			mScrollTracking = false;
 			mSeekScrollTarget = false;
@@ -796,7 +796,7 @@ namespace Sexy
 		{
 			CGPoint cgpoint = CGMaths.CGPointSubtract(touch.location, mScrollTouchReference);
 			CGPoint cgpoint2 = mScrollOffset;
-			if ((mScrollPractical & ScrollWidget.ScrollMode.SCROLL_HORIZONTAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED)
+			if ((mScrollPractical & ScrollWidget.ScrollMode.Horizontal) != ScrollWidget.ScrollMode.Disabled)
 			{
 				cgpoint2.x = mScrollOffsetReference.x + cgpoint.X;
 				float x = mScrollMin.x;
@@ -823,7 +823,7 @@ namespace Sexy
 					}
 				}
 			}
-			if ((mScrollPractical & ScrollWidget.ScrollMode.SCROLL_VERTICAL) != ScrollWidget.ScrollMode.SCROLL_DISABLED)
+			if ((mScrollPractical & ScrollWidget.ScrollMode.Vertical) != ScrollWidget.ScrollMode.Disabled)
 			{
 				cgpoint2.y = mScrollOffsetReference.y + cgpoint.Y;
 				float y = mScrollMin.y;
@@ -958,7 +958,7 @@ namespace Sexy
 			else
 			{
 				mScrollMin.x = (mScrollMax.x = (mScrollMin.y = (mScrollMax.y = 0f)));
-				mScrollPractical = ScrollWidget.ScrollMode.SCROLL_DISABLED;
+				mScrollPractical = ScrollWidget.ScrollMode.Disabled;
 			}
 			if (mPagingEnabled)
 			{
@@ -1078,15 +1078,15 @@ namespace Sexy
 
 		public enum ScrollMode
 		{
-			SCROLL_DISABLED,
-			SCROLL_HORIZONTAL,
-			SCROLL_VERTICAL,
-			SCROLL_BOTH
+			Disabled,
+			Horizontal,
+			Vertical,
+			Both
 		}
 
 		public enum Colors
 		{
-			COLOR_BACKGROUND
+			Background
 		}
 
 		protected class Overlay

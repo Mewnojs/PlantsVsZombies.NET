@@ -8,7 +8,7 @@ namespace Lawn
 		public void Reset()
 		{
 			mPosX = (mPosY = (mDestOffsetX = (mDestOffsetY = 0f)));
-			mItemType = MagnetItemType.MAGNET_ITEM_NONE;
+			mItemType = MagnetItemType.None;
 		}
 
 		public bool SaveToFile(Sexy.Buffer b)

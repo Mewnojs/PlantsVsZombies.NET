@@ -63,8 +63,8 @@ namespace Lawn
 			base.Update();
 			if (mSlideCounter > 0)
 			{
-				int theNewX = TodCommon.TodAnimateCurve(75, 0, mSlideCounter, mStartX, mDestX, TodCurves.CURVE_EASE_IN_OUT);
-				int theNewY = TodCommon.TodAnimateCurve(75, 0, mSlideCounter, mStartY, mDestY, TodCurves.CURVE_EASE_IN_OUT);
+				int theNewX = TodCommon.TodAnimateCurve(75, 0, mSlideCounter, mStartX, mDestX, TodCurves.EaseInOut);
+				int theNewY = TodCommon.TodAnimateCurve(75, 0, mSlideCounter, mStartY, mDestY, TodCurves.EaseInOut);
 				Move(theNewX, theNewY);
 				mSlideCounter -= 3;
 			}

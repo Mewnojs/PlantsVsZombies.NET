@@ -2,11 +2,11 @@
 
 namespace Lawn
 {
-	public enum ButtonIds
-	{
-		ALMANAC_BUTTON_CLOSE,
-		ALMANAC_BUTTON_PLANT,
-		ALMANAC_BUTTON_ZOMBIE,
-		ALMANAC_BUTTON_INDEX
+	public enum ButtonIds //Prefix: ALMANAC_BUTTON
+    {
+		Close,
+		Plant,
+		Zombie,
+		Index
 	}
 }

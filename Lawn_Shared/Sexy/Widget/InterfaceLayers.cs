@@ -2,13 +2,13 @@
 
 namespace Sexy
 {
-	public enum InterfaceLayers
-	{
-		UI_LAYER_LOADING,
-		UI_LAYER_BACKGROUND = 10,
-		UI_LAYER_BOARD = 20,
-		UI_LAYER_BOARD_EFFECTS = 30,
-		UI_LAYER_MENU = 40,
-		UI_LAYER_ACTION_SHEET = 100
+	public enum InterfaceLayers //Prefix: UI_LAYER
+    {
+		Loading,
+		Background = 10,
+		Board = 20,
+		BoardEffects = 30,
+		Menu = 40,
+		ActionSheet = 100
 	}
 }

@@ -32,7 +32,7 @@ namespace Sexy.TodLib
 
 		private void Reset()
 		{
-			mEffectType = ParticleEffect.PARTICLE_NONE;
+			mEffectType = ParticleEffect.None;
 			for (int i = 0; i < mEmitterList.Count; i++)
 			{
 				mEmitterList[i].PrepareForReuse();
@@ -261,7 +261,7 @@ namespace Sexy.TodLib
 			return null;
 		}
 
-		public ParticleEffect mEffectType = ParticleEffect.PARTICLE_NONE;
+		public ParticleEffect mEffectType = ParticleEffect.None;
 
 		public TodParticleDefinition mParticleDef;
 

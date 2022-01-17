@@ -13,9 +13,9 @@ namespace Lawn
 			mApp = theApp;
 			mDuration = 0;
 			mLabel = string.Empty;
-			mMessageStyle = MessageStyle.MESSAGE_STYLE_OFF;
+			mMessageStyle = MessageStyle.Off;
 			mLabelNext[0] = char.MaxValue;
-			mMessageStyleNext = MessageStyle.MESSAGE_STYLE_OFF;
+			mMessageStyleNext = MessageStyle.Off;
 			mSlideOffTime = 100;
 			mIcon = null;
 			for (int i = 0; i < 128; i++)
@@ -38,7 +38,7 @@ namespace Lawn
 		{
 			string text = TodStringFile.TodStringTranslate(theNewLabel);
 			Debug.ASSERT(text.length() < 127);
-			if (mReanimType != ReanimationType.REANIM_NONE && mDuration > 0)
+			if (mReanimType != ReanimationType.None && mDuration > 0)
 			{
 				mMessageStyleNext = theMessageStyle;
 				mLabelNext = text.ToCharArray();//string.Copy(text).ToCharArray();
@@ -54,37 +54,37 @@ namespace Lawn
 				mLabelStringList.Add(mLabel[i].ToString());
 			}
 			mMessageStyle = theMessageStyle;
-			mReanimType = ReanimationType.REANIM_NONE;
-			if (theMessageStyle == MessageStyle.MESSAGE_STYLE_HINT_LONG || theMessageStyle == MessageStyle.MESSAGE_STYLE_BIG_MIDDLE || theMessageStyle == MessageStyle.MESSAGE_STYLE_ZEN_GARDEN_LONG || theMessageStyle == MessageStyle.MESSAGE_STYLE_HINT_TALL_LONG)
+			mReanimType = ReanimationType.None;
+			if (theMessageStyle == MessageStyle.HintLong || theMessageStyle == MessageStyle.BigMiddle || theMessageStyle == MessageStyle.ZenGardenLong || theMessageStyle == MessageStyle.HintTallLong)
 			{
 				mDuration = 1500;
 			}
-			else if (theMessageStyle == MessageStyle.MESSAGE_STYLE_HINT_TALL_UNLOCKMESSAGE)
+			else if (theMessageStyle == MessageStyle.HintTallUnlockmessage)
 			{
 				mDuration = 500;
 			}
-			else if (theMessageStyle == MessageStyle.MESSAGE_STYLE_HINT_FAST || theMessageStyle == MessageStyle.MESSAGE_STYLE_HINT_TALL_FAST || theMessageStyle == MessageStyle.MESSAGE_STYLE_BIG_MIDDLE_FAST || theMessageStyle == MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1 || theMessageStyle == MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL2 || theMessageStyle == MessageStyle.MESSAGE_STYLE_TUTORIAL_LATER)
+			else if (theMessageStyle == MessageStyle.HintFast || theMessageStyle == MessageStyle.HintTallFast || theMessageStyle == MessageStyle.BigMiddleFast || theMessageStyle == MessageStyle.TutorialLevel1 || theMessageStyle == MessageStyle.TutorialLevel2 || theMessageStyle == MessageStyle.TutorialLater)
 			{
 				mDuration = 500;
 			}
-			else if (theMessageStyle == MessageStyle.MESSAGE_STYLE_ACHIEVEMENT)
+			else if (theMessageStyle == MessageStyle.Achievement)
 			{
 				mDuration = 250;
 			}
-			else if (theMessageStyle == MessageStyle.MESSAGE_STYLE_HINT_STAY || theMessageStyle == MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1_STAY || theMessageStyle == MessageStyle.MESSAGE_STYLE_TUTORIAL_LATER_STAY)
+			else if (theMessageStyle == MessageStyle.HintStay || theMessageStyle == MessageStyle.TutorialLevel1Stay || theMessageStyle == MessageStyle.TutorialLaterStay)
 			{
 				mDuration = 10000;
 			}
-			else if (theMessageStyle == MessageStyle.MESSAGE_STYLE_HOUSE_NAME)
+			else if (theMessageStyle == MessageStyle.HouseName)
 			{
 				mDuration = 250;
 			}
-			else if (theMessageStyle == MessageStyle.MESSAGE_STYLE_HUGE_WAVE)
+			else if (theMessageStyle == MessageStyle.HugeWave)
 			{
 				mDuration = 750;
-				mReanimType = ReanimationType.REANIM_TEXT_FADE_ON;
+				mReanimType = ReanimationType.TextFadeOn;
 			}
-			else if (theMessageStyle == MessageStyle.MESSAGE_STYLE_SLOT_MACHINE)
+			else if (theMessageStyle == MessageStyle.SlotMachine)
 			{
 				mDuration = 750;
 			}
@@ -92,7 +92,7 @@ namespace Lawn
 			{
 				Debug.ASSERT(false);
 			}
-			if (mReanimType != ReanimationType.REANIM_NONE)
+			if (mReanimType != ReanimationType.None)
 			{
 				LayoutReanimText();
 			}
@@ -111,12 +111,12 @@ namespace Lawn
 				mDuration -= 3;
 				if (mDuration >= 0 && mDuration < 3)
 				{
-					mMessageStyle = MessageStyle.MESSAGE_STYLE_OFF;
+					mMessageStyle = MessageStyle.Off;
 					mIcon = null;
-					if (mMessageStyleNext != MessageStyle.MESSAGE_STYLE_OFF)
+					if (mMessageStyleNext != MessageStyle.Off)
 					{
 						SetLabel(new string(mLabelNext), mMessageStyleNext);
-						mMessageStyleNext = MessageStyle.MESSAGE_STYLE_OFF;
+						mMessageStyleNext = MessageStyle.Off;
 					}
 				}
 			}
@@ -129,30 +129,30 @@ namespace Lawn
 				}
 				int theTimeEnd = 50;
 				int num = 1;
-				if (mReanimType == ReanimationType.REANIM_TEXT_FADE_ON)
+				if (mReanimType == ReanimationType.TextFadeOn)
 				{
 					num = 100;
 				}
 				if (mDuration > mSlideOffTime)
 				{
-					if (mReanimType == ReanimationType.REANIM_TEXT_FADE_ON)
+					if (mReanimType == ReanimationType.TextFadeOn)
 					{
 						reanimation.mAnimRate = 60f;
 					}
 					else
 					{
 						int num2 = (mDisplayTime - mDuration) * num;
-						reanimation.mAnimRate = TodCommon.TodAnimateCurveFloat(0, theTimeEnd, num2 - i, 0f, 40f, TodCurves.CURVE_LINEAR);
+						reanimation.mAnimRate = TodCommon.TodAnimateCurveFloat(0, theTimeEnd, num2 - i, 0f, 40f, TodCurves.Linear);
 					}
 				}
 				else
 				{
 					if (mDuration >= mSlideOffTime && mDuration < mSlideOffTime + 3)
 					{
-						reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_leave, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 0f);
+						reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_leave, ReanimLoopType.PlayOnceAndHold, 0, 0f);
 					}
 					int num3 = (mSlideOffTime - mDuration) * num;
-					reanimation.mAnimRate = TodCommon.TodAnimateCurveFloat(0, theTimeEnd, num3 - i, 0f, 40f, TodCurves.CURVE_LINEAR);
+					reanimation.mAnimRate = TodCommon.TodAnimateCurveFloat(0, theTimeEnd, num3 - i, 0f, 40f, TodCurves.Linear);
 				}
 				reanimation.Update();
 			}
@@ -180,66 +180,66 @@ namespace Lawn
 			}
 			switch (mMessageStyle)
 			{
-			case MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1:
-			case MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1_STAY:
+			case MessageStyle.TutorialLevel1:
+			case MessageStyle.TutorialLevel1Stay:
 				num2 = 476;
 				num4 = (int)Constants.InvertAndScale(60f);
 				theColor = new SexyColor(253, 245, 173);
 				num3 = 192;
 				break;
-			case MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL2:
-			case MessageStyle.MESSAGE_STYLE_TUTORIAL_LATER:
-			case MessageStyle.MESSAGE_STYLE_TUTORIAL_LATER_STAY:
+			case MessageStyle.TutorialLevel2:
+			case MessageStyle.TutorialLater:
+			case MessageStyle.TutorialLaterStay:
 				num2 = 476;
 				num4 = (int)Constants.InvertAndScale(60f);
 				theColor = new SexyColor(253, 245, 173);
 				num3 = 192;
 				break;
-			case MessageStyle.MESSAGE_STYLE_HINT_LONG:
-			case MessageStyle.MESSAGE_STYLE_HINT_FAST:
-			case MessageStyle.MESSAGE_STYLE_HINT_STAY:
+			case MessageStyle.HintLong:
+			case MessageStyle.HintFast:
+			case MessageStyle.HintStay:
 				num2 = 527;
 				num4 = (int)Constants.InvertAndScale(40f);
 				theColor = new SexyColor(253, 245, 173);
 				num3 = 192;
 				break;
-			case MessageStyle.MESSAGE_STYLE_HINT_TALL_FAST:
-			case MessageStyle.MESSAGE_STYLE_HINT_TALL_UNLOCKMESSAGE:
-			case MessageStyle.MESSAGE_STYLE_HINT_TALL_LONG:
+			case MessageStyle.HintTallFast:
+			case MessageStyle.HintTallUnlockmessage:
+			case MessageStyle.HintTallLong:
 				num2 = 476;
 				num4 = (int)Constants.InvertAndScale(70f);
 				theColor = new SexyColor(253, 245, 173);
 				num3 = 192;
 				num5 = 30;
 				break;
-			case MessageStyle.MESSAGE_STYLE_BIG_MIDDLE:
-			case MessageStyle.MESSAGE_STYLE_BIG_MIDDLE_FAST:
+			case MessageStyle.BigMiddle:
+			case MessageStyle.BigMiddleFast:
 				num2 = 476;
 				num4 = (int)Constants.InvertAndScale(60f);
 				theColor = new SexyColor(253, 245, 173);
 				num3 = 192;
 				break;
-			case MessageStyle.MESSAGE_STYLE_HOUSE_NAME:
+			case MessageStyle.HouseName:
 				num2 = 550;
 				theColor = new SexyColor(255, 255, 255, 255);
 				flag = true;
 				break;
-			case MessageStyle.MESSAGE_STYLE_HUGE_WAVE:
+			case MessageStyle.HugeWave:
 				num2 = 290;
 				theColor = new SexyColor(255, 0, 0);
 				break;
-			case MessageStyle.MESSAGE_STYLE_SLOT_MACHINE:
+			case MessageStyle.SlotMachine:
 				num = mApp.mWidth / 2 + Constants.Board_Offset_AspectRatio_Correction;
 				num2 = Constants.MessageWidget_SlotMachine_Y;
 				num3 = 64;
 				break;
-			case MessageStyle.MESSAGE_STYLE_ZEN_GARDEN_LONG:
+			case MessageStyle.ZenGardenLong:
 				num2 = 514;
 				num4 = (int)Constants.InvertAndScale(40f);
 				theColor = new SexyColor(253, 245, 173);
 				num3 = 192;
 				break;
-			case MessageStyle.MESSAGE_STYLE_ACHIEVEMENT:
+			case MessageStyle.Achievement:
 				num2 = 466;
 				num4 = (int)Constants.InvertAndScale(40f);
 				theColor = new SexyColor(253, 245, 173);
@@ -250,7 +250,7 @@ namespace Lawn
 				break;
 			}
 			num2 = (int)(num2 * Constants.S);
-			if (mReanimType != ReanimationType.REANIM_NONE)
+			if (mReanimType != ReanimationType.None)
 			{
 				if (font == Resources.FONT_CONTINUUMBOLD14)
 				{
@@ -261,7 +261,7 @@ namespace Lawn
 			}
 			if (num3 != 255)
 			{
-				theColor.mAlpha = TodCommon.TodAnimateCurve(75, 0, mApp.mBoard.mMainCounter % 75, num3, 255, TodCurves.CURVE_BOUNCE_SLOW_MIDDLE);
+				theColor.mAlpha = TodCommon.TodAnimateCurve(75, 0, mApp.mBoard.mMainCounter % 75, num3, 255, TodCurves.BounceSlowMiddle);
 				theColor2.mAlpha = theColor.mAlpha;
 			}
 			if (flag)
@@ -278,18 +278,18 @@ namespace Lawn
 				g.FillRect(theRect);
 				theRect.mY -= (int)Constants.InvertAndScale(3f);
 				theRect.mX += num5;
-				TodStringFile.TodDrawStringWrapped(g, mLabel, theRect, font, theColor, DrawStringJustification.DS_ALIGN_CENTER_VERTICAL_MIDDLE);
+				TodStringFile.TodDrawStringWrapped(g, mLabel, theRect, font, theColor, DrawStringJustification.CenterVerticalMiddle);
 			}
 			else
 			{
 				TRect theRect2 = new TRect(num - mApp.mWidth / 2 - mApp.mBoard.mX, num2 + font.GetAscent(), mApp.mWidth, mApp.mHeight);
 				if (font2 != null)
 				{
-					TodStringFile.TodDrawStringWrapped(g, mLabel, theRect2, font2, theColor2, DrawStringJustification.DS_ALIGN_CENTER);
+					TodStringFile.TodDrawStringWrapped(g, mLabel, theRect2, font2, theColor2, DrawStringJustification.Center);
 				}
-				TodStringFile.TodDrawStringWrapped(g, mLabel, theRect2, font, theColor, DrawStringJustification.DS_ALIGN_CENTER);
+				TodStringFile.TodDrawStringWrapped(g, mLabel, theRect2, font, theColor, DrawStringJustification.Center);
 			}
-			if (mMessageStyle == MessageStyle.MESSAGE_STYLE_HOUSE_NAME)
+			if (mMessageStyle == MessageStyle.HouseName)
 			{
 				string text = string.Empty;
 				if (mApp.IsSurvivalMode() && mApp.mBoard.mChallenge.mSurvivalStage > 0)
@@ -308,10 +308,10 @@ namespace Lawn
 				}
 				if (text.length() > 0)
 				{
-					TodCommon.TodDrawString(g, text, mApp.mWidth / 2 - mApp.mBoard.mX, num2 + 26, Resources.FONT_HOUSEOFTERROR16, new SexyColor(224, 187, 98, theColor.mAlpha), DrawStringJustification.DS_ALIGN_CENTER);
+					TodCommon.TodDrawString(g, text, mApp.mWidth / 2 - mApp.mBoard.mX, num2 + 26, Resources.FONT_HOUSEOFTERROR16, new SexyColor(224, 187, 98, theColor.mAlpha), DrawStringJustification.Center);
 				}
 			}
-			if (mMessageStyle == MessageStyle.MESSAGE_STYLE_ACHIEVEMENT && mIcon != null)
+			if (mMessageStyle == MessageStyle.Achievement && mIcon != null)
 			{
 				g.DrawImage(mIcon, 10, num2 - 10);
 			}
@@ -334,9 +334,9 @@ namespace Lawn
 
 		public void ClearLabel()
 		{
-			if (mReanimType != ReanimationType.REANIM_NONE)
+			if (mReanimType != ReanimationType.None)
 			{
-				if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_SPEED)
+				if (mApp.mGameMode == GameMode.ChallengeSpeed)
 				{
 					mDuration = Math.Min(mDuration, 51);
 				}
@@ -385,7 +385,7 @@ namespace Lawn
 					theColor2.mAlpha = num;
 					reanimatorTransform.mTransX += reanimation.mOverlayMatrix.mMatrix.M41 + Constants.ReanimTextCenterOffsetX - Constants.Board_Offset_AspectRatio_Correction / 2;
 					reanimatorTransform.mTransY += reanimation.mOverlayMatrix.mMatrix.M42 + thePosY - 300f * Constants.S;
-					if (mReanimType == ReanimationType.REANIM_TEXT_FADE_ON && mDisplayTime - mDuration < mSlideOffTime)
+					if (mReanimType == ReanimationType.TextFadeOn && mDisplayTime - mDuration < mSlideOffTime)
 					{
 						float num2 = 1f - reanimation.mAnimTime;
 						reanimatorTransform.mTransX += reanimation.mOverlayMatrix.mMatrix.M41 * num2;
@@ -428,7 +428,7 @@ namespace Lawn
 			{
 				Reanimation reanimation = mApp.AddReanimation(num6 * Constants.IS, num7 * Constants.IS, 0, mReanimType);
 				reanimation.mIsAttachment = true;
-				reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_enter, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 0f);
+				reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_enter, ReanimLoopType.PlayOnceAndHold, 0, 0f);
 				mTextReanimID[j] = mApp.ReanimationGetID(reanimation);
 				num6 += font.CharWidth(mLabel[j]);
 				if (mLabel[j] == '\n')

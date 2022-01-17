@@ -69,7 +69,7 @@ namespace Sexy.TodLib
 				bool flag = false;
 				switch (attachEffect.mEffectType)
 				{
-				case EffectType.EFFECT_PARTICLE:
+				case EffectType.Particle:
 				{
 					List<TodParticleSystem> mParticleSystems = EffectSystem.gEffectSystem.mParticleHolder.mParticleSystems;
 					int num = mParticleSystems.IndexOf((TodParticleSystem)attachEffect.mEffectID);
@@ -87,7 +87,7 @@ namespace Sexy.TodLib
 					}
 					break;
 				}
-				case EffectType.EFFECT_TRAIL:
+				case EffectType.Trail:
 				{
 					List<Trail> mTrails = EffectSystem.gEffectSystem.mTrailHolder.mTrails;
 					Trail trail = (Trail)attachEffect.mEffectID;
@@ -101,7 +101,7 @@ namespace Sexy.TodLib
 					}
 					break;
 				}
-				case EffectType.EFFECT_REANIM:
+				case EffectType.Reanim:
 				{
 					List<Reanimation> mReanimations = EffectSystem.gEffectSystem.mReanimationHolder.mReanimations;
 					Reanimation reanimation = (Reanimation)attachEffect.mEffectID;
@@ -115,7 +115,7 @@ namespace Sexy.TodLib
 					}
 					break;
 				}
-				case EffectType.EFFECT_ATTACHMENT:
+				case EffectType.Attachment:
 				{
 					List<Attachment> mAttachments = EffectSystem.gEffectSystem.mAttachmentHolder.mAttachments;
 					Attachment attachment = (Attachment)attachEffect.mEffectID;
@@ -191,7 +191,7 @@ namespace Sexy.TodLib
 				};
 				switch (attachEffect.mEffectType)
 				{
-				case EffectType.EFFECT_PARTICLE:
+				case EffectType.Particle:
 				{
 					List<TodParticleSystem> mParticleSystems = EffectSystem.gEffectSystem.mParticleHolder.mParticleSystems;
 					TodParticleSystem todParticleSystem = null;
@@ -205,7 +205,7 @@ namespace Sexy.TodLib
 					}
 					break;
 				}
-				case EffectType.EFFECT_TRAIL:
+				case EffectType.Trail:
 				{
 					List<Trail> mTrails = EffectSystem.gEffectSystem.mTrailHolder.mTrails;
 					Trail trail = (Trail)attachEffect.mEffectID;
@@ -215,7 +215,7 @@ namespace Sexy.TodLib
 					}
 					break;
 				}
-				case EffectType.EFFECT_REANIM:
+				case EffectType.Reanim:
 				{
 					List<Reanimation> mReanimations = EffectSystem.gEffectSystem.mReanimationHolder.mReanimations;
 					Reanimation reanimation = (Reanimation)attachEffect.mEffectID;
@@ -225,7 +225,7 @@ namespace Sexy.TodLib
 					}
 					break;
 				}
-				case EffectType.EFFECT_ATTACHMENT:
+				case EffectType.Attachment:
 				{
 					List<Attachment> mAttachments = EffectSystem.gEffectSystem.mAttachmentHolder.mAttachments;
 					Attachment attachment = mAttachments[mAttachments.IndexOf((Attachment)attachEffect.mEffectID)];
@@ -247,7 +247,7 @@ namespace Sexy.TodLib
 				AttachEffect attachEffect = mEffectArray[i];
 				switch (attachEffect.mEffectType)
 				{
-				case EffectType.EFFECT_PARTICLE:
+				case EffectType.Particle:
 				{
 					List<TodParticleSystem> mParticleSystems = EffectSystem.gEffectSystem.mParticleHolder.mParticleSystems;
 					TodParticleSystem todParticleSystem = (TodParticleSystem)attachEffect.mEffectID;
@@ -257,7 +257,7 @@ namespace Sexy.TodLib
 					}
 					break;
 				}
-				case EffectType.EFFECT_REANIM:
+				case EffectType.Reanim:
 				{
 					List<Reanimation> mReanimations = EffectSystem.gEffectSystem.mReanimationHolder.mReanimations;
 					Reanimation reanimation = (Reanimation)attachEffect.mEffectID;
@@ -267,7 +267,7 @@ namespace Sexy.TodLib
 					}
 					break;
 				}
-				case EffectType.EFFECT_ATTACHMENT:
+				case EffectType.Attachment:
 				{
 					List<Attachment> mAttachments = EffectSystem.gEffectSystem.mAttachmentHolder.mAttachments;
 					Attachment attachment = (Attachment)attachEffect.mEffectID;
@@ -289,7 +289,7 @@ namespace Sexy.TodLib
 				AttachEffect attachEffect = mEffectArray[i];
 				switch (attachEffect.mEffectType)
 				{
-				case EffectType.EFFECT_PARTICLE:
+				case EffectType.Particle:
 				{
 					List<TodParticleSystem> mParticleSystems = EffectSystem.gEffectSystem.mParticleHolder.mParticleSystems;
 					TodParticleSystem todParticleSystem = (TodParticleSystem)attachEffect.mEffectID;
@@ -299,7 +299,7 @@ namespace Sexy.TodLib
 					}
 					break;
 				}
-				case EffectType.EFFECT_REANIM:
+				case EffectType.Reanim:
 				{
 					List<Reanimation> mReanimations = EffectSystem.gEffectSystem.mReanimationHolder.mReanimations;
 					Reanimation reanimation = (Reanimation)attachEffect.mEffectID;
@@ -309,7 +309,7 @@ namespace Sexy.TodLib
 					}
 					break;
 				}
-				case EffectType.EFFECT_ATTACHMENT:
+				case EffectType.Attachment:
 				{
 					List<Attachment> mAttachments = EffectSystem.gEffectSystem.mAttachmentHolder.mAttachments;
 					Attachment attachment = (Attachment)attachEffect.mEffectID;
@@ -338,7 +338,7 @@ namespace Sexy.TodLib
 				{
 					switch (attachEffect.mEffectType)
 					{
-					case EffectType.EFFECT_PARTICLE:
+					case EffectType.Particle:
 					{
 						TodParticleSystem todParticleSystem = (TodParticleSystem)attachEffect.mEffectID;
 						int num = mParticleSystems.IndexOf(todParticleSystem);
@@ -352,7 +352,7 @@ namespace Sexy.TodLib
 						}
 						break;
 					}
-					case EffectType.EFFECT_TRAIL:
+					case EffectType.Trail:
 					{
 						Trail trail = null;
 						int num2 = mTrails.IndexOf((Trail)attachEffect.mEffectID);
@@ -366,7 +366,7 @@ namespace Sexy.TodLib
 						}
 						break;
 					}
-					case EffectType.EFFECT_REANIM:
+					case EffectType.Reanim:
 					{
 						Reanimation reanimation = (Reanimation)attachEffect.mEffectID;
 						if (reanimation != null && reanimation.mActive)
@@ -375,7 +375,7 @@ namespace Sexy.TodLib
 						}
 						break;
 					}
-					case EffectType.EFFECT_ATTACHMENT:
+					case EffectType.Attachment:
 					{
 						Attachment attachment = (Attachment)attachEffect.mEffectID;
 						if (attachment != null && attachment.mActive)
@@ -401,7 +401,7 @@ namespace Sexy.TodLib
 				AttachEffect attachEffect = mEffectArray[i];
 				switch (attachEffect.mEffectType)
 				{
-				case EffectType.EFFECT_PARTICLE:
+				case EffectType.Particle:
 				{
 					TodParticleSystem todParticleSystem = attachEffect.mEffectID as TodParticleSystem;
 					if (todParticleSystem != null && mParticleSystems.IndexOf(todParticleSystem) >= 0)
@@ -410,7 +410,7 @@ namespace Sexy.TodLib
 					}
 					break;
 				}
-				case EffectType.EFFECT_TRAIL:
+				case EffectType.Trail:
 				{
 					Trail trail = attachEffect.mEffectID as Trail;
 					if (trail != null && mTrails.IndexOf(trail) >= 0)
@@ -419,7 +419,7 @@ namespace Sexy.TodLib
 					}
 					break;
 				}
-				case EffectType.EFFECT_REANIM:
+				case EffectType.Reanim:
 				{
 					Reanimation reanimation = attachEffect.mEffectID as Reanimation;
 					if (reanimation != null && mReanimations.IndexOf(reanimation) >= 0)
@@ -428,7 +428,7 @@ namespace Sexy.TodLib
 					}
 					break;
 				}
-				case EffectType.EFFECT_ATTACHMENT:
+				case EffectType.Attachment:
 				{
 					Attachment attachment = attachEffect.mEffectID as Attachment;
 					if (attachment != null && mAttachments.IndexOf(attachment) >= 0)
@@ -456,7 +456,7 @@ namespace Sexy.TodLib
 				AttachEffect attachEffect = mEffectArray[i];
 				switch (attachEffect.mEffectType)
 				{
-				case EffectType.EFFECT_PARTICLE:
+				case EffectType.Particle:
 				{
 					TodParticleSystem todParticleSystem = null;
 					TodParticleSystem todParticleSystem2 = attachEffect.mEffectID as TodParticleSystem;
@@ -472,7 +472,7 @@ namespace Sexy.TodLib
 					}
 					break;
 				}
-				case EffectType.EFFECT_TRAIL:
+				case EffectType.Trail:
 				{
 					Trail trail = mTrails[mTrails.IndexOf((Trail)attachEffect.mEffectID)];
 					if (trail != null)
@@ -482,7 +482,7 @@ namespace Sexy.TodLib
 					}
 					break;
 				}
-				case EffectType.EFFECT_REANIM:
+				case EffectType.Reanim:
 				{
 					Reanimation reanimation = mReanimations[mReanimations.IndexOf((Reanimation)attachEffect.mEffectID)];
 					if (reanimation != null)
@@ -492,7 +492,7 @@ namespace Sexy.TodLib
 					}
 					break;
 				}
-				case EffectType.EFFECT_ATTACHMENT:
+				case EffectType.Attachment:
 				{
 					Attachment attachment = mAttachments[mAttachments.IndexOf((Attachment)attachEffect.mEffectID)];
 					if (attachment != null)
@@ -515,7 +515,7 @@ namespace Sexy.TodLib
 			{
 				AttachEffect attachEffect = mEffectArray[i];
 				EffectType attachEffectType = attachEffect.mEffectType;
-				if (attachEffectType == EffectType.EFFECT_PARTICLE)
+				if (attachEffectType == EffectType.Particle)
 				{
 					List<TodParticleSystem> mParticleSystems = EffectSystem.gEffectSystem.mParticleHolder.mParticleSystems;
 					int num = mParticleSystems.IndexOf((TodParticleSystem)attachEffect.mEffectID);
@@ -542,7 +542,7 @@ namespace Sexy.TodLib
 				{
 					switch (attachEffect.mEffectType)
 					{
-					case EffectType.EFFECT_PARTICLE:
+					case EffectType.Particle:
 					{
 						List<TodParticleSystem> mParticleSystems = EffectSystem.gEffectSystem.mParticleHolder.mParticleSystems;
 						if (attachEffect.mEffectID != null)
@@ -560,7 +560,7 @@ namespace Sexy.TodLib
 						}
 						break;
 					}
-					case EffectType.EFFECT_REANIM:
+					case EffectType.Reanim:
 					{
 						Reanimation reanimation = (Reanimation)attachEffect.mEffectID;
 						if (reanimation.mActive && reanimation != null)
@@ -574,7 +574,7 @@ namespace Sexy.TodLib
 						}
 						break;
 					}
-					case EffectType.EFFECT_ATTACHMENT:
+					case EffectType.Attachment:
 					{
 						List<Attachment> mAttachments = EffectSystem.gEffectSystem.mAttachmentHolder.mAttachments;
 						Attachment attachment = (Attachment)attachEffect.mEffectID;
@@ -598,7 +598,7 @@ namespace Sexy.TodLib
 				SexyVector2 position = new SexyVector2(Vector2.Transform(thePosition.mVector, attachEffect.mOffset.mMatrix));
 				switch (attachEffect.mEffectType)
 				{
-				case EffectType.EFFECT_PARTICLE:
+				case EffectType.Particle:
 				{
 					List<TodParticleSystem> mParticleSystems = EffectSystem.gEffectSystem.mParticleHolder.mParticleSystems;
 					int num = mParticleSystems.IndexOf((TodParticleSystem)attachEffect.mEffectID);
@@ -612,7 +612,7 @@ namespace Sexy.TodLib
 					}
 					break;
 				}
-				case EffectType.EFFECT_TRAIL:
+				case EffectType.Trail:
 				{
 					List<Trail> mTrails = EffectSystem.gEffectSystem.mTrailHolder.mTrails;
 					Trail trail = (Trail)attachEffect.mEffectID;
@@ -622,7 +622,7 @@ namespace Sexy.TodLib
 					}
 					break;
 				}
-				case EffectType.EFFECT_REANIM:
+				case EffectType.Reanim:
 				{
 					List<Reanimation> mReanimations = EffectSystem.gEffectSystem.mReanimationHolder.mReanimations;
 					Reanimation reanimation = (Reanimation)attachEffect.mEffectID;
@@ -632,7 +632,7 @@ namespace Sexy.TodLib
 					}
 					break;
 				}
-				case EffectType.EFFECT_ATTACHMENT:
+				case EffectType.Attachment:
 				{
 					List<Attachment> mAttachments = EffectSystem.gEffectSystem.mAttachmentHolder.mAttachments;
 					Attachment attachment = (Attachment)attachEffect.mEffectID;

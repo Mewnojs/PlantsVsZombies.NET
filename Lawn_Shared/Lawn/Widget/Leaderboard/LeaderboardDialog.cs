@@ -22,17 +22,17 @@ namespace Lawn
 			mLeaderboardType = aType;
 			switch (aType)
 			{
-			case LeaderBoardType.LEADERBOARD_TYPE_IZOMBIE:
+			case LeaderBoardType.Izombie:
 				mTitle = "[I_ZOMBIE_1]";
 				mLeaderboardState = LeaderboardState.IZombie;
 				mGameMode = LeaderboardGameMode.IZombie;
 				break;
-			case LeaderBoardType.LEADERBOARD_TYPE_VASEBREAKER:
+			case LeaderBoardType.Vasebreaker:
 				mTitle = "[SCARY_POTTER_1]";
 				mLeaderboardState = LeaderboardState.Vasebreaker;
 				mGameMode = LeaderboardGameMode.Vasebreaker;
 				break;
-			case LeaderBoardType.LEADERBOARD_TYPE_KILLED:
+			case LeaderBoardType.Killed:
 				mTitle = "[ZOMBIES_KILLED]";
 				mLeaderboardState = LeaderboardState.Adventure;
 				mGameMode = LeaderboardGameMode.Adventure;
@@ -105,11 +105,11 @@ namespace Lawn
 			g.mClipRect = clipRect;
 			g.SetColor(SexyColor.White);
 			base.Draw(g);
-			TodCommon.TodDrawString(g, mTitle, mWidth / 2, 60, Resources.FONT_DWARVENTODCRAFT15, SexyColor.White, DrawStringJustification.DS_ALIGN_CENTER);
+			TodCommon.TodDrawString(g, mTitle, mWidth / 2, 60, Resources.FONT_DWARVENTODCRAFT15, SexyColor.White, DrawStringJustification.Center);
 			int num = LeaderBoardComm.LoadResults(mGameMode);
 			if (num == -1)
 			{
-				TodCommon.TodDrawStringCenterBy(g, LeaderboardDialog.loadingStrings[loadingTimer], mWidth / 2, (int)Constants.InvertAndScale(150f), Resources.FONT_HOUSEOFTERROR16, SexyColor.White, DrawStringJustification.DS_ALIGN_CENTER, 1f, LeaderboardDialog.loadingStrings[0]);
+				TodCommon.TodDrawStringCenterBy(g, LeaderboardDialog.loadingStrings[loadingTimer], mWidth / 2, (int)Constants.InvertAndScale(150f), Resources.FONT_HOUSEOFTERROR16, SexyColor.White, DrawStringJustification.Center, 1f, LeaderboardDialog.loadingStrings[0]);
 				return;
 			}
 			if (num == -2)

@@ -537,19 +537,19 @@ namespace Sexy
 
 		public enum Justification
 		{
-			JUSTIFY_LEFT,
-			JUSTIFY_CENTER,
-			JUSTIFY_RIGHT
+			Left,
+			Center,
+			Right
 		}
 
 		public enum ListColors
 		{
-			COLOR_BKG,
-			COLOR_OUTLINE,
-			COLOR_TEXT,
-			COLOR_HILITE,
-			COLOR_SELECT,
-			COLOR_SELECT_TEXT
+			Bkg,
+			Outline,
+			Text,
+			Hilite,
+			Select,
+			SelectText
 		}
 	}
 }

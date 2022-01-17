@@ -4,22 +4,22 @@ namespace Sexy.TodLib
 {
 	public enum ParticleTracks
 	{
-		TRACK_PARTICLE_RED,
-		TRACK_PARTICLE_GREEN,
-		TRACK_PARTICLE_BLUE,
-		TRACK_PARTICLE_ALPHA,
-		TRACK_PARTICLE_BRIGHTNESS,
-		TRACK_PARTICLE_SPIN_SPEED,
-		TRACK_PARTICLE_SPIN_ANGLE,
-		TRACK_PARTICLE_SCALE,
-		TRACK_PARTICLE_STRETCH,
-		TRACK_PARTICLE_COLLISION_REFLECT,
-		TRACK_PARTICLE_COLLISION_SPIN,
-		TRACK_PARTICLE_CLIP_TOP,
-		TRACK_PARTICLE_CLIP_BOTTOM,
-		TRACK_PARTICLE_CLIP_LEFT,
-		TRACK_PARTICLE_CLIP_RIGHT,
-		TRACK_PARTICLE_ANIMATION_RATE,
-		NUM_PARTICLE_TRACKS
+		ParticleRed,
+		ParticleGreen,
+		ParticleBlue,
+		ParticleAlpha,
+		ParticleBrightness,
+		ParticleSpinSpeed,
+		ParticleSpinAngle,
+		ParticleScale,
+		ParticleStretch,
+		ParticleCollisionReflect,
+		ParticleCollisionSpin,
+		ParticleClipTop,
+		ParticleClipBottom,
+		ParticleClipLeft,
+		ParticleClipRight,
+		ParticleAnimationRate,
+		NumParticleTracks
 	}
 }

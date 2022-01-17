@@ -2,9 +2,9 @@
 
 namespace Lawn
 {
-	public enum PlantWeapon
+	public enum PlantWeapon //Prefix: WEAPON
 	{
-		WEAPON_PRIMARY,
-		WEAPON_SECONDARY
+		Primary,
+		Secondary
 	}
 }

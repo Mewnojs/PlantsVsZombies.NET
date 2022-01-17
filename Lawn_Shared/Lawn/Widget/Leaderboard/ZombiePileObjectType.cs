@@ -2,23 +2,23 @@
 
 namespace Lawn
 {
-	public enum ZombiePileObjectType
+	public enum ZombiePileObjectType //Prefix: OBJECT
 	{
-		OBJECT_BALLOON,
-		OBJECT_YELLOW_CLOUD,
-		OBJECT_AIRPLANE,
-		OBJECT_MOON,
-		OBJECT_SATELLITE,
-		OBJECT_PEGGLE_URSAMAJOR,
-		OBJECT_ASTRONAUT,
-		OBJECT_BLACKHOLE,
-		OBJECT_ARROW,
-		OBJECT_GEM0,
-		OBJECT_GEM1,
-		OBJECT_GEM2,
-		OBJECT_GEM3,
-		OBJECT_GEM4,
-		OBJECT_GEM5,
-		OBJECT_GEM6
+		Balloon,
+		YellowCloud,
+		Airplane,
+		Moon,
+		Satellite,
+		PeggleUrsamajor,
+		Astronaut,
+		Blackhole,
+		Arrow,
+		Gem0,
+		Gem1,
+		Gem2,
+		Gem3,
+		Gem4,
+		Gem5,
+		Gem6
 	}
 }

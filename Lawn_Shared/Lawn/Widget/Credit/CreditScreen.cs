@@ -11,13 +11,13 @@ namespace Lawn
 		internal static int DrawLeftText(Graphics g, string theText, int theY)
 		{
 			TRect theRect = new TRect(Constants.CreditScreen_LeftText_X, theY, Constants.CreditScreen_LeftRight_Text_Width, Constants.BOARD_HEIGHT);
-			return TodStringFile.TodDrawStringWrapped(g, theText, theRect, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, DrawStringJustification.DS_ALIGN_RIGHT);
+			return TodStringFile.TodDrawStringWrapped(g, theText, theRect, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, DrawStringJustification.Right);
 		}
 
 		internal static int DrawRightText(Graphics g, string theText, int theY)
 		{
 			TRect theRect = new TRect(Constants.CreditScreen_RightText_X, theY, Constants.CreditScreen_LeftRight_Text_Width, Constants.BOARD_HEIGHT);
-			return TodStringFile.TodDrawStringWrapped(g, theText, theRect, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, DrawStringJustification.DS_ALIGN_LEFT, ',');
+			return TodStringFile.TodDrawStringWrapped(g, theText, theRect, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, DrawStringJustification.Left, ',');
 		}
 
 		internal static int DrawSection(Graphics g, string theLeftText, string theRightText, int theY)
@@ -33,7 +33,7 @@ namespace Lawn
 					text = theLeftText.Substring(1);
 					CreditScreen.sectionSubstrings.Add(theLeftText, text);
 				}
-				TodCommon.TodDrawString(g, text, Constants.BOARD_WIDTH / 2, theY + num3, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, DrawStringJustification.DS_ALIGN_CENTER, 1f);
+				TodCommon.TodDrawString(g, text, Constants.BOARD_WIDTH / 2, theY + num3, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, DrawStringJustification.Center, 1f);
 				num = (int)Constants.InvertAndScale(29f);
 			}
 			else
@@ -279,7 +279,7 @@ namespace Lawn
 			if (mDidInitialDraw && mNeedToStartPlaying)
 			{
 				mApp.LostFocus();
-				if (mApp.PlayMovie(VideoType.Credits, MOVIESCALINGMODE.MOVIESCALINGMODE_NONE, MOVIECONTROLMODE.MOVIECONTROLMODE_DEFAULT, SexyColor.Black))
+				if (mApp.PlayMovie(VideoType.Credits, MovieScalingMode.None, MovieControllMode.Default, SexyColor.Black))
 				{
 					videoDone = false;
 				}
@@ -318,7 +318,7 @@ namespace Lawn
 			}
 			else
 			{
-				mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_DAY_GRASSWALK);
+				mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.DayGrasswalk);
 			}
 			RestartScroll();
 		}

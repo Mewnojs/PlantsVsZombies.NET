@@ -364,7 +364,7 @@ namespace Lawn
 
 		public void ResetChallengeRecord(GameMode theGameMode)
 		{
-			int num = theGameMode - GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_1;
+			int num = theGameMode - GameMode.SurvivalNormalStage1;
 			Debug.ASSERT(num >= 0 && num < 122);
 			mChallengeRecords[num] = 0;
 		}

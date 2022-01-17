@@ -261,7 +261,7 @@ namespace Sexy
 
 		public virtual void KeyDown(KeyCode theKey)
 		{
-			if (theKey == KeyCode.KEYCODE_TAB)
+			if (theKey == KeyCode.Tab)
 			{
 				if (mWidgetManager.mKeyDown[16])
 				{

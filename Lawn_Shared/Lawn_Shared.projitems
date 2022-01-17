@@ -136,14 +136,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PlantID.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\Enums\PlantingReason.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PlantOnBungeeState.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PlantPriority.cs" />
+    <Compile Include="..\Lawn_Shared\Lawn\System\GameObjects\Plant\TopPlant.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PlantRowType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PlantsOnLawn.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PlantState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PlantSubClass.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PlantWeapon.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PLANT_LAYER.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PLANT_ORDER.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PlantLayer.cs" />
+    <Compile Include="..\Lawn_Shared\Lawn\System\GameObjects\Plant\PlantOrder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\Utils\Save\PlayerInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\PottedPlant\PottedPlant.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\PottedPlant\PottedPlantAge.cs" />
@@ -195,7 +195,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\Widget\ZenGarden\ZenGarden.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Zombie\Zombie.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\ZombieAllowedLevels.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Zombie\ZombieAttackType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Zombie\ZombieDefinition.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\Widget\QuickPlay\ZombieDescriptor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Zombie\ZombieDrawPosition.cs" />
@@ -261,8 +260,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\Widget\Components\ListListener.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\Widget\Components\ListWidget.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\Graphics\MemoryImage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Sexy\Media\MOVIECONTROLMODE.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Sexy\Media\MOVIESCALINGMODE.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sexy\Media\MovieControllMode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sexy\Media\MovieScalingMode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\Music\MusicInterface.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\Input\MyTypedKeyCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\Widget\PageControl.cs" />
@@ -283,7 +282,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\System\SexyAppBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\System\SexyAppBaseInterface.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\System\SexyAppFrameworkConstants.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Sexy\Input\SexyChar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\Graphics\SexyColor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\System\SexyMath.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\System\SexyProfiler.cs" />

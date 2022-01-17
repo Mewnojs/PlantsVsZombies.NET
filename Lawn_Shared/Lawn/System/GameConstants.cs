@@ -64,234 +64,234 @@ namespace Lawn
 			};
 			GameConstants.gLawnParticleArray = new ParticleParams[]
 			{
-				new ParticleParams(ParticleEffect.PARTICLE_MELONSPLASH, "particles/melonimpact"),
-				new ParticleParams(ParticleEffect.PARTICLE_WINTERMELON, "particles/WinterMelonImpact"),
-				new ParticleParams(ParticleEffect.PARTICLE_FUMECLOUD, "particles/FumeCloud"),
-				new ParticleParams(ParticleEffect.PARTICLE_POPCORNSPLASH, "particles/PopcornSplash"),
-				new ParticleParams(ParticleEffect.PARTICLE_POWIE, "particles/Powie"),
-				new ParticleParams(ParticleEffect.PARTICLE_JACKEXPLODE, "particles/JackExplode"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZOMBIE_HEAD, "particles/ZombieHead"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZOMBIE_ARM, "particles/ZombieArm"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZOMBIE_TRAFFIC_CONE, "particles/ZombieTrafficCone"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZOMBIE_PAIL, "particles/ZombiePail"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZOMBIE_HELMET, "particles/ZombieHelmet"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZOMBIE_FLAG, "particles/ZombieFlag"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZOMBIE_DOOR, "particles/ZombieDoor"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZOMBIE_NEWSPAPER, "particles/ZombieNewspaper"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZOMBIE_HEADLIGHT, "particles/ZombieHeadLight"),
-				new ParticleParams(ParticleEffect.PARTICLE_POW, "particles/Pow"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZOMBIE_POGO, "particles/ZombiePogo"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZOMBIE_NEWSPAPER_HEAD, "particles/ZombieNewspaperHead"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZOMBIE_BALLOON_HEAD, "particles/ZombieBalloonHead"),
-				new ParticleParams(ParticleEffect.PARTICLE_SOD_ROLL, "particles/SodRoll"),
-				new ParticleParams(ParticleEffect.PARTICLE_GRAVE_STONE_RISE, "particles/GraveStoneRise"),
-				new ParticleParams(ParticleEffect.PARTICLE_PLANTING, "particles/Planting"),
-				new ParticleParams(ParticleEffect.PARTICLE_PLANTING_POOL, "particles/PlantingPool"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZOMBIE_RISE, "particles/ZombieRise"),
-				new ParticleParams(ParticleEffect.PARTICLE_GRAVE_BUSTER, "particles/GraveBuster"),
-				new ParticleParams(ParticleEffect.PARTICLE_GRAVE_BUSTER_DIE, "particles/GraveBusterDie"),
-				new ParticleParams(ParticleEffect.PARTICLE_POOL_SPLASH, "particles/PoolSplash"),
-				new ParticleParams(ParticleEffect.PARTICLE_ICE_SPARKLE, "particles/IceSparkle"),
-				new ParticleParams(ParticleEffect.PARTICLE_SEED_PACKET, "particles/SeedPacket"),
-				new ParticleParams(ParticleEffect.PARTICLE_TALL_NUT_BLOCK, "particles/TallNutBlock"),
-				new ParticleParams(ParticleEffect.PARTICLE_DOOM, "particles/Doom"),
-				new ParticleParams(ParticleEffect.PARTICLE_DIGGER_RISE, "particles/DiggerRise"),
-				new ParticleParams(ParticleEffect.PARTICLE_DIGGER_TUNNEL, "particles/DiggerTunnel"),
-				new ParticleParams(ParticleEffect.PARTICLE_DANCER_RISE, "particles/DancerRise"),
-				new ParticleParams(ParticleEffect.PARTICLE_POOL_SPARKLY, "particles/PoolSparkly"),
-				new ParticleParams(ParticleEffect.PARTICLE_WALLNUT_EAT_SMALL, "particles/WallnutEatSmall"),
-				new ParticleParams(ParticleEffect.PARTICLE_WALLNUT_EAT_LARGE, "particles/WallnutEatLarge"),
-				new ParticleParams(ParticleEffect.PARTICLE_PEA_SPLAT, "particles/PeaSplat"),
-				new ParticleParams(ParticleEffect.PARTICLE_BUTTER_SPLAT, "particles/ButterSplat"),
-				new ParticleParams(ParticleEffect.PARTICLE_CABBAGE_SPLAT, "particles/CabbageSplat"),
-				new ParticleParams(ParticleEffect.PARTICLE_PUFF_SPLAT, "particles/PuffSplat"),
-				new ParticleParams(ParticleEffect.PARTICLE_STAR_SPLAT, "particles/StarSplat"),
-				new ParticleParams(ParticleEffect.PARTICLE_ICE_TRAP, "particles/IceTrap"),
-				new ParticleParams(ParticleEffect.PARTICLE_SNOWPEA_SPLAT, "particles/SnowPeaSplat"),
-				new ParticleParams(ParticleEffect.PARTICLE_SNOWPEA_PUFF, "particles/SnowPeaPuff"),
-				new ParticleParams(ParticleEffect.PARTICLE_SNOWPEA_TRAIL, "particles/SnowPeaTrail"),
-				new ParticleParams(ParticleEffect.PARTICLE_LANTERN_SHINE, "particles/LanternShine"),
-				new ParticleParams(ParticleEffect.PARTICLE_SEED_PACKET_PICKUP, "particles/Award"),
-				new ParticleParams(ParticleEffect.PARTICLE_POTATO_MINE, "particles/PotatoMine"),
-				new ParticleParams(ParticleEffect.PARTICLE_POTATO_MINE_RISE, "particles/PotatoMineRise"),
-				new ParticleParams(ParticleEffect.PARTICLE_PUFFSHROOM_TRAIL, "particles/PuffShroomTrail"),
-				new ParticleParams(ParticleEffect.PARTICLE_PUFFSHROOM_MUZZLE, "particles/PuffShroomMuzzle"),
-				new ParticleParams(ParticleEffect.PARTICLE_SEED_PACKET_FLASH, "particles/SeedPacketFlash"),
-				new ParticleParams(ParticleEffect.PARTICLE_WHACK_A_ZOMBIE_RISE, "particles/WhackAZombieRise"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZOMBIE_LADDER, "particles/ZombieLadder"),
-				new ParticleParams(ParticleEffect.PARTICLE_UMBRELLA_REFLECT, "particles/UmbrellaReflect"),
-				new ParticleParams(ParticleEffect.PARTICLE_SEED_PACKET_PICK, "particles/SeedPacketPick"),
-				new ParticleParams(ParticleEffect.PARTICLE_ICE_TRAP_ZOMBIE, "particles/IceTrapZombie"),
-				new ParticleParams(ParticleEffect.PARTICLE_ICE_TRAP_RELEASE, "particles/IceTrapRelease"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZAMBONI_SMOKE, "particles/ZamboniSmoke"),
-				new ParticleParams(ParticleEffect.PARTICLE_GLOOMCLOUD, "particles/GloomCloud"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZOMBIE_POGO_HEAD, "particles/ZombiePogoHead"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZAMBONI_TIRE, "particles/ZamboniTire"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZAMBONI_EXPLOSION, "particles/ZamboniExplosion"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZAMBONI_EXPLOSION2, "particles/ZamboniExplosion2"),
-				new ParticleParams(ParticleEffect.PARTICLE_CATAPULT_EXPLOSION, "particles/CatapultExplosion"),
-				new ParticleParams(ParticleEffect.PARTICLE_MOWER_CLOUD, "particles/MowerCloud"),
-				new ParticleParams(ParticleEffect.PARTICLE_BOSS_ICE_BALL, "particles/BossIceBallTrail"),
-				new ParticleParams(ParticleEffect.PARTICLE_BLASTMARK, "particles/BlastMark"),
-				new ParticleParams(ParticleEffect.PARTICLE_COIN_PICKUP_ARROW, "particles/CoinPickupArrow"),
-				new ParticleParams(ParticleEffect.PARTICLE_PRESENT_PICKUP, "particles/PresentPickup"),
-				new ParticleParams(ParticleEffect.PARTICLE_IMITATER_MORPH, "particles/ImitaterMorph"),
-				new ParticleParams(ParticleEffect.PARTICLE_MOWERED_ZOMBIE_HEAD, "particles/MoweredZombieHead"),
-				new ParticleParams(ParticleEffect.PARTICLE_MOWERED_ZOMBIE_ARM, "particles/MoweredZombieArm"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZOMBIE_HEAD_POOL, "particles/ZombieHeadPool"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZOMBIE_BOSS_FIREBALL, "particles/Zombie_boss_fireball"),
-				new ParticleParams(ParticleEffect.PARTICLE_FIREBALL_DEATH, "particles/FireBallDeath"),
-				new ParticleParams(ParticleEffect.PARTICLE_ICEBALL_DEATH, "particles/IceBallDeath"),
-				new ParticleParams(ParticleEffect.PARTICLE_ICEBALL_TRAIL, "particles/Iceball_Trail"),
-				new ParticleParams(ParticleEffect.PARTICLE_FIREBALL_TRAIL, "particles/Fireball_Trail"),
-				new ParticleParams(ParticleEffect.PARTICLE_BOSS_EXPLOSION, "particles/BossExplosion"),
-				new ParticleParams(ParticleEffect.PARTICLE_SCREEN_FLASH, "particles/ScreenFlash"),
-				new ParticleParams(ParticleEffect.PARTICLE_TROPHY_SPARKLE, "particles/TrophySparkle"),
-				new ParticleParams(ParticleEffect.PARTICLE_PORTAL_CIRCLE, "particles/PortalCircle"),
-				new ParticleParams(ParticleEffect.PARTICLE_PORTAL_SQUARE, "particles/PortalSquare"),
-				new ParticleParams(ParticleEffect.PARTICLE_POTTED_PLANT_GLOW, "particles/PottedPlantGlow"),
-				new ParticleParams(ParticleEffect.PARTICLE_POTTED_WATER_PLANT_GLOW, "particles/PottedWaterPlantGlow"),
-				new ParticleParams(ParticleEffect.PARTICLE_POTTED_ZEN_GLOW, "particles/PottedZenGlow"),
-				new ParticleParams(ParticleEffect.PARTICLE_MIND_CONTROL, "particles/MindControl"),
-				new ParticleParams(ParticleEffect.PARTICLE_VASE_SHATTER, "particles/VaseShatter"),
-				new ParticleParams(ParticleEffect.PARTICLE_VASE_SHATTER_LEAF, "particles/VaseShatterLeaf"),
-				new ParticleParams(ParticleEffect.PARTICLE_VASE_SHATTER_ZOMBIE, "particles/VaseShatterZombie"),
-				new ParticleParams(ParticleEffect.PARTICLE_AWARD_PICKUP_ARROW, "particles/AwardPickupArrow"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZOMBIE_SEAWEED, "particles/Zombie_seaweed"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZOMBIE_MUSTACHE, "particles/ZombieMustache"),
-				new ParticleParams(ParticleEffect.PARTICLE_ZOMBIE_FUTURE_GLASSES, "particles/ZombieFutureGlasses"),
-				new ParticleParams(ParticleEffect.PARTICLE_PINATA, "particles/Pinata"),
-				new ParticleParams(ParticleEffect.PARTICLE_DUST_SQUASH, "particles/Dust_Squash"),
-				new ParticleParams(ParticleEffect.PARTICLE_DUST_FOOT, "particles/Dust_Foot"),
-				new ParticleParams(ParticleEffect.PARTICLE_DAISY, "particles/Daisy"),
-				new ParticleParams(ParticleEffect.PARTICLE_STARBURST, "particles/Starburst"),
-				new ParticleParams(ParticleEffect.PARTICLE_UPSELL_ARROW, "particles/UpsellArrow")
+				new ParticleParams(ParticleEffect.Melonsplash, "particles/melonimpact"),
+				new ParticleParams(ParticleEffect.Wintermelon, "particles/WinterMelonImpact"),
+				new ParticleParams(ParticleEffect.Fumecloud, "particles/FumeCloud"),
+				new ParticleParams(ParticleEffect.Popcornsplash, "particles/PopcornSplash"),
+				new ParticleParams(ParticleEffect.Powie, "particles/Powie"),
+				new ParticleParams(ParticleEffect.Jackexplode, "particles/JackExplode"),
+				new ParticleParams(ParticleEffect.ZombieHead, "particles/ZombieHead"),
+				new ParticleParams(ParticleEffect.ZombieArm, "particles/ZombieArm"),
+				new ParticleParams(ParticleEffect.ZombieTrafficCone, "particles/ZombieTrafficCone"),
+				new ParticleParams(ParticleEffect.ZombiePail, "particles/ZombiePail"),
+				new ParticleParams(ParticleEffect.ZombieHelmet, "particles/ZombieHelmet"),
+				new ParticleParams(ParticleEffect.ZombieFlag, "particles/ZombieFlag"),
+				new ParticleParams(ParticleEffect.ZombieDoor, "particles/ZombieDoor"),
+				new ParticleParams(ParticleEffect.ZombieNewspaper, "particles/ZombieNewspaper"),
+				new ParticleParams(ParticleEffect.ZombieHeadlight, "particles/ZombieHeadLight"),
+				new ParticleParams(ParticleEffect.Pow, "particles/Pow"),
+				new ParticleParams(ParticleEffect.ZombiePogo, "particles/ZombiePogo"),
+				new ParticleParams(ParticleEffect.ZombieNewspaperHead, "particles/ZombieNewspaperHead"),
+				new ParticleParams(ParticleEffect.ZombieBalloonHead, "particles/ZombieBalloonHead"),
+				new ParticleParams(ParticleEffect.SodRoll, "particles/SodRoll"),
+				new ParticleParams(ParticleEffect.GraveStoneRise, "particles/GraveStoneRise"),
+				new ParticleParams(ParticleEffect.Planting, "particles/Planting"),
+				new ParticleParams(ParticleEffect.PlantingPool, "particles/PlantingPool"),
+				new ParticleParams(ParticleEffect.ZombieRise, "particles/ZombieRise"),
+				new ParticleParams(ParticleEffect.GraveBuster, "particles/GraveBuster"),
+				new ParticleParams(ParticleEffect.GraveBusterDie, "particles/GraveBusterDie"),
+				new ParticleParams(ParticleEffect.PoolSplash, "particles/PoolSplash"),
+				new ParticleParams(ParticleEffect.IceSparkle, "particles/IceSparkle"),
+				new ParticleParams(ParticleEffect.SeedPacket, "particles/SeedPacket"),
+				new ParticleParams(ParticleEffect.TallNutBlock, "particles/TallNutBlock"),
+				new ParticleParams(ParticleEffect.Doom, "particles/Doom"),
+				new ParticleParams(ParticleEffect.DiggerRise, "particles/DiggerRise"),
+				new ParticleParams(ParticleEffect.DiggerTunnel, "particles/DiggerTunnel"),
+				new ParticleParams(ParticleEffect.DancerRise, "particles/DancerRise"),
+				new ParticleParams(ParticleEffect.PoolSparkly, "particles/PoolSparkly"),
+				new ParticleParams(ParticleEffect.WallnutEatSmall, "particles/WallnutEatSmall"),
+				new ParticleParams(ParticleEffect.WallnutEatLarge, "particles/WallnutEatLarge"),
+				new ParticleParams(ParticleEffect.PeaSplat, "particles/PeaSplat"),
+				new ParticleParams(ParticleEffect.ButterSplat, "particles/ButterSplat"),
+				new ParticleParams(ParticleEffect.CabbageSplat, "particles/CabbageSplat"),
+				new ParticleParams(ParticleEffect.PuffSplat, "particles/PuffSplat"),
+				new ParticleParams(ParticleEffect.StarSplat, "particles/StarSplat"),
+				new ParticleParams(ParticleEffect.IceTrap, "particles/IceTrap"),
+				new ParticleParams(ParticleEffect.SnowpeaSplat, "particles/SnowPeaSplat"),
+				new ParticleParams(ParticleEffect.SnowpeaPuff, "particles/SnowPeaPuff"),
+				new ParticleParams(ParticleEffect.SnowpeaTrail, "particles/SnowPeaTrail"),
+				new ParticleParams(ParticleEffect.LanternShine, "particles/LanternShine"),
+				new ParticleParams(ParticleEffect.SeedPacketPickup, "particles/Award"),
+				new ParticleParams(ParticleEffect.PotatoMine, "particles/PotatoMine"),
+				new ParticleParams(ParticleEffect.PotatoMineRise, "particles/PotatoMineRise"),
+				new ParticleParams(ParticleEffect.PuffshroomTrail, "particles/PuffShroomTrail"),
+				new ParticleParams(ParticleEffect.PuffshroomMuzzle, "particles/PuffShroomMuzzle"),
+				new ParticleParams(ParticleEffect.SeedPacketFlash, "particles/SeedPacketFlash"),
+				new ParticleParams(ParticleEffect.WhackAZombieRise, "particles/WhackAZombieRise"),
+				new ParticleParams(ParticleEffect.ZombieLadder, "particles/ZombieLadder"),
+				new ParticleParams(ParticleEffect.UmbrellaReflect, "particles/UmbrellaReflect"),
+				new ParticleParams(ParticleEffect.SeedPacketPick, "particles/SeedPacketPick"),
+				new ParticleParams(ParticleEffect.IceTrapZombie, "particles/IceTrapZombie"),
+				new ParticleParams(ParticleEffect.IceTrapRelease, "particles/IceTrapRelease"),
+				new ParticleParams(ParticleEffect.ZamboniSmoke, "particles/ZamboniSmoke"),
+				new ParticleParams(ParticleEffect.Gloomcloud, "particles/GloomCloud"),
+				new ParticleParams(ParticleEffect.ZombiePogoHead, "particles/ZombiePogoHead"),
+				new ParticleParams(ParticleEffect.ZamboniTire, "particles/ZamboniTire"),
+				new ParticleParams(ParticleEffect.ZamboniExplosion, "particles/ZamboniExplosion"),
+				new ParticleParams(ParticleEffect.ZamboniExplosion2, "particles/ZamboniExplosion2"),
+				new ParticleParams(ParticleEffect.CatapultExplosion, "particles/CatapultExplosion"),
+				new ParticleParams(ParticleEffect.MowerCloud, "particles/MowerCloud"),
+				new ParticleParams(ParticleEffect.BossIceBall, "particles/BossIceBallTrail"),
+				new ParticleParams(ParticleEffect.Blastmark, "particles/BlastMark"),
+				new ParticleParams(ParticleEffect.CoinPickupArrow, "particles/CoinPickupArrow"),
+				new ParticleParams(ParticleEffect.PresentPickup, "particles/PresentPickup"),
+				new ParticleParams(ParticleEffect.ImitaterMorph, "particles/ImitaterMorph"),
+				new ParticleParams(ParticleEffect.MoweredZombieHead, "particles/MoweredZombieHead"),
+				new ParticleParams(ParticleEffect.MoweredZombieArm, "particles/MoweredZombieArm"),
+				new ParticleParams(ParticleEffect.ZombieHeadPool, "particles/ZombieHeadPool"),
+				new ParticleParams(ParticleEffect.ZombieBossFireball, "particles/Zombie_boss_fireball"),
+				new ParticleParams(ParticleEffect.FireballDeath, "particles/FireBallDeath"),
+				new ParticleParams(ParticleEffect.IceballDeath, "particles/IceBallDeath"),
+				new ParticleParams(ParticleEffect.IceballTrail, "particles/Iceball_Trail"),
+				new ParticleParams(ParticleEffect.FireballTrail, "particles/Fireball_Trail"),
+				new ParticleParams(ParticleEffect.BossExplosion, "particles/BossExplosion"),
+				new ParticleParams(ParticleEffect.ScreenFlash, "particles/ScreenFlash"),
+				new ParticleParams(ParticleEffect.TrophySparkle, "particles/TrophySparkle"),
+				new ParticleParams(ParticleEffect.PortalCircle, "particles/PortalCircle"),
+				new ParticleParams(ParticleEffect.PortalSquare, "particles/PortalSquare"),
+				new ParticleParams(ParticleEffect.PottedPlantGlow, "particles/PottedPlantGlow"),
+				new ParticleParams(ParticleEffect.PottedWaterPlantGlow, "particles/PottedWaterPlantGlow"),
+				new ParticleParams(ParticleEffect.PottedZenGlow, "particles/PottedZenGlow"),
+				new ParticleParams(ParticleEffect.MindControl, "particles/MindControl"),
+				new ParticleParams(ParticleEffect.VaseShatter, "particles/VaseShatter"),
+				new ParticleParams(ParticleEffect.VaseShatterLeaf, "particles/VaseShatterLeaf"),
+				new ParticleParams(ParticleEffect.VaseShatterZombie, "particles/VaseShatterZombie"),
+				new ParticleParams(ParticleEffect.AwardPickupArrow, "particles/AwardPickupArrow"),
+				new ParticleParams(ParticleEffect.ZombieSeaweed, "particles/Zombie_seaweed"),
+				new ParticleParams(ParticleEffect.ZombieMustache, "particles/ZombieMustache"),
+				new ParticleParams(ParticleEffect.ZombieFutureGlasses, "particles/ZombieFutureGlasses"),
+				new ParticleParams(ParticleEffect.Pinata, "particles/Pinata"),
+				new ParticleParams(ParticleEffect.DustSquash, "particles/Dust_Squash"),
+				new ParticleParams(ParticleEffect.DustFoot, "particles/Dust_Foot"),
+				new ParticleParams(ParticleEffect.Daisy, "particles/Daisy"),
+				new ParticleParams(ParticleEffect.Starburst, "particles/Starburst"),
+				new ParticleParams(ParticleEffect.UpsellArrow, "particles/UpsellArrow")
 			};
 			GameConstants.gLawnReanimationArray = new ReanimationParams[]
 			{
-				new ReanimationParams(ReanimationType.REANIM_LOADBAR_SPROUT, "reanim/LoadBar_sprout", 1),
-				new ReanimationParams(ReanimationType.REANIM_LOADBAR_ZOMBIEHEAD, "reanim/LoadBar_Zombiehead", 1),
-				new ReanimationParams(ReanimationType.REANIM_SODROLL, "reanim/SodRoll", 0),
-				new ReanimationParams(ReanimationType.REANIM_FINAL_WAVE, "reanim/FinalWave", 1),
-				new ReanimationParams(ReanimationType.REANIM_PEASHOOTER, "reanim/PeaShooterSingle", 0),
-				new ReanimationParams(ReanimationType.REANIM_WALLNUT, "reanim/Wallnut", 0),
-				new ReanimationParams(ReanimationType.REANIM_LILYPAD, "reanim/LilyPad", 0),
-				new ReanimationParams(ReanimationType.REANIM_SUNFLOWER, "reanim/SunFlower", 0),
-				new ReanimationParams(ReanimationType.REANIM_LAWNMOWER, "reanim/LawnMower", 0),
-				new ReanimationParams(ReanimationType.REANIM_READYSETPLANT, "reanim/StartReadySetPlant", 1),
-				new ReanimationParams(ReanimationType.REANIM_CHERRYBOMB, "reanim/CherryBomb", 0),
-				new ReanimationParams(ReanimationType.REANIM_SQUASH, "reanim/Squash", 0),
-				new ReanimationParams(ReanimationType.REANIM_DOOMSHROOM, "reanim/DoomShroom", 0),
-				new ReanimationParams(ReanimationType.REANIM_SNOWPEA, "reanim/SnowPea", 0),
-				new ReanimationParams(ReanimationType.REANIM_REPEATER, "reanim/PeaShooter", 0),
-				new ReanimationParams(ReanimationType.REANIM_SUNSHROOM, "reanim/SunShroom", 0),
-				new ReanimationParams(ReanimationType.REANIM_TALLNUT, "reanim/Tallnut", 0),
-				new ReanimationParams(ReanimationType.REANIM_FUMESHROOM, "reanim/FumeShroom", 0),
-				new ReanimationParams(ReanimationType.REANIM_PUFFSHROOM, "reanim/PuffShroom", 0),
-				new ReanimationParams(ReanimationType.REANIM_HYPNOSHROOM, "reanim/HypnoShroom", 0),
-				new ReanimationParams(ReanimationType.REANIM_CHOMPER, "reanim/Chomper", 0),
-				new ReanimationParams(ReanimationType.REANIM_ZOMBIE, "reanim/Zombie", 0),
-				new ReanimationParams(ReanimationType.REANIM_SUN, "reanim/Sun", 0),
-				new ReanimationParams(ReanimationType.REANIM_POTATOMINE, "reanim/PotatoMine", 0),
-				new ReanimationParams(ReanimationType.REANIM_SPIKEWEED, "reanim/Caltrop", 0),
-				new ReanimationParams(ReanimationType.REANIM_SPIKEROCK, "reanim/SpikeRock", 0),
-				new ReanimationParams(ReanimationType.REANIM_THREEPEATER, "reanim/ThreePeater", 0),
-				new ReanimationParams(ReanimationType.REANIM_MARIGOLD, "reanim/Marigold", 0),
-				new ReanimationParams(ReanimationType.REANIM_ICESHROOM, "reanim/IceShroom", 0),
-				new ReanimationParams(ReanimationType.REANIM_ZOMBIE_FOOTBALL, "reanim/Zombie_football", 0),
-				new ReanimationParams(ReanimationType.REANIM_ZOMBIE_NEWSPAPER, "reanim/Zombie_paper", 0),
-				new ReanimationParams(ReanimationType.REANIM_ZOMBIE_ZAMBONI, "reanim/Zombie_zamboni", 0),
-				new ReanimationParams(ReanimationType.REANIM_SPLASH, "reanim/splash", 0),
-				new ReanimationParams(ReanimationType.REANIM_JALAPENO, "reanim/Jalapeno", 0),
-				new ReanimationParams(ReanimationType.REANIM_JALAPENO_FIRE, "reanim/fire", 0),
-				new ReanimationParams(ReanimationType.REANIM_COIN_SILVER, "reanim/Coin_silver", 0),
-				new ReanimationParams(ReanimationType.REANIM_ZOMBIE_CHARRED, "reanim/Zombie_charred", 0),
-				new ReanimationParams(ReanimationType.REANIM_ZOMBIE_CHARRED_IMP, "reanim/Zombie_charred_imp", 0),
-				new ReanimationParams(ReanimationType.REANIM_ZOMBIE_CHARRED_DIGGER, "reanim/Zombie_charred_digger", 0),
-				new ReanimationParams(ReanimationType.REANIM_ZOMBIE_CHARRED_ZAMBONI, "reanim/Zombie_charred_zamboni", 0),
-				new ReanimationParams(ReanimationType.REANIM_ZOMBIE_CHARRED_CATAPULT, "reanim/Zombie_charred_catapult", 0),
-				new ReanimationParams(ReanimationType.REANIM_ZOMBIE_CHARRED_GARGANTUAR, "reanim/Zombie_charred_gargantuar", 0),
-				new ReanimationParams(ReanimationType.REANIM_SCRAREYSHROOM, "reanim/ScaredyShroom", 0),
-				new ReanimationParams(ReanimationType.REANIM_PUMPKIN, "reanim/Pumpkin", 0),
-				new ReanimationParams(ReanimationType.REANIM_PLANTERN, "reanim/Plantern", 0),
-				new ReanimationParams(ReanimationType.REANIM_TORCHWOOD, "reanim/Torchwood", 0),
-				new ReanimationParams(ReanimationType.REANIM_SPLITPEA, "reanim/SplitPea", 0),
-				new ReanimationParams(ReanimationType.REANIM_SEASHROOM, "reanim/SeaShroom", 0),
-				new ReanimationParams(ReanimationType.REANIM_BLOVER, "reanim/Blover", 0),
-				new ReanimationParams(ReanimationType.REANIM_FLOWER_POT, "reanim/Pot", 0),
-				new ReanimationParams(ReanimationType.REANIM_CACTUS, "reanim/Cactus", 0),
-				new ReanimationParams(ReanimationType.REANIM_DISCO, "reanim/Zombie_disco", 0),
-				new ReanimationParams(ReanimationType.REANIM_TANGLEKELP, "reanim/Tanglekelp", 0),
-				new ReanimationParams(ReanimationType.REANIM_STARFRUIT, "reanim/Starfruit", 0),
-				new ReanimationParams(ReanimationType.REANIM_POLEVAULTER, "reanim/Zombie_polevaulter", 0),
-				new ReanimationParams(ReanimationType.REANIM_BALLOON, "reanim/Zombie_balloon", 0),
-				new ReanimationParams(ReanimationType.REANIM_GARGANTUAR, "reanim/Zombie_gargantuar", 0),
-				new ReanimationParams(ReanimationType.REANIM_IMP, "reanim/Zombie_imp", 0),
-				new ReanimationParams(ReanimationType.REANIM_DIGGER, "reanim/Zombie_digger", 0),
-				new ReanimationParams(ReanimationType.REANIM_DIGGER_DIRT, "reanim/Digger_rising_dirt", 0),
-				new ReanimationParams(ReanimationType.REANIM_ZOMBIE_DOLPHINRIDER, "reanim/Zombie_dolphinrider", 0),
-				new ReanimationParams(ReanimationType.REANIM_POGO, "reanim/Zombie_pogo", 0),
-				new ReanimationParams(ReanimationType.REANIM_BACKUP_DANCER, "reanim/Zombie_backup", 0),
-				new ReanimationParams(ReanimationType.REANIM_BOBSLED, "reanim/Zombie_bobsled", 0),
-				new ReanimationParams(ReanimationType.REANIM_JACKINTHEBOX, "reanim/Zombie_jackbox", 0),
-				new ReanimationParams(ReanimationType.REANIM_SNORKEL, "reanim/Zombie_snorkle", 0),
-				new ReanimationParams(ReanimationType.REANIM_BUNGEE, "reanim/Zombie_bungi", 0),
-				new ReanimationParams(ReanimationType.REANIM_CATAPULT, "reanim/Zombie_catapult", 0),
-				new ReanimationParams(ReanimationType.REANIM_LADDER, "reanim/Zombie_ladder", 0),
-				new ReanimationParams(ReanimationType.REANIM_PUFF, "reanim/Puff", 0),
-				new ReanimationParams(ReanimationType.REANIM_SLEEPING, "reanim/Z", 0),
-				new ReanimationParams(ReanimationType.REANIM_GRAVE_BUSTER, "reanim/Gravebuster", 0),
-				new ReanimationParams(ReanimationType.REANIM_ZOMBIES_WON, "reanim/ZombiesWon", 1),
-				new ReanimationParams(ReanimationType.REANIM_MAGNETSHROOM, "reanim/Magnetshroom", 0),
-				new ReanimationParams(ReanimationType.REANIM_BOSS, "reanim/Zombie_boss", 1),
-				new ReanimationParams(ReanimationType.REANIM_CABBAGEPULT, "reanim/Cabbagepult", 0),
-				new ReanimationParams(ReanimationType.REANIM_KERNELPULT, "reanim/Cornpult", 0),
-				new ReanimationParams(ReanimationType.REANIM_MELONPULT, "reanim/Melonpult", 0),
-				new ReanimationParams(ReanimationType.REANIM_COFFEEBEAN, "reanim/Coffeebean", 1),
-				new ReanimationParams(ReanimationType.REANIM_UMBRELLALEAF, "reanim/Umbrellaleaf", 0),
-				new ReanimationParams(ReanimationType.REANIM_GATLINGPEA, "reanim/GatlingPea", 0),
-				new ReanimationParams(ReanimationType.REANIM_CATTAIL, "reanim/Cattail", 0),
-				new ReanimationParams(ReanimationType.REANIM_GLOOMSHROOM, "reanim/GloomShroom", 0),
-				new ReanimationParams(ReanimationType.REANIM_BOSS_ICEBALL, "reanim/Zombie_boss_iceball", 1),
-				new ReanimationParams(ReanimationType.REANIM_BOSS_FIREBALL, "reanim/Zombie_boss_fireball", 1),
-				new ReanimationParams(ReanimationType.REANIM_COBCANNON, "reanim/CobCannon", 0),
-				new ReanimationParams(ReanimationType.REANIM_GARLIC, "reanim/Garlic", 0),
-				new ReanimationParams(ReanimationType.REANIM_GOLD_MAGNET, "reanim/GoldMagnet", 0),
-				new ReanimationParams(ReanimationType.REANIM_WINTER_MELON, "reanim/WinterMelon", 0),
-				new ReanimationParams(ReanimationType.REANIM_TWIN_SUNFLOWER, "reanim/TwinSunflower", 0),
-				new ReanimationParams(ReanimationType.REANIM_POOL_CLEANER, "reanim/PoolCleaner", 0),
-				new ReanimationParams(ReanimationType.REANIM_ROOF_CLEANER, "reanim/RoofCleaner", 0),
-				new ReanimationParams(ReanimationType.REANIM_FIRE_PEA, "reanim/FirePea", 0),
-				new ReanimationParams(ReanimationType.REANIM_IMITATER, "reanim/Imitater", 0),
-				new ReanimationParams(ReanimationType.REANIM_YETI, "reanim/Zombie_yeti", 0),
-				new ReanimationParams(ReanimationType.REANIM_BOSS_DRIVER, "reanim/Zombie_Boss_driver", 0),
-				new ReanimationParams(ReanimationType.REANIM_LAWN_MOWERED_ZOMBIE, "reanim/LawnMoweredZombie", 0),
-				new ReanimationParams(ReanimationType.REANIM_CRAZY_DAVE, "reanim/CrazyDave", 1),
-				new ReanimationParams(ReanimationType.REANIM_TEXT_FADE_ON, "reanim/TextFadeOn", 0),
-				new ReanimationParams(ReanimationType.REANIM_HAMMER, "reanim/Hammer", 0),
-				new ReanimationParams(ReanimationType.REANIM_SLOT_MACHINE_HANDLE, "reanim/SlotMachine", 0),
-				new ReanimationParams(ReanimationType.REANIM_SELECTOR_SCREEN, "reanim/SelectorScreen", 3),
-				new ReanimationParams(ReanimationType.REANIM_PORTAL_CIRCLE, "reanim/Portal_Circle", 0),
-				new ReanimationParams(ReanimationType.REANIM_PORTAL_SQUARE, "reanim/Portal_Square", 0),
-				new ReanimationParams(ReanimationType.REANIM_ZENGARDEN_SPROUT, "reanim/ZenGarden_sprout", 0),
-				new ReanimationParams(ReanimationType.REANIM_ZENGARDEN_WATERINGCAN, "reanim/ZenGarden_wateringcan", 1),
-				new ReanimationParams(ReanimationType.REANIM_ZENGARDEN_FERTILIZER, "reanim/ZenGarden_fertilizer", 1),
-				new ReanimationParams(ReanimationType.REANIM_ZENGARDEN_BUGSPRAY, "reanim/ZenGarden_bugspray", 1),
-				new ReanimationParams(ReanimationType.REANIM_ZENGARDEN_PHONOGRAPH, "reanim/ZenGarden_phonograph", 1),
-				new ReanimationParams(ReanimationType.REANIM_DIAMOND, "reanim/Diamond", 0),
-				new ReanimationParams(ReanimationType.REANIM_STINKY, "reanim/Stinky", 0),
-				new ReanimationParams(ReanimationType.REANIM_RAKE, "reanim/Rake", 0),
-				new ReanimationParams(ReanimationType.REANIM_RAIN_CIRCLE, "reanim/Rain_circle", 0),
-				new ReanimationParams(ReanimationType.REANIM_RAIN_SPLASH, "reanim/Rain_splash", 0),
-				new ReanimationParams(ReanimationType.REANIM_ZOMBIE_SURPRISE, "reanim/Zombie_surprise", 0),
-				new ReanimationParams(ReanimationType.REANIM_COIN_GOLD, "reanim/Coin_gold", 0),
-				new ReanimationParams(ReanimationType.REANIM_ZOMBIE_FLAGPOLE, "reanim/Zombie_flagpole"),
-				new ReanimationParams(ReanimationType.REANIM_WOODSIGN, "reanim/woodsign"),
-				new ReanimationParams(ReanimationType.REANIM_ASTRONAUT, "reanim/astronaut")
+				new ReanimationParams(ReanimationType.LoadbarSprout, "reanim/LoadBar_sprout", 1),
+				new ReanimationParams(ReanimationType.LoadbarZombiehead, "reanim/LoadBar_Zombiehead", 1),
+				new ReanimationParams(ReanimationType.Sodroll, "reanim/SodRoll", 0),
+				new ReanimationParams(ReanimationType.FinalWave, "reanim/FinalWave", 1),
+				new ReanimationParams(ReanimationType.Peashooter, "reanim/PeaShooterSingle", 0),
+				new ReanimationParams(ReanimationType.Wallnut, "reanim/Wallnut", 0),
+				new ReanimationParams(ReanimationType.Lilypad, "reanim/LilyPad", 0),
+				new ReanimationParams(ReanimationType.Sunflower, "reanim/SunFlower", 0),
+				new ReanimationParams(ReanimationType.Lawnmower, "reanim/LawnMower", 0),
+				new ReanimationParams(ReanimationType.Readysetplant, "reanim/StartReadySetPlant", 1),
+				new ReanimationParams(ReanimationType.Cherrybomb, "reanim/CherryBomb", 0),
+				new ReanimationParams(ReanimationType.Squash, "reanim/Squash", 0),
+				new ReanimationParams(ReanimationType.Doomshroom, "reanim/DoomShroom", 0),
+				new ReanimationParams(ReanimationType.Snowpea, "reanim/SnowPea", 0),
+				new ReanimationParams(ReanimationType.Repeater, "reanim/PeaShooter", 0),
+				new ReanimationParams(ReanimationType.Sunshroom, "reanim/SunShroom", 0),
+				new ReanimationParams(ReanimationType.Tallnut, "reanim/Tallnut", 0),
+				new ReanimationParams(ReanimationType.Fumeshroom, "reanim/FumeShroom", 0),
+				new ReanimationParams(ReanimationType.Puffshroom, "reanim/PuffShroom", 0),
+				new ReanimationParams(ReanimationType.Hypnoshroom, "reanim/HypnoShroom", 0),
+				new ReanimationParams(ReanimationType.Chomper, "reanim/Chomper", 0),
+				new ReanimationParams(ReanimationType.Zombie, "reanim/Zombie", 0),
+				new ReanimationParams(ReanimationType.Sun, "reanim/Sun", 0),
+				new ReanimationParams(ReanimationType.Potatomine, "reanim/PotatoMine", 0),
+				new ReanimationParams(ReanimationType.Spikeweed, "reanim/Caltrop", 0),
+				new ReanimationParams(ReanimationType.Spikerock, "reanim/SpikeRock", 0),
+				new ReanimationParams(ReanimationType.Threepeater, "reanim/ThreePeater", 0),
+				new ReanimationParams(ReanimationType.Marigold, "reanim/Marigold", 0),
+				new ReanimationParams(ReanimationType.Iceshroom, "reanim/IceShroom", 0),
+				new ReanimationParams(ReanimationType.ZombieFootball, "reanim/Zombie_football", 0),
+				new ReanimationParams(ReanimationType.ZombieNewspaper, "reanim/Zombie_paper", 0),
+				new ReanimationParams(ReanimationType.ZombieZamboni, "reanim/Zombie_zamboni", 0),
+				new ReanimationParams(ReanimationType.Splash, "reanim/splash", 0),
+				new ReanimationParams(ReanimationType.Jalapeno, "reanim/Jalapeno", 0),
+				new ReanimationParams(ReanimationType.JalapenoFire, "reanim/fire", 0),
+				new ReanimationParams(ReanimationType.CoinSilver, "reanim/Coin_silver", 0),
+				new ReanimationParams(ReanimationType.ZombieCharred, "reanim/Zombie_charred", 0),
+				new ReanimationParams(ReanimationType.ZombieCharredImp, "reanim/Zombie_charred_imp", 0),
+				new ReanimationParams(ReanimationType.ZombieCharredDigger, "reanim/Zombie_charred_digger", 0),
+				new ReanimationParams(ReanimationType.ZombieCharredZamboni, "reanim/Zombie_charred_zamboni", 0),
+				new ReanimationParams(ReanimationType.ZombieCharredCatapult, "reanim/Zombie_charred_catapult", 0),
+				new ReanimationParams(ReanimationType.ZombieCharredGargantuar, "reanim/Zombie_charred_gargantuar", 0),
+				new ReanimationParams(ReanimationType.Scrareyshroom, "reanim/ScaredyShroom", 0),
+				new ReanimationParams(ReanimationType.Pumpkin, "reanim/Pumpkin", 0),
+				new ReanimationParams(ReanimationType.Plantern, "reanim/Plantern", 0),
+				new ReanimationParams(ReanimationType.Torchwood, "reanim/Torchwood", 0),
+				new ReanimationParams(ReanimationType.Splitpea, "reanim/SplitPea", 0),
+				new ReanimationParams(ReanimationType.Seashroom, "reanim/SeaShroom", 0),
+				new ReanimationParams(ReanimationType.Blover, "reanim/Blover", 0),
+				new ReanimationParams(ReanimationType.FlowerPot, "reanim/Pot", 0),
+				new ReanimationParams(ReanimationType.Cactus, "reanim/Cactus", 0),
+				new ReanimationParams(ReanimationType.Disco, "reanim/Zombie_disco", 0),
+				new ReanimationParams(ReanimationType.Tanglekelp, "reanim/Tanglekelp", 0),
+				new ReanimationParams(ReanimationType.Starfruit, "reanim/Starfruit", 0),
+				new ReanimationParams(ReanimationType.Polevaulter, "reanim/Zombie_polevaulter", 0),
+				new ReanimationParams(ReanimationType.Balloon, "reanim/Zombie_balloon", 0),
+				new ReanimationParams(ReanimationType.Gargantuar, "reanim/Zombie_gargantuar", 0),
+				new ReanimationParams(ReanimationType.Imp, "reanim/Zombie_imp", 0),
+				new ReanimationParams(ReanimationType.Digger, "reanim/Zombie_digger", 0),
+				new ReanimationParams(ReanimationType.DiggerDirt, "reanim/Digger_rising_dirt", 0),
+				new ReanimationParams(ReanimationType.ZombieDolphinrider, "reanim/Zombie_dolphinrider", 0),
+				new ReanimationParams(ReanimationType.Pogo, "reanim/Zombie_pogo", 0),
+				new ReanimationParams(ReanimationType.BackupDancer, "reanim/Zombie_backup", 0),
+				new ReanimationParams(ReanimationType.Bobsled, "reanim/Zombie_bobsled", 0),
+				new ReanimationParams(ReanimationType.Jackinthebox, "reanim/Zombie_jackbox", 0),
+				new ReanimationParams(ReanimationType.Snorkel, "reanim/Zombie_snorkle", 0),
+				new ReanimationParams(ReanimationType.Bungee, "reanim/Zombie_bungi", 0),
+				new ReanimationParams(ReanimationType.Catapult, "reanim/Zombie_catapult", 0),
+				new ReanimationParams(ReanimationType.Ladder, "reanim/Zombie_ladder", 0),
+				new ReanimationParams(ReanimationType.Puff, "reanim/Puff", 0),
+				new ReanimationParams(ReanimationType.Sleeping, "reanim/Z", 0),
+				new ReanimationParams(ReanimationType.GraveBuster, "reanim/Gravebuster", 0),
+				new ReanimationParams(ReanimationType.ZombiesWon, "reanim/ZombiesWon", 1),
+				new ReanimationParams(ReanimationType.Magnetshroom, "reanim/Magnetshroom", 0),
+				new ReanimationParams(ReanimationType.Boss, "reanim/Zombie_boss", 1),
+				new ReanimationParams(ReanimationType.Cabbagepult, "reanim/Cabbagepult", 0),
+				new ReanimationParams(ReanimationType.Kernelpult, "reanim/Cornpult", 0),
+				new ReanimationParams(ReanimationType.Melonpult, "reanim/Melonpult", 0),
+				new ReanimationParams(ReanimationType.Coffeebean, "reanim/Coffeebean", 1),
+				new ReanimationParams(ReanimationType.Umbrellaleaf, "reanim/Umbrellaleaf", 0),
+				new ReanimationParams(ReanimationType.Gatlingpea, "reanim/GatlingPea", 0),
+				new ReanimationParams(ReanimationType.Cattail, "reanim/Cattail", 0),
+				new ReanimationParams(ReanimationType.Gloomshroom, "reanim/GloomShroom", 0),
+				new ReanimationParams(ReanimationType.BossIceball, "reanim/Zombie_boss_iceball", 1),
+				new ReanimationParams(ReanimationType.BossFireball, "reanim/Zombie_boss_fireball", 1),
+				new ReanimationParams(ReanimationType.Cobcannon, "reanim/CobCannon", 0),
+				new ReanimationParams(ReanimationType.Garlic, "reanim/Garlic", 0),
+				new ReanimationParams(ReanimationType.GoldMagnet, "reanim/GoldMagnet", 0),
+				new ReanimationParams(ReanimationType.WinterMelon, "reanim/WinterMelon", 0),
+				new ReanimationParams(ReanimationType.TwinSunflower, "reanim/TwinSunflower", 0),
+				new ReanimationParams(ReanimationType.PoolCleaner, "reanim/PoolCleaner", 0),
+				new ReanimationParams(ReanimationType.RoofCleaner, "reanim/RoofCleaner", 0),
+				new ReanimationParams(ReanimationType.FirePea, "reanim/FirePea", 0),
+				new ReanimationParams(ReanimationType.Imitater, "reanim/Imitater", 0),
+				new ReanimationParams(ReanimationType.Yeti, "reanim/Zombie_yeti", 0),
+				new ReanimationParams(ReanimationType.BossDriver, "reanim/Zombie_Boss_driver", 0),
+				new ReanimationParams(ReanimationType.LawnMoweredZombie, "reanim/LawnMoweredZombie", 0),
+				new ReanimationParams(ReanimationType.CrazyDave, "reanim/CrazyDave", 1),
+				new ReanimationParams(ReanimationType.TextFadeOn, "reanim/TextFadeOn", 0),
+				new ReanimationParams(ReanimationType.Hammer, "reanim/Hammer", 0),
+				new ReanimationParams(ReanimationType.SlotMachineHandle, "reanim/SlotMachine", 0),
+				new ReanimationParams(ReanimationType.SelectorScreen, "reanim/SelectorScreen", 3),
+				new ReanimationParams(ReanimationType.PortalCircle, "reanim/Portal_Circle", 0),
+				new ReanimationParams(ReanimationType.PortalSquare, "reanim/Portal_Square", 0),
+				new ReanimationParams(ReanimationType.ZengardenSprout, "reanim/ZenGarden_sprout", 0),
+				new ReanimationParams(ReanimationType.ZengardenWateringcan, "reanim/ZenGarden_wateringcan", 1),
+				new ReanimationParams(ReanimationType.ZengardenFertilizer, "reanim/ZenGarden_fertilizer", 1),
+				new ReanimationParams(ReanimationType.ZengardenBugspray, "reanim/ZenGarden_bugspray", 1),
+				new ReanimationParams(ReanimationType.ZengardenPhonograph, "reanim/ZenGarden_phonograph", 1),
+				new ReanimationParams(ReanimationType.Diamond, "reanim/Diamond", 0),
+				new ReanimationParams(ReanimationType.Stinky, "reanim/Stinky", 0),
+				new ReanimationParams(ReanimationType.Rake, "reanim/Rake", 0),
+				new ReanimationParams(ReanimationType.RainCircle, "reanim/Rain_circle", 0),
+				new ReanimationParams(ReanimationType.RainSplash, "reanim/Rain_splash", 0),
+				new ReanimationParams(ReanimationType.ZombieSurprise, "reanim/Zombie_surprise", 0),
+				new ReanimationParams(ReanimationType.CoinGold, "reanim/Coin_gold", 0),
+				new ReanimationParams(ReanimationType.ZombieFlagpole, "reanim/Zombie_flagpole"),
+				new ReanimationParams(ReanimationType.Woodsign, "reanim/woodsign"),
+				new ReanimationParams(ReanimationType.Astronaut, "reanim/astronaut")
 			};
 			GameConstants.gLawnTrailArray = new TrailParams[]
 			{
-				new TrailParams(TrailType.TRAIL_ICE, "particles/IceTrail")
+				new TrailParams(TrailType.Ice, "particles/IceTrail")
 			};
 			GameConstants.gLawnStringFormats = new TodStringListFormat[]
 			{
@@ -387,7 +387,7 @@ namespace Lawn
 		static GameConstants()
 		{
 			ZombieAllowedLevels[] array = new ZombieAllowedLevels[33];
-			array[0] = new ZombieAllowedLevels(ZombieType.ZOMBIE_NORMAL, new int[]
+			array[0] = new ZombieAllowedLevels(ZombieType.Normal, new int[]
 			{
 				1,
 				1,
@@ -440,7 +440,7 @@ namespace Lawn
 				1,
 				1
 			});
-			array[1] = new ZombieAllowedLevels(ZombieType.ZOMBIE_FLAG, new int[]
+			array[1] = new ZombieAllowedLevels(ZombieType.Flag, new int[]
 			{
 				1,
 				1,
@@ -493,7 +493,7 @@ namespace Lawn
 				1,
 				1
 			});
-			array[2] = new ZombieAllowedLevels(ZombieType.ZOMBIE_TRAFFIC_CONE, new int[]
+			array[2] = new ZombieAllowedLevels(ZombieType.TrafficCone, new int[]
 			{
 				0,
 				0,
@@ -546,7 +546,7 @@ namespace Lawn
 				1,
 				1
 			});
-			array[3] = new ZombieAllowedLevels(ZombieType.ZOMBIE_POLEVAULTER, new int[]
+			array[3] = new ZombieAllowedLevels(ZombieType.Polevaulter, new int[]
 			{
 				0,
 				0,
@@ -599,7 +599,7 @@ namespace Lawn
 				0,
 				0
 			});
-			array[4] = new ZombieAllowedLevels(ZombieType.ZOMBIE_PAIL, new int[]
+			array[4] = new ZombieAllowedLevels(ZombieType.Pail, new int[]
 			{
 				0,
 				0,
@@ -652,7 +652,7 @@ namespace Lawn
 				1,
 				1
 			});
-			array[5] = new ZombieAllowedLevels(ZombieType.ZOMBIE_NEWSPAPER, new int[]
+			array[5] = new ZombieAllowedLevels(ZombieType.Newspaper, new int[]
 			{
 				0,
 				0,
@@ -705,7 +705,7 @@ namespace Lawn
 				0,
 				0
 			});
-			array[6] = new ZombieAllowedLevels(ZombieType.ZOMBIE_DOOR, new int[]
+			array[6] = new ZombieAllowedLevels(ZombieType.Door, new int[]
 			{
 				0,
 				0,
@@ -758,7 +758,7 @@ namespace Lawn
 				0,
 				0
 			});
-			array[7] = new ZombieAllowedLevels(ZombieType.ZOMBIE_FOOTBALL, new int[]
+			array[7] = new ZombieAllowedLevels(ZombieType.Football, new int[]
 			{
 				0,
 				0,
@@ -811,7 +811,7 @@ namespace Lawn
 				0,
 				0
 			});
-			array[8] = new ZombieAllowedLevels(ZombieType.ZOMBIE_DANCER, new int[]
+			array[8] = new ZombieAllowedLevels(ZombieType.Dancer, new int[]
 			{
 				0,
 				0,
@@ -864,7 +864,7 @@ namespace Lawn
 				0,
 				0
 			});
-			array[9] = new ZombieAllowedLevels(ZombieType.ZOMBIE_BACKUP_DANCER, new int[]
+			array[9] = new ZombieAllowedLevels(ZombieType.BackupDancer, new int[]
 			{
 				0,
 				0,
@@ -919,10 +919,10 @@ namespace Lawn
 			});
 			ZombieAllowedLevels[] array2 = array;
 			int num = 10;
-			ZombieType aZombieType = ZombieType.ZOMBIE_DUCKY_TUBE;
+			ZombieType aZombieType = ZombieType.DuckyTube;
 			int[] levels = new int[50];
 			array2[num] = new ZombieAllowedLevels(aZombieType, levels);
-			array[11] = new ZombieAllowedLevels(ZombieType.ZOMBIE_SNORKEL, new int[]
+			array[11] = new ZombieAllowedLevels(ZombieType.Snorkel, new int[]
 			{
 				0,
 				0,
@@ -975,7 +975,7 @@ namespace Lawn
 				0,
 				0
 			});
-			array[12] = new ZombieAllowedLevels(ZombieType.ZOMBIE_ZAMBONI, new int[]
+			array[12] = new ZombieAllowedLevels(ZombieType.Zamboni, new int[]
 			{
 				0,
 				0,
@@ -1028,7 +1028,7 @@ namespace Lawn
 				0,
 				0
 			});
-			array[13] = new ZombieAllowedLevels(ZombieType.ZOMBIE_BOBSLED, new int[]
+			array[13] = new ZombieAllowedLevels(ZombieType.Bobsled, new int[]
 			{
 				0,
 				0,
@@ -1081,7 +1081,7 @@ namespace Lawn
 				0,
 				0
 			});
-			array[14] = new ZombieAllowedLevels(ZombieType.ZOMBIE_DOLPHIN_RIDER, new int[]
+			array[14] = new ZombieAllowedLevels(ZombieType.DolphinRider, new int[]
 			{
 				0,
 				0,
@@ -1134,7 +1134,7 @@ namespace Lawn
 				0,
 				0
 			});
-			array[15] = new ZombieAllowedLevels(ZombieType.ZOMBIE_JACK_IN_THE_BOX, new int[]
+			array[15] = new ZombieAllowedLevels(ZombieType.JackInTheBox, new int[]
 			{
 				0,
 				0,
@@ -1187,7 +1187,7 @@ namespace Lawn
 				1,
 				1
 			});
-			array[16] = new ZombieAllowedLevels(ZombieType.ZOMBIE_BALLOON, new int[]
+			array[16] = new ZombieAllowedLevels(ZombieType.Balloon, new int[]
 			{
 				0,
 				0,
@@ -1240,7 +1240,7 @@ namespace Lawn
 				0,
 				0
 			});
-			array[17] = new ZombieAllowedLevels(ZombieType.ZOMBIE_DIGGER, new int[]
+			array[17] = new ZombieAllowedLevels(ZombieType.Digger, new int[]
 			{
 				0,
 				0,
@@ -1293,7 +1293,7 @@ namespace Lawn
 				0,
 				0
 			});
-			array[18] = new ZombieAllowedLevels(ZombieType.ZOMBIE_POGO, new int[]
+			array[18] = new ZombieAllowedLevels(ZombieType.Pogo, new int[]
 			{
 				0,
 				0,
@@ -1348,10 +1348,10 @@ namespace Lawn
 			});
 			ZombieAllowedLevels[] array3 = array;
 			int num2 = 19;
-			ZombieType aZombieType2 = ZombieType.ZOMBIE_YETI;
+			ZombieType aZombieType2 = ZombieType.Yeti;
 			int[] levels2 = new int[50];
 			array3[num2] = new ZombieAllowedLevels(aZombieType2, levels2);
-			array[20] = new ZombieAllowedLevels(ZombieType.ZOMBIE_BUNGEE, new int[]
+			array[20] = new ZombieAllowedLevels(ZombieType.Bungee, new int[]
 			{
 				0,
 				0,
@@ -1404,7 +1404,7 @@ namespace Lawn
 				1,
 				1
 			});
-			array[21] = new ZombieAllowedLevels(ZombieType.ZOMBIE_LADDER, new int[]
+			array[21] = new ZombieAllowedLevels(ZombieType.Ladder, new int[]
 			{
 				0,
 				0,
@@ -1457,7 +1457,7 @@ namespace Lawn
 				1,
 				1
 			});
-			array[22] = new ZombieAllowedLevels(ZombieType.ZOMBIE_CATAPULT, new int[]
+			array[22] = new ZombieAllowedLevels(ZombieType.Catapult, new int[]
 			{
 				0,
 				0,
@@ -1510,7 +1510,7 @@ namespace Lawn
 				1,
 				1
 			});
-			array[23] = new ZombieAllowedLevels(ZombieType.ZOMBIE_GARGANTUAR, new int[]
+			array[23] = new ZombieAllowedLevels(ZombieType.Gargantuar, new int[]
 			{
 				0,
 				0,
@@ -1563,7 +1563,7 @@ namespace Lawn
 				1,
 				1
 			});
-			array[24] = new ZombieAllowedLevels(ZombieType.ZOMBIE_IMP, new int[]
+			array[24] = new ZombieAllowedLevels(ZombieType.Imp, new int[]
 			{
 				0,
 				0,
@@ -1618,100 +1618,100 @@ namespace Lawn
 			});
 			ZombieAllowedLevels[] array4 = array;
 			int num3 = 25;
-			ZombieType aZombieType3 = ZombieType.ZOMBIE_BOSS;
+			ZombieType aZombieType3 = ZombieType.Boss;
 			int[] levels3 = new int[50];
 			array4[num3] = new ZombieAllowedLevels(aZombieType3, levels3);
 			ZombieAllowedLevels[] array5 = array;
 			int num4 = 26;
-			ZombieType aZombieType4 = ZombieType.ZOMBIE_PEA_HEAD;
+			ZombieType aZombieType4 = ZombieType.PeaHead;
 			int[] levels4 = new int[50];
 			array5[num4] = new ZombieAllowedLevels(aZombieType4, levels4);
 			ZombieAllowedLevels[] array6 = array;
 			int num5 = 27;
-			ZombieType aZombieType5 = ZombieType.ZOMBIE_WALLNUT_HEAD;
+			ZombieType aZombieType5 = ZombieType.WallnutHead;
 			int[] levels5 = new int[50];
 			array6[num5] = new ZombieAllowedLevels(aZombieType5, levels5);
 			ZombieAllowedLevels[] array7 = array;
 			int num6 = 28;
-			ZombieType aZombieType6 = ZombieType.ZOMBIE_JALAPENO_HEAD;
+			ZombieType aZombieType6 = ZombieType.JalapenoHead;
 			int[] levels6 = new int[50];
 			array7[num6] = new ZombieAllowedLevels(aZombieType6, levels6);
 			ZombieAllowedLevels[] array8 = array;
 			int num7 = 29;
-			ZombieType aZombieType7 = ZombieType.ZOMBIE_GATLING_HEAD;
+			ZombieType aZombieType7 = ZombieType.GatlingHead;
 			int[] levels7 = new int[50];
 			array8[num7] = new ZombieAllowedLevels(aZombieType7, levels7);
 			ZombieAllowedLevels[] array9 = array;
 			int num8 = 30;
-			ZombieType aZombieType8 = ZombieType.ZOMBIE_SQUASH_HEAD;
+			ZombieType aZombieType8 = ZombieType.SquashHead;
 			int[] levels8 = new int[50];
 			array9[num8] = new ZombieAllowedLevels(aZombieType8, levels8);
 			ZombieAllowedLevels[] array10 = array;
 			int num9 = 31;
-			ZombieType aZombieType9 = ZombieType.ZOMBIE_TALLNUT_HEAD;
+			ZombieType aZombieType9 = ZombieType.TallnutHead;
 			int[] levels9 = new int[50];
 			array10[num9] = new ZombieAllowedLevels(aZombieType9, levels9);
 			ZombieAllowedLevels[] array11 = array;
 			int num10 = 32;
-			ZombieType aZombieType10 = ZombieType.ZOMBIE_REDEYE_GARGANTUAR;
+			ZombieType aZombieType10 = ZombieType.RedeyeGargantuar;
 			int[] levels10 = new int[50];
 			array11[num10] = new ZombieAllowedLevels(aZombieType10, levels10);
 			GameConstants.gZombieAllowedLevels = array;
 			GameConstants.gPlantDefs = new PlantDefinition[]
 			{
-				new PlantDefinition(SeedType.SEED_PEASHOOTER, null, ReanimationType.REANIM_PEASHOOTER, 0, 100, 750, PlantSubClass.SUBCLASS_SHOOTER, 150, "PEASHOOTER"),
-				new PlantDefinition(SeedType.SEED_SUNFLOWER, null, ReanimationType.REANIM_SUNFLOWER, 1, 50, 750, PlantSubClass.SUBCLASS_NORMAL, 2500, "SUNFLOWER"),
-				new PlantDefinition(SeedType.SEED_CHERRYBOMB, null, ReanimationType.REANIM_CHERRYBOMB, 3, 150, 5000, PlantSubClass.SUBCLASS_NORMAL, 0, "CHERRY_BOMB"),
-				new PlantDefinition(SeedType.SEED_WALLNUT, null, ReanimationType.REANIM_WALLNUT, 2, 50, 3000, PlantSubClass.SUBCLASS_NORMAL, 0, "WALL_NUT"),
-				new PlantDefinition(SeedType.SEED_POTATOMINE, null, ReanimationType.REANIM_POTATOMINE, 37, 25, 3000, PlantSubClass.SUBCLASS_NORMAL, 0, "POTATO_MINE"),
-				new PlantDefinition(SeedType.SEED_SNOWPEA, null, ReanimationType.REANIM_SNOWPEA, 4, 175, 750, PlantSubClass.SUBCLASS_SHOOTER, 150, "SNOW_PEA"),
-				new PlantDefinition(SeedType.SEED_CHOMPER, null, ReanimationType.REANIM_CHOMPER, 31, 150, 750, PlantSubClass.SUBCLASS_NORMAL, 0, "CHOMPER"),
-				new PlantDefinition(SeedType.SEED_REPEATER, null, ReanimationType.REANIM_REPEATER, 5, 200, 750, PlantSubClass.SUBCLASS_SHOOTER, 150, "REPEATER"),
-				new PlantDefinition(SeedType.SEED_PUFFSHROOM, null, ReanimationType.REANIM_PUFFSHROOM, 6, 0, 750, PlantSubClass.SUBCLASS_SHOOTER, 150, "PUFF_SHROOM"),
-				new PlantDefinition(SeedType.SEED_SUNSHROOM, null, ReanimationType.REANIM_SUNSHROOM, 7, 25, 750, PlantSubClass.SUBCLASS_NORMAL, 2500, "SUN_SHROOM"),
-				new PlantDefinition(SeedType.SEED_FUMESHROOM, null, ReanimationType.REANIM_FUMESHROOM, 9, 75, 750, PlantSubClass.SUBCLASS_SHOOTER, 150, "FUME_SHROOM"),
-				new PlantDefinition(SeedType.SEED_GRAVEBUSTER, null, ReanimationType.REANIM_GRAVE_BUSTER, 40, 75, 750, PlantSubClass.SUBCLASS_NORMAL, 0, "GRAVE_BUSTER"),
-				new PlantDefinition(SeedType.SEED_HYPNOSHROOM, null, ReanimationType.REANIM_HYPNOSHROOM, 10, 75, 3000, PlantSubClass.SUBCLASS_NORMAL, 0, "HYPNO_SHROOM"),
-				new PlantDefinition(SeedType.SEED_SCAREDYSHROOM, null, ReanimationType.REANIM_SCRAREYSHROOM, 33, 25, 750, PlantSubClass.SUBCLASS_SHOOTER, 150, "SCAREDY_SHROOM"),
-				new PlantDefinition(SeedType.SEED_ICESHROOM, null, ReanimationType.REANIM_ICESHROOM, 36, 75, 5000, PlantSubClass.SUBCLASS_NORMAL, 0, "ICE_SHROOM"),
-				new PlantDefinition(SeedType.SEED_DOOMSHROOM, null, ReanimationType.REANIM_DOOMSHROOM, 20, 125, 5000, PlantSubClass.SUBCLASS_NORMAL, 0, "DOOM_SHROOM"),
-				new PlantDefinition(SeedType.SEED_LILYPAD, null, ReanimationType.REANIM_LILYPAD, 19, 25, 750, PlantSubClass.SUBCLASS_NORMAL, 0, "LILY_PAD"),
-				new PlantDefinition(SeedType.SEED_SQUASH, null, ReanimationType.REANIM_SQUASH, 21, 50, 3000, PlantSubClass.SUBCLASS_NORMAL, 0, "SQUASH"),
-				new PlantDefinition(SeedType.SEED_THREEPEATER, null, ReanimationType.REANIM_THREEPEATER, 12, 325, 750, PlantSubClass.SUBCLASS_SHOOTER, 150, "THREEPEATER"),
-				new PlantDefinition(SeedType.SEED_TANGLEKELP, null, ReanimationType.REANIM_TANGLEKELP, 17, 25, 3000, PlantSubClass.SUBCLASS_NORMAL, 0, "TANGLE_KELP"),
-				new PlantDefinition(SeedType.SEED_JALAPENO, null, ReanimationType.REANIM_JALAPENO, 11, 125, 5000, PlantSubClass.SUBCLASS_NORMAL, 0, "JALAPENO"),
-				new PlantDefinition(SeedType.SEED_SPIKEWEED, null, ReanimationType.REANIM_SPIKEWEED, 22, 100, 750, PlantSubClass.SUBCLASS_NORMAL, 0, "SPIKEWEED"),
-				new PlantDefinition(SeedType.SEED_TORCHWOOD, null, ReanimationType.REANIM_TORCHWOOD, 29, 175, 750, PlantSubClass.SUBCLASS_NORMAL, 0, "TORCHWOOD"),
-				new PlantDefinition(SeedType.SEED_TALLNUT, null, ReanimationType.REANIM_TALLNUT, 28, 125, 3000, PlantSubClass.SUBCLASS_NORMAL, 0, "TALL_NUT"),
-				new PlantDefinition(SeedType.SEED_SEASHROOM, null, ReanimationType.REANIM_SEASHROOM, 39, 0, 3000, PlantSubClass.SUBCLASS_SHOOTER, 150, "SEA_SHROOM"),
-				new PlantDefinition(SeedType.SEED_PLANTERN, null, ReanimationType.REANIM_PLANTERN, 38, 25, 3000, PlantSubClass.SUBCLASS_NORMAL, 2500, "PLANTERN"),
-				new PlantDefinition(SeedType.SEED_CACTUS, null, ReanimationType.REANIM_CACTUS, 15, 125, 750, PlantSubClass.SUBCLASS_SHOOTER, 150, "CACTUS"),
-				new PlantDefinition(SeedType.SEED_BLOVER, null, ReanimationType.REANIM_BLOVER, 18, 100, 750, PlantSubClass.SUBCLASS_NORMAL, 0, "BLOVER"),
-				new PlantDefinition(SeedType.SEED_SPLITPEA, null, ReanimationType.REANIM_SPLITPEA, 32, 125, 750, PlantSubClass.SUBCLASS_SHOOTER, 150, "SPLIT_PEA"),
-				new PlantDefinition(SeedType.SEED_STARFRUIT, null, ReanimationType.REANIM_STARFRUIT, 30, 125, 750, PlantSubClass.SUBCLASS_SHOOTER, 150, "STARFRUIT"),
-				new PlantDefinition(SeedType.SEED_PUMPKINSHELL, null, ReanimationType.REANIM_PUMPKIN, 25, 125, 3000, PlantSubClass.SUBCLASS_NORMAL, 0, "PUMPKIN"),
-				new PlantDefinition(SeedType.SEED_MAGNETSHROOM, null, ReanimationType.REANIM_MAGNETSHROOM, 35, 100, 750, PlantSubClass.SUBCLASS_NORMAL, 0, "MAGNET_SHROOM"),
-				new PlantDefinition(SeedType.SEED_CABBAGEPULT, null, ReanimationType.REANIM_CABBAGEPULT, 13, 100, 750, PlantSubClass.SUBCLASS_SHOOTER, 300, "CABBAGE_PULT"),
-				new PlantDefinition(SeedType.SEED_FLOWERPOT, null, ReanimationType.REANIM_FLOWER_POT, 33, 25, 750, PlantSubClass.SUBCLASS_NORMAL, 0, "FLOWER_POT"),
-				new PlantDefinition(SeedType.SEED_KERNELPULT, null, ReanimationType.REANIM_KERNELPULT, 13, 100, 750, PlantSubClass.SUBCLASS_SHOOTER, 300, "KERNEL_PULT"),
-				new PlantDefinition(SeedType.SEED_INSTANT_COFFEE, null, ReanimationType.REANIM_COFFEEBEAN, 33, 75, 750, PlantSubClass.SUBCLASS_NORMAL, 0, "COFFEE_BEAN"),
-				new PlantDefinition(SeedType.SEED_GARLIC, null, ReanimationType.REANIM_GARLIC, 8, 50, 750, PlantSubClass.SUBCLASS_NORMAL, 0, "GARLIC"),
-				new PlantDefinition(SeedType.SEED_UMBRELLA, null, ReanimationType.REANIM_UMBRELLALEAF, 23, 100, 750, PlantSubClass.SUBCLASS_NORMAL, 0, "UMBRELLA_LEAF"),
-				new PlantDefinition(SeedType.SEED_MARIGOLD, null, ReanimationType.REANIM_MARIGOLD, 24, 50, 3000, PlantSubClass.SUBCLASS_NORMAL, 2500, "MARIGOLD"),
-				new PlantDefinition(SeedType.SEED_MELONPULT, null, ReanimationType.REANIM_MELONPULT, 14, 300, 750, PlantSubClass.SUBCLASS_SHOOTER, 300, "MELON_PULT"),
-				new PlantDefinition(SeedType.SEED_GATLINGPEA, null, ReanimationType.REANIM_GATLINGPEA, 5, 250, 5000, PlantSubClass.SUBCLASS_SHOOTER, 150, "GATLING_PEA"),
-				new PlantDefinition(SeedType.SEED_TWINSUNFLOWER, null, ReanimationType.REANIM_TWIN_SUNFLOWER, 1, 150, 5000, PlantSubClass.SUBCLASS_NORMAL, 2500, "TWIN_SUNFLOWER"),
-				new PlantDefinition(SeedType.SEED_GLOOMSHROOM, null, ReanimationType.REANIM_GLOOMSHROOM, 27, 150, 5000, PlantSubClass.SUBCLASS_SHOOTER, 200, "GLOOM_SHROOM"),
-				new PlantDefinition(SeedType.SEED_CATTAIL, null, ReanimationType.REANIM_CATTAIL, 27, 225, 5000, PlantSubClass.SUBCLASS_SHOOTER, 150, "CATTAIL"),
-				new PlantDefinition(SeedType.SEED_WINTERMELON, null, ReanimationType.REANIM_WINTER_MELON, 27, 200, 5000, PlantSubClass.SUBCLASS_SHOOTER, 300, "WINTER_MELON"),
-				new PlantDefinition(SeedType.SEED_GOLD_MAGNET, null, ReanimationType.REANIM_GOLD_MAGNET, 27, 50, 5000, PlantSubClass.SUBCLASS_NORMAL, 0, "GOLD_MAGNET"),
-				new PlantDefinition(SeedType.SEED_SPIKEROCK, null, ReanimationType.REANIM_SPIKEROCK, 27, 125, 5000, PlantSubClass.SUBCLASS_NORMAL, 0, "SPIKEROCK"),
-				new PlantDefinition(SeedType.SEED_COBCANNON, null, ReanimationType.REANIM_COBCANNON, 16, 500, 5000, PlantSubClass.SUBCLASS_NORMAL, 600, "COB_CANNON"),
-				new PlantDefinition(SeedType.SEED_IMITATER, null, ReanimationType.REANIM_IMITATER, 33, 0, 750, PlantSubClass.SUBCLASS_NORMAL, 0, "IMITATER"),
-				new PlantDefinition(SeedType.SEED_EXPLODE_O_NUT, null, ReanimationType.REANIM_WALLNUT, 2, 0, 3000, PlantSubClass.SUBCLASS_NORMAL, 0, "EXPLODE_O_NUT"),
-				new PlantDefinition(SeedType.SEED_GIANT_WALLNUT, null, ReanimationType.REANIM_WALLNUT, 2, 0, 3000, PlantSubClass.SUBCLASS_NORMAL, 0, "GIANT_WALLNUT"),
-				new PlantDefinition(SeedType.SEED_SPROUT, null, ReanimationType.REANIM_NONE, 33, 0, 3000, PlantSubClass.SUBCLASS_NORMAL, 0, "SPROUT"),
-				new PlantDefinition(SeedType.SEED_LEFTPEATER, null, ReanimationType.REANIM_REPEATER, 5, 200, 750, PlantSubClass.SUBCLASS_SHOOTER, 150, "REPEATER")
+				new PlantDefinition(SeedType.Peashooter, null, ReanimationType.Peashooter, 0, 100, 750, PlantSubClass.Shooter, 150, "PEASHOOTER"),
+				new PlantDefinition(SeedType.Sunflower, null, ReanimationType.Sunflower, 1, 50, 750, PlantSubClass.Normal, 2500, "SUNFLOWER"),
+				new PlantDefinition(SeedType.Cherrybomb, null, ReanimationType.Cherrybomb, 3, 150, 5000, PlantSubClass.Normal, 0, "CHERRY_BOMB"),
+				new PlantDefinition(SeedType.Wallnut, null, ReanimationType.Wallnut, 2, 50, 3000, PlantSubClass.Normal, 0, "WALL_NUT"),
+				new PlantDefinition(SeedType.Potatomine, null, ReanimationType.Potatomine, 37, 25, 3000, PlantSubClass.Normal, 0, "POTATO_MINE"),
+				new PlantDefinition(SeedType.Snowpea, null, ReanimationType.Snowpea, 4, 175, 750, PlantSubClass.Shooter, 150, "SNOW_PEA"),
+				new PlantDefinition(SeedType.Chomper, null, ReanimationType.Chomper, 31, 150, 750, PlantSubClass.Normal, 0, "CHOMPER"),
+				new PlantDefinition(SeedType.Repeater, null, ReanimationType.Repeater, 5, 200, 750, PlantSubClass.Shooter, 150, "REPEATER"),
+				new PlantDefinition(SeedType.Puffshroom, null, ReanimationType.Puffshroom, 6, 0, 750, PlantSubClass.Shooter, 150, "PUFF_SHROOM"),
+				new PlantDefinition(SeedType.Sunshroom, null, ReanimationType.Sunshroom, 7, 25, 750, PlantSubClass.Normal, 2500, "SUN_SHROOM"),
+				new PlantDefinition(SeedType.Fumeshroom, null, ReanimationType.Fumeshroom, 9, 75, 750, PlantSubClass.Shooter, 150, "FUME_SHROOM"),
+				new PlantDefinition(SeedType.Gravebuster, null, ReanimationType.GraveBuster, 40, 75, 750, PlantSubClass.Normal, 0, "GRAVE_BUSTER"),
+				new PlantDefinition(SeedType.Hypnoshroom, null, ReanimationType.Hypnoshroom, 10, 75, 3000, PlantSubClass.Normal, 0, "HYPNO_SHROOM"),
+				new PlantDefinition(SeedType.Scaredyshroom, null, ReanimationType.Scrareyshroom, 33, 25, 750, PlantSubClass.Shooter, 150, "SCAREDY_SHROOM"),
+				new PlantDefinition(SeedType.Iceshroom, null, ReanimationType.Iceshroom, 36, 75, 5000, PlantSubClass.Normal, 0, "ICE_SHROOM"),
+				new PlantDefinition(SeedType.Doomshroom, null, ReanimationType.Doomshroom, 20, 125, 5000, PlantSubClass.Normal, 0, "DOOM_SHROOM"),
+				new PlantDefinition(SeedType.Lilypad, null, ReanimationType.Lilypad, 19, 25, 750, PlantSubClass.Normal, 0, "LILY_PAD"),
+				new PlantDefinition(SeedType.Squash, null, ReanimationType.Squash, 21, 50, 3000, PlantSubClass.Normal, 0, "SQUASH"),
+				new PlantDefinition(SeedType.Threepeater, null, ReanimationType.Threepeater, 12, 325, 750, PlantSubClass.Shooter, 150, "THREEPEATER"),
+				new PlantDefinition(SeedType.Tanglekelp, null, ReanimationType.Tanglekelp, 17, 25, 3000, PlantSubClass.Normal, 0, "TANGLE_KELP"),
+				new PlantDefinition(SeedType.Jalapeno, null, ReanimationType.Jalapeno, 11, 125, 5000, PlantSubClass.Normal, 0, "JALAPENO"),
+				new PlantDefinition(SeedType.Spikeweed, null, ReanimationType.Spikeweed, 22, 100, 750, PlantSubClass.Normal, 0, "SPIKEWEED"),
+				new PlantDefinition(SeedType.Torchwood, null, ReanimationType.Torchwood, 29, 175, 750, PlantSubClass.Normal, 0, "TORCHWOOD"),
+				new PlantDefinition(SeedType.Tallnut, null, ReanimationType.Tallnut, 28, 125, 3000, PlantSubClass.Normal, 0, "TALL_NUT"),
+				new PlantDefinition(SeedType.Seashroom, null, ReanimationType.Seashroom, 39, 0, 3000, PlantSubClass.Shooter, 150, "SEA_SHROOM"),
+				new PlantDefinition(SeedType.Plantern, null, ReanimationType.Plantern, 38, 25, 3000, PlantSubClass.Normal, 2500, "PLANTERN"),
+				new PlantDefinition(SeedType.Cactus, null, ReanimationType.Cactus, 15, 125, 750, PlantSubClass.Shooter, 150, "CACTUS"),
+				new PlantDefinition(SeedType.Blover, null, ReanimationType.Blover, 18, 100, 750, PlantSubClass.Normal, 0, "BLOVER"),
+				new PlantDefinition(SeedType.Splitpea, null, ReanimationType.Splitpea, 32, 125, 750, PlantSubClass.Shooter, 150, "SPLIT_PEA"),
+				new PlantDefinition(SeedType.Starfruit, null, ReanimationType.Starfruit, 30, 125, 750, PlantSubClass.Shooter, 150, "STARFRUIT"),
+				new PlantDefinition(SeedType.Pumpkinshell, null, ReanimationType.Pumpkin, 25, 125, 3000, PlantSubClass.Normal, 0, "PUMPKIN"),
+				new PlantDefinition(SeedType.Magnetshroom, null, ReanimationType.Magnetshroom, 35, 100, 750, PlantSubClass.Normal, 0, "MAGNET_SHROOM"),
+				new PlantDefinition(SeedType.Cabbagepult, null, ReanimationType.Cabbagepult, 13, 100, 750, PlantSubClass.Shooter, 300, "CABBAGE_PULT"),
+				new PlantDefinition(SeedType.Flowerpot, null, ReanimationType.FlowerPot, 33, 25, 750, PlantSubClass.Normal, 0, "FLOWER_POT"),
+				new PlantDefinition(SeedType.Kernelpult, null, ReanimationType.Kernelpult, 13, 100, 750, PlantSubClass.Shooter, 300, "KERNEL_PULT"),
+				new PlantDefinition(SeedType.InstantCoffee, null, ReanimationType.Coffeebean, 33, 75, 750, PlantSubClass.Normal, 0, "COFFEE_BEAN"),
+				new PlantDefinition(SeedType.Garlic, null, ReanimationType.Garlic, 8, 50, 750, PlantSubClass.Normal, 0, "GARLIC"),
+				new PlantDefinition(SeedType.Umbrella, null, ReanimationType.Umbrellaleaf, 23, 100, 750, PlantSubClass.Normal, 0, "UMBRELLA_LEAF"),
+				new PlantDefinition(SeedType.Marigold, null, ReanimationType.Marigold, 24, 50, 3000, PlantSubClass.Normal, 2500, "MARIGOLD"),
+				new PlantDefinition(SeedType.Melonpult, null, ReanimationType.Melonpult, 14, 300, 750, PlantSubClass.Shooter, 300, "MELON_PULT"),
+				new PlantDefinition(SeedType.Gatlingpea, null, ReanimationType.Gatlingpea, 5, 250, 5000, PlantSubClass.Shooter, 150, "GATLING_PEA"),
+				new PlantDefinition(SeedType.Twinsunflower, null, ReanimationType.TwinSunflower, 1, 150, 5000, PlantSubClass.Normal, 2500, "TWIN_SUNFLOWER"),
+				new PlantDefinition(SeedType.Gloomshroom, null, ReanimationType.Gloomshroom, 27, 150, 5000, PlantSubClass.Shooter, 200, "GLOOM_SHROOM"),
+				new PlantDefinition(SeedType.Cattail, null, ReanimationType.Cattail, 27, 225, 5000, PlantSubClass.Shooter, 150, "CATTAIL"),
+				new PlantDefinition(SeedType.Wintermelon, null, ReanimationType.WinterMelon, 27, 200, 5000, PlantSubClass.Shooter, 300, "WINTER_MELON"),
+				new PlantDefinition(SeedType.GoldMagnet, null, ReanimationType.GoldMagnet, 27, 50, 5000, PlantSubClass.Normal, 0, "GOLD_MAGNET"),
+				new PlantDefinition(SeedType.Spikerock, null, ReanimationType.Spikerock, 27, 125, 5000, PlantSubClass.Normal, 0, "SPIKEROCK"),
+				new PlantDefinition(SeedType.Cobcannon, null, ReanimationType.Cobcannon, 16, 500, 5000, PlantSubClass.Normal, 600, "COB_CANNON"),
+				new PlantDefinition(SeedType.Imitater, null, ReanimationType.Imitater, 33, 0, 750, PlantSubClass.Normal, 0, "IMITATER"),
+				new PlantDefinition(SeedType.ExplodeONut, null, ReanimationType.Wallnut, 2, 0, 3000, PlantSubClass.Normal, 0, "EXPLODE_O_NUT"),
+				new PlantDefinition(SeedType.GiantWallnut, null, ReanimationType.Wallnut, 2, 0, 3000, PlantSubClass.Normal, 0, "GIANT_WALLNUT"),
+				new PlantDefinition(SeedType.Sprout, null, ReanimationType.None, 33, 0, 3000, PlantSubClass.Normal, 0, "SPROUT"),
+				new PlantDefinition(SeedType.Leftpeater, null, ReanimationType.Repeater, 5, 200, 750, PlantSubClass.Shooter, 150, "REPEATER")
 			};
 			GameConstants.NUM_BACKUP_DANCERS = 4;
 			GameConstants.MAX_ZOMBIE_FOLLOWERS = 4;
@@ -1749,54 +1749,54 @@ namespace Lawn
 			GameConstants.BOSS_BALL_OFFSET_Y = -90f;
 			GameConstants.gZombieDefs = new ZombieDefinition[]
 			{
-				new ZombieDefinition(ZombieType.ZOMBIE_NORMAL, ReanimationType.REANIM_ZOMBIE, 1, 1, 1, 4000, "ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_FLAG, ReanimationType.REANIM_ZOMBIE, 1, 1, 1, 0, "FLAG_ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_TRAFFIC_CONE, ReanimationType.REANIM_ZOMBIE, 2, 3, 1, 4000, "CONEHEAD_ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_POLEVAULTER, ReanimationType.REANIM_POLEVAULTER, 2, 6, 5, 2000, "POLE_VAULTING_ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_PAIL, ReanimationType.REANIM_ZOMBIE, 4, 8, 1, 3000, "BUCKETHEAD_ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_NEWSPAPER, ReanimationType.REANIM_ZOMBIE_NEWSPAPER, 2, 11, 1, 1000, "NEWSPAPER_ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_DOOR, ReanimationType.REANIM_ZOMBIE, 4, 13, 5, 3500, "SCREEN_DOOR_ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_FOOTBALL, ReanimationType.REANIM_ZOMBIE_FOOTBALL, 7, 16, 5, 2000, "FOOTBALL_ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_DANCER, ReanimationType.REANIM_DISCO, 5, 18, 5, 1000, "DANCING_ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_BACKUP_DANCER, ReanimationType.REANIM_BACKUP_DANCER, 1, 18, 1, 0, "BACKUP_DANCER"),
-				new ZombieDefinition(ZombieType.ZOMBIE_DUCKY_TUBE, ReanimationType.REANIM_ZOMBIE, 1, 21, 5, 0, "DUCKY_TUBE_ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_SNORKEL, ReanimationType.REANIM_SNORKEL, 3, 23, 10, 2000, "SNORKEL_ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_ZAMBONI, ReanimationType.REANIM_ZOMBIE_ZAMBONI, 7, 26, 10, 2000, "ZOMBONI"),
-				new ZombieDefinition(ZombieType.ZOMBIE_BOBSLED, ReanimationType.REANIM_BOBSLED, 3, 26, 10, 2000, "ZOMBIE_BOBSLED_TEAM"),
-				new ZombieDefinition(ZombieType.ZOMBIE_DOLPHIN_RIDER, ReanimationType.REANIM_ZOMBIE_DOLPHINRIDER, 3, 28, 10, 1500, "DOLPHIN_RIDER_ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_JACK_IN_THE_BOX, ReanimationType.REANIM_JACKINTHEBOX, 3, 31, 10, 1000, "JACK_IN_THE_BOX_ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_BALLOON, ReanimationType.REANIM_BALLOON, 2, 33, 10, 2000, "BALLOON_ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_DIGGER, ReanimationType.REANIM_DIGGER, 4, 36, 10, 1000, "DIGGER_ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_POGO, ReanimationType.REANIM_POGO, 4, 38, 10, 1000, "POGO_ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_YETI, ReanimationType.REANIM_YETI, 4, 40, 1, 1, "ZOMBIE_YETI"),
-				new ZombieDefinition(ZombieType.ZOMBIE_BUNGEE, ReanimationType.REANIM_BUNGEE, 3, 41, 10, 1000, "BUNGEE_ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_LADDER, ReanimationType.REANIM_LADDER, 4, 43, 10, 1000, "LADDER_ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_CATAPULT, ReanimationType.REANIM_CATAPULT, 5, 46, 10, 1500, "CATAPULT_ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_GARGANTUAR, ReanimationType.REANIM_GARGANTUAR, 10, 48, 15, 1500, "GARGANTUAR"),
-				new ZombieDefinition(ZombieType.ZOMBIE_IMP, ReanimationType.REANIM_IMP, 10, 48, 1, 0, "IMP"),
-				new ZombieDefinition(ZombieType.ZOMBIE_BOSS, ReanimationType.REANIM_BOSS, 10, 50, 1, 0, "BOSS"),
-				new ZombieDefinition(ZombieType.ZOMBIE_PEA_HEAD, ReanimationType.REANIM_ZOMBIE, 1, 99, 1, 4000, "ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_WALLNUT_HEAD, ReanimationType.REANIM_ZOMBIE, 4, 99, 1, 3000, "ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_JALAPENO_HEAD, ReanimationType.REANIM_ZOMBIE, 3, 99, 10, 1000, "ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_GATLING_HEAD, ReanimationType.REANIM_ZOMBIE, 3, 99, 10, 2000, "ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_SQUASH_HEAD, ReanimationType.REANIM_ZOMBIE, 3, 99, 10, 2000, "ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_TALLNUT_HEAD, ReanimationType.REANIM_ZOMBIE, 4, 99, 10, 2000, "ZOMBIE"),
-				new ZombieDefinition(ZombieType.ZOMBIE_REDEYE_GARGANTUAR, ReanimationType.REANIM_GARGANTUAR, 10, 48, 15, 6000, "REDEYED_GARGANTUAR")
+				new ZombieDefinition(ZombieType.Normal, ReanimationType.Zombie, 1, 1, 1, 4000, "ZOMBIE"),
+				new ZombieDefinition(ZombieType.Flag, ReanimationType.Zombie, 1, 1, 1, 0, "FLAG_ZOMBIE"),
+				new ZombieDefinition(ZombieType.TrafficCone, ReanimationType.Zombie, 2, 3, 1, 4000, "CONEHEAD_ZOMBIE"),
+				new ZombieDefinition(ZombieType.Polevaulter, ReanimationType.Polevaulter, 2, 6, 5, 2000, "POLE_VAULTING_ZOMBIE"),
+				new ZombieDefinition(ZombieType.Pail, ReanimationType.Zombie, 4, 8, 1, 3000, "BUCKETHEAD_ZOMBIE"),
+				new ZombieDefinition(ZombieType.Newspaper, ReanimationType.ZombieNewspaper, 2, 11, 1, 1000, "NEWSPAPER_ZOMBIE"),
+				new ZombieDefinition(ZombieType.Door, ReanimationType.Zombie, 4, 13, 5, 3500, "SCREEN_DOOR_ZOMBIE"),
+				new ZombieDefinition(ZombieType.Football, ReanimationType.ZombieFootball, 7, 16, 5, 2000, "FOOTBALL_ZOMBIE"),
+				new ZombieDefinition(ZombieType.Dancer, ReanimationType.Disco, 5, 18, 5, 1000, "DANCING_ZOMBIE"),
+				new ZombieDefinition(ZombieType.BackupDancer, ReanimationType.BackupDancer, 1, 18, 1, 0, "BACKUP_DANCER"),
+				new ZombieDefinition(ZombieType.DuckyTube, ReanimationType.Zombie, 1, 21, 5, 0, "DUCKY_TUBE_ZOMBIE"),
+				new ZombieDefinition(ZombieType.Snorkel, ReanimationType.Snorkel, 3, 23, 10, 2000, "SNORKEL_ZOMBIE"),
+				new ZombieDefinition(ZombieType.Zamboni, ReanimationType.ZombieZamboni, 7, 26, 10, 2000, "ZOMBONI"),
+				new ZombieDefinition(ZombieType.Bobsled, ReanimationType.Bobsled, 3, 26, 10, 2000, "ZOMBIE_BOBSLED_TEAM"),
+				new ZombieDefinition(ZombieType.DolphinRider, ReanimationType.ZombieDolphinrider, 3, 28, 10, 1500, "DOLPHIN_RIDER_ZOMBIE"),
+				new ZombieDefinition(ZombieType.JackInTheBox, ReanimationType.Jackinthebox, 3, 31, 10, 1000, "JACK_IN_THE_BOX_ZOMBIE"),
+				new ZombieDefinition(ZombieType.Balloon, ReanimationType.Balloon, 2, 33, 10, 2000, "BALLOON_ZOMBIE"),
+				new ZombieDefinition(ZombieType.Digger, ReanimationType.Digger, 4, 36, 10, 1000, "DIGGER_ZOMBIE"),
+				new ZombieDefinition(ZombieType.Pogo, ReanimationType.Pogo, 4, 38, 10, 1000, "POGO_ZOMBIE"),
+				new ZombieDefinition(ZombieType.Yeti, ReanimationType.Yeti, 4, 40, 1, 1, "ZOMBIE_YETI"),
+				new ZombieDefinition(ZombieType.Bungee, ReanimationType.Bungee, 3, 41, 10, 1000, "BUNGEE_ZOMBIE"),
+				new ZombieDefinition(ZombieType.Ladder, ReanimationType.Ladder, 4, 43, 10, 1000, "LADDER_ZOMBIE"),
+				new ZombieDefinition(ZombieType.Catapult, ReanimationType.Catapult, 5, 46, 10, 1500, "CATAPULT_ZOMBIE"),
+				new ZombieDefinition(ZombieType.Gargantuar, ReanimationType.Gargantuar, 10, 48, 15, 1500, "GARGANTUAR"),
+				new ZombieDefinition(ZombieType.Imp, ReanimationType.Imp, 10, 48, 1, 0, "IMP"),
+				new ZombieDefinition(ZombieType.Boss, ReanimationType.Boss, 10, 50, 1, 0, "BOSS"),
+				new ZombieDefinition(ZombieType.PeaHead, ReanimationType.Zombie, 1, 99, 1, 4000, "ZOMBIE"),
+				new ZombieDefinition(ZombieType.WallnutHead, ReanimationType.Zombie, 4, 99, 1, 3000, "ZOMBIE"),
+				new ZombieDefinition(ZombieType.JalapenoHead, ReanimationType.Zombie, 3, 99, 10, 1000, "ZOMBIE"),
+				new ZombieDefinition(ZombieType.GatlingHead, ReanimationType.Zombie, 3, 99, 10, 2000, "ZOMBIE"),
+				new ZombieDefinition(ZombieType.SquashHead, ReanimationType.Zombie, 3, 99, 10, 2000, "ZOMBIE"),
+				new ZombieDefinition(ZombieType.TallnutHead, ReanimationType.Zombie, 4, 99, 10, 2000, "ZOMBIE"),
+				new ZombieDefinition(ZombieType.RedeyeGargantuar, ReanimationType.Gargantuar, 10, 48, 15, 6000, "REDEYED_GARGANTUAR")
 			};
 			GameConstants.gBossZombieList = new ZombieType[]
 			{
-				ZombieType.ZOMBIE_TRAFFIC_CONE,
-				ZombieType.ZOMBIE_PAIL,
-				ZombieType.ZOMBIE_FOOTBALL,
-				ZombieType.ZOMBIE_POLEVAULTER,
-				ZombieType.ZOMBIE_JACK_IN_THE_BOX,
-				ZombieType.ZOMBIE_LADDER,
-				ZombieType.ZOMBIE_ZAMBONI,
-				ZombieType.ZOMBIE_CATAPULT,
-				ZombieType.ZOMBIE_POGO,
-				ZombieType.ZOMBIE_NEWSPAPER,
-				ZombieType.ZOMBIE_DOOR,
-				ZombieType.ZOMBIE_GARGANTUAR
+				ZombieType.TrafficCone,
+				ZombieType.Pail,
+				ZombieType.Football,
+				ZombieType.Polevaulter,
+				ZombieType.JackInTheBox,
+				ZombieType.Ladder,
+				ZombieType.Zamboni,
+				ZombieType.Catapult,
+				ZombieType.Pogo,
+				ZombieType.Newspaper,
+				ZombieType.Door,
+				ZombieType.Gargantuar
 			};
 			GameConstants.TESTING_LOAD_BAR = false;
 			GameConstants.BAR_FADE_TIME = 8;
@@ -1824,21 +1824,21 @@ namespace Lawn
 			GameConstants.gUserVersion = 13;
 			GameConstants.gProjectileDefinition = new ProjectileDefinition[]
 			{
-				new ProjectileDefinition(ProjectileType.PROJECTILE_PEA, 0, 20),
-				new ProjectileDefinition(ProjectileType.PROJECTILE_SNOWPEA, 0, 20),
-				new ProjectileDefinition(ProjectileType.PROJECTILE_CABBAGE, 0, 40),
-				new ProjectileDefinition(ProjectileType.PROJECTILE_MELON, 0, 80),
-				new ProjectileDefinition(ProjectileType.PROJECTILE_PUFF, 0, 20),
-				new ProjectileDefinition(ProjectileType.PROJECTILE_WINTERMELON, 0, 80),
-				new ProjectileDefinition(ProjectileType.PROJECTILE_FIREBALL, 0, 40),
-				new ProjectileDefinition(ProjectileType.PROJECTILE_STAR, 0, 20),
-				new ProjectileDefinition(ProjectileType.PROJECTILE_SPIKE, 0, 20),
-				new ProjectileDefinition(ProjectileType.PROJECTILE_BASKETBALL, 0, 75),
-				new ProjectileDefinition(ProjectileType.PROJECTILE_KERNEL, 0, 20),
-				new ProjectileDefinition(ProjectileType.PROJECTILE_COBBIG, 0, 300),
-				new ProjectileDefinition(ProjectileType.PROJECTILE_BUTTER, 0, 40),
-				new ProjectileDefinition(ProjectileType.PROJECTILE_ZOMBIE_PEA, 0, 20),
-				new ProjectileDefinition(ProjectileType.PROJECTILE_ZOMBIE_PEA_MIND_CONTROL, 0, 20)
+				new ProjectileDefinition(ProjectileType.Pea, 0, 20),
+				new ProjectileDefinition(ProjectileType.Snowpea, 0, 20),
+				new ProjectileDefinition(ProjectileType.Cabbage, 0, 40),
+				new ProjectileDefinition(ProjectileType.Melon, 0, 80),
+				new ProjectileDefinition(ProjectileType.Puff, 0, 20),
+				new ProjectileDefinition(ProjectileType.Wintermelon, 0, 80),
+				new ProjectileDefinition(ProjectileType.Fireball, 0, 40),
+				new ProjectileDefinition(ProjectileType.Star, 0, 20),
+				new ProjectileDefinition(ProjectileType.Spike, 0, 20),
+				new ProjectileDefinition(ProjectileType.Basketball, 0, 75),
+				new ProjectileDefinition(ProjectileType.Kernel, 0, 20),
+				new ProjectileDefinition(ProjectileType.Cobbig, 0, 300),
+				new ProjectileDefinition(ProjectileType.Butter, 0, 40),
+				new ProjectileDefinition(ProjectileType.ZombiePea, 0, 20),
+				new ProjectileDefinition(ProjectileType.ZombiePeaMindControl, 0, 20)
 			};
 			GameConstants.SEED_BANK_OFFSET_X = 0;
 			GameConstants.SEED_BANK_OFFSET_X_END = 0;

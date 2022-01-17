@@ -470,20 +470,20 @@ namespace Lawn
 
 		public enum ButtonLabelJustify
 		{
-			BUTTON_LABEL_LEFT = -1,
-			BUTTON_LABEL_CENTER,
-			BUTTON_LABEL_RIGHT
+			Left = -1,
+			Center,
+			Right
 		}
 
 		public enum ButtonColours
 		{
-			COLOR_LABEL,
-			COLOR_LABEL_HILITE,
-			COLOR_DARK_OUTLINE,
-			COLOR_LIGHT_OUTLINE,
-			COLOR_MEDIUM_OUTLINE,
-			COLOR_BKG,
-			NUM_COLORS
+			Label,
+			LabelHilite,
+			DarkOutline,
+			LightOutline,
+			MediumOutline,
+			Bkg,
+			ColorCount
 		}
 	}
 }

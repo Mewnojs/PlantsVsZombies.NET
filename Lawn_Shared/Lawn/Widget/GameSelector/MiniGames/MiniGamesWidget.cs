@@ -13,7 +13,7 @@ namespace Lawn
 			mListener = theListener;
 			mWidth = 0;
 			mHeight = AtlasResources.IMAGE_MINI_GAME_FRAME.mHeight + 20;
-			mMode = MiniGameMode.MINI_GAME_MODE_GAMES;
+			mMode = MiniGameMode.Games;
 		}
 
 		public void SwitchMode(MiniGameMode mode)
@@ -30,19 +30,19 @@ namespace Lawn
 			}
 			switch (mMode)
 			{
-			case MiniGameMode.MINI_GAME_MODE_GAMES:
+			case MiniGameMode.Games:
 				if (mApp.mPlayerInfo.mMiniGamesUnlocked < 19)
 				{
 					return mApp.mPlayerInfo.mMiniGamesUnlocked;
 				}
 				return 19;
-			case MiniGameMode.MINI_GAME_MODE_I_ZOMBIE:
+			case MiniGameMode.IZombie:
 				if (mApp.mPlayerInfo.mIZombieUnlocked < 10)
 				{
 					return mApp.mPlayerInfo.mIZombieUnlocked;
 				}
 				return 10;
-			case MiniGameMode.MINI_GAME_MODE_VASEBREAKER:
+			case MiniGameMode.Vasebreaker:
 				if (mApp.mPlayerInfo.mVasebreakerUnlocked < 10)
 				{
 					return mApp.mPlayerInfo.mVasebreakerUnlocked;
@@ -61,19 +61,19 @@ namespace Lawn
 			}
 			switch (mMode)
 			{
-			case MiniGameMode.MINI_GAME_MODE_GAMES:
+			case MiniGameMode.Games:
 				if (mApp.mPlayerInfo.mMiniGamesUnlocked != 19)
 				{
 					return true;
 				}
 				break;
-			case MiniGameMode.MINI_GAME_MODE_I_ZOMBIE:
+			case MiniGameMode.IZombie:
 				if (mApp.mPlayerInfo.mIZombieUnlocked != 10)
 				{
 					return true;
 				}
 				break;
-			case MiniGameMode.MINI_GAME_MODE_VASEBREAKER:
+			case MiniGameMode.Vasebreaker:
 				if (mApp.mPlayerInfo.mVasebreakerUnlocked != 10)
 				{
 					return true;
@@ -147,7 +147,7 @@ namespace Lawn
 		{
 			switch (mMode)
 			{
-			case MiniGameMode.MINI_GAME_MODE_GAMES:
+			case MiniGameMode.Games:
 				if (!mApp.HasFinishedAdventure())
 				{
 					mApp.LawnMessageBox(49, "[MODE_LOCKED]", "[FINISH_ADVENTURE_TOOLTIP]", "[DIALOG_BUTTON_OK]", "", 3, null);
@@ -155,7 +155,7 @@ namespace Lawn
 				}
 				mApp.LawnMessageBox(49, "[MODE_LOCKED]", "[ONE_MORE_CHALLENGE_TOOLTIP]", "[DIALOG_BUTTON_OK]", "", 3, null);
 				return;
-			case MiniGameMode.MINI_GAME_MODE_I_ZOMBIE:
+			case MiniGameMode.IZombie:
 				if (!mApp.HasFinishedAdventure() && mApp.mPlayerInfo.mIZombieUnlocked == 3)
 				{
 					mApp.LawnMessageBox(49, "[MODE_LOCKED]", "[FINISH_ADVENTURE_TOOLTIP]", "[DIALOG_BUTTON_OK]", "", 3, null);
@@ -163,7 +163,7 @@ namespace Lawn
 				}
 				mApp.LawnMessageBox(49, "[MODE_LOCKED]", "[ONE_MORE_IZOMBIE_TOOLTIP]", "[DIALOG_BUTTON_OK]", "", 3, null);
 				return;
-			case MiniGameMode.MINI_GAME_MODE_VASEBREAKER:
+			case MiniGameMode.Vasebreaker:
 				if (!mApp.HasFinishedAdventure() && mApp.mPlayerInfo.mVasebreakerUnlocked == 3)
 				{
 					mApp.LawnMessageBox(49, "[MODE_LOCKED]", "[FINISH_ADVENTURE_TOOLTIP]", "[DIALOG_BUTTON_OK]", "", 3, null);
@@ -193,11 +193,11 @@ namespace Lawn
 		{
 			switch (mMode)
 			{
-			case MiniGameMode.MINI_GAME_MODE_GAMES:
+			case MiniGameMode.Games:
 				return GetGameModeMiniGames(index);
-			case MiniGameMode.MINI_GAME_MODE_I_ZOMBIE:
+			case MiniGameMode.IZombie:
 				return GetGameModeIZombie(index);
-			case MiniGameMode.MINI_GAME_MODE_VASEBREAKER:
+			case MiniGameMode.Vasebreaker:
 				return GetGameModeVasebreaker(index);
 			default:
 				return -1;
@@ -208,15 +208,15 @@ namespace Lawn
 		{
 			switch (mMode)
 			{
-			case MiniGameMode.MINI_GAME_MODE_GAMES:
+			case MiniGameMode.Games:
 				return TodStringFile.TodStringTranslate(ChallengeScreen.gChallengeDefs[index + 14].mChallengeName);
-			case MiniGameMode.MINI_GAME_MODE_I_ZOMBIE:
+			case MiniGameMode.IZombie:
 				if (index == 10)
 				{
 					return TodStringFile.TodStringTranslate("[I_ZOMBIE_ENDLESS]");
 				}
 				return TodStringFile.TodStringTranslate("[I_ZOMBIE_" + index.ToString() + "]");
-			case MiniGameMode.MINI_GAME_MODE_VASEBREAKER:
+			case MiniGameMode.Vasebreaker:
 				if (index == 10)
 				{
 					return TodStringFile.TodStringTranslate("[SCARY_POTTER_ENDLESS]");
@@ -231,11 +231,11 @@ namespace Lawn
 		{
 			switch (mMode)
 			{
-			case MiniGameMode.MINI_GAME_MODE_GAMES:
+			case MiniGameMode.Games:
 				return GetImageForGames(index);
-			case MiniGameMode.MINI_GAME_MODE_I_ZOMBIE:
+			case MiniGameMode.IZombie:
 				return GetImageForIZombie(index);
-			case MiniGameMode.MINI_GAME_MODE_VASEBREAKER:
+			case MiniGameMode.Vasebreaker:
 				return GetImageForVasebreaker(index);
 			default:
 				return null;

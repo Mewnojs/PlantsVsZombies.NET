@@ -4,24 +4,24 @@ namespace Lawn
 {
 	public enum DrawVariation
 	{
-		VARIATION_NORMAL,
-		VARIATION_IMITATER,
-		VARIATION_MARIGOLD_WHITE,
-		VARIATION_MARIGOLD_MAGENTA,
-		VARIATION_MARIGOLD_ORANGE,
-		VARIATION_MARIGOLD_PINK,
-		VARIATION_MARIGOLD_LIGHT_BLUE,
-		VARIATION_MARIGOLD_RED,
-		VARIATION_MARIGOLD_BLUE,
-		VARIATION_MARIGOLD_VIOLET,
-		VARIATION_MARIGOLD_LAVENDER,
-		VARIATION_MARIGOLD_YELLOW,
-		VARIATION_MARIGOLD_LIGHT_GREEN,
-		VARIATION_ZEN_GARDEN,
-		VARIATION_ZEN_GARDEN_WATER,
-		VARIATION_SPROUT_NO_FLOWER,
-		VARIATION_IMITATER_LESS,
-		VARIATION_AQUARIUM,
-		VARIATION_BIGIDLE
+		Normal,
+		Imitater,
+		MarigoldWhite,
+		MarigoldMagenta,
+		MarigoldOrange,
+		MarigoldPink,
+		MarigoldLightBlue,
+		MarigoldRed,
+		MarigoldBlue,
+		MarigoldViolet,
+		MarigoldLavender,
+		MarigoldYellow,
+		MarigoldLightGreen,
+		ZenGarden,
+		ZenGardenWater,
+		SproutNoFlower,
+		ImitaterLess,
+		Aquarium,
+		Bigidle
 	}
 }

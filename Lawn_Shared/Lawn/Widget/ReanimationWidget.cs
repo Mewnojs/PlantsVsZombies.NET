@@ -54,7 +54,7 @@ namespace Lawn
 			mPosX = x;
 			mPosY = y;
 			mReanim = mApp.mEffectSystem.mReanimationHolder.AllocReanimation(x, y, 0, theReanimationType);
-			mReanim.mLoopType = ReanimLoopType.REANIM_LOOP;
+			mReanim.mLoopType = ReanimLoopType.Loop;
 			mReanim.mIsAttachment = true;
 			if (mReanim.TrackExists(GlobalMembersReanimIds.ReanimTrackId_anim_idle))
 			{

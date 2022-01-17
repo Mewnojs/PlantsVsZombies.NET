@@ -69,7 +69,7 @@ namespace Sexy.TodLib
 		{
 			string theText2 = TodStringFile.TodStringTranslate(theText);
 			TRect theRect2 = theRect;
-			if (theJustification == DrawStringJustification.DS_ALIGN_LEFT_VERTICAL_MIDDLE || theJustification == DrawStringJustification.DS_ALIGN_RIGHT_VERTICAL_MIDDLE || theJustification == DrawStringJustification.DS_ALIGN_CENTER_VERTICAL_MIDDLE)
+			if (theJustification == DrawStringJustification.LeftVerticalMiddle || theJustification == DrawStringJustification.RightVerticalMiddle || theJustification == DrawStringJustification.CenterVerticalMiddle)
 			{
 				int num = TodStringFile.TodDrawStringWrappedHelper(g, theText2, theRect2, theFont, theColor, theJustification, false, widowSupression);
 				theRect2.mY += (theRect.mHeight - num) / 2;
@@ -86,7 +86,7 @@ namespace Sexy.TodLib
 		{
 			string theText2 = TodStringFile.TodStringTranslate(theText);
 			TRect theRect2 = theRect;
-			if (theJustification == DrawStringJustification.DS_ALIGN_LEFT_VERTICAL_MIDDLE || theJustification == DrawStringJustification.DS_ALIGN_RIGHT_VERTICAL_MIDDLE || theJustification == DrawStringJustification.DS_ALIGN_CENTER_VERTICAL_MIDDLE)
+			if (theJustification == DrawStringJustification.LeftVerticalMiddle || theJustification == DrawStringJustification.RightVerticalMiddle || theJustification == DrawStringJustification.CenterVerticalMiddle)
 			{
 				int num = TodStringFile.TodDrawStringWrappedHelper(g, theText2, theRect2, theFont, theColor, theJustification, false, widowSupression);
 				theRect2.mY += (theRect.mHeight - num) / 2;
@@ -266,13 +266,13 @@ namespace Sexy.TodLib
 			{
 				switch (theJustification)
 				{
-				case DrawStringJustification.DS_ALIGN_RIGHT:
-				case DrawStringJustification.DS_ALIGN_RIGHT_VERTICAL_MIDDLE:
-					theX += theWidth - TodStringFile.TodWriteString(g, theString, theX, theY, theCurrentFormat, theWidth, DrawStringJustification.DS_ALIGN_LEFT, false, theOffset, theLength);
+				case DrawStringJustification.Right:
+				case DrawStringJustification.RightVerticalMiddle:
+					theX += theWidth - TodStringFile.TodWriteString(g, theString, theX, theY, theCurrentFormat, theWidth, DrawStringJustification.Left, false, theOffset, theLength);
 					break;
-				case DrawStringJustification.DS_ALIGN_CENTER:
-				case DrawStringJustification.DS_ALIGN_CENTER_VERTICAL_MIDDLE:
-					theX += (theWidth - TodStringFile.TodWriteString(g, theString, theX, theY, theCurrentFormat, theWidth, DrawStringJustification.DS_ALIGN_LEFT, false, theOffset, theLength)) / 2;
+				case DrawStringJustification.Center:
+				case DrawStringJustification.CenterVerticalMiddle:
+					theX += (theWidth - TodStringFile.TodWriteString(g, theString, theX, theY, theCurrentFormat, theWidth, DrawStringJustification.Left, false, theOffset, theLength)) / 2;
 					break;
 				}
 			}

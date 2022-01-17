@@ -602,12 +602,12 @@ namespace Sexy
 
 		public enum ScrollbarColors
 		{
-			COLOR_BAR,
-			COLOR_BAR_PAGING,
-			COLOR_THUMB,
-			COLOR_DARK_OUTLINE,
-			COLOR_MEDIUM_OUTLINE,
-			COLOR_LIGHT_OUTLINE,
+			Bar,
+			BarPaging,
+			Thumb,
+			DarkOutline,
+			MediumOutline,
+			LightOutline,
 			NUM_COLORS
 		}
 	}

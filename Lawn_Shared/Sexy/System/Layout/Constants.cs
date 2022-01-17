@@ -37,7 +37,7 @@ namespace Sexy
 			Constants.SCROLL_AREA_OFFSET_Y = 28;
 			Constants.DIALOG_HEADER_OFFSET = 24;
 			Constants.WIDE_BOARD_WIDTH = 900;
-			Constants.BACKGROUND_IMAGE_WIDTH = 1400;
+			Constants.ImageWidth = 1400;
 			Constants.LAWN_XMIN = 140;
 			Constants.LAWN_YMIN = 80;
 			Constants.TitleScreen_ReanimStart_X = 60;
@@ -606,7 +606,7 @@ namespace Sexy
 			Constants.SCROLL_AREA_OFFSET_Y = (int)Constants.InvertAndScale(28f);
 			Constants.DIALOG_HEADER_OFFSET = 36;
 			Constants.WIDE_BOARD_WIDTH = 900;
-			Constants.BACKGROUND_IMAGE_WIDTH = (int)(Constants.S * 1400f);
+			Constants.ImageWidth = (int)(Constants.S * 1400f);
 			Constants.LAWN_XMIN = 140;
 			Constants.LAWN_YMIN = 80;
 			Constants.SEED_PACKET_HORIZ_GAP = (int)Constants.InvertAndScale(2f);
@@ -1167,7 +1167,7 @@ namespace Sexy
 			Constants.SCROLL_AREA_OFFSET_Y = (int)Constants.InvertAndScale(28f);
 			Constants.DIALOG_HEADER_OFFSET = 36;
 			Constants.WIDE_BOARD_WIDTH = 900;
-			Constants.BACKGROUND_IMAGE_WIDTH = (int)(Constants.S * 1400f);
+			Constants.ImageWidth = (int)(Constants.S * 1400f);
 			Constants.LAWN_XMIN = 140;
 			Constants.LAWN_YMIN = 80;
 			Constants.SEED_PACKET_HORIZ_GAP = (int)Constants.InvertAndScale(2f);
@@ -1739,7 +1739,7 @@ namespace Sexy
 
 		public static int WIDE_BOARD_WIDTH;
 
-		public static int BACKGROUND_IMAGE_WIDTH;
+		public static int ImageWidth;
 
 		public static int LAWN_XMIN;
 

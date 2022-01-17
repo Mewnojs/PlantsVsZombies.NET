@@ -10,7 +10,7 @@ namespace Sexy.TodLib
 			mImageCol = 0;
 			mImageFrames = 1;
 			mAnimated = 0;
-			mEmitterType = EmitterType.EMITTER_BOX;
+			mEmitterType = EmitterType.Box;
 			mImage = null;
 			mName = "";
 			mOnDuration = "";

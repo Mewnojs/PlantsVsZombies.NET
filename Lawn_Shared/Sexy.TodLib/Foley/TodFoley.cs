@@ -259,58 +259,58 @@ namespace Sexy.TodLib
 		{
 			TodFoley.gFoleyParamArray = new FoleyParams[]
 			{
-				new FoleyParams(FoleyType.FOLEY_SUN, 10f, new int[]
+				new FoleyParams(FoleyType.Sun, 10f, new int[]
 				{
 					Resources.SOUND_POINTS
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_SPLAT, 10f, new int[]
+				new FoleyParams(FoleyType.Splat, 10f, new int[]
 				{
 					Resources.SOUND_SPLAT,
 					Resources.SOUND_SPLAT2,
 					Resources.SOUND_SPLAT3
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_LAWNMOWER, 10f, new int[]
+				new FoleyParams(FoleyType.Lawnmower, 10f, new int[]
 				{
 					Resources.SOUND_LAWNMOWER
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_THROW, 10f, new int[]
+				new FoleyParams(FoleyType.Throw, 10f, new int[]
 				{
 					Resources.SOUND_THROW,
 					Resources.SOUND_THROW,
 					Resources.SOUND_THROW,
 					Resources.SOUND_THROW2
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_SPAWN_SUN, 10f, new int[]
+				new FoleyParams(FoleyType.SpawnSun, 10f, new int[]
 				{
 					Resources.SOUND_THROW
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_CHOMP, 0f, new int[]
+				new FoleyParams(FoleyType.Chomp, 0f, new int[]
 				{
 					Resources.SOUND_CHOMP,
 					Resources.SOUND_CHOMP2
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_CHOMP_SOFT, 4f, new int[]
+				new FoleyParams(FoleyType.ChompSoft, 4f, new int[]
 				{
 					Resources.SOUND_CHOMPSOFT
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_PLANT, 0f, new int[]
+				new FoleyParams(FoleyType.Plant, 0f, new int[]
 				{
 					Resources.SOUND_PLANT,
 					Resources.SOUND_PLANT2
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_USE_SHOVEL, 0f, new int[]
+				new FoleyParams(FoleyType.UseShovel, 0f, new int[]
 				{
 					Resources.SOUND_PLANT2
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_DROP, 0f, new int[]
+				new FoleyParams(FoleyType.Drop, 0f, new int[]
 				{
 					Resources.SOUND_TAP2
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_BLEEP, 0f, new int[]
+				new FoleyParams(FoleyType.Bleep, 0f, new int[]
 				{
 					Resources.SOUND_BLEEP
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_GROAN, 0f, new int[]
+				new FoleyParams(FoleyType.Groan, 0f, new int[]
 				{
 					Resources.SOUND_GROAN,
 					Resources.SOUND_GROAN2,
@@ -319,7 +319,7 @@ namespace Sexy.TodLib
 					Resources.SOUND_GROAN5,
 					Resources.SOUND_GROAN6
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_BRAINS, 0f, new int[]
+				new FoleyParams(FoleyType.Brains, 0f, new int[]
 				{
 					Resources.SOUND_GROAN,
 					Resources.SOUND_GROAN2,
@@ -331,391 +331,391 @@ namespace Sexy.TodLib
 					Resources.SOUND_SUKHBIR5,
 					Resources.SOUND_SUKHBIR6
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_JACKINTHEBOX, 0f, new int[]
+				new FoleyParams(FoleyType.Jackinthebox, 0f, new int[]
 				{
 					Resources.SOUND_JACKINTHEBOX
 				}, 7U),
-				new FoleyParams(FoleyType.FOLEY_ART_CHALLENGE, 0f, new int[]
+				new FoleyParams(FoleyType.ArtChallenge, 0f, new int[]
 				{
 					Resources.SOUND_DIAMOND
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_ZAMBONI, 5f, new int[]
+				new FoleyParams(FoleyType.Zamboni, 5f, new int[]
 				{
 					Resources.SOUND_ZAMBONI
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_THUNDER, 10f, new int[]
+				new FoleyParams(FoleyType.Thunder, 10f, new int[]
 				{
 					Resources.SOUND_THUNDER
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_FROZEN, 0f, new int[]
+				new FoleyParams(FoleyType.Frozen, 0f, new int[]
 				{
 					Resources.SOUND_FROZEN
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_ZOMBIESPLASH, 10f, new int[]
+				new FoleyParams(FoleyType.Zombiesplash, 10f, new int[]
 				{
 					Resources.SOUND_PLANT_WATER,
 					Resources.SOUND_ZOMBIE_ENTERING_WATER
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_BOWLINGIMPACT, -3f, new int[]
+				new FoleyParams(FoleyType.Bowlingimpact, -3f, new int[]
 				{
 					Resources.SOUND_BOWLINGIMPACT
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_SQUISH, 0f, new int[]
+				new FoleyParams(FoleyType.Squish, 0f, new int[]
 				{
 					Resources.SOUND_CHOMP,
 					Resources.SOUND_CHOMP2
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_TIRE_POP, 0f, new int[]
+				new FoleyParams(FoleyType.TirePop, 0f, new int[]
 				{
 					Resources.SOUND_BALLOON_POP
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_EXPLOSION, 0f, new int[]
+				new FoleyParams(FoleyType.Explosion, 0f, new int[]
 				{
 					Resources.SOUND_EXPLOSION
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_SLURP, 2f, new int[]
+				new FoleyParams(FoleyType.Slurp, 2f, new int[]
 				{
 					Resources.SOUND_SLURP
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_LIMBS_POP, 10f, new int[]
+				new FoleyParams(FoleyType.LimbsPop, 10f, new int[]
 				{
 					Resources.SOUND_LIMBS_POP
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_POGO_ZOMBIE, 4f, new int[]
+				new FoleyParams(FoleyType.PogoZombie, 4f, new int[]
 				{
 					Resources.SOUND_POGO_ZOMBIE
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_SNOW_PEA_SPARKLES, 10f, new int[]
+				new FoleyParams(FoleyType.SnowPeaSparkles, 10f, new int[]
 				{
 					Resources.SOUND_SNOW_PEA_SPARKLES
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_ZOMBIE_FALLING, 10f, new int[]
+				new FoleyParams(FoleyType.ZombieFalling, 10f, new int[]
 				{
 					Resources.SOUND_ZOMBIE_FALLING_1,
 					Resources.SOUND_ZOMBIE_FALLING_2
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_PUFF, 10f, new int[]
+				new FoleyParams(FoleyType.Puff, 10f, new int[]
 				{
 					Resources.SOUND_PUFF
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_FUME, 10f, new int[]
+				new FoleyParams(FoleyType.Fume, 10f, new int[]
 				{
 					Resources.SOUND_FUME
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_COIN, 10f, new int[]
+				new FoleyParams(FoleyType.Coin, 10f, new int[]
 				{
 					Resources.SOUND_COIN
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_KERNEL_SPLAT, 10f, new int[]
+				new FoleyParams(FoleyType.KernelSplat, 10f, new int[]
 				{
 					Resources.SOUND_KERNELPULT,
 					Resources.SOUND_KERNELPULT2
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_DIGGER, 0f, new int[]
+				new FoleyParams(FoleyType.Digger, 0f, new int[]
 				{
 					Resources.SOUND_DIGGER_ZOMBIE
 				}, 7U),
-				new FoleyParams(FoleyType.FOLEY_JACK_SURPRISE, 1f, new int[]
+				new FoleyParams(FoleyType.JackSurprise, 1f, new int[]
 				{
 					Resources.SOUND_JACK_SURPRISE,
 					Resources.SOUND_JACK_SURPRISE,
 					Resources.SOUND_JACK_SURPRISE2
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_VASE_BREAKING, -5f, new int[]
+				new FoleyParams(FoleyType.VaseBreaking, -5f, new int[]
 				{
 					Resources.SOUND_VASE_BREAKING
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_POOL_CLEANER, 2f, new int[]
+				new FoleyParams(FoleyType.PoolCleaner, 2f, new int[]
 				{
 					Resources.SOUND_POOL_CLEANER
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_BASKETBALL, 10f, new int[]
+				new FoleyParams(FoleyType.Basketball, 10f, new int[]
 				{
 					Resources.SOUND_BASKETBALL
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_IGNITE, 5f, new int[]
+				new FoleyParams(FoleyType.Ignite, 5f, new int[]
 				{
 					Resources.SOUND_IGNITE,
 					Resources.SOUND_IGNITE,
 					Resources.SOUND_IGNITE,
 					Resources.SOUND_IGNITE2
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_FIREPEA, 10f, new int[]
+				new FoleyParams(FoleyType.Firepea, 10f, new int[]
 				{
 					Resources.SOUND_FIREPEA
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_THUMP, 2f, new int[]
+				new FoleyParams(FoleyType.Thump, 2f, new int[]
 				{
 					Resources.SOUND_GARGANTUAR_THUMP
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_SQUASH_HMM, 2f, new int[]
+				new FoleyParams(FoleyType.SquashHmm, 2f, new int[]
 				{
 					Resources.SOUND_SQUASH_HMM,
 					Resources.SOUND_SQUASH_HMM,
 					Resources.SOUND_SQUASH_HMM2
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_MAGNETSHROOM, 2f, new int[]
+				new FoleyParams(FoleyType.Magnetshroom, 2f, new int[]
 				{
 					Resources.SOUND_MAGNETSHROOM
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_BUTTER, 2f, new int[]
+				new FoleyParams(FoleyType.Butter, 2f, new int[]
 				{
 					Resources.SOUND_BUTTER
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_BUNGEE_SCREAM, 2f, new int[]
+				new FoleyParams(FoleyType.BungeeScream, 2f, new int[]
 				{
 					Resources.SOUND_BUNGEE_SCREAM,
 					Resources.SOUND_BUNGEE_SCREAM2,
 					Resources.SOUND_BUNGEE_SCREAM3
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_BOSS_EXPLOSION_SMALL, 2f, new int[]
+				new FoleyParams(FoleyType.BossExplosionSmall, 2f, new int[]
 				{
 					Resources.SOUND_EXPLOSION
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_SHIELD_HIT, 10f, new int[]
+				new FoleyParams(FoleyType.ShieldHit, 10f, new int[]
 				{
 					Resources.SOUND_SHIELDHIT,
 					Resources.SOUND_SHIELDHIT2
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_SWING, 2f, new int[]
+				new FoleyParams(FoleyType.Swing, 2f, new int[]
 				{
 					Resources.SOUND_SWING
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_BONK, 2f, new int[]
+				new FoleyParams(FoleyType.Bonk, 2f, new int[]
 				{
 					Resources.SOUND_BONK
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_RAIN, 0f, new int[]
+				new FoleyParams(FoleyType.Rain, 0f, new int[]
 				{
 					Resources.SOUND_RAIN
 				}, 5U),
-				new FoleyParams(FoleyType.FOLEY_DOLPHIN_BEFORE_JUMPING, 0f, new int[]
+				new FoleyParams(FoleyType.DolphinBeforeJumping, 0f, new int[]
 				{
 					Resources.SOUND_DOLPHIN_BEFORE_JUMPING
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_DOLPHIN_APPEARS, 0f, new int[]
+				new FoleyParams(FoleyType.DolphinAppears, 0f, new int[]
 				{
 					Resources.SOUND_DOLPHIN_APPEARS
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_PLANT_WATER, 0f, new int[]
+				new FoleyParams(FoleyType.PlantWater, 0f, new int[]
 				{
 					Resources.SOUND_PLANT_WATER
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_ZOMBIE_ENTERING_WATER, 0f, new int[]
+				new FoleyParams(FoleyType.ZombieEnteringWater, 0f, new int[]
 				{
 					Resources.SOUND_ZOMBIE_ENTERING_WATER
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_GRAVEBUSTERCHOMP, 0f, new int[]
+				new FoleyParams(FoleyType.Gravebusterchomp, 0f, new int[]
 				{
 					Resources.SOUND_GRAVEBUSTERCHOMP
 				}, 4U),
-				new FoleyParams(FoleyType.FOLEY_CHERRYBOMB, 0f, new int[]
+				new FoleyParams(FoleyType.Cherrybomb, 0f, new int[]
 				{
 					Resources.SOUND_CHERRYBOMB
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_JALAPENO_IGNITE, 0f, new int[]
+				new FoleyParams(FoleyType.JalapenoIgnite, 0f, new int[]
 				{
 					Resources.SOUND_JALAPENO
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_REVERSE_EXPLOSION, 0f, new int[]
+				new FoleyParams(FoleyType.ReverseExplosion, 0f, new int[]
 				{
 					Resources.SOUND_REVERSE_EXPLOSION
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_PLASTIC_HIT, 5f, new int[]
+				new FoleyParams(FoleyType.PlasticHit, 5f, new int[]
 				{
 					Resources.SOUND_PLASTICHIT,
 					Resources.SOUND_PLASTICHIT2
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_WINMUSIC, 0f, new int[]
+				new FoleyParams(FoleyType.Winmusic, 0f, new int[]
 				{
 					Resources.SOUND_WINMUSIC
 				}, 8U),
-				new FoleyParams(FoleyType.FOLEY_BALLOONINFLATE, 10f, new int[]
+				new FoleyParams(FoleyType.Ballooninflate, 10f, new int[]
 				{
 					Resources.SOUND_BALLOONINFLATE
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_BIGCHOMP, -2f, new int[]
+				new FoleyParams(FoleyType.Bigchomp, -2f, new int[]
 				{
 					Resources.SOUND_BIGCHOMP
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_MELONIMPACT, -5f, new int[]
+				new FoleyParams(FoleyType.Melonimpact, -5f, new int[]
 				{
 					Resources.SOUND_MELONIMPACT,
 					Resources.SOUND_MELONIMPACT2
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_PLANTGROW, -2f, new int[]
+				new FoleyParams(FoleyType.Plantgrow, -2f, new int[]
 				{
 					Resources.SOUND_PLANTGROW
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_SHOOP, -5f, new int[]
+				new FoleyParams(FoleyType.Shoop, -5f, new int[]
 				{
 					Resources.SOUND_SHOOP
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_JUICY, 2f, new int[]
+				new FoleyParams(FoleyType.Juicy, 2f, new int[]
 				{
 					Resources.SOUND_JUICY
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_NEWSPAPER_RARRGH, -2f, new int[]
+				new FoleyParams(FoleyType.NewspaperRarrgh, -2f, new int[]
 				{
 					Resources.SOUND_NEWSPAPER_RARRGH,
 					Resources.SOUND_NEWSPAPER_RARRGH2,
 					Resources.SOUND_NEWSPAPER_RARRGH2
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_NEWSPAPER_RIP, -2f, new int[]
+				new FoleyParams(FoleyType.NewspaperRip, -2f, new int[]
 				{
 					Resources.SOUND_NEWSPAPER_RIP
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_FLOOP, 0f, new int[]
+				new FoleyParams(FoleyType.Floop, 0f, new int[]
 				{
 					Resources.SOUND_FLOOP
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_COFFEE, 0f, new int[]
+				new FoleyParams(FoleyType.Coffee, 0f, new int[]
 				{
 					Resources.SOUND_COFFEE
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_LOWGROAN, 2f, new int[]
+				new FoleyParams(FoleyType.Lowgroan, 2f, new int[]
 				{
 					Resources.SOUND_LOWGROAN,
 					Resources.SOUND_LOWGROAN2
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_PRIZE, 0f, new int[]
+				new FoleyParams(FoleyType.Prize, 0f, new int[]
 				{
 					Resources.SOUND_PRIZE
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_YUCK, 1f, new int[]
+				new FoleyParams(FoleyType.Yuck, 1f, new int[]
 				{
 					Resources.SOUND_YUCK,
 					Resources.SOUND_YUCK,
 					Resources.SOUND_YUCK2
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_UMBRELLA, 2f, new int[]
+				new FoleyParams(FoleyType.Umbrella, 2f, new int[]
 				{
 					Resources.SOUND_THROW2
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_GRASSSTEP, 2f, new int[]
+				new FoleyParams(FoleyType.Grassstep, 2f, new int[]
 				{
 					Resources.SOUND_GRASSSTEP
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_SHOVEL, 5f, new int[]
+				new FoleyParams(FoleyType.Shovel, 5f, new int[]
 				{
 					Resources.SOUND_SHOVEL
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_COBLAUNCH, 10f, new int[]
+				new FoleyParams(FoleyType.Coblaunch, 10f, new int[]
 				{
 					Resources.SOUND_COBLAUNCH
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_WATERING, 10f, new int[]
+				new FoleyParams(FoleyType.Watering, 10f, new int[]
 				{
 					Resources.SOUND_WATERING
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_POLEVAULT, 5f, new int[]
+				new FoleyParams(FoleyType.Polevault, 5f, new int[]
 				{
 					Resources.SOUND_POLEVAULT
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_GRAVESTONE_RUMBLE, 10f, new int[]
+				new FoleyParams(FoleyType.GravestoneRumble, 10f, new int[]
 				{
 					Resources.SOUND_GRAVESTONE_RUMBLE
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_DIRT_RISE, 5f, new int[]
+				new FoleyParams(FoleyType.DirtRise, 5f, new int[]
 				{
 					Resources.SOUND_DIRT_RISE
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_FERTILIZER, 0f, new int[]
+				new FoleyParams(FoleyType.Fertilizer, 0f, new int[]
 				{
 					Resources.SOUND_FERTILIZER
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_PORTAL, 0f, new int[]
+				new FoleyParams(FoleyType.Portal, 0f, new int[]
 				{
 					Resources.SOUND_PORTAL
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_WAKEUP, 0f, new int[]
+				new FoleyParams(FoleyType.Wakeup, 0f, new int[]
 				{
 					Resources.SOUND_WAKEUP
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_BUGSPRAY, 0f, new int[]
+				new FoleyParams(FoleyType.Bugspray, 0f, new int[]
 				{
 					Resources.SOUND_BUGSPRAY
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_SCREAM, 0f, new int[]
+				new FoleyParams(FoleyType.Scream, 0f, new int[]
 				{
 					Resources.SOUND_SCREAM
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_PAPER, 0f, new int[]
+				new FoleyParams(FoleyType.Paper, 0f, new int[]
 				{
 					Resources.SOUND_PAPER
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_MONEYFALLS, 0f, new int[]
+				new FoleyParams(FoleyType.Moneyfalls, 0f, new int[]
 				{
 					Resources.SOUND_MONEYFALLS
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_IMP, 5f, new int[]
+				new FoleyParams(FoleyType.Imp, 5f, new int[]
 				{
 					Resources.SOUND_IMP,
 					Resources.SOUND_IMP2
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_HYDRAULIC_SHORT, 3f, new int[]
+				new FoleyParams(FoleyType.HydraulicShort, 3f, new int[]
 				{
 					Resources.SOUND_HYDRAULIC_SHORT
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_HYDRAULIC, 0f, new int[]
+				new FoleyParams(FoleyType.Hydraulic, 0f, new int[]
 				{
 					Resources.SOUND_HYDRAULIC
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_GARGANTUDEATH, 3f, new int[]
+				new FoleyParams(FoleyType.Gargantudeath, 3f, new int[]
 				{
 					Resources.SOUND_GARGANTUDEATH
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_CERAMIC, 0f, new int[]
+				new FoleyParams(FoleyType.Ceramic, 0f, new int[]
 				{
 					Resources.SOUND_CERAMIC
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_BOSSBOULDERATTACK, 0f, new int[]
+				new FoleyParams(FoleyType.Bossboulderattack, 0f, new int[]
 				{
 					Resources.SOUND_BOSSBOULDERATTACK
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_CHIME, 0f, new int[]
+				new FoleyParams(FoleyType.Chime, 0f, new int[]
 				{
 					Resources.SOUND_CHIME
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_CRAZYDAVESHORT, 0f, new int[]
+				new FoleyParams(FoleyType.Crazydaveshort, 0f, new int[]
 				{
 					Resources.SOUND_CRAZYDAVESHORT1,
 					Resources.SOUND_CRAZYDAVESHORT2,
 					Resources.SOUND_CRAZYDAVESHORT3
 				}, 16U),
-				new FoleyParams(FoleyType.FOLEY_CRAZYDAVELONG, 0f, new int[]
+				new FoleyParams(FoleyType.Crazydavelong, 0f, new int[]
 				{
 					Resources.SOUND_CRAZYDAVELONG1,
 					Resources.SOUND_CRAZYDAVELONG2,
 					Resources.SOUND_CRAZYDAVELONG3
 				}, 16U),
-				new FoleyParams(FoleyType.FOLEY_CRAZYDAVEEXTRALONG, 0f, new int[]
+				new FoleyParams(FoleyType.Crazydaveextralong, 0f, new int[]
 				{
 					Resources.SOUND_CRAZYDAVEEXTRALONG1,
 					Resources.SOUND_CRAZYDAVEEXTRALONG2,
 					Resources.SOUND_CRAZYDAVEEXTRALONG3
 				}, 16U),
-				new FoleyParams(FoleyType.FOLEY_CRAZYDAVECRAZY, 0f, new int[]
+				new FoleyParams(FoleyType.Crazydavecrazy, 0f, new int[]
 				{
 					Resources.SOUND_CRAZYDAVECRAZY
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_PHONOGRAPH, 0f, new int[]
+				new FoleyParams(FoleyType.Phonograph, 0f, new int[]
 				{
 					Resources.SOUND_PHONOGRAPH
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_DANCER, 0f, new int[]
+				new FoleyParams(FoleyType.Dancer, 0f, new int[]
 				{
 					Resources.SOUND_DANCER
 				}, 6U),
-				new FoleyParams(FoleyType.FOLEY_FINALFANFARE, 0f, new int[]
+				new FoleyParams(FoleyType.Finalfanfare, 0f, new int[]
 				{
 					Resources.SOUND_FINALFANFARE
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_CRAZYDAVESCREAM, 0f, new int[]
+				new FoleyParams(FoleyType.Crazydavescream, 0f, new int[]
 				{
 					Resources.SOUND_CRAZYDAVESCREAM
 				}, 0U),
-				new FoleyParams(FoleyType.FOLEY_CRAZYDAVESCREAM2, 0f, new int[]
+				new FoleyParams(FoleyType.Crazydavescream2, 0f, new int[]
 				{
 					Resources.SOUND_CRAZYDAVESCREAM2
 				}, 0U)
@@ -818,10 +818,10 @@ namespace Sexy.TodLib
 
 	public enum FoleyFlags
 	{
-		FOLEYFLAGS_LOOP,
-		FOLEYFLAGS_ONE_AT_A_TIME,
-		FOLEYFLAGS_MUTE_ON_PAUSE,
-		FOLEYFLAGS_USES_MUSIC_VOLUME,
-		FOLEYFLAGS_DONT_REPEAT
+		Loop,
+		OneAtATime,
+		MuteOnPause,
+		UsesMusicVolume,
+		DontRepeat
 	}
 }

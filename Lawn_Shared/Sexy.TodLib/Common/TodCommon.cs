@@ -110,43 +110,43 @@ namespace Sexy.TodLib
 			float num = 0f;
 			switch (theCurve)
 			{
-			case TodCurves.CURVE_CONSTANT:
+			case TodCurves.Constant:
 				num = 0f;
 				goto IL_101;
-			case TodCurves.CURVE_LINEAR:
+			case TodCurves.Linear:
 				num = theTime;
 				goto IL_101;
-			case TodCurves.CURVE_EASE_IN:
+			case TodCurves.EaseIn:
 				num = TodCommon.TodCurveQuad(theTime);
 				goto IL_101;
-			case TodCurves.CURVE_EASE_OUT:
+			case TodCurves.EaseOut:
 				num = TodCommon.TodCurveInvQuad(theTime);
 				goto IL_101;
-			case TodCurves.CURVE_EASE_IN_OUT:
+			case TodCurves.EaseInOut:
 				num = TodCommon.TodCurveS(TodCommon.TodCurveS(theTime));
 				goto IL_101;
-			case TodCurves.CURVE_EASE_IN_OUT_WEAK:
+			case TodCurves.EaseInOutWeak:
 				num = TodCommon.TodCurveS(theTime);
 				goto IL_101;
-			case TodCurves.CURVE_FAST_IN_OUT:
+			case TodCurves.FastInOut:
 				num = TodCommon.TodCurveInvQuadS(TodCommon.TodCurveInvQuadS(theTime));
 				goto IL_101;
-			case TodCurves.CURVE_FAST_IN_OUT_WEAK:
+			case TodCurves.FastInOutWeak:
 				num = TodCommon.TodCurveInvQuadS(theTime);
 				goto IL_101;
-			case TodCurves.CURVE_BOUNCE:
+			case TodCurves.Bounce:
 				num = TodCommon.TodCurveBounce(theTime);
 				goto IL_101;
-			case TodCurves.CURVE_BOUNCE_FAST_MIDDLE:
+			case TodCurves.BounceFastMiddle:
 				num = TodCommon.TodCurveQuad(TodCommon.TodCurveBounce(theTime));
 				goto IL_101;
-			case TodCurves.CURVE_BOUNCE_SLOW_MIDDLE:
+			case TodCurves.BounceSlowMiddle:
 				num = TodCommon.TodCurveInvQuad(TodCommon.TodCurveBounce(theTime));
 				goto IL_101;
-			case TodCurves.CURVE_SIN_WAVE:
+			case TodCurves.SinWave:
 				num = (float)Math.Sin(theTime * 3.1415927f * 2f);
 				goto IL_101;
-			case TodCurves.CURVE_EASE_SIN_WAVE:
+			case TodCurves.EaseSinWave:
 				num = (float)Math.Sin(TodCommon.TodCurveS(theTime) * 3.1415927f * 2f);
 				goto IL_101;
 			}
@@ -312,12 +312,12 @@ namespace Sexy.TodLib
 			string theString = TodStringFile.TodStringTranslate(theText);
 			int num = thePosX + g.mTransX;
 			int theY = thePosY + g.mTransY;
-			if (theJustification == DrawStringJustification.DS_ALIGN_RIGHT || theJustification == DrawStringJustification.DS_ALIGN_RIGHT_VERTICAL_MIDDLE)
+			if (theJustification == DrawStringJustification.Right || theJustification == DrawStringJustification.RightVerticalMiddle)
 			{
 				int num2 = theFont.StringWidth(theString);
 				num -= num2;
 			}
-			else if (theJustification == DrawStringJustification.DS_ALIGN_CENTER || theJustification == DrawStringJustification.DS_ALIGN_CENTER_VERTICAL_MIDDLE)
+			else if (theJustification == DrawStringJustification.Center || theJustification == DrawStringJustification.CenterVerticalMiddle)
 			{
 				int num3 = theFont.StringWidth(theString);
 				num -= num3 / 2;
@@ -333,12 +333,12 @@ namespace Sexy.TodLib
 			string theString = TodStringFile.TodStringTranslate(theText);
 			int num = thePosX + g.mTransX;
 			int theY = thePosY + g.mTransY;
-			if (theJustification == DrawStringJustification.DS_ALIGN_RIGHT || theJustification == DrawStringJustification.DS_ALIGN_RIGHT_VERTICAL_MIDDLE)
+			if (theJustification == DrawStringJustification.Right || theJustification == DrawStringJustification.RightVerticalMiddle)
 			{
 				int num2 = theFont.StringWidth(theString);
 				num -= num2;
 			}
-			else if (theJustification == DrawStringJustification.DS_ALIGN_CENTER || theJustification == DrawStringJustification.DS_ALIGN_CENTER_VERTICAL_MIDDLE)
+			else if (theJustification == DrawStringJustification.Center || theJustification == DrawStringJustification.CenterVerticalMiddle)
 			{
 				int num3 = theFont.StringWidth(theString);
 				num -= num3 / 2;
@@ -354,12 +354,12 @@ namespace Sexy.TodLib
 			string theString = TodStringFile.TodStringTranslate(theText);
 			int num = thePosX + g.mTransX;
 			int theY = thePosY + g.mTransY;
-			if (theJustification == DrawStringJustification.DS_ALIGN_RIGHT || theJustification == DrawStringJustification.DS_ALIGN_RIGHT_VERTICAL_MIDDLE)
+			if (theJustification == DrawStringJustification.Right || theJustification == DrawStringJustification.RightVerticalMiddle)
 			{
 				int num2 = theFont.StringWidth(centerString);
 				num -= num2;
 			}
-			else if (theJustification == DrawStringJustification.DS_ALIGN_CENTER || theJustification == DrawStringJustification.DS_ALIGN_CENTER_VERTICAL_MIDDLE)
+			else if (theJustification == DrawStringJustification.Center || theJustification == DrawStringJustification.CenterVerticalMiddle)
 			{
 				int num3 = theFont.StringWidth(centerString);
 				num -= num3 / 2;
@@ -744,7 +744,7 @@ namespace Sexy.TodLib
 			{
 				return TodCommon.TodCurveEvaluate(theTime, thePositionStart, thePositionEnd, theCurve);
 			}
-			if (theCurve == TodCurves.CURVE_BOUNCE || theCurve == TodCurves.CURVE_BOUNCE_SLOW_MIDDLE || theCurve == TodCurves.CURVE_BOUNCE_FAST_MIDDLE || theCurve == TodCurves.CURVE_SIN_WAVE || theCurve == TodCurves.CURVE_EASE_SIN_WAVE)
+			if (theCurve == TodCurves.Bounce || theCurve == TodCurves.BounceSlowMiddle || theCurve == TodCurves.BounceFastMiddle || theCurve == TodCurves.SinWave || theCurve == TodCurves.EaseSinWave)
 			{
 				return thePositionStart;
 			}

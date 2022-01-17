@@ -65,7 +65,7 @@ namespace Lawn
 			mReanimation = null;
 			mGridItem = null;
 			mMower = null;
-			mBossPart = BossPart.BOSS_PART_BACK_LEG;
+			mBossPart = BossPart.BackLeg;
 			mBoardGridY = 0;
 		}
 

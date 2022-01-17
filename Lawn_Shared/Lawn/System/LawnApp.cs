@@ -61,7 +61,7 @@ namespace Lawn
 			mDanceMode = false;
 			mDaisyMode = false;
 			mSukhbirMode = false;
-			mGameScene = GameScenes.SCENE_LOADING;
+			mGameScene = GameScenes.Loading;
 			mZenGarden = null;
 			mEffectSystem = null;
 			mReanimatorCache = null;
@@ -70,7 +70,7 @@ namespace Lawn
 			mHeight = Constants.BOARD_HEIGHT;
 			mAppCounter = 0;
 			mAppRandSeed = DateTime.UtcNow.Millisecond;
-			mTrialType = TrialType.TRIAL_NONE;
+			mTrialType = TrialType.None;
 			mDebugTrialLocked = false;
 			mMuteSoundsForCutscene = false;
 			base.mMusicVolume = 0.85;
@@ -82,7 +82,7 @@ namespace Lawn
 			mPlayerInfo = null;
 			mLastLevelStats = new LevelStats();
 			mFirstTimeGameSelector = true;
-			mGameMode = GameMode.GAMEMODE_ADVENTURE;
+			mGameMode = GameMode.Adventure;
 			mEasyPlantingCheat = false;
 			mLoadingZombiesThreadCompleted = true;
 			mGamesPlayed = 0;
@@ -94,7 +94,7 @@ namespace Lawn
 			mRegisterResourcesLoaded = false;
 			mTodCheatKeys = false;
 			mCrazyDaveReanimID = null;
-			mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_OFF;
+			mCrazyDaveState = CrazyDaveState.Off;
 			mCrazyDaveBlinkCounter = 0;
 			mCrazyDaveBlinkReanimID = null;
 			mCrazyDaveMessageIndex = -1;
@@ -118,7 +118,7 @@ namespace Lawn
 			}
 			if (mBoard != null)
 			{
-				mBoardResult = BoardResult.BOARDRESULT_QUIT_APP;
+				mBoardResult = BoardResult.QuitApp;
 				mBoard.TryToSaveGame();
 				mWidgetManager.RemoveWidget(mBoard);
 				mBoard.Dispose();
@@ -254,8 +254,8 @@ namespace Lawn
 			Resources.LinkUpResArray();
 			ReanimationParams[] array = new ReanimationParams[]
 			{
-				new ReanimationParams(ReanimationType.REANIM_LOADBAR_SPROUT, "reanim/LoadBar_sprout", 1),
-				new ReanimationParams(ReanimationType.REANIM_LOADBAR_ZOMBIEHEAD, "reanim/LoadBar_Zombiehead", 1)
+				new ReanimationParams(ReanimationType.LoadbarSprout, "reanim/LoadBar_sprout", 1),
+				new ReanimationParams(ReanimationType.LoadbarZombiehead, "reanim/LoadBar_Zombiehead", 1)
 			};
 			ReanimatorXnaHelpers.ReanimatorLoadDefinitions(ref array, array.Length);
 			TodStringFile.TodStringListLoad("Content/"+"LawnStrings_" + Constants.LanguageSubDir + ".txt");
@@ -305,7 +305,7 @@ namespace Lawn
 			base.SafeDeleteWidget(mTitleScreen);
 			mTitleScreen = null;
 			mResourceManager.DeleteImage("IMAGE_TITLESCREEN");
-			if (mRestoreLocation == RestoreLocation.RESTORE_BOARD && RestoreGame())
+			if (mRestoreLocation == RestoreLocation.Board && RestoreGame())
 			{
 				return;
 			}
@@ -369,35 +369,35 @@ namespace Lawn
 				yield return true;
 			}
 			//init filter effects
-			for (int i = 0; i < (int)FilterEffectType.NUM_FILTER_EFFECTS; i++)
+			for (int i = 0; i < (int)FilterEffectType.FilterEffectCount; i++)
             {
                 FilterEffect.FilterEffectInitTexture(AtlasResources.IMAGE_REANIM_IMITATER_BLINK1.Texture, (FilterEffectType)i);
 				yield return true;
 			}
             // Cached GameObjects
-            for (SeedType i = 0; i < SeedType.NUM_SEED_TYPES; i++)
+            for (SeedType i = 0; i < SeedType.SeedTypeCount; i++)
             {
-                if (i == SeedType.SEED_SPROUT) continue;
-                mReanimatorCache.MakeCachedPlantFrame(i, DrawVariation.VARIATION_NORMAL);
+                if (i == SeedType.Sprout) continue;
+                mReanimatorCache.MakeCachedPlantFrame(i, DrawVariation.Normal);
 				yield return true;
 			}
-            for (LawnMowerType i = 0; i < LawnMowerType.NUM_MOWER_TYPES; i++)
+            for (LawnMowerType i = 0; i < LawnMowerType.MowerTypesCount; i++)
             {
                 mReanimatorCache.MakeCachedMowerFrame(i);
 				yield return true;
 			}
-            for (ZombieType i = 0; i < ZombieType.NUM_CACHED_ZOMBIE_TYPES; i++)
+            for (ZombieType i = 0; i < ZombieType.CachedZombieTypesCount; i++)
             {
-                if (i == ZombieType.NUM_ZOMBIE_TYPES) continue;
+                if (i == ZombieType.ZombieTypesCount) continue;
                 mReanimatorCache.MakeCachedZombieFrame(i);
 				yield return true;
 			}
-            for (DrawVariation j = DrawVariation.VARIATION_MARIGOLD_WHITE; j <= DrawVariation.VARIATION_MARIGOLD_LIGHT_GREEN; j++)
+            for (DrawVariation j = DrawVariation.MarigoldWhite; j <= DrawVariation.MarigoldLightGreen; j++)
             {
-                mReanimatorCache.MakeCachedPlantFrame(SeedType.SEED_MARIGOLD, j);
+                mReanimatorCache.MakeCachedPlantFrame(SeedType.Marigold, j);
 				yield return true;
 			}
-			//mReanimatorCache.MakeCachedPlantFrame(SeedType.SEED_MARIGOLD, DrawVariation.VARIATION_MARIGOLD_WHITE);
+			//mReanimatorCache.MakeCachedPlantFrame(SeedType.Marigold, DrawVariation.MarigoldWhite);
 			//yield return false;
 		}
 
@@ -499,7 +499,7 @@ namespace Lawn
 			if (isYes)
 			{
 				mMusic.StopAllMusic();
-				mBoardResult = BoardResult.BOARDRESULT_CHEAT;
+				mBoardResult = BoardResult.Cheat;
 				PreNewGame(mGameMode, false);
 			}
 		}
@@ -662,7 +662,7 @@ namespace Lawn
 				mMusic.StopAllMusic();
 				mSoundSystem.CancelPausedFoley();
 				KillNewOptionsDialog();
-				mBoardResult = BoardResult.BOARDRESULT_RESTART;
+				mBoardResult = BoardResult.Restart;
 				if (mBoard != null)
 				{
 					mKilledYetiAndRestarted = mBoard.mKilledYeti;
@@ -768,7 +768,7 @@ namespace Lawn
 		{
 			KillSeedChooserScreen();
 			mBoard.StartLevel();
-			mGameScene = GameScenes.SCENE_PLAYING;
+			mGameScene = GameScenes.Playing;
 		}
 
 		public bool TryLoadGame()
@@ -794,8 +794,8 @@ namespace Lawn
 			mFirstTimeGameSelector = false;
 			MakeNewBoard();
 			mBoard.InitLevel();
-			mBoardResult = BoardResult.BOARDRESULT_NONE;
-			mGameScene = GameScenes.SCENE_LEVEL_INTRO;
+			mBoardResult = BoardResult.None;
+			mGameScene = GameScenes.LevelIntro;
 			ShowSeedChooserScreen();
 			mBoard.mCutScene.StartLevelIntro();
 		}
@@ -826,9 +826,9 @@ namespace Lawn
 
 		public void RestartLoopingSounds()
 		{
-			if (mGameMode == GameMode.GAMEMODE_CHALLENGE_RAINING_SEEDS || IsStormyNightLevel())
+			if (mGameMode == GameMode.ChallengeRainingSeeds || IsStormyNightLevel())
 			{
-				PlayFoley(FoleyType.FOLEY_RAIN);
+				PlayFoley(FoleyType.Rain);
 			}
 			int count = mBoard.mZombies.Count;
 			for (int i = 0; i < count; i++)
@@ -855,7 +855,7 @@ namespace Lawn
 				return;
 			}
 			DelayLoadMainMenuResource(false);
-			if (theGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+			if (theGameMode == GameMode.ChallengeZenGarden)
 			{
 				DelayLoadZenGardenResources(true);
 			}
@@ -866,7 +866,7 @@ namespace Lawn
 			GC.Collect();
 			GC.WaitForPendingFinalizers();
 			DelayLoadGamePlayResources(true);
-			if (SexyAppBase.IsInTrialMode && mPlayerInfo.mLevel >= 7 && theGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+			if (SexyAppBase.IsInTrialMode && mPlayerInfo.mLevel >= 7 && theGameMode != GameMode.ChallengeZenGarden)
 			{
 				if (mPlayerInfo.mNeedsTrialLevelReset)
 				{
@@ -875,10 +875,10 @@ namespace Lawn
 				}
 				else
 				{
-					theGameMode = GameMode.GAMEMODE_UPSELL;
+					theGameMode = GameMode.Upsell;
 				}
 			}
-			if (SexyAppBase.IsInTrialMode && checkForTutorialCompletion && theGameMode == GameMode.GAMEMODE_ADVENTURE && mPlayerInfo.mLevel <= 3 && mPlayerInfo.mHasFinishedTutorial && mPlayerInfo.mFinishedAdventure == 0)
+			if (SexyAppBase.IsInTrialMode && checkForTutorialCompletion && theGameMode == GameMode.Adventure && mPlayerInfo.mLevel <= 3 && mPlayerInfo.mHasFinishedTutorial && mPlayerInfo.mFinishedAdventure == 0)
 			{
 				LawnDialog theDialog = DoDialog(58, true, string.Empty, "[SKIP_TUTORIAL_MESSAGE]", string.Empty, 1);
 				LawnApp.CenterDialog(theDialog, (int)Constants.InvertAndScale(400f), (int)Constants.InvertAndScale(200f));
@@ -892,7 +892,7 @@ namespace Lawn
 			string savedGameName = LawnCommon.GetSavedGameName(mGameMode, (int)mPlayerInfo.mId);
 			base.EraseFile(savedGameName);
 			NewGame();
-			if (mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && !mPlayerInfo.mZenGardenTutorialComplete)
+			if (mGameMode == GameMode.ChallengeZenGarden && !mPlayerInfo.mZenGardenTutorialComplete)
 			{
 				mZenGarden.SetupForZenTutorial();
 			}
@@ -915,7 +915,7 @@ namespace Lawn
 				mWidgetManager.RemoveWidget(mGameSelector);
 				base.SafeDeleteWidget(mGameSelector);
 			}
-			mGameScene = GameScenes.SCENE_MENU;
+			mGameScene = GameScenes.Menu;
 			mGameSelector = new GameSelector(this);
 			mGameSelector.Resize(0, 0, Constants.GameSelector_Width, Constants.GameSelector_Height);
 			mWidgetManager.AddWidget(mGameSelector);
@@ -946,7 +946,7 @@ namespace Lawn
 
 		public void ShowGameSelectorQuickPlay(bool theDoFadeIn)
 		{
-			ShowGameSelectorQuickPlay(theDoFadeIn, GameSelectorButtons.GameSelector_MiniGames);
+			ShowGameSelectorQuickPlay(theDoFadeIn, GameSelectorButtons.MiniGames);
 		}
 
 		protected override void ShowUpdateMessage()
@@ -1012,7 +1012,7 @@ namespace Lawn
 
 		public void ShowAwardScreen(AwardType theAwardType, bool theShowAchievements)
 		{
-			mGameScene = GameScenes.SCENE_AWARD;
+			mGameScene = GameScenes.Award;
 			mAwardScreen = new AwardScreen(this, theAwardType, theShowAchievements);
 			mAwardScreen.Resize(0, 0, mWidth, mHeight);
 			mWidgetManager.AddWidget(mAwardScreen);
@@ -1125,14 +1125,14 @@ namespace Lawn
 
 		public void WriteRestoreInfo()
 		{
-			RestoreLocation theValue = RestoreLocation.RESTORE_TITLESCREEN;
+			RestoreLocation theValue = RestoreLocation.Titlescreen;
 			if (mGameSelector != null)
 			{
-				theValue = RestoreLocation.RESTORE_MAINMENU;
+				theValue = RestoreLocation.Mainmenu;
 			}
 			else if (mBoard != null)
 			{
-				theValue = RestoreLocation.RESTORE_BOARD;
+				theValue = RestoreLocation.Board;
 				base.RegistryWriteInteger("RestoreGameMode", (int)mGameMode);
 			}
 			base.RegistryWriteInteger("RestoreLocation", (int)theValue);
@@ -1140,9 +1140,9 @@ namespace Lawn
 
 		public void ReadRestoreInfo()
 		{
-			mRestoreLocation = RestoreLocation.RESTORE_MAINMENU;
+			mRestoreLocation = RestoreLocation.Mainmenu;
 			mRestoreLocation = (RestoreLocation)base.RegistryReadInteger("RestoreLocation");
-			if (mRestoreLocation == RestoreLocation.RESTORE_BOARD)
+			if (mRestoreLocation == RestoreLocation.Board)
 			{
 				mRestoreGameMode = (GameMode)base.RegistryReadInteger("RestoreGameMode");
 			}
@@ -1184,11 +1184,11 @@ namespace Lawn
 				num = (int)Constants.InvertAndScale(125f);
 			}
 			int num2 = AtlasResources.IMAGE_DIALOG_TOPLEFT.mWidth + num + AtlasResources.IMAGE_DIALOG_TOPRIGHT.mWidth;
-			lawnDialog.mReanimation.AddReanimation(num2 / 2 - Constants.InvertAndScale(85f), Constants.InvertAndScale(30f), ReanimationType.REANIM_ZOMBIE_NEWSPAPER);
+			lawnDialog.mReanimation.AddReanimation(num2 / 2 - Constants.InvertAndScale(85f), Constants.InvertAndScale(30f), ReanimationType.ZombieNewspaper);
 			lawnDialog.mSpaceAfterHeader = (int)Constants.InvertAndScale(65f);
 			lawnDialog.CalcSize((int)Constants.InvertAndScale(20f), (int)Constants.InvertAndScale(10f), num);
 			LawnApp.CenterDialog(lawnDialog, lawnDialog.mWidth, lawnDialog.mHeight);
-			if (mBoard.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_HAMMER)
+			if (mBoard.mCursorObject.mCursorType == CursorType.Hammer)
 			{
 				EnforceCursor();
 			}
@@ -1235,7 +1235,7 @@ namespace Lawn
 				}
 				if (mBoard != null)
 				{
-					mBoardResult = BoardResult.BOARDRESULT_QUIT_APP;
+					mBoardResult = BoardResult.QuitApp;
 					mWidgetManager.mDownButtons = 0;
 					mBoard.TryToSaveGame();
 					KillBoard();
@@ -1274,7 +1274,7 @@ namespace Lawn
 			mSessionID = (int)DateTime.UtcNow.Ticks;
 			mPlayTimeActiveSession = 0;
 			mPlayTimeInactiveSession = 0;
-			mBoardResult = BoardResult.BOARDRESULT_NONE;
+			mBoardResult = BoardResult.None;
 			mKilledYetiAndRestarted = false;
 			base.Init();
 			ReadRestoreInfo();
@@ -1336,14 +1336,14 @@ namespace Lawn
 			mEffectSystem.EffectSystemInitialize();
 			FilterEffect.FilterEffectInitForApp();
 			mKonamiCheck = new TypingCheck();
-			mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_UP);
-			mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_UP);
-			mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_DOWN);
-			mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_DOWN);
-			mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_LEFT);
-			mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_RIGHT);
-			mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_LEFT);
-			mKonamiCheck.AddKeyCode(KeyCode.KEYCODE_RIGHT);
+			mKonamiCheck.AddKeyCode(KeyCode.Up);
+			mKonamiCheck.AddKeyCode(KeyCode.Up);
+			mKonamiCheck.AddKeyCode(KeyCode.Down);
+			mKonamiCheck.AddKeyCode(KeyCode.Down);
+			mKonamiCheck.AddKeyCode(KeyCode.Left);
+			mKonamiCheck.AddKeyCode(KeyCode.Right);
+			mKonamiCheck.AddKeyCode(KeyCode.Left);
+			mKonamiCheck.AddKeyCode(KeyCode.Right);
 			mKonamiCheck.AddChar('b');
 			mKonamiCheck.AddChar('a');
 			mMustacheCheck = new TypingCheck("mustache");
@@ -1526,7 +1526,7 @@ namespace Lawn
 					return;
 				case 22:
 					KillDialog(22);
-					mBoardResult = BoardResult.BOARDRESULT_QUIT;
+					mBoardResult = BoardResult.Quit;
 					mBoard.TryToSaveGame();
 					DoBackToMain();
 					return;
@@ -1588,7 +1588,7 @@ namespace Lawn
 					return;
 				case 58:
 					KillDialog(theId - 2000);
-					PreNewGame(GameMode.GAMEMODE_ADVENTURE, true, false);
+					PreNewGame(GameMode.Adventure, true, false);
 					mPlayerInfo.mHasFinishedTutorial = false;
 					return;
 				default:
@@ -1687,7 +1687,7 @@ namespace Lawn
 						{
 							KillDialog(theId - 3000);
 							mPlayerInfo.SetLevel(4);
-							PreNewGame(GameMode.GAMEMODE_ADVENTURE, false, false);
+							PreNewGame(GameMode.Adventure, false, false);
 							return;
 						}
 						if (num2 != 10008)
@@ -1763,27 +1763,27 @@ namespace Lawn
 
 		public bool IsAdventureMode()
 		{
-			return mGameMode == GameMode.GAMEMODE_ADVENTURE;
+			return mGameMode == GameMode.Adventure;
 		}
 
 		public bool IsQuickPlayMode()
 		{
-			return mGameMode >= GameMode.GAMEMODE_QUICKPLAY_1 && mGameMode <= GameMode.GAMEMODE_QUICKPLAY_50;
+			return mGameMode >= GameMode.Quickplay1 && mGameMode <= GameMode.Quickplay50;
 		}
 
 		public bool IsSurvivalMode()
 		{
-			return mGameMode >= GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_1 && mGameMode <= GameMode.GAMEMODE_SURVIVAL_ENDLESS_STAGE_5;
+			return mGameMode >= GameMode.SurvivalNormalStage1 && mGameMode <= GameMode.SurvivalEndlessStage5;
 		}
 
 		public bool IsContinuousChallenge()
 		{
-			return IsArtChallenge() || IsSlotMachineLevel() || IsFinalBossLevel() || mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED || mGameMode == GameMode.GAMEMODE_UPSELL || mGameMode == GameMode.GAMEMODE_INTRO || mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST;
+			return IsArtChallenge() || IsSlotMachineLevel() || IsFinalBossLevel() || mGameMode == GameMode.ChallengeBeghouled || mGameMode == GameMode.Upsell || mGameMode == GameMode.Intro || mGameMode == GameMode.ChallengeBeghouledTwist;
 		}
 
 		public bool IsArtChallenge()
 		{
-			return mBoard != null && (mGameMode == GameMode.GAMEMODE_CHALLENGE_ART_CHALLENGE_1 || mGameMode == GameMode.GAMEMODE_CHALLENGE_ART_CHALLENGE_2 || mGameMode == GameMode.GAMEMODE_CHALLENGE_SEEING_STARS);
+			return mBoard != null && (mGameMode == GameMode.ChallengeArtChallenge1 || mGameMode == GameMode.ChallengeArtChallenge2 || mGameMode == GameMode.ChallengeSeeingStars);
 		}
 
 		public bool NeedPauseGame()
@@ -1797,7 +1797,7 @@ namespace Lawn
 			{
 				num = mDialogList.First.Value.mId;
 			}
-			return num != 28 && num != 51 && num != 50 && (mBoard == null || mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN) && (mBoard == null || mGameMode != GameMode.GAMEMODE_TREE_OF_WISDOM);
+			return num != 28 && num != 51 && num != 50 && (mBoard == null || mGameMode != GameMode.ChallengeZenGarden) && (mBoard == null || mGameMode != GameMode.TreeOfWisdom);
 		}
 
 		public void ShowResourceError()
@@ -1876,7 +1876,7 @@ namespace Lawn
 
 		public void ShowChallengeScreen(ChallengePage thePage)
 		{
-			mGameScene = GameScenes.SCENE_CHALLENGE;
+			mGameScene = GameScenes.Challenge;
 			mChallengeScreen = new ChallengeScreen(this, thePage);
 			mChallengeScreen.Resize(0, 0, mWidth, mHeight);
 			mWidgetManager.AddWidget(mChallengeScreen);
@@ -1886,7 +1886,7 @@ namespace Lawn
 
 		public void ShowLeaderboardScreen()
 		{
-			mGameScene = GameScenes.SCENE_LEADERBOARD;
+			mGameScene = GameScenes.Leaderboard;
 			mLeaderboardScreen = new LeaderboardScreen(this);
 			mLeaderboardScreen.Resize(0, 0, mWidth, mHeight);
 			mWidgetManager.AddWidget(mLeaderboardScreen);
@@ -1920,29 +1920,29 @@ namespace Lawn
 				KillBoard();
 				if (IsFirstTimeAdventureMode() && level < 50)
 				{
-					ShowAwardScreen(AwardType.AWARD_FOR_LEVEL, flag);
+					ShowAwardScreen(AwardType.ForLevel, flag);
 					return;
 				}
 				if (level == 50)
 				{
 					if (mPlayerInfo.mFinishedAdventure != 1)
 					{
-						ShowAwardScreen(AwardType.AWARD_FOR_LEVEL, flag);
+						ShowAwardScreen(AwardType.ForLevel, flag);
 						return;
 					}
-					ShowAwardScreen(AwardType.AWARD_PRE_CREDITS_ZOMBIE_NOTE, flag);
+					ShowAwardScreen(AwardType.PreCreditsZombieNote, flag);
 					return;
 				}
 				else
 				{
 					if (level == 9 || level == 19 || level == 29 || level == 39 || level == 49)
 					{
-						ShowAwardScreen(AwardType.AWARD_FOR_LEVEL, flag);
+						ShowAwardScreen(AwardType.ForLevel, flag);
 						return;
 					}
 					if (flag)
 					{
-						ShowAwardScreen(AwardType.AWARD_ACHIEVEMENT_ONLY, true);
+						ShowAwardScreen(AwardType.AchievementOnly, true);
 						return;
 					}
 					PreNewGame(mGameMode, false);
@@ -1954,7 +1954,7 @@ namespace Lawn
 				KillBoard();
 				if (flag)
 				{
-					ShowAwardScreen(AwardType.AWARD_ACHIEVEMENT_ONLY, flag);
+					ShowAwardScreen(AwardType.AchievementOnly, flag);
 					return;
 				}
 				ShowGameSelectorQuickPlay(false);
@@ -1985,10 +1985,10 @@ namespace Lawn
 				KillBoard();
 				if (flag2)
 				{
-					ShowGameSelectorQuickPlay(false, GameSelectorButtons.GameSelector_IZombie);
+					ShowGameSelectorQuickPlay(false, GameSelectorButtons.IZombie);
 					return;
 				}
-				ShowGameSelectorQuickPlay(false, GameSelectorButtons.GameSelector_Vasebreaker);
+				ShowGameSelectorQuickPlay(false, GameSelectorButtons.Vasebreaker);
 				return;
 			}
 		}
@@ -2000,7 +2000,7 @@ namespace Lawn
 
 		public bool IsChallengeWithoutSeedBank()
 		{
-			return mGameMode == GameMode.GAMEMODE_CHALLENGE_RAINING_SEEDS || mGameMode == GameMode.GAMEMODE_UPSELL || mGameMode == GameMode.GAMEMODE_INTRO || IsWhackAZombieLevel() || IsSquirrelLevel() || IsScaryPotterLevel() || mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN || mGameMode == GameMode.GAMEMODE_TREE_OF_WISDOM;
+			return mGameMode == GameMode.ChallengeRainingSeeds || mGameMode == GameMode.Upsell || mGameMode == GameMode.Intro || IsWhackAZombieLevel() || IsSquirrelLevel() || IsScaryPotterLevel() || mGameMode == GameMode.ChallengeZenGarden || mGameMode == GameMode.TreeOfWisdom;
 		}
 
 		public AlmanacDialog DoAlmanacDialog(SeedType theSeedType, ZombieType theZombieType, AlmanacListener theListener)
@@ -2011,11 +2011,11 @@ namespace Lawn
 			almanacDialog.Resize(0, 0, Constants.BackBufferSize.Y, Constants.BackBufferSize.X);
 			base.AddDialog(3, almanacDialog);
 			mWidgetManager.SetFocus(almanacDialog);
-			if (theSeedType != SeedType.SEED_NONE)
+			if (theSeedType != SeedType.None)
 			{
 				almanacDialog.ShowPlant(theSeedType);
 			}
-			else if (theZombieType != ZombieType.ZOMBIE_INVALID)
+			else if (theZombieType != ZombieType.Invalid)
 			{
 				almanacDialog.ShowZombie(theZombieType);
 			}
@@ -2162,43 +2162,43 @@ namespace Lawn
 
 		public bool HasSeedType(SeedType theSeedType)
 		{
-			if (theSeedType == SeedType.SEED_GATLINGPEA)
+			if (theSeedType == SeedType.Gatlingpea)
 			{
 				return mPlayerInfo.mPurchases[0] > 0;
 			}
-			if (IsTrialStageLocked() && theSeedType >= SeedType.SEED_JALAPENO)
+			if (IsTrialStageLocked() && theSeedType >= SeedType.Jalapeno)
 			{
 				return false;
 			}
-			if (theSeedType == SeedType.SEED_TWINSUNFLOWER)
+			if (theSeedType == SeedType.Twinsunflower)
 			{
 				return mPlayerInfo.mPurchases[1] > 0;
 			}
-			if (theSeedType == SeedType.SEED_GLOOMSHROOM)
+			if (theSeedType == SeedType.Gloomshroom)
 			{
 				return mPlayerInfo.mPurchases[2] > 0;
 			}
-			if (theSeedType == SeedType.SEED_CATTAIL)
+			if (theSeedType == SeedType.Cattail)
 			{
 				return mPlayerInfo.mPurchases[3] > 0;
 			}
-			if (theSeedType == SeedType.SEED_WINTERMELON)
+			if (theSeedType == SeedType.Wintermelon)
 			{
 				return mPlayerInfo.mPurchases[4] > 0;
 			}
-			if (theSeedType == SeedType.SEED_GOLD_MAGNET)
+			if (theSeedType == SeedType.GoldMagnet)
 			{
 				return mPlayerInfo.mPurchases[5] > 0;
 			}
-			if (theSeedType == SeedType.SEED_SPIKEROCK)
+			if (theSeedType == SeedType.Spikerock)
 			{
 				return mPlayerInfo.mPurchases[6] > 0;
 			}
-			if (theSeedType == SeedType.SEED_COBCANNON)
+			if (theSeedType == SeedType.Cobcannon)
 			{
 				return mPlayerInfo.mPurchases[7] > 0;
 			}
-			if (theSeedType == SeedType.SEED_IMITATER)
+			if (theSeedType == SeedType.Imitater)
 			{
 				return mPlayerInfo.mPurchases[8] > 0;
 			}
@@ -2221,42 +2221,42 @@ namespace Lawn
 
 		public bool IsShovelLevel()
 		{
-			return mBoard != null && mGameMode == GameMode.GAMEMODE_CHALLENGE_SHOVEL;
+			return mBoard != null && mGameMode == GameMode.ChallengeShovel;
 		}
 
 		public bool IsWallnutBowlingLevel()
 		{
-			return mBoard != null && (mGameMode == GameMode.GAMEMODE_CHALLENGE_WALLNUT_BOWLING || mGameMode == GameMode.GAMEMODE_CHALLENGE_WALLNUT_BOWLING_2 || ((IsAdventureMode() && mPlayerInfo.mLevel == 5) || mGameMode == GameMode.GAMEMODE_QUICKPLAY_5));
+			return mBoard != null && (mGameMode == GameMode.ChallengeWallnutBowling || mGameMode == GameMode.ChallengeWallnutBowling2 || ((IsAdventureMode() && mPlayerInfo.mLevel == 5) || mGameMode == GameMode.Quickplay5));
 		}
 
 		public bool IsMiniBossLevel()
 		{
-			return mBoard != null && ((IsAdventureMode() && mPlayerInfo.mLevel == 10) || mGameMode == GameMode.GAMEMODE_QUICKPLAY_10 || ((IsAdventureMode() && mPlayerInfo.mLevel == 20) || mGameMode == GameMode.GAMEMODE_QUICKPLAY_20) || ((IsAdventureMode() && mPlayerInfo.mLevel == 30) || mGameMode == GameMode.GAMEMODE_QUICKPLAY_30));
+			return mBoard != null && ((IsAdventureMode() && mPlayerInfo.mLevel == 10) || mGameMode == GameMode.Quickplay10 || ((IsAdventureMode() && mPlayerInfo.mLevel == 20) || mGameMode == GameMode.Quickplay20) || ((IsAdventureMode() && mPlayerInfo.mLevel == 30) || mGameMode == GameMode.Quickplay30));
 		}
 
 		public bool IsSlotMachineLevel()
 		{
-			return mBoard != null && mGameMode == GameMode.GAMEMODE_CHALLENGE_SLOT_MACHINE;
+			return mBoard != null && mGameMode == GameMode.ChallengeSlotMachine;
 		}
 
 		public bool IsLittleTroubleLevel()
 		{
-			return mBoard != null && (mGameMode == GameMode.GAMEMODE_CHALLENGE_LITTLE_TROUBLE || ((IsAdventureMode() && mPlayerInfo.mLevel == 25) || mGameMode == GameMode.GAMEMODE_QUICKPLAY_25));
+			return mBoard != null && (mGameMode == GameMode.ChallengeLittleTrouble || ((IsAdventureMode() && mPlayerInfo.mLevel == 25) || mGameMode == GameMode.Quickplay25));
 		}
 
 		public bool IsStormyNightLevel()
 		{
-			return mBoard != null && (mGameMode == GameMode.GAMEMODE_CHALLENGE_STORMY_NIGHT || ((IsAdventureMode() && mPlayerInfo.mLevel == 40) || mGameMode == GameMode.GAMEMODE_QUICKPLAY_40));
+			return mBoard != null && (mGameMode == GameMode.ChallengeStormyNight || ((IsAdventureMode() && mPlayerInfo.mLevel == 40) || mGameMode == GameMode.Quickplay40));
 		}
 
 		public bool IsFinalBossLevel()
 		{
-			return mBoard != null && (mGameMode == GameMode.GAMEMODE_CHALLENGE_FINAL_BOSS || ((IsAdventureMode() && mPlayerInfo.mLevel == 50) || mGameMode == GameMode.GAMEMODE_QUICKPLAY_50));
+			return mBoard != null && (mGameMode == GameMode.ChallengeFinalBoss || ((IsAdventureMode() && mPlayerInfo.mLevel == 50) || mGameMode == GameMode.Quickplay50));
 		}
 
 		public bool IsBungeeBlitzLevel()
 		{
-			return mBoard != null && (mGameMode == GameMode.GAMEMODE_CHALLENGE_BUNGEE_BLITZ || ((IsAdventureMode() && mPlayerInfo.mLevel == 45) || mGameMode == GameMode.GAMEMODE_QUICKPLAY_45));
+			return mBoard != null && (mGameMode == GameMode.ChallengeBungeeBlitz || ((IsAdventureMode() && mPlayerInfo.mLevel == 45) || mGameMode == GameMode.Quickplay45));
 		}
 
 		public SeedType GetAwardSeedForLevel(int theLevel)
@@ -2309,7 +2309,7 @@ namespace Lawn
 			{
 				return false;
 			}
-			int num = theGameMode - GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_1;
+			int num = theGameMode - GameMode.SurvivalNormalStage1;
 			Debug.ASSERT(num >= 0 && num < 122);
 			if (IsSurvivalNormal(theGameMode))
 			{
@@ -2330,17 +2330,17 @@ namespace Lawn
 
 		public bool IsSurvivalNormal(GameMode theGameMode)
 		{
-			return theGameMode >= GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_1 && theGameMode <= GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_5;
+			return theGameMode >= GameMode.SurvivalNormalStage1 && theGameMode <= GameMode.SurvivalNormalStage5;
 		}
 
 		public bool IsSurvivalHard(GameMode theGameMode)
 		{
-			return theGameMode >= GameMode.GAMEMODE_SURVIVAL_HARD_STAGE_1 && theGameMode <= GameMode.GAMEMODE_SURVIVAL_HARD_STAGE_5;
+			return theGameMode >= GameMode.SurvivalHardStage1 && theGameMode <= GameMode.SurvivalHardStage5;
 		}
 
 		public bool IsSurvivalEndless(GameMode theGameMode)
 		{
-			return theGameMode >= GameMode.GAMEMODE_SURVIVAL_ENDLESS_STAGE_1 && theGameMode <= GameMode.GAMEMODE_SURVIVAL_ENDLESS_STAGE_5;
+			return theGameMode >= GameMode.SurvivalEndlessStage1 && theGameMode <= GameMode.SurvivalEndlessStage5;
 		}
 
 		public bool HasFinishedAdventure()
@@ -2355,24 +2355,24 @@ namespace Lawn
 
 		public bool CanSpawnYetis()
 		{
-			ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(ZombieType.ZOMBIE_YETI);
+			ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(ZombieType.Yeti);
 			return HasFinishedAdventure() && (mPlayerInfo.mFinishedAdventure >= 2 || mPlayerInfo.mLevel >= zombieDefinition.mStartingLevel);
 		}
 
 		public void CrazyDaveEnter()
 		{
-			Debug.ASSERT(mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_OFF);
+			Debug.ASSERT(mCrazyDaveState == CrazyDaveState.Off);
 			Debug.ASSERT(ReanimationTryToGet(mCrazyDaveReanimID) == null);
-			Reanimation reanimation = AddReanimation(0f, 0f, 0, ReanimationType.REANIM_CRAZY_DAVE);
+			Reanimation reanimation = AddReanimation(0f, 0f, 0, ReanimationType.CrazyDave);
 			reanimation.mIsAttachment = true;
 			reanimation.SetBasePoseFromAnim(GlobalMembersReanimIds.ReanimTrackId_anim_idle_handing);
 			mCrazyDaveReanimID = ReanimationGetID(reanimation);
-			reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_enter, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 24f);
-			mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_ENTERING;
+			reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_enter, ReanimLoopType.PlayOnceAndHold, 0, 24f);
+			mCrazyDaveState = CrazyDaveState.Entering;
 			mCrazyDaveMessageIndex = -1;
 			mCrazyDaveMessageText = string.Empty;
 			mCrazyDaveBlinkCounter = TodCommon.RandRangeInt(400, 800);
-			if (mGameScene == GameScenes.SCENE_LEVEL_INTRO && IsStormyNightLevel())
+			if (mGameScene == GameScenes.LevelIntro && IsStormyNightLevel())
 			{
 				reanimation.mColorOverride = new SexyColor(64, 64, 64);
 			}
@@ -2383,9 +2383,9 @@ namespace Lawn
 			mZenGarden.mIsTutorial = false;
 			mPlayerInfo.mZenGardenTutorialComplete = true;
 			mPlayerInfo.mIsInZenTutorial = false;
-			mBoardResult = BoardResult.BOARDRESULT_WON;
+			mBoardResult = BoardResult.Won;
 			KillBoard();
-			PreNewGame(GameMode.GAMEMODE_ADVENTURE, false);
+			PreNewGame(GameMode.Adventure, false);
 		}
 
 		public void UpdateCrazyDave()
@@ -2395,27 +2395,27 @@ namespace Lawn
 			{
 				return;
 			}
-			if (mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_ENTERING || mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_TALKING)
+			if (mCrazyDaveState == CrazyDaveState.Entering || mCrazyDaveState == CrazyDaveState.Talking)
 			{
 				if (reanimation.mLoopCount > 0)
 				{
-					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.REANIM_LOOP, 20, 12f);
-					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_IDLING;
+					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.Loop, 20, 12f);
+					mCrazyDaveState = CrazyDaveState.Idling;
 				}
 			}
-			else if (mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING)
+			else if (mCrazyDaveState == CrazyDaveState.HandingTalking)
 			{
 				if (reanimation.mLoopCount > 0)
 				{
-					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle_handing, ReanimLoopType.REANIM_LOOP, 20, 12f);
-					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_HANDING_IDLING;
+					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle_handing, ReanimLoopType.Loop, 20, 12f);
+					mCrazyDaveState = CrazyDaveState.HandingIdling;
 				}
 			}
-			else if (mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_LEAVING && reanimation.mLoopCount > 0)
+			else if (mCrazyDaveState == CrazyDaveState.Leaving && reanimation.mLoopCount > 0)
 			{
 				CrazyDaveDie();
 			}
-			if (mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_IDLING || mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_IDLING)
+			if (mCrazyDaveState == CrazyDaveState.Idling || mCrazyDaveState == CrazyDaveState.HandingIdling)
 			{
 				if (mCrazyDaveMessageText.IndexOf("{MOUTH_BIG_SMILE}") != -1)
 				{
@@ -2439,15 +2439,15 @@ namespace Lawn
 				}
 			}
 			Reanimation reanimation2;
-			if (mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_IDLING || mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_TALKING || mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING || mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_IDLING)
+			if (mCrazyDaveState == CrazyDaveState.Idling || mCrazyDaveState == CrazyDaveState.Talking || mCrazyDaveState == CrazyDaveState.HandingTalking || mCrazyDaveState == CrazyDaveState.HandingIdling)
 			{
 				mCrazyDaveBlinkCounter--;
 				if (mCrazyDaveBlinkCounter <= 0)
 				{
 					mCrazyDaveBlinkCounter = TodCommon.RandRangeInt(400, 800);
-					reanimation2 = AddReanimation(0f, 0f, 0, ReanimationType.REANIM_CRAZY_DAVE);
+					reanimation2 = AddReanimation(0f, 0f, 0, ReanimationType.CrazyDave);
 					reanimation2.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_blink);
-					reanimation2.mLoopType = ReanimLoopType.REANIM_PLAY_ONCE_FULL_LAST_FRAME_AND_HOLD;
+					reanimation2.mLoopType = ReanimLoopType.PlayOnceFullLastFrameAndHold;
 					reanimation2.mAnimRate = 15f;
 					reanimation2.AttachToAnotherReanimation(ref reanimation, GlobalMembersReanimIds.ReanimTrackId_dave_head);
 					reanimation2.mColorOverride = reanimation.mColorOverride;
@@ -2481,7 +2481,7 @@ namespace Lawn
 				flag = true;
 				theMessage = theMessage.Replace("{HANDING}", string.Empty);
 			}
-			if ((mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING || mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_IDLING) && !flag)
+			if ((mCrazyDaveState == CrazyDaveState.HandingTalking || mCrazyDaveState == CrazyDaveState.HandingIdling) && !flag)
 			{
 				CrazyDaveDoneHanding();
 			}
@@ -2514,62 +2514,62 @@ namespace Lawn
 			}
 			Image theImage = null;
 			reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_dave_mouths, theImage);
-			if (mCrazyDaveState != CrazyDaveState.CRAZY_DAVE_TALKING || flag2)
+			if (mCrazyDaveState != CrazyDaveState.Talking || flag2)
 			{
 				if (flag)
 				{
-					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_talk_handing, ReanimLoopType.REANIM_LOOP, 50, 12f);
+					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_talk_handing, ReanimLoopType.Loop, 50, 12f);
 					if (flag2 && theMessage.IndexOf("{SHORT_SOUND}") != -1)
 					{
-						PlayFoley(FoleyType.FOLEY_CRAZYDAVESHORT);
+						PlayFoley(FoleyType.Crazydaveshort);
 						theMessage = theMessage.Replace("{SHORT_SOUND}", "");
 					}
 					else if (flag2 && theMessage.IndexOf("{SCREAM}") != -1)
 					{
-						PlayFoley(FoleyType.FOLEY_CRAZYDAVESCREAM);
+						PlayFoley(FoleyType.Crazydavescream);
 						theMessage = theMessage.Replace("{SCREAM}", "");
 					}
 					else if (flag2)
 					{
-						PlayFoley(FoleyType.FOLEY_CRAZYDAVELONG);
+						PlayFoley(FoleyType.Crazydavelong);
 					}
-					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_HANDING_TALKING;
+					mCrazyDaveState = CrazyDaveState.HandingTalking;
 				}
 				else if (theMessage.IndexOf("{SHAKE}") != -1)
 				{
-					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_crazy, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 50, 12f);
+					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_crazy, ReanimLoopType.PlayOnceAndHold, 50, 12f);
 					if (flag2)
 					{
-						PlayFoley(FoleyType.FOLEY_CRAZYDAVECRAZY);
+						PlayFoley(FoleyType.Crazydavecrazy);
 					}
-					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_TALKING;
+					mCrazyDaveState = CrazyDaveState.Talking;
 					theMessage = theMessage.Replace("{SHAKE}", "");
 				}
 				else if (theMessage.IndexOf("{SCREAM}") != -1)
 				{
-					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_smalltalk, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 50, 12f);
+					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_smalltalk, ReanimLoopType.PlayOnceAndHold, 50, 12f);
 					if (flag2)
 					{
-						PlayFoley(FoleyType.FOLEY_CRAZYDAVESCREAM);
+						PlayFoley(FoleyType.Crazydavescream);
 					}
-					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_TALKING;
+					mCrazyDaveState = CrazyDaveState.Talking;
 					theMessage = theMessage.Replace("{SCREAM}", "");
 				}
 				else if (theMessage.IndexOf("{SCREAM2}") != -1)
 				{
-					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_mediumtalk, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 50, 12f);
+					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_mediumtalk, ReanimLoopType.PlayOnceAndHold, 50, 12f);
 					if (flag2)
 					{
-						PlayFoley(FoleyType.FOLEY_CRAZYDAVESCREAM2);
+						PlayFoley(FoleyType.Crazydavescream2);
 					}
-					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_TALKING;
+					mCrazyDaveState = CrazyDaveState.Talking;
 					theMessage = theMessage.Replace("{SCREAM2}", "");
 				}
 				else if (theMessage.IndexOf("{SHOW_WALLNUT}") != -1)
 				{
-					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_talk_handing, ReanimLoopType.REANIM_LOOP, 50, 12f);
-					Reanimation reanimation2 = AddReanimation(0f, 0f, 0, ReanimationType.REANIM_WALLNUT);
-					reanimation2.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.REANIM_LOOP, 0, 12f);
+					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_talk_handing, ReanimLoopType.Loop, 50, 12f);
+					Reanimation reanimation2 = AddReanimation(0f, 0f, 0, ReanimationType.Wallnut);
+					reanimation2.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.Loop, 0, 12f);
 					ReanimatorTrackInstance trackInstanceByName = reanimation.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_dave_handinghand);
 					AttachEffect attachEffect = GlobalMembersAttachment.AttachReanim(ref trackInstanceByName.mAttachmentID, reanimation2, 100f * Constants.S, 393f * Constants.S);
 					attachEffect.mOffset.mMatrix.M11 = 1.2f;
@@ -2577,16 +2577,16 @@ namespace Lawn
 					reanimation.Update();
 					if (flag2)
 					{
-						PlayFoley(FoleyType.FOLEY_CRAZYDAVESCREAM2);
+						PlayFoley(FoleyType.Crazydavescream2);
 					}
-					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_HANDING_TALKING;
+					mCrazyDaveState = CrazyDaveState.HandingTalking;
 					theMessage = theMessage.Replace("{SHOW_WALLNUT}", "");
 				}
 				else if (theMessage.IndexOf("{SHOW_HAMMER}") != -1)
 				{
-					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_talk_handing, ReanimLoopType.REANIM_LOOP, 50, 12f);
-					Reanimation reanimation3 = AddReanimation(0f, 0f, 0, ReanimationType.REANIM_HAMMER);
-					reanimation3.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_whack_zombie, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 24f);
+					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_talk_handing, ReanimLoopType.Loop, 50, 12f);
+					Reanimation reanimation3 = AddReanimation(0f, 0f, 0, ReanimationType.Hammer);
+					reanimation3.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_whack_zombie, ReanimLoopType.PlayOnceAndHold, 0, 24f);
 					reanimation3.mAnimTime = 1f;
 					ReanimatorTrackInstance trackInstanceByName2 = reanimation.GetTrackInstanceByName(GlobalMembersReanimIds.ReanimTrackId_dave_handinghand);
 					AttachEffect attachEffect2 = GlobalMembersAttachment.AttachReanim(ref trackInstanceByName2.mAttachmentID, reanimation3, 62f * Constants.S, 445f * Constants.S);
@@ -2595,37 +2595,37 @@ namespace Lawn
 					reanimation.Update();
 					if (flag2)
 					{
-						PlayFoley(FoleyType.FOLEY_CRAZYDAVELONG);
+						PlayFoley(FoleyType.Crazydavelong);
 					}
-					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_HANDING_TALKING;
+					mCrazyDaveState = CrazyDaveState.HandingTalking;
 					theMessage = theMessage.Replace("{SHOW_HAMMER}", "");
 				}
 				else if (num < 23)
 				{
-					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_smalltalk, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 50, 12f);
+					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_smalltalk, ReanimLoopType.PlayOnceAndHold, 50, 12f);
 					if (flag2)
 					{
-						PlayFoley(FoleyType.FOLEY_CRAZYDAVESHORT);
+						PlayFoley(FoleyType.Crazydaveshort);
 					}
-					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_TALKING;
+					mCrazyDaveState = CrazyDaveState.Talking;
 				}
 				else if (num < 52)
 				{
-					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_mediumtalk, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 50, 12f);
+					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_mediumtalk, ReanimLoopType.PlayOnceAndHold, 50, 12f);
 					if (flag2)
 					{
-						PlayFoley(FoleyType.FOLEY_CRAZYDAVELONG);
+						PlayFoley(FoleyType.Crazydavelong);
 					}
-					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_TALKING;
+					mCrazyDaveState = CrazyDaveState.Talking;
 				}
 				else
 				{
-					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_blahblah, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 50, 12f);
+					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_blahblah, ReanimLoopType.PlayOnceAndHold, 50, 12f);
 					if (flag2)
 					{
-						PlayFoley(FoleyType.FOLEY_CRAZYDAVEEXTRALONG);
+						PlayFoley(FoleyType.Crazydaveextralong);
 					}
-					mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_TALKING;
+					mCrazyDaveState = CrazyDaveState.Talking;
 				}
 			}
 			mCrazyDaveMessageText = theMessage;
@@ -2638,14 +2638,14 @@ namespace Lawn
 			{
 				return;
 			}
-			if (mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING || mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_IDLING)
+			if (mCrazyDaveState == CrazyDaveState.HandingTalking || mCrazyDaveState == CrazyDaveState.HandingIdling)
 			{
 				CrazyDaveDoneHanding();
 			}
-			reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_leave, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 20, 24f);
+			reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_leave, ReanimLoopType.PlayOnceAndHold, 20, 24f);
 			Image theImage = null;
 			reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_dave_mouths, theImage);
-			mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_LEAVING;
+			mCrazyDaveState = CrazyDaveState.Leaving;
 			mCrazyDaveMessageIndex = -1;
 			mCrazyDaveMessageText = string.Empty;
 			CrazyDaveStopSound();
@@ -2678,7 +2678,7 @@ namespace Lawn
 					g.DrawImage(image_STORE_SPEECHBUBBLE, num, num2, new TRect(0, 0, (int)Constants.InvertAndScale(64f), image_STORE_SPEECHBUBBLE.mHeight));
 					g.DrawImage(image_STORE_SPEECHBUBBLE, num + (int)Constants.InvertAndScale(64f), num2, new TRect(image_STORE_SPEECHBUBBLE.mWidth - num3, 0, num3, image_STORE_SPEECHBUBBLE.mHeight));
 				}
-				else if (mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+				else if (mGameMode == GameMode.ChallengeZenGarden)
 				{
 					num += Constants.ZenGarden_RetardedDaveBubble_Pos.X;
 					num2 += Constants.ZenGarden_RetardedDaveBubble_Pos.Y;
@@ -2701,7 +2701,7 @@ namespace Lawn
 					theRect.mY += RandomNumbers.NextNumber() % 2;
 				}
 				bool flag = true;
-				if (mGameMode == GameMode.GAMEMODE_UPSELL)
+				if (mGameMode == GameMode.Upsell)
 				{
 					flag = false;
 				}
@@ -2718,10 +2718,10 @@ namespace Lawn
 				}
 				g.SetColor(SexyColor.Black);
 				g.SetFont(theUseSmallFont ? Resources.FONT_BRIANNETOD12 : Resources.FONT_BRIANNETOD16);
-				TodStringFile.TodDrawStringWrapped(g, text, theRect, theUseSmallFont ? Resources.FONT_BRIANNETOD12 : Resources.FONT_BRIANNETOD16, SexyColor.Black, DrawStringJustification.DS_ALIGN_CENTER_VERTICAL_MIDDLE);
+				TodStringFile.TodDrawStringWrapped(g, text, theRect, theUseSmallFont ? Resources.FONT_BRIANNETOD12 : Resources.FONT_BRIANNETOD16, SexyColor.Black, DrawStringJustification.CenterVerticalMiddle);
 				if (flag)
 				{
-					TodCommon.TodDrawString(g, "[TAP_TO_CONTINUE]", x + theRect.mWidth / 2, num2 + Constants.RetardedDave_Bubble_TapToContinue_Y, Resources.FONT_PICO129, SexyColor.Black, DrawStringJustification.DS_ALIGN_CENTER);
+					TodCommon.TodDrawString(g, "[TAP_TO_CONTINUE]", x + theRect.mWidth / 2, num2 + Constants.RetardedDave_Bubble_TapToContinue_Y, Resources.FONT_PICO129, SexyColor.Black, DrawStringJustification.Center);
 				}
 			}
 			reanimation.Draw(g, false);
@@ -2735,7 +2735,7 @@ namespace Lawn
 				return;
 			}
 			reanimation.ReanimationDie();
-			mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_OFF;
+			mCrazyDaveState = CrazyDaveState.Off;
 			mCrazyDaveReanimID = null;
 			mCrazyDaveMessageIndex = -1;
 			mCrazyDaveMessageText = string.Empty;
@@ -2749,26 +2749,26 @@ namespace Lawn
 		public void CrazyDaveStopTalking()
 		{
 			bool flag = true;
-			if (mGameMode == GameMode.GAMEMODE_UPSELL)
+			if (mGameMode == GameMode.Upsell)
 			{
 				flag = false;
 			}
-			if (flag && mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING)
+			if (flag && mCrazyDaveState == CrazyDaveState.HandingTalking)
 			{
 				CrazyDaveDoneHanding();
 			}
 			Image theImage = null;
 			Reanimation reanimation = ReanimationGet(mCrazyDaveReanimID);
 			reanimation.SetImageOverride(GlobalMembersReanimIds.ReanimTrackId_dave_mouths, theImage);
-			if (mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING && !flag)
+			if (mCrazyDaveState == CrazyDaveState.HandingTalking && !flag)
 			{
-				reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle_handing, ReanimLoopType.REANIM_LOOP, 20, 12f);
-				mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_HANDING_IDLING;
+				reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle_handing, ReanimLoopType.Loop, 20, 12f);
+				mCrazyDaveState = CrazyDaveState.HandingIdling;
 			}
-			else if (mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_TALKING || mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_HANDING_TALKING)
+			else if (mCrazyDaveState == CrazyDaveState.Talking || mCrazyDaveState == CrazyDaveState.HandingTalking)
 			{
-				reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.REANIM_LOOP, 20, 12f);
-				mCrazyDaveState = CrazyDaveState.CRAZY_DAVE_IDLING;
+				reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.Loop, 20, 12f);
+				mCrazyDaveState = CrazyDaveState.Idling;
 			}
 			mCrazyDaveMessageIndex = -1;
 			mCrazyDaveMessageText = string.Empty;
@@ -2778,24 +2778,24 @@ namespace Lawn
 		public void PreloadForUser()
 		{
 			int num = mCompletedLoadingThreadTasks + GetNumPreloadingTasks();
-			if (mTitleScreen != null && mTitleScreen.mQuickLoadKey != KeyCode.KEYCODE_UNKNOWN)
+			if (mTitleScreen != null && mTitleScreen.mQuickLoadKey != KeyCode.Unknown)
 			{
 				mCompletedLoadingThreadTasks = num;
 				return;
 			}
-			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_PUFF, true);
-			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_LAWN_MOWERED_ZOMBIE, true);
-			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_READYSETPLANT, true);
+			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.Puff, true);
+			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.LawnMoweredZombie, true);
+			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.Readysetplant, true);
 			mCompletedLoadingThreadTasks += 68;
-			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_FINAL_WAVE, true);
-			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_SUN, true);
-			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_TEXT_FADE_ON, true);
+			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.FinalWave, true);
+			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.Sun, true);
+			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.TextFadeOn, true);
 			mCompletedLoadingThreadTasks += 68;
-			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_ZOMBIE, true);
+			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.Zombie, true);
 			mCompletedLoadingThreadTasks += 68;
-			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_ZOMBIE_NEWSPAPER, true);
+			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.ZombieNewspaper, true);
 			mCompletedLoadingThreadTasks += 68;
-			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_SELECTOR_SCREEN, true);
+			ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.SelectorScreen, true);
 			mCompletedLoadingThreadTasks += 340;
 			mCompletedLoadingThreadTasks += 68;
 			if (mPlayerInfo != null)
@@ -2810,7 +2810,7 @@ namespace Lawn
 						{
 							mCompletedLoadingThreadTasks += 68;
 						}
-						if (mTitleScreen != null && mTitleScreen.mQuickLoadKey != KeyCode.KEYCODE_UNKNOWN)
+						if (mTitleScreen != null && mTitleScreen.mQuickLoadKey != KeyCode.Unknown)
 						{
 							mCompletedLoadingThreadTasks = num;
 							return;
@@ -2838,7 +2838,7 @@ namespace Lawn
 					j++;
 					continue;
 					IL_175:
-					if (zombieType == ZombieType.ZOMBIE_BOSS || zombieType == ZombieType.ZOMBIE_CATAPULT || zombieType == ZombieType.ZOMBIE_GARGANTUAR || zombieType == ZombieType.ZOMBIE_DIGGER || zombieType == ZombieType.ZOMBIE_ZAMBONI)
+					if (zombieType == ZombieType.Boss || zombieType == ZombieType.Catapult || zombieType == ZombieType.Gargantuar || zombieType == ZombieType.Digger || zombieType == ZombieType.Zamboni)
 					{
 						goto IL_1E0;
 					}
@@ -2847,7 +2847,7 @@ namespace Lawn
 					{
 						mCompletedLoadingThreadTasks += 68;
 					}
-					if (mTitleScreen != null && mTitleScreen.mQuickLoadKey != KeyCode.KEYCODE_UNKNOWN)
+					if (mTitleScreen != null && mTitleScreen.mQuickLoadKey != KeyCode.Unknown)
 					{
 						mCompletedLoadingThreadTasks = num;
 						return;
@@ -2903,7 +2903,7 @@ namespace Lawn
 					j++;
 					continue;
 					IL_5B:
-					if (zombieType != ZombieType.ZOMBIE_BOSS && zombieType != ZombieType.ZOMBIE_CATAPULT && zombieType != ZombieType.ZOMBIE_GARGANTUAR && zombieType != ZombieType.ZOMBIE_DIGGER && zombieType != ZombieType.ZOMBIE_ZAMBONI)
+					if (zombieType != ZombieType.Boss && zombieType != ZombieType.Catapult && zombieType != ZombieType.Gargantuar && zombieType != ZombieType.Digger && zombieType != ZombieType.Zamboni)
 					{
 						num++;
 						goto IL_7D;
@@ -2999,22 +2999,22 @@ namespace Lawn
 
 		public bool IsScaryPotterLevel()
 		{
-			return (mGameMode >= GameMode.GAMEMODE_SCARY_POTTER_1 && mGameMode <= GameMode.GAMEMODE_SCARY_POTTER_ENDLESS) || ((IsAdventureMode() && mPlayerInfo.mLevel == 35) || mGameMode == GameMode.GAMEMODE_QUICKPLAY_35);
+			return (mGameMode >= GameMode.ScaryPotter1 && mGameMode <= GameMode.ScaryPotterEndless) || ((IsAdventureMode() && mPlayerInfo.mLevel == 35) || mGameMode == GameMode.Quickplay35);
 		}
 
 		public bool IsEndlessScaryPotter(GameMode theGameMode)
 		{
-			return theGameMode == GameMode.GAMEMODE_SCARY_POTTER_ENDLESS;
+			return theGameMode == GameMode.ScaryPotterEndless;
 		}
 
 		public bool IsSquirrelLevel()
 		{
-			return mBoard != null && mGameMode == GameMode.GAMEMODE_CHALLENGE_SQUIRREL;
+			return mBoard != null && mGameMode == GameMode.ChallengeSquirrel;
 		}
 
 		public bool IsIZombieLevel()
 		{
-			return mBoard != null && (mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_1 || mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_2 || mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_3 || mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_4 || mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_5 || mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_6 || mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_7 || mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_8 || mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_9 || mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_ENDLESS);
+			return mBoard != null && (mGameMode == GameMode.PuzzleIZombie1 || mGameMode == GameMode.PuzzleIZombie2 || mGameMode == GameMode.PuzzleIZombie3 || mGameMode == GameMode.PuzzleIZombie4 || mGameMode == GameMode.PuzzleIZombie5 || mGameMode == GameMode.PuzzleIZombie6 || mGameMode == GameMode.PuzzleIZombie7 || mGameMode == GameMode.PuzzleIZombie8 || mGameMode == GameMode.PuzzleIZombie9 || mGameMode == GameMode.PuzzleIZombieEndless);
 		}
 
 		public bool CanShowZenGarden()
@@ -3060,7 +3060,7 @@ namespace Lawn
 
 		public bool IsWhackAZombieLevel()
 		{
-			return mBoard != null && (mGameMode == GameMode.GAMEMODE_CHALLENGE_WHACK_A_ZOMBIE || ((IsAdventureMode() && mPlayerInfo.mLevel == 15) || mGameMode == GameMode.GAMEMODE_QUICKPLAY_15));
+			return mBoard != null && (mGameMode == GameMode.ChallengeWhackAZombie || ((IsAdventureMode() && mPlayerInfo.mLevel == 15) || mGameMode == GameMode.Quickplay15));
 		}
 
 		public void UpdatePlayTimeStats()
@@ -3069,12 +3069,12 @@ namespace Lawn
 
 		public bool CanPauseNow()
 		{
-			return mBoard != null && (mSeedChooserScreen == null || !mSeedChooserScreen.mMouseVisible) && mBoard.mBoardFadeOutCounter < 0 && mCrazyDaveState == CrazyDaveState.CRAZY_DAVE_OFF && mGameMode != GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN && mGameMode != GameMode.GAMEMODE_TREE_OF_WISDOM && base.GetDialogCount() <= 0;
+			return mBoard != null && (mSeedChooserScreen == null || !mSeedChooserScreen.mMouseVisible) && mBoard.mBoardFadeOutCounter < 0 && mCrazyDaveState == CrazyDaveState.Off && mGameMode != GameMode.ChallengeZenGarden && mGameMode != GameMode.TreeOfWisdom && base.GetDialogCount() <= 0;
 		}
 
 		public bool IsPuzzleMode()
 		{
-			return (mGameMode >= GameMode.GAMEMODE_SCARY_POTTER_1 && mGameMode <= GameMode.GAMEMODE_SCARY_POTTER_ENDLESS) || (mGameMode >= GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_1 && mGameMode <= GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_ENDLESS);
+			return (mGameMode >= GameMode.ScaryPotter1 && mGameMode <= GameMode.ScaryPotterEndless) || (mGameMode >= GameMode.PuzzleIZombie1 && mGameMode <= GameMode.PuzzleIZombieEndless);
 		}
 
 		public bool IsChallengeMode()
@@ -3084,7 +3084,7 @@ namespace Lawn
 
 		public bool IsEndlessIZombie(GameMode theGameMode)
 		{
-			return theGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_ENDLESS;
+			return theGameMode == GameMode.PuzzleIZombieEndless;
 		}
 
 		public void CrazyDaveDoneHanding()
@@ -3101,7 +3101,7 @@ namespace Lawn
 
 		public int GetCurrentChallengeIndex()
 		{
-			return mGameMode - GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_1;
+			return mGameMode - GameMode.SurvivalNormalStage1;
 		}
 
 		public void LoadGroup(string theGroupName, int theGroupAveMsToLoad)
@@ -3381,10 +3381,10 @@ namespace Lawn
 
 		public void CrazyDaveStopSound()
 		{
-			mSoundSystem.StopFoley(FoleyType.FOLEY_CRAZYDAVESHORT);
-			mSoundSystem.StopFoley(FoleyType.FOLEY_CRAZYDAVELONG);
-			mSoundSystem.StopFoley(FoleyType.FOLEY_CRAZYDAVEEXTRALONG);
-			mSoundSystem.StopFoley(FoleyType.FOLEY_CRAZYDAVECRAZY);
+			mSoundSystem.StopFoley(FoleyType.Crazydaveshort);
+			mSoundSystem.StopFoley(FoleyType.Crazydavelong);
+			mSoundSystem.StopFoley(FoleyType.Crazydaveextralong);
+			mSoundSystem.StopFoley(FoleyType.Crazydavecrazy);
 		}
 
 		public bool UpdatePlayerProfileForFinishingLevel()
@@ -3395,11 +3395,11 @@ namespace Lawn
 				int level = mBoard.mLevel;
 				if (level == 50)
 				{
-					if (mPlayerInfo.mIZombieUnlocked == 3 && HasBeatenChallenge(GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_3))
+					if (mPlayerInfo.mIZombieUnlocked == 3 && HasBeatenChallenge(GameMode.PuzzleIZombie3))
 					{
 						mPlayerInfo.mIZombieUnlocked++;
 					}
-					if (mPlayerInfo.mVasebreakerUnlocked == 3 && HasBeatenChallenge(GameMode.GAMEMODE_SCARY_POTTER_3))
+					if (mPlayerInfo.mVasebreakerUnlocked == 3 && HasBeatenChallenge(GameMode.ScaryPotter3))
 					{
 						mPlayerInfo.mVasebreakerUnlocked++;
 					}
@@ -3410,15 +3410,15 @@ namespace Lawn
 						mPlayerInfo.mNeedsMessageOnGameSelector = true;
 						mPlayerInfo.mMiniGamesUnlockable = 19;
 						int num = 0;
-						if (HasBeatenChallenge(GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS))
+						if (HasBeatenChallenge(GameMode.ChallengeWarAndPeas))
 						{
 							num++;
 						}
-						if (HasBeatenChallenge(GameMode.GAMEMODE_CHALLENGE_WALLNUT_BOWLING))
+						if (HasBeatenChallenge(GameMode.ChallengeWallnutBowling))
 						{
 							num++;
 						}
-						if (HasBeatenChallenge(GameMode.GAMEMODE_CHALLENGE_SLOT_MACHINE))
+						if (HasBeatenChallenge(GameMode.ChallengeSlotMachine))
 						{
 							num++;
 						}
@@ -3456,7 +3456,7 @@ namespace Lawn
 						mBoard.SurvivalSaveScore();
 						if (flag && HasFinishedAdventure())
 						{
-							int numTrophies = GetNumTrophies(ChallengePage.CHALLENGE_PAGE_SURVIVAL);
+							int numTrophies = GetNumTrophies(ChallengePage.Survival);
 							if (numTrophies != 8 && numTrophies != 9)
 							{
 								mPlayerInfo.mHasNewSurvival = true;
@@ -3469,7 +3469,7 @@ namespace Lawn
 					flag = !HasBeatenChallenge(mGameMode);
 					int currentChallengeIndex = GetCurrentChallengeIndex();
 					mPlayerInfo.mChallengeRecords[currentChallengeIndex]++;
-					if (!HasFinishedAdventure() && (mGameMode == GameMode.GAMEMODE_SCARY_POTTER_3 || mGameMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_3))
+					if (!HasFinishedAdventure() && (mGameMode == GameMode.ScaryPotter3 || mGameMode == GameMode.PuzzleIZombie3))
 					{
 						flag = false;
 					}
@@ -3514,7 +3514,7 @@ namespace Lawn
 					}
 					if (flag && HasFinishedAdventure())
 					{
-						int numTrophies2 = GetNumTrophies(ChallengePage.CHALLENGE_PAGE_CHALLENGE);
+						int numTrophies2 = GetNumTrophies(ChallengePage.Challenge);
 						if (numTrophies2 <= 17)
 						{
 							mPlayerInfo.mHasNewMiniGame = true;
@@ -3522,7 +3522,7 @@ namespace Lawn
 					}
 				}
 			}
-			int numTrophies3 = GetNumTrophies(ChallengePage.CHALLENGE_PAGE_CHALLENGE);
+			int numTrophies3 = GetNumTrophies(ChallengePage.Challenge);
 			if (numTrophies3 == 19)
 			{
 				ReportAchievement.GiveAchievement(AchievementId.BeyondTheGrave);
@@ -3563,7 +3563,7 @@ namespace Lawn
 
 		public bool SaveFileExists()
 		{
-			string savedGameName = LawnCommon.GetSavedGameName(GameMode.GAMEMODE_ADVENTURE, (int)mPlayerInfo.mId);
+			string savedGameName = LawnCommon.GetSavedGameName(GameMode.Adventure, (int)mPlayerInfo.mId);
 			return base.FileExists(savedGameName);
 		}
 

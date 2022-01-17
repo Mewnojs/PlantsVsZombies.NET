@@ -40,8 +40,8 @@ namespace Lawn
 			mNeedShowRegisterBox = false;
 			mLoadingThreadComplete = false;
 			mNeedToInit = true;
-			mQuickLoadKey = KeyCode.KEYCODE_UNKNOWN;
-			mTitleState = TitleState.TITLESTATE_WAITING_FOR_FIRST_DRAW;
+			mQuickLoadKey = KeyCode.Unknown;
+			mTitleState = TitleState.WaitingForFirstDraw;
 			mTitleStateDuration = 0;
 			mTitleStateCounter = 0;
 			mLoaderScreenIsLoaded = false;
@@ -103,17 +103,17 @@ namespace Lawn
 				return;
 			}
 			MarkDirty();
-			if (mTitleState == TitleState.TITLESTATE_WAITING_FOR_FIRST_DRAW)
+			if (mTitleState == TitleState.WaitingForFirstDraw)
 			{
 				mApp.mMusic.MusicTitleScreenInit();
 				mApp.StartLoadingThread();
-				mTitleState = TitleState.TITLESTATE_POPCAP_LOGO;
+				mTitleState = TitleState.PopcapLogo;
 				mTitleStateDuration = 200;
 				mTitleStateCounter = mTitleStateDuration;
 			}
-			if (mQuickLoadKey != KeyCode.KEYCODE_UNKNOWN && mTitleState != TitleState.TITLESTATE_SCREEN)
+			if (mQuickLoadKey != KeyCode.Unknown && mTitleState != TitleState.Screen)
 			{
-				mTitleState = TitleState.TITLESTATE_SCREEN;
+				mTitleState = TitleState.Screen;
 				mTitleStateDuration = 0;
 				mTitleStateCounter = 100;
 			}
@@ -122,11 +122,11 @@ namespace Lawn
 			{
 				mTitleStateCounter -= 3;
 			}
-			if (mTitleState == TitleState.TITLESTATE_POPCAP_LOGO)
+			if (mTitleState == TitleState.PopcapLogo)
 			{
 				if (mTitleStateCounter <= 0)
 				{
-					mTitleState = TitleState.TITLESTATE_SCREEN;
+					mTitleState = TitleState.Screen;
 					mTitleStateDuration = 100;
 					mTitleStateCounter = mTitleStateDuration;
 				}
@@ -167,11 +167,11 @@ namespace Lawn
 			int theY;
 			if (mTitleStateCounter > 10)
 			{
-				theY = TodCommon.TodAnimateCurve(60, 10, mTitleStateCounter, (int)(Constants.S * 731f), (int)(Constants.S * 532f), TodCurves.CURVE_EASE_IN);
+				theY = TodCommon.TodAnimateCurve(60, 10, mTitleStateCounter, (int)(Constants.S * 731f), (int)(Constants.S * 532f), TodCurves.EaseIn);
 			}
 			else
 			{
-				theY = TodCommon.TodAnimateCurve(10, 0, mTitleStateCounter, (int)(Constants.S * 532f), (int)(Constants.S * 523f), TodCurves.CURVE_BOUNCE);
+				theY = TodCommon.TodAnimateCurve(10, 0, mTitleStateCounter, (int)(Constants.S * 532f), (int)(Constants.S * 523f), TodCurves.Bounce);
 			}
 			mStartButton.Resize(mStartButton.mX, theY, (int)mTotalBarWidth, mStartButton.mHeight);
 			if (mTitleStateCounter > 0)
@@ -190,7 +190,7 @@ namespace Lawn
 			}
 			else if (mCurBarWidth > mTotalBarWidth)
 			{
-				if (mApp.mRestoreLocation == RestoreLocation.RESTORE_BOARD)
+				if (mApp.mRestoreLocation == RestoreLocation.Board)
 				{
 					mApp.LoadingCompleted();
 				}
@@ -202,15 +202,15 @@ namespace Lawn
 			}
 			if (num4 > mPrevLoadingPercent + 0.01f || mLoadingThreadComplete)
 			{
-				float num6 = TodCommon.TodAnimateCurveFloatTime(0f, 1f, num4, 0f, mTotalBarWidth, TodCurves.CURVE_EASE_IN);
+				float num6 = TodCommon.TodAnimateCurveFloatTime(0f, 1f, num4, 0f, mTotalBarWidth, TodCurves.EaseIn);
 				float num7 = num6 - mCurBarWidth;
-				float num8 = TodCommon.TodAnimateCurveFloatTime(0f, 1f, num4, 0.0001f, 1E-05f, TodCurves.CURVE_LINEAR);
+				float num8 = TodCommon.TodAnimateCurveFloatTime(0f, 1f, num4, 0.0001f, 1E-05f, TodCurves.Linear);
 				if (mLoadingThreadComplete)
 				{
 					num8 = 0.0001f;
 				}
 				mBarVel += num7 * Math.Abs(num7) * num8;
-				float num9 = TodCommon.TodAnimateCurveFloatTime(0f, 1f, num4, 0.2f, 0.01f, TodCurves.CURVE_LINEAR);
+				float num9 = TodCommon.TodAnimateCurveFloatTime(0f, 1f, num4, 0.2f, 0.01f, TodCurves.Linear);
 				float num10 = 2f;
 				if (mApp.mTodCheatKeys)
 				{
@@ -242,15 +242,15 @@ namespace Lawn
 			{
 				if (aTriggerPoint[i] > num5 && aTriggerPoint[i] <= mCurBarWidth)
 				{
-					ReanimationType theReanimationType = ReanimationType.REANIM_LOADBAR_SPROUT;
+					ReanimationType theReanimationType = ReanimationType.LoadbarSprout;
 					if (i == 4)
 					{
-						theReanimationType = ReanimationType.REANIM_LOADBAR_ZOMBIEHEAD;
+						theReanimationType = ReanimationType.LoadbarZombiehead;
 					}
 					float num11 = Constants.TitleScreen_ReanimStart_X + aTriggerPoint[i];
 					float num12 = mStartButton.mY - Constants.InvertAndScale(42f);
 					Reanimation reanimation = mApp.AddReanimation(num11, num12, 0, theReanimationType, false);
-					reanimation.mLoopType = ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD;
+					reanimation.mLoopType = ReanimLoopType.PlayOnceAndHold;
 					reanimation.mAnimRate = 18f;
 					if (i == 1 || i == 3)
 					{
@@ -282,7 +282,7 @@ namespace Lawn
 		{
 			g.SetLinearBlend(true);
 			base.Draw(g);
-			if (mTitleState == TitleState.TITLESTATE_POPCAP_LOGO)
+			if (mTitleState == TitleState.PopcapLogo)
 			{
 				g.SetColor(SexyColor.Black);
 				g.FillRect(0, 0, mWidth, mHeight);
@@ -290,7 +290,7 @@ namespace Lawn
 				int theAlpha = 255;
 				if (mTitleStateCounter < mTitleStateDuration - num)
 				{
-					theAlpha = TodCommon.TodAnimateCurve(num, 0, mTitleStateCounter, 255, 0, TodCurves.CURVE_LINEAR);
+					theAlpha = TodCommon.TodAnimateCurve(num, 0, mTitleStateCounter, 255, 0, TodCurves.Linear);
 				}
 				g.SetColorizeImages(true);
 				g.SetColor(new SexyColor(255, 255, 255, theAlpha));
@@ -320,11 +320,11 @@ namespace Lawn
 			int theY;
 			if (mTitleStateCounter > 60)
 			{
-				theY = TodCommon.TodAnimateCurve(100, 60, mTitleStateCounter, (int)Constants.InvertAndScale(-150f), (int)Constants.InvertAndScale(10f), TodCurves.CURVE_EASE_IN);
+				theY = TodCommon.TodAnimateCurve(100, 60, mTitleStateCounter, (int)Constants.InvertAndScale(-150f), (int)Constants.InvertAndScale(10f), TodCurves.EaseIn);
 			}
 			else
 			{
-				theY = TodCommon.TodAnimateCurve(60, 50, mTitleStateCounter, (int)Constants.InvertAndScale(10f), (int)Constants.InvertAndScale(15f), TodCurves.CURVE_BOUNCE);
+				theY = TodCommon.TodAnimateCurve(60, 50, mTitleStateCounter, (int)Constants.InvertAndScale(10f), (int)Constants.InvertAndScale(15f), TodCurves.Bounce);
 			}
 			g.DrawImage(Resources.IMAGE_PVZ_LOGO, mWidth / 2 - Resources.IMAGE_PVZ_LOGO.mWidth / 2, theY);
 			int grassX = mStartButton.mX;
@@ -345,7 +345,7 @@ namespace Lawn
 				@new.DrawImage(AtlasResources.IMAGE_LOADBAR_GRASS, grassX, grassY);
 				float num3 = mCurBarWidth * 0.94f;
 				float rad = -num3 / 180f * 3.1415927f * 2f;
-				float num4 = TodCommon.TodAnimateCurveFloatTime(0f, mTotalBarWidth, mCurBarWidth, 1f, 0.5f, TodCurves.CURVE_LINEAR);
+				float num4 = TodCommon.TodAnimateCurveFloatTime(0f, mTotalBarWidth, mCurBarWidth, 1f, 0.5f, TodCurves.Linear);
 				SexyTransform2D sexyTransform2D = default(SexyTransform2D);
 				TodCommon.TodScaleRotateTransformMatrix(ref sexyTransform2D.mMatrix, grassX + Constants.InvertAndScale(11f) + num3, grassY - Constants.InvertAndScale(3f) - Constants.InvertAndScale(35f) * num4 + Constants.InvertAndScale(35f), rad, num4, num4);
 				TRect theSrcRect = new TRect(0, 0, AtlasResources.IMAGE_REANIM_LOAD_SODROLLCAP.mWidth, AtlasResources.IMAGE_REANIM_LOAD_SODROLLCAP.mHeight);

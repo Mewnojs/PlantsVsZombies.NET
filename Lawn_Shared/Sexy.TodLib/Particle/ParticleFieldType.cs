@@ -4,18 +4,18 @@ namespace Sexy.TodLib
 {
 	public enum ParticleFieldType
 	{
-		FIELD_INVALID,
-		FIELD_FRICTION,
-		FIELD_ACCELERATION,
-		FIELD_ATTRACTOR,
-		FIELD_MAX_VELOCITY,
-		FIELD_VELOCITY,
-		FIELD_POSITION,
-		FIELD_SYSTEM_POSITION,
-		FIELD_GROUND_CONSTRAINT,
-		FIELD_SHAKE,
-		FIELD_CIRCLE,
-		FIELD_AWAY,
-		PARTICLE_FIELD_COUNT
+		Invalid,
+		Friction,
+		Acceleration,
+		Attractor,
+		MaxVelocity,
+		Velocity,
+		Position,
+		SystemPosition,
+		GroundConstraint,
+		Shake,
+		Circle,
+		Away,
+		FieldCount
 	}
 }

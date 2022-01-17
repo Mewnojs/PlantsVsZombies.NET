@@ -54,10 +54,10 @@ namespace Sexy
 
 		protected virtual void ProcessKey(KeyCode theKey, SexyChar theChar)
 		{
-			bool shiftDown = mWidgetManager.mKeyDown[(int)KeyCode.KEYCODE_SHIFT];
-			bool controlDown = mWidgetManager.mKeyDown[(int)KeyCode.KEYCODE_CONTROL];
+			bool shiftDown = mWidgetManager.mKeyDown[(int)KeyCode.Shift];
+			bool controlDown = mWidgetManager.mKeyDown[(int)KeyCode.Control];
 
-			if ((theKey == KeyCode.KEYCODE_SHIFT) || (theKey == KeyCode.KEYCODE_CONTROL))
+			if ((theKey == KeyCode.Shift) || (theKey == KeyCode.Control))
 			{
 				return;
 			}
@@ -165,7 +165,7 @@ namespace Sexy
 
 				removeHilite = false;
 			}
-			else if (theKey == KeyCode.KEYCODE_LEFT)
+			else if (theKey == KeyCode.Left)
 			{
 				if (controlDown)
 				{
@@ -190,7 +190,7 @@ namespace Sexy
 					mCursorPos = Math.Min(mCursorPos, mHilitePos);
 				}
 			}
-			else if (theKey == KeyCode.KEYCODE_RIGHT)
+			else if (theKey == KeyCode.Right)
 			{
 				if (controlDown)
 				{
@@ -215,7 +215,7 @@ namespace Sexy
 					mCursorPos = Math.Max(mCursorPos, mHilitePos);
 				}
 			}
-			else if (theKey == KeyCode.KEYCODE_BACK)
+			else if (theKey == KeyCode.Back)
 			{
 				if (mString.length() > 0)
 				{
@@ -250,7 +250,7 @@ namespace Sexy
 					}
 				}
 			}
-			else if (theKey == KeyCode.KEYCODE_DELETE)
+			else if (theKey == KeyCode.Delete)
 			{
 				if (mString.length() > 0)
 				{
@@ -279,15 +279,15 @@ namespace Sexy
 					}
 				}
 			}
-			else if (theKey == KeyCode.KEYCODE_HOME)
+			else if (theKey == KeyCode.Home)
 			{
 				mCursorPos = 0;
 			}
-			else if (theKey == KeyCode.KEYCODE_END)
+			else if (theKey == KeyCode.End)
 			{
 				mCursorPos = mString.length();
 			}
-			else if (theKey == KeyCode.KEYCODE_RETURN)
+			else if (theKey == KeyCode.Return)
 			{
 				mEditListener.EditWidgetText(mId, mString);
 			}
@@ -537,7 +537,7 @@ namespace Sexy
 
 			string aString = GetDisplayString();
 
-			g.SetColor(mColors[(int)Colors.COLOR_BKG]);
+			g.SetColor(mColors[(int)Colors.Bkg]);
 			g.FillRect(0, 0, mWidth, mHeight);
 
 			for (int i = 0; i < 2; i++)
@@ -572,17 +572,17 @@ namespace Sexy
 				bool hasfocus = mHasFocus || mDrawSelOverride;
 				if (i == 1 && hasfocus)
 				{
-					aClipG.SetColor(mColors[(int)Colors.COLOR_HILITE]);
+					aClipG.SetColor(mColors[(int)Colors.Hilite]);
 					aClipG.FillRect(0, 0, mWidth, mHeight);
 				}
 
 				if (i == 0 || !hasfocus)
 				{
-					aClipG.SetColor(mColors[(int)Colors.COLOR_TEXT]);
+					aClipG.SetColor(mColors[(int)Colors.Text]);
 				}
 				else
 				{
-					aClipG.SetColor(mColors[(int)Colors.COLOR_HILITE_TEXT]);
+					aClipG.SetColor(mColors[(int)Colors.HiliteText]);
 				}
 				aClipG.DrawString(aString.Substring(mLeftPos), 4, -4/*(int)( (mHeight + mFont.GetHeight()) / 2 - mFont.GetAscent())*/);
 
@@ -592,7 +592,7 @@ namespace Sexy
 				}
 			}
 
-			g.SetColor(mColors[(int)Colors.COLOR_OUTLINE]);
+			g.SetColor(mColors[(int)Colors.Outline]);
 			g.DrawRect(0, 0, mWidth - 1, mHeight - 1);
 		}
 
@@ -724,7 +724,7 @@ namespace Sexy
 
         public override void KeyChar(SexyChar theChar)
 		{
-			ProcessKey(KeyCode.KEYCODE_UNKNOWN, new SexyChar(theChar));
+			ProcessKey(KeyCode.Unknown, new SexyChar(theChar));
 			base.KeyChar(theChar);
 		}
 
@@ -855,11 +855,11 @@ namespace Sexy
 
         public enum Colors
 		{
-			COLOR_BKG,
-			COLOR_OUTLINE,
-			COLOR_TEXT,
-			COLOR_HILITE,
-			COLOR_HILITE_TEXT,
+			Bkg,
+			Outline,
+			Text,
+			Hilite,
+			HiliteText,
 			NUM_COLORS
 		}
 	}

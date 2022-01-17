@@ -4,16 +4,16 @@ namespace Lawn
 {
 	public enum ZombieHeight
 	{
-		HEIGHT_ZOMBIE_NORMAL,
-		HEIGHT_IN_TO_POOL,
-		HEIGHT_OUT_OF_POOL,
-		HEIGHT_DRAGGED_UNDER,
-		HEIGHT_UP_TO_HIGH_GROUND,
-		HEIGHT_DOWN_OFF_HIGH_GROUND,
-		HEIGHT_UP_LADDER,
-		HEIGHT_FALLING,
-		HEIGHT_IN_TO_CHIMNEY,
-		HEIGHT_GETTING_BUNGEE_DROPPED,
-		HEIGHT_ZOMBIQUARIUM
+		ZombieNormal,
+		InToPool,
+		OutOfPool,
+		DraggedUnder,
+		UpToHighGround,
+		DownOffHighGround,
+		UpLadder,
+		Falling,
+		InToChimney,
+		GettingBungeeDropped,
+		Zombiquarium
 	}
 }

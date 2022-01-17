@@ -45,14 +45,14 @@ namespace Sexy
 		private static Stack<PreModalInfo> unusedObjects = new Stack<PreModalInfo>();
 	}
 
-	public enum WidgetFlags
-	{
-		WIDGETFLAGS_UPDATE = 1,
-		WIDGETFLAGS_MARK_DIRTY,
-		WIDGETFLAGS_DRAW = 4,
-		WIDGETFLAGS_CLIP = 8,
-		WIDGETFLAGS_ALLOW_MOUSE = 16,
-		WIDGETFLAGS_ALLOW_FOCUS = 32
+	public enum WidgetFlags //Prefix: WIDGETFLAGS
+    {
+		Update = 1,
+		MarkDirty,
+		Draw = 4,
+		Clip = 8,
+		AllowMouse = 16,
+		AllowFocus = 32
 	}
 
 	public/*internal*/ class WidgetManager : WidgetContainer
@@ -882,7 +882,7 @@ namespace Sexy
 		public bool KeyChar(SexyChar theChar)
 		{
 			mLastInputUpdateCnt = mUpdateCnt;
-			if (theChar == KeyCode.KEYCODE_TAB && mKeyDown[17])
+			if (theChar == KeyCode.Tab && mKeyDown[17])
 			{
 				if (mDefaultTab != null)
 				{
@@ -900,7 +900,7 @@ namespace Sexy
 		public bool KeyDown(KeyCode key)
 		{
 			mLastInputUpdateCnt = mUpdateCnt;
-			if (key >= KeyCode.KEYCODE_UNKNOWN && key < (KeyCode)255)
+			if (key >= KeyCode.Unknown && key < (KeyCode)255)
 			{
 				mKeyDown[(int)key] = true;
 			}
@@ -914,11 +914,11 @@ namespace Sexy
 		public bool KeyUp(KeyCode key)
 		{
 			mLastInputUpdateCnt = mUpdateCnt;
-			if (key >= KeyCode.KEYCODE_UNKNOWN && key < (KeyCode)255)
+			if (key >= KeyCode.Unknown && key < (KeyCode)255)
 			{
 				mKeyDown[(int)key] = false;
 			}
-			if (key == KeyCode.KEYCODE_TAB && mKeyDown[17])
+			if (key == KeyCode.Tab && mKeyDown[17])
 			{
 				return true;
 			}

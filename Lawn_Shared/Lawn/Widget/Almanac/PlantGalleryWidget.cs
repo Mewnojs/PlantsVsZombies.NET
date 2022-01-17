@@ -15,7 +15,7 @@ namespace Lawn
 		public override void MouseUp(int x, int y, int theClickCount)
 		{
 			SeedType seedType = SeedHitTest(x, y);
-			if (seedType != SeedType.SEED_NONE)
+			if (seedType != SeedType.None)
 			{
 				mDialog.PlantSelected(seedType);
 			}
@@ -39,12 +39,12 @@ namespace Lawn
 					}
 				}
 			}
-			return SeedType.SEED_NONE;
+			return SeedType.None;
 		}
 
 		public void GetSeedPosition(SeedType theSeedType, ref int x, ref int y)
 		{
-			if (theSeedType == SeedType.SEED_IMITATER)
+			if (theSeedType == SeedType.Imitater)
 			{
 				x = Constants.Almanac_ImitatorPosition.X;
 				y = Constants.Almanac_ImitatorPosition.Y;
@@ -73,7 +73,7 @@ namespace Lawn
 					}
 					else
 					{
-						SeedPacket.DrawSmallSeedPacket(g, num, num2, seedType, SeedType.SEED_NONE, 0f, 255, seedType != SeedType.SEED_IMITATER && flag, false, flag2, seedType != SeedType.SEED_IMITATER && flag2);
+						SeedPacket.DrawSmallSeedPacket(g, num, num2, seedType, SeedType.None, 0f, 255, seedType != SeedType.Imitater && flag, false, flag2, seedType != SeedType.Imitater && flag2);
 					}
 				}
 				flag = true;

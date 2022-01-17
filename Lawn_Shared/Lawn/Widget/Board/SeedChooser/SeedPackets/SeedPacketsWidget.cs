@@ -62,7 +62,7 @@ namespace Lawn
 				int num3 = 0;
 				SeedType seedType = (SeedType)i;
 				GetSeedPosition(seedType, ref num2, ref num3);
-				if (seedType != SeedType.SEED_IMITATER)
+				if (seedType != SeedType.Imitater)
 				{
 					if (mApp.HasSeedType(seedType))
 					{
@@ -71,11 +71,11 @@ namespace Lawn
 						{
 							if (mImitaters)
 							{
-								SeedPacket.DrawSmallSeedPacket(g, num2, num3, SeedType.SEED_IMITATER, seedType, 0f, 255, theDrawCost, false, theDrawBackground, theDrawBackground);
+								SeedPacket.DrawSmallSeedPacket(g, num2, num3, SeedType.Imitater, seedType, 0f, 255, theDrawCost, false, theDrawBackground, theDrawBackground);
 							}
 							else
 							{
-								SeedPacket.DrawSmallSeedPacket(g, num2, num3, seedType, SeedType.SEED_NONE, 0f, 55, theDrawCost, false, theDrawBackground, theDrawBackground);
+								SeedPacket.DrawSmallSeedPacket(g, num2, num3, seedType, SeedType.None, 0f, 55, theDrawCost, false, theDrawBackground, theDrawBackground);
 							}
 						}
 					}
@@ -113,7 +113,7 @@ namespace Lawn
 						float num7 = flag ? 115 : 255;
 						if (mImitaters)
 						{
-							SeedPacket.DrawSmallSeedPacket(g, num5, num6, SeedType.SEED_IMITATER, chosenSeed2.mSeedType, 0f, (int)num7, theDrawCost, false, theDrawBackground, theDrawBackground);
+							SeedPacket.DrawSmallSeedPacket(g, num5, num6, SeedType.Imitater, chosenSeed2.mSeedType, 0f, (int)num7, theDrawCost, false, theDrawBackground, theDrawBackground);
 						}
 						else
 						{

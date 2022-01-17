@@ -4,17 +4,17 @@ namespace Sexy.TodLib
 {
 	public enum ParticleFlags
 	{
-		PARTICLE_RANDOM_LAUNCH_SPIN,
-		PARTICLE_ALIGN_LAUNCH_SPIN,
-		PARTICLE_ALIGN_TO_PIXELS,
-		PARTICLE_SYSTEM_LOOPS,
-		PARTICLE_PARTICLE_LOOPS,
-		PARTICLE_PARTICLES_DONT_FOLLOW,
-		PARTICLE_RANDOM_START_TIME,
-		PARTICLE_DIE_IF_OVERLOADED,
-		PARTICLE_ADDITIVE,
-		PARTICLE_FULLSCREEN,
-		PARTICLE_SOFTWARE_ONLY,
-		PARTICLE_HARDWARE_ONLY
+		RandomLaunchSpin,
+		AlignLaunchSpin,
+		AlignToPixels,
+		SystemLoops,
+		ParticleLoops,
+		ParticlesDontFollow,
+		RandomStartTime,
+		DieIfOverloaded,
+		Additive,
+		Fullscreen,
+		SoftwareOnly,
+		HardwareOnly
 	}
 }

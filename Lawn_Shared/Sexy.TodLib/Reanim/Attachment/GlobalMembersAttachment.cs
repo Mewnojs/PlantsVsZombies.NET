@@ -189,7 +189,7 @@ namespace Sexy.TodLib
 
 		public static AttachEffect AttachReanim(ref Attachment theAttachmentID, Reanimation theReanimation, float theOffsetX, float theOffsetY)
 		{
-			AttachEffect result = GlobalMembersAttachment.CreateEffectAttachment(ref theAttachmentID, EffectType.EFFECT_REANIM, theReanimation, theOffsetX, theOffsetY);
+			AttachEffect result = GlobalMembersAttachment.CreateEffectAttachment(ref theAttachmentID, EffectType.Reanim, theReanimation, theOffsetX, theOffsetY);
 			Debug.ASSERT(!theReanimation.mIsAttachment);
 			theReanimation.mIsAttachment = true;
 			return result;
@@ -201,7 +201,7 @@ namespace Sexy.TodLib
 			{
 				return null;
 			}
-			AttachEffect result = GlobalMembersAttachment.CreateEffectAttachment(ref theAttachmentID, EffectType.EFFECT_PARTICLE, theParticleSystem, theOffsetX, theOffsetY);
+			AttachEffect result = GlobalMembersAttachment.CreateEffectAttachment(ref theAttachmentID, EffectType.Particle, theParticleSystem, theOffsetX, theOffsetY);
 			Debug.ASSERT(!theParticleSystem.mIsAttachment);
 			theParticleSystem.mIsAttachment = true;
 			return result;
@@ -210,7 +210,7 @@ namespace Sexy.TodLib
 		public static AttachEffect AttachTrail(ref Attachment theAttachmentID, Trail theTrail, float theOffsetX, float theOffsetY)
 		{
 			Trail theDataID = EffectSystem.gEffectSystem.mTrailHolder.mTrails[EffectSystem.gEffectSystem.mTrailHolder.mTrails.IndexOf(theTrail)];
-			AttachEffect result = GlobalMembersAttachment.CreateEffectAttachment(ref theAttachmentID, EffectType.EFFECT_TRAIL, theDataID, theOffsetX, theOffsetY);
+			AttachEffect result = GlobalMembersAttachment.CreateEffectAttachment(ref theAttachmentID, EffectType.Trail, theDataID, theOffsetX, theOffsetY);
 			Debug.ASSERT(!theTrail.mIsAttachment);
 			theTrail.mIsAttachment = true;
 			return result;
@@ -228,13 +228,13 @@ namespace Sexy.TodLib
 			{
 				return;
 			}
-			Debug.ASSERT(theParticleEffect >= ParticleEffect.PARTICLE_MELONSPLASH && theParticleEffect < (ParticleEffect)TodParticleGlobal.gParticleDefCount);
+			Debug.ASSERT(theParticleEffect >= ParticleEffect.Melonsplash && theParticleEffect < (ParticleEffect)TodParticleGlobal.gParticleDefCount);
 			TodParticleDefinition todParticleDefinition = TodParticleGlobal.gParticleDefArray[(int)theParticleEffect];
 			List<TodParticleSystem> mParticleSystems = EffectSystem.gEffectSystem.mParticleHolder.mParticleSystems;
 			for (int i = 0; i < attachment.mNumEffects; i++)
 			{
 				AttachEffect attachEffect = attachment.mEffectArray[i];
-				if (attachEffect.mEffectType == EffectType.EFFECT_PARTICLE)
+				if (attachEffect.mEffectType == EffectType.Particle)
 				{
 					TodParticleSystem todParticleSystem = (TodParticleSystem)attachEffect.mEffectID;
 					if (mParticleSystems.Contains(todParticleSystem) && todParticleSystem.mParticleDef == todParticleDefinition)
@@ -292,7 +292,7 @@ namespace Sexy.TodLib
 			for (int i = 0; i < attachment.mNumEffects; i++)
 			{
 				AttachEffect attachEffect = attachment.mEffectArray[i];
-				if (attachEffect.mEffectType == EffectType.EFFECT_REANIM)
+				if (attachEffect.mEffectType == EffectType.Reanim)
 				{
 					List<Reanimation> mReanimations = EffectSystem.gEffectSystem.mReanimationHolder.mReanimations;
 					Reanimation reanimation = attachEffect.mEffectID as Reanimation;
@@ -341,7 +341,7 @@ namespace Sexy.TodLib
 			for (int i = 0; i < attachment.mNumEffects; i++)
 			{
 				AttachEffect attachEffect = attachment.mEffectArray[i];
-				if (attachEffect.mEffectType == EffectType.EFFECT_REANIM)
+				if (attachEffect.mEffectType == EffectType.Reanim)
 				{
 					Reanimation reanimation = mReanimations[mReanimations.IndexOf((Reanimation)attachEffect.mEffectID)];
 					if (reanimation != null && reanimation.mReanimationType == theReanimType)
@@ -387,25 +387,25 @@ namespace Sexy.TodLib
 			}
 			switch (theEffectType)
 			{
-			case EffectType.EFFECT_PARTICLE:
+			case EffectType.Particle:
 				if ((theDataID as TodParticleSystem).mDead)
 				{
 					return null;
 				}
 				break;
-			case EffectType.EFFECT_TRAIL:
+			case EffectType.Trail:
 				if ((theDataID as Trail).mDead)
 				{
 					return null;
 				}
 				break;
-			case EffectType.EFFECT_REANIM:
+			case EffectType.Reanim:
 				if ((theDataID as Reanimation).mDead)
 				{
 					return null;
 				}
 				break;
-			case EffectType.EFFECT_ATTACHMENT:
+			case EffectType.Attachment:
 				if ((theDataID as Attachment).mDead)
 				{
 					return null;

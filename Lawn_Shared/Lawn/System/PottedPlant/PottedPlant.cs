@@ -9,14 +9,14 @@ namespace Lawn
 		public void InitializePottedPlant(SeedType theSeedType)
 		{
 			mSeedType = theSeedType;
-			mDrawVariation = DrawVariation.VARIATION_NORMAL;
+			mDrawVariation = DrawVariation.Normal;
 			mLastWateredTime.AddTicks(0L);
 			mFacing = (PottedPlant.FacingDirection)TodCommon.RandRangeInt(0, 1);
-			mPlantAge = PottedPlantAge.PLANTAGE_SPROUT;
+			mPlantAge = PottedPlantAge.Sprout;
 			mTimesFed = 0;
-			mWhichZenGarden = GardenType.GARDEN_MAIN;
+			mWhichZenGarden = GardenType.Main;
 			mFeedingsPerGrow = TodCommon.RandRangeInt(3, 5);
-			mPlantNeed = PottedPlantNeed.PLANTNEED_NONE;
+			mPlantNeed = PottedPlantNeed.None;
 		}
 
 		public void Save(Sexy.Buffer b)
@@ -87,10 +87,10 @@ namespace Lawn
 
 		public int[] mFutureAttribute = new int[1];
 
-		public enum FacingDirection
+		public enum FacingDirection //Prefix: FACING
 		{
-			FACING_RIGHT,
-			FACING_LEFT
+			Right,
+			Left
 		}
 	}
 }

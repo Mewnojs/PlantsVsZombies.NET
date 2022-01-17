@@ -12,7 +12,7 @@ namespace Lawn
 			mClip = false;
 			mCheatEnableChallenges = false;
 			mPageIndex = thePage;
-			mUnlockState = UnlockingState.UNLOCKING_OFF;
+			mUnlockState = UnlockingState.Off;
 			mUnlockChallengeIndex = -1;
 			mUnlockStateCounter = 0;
 			mLockShakeX = 0f;
@@ -60,7 +60,7 @@ namespace Lawn
 				mChallengeButton[j] = new ButtonWidget(200 + j, this);
 				mChallengeButton[j].mDoFinger = true;
 				mChallengeButton[j].mFrameNoDraw = true;
-				if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_CHALLENGE || challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_LIMBO || challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_PUZZLE)
+				if (challengeDefinition.mPage == ChallengePage.Challenge || challengeDefinition.mPage == ChallengePage.Limbo || challengeDefinition.mPage == ChallengePage.Puzzle)
 				{
 					mChallengeButton[j].Resize(base.M(75) + challengeDefinition.mCol * base.M1(150), base.M2(15) + challengeDefinition.mRow * base.M3(95), 50, 60);
 				}
@@ -75,29 +75,29 @@ namespace Lawn
 				}
 			}
 			UpdateButtons();
-			if (mApp.mGameMode != GameMode.GAMEMODE_UPSELL || mApp.mGameScene != GameScenes.SCENE_LEVEL_INTRO)
+			if (mApp.mGameMode != GameMode.Upsell || mApp.mGameScene != GameScenes.LevelIntro)
 			{
-				mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_CHOOSE_YOUR_SEEDS);
+				mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.ChooseYourSeeds);
 			}
-			if (mPageIndex == ChallengePage.CHALLENGE_PAGE_SURVIVAL && mApp.mPlayerInfo.mHasNewSurvival)
+			if (mPageIndex == ChallengePage.Survival && mApp.mPlayerInfo.mHasNewSurvival)
 			{
 				SetUnlockChallengeIndex(mPageIndex, false);
 				mApp.mPlayerInfo.mHasNewSurvival = false;
 				return;
 			}
-			if (mPageIndex == ChallengePage.CHALLENGE_PAGE_CHALLENGE && mApp.mPlayerInfo.mHasNewMiniGame)
+			if (mPageIndex == ChallengePage.Challenge && mApp.mPlayerInfo.mHasNewMiniGame)
 			{
 				SetUnlockChallengeIndex(mPageIndex, false);
 				mApp.mPlayerInfo.mHasNewMiniGame = false;
 				return;
 			}
-			if (mPageIndex == ChallengePage.CHALLENGE_PAGE_PUZZLE && mApp.mPlayerInfo.mHasNewVasebreaker)
+			if (mPageIndex == ChallengePage.Puzzle && mApp.mPlayerInfo.mHasNewVasebreaker)
 			{
 				SetUnlockChallengeIndex(mPageIndex, false);
 				mApp.mPlayerInfo.mHasNewVasebreaker = false;
 				return;
 			}
-			if (mPageIndex == ChallengePage.CHALLENGE_PAGE_PUZZLE && mApp.mPlayerInfo.mHasNewIZombie)
+			if (mPageIndex == ChallengePage.Puzzle && mApp.mPlayerInfo.mHasNewIZombie)
 			{
 				SetUnlockChallengeIndex(mPageIndex, true);
 				mApp.mPlayerInfo.mHasNewIZombie = false;
@@ -113,13 +113,13 @@ namespace Lawn
 
 		public void SetUnlockChallengeIndex(ChallengePage thePage, bool aIsIZombie)
 		{
-			mUnlockState = UnlockingState.UNLOCKING_SHAKING;
+			mUnlockState = UnlockingState.Shaking;
 			mUnlockStateCounter = 100;
 			mUnlockChallengeIndex = 0;
 			for (int i = 0; i < ChallengeScreen.gChallengeDefs.Length; i++)
 			{
 				ChallengeDefinition challengeDefinition = ChallengeScreen.gChallengeDefs[i];
-				if (challengeDefinition.mPage == thePage && (thePage != ChallengePage.CHALLENGE_PAGE_PUZZLE || ((aIsIZombie || IsScaryPotterLevel(challengeDefinition.mChallengeMode)) && (!aIsIZombie || IsIZombieLevel(challengeDefinition.mChallengeMode)))))
+				if (challengeDefinition.mPage == thePage && (thePage != ChallengePage.Puzzle || ((aIsIZombie || IsScaryPotterLevel(challengeDefinition.mChallengeMode)) && (!aIsIZombie || IsIZombieLevel(challengeDefinition.mChallengeMode)))))
 				{
 					int num = AccomplishmentsNeeded(i);
 					if (num <= 0)
@@ -133,9 +133,9 @@ namespace Lawn
 		public int MoreTrophiesNeeded(int aChallengeIndex)
 		{
 			ChallengeDefinition challengeDefinition = ChallengeScreen.gChallengeDefs[aChallengeIndex];
-			if (mApp.mGameMode == GameMode.GAMEMODE_UPSELL && mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
+			if (mApp.mGameMode == GameMode.Upsell && mApp.mGameScene == GameScenes.LevelIntro)
 			{
-				if (challengeDefinition.mChallengeMode == GameMode.GAMEMODE_CHALLENGE_FINAL_BOSS)
+				if (challengeDefinition.mChallengeMode == GameMode.ChallengeFinalBoss)
 				{
 					return 1;
 				}
@@ -145,32 +145,32 @@ namespace Lawn
 			{
 				if (mApp.IsTrialStageLocked())
 				{
-					if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_PUZZLE && challengeDefinition.mChallengeMode >= GameMode.GAMEMODE_SCARY_POTTER_4)
+					if (challengeDefinition.mPage == ChallengePage.Puzzle && challengeDefinition.mChallengeMode >= GameMode.ScaryPotter4)
 					{
-						if (challengeDefinition.mChallengeMode == GameMode.GAMEMODE_SCARY_POTTER_4)
+						if (challengeDefinition.mChallengeMode == GameMode.ScaryPotter4)
 						{
 							return 1;
 						}
 						return 2;
 					}
-					else if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_CHALLENGE && challengeDefinition.mChallengeMode >= GameMode.GAMEMODE_CHALLENGE_RAINING_SEEDS)
+					else if (challengeDefinition.mPage == ChallengePage.Challenge && challengeDefinition.mChallengeMode >= GameMode.ChallengeRainingSeeds)
 					{
-						if (challengeDefinition.mChallengeMode == GameMode.GAMEMODE_CHALLENGE_RAINING_SEEDS)
+						if (challengeDefinition.mChallengeMode == GameMode.ChallengeRainingSeeds)
 						{
 							return 1;
 						}
 						return 2;
 					}
-					else if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_SURVIVAL && challengeDefinition.mChallengeMode >= GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_4)
+					else if (challengeDefinition.mPage == ChallengePage.Survival && challengeDefinition.mChallengeMode >= GameMode.SurvivalNormalStage4)
 					{
-						if (challengeDefinition.mChallengeMode == GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_4)
+						if (challengeDefinition.mChallengeMode == GameMode.SurvivalNormalStage4)
 						{
 							return 1;
 						}
 						return 2;
 					}
 				}
-				if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_PUZZLE && IsScaryPotterLevel(challengeDefinition.mChallengeMode))
+				if (challengeDefinition.mPage == ChallengePage.Puzzle && IsScaryPotterLevel(challengeDefinition.mChallengeMode))
 				{
 					int num = 0;
 					for (int i = 0; i < ChallengeScreen.gChallengeDefs.Length; i++)
@@ -181,18 +181,18 @@ namespace Lawn
 							num++;
 						}
 					}
-					if (challengeDefinition.mChallengeMode < GameMode.GAMEMODE_SCARY_POTTER_4 || mApp.HasFinishedAdventure() || num < 3)
+					if (challengeDefinition.mChallengeMode < GameMode.ScaryPotter4 || mApp.HasFinishedAdventure() || num < 3)
 					{
-						int num2 = challengeDefinition.mChallengeMode - GameMode.GAMEMODE_SCARY_POTTER_1;
+						int num2 = challengeDefinition.mChallengeMode - GameMode.ScaryPotter1;
 						return TodCommon.ClampInt(num2 - num, 0, 9);
 					}
-					if (challengeDefinition.mChallengeMode == GameMode.GAMEMODE_SCARY_POTTER_4)
+					if (challengeDefinition.mChallengeMode == GameMode.ScaryPotter4)
 					{
 						return 1;
 					}
 					return 2;
 				}
-				else if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_PUZZLE && IsIZombieLevel(challengeDefinition.mChallengeMode))
+				else if (challengeDefinition.mPage == ChallengePage.Puzzle && IsIZombieLevel(challengeDefinition.mChallengeMode))
 				{
 					int num3 = 0;
 					for (int j = 0; j < ChallengeScreen.gChallengeDefs.Length; j++)
@@ -203,12 +203,12 @@ namespace Lawn
 							num3++;
 						}
 					}
-					if (challengeDefinition.mChallengeMode < GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_4 || mApp.HasFinishedAdventure() || num3 < 3)
+					if (challengeDefinition.mChallengeMode < GameMode.PuzzleIZombie4 || mApp.HasFinishedAdventure() || num3 < 3)
 					{
-						int num4 = challengeDefinition.mChallengeMode - GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_1;
+						int num4 = challengeDefinition.mChallengeMode - GameMode.PuzzleIZombie1;
 						return TodCommon.ClampInt(num4 - num3, 0, 9);
 					}
-					if (challengeDefinition.mChallengeMode == GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_4)
+					if (challengeDefinition.mChallengeMode == GameMode.PuzzleIZombie4)
 					{
 						return 1;
 					}
@@ -217,7 +217,7 @@ namespace Lawn
 				else
 				{
 					int num5 = challengeDefinition.mRow * 5 + challengeDefinition.mCol;
-					if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_CHALLENGE && !mApp.HasFinishedAdventure())
+					if (challengeDefinition.mPage == ChallengePage.Challenge && !mApp.HasFinishedAdventure())
 					{
 						if (num5 < 3)
 						{
@@ -229,7 +229,7 @@ namespace Lawn
 						}
 						return 2;
 					}
-					else if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_SURVIVAL && !mApp.HasFinishedAdventure())
+					else if (challengeDefinition.mPage == ChallengePage.Survival && !mApp.HasFinishedAdventure())
 					{
 						if (num5 < 3)
 						{
@@ -245,7 +245,7 @@ namespace Lawn
 					{
 						int numTrophies = mApp.GetNumTrophies(challengeDefinition.mPage);
 						int num6 = 0;
-						if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_LIMBO)
+						if (challengeDefinition.mPage == ChallengePage.Limbo)
 						{
 							return 0;
 						}
@@ -253,7 +253,7 @@ namespace Lawn
 						{
 							return 10 - numTrophies;
 						}
-						if (challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_SURVIVAL || challengeDefinition.mPage == ChallengePage.CHALLENGE_PAGE_CHALLENGE)
+						if (challengeDefinition.mPage == ChallengePage.Survival || challengeDefinition.mPage == ChallengePage.Challenge)
 						{
 							num6 = 3;
 						}
@@ -270,7 +270,7 @@ namespace Lawn
 
 		public bool ShowPageButtons()
 		{
-			return mApp.mTodCheatKeys && mPageIndex != ChallengePage.CHALLENGE_PAGE_SURVIVAL && mPageIndex != ChallengePage.CHALLENGE_PAGE_PUZZLE;
+			return mApp.mTodCheatKeys && mPageIndex != ChallengePage.Survival && mPageIndex != ChallengePage.Puzzle;
 		}
 
 		public void UpdateButtons()
@@ -304,14 +304,14 @@ namespace Lawn
 
 		public bool ChallengeModeRecordsTime(GameMode theGameMode)
 		{
-			return theGameMode >= GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_1 && theGameMode <= GameMode.GAMEMODE_SURVIVAL_ENDLESS_STAGE_5;
+			return theGameMode >= GameMode.SurvivalNormalStage1 && theGameMode <= GameMode.SurvivalEndlessStage5;
 		}
 
 		public int AccomplishmentsNeeded(int aChallengeIndex)
 		{
 			int num = MoreTrophiesNeeded(aChallengeIndex);
 			ChallengeDefinition challengeDefinition = ChallengeScreen.gChallengeDefs[aChallengeIndex];
-			if (mApp.IsSurvivalEndless(challengeDefinition.mChallengeMode) && num <= 3 && mApp.GetNumTrophies(ChallengePage.CHALLENGE_PAGE_SURVIVAL) < 10 && mApp.HasFinishedAdventure() && !mApp.IsTrialStageLocked())
+			if (mApp.IsSurvivalEndless(challengeDefinition.mChallengeMode) && num <= 3 && mApp.GetNumTrophies(ChallengePage.Survival) < 10 && mApp.HasFinishedAdventure() && !mApp.IsTrialStageLocked())
 			{
 				num = 1;
 			}
@@ -326,29 +326,29 @@ namespace Lawn
 		{
 			g.SetLinearBlend(true);
 			LawnCommon.DrawImageBox(g, new TRect(0, 0, mWidth, mHeight), AtlasResources.IMAGE_ALMANAC_ROUNDED_OUTLINE);
-			if (mPageIndex == ChallengePage.CHALLENGE_PAGE_SURVIVAL)
+			if (mPageIndex == ChallengePage.Survival)
 			{
-				TodCommon.TodDrawString(g, "[PICK_AREA]", 400, 22, Resources.FONT_DWARVENTODCRAFT15, new SexyColor(220, 220, 220), DrawStringJustification.DS_ALIGN_CENTER);
+				TodCommon.TodDrawString(g, "[PICK_AREA]", 400, 22, Resources.FONT_DWARVENTODCRAFT15, new SexyColor(220, 220, 220), DrawStringJustification.Center);
 			}
-			else if (mPageIndex == ChallengePage.CHALLENGE_PAGE_PUZZLE)
+			else if (mPageIndex == ChallengePage.Puzzle)
 			{
-				TodCommon.TodDrawString(g, "[SCARY_POTTER]", 400, 22, Resources.FONT_DWARVENTODCRAFT15, new SexyColor(220, 220, 220), DrawStringJustification.DS_ALIGN_CENTER);
+				TodCommon.TodDrawString(g, "[SCARY_POTTER]", 400, 22, Resources.FONT_DWARVENTODCRAFT15, new SexyColor(220, 220, 220), DrawStringJustification.Center);
 			}
 			else
 			{
-				TodCommon.TodDrawString(g, "[PICK_CHALLENGE]", 400, 22, Resources.FONT_DWARVENTODCRAFT15, new SexyColor(220, 220, 220), DrawStringJustification.DS_ALIGN_CENTER);
+				TodCommon.TodDrawString(g, "[PICK_CHALLENGE]", 400, 22, Resources.FONT_DWARVENTODCRAFT15, new SexyColor(220, 220, 220), DrawStringJustification.Center);
 			}
 			int num = 0;
 			int numTrophies = mApp.GetNumTrophies(mPageIndex);
-			if (mPageIndex == ChallengePage.CHALLENGE_PAGE_SURVIVAL)
+			if (mPageIndex == ChallengePage.Survival)
 			{
 				num = 10;
 			}
-			else if (mPageIndex == ChallengePage.CHALLENGE_PAGE_CHALLENGE)
+			else if (mPageIndex == ChallengePage.Challenge)
 			{
 				num = 20;
 			}
-			else if (mPageIndex == ChallengePage.CHALLENGE_PAGE_PUZZLE)
+			else if (mPageIndex == ChallengePage.Puzzle)
 			{
 				num = 18;
 			}
@@ -359,7 +359,7 @@ namespace Lawn
 					trophyStrings[(int)mPageIndex] = LawnApp.ToString(numTrophies) + "/" + LawnApp.ToString(num);
 				}
 				string theText = trophyStrings[(int)mPageIndex];
-				TodCommon.TodDrawString(g, theText, 600, 39, Resources.FONT_DWARVENTODCRAFT12, new SexyColor(255, 240, 0), DrawStringJustification.DS_ALIGN_CENTER);
+				TodCommon.TodDrawString(g, theText, 600, 39, Resources.FONT_DWARVENTODCRAFT12, new SexyColor(255, 240, 0), DrawStringJustification.Center);
 			}
 			TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_TROPHY, 580f, 15f, 0.5f, 0.5f);
 		}
@@ -372,12 +372,12 @@ namespace Lawn
 			{
 				mUnlockStateCounter--;
 			}
-			if (mUnlockState == UnlockingState.UNLOCKING_SHAKING)
+			if (mUnlockState == UnlockingState.Shaking)
 			{
 				if (mUnlockStateCounter == 0)
 				{
-					mApp.PlayFoley(FoleyType.FOLEY_PAPER);
-					mUnlockState = UnlockingState.UNLOCKING_FADING;
+					mApp.PlayFoley(FoleyType.Paper);
+					mUnlockState = UnlockingState.Fading;
 					mUnlockStateCounter = 50;
 					mLockShakeX = 0f;
 					mLockShakeY = 0f;
@@ -388,9 +388,9 @@ namespace Lawn
 					mLockShakeY = TodCommon.RandRangeFloat(-2f, 2f);
 				}
 			}
-			else if (mUnlockState == UnlockingState.UNLOCKING_FADING && mUnlockStateCounter == 0)
+			else if (mUnlockState == UnlockingState.Fading && mUnlockStateCounter == 0)
 			{
-				mUnlockState = UnlockingState.UNLOCKING_OFF;
+				mUnlockState = UnlockingState.Off;
 				mUnlockStateCounter = 0;
 				mUnlockChallengeIndex = -1;
 			}
@@ -440,7 +440,7 @@ namespace Lawn
 			int num = theId - 200;
 			if (num >= 0 && num < 122)
 			{
-				GameMode theGameMode = num + GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_1;
+				GameMode theGameMode = num + GameMode.SurvivalNormalStage1;
 				mApp.KillChallengeScreen();
 				mApp.PreNewGame(theGameMode, true);
 			}
@@ -454,12 +454,12 @@ namespace Lawn
 
 		public bool IsScaryPotterLevel(GameMode theGameMode)
 		{
-			return theGameMode >= GameMode.GAMEMODE_SCARY_POTTER_1 && theGameMode <= GameMode.GAMEMODE_SCARY_POTTER_ENDLESS;
+			return theGameMode >= GameMode.ScaryPotter1 && theGameMode <= GameMode.ScaryPotterEndless;
 		}
 
 		public bool IsIZombieLevel(GameMode theGameMode)
 		{
-			return theGameMode >= GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_1 && theGameMode <= GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_ENDLESS;
+			return theGameMode >= GameMode.PuzzleIZombie1 && theGameMode <= GameMode.PuzzleIZombieEndless;
 		}
 
 		public void UpdateToolTip()
@@ -498,77 +498,77 @@ namespace Lawn
 
 		public static ChallengeDefinition[] gChallengeDefs = new ChallengeDefinition[]
 		{
-			new ChallengeDefinition(GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_1, 0, ChallengePage.CHALLENGE_PAGE_SURVIVAL, 0, 0, "[SURVIVAL_DAY_NORMAL]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_2, 1, ChallengePage.CHALLENGE_PAGE_SURVIVAL, 0, 1, "[SURVIVAL_NIGHT_NORMAL]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_3, 2, ChallengePage.CHALLENGE_PAGE_SURVIVAL, 0, 2, "[SURVIVAL_POOL_NORMAL]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_4, 3, ChallengePage.CHALLENGE_PAGE_SURVIVAL, 0, 3, "[SURVIVAL_FOG_NORMAL]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_5, 4, ChallengePage.CHALLENGE_PAGE_SURVIVAL, 0, 4, "[SURVIVAL_ROOF_NORMAL]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SURVIVAL_HARD_STAGE_1, 5, ChallengePage.CHALLENGE_PAGE_SURVIVAL, 1, 0, "[SURVIVAL_DAY_HARD]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SURVIVAL_HARD_STAGE_2, 6, ChallengePage.CHALLENGE_PAGE_SURVIVAL, 1, 1, "[SURVIVAL_NIGHT_HARD]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SURVIVAL_HARD_STAGE_3, 7, ChallengePage.CHALLENGE_PAGE_SURVIVAL, 1, 2, "[SURVIVAL_POOL_HARD]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SURVIVAL_HARD_STAGE_4, 8, ChallengePage.CHALLENGE_PAGE_SURVIVAL, 1, 3, "[SURVIVAL_FOG_HARD]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SURVIVAL_HARD_STAGE_5, 9, ChallengePage.CHALLENGE_PAGE_SURVIVAL, 1, 4, "[SURVIVAL_ROOF_HARD]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SURVIVAL_ENDLESS_STAGE_1, 10, ChallengePage.CHALLENGE_PAGE_LIMBO, 3, 0, "[SURVIVAL_DAY_ENDLESS]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SURVIVAL_ENDLESS_STAGE_2, 10, ChallengePage.CHALLENGE_PAGE_LIMBO, 3, 1, "[SURVIVAL_NIGHT_ENDLESS]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SURVIVAL_ENDLESS_STAGE_3, 10, ChallengePage.CHALLENGE_PAGE_SURVIVAL, 2, 2, "[SURVIVAL_POOL_ENDLESS]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SURVIVAL_ENDLESS_STAGE_4, 10, ChallengePage.CHALLENGE_PAGE_LIMBO, 3, 2, "[SURVIVAL_FOG_ENDLESS]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SURVIVAL_ENDLESS_STAGE_5, 10, ChallengePage.CHALLENGE_PAGE_LIMBO, 3, 3, "[SURVIVAL_ROOF_ENDLESS]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS, 0, ChallengePage.CHALLENGE_PAGE_CHALLENGE, 0, 0, "[WAR_AND_PEAS]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_WALLNUT_BOWLING, 6, ChallengePage.CHALLENGE_PAGE_CHALLENGE, 0, 1, "[WALL_NUT_BOWLING]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_SLOT_MACHINE, 2, ChallengePage.CHALLENGE_PAGE_CHALLENGE, 0, 2, "[SLOT_MACHINE]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_RAINING_SEEDS, 3, ChallengePage.CHALLENGE_PAGE_CHALLENGE, 0, 3, "[ITS_RAINING_SEEDS]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_BEGHOULED, 1, ChallengePage.CHALLENGE_PAGE_CHALLENGE, 0, 4, "[BEGHOULED]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_INVISIGHOUL, 8, ChallengePage.CHALLENGE_PAGE_CHALLENGE, 1, 0, "[INVISIGHOUL]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_SEEING_STARS, 5, ChallengePage.CHALLENGE_PAGE_CHALLENGE, 1, 1, "[SEEING_STARS]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST, 20, ChallengePage.CHALLENGE_PAGE_CHALLENGE, 1, 3, "[BEGHOULED_TWIST]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_LITTLE_TROUBLE, 12, ChallengePage.CHALLENGE_PAGE_CHALLENGE, 1, 4, "[LITTLE_TROUBLE]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_PORTAL_COMBAT, 15, ChallengePage.CHALLENGE_PAGE_CHALLENGE, 2, 0, "[PORTAL_COMBAT]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_COLUMN, 4, ChallengePage.CHALLENGE_PAGE_CHALLENGE, 2, 1, "[COLUMN_AS_YOU_SEE_EM]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_BOBSLED_BONANZA, 17, ChallengePage.CHALLENGE_PAGE_CHALLENGE, 2, 2, "[BOBSLED_BONANZA]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_SPEED, 18, ChallengePage.CHALLENGE_PAGE_CHALLENGE, 2, 3, "[ZOMBIES_ON_SPEED]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_WHACK_A_ZOMBIE, 16, ChallengePage.CHALLENGE_PAGE_CHALLENGE, 2, 4, "[WHACK_A_ZOMBIE]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_LAST_STAND, 21, ChallengePage.CHALLENGE_PAGE_CHALLENGE, 3, 0, "[LAST_STAND]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_WAR_AND_PEAS_2, 0, ChallengePage.CHALLENGE_PAGE_CHALLENGE, 3, 1, "[WAR_AND_PEAS_2]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_WALLNUT_BOWLING_2, 6, ChallengePage.CHALLENGE_PAGE_CHALLENGE, 3, 2, "[WALL_NUT_BOWLING_EXTREME]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_POGO_PARTY, 14, ChallengePage.CHALLENGE_PAGE_CHALLENGE, 3, 3, "[POGO_PARTY]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_FINAL_BOSS, 19, ChallengePage.CHALLENGE_PAGE_CHALLENGE, 3, 4, "[FINAL_BOSS]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_ART_CHALLENGE_1, 0, ChallengePage.CHALLENGE_PAGE_LIMBO, 0, 0, "[ART_CHALLENGE_WALL_NUT]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_SUNNY_DAY, 1, ChallengePage.CHALLENGE_PAGE_LIMBO, 0, 1, "[SUNNY_DAY]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_RESODDED, 2, ChallengePage.CHALLENGE_PAGE_LIMBO, 0, 2, "[UNSODDED]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_BIG_TIME, 3, ChallengePage.CHALLENGE_PAGE_LIMBO, 0, 3, "[BIG_TIME]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_ART_CHALLENGE_2, 4, ChallengePage.CHALLENGE_PAGE_LIMBO, 0, 4, "[ART_CHALLENGE_SUNFLOWER]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_AIR_RAID, 5, ChallengePage.CHALLENGE_PAGE_LIMBO, 1, 0, "[AIR_RAID]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_ICE, 6, ChallengePage.CHALLENGE_PAGE_LIMBO, 1, 1, "[ICE_LEVEL]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN, 7, ChallengePage.CHALLENGE_PAGE_LIMBO, 1, 2, "[ZEN_GARDEN]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_HIGH_GRAVITY, 8, ChallengePage.CHALLENGE_PAGE_LIMBO, 1, 3, "[HIGH_GRAVITY]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_GRAVE_DANGER, 11, ChallengePage.CHALLENGE_PAGE_LIMBO, 1, 4, "[GRAVE_DANGER]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_SHOVEL, 10, ChallengePage.CHALLENGE_PAGE_LIMBO, 2, 0, "[CAN_YOU_DIG_IT]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_STORMY_NIGHT, 13, ChallengePage.CHALLENGE_PAGE_LIMBO, 2, 1, "[DARK_STORMY_NIGHT]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_BUNGEE_BLITZ, 9, ChallengePage.CHALLENGE_PAGE_LIMBO, 2, 2, "[BUNGEE_BLITZ]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_CHALLENGE_SQUIRREL, 10, ChallengePage.CHALLENGE_PAGE_LIMBO, 2, 3, "Squirrel"),
-			new ChallengeDefinition(GameMode.GAMEMODE_TREE_OF_WISDOM, 10, ChallengePage.CHALLENGE_PAGE_LIMBO, 2, 4, "Tree of Wisdom"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SCARY_POTTER_1, 10, ChallengePage.CHALLENGE_PAGE_PUZZLE, 0, 0, "[SCARY_POTTER_1]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SCARY_POTTER_2, 10, ChallengePage.CHALLENGE_PAGE_PUZZLE, 0, 1, "[SCARY_POTTER_2]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SCARY_POTTER_3, 10, ChallengePage.CHALLENGE_PAGE_PUZZLE, 0, 2, "[SCARY_POTTER_3]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SCARY_POTTER_4, 10, ChallengePage.CHALLENGE_PAGE_PUZZLE, 0, 3, "[SCARY_POTTER_4]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SCARY_POTTER_5, 10, ChallengePage.CHALLENGE_PAGE_PUZZLE, 0, 4, "[SCARY_POTTER_5]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SCARY_POTTER_6, 10, ChallengePage.CHALLENGE_PAGE_PUZZLE, 1, 0, "[SCARY_POTTER_6]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SCARY_POTTER_7, 10, ChallengePage.CHALLENGE_PAGE_PUZZLE, 1, 1, "[SCARY_POTTER_7]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SCARY_POTTER_8, 10, ChallengePage.CHALLENGE_PAGE_PUZZLE, 1, 2, "[SCARY_POTTER_8]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SCARY_POTTER_9, 10, ChallengePage.CHALLENGE_PAGE_PUZZLE, 1, 3, "[SCARY_POTTER_9]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_SCARY_POTTER_ENDLESS, 10, ChallengePage.CHALLENGE_PAGE_PUZZLE, 1, 4, "[SCARY_POTTER_ENDLESS]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_1, 11, ChallengePage.CHALLENGE_PAGE_PUZZLE, 2, 0, "[I_ZOMBIE_1]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_2, 11, ChallengePage.CHALLENGE_PAGE_PUZZLE, 2, 1, "[I_ZOMBIE_2]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_3, 11, ChallengePage.CHALLENGE_PAGE_PUZZLE, 2, 2, "[I_ZOMBIE_3]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_4, 11, ChallengePage.CHALLENGE_PAGE_PUZZLE, 2, 3, "[I_ZOMBIE_4]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_5, 11, ChallengePage.CHALLENGE_PAGE_PUZZLE, 2, 4, "[I_ZOMBIE_5]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_6, 11, ChallengePage.CHALLENGE_PAGE_PUZZLE, 3, 0, "[I_ZOMBIE_6]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_7, 11, ChallengePage.CHALLENGE_PAGE_PUZZLE, 3, 1, "[I_ZOMBIE_7]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_8, 11, ChallengePage.CHALLENGE_PAGE_PUZZLE, 3, 2, "[I_ZOMBIE_8]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_9, 11, ChallengePage.CHALLENGE_PAGE_PUZZLE, 3, 3, "[I_ZOMBIE_9]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_ENDLESS, 11, ChallengePage.CHALLENGE_PAGE_PUZZLE, 3, 4, "[I_ZOMBIE_ENDLESS]"),
-			new ChallengeDefinition(GameMode.GAMEMODE_UPSELL, 10, ChallengePage.CHALLENGE_PAGE_LIMBO, 3, 4, "Upsell"),
-			new ChallengeDefinition(GameMode.GAMEMODE_INTRO, 10, ChallengePage.CHALLENGE_PAGE_LIMBO, 2, 3, "Intro")
+			new ChallengeDefinition(GameMode.SurvivalNormalStage1, 0, ChallengePage.Survival, 0, 0, "[SURVIVAL_DAY_NORMAL]"),
+			new ChallengeDefinition(GameMode.SurvivalNormalStage2, 1, ChallengePage.Survival, 0, 1, "[SURVIVAL_NIGHT_NORMAL]"),
+			new ChallengeDefinition(GameMode.SurvivalNormalStage3, 2, ChallengePage.Survival, 0, 2, "[SURVIVAL_POOL_NORMAL]"),
+			new ChallengeDefinition(GameMode.SurvivalNormalStage4, 3, ChallengePage.Survival, 0, 3, "[SURVIVAL_FOG_NORMAL]"),
+			new ChallengeDefinition(GameMode.SurvivalNormalStage5, 4, ChallengePage.Survival, 0, 4, "[SURVIVAL_ROOF_NORMAL]"),
+			new ChallengeDefinition(GameMode.SurvivalHardStage1, 5, ChallengePage.Survival, 1, 0, "[SURVIVAL_DAY_HARD]"),
+			new ChallengeDefinition(GameMode.SurvivalHardStage2, 6, ChallengePage.Survival, 1, 1, "[SURVIVAL_NIGHT_HARD]"),
+			new ChallengeDefinition(GameMode.SurvivalHardStage3, 7, ChallengePage.Survival, 1, 2, "[SURVIVAL_POOL_HARD]"),
+			new ChallengeDefinition(GameMode.SurvivalHardStage4, 8, ChallengePage.Survival, 1, 3, "[SURVIVAL_FOG_HARD]"),
+			new ChallengeDefinition(GameMode.SurvivalHardStage5, 9, ChallengePage.Survival, 1, 4, "[SURVIVAL_ROOF_HARD]"),
+			new ChallengeDefinition(GameMode.SurvivalEndlessStage1, 10, ChallengePage.Limbo, 3, 0, "[SURVIVAL_DAY_ENDLESS]"),
+			new ChallengeDefinition(GameMode.SurvivalEndlessStage2, 10, ChallengePage.Limbo, 3, 1, "[SURVIVAL_NIGHT_ENDLESS]"),
+			new ChallengeDefinition(GameMode.SurvivalEndlessStage3, 10, ChallengePage.Survival, 2, 2, "[SURVIVAL_POOL_ENDLESS]"),
+			new ChallengeDefinition(GameMode.SurvivalEndlessStage4, 10, ChallengePage.Limbo, 3, 2, "[SURVIVAL_FOG_ENDLESS]"),
+			new ChallengeDefinition(GameMode.SurvivalEndlessStage5, 10, ChallengePage.Limbo, 3, 3, "[SURVIVAL_ROOF_ENDLESS]"),
+			new ChallengeDefinition(GameMode.ChallengeWarAndPeas, 0, ChallengePage.Challenge, 0, 0, "[WAR_AND_PEAS]"),
+			new ChallengeDefinition(GameMode.ChallengeWallnutBowling, 6, ChallengePage.Challenge, 0, 1, "[WALL_NUT_BOWLING]"),
+			new ChallengeDefinition(GameMode.ChallengeSlotMachine, 2, ChallengePage.Challenge, 0, 2, "[SLOT_MACHINE]"),
+			new ChallengeDefinition(GameMode.ChallengeRainingSeeds, 3, ChallengePage.Challenge, 0, 3, "[ITS_RAINING_SEEDS]"),
+			new ChallengeDefinition(GameMode.ChallengeBeghouled, 1, ChallengePage.Challenge, 0, 4, "[BEGHOULED]"),
+			new ChallengeDefinition(GameMode.ChallengeInvisighoul, 8, ChallengePage.Challenge, 1, 0, "[INVISIGHOUL]"),
+			new ChallengeDefinition(GameMode.ChallengeSeeingStars, 5, ChallengePage.Challenge, 1, 1, "[SEEING_STARS]"),
+			new ChallengeDefinition(GameMode.ChallengeBeghouledTwist, 20, ChallengePage.Challenge, 1, 3, "[BEGHOULED_TWIST]"),
+			new ChallengeDefinition(GameMode.ChallengeLittleTrouble, 12, ChallengePage.Challenge, 1, 4, "[LITTLE_TROUBLE]"),
+			new ChallengeDefinition(GameMode.ChallengePortalCombat, 15, ChallengePage.Challenge, 2, 0, "[PORTAL_COMBAT]"),
+			new ChallengeDefinition(GameMode.ChallengeColumn, 4, ChallengePage.Challenge, 2, 1, "[COLUMN_AS_YOU_SEE_EM]"),
+			new ChallengeDefinition(GameMode.ChallengeBobsledBonanza, 17, ChallengePage.Challenge, 2, 2, "[BOBSLED_BONANZA]"),
+			new ChallengeDefinition(GameMode.ChallengeSpeed, 18, ChallengePage.Challenge, 2, 3, "[ZOMBIES_ON_SPEED]"),
+			new ChallengeDefinition(GameMode.ChallengeWhackAZombie, 16, ChallengePage.Challenge, 2, 4, "[WHACK_A_ZOMBIE]"),
+			new ChallengeDefinition(GameMode.ChallengeLastStand, 21, ChallengePage.Challenge, 3, 0, "[LAST_STAND]"),
+			new ChallengeDefinition(GameMode.ChallengeWarAndPeas2, 0, ChallengePage.Challenge, 3, 1, "[WAR_AND_PEAS_2]"),
+			new ChallengeDefinition(GameMode.ChallengeWallnutBowling2, 6, ChallengePage.Challenge, 3, 2, "[WALL_NUT_BOWLING_EXTREME]"),
+			new ChallengeDefinition(GameMode.ChallengePogoParty, 14, ChallengePage.Challenge, 3, 3, "[POGO_PARTY]"),
+			new ChallengeDefinition(GameMode.ChallengeFinalBoss, 19, ChallengePage.Challenge, 3, 4, "[FINAL_BOSS]"),
+			new ChallengeDefinition(GameMode.ChallengeArtChallenge1, 0, ChallengePage.Limbo, 0, 0, "[ART_CHALLENGE_WALL_NUT]"),
+			new ChallengeDefinition(GameMode.ChallengeSunnyDay, 1, ChallengePage.Limbo, 0, 1, "[SUNNY_DAY]"),
+			new ChallengeDefinition(GameMode.ChallengeResodded, 2, ChallengePage.Limbo, 0, 2, "[UNSODDED]"),
+			new ChallengeDefinition(GameMode.ChallengeBigTime, 3, ChallengePage.Limbo, 0, 3, "[BIG_TIME]"),
+			new ChallengeDefinition(GameMode.ChallengeArtChallenge2, 4, ChallengePage.Limbo, 0, 4, "[ART_CHALLENGE_SUNFLOWER]"),
+			new ChallengeDefinition(GameMode.ChallengeAirRaid, 5, ChallengePage.Limbo, 1, 0, "[AIR_RAID]"),
+			new ChallengeDefinition(GameMode.ChallengeIce, 6, ChallengePage.Limbo, 1, 1, "[ICE_LEVEL]"),
+			new ChallengeDefinition(GameMode.ChallengeZenGarden, 7, ChallengePage.Limbo, 1, 2, "[ZEN_GARDEN]"),
+			new ChallengeDefinition(GameMode.ChallengeHighGravity, 8, ChallengePage.Limbo, 1, 3, "[HIGH_GRAVITY]"),
+			new ChallengeDefinition(GameMode.ChallengeGraveDanger, 11, ChallengePage.Limbo, 1, 4, "[GRAVE_DANGER]"),
+			new ChallengeDefinition(GameMode.ChallengeShovel, 10, ChallengePage.Limbo, 2, 0, "[CAN_YOU_DIG_IT]"),
+			new ChallengeDefinition(GameMode.ChallengeStormyNight, 13, ChallengePage.Limbo, 2, 1, "[DARK_STORMY_NIGHT]"),
+			new ChallengeDefinition(GameMode.ChallengeBungeeBlitz, 9, ChallengePage.Limbo, 2, 2, "[BUNGEE_BLITZ]"),
+			new ChallengeDefinition(GameMode.ChallengeSquirrel, 10, ChallengePage.Limbo, 2, 3, "Squirrel"),
+			new ChallengeDefinition(GameMode.TreeOfWisdom, 10, ChallengePage.Limbo, 2, 4, "Tree of Wisdom"),
+			new ChallengeDefinition(GameMode.ScaryPotter1, 10, ChallengePage.Puzzle, 0, 0, "[SCARY_POTTER_1]"),
+			new ChallengeDefinition(GameMode.ScaryPotter2, 10, ChallengePage.Puzzle, 0, 1, "[SCARY_POTTER_2]"),
+			new ChallengeDefinition(GameMode.ScaryPotter3, 10, ChallengePage.Puzzle, 0, 2, "[SCARY_POTTER_3]"),
+			new ChallengeDefinition(GameMode.ScaryPotter4, 10, ChallengePage.Puzzle, 0, 3, "[SCARY_POTTER_4]"),
+			new ChallengeDefinition(GameMode.ScaryPotter5, 10, ChallengePage.Puzzle, 0, 4, "[SCARY_POTTER_5]"),
+			new ChallengeDefinition(GameMode.ScaryPotter6, 10, ChallengePage.Puzzle, 1, 0, "[SCARY_POTTER_6]"),
+			new ChallengeDefinition(GameMode.ScaryPotter7, 10, ChallengePage.Puzzle, 1, 1, "[SCARY_POTTER_7]"),
+			new ChallengeDefinition(GameMode.ScaryPotter8, 10, ChallengePage.Puzzle, 1, 2, "[SCARY_POTTER_8]"),
+			new ChallengeDefinition(GameMode.ScaryPotter9, 10, ChallengePage.Puzzle, 1, 3, "[SCARY_POTTER_9]"),
+			new ChallengeDefinition(GameMode.ScaryPotterEndless, 10, ChallengePage.Puzzle, 1, 4, "[SCARY_POTTER_ENDLESS]"),
+			new ChallengeDefinition(GameMode.PuzzleIZombie1, 11, ChallengePage.Puzzle, 2, 0, "[I_ZOMBIE_1]"),
+			new ChallengeDefinition(GameMode.PuzzleIZombie2, 11, ChallengePage.Puzzle, 2, 1, "[I_ZOMBIE_2]"),
+			new ChallengeDefinition(GameMode.PuzzleIZombie3, 11, ChallengePage.Puzzle, 2, 2, "[I_ZOMBIE_3]"),
+			new ChallengeDefinition(GameMode.PuzzleIZombie4, 11, ChallengePage.Puzzle, 2, 3, "[I_ZOMBIE_4]"),
+			new ChallengeDefinition(GameMode.PuzzleIZombie5, 11, ChallengePage.Puzzle, 2, 4, "[I_ZOMBIE_5]"),
+			new ChallengeDefinition(GameMode.PuzzleIZombie6, 11, ChallengePage.Puzzle, 3, 0, "[I_ZOMBIE_6]"),
+			new ChallengeDefinition(GameMode.PuzzleIZombie7, 11, ChallengePage.Puzzle, 3, 1, "[I_ZOMBIE_7]"),
+			new ChallengeDefinition(GameMode.PuzzleIZombie8, 11, ChallengePage.Puzzle, 3, 2, "[I_ZOMBIE_8]"),
+			new ChallengeDefinition(GameMode.PuzzleIZombie9, 11, ChallengePage.Puzzle, 3, 3, "[I_ZOMBIE_9]"),
+			new ChallengeDefinition(GameMode.PuzzleIZombieEndless, 11, ChallengePage.Puzzle, 3, 4, "[I_ZOMBIE_ENDLESS]"),
+			new ChallengeDefinition(GameMode.Upsell, 10, ChallengePage.Limbo, 3, 4, "Upsell"),
+			new ChallengeDefinition(GameMode.Intro, 10, ChallengePage.Limbo, 2, 3, "Intro")
 		};
 
 		public NewLawnButton mBackButton;

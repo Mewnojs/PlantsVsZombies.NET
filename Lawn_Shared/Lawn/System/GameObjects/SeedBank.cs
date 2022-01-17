@@ -26,7 +26,7 @@ namespace Lawn
 			{
 				return;
 			}
-			if (mApp.mGameScene != GameScenes.SCENE_PLAYING)
+			if (mApp.mGameScene != GameScenes.Playing)
 			{
 				g.mTransX -= mBoard.mX;
 				g.mTransY -= mBoard.mY;
@@ -47,7 +47,7 @@ namespace Lawn
 			for (int j = 0; j < mNumPackets; j++)
 			{
 				SeedPacket seedPacket = mSeedPackets[j];
-				if (seedPacket.mPacketType != SeedType.SEED_NONE && seedPacket.BeginDraw(g))
+				if (seedPacket.mPacketType != SeedType.None && seedPacket.BeginDraw(g))
 				{
 					seedPacket.DrawBackground(g);
 					seedPacket.EndDraw(g);
@@ -56,7 +56,7 @@ namespace Lawn
 			for (int k = 0; k < mNumPackets; k++)
 			{
 				SeedPacket seedPacket2 = mSeedPackets[k];
-				if (seedPacket2.mPacketType != SeedType.SEED_NONE && seedPacket2.BeginDraw(g))
+				if (seedPacket2.mPacketType != SeedType.None && seedPacket2.BeginDraw(g))
 				{
 					seedPacket2.Draw(g);
 					seedPacket2.EndDraw(g);
@@ -65,7 +65,7 @@ namespace Lawn
 			for (int l = 0; l < mNumPackets; l++)
 			{
 				SeedPacket seedPacket3 = mSeedPackets[l];
-				if (seedPacket3.mPacketType != SeedType.SEED_NONE && seedPacket3.BeginDraw(g))
+				if (seedPacket3.mPacketType != SeedType.None && seedPacket3.BeginDraw(g))
 				{
 					seedPacket3.DrawOverlay(g);
 					seedPacket3.EndDraw(g);
@@ -73,7 +73,7 @@ namespace Lawn
 			}
 			g.ClearClipRect();
 			mApp.IsSlotMachineLevel();
-			if (mApp.mGameScene != GameScenes.SCENE_PLAYING)
+			if (mApp.mGameScene != GameScenes.Playing)
 			{
 				g.mTransX += mBoard.mX;
 				g.mTransY += mBoard.mY;
@@ -137,7 +137,7 @@ namespace Lawn
 
 		public void DrawSun(Graphics g)
 		{
-			if (mBoard.mCutScene != null && (mBoard.mCutScene.IsBeforePreloading() || mApp.mGameMode == GameMode.GAMEMODE_INTRO))
+			if (mBoard.mCutScene != null && (mBoard.mCutScene.IsBeforePreloading() || mApp.mGameMode == GameMode.Intro))
 			{
 				return;
 			}
@@ -153,7 +153,7 @@ namespace Lawn
 				int num = Constants.UISunBankPositionX - Constants.Board_Offset_AspectRatio_Correction;
 				int aX = mX;
 				g.DrawImage(AtlasResources.IMAGE_DAN_SUNBANK, num, aX);
-				TodCommon.TodDrawString(g, theText, num + Constants.UISunBankTextOffset.X, aX + Constants.UISunBankTextOffset.Y, Resources.FONT_CONTINUUMBOLD14OUTLINE, theColor, DrawStringJustification.DS_ALIGN_CENTER);
+				TodCommon.TodDrawString(g, theText, num + Constants.UISunBankTextOffset.X, aX + Constants.UISunBankTextOffset.Y, Resources.FONT_CONTINUUMBOLD14OUTLINE, theColor, DrawStringJustification.Center);
 			}
 		}
 
@@ -169,7 +169,7 @@ namespace Lawn
 			for (int i = 0; i < mNumPackets; i++)
 			{
 				SeedPacket seedPacket2 = mSeedPackets[i];
-				if (seedPacket2.mPacketType != SeedType.SEED_NONE)
+				if (seedPacket2.mPacketType != SeedType.None)
 				{
 					int num2 = seedPacket2.CenterY();
 					if (num2 <= mHeight)
@@ -186,17 +186,17 @@ namespace Lawn
 			if (seedPacket != null)
 			{
 				theHitResult.mObject = seedPacket;
-				theHitResult.mObjectType = GameObjectType.OBJECT_TYPE_SEEDPACKET;
+				theHitResult.mObjectType = GameObjectType.Seedpacket;
 				return true;
 			}
 			theHitResult.mObject = null;
-			theHitResult.mObjectType = GameObjectType.OBJECT_TYPE_NONE;
+			theHitResult.mObjectType = GameObjectType.None;
 			return false;
 		}
 
 		public void Move(int x, int y)
 		{
-			mX = x - ((mApp.mGameScene != GameScenes.SCENE_PLAYING) ? 0 : Constants.Board_Offset_AspectRatio_Correction);
+			mX = x - ((mApp.mGameScene != GameScenes.Playing) ? 0 : Constants.Board_Offset_AspectRatio_Correction);
 			mY = y;
 		}
 
@@ -210,7 +210,7 @@ namespace Lawn
 			for (int i = 0; i < mNumPackets; i++)
 			{
 				SeedPacket seedPacket = mSeedPackets[i];
-				if (seedPacket.mPacketType == SeedType.SEED_NONE)
+				if (seedPacket.mPacketType == SeedType.None)
 				{
 					return i;
 				}
@@ -221,7 +221,7 @@ namespace Lawn
 		public void AddSeed(SeedType theSeedType)
 		{
 			Debug.ASSERT(mBoard.HasConveyorBeltSeedBank());
-			Debug.ASSERT(theSeedType != SeedType.SEED_NONE);
+			Debug.ASSERT(theSeedType != SeedType.None);
 			int numSeedsOnConveyorBelt = GetNumSeedsOnConveyorBelt();
 			if (numSeedsOnConveyorBelt == mNumPackets)
 			{
@@ -251,13 +251,13 @@ namespace Lawn
 			for (int i = theIndex; i < mNumPackets; i++)
 			{
 				SeedPacket seedPacket = mSeedPackets[i];
-				if (seedPacket.mPacketType == SeedType.SEED_NONE)
+				if (seedPacket.mPacketType == SeedType.None)
 				{
 					return;
 				}
 				if (i == mNumPackets - 1)
 				{
-					seedPacket.mPacketType = SeedType.SEED_NONE;
+					seedPacket.mPacketType = SeedType.None;
 					seedPacket.mOffsetY = 0;
 				}
 				else
@@ -319,7 +319,7 @@ namespace Lawn
 			for (int i = 0; i < mNumPackets; i++)
 			{
 				SeedPacket seedPacket = mSeedPackets[i];
-				if (seedPacket.mPacketType == SeedType.SEED_NONE)
+				if (seedPacket.mPacketType == SeedType.None)
 				{
 					return;
 				}

@@ -72,9 +72,9 @@ namespace Lawn
 			//this.mUserButton.mColors[1] = new SexyColor(200, 200, 255);
 			//mUserButton.Resize(Constants.MAIN_MENU_ORIGIN_X + (int)Constants.InvertAndScale(20f), (int)Constants.InvertAndScale(90f), (int)Constants.InvertAndScale(120f), (int)Constants.InvertAndScale(30f));
 			float limboBtnOffset = 190;
-			mChallengePageSurvivalButton = GameButton.MakeButton(126/*(int)GameSelectorButtons.GameSelector_ChallengePageSurvival*/, this, "[GAMESELECTOR_SURVIVAL]");
+			mChallengePageSurvivalButton = GameButton.MakeButton(126/*(int)GameSelectorButtons.ChallengePageSurvival*/, this, "[GAMESELECTOR_SURVIVAL]");
 			mChallengePageSurvivalButton.Resize(Constants.QUICKPLAY_ORIGIN_X + (int)Constants.InvertAndScale(20f), (int)Constants.InvertAndScale(limboBtnOffset), (int)Constants.InvertAndScale(100f), (int)Constants.InvertAndScale(30f));
-			mChallengePageLimboButton = GameButton.MakeButton(127/*(int)GameSelectorButtons.GameSelector_ChallengePageLimbo*/, this, "[GAMESELECTOR_LIMBO]");
+			mChallengePageLimboButton = GameButton.MakeButton(127/*(int)GameSelectorButtons.ChallengePageLimbo*/, this, "[GAMESELECTOR_LIMBO]");
 			mChallengePageLimboButton.Resize(Constants.QUICKPLAY_ORIGIN_X + (int)Constants.InvertAndScale(20f), (int)Constants.InvertAndScale(limboBtnOffset + 30f), (int)Constants.InvertAndScale(100f), (int)Constants.InvertAndScale(30f));
 
 
@@ -91,14 +91,14 @@ namespace Lawn
 			mAchievementsScrollWidget.AddWidget(mAchievementsWidget);
 			mQuickplayWidget = new QuickPlayWidget(mApp, this);
 			mQuickplayScrollWidget = new ScrollWidget();
-			mQuickplayScrollWidget.SetScrollMode(ScrollWidget.ScrollMode.SCROLL_HORIZONTAL);
+			mQuickplayScrollWidget.SetScrollMode(ScrollWidget.ScrollMode.Horizontal);
 			mQuickplayWidget.SizeToFit();
 			mQuickplayScrollWidget.Resize(Constants.QUICKPLAY_ORIGIN_X + 30, 0, Constants.BOARD_WIDTH, mQuickplayWidget.mHeight);
 			mQuickplayScrollWidget.AddWidget(mQuickplayWidget);
 			mQuickplayScrollWidget.EnableIndicators(AtlasResources.IMAGE_SCROLL_INDICATOR);
 			mMiniGamesWidget = new MiniGamesWidget(mApp, this);
 			mMiniGamesScrollWidget = new ScrollWidget();
-			mMiniGamesScrollWidget.SetScrollMode(ScrollWidget.ScrollMode.SCROLL_HORIZONTAL);
+			mMiniGamesScrollWidget.SetScrollMode(ScrollWidget.ScrollMode.Horizontal);
 			mMiniGamesWidget.SizeToFit();
 			mMiniGamesScrollWidget.Resize(Constants.QUICKPLAY_ORIGIN_X + 30, 10, Constants.BOARD_WIDTH, mMiniGamesWidget.mHeight);
 			mMiniGamesScrollWidget.AddWidget(mMiniGamesWidget);
@@ -130,14 +130,14 @@ namespace Lawn
 			AddWidget(mAchievementsScrollWidget);
 			AddWidget(mLeaderboardButton);
 			AddWidget(mMiniGamesScrollWidget);
-			mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_TITLE_CRAZY_DAVE_MAIN_THEME);
+			mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.TitleCrazyDaveMainTheme);
 			mQuickplayLocked = false;
 			mUnlockSelectorCheat = false;
 			mTrophyParticleID = null;
 			mShowStartButton = false;
 			float theX = 0f;
 			float theY = 0f;
-			Reanimation theReanimation = mApp.AddReanimation(theX, theY, 400000, ReanimationType.REANIM_WOODSIGN, false);
+			Reanimation theReanimation = mApp.AddReanimation(theX, theY, 400000, ReanimationType.Woodsign, false);
 			mWoodSignReanimID = mApp.ReanimationGetID(theReanimation);
 			SetupUnlockFullGameReanim();
 			//if (SexyAppBase.IsInTrialMode)
@@ -145,7 +145,7 @@ namespace Lawn
 				AddWidget(mUserDialogButton);
 			//}
 			mLeafCounter = 50;
-			mSignState = SelectorSignState.SIGN_UP;
+			mSignState = SelectorSignState.Up;
 			SyncProfile(false);
 			LowerSign();
 			mSlideCounter = 0;
@@ -291,7 +291,7 @@ namespace Lawn
 			g.Translate(Constants.MAIN_MENU_ORIGIN_X, 0);
 			reanimation.Draw(g);
 			g.Translate(-Constants.MAIN_MENU_ORIGIN_X, 0);
-			if (mApp.mPlayerInfo != null && !string.IsNullOrEmpty(mApp.mPlayerInfo.mName) && (mSignState == SelectorSignState.SIGN_DOWN || mSignState == SelectorSignState.SIGN_MOVING_DOWN))
+			if (mApp.mPlayerInfo != null && !string.IsNullOrEmpty(mApp.mPlayerInfo.mName) && (mSignState == SelectorSignState.Down || mSignState == SelectorSignState.MovingDown))
 			{
 				string welcomeString = GetWelcomeString();
 				int theTrackIndex = reanimation.FindTrackIndex(GlobalMembersReanimIds.ReanimTrackId_welcome);
@@ -316,7 +316,7 @@ namespace Lawn
 				int num10 = Constants.MORE_GAMES_PLANK_HEIGHT + Constants.MORE_GAMES_ITEM_GAP;
 				int num11 = (num9 + num10 / 2) / num10 * num10;
 				int theTimeAge = Math.Abs(num11 - num9);
-				int theAlpha = TodCommon.TodAnimateCurve(0, 35, theTimeAge, 0, 220, TodCurves.CURVE_LINEAR);
+				int theAlpha = TodCommon.TodAnimateCurve(0, 35, theTimeAge, 0, 220, TodCurves.Linear);
 				g.SetColor(new SexyColor(115, 101, 66, theAlpha));
 			}
 			if (num8 > 340)
@@ -324,7 +324,7 @@ namespace Lawn
 				int num12 = Constants.MORE_GAMES_PLANK_HEIGHT + Constants.MORE_GAMES_ITEM_GAP;
 				int num13 = (num9 + num12 / 2) / num12 * num12;
 				int theTimeAge2 = Math.Abs(num13 - num9);
-				int theAlpha = TodCommon.TodAnimateCurve(0, 35, theTimeAge2, 0, 220, TodCurves.CURVE_LINEAR);
+				int theAlpha = TodCommon.TodAnimateCurve(0, 35, theTimeAge2, 0, 220, TodCurves.Linear);
 				g.SetColor(new SexyColor(115, 101, 66, theAlpha));
 			}
 			g.SetColorizeImages(false);
@@ -363,7 +363,7 @@ namespace Lawn
 		{
 			g.DrawImage(Resources.IMAGE_SELECTORSCREEN_QUICKPLAY_BACKGROUND, Constants.QUICKPLAY_ORIGIN_X, 0);
 			g.DrawImage(AtlasResources.IMAGE_TROPHY, Constants.QUICKPLAY_ORIGIN_X + Constants.BOARD_WIDTH - 155, Constants.BOARD_HEIGHT - 50);
-			int num = mApp.GetNumTrophies(ChallengePage.CHALLENGE_PAGE_CHALLENGE) + mApp.GetNumTrophies(ChallengePage.CHALLENGE_PAGE_PUZZLE);
+			int num = mApp.GetNumTrophies(ChallengePage.Challenge) + mApp.GetNumTrophies(ChallengePage.Puzzle);
 			int num2 = 37;
 			if (cachedTrophyStringCount != num)
 			{
@@ -382,16 +382,16 @@ namespace Lawn
 		public void RaiseSign()
 		{
 			Reanimation reanimation = mApp.ReanimationGet(mWoodSignReanimID);
-			reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_lift, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 10f);
-			mSignState = SelectorSignState.SIGN_MOVING_UP;
+			reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_lift, ReanimLoopType.PlayOnceAndHold, 0, 10f);
+			mSignState = SelectorSignState.MovingUp;
 			mNeedToPlayRollIn = false;
 		}
 
 		public void LowerSign()
 		{
 			Reanimation reanimation = mApp.ReanimationGet(mWoodSignReanimID);
-			reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_drop, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 10f);
-			mSignState = SelectorSignState.SIGN_MOVING_DOWN;
+			reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_drop, ReanimLoopType.PlayOnceAndHold, 0, 10f);
+			mSignState = SelectorSignState.MovingDown;
 			mNeedToPlayRollIn = true;
 			woodSignY = -30f;
 		}
@@ -438,18 +438,18 @@ namespace Lawn
 			MarkDirty();
 			if (mSlideCounter > 0)
 			{
-				int theNewX = TodCommon.TodAnimateCurve(75, 0, mSlideCounter, mStartX, mDestX, TodCurves.CURVE_EASE_IN_OUT);
-				int theNewY = TodCommon.TodAnimateCurve(75, 0, mSlideCounter, mStartY, mDestY, TodCurves.CURVE_EASE_IN_OUT);
+				int theNewX = TodCommon.TodAnimateCurve(75, 0, mSlideCounter, mStartX, mDestX, TodCurves.EaseInOut);
+				int theNewY = TodCommon.TodAnimateCurve(75, 0, mSlideCounter, mStartY, mDestY, TodCurves.EaseInOut);
 				Move(theNewX, theNewY);
 				mSlideCounter -= 3;
 				if (mSlideCounter >= 0 && mSlideCounter < 3)
 				{
-					if (mX == -Constants.MAIN_MENU_ORIGIN_X && mY == 0 && mSignState == SelectorSignState.SIGN_UP)
+					if (mX == -Constants.MAIN_MENU_ORIGIN_X && mY == 0 && mSignState == SelectorSignState.Up)
 					{
 						LowerSign();
 					}
 				}
-				else if (mSignState == SelectorSignState.SIGN_DOWN && mStartX == -Constants.MAIN_MENU_ORIGIN_X && mDestX == 0)
+				else if (mSignState == SelectorSignState.Down && mStartX == -Constants.MAIN_MENU_ORIGIN_X && mDestX == 0)
 				{
 					RaiseSign();
 				}
@@ -460,11 +460,11 @@ namespace Lawn
 				int theNewY2;
 				if (mRetractingQuickplay)
 				{
-					theNewY2 = TodCommon.TodAnimateCurve(30, 0, mQuickplaySlideCounter, 10, -mMiniGamesScrollWidget.mHeight - num, TodCurves.CURVE_EASE_IN_OUT);
+					theNewY2 = TodCommon.TodAnimateCurve(30, 0, mQuickplaySlideCounter, 10, -mMiniGamesScrollWidget.mHeight - num, TodCurves.EaseInOut);
 				}
 				else
 				{
-					theNewY2 = TodCommon.TodAnimateCurve(30, 0, mQuickplaySlideCounter, -mMiniGamesScrollWidget.mHeight - num, 10, TodCurves.CURVE_EASE_IN_OUT);
+					theNewY2 = TodCommon.TodAnimateCurve(30, 0, mQuickplaySlideCounter, -mMiniGamesScrollWidget.mHeight - num, 10, TodCurves.EaseInOut);
 				}
 				mQuickplayScrollWidget.Move(mQuickplayScrollWidget.mX, theNewY2);
 				mMiniGamesScrollWidget.Move(mMiniGamesScrollWidget.mX, theNewY2);
@@ -485,7 +485,7 @@ namespace Lawn
 				todParticleSystem.Update();
 			}
 			Reanimation reanimation = mApp.ReanimationGet(mWoodSignReanimID);
-			if (mSignState == SelectorSignState.SIGN_DOWN)
+			if (mSignState == SelectorSignState.Down)
 			{
 				if (reanimation.mLoopCount > 0)
 				{
@@ -507,16 +507,16 @@ namespace Lawn
 					}
 				}
 			}
-			else if (mSignState == SelectorSignState.SIGN_MOVING_UP)
+			else if (mSignState == SelectorSignState.MovingUp)
 			{
 				if (reanimation.mLoopCount > 0)
 				{
-					mSignState = SelectorSignState.SIGN_UP;
+					mSignState = SelectorSignState.Up;
 				}
 			}
-			else if (mSignState == SelectorSignState.SIGN_MOVING_DOWN && reanimation.mLoopCount > 0)
+			else if (mSignState == SelectorSignState.MovingDown && reanimation.mLoopCount > 0)
 			{
-				mSignState = SelectorSignState.SIGN_DOWN;
+				mSignState = SelectorSignState.Down;
 			}
 			if (mInUserDialog && mApp.GetDialog(30) == null)
 			{
@@ -550,7 +550,7 @@ namespace Lawn
 			{
 				return;
 			}
-			mApp.PlayFoley(FoleyType.FOLEY_BLEEP);
+			mApp.PlayFoley(FoleyType.Bleep);
 		}
 
 		public virtual void ButtonPress(int theId, int theClickCount)
@@ -621,7 +621,7 @@ namespace Lawn
 				return;
 			case 110:
 				mApp.KillGameSelector();
-				mApp.ShowAwardScreen(AwardType.AWARD_HELP_ZOMBIE_NOTE, false);
+				mApp.ShowAwardScreen(AwardType.HelpZombieNote, false);
 				return;
 			case 111:
 				mApp.ConfirmQuit();
@@ -635,7 +635,7 @@ namespace Lawn
 				mApp.DoUserDialog();
 				return;
 			case 114:
-				mApp.DoAlmanacDialog(SeedType.SEED_NONE, ZombieType.ZOMBIE_INVALID, this);
+				mApp.DoAlmanacDialog(SeedType.None, ZombieType.Invalid, this);
 				return;
 			case 115:
 				mMoreGamesButton.mVisible = false;
@@ -696,7 +696,7 @@ namespace Lawn
 				break;
 			case 124:
 				mApp.KillGameSelector();
-				mApp.PreNewGame(GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN, false);
+				mApp.PreNewGame(GameMode.ChallengeZenGarden, false);
 				return;
 			default:
 				return;
@@ -707,18 +707,18 @@ namespace Lawn
 		{
 			if (mApp.mKonamiCheck.Check(theKey))
 			{
-				mApp.PlayFoley(FoleyType.FOLEY_DROP);
+				mApp.PlayFoley(FoleyType.Drop);
 				return;
 			}
 			if (mApp.mMustacheCheck.Check(theKey) || mApp.mMoustacheCheck.Check(theKey))
 			{
-				mApp.PlayFoley(FoleyType.FOLEY_POLEVAULT);
+				mApp.PlayFoley(FoleyType.Polevault);
 				mApp.mMustacheMode = !mApp.mMustacheMode;
 				return;
 			}
 			if (mApp.mSuperMowerCheck.Check(theKey) || mApp.mSuperMowerCheck2.Check(theKey))
 			{
-				mApp.PlayFoley(FoleyType.FOLEY_ZAMBONI);
+				mApp.PlayFoley(FoleyType.Zamboni);
 				mApp.mSuperMowerMode = !mApp.mSuperMowerMode;
 				return;
 			}
@@ -732,7 +732,7 @@ namespace Lawn
 			{
 				if (mApp.CanDoPinataMode())
 				{
-					mApp.PlayFoley(FoleyType.FOLEY_JUICY);
+					mApp.PlayFoley(FoleyType.Juicy);
 					mApp.mPinataMode = !mApp.mPinataMode;
 					return;
 				}
@@ -757,7 +757,7 @@ namespace Lawn
 				}
 				if (mApp.CanDoDanceMode())
 				{
-					mApp.PlayFoley(FoleyType.FOLEY_DANCER);
+					mApp.PlayFoley(FoleyType.Dancer);
 					mApp.mDanceMode = !mApp.mDanceMode;
 					return;
 				}
@@ -778,8 +778,8 @@ namespace Lawn
 				mApp.mPlayerInfo.mHasUnlockedSurvivalMode = true;
 				for (int i = 0; i < 200; i++)
 				{
-					GameMode gameMode = i + GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_1;
-					if (gameMode != GameMode.GAMEMODE_SCARY_POTTER_ENDLESS && gameMode != GameMode.GAMEMODE_PUZZLE_I_ZOMBIE_ENDLESS && gameMode != GameMode.GAMEMODE_SURVIVAL_ENDLESS_STAGE_3)
+					GameMode gameMode = i + GameMode.SurvivalNormalStage1;
+					if (gameMode != GameMode.ScaryPotterEndless && gameMode != GameMode.PuzzleIZombieEndless && gameMode != GameMode.SurvivalEndlessStage3)
 					{
 						mApp.mPlayerInfo.mChallengeRecords[i] = 20;
 					}
@@ -790,7 +790,7 @@ namespace Lawn
 				}
 				mApp.mPlayerInfo.mPurchases[7] = 0;
 				SyncProfile(true);
-				string savedGameName = LawnCommon.GetSavedGameName(GameMode.GAMEMODE_ADVENTURE, (int)mApp.mPlayerInfo.mId);
+				string savedGameName = LawnCommon.GetSavedGameName(GameMode.Adventure, (int)mApp.mPlayerInfo.mId);
 				mApp.EraseFile(savedGameName);
 			}
 		}
@@ -853,12 +853,12 @@ namespace Lawn
 			mApp.KillGameSelector();
 			if (mApp.IsIceDemo())
 			{
-				mApp.PreNewGame(GameMode.GAMEMODE_CHALLENGE_ICE, false);
+				mApp.PreNewGame(GameMode.ChallengeIce, false);
 				return;
 			}
 			if (mApp.IsFirstTimeAdventureMode() && mLevel == 1 && !mApp.SaveFileExists())
 			{
-				mApp.PreNewGame(GameMode.GAMEMODE_INTRO, false);
+				mApp.PreNewGame(GameMode.Intro, false);
 				return;
 			}
 			if (mApp.mPlayerInfo.mNeedsMagicTacoReward && mLevel == 35)
@@ -870,11 +870,11 @@ namespace Lawn
 			}
 			if (ShouldDoZenTuturialBeforeAdventure())
 			{
-				mApp.PreNewGame(GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN, false);
+				mApp.PreNewGame(GameMode.ChallengeZenGarden, false);
 				mApp.mZenGarden.SetupForZenTutorial();
 				return;
 			}
-			mApp.PreNewGame(GameMode.GAMEMODE_ADVENTURE, true);
+			mApp.PreNewGame(GameMode.Adventure, true);
 		}
 
 		public bool ShouldDoZenTuturialBeforeAdventure()
@@ -888,31 +888,31 @@ namespace Lawn
 			mApp.KillDialog(4);
 			if (mDoNewGameAfterStore)
 			{
-				mApp.PreNewGame(GameMode.GAMEMODE_ADVENTURE, false);
+				mApp.PreNewGame(GameMode.Adventure, false);
 				return;
 			}
-			mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_TITLE_CRAZY_DAVE_MAIN_THEME);
+			mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.TitleCrazyDaveMainTheme);
 		}
 
 		public void QuickPlayStageSelected(int theLevel)
 		{
 			mApp.PlaySample(Resources.SOUND_TAP);
 			mApp.KillGameSelector();
-			GameMode theGameMode = theLevel - 1 + GameMode.GAMEMODE_QUICKPLAY_1;
+			GameMode theGameMode = theLevel - 1 + GameMode.Quickplay1;
 			mApp.PreNewGame(theGameMode, true);
 		}
 
 		public void MiniGamesStageSelected(int theLevel)
 		{
 			mApp.PlaySample(Resources.SOUND_TAP);
-			GameMode theGameMode = theLevel + GameMode.GAMEMODE_SURVIVAL_NORMAL_STAGE_1;
+			GameMode theGameMode = theLevel + GameMode.SurvivalNormalStage1;
 			mApp.KillGameSelector();
 			mApp.PreNewGame(theGameMode, true);
 		}
 
 		public void BackFromAlmanac()
 		{
-			mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_TITLE_CRAZY_DAVE_MAIN_THEME);
+			mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.TitleCrazyDaveMainTheme);
 		}
 
 		public void LoadGames()
@@ -968,17 +968,17 @@ namespace Lawn
 
 		public void PopulateQuickPlayWidget()
 		{
-			MiniGameMode mode = MiniGameMode.MINI_GAME_MODE_GAMES;
+			MiniGameMode mode = MiniGameMode.Games;
 			switch (mSelectedQuickplayButtonId)
 			{
 			case 121:
-				mode = MiniGameMode.MINI_GAME_MODE_GAMES;
+				mode = MiniGameMode.Games;
 				break;
 			case 122:
-				mode = MiniGameMode.MINI_GAME_MODE_VASEBREAKER;
+				mode = MiniGameMode.Vasebreaker;
 				break;
 			case 123:
-				mode = MiniGameMode.MINI_GAME_MODE_I_ZOMBIE;
+				mode = MiniGameMode.IZombie;
 				break;
 			}
 			mMiniGamesWidget.SwitchMode(mode);

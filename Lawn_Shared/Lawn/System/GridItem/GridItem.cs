@@ -30,14 +30,14 @@ namespace Lawn
 
 		private void Reset()
 		{
-			mGridItemState = GridItemState.GRIDITEM_STATE_NORMAL;
+			mGridItemState = GridItemState.Normal;
 			for (int i = 0; i < mMotionTrailFrames.Length; i++)
 			{
 				mMotionTrailFrames[i] = new MotionTrailFrame();
 			}
 			mApp = (LawnApp)GlobalStaticVars.gSexyAppBase;
 			mBoard = mApp.mBoard;
-			mGridItemType = GridItemType.GRIDITEM_NONE;
+			mGridItemType = GridItemType.None;
 			mGridX = 0;
 			mGridY = 0;
 			mGridItemCounter = 0;
@@ -49,9 +49,9 @@ namespace Lawn
 			mGoalY = 0f;
 			mGridItemReanimID = null;
 			mGridItemParticleID = null;
-			mZombieType = ZombieType.ZOMBIE_INVALID;
-			mSeedType = SeedType.SEED_NONE;
-			mScaryPotType = ScaryPotType.SCARYPOT_NONE;
+			mZombieType = ZombieType.Invalid;
+			mSeedType = SeedType.None;
+			mScaryPotType = ScaryPotType.None;
 			mHighlighted = false;
 			mTransparentCounter = 0;
 			mSunCount = 0;
@@ -134,11 +134,11 @@ namespace Lawn
 		{
 			mApp = GlobalStaticVars.gLawnApp;
 			mBoard = mApp.mBoard;
-			if (mGridItemType == GridItemType.GRIDITEM_RAKE)
+			if (mGridItemType == GridItemType.Rake)
 			{
 				mGridItemReanimID = mBoard.CreateRakeReanim(mPosX, mPosY, mRenderOrder);
 			}
-			if (mGridItemType == GridItemType.GRIDITEM_PORTAL_CIRCLE || mGridItemType == GridItemType.GRIDITEM_PORTAL_SQUARE)
+			if (mGridItemType == GridItemType.PortalCircle || mGridItemType == GridItemType.PortalSquare)
 			{
 				OpenPortal();
 			}
@@ -157,7 +157,7 @@ namespace Lawn
 			float num2 = mBoard.GridToPixelY(mGridX, mGridY) + 40f;
 			if (mGridItemCounter < 25)
 			{
-				int theAlpha = TodCommon.TodAnimateCurve(25, 0, mGridItemCounter, 255, 0, TodCurves.CURVE_LINEAR);
+				int theAlpha = TodCommon.TodAnimateCurve(25, 0, mGridItemCounter, 255, 0, TodCurves.Linear);
 				g.SetColor(new SexyColor(255, 255, 255, theAlpha));
 				g.SetColorizeImages(true);
 			}
@@ -226,7 +226,7 @@ namespace Lawn
 			{
 				return;
 			}
-			int theTimeAge = TodCommon.TodAnimateCurve(0, 100, mGridItemCounter, 1000, 0, TodCurves.CURVE_EASE_IN_OUT);
+			int theTimeAge = TodCommon.TodAnimateCurve(0, 100, mGridItemCounter, 1000, 0, TodCurves.EaseInOut);
 			int num = mBoard.mGridCelLook[mGridX, mGridY];
 			int num2 = mBoard.mGridCelOffset[mGridX, mGridY, 0];
 			int num3 = mBoard.mGridCelOffset[mGridX, mGridY, 1];
@@ -238,7 +238,7 @@ namespace Lawn
 			{
 				num7 = 1;
 			}
-			else if (mGridItemState == GridItemState.GRIDITEM_STATE_GRAVESTONE_SPECIAL)
+			else if (mGridItemState == GridItemState.GravestoneSpecial)
 			{
 				num7 = 0;
 			}
@@ -246,14 +246,14 @@ namespace Lawn
 			{
 				num7 = 2 + num % 2;
 			}
-			int num8 = TodCommon.TodAnimateCurve(0, 1000, theTimeAge, num5, 0, TodCurves.CURVE_EASE_IN_OUT);
-			int num9 = TodCommon.TodAnimateCurve(0, 50, theTimeAge, 0, 14, TodCurves.CURVE_EASE_IN_OUT);
-			int num10 = TodCommon.TodAnimateCurve(500, 1000, theTimeAge, num5, 0, TodCurves.CURVE_EASE_IN_OUT);
+			int num8 = TodCommon.TodAnimateCurve(0, 1000, theTimeAge, num5, 0, TodCurves.EaseInOut);
+			int num9 = TodCommon.TodAnimateCurve(0, 50, theTimeAge, 0, 14, TodCurves.EaseInOut);
+			int num10 = TodCommon.TodAnimateCurve(500, 1000, theTimeAge, num5, 0, TodCurves.EaseInOut);
 			int num11 = 0;
-			Plant topPlantAt = mBoard.GetTopPlantAt(mGridX, mGridY, PlantPriority.TOPPLANT_ONLY_NORMAL_POSITION);
-			if (topPlantAt != null && topPlantAt.mState == PlantState.STATE_GRAVEBUSTER_EATING)
+			Plant topPlantAt = mBoard.GetTopPlantAt(mGridX, mGridY, TopPlant.OnlyNormalPosition);
+			if (topPlantAt != null && topPlantAt.mState == PlantState.GravebusterEating)
 			{
-				num11 = TodCommon.TodAnimateCurve(400, 0, topPlantAt.mStateCountdown, 10, 40, TodCurves.CURVE_LINEAR);
+				num11 = TodCommon.TodAnimateCurve(400, 0, topPlantAt.mStateCountdown, 10, 40, TodCurves.Linear);
 			}
 			TRect theSrcRect = new TRect((int)(num4 * num6 * Constants.S), (int)((num5 * num7 + num11) * Constants.S), (int)(num4 * Constants.S), (int)((num8 - num9 - num11) * Constants.S));
 			int num12 = mBoard.GridToPixelX(mGridX, mGridY) - 4 + num2;
@@ -290,8 +290,8 @@ namespace Lawn
 			int num2 = mBoard.mGridCelOffset[mGridX, mGridY, 1];
 			int num3 = mBoard.GridToPixelX(mGridX, mGridY) + 14 + num;
 			int num4 = mBoard.GridToPixelY(mGridX, mGridY) + 78 + num2;
-			mApp.AddTodParticle(num3, num4, mRenderOrder + 1, ParticleEffect.PARTICLE_GRAVE_STONE_RISE);
-			mApp.PlayFoley(FoleyType.FOLEY_DIRT_RISE);
+			mApp.AddTodParticle(num3, num4, mRenderOrder + 1, ParticleEffect.GraveStoneRise);
+			mApp.PlayFoley(FoleyType.DirtRise);
 		}
 
 		public void DrawGridItem(Graphics g)
@@ -299,33 +299,33 @@ namespace Lawn
 			g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
 			switch (mGridItemType)
 			{
-			case GridItemType.GRIDITEM_GRAVESTONE:
+			case GridItemType.Gravestone:
 				DrawGraveStone(g);
 				break;
-			case GridItemType.GRIDITEM_CRATER:
+			case GridItemType.Crater:
 				DrawCrater(g);
 				break;
-			case GridItemType.GRIDITEM_LADDER:
+			case GridItemType.Ladder:
 				DrawLadder(g);
 				break;
-			case GridItemType.GRIDITEM_PORTAL_CIRCLE:
-			case GridItemType.GRIDITEM_PORTAL_SQUARE:
-			case GridItemType.GRIDITEM_ZEN_TOOL:
-			case GridItemType.GRIDITEM_RAKE:
+			case GridItemType.PortalCircle:
+			case GridItemType.PortalSquare:
+			case GridItemType.ZenTool:
+			case GridItemType.Rake:
 				break;
-			case GridItemType.GRIDITEM_BRAIN:
+			case GridItemType.Brain:
 				g.DrawImageF(AtlasResources.IMAGE_BRAIN, mPosX * Constants.S, mPosY * Constants.S);
 				break;
-			case GridItemType.GRIDITEM_SCARY_POT:
+			case GridItemType.ScaryPot:
 				DrawScaryPot(g);
 				break;
-			case GridItemType.GRIDITEM_SQUIRREL:
+			case GridItemType.Squirrel:
 				DrawSquirrel(g);
 				break;
-			case GridItemType.GRIDITEM_STINKY:
+			case GridItemType.Stinky:
 				DrawStinky(g);
 				return;
-			case GridItemType.GRIDITEM_IZOMBIE_BRAIN:
+			case GridItemType.IzombieBrain:
 				DrawIZombieBrain(g);
 				break;
 			default:
@@ -347,11 +347,11 @@ namespace Lawn
 		public void DrawGridItemOverlay(Graphics g)
 		{
 			GridItemType gridItemType = mGridItemType;
-			if (gridItemType != GridItemType.GRIDITEM_STINKY)
+			if (gridItemType != GridItemType.Stinky)
 			{
 				return;
 			}
-			if (mBoard.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_CHOCOLATE && !mApp.mZenGarden.IsStinkyHighOnChocolate())
+			if (mBoard.mCursorObject.mCursorType == CursorType.Chocolate && !mApp.mZenGarden.IsStinkyHighOnChocolate())
 			{
 				g.DrawImage(AtlasResources.IMAGE_PLANTSPEECHBUBBLE, Constants.ZenGarden_StinkySpeechBubble_Pos.X + Constants.S * mPosX, Constants.ZenGarden_StinkySpeechBubble_Pos.Y + Constants.S * mPosY);
 				TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_CHOCOLATE, Constants.ZenGarden_Chocolate_Pos.X + mPosX * Constants.S, Constants.ZenGarden_Chocolate_Pos.Y + mPosY * Constants.S, 0.44f, 0.44f);
@@ -365,12 +365,12 @@ namespace Lawn
 			Reanimation reanimation = mApp.ReanimationTryToGet(mGridItemReanimID);
 			if (reanimation == null)
 			{
-				ReanimationType theReanimationType = ReanimationType.REANIM_PORTAL_CIRCLE;
-				if (mGridItemType == GridItemType.GRIDITEM_PORTAL_SQUARE)
+				ReanimationType theReanimationType = ReanimationType.PortalCircle;
+				if (mGridItemType == GridItemType.PortalSquare)
 				{
 					num2 += 25f;
 					num += -4f;
-					theReanimationType = ReanimationType.REANIM_PORTAL_SQUARE;
+					theReanimationType = ReanimationType.PortalSquare;
 				}
 				reanimation = mApp.AddReanimation(num, num2, 0, theReanimationType);
 				reanimation.mIsAttachment = true;
@@ -386,8 +386,8 @@ namespace Lawn
 				todParticleSystem.ParticleSystemDie();
 				mGridItemParticleID = null;
 			}
-			reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_appear, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 12f);
-			mApp.PlayFoley(FoleyType.FOLEY_PORTAL);
+			reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_appear, ReanimLoopType.PlayOnceAndHold, 0, 12f);
+			mApp.PlayFoley(FoleyType.Portal);
 		}
 
 		public void Update(int updateCount)
@@ -402,19 +402,19 @@ namespace Lawn
 			{
 				todParticleSystem.Update();
 			}
-			if (mGridItemType == GridItemType.GRIDITEM_PORTAL_CIRCLE || mGridItemType == GridItemType.GRIDITEM_PORTAL_SQUARE)
+			if (mGridItemType == GridItemType.PortalCircle || mGridItemType == GridItemType.PortalSquare)
 			{
 				UpdatePortal();
 			}
-			if (mGridItemType == GridItemType.GRIDITEM_SCARY_POT)
+			if (mGridItemType == GridItemType.ScaryPot)
 			{
 				UpdateScaryPot();
 			}
-			if (mGridItemType == GridItemType.GRIDITEM_RAKE)
+			if (mGridItemType == GridItemType.Rake)
 			{
 				UpdateRake();
 			}
-			if (mGridItemType == GridItemType.GRIDITEM_IZOMBIE_BRAIN)
+			if (mGridItemType == GridItemType.IzombieBrain)
 			{
 				UpdateBrain();
 			}
@@ -425,7 +425,7 @@ namespace Lawn
 			Reanimation reanimation = mApp.ReanimationTryToGet(mGridItemReanimID);
 			if (reanimation != null)
 			{
-				reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_dissapear, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 12f);
+				reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_dissapear, ReanimLoopType.PlayOnceAndHold, 0, 12f);
 			}
 			TodParticleSystem todParticleSystem = mApp.ParticleTryToGet(mGridItemParticleID);
 			if (todParticleSystem != null)
@@ -433,12 +433,12 @@ namespace Lawn
 				todParticleSystem.ParticleSystemDie();
 				mGridItemParticleID = null;
 			}
-			mGridItemState = GridItemState.GRIDITEM_STATE_PORTAL_CLOSED;
+			mGridItemState = GridItemState.PortalClosed;
 		}
 
 		public void DrawScaryPot(Graphics g)
 		{
-			int num = mGridItemState - GridItemState.GRIDITEM_STATE_SCARY_POT_QUESTION;
+			int num = mGridItemState - GridItemState.ScaryPotQuestion;
 			Debug.ASSERT(num >= 0 && num < 3);
 			int num2 = mBoard.GridToPixelX(mGridX, mGridY) - 5;
 			int num3 = mBoard.GridToPixelY(mGridX, mGridY) - 15;
@@ -446,26 +446,26 @@ namespace Lawn
 			{
 				g.DrawImageCel(Resources.IMAGE_SCARY_POT, (int)(num2 * Constants.S), (int)(num3 * Constants.S), num, 0);
 				Graphics @new = Graphics.GetNew(g);
-				if (mScaryPotType == ScaryPotType.SCARYPOT_SEED)
+				if (mScaryPotType == ScaryPotType.Seed)
 				{
 					@new.mScaleX = 0.7f;
 					@new.mScaleY = 0.7f;
-					SeedPacket.DrawSmallSeedPacket(@new, (num2 + Constants.GridItem_ScaryPot_SeedPacket_Offset.X) * Constants.S, (num3 + Constants.GridItem_ScaryPot_SeedPacket_Offset.Y) * Constants.S, mSeedType, SeedType.SEED_NONE, 0f, 255, false, false, true, false);
+					SeedPacket.DrawSmallSeedPacket(@new, (num2 + Constants.GridItem_ScaryPot_SeedPacket_Offset.X) * Constants.S, (num3 + Constants.GridItem_ScaryPot_SeedPacket_Offset.Y) * Constants.S, mSeedType, SeedType.None, 0f, 255, false, false, true, false);
 				}
-				else if (mScaryPotType == ScaryPotType.SCARYPOT_ZOMBIE)
+				else if (mScaryPotType == ScaryPotType.Zombie)
 				{
 					@new.mScaleX = 0.4f;
 					@new.mScaleY = 0.4f;
 					float num4 = Constants.GridItem_ScaryPot_Zombie_Offset.X;
 					float num5 = Constants.GridItem_ScaryPot_Zombie_Offset.Y;
-					if (mZombieType == ZombieType.ZOMBIE_FOOTBALL)
+					if (mZombieType == ZombieType.Football)
 					{
 						@new.mScaleX = 0.4f;
 						@new.mScaleY = 0.4f;
 						num4 = Constants.GridItem_ScaryPot_ZombieFootball_Offset.X;
 						num5 = Constants.GridItem_ScaryPot_ZombieFootball_Offset.Y;
 					}
-					if (mZombieType == ZombieType.ZOMBIE_GARGANTUAR)
+					if (mZombieType == ZombieType.Gargantuar)
 					{
 						@new.mScaleX = 0.3f;
 						@new.mScaleY = 0.3f;
@@ -474,11 +474,11 @@ namespace Lawn
 					}
 					mApp.mReanimatorCache.DrawCachedZombie(@new, (num2 + num4) * Constants.S, (num3 + num5) * Constants.S, mZombieType);
 				}
-				else if (mScaryPotType == ScaryPotType.SCARYPOT_SUN)
+				else if (mScaryPotType == ScaryPotType.Sun)
 				{
 					int num6 = mBoard.mChallenge.ScaryPotterCountSunInPot(this);
 					Reanimation newReanimation = Reanimation.GetNewReanimation();
-					newReanimation.ReanimationInitializeType(0f, 0f, ReanimationType.REANIM_SUN);
+					newReanimation.ReanimationInitializeType(0f, 0f, ReanimationType.Sun);
 					newReanimation.OverrideScale(0.5f, 0.5f);
 					for (int i = 0; i < num6; i++)
 					{
@@ -509,7 +509,7 @@ namespace Lawn
 					newReanimation.PrepareForReuse();
 				}
 				@new.PrepareForReuse();
-				int theAlpha = TodCommon.TodAnimateCurve(0, 50, mTransparentCounter, 255, 58, TodCurves.CURVE_LINEAR);
+				int theAlpha = TodCommon.TodAnimateCurve(0, 50, mTransparentCounter, 255, 58, TodCurves.Linear);
 				g.SetColorizeImages(true);
 				g.SetColor(new SexyColor(255, 255, 255, theAlpha));
 			}
@@ -542,7 +542,7 @@ namespace Lawn
 			for (int i = 0; i < count; i++)
 			{
 				Plant plant = mBoard.mPlants[i];
-				if (!plant.mDead && plant.mSeedType == SeedType.SEED_PLANTERN && !plant.NotOnGround())
+				if (!plant.mDead && plant.mSeedType == SeedType.Plantern && !plant.NotOnGround())
 				{
 					int num = Math.Max(Math.Abs(plant.mPlantCol - mGridX), Math.Abs(plant.mRow - mGridY));
 					if (num <= 1)
@@ -568,7 +568,7 @@ namespace Lawn
 			{
 				return;
 			}
-			if (mGridItemState == GridItemState.GRIDITEM_STATE_PORTAL_CLOSED)
+			if (mGridItemState == GridItemState.PortalClosed)
 			{
 				if (reanimation.mLoopCount > 0)
 				{
@@ -576,15 +576,15 @@ namespace Lawn
 					return;
 				}
 			}
-			else if (reanimation.mLoopType == ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD && reanimation.mLoopCount > 0)
+			else if (reanimation.mLoopType == ReanimLoopType.PlayOnceAndHold && reanimation.mLoopCount > 0)
 			{
-				reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_pulse, ReanimLoopType.REANIM_LOOP, 0, 12f);
-				ParticleEffect theEffect = ParticleEffect.PARTICLE_PORTAL_CIRCLE;
+				reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_pulse, ReanimLoopType.Loop, 0, 12f);
+				ParticleEffect theEffect = ParticleEffect.PortalCircle;
 				float num = mGridX * 80f + 13f;
 				float num2 = mBoard.GridToPixelY(0, mGridY) - 39f;
-				if (mGridItemType == GridItemType.GRIDITEM_PORTAL_SQUARE)
+				if (mGridItemType == GridItemType.PortalSquare)
 				{
-					theEffect = ParticleEffect.PARTICLE_PORTAL_SQUARE;
+					theEffect = ParticleEffect.PortalSquare;
 					num += -8f;
 					num2 += 15f;
 				}
@@ -597,35 +597,35 @@ namespace Lawn
 		{
 			int num = mBoard.GridToPixelX(mGridX, mGridY);
 			int num2 = mBoard.GridToPixelY(mGridX, mGridY);
-			if (mGridItemState == GridItemState.GRIDITEM_STATE_SQUIRREL_PEEKING)
+			if (mGridItemState == GridItemState.SquirrelPeeking)
 			{
-				num2 += TodCommon.TodAnimateCurve(50, 0, mGridItemCounter, 0, -40, TodCurves.CURVE_BOUNCE_SLOW_MIDDLE);
+				num2 += TodCommon.TodAnimateCurve(50, 0, mGridItemCounter, 0, -40, TodCurves.BounceSlowMiddle);
 				return;
 			}
-			if (mGridItemState == GridItemState.GRIDITEM_STATE_SQUIRREL_RUNNING_UP)
+			if (mGridItemState == GridItemState.SquirrelRunningUp)
 			{
-				num2 += TodCommon.TodAnimateCurve(50, 0, mGridItemCounter, 100, 0, TodCurves.CURVE_EASE_IN);
+				num2 += TodCommon.TodAnimateCurve(50, 0, mGridItemCounter, 100, 0, TodCurves.EaseIn);
 				return;
 			}
-			if (mGridItemState == GridItemState.GRIDITEM_STATE_SQUIRREL_RUNNING_DOWN)
+			if (mGridItemState == GridItemState.SquirrelRunningDown)
 			{
-				num2 += TodCommon.TodAnimateCurve(50, 0, mGridItemCounter, -100, 0, TodCurves.CURVE_EASE_IN);
+				num2 += TodCommon.TodAnimateCurve(50, 0, mGridItemCounter, -100, 0, TodCurves.EaseIn);
 				return;
 			}
-			if (mGridItemState == GridItemState.GRIDITEM_STATE_SQUIRREL_RUNNING_LEFT)
+			if (mGridItemState == GridItemState.SquirrelRunningLeft)
 			{
-				num += TodCommon.TodAnimateCurve(50, 0, mGridItemCounter, 80, 0, TodCurves.CURVE_EASE_IN);
+				num += TodCommon.TodAnimateCurve(50, 0, mGridItemCounter, 80, 0, TodCurves.EaseIn);
 				return;
 			}
-			if (mGridItemState == GridItemState.GRIDITEM_STATE_SQUIRREL_RUNNING_RIGHT)
+			if (mGridItemState == GridItemState.SquirrelRunningRight)
 			{
-				num += TodCommon.TodAnimateCurve(50, 0, mGridItemCounter, -80, 0, TodCurves.CURVE_EASE_IN);
+				num += TodCommon.TodAnimateCurve(50, 0, mGridItemCounter, -80, 0, TodCurves.EaseIn);
 			}
 		}
 
 		public void UpdateRake()
 		{
-			if (mGridItemState == GridItemState.GRIDITEM_STATE_RAKE_ATTRACTING || mGridItemState == GridItemState.GRIDITEM_STATE_RAKE_WAITING)
+			if (mGridItemState == GridItemState.RakeAttracting || mGridItemState == GridItemState.RakeWaiting)
 			{
 				Zombie zombie = RakeFindZombie();
 				if (zombie != null)
@@ -633,12 +633,12 @@ namespace Lawn
 					Reanimation reanimation = mApp.ReanimationGet(mGridItemReanimID);
 					reanimation.mAnimRate = 20f;
 					mGridItemCounter = 200;
-					mGridItemState = GridItemState.GRIDITEM_STATE_RAKE_TRIGGERED;
-					mApp.PlayFoley(FoleyType.FOLEY_SWING);
+					mGridItemState = GridItemState.RakeTriggered;
+					mApp.PlayFoley(FoleyType.Swing);
 					return;
 				}
 			}
-			else if (mGridItemState == GridItemState.GRIDITEM_STATE_RAKE_TRIGGERED)
+			else if (mGridItemState == GridItemState.RakeTriggered)
 			{
 				Reanimation reanimation2 = mApp.ReanimationGet(mGridItemReanimID);
 				if (reanimation2 != null && reanimation2.ShouldTriggerTimedEvent(0.8f))
@@ -647,7 +647,7 @@ namespace Lawn
 					if (zombie2 != null)
 					{
 						zombie2.TakeDamage(1800, 0U);
-						mApp.PlayFoley(FoleyType.FOLEY_BONK);
+						mApp.PlayFoley(FoleyType.Bonk);
 					}
 				}
 				mGridItemCounter -= 3;
@@ -680,12 +680,12 @@ namespace Lawn
 
 		public void DrawIZombieBrain(Graphics g)
 		{
-			if (mGridItemState == GridItemState.GRIDITEM_STATE_BRAIN_SQUISHED)
+			if (mGridItemState == GridItemState.BrainSquished)
 			{
 				TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_BRAIN, mPosX * Constants.S, (mPosY + 20f) * Constants.S, 1f, 0.25f);
 				return;
 			}
-			if (mBoard.mAdvice.mDuration > 0 && mBoard.mHelpIndex == AdviceType.ADVICE_I_ZOMBIE_EAT_ALL_BRAINS)
+			if (mBoard.mAdvice.mDuration > 0 && mBoard.mHelpIndex == AdviceType.IZombieEatAllBrains)
 			{
 				SexyColor flashingColor = TodCommon.GetFlashingColor(mBoard.mMainCounter, 75);
 				g.SetColorizeImages(true);
@@ -707,7 +707,7 @@ namespace Lawn
 
 		public void UpdateBrain()
 		{
-			if (mGridItemState == GridItemState.GRIDITEM_STATE_BRAIN_SQUISHED)
+			if (mGridItemState == GridItemState.BrainSquished)
 			{
 				mGridItemCounter -= 3;
 				if (mGridItemCounter <= 0)
@@ -733,7 +733,7 @@ namespace Lawn
 					MotionTrailFrame motionTrailFrame = mMotionTrailFrames[i];
 					float num = motionTrailFrame.mPosX - mPosX;
 					float num2 = motionTrailFrame.mPosY - mPosY;
-					int theAlpha = TodCommon.TodAnimateCurve(0, 11, i, 64, 16, TodCurves.CURVE_LINEAR);
+					int theAlpha = TodCommon.TodAnimateCurve(0, 11, i, 64, 16, TodCurves.Linear);
 					g.SetColor(new SexyColor(255, 255, 255, theAlpha));
 					g.SetColorizeImages(true);
 					reanimation.mAnimTime = motionTrailFrame.mAnimTime;
@@ -748,7 +748,7 @@ namespace Lawn
 				}
 			}
 			reanimation.mAnimTime = animTime;
-			if (mGridItemType == GridItemType.GRIDITEM_STINKY && mHighlighted)
+			if (mGridItemType == GridItemType.Stinky && mHighlighted)
 			{
 				reanimation.mEnableExtraAdditiveDraw = true;
 				reanimation.mExtraAdditiveColor = new SexyColor(255, 255, 255, 196);

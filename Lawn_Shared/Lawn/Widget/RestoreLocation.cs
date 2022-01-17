@@ -2,10 +2,10 @@
 
 namespace Lawn
 {
-	public enum RestoreLocation
+	public enum RestoreLocation //Prefix: RESTORE
 	{
-		RESTORE_MAINMENU,
-		RESTORE_BOARD,
-		RESTORE_TITLESCREEN
+		Mainmenu,
+		Board,
+		Titlescreen
 	}
 }

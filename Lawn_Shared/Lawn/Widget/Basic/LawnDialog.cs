@@ -159,12 +159,12 @@ namespace Lawn
 			{
 				return;
 			}
-			if (theKey == KeyCode.KEYCODE_SPACE || theKey == KeyCode.KEYCODE_RETURN || (ushort)theKey == 121 || (ushort)theKey == 89)
+			if (theKey == KeyCode.Space || theKey == KeyCode.Return || (ushort)theKey == 121 || (ushort)theKey == 89)
 			{
 				base.ButtonDepress(1000);
 				return;
 			}
-			if ((theKey == KeyCode.KEYCODE_ESCAPE || (ushort)theKey == 110 || (ushort)theKey == 78) && mLawnNoButton != null)
+			if ((theKey == KeyCode.Escape || (ushort)theKey == 110 || (ushort)theKey == 78) && mLawnNoButton != null)
 			{
 				base.ButtonDepress(1001);
 			}
@@ -387,7 +387,7 @@ namespace Lawn
 
 		public override int GetWordWrappedHeight(Graphics g, int theWidth, string theLine, int aLineSpacing)
 		{
-			return TodStringFile.TodDrawStringWrappedHeight(g, theLine, new TRect(0, 0, theWidth, 0), g.GetFont(), g.mColor, DrawStringJustification.DS_ALIGN_LEFT);
+			return TodStringFile.TodDrawStringWrappedHeight(g, theLine, new TRect(0, 0, theWidth, 0), g.GetFont(), g.mColor, DrawStringJustification.Left);
 		}
 
 		public LawnApp mApp;

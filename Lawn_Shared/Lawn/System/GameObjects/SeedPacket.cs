@@ -8,8 +8,8 @@ namespace Lawn
 	{
 		public SeedPacket()
 		{
-			mPacketType = SeedType.SEED_NONE;
-			mImitaterType = SeedType.SEED_NONE;
+			mPacketType = SeedType.None;
+			mImitaterType = SeedType.None;
 			mIndex = -1;
 			mWidth = Constants.SMALL_SEEDPACKET_WIDTH;
 			mHeight = Constants.SMALL_SEEDPACKET_HEIGHT;
@@ -19,7 +19,7 @@ namespace Lawn
 			mActive = true;
 			mOffsetY = 0;
 			mSlotMachineCountDown = 0;
-			mSlotMachiningNextSeed = SeedType.SEED_NONE;
+			mSlotMachiningNextSeed = SeedType.None;
 			mSlotMachiningPosition = 0f;
 			mTimesUsed = 0;
 			mPosScaled = false;
@@ -79,11 +79,11 @@ namespace Lawn
 
 		public void Update()
 		{
-			if (mApp.mGameScene != GameScenes.SCENE_PLAYING)
+			if (mApp.mGameScene != GameScenes.Playing)
 			{
 				return;
 			}
-			if (mPacketType == SeedType.SEED_NONE)
+			if (mPacketType == SeedType.None)
 			{
 				return;
 			}
@@ -105,7 +105,7 @@ namespace Lawn
 			if (mSlotMachineCountDown > 0)
 			{
 				mSlotMachineCountDown--;
-				float num = TodCommon.TodAnimateCurveFloat(400, 0, mSlotMachineCountDown, 6f, 2f, TodCurves.CURVE_LINEAR);
+				float num = TodCommon.TodAnimateCurveFloat(400, 0, mSlotMachineCountDown, 6f, 2f, TodCurves.Linear);
 				mSlotMachiningPosition += num * 0.01f;
 				if (mSlotMachiningPosition >= 1f)
 				{
@@ -131,7 +131,7 @@ namespace Lawn
 		{
 			float num = 0f;
 			int theGrayness = 255;
-			if (mBoard.mCursorObject.mCursorType != CursorType.CURSOR_TYPE_PLANT_FROM_BANK || mBoard.mCursorObject.mSeedBankIndex != mIndex)
+			if (mBoard.mCursorObject.mCursorType != CursorType.PlantFromBank || mBoard.mCursorObject.mSeedBankIndex != mIndex)
 			{
 				GetGraynessAndDarkness(ref theGrayness, ref num);
 			}
@@ -153,12 +153,12 @@ namespace Lawn
 				@new.HardwareClip();
 				if (mSlotMachineCountDown > 0)
 				{
-					DrawSeedPacketSlotMachine(@new, num6, num5, mPacketType, SeedType.SEED_NONE, theGrayness, num3);
-					DrawSeedPacketSlotMachine(@new, num6, num5 + AtlasResources.IMAGE_SEEDPACKETS.GetCelHeight() * num3 - challenge_SlotMachine_Shadow_Offset, mSlotMachiningNextSeed, SeedType.SEED_NONE, theGrayness, num3);
+					DrawSeedPacketSlotMachine(@new, num6, num5, mPacketType, SeedType.None, theGrayness, num3);
+					DrawSeedPacketSlotMachine(@new, num6, num5 + AtlasResources.IMAGE_SEEDPACKETS.GetCelHeight() * num3 - challenge_SlotMachine_Shadow_Offset, mSlotMachiningNextSeed, SeedType.None, theGrayness, num3);
 				}
 				else
 				{
-					DrawSeedPacketSlotMachine(@new, num6, num5, mPacketType, SeedType.SEED_NONE, theGrayness, num3);
+					DrawSeedPacketSlotMachine(@new, num6, num5, mPacketType, SeedType.None, theGrayness, num3);
 				}
 				@new.EndHardwareClip();
 				@new.PrepareForReuse();
@@ -181,7 +181,7 @@ namespace Lawn
 		{
 			float thePercentDark = 0f;
 			int theGrayness = 255;
-			bool flag = mBoard.mCursorObject.mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_BANK && mBoard.mCursorObject.mSeedBankIndex == mIndex;
+			bool flag = mBoard.mCursorObject.mCursorType == CursorType.PlantFromBank && mBoard.mCursorObject.mSeedBankIndex == mIndex;
 			if (!flag)
 			{
 				GetGraynessAndDarkness(ref theGrayness, ref thePercentDark);
@@ -191,8 +191,8 @@ namespace Lawn
 				int num = TodCommon.FloatRoundToInt(mSlotMachiningPosition * (float)(-mHeight));
 				Graphics @new = Graphics.GetNew(g);
 				@new.ClipRect(0, 0, mWidth, mHeight);
-				SeedPacket.DrawSmallSeedPacket(@new, 0f, num, mPacketType, SeedType.SEED_NONE, 0f, 128, false, false, false, false);
-				SeedPacket.DrawSmallSeedPacket(@new, 0f, num + mHeight, mSlotMachiningNextSeed, SeedType.SEED_NONE, 0f, 128, false, false, false, false);
+				SeedPacket.DrawSmallSeedPacket(@new, 0f, num, mPacketType, SeedType.None, 0f, 128, false, false, false, false);
+				SeedPacket.DrawSmallSeedPacket(@new, 0f, num + mHeight, mSlotMachiningNextSeed, SeedType.None, 0f, 128, false, false, false, false);
 				@new.PrepareForReuse();
 				return;
 			}
@@ -205,19 +205,19 @@ namespace Lawn
 
 		internal static void DrawSeedType(Graphics g, float x, float y, SeedType theSeedType, SeedType theImitaterType)
 		{
-			Plant.DrawSeedType(g, theSeedType, theImitaterType, DrawVariation.VARIATION_NORMAL, x, y);
+			Plant.DrawSeedType(g, theSeedType, theImitaterType, DrawVariation.Normal, x, y);
 		}
 
 		public static void DrawSmallSeedPacket(Graphics g, float x, float y, SeedType theSeedType, SeedType theImitaterType, float thePercentDark, int theGrayness, bool theDrawCost, bool theUseCurrentCost, bool theDrawBackground, bool theDrawCostBackground)
 		{
 			SeedType seedType = theSeedType;
-			if (theSeedType == SeedType.SEED_IMITATER && theImitaterType != SeedType.SEED_NONE)
+			if (theSeedType == SeedType.Imitater && theImitaterType != SeedType.None)
 			{
 				seedType = theImitaterType;
 			}
-			if (seedType == SeedType.SEED_LEFTPEATER)
+			if (seedType == SeedType.Leftpeater)
 			{
-				seedType = SeedType.SEED_SPROUT;
+				seedType = SeedType.Sprout;
 			}
 			g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
 			g.SetColor(new SexyColor(255, 255, 255, 255));
@@ -233,27 +233,27 @@ namespace Lawn
 			}
 			if (theDrawBackground)
 			{
-				if (theSeedType == SeedType.SEED_SLOT_MACHINE_SUN)
+				if (theSeedType == SeedType.SlotMachineSun)
 				{
 					g.DrawImage(AtlasResources.IMAGE_SEEDPACKET_SUN, x, y);
 				}
-				else if (theSeedType == SeedType.SEED_SLOT_MACHINE_DIAMOND)
+				else if (theSeedType == SeedType.SlotMachineDiamond)
 				{
 					g.DrawImage(AtlasResources.IMAGE_SEEDPACKET_DIAMOND, x, y);
 				}
-				else if (theSeedType == SeedType.SEED_ZOMBIQUARIUM_SNORKEL)
+				else if (theSeedType == SeedType.ZombiquariumSnorkel)
 				{
 					g.DrawImage(AtlasResources.IMAGE_SEEDPACKET_ZOMBIEQUARIUM, x, y);
 				}
-				else if (theSeedType == SeedType.SEED_ZOMBIQUARIUM_TROPHY)
+				else if (theSeedType == SeedType.ZombiquariumTrophy)
 				{
 					g.DrawImage(AtlasResources.IMAGE_SEEDPACKET_TROPHY, x, y);
 				}
-				else if (theSeedType == SeedType.SEED_BEGHOULED_BUTTON_SHUFFLE)
+				else if (theSeedType == SeedType.BeghouledButtonShuffle)
 				{
 					g.DrawImage(AtlasResources.IMAGE_SEEDPACKET_SHUFFLE, x, y);
 				}
-				else if (theSeedType == SeedType.SEED_BEGHOULED_BUTTON_CRATER)
+				else if (theSeedType == SeedType.BeghouledButtonCrater)
 				{
 					g.DrawImage(AtlasResources.IMAGE_SEEDPACKET_CRATER, x, y);
 				}
@@ -264,7 +264,7 @@ namespace Lawn
 				else
 				{
 					g.DrawImageCel(AtlasResources.IMAGE_SEEDPACKETS, (int)x, (int)y, (int)seedType);
-					if (theSeedType == SeedType.SEED_IMITATER)
+					if (theSeedType == SeedType.Imitater)
 					{
 						g.SetColor(new SexyColor(0, 255, 0, 128));
 						g.FillRect((int)x, (int)y, Constants.SMALL_SEEDPACKET_WIDTH, Constants.SMALL_SEEDPACKET_HEIGHT);
@@ -274,11 +274,11 @@ namespace Lawn
 			if (theDrawCostBackground)
 			{
 				Image theImage;
-				if (theSeedType == SeedType.SEED_IMITATER)
+				if (theSeedType == SeedType.Imitater)
 				{
 					theImage = AtlasResources.IMAGE_SEEDPACKETS_GRAY_TAB;
 				}
-				else if (theSeedType < SeedType.SEED_GATLINGPEA)
+				else if (theSeedType < SeedType.Gatlingpea)
 				{
 					theImage = AtlasResources.IMAGE_SEEDPACKETS_GREEN_TAB;
 				}
@@ -338,7 +338,7 @@ namespace Lawn
 					x3 = Constants.SeedPacket_CostText_Pos.X;
 					y3 = Constants.SeedPacket_CostText_Pos.Y;
 				}
-				TodCommon.TodDrawString(g, theText, (int)x + x3, (int)y + y3, Resources.FONT_PICO129, SexyColor.Black, DrawStringJustification.DS_ALIGN_RIGHT);
+				TodCommon.TodDrawString(g, theText, (int)x + x3, (int)y + y3, Resources.FONT_PICO129, SexyColor.Black, DrawStringJustification.Right);
 			}
 			g.SetColorizeImages(false);
 		}
@@ -346,7 +346,7 @@ namespace Lawn
 		private static void DrawIZombieSeedPacket(LawnApp theApp, Graphics g, float x, float y, SeedType aSeedType, float thePercentDark, int theGrayness, bool theDrawCost, bool theUseCurrentCost, bool theDrawBackground, bool theDrawCostBackground)
 		{
 			ZombieType izombieTypeFromSeed = SeedPacket.GetIZombieTypeFromSeed(aSeedType);
-			if (izombieTypeFromSeed == ZombieType.ZOMBIE_INVALID)
+			if (izombieTypeFromSeed == ZombieType.Invalid)
 			{
 				return;
 			}
@@ -368,62 +368,62 @@ namespace Lawn
 		{
 			switch (theSeedType)
 			{
-			case SeedType.SEED_ZOMBIE_NORMAL:
-				return ZombieType.ZOMBIE_NORMAL;
-			case SeedType.SEED_ZOMBIE_TRAFFIC_CONE:
-				return ZombieType.ZOMBIE_TRAFFIC_CONE;
-			case SeedType.SEED_ZOMBIE_POLEVAULTER:
-				return ZombieType.ZOMBIE_POLEVAULTER;
-			case SeedType.SEED_ZOMBIE_PAIL:
-				return ZombieType.ZOMBIE_PAIL;
-			case SeedType.SEED_ZOMBIE_LADDER:
-				return ZombieType.ZOMBIE_LADDER;
-			case SeedType.SEED_ZOMBIE_DIGGER:
-				return ZombieType.ZOMBIE_DIGGER;
-			case SeedType.SEED_ZOMBIE_BUNGEE:
-				return ZombieType.ZOMBIE_BUNGEE;
-			case SeedType.SEED_ZOMBIE_FOOTBALL:
-				return ZombieType.ZOMBIE_FOOTBALL;
-			case SeedType.SEED_ZOMBIE_BALLOON:
-				return ZombieType.ZOMBIE_BALLOON;
-			case SeedType.SEED_ZOMBIE_SCREEN_DOOR:
-				return ZombieType.ZOMBIE_DOOR;
-			case SeedType.SEED_ZOMBONI:
-				return ZombieType.ZOMBIE_ZAMBONI;
-			case SeedType.SEED_ZOMBIE_POGO:
-				return ZombieType.ZOMBIE_POGO;
-			case SeedType.SEED_ZOMBIE_DANCER:
-				return ZombieType.ZOMBIE_DANCER;
-			case SeedType.SEED_ZOMBIE_GARGANTUAR:
-				return ZombieType.ZOMBIE_GARGANTUAR;
-			case SeedType.SEED_ZOMBIE_IMP:
-				return ZombieType.ZOMBIE_IMP;
+			case SeedType.ZombieNormal:
+				return ZombieType.Normal;
+			case SeedType.ZombieTrafficCone:
+				return ZombieType.TrafficCone;
+			case SeedType.ZombiePolevaulter:
+				return ZombieType.Polevaulter;
+			case SeedType.ZombiePail:
+				return ZombieType.Pail;
+			case SeedType.ZombieLadder:
+				return ZombieType.Ladder;
+			case SeedType.ZombieDigger:
+				return ZombieType.Digger;
+			case SeedType.ZombieBungee:
+				return ZombieType.Bungee;
+			case SeedType.ZombieFootball:
+				return ZombieType.Football;
+			case SeedType.ZombieBalloon:
+				return ZombieType.Balloon;
+			case SeedType.ZombieScreenDoor:
+				return ZombieType.Door;
+			case SeedType.Zomboni:
+				return ZombieType.Zamboni;
+			case SeedType.ZombiePogo:
+				return ZombieType.Pogo;
+			case SeedType.ZombieDancer:
+				return ZombieType.Dancer;
+			case SeedType.ZombieGargantuar:
+				return ZombieType.Gargantuar;
+			case SeedType.ZombieImp:
+				return ZombieType.Imp;
 			default:
-				return ZombieType.ZOMBIE_INVALID;
+				return ZombieType.Invalid;
 			}
 		}
 
 		private void DrawSeedPacketSlotMachine(Graphics g, float x, float y, SeedType theSeedType, SeedType theImitaterType, int theGrayness, float scale)
 		{
 			SeedType seedType = theSeedType;
-			if (theSeedType == SeedType.SEED_IMITATER && theImitaterType != SeedType.SEED_NONE)
+			if (theSeedType == SeedType.Imitater && theImitaterType != SeedType.None)
 			{
 				seedType = theImitaterType;
 			}
-			if (seedType == SeedType.SEED_LEFTPEATER)
+			if (seedType == SeedType.Leftpeater)
 			{
-				seedType = SeedType.SEED_SPROUT;
+				seedType = SeedType.Sprout;
 			}
 			if (theGrayness != 255)
 			{
 				g.SetColor(new SexyColor(theGrayness, theGrayness, theGrayness));
 				g.SetColorizeImages(true);
 			}
-			if (theSeedType == SeedType.SEED_SLOT_MACHINE_SUN)
+			if (theSeedType == SeedType.SlotMachineSun)
 			{
 				TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_SEEDPACKET_SUN, x, y, scale, scale);
 			}
-			else if (theSeedType == SeedType.SEED_SLOT_MACHINE_DIAMOND)
+			else if (theSeedType == SeedType.SlotMachineDiamond)
 			{
 				TodCommon.TodDrawImageScaledF(g, AtlasResources.IMAGE_SEEDPACKET_DIAMOND, x, y, scale, scale);
 			}
@@ -438,11 +438,11 @@ namespace Lawn
 
 		public void MouseDown(int x, int y, int theClickCount)
 		{
-			if (mBoard.mPaused || mApp.mGameScene != GameScenes.SCENE_PLAYING)
+			if (mBoard.mPaused || mApp.mGameScene != GameScenes.Playing)
 			{
 				return;
 			}
-			if (mPacketType == SeedType.SEED_NONE)
+			if (mPacketType == SeedType.None)
 			{
 				return;
 			}
@@ -450,13 +450,13 @@ namespace Lawn
 			{
 				if (!mBoard.mAdvice.IsBeingDisplayed())
 				{
-					mBoard.DisplayAdvice("[ADVICE_SLOT_MACHINE_PULL]", MessageStyle.MESSAGE_STYLE_HINT_TALL_FAST, AdviceType.ADVICE_NONE);
+					mBoard.DisplayAdvice("[ADVICE_SLOT_MACHINE_PULL]", MessageStyle.HintTallFast, AdviceType.None);
 				}
 				mBoard.mChallenge.mSlotMachineRollCount = Math.Min(mBoard.mChallenge.mSlotMachineRollCount, 2);
 				return;
 			}
 			SeedType seedType = mPacketType;
-			if (seedType == SeedType.SEED_IMITATER && mImitaterType != SeedType.SEED_NONE)
+			if (seedType == SeedType.Imitater && mImitaterType != SeedType.None)
 			{
 				seedType = mImitaterType;
 			}
@@ -467,7 +467,7 @@ namespace Lawn
 					mApp.PlaySample(Resources.SOUND_BUZZER);
 					if (mApp.IsFirstTimeAdventureMode() && mBoard.mLevel == 1 && mBoard.mHelpDisplayed[0])
 					{
-						mBoard.DisplayAdvice("[ADVICE_SEED_REFRESH]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1, AdviceType.ADVICE_SEED_REFRESH);
+						mBoard.DisplayAdvice("[ADVICE_SEED_REFRESH]", MessageStyle.TutorialLevel1, AdviceType.SeedRefresh);
 					}
 					return;
 				}
@@ -478,125 +478,125 @@ namespace Lawn
 					mBoard.mOutOfMoneyCounter = 70;
 					if (mApp.IsFirstTimeAdventureMode() && mBoard.mLevel == 1 && mBoard.mHelpDisplayed[0])
 					{
-						mBoard.DisplayAdvice("[ADVICE_CANT_AFFORD_PLANT]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1, AdviceType.ADVICE_CANT_AFFORD_PLANT);
+						mBoard.DisplayAdvice("[ADVICE_CANT_AFFORD_PLANT]", MessageStyle.TutorialLevel1, AdviceType.CantAffordPlant);
 					}
 					return;
 				}
 				if (!mBoard.PlantingRequirementsMet(seedType))
 				{
 					mApp.PlaySample(Resources.SOUND_BUZZER);
-					if (seedType == SeedType.SEED_GATLINGPEA)
+					if (seedType == SeedType.Gatlingpea)
 					{
-						mBoard.DisplayAdvice("[ADVICE_PLANT_NEEDS_REPEATER]", MessageStyle.MESSAGE_STYLE_HINT_LONG, AdviceType.ADVICE_PLANT_NEEDS_REPEATER);
+						mBoard.DisplayAdvice("[ADVICE_PLANT_NEEDS_REPEATER]", MessageStyle.HintLong, AdviceType.PlantNeedsRepeater);
 						return;
 					}
-					if (seedType == SeedType.SEED_WINTERMELON)
+					if (seedType == SeedType.Wintermelon)
 					{
-						mBoard.DisplayAdvice("[ADVICE_PLANT_NEEDS_MELONPULT]", MessageStyle.MESSAGE_STYLE_HINT_LONG, AdviceType.ADVICE_PLANT_NEEDS_MELONPULT);
+						mBoard.DisplayAdvice("[ADVICE_PLANT_NEEDS_MELONPULT]", MessageStyle.HintLong, AdviceType.PlantNeedsMelonpult);
 						return;
 					}
-					if (seedType == SeedType.SEED_TWINSUNFLOWER)
+					if (seedType == SeedType.Twinsunflower)
 					{
-						mBoard.DisplayAdvice("[ADVICE_PLANT_NEEDS_SUNFLOWER]", MessageStyle.MESSAGE_STYLE_HINT_LONG, AdviceType.ADVICE_PLANT_NEEDS_SUNFLOWER);
+						mBoard.DisplayAdvice("[ADVICE_PLANT_NEEDS_SUNFLOWER]", MessageStyle.HintLong, AdviceType.PlantNeedsSunflower);
 						return;
 					}
-					if (seedType == SeedType.SEED_SPIKEROCK)
+					if (seedType == SeedType.Spikerock)
 					{
-						mBoard.DisplayAdvice("[ADVICE_PLANT_NEEDS_SPIKEWEED]", MessageStyle.MESSAGE_STYLE_HINT_LONG, AdviceType.ADVICE_PLANT_NEEDS_SPIKEWEED);
+						mBoard.DisplayAdvice("[ADVICE_PLANT_NEEDS_SPIKEWEED]", MessageStyle.HintLong, AdviceType.PlantNeedsSpikeweed);
 						return;
 					}
-					if (seedType == SeedType.SEED_COBCANNON)
+					if (seedType == SeedType.Cobcannon)
 					{
-						mBoard.DisplayAdvice("[ADVICE_PLANT_NEEDS_KERNELPULT]", MessageStyle.MESSAGE_STYLE_HINT_LONG, AdviceType.ADVICE_PLANT_NEEDS_KERNELPULT);
+						mBoard.DisplayAdvice("[ADVICE_PLANT_NEEDS_KERNELPULT]", MessageStyle.HintLong, AdviceType.PlantNeedsKernelpult);
 						return;
 					}
-					if (seedType == SeedType.SEED_GOLD_MAGNET)
+					if (seedType == SeedType.GoldMagnet)
 					{
-						mBoard.DisplayAdvice("[ADVICE_PLANT_NEEDS_MAGNETSHROOM]", MessageStyle.MESSAGE_STYLE_HINT_LONG, AdviceType.ADVICE_PLANT_NEEDS_MAGNETSHROOM);
+						mBoard.DisplayAdvice("[ADVICE_PLANT_NEEDS_MAGNETSHROOM]", MessageStyle.HintLong, AdviceType.PlantNeedsMagnetshroom);
 						return;
 					}
-					if (seedType == SeedType.SEED_GLOOMSHROOM)
+					if (seedType == SeedType.Gloomshroom)
 					{
-						mBoard.DisplayAdvice("[ADVICE_PLANT_NEEDS_FUMESHROOM]", MessageStyle.MESSAGE_STYLE_HINT_LONG, AdviceType.ADVICE_PLANT_NEEDS_FUMESHROOM);
+						mBoard.DisplayAdvice("[ADVICE_PLANT_NEEDS_FUMESHROOM]", MessageStyle.HintLong, AdviceType.PlantNeedsFumeshroom);
 						return;
 					}
-					if (seedType == SeedType.SEED_CATTAIL)
+					if (seedType == SeedType.Cattail)
 					{
-						mBoard.DisplayAdvice("[ADVICE_PLANT_NEEDS_LILYPAD]", MessageStyle.MESSAGE_STYLE_HINT_LONG, AdviceType.ADVICE_PLANT_NEEDS_LILYPAD);
+						mBoard.DisplayAdvice("[ADVICE_PLANT_NEEDS_LILYPAD]", MessageStyle.HintLong, AdviceType.PlantNeedsLilypad);
 						return;
 					}
 					Debug.ASSERT(false);
 					return;
 				}
 			}
-			mBoard.ClearAdvice(AdviceType.ADVICE_CANT_AFFORD_PLANT);
-			mBoard.ClearAdvice(AdviceType.ADVICE_PLANT_NEEDS_REPEATER);
-			mBoard.ClearAdvice(AdviceType.ADVICE_PLANT_NEEDS_MELONPULT);
-			mBoard.ClearAdvice(AdviceType.ADVICE_PLANT_NEEDS_SUNFLOWER);
-			mBoard.ClearAdvice(AdviceType.ADVICE_PLANT_NEEDS_KERNELPULT);
-			mBoard.ClearAdvice(AdviceType.ADVICE_PLANT_NEEDS_SPIKEWEED);
-			mBoard.ClearAdvice(AdviceType.ADVICE_PLANT_NEEDS_MAGNETSHROOM);
-			mBoard.ClearAdvice(AdviceType.ADVICE_PLANT_NEEDS_FUMESHROOM);
-			mBoard.ClearAdvice(AdviceType.ADVICE_PLANT_NEEDS_LILYPAD);
-			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST)
+			mBoard.ClearAdvice(AdviceType.CantAffordPlant);
+			mBoard.ClearAdvice(AdviceType.PlantNeedsRepeater);
+			mBoard.ClearAdvice(AdviceType.PlantNeedsMelonpult);
+			mBoard.ClearAdvice(AdviceType.PlantNeedsSunflower);
+			mBoard.ClearAdvice(AdviceType.PlantNeedsKernelpult);
+			mBoard.ClearAdvice(AdviceType.PlantNeedsSpikeweed);
+			mBoard.ClearAdvice(AdviceType.PlantNeedsMagnetshroom);
+			mBoard.ClearAdvice(AdviceType.PlantNeedsFumeshroom);
+			mBoard.ClearAdvice(AdviceType.PlantNeedsLilypad);
+			if (mApp.mGameMode == GameMode.ChallengeBeghouled || mApp.mGameMode == GameMode.ChallengeBeghouledTwist)
 			{
 				mBoard.mChallenge.BeghouledPacketClicked(this);
 				return;
 			}
 			mBoard.mCursorObject.mType = mPacketType;
 			mBoard.mCursorObject.mImitaterType = mImitaterType;
-			mBoard.mCursorObject.mCursorType = CursorType.CURSOR_TYPE_PLANT_FROM_BANK;
+			mBoard.mCursorObject.mCursorType = CursorType.PlantFromBank;
 			mBoard.mCursorObject.mSeedBankIndex = mIndex;
 			mApp.PlaySample(Resources.SOUND_SEEDLIFT);
-			if (mBoard.mTutorialState == TutorialState.TUTORIAL_LEVEL_1_PICK_UP_PEASHOOTER)
+			if (mBoard.mTutorialState == TutorialState.Level1PickUpPeashooter)
 			{
-				mBoard.SetTutorialState(TutorialState.TUTORIAL_LEVEL_1_PLANT_PEASHOOTER);
+				mBoard.SetTutorialState(TutorialState.Level1PlantPeashooter);
 			}
-			else if (mBoard.mTutorialState == TutorialState.TUTORIAL_LEVEL_2_PICK_UP_SUNFLOWER)
+			else if (mBoard.mTutorialState == TutorialState.Level2PickUpSunflower)
 			{
-				if (mPacketType == SeedType.SEED_SUNFLOWER)
+				if (mPacketType == SeedType.Sunflower)
 				{
-					mBoard.SetTutorialState(TutorialState.TUTORIAL_LEVEL_2_PLANT_SUNFLOWER);
+					mBoard.SetTutorialState(TutorialState.Level2PlantSunflower);
 				}
 				else
 				{
-					mBoard.SetTutorialState(TutorialState.TUTORIAL_LEVEL_2_REFRESH_SUNFLOWER);
+					mBoard.SetTutorialState(TutorialState.Level2RefreshSunflower);
 				}
 			}
-			else if (mBoard.mTutorialState == TutorialState.TUTORIAL_MORESUN_PICK_UP_SUNFLOWER)
+			else if (mBoard.mTutorialState == TutorialState.MoresunPickUpSunflower)
 			{
-				if (mPacketType == SeedType.SEED_SUNFLOWER)
+				if (mPacketType == SeedType.Sunflower)
 				{
-					mBoard.SetTutorialState(TutorialState.TUTORIAL_MORESUN_PLANT_SUNFLOWER);
+					mBoard.SetTutorialState(TutorialState.MoresunPlantSunflower);
 				}
 				else
 				{
-					mBoard.SetTutorialState(TutorialState.TUTORIAL_MORESUN_REFRESH_SUNFLOWER);
+					mBoard.SetTutorialState(TutorialState.MoresunRefreshSunflower);
 				}
 			}
-			else if (mBoard.mTutorialState == TutorialState.TUTORIAL_WHACK_A_ZOMBIE_PICK_SEED || mBoard.mTutorialState == TutorialState.TUTORIAL_WHACK_A_ZOMBIE_BEFORE_PICK_SEED)
+			else if (mBoard.mTutorialState == TutorialState.WhackAZombiePickSeed || mBoard.mTutorialState == TutorialState.WhackAZombieBeforePickSeed)
 			{
-				mBoard.SetTutorialState(TutorialState.TUTORIAL_WHACK_A_ZOMBIE_COMPLETED);
+				mBoard.SetTutorialState(TutorialState.WhackAZombieCompleted);
 			}
 			Deactivate();
 		}
 
 		public bool MouseHitTest(int theX, int theY, HitResult theHitResult)
 		{
-			if (mSlotMachineCountDown > 0 || mPacketType == SeedType.SEED_NONE)
+			if (mSlotMachineCountDown > 0 || mPacketType == SeedType.None)
 			{
 				theHitResult.mObject = null;
-				theHitResult.mObjectType = GameObjectType.OBJECT_TYPE_NONE;
+				theHitResult.mObjectType = GameObjectType.None;
 				return false;
 			}
 			if (theX >= mX && theX < mX + mWidth && theY >= mY + mOffsetY && theY < mY + mHeight + mOffsetY)
 			{
 				theHitResult.mObject = this;
-				theHitResult.mObjectType = GameObjectType.OBJECT_TYPE_SEEDPACKET;
+				theHitResult.mObjectType = GameObjectType.Seedpacket;
 				return true;
 			}
 			theHitResult.mObject = null;
-			theHitResult.mObjectType = GameObjectType.OBJECT_TYPE_NONE;
+			theHitResult.mObjectType = GameObjectType.None;
 			return false;
 		}
 
@@ -610,13 +610,13 @@ namespace Lawn
 
 		public void Activate()
 		{
-			Debug.ASSERT(mPacketType != SeedType.SEED_NONE);
+			Debug.ASSERT(mPacketType != SeedType.None);
 			mActive = true;
 		}
 
 		public void PickNextSlotMachineSeed()
 		{
-			int theTimeAge = mBoard.CountPlantByType(SeedType.SEED_PEASHOOTER);
+			int theTimeAge = mBoard.CountPlantByType(SeedType.Peashooter);
 			for (int i = 0; i < aSeedWeightArray.Length; i++)
 			{
 				if (aSeedWeightArray[i] != null)
@@ -630,15 +630,15 @@ namespace Lawn
 			{
 				SeedType seedType = SLOT_SEED_TYPES[j];
 				int num2 = 100;
-				if (seedType == SeedType.SEED_PEASHOOTER)
+				if (seedType == SeedType.Peashooter)
 				{
-					num2 = TodCommon.TodAnimateCurve(0, 5, theTimeAge, 200, 100, TodCurves.CURVE_LINEAR);
+					num2 = TodCommon.TodAnimateCurve(0, 5, theTimeAge, 200, 100, TodCurves.Linear);
 				}
-				if (seedType == SeedType.SEED_SLOT_MACHINE_DIAMOND)
+				if (seedType == SeedType.SlotMachineDiamond)
 				{
 					num2 = 30;
 				}
-				if (mIndex == 2 && seedType != SeedType.SEED_SLOT_MACHINE_DIAMOND && (seedType == mBoard.mSeedBank.mSeedPackets[0].mSlotMachiningNextSeed || seedType == mBoard.mSeedBank.mSeedPackets[1].mSlotMachiningNextSeed))
+				if (mIndex == 2 && seedType != SeedType.SlotMachineDiamond && (seedType == mBoard.mSeedBank.mSeedPackets[0].mSlotMachiningNextSeed || seedType == mBoard.mSeedBank.mSeedPackets[1].mSlotMachiningNextSeed))
 				{
 					num2 += num2 / 2;
 				}
@@ -658,7 +658,7 @@ namespace Lawn
 
 		public void WasPlanted()
 		{
-			Debug.ASSERT(mPacketType != SeedType.SEED_NONE);
+			Debug.ASSERT(mPacketType != SeedType.None);
 			if (mBoard.HasConveyorBeltSeedBank())
 			{
 				mBoard.mSeedBank.RemoveSeed(mIndex);
@@ -669,7 +669,7 @@ namespace Lawn
 				Deactivate();
 				return;
 			}
-			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND && mBoard.mChallenge.mChallengeState != ChallengeState.STATECHALLENGE_LAST_STAND_ONSLAUGHT)
+			if (mApp.mGameMode == GameMode.ChallengeLastStand && mBoard.mChallenge.mChallengeState != ChallengeState.LastStandOnslaught)
 			{
 				mTimesUsed++;
 				mActive = true;
@@ -691,34 +691,34 @@ namespace Lawn
 			{
 				return;
 			}
-			if (mBoard.mTutorialState == TutorialState.TUTORIAL_LEVEL_1_REFRESH_PEASHOOTER)
+			if (mBoard.mTutorialState == TutorialState.Level1RefreshPeashooter)
 			{
-				mBoard.SetTutorialState(TutorialState.TUTORIAL_LEVEL_1_PICK_UP_PEASHOOTER);
+				mBoard.SetTutorialState(TutorialState.Level1PickUpPeashooter);
 				return;
 			}
-			if (mBoard.mTutorialState == TutorialState.TUTORIAL_LEVEL_2_REFRESH_SUNFLOWER && mPacketType == SeedType.SEED_SUNFLOWER)
+			if (mBoard.mTutorialState == TutorialState.Level2RefreshSunflower && mPacketType == SeedType.Sunflower)
 			{
-				mBoard.SetTutorialState(TutorialState.TUTORIAL_LEVEL_2_PICK_UP_SUNFLOWER);
+				mBoard.SetTutorialState(TutorialState.Level2PickUpSunflower);
 				return;
 			}
-			if (mBoard.mTutorialState == TutorialState.TUTORIAL_MORESUN_REFRESH_SUNFLOWER && mPacketType == SeedType.SEED_SUNFLOWER)
+			if (mBoard.mTutorialState == TutorialState.MoresunRefreshSunflower && mPacketType == SeedType.Sunflower)
 			{
-				mBoard.SetTutorialState(TutorialState.TUTORIAL_MORESUN_PICK_UP_SUNFLOWER);
+				mBoard.SetTutorialState(TutorialState.MoresunPickUpSunflower);
 			}
 		}
 
 		public bool CanPickUp()
 		{
-			if (mBoard.mPaused || mApp.mGameScene != GameScenes.SCENE_PLAYING)
+			if (mBoard.mPaused || mApp.mGameScene != GameScenes.Playing)
 			{
 				return false;
 			}
-			if (mPacketType == SeedType.SEED_NONE)
+			if (mPacketType == SeedType.None)
 			{
 				return false;
 			}
 			SeedType theSeedType = mPacketType;
-			if (mPacketType == SeedType.SEED_IMITATER && mImitaterType != SeedType.SEED_NONE)
+			if (mPacketType == SeedType.Imitater && mImitaterType != SeedType.None)
 			{
 				theSeedType = mImitaterType;
 			}
@@ -754,11 +754,11 @@ namespace Lawn
 			mRefreshing = false;
 			mActive = true;
 			SeedType theSeedtype = theSeedType;
-			if (theSeedType == SeedType.SEED_IMITATER && theImitaterType != SeedType.SEED_NONE)
+			if (theSeedType == SeedType.Imitater && theImitaterType != SeedType.None)
 			{
 				theSeedtype = theImitaterType;
 			}
-			if (mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST && mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_LAST_STAND && !mApp.IsIZombieLevel() && !mApp.IsScaryPotterLevel())
+			if (mApp.mGameMode != GameMode.ChallengeBeghouled && mApp.mGameMode != GameMode.ChallengeBeghouledTwist && mApp.mGameMode != GameMode.ChallengeLastStand && !mApp.IsIZombieLevel() && !mApp.IsScaryPotterLevel())
 			{
 				if (mApp.IsWhackAZombieLevel())
 				{
@@ -806,7 +806,7 @@ namespace Lawn
 				}
 			}
 			SeedType theSeedType = mPacketType;
-			if (mPacketType == SeedType.SEED_IMITATER && mImitaterType != SeedType.SEED_NONE)
+			if (mPacketType == SeedType.Imitater && mImitaterType != SeedType.None)
 			{
 				theSeedType = mImitaterType;
 			}
@@ -817,32 +817,32 @@ namespace Lawn
 			}
 			int currentPlantCost = mBoard.GetCurrentPlantCost(mPacketType, mImitaterType);
 			int num2 = 255;
-			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED && !mActive)
+			if (mApp.mGameMode == GameMode.ChallengeBeghouled && !mActive)
 			{
 				num2 = 64;
 			}
-			else if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST && !mActive)
+			else if (mApp.mGameMode == GameMode.ChallengeBeghouledTwist && !mActive)
 			{
 				num2 = 64;
 			}
-			else if (mApp.mGameScene != GameScenes.SCENE_PLAYING)
+			else if (mApp.mGameScene != GameScenes.Playing)
 			{
 				num2 = mBoard.mSeedBank.mCutSceneDarken;
 				num = 0f;
 			}
-			else if (mBoard.mTutorialState == TutorialState.TUTORIAL_LEVEL_1_PICK_UP_PEASHOOTER && mBoard.mTutorialTimer == -1 && mPacketType == SeedType.SEED_PEASHOOTER)
+			else if (mBoard.mTutorialState == TutorialState.Level1PickUpPeashooter && mBoard.mTutorialTimer == -1 && mPacketType == SeedType.Peashooter)
 			{
 				num2 = TodCommon.GetFlashingColor(mBoard.mMainCounter, 75).mRed;
 			}
-			else if (mBoard.mTutorialState == TutorialState.TUTORIAL_LEVEL_2_PICK_UP_SUNFLOWER && mPacketType == SeedType.SEED_SUNFLOWER)
+			else if (mBoard.mTutorialState == TutorialState.Level2PickUpSunflower && mPacketType == SeedType.Sunflower)
 			{
 				num2 = TodCommon.GetFlashingColor(mBoard.mMainCounter, 75).mRed;
 			}
-			else if (mBoard.mTutorialState == TutorialState.TUTORIAL_MORESUN_PICK_UP_SUNFLOWER && mPacketType == SeedType.SEED_SUNFLOWER)
+			else if (mBoard.mTutorialState == TutorialState.MoresunPickUpSunflower && mPacketType == SeedType.Sunflower)
 			{
 				num2 = TodCommon.GetFlashingColor(mBoard.mMainCounter, 75).mRed;
 			}
-			else if (mBoard.mTutorialState == TutorialState.TUTORIAL_WHACK_A_ZOMBIE_PICK_SEED)
+			else if (mBoard.mTutorialState == TutorialState.WhackAZombiePickSeed)
 			{
 				num2 = TodCommon.GetFlashingColor(mBoard.mMainCounter, 75).mRed;
 			}
@@ -905,12 +905,12 @@ namespace Lawn
 
 		private SeedType[] SLOT_SEED_TYPES = new SeedType[]
 		{
-			SeedType.SEED_SUNFLOWER,
-			SeedType.SEED_PEASHOOTER,
-			SeedType.SEED_SNOWPEA,
-			SeedType.SEED_WALLNUT,
-			SeedType.SEED_SLOT_MACHINE_SUN,
-			SeedType.SEED_SLOT_MACHINE_DIAMOND
+			SeedType.Sunflower,
+			SeedType.Peashooter,
+			SeedType.Snowpea,
+			SeedType.Wallnut,
+			SeedType.SlotMachineSun,
+			SeedType.SlotMachineDiamond
 		};
 	}
 }

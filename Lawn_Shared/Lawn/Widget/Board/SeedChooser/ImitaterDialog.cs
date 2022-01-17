@@ -49,7 +49,7 @@ namespace Lawn
 
 		public virtual void SeedSelected(SeedType theSeedType)
 		{
-			if (theSeedType != SeedType.SEED_NONE && !mApp.mSeedChooserScreen.SeedNotAllowedToPick(theSeedType))
+			if (theSeedType != SeedType.None && !mApp.mSeedChooserScreen.SeedNotAllowedToPick(theSeedType))
 			{
 				ChosenSeed chosenSeed = mApp.mSeedChooserScreen.mChosenSeeds[48];
 				chosenSeed.mSeedState = ChosenSeedState.SEED_IN_CHOOSER;

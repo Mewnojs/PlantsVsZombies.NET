@@ -22,40 +22,40 @@ namespace Lawn
 			gemRotationSpeed = ((float)ZombiePileObject.rand.NextDouble() - 0.5f) * 0.1f;
 			switch (aType)
 			{
-			case ZombiePileObjectType.OBJECT_GEM0:
+			case ZombiePileObjectType.Gem0:
 				gemImage = AtlasResources.IMAGE_PILE_GEM0;
 				break;
-			case ZombiePileObjectType.OBJECT_GEM1:
+			case ZombiePileObjectType.Gem1:
 				gemImage = AtlasResources.IMAGE_PILE_GEM1;
 				break;
-			case ZombiePileObjectType.OBJECT_GEM2:
+			case ZombiePileObjectType.Gem2:
 				gemImage = AtlasResources.IMAGE_PILE_GEM2;
 				break;
-			case ZombiePileObjectType.OBJECT_GEM3:
+			case ZombiePileObjectType.Gem3:
 				gemImage = AtlasResources.IMAGE_PILE_GEM3;
 				break;
-			case ZombiePileObjectType.OBJECT_GEM4:
+			case ZombiePileObjectType.Gem4:
 				gemImage = AtlasResources.IMAGE_PILE_GEM4;
 				break;
-			case ZombiePileObjectType.OBJECT_GEM5:
+			case ZombiePileObjectType.Gem5:
 				gemImage = AtlasResources.IMAGE_PILE_GEM5;
 				break;
-			case ZombiePileObjectType.OBJECT_GEM6:
+			case ZombiePileObjectType.Gem6:
 				gemImage = AtlasResources.IMAGE_PILE_GEM6;
 				break;
 			default:
 				gemImage = null;
 				break;
 			}
-			if (aType == ZombiePileObjectType.OBJECT_YELLOW_CLOUD)
+			if (aType == ZombiePileObjectType.YellowCloud)
 			{
 				mCounter = ZombiePileObject.rand.Next(Constants.BOARD_WIDTH);
 			}
-			if (aType == ZombiePileObjectType.OBJECT_ASTRONAUT)
+			if (aType == ZombiePileObjectType.Astronaut)
 			{
 				mReanim = Reanimation.GetNewReanimation();
-				mReanim.ReanimationInitializeType(0f, 0f, ReanimationType.REANIM_ASTRONAUT);
-				mReanim.mLoopType = ReanimLoopType.REANIM_LOOP;
+				mReanim.ReanimationInitializeType(0f, 0f, ReanimationType.Astronaut);
+				mReanim.mLoopType = ReanimLoopType.Loop;
 				mReanim.mOverlayMatrix.mMatrix.M11 = 0.85f;
 				mReanim.mOverlayMatrix.mMatrix.M22 = 0.85f;
 				mOffsetX = 400f;

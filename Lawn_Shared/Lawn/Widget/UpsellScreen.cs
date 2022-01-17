@@ -43,7 +43,7 @@ namespace Lawn
 
 		public override void Update()
 		{
-			mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MUSIC_TUNE_MINIGAME_LOONBOON);
+			mApp.mMusic.MakeSureMusicIsPlaying(MusicTune.MinigameLoonboon);
 			mApp.UpdateCrazyDave();
 			base.Update();
 		}

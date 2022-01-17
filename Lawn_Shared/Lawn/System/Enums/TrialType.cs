@@ -4,7 +4,7 @@ namespace Lawn
 {
 	public enum TrialType
 	{
-		TRIAL_NONE,
-		TRIAL_STAGELOCKED
+		None,
+		Stagelocked
 	}
 }

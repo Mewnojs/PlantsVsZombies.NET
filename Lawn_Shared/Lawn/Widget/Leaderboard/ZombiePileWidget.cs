@@ -25,27 +25,27 @@ namespace Lawn
 			mY = -mHeight;
 			mScreenTop = mHeight - Constants.BOARD_HEIGHT;
 			List<ZombiePileObject> list = new List<ZombiePileObject>();
-			list.Add(new ZombiePileObject(5, ZombiePileObjectType.OBJECT_YELLOW_CLOUD));
-			list.Add(new ZombiePileObject(15, ZombiePileObjectType.OBJECT_YELLOW_CLOUD));
-			list.Add(new ZombiePileObject(30, ZombiePileObjectType.OBJECT_YELLOW_CLOUD));
-			list.Add(new ZombiePileObject(45, ZombiePileObjectType.OBJECT_AIRPLANE));
-			list.Add(new ZombiePileObject(50, ZombiePileObjectType.OBJECT_YELLOW_CLOUD));
-			list.Add(new ZombiePileObject(60, ZombiePileObjectType.OBJECT_YELLOW_CLOUD));
-			list.Add(new ZombiePileObject(85, ZombiePileObjectType.OBJECT_SATELLITE));
-			list.Add(new ZombiePileObject(110, ZombiePileObjectType.OBJECT_MOON));
-			list.Add(new ZombiePileObject(140, ZombiePileObjectType.OBJECT_ASTRONAUT));
-			list.Add(new ZombiePileObject(160, ZombiePileObjectType.OBJECT_PEGGLE_URSAMAJOR));
+			list.Add(new ZombiePileObject(5, ZombiePileObjectType.YellowCloud));
+			list.Add(new ZombiePileObject(15, ZombiePileObjectType.YellowCloud));
+			list.Add(new ZombiePileObject(30, ZombiePileObjectType.YellowCloud));
+			list.Add(new ZombiePileObject(45, ZombiePileObjectType.Airplane));
+			list.Add(new ZombiePileObject(50, ZombiePileObjectType.YellowCloud));
+			list.Add(new ZombiePileObject(60, ZombiePileObjectType.YellowCloud));
+			list.Add(new ZombiePileObject(85, ZombiePileObjectType.Satellite));
+			list.Add(new ZombiePileObject(110, ZombiePileObjectType.Moon));
+			list.Add(new ZombiePileObject(140, ZombiePileObjectType.Astronaut));
+			list.Add(new ZombiePileObject(160, ZombiePileObjectType.PeggleUrsamajor));
 			List<ZombiePileObject> list2 = new List<ZombiePileObject>();
 			for (int i = 0; i < 100; i++)
 			{
-				list2.Add(new ZombiePileObject(180 + rand.Next(4) - 2, ZombiePileObjectType.OBJECT_GEM0 + rand.Next(7)));
+				list2.Add(new ZombiePileObject(180 + rand.Next(4) - 2, ZombiePileObjectType.Gem0 + rand.Next(7)));
 			}
 			list2.Sort(new Comparison<ZombiePileObject>(ZombiePileWidget.SortGems));
 			list.AddRange(list2);
-			list.Add(new ZombiePileObject(200, ZombiePileObjectType.OBJECT_BLACKHOLE));
+			list.Add(new ZombiePileObject(200, ZombiePileObjectType.Blackhole));
 			if (!theApp.mPlayerInfo.mSeenLeaderboardArrow && mPileHeight >= 1)
 			{
-				list.Add(new ZombiePileObject(0, ZombiePileObjectType.OBJECT_ARROW));
+				list.Add(new ZombiePileObject(0, ZombiePileObjectType.Arrow));
 				theApp.mPlayerInfo.mSeenLeaderboardArrow = true;
 			}
 			gPileObjects = list.ToArray();
@@ -293,7 +293,7 @@ namespace Lawn
 					{
 						g.DrawImage(gamerImage, 51, num + 61);
 					}
-					TodCommon.TodDrawString(g, friendMarkers[i].mGamer.Gamertag, 126, num + 79, Resources.FONT_DWARVENTODCRAFT15, SexyColor.White, 211, DrawStringJustification.DS_ALIGN_LEFT);
+					TodCommon.TodDrawString(g, friendMarkers[i].mGamer.Gamertag, 126, num + 79, Resources.FONT_DWARVENTODCRAFT15, SexyColor.White, 211, DrawStringJustification.Left);
 				}
 			}
 		}
@@ -303,7 +303,7 @@ namespace Lawn
 			for (int i = 0; i < gPileObjects.Length; i++)
 			{
 				gPileObjects[i].mY = (int)(mScreenTop * 0.4f - CalculatePileHeight(gPileObjects[i].mHeight) * 0.4f);
-				if (gPileObjects[i].mType == ZombiePileObjectType.OBJECT_ARROW)
+				if (gPileObjects[i].mType == ZombiePileObjectType.Arrow)
 				{
 					gPileObjects[i].mY = mScreenTop - CalculatePileHeight(gPileObjects[i].mHeight);
 				}
@@ -321,25 +321,25 @@ namespace Lawn
 				{
 					switch (zombiePileObject.mType)
 					{
-					case ZombiePileObjectType.OBJECT_BALLOON:
+					case ZombiePileObjectType.Balloon:
 						g.DrawImage(AtlasResources.IMAGE_PILE_BALLOON, 40f, zombiePileObject.mY + zombiePileObject.mOffsetY);
 						break;
-					case ZombiePileObjectType.OBJECT_YELLOW_CLOUD:
+					case ZombiePileObjectType.YellowCloud:
 						g.DrawImage(AtlasResources.IMAGE_PILE_YELLOW_CLOUD, (int)zombiePileObject.mOffsetX, zombiePileObject.mY + (int)zombiePileObject.mOffsetY, AtlasResources.IMAGE_PILE_YELLOW_CLOUD.mWidth, AtlasResources.IMAGE_PILE_YELLOW_CLOUD.mHeight);
 						break;
-					case ZombiePileObjectType.OBJECT_AIRPLANE:
+					case ZombiePileObjectType.Airplane:
 						g.DrawImage(AtlasResources.IMAGE_PILE_AIRPLANE, zombiePileObject.mOffsetX, zombiePileObject.mY + zombiePileObject.mOffsetY);
 						break;
-					case ZombiePileObjectType.OBJECT_MOON:
+					case ZombiePileObjectType.Moon:
 						g.DrawImage(AtlasResources.IMAGE_PILE_MOON, 40, zombiePileObject.mY);
 						break;
-					case ZombiePileObjectType.OBJECT_SATELLITE:
+					case ZombiePileObjectType.Satellite:
 						g.DrawImage(AtlasResources.IMAGE_PILE_SATELLITE, zombiePileObject.mOffsetX, zombiePileObject.mY + zombiePileObject.mOffsetY);
 						break;
-					case ZombiePileObjectType.OBJECT_PEGGLE_URSAMAJOR:
+					case ZombiePileObjectType.PeggleUrsamajor:
 						g.DrawImage(AtlasResources.IMAGE_PILE_PEGGLE_URSAMAJOR, 30, zombiePileObject.mY);
 						break;
-					case ZombiePileObjectType.OBJECT_ASTRONAUT:
+					case ZombiePileObjectType.Astronaut:
 					{
 						Graphics @new = Graphics.GetNew(g);
 						@new.mTransX += (int)zombiePileObject.mOffsetX;
@@ -348,7 +348,7 @@ namespace Lawn
 						@new.PrepareForReuse();
 						break;
 					}
-					case ZombiePileObjectType.OBJECT_BLACKHOLE:
+					case ZombiePileObjectType.Blackhole:
 					{
 						Matrix world = Matrix.Identity;
 						new TRect(0, 0, Resources.IMAGE_BLACKHOLE.mWidth, Resources.IMAGE_BLACKHOLE.mHeight);
@@ -364,16 +364,16 @@ namespace Lawn
 						g.DrawImageWithBasicEffect(Resources.IMAGE_BLACKHOLE, blackHoleVerts, blackHoleIndices, world, blackHoleView, blackHoleProjection);
 						break;
 					}
-					case ZombiePileObjectType.OBJECT_ARROW:
+					case ZombiePileObjectType.Arrow:
 						g.DrawImageRotatedScaled(AtlasResources.IMAGE_DOWNARROW, 160f, zombiePileObject.mY + (int)zombiePileObject.mOffsetY + transY + 50, 3.141592653589793, AtlasResources.IMAGE_DOWNARROW.mWidth / 2, AtlasResources.IMAGE_DOWNARROW.mHeight / 2, new TRect?(new TRect(0, 0, AtlasResources.IMAGE_DOWNARROW.mWidth, AtlasResources.IMAGE_DOWNARROW.mHeight)), 10, 10);
 						break;
-					case ZombiePileObjectType.OBJECT_GEM0:
-					case ZombiePileObjectType.OBJECT_GEM1:
-					case ZombiePileObjectType.OBJECT_GEM2:
-					case ZombiePileObjectType.OBJECT_GEM3:
-					case ZombiePileObjectType.OBJECT_GEM4:
-					case ZombiePileObjectType.OBJECT_GEM5:
-					case ZombiePileObjectType.OBJECT_GEM6:
+					case ZombiePileObjectType.Gem0:
+					case ZombiePileObjectType.Gem1:
+					case ZombiePileObjectType.Gem2:
+					case ZombiePileObjectType.Gem3:
+					case ZombiePileObjectType.Gem4:
+					case ZombiePileObjectType.Gem5:
+					case ZombiePileObjectType.Gem6:
 					{
 						float num2 = Math.Abs(zombiePileObject.gemSpeedX / 5f);
 						num2 = 1f / num2;
@@ -395,7 +395,7 @@ namespace Lawn
 				{
 					switch (zombiePileObject.mType)
 					{
-					case ZombiePileObjectType.OBJECT_BALLOON:
+					case ZombiePileObjectType.Balloon:
 						zombiePileObject.mCounter += 0.1f;
 						if (zombiePileObject.mCounter > 6.283185307179586)
 						{
@@ -403,7 +403,7 @@ namespace Lawn
 						}
 						zombiePileObject.mOffsetY = (int)(Math.Sin(zombiePileObject.mCounter) * 5.0);
 						break;
-					case ZombiePileObjectType.OBJECT_YELLOW_CLOUD:
+					case ZombiePileObjectType.YellowCloud:
 						zombiePileObject.mCounter -= 1f;
 						zombiePileObject.mOffsetX = (int)zombiePileObject.mCounter;
 						if (zombiePileObject.mOffsetX < (float)(-AtlasResources.IMAGE_PILE_YELLOW_CLOUD.mWidth))
@@ -412,7 +412,7 @@ namespace Lawn
 							zombiePileObject.mOffsetX = (int)zombiePileObject.mCounter;
 						}
 						break;
-					case ZombiePileObjectType.OBJECT_AIRPLANE:
+					case ZombiePileObjectType.Airplane:
 						zombiePileObject.mOffsetX += 6f;
 						zombiePileObject.mOffsetY += zombiePileObject.mCounter;
 						zombiePileObject.mCounter -= 0.01f * zombiePileObject.mCounter;
@@ -423,7 +423,7 @@ namespace Lawn
 							zombiePileObject.mCounter = 3f;
 						}
 						break;
-					case ZombiePileObjectType.OBJECT_SATELLITE:
+					case ZombiePileObjectType.Satellite:
 						zombiePileObject.mOffsetX -= 9f;
 						zombiePileObject.mOffsetY += 1f;
 						if (zombiePileObject.mOffsetX < (float)(-AtlasResources.IMAGE_PILE_SATELLITE.mWidth))
@@ -432,7 +432,7 @@ namespace Lawn
 							zombiePileObject.mOffsetY = -50f;
 						}
 						break;
-					case ZombiePileObjectType.OBJECT_ASTRONAUT:
+					case ZombiePileObjectType.Astronaut:
 						zombiePileObject.mReanim.Update();
 						zombiePileObject.mCounter += 0.025f;
 						if (zombiePileObject.mCounter > 6.283185307179586)
@@ -447,14 +447,14 @@ namespace Lawn
 							zombiePileObject.mCounter = 0f;
 						}
 						break;
-					case ZombiePileObjectType.OBJECT_BLACKHOLE:
+					case ZombiePileObjectType.Blackhole:
 						zombiePileObject.mCounter += 0.05f;
 						if (zombiePileObject.mCounter > 6.283185307179586)
 						{
 							zombiePileObject.mCounter -= 6.2831855f;
 						}
 						break;
-					case ZombiePileObjectType.OBJECT_ARROW:
+					case ZombiePileObjectType.Arrow:
 						zombiePileObject.mCounter += 0.1f;
 						if (zombiePileObject.mCounter > 6.283185307179586)
 						{
@@ -462,13 +462,13 @@ namespace Lawn
 						}
 						zombiePileObject.mOffsetY = (int)(Math.Sin(zombiePileObject.mCounter) * 10.0);
 						break;
-					case ZombiePileObjectType.OBJECT_GEM0:
-					case ZombiePileObjectType.OBJECT_GEM1:
-					case ZombiePileObjectType.OBJECT_GEM2:
-					case ZombiePileObjectType.OBJECT_GEM3:
-					case ZombiePileObjectType.OBJECT_GEM4:
-					case ZombiePileObjectType.OBJECT_GEM5:
-					case ZombiePileObjectType.OBJECT_GEM6:
+					case ZombiePileObjectType.Gem0:
+					case ZombiePileObjectType.Gem1:
+					case ZombiePileObjectType.Gem2:
+					case ZombiePileObjectType.Gem3:
+					case ZombiePileObjectType.Gem4:
+					case ZombiePileObjectType.Gem5:
+					case ZombiePileObjectType.Gem6:
 						zombiePileObject.mOffsetX += zombiePileObject.gemSpeedX;
 						zombiePileObject.mCounter += zombiePileObject.gemRotationSpeed;
 						zombiePileObject.mOffsetY += zombiePileObject.gemSpeedY;
@@ -509,17 +509,17 @@ namespace Lawn
 			}
 			if (theId == 4)
 			{
-				ShowLeaderboard(LeaderBoardType.LEADERBOARD_TYPE_IZOMBIE);
+				ShowLeaderboard(LeaderBoardType.Izombie);
 				return;
 			}
 			if (theId == 3)
 			{
-				ShowLeaderboard(LeaderBoardType.LEADERBOARD_TYPE_VASEBREAKER);
+				ShowLeaderboard(LeaderBoardType.Vasebreaker);
 				return;
 			}
 			if (theId == 5)
 			{
-				ShowLeaderboard(LeaderBoardType.LEADERBOARD_TYPE_KILLED);
+				ShowLeaderboard(LeaderBoardType.Killed);
 			}
 		}
 
@@ -555,7 +555,7 @@ namespace Lawn
 
 		public void ButtonMouseEnter(int id)
 		{
-			mApp.PlayFoley(FoleyType.FOLEY_BLEEP);
+			mApp.PlayFoley(FoleyType.Bleep);
 		}
 
 		public void ButtonMouseTick(int id)
@@ -572,7 +572,7 @@ namespace Lawn
 			{
 				mApp.PlaySample(Resources.SOUND_TAP);
 			}
-			mApp.PlayFoley(FoleyType.FOLEY_BLEEP);
+			mApp.PlayFoley(FoleyType.Bleep);
 		}
 
 		public void ButtonDownTick(int id)

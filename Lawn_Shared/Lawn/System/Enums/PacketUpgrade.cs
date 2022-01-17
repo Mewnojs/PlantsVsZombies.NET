@@ -4,10 +4,10 @@ namespace Lawn
 {
 	internal enum PacketUpgrade
 	{
-		PACKET_UPGRADE_6_MAX,
-		PACKET_UPGRADE_7_MAX,
-		PACKET_UPGRADE_8_MAX,
-		PACKET_UPGRADE_9_MAX,
-		PACKET_UPGRADE_10_MAX
+		Num6Max,
+		Num7Max,
+		Num8Max,
+		Num9Max,
+		Num10Max
 	}
 }

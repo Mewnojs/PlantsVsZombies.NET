@@ -45,13 +45,13 @@ namespace Lawn
 						}
 						if (i == mApp.mChallengeScreen.mUnlockChallengeIndex)
 						{
-							if (mApp.mChallengeScreen.mUnlockState == UnlockingState.UNLOCKING_SHAKING)
+							if (mApp.mChallengeScreen.mUnlockState == UnlockingState.Shaking)
 							{
 								g.SetColor(new SexyColor(92, 92, 92));
 							}
-							else if (mApp.mChallengeScreen.mUnlockState == UnlockingState.UNLOCKING_FADING)
+							else if (mApp.mChallengeScreen.mUnlockState == UnlockingState.Fading)
 							{
-								int num4 = TodCommon.TodAnimateCurve(50, 25, mApp.mChallengeScreen.mUnlockStateCounter, 92, 255, TodCurves.CURVE_LINEAR);
+								int num4 = TodCommon.TodAnimateCurve(50, 25, mApp.mChallengeScreen.mUnlockStateCounter, 92, 255, TodCurves.Linear);
 								g.SetColor(new SexyColor(num4, num4, num4));
 							}
 							g.SetColorizeImages(true);
@@ -69,7 +69,7 @@ namespace Lawn
 						theColor = new SexyColor(250, 40, 40);
 					}
 					string text = TodStringFile.TodStringTranslate(challengeDefinition.mChallengeName);
-					if (i == mApp.mChallengeScreen.mUnlockChallengeIndex && mApp.mChallengeScreen.mUnlockState == UnlockingState.UNLOCKING_SHAKING)
+					if (i == mApp.mChallengeScreen.mUnlockChallengeIndex && mApp.mChallengeScreen.mUnlockState == UnlockingState.Shaking)
 					{
 						text = "?";
 					}
@@ -80,12 +80,12 @@ namespace Lawn
 					int num5 = text.length();
 					if (num5 < 13)
 					{
-						TodCommon.TodDrawString(g, text, num + base.M(22), num2 + base.M1(56), Resources.FONT_BRIANNETOD12, theColor, DrawStringJustification.DS_ALIGN_CENTER);
+						TodCommon.TodDrawString(g, text, num + base.M(22), num2 + base.M1(56), Resources.FONT_BRIANNETOD12, theColor, DrawStringJustification.Center);
 					}
 					else
 					{
 						int num6 = num5 / 2 - 1;
-						if (mApp.mChallengeScreen.mPageIndex == ChallengePage.CHALLENGE_PAGE_SURVIVAL && !buttonWidget.mDisabled)
+						if (mApp.mChallengeScreen.mPageIndex == ChallengePage.Survival && !buttonWidget.mDisabled)
 						{
 							num6 = 7;
 						}
@@ -102,19 +102,19 @@ namespace Lawn
 							num9 = num5 - num8 - 1;
 						}
 						string theText = text.Substring(0, num8);
-						TodCommon.TodDrawString(g, theText, num + 22, num2 + 48, Resources.FONT_BRIANNETOD12, theColor, DrawStringJustification.DS_ALIGN_CENTER);
+						TodCommon.TodDrawString(g, theText, num + 22, num2 + 48, Resources.FONT_BRIANNETOD12, theColor, DrawStringJustification.Center);
 						if (num9 > 0)
 						{
 							string theText2 = text.Substring(num8 + 1, num9);
-							TodCommon.TodDrawString(g, theText2, num + 22, num2 + 65, Resources.FONT_BRIANNETOD12, theColor, DrawStringJustification.DS_ALIGN_CENTER);
+							TodCommon.TodDrawString(g, theText2, num + 22, num2 + 65, Resources.FONT_BRIANNETOD12, theColor, DrawStringJustification.Center);
 						}
 					}
 					int num10 = mApp.mPlayerInfo.mChallengeRecords[i];
 					if (i == mApp.mChallengeScreen.mUnlockChallengeIndex)
 					{
-						if (mApp.mChallengeScreen.mUnlockState == UnlockingState.UNLOCKING_FADING)
+						if (mApp.mChallengeScreen.mUnlockState == UnlockingState.Fading)
 						{
-							int theAlpha = TodCommon.TodAnimateCurve(25, 0, mApp.mChallengeScreen.mUnlockStateCounter, 255, 0, TodCurves.CURVE_LINEAR);
+							int theAlpha = TodCommon.TodAnimateCurve(25, 0, mApp.mChallengeScreen.mUnlockStateCounter, 255, 0, TodCurves.Linear);
 							g.SetColor(new SexyColor(255, 255, 255, theAlpha));
 							g.SetColorizeImages(true);
 						}
@@ -130,8 +130,8 @@ namespace Lawn
 						{
 							string theText3 = TodCommon.TodReplaceNumberString("[LONGEST_STREAK]", "{STREAK}", num10);
 							TRect theRect = new TRect(num, num2 + 15, 96, 200);
-							TodStringFile.TodDrawStringWrapped(g, theText3, theRect, Resources.FONT_CONTINUUMBOLD14OUTLINE, new SexyColor(255, 255, 255), DrawStringJustification.DS_ALIGN_CENTER);
-							TodStringFile.TodDrawStringWrapped(g, theText3, theRect, Resources.FONT_CONTINUUMBOLD14, new SexyColor(255, 0, 0), DrawStringJustification.DS_ALIGN_CENTER);
+							TodStringFile.TodDrawStringWrapped(g, theText3, theRect, Resources.FONT_CONTINUUMBOLD14OUTLINE, new SexyColor(255, 255, 255), DrawStringJustification.Center);
+							TodStringFile.TodDrawStringWrapped(g, theText3, theRect, Resources.FONT_CONTINUUMBOLD14, new SexyColor(255, 0, 0), DrawStringJustification.Center);
 						}
 					}
 					else

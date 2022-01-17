@@ -15,7 +15,7 @@ namespace Lawn
 		public override void MouseUp(int x, int y, int theClickCount)
 		{
 			ZombieType zombieType = ZombieHitTest(x, y);
-			if (zombieType != ZombieType.ZOMBIE_INVALID)
+			if (zombieType != ZombieType.Invalid)
 			{
 				mDialog.ZombieSelected(zombieType);
 			}
@@ -25,7 +25,7 @@ namespace Lawn
 		{
 			if (theIndex >= 33)
 			{
-				return ZombieType.ZOMBIE_INVALID;
+				return ZombieType.Invalid;
 			}
 			return (ZombieType)theIndex;
 		}
@@ -37,7 +37,7 @@ namespace Lawn
 				if (i < 33)
 				{
 					ZombieType zombieType = GetZombieType(i);
-					if (zombieType != ZombieType.ZOMBIE_INVALID && ZombieIsShown(zombieType))
+					if (zombieType != ZombieType.Invalid && ZombieIsShown(zombieType))
 					{
 						int num = 0;
 						int num2 = 0;
@@ -49,18 +49,18 @@ namespace Lawn
 					}
 				}
 			}
-			return ZombieType.ZOMBIE_INVALID;
+			return ZombieType.Invalid;
 		}
 
 		public void GetZombiePosition(ZombieType theZombieType, ref int x, ref int y)
 		{
-			if (theZombieType == ZombieType.ZOMBIE_BOSS)
+			if (theZombieType == ZombieType.Boss)
 			{
 				x = Constants.Almanac_BossPosition.X;
 				y = Constants.Almanac_BossPosition.Y;
 				return;
 			}
-			if (theZombieType == ZombieType.ZOMBIE_IMP)
+			if (theZombieType == ZombieType.Imp)
 			{
 				x = Constants.Almanac_ImpPosition.X;
 				y = Constants.Almanac_ImpPosition.Y;
@@ -74,15 +74,15 @@ namespace Lawn
 		{
 			ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(theZombieType);
 			int level = mDialog.mApp.mPlayerInfo.GetLevel();
-			if (mDialog.mApp.IsTrialStageLocked() && theZombieType > ZombieType.ZOMBIE_SNORKEL)
+			if (mDialog.mApp.IsTrialStageLocked() && theZombieType > ZombieType.Snorkel)
 			{
 				return false;
 			}
-			if (theZombieType == ZombieType.ZOMBIE_YETI)
+			if (theZombieType == ZombieType.Yeti)
 			{
-				return mDialog.mApp.CanSpawnYetis() || mDialog.ZombieHasSilhouette(ZombieType.ZOMBIE_YETI);
+				return mDialog.mApp.CanSpawnYetis() || mDialog.ZombieHasSilhouette(ZombieType.Yeti);
 			}
-			return theZombieType <= ZombieType.ZOMBIE_BOSS && (mDialog.mApp.HasFinishedAdventure() || (zombieDefinition.mStartingLevel <= level && (zombieDefinition.mStartingLevel != level || (theZombieType != ZombieType.ZOMBIE_IMP && theZombieType != ZombieType.ZOMBIE_BOBSLED && theZombieType != ZombieType.ZOMBIE_BACKUP_DANCER) || AlmanacDialog.gZombieDefeated[(int)theZombieType])));
+			return theZombieType <= ZombieType.Boss && (mDialog.mApp.HasFinishedAdventure() || (zombieDefinition.mStartingLevel <= level && (zombieDefinition.mStartingLevel != level || (theZombieType != ZombieType.Imp && theZombieType != ZombieType.Bobsled && theZombieType != ZombieType.BackupDancer) || AlmanacDialog.gZombieDefeated[(int)theZombieType])));
 		}
 
 		public override void Draw(Graphics g)
@@ -93,7 +93,7 @@ namespace Lawn
 				int num = 0;
 				int num2 = 0;
 				GetZombiePosition(zombieType, ref num, ref num2);
-				if (zombieType != ZombieType.ZOMBIE_INVALID)
+				if (zombieType != ZombieType.Invalid)
 				{
 					if (!ZombieIsShown(zombieType))
 					{

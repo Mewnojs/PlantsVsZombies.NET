@@ -40,12 +40,12 @@ namespace Lawn
 			mChompCounter = 0;
 			mRollingInCounter = 0;
 			mSquishedCounter = 0;
-			mMowerState = LawnMowerState.MOWER_ROLLING_IN;
+			mMowerState = LawnMowerState.RollingIn;
 			mDead = false;
 			mVisible = false;
-			mMowerType = LawnMowerType.LAWNMOWER_LAWN;
+			mMowerType = LawnMowerType.Lawn;
 			mAltitude = 0f;
-			mMowerHeight = MowerHeight.MOWER_HEIGHT_LAND;
+			mMowerHeight = MowerHeight.Land;
 			mLastPortalX = 0;
 		}
 
@@ -54,11 +54,11 @@ namespace Lawn
 			mApp = (LawnApp)GlobalStaticVars.gSexyAppBase;
 			mBoard = mApp.mBoard;
 			mRow = theRow;
-			mRenderOrder = Board.MakeRenderOrder(RenderLayer.RENDER_LAYER_LAWN_MOWER, theRow, 0);
+			mRenderOrder = Board.MakeRenderOrder(RenderLayer.LawnMower, theRow, 0);
 			mPosX = -160f + Constants.BOARD_EXTRA_ROOM;
 			mPosY = mBoard.GetPosYBasedOnRow(mPosX + 40f, theRow) + 23f;
 			mDead = false;
-			mMowerState = LawnMowerState.MOWER_READY;
+			mMowerState = LawnMowerState.Ready;
 			mVisible = true;
 			mChompCounter = 0;
 			mRollingInCounter = 0;
@@ -67,30 +67,30 @@ namespace Lawn
 			ReanimationType theReanimationType;
 			if (mBoard.StageHasRoof())
 			{
-				mMowerType = LawnMowerType.LAWNMOWER_ROOF;
-				theReanimationType = ReanimationType.REANIM_ROOF_CLEANER;
+				mMowerType = LawnMowerType.Roof;
+				theReanimationType = ReanimationType.RoofCleaner;
 			}
-			else if (mBoard.mPlantRow[mRow] == PlantRowType.PLANTROW_POOL && mApp.mPlayerInfo.mPurchases[22] != 0)
+			else if (mBoard.mPlantRow[mRow] == PlantRowType.Pool && mApp.mPlayerInfo.mPurchases[22] != 0)
 			{
-				mMowerType = LawnMowerType.LAWNMOWER_POOL;
-				theReanimationType = ReanimationType.REANIM_POOL_CLEANER;
+				mMowerType = LawnMowerType.Pool;
+				theReanimationType = ReanimationType.PoolCleaner;
 			}
 			else
 			{
-				mMowerType = LawnMowerType.LAWNMOWER_LAWN;
-				theReanimationType = ReanimationType.REANIM_LAWNMOWER;
+				mMowerType = LawnMowerType.Lawn;
+				theReanimationType = ReanimationType.Lawnmower;
 			}
 			Reanimation reanimation = mApp.AddReanimation(0f, 18f, mRenderOrder, theReanimationType);
-			reanimation.mLoopType = ReanimLoopType.REANIM_LOOP;
+			reanimation.mLoopType = ReanimLoopType.Loop;
 			reanimation.mAnimRate = 0f;
 			reanimation.mIsAttachment = true;
 			reanimation.OverrideScale(0.85f, 0.85f);
 			mReanimID = mApp.ReanimationGetID(reanimation);
-			if (mMowerType == LawnMowerType.LAWNMOWER_LAWN)
+			if (mMowerType == LawnMowerType.Lawn)
 			{
 				reanimation.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_normal);
 			}
-			else if (mMowerType == LawnMowerType.LAWNMOWER_POOL)
+			else if (mMowerType == LawnMowerType.Pool)
 			{
 				reanimation.OverrideScale(0.8f, 0.8f);
 				reanimation.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_land);
@@ -105,29 +105,29 @@ namespace Lawn
 
 		public void StartMower()
 		{
-			if (mMowerState == LawnMowerState.MOWER_TRIGGERED)
+			if (mMowerState == LawnMowerState.Triggered)
 			{
 				return;
 			}
 			Reanimation reanimation = mApp.ReanimationGet(mReanimID);
-			if (mMowerType == LawnMowerType.LAWNMOWER_POOL)
+			if (mMowerType == LawnMowerType.Pool)
 			{
 				reanimation.mAnimRate = 35f;
-				mApp.PlayFoley(FoleyType.FOLEY_POOL_CLEANER);
+				mApp.PlayFoley(FoleyType.PoolCleaner);
 			}
 			else
 			{
 				reanimation.mAnimRate = 70f;
-				mApp.PlayFoley(FoleyType.FOLEY_LAWNMOWER);
+				mApp.PlayFoley(FoleyType.Lawnmower);
 			}
 			mBoard.mWaveRowGotLawnMowered[mRow] = mBoard.mCurrentWave;
 			mBoard.mTriggeredLawnMowers++;
-			mMowerState = LawnMowerState.MOWER_TRIGGERED;
+			mMowerState = LawnMowerState.Triggered;
 		}
 
 		public void Update()
 		{
-			if (mMowerState == LawnMowerState.MOWER_SQUISHED)
+			if (mMowerState == LawnMowerState.Squished)
 			{
 				mSquishedCounter -= 3;
 				if (mSquishedCounter <= 0)
@@ -136,17 +136,17 @@ namespace Lawn
 				}
 				return;
 			}
-			if (mMowerState == LawnMowerState.MOWER_ROLLING_IN)
+			if (mMowerState == LawnMowerState.RollingIn)
 			{
 				mRollingInCounter += 3;
-				mPosX = TodCommon.TodAnimateCurveFloat(0, 100, mRollingInCounter, -160f, -21f, TodCurves.CURVE_EASE_IN_OUT) + Constants.BOARD_EXTRA_ROOM;
+				mPosX = TodCommon.TodAnimateCurveFloat(0, 100, mRollingInCounter, -160f, -21f, TodCurves.EaseInOut) + Constants.BOARD_EXTRA_ROOM;
 				if (mRollingInCounter >= 100)
 				{
-					mMowerState = LawnMowerState.MOWER_READY;
+					mMowerState = LawnMowerState.Ready;
 				}
 				return;
 			}
-			if (mApp.mGameScene != GameScenes.SCENE_PLAYING && !mBoard.mCutScene.ShouldRunUpsellBoard())
+			if (mApp.mGameScene != GameScenes.Playing && !mBoard.mCutScene.ShouldRunUpsellBoard())
 			{
 				return;
 			}
@@ -155,7 +155,7 @@ namespace Lawn
 			for (int i = 0; i < count; i++)
 			{
 				Zombie zombie = mBoard.mZombies[i];
-				if (!zombie.mDead && zombie.mZombieType != ZombieType.ZOMBIE_BOSS && zombie.mRow - mRow == 0 && zombie.mZombiePhase != ZombiePhase.PHASE_ZOMBIE_MOWERED && !zombie.IsTangleKelpTarget())
+				if (!zombie.mDead && zombie.mZombieType != ZombieType.Boss && zombie.mRow - mRow == 0 && zombie.mZombiePhase != ZombiePhase.ZombieMowered && !zombie.IsTangleKelpTarget())
 				{
 					int theDamageRangeFlags = 127;
 					if (zombie.EffectedByDamage((uint)theDamageRangeFlags))
@@ -163,44 +163,44 @@ namespace Lawn
 						TRect zombieRect = zombie.GetZombieRect();
 						int rectOverlap = GameConstants.GetRectOverlap(lawnMowerAttackRect, zombieRect);
 						int num = 0;
-						if (zombie.mZombieType == ZombieType.ZOMBIE_BALLOON)
+						if (zombie.mZombieType == ZombieType.Balloon)
 						{
 							num = 20;
 						}
-						if (rectOverlap > num && (mMowerState != LawnMowerState.MOWER_READY || (zombie.mZombieType != ZombieType.ZOMBIE_BUNGEE && zombie.mHasHead)))
+						if (rectOverlap > num && (mMowerState != LawnMowerState.Ready || (zombie.mZombieType != ZombieType.Bungee && zombie.mHasHead)))
 						{
 							MowZombie(zombie);
 						}
 					}
 				}
 			}
-			if (mMowerState != LawnMowerState.MOWER_TRIGGERED && mMowerState != LawnMowerState.MOWER_SQUISHED)
+			if (mMowerState != LawnMowerState.Triggered && mMowerState != LawnMowerState.Squished)
 			{
 				return;
 			}
 			float num2 = 3.33f;
-			if (mMowerType == LawnMowerType.LAWNMOWER_POOL)
+			if (mMowerType == LawnMowerType.Pool)
 			{
 				num2 = 2.5f;
 			}
 			if (mChompCounter > 0)
 			{
 				mChompCounter -= 3;
-				num2 = TodCommon.TodAnimateCurveFloat(50, 0, mChompCounter, num2, 1f, TodCurves.CURVE_BOUNCE_SLOW_MIDDLE);
+				num2 = TodCommon.TodAnimateCurveFloat(50, 0, mChompCounter, num2, 1f, TodCurves.BounceSlowMiddle);
 			}
 			mPosX += 3f * num2;
 			mPosY = mBoard.GetPosYBasedOnRow(mPosX + 40f, mRow) + 23f;
-			if (mMowerType == LawnMowerType.LAWNMOWER_POOL)
+			if (mMowerType == LawnMowerType.Pool)
 			{
 				UpdatePool();
 			}
-			if (mMowerType == LawnMowerType.LAWNMOWER_LAWN && mBoard.mPlantRow[mRow] == PlantRowType.PLANTROW_POOL && mPosX > 50f)
+			if (mMowerType == LawnMowerType.Lawn && mBoard.mPlantRow[mRow] == PlantRowType.Pool && mPosX > 50f)
 			{
-				Reanimation reanimation = mApp.AddReanimation(mPosX, mPosY + 25f, mRenderOrder + 1, ReanimationType.REANIM_SPLASH);
+				Reanimation reanimation = mApp.AddReanimation(mPosX, mPosY + 25f, mRenderOrder + 1, ReanimationType.Splash);
 				reanimation.OverrideScale(1.2f, 0.8f);
-				mApp.AddTodParticle(mPosX + 50f, mPosY + 67f, mRenderOrder + 1, ParticleEffect.PARTICLE_PLANTING_POOL);
+				mApp.AddTodParticle(mPosX + 50f, mPosY + 67f, mRenderOrder + 1, ParticleEffect.PlantingPool);
 				mApp.PlaySample(Resources.SOUND_ZOMBIE_ENTERING_WATER);
-				mApp.mSoundSystem.StopFoley(FoleyType.FOLEY_LAWNMOWER);
+				mApp.mSoundSystem.StopFoley(FoleyType.Lawnmower);
 				Die();
 			}
 			if (mPosX > Constants.WIDE_BOARD_WIDTH)
@@ -225,7 +225,7 @@ namespace Lawn
 			}
 			float num = 14f;
 			g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
-			if (mMowerHeight != MowerHeight.MOWER_HEIGHT_UP_TO_LAND && mMowerHeight != MowerHeight.MOWER_HEIGHT_DOWN_TO_POOL && mMowerHeight != MowerHeight.MOWER_HEIGHT_IN_POOL && mMowerState != LawnMowerState.MOWER_SQUISHED)
+			if (mMowerHeight != MowerHeight.UpToLand && mMowerHeight != MowerHeight.DownToPool && mMowerHeight != MowerHeight.InPool && mMowerState != LawnMowerState.Squished)
 			{
 				int num2 = 0;
 				float theScaleX = 1f;
@@ -236,17 +236,17 @@ namespace Lawn
 				}
 				float num3 = mPosX - 7f;
 				float num4 = mPosY - mAltitude + 47f;
-				if (mMowerType == LawnMowerType.LAWNMOWER_POOL)
+				if (mMowerType == LawnMowerType.Pool)
 				{
 					num3 += -17f;
 					num4 += -8f;
 				}
-				if (mMowerType == LawnMowerType.LAWNMOWER_ROOF)
+				if (mMowerType == LawnMowerType.Roof)
 				{
 					num3 += -9f;
 					num4 += -36f;
 					theScaleY = 1.2f;
-					if (mMowerState == LawnMowerState.MOWER_TRIGGERED)
+					if (mMowerState == LawnMowerState.Triggered)
 					{
 						num4 += 36f;
 					}
@@ -267,9 +267,9 @@ namespace Lawn
 			Graphics @new = Graphics.GetNew(g);
 			@new.mTransX += (int)((mPosX + 6f) * Constants.S);
 			@new.mTransY += (int)((mPosY - mAltitude - num) * Constants.S);
-			if (mMowerType == LawnMowerType.LAWNMOWER_POOL)
+			if (mMowerType == LawnMowerType.Pool)
 			{
-				if (mMowerState == LawnMowerState.MOWER_TRIGGERED)
+				if (mMowerState == LawnMowerState.Triggered)
 				{
 					@new.mTransY -= (int)(7f * Constants.S);
 					@new.mTransX -= (int)(10f * Constants.S);
@@ -278,14 +278,14 @@ namespace Lawn
 				{
 					@new.mTransY -= (int)(33f * Constants.S);
 				}
-				if (mMowerHeight == MowerHeight.MOWER_HEIGHT_UP_TO_LAND || mMowerHeight == MowerHeight.MOWER_HEIGHT_DOWN_TO_POOL)
+				if (mMowerHeight == MowerHeight.UpToLand || mMowerHeight == MowerHeight.DownToPool)
 				{
 					@new.SetClipRect((int)(-50f * Constants.S), (int)(-50f * Constants.S), (int)(150f * Constants.S), (int)((132f + mAltitude) * Constants.S));
 				}
 			}
-			else if (mMowerType == LawnMowerType.LAWNMOWER_ROOF)
+			else if (mMowerType == LawnMowerType.Roof)
 			{
-				if (mMowerState == LawnMowerState.MOWER_TRIGGERED)
+				if (mMowerState == LawnMowerState.Triggered)
 				{
 					@new.mTransY -= (int)(4f * Constants.S);
 					@new.mTransX -= (int)(10f * Constants.S);
@@ -295,7 +295,7 @@ namespace Lawn
 					@new.mTransY -= (int)(40f * Constants.S);
 				}
 			}
-			if (mMowerState == LawnMowerState.MOWER_TRIGGERED || mMowerState == LawnMowerState.MOWER_SQUISHED)
+			if (mMowerState == LawnMowerState.Triggered || mMowerState == LawnMowerState.Squished)
 			{
 				Reanimation reanimation = mApp.ReanimationGet(mReanimID);
 				reanimation.Draw(@new);
@@ -303,9 +303,9 @@ namespace Lawn
 			else
 			{
 				LawnMowerType lawnMowerType = mMowerType;
-				if (mMowerType == LawnMowerType.LAWNMOWER_LAWN && mBoard.mSuperMowerMode)
+				if (mMowerType == LawnMowerType.Lawn && mBoard.mSuperMowerMode)
 				{
-					lawnMowerType = LawnMowerType.LAWNMOWER_SUPER_MOWER;
+					lawnMowerType = LawnMowerType.SuperMower;
 				}
 				GlobalStaticVars.gLawnApp.mReanimatorCache.DrawCachedMower(@new, 0f * Constants.S, 19f * Constants.S, lawnMowerType);
 			}
@@ -320,7 +320,7 @@ namespace Lawn
 			{
 				LawnMower lawnMower = new LawnMower();
 				lawnMower.LawnMowerInitialize(mRow);
-				lawnMower.mMowerState = LawnMowerState.MOWER_ROLLING_IN;
+				lawnMower.mMowerState = LawnMowerState.RollingIn;
 				mBoard.mBonusLawnMowersRemaining--;
 				mBoard.mLawnMowers.Add(lawnMower);
 			}
@@ -339,49 +339,49 @@ namespace Lawn
 				flag = true;
 			}
 			Reanimation reanimation = mApp.ReanimationGet(mReanimID);
-			if (flag && mMowerHeight == MowerHeight.MOWER_HEIGHT_LAND)
+			if (flag && mMowerHeight == MowerHeight.Land)
 			{
-				Reanimation reanimation2 = mApp.AddReanimation(mPosX + 0f, mPosY + 25f, mRenderOrder + 1, ReanimationType.REANIM_SPLASH);
+				Reanimation reanimation2 = mApp.AddReanimation(mPosX + 0f, mPosY + 25f, mRenderOrder + 1, ReanimationType.Splash);
 				reanimation2.OverrideScale(1.2f, 0.8f);
-				mApp.AddTodParticle(mPosX + 0f + 50f, mPosY + 0f + 42f, mRenderOrder + 1, ParticleEffect.PARTICLE_PLANTING_POOL);
-				mApp.PlayFoley(FoleyType.FOLEY_ZOMBIESPLASH);
-				mMowerHeight = MowerHeight.MOWER_HEIGHT_DOWN_TO_POOL;
+				mApp.AddTodParticle(mPosX + 0f + 50f, mPosY + 0f + 42f, mRenderOrder + 1, ParticleEffect.PlantingPool);
+				mApp.PlayFoley(FoleyType.Zombiesplash);
+				mMowerHeight = MowerHeight.DownToPool;
 			}
-			else if (mMowerHeight == MowerHeight.MOWER_HEIGHT_DOWN_TO_POOL)
+			else if (mMowerHeight == MowerHeight.DownToPool)
 			{
 				mAltitude -= 2f;
 				if (mAltitude <= -28f)
 				{
 					mAltitude = 0f;
-					mMowerHeight = MowerHeight.MOWER_HEIGHT_IN_POOL;
-					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_water, ReanimLoopType.REANIM_LOOP, 0, 0f);
+					mMowerHeight = MowerHeight.InPool;
+					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_water, ReanimLoopType.Loop, 0, 0f);
 				}
 			}
-			else if (mMowerHeight == MowerHeight.MOWER_HEIGHT_IN_POOL)
+			else if (mMowerHeight == MowerHeight.InPool)
 			{
 				if (!flag)
 				{
 					mAltitude = -28f;
-					mMowerHeight = MowerHeight.MOWER_HEIGHT_UP_TO_LAND;
-					Reanimation reanimation3 = mApp.AddReanimation(mPosX + 0f, mPosY + 25f, mRenderOrder + 1, ReanimationType.REANIM_SPLASH);
+					mMowerHeight = MowerHeight.UpToLand;
+					Reanimation reanimation3 = mApp.AddReanimation(mPosX + 0f, mPosY + 25f, mRenderOrder + 1, ReanimationType.Splash);
 					reanimation3.OverrideScale(1.2f, 0.8f);
-					mApp.AddTodParticle(mPosX + 0f + 50f, mPosY + 0f + 42f, mRenderOrder + 1, ParticleEffect.PARTICLE_PLANTING_POOL);
-					mApp.PlayFoley(FoleyType.FOLEY_PLANT_WATER);
-					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_land, ReanimLoopType.REANIM_LOOP, 0, 0f);
+					mApp.AddTodParticle(mPosX + 0f + 50f, mPosY + 0f + 42f, mRenderOrder + 1, ParticleEffect.PlantingPool);
+					mApp.PlayFoley(FoleyType.PlantWater);
+					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_land, ReanimLoopType.Loop, 0, 0f);
 				}
 			}
-			else if (mMowerHeight == MowerHeight.MOWER_HEIGHT_UP_TO_LAND)
+			else if (mMowerHeight == MowerHeight.UpToLand)
 			{
 				mAltitude += 2f;
 				if (mAltitude >= 0f)
 				{
 					mAltitude = 0f;
-					mMowerHeight = MowerHeight.MOWER_HEIGHT_LAND;
+					mMowerHeight = MowerHeight.Land;
 				}
 			}
-			if (mMowerHeight == MowerHeight.MOWER_HEIGHT_IN_POOL && reanimation.mLoopType == ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD && reanimation.mLoopCount > 0)
+			if (mMowerHeight == MowerHeight.InPool && reanimation.mLoopType == ReanimLoopType.PlayOnceAndHold && reanimation.mLoopCount > 0)
 			{
-				reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_water, ReanimLoopType.REANIM_LOOP, 10, 35f);
+				reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_water, ReanimLoopType.Loop, 10, 35f);
 			}
 		}
 
@@ -435,32 +435,32 @@ namespace Lawn
 
 		public void MowZombie(Zombie theZombie)
 		{
-			if (mMowerState == LawnMowerState.MOWER_READY)
+			if (mMowerState == LawnMowerState.Ready)
 			{
 				StartMower();
 				mChompCounter = 25;
 			}
-			else if (mMowerState == LawnMowerState.MOWER_TRIGGERED)
+			else if (mMowerState == LawnMowerState.Triggered)
 			{
 				mChompCounter = 50;
 			}
-			if (mMowerType == LawnMowerType.LAWNMOWER_POOL)
+			if (mMowerType == LawnMowerType.Pool)
 			{
-				mApp.PlayFoley(FoleyType.FOLEY_SHOOP);
-				if (mMowerHeight == MowerHeight.MOWER_HEIGHT_IN_POOL)
+				mApp.PlayFoley(FoleyType.Shoop);
+				if (mMowerHeight == MowerHeight.InPool)
 				{
 					Reanimation reanimation = mApp.ReanimationGet(mReanimID);
-					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_suck, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 10, 35f);
+					reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_suck, ReanimLoopType.PlayOnceAndHold, 10, 35f);
 				}
 				else
 				{
 					Reanimation reanimation2 = mApp.ReanimationGet(mReanimID);
-					reanimation2.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_landsuck, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 10, 35f);
+					reanimation2.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_landsuck, ReanimLoopType.PlayOnceAndHold, 10, 35f);
 				}
 				theZombie.DieWithLoot();
 				return;
 			}
-			mApp.PlayFoley(FoleyType.FOLEY_SPLAT);
+			mApp.PlayFoley(FoleyType.Splat);
 			theZombie.MowDown();
 		}
 
@@ -469,14 +469,14 @@ namespace Lawn
 			Reanimation reanimation = mApp.ReanimationGet(mReanimID);
 			reanimation.OverrideScale(0.85f, 0.22f);
 			reanimation.SetPosition(-11f * Constants.S, 65f * Constants.S);
-			mMowerState = LawnMowerState.MOWER_SQUISHED;
+			mMowerState = LawnMowerState.Squished;
 			mSquishedCounter = 500;
-			mApp.PlayFoley(FoleyType.FOLEY_SQUISH);
+			mApp.PlayFoley(FoleyType.Squish);
 		}
 
 		public void EnableSuperMower(bool theEnable)
 		{
-			if (mMowerType != LawnMowerType.LAWNMOWER_LAWN)
+			if (mMowerType != LawnMowerType.Lawn)
 			{
 				return;
 			}

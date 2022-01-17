@@ -8,12 +8,12 @@ namespace Lawn
     {
         public CursorObject()
         {
-            mType = SeedType.SEED_NONE;
-            mImitaterType = SeedType.SEED_NONE;
+            mType = SeedType.None;
+            mImitaterType = SeedType.None;
             mSeedBankIndex = -1;
             mX = 0;
             mY = 0;
-            mCursorType = CursorType.CURSOR_TYPE_NORMAL;
+            mCursorType = CursorType.Normal;
             mCoinID = null;
             mDuplicatorPlantID = null;
             mCobCannonPlantID = null;
@@ -22,10 +22,10 @@ namespace Lawn
             mPosScaled = false;
             if (mApp.IsWhackAZombieLevel())
             {
-                ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.REANIM_HAMMER, true);
-                Reanimation reanimation = mApp.AddReanimation(-25f, 16f, 0, ReanimationType.REANIM_HAMMER);
+                ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.Hammer, true);
+                Reanimation reanimation = mApp.AddReanimation(-25f, 16f, 0, ReanimationType.Hammer);
                 reanimation.mIsAttachment = true;
-                reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_whack_zombie, ReanimLoopType.REANIM_PLAY_ONCE_AND_HOLD, 0, 24f);
+                reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_whack_zombie, ReanimLoopType.PlayOnceAndHold, 0, 24f);
                 reanimation.mAnimTime = 1f;
                 mReanimCursorID = mApp.ReanimationGetID(reanimation);
             }
@@ -35,7 +35,7 @@ namespace Lawn
 
         public void Update()
         {
-            if (mApp.mGameScene != GameScenes.SCENE_PLAYING && !mBoard.mCutScene.IsInShovelTutorial())
+            if (mApp.mGameScene != GameScenes.Playing && !mBoard.mCutScene.IsInShovelTutorial())
             {
                 mVisible = false;
                 return;
@@ -79,13 +79,13 @@ namespace Lawn
 
         public void DrawGroundLayer(Graphics g)
         {
-            if (mCursorType != CursorType.CURSOR_TYPE_NORMAL)
+            if (mCursorType != CursorType.Normal)
             {
                 int theX = (int)(mX * Constants.IS);
                 int theY = (int)(mY * Constants.IS);
                 int num;
                 int num2;
-                if (mCursorType == CursorType.CURSOR_TYPE_PLANT_FROM_BANK)
+                if (mCursorType == CursorType.PlantFromBank)
                 {
                     if (mBoard.mIgnoreMouseUp)
                     {
@@ -93,7 +93,7 @@ namespace Lawn
                     }
                     num = mBoard.PlantingPixelToGridX(theX, theY, mType);
                     num2 = mBoard.PlantingPixelToGridY(theX, theY, mType);
-                    if (mBoard.CanPlantAt(num, num2, mType) != PlantingReason.PLANTING_OK)
+                    if (mBoard.CanPlantAt(num, num2, mType) != PlantingReason.Ok)
                     {
                         return;
                     }
@@ -102,7 +102,7 @@ namespace Lawn
                 {
                     num = mBoard.PixelToGridX(theX, theY);
                     num2 = mBoard.PixelToGridY(theX, theY);
-                    if (mCursorType == CursorType.CURSOR_TYPE_SHOVEL && (mBoard.mIgnoreMouseUp || mBoard.ToolHitTest(mX, mY, false).mObjectType == GameObjectType.OBJECT_TYPE_NONE))
+                    if (mCursorType == CursorType.Shovel && (mBoard.mIgnoreMouseUp || mBoard.ToolHitTest(mX, mY, false).mObjectType == GameObjectType.None))
                     {
                         return;
                     }
@@ -138,7 +138,7 @@ namespace Lawn
         {
             switch (mCursorType)
             {
-                case CursorType.CURSOR_TYPE_SHOVEL:
+                case CursorType.Shovel:
                     if (mBoard.mIgnoreMouseUp || mX * Constants.IS < Constants.LAWN_XMIN || mY * Constants.IS < Constants.LAWN_YMIN)
                     {
                         return;
@@ -146,14 +146,14 @@ namespace Lawn
                     int imgShovelWidth = AtlasResources.IMAGE_SHOVEL_HI_RES.mWidth;
                     int imgShovelHeight = AtlasResources.IMAGE_SHOVEL_HI_RES.mHeight;
                     g.SetColor(SexyColor.White);
-                    int num = (int)TodCommon.TodAnimateCurveFloat(0, 39, mBoard.mEffectCounter % 40, 0f, imgShovelWidth / 2, TodCurves.CURVE_BOUNCE_SLOW_MIDDLE);
+                    int num = (int)TodCommon.TodAnimateCurveFloat(0, 39, mBoard.mEffectCounter % 40, 0f, imgShovelWidth / 2, TodCurves.BounceSlowMiddle);
                     g.DrawImage(AtlasResources.IMAGE_SHOVEL_HI_RES, num, -imgShovelHeight - num, imgShovelWidth, imgShovelHeight);
                     return;
-                case CursorType.CURSOR_TYPE_HAMMER:
+                case CursorType.Hammer:
                     Reanimation reanimation = mApp.ReanimationGet(mReanimCursorID);
                     reanimation.Draw(g);
                     return;
-                case CursorType.CURSOR_TYPE_COBCANNON_TARGET:
+                case CursorType.CobcannonTarget:
                     if (mX * Constants.IS < Constants.LAWN_XMIN || mY * Constants.IS < Constants.LAWN_YMIN)
                     {
                         return;
@@ -165,7 +165,7 @@ namespace Lawn
                     g.DrawImage(AtlasResources.IMAGE_COBCANNON_TARGET, -imgCobCannonTargetWidth / 2, -imgCobCannonTargetHeight / 2, imgCobCannonTargetWidth, imgCobCannonTargetHeight);
                     g.SetColorizeImages(false);
                     return;
-                case CursorType.CURSOR_TYPE_WATERING_CAN:
+                case CursorType.WateringCan:
                     if (mApp.mPlayerInfo.mPurchases[13] > 0)
                     {
                         TRect trect = new TRect(Constants.ZEN_XMIN, Constants.ZEN_YMIN, Constants.ZEN_XMAX - Constants.ZEN_XMIN, Constants.ZEN_YMAX - Constants.ZEN_YMIN);
@@ -182,25 +182,25 @@ namespace Lawn
                         DrawToolIconImage(g, AtlasResources.IMAGE_REANIM_ZENGARDEN_WATERINGCAN1);
                     }
                     break;
-                case CursorType.CURSOR_TYPE_BUG_SPRAY:
+                case CursorType.BugSpray:
                     DrawToolIconImage(g, AtlasResources.IMAGE_REANIM_ZENGARDEN_BUGSPRAY_BOTTLE);
                     return;
-                case CursorType.CURSOR_TYPE_PHONOGRAPH:
+                case CursorType.Phonograph:
                     DrawToolIconImage(g, AtlasResources.IMAGE_PHONOGRAPH);
                     return;
-                case CursorType.CURSOR_TYPE_FERTILIZER:
+                case CursorType.Fertilizer:
                     DrawToolIconImage(g, AtlasResources.IMAGE_REANIM_ZENGARDEN_FERTILIZER_BAG1);
                     return;
-                case CursorType.CURSOR_TYPE_GLOVE:
+                case CursorType.Glove:
                     DrawToolIconImage(g, AtlasResources.IMAGE_ZEN_GARDENGLOVE);
                     return;
-                case CursorType.CURSOR_TYPE_CHOCOLATE:
+                case CursorType.Chocolate:
                     DrawToolIconImage(g, AtlasResources.IMAGE_CHOCOLATE);
                     return;
-                case CursorType.CURSOR_TYPE_MONEY_SIGN:
+                case CursorType.MoneySign:
                     DrawToolIconImage(g, AtlasResources.IMAGE_ZEN_MONEYSIGN);
                     return;
-                case CursorType.CURSOR_TYPE_WHEEELBARROW:
+                case CursorType.Wheeelbarrow:
                     Image wbimage = AtlasResources.IMAGE_ZEN_WHEELBARROW;
                     DrawToolIconImage(g, wbimage);
                     PottedPlant wbplant = mApp.mZenGarden.GetPottedPlantInWheelbarrow();
@@ -209,13 +209,13 @@ namespace Lawn
                         mApp.mZenGarden.DrawPottedPlant(g, -wbimage.mWidth / 2 + (float)(Constants.ZenGardenButton_WheelbarrowPlant_Offset.X), -wbimage.mHeight / 2 + (float)(Constants.ZenGardenButton_WheelbarrowPlant_Offset.Y), wbplant, 0.6f, true);
                     }
                     return;
-                case CursorType.CURSOR_TYPE_PLANT_FROM_BANK:
-                case CursorType.CURSOR_TYPE_PLANT_FROM_USABLE_COIN:
+                case CursorType.PlantFromBank:
+                case CursorType.PlantFromUsableCoin:
                     if (mBoard.mIgnoreMouseUp || mX * Constants.IS < Constants.LAWN_XMIN || mY * Constants.IS < Constants.LAWN_YMIN)
                     {
                         return;
                     }
-                    if (mType == SeedType.SEED_NONE) 
+                    if (mType == SeedType.None) 
                     {
                         return;
                     }
@@ -229,7 +229,7 @@ namespace Lawn
                         GlobalStaticVars.gLawnApp.mReanimatorCache.DrawCachedZombie(g, xPos, yPos, theZombieType);
                         return;
                     }
-                    GlobalStaticVars.gLawnApp.mReanimatorCache.DrawCachedPlant(g, xPos, yPos, mType, DrawVariation.VARIATION_NORMAL);
+                    GlobalStaticVars.gLawnApp.mReanimatorCache.DrawCachedPlant(g, xPos, yPos, mType, DrawVariation.Normal);
                     return;
 
             }

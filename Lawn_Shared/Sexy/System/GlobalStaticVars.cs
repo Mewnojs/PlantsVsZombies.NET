@@ -19,27 +19,27 @@ namespace Sexy
 			{
 				return "Before App";
 			}
-			if (GlobalStaticVars.gLawnApp.mGameScene == GameScenes.SCENE_LOADING)
+			if (GlobalStaticVars.gLawnApp.mGameScene == GameScenes.Loading)
 			{
 				return "Game Loading";
 			}
-			if (GlobalStaticVars.gLawnApp.mGameScene == GameScenes.SCENE_MENU)
+			if (GlobalStaticVars.gLawnApp.mGameScene == GameScenes.Menu)
 			{
 				return "Game Selector";
 			}
-			if (GlobalStaticVars.gLawnApp.mGameScene == GameScenes.SCENE_AWARD)
+			if (GlobalStaticVars.gLawnApp.mGameScene == GameScenes.Award)
 			{
 				return "Award Screen";
 			}
-			if (GlobalStaticVars.gLawnApp.mGameScene == GameScenes.SCENE_MENU)
+			if (GlobalStaticVars.gLawnApp.mGameScene == GameScenes.Menu)
 			{
 				return "Game Selector";
 			}
-			if (GlobalStaticVars.gLawnApp.mGameScene == GameScenes.SCENE_CHALLENGE)
+			if (GlobalStaticVars.gLawnApp.mGameScene == GameScenes.Challenge)
 			{
 				return "Challenge Screen";
 			}
-			if (GlobalStaticVars.gLawnApp.mGameScene == GameScenes.SCENE_CREDIT)
+			if (GlobalStaticVars.gLawnApp.mGameScene == GameScenes.Credit)
 			{
 				return "Credits";
 			}

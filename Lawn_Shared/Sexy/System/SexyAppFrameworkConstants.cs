@@ -25,7 +25,7 @@ namespace Sexy
 
 		public const int MAX_CHANNELS = 32;
 
-		public const int TRACK_FLUSHES = 1;
+		public const int Flushes = 1;
 
 		public const long FONT_MAGIC = 4278190267L;
 

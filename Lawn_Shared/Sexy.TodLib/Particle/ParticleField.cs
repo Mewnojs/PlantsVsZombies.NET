@@ -6,7 +6,7 @@ namespace Sexy.TodLib
 	{
 		public ParticleField()
 		{
-			mFieldType = ParticleFieldType.FIELD_INVALID;
+			mFieldType = ParticleFieldType.Invalid;
 		}
 
 		public ParticleFieldType mFieldType;

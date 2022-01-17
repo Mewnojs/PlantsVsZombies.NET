@@ -22,7 +22,7 @@ namespace Lawn
 			@new.DrawImage(AtlasResources.IMAGE_LOADBAR_GRASS, num, num2);
 			float num3 = mCurBarWidth * 0.94f;
 			float rad = -num3 / 180f * 3.1415927f * 2f;
-			float num4 = TodCommon.TodAnimateCurveFloatTime(0f, mTotalBarWidth, mCurBarWidth, 1f, 0.5f, TodCurves.CURVE_LINEAR);
+			float num4 = TodCommon.TodAnimateCurveFloatTime(0f, mTotalBarWidth, mCurBarWidth, 1f, 0.5f, TodCurves.Linear);
 			SexyTransform2D sexyTransform2D = default(SexyTransform2D);
 			TodCommon.TodScaleRotateTransformMatrix(ref sexyTransform2D.mMatrix, num + Constants.InvertAndScale(11f) + num3, num2 - Constants.InvertAndScale(3f) - Constants.InvertAndScale(35f) * num4 + Constants.InvertAndScale(35f), rad, num4, num4);
 			TRect theSrcRect = new TRect(0, 0, AtlasResources.IMAGE_REANIM_LOAD_SODROLLCAP.mWidth, AtlasResources.IMAGE_REANIM_LOAD_SODROLLCAP.mHeight);

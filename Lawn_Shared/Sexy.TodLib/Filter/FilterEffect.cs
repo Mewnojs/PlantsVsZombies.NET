@@ -9,7 +9,7 @@ namespace Sexy.TodLib
 	{
 		public static void FilterEffectInitForApp()
 		{
-			for (int i = 0; i < (int)FilterEffectType.NUM_FILTER_EFFECTS; i++) 
+			for (int i = 0; i < (int)FilterEffectType.FilterEffectCount; i++) 
 			{
 				gFilterMap.Add(new Dictionary<Texture2D, Texture2D>());
 			}
@@ -28,7 +28,7 @@ namespace Sexy.TodLib
 
 		public static Image FilterEffectGetImage(Image theImage, FilterEffectType theFilterEffect)
 		{
-			if (theFilterEffect == FilterEffectType.FILTER_EFFECT_NONE)
+			if (theFilterEffect == FilterEffectType.None)
 				return theImage;
 			else 
 			{
@@ -82,13 +82,13 @@ namespace Sexy.TodLib
 			}
 			switch (theFilterEffect)
 			{
-			case FilterEffectType.FILTER_EFFECT_WASHED_OUT:
+			case FilterEffectType.WashedOut:
 				FilterEffect.FilterEffectDoWashedOut(memoryImage);
 				break;
-			case FilterEffectType.FILTER_EFFECT_LESS_WASHED_OUT:
+			case FilterEffectType.LessWashedOut:
 				FilterEffect.FilterEffectDoLessWashedOut(memoryImage);
 				break;
-			case FilterEffectType.FILTER_EFFECT_WHITE:
+			case FilterEffectType.White:
 				FilterEffect.FilterEffectDoWhite(memoryImage);
 				break;
 			}
@@ -246,10 +246,10 @@ namespace Sexy.TodLib
 
 	public enum FilterEffectType
 	{
-		FILTER_EFFECT_NONE = -1,
-		FILTER_EFFECT_WASHED_OUT,
-		FILTER_EFFECT_LESS_WASHED_OUT,
-		FILTER_EFFECT_WHITE,
-		NUM_FILTER_EFFECTS
+		None = -1,
+		WashedOut,
+		LessWashedOut,
+		White,
+		FilterEffectCount
 	}
 }

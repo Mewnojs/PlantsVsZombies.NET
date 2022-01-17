@@ -13,7 +13,7 @@ namespace Lawn
 			mLevelEditWidget.mMaxChars = 12;
 			mLevelEditWidget.SetFont(Resources.FONT_BRIANNETOD12);
 			string text = string.Empty;
-			if (mApp.mGameMode != GameMode.GAMEMODE_ADVENTURE)
+			if (mApp.mGameMode != GameMode.Adventure)
 			{
 				text = Common.StrFormat_("C{0}", (int)mApp.mGameMode);
 			}

@@ -134,11 +134,11 @@ namespace Sexy
 			{
 				if (mYesButton != null)
 				{
-					mYesButton.SetColor(ButtonWidget.ColorType.COLOR_LABEL, theColor);
+					mYesButton.SetColor(ButtonWidget.ColorType.Label, theColor);
 				}
 				if (mNoButton != null)
 				{
-					mNoButton.SetColor(ButtonWidget.ColorType.COLOR_LABEL, theColor);
+					mNoButton.SetColor(ButtonWidget.ColorType.Label, theColor);
 					return;
 				}
 			}
@@ -146,11 +146,11 @@ namespace Sexy
 			{
 				if (mYesButton != null)
 				{
-					mYesButton.SetColor(ButtonWidget.ColorType.COLOR_LABEL_HILITE, theColor);
+					mYesButton.SetColor(ButtonWidget.ColorType.LabelHilite, theColor);
 				}
 				if (mNoButton != null)
 				{
-					mNoButton.SetColor(ButtonWidget.ColorType.COLOR_LABEL_HILITE, theColor);
+					mNoButton.SetColor(ButtonWidget.ColorType.LabelHilite, theColor);
 				}
 			}
 		}
@@ -200,11 +200,11 @@ namespace Sexy
 			{
 				int num = 6;
 				Color theDefaultColor = new Color(GlobalMembersDialog.gDialogColors[num, 0], GlobalMembersDialog.gDialogColors[num, 1], GlobalMembersDialog.gDialogColors[num, 2]);
-				g.SetColor(GetColor(Dialog.DialogColour.COLOR_OUTLINE, theDefaultColor));
+				g.SetColor(GetColor(Dialog.DialogColour.Outline, theDefaultColor));
 				g.DrawRect(12, 12, mWidth - 24 - 1, mHeight - 24 - 1);
 				num = 5;
 				theDefaultColor = new Color(GlobalMembersDialog.gDialogColors[num, 0], GlobalMembersDialog.gDialogColors[num, 1], GlobalMembersDialog.gDialogColors[num, 2]);
-				g.SetColor(GetColor(Dialog.DialogColour.COLOR_BKG, theDefaultColor));
+				g.SetColor(GetColor(Dialog.DialogColour.Bkg, theDefaultColor));
 				g.FillRect(13, 13, mWidth - 24 - 2, mHeight - 24 - 2);
 				g.SetColor(new Color(0, 0, 0, 128));
 				g.FillRect(mWidth - 12, 24, 12, mHeight - 36);
@@ -487,13 +487,13 @@ namespace Sexy
 
 		public enum DialogColour
 		{
-			COLOR_HEADER,
-			COLOR_LINES,
-			COLOR_FOOTER,
-			COLOR_BUTTON_TEXT,
-			COLOR_BUTTON_TEXT_HILITE,
-			COLOR_BKG,
-			COLOR_OUTLINE,
+			Header,
+			Lines,
+			Footer,
+			ButtonText,
+			ButtonTextHilite,
+			Bkg,
+			Outline,
 			NUM_COLORS
 		}
 

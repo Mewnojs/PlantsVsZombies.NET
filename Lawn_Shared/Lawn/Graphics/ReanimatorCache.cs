@@ -9,15 +9,15 @@ namespace Lawn
     {
         public void ReanimatorCacheInitialize()
         {
-            for (int i = 0; i < (int)SeedType.NUM_SEED_TYPES; i++)
+            for (int i = 0; i < (int)SeedType.SeedTypeCount; i++)
             {
                 mPlantImages.Add(null);
             }
-            for (int i = 0; i < (int)LawnMowerType.NUM_MOWER_TYPES; i++)
+            for (int i = 0; i < (int)LawnMowerType.MowerTypesCount; i++)
             {
                 mLawnMowers.Add(null);
             }
-            for (int i = 0; i < (int)ZombieType.NUM_CACHED_ZOMBIE_TYPES; i++)
+            for (int i = 0; i < (int)ZombieType.CachedZombieTypesCount; i++)
             {
                 mZombieImages.Add(null);
             }
@@ -34,9 +34,9 @@ namespace Lawn
 
         /*public void DrawCachedPlant(Graphics g, float centerX, float btmY, SeedType theSeedType, DrawVariation theDrawVariation)
         {
-            Debug.ASSERT(theSeedType >= SeedType.SEED_PEASHOOTER && theSeedType < SeedType.NUM_SEED_TYPES);
+            Debug.ASSERT(theSeedType >= SeedType.Peashooter && theSeedType < SeedType.NUM_SEED_TYPES);
             Image image;
-            if (theSeedType == SeedType.SEED_SPROUT)
+            if (theSeedType == SeedType.Sprout)
             {
                 image = AtlasResources.IMAGE_CACHED_MARIGOLD;
             }
@@ -51,7 +51,7 @@ namespace Lawn
         public void DrawCachedPlant(Graphics g, float centerX, float btmY, SeedType theSeedType, DrawVariation theDrawVariation)
         {
             MemoryImage image = null;
-            if (theDrawVariation == DrawVariation.VARIATION_NORMAL || theDrawVariation == DrawVariation.VARIATION_IMITATER || theDrawVariation == DrawVariation.VARIATION_IMITATER_LESS)
+            if (theDrawVariation == DrawVariation.Normal || theDrawVariation == DrawVariation.Imitater || theDrawVariation == DrawVariation.ImitaterLess)
             {
                 if (mPlantImages[(int)theSeedType] == null)
                 {
@@ -88,7 +88,7 @@ namespace Lawn
 
         public void DrawCachedZombie(Graphics g, float thePosX, float thePosY, ZombieType theZombieType)
         {
-            Debug.ASSERT(theZombieType >= ZombieType.ZOMBIE_NORMAL && theZombieType < ZombieType.NUM_CACHED_ZOMBIE_TYPES);
+            Debug.ASSERT(theZombieType >= ZombieType.Normal && theZombieType < ZombieType.CachedZombieTypesCount);
             Image imageInAtlasById = AtlasResources.GetImageInAtlasById((int)(10349 + theZombieType));
             TodCommon.TodDrawImageScaledF(g, imageInAtlasById, thePosX, thePosY, g.mScaleX, g.mScaleY);
         }
@@ -118,16 +118,16 @@ namespace Lawn
             TRect result = new TRect(-20, -20, 120, 120);
             switch (seedtype)
             {
-                case SeedType.SEED_TALLNUT:
+                case SeedType.Tallnut:
                     result.mY -= 20;
                     result.mHeight += 40;
                     break;
-                case SeedType.SEED_MELONPULT:
-                case SeedType.SEED_WINTERMELON:
+                case SeedType.Melonpult:
+                case SeedType.Wintermelon:
                     result.mX -= 20;
                     result.mWidth += 40;
                     break;
-                case SeedType.SEED_COBCANNON:
+                case SeedType.Cobcannon:
                     result.mWidth += 80;
                     break;
             }
@@ -142,11 +142,11 @@ namespace Lawn
             {
                 reanim.SetFramesForLayer(trackName);
             }
-            if (reanimType == ReanimationType.REANIM_KERNELPULT)
+            if (reanimType == ReanimationType.Kernelpult)
             {
                 reanim.AssignRenderGroupToTrack("Cornpult_butter", -1);
             }
-            if (reanimType == ReanimationType.REANIM_SUNFLOWER)
+            if (reanimType == ReanimationType.Sunflower)
             {
                 reanim.mAnimTime = 0.15f;
             }
@@ -164,9 +164,9 @@ namespace Lawn
 
         public void UpdateReanimationforVariation(Reanimation reanimation, DrawVariation variation)
         {
-            if (variation != DrawVariation.VARIATION_NORMAL)
+            if (variation != DrawVariation.Normal)
             {
-                if (DrawVariation.VARIATION_MARIGOLD_WHITE <= variation && variation <= DrawVariation.VARIATION_MARIGOLD_LIGHT_GREEN)
+                if (DrawVariation.MarigoldWhite <= variation && variation <= DrawVariation.MarigoldLightGreen)
                 {
                     List<SexyColor> marigoldColors = new List<SexyColor> {
                         new SexyColor(255, 255, 255),
@@ -185,25 +185,25 @@ namespace Lawn
                 }
                 switch (variation)
                 {
-                    case DrawVariation.VARIATION_IMITATER:
-                        reanimation.mFilterEffect = FilterEffectType.FILTER_EFFECT_WASHED_OUT;
+                    case DrawVariation.Imitater:
+                        reanimation.mFilterEffect = FilterEffectType.WashedOut;
                         break;
-                    case DrawVariation.VARIATION_IMITATER_LESS:
-                        reanimation.mFilterEffect = FilterEffectType.FILTER_EFFECT_LESS_WASHED_OUT;
+                    case DrawVariation.ImitaterLess:
+                        reanimation.mFilterEffect = FilterEffectType.LessWashedOut;
                         break;
-                    case DrawVariation.VARIATION_ZEN_GARDEN:
+                    case DrawVariation.ZenGarden:
                         reanimation.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_zengarden);
                         break;
-                    case DrawVariation.VARIATION_ZEN_GARDEN_WATER:
+                    case DrawVariation.ZenGardenWater:
                         reanimation.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_waterplants);
                         break;
-                    case DrawVariation.VARIATION_AQUARIUM:
+                    case DrawVariation.Aquarium:
                         reanimation.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_idle_aquarium);
                         break;
-                    case DrawVariation.VARIATION_BIGIDLE:
+                    case DrawVariation.Bigidle:
                         reanimation.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_bigidle);
                         break;
-                    case DrawVariation.VARIATION_SPROUT_NO_FLOWER:
+                    case DrawVariation.SproutNoFlower:
                         reanimation.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_idle_noflower);
                         break;
 
@@ -222,7 +222,7 @@ namespace Lawn
         public MemoryImage MakeCachedPlantFrame(SeedType seedType, DrawVariation drawVariation)
         {
             MemoryImage result = null;
-            if (drawVariation == DrawVariation.VARIATION_NORMAL)
+            if (drawVariation == DrawVariation.Normal)
             {
                 if (mPlantImages[(int)seedType] != null)
                 {
@@ -253,37 +253,37 @@ namespace Lawn
                 int offset;
                 switch (seedType)
                 {
-                    case SeedType.SEED_POTATOMINE:
+                    case SeedType.Potatomine:
                         offset = 12;
                         g.mScaleX = 0.8f;
                         g.mScaleY = 0.8f;
                         DrawReanimatorFrame(g, (Constants.S * -(drawRect.mX - offset)), (Constants.S * -(drawRect.mY - offset)), reanimationType, GlobalMembersReanimIds.ReanimTrackId_anim_armed, drawVariation);
                         break;
-                    case SeedType.SEED_INSTANT_COFFEE:
+                    case SeedType.InstantCoffee:
                         offset = 12;
                         g.mScaleX = 0.8f;
                         g.mScaleY = 0.8f;
                         DrawReanimatorFrame(g, (Constants.S * -(drawRect.mX - offset)), (Constants.S * -(drawRect.mY - offset)), reanimationType, GlobalMembersReanimIds.ReanimTrackId_anim_idle, drawVariation);
                         break;
-                    case SeedType.SEED_EXPLODE_O_NUT:
+                    case SeedType.ExplodeONut:
                         g.SetColorizeImages(true);
                         g.SetColor(new SexyColor(255, 64, 64));
                         DrawReanimatorFrame(g, (Constants.S * -drawRect.mX), (Constants.S * -drawRect.mY), reanimationType, GlobalMembersReanimIds.ReanimTrackId_anim_idle, drawVariation);
                         break;
-                    case SeedType.SEED_PEASHOOTER:
-                    case SeedType.SEED_SNOWPEA:
-                    case SeedType.SEED_REPEATER:
-                    case SeedType.SEED_GATLINGPEA:
-                    case SeedType.SEED_LEFTPEATER:
+                    case SeedType.Peashooter:
+                    case SeedType.Snowpea:
+                    case SeedType.Repeater:
+                    case SeedType.Gatlingpea:
+                    case SeedType.Leftpeater:
                         DrawReanimatorFrame(g, (Constants.S * -drawRect.mX), (Constants.S * -drawRect.mY), reanimationType, GlobalMembersReanimIds.ReanimTrackId_anim_idle, drawVariation);
                         DrawReanimatorFrame(g, (Constants.S * -drawRect.mX), (Constants.S * -drawRect.mY), reanimationType, GlobalMembersReanimIds.ReanimTrackId_anim_head_idle, drawVariation);
                         break;
-                    case SeedType.SEED_SPLITPEA:
+                    case SeedType.Splitpea:
                         DrawReanimatorFrame(g, (Constants.S * -drawRect.mX), (Constants.S * -drawRect.mY), reanimationType, GlobalMembersReanimIds.ReanimTrackId_anim_idle, drawVariation);
                         DrawReanimatorFrame(g, (Constants.S * -drawRect.mX), (Constants.S * -drawRect.mY), reanimationType, GlobalMembersReanimIds.ReanimTrackId_anim_head_idle, drawVariation);
                         DrawReanimatorFrame(g, (Constants.S * -drawRect.mX), (Constants.S * -drawRect.mY), reanimationType, GlobalMembersReanimIds.ReanimTrackId_anim_splitpea_idle, drawVariation);
                         break;
-                    case SeedType.SEED_THREEPEATER:
+                    case SeedType.Threepeater:
                         DrawReanimatorFrame(g, (Constants.S * -drawRect.mX), (Constants.S * -drawRect.mY), reanimationType, GlobalMembersReanimIds.ReanimTrackId_anim_idle, drawVariation);
                         DrawReanimatorFrame(g, (Constants.S * -drawRect.mX), (Constants.S * -drawRect.mY), reanimationType, GlobalMembersReanimIds.ReanimTrackId_anim_head_idle, drawVariation);
                         DrawReanimatorFrame(g, (Constants.S * -drawRect.mX), (Constants.S * -drawRect.mY), reanimationType, GlobalMembersReanimIds.ReanimTrackId_anim_head_idle1, drawVariation);
@@ -295,7 +295,7 @@ namespace Lawn
                         break;
 
                 }
-                if (drawVariation == DrawVariation.VARIATION_NORMAL)
+                if (drawVariation == DrawVariation.Normal)
                 {
                     mPlantImages[(int)seedType] = result;
                 }
@@ -327,7 +327,7 @@ namespace Lawn
                 g.SetLinearBlend(true);
 
                 g.BeginFrame();
-                ReanimationType reanimtype = ReanimationType.REANIM_LAWNMOWER;
+                ReanimationType reanimtype = ReanimationType.Lawnmower;
                 string trackname = null;
                 g.mScaleX = 0.85f;
                 g.mScaleY = 0.85f;
@@ -335,23 +335,23 @@ namespace Lawn
                 float y = 0;
                 switch (mowerType)
                 {
-                    case LawnMowerType.LAWNMOWER_LAWN:
+                    case LawnMowerType.Lawn:
                         trackname = GlobalMembersReanimIds.ReanimTrackId_anim_normal;
                         break;
-                    case LawnMowerType.LAWNMOWER_POOL:
+                    case LawnMowerType.Pool:
                         g.mScaleX = 0.80f;
                         g.mScaleY = 0.80f;
                         y = 25;
-                        reanimtype = ReanimationType.REANIM_POOL_CLEANER;
+                        reanimtype = ReanimationType.PoolCleaner;
                         break;
-                    case LawnMowerType.LAWNMOWER_ROOF:
-                        reanimtype = ReanimationType.REANIM_ROOF_CLEANER;
+                    case LawnMowerType.Roof:
+                        reanimtype = ReanimationType.RoofCleaner;
                         break;
-                    case LawnMowerType.LAWNMOWER_SUPER_MOWER:
+                    case LawnMowerType.SuperMower:
                         trackname = GlobalMembersReanimIds.ReanimTrackId_anim_tricked;
                         break;
                 }
-                DrawReanimatorFrame(g, (Constants.S * x), (Constants.S * y), reanimtype, trackname, DrawVariation.VARIATION_NORMAL);
+                DrawReanimatorFrame(g, (Constants.S * x), (Constants.S * y), reanimtype, trackname, DrawVariation.Normal);
                 mLawnMowers[(int)mowerType] = result;
 
                 g.EndFrame();
@@ -368,7 +368,7 @@ namespace Lawn
                 return mZombieImages[(int)zombieType];
             }
             MemoryImage result = null;
-            if (zombieType == ZombieType.ZOMBIE_ZAMBONI)
+            if (zombieType == ZombieType.Zamboni)
             {
                 result = MakeBlankCanvasImage((int)(Constants.S * 512), (int)(Constants.S * 256));
             }
@@ -383,16 +383,16 @@ namespace Lawn
 
             
                 g.BeginFrame();
-                ZombieType zombieType_reanim = zombieType != ZombieType.ZOMBIE_CACHED_POLEVAULTER_WITH_POLE ? zombieType : ZombieType.ZOMBIE_POLEVAULTER;
+                ZombieType zombieType_reanim = zombieType != ZombieType.CachedPolevaulterWithPole ? zombieType : ZombieType.Polevaulter;
                 ZombieDefinition zombieDef = Zombie.GetZombieDefinition(zombieType_reanim);
                 ReanimationType reanimationType = zombieDef.mReanimationType;
                 float x = 40;
                 float y = 40;
-                if (zombieType == ZombieType.ZOMBIE_ZAMBONI)
+                if (zombieType == ZombieType.Zamboni)
                 {
                     x += 100;
                 }
-                if (reanimationType == ReanimationType.REANIM_ZOMBIE)
+                if (reanimationType == ReanimationType.Zombie)
                 {
                     Reanimation reanim = Reanimation.GetNewReanimation();
                     reanim.ReanimationInitializeType(Constants.S * x, Constants.S * y, reanimationType);
@@ -401,12 +401,12 @@ namespace Lawn
                     Zombie.SetupReanimLayers(reanim, zombieType_reanim);
                     switch (zombieType)
                     {
-                        case ZombieType.ZOMBIE_DOOR:
+                        case ZombieType.Door:
                             reanim.AssignRenderGroupToTrack(GlobalMembersReanimIds.ReanimTrackId_anim_screendoor, 0);
                             break;
-                        case ZombieType.ZOMBIE_FLAG:
+                        case ZombieType.Flag:
                             Reanimation flagReanim = Reanimation.GetNewReanimation();
-                            flagReanim.ReanimationInitializeType(Constants.S * x, Constants.S * y, ReanimationType.REANIM_ZOMBIE_FLAGPOLE);
+                            flagReanim.ReanimationInitializeType(Constants.S * x, Constants.S * y, ReanimationType.ZombieFlagpole);
                             flagReanim.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_zombie_flag);
                             flagReanim.Draw(g);
                             flagReanim.PrepareForReuse();
@@ -415,14 +415,14 @@ namespace Lawn
                     reanim.Draw(g);
                     reanim.PrepareForReuse();
                 }
-                else if (reanimationType == ReanimationType.REANIM_BOSS)
+                else if (reanimationType == ReanimationType.Boss)
                 {
                     Reanimation reanim = Reanimation.GetNewReanimation();
                     reanim.ReanimationInitializeType(Constants.S * -524, Constants.S * -88, reanimationType);
                     reanim.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_head_idle);
                     reanim.AssignRenderGroupToTrack("zombie_butter", -1);
                     Reanimation bodyReanim = Reanimation.GetNewReanimation();
-                    bodyReanim.ReanimationInitializeType(Constants.S * 46, Constants.S * 22, ReanimationType.REANIM_BOSS_DRIVER);
+                    bodyReanim.ReanimationInitializeType(Constants.S * 46, Constants.S * 22, ReanimationType.BossDriver);
                     bodyReanim.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_idle);
                     reanim.Draw(g);
                     bodyReanim.Draw(g);
@@ -438,22 +438,22 @@ namespace Lawn
                     string trackName = null;
                     switch (zombieType)
                     {
-                        case ZombieType.ZOMBIE_POGO:
+                        case ZombieType.Pogo:
                             trackName = GlobalMembersReanimIds.ReanimTrackId_anim_pogo;
                             break;
-                        case ZombieType.ZOMBIE_CACHED_POLEVAULTER_WITH_POLE:
+                        case ZombieType.CachedPolevaulterWithPole:
                             trackName = GlobalMembersReanimIds.ReanimTrackId_anim_idle;
                             break;
-                        case ZombieType.ZOMBIE_POLEVAULTER:
+                        case ZombieType.Polevaulter:
                             trackName = "anim_walk";
                             break;
-                        case ZombieType.ZOMBIE_GARGANTUAR:
+                        case ZombieType.Gargantuar:
                             y = 60;
                             break;
                         default:
                             break;
                     }
-                    DrawReanimatorFrame(g, Constants.S * x, Constants.S * y, reanimationType, trackName, DrawVariation.VARIATION_NORMAL);
+                    DrawReanimatorFrame(g, Constants.S * x, Constants.S * y, reanimationType, trackName, DrawVariation.Normal);
                 }
 
                 mZombieImages[(int)zombieType] = result;

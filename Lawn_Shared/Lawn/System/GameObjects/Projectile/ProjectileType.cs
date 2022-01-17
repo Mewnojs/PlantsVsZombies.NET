@@ -4,21 +4,21 @@ namespace Lawn
 {
 	public enum ProjectileType
 	{
-		PROJECTILE_PEA,
-		PROJECTILE_SNOWPEA,
-		PROJECTILE_CABBAGE,
-		PROJECTILE_MELON,
-		PROJECTILE_PUFF,
-		PROJECTILE_WINTERMELON,
-		PROJECTILE_FIREBALL,
-		PROJECTILE_STAR,
-		PROJECTILE_SPIKE,
-		PROJECTILE_BASKETBALL,
-		PROJECTILE_KERNEL,
-		PROJECTILE_COBBIG,
-		PROJECTILE_BUTTER,
-		PROJECTILE_ZOMBIE_PEA,
-		PROJECTILE_ZOMBIE_PEA_MIND_CONTROL,
-		NUM_PROJECTILES
+		Pea,
+		Snowpea,
+		Cabbage,
+		Melon,
+		Puff,
+		Wintermelon,
+		Fireball,
+		Star,
+		Spike,
+		Basketball,
+		Kernel,
+		Cobbig,
+		Butter,
+		ZombiePea,
+		ZombiePeaMindControl,
+		ProjectilesCount
 	}
 }

@@ -12,15 +12,15 @@ namespace Lawn
 			mApp = theApp;
 			switch (aType)
 			{
-			case LeaderBoardType.LEADERBOARD_TYPE_IZOMBIE:
+			case LeaderBoardType.Izombie:
 				mLeaderboardState = LeaderboardState.IZombie;
 				mGameMode = LeaderboardGameMode.IZombie;
 				break;
-			case LeaderBoardType.LEADERBOARD_TYPE_VASEBREAKER:
+			case LeaderBoardType.Vasebreaker:
 				mLeaderboardState = LeaderboardState.Vasebreaker;
 				mGameMode = LeaderboardGameMode.Vasebreaker;
 				break;
-			case LeaderBoardType.LEADERBOARD_TYPE_KILLED:
+			case LeaderBoardType.Killed:
 				mLeaderboardState = LeaderboardState.Adventure;
 				mGameMode = LeaderboardGameMode.Adventure;
 				break;
@@ -44,11 +44,11 @@ namespace Lawn
 					g.DrawImage(AtlasResources.IMAGE_PILE_LEADERBOARDSCREEN_BANNER, 0, num2);
 					long leaderboardScore = LeaderBoardComm.GetLeaderboardScore(i, mLeaderboardState);
 					Gamer leaderboardGamer = LeaderBoardComm.GetLeaderboardGamer(i, mLeaderboardState);
-					TodCommon.TodDrawString(g, LawnApp.ToString(i + 1), 30, num2 + 25, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, 150, DrawStringJustification.DS_ALIGN_LEFT);
-					TodCommon.TodDrawString(g, LawnApp.ToString((int)leaderboardScore), AtlasResources.IMAGE_PILE_LEADERBOARDSCREEN_BANNER.mWidth - 20, num2 + 25, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, DrawStringJustification.DS_ALIGN_RIGHT);
+					TodCommon.TodDrawString(g, LawnApp.ToString(i + 1), 30, num2 + 25, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, 150, DrawStringJustification.Left);
+					TodCommon.TodDrawString(g, LawnApp.ToString((int)leaderboardScore), AtlasResources.IMAGE_PILE_LEADERBOARDSCREEN_BANNER.mWidth - 20, num2 + 25, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, DrawStringJustification.Right);
 					if (leaderboardGamer != null)
 					{
-						TodCommon.TodDrawString(g, leaderboardGamer.Gamertag, 150, num2 + 25, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, 150, DrawStringJustification.DS_ALIGN_LEFT);
+						TodCommon.TodDrawString(g, leaderboardGamer.Gamertag, 150, num2 + 25, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, 150, DrawStringJustification.Left);
 						Image gamerImage = LeaderBoardComm.GetGamerImage(leaderboardGamer);
 						if (gamerImage != null)
 						{
@@ -57,7 +57,7 @@ namespace Lawn
 					}
 					else
 					{
-						TodCommon.TodDrawString(g, "GAMERTAG", 150, num2 + 25, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, 150, DrawStringJustification.DS_ALIGN_LEFT);
+						TodCommon.TodDrawString(g, "GAMERTAG", 150, num2 + 25, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, 150, DrawStringJustification.Left);
 					}
 				}
 			}

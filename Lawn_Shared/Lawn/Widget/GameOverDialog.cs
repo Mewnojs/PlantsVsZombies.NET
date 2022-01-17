@@ -39,7 +39,7 @@ namespace Lawn
 			mApp.KillBoard();
 			if (mApp.IsSurvivalMode())
 			{
-				mApp.ShowChallengeScreen(ChallengePage.CHALLENGE_PAGE_SURVIVAL);
+				mApp.ShowChallengeScreen(ChallengePage.Survival);
 				return;
 			}
 			if (mApp.IsPuzzleMode())

@@ -24,7 +24,7 @@ namespace Lawn
 					GlobalMembersStoreScreen.seedNumberUpgradeCache.Add(aQuantity, text);
 				}
 				TRect theRect = new TRect(aPosX, aPosY + Constants.StoreScreen_PacketUpgrade_Text_Size.Y, Constants.StoreScreen_PacketUpgrade_Text_Size.Width, Constants.StoreScreen_PacketUpgrade_Text_Size.Height);
-				TodStringFile.TodDrawStringWrapped(g, text, theRect, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, DrawStringJustification.DS_ALIGN_CENTER_VERTICAL_MIDDLE);
+				TodStringFile.TodDrawStringWrapped(g, text, theRect, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, DrawStringJustification.CenterVerticalMiddle);
 				return;
 			}
 			if (theItemType == StoreItem.STORE_ITEM_BONUS_LAWN_MOWER)
@@ -48,7 +48,7 @@ namespace Lawn
 			}
 			if (theItemType == StoreItem.STORE_ITEM_PLANT_IMITATER)
 			{
-				SeedPacket.DrawSmallSeedPacket(g, aPosX + Constants.StoreScreen_Imitater_Offset_X, aPosY + Constants.StoreScreen_Imitater_Offset_Y, SeedType.SEED_IMITATER, SeedType.SEED_NONE, 0f, 255, false, false, true, false);
+				SeedPacket.DrawSmallSeedPacket(g, aPosX + Constants.StoreScreen_Imitater_Offset_X, aPosY + Constants.StoreScreen_Imitater_Offset_Y, SeedType.Imitater, SeedType.None, 0f, 255, false, false, true, false);
 				return;
 			}
 			if (theItemType == StoreItem.STORE_ITEM_FIRSTAID)
@@ -79,7 +79,7 @@ namespace Lawn
 			if (theItemType == StoreItem.STORE_ITEM_FERTILIZER)
 			{
 				g.DrawImage(AtlasResources.IMAGE_REANIM_ZENGARDEN_FERTILIZER_BAG1, aPosX + Constants.StoreScreenPlantFoodOffsetX, aPosY + Constants.StoreScreenPlantFoodOffsetY);
-				TodCommon.TodDrawString(g, "x5", aPosX + 50, aPosY + 65, Resources.FONT_HOUSEOFTERROR16, Color.White, DrawStringJustification.DS_ALIGN_RIGHT);
+				TodCommon.TodDrawString(g, "x5", aPosX + 50, aPosY + 65, Resources.FONT_HOUSEOFTERROR16, Color.White, DrawStringJustification.Right);
 				return;
 			}
 			if (theItemType == StoreItem.STORE_ITEM_PHONOGRAPH)
@@ -90,7 +90,7 @@ namespace Lawn
 			if (theItemType == StoreItem.STORE_ITEM_BUG_SPRAY)
 			{
 				g.DrawImage(AtlasResources.IMAGE_REANIM_ZENGARDEN_BUGSPRAY_BOTTLE, aPosX + Constants.StoreScreenBugSprayOffsetX, aPosY + Constants.StoreScreenBugSprayOffsetY);
-				TodCommon.TodDrawString(g, "x5", aPosX + 47, aPosY + 65, Resources.FONT_HOUSEOFTERROR16, Color.White, DrawStringJustification.DS_ALIGN_RIGHT);
+				TodCommon.TodDrawString(g, "x5", aPosX + 47, aPosY + 65, Resources.FONT_HOUSEOFTERROR16, Color.White, DrawStringJustification.Right);
 				return;
 			}
 			if (theItemType == StoreItem.STORE_ITEM_GARDENING_GLOVE)
@@ -106,13 +106,13 @@ namespace Lawn
 			if (StoreScreen.IsPottedPlant(theItemType))
 			{
 				LawnApp gLawnApp = GlobalStaticVars.gLawnApp;
-				GlobalMembersStoreScreen.tempPottedPlant.InitializePottedPlant(SeedType.SEED_MARIGOLD);
-				GlobalMembersStoreScreen.tempPottedPlant.mFacing = PottedPlant.FacingDirection.FACING_RIGHT;
+				GlobalMembersStoreScreen.tempPottedPlant.InitializePottedPlant(SeedType.Marigold);
+				GlobalMembersStoreScreen.tempPottedPlant.mFacing = PottedPlant.FacingDirection.Right;
 				gLawnApp.mZenGarden.DrawPottedPlantIcon(g, aPosX + Constants.StoreScreen_PotPlant_Offset.X, aPosY + Constants.StoreScreen_PotPlant_Offset.Y, GlobalMembersStoreScreen.tempPottedPlant);
 				return;
 			}
 			SeedType theSeedType = (SeedType)(theItemType + 40);
-			SeedPacket.DrawSmallSeedPacket(g, aPosX + -3, aPosY + Constants.StoreScreen_Default_Offset_Y, theSeedType, SeedType.SEED_NONE, 0f, 255, false, false, true, false);
+			SeedPacket.DrawSmallSeedPacket(g, aPosX + -3, aPosY + Constants.StoreScreen_Default_Offset_Y, theSeedType, SeedType.None, 0f, 255, false, false, true, false);
 		}
 
 		internal static void DrawStoreItem(Graphics g, int aPosX, int aPosY, StoreItem theItemType, bool isComingSoon, bool isSoldOut, int aQuantity, int aCost)
@@ -120,7 +120,7 @@ namespace Lawn
 			GlobalMembersStoreScreen.DrawStoreItemIcon(g, aPosX, aPosY, theItemType, aQuantity);
 			g.DrawImage(AtlasResources.IMAGE_STORE_PRICETAG, aPosX - Constants.StoreScreen_PriceTag_X, aPosY + Constants.StoreScreen_PriceTag_Y);
 			string moneyString = LawnApp.GetMoneyString(aCost);
-			TodCommon.TodDrawString(g, moneyString, aPosX + Constants.StoreScreen_PriceTag_Text_Offset_X, aPosY + Constants.StoreScreen_PriceTag_Text_Offset_Y, Resources.FONT_BRIANNETOD12, new SexyColor(0, 0, 0), DrawStringJustification.DS_ALIGN_CENTER);
+			TodCommon.TodDrawString(g, moneyString, aPosX + Constants.StoreScreen_PriceTag_Text_Offset_X, aPosY + Constants.StoreScreen_PriceTag_Text_Offset_Y, Resources.FONT_BRIANNETOD12, new SexyColor(0, 0, 0), DrawStringJustification.Center);
 			if (isComingSoon)
 			{
 				TRect theRect = new TRect(aPosX - (int)(Constants.S * 12f), aPosY, Constants.StoreScreen_ComingSoon_X, Constants.StoreScreen_ComingSoon_Y);
@@ -128,13 +128,13 @@ namespace Lawn
 				{
 					theRect.mX -= (int)(Constants.S * 4f);
 				}
-				TodStringFile.TodDrawStringWrapped(g, "[COMING_SOON]", theRect, Resources.FONT_HOUSEOFTERROR16, new SexyColor(255, 0, 0), DrawStringJustification.DS_ALIGN_CENTER_VERTICAL_MIDDLE);
+				TodStringFile.TodDrawStringWrapped(g, "[COMING_SOON]", theRect, Resources.FONT_HOUSEOFTERROR16, new SexyColor(255, 0, 0), DrawStringJustification.CenterVerticalMiddle);
 				return;
 			}
 			if (isSoldOut)
 			{
 				TRect theRect2 = new TRect(aPosX, aPosY + Constants.StoreScreen_SoldOut_Y, Constants.StoreScreen_SoldOut_Width, Constants.StoreScreen_SoldOut_Height);
-				TodStringFile.TodDrawStringWrapped(g, "[SOLD_OUT]", theRect2, Resources.FONT_HOUSEOFTERROR16, new SexyColor(255, 0, 0), DrawStringJustification.DS_ALIGN_CENTER_VERTICAL_MIDDLE);
+				TodStringFile.TodDrawStringWrapped(g, "[SOLD_OUT]", theRect2, Resources.FONT_HOUSEOFTERROR16, new SexyColor(255, 0, 0), DrawStringJustification.CenterVerticalMiddle);
 			}
 		}
 
