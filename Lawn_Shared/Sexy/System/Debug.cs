@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Sexy
 {
-	internal static class Debug
+	public /*internal*/ static class Debug
 	{
 		public static void Log(DebugType msgtype, string msg) 
 		{
