@@ -9,7 +9,7 @@ namespace Sexy.TodLib
 		{
 			ReanimatorDefinition reanimatorDefinition = new ReanimatorDefinition();
 			CustomContentReader customContentReader = new CustomContentReader(input);
-			bool doScale = customContentReader.ReadBoolean();
+            ReanimScaleType doScale = (ReanimScaleType)customContentReader.ReadByte();
 			reanimatorDefinition.mFPS = customContentReader.ReadSingle();
 			reanimatorDefinition.mTrackCount = (short)customContentReader.ReadInt32();
 			reanimatorDefinition.mTracks = new ReanimatorTrack[reanimatorDefinition.mTrackCount];
@@ -22,7 +22,7 @@ namespace Sexy.TodLib
 			return reanimatorDefinition;
 		}
 
-		private void ReadReanimTrack(CustomContentReader input, bool doScale, out ReanimatorTrack track)
+		private void ReadReanimTrack(CustomContentReader input, ReanimScaleType doScale, out ReanimatorTrack track)
 		{
 			string name = input.ReadString();
 			int transformCount = input.ReadInt32();
@@ -56,7 +56,7 @@ namespace Sexy.TodLib
 			return newReanimatorTransform;
 		}
 
-		private void ReadReanimTransform(CustomContentReader input, bool doScale, out ReanimatorTransform transform)
+		private void ReadReanimTransform(CustomContentReader input, ReanimScaleType doScale, out ReanimatorTransform transform)
 		{
 			ReanimReader.ReanimOptimisationType reanimOptimisationType = (ReanimReader.ReanimOptimisationType)input.ReadByte();
 			if (reanimOptimisationType == ReanimReader.ReanimOptimisationType.Placeholder)
@@ -82,12 +82,17 @@ namespace Sexy.TodLib
 				transform.mSkewY = input.ReadSingle();
 				float num = input.ReadSingle();
 				float num2 = input.ReadSingle();
-				if (doScale)
-				{
-					transform.mTransX = ((num == ReanimatorXnaHelpers.DEFAULT_FIELD_PLACEHOLDER) ? num : Constants.InvertAndScale(num));
-					transform.mTransY = ((num2 == ReanimatorXnaHelpers.DEFAULT_FIELD_PLACEHOLDER) ? num2 : Constants.InvertAndScale(num2));
-				}
-				else
+                if (doScale == ReanimScaleType.InvertAndScale)
+                {
+                    transform.mTransX = ((num == ReanimatorXnaHelpers.DEFAULT_FIELD_PLACEHOLDER) ? num : Constants.InvertAndScale(num));
+                    transform.mTransY = ((num2 == ReanimatorXnaHelpers.DEFAULT_FIELD_PLACEHOLDER) ? num2 : Constants.InvertAndScale(num2));
+                }
+                else if (doScale == ReanimScaleType.ScaleFromPC) 
+                {
+                    transform.mTransX = ((num == ReanimatorXnaHelpers.DEFAULT_FIELD_PLACEHOLDER) ? num : Constants.S * num);
+                    transform.mTransY = ((num2 == ReanimatorXnaHelpers.DEFAULT_FIELD_PLACEHOLDER) ? num2 : Constants.S * num2);
+                }
+                else
 				{
 					transform.mTransX = num;
 					transform.mTransY = num2;
@@ -106,5 +111,12 @@ namespace Sexy.TodLib
 			CopyPrevious,
 			Placeholder
 		}
+
+        internal enum ReanimScaleType 
+        {
+            NoScale,
+            InvertAndScale,
+            ScaleFromPC = 0xFF
+        }
 	}
 }

@@ -1240,8 +1240,10 @@ internal class AtlasResources_480x800 : AtlasResources
 			new UNPACK_INFO(AtlasResources.IMAGE_REANIM_ZOMBIE_PAPER_HEAD_LOOK, 96, 1172, 48, 44, 1, 1, AnimType.AnimType_None, 0, 0, 0),
 			new UNPACK_INFO(AtlasResources.IMAGE_REANIM_ZOMBIE_GARGANTUAR_OUTERARM_LOWER, 242, 1174, 42, 50, 1, 1, AnimType.AnimType_None, 0, 0, 0),
 			new UNPACK_INFO(AtlasResources.IMAGE_REANIM_ZOMBIE_GARGANTUAR_OUTERARM_LOWER2, 1614, 1176, 42, 50, 1, 1, AnimType.AnimType_None, 0, 0, 0),
-			new UNPACK_INFO(AtlasResources.IMAGE_REANIM_SPIKEROCK_BIGSPIKE1, 741, 561, 65, 32, 1, 1, AnimType.AnimType_None, 0, 0, 0),
-			new UNPACK_INFO(AtlasResources.IMAGE_REANIM_SPLASH_1, 1260, 1177, 67, 31, 1, 1, AnimType.AnimType_None, 0, 0, 0),
+			new UNPACK_INFO(AtlasResources.IMAGE_REANIM_SPIKEROCK_BIGSPIKE1, 741, 561, 16, 32, 1, 1, AnimType.AnimType_None, 0, 0, 0),
+            new UNPACK_INFO(AtlasResources.IMAGE_REANIM_SPIKEROCK_BIGSPIKE2, 766, 564, 15, 27, 1, 1, AnimType.AnimType_None, 0, 0, 0),
+            new UNPACK_INFO(AtlasResources.IMAGE_REANIM_SPIKEROCK_BIGSPIKE3, 790, 561, 16, 30, 1, 1, AnimType.AnimType_None, 0, 0, 0),
+            new UNPACK_INFO(AtlasResources.IMAGE_REANIM_SPLASH_1, 1260, 1177, 67, 31, 1, 1, AnimType.AnimType_None, 0, 0, 0),
 			new UNPACK_INFO(AtlasResources.IMAGE_REANIM_ZOMBIE_POLEVAULTER_BODY1, 1658, 1176, 43, 48, 1, 1, AnimType.AnimType_None, 0, 0, 0),
 			new UNPACK_INFO(AtlasResources.IMAGE_REANIM_SCAREDYSHROOM_HEAD, 286, 1178, 49, 42, 1, 1, AnimType.AnimType_None, 0, 0, 0),
 			new UNPACK_INFO(AtlasResources.IMAGE_REANIM_SCAREDYSHROOM_HEAD2, 1438, 1180, 49, 42, 1, 1, AnimType.AnimType_None, 0, 0, 0),
@@ -2617,7 +2619,11 @@ internal class AtlasResources_480x800 : AtlasResources
 		num++;
 		AtlasResources.IMAGE_REANIM_SPIKEROCK_BIGSPIKE1 = array[num].mpImage;
 		num++;
-		AtlasResources.IMAGE_REANIM_SPLASH_1 = array[num].mpImage;
+        AtlasResources.IMAGE_REANIM_SPIKEROCK_BIGSPIKE2 = array[num].mpImage;
+        num++;
+        AtlasResources.IMAGE_REANIM_SPIKEROCK_BIGSPIKE3 = array[num].mpImage;
+        num++;
+        AtlasResources.IMAGE_REANIM_SPLASH_1 = array[num].mpImage;
 		num++;
 		AtlasResources.IMAGE_REANIM_ZOMBIE_POLEVAULTER_BODY1 = array[num].mpImage;
 		num++;

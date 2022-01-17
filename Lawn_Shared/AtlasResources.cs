@@ -3576,7 +3576,11 @@ internal class AtlasResources
 			return AtlasResources.IMAGE_STORE_PACKETUPGRADE;
 		case 11745:
 			return AtlasResources.IMAGE_STORE_FIRSTAIDWALLNUTICON;
-		default:
+        case 11746:
+            return AtlasResources.IMAGE_REANIM_SPIKEROCK_BIGSPIKE2;
+        case 11747:
+            return AtlasResources.IMAGE_REANIM_SPIKEROCK_BIGSPIKE3;
+        default:
 			return Resources.GetImageById(theId);
 		}
 	}
@@ -5987,7 +5991,15 @@ internal class AtlasResources
 		{
 			return 11105;
 		}
-		if (theImage == AtlasResources.IMAGE_REANIM_SPLASH_1)
+        if (theImage == AtlasResources.IMAGE_REANIM_SPIKEROCK_BIGSPIKE2)
+        {
+            return 11746;
+        }
+        if (theImage == AtlasResources.IMAGE_REANIM_SPIKEROCK_BIGSPIKE3)
+        {
+            return 11747;
+        }
+            if (theImage == AtlasResources.IMAGE_REANIM_SPLASH_1)
 		{
 			return 11715;
 		}
@@ -11781,7 +11793,11 @@ internal class AtlasResources
 
 	public static Image IMAGE_REANIM_SPIKEROCK_BIGSPIKE1;
 
-	public static Image IMAGE_REANIM_SPLASH_1;
+    public static Image IMAGE_REANIM_SPIKEROCK_BIGSPIKE2;
+
+    public static Image IMAGE_REANIM_SPIKEROCK_BIGSPIKE3;
+
+    public static Image IMAGE_REANIM_SPLASH_1;
 
 	public static Image IMAGE_REANIM_ZOMBIE_POLEVAULTER_BODY1;
 
@@ -14675,7 +14691,9 @@ internal class AtlasResources
 		new AtlasResources.AtlasStringTable("IMAGE_REANIM_ZOMBIE_GARGANTUAR_OUTERARM_LOWER", 11562),
 		new AtlasResources.AtlasStringTable("IMAGE_REANIM_ZOMBIE_GARGANTUAR_OUTERARM_LOWER2", 10534),
 		new AtlasResources.AtlasStringTable("IMAGE_REANIM_SPIKEROCK_BIGSPIKE1", 11105),
-		new AtlasResources.AtlasStringTable("IMAGE_REANIM_SPLASH_1", 11715),
+        new AtlasResources.AtlasStringTable("IMAGE_REANIM_SPIKEROCK_BIGSPIKE2", 11746),
+        new AtlasResources.AtlasStringTable("IMAGE_REANIM_SPIKEROCK_BIGSPIKE3", 11747),
+        new AtlasResources.AtlasStringTable("IMAGE_REANIM_SPLASH_1", 11715),
 		new AtlasResources.AtlasStringTable("IMAGE_REANIM_ZOMBIE_POLEVAULTER_BODY1", 11653),
 		new AtlasResources.AtlasStringTable("IMAGE_REANIM_SCAREDYSHROOM_HEAD", 11075),
 		new AtlasResources.AtlasStringTable("IMAGE_REANIM_SCAREDYSHROOM_HEAD2", 11076),
@@ -17571,8 +17589,10 @@ internal class AtlasResources
 		IMAGE_STORE_PREVBUTTONDISABLED_ID,
 		IMAGE_STORE_PRICETAG_ID,
 		IMAGE_STORE_PACKETUPGRADE_ID,
-		IMAGE_STORE_FIRSTAIDWALLNUTICON_ID
-	}
+		IMAGE_STORE_FIRSTAIDWALLNUTICON_ID,
+        IMAGE_REANIM_SPIKEROCK_BIGSPIKE2_ID,
+        IMAGE_REANIM_SPIKEROCK_BIGSPIKE3_ID
+    }
 
 	public class AtlasStringTable
 	{
