@@ -2,10 +2,10 @@
 
 namespace Lawn
 {
-	public enum PlantOnBungeeState //Prefix: PLANT
+    public enum PlantOnBungeeState //Prefix: PLANT
     {
-		NotOnBungee,
-		GettingGrabbedByBungee,
-		RisingWithBungee
-	}
+        NotOnBungee,
+        GettingGrabbedByBungee,
+        RisingWithBungee
+    }
 }

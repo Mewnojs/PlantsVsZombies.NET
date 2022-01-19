@@ -2,8 +2,8 @@
 
 namespace Lawn
 {
-	public enum ZombieID
-	{
-		Null
-	}
+    public enum ZombieID
+    {
+        Null
+    }
 }

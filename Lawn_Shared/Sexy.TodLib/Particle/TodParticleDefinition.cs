@@ -2,16 +2,16 @@
 
 namespace Sexy.TodLib
 {
-	public/*internal*/ class TodParticleDefinition
-	{
-		public TodParticleDefinition()
-		{
-			mEmitterDefs = null;
-			mEmitterDefCount = 0;
-		}
+    public/*internal*/ class TodParticleDefinition
+    {
+        public TodParticleDefinition()
+        {
+            mEmitterDefs = null;
+            mEmitterDefCount = 0;
+        }
 
-		public TodEmitterDefinition[] mEmitterDefs;
+        public TodEmitterDefinition[] mEmitterDefs;
 
-		public int mEmitterDefCount;
-	}
+        public int mEmitterDefCount;
+    }
 }

@@ -2,17 +2,17 @@
 
 namespace Lawn
 {
-	public enum HelmType //Prefix: HELMTYPE
+    public enum HelmType //Prefix: HELMTYPE
     {
-		None,
-		TrafficCone,
-		Pail,
-		Football,
-		Digger,
-		Redeyes,
-		Headband,
-		Bobsled,
-		Wallnut,
-		Tallnut
-	}
+        None,
+        TrafficCone,
+        Pail,
+        Football,
+        Digger,
+        Redeyes,
+        Headband,
+        Bobsled,
+        Wallnut,
+        Tallnut
+    }
 }

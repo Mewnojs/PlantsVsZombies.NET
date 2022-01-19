@@ -2,19 +2,19 @@
 
 namespace Lawn
 {
-	public struct ZombieDescriptor
-	{
-		public ZombieDescriptor(ZombieType theType, int aX, int aY)
-		{
-			type = theType;
-			x = aX;
-			y = aY;
-		}
+    public struct ZombieDescriptor
+    {
+        public ZombieDescriptor(ZombieType theType, int aX, int aY)
+        {
+            type = theType;
+            x = aX;
+            y = aY;
+        }
 
-		public ZombieType type;
+        public ZombieType type;
 
-		public int x;
+        public int x;
 
-		public int y;
-	}
+        public int y;
+    }
 }

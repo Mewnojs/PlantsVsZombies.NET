@@ -2,18 +2,18 @@
 
 namespace Lawn
 {
-	public/*internal*/ class LevelStats
-	{
-		public LevelStats()
-		{
-			Reset();
-		}
+    public/*internal*/ class LevelStats
+    {
+        public LevelStats()
+        {
+            Reset();
+        }
 
-		public void Reset()
-		{
-			mUnusedLawnMowers = 0;
-		}
+        public void Reset()
+        {
+            mUnusedLawnMowers = 0;
+        }
 
-		public int mUnusedLawnMowers;
-	}
+        public int mUnusedLawnMowers;
+    }
 }

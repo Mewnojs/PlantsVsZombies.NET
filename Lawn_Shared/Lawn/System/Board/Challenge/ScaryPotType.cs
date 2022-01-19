@@ -2,11 +2,11 @@
 
 namespace Lawn
 {
-	public enum ScaryPotType
-	{
-		None,
-		Seed,
-		Zombie,
-		Sun
-	}
+    public enum ScaryPotType
+    {
+        None,
+        Seed,
+        Zombie,
+        Sun
+    }
 }

@@ -2,12 +2,12 @@
 
 namespace Lawn
 {
-	public enum PlantOrder
-	{
-		Lilypad,
-		Normal,
-		Pumpkin,
-		Flyer,
-		Cherrybomb
-	}
+    public enum PlantOrder
+    {
+        Lilypad,
+        Normal,
+        Pumpkin,
+        Flyer,
+        Cherrybomb
+    }
 }

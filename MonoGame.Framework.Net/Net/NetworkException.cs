@@ -49,21 +49,21 @@ namespace Microsoft.Xna.Framework.Net
 #else
     [Serializable]
 #endif
-	public class NetworkException : Exception
-	{
+    public class NetworkException : Exception
+    {
 
-		public NetworkException ()
-		{
-		}
-		
-		public NetworkException( string message )
-		{
-			
-		}
-		
-		public NetworkException (string message, Exception innerException)
-		{
-			
-		}
-	}
+        public NetworkException ()
+        {
+        }
+        
+        public NetworkException( string message )
+        {
+            
+        }
+        
+        public NetworkException (string message, Exception innerException)
+        {
+            
+        }
+    }
 }

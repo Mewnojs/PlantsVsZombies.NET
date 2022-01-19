@@ -2,9 +2,9 @@
 
 namespace Sexy.TodLib
 {
-	public enum TodStringFormatFlag //Prefix: TOD_FORMAT
+    public enum TodStringFormatFlag //Prefix: TOD_FORMAT
     {
-		IgnoreNewlines,
-		HideUntilMagnetshroom
-	}
+        IgnoreNewlines,
+        HideUntilMagnetshroom
+    }
 }

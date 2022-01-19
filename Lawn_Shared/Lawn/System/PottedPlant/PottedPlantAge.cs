@@ -2,11 +2,11 @@
 
 namespace Lawn
 {
-	public enum PottedPlantAge //Prefix: PLANTAGE
+    public enum PottedPlantAge //Prefix: PLANTAGE
     {
-		Sprout,
-		Small,
-		Medium,
-		Full
-	}
+        Sprout,
+        Small,
+        Medium,
+        Full
+    }
 }

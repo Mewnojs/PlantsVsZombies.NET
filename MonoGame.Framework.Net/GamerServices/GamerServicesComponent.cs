@@ -76,22 +76,22 @@ using Microsoft.Xna.Framework.Net;
 
 namespace Microsoft.Xna.Framework.GamerServices {
 
-	public class GamerServicesComponent : GameComponent {
-		private static LocalNetworkGamer lng;
+    public class GamerServicesComponent : GameComponent {
+        private static LocalNetworkGamer lng;
 
-		internal static LocalNetworkGamer LocalNetworkGamer { get { return lng; } set { lng = value; } }
+        internal static LocalNetworkGamer LocalNetworkGamer { get { return lng; } set { lng = value; } }
 
-		public GamerServicesComponent(Game game)
-			: base(game)
-		{
+        public GamerServicesComponent(Game game)
+            : base(game)
+        {
             Guide.Initialise(game);
-		}
+        }
 
-		public override void Update (GameTime gameTime)
-		{
+        public override void Update (GameTime gameTime)
+        {
 
-		}
-	}
+        }
+    }
 
     public class MonoGameGamerServicesComponent : GamerServicesComponent
     {

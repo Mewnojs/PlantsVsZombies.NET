@@ -2,9 +2,9 @@
 
 namespace Lawn
 {
-	public enum LawnDialogResult //Prefix: ID
-	{
-		TryAgainMenu = 1,
-		InAppNotificationNo
-	}
+    public enum LawnDialogResult //Prefix: ID
+    {
+        TryAgainMenu = 1,
+        InAppNotificationNo
+    }
 }

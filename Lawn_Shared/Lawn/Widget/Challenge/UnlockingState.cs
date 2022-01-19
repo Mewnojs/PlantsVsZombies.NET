@@ -2,10 +2,10 @@
 
 namespace Lawn
 {
-	public enum UnlockingState //Prefix: UNLOCKING
+    public enum UnlockingState //Prefix: UNLOCKING
     {
-		Off,
-		Shaking,
-		Fading
-	}
+        Off,
+        Shaking,
+        Fading
+    }
 }

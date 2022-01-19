@@ -2,10 +2,10 @@
 
 namespace Sexy
 {
-	internal class WidgetSafeDeleteInfo
-	{
-		public int mUpdateAppDepth;
+    internal class WidgetSafeDeleteInfo
+    {
+        public int mUpdateAppDepth;
 
-		public Widget mWidget;
-	}
+        public Widget mWidget;
+    }
 }

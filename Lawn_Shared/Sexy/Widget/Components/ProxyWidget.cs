@@ -2,21 +2,21 @@
 
 namespace Sexy
 {
-	public/*internal*/ class ProxyWidget : Widget
-	{
-		public ProxyWidget(ProxyWidgetListener listener)
-		{
-			mListener = listener;
-		}
+    public/*internal*/ class ProxyWidget : Widget
+    {
+        public ProxyWidget(ProxyWidgetListener listener)
+        {
+            mListener = listener;
+        }
 
-		public override void Draw(Graphics g)
-		{
-			if (mListener != null)
-			{
-				mListener.DrawProxyWidget(g, this);
-			}
-		}
+        public override void Draw(Graphics g)
+        {
+            if (mListener != null)
+            {
+                mListener.DrawProxyWidget(g, this);
+            }
+        }
 
-		private ProxyWidgetListener mListener;
-	}
+        private ProxyWidgetListener mListener;
+    }
 }

@@ -41,11 +41,11 @@
 using System;
 namespace Microsoft.Xna.Framework.GamerServices
 {
-	public class FriendGamer : Gamer
-	{
-		public FriendGamer()
-		{
-		}
-	}
+    public class FriendGamer : Gamer
+    {
+        public FriendGamer()
+        {
+        }
+    }
 }
 

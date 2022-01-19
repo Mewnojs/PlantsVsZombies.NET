@@ -2,10 +2,10 @@
 
 namespace Lawn
 {
-	public enum LeaderBoardType //Prefix: LEADERBOARD_TYPE
+    public enum LeaderBoardType //Prefix: LEADERBOARD_TYPE
     {
-		Izombie,
-		Vasebreaker,
-		Killed
-	}
+        Izombie,
+        Vasebreaker,
+        Killed
+    }
 }

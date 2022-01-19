@@ -2,36 +2,36 @@
 
 namespace Lawn
 {
-	public/*internal*/ class ChosenSeed
-	{
-		public int mX;
+    public/*internal*/ class ChosenSeed
+    {
+        public int mX;
 
-		public int mY;
+        public int mY;
 
-		public int mTimeStartMotion;
+        public int mTimeStartMotion;
 
-		public int mTimeEndMotion;
+        public int mTimeEndMotion;
 
-		public int mStartX;
+        public int mStartX;
 
-		public int mStartY;
+        public int mStartY;
 
-		public int mEndX;
+        public int mEndX;
 
-		public int mEndY;
+        public int mEndY;
 
-		public SeedType mSeedType;
+        public SeedType mSeedType;
 
-		public ChosenSeedState mSeedState;
+        public ChosenSeedState mSeedState;
 
-		public int mSeedIndexInBank;
+        public int mSeedIndexInBank;
 
-		public bool mRefreshing;
+        public bool mRefreshing;
 
-		public int mRefreshCounter;
+        public int mRefreshCounter;
 
-		public SeedType mImitaterType;
+        public SeedType mImitaterType;
 
-		public bool mCrazyDavePicked;
-	}
+        public bool mCrazyDavePicked;
+    }
 }

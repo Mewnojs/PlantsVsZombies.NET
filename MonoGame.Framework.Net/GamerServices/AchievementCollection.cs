@@ -44,27 +44,27 @@ using System.Collections.Generic;
 
 namespace Microsoft.Xna.Framework.GamerServices
 {
-	public class AchievementCollection : IList<Achievement>, ICollection<Achievement>, IEnumerable<Achievement>, IEnumerable, IDisposable
-	{
-		private List<Achievement> innerlist;
-		
-		public AchievementCollection ()
-		{
-			innerlist = new List<Achievement>();
-		}
-		
+    public class AchievementCollection : IList<Achievement>, ICollection<Achievement>, IEnumerable<Achievement>, IEnumerable, IDisposable
+    {
+        private List<Achievement> innerlist;
+        
+        public AchievementCollection ()
+        {
+            innerlist = new List<Achievement>();
+        }
+        
         ~AchievementCollection()
         {
             Dispose(false);
         }
 
-		#region Properties
-		public int Count
+        #region Properties
+        public int Count
         {
             get { return innerlist.Count; }
         }
-		
-		public Achievement this[int index]
+        
+        public Achievement this[int index]
         {
             get { return innerlist[index]; }
             set
@@ -85,19 +85,19 @@ namespace Microsoft.Xna.Framework.GamerServices
             }
         }
 
-		private bool isReadOnly = false;
-		public bool IsReadOnly 
-		{
+        private bool isReadOnly = false;
+        public bool IsReadOnly 
+        {
             get
-			{
-				return isReadOnly;
-			}
+            {
+                return isReadOnly;
+            }
         }
-		
+        
         #endregion Properties
-		
-		#region Public Methods
-		public void Add(Achievement item)
+        
+        #region Public Methods
+        public void Add(Achievement item)
         {
             if (item == null)
                 throw new ArgumentNullException();
@@ -124,8 +124,8 @@ namespace Microsoft.Xna.Framework.GamerServices
         {
             innerlist.Clear();
         }
-		
-		public bool Contains(Achievement item)
+        
+        public bool Contains(Achievement item)
         {
             return innerlist.Contains(item);
         }
@@ -134,24 +134,24 @@ namespace Microsoft.Xna.Framework.GamerServices
         {
             innerlist.CopyTo(array, arrayIndex);
         }
-		
-		public void Dispose()
-	    {
+        
+        public void Dispose()
+        {
             Dispose(true);
             GC.SuppressFinalize(this);
-		}
+        }
 
         protected virtual void Dispose(bool disposing)
         {
         
         }
-		
-		public int IndexOf(Achievement item)
+        
+        public int IndexOf(Achievement item)
         {
             return innerlist.IndexOf(item);
         }
-		
-		public void Insert(int index, Achievement item)
+        
+        public void Insert(int index, Achievement item)
         {
             innerlist.Insert(index, item);
         }
@@ -165,8 +165,8 @@ namespace Microsoft.Xna.Framework.GamerServices
         {
             innerlist.RemoveAt(index);
         }
-		
-		public IEnumerator<Achievement> GetEnumerator()
+        
+        public IEnumerator<Achievement> GetEnumerator()
         {
             return innerlist.GetEnumerator();
         }
@@ -175,8 +175,8 @@ namespace Microsoft.Xna.Framework.GamerServices
         {
             return innerlist.GetEnumerator();
         }
-		
-		#endregion Methods
-	}
+        
+        #endregion Methods
+    }
 }
 

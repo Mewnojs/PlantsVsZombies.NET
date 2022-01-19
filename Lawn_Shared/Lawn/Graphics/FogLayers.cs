@@ -2,11 +2,11 @@
 
 namespace Lawn
 {
-	public enum FogLayers
-	{
-		Fog,
-		PlanternShine,
-		Coin,
-		Rain
-	}
+    public enum FogLayers
+    {
+        Fog,
+        PlanternShine,
+        Coin,
+        Rain
+    }
 }

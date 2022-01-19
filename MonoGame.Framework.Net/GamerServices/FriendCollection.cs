@@ -44,27 +44,27 @@ using System.Collections.Generic;
 
 namespace Microsoft.Xna.Framework.GamerServices
 {
-	public class FriendCollection : IList<FriendGamer>, ICollection<FriendGamer>, IEnumerable<FriendGamer>, IEnumerable, IDisposable
-	{
-		private List<FriendGamer> innerlist;
-		
-		public FriendCollection ()
-		{
-			innerlist = new List<FriendGamer>();
-		}
-		
+    public class FriendCollection : IList<FriendGamer>, ICollection<FriendGamer>, IEnumerable<FriendGamer>, IEnumerable, IDisposable
+    {
+        private List<FriendGamer> innerlist;
+        
+        public FriendCollection ()
+        {
+            innerlist = new List<FriendGamer>();
+        }
+        
         ~FriendCollection()
         {
             Dispose(false);
         }
 
-		#region Properties
-		public int Count
+        #region Properties
+        public int Count
         {
             get { return innerlist.Count; }
         }
-		
-		public FriendGamer this[int index]
+        
+        public FriendGamer this[int index]
         {
             get { return innerlist[index]; }
             set
@@ -85,23 +85,23 @@ namespace Microsoft.Xna.Framework.GamerServices
             }
         }
 
-		private bool isReadOnly;
-		public bool IsReadOnly 
-		{
+        private bool isReadOnly;
+        public bool IsReadOnly 
+        {
             get
-			{
-				return isReadOnly;
-			}
+            {
+                return isReadOnly;
+            }
             private set 
             {
                 isReadOnly = value;
             }
         }
-		
+        
         #endregion Properties
-		
-		#region Public Methods
-		public void Add(FriendGamer item)
+        
+        #region Public Methods
+        public void Add(FriendGamer item)
         {
             if (item == null)
                 throw new ArgumentNullException();
@@ -128,8 +128,8 @@ namespace Microsoft.Xna.Framework.GamerServices
         {
             innerlist.Clear();
         }
-		
-		public bool Contains(FriendGamer item)
+        
+        public bool Contains(FriendGamer item)
         {
             return innerlist.Contains(item);
         }
@@ -138,24 +138,24 @@ namespace Microsoft.Xna.Framework.GamerServices
         {
             innerlist.CopyTo(array, arrayIndex);
         }
-		
-		public void Dispose()
-	    {
+        
+        public void Dispose()
+        {
             Dispose(true);
             GC.SuppressFinalize(this);
-		}
-		
+        }
+        
         protected virtual void Dispose(bool disposing)
         {
 
         }
 
-		public int IndexOf(FriendGamer item)
+        public int IndexOf(FriendGamer item)
         {
             return innerlist.IndexOf(item);
         }
-		
-		public void Insert(int index, FriendGamer item)
+        
+        public void Insert(int index, FriendGamer item)
         {
             innerlist.Insert(index, item);
         }
@@ -169,8 +169,8 @@ namespace Microsoft.Xna.Framework.GamerServices
         {
             innerlist.RemoveAt(index);
         }
-		
-		public IEnumerator<FriendGamer> GetEnumerator()
+        
+        public IEnumerator<FriendGamer> GetEnumerator()
         {
             return innerlist.GetEnumerator();
         }
@@ -179,8 +179,8 @@ namespace Microsoft.Xna.Framework.GamerServices
         {
             return innerlist.GetEnumerator();
         }
-		
-		#endregion Methods
-	}
+        
+        #endregion Methods
+    }
 }
 

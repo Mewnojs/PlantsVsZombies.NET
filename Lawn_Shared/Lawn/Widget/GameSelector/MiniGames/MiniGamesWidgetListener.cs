@@ -2,8 +2,8 @@
 
 namespace Lawn
 {
-	public interface MiniGamesWidgetListener
-	{
-		void MiniGamesStageSelected(int theLevel);
-	}
+    public interface MiniGamesWidgetListener
+    {
+        void MiniGamesStageSelected(int theLevel);
+    }
 }

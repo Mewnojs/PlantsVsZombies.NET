@@ -49,17 +49,17 @@ namespace Microsoft.Xna.Framework.GamerServices
 {
 
 
-	public class GamerCollection<T> : ReadOnlyCollection<T>, IEnumerable<T>, IEnumerable where T : Gamer
-	{	
-		internal GamerCollection(List<T> list): base(list)
-		{
-		}
-		
-		internal GamerCollection(): base(new List<T>())
-		{
-		}
+    public class GamerCollection<T> : ReadOnlyCollection<T>, IEnumerable<T>, IEnumerable where T : Gamer
+    {	
+        internal GamerCollection(List<T> list): base(list)
+        {
+        }
+        
+        internal GamerCollection(): base(new List<T>())
+        {
+        }
  
-		internal void AddGamer (T item) {
+        internal void AddGamer (T item) {
             // need to add gamers at the correct index based on GamerTag           
             if (base.Items.Count > 0)
             {
@@ -74,24 +74,24 @@ namespace Microsoft.Xna.Framework.GamerServices
             }
             base.Items.Add(item);            
             
-		}
-		
-		internal void RemoveGamer (T item) {
-			base.Items.Remove (item);
-		}		
+        }
+        
+        internal void RemoveGamer (T item) {
+            base.Items.Remove (item);
+        }		
 
-		internal void RemoveGamerAt (int item) {
-			base.Items.RemoveAt (item);
-		}		
-		
+        internal void RemoveGamerAt (int item) {
+            base.Items.RemoveAt (item);
+        }		
+        
 //	public IEnumerator<Gamer> GetEnumerator()
 //        {
 //            return this.GetEnumerator();
 //        }
-		
-	    IEnumerator IEnumerable.GetEnumerator()
+        
+        IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
-	}
+    }
 }

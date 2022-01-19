@@ -2,8 +2,8 @@
 
 namespace Lawn
 {
-	public interface AlmanacListener
-	{
-		void BackFromAlmanac();
-	}
+    public interface AlmanacListener
+    {
+        void BackFromAlmanac();
+    }
 }

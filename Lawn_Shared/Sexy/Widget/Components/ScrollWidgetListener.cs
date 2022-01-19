@@ -2,10 +2,10 @@
 
 namespace Sexy
 {
-	public/*internal*/ interface ScrollWidgetListener
-	{
-		void ScrollTargetReached(ScrollWidget scrollWidget);
+    public/*internal*/ interface ScrollWidgetListener
+    {
+        void ScrollTargetReached(ScrollWidget scrollWidget);
 
-		void ScrollTargetInterrupted(ScrollWidget scrollWidget);
-	}
+        void ScrollTargetInterrupted(ScrollWidget scrollWidget);
+    }
 }

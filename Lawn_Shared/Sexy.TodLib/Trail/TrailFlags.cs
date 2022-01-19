@@ -2,8 +2,8 @@
 
 namespace Sexy.TodLib
 {
-	public enum TrailFlags
-	{
-		Loops = 1
-	}
+    public enum TrailFlags
+    {
+        Loops = 1
+    }
 }

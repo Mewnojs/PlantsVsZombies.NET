@@ -47,9 +47,9 @@ namespace Microsoft.Xna.Framework.GamerServices
     public enum GamerZone
     {
         Family,	        // Family-friendly game play.
-	    Pro,	        // Competitive game play.
-	    Recreation,     // Non-competitive game play.
-	    Underground,    // Alternative approach to game play.
-	    Unknown,        // Unknown.
+        Pro,	        // Competitive game play.
+        Recreation,     // Non-competitive game play.
+        Underground,    // Alternative approach to game play.
+        Unknown,        // Unknown.
     }
 }

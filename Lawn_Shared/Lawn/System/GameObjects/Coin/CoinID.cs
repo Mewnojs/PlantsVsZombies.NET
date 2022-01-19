@@ -2,8 +2,8 @@
 
 namespace Lawn
 {
-	public enum CoinID
-	{
-		Null
-	}
+    public enum CoinID
+    {
+        Null
+    }
 }

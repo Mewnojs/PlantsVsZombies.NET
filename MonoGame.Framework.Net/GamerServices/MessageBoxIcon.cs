@@ -41,12 +41,12 @@
 using System;
 namespace Microsoft.Xna.Framework.GamerServices
 {
-	public enum MessageBoxIcon
-	{
-		Alert,		// Displays the Alert icon.
-		Error,		// Displays the Error icon.
-		None,		// No icon is displayed.
-		Warning,	// Displays the Warning icon.
-	}
+    public enum MessageBoxIcon
+    {
+        Alert,		// Displays the Alert icon.
+        Error,		// Displays the Error icon.
+        None,		// No icon is displayed.
+        Warning,	// Displays the Warning icon.
+    }
 }
 

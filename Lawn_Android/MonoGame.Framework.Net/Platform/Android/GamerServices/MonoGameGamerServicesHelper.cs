@@ -16,7 +16,7 @@ namespace Microsoft.Xna.Framework.GamerServices
         public static void ShowSigninSheet()
         {
             guide.Enabled = true;
-			guide.Visible = true;
+            guide.Visible = true;
             Guide.IsVisible = true;
         }
     
@@ -116,7 +116,7 @@ namespace Microsoft.Xna.Framework.GamerServices
 
         TimeSpan gt = TimeSpan.Zero;
         TimeSpan last = TimeSpan.Zero;
-		int delay = 2;
+        int delay = 2;
 
         public override void Update(GameTime gameTime)
         {
@@ -130,33 +130,33 @@ namespace Microsoft.Xna.Framework.GamerServices
 
             if ((gameTime.TotalGameTime - gt).TotalSeconds > delay) // close after 10 seconds
             {
-				
-				string name = "androiduser";
-				try
-				{
-					Android.Accounts.AccountManager mgr = (Android.Accounts.AccountManager)Android.App.Application.Context.GetSystemService(Android.App.Activity.AccountService);
-					if (mgr != null)
-					{
-						var accounts = mgr.GetAccounts();
-						if (accounts != null && accounts.Length > 0)
-						{							
-							name = accounts[0].Name;
-							if (name.Contains("@"))
-							{
-								// its an email 
-								name = name.Substring(0, name.IndexOf("@"));
-							}
-						}
-					}
-				}
-				catch
-				{
-				}
-				
+                
+                string name = "androiduser";
+                try
+                {
+                    Android.Accounts.AccountManager mgr = (Android.Accounts.AccountManager)Android.App.Application.Context.GetSystemService(Android.App.Activity.AccountService);
+                    if (mgr != null)
+                    {
+                        var accounts = mgr.GetAccounts();
+                        if (accounts != null && accounts.Length > 0)
+                        {							
+                            name = accounts[0].Name;
+                            if (name.Contains("@"))
+                            {
+                                // its an email 
+                                name = name.Substring(0, name.IndexOf("@"));
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                }
+                
                 SignedInGamer sig = new SignedInGamer();
                 sig.DisplayName = name;
                 sig.Gamertag = name;
-				sig.IsSignedInToLive = false;
+                sig.IsSignedInToLive = false;
 
                 Gamer.SignedInGamers.Add(sig);
 

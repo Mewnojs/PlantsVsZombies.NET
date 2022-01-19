@@ -2,14 +2,14 @@
 
 namespace Lawn
 {
-	public enum CrazyDaveState //Prefix: CRAZY_DAVE
+    public enum CrazyDaveState //Prefix: CRAZY_DAVE
     {
-		Off,
-		Entering,
-		Leaving,
-		Idling,
-		Talking,
-		HandingTalking,
-		HandingIdling
-	}
+        Off,
+        Entering,
+        Leaving,
+        Idling,
+        Talking,
+        HandingTalking,
+        HandingIdling
+    }
 }

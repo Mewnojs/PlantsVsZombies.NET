@@ -2,9 +2,9 @@
 
 namespace Lawn
 {
-	public enum PlantSubClass //Prefix: SUBCLASS
+    public enum PlantSubClass //Prefix: SUBCLASS
     {
-		Normal,
-		Shooter
-	}
+        Normal,
+        Shooter
+    }
 }

@@ -2,8 +2,8 @@
 
 namespace Lawn
 {
-	public interface StoreListener
-	{
-		void BackFromStore();
-	}
+    public interface StoreListener
+    {
+        void BackFromStore();
+    }
 }

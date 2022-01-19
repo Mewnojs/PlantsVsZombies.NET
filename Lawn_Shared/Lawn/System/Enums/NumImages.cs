@@ -2,8 +2,8 @@
 
 namespace Lawn
 {
-	public enum NumImages
-	{
-		NUM_IMAGES = 249
-	}
+    public enum NumImages
+    {
+        NUM_IMAGES = 249
+    }
 }

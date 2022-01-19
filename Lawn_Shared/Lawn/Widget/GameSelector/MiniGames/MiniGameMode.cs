@@ -2,10 +2,10 @@
 
 namespace Lawn
 {
-	public enum MiniGameMode //Prefix: MINI_GAME_MODE
+    public enum MiniGameMode //Prefix: MINI_GAME_MODE
     {
-		Games,
-		IZombie,
-		Vasebreaker
-	}
+        Games,
+        IZombie,
+        Vasebreaker
+    }
 }

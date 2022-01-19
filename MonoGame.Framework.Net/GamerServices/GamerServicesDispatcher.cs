@@ -61,9 +61,9 @@ namespace Microsoft.Xna.Framework.GamerServices
 
         public static event EventHandler<EventArgs> InstallingTitleUpdate;
 
-		private static bool SuppressEventHandlerWarningsUntilEventsAreProperlyImplemented()
-		{
-			return InstallingTitleUpdate != null;
-		}
+        private static bool SuppressEventHandlerWarningsUntilEventsAreProperlyImplemented()
+        {
+            return InstallingTitleUpdate != null;
+        }
     }
 }

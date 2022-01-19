@@ -2,12 +2,12 @@
 
 namespace Lawn
 {
-	public/*internal*/ enum GridSquareType
-	{
-		None,
-		Grass,
-		Dirt,
-		Pool,
-		HighGround
-	}
+    public/*internal*/ enum GridSquareType
+    {
+        None,
+        Grass,
+        Dirt,
+        Pool,
+        HighGround
+    }
 }

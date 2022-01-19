@@ -2,11 +2,11 @@
 
 namespace Lawn
 {
-	public enum GardenType //Prefix: GARDEN
+    public enum GardenType //Prefix: GARDEN
     {
-		Main,
-		Mushroom,
-		Wheelbarrow,
-		Aquarium
-	}
+        Main,
+        Mushroom,
+        Wheelbarrow,
+        Aquarium
+    }
 }

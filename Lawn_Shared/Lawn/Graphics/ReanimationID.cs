@@ -2,8 +2,8 @@
 
 namespace Lawn
 {
-	public enum ReanimationID
-	{
-		Null
-	}
+    public enum ReanimationID
+    {
+        Null
+    }
 }

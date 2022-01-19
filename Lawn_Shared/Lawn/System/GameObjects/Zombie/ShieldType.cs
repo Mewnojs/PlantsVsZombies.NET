@@ -2,11 +2,11 @@
 
 namespace Lawn
 {
-	public enum ShieldType
-	{
-		None,
-		Door,
-		Newspaper,
-		Ladder
-	}
+    public enum ShieldType
+    {
+        None,
+        Door,
+        Newspaper,
+        Ladder
+    }
 }

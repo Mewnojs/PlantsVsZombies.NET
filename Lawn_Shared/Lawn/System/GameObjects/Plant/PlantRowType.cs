@@ -2,11 +2,11 @@
 
 namespace Lawn
 {
-	public/*internal*/ enum PlantRowType
-	{
-		Dirt,
-		Normal,
-		Pool,
-		HighGround
-	}
+    public/*internal*/ enum PlantRowType
+    {
+        Dirt,
+        Normal,
+        Pool,
+        HighGround
+    }
 }

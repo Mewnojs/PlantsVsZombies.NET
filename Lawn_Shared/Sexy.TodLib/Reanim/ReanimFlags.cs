@@ -2,9 +2,9 @@
 
 namespace Sexy.TodLib
 {
-	public enum ReanimFlags //Prefix: PARAMREANIMFLAG
+    public enum ReanimFlags //Prefix: PARAMREANIMFLAG
     {
-		NoAtlas,
-		FastDrawInSwMode
-	}
+        NoAtlas,
+        FastDrawInSwMode
+    }
 }

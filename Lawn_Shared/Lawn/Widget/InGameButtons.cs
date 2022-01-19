@@ -2,9 +2,9 @@
 
 namespace Lawn
 {
-	public enum InGameButtons //Prefix: GAME
-	{
-		MenuButton,
-		StoreButton
-	}
+    public enum InGameButtons //Prefix: GAME
+    {
+        MenuButton,
+        StoreButton
+    }
 }

@@ -2,10 +2,10 @@
 
 namespace Sexy
 {
-	public interface IReusable
-	{
-		void Reset();
+    public interface IReusable
+    {
+        void Reset();
 
-		void PrepareForReuse();
-	}
+        void PrepareForReuse();
+    }
 }

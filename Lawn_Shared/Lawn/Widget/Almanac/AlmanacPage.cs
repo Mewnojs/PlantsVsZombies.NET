@@ -2,10 +2,10 @@
 
 namespace Lawn
 {
-	public enum AlmanacPage
-	{
-		Index,
-		Plants,
-		Zombies
-	}
+    public enum AlmanacPage
+    {
+        Index,
+        Plants,
+        Zombies
+    }
 }

@@ -2,10 +2,10 @@
 
 namespace Sexy
 {
-	public enum InterfaceParams
-	{
-		OUT,
-		IN,
-		OFF = -1
-	}
+    public enum InterfaceParams
+    {
+        OUT,
+        IN,
+        OFF = -1
+    }
 }

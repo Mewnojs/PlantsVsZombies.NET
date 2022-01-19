@@ -2,9 +2,9 @@
 
 namespace Lawn
 {
-	public enum TrialType
-	{
-		None,
-		Stagelocked
-	}
+    public enum TrialType
+    {
+        None,
+        Stagelocked
+    }
 }

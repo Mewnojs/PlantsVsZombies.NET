@@ -2,18 +2,18 @@
 
 namespace Sexy.TodLib
 {
-	public/*internal*/ class FloatParameterTrackNode
-	{
-		public float mTime;
+    public/*internal*/ class FloatParameterTrackNode
+    {
+        public float mTime;
 
-		public float mLowValue;
+        public float mLowValue;
 
-		public float mHighValue;
+        public float mHighValue;
 
-		public TodCurves mCurveType;
+        public TodCurves mCurveType;
 
-		public TodCurves mDistribution;
+        public TodCurves mDistribution;
 
-		public static int SIZE = 20;
-	}
+        public static int SIZE = 20;
+    }
 }

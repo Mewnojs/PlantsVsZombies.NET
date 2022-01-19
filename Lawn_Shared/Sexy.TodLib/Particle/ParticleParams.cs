@@ -2,16 +2,16 @@
 
 namespace Sexy.TodLib
 {
-	public/*internal*/ class ParticleParams
-	{
-		public ParticleParams(ParticleEffect aParticleEffect, string aParticleName)
-		{
-			mParticleEffect = aParticleEffect;
-			mParticleFileName = aParticleName;
-		}
+    public/*internal*/ class ParticleParams
+    {
+        public ParticleParams(ParticleEffect aParticleEffect, string aParticleName)
+        {
+            mParticleEffect = aParticleEffect;
+            mParticleFileName = aParticleName;
+        }
 
-		public ParticleEffect mParticleEffect;
+        public ParticleEffect mParticleEffect;
 
-		public string mParticleFileName;
-	}
+        public string mParticleFileName;
+    }
 }

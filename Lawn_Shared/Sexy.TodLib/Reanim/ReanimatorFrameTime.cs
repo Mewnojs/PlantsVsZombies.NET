@@ -2,12 +2,12 @@
 
 namespace Sexy.TodLib
 {
-	public struct ReanimatorFrameTime
-	{
-		public float mFraction;
+    public struct ReanimatorFrameTime
+    {
+        public float mFraction;
 
-		public short mAnimFrameBeforeInt;
+        public short mAnimFrameBeforeInt;
 
-		public short mAnimFrameAfterInt;
-	}
+        public short mAnimFrameAfterInt;
+    }
 }

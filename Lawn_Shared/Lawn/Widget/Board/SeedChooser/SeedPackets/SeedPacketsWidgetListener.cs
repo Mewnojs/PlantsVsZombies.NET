@@ -2,8 +2,8 @@
 
 namespace Lawn
 {
-	public interface SeedPacketsWidgetListener
-	{
-		void SeedSelected(SeedType UnnamedParameter1);
-	}
+    public interface SeedPacketsWidgetListener
+    {
+        void SeedSelected(SeedType UnnamedParameter1);
+    }
 }

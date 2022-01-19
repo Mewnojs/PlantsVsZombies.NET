@@ -2,14 +2,14 @@
 
 namespace Sexy.TodLib
 {
-	public/*internal*/ class AttacherInfo
-	{
-		public string mReanimName;
+    public/*internal*/ class AttacherInfo
+    {
+        public string mReanimName;
 
-		public string mTrackName;
+        public string mTrackName;
 
-		public float mAnimRate;
+        public float mAnimRate;
 
-		public ReanimLoopType mLoopType;
-	}
+        public ReanimLoopType mLoopType;
+    }
 }

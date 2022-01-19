@@ -3,26 +3,26 @@ using Microsoft.Xna.Framework;
 
 namespace Sexy
 {
-	public interface SexyAppBaseInterface
-	{
-		void Init();
+    public interface SexyAppBaseInterface
+    {
+        void Init();
 
-		bool UpdateApp();
+        bool UpdateApp();
 
-		void UpdateFrames();
+        void UpdateFrames();
 
-		void DrawGame(GameTime gameTime);
+        void DrawGame(GameTime gameTime);
 
-		void StartLoadingThread();
+        void StartLoadingThread();
 
-		void LoadingThreadCompleted();
+        void LoadingThreadCompleted();
 
-		void LoadingThreadProcStub();
+        void LoadingThreadProcStub();
 
-		void InitHook();
+        void InitHook();
 
-		void DeviceOrientationChanged(UI_ORIENTATION toOrientation);
+        void DeviceOrientationChanged(UI_ORIENTATION toOrientation);
 
-		void AccelerometerDidAccelerate(double timestamp, double ax, double ay, double az);
-	}
+        void AccelerometerDidAccelerate(double timestamp, double ax, double ay, double az);
+    }
 }

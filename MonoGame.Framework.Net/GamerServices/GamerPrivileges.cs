@@ -50,62 +50,62 @@ namespace Microsoft.Xna.Framework.GamerServices
     [Serializable]
 #endif
     public class GamerPrivilegeException : Exception
-	{
-		
-	}
-	
+    {
+        
+    }
+    
     public class GamerPrivileges
     {
-		#region Properties
-		public GamerPrivilegeSetting AllowCommunication 
-		{ 
-			get
-			{
-				return GamerPrivilegeSetting.Everyone;
-			}
-		}
-		
-		public bool AllowOnlineSessions 
-		{ 
-			get
-			{
-				return true;
-			}
-		}
-		
-		public GamerPrivilegeSetting AllowProfileViewing 
-		{ 
-			get
-			{
-				return GamerPrivilegeSetting.Blocked;
-			}
-		}
-		
-		public bool AllowPurchaseContent
-		{ 
-			get
-			{
-				return false;
-			}
-		}
-		
-		public bool AllowTradeContent 
-		{ 
-			get
-			{
-				return false;
-			} 
-		}
-		
-		public GamerPrivilegeSetting AllowUserCreatedContent 
-		{ 
-			get
-			{
-				return GamerPrivilegeSetting.Blocked;
-			} 
-		}
-		#endregion
-		
+        #region Properties
+        public GamerPrivilegeSetting AllowCommunication 
+        { 
+            get
+            {
+                return GamerPrivilegeSetting.Everyone;
+            }
+        }
+        
+        public bool AllowOnlineSessions 
+        { 
+            get
+            {
+                return true;
+            }
+        }
+        
+        public GamerPrivilegeSetting AllowProfileViewing 
+        { 
+            get
+            {
+                return GamerPrivilegeSetting.Blocked;
+            }
+        }
+        
+        public bool AllowPurchaseContent
+        { 
+            get
+            {
+                return false;
+            }
+        }
+        
+        public bool AllowTradeContent 
+        { 
+            get
+            {
+                return false;
+            } 
+        }
+        
+        public GamerPrivilegeSetting AllowUserCreatedContent 
+        { 
+            get
+            {
+                return GamerPrivilegeSetting.Blocked;
+            } 
+        }
+        #endregion
+        
         
     }
 }

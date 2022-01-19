@@ -2,12 +2,12 @@
 
 namespace Lawn
 {
-	public enum AwardType
-	{
-		ForLevel,
-		CreditsZombieNote,
-		HelpZombieNote,
-		AchievementOnly,
-		PreCreditsZombieNote
-	}
+    public enum AwardType
+    {
+        ForLevel,
+        CreditsZombieNote,
+        HelpZombieNote,
+        AchievementOnly,
+        PreCreditsZombieNote
+    }
 }

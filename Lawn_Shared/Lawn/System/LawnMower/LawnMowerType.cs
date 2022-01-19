@@ -2,12 +2,12 @@
 
 namespace Lawn
 {
-	public enum LawnMowerType
-	{
-		Lawn,
-		Pool,
-		Roof,
-		SuperMower,
-		MowerTypesCount
-	}
+    public enum LawnMowerType
+    {
+        Lawn,
+        Pool,
+        Roof,
+        SuperMower,
+        MowerTypesCount
+    }
 }

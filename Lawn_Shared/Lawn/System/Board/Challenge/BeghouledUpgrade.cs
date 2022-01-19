@@ -2,11 +2,11 @@
 
 namespace Lawn
 {
-	public enum BeghouledUpgrade
-	{
-		Repeater,
-		Fumeshroom,
-		Tallnut,
-		BeghouledUpgradeCount
-	}
+    public enum BeghouledUpgrade
+    {
+        Repeater,
+        Fumeshroom,
+        Tallnut,
+        BeghouledUpgradeCount
+    }
 }

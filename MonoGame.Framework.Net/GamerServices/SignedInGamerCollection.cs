@@ -42,20 +42,20 @@ using System.Collections.Generic;
 
 namespace Microsoft.Xna.Framework.GamerServices
 {
-	public class SignedInGamerCollection : List<SignedInGamer>
-	{
-		#region Properties
-		// Indexer to get and set words of the containing document:
-		public SignedInGamer this [PlayerIndex index] { 
-			get {
-				if (this.Count == 0 || (int)index > this.Count - 1)
-					return null;
+    public class SignedInGamerCollection : List<SignedInGamer>
+    {
+        #region Properties
+        // Indexer to get and set words of the containing document:
+        public SignedInGamer this [PlayerIndex index] { 
+            get {
+                if (this.Count == 0 || (int)index > this.Count - 1)
+                    return null;
 
-				return this [(int)index];
-			}
-		}
-		#endregion
-	}
+                return this [(int)index];
+            }
+        }
+        #endregion
+    }
 
 
 }

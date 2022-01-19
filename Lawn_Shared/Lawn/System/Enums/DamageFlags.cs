@@ -2,13 +2,13 @@
 
 namespace Lawn
 {
-	public enum DamageFlags
-	{
-		BypassesShield,
-		HitsShieldAndBody,
-		Freeze,
-		DoesntCauseFlash,
-		DoesntLeaveBody,
-		Spike
-	}
+    public enum DamageFlags
+    {
+        BypassesShield,
+        HitsShieldAndBody,
+        Freeze,
+        DoesntCauseFlash,
+        DoesntLeaveBody,
+        Spike
+    }
 }

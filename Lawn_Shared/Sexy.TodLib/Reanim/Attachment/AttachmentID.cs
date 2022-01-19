@@ -2,8 +2,8 @@
 
 namespace Sexy.TodLib
 {
-	public enum AttachmentID
-	{
-		Null
-	}
+    public enum AttachmentID
+    {
+        Null
+    }
 }

@@ -2,9 +2,9 @@
 
 namespace Lawn
 {
-	public enum SeedChooserState //Prefix: CHOOSE
-	{
-		Normal,
-		ViewLawn
-	}
+    public enum SeedChooserState //Prefix: CHOOSE
+    {
+        Normal,
+        ViewLawn
+    }
 }

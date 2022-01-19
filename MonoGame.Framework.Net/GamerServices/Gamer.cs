@@ -87,7 +87,7 @@ namespace Microsoft.Xna.Framework.GamerServices
         public string DisplayName 
         {
             get;
-			internal set;
+            internal set;
         }
 
         [DataMember]
@@ -97,11 +97,11 @@ namespace Microsoft.Xna.Framework.GamerServices
             {
                 return _gamer;
             }
-			
-			internal set
-			{
-				_gamer = value;
-			}
+            
+            internal set
+            {
+                _gamer = value;
+            }
         }
 
         [DataMember]

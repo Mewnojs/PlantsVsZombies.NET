@@ -45,11 +45,11 @@ using System;
 
 namespace Microsoft.Xna.Framework.Net
 {
-	public enum NetworkSessionEndReason
-	{
-		ClientSignedOut,	// This client player has signed out of session.
-		HostEndedSession,	// The host left the session, removing all active players.
-		RemovedByHost,		// The host removed this client player from the session.
-		Disconnected,		// Network connectivity problems ended the session
-	}
+    public enum NetworkSessionEndReason
+    {
+        ClientSignedOut,	// This client player has signed out of session.
+        HostEndedSession,	// The host left the session, removing all active players.
+        RemovedByHost,		// The host removed this client player from the session.
+        Disconnected,		// Network connectivity problems ended the session
+    }
 }

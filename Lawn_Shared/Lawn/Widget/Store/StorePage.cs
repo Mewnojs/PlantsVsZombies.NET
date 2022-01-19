@@ -2,12 +2,12 @@
 
 namespace Lawn
 {
-	public enum StorePage //Prefix: STORE_PAGE
+    public enum StorePage //Prefix: STORE_PAGE
     {
-		SlotUpgrades,
-		PlantUpgrades,
-		Zen1,
-		Zen2,
-		NumStorePages
-	}
+        SlotUpgrades,
+        PlantUpgrades,
+        Zen1,
+        Zen2,
+        NumStorePages
+    }
 }

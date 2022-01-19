@@ -2,11 +2,11 @@
 
 namespace Lawn
 {
-	public enum GroundLayers
-	{
-		PoolSparkle,
-		Crater,
-		Ice,
-		Shadow
-	}
+    public enum GroundLayers
+    {
+        PoolSparkle,
+        Crater,
+        Ice,
+        Shadow
+    }
 }

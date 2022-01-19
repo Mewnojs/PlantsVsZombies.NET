@@ -2,16 +2,16 @@
 
 namespace Sexy
 {
-	public struct _Touch
-	{
-		public CGPoint location;
+    public struct _Touch
+    {
+        public CGPoint location;
 
-		public CGPoint previousLocation;
+        public CGPoint previousLocation;
 
-		public int tapCount;
+        public int tapCount;
 
-		public double timestamp;
+        public double timestamp;
 
-		public _Phase phase;
-	}
+        public _Phase phase;
+    }
 }

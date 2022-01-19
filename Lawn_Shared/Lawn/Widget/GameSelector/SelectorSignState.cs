@@ -2,11 +2,11 @@
 
 namespace Lawn
 {
-	public enum SelectorSignState //Prefix: SIGN
-	{
-		Down,
-		Up,
-		MovingUp,
-		MovingDown
-	}
+    public enum SelectorSignState //Prefix: SIGN
+    {
+        Down,
+        Up,
+        MovingUp,
+        MovingDown
+    }
 }

@@ -2,9 +2,9 @@
 
 namespace Lawn
 {
-	public enum UserDialogs
-	{
-		UserDialog_RenameUser,
-		UserDialog_DeleteUser
-	}
+    public enum UserDialogs
+    {
+        UserDialog_RenameUser,
+        UserDialog_DeleteUser
+    }
 }

@@ -2,8 +2,8 @@
 
 namespace Sexy
 {
-	internal class FrameworkConstants
-	{
-		public static float Font_Scale = 1f;
-	}
+    internal class FrameworkConstants
+    {
+        public static float Font_Scale = 1f;
+    }
 }

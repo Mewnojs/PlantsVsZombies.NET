@@ -2,8 +2,8 @@
 
 namespace Sexy.TodLib
 {
-	public enum ParticleEmitterID
-	{
-		Null
-	}
+    public enum ParticleEmitterID
+    {
+        Null
+    }
 }

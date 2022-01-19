@@ -2,13 +2,13 @@
 
 namespace Sexy.TodLib
 {
-	public enum DrawStringJustification //Prefix: DS_ALIGN
+    public enum DrawStringJustification //Prefix: DS_ALIGN
     {
-		Left,
-		Right,
-		Center,
-		LeftVerticalMiddle,
-		RightVerticalMiddle,
-		CenterVerticalMiddle
-	}
+        Left,
+        Right,
+        Center,
+        LeftVerticalMiddle,
+        RightVerticalMiddle,
+        CenterVerticalMiddle
+    }
 }

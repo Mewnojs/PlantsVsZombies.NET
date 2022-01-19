@@ -2,14 +2,14 @@
 
 namespace Sexy
 {
-	internal class PuzzleRating
-	{
-		public ushort mPuzzleNum;
+    internal class PuzzleRating
+    {
+        public ushort mPuzzleNum;
 
-		public byte mRating;
+        public byte mRating;
 
-		public ushort mSecondsSpent;
+        public ushort mSecondsSpent;
 
-		public ushort mHintsUsed;
-	}
+        public ushort mHintsUsed;
+    }
 }

@@ -66,15 +66,15 @@ namespace Microsoft.Xna.Framework.GamerServices
 {
 
 
-	public static class Guide
-	{
-		private static bool isScreenSaverEnabled;
-		private static bool isTrialMode = false;
-		private static bool isVisible;
-		private static bool simulateTrialMode;
+    public static class Guide
+    {
+        private static bool isScreenSaverEnabled;
+        private static bool isTrialMode = false;
+        private static bool isVisible;
+        private static bool simulateTrialMode;
 
 #if WINDOWS_UAP
-	    private static readonly CoreDispatcher _dispatcher;
+        private static readonly CoreDispatcher _dispatcher;
 #endif 
 
         static Guide()
@@ -90,35 +90,35 @@ namespace Microsoft.Xna.Framework.GamerServices
 #endif
         }
 
-		delegate string ShowKeyboardInputDelegate(
+        delegate string ShowKeyboardInputDelegate(
          MGXna_Framework.PlayerIndex player,           
          string title,
          string description,
          string defaultText,
-		 bool usePasswordMode);
+         bool usePasswordMode);
 
-		private static string ShowKeyboardInput(
+        private static string ShowKeyboardInput(
          MGXna_Framework.PlayerIndex player,           
          string title,
          string description,
          string defaultText,
-		 bool usePasswordMode)
+         bool usePasswordMode)
         {
             throw new NotImplementedException();
-		}
+        }
 
-		public static IAsyncResult BeginShowKeyboardInput (
+        public static IAsyncResult BeginShowKeyboardInput (
          MGXna_Framework.PlayerIndex player,
          string title,
          string description,
          string defaultText,
          AsyncCallback callback,
          Object state)
-		{
-		return BeginShowKeyboardInput(player, title, description, defaultText, callback, state, false );
-		}
+        {
+        return BeginShowKeyboardInput(player, title, description, defaultText, callback, state, false );
+        }
 
-		public static IAsyncResult BeginShowKeyboardInput (
+        public static IAsyncResult BeginShowKeyboardInput (
          MGXna_Framework.PlayerIndex player,
          string title,
          string description,
@@ -126,26 +126,26 @@ namespace Microsoft.Xna.Framework.GamerServices
          AsyncCallback callback,
          Object state,
          bool usePasswordMode)
-		{
+        {
 #if !WINDOWS_UAP
-			ShowKeyboardInputDelegate ski = ShowKeyboardInput; 
+            ShowKeyboardInputDelegate ski = ShowKeyboardInput; 
 
-			return ski.BeginInvoke(player, title, description, defaultText, usePasswordMode, callback, ski);
+            return ski.BeginInvoke(player, title, description, defaultText, usePasswordMode, callback, ski);
 #else
             throw new NotImplementedException();
 #endif
-		}
+        }
 
-		public static string EndShowKeyboardInput (IAsyncResult result)
-		{
+        public static string EndShowKeyboardInput (IAsyncResult result)
+        {
 #if !WINDOWS_UAP
-			ShowKeyboardInputDelegate ski = (ShowKeyboardInputDelegate)result.AsyncState; 
+            ShowKeyboardInputDelegate ski = (ShowKeyboardInputDelegate)result.AsyncState; 
 
-			return ski.EndInvoke(result);		
+            return ski.EndInvoke(result);		
 #else
             throw new NotImplementedException();
 #endif
-		}
+        }
 
         delegate Nullable<int> ShowMessageBoxDelegate(string title,
          string text,
@@ -264,18 +264,18 @@ namespace Microsoft.Xna.Framework.GamerServices
         {
         }
 
-		public static void Show ()
-		{
-			ShowSignIn(1, false);
-		}
+        public static void Show ()
+        {
+            ShowSignIn(1, false);
+        }
 
-		public static void ShowSignIn (int paneCount, bool onlineOnly)
-		{
-			if ( paneCount != 1 && paneCount != 2 && paneCount != 4)
-			{
-				new ArgumentException("paneCount Can only be 1, 2 or 4 on Windows");
-				return;
-			}
+        public static void ShowSignIn (int paneCount, bool onlineOnly)
+        {
+            if ( paneCount != 1 && paneCount != 2 && paneCount != 4)
+            {
+                new ArgumentException("paneCount Can only be 1, 2 or 4 on Windows");
+                return;
+            }
 
 #if !WINDOWS_UAP && !(WINDOWS && DIRECTX)
             Microsoft.Xna.Framework.GamerServices.MonoGameGamerServicesHelper.ShowSigninSheet();            
@@ -289,15 +289,15 @@ namespace Microsoft.Xna.Framework.GamerServices
                 GamerServicesComponent.LocalNetworkGamer.SignedInGamer.BeginAuthentication(null, null);
             }
 #endif
-		}
+        }
 
-		public static void ShowLeaderboard()
-		{
+        public static void ShowLeaderboard()
+        {
             //if ( ( Gamer.SignedInGamers.Count > 0 ) && ( Gamer.SignedInGamers[0].IsSignedInToLive ) )
             //{
             //    // Lazy load it
             //    if ( leaderboardController == null )
-            //    {			    	
+            //    {			        
             //        leaderboardController = new GKLeaderboardViewController();
             //    }
 
@@ -323,10 +323,10 @@ namespace Microsoft.Xna.Framework.GamerServices
             //        }
             //    }
             //}
-		}
+        }
 
-		public static void ShowAchievements()
-		{
+        public static void ShowAchievements()
+        {
             //if ( ( Gamer.SignedInGamers.Count > 0 ) && ( Gamer.SignedInGamers[0].IsSignedInToLive ) )
             //{
             //    // Lazy load it
@@ -357,65 +357,65 @@ namespace Microsoft.Xna.Framework.GamerServices
             //        }
             //    }
             //}
-		}
+        }
 
-		#region Properties
-		public static bool IsScreenSaverEnabled 
-		{ 
-			get
-			{
-				return isScreenSaverEnabled;
-			}
-			set
-			{
-				isScreenSaverEnabled = value;
-			}
-		}
+        #region Properties
+        public static bool IsScreenSaverEnabled 
+        { 
+            get
+            {
+                return isScreenSaverEnabled;
+            }
+            set
+            {
+                isScreenSaverEnabled = value;
+            }
+        }
 
-		public static bool IsTrialMode 
-		{ 
-			get
-			{
-				// If simulate trial mode is enabled then 
-				// we're in the trial mode.
+        public static bool IsTrialMode 
+        { 
+            get
+            {
+                // If simulate trial mode is enabled then 
+                // we're in the trial mode.
 #if DEBUG
                 return simulateTrialMode || isTrialMode;
 #else
                 return simulateTrialMode || isTrialMode;
 #endif
-			}
-		}
+            }
+        }
 
-		public static bool IsVisible 
-		{ 
-			get
-			{
-				return isVisible;
-			}
-			set
-			{
-				isVisible = value;
-			}
-		}
+        public static bool IsVisible 
+        { 
+            get
+            {
+                return isVisible;
+            }
+            set
+            {
+                isVisible = value;
+            }
+        }
 
-		public static bool SimulateTrialMode 
-		{ 
-			get
-			{
-				return simulateTrialMode;
-			}
-			set
-			{
-				simulateTrialMode = value;
-			}
-		}
+        public static bool SimulateTrialMode 
+        { 
+            get
+            {
+                return simulateTrialMode;
+            }
+            set
+            {
+                simulateTrialMode = value;
+            }
+        }
 
-		public static MGXna_Framework.GameWindow Window 
-		{ 
-			get;
-			set;
-		}
-		#endregion
+        public static MGXna_Framework.GameWindow Window 
+        { 
+            get;
+            set;
+        }
+        #endregion
 
         internal static void Initialise(MGXna_Framework.Game game)
         {

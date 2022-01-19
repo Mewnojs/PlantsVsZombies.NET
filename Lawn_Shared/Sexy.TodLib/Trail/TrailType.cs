@@ -2,10 +2,10 @@
 
 namespace Sexy.TodLib
 {
-	public enum TrailType
-	{
-		None = -1,
-		Ice,
-		NumTrails
-	}
+    public enum TrailType
+    {
+        None = -1,
+        Ice,
+        NumTrails
+    }
 }

@@ -2,10 +2,10 @@
 
 namespace Sexy
 {
-	public enum MovieControllMode
-	{
-		Default,
-		Volumeonly,
-		Hidden
-	}
+    public enum MovieControllMode
+    {
+        Default,
+        Volumeonly,
+        Hidden
+    }
 }
