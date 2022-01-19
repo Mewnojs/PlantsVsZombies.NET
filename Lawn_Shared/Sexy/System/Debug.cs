@@ -6,8 +6,14 @@ namespace Sexy
 {
 	public /*internal*/ static class Debug
 	{
-		public static void Log(DebugType msgtype, string msg) 
+        public static void Log(object msg)
+        {
+            Log(DebugType.Info, msg);
+        }
+
+            public static void Log(DebugType msgtype, object msg) 
 		{
+            msg = msg.ToString();
 			ConsoleColor fgColor = Console.ForegroundColor;
 			ConsoleColor bgColor = Console.BackgroundColor;
 			Action colorReset = Console.ResetColor;

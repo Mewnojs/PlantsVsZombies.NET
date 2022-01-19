@@ -1,7 +1,7 @@
 ﻿using System;
 using Sexy;
 
-internal static class Resources
+public/*internal*/ static class Resources
 {
 	public static bool ExtractResourcesByName(ResourceManager theManager, string theName)
 	{

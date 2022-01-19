@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Sexy.TodLib
 {
-	class FilterEffect
+	public class FilterEffect
 	{
 		public static void FilterEffectInitForApp()
 		{

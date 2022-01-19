@@ -5842,33 +5842,28 @@ namespace Lawn
 			Board.ZombiePickerInit(zombiePicker);
 			ZombieType introducedZombieType = GetIntroducedZombieType();
 			Debug.ASSERT(mNumWaves <= 100);
-			int i = 0;
-			while (i < mNumWaves)
+			
+			for (int i = 0; i < mNumWaves; i++)
 			{
 				Board.ZombiePickerInitForWave(zombiePicker);
 				mZombiesInWave[i, 0] = ZombieType.Invalid;
-				bool flag = IsFlagWave(i);
-				bool flag2 = i == mNumWaves - 1;
-				if (!mApp.IsBungeeBlitzLevel() || !flag)
-				{
-					goto IL_2E4;
-				}
-				for (int j = 0; j < 5; j++)
-				{
-					PutZombieInWave(ZombieType.Bungee, i, zombiePicker);
-				}
-				if (flag2)
-				{
-					goto IL_2E4;
-				}
-				if ((mApp.IsAdventureMode() || mApp.IsQuickPlayMode()) && flag2)
-				{
-					PutInMissingZombies(i, zombiePicker);
-				}
-				IL_65F:
-				i++;
-				continue;
-				IL_2E4:
+				bool isFlagWave = IsFlagWave(i);
+				bool isBeforeLastWave = i == mNumWaves - 1;
+                if (mApp.IsBungeeBlitzLevel() && isFlagWave)
+                {
+                    for (int j = 0; j < 5; j++)
+                    {
+                        PutZombieInWave(ZombieType.Bungee, i, zombiePicker);
+                    }
+                    if (!isBeforeLastWave)
+                    {
+                        if ((mApp.IsAdventureMode() || mApp.IsQuickPlayMode()) && isBeforeLastWave)
+                        {
+                            PutInMissingZombies(i, zombiePicker);
+                        }
+                        continue;
+                    }
+                }
 				if (mApp.mGameMode == GameMode.ChallengeLastStand)
 				{
 					zombiePicker.mZombiePoints = (mChallenge.mSurvivalStage * GetNumWavesPerSurvivalStage() + i + 10) * 2 / 5 + 1;
@@ -5885,7 +5880,7 @@ namespace Lawn
 				{
 					zombiePicker.mZombiePoints = i / 3 + 1;
 				}
-				if (flag)
+				if (isFlagWave)
 				{
 					int num2 = Math.Min(zombiePicker.mZombiePoints, 8);
 					zombiePicker.mZombiePoints = (int)(zombiePicker.mZombiePoints * 2.5f);
@@ -5923,7 +5918,7 @@ namespace Lawn
 					bool flag3 = false;
 					if (introducedZombieType == ZombieType.Digger || introducedZombieType == ZombieType.Balloon)
 					{
-						if (i + 1 == 7 || flag2)
+						if (i + 1 == 7 || isBeforeLastWave)
 						{
 							flag3 = true;
 						}
@@ -5935,7 +5930,7 @@ namespace Lawn
 							flag3 = true;
 						}
 					}
-					else if (i == mNumWaves / 2 || flag2)
+					else if (i == mNumWaves / 2 || isBeforeLastWave)
 					{
 						flag3 = true;
 					}
@@ -5944,11 +5939,11 @@ namespace Lawn
 						PutZombieInWave(introducedZombieType, i, zombiePicker);
 					}
 				}
-				if (mLevel == 50 && flag2)
+				if (mLevel == 50 && isBeforeLastWave)
 				{
 					PutZombieInWave(ZombieType.Gargantuar, i, zombiePicker);
 				}
-				if ((mApp.IsAdventureMode() || mApp.IsQuickPlayMode()) && flag2)
+				if ((mApp.IsAdventureMode() || mApp.IsQuickPlayMode()) && isBeforeLastWave)
 				{
 					PutInMissingZombies(i, zombiePicker);
 				}
@@ -5989,8 +5984,8 @@ namespace Lawn
 					PutZombieInWave(theZombieType, i, zombiePicker);
 				}
 				int aZombiePoints = zombiePicker.mZombiePoints;
-				goto IL_65F;
-			}
+                continue;
+            }
 		}
 
 		public void StopAllZombieSounds()

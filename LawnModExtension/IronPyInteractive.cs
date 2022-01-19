@@ -114,13 +114,24 @@ namespace LawnMod
                         Debug.Log(DebugType.Info, $"Loading <{path}>");
                         try
                         {
-                            mPyEnj.ExecuteFile(path);
-                            Debug.Log(DebugType.Info, $"Successfully loaded <{path}>");
+                            if (path[^3..].ToLower() == ".py")
+                            {
+                                mPyEnj.ExecuteFile(path);
+                                Debug.Log(DebugType.Info, $"Successfully loaded <{path}>");
+                            }
+                            //else if (path[^4..].ToLower() == ".dll")
+                            //{
+                                //mPyEnj.Runtime.LoadAssembly(Assembly.LoadFrom(path));
+                                //var sc = mPyEnj.Runtime.ImportModule("v95");
+                            //} not supported in .net core
+                            else 
+                            {
+                                Debug.Log(DebugType.Info, $"Skipped <{path}> as it's not a supported script.");
+                            }
                         }
                         catch (Exception ex)
                         {
                             Debug.Log(DebugType.Error, $"{ex.GetType()}: {ex.Message}");
-                            return;
                         }
                     }
                 }

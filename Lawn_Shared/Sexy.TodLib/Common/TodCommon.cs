@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace Sexy.TodLib
 {
-	internal static class TodCommon
+	public/*internal*/ static class TodCommon
 	{
 		public static float PixelAligned(float num)
 		{
