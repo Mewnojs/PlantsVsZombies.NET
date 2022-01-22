@@ -130,9 +130,12 @@ namespace Sexy
             LawnMod.IronPyInteractive.Serve();
             base.Initialize();
             // Window Scaling
-            GlobalStaticVars.gSexyAppBase.mScreenScales.Init(1600, 960, 800, 480);
-            Main.graphics.PreferredBackBufferWidth = 1600;
-            Main.graphics.PreferredBackBufferHeight = 960;
+            var f = new SharpDX.Direct2D1.Factory();
+            var ww = (int)(f.DesktopDpi.Width  / 96 * 800);
+            var wh = (int)(f.DesktopDpi.Height / 96 * 480);
+            GlobalStaticVars.gSexyAppBase.mScreenScales.Init(ww, wh, 800, 480);
+            Main.graphics.PreferredBackBufferWidth = ww;
+            Main.graphics.PreferredBackBufferHeight = wh;
             GraphicsState.mGraphicsDeviceManager.ApplyChanges();
             // IME Support
             GlobalStaticVars.gSexyAppBase.mWidgetManager.mIMEHandler = new MonoGame.IMEHelper.WinFormsIMEHandler(this);
