@@ -2159,7 +2159,24 @@ namespace Lawn
 
         public override void KeyChar(SexyChar theChar)
         {
-            if (mApp.mDebugKeysEnabled)
+            if (!mApp.mDebugKeysEnabled)
+            {
+                switch ((char)theChar) 
+                {
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                    mSeedBank.mSeedPackets[theChar-'1'].MouseDown(0, 0, 1);
+                    break;
+                }
+            }
+            else
             {
                 char value_type = theChar.value_type;
                 if (mApp.mGameMode == GameMode.ChallengeZenGarden)
