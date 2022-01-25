@@ -48,7 +48,7 @@ namespace Lawn
             int num2 = (int)(btmY - (float)image.mHeight * g.mScaleY);
             TodCommon.TodDrawImageScaledF(g, image, (float)num, (float)num2, g.mScaleX, g.mScaleY);
         }*/
-        public void DrawCachedPlant(Graphics g, float centerX, float btmY, SeedType theSeedType, DrawVariation theDrawVariation)
+        public void DrawCachedPlant(Graphics g, float thePosX, float thePosY, SeedType theSeedType, DrawVariation theDrawVariation)
         {
             MemoryImage image = null;
             if (theDrawVariation == DrawVariation.Normal || theDrawVariation == DrawVariation.Imitater || theDrawVariation == DrawVariation.ImitaterLess)
@@ -78,11 +78,11 @@ namespace Lawn
             {
                 if (g.mScaleX == 1f && g.mScaleY == 1f)
                 {
-                    g.DrawImage(image, centerX + (Constants.S * ( drawRect.mX - drawRect.mWidth / 2)), btmY + (Constants.S * (-drawRect.mY - drawRect.mHeight)));
+                    g.DrawImage(image, thePosX + (Constants.S * drawRect.mX), thePosY + (Constants.S * drawRect.mY));
                     return;
                 }
             }
-            TodCommon.TodDrawImageScaledF(g, image, centerX + (Constants.S * ((drawRect.mX - drawRect.mWidth / 2) * g.mScaleX)), btmY + (Constants.S * ((-drawRect.mY - drawRect.mHeight) * g.mScaleY)), g.mScaleX, g.mScaleY);
+            TodCommon.TodDrawImageScaledF(g, image, thePosX + (Constants.S * (drawRect.mX * g.mScaleX)), thePosY + (Constants.S * ((drawRect.mY) * g.mScaleY)), g.mScaleX, g.mScaleY);
             return;
         }
 

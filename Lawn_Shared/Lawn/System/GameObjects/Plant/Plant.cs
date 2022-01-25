@@ -643,11 +643,12 @@ namespace Lawn
                 {
                     num2 -= 20f;
                 }
-                g.SetScale(1f, 0.5f, 0f, 0f);
-                Image imageInAtlasById = AtlasResources.GetImageInAtlasById((int)(10300 + mSeedType));
+                float ratioSquished = 0.5f;
+                g.SetScale(1f, ratioSquished, 0f, 0f);
+                //Image imageInAtlasById = AtlasResources.GetImageInAtlasById((int)(10300 + mSeedType));
                 g.SetColorizeImages(true);
                 g.SetColor(new Color(255, 255, 255, (int)(255f * Math.Min(1f, mDisappearCountdown / 100f))));
-                Plant.DrawSeedType(g, mSeedType, mImitaterType, DrawVariation.Normal, num * Constants.S + imageInAtlasById.GetCelWidth() / 2 + Constants.Plant_Squished_Offset.X, num2 * Constants.S + imageInAtlasById.GetCelHeight() + Constants.Plant_Squished_Offset.Y);
+                Plant.DrawSeedType(g, mSeedType, mImitaterType, DrawVariation.Normal, num * Constants.S/* + imageInAtlasById.GetCelWidth() / 2 */+ Constants.Plant_Squished_Offset.X, num2 * Constants.S + (float)Constants.New.Board_GridCellSizeY_6Rows * (1-ratioSquished) * Constants.S/*+ imageInAtlasById.GetCelHeight()*/ + Constants.Plant_Squished_Offset.Y);
                 g.SetScale(1f, 1f, 0f, 0f);
                 g.SetColorizeImages(false);
                 return;
@@ -5524,7 +5525,7 @@ namespace Lawn
             b.WriteLong(mTargetY);
             GameObject.SaveId(mTargetZombieID, b);
             b.WriteLong(mWakeUpCounter);
-            b.WriteFloat(mBodyReanimID.mAnimTime);
+            b.WriteFloat(mBodyReanimID?.mAnimTime ?? 0f);
             return true;
         }
 
@@ -5651,7 +5652,7 @@ namespace Lawn
                 float num5 = (float)Math.Sin(num3 + num4) * 2f;
                 num += num5;
             }
-            if (theBoard != null && (thePlant == null || !thePlant.mSquished) && thePlant.mInFlowerPot)
+            if (theBoard != null && (thePlant == null || !thePlant.mSquished) && (thePlant?.mInFlowerPot ?? false))
             {
                 Plant flowerPotAt = theBoard.GetFlowerPotAt(theCol, theRow);
                 if (flowerPotAt != null && !flowerPotAt.mSquished && theSeedType != SeedType.Flowerpot)

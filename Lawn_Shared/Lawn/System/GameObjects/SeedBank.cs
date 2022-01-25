@@ -8,7 +8,7 @@ namespace Lawn
     {
         public SeedBank()
         {
-            mWidth = (int)Constants.InvertAndScale(62f);
+            mWidth = Constants.New.SeedBank_Width;
             mHeight = mApp.mHeight;
             mNumPackets = 0;
             mCutSceneDarken = 255;

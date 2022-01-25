@@ -363,6 +363,15 @@ namespace Lawn
             {
                 return;
             }
+            if (theClickCount >= 0 && mType == CoinType.UsableSeedPacket) 
+            {
+                if (mBoard.mCursorObject.mCoinID == this)
+                {
+                    mBoard.RefreshSeedPacketFromCursor();
+                    mApp.PlayFoley(FoleyType.Drop);
+                    return;
+                }
+            }
             if (theClickCount >= 0 && !mIsBeingCollected)
             {
                 PlayCollectSound();
@@ -399,7 +408,17 @@ namespace Lawn
             {
                 num2 = 50;
             }
-            bool flag = !mDead && (!mIsBeingCollected || (mType == CoinType.UsableSeedPacket && mBoard.mIgnoreNextMouseUpSeedPacket)) && (mType != CoinType.UsableSeedPacket || mBoard == null || mBoard.mCursorObject.mCursorType == CursorType.Normal || mApp.IsWhackAZombieLevel() || mBoard.mIgnoreNextMouseUpSeedPacket) && (theX >= mPosX - num2 && theX < mPosX + mWidth + num2 && theY >= mPosY + num - num2 && theY < mPosY + mHeight + num + num2 + num3);
+            bool flag = !mDead 
+                && (!mIsBeingCollected || (mType == CoinType.UsableSeedPacket && mBoard.mIgnoreNextMouseUpSeedPacket)) 
+                && (mType != CoinType.UsableSeedPacket
+                    || mBoard == null
+                    || mBoard.mCursorObject.mCursorType == CursorType.Normal
+                    || mApp.IsWhackAZombieLevel()
+                    || mBoard.mIgnoreNextMouseUpSeedPacket) 
+                && (theX >= mPosX - num2
+                    && theX < mPosX + mWidth + num2
+                    && theY >= mPosY + num - num2
+                    && theY < mPosY + mHeight + num + num2 + num3);
             if (flag)
             {
                 theHitResult.mObject = this;
@@ -633,7 +652,7 @@ namespace Lawn
                         int theGrayness = 255;
                         if (mIsBeingCollected)
                         {
-                            theGrayness = 128;
+                            //theGrayness = 128;
                         }
                         else
                         {
@@ -650,6 +669,10 @@ namespace Lawn
                             num4++;
                         }
                         SeedPacket.DrawSmallSeedPacket(g, (int)(mPosX * Constants.S), (int)(mPosY * Constants.S), mUsableSeedType, SeedType.None, 0f, theGrayness, false, false, true, false);
+                        if (mIsBeingCollected)
+                        {
+                            g.DrawImage(AtlasResources.IMAGE_SELECTED_PACKET, (int)(mPosX * Constants.S + Constants.SeedPacket_Selector_Pos.X), (int)(mPosY * Constants.S - Constants.SeedPacket_Selector_Pos.Y));
+                        }
                         g.SetColorizeImages(false);
                         return;
                     }
@@ -826,6 +849,9 @@ namespace Lawn
             if (mType == CoinType.UsableSeedPacket)
             {
                 Debug.ASSERT(mBoard != null);
+                //
+                mBoard.ClearCursor();
+                //
                 mBoard.mCursorObject.mType = mUsableSeedType;
                 mBoard.mCursorObject.mCursorType = CursorType.PlantFromUsableCoin;
                 mBoard.mCursorObject.mCoinID = mBoard.mCoins[mBoard.mCoins.IndexOf(this)];
@@ -903,7 +929,7 @@ namespace Lawn
             {
                 return;
             }
-            mFadeCount -= 3;
+            mFadeCount -= 1;
             if (mFadeCount >= 0 && mFadeCount < 3)
             {
                 if (mType == CoinType.Silver || mType == CoinType.Gold)

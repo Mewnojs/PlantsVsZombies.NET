@@ -1009,7 +1009,7 @@ namespace Sexy
             Constants.Coin_Taco_Offset = new Point(0, 20);
             Constants.Coin_Bacon_Offset = new Point(0, 20);
             Constants.Plant_CobCannon_Projectile_Offset = new Point(-30, -160);
-            Constants.Plant_Squished_Offset = new Point(5, 20);
+            Constants.Plant_Squished_Offset = new Point(0, 0);
             Constants.IZombieBrainPosition = 140;
             Constants.IZombie_SeedOffset = new Point(4, 2);
             Constants.IZombie_ClipOffset = new Rectangle(0, 0, 80, 50);
@@ -1114,6 +1114,7 @@ namespace Sexy
             Constants.GridItem_ScaryPot_ZombieFootball_Offset = new Point(15, 25);
             Constants.GridItem_ScaryPot_ZombieGargantuar_Offset = new Point(-7, -5);
             Constants.GridItem_ScaryPot_Sun_Offset = new Point(42, 62);
+            New.Load();
         }
 
         public static void Load600x1000()
@@ -1675,6 +1676,7 @@ namespace Sexy
             Constants.GridItem_ScaryPot_ZombieFootball_Offset = new Point(15, 25);
             Constants.GridItem_ScaryPot_ZombieGargantuar_Offset = new Point(-7, -5);
             Constants.GridItem_ScaryPot_Sun_Offset = new Point(42, 62);
+            New.Load();
         }
 
         public const int PC_BOARD_WIDTH = 800;
@@ -2630,6 +2632,20 @@ namespace Sexy
             de,
             es,
             it
+        }
+        public static class New 
+        {
+            public static void Load() 
+            {
+                Board_GridCellSizeX = 80;
+                Board_GridCellSizeY_6Rows = 85;
+                Board_GridCellSizeY_5Rows = 100;
+                SeedBank_Width = (int)Constants.InvertAndScale(62f);
+            }
+            public static int Board_GridCellSizeX;
+            public static int Board_GridCellSizeY_5Rows;
+            public static int Board_GridCellSizeY_6Rows;
+            public static int SeedBank_Width;
         }
     }
 }

@@ -136,102 +136,115 @@ namespace Lawn
 
         public void DrawTopLayer(Graphics g)
         {
+            bool flag = mBoard.HasConveyorBeltSeedBank();
+            if (flag)
+            {
+                g.SetClipRect(new TRect(-mX - Constants.Board_Offset_AspectRatio_Correction + (int)(Constants.New.SeedBank_Width), -mY, short.MaxValue, short.MaxValue));
+                g.HardwareClip();
+            }
             switch (mCursorType)
             {
-                case CursorType.Shovel:
-                    if (mBoard.mIgnoreMouseUp || mX * Constants.IS < Constants.LAWN_XMIN || mY * Constants.IS < Constants.LAWN_YMIN)
-                    {
-                        return;
-                    }
-                    int imgShovelWidth = AtlasResources.IMAGE_SHOVEL_HI_RES.mWidth;
-                    int imgShovelHeight = AtlasResources.IMAGE_SHOVEL_HI_RES.mHeight;
-                    g.SetColor(SexyColor.White);
-                    int num = (int)TodCommon.TodAnimateCurveFloat(0, 39, mBoard.mEffectCounter % 40, 0f, imgShovelWidth / 2, TodCurves.BounceSlowMiddle);
-                    g.DrawImage(AtlasResources.IMAGE_SHOVEL_HI_RES, num, -imgShovelHeight - num, imgShovelWidth, imgShovelHeight);
-                    return;
-                case CursorType.Hammer:
-                    Reanimation reanimation = mApp.ReanimationGet(mReanimCursorID);
-                    reanimation.Draw(g);
-                    return;
-                case CursorType.CobcannonTarget:
-                    if (mX * Constants.IS < Constants.LAWN_XMIN || mY * Constants.IS < Constants.LAWN_YMIN)
-                    {
-                        return;
-                    }
-                    int imgCobCannonTargetWidth = AtlasResources.IMAGE_COBCANNON_TARGET.mWidth;
-                    int imgCobCannonTargetHeight = AtlasResources.IMAGE_COBCANNON_TARGET.mHeight;
-                    g.SetColorizeImages(true);
-                    g.SetColor(new SexyColor(255, 255, 255, 127));
-                    g.DrawImage(AtlasResources.IMAGE_COBCANNON_TARGET, -imgCobCannonTargetWidth / 2, -imgCobCannonTargetHeight / 2, imgCobCannonTargetWidth, imgCobCannonTargetHeight);
-                    g.SetColorizeImages(false);
-                    return;
-                case CursorType.WateringCan:
-                    if (mApp.mPlayerInfo.mPurchases[13] > 0)
-                    {
-                        TRect trect = new TRect(Constants.ZEN_XMIN, Constants.ZEN_YMIN, Constants.ZEN_XMAX - Constants.ZEN_XMIN, Constants.ZEN_YMAX - Constants.ZEN_YMIN);
-                        if (trect.Contains(mApp.mBoard.mLastToolX, mApp.mBoard.mLastToolY))
-                        {
-                            int imgGoldToolReticleWidth = AtlasResources.IMAGE_ZEN_GOLDTOOLRETICLE.mWidth;
-                            int imgGoldToolReticleHeight = AtlasResources.IMAGE_ZEN_GOLDTOOLRETICLE.mHeight;
-                            g.DrawImage(AtlasResources.IMAGE_ZEN_GOLDTOOLRETICLE, -imgGoldToolReticleWidth / 2, -imgGoldToolReticleHeight / 2, imgGoldToolReticleWidth, imgGoldToolReticleHeight);
-                        }
-                        DrawToolIconImage(g, AtlasResources.IMAGE_REANIM_ZENGARDEN_WATERINGCAN1_GOLD);
-                    }
-                    else
-                    {
-                        DrawToolIconImage(g, AtlasResources.IMAGE_REANIM_ZENGARDEN_WATERINGCAN1);
-                    }
+            case CursorType.Shovel:
+                if (mBoard.mIgnoreMouseUp /*|| mX * Constants.IS < Constants.LAWN_XMIN || mY * Constants.IS < Constants.LAWN_YMIN*/)
+                {
                     break;
-                case CursorType.BugSpray:
-                    DrawToolIconImage(g, AtlasResources.IMAGE_REANIM_ZENGARDEN_BUGSPRAY_BOTTLE);
-                    return;
-                case CursorType.Phonograph:
-                    DrawToolIconImage(g, AtlasResources.IMAGE_PHONOGRAPH);
-                    return;
-                case CursorType.Fertilizer:
-                    DrawToolIconImage(g, AtlasResources.IMAGE_REANIM_ZENGARDEN_FERTILIZER_BAG1);
-                    return;
-                case CursorType.Glove:
-                    DrawToolIconImage(g, AtlasResources.IMAGE_ZEN_GARDENGLOVE);
-                    return;
-                case CursorType.Chocolate:
-                    DrawToolIconImage(g, AtlasResources.IMAGE_CHOCOLATE);
-                    return;
-                case CursorType.MoneySign:
-                    DrawToolIconImage(g, AtlasResources.IMAGE_ZEN_MONEYSIGN);
-                    return;
-                case CursorType.Wheeelbarrow:
-                    Image wbimage = AtlasResources.IMAGE_ZEN_WHEELBARROW;
-                    DrawToolIconImage(g, wbimage);
-                    PottedPlant wbplant = mApp.mZenGarden.GetPottedPlantInWheelbarrow();
-                    if (wbplant != null)
+                }
+                int imgShovelWidth = AtlasResources.IMAGE_SHOVEL_HI_RES.mWidth;
+                int imgShovelHeight = AtlasResources.IMAGE_SHOVEL_HI_RES.mHeight;
+                g.SetColor(SexyColor.White);
+                int num = (int)TodCommon.TodAnimateCurveFloat(0, 39, mBoard.mEffectCounter % 40, 0f, imgShovelWidth / 2, TodCurves.BounceSlowMiddle);
+                g.DrawImage(AtlasResources.IMAGE_SHOVEL_HI_RES, num, -imgShovelHeight - num, imgShovelWidth, imgShovelHeight);
+                break;
+            case CursorType.Hammer:
+                Reanimation reanimation = mApp.ReanimationGet(mReanimCursorID);
+                reanimation.Draw(g);
+                break;
+            case CursorType.CobcannonTarget:
+                if (/*mX * Constants.IS < Constants.LAWN_XMIN ||mY * Constants.IS < Constants.LAWN_YMIN*/false)
+                {
+                    break;
+                }
+                int imgCobCannonTargetWidth = AtlasResources.IMAGE_COBCANNON_TARGET.mWidth;
+                int imgCobCannonTargetHeight = AtlasResources.IMAGE_COBCANNON_TARGET.mHeight;
+                g.SetColorizeImages(true);
+                g.SetColor(new SexyColor(255, 255, 255, 127));
+                g.DrawImage(AtlasResources.IMAGE_COBCANNON_TARGET, -imgCobCannonTargetWidth / 2, -imgCobCannonTargetHeight / 2, imgCobCannonTargetWidth, imgCobCannonTargetHeight);
+                g.SetColorizeImages(false);
+                break;
+            case CursorType.WateringCan:
+                if (mApp.mPlayerInfo.mPurchases[13] > 0)
+                {
+                    TRect trect = new TRect(Constants.ZEN_XMIN, Constants.ZEN_YMIN, Constants.ZEN_XMAX - Constants.ZEN_XMIN, Constants.ZEN_YMAX - Constants.ZEN_YMIN);
+                    if (trect.Contains(mApp.mBoard.mLastToolX, mApp.mBoard.mLastToolY))
                     {
-                        mApp.mZenGarden.DrawPottedPlant(g, -wbimage.mWidth / 2 + (float)(Constants.ZenGardenButton_WheelbarrowPlant_Offset.X), -wbimage.mHeight / 2 + (float)(Constants.ZenGardenButton_WheelbarrowPlant_Offset.Y), wbplant, 0.6f, true);
+                        int imgGoldToolReticleWidth = AtlasResources.IMAGE_ZEN_GOLDTOOLRETICLE.mWidth;
+                        int imgGoldToolReticleHeight = AtlasResources.IMAGE_ZEN_GOLDTOOLRETICLE.mHeight;
+                        g.DrawImage(AtlasResources.IMAGE_ZEN_GOLDTOOLRETICLE, -imgGoldToolReticleWidth / 2, -imgGoldToolReticleHeight / 2, imgGoldToolReticleWidth, imgGoldToolReticleHeight);
                     }
-                    return;
-                case CursorType.PlantFromBank:
-                case CursorType.PlantFromUsableCoin:
-                    if (mBoard.mIgnoreMouseUp || mX * Constants.IS < Constants.LAWN_XMIN || mY * Constants.IS < Constants.LAWN_YMIN)
-                    {
-                        return;
-                    }
-                    if (mType == SeedType.None) 
-                    {
-                        return;
-                    }
-                    int xPos = (int)(20 * Constants.S);
-                    int yPos = (int)(20 * Constants.S);
-                    if (Challenge.IsZombieSeedType(mType))
-                    {
-                        xPos = (int)(-40 * Constants.S);
-                        yPos = (int)(-90 * Constants.S);
-                        ZombieType theZombieType = Challenge.IZombieSeedTypeToZombieType(mType);
-                        GlobalStaticVars.gLawnApp.mReanimatorCache.DrawCachedZombie(g, xPos, yPos, theZombieType);
-                        return;
-                    }
-                    GlobalStaticVars.gLawnApp.mReanimatorCache.DrawCachedPlant(g, xPos, yPos, mType, DrawVariation.Normal);
-                    return;
-
+                    DrawToolIconImage(g, AtlasResources.IMAGE_REANIM_ZENGARDEN_WATERINGCAN1_GOLD);
+                }
+                else
+                {
+                    DrawToolIconImage(g, AtlasResources.IMAGE_REANIM_ZENGARDEN_WATERINGCAN1);
+                }
+                break;
+            case CursorType.BugSpray:
+                DrawToolIconImage(g, AtlasResources.IMAGE_REANIM_ZENGARDEN_BUGSPRAY_BOTTLE);
+                break;
+            case CursorType.Phonograph:
+                DrawToolIconImage(g, AtlasResources.IMAGE_PHONOGRAPH);
+                break;
+            case CursorType.Fertilizer:
+                DrawToolIconImage(g, AtlasResources.IMAGE_REANIM_ZENGARDEN_FERTILIZER_BAG1);
+                break;
+            case CursorType.Glove:
+                DrawToolIconImage(g, AtlasResources.IMAGE_ZEN_GARDENGLOVE);
+                break;
+            case CursorType.Chocolate:
+                DrawToolIconImage(g, AtlasResources.IMAGE_CHOCOLATE);
+                break;
+            case CursorType.MoneySign:
+                DrawToolIconImage(g, AtlasResources.IMAGE_ZEN_MONEYSIGN);
+                break;
+            case CursorType.Wheeelbarrow:
+                Image wbimage = AtlasResources.IMAGE_ZEN_WHEELBARROW;
+                DrawToolIconImage(g, wbimage);
+                PottedPlant wbplant = mApp.mZenGarden.GetPottedPlantInWheelbarrow();
+                if (wbplant != null)
+                {
+                    mApp.mZenGarden.DrawPottedPlant(g, -wbimage.mWidth / 2 + (float)(Constants.ZenGardenButton_WheelbarrowPlant_Offset.X), -wbimage.mHeight / 2 + (float)(Constants.ZenGardenButton_WheelbarrowPlant_Offset.Y), wbplant, 0.6f, true);
+                }
+                break;
+            case CursorType.PlantFromBank:
+            case CursorType.PlantFromUsableCoin:
+                if (mBoard.mIgnoreMouseUp /*|| mX * Constants.IS < Constants.LAWN_XMIN || mY * Constants.IS < Constants.LAWN_YMIN*/)
+                {
+                    break;
+                }
+                if (mType == SeedType.None)
+                {
+                    break;
+                }
+                if (!flag && mX + Constants.Board_Offset_AspectRatio_Correction < Constants.SMALL_SEEDPACKET_WIDTH) 
+                {
+                    break;
+                }
+                float yPos = -Constants.New.Board_GridCellSizeY_6Rows / 2f * Constants.S;
+                float xPos = -Constants.New.Board_GridCellSizeX / 2f * Constants.S;
+                if (Challenge.IsZombieSeedType(mType))
+                {
+                    xPos = (int)(-40 * Constants.S);
+                    yPos = (int)(-90 * Constants.S);
+                    ZombieType theZombieType = Challenge.IZombieSeedTypeToZombieType(mType);
+                    GlobalStaticVars.gLawnApp.mReanimatorCache.DrawCachedZombie(g, xPos, yPos, theZombieType);
+                    break;
+                }
+                GlobalStaticVars.gLawnApp.mReanimatorCache.DrawCachedPlant(g, xPos, yPos, mType, DrawVariation.Normal);
+                break;
+            }
+            if (flag)
+            {
+                g.EndHardwareClip();
             }
         }
 
