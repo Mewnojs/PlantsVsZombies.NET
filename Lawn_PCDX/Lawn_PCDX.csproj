@@ -11,7 +11,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
     <AssemblyName>LAWN</AssemblyName>
     <StartupObject>LAWN.PlantsVsZombies</StartupObject>
-    <Version>0.1.2.1</Version>
+    <Version>0.1.2.4</Version>
   </PropertyGroup>
   <ItemGroup>
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
