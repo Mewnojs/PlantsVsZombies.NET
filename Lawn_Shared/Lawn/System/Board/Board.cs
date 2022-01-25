@@ -1899,13 +1899,14 @@ namespace Lawn
             }
         }
 
-        //public override void MouseMove(int x, int y)
-        //{
-        //    base.MouseMove(x, y);
-        //    mChallenge.MouseMove(x, y);
-        //}
-
         public override void MouseMove(int x, int y)
+        {
+            //base.MouseMove(x, y);
+            MouseDrag(x, y);
+            mChallenge.MouseMove(x, y);
+        }
+
+        public override void MouseDrag(int x, int y)
         {
             base.MouseDrag(x, y);
             if (mIgnoreMouseUp && mCursorObject.mCursorType == CursorType.PlantFromUsableCoin)
