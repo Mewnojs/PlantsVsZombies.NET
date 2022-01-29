@@ -5,6 +5,7 @@ namespace Lawn
     public enum GameMode
     {
         Adventure,
+
         SurvivalNormalStage1,
         SurvivalNormalStage2,
         SurvivalNormalStage3,
@@ -20,6 +21,7 @@ namespace Lawn
         SurvivalEndlessStage3,
         SurvivalEndlessStage4,
         SurvivalEndlessStage5,
+
         ChallengeWarAndPeas,
         ChallengeWallnutBowling,
         ChallengeSlotMachine,
@@ -54,6 +56,7 @@ namespace Lawn
         ChallengeBungeeBlitz,
         ChallengeSquirrel,
         TreeOfWisdom,
+
         ScaryPotter1,
         ScaryPotter2,
         ScaryPotter3,
@@ -64,6 +67,7 @@ namespace Lawn
         ScaryPotter8,
         ScaryPotter9,
         ScaryPotterEndless,
+
         PuzzleIZombie1,
         PuzzleIZombie2,
         PuzzleIZombie3,
@@ -74,8 +78,10 @@ namespace Lawn
         PuzzleIZombie8,
         PuzzleIZombie9,
         PuzzleIZombieEndless,
+
         Upsell,
         Intro,
+
         Quickplay1,
         Quickplay2,
         Quickplay3,
@@ -126,7 +132,23 @@ namespace Lawn
         Quickplay48,
         Quickplay49,
         Quickplay50,
+
         ChallengeZombiquarium,
-        GameModeCount
+
+        GameModeCount,
+
+        AdventureCount = 1,
+        AdventureStart = Adventure,
+        SurvivalCount = 15,
+        SurvivalStart = SurvivalNormalStage1,
+        ScaryPotterCount = 10,
+        ScaryPotterStart = ScaryPotter1,
+        PuzzleIZombieCount = 10,
+        PuzzleIZombieStart = PuzzleIZombie1,
+        ChallengeStart = ChallengeWarAndPeas,
+        MiniGameCount = 19,
+        MiniGameStart = ChallengeStart,
+        QuickplayCount = 50,
+        QuickplayStart = Quickplay1
     }
 }

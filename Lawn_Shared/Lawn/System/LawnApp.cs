@@ -1768,12 +1768,12 @@ namespace Lawn
 
         public bool IsQuickPlayMode()
         {
-            return mGameMode >= GameMode.Quickplay1 && mGameMode <= GameMode.Quickplay50;
+            return mGameMode >= GameMode.QuickplayStart && mGameMode <= GameMode.QuickplayStart + (int)GameMode.QuickplayCount;
         }
 
         public bool IsSurvivalMode()
         {
-            return mGameMode >= GameMode.SurvivalNormalStage1 && mGameMode <= GameMode.SurvivalEndlessStage5;
+            return mGameMode >= GameMode.SurvivalStart && mGameMode <= GameMode.SurvivalStart + (int)GameMode.SurvivalCount;
         }
 
         public bool IsContinuousChallenge()
@@ -2999,7 +2999,7 @@ namespace Lawn
 
         public bool IsScaryPotterLevel()
         {
-            return (mGameMode >= GameMode.ScaryPotter1 && mGameMode <= GameMode.ScaryPotterEndless) || ((IsAdventureMode() && mPlayerInfo.mLevel == 35) || mGameMode == GameMode.Quickplay35);
+            return (mGameMode >= GameMode.ScaryPotterStart && mGameMode <= GameMode.ScaryPotterStart + (int)GameMode.ScaryPotterCount) || ((IsAdventureMode() && mPlayerInfo.mLevel == 35) || mGameMode == GameMode.Quickplay35);
         }
 
         public bool IsEndlessScaryPotter(GameMode theGameMode)
@@ -3643,7 +3643,7 @@ namespace Lawn
 
         private const string PLACEHOLDER_CRAZYDAVE_0 = "[CRAZY_DAVE_{0}]";
 
-        public static string AppVersionNumber = "0.1.2.4";
+        public static string AppVersionNumber = "0.1.2.5";
 
         public Board mBoard;
 

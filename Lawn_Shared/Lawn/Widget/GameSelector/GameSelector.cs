@@ -474,6 +474,10 @@ namespace Lawn
                     PopulateQuickPlayWidget();
                     SlideOutQuickPlayWidget();
                 }
+                else if (mQuickplaySlideCounter >= 0 && mQuickplaySlideCounter < 3) 
+                {
+                    mMiniGamesWidget.RecoverLastPlayedMode();
+                }
             }
             if (mApp.mZenGarden != null)
             {
@@ -948,6 +952,10 @@ namespace Lawn
                 PopulateQuickPlayWidget();
                 mMiniGamesScrollWidget.ScrollToMin(false);
                 mMiniGamesScrollWidget.Move(mMiniGamesScrollWidget.mX, 10);
+            }
+            if (!theDoFadeIn) 
+            {
+                mMiniGamesWidget.RecoverLastPlayedMode();
             }
         }
 

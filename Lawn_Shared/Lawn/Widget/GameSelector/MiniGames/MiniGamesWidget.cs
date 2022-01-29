@@ -109,7 +109,10 @@ namespace Lawn
                 string levelName = GetLevelName(j + 1);
                 g.SetFont(Resources.FONT_DWARVENTODCRAFT12);
                 g.SetColor(Color.White);
+                var aClipRect = g.mClipRect;
+                g.ClearClipRect();
                 g.WriteWordWrapped(new TRect(num + 15, AtlasResources.IMAGE_MINI_GAME_FRAME.mHeight, AtlasResources.IMAGE_MINI_GAME_FRAME.mWidth - 30, 100), levelName, 5, 0);
+                g.mClipRect = aClipRect;
                 num += AtlasResources.IMAGE_MINI_GAME_FRAME.mWidth + 10;
             }
             if (drawPadlock)
@@ -244,17 +247,18 @@ namespace Lawn
 
         public int GetGameModeVasebreaker(int index)
         {
-            return index - 1 + 50;
+            return index - 1 + (int)GameMode.ScaryPotterStart;
         }
 
         public int GetGameModeIZombie(int index)
         {
-            return index - 1 + 60;
+            return index - 1 + (int)GameMode.PuzzleIZombieStart;
         }
 
         public int GetGameModeMiniGames(int index)
         {
-            switch (index)
+            return 1 <= index && index <= (int)GameMode.MiniGameCount ? index - 1 + (int)GameMode.MiniGameStart : -1;
+            /*switch (index)
             {
             case 1:
                 return 16;
@@ -296,7 +300,7 @@ namespace Lawn
                 return 34;
             default:
                 return -1;
-            }
+            }*/
         }
 
         public void DrawBackgroundThumbnailForLevel(Graphics g, int theX, int theY, int theLevel)
@@ -382,6 +386,32 @@ namespace Lawn
         public Image GetImageForVasebreaker(int index)
         {
             return AtlasResources.IMAGE_MINIGAMES_VASEBREAKER;
+        }
+
+        public void RecoverLastPlayedMode() 
+        {
+            GameMode aGameMode = mApp.mGameMode;
+            int index = -1;
+            switch (mMode) 
+            {
+            case MiniGameMode.Games:
+                index = 1 <= (int)aGameMode && (int)aGameMode <= ((int)GameMode.MiniGameStart + (int)GameMode.MiniGameCount)
+                        ? (int)aGameMode + 1 - (int)GameMode.MiniGameStart : -1;
+                break;
+            case MiniGameMode.IZombie:
+                if (mApp.IsIZombieLevel())
+                    index = (int)aGameMode + 1 - (int)GameMode.PuzzleIZombieStart;
+                break;
+            case MiniGameMode.Vasebreaker:
+                if (mApp.IsScaryPotterLevel())
+                    index = (int)aGameMode + 1 - (int)GameMode.ScaryPotterStart;
+                break;
+            }
+            if (index != -1) {
+                var aWidget = mApp.mGameSelector.mMiniGamesScrollWidget;
+                int x = (AtlasResources.IMAGE_MINI_GAME_FRAME.mWidth + 10) * (index - 1);
+                aWidget.ScrollToPoint(new CGPoint((x > mWidth - aWidget.mWidth) ? mWidth - aWidget.mWidth : x, 0), true); 
+            }
         }
 
         public LawnApp mApp;
