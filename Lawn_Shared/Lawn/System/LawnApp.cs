@@ -1768,12 +1768,12 @@ namespace Lawn
 
         public bool IsQuickPlayMode()
         {
-            return mGameMode >= GameMode.QuickplayStart && mGameMode <= GameMode.QuickplayStart + (int)GameMode.QuickplayCount;
+            return mGameMode >= GameMode.QuickplayStart && mGameMode < GameMode.QuickplayStart + (int)GameMode.QuickplayCount;
         }
 
         public bool IsSurvivalMode()
         {
-            return mGameMode >= GameMode.SurvivalStart && mGameMode <= GameMode.SurvivalStart + (int)GameMode.SurvivalCount;
+            return mGameMode >= GameMode.SurvivalStart && mGameMode < GameMode.SurvivalStart + (int)GameMode.SurvivalCount;
         }
 
         public bool IsContinuousChallenge()
@@ -2999,7 +2999,7 @@ namespace Lawn
 
         public bool IsScaryPotterLevel()
         {
-            return (mGameMode >= GameMode.ScaryPotterStart && mGameMode <= GameMode.ScaryPotterStart + (int)GameMode.ScaryPotterCount) || ((IsAdventureMode() && mPlayerInfo.mLevel == 35) || mGameMode == GameMode.Quickplay35);
+            return (mGameMode >= GameMode.ScaryPotterStart && mGameMode < GameMode.ScaryPotterStart + (int)GameMode.ScaryPotterCount) || ((IsAdventureMode() && mPlayerInfo.mLevel == 35) || mGameMode == GameMode.Quickplay35);
         }
 
         public bool IsEndlessScaryPotter(GameMode theGameMode)
