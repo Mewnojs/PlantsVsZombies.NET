@@ -1256,8 +1256,8 @@ namespace Lawn
                         celPosition[2].mY = (int)(celPosition[2].mY * Constants.S);
                         celPosition[3].mX = (int)(celPosition[3].mX * Constants.S);
                         celPosition[3].mY = (int)(celPosition[3].mY * Constants.S);
-                        float thePosX = celPosition[0].x + (celPosition[2].x - celPosition[0].x) / 2;
-                        float thePosY = celPosition[2].y - Constants.Challenge_SeeingStars_StarfruitPreview_Offset_Y;
+                        float thePosX = celPosition[0].x; //+ (celPosition[2].x - celPosition[0].x) / 2;
+                        float thePosY = celPosition[0].y; //- Constants.Challenge_SeeingStars_StarfruitPreview_Offset_Y;
                         Plant.DrawSeedType(g, artChallengeSeed, SeedType.None, DrawVariation.Normal, thePosX, thePosY);
                     }
                 }
