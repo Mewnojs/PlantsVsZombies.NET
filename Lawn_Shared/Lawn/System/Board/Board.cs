@@ -10100,11 +10100,11 @@ namespace Lawn
 
         private static int mPeashootersPlanted;
 
-        private static TodWeightedArray[] aZombieWeightArray = new TodWeightedArray[33];
+        public static TodWeightedArray[] aZombieWeightArray = new TodWeightedArray[33];
 
-        private static TodWeightedArray[] aPickArray = new TodWeightedArray[Constants.MAX_GRIDSIZEY];
+        public static TodWeightedArray[] aPickArray = new TodWeightedArray[Constants.MAX_GRIDSIZEY];
 
-        private static TodWeightedGridArray[] aGridArray = new TodWeightedGridArray[10];
+        public static TodWeightedGridArray[] aGridArray = new TodWeightedGridArray[10];
 
         private static int MAX_GRAVE_STONES = Constants.GRIDSIZEX * Constants.MAX_GRIDSIZEY;
 

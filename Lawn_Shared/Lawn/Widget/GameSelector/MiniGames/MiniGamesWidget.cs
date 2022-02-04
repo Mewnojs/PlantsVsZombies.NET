@@ -395,8 +395,7 @@ namespace Lawn
             switch (mMode) 
             {
             case MiniGameMode.Games:
-                index = 1 <= (int)aGameMode && (int)aGameMode <= ((int)GameMode.MiniGameStart + (int)GameMode.MiniGameCount)
-                        ? (int)aGameMode + 1 - (int)GameMode.MiniGameStart : -1;
+                index = (int)aGameMode + 1 - (int)GameMode.MiniGameStart;
                 break;
             case MiniGameMode.IZombie:
                 if (mApp.IsIZombieLevel())
@@ -407,7 +406,7 @@ namespace Lawn
                     index = (int)aGameMode + 1 - (int)GameMode.ScaryPotterStart;
                 break;
             }
-            if (index != -1) {
+            if (index >= 0) {
                 var aWidget = mApp.mGameSelector.mMiniGamesScrollWidget;
                 int x = (AtlasResources.IMAGE_MINI_GAME_FRAME.mWidth + 10) * (index - 1);
                 aWidget.ScrollToPoint(new CGPoint((x > mWidth - aWidget.mWidth) ? mWidth - aWidget.mWidth : x, 0), true); 
