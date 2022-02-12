@@ -151,7 +151,7 @@ namespace Sexy
         protected bool mIsOffscreen;
     }
 
-    public/*internal*/ class Graphics : GraphicsState
+    public/*internal*/ class Graphics : GraphicsState, IReusable
     {
         public static void PreAllocateMemory()
         {
@@ -207,14 +207,14 @@ namespace Sexy
 
         public static Graphics GetNew(Game theGame)
         {
-            if (Graphics.unusedObjects.Count > 0)
+            /*if (Graphics.unusedObjects.Count > 0)
             {
                 Graphics graphics = Graphics.unusedObjects.Pop();
                 graphics.Reset();
                 graphics.mGame = theGame;
                 GraphicsState.mGraphicsDeviceManager = new GraphicsDeviceManager(theGame);
                 return graphics;
-            }
+            }*/
             return new Graphics(theGame);
         }
 
@@ -329,7 +329,7 @@ namespace Sexy
         private Graphics(Game theGame) : base(theGame)
         {
             mGame = theGame;
-            Graphics.PreAllocateMemory();
+            //Graphics.PreAllocateMemory();
         }
 
         private Graphics(MemoryImage theDestImage)

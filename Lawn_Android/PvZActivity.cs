@@ -20,7 +20,24 @@ namespace Lawn_Android
         Immersive = true,
         MultiProcess = true,
         ScreenOrientation = ScreenOrientation.SensorLandscape,
-        ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.Keyboard | ConfigChanges.KeyboardHidden | ConfigChanges.ScreenSize
+        ConfigurationChanges = ConfigChanges.Orientation
+        | ConfigChanges.Keyboard
+        | ConfigChanges.KeyboardHidden
+        | ConfigChanges.ScreenSize
+        // Configs NOT ACTUALLY handled, but since Destroying the activity leads to crash, here to pretend handling them
+        | ConfigChanges.Mnc
+        | ConfigChanges.Mcc
+        | ConfigChanges.Locale
+        | ConfigChanges.UiMode
+        | ConfigChanges.Navigation
+        | ConfigChanges.Orientation
+        | ConfigChanges.ScreenLayout
+        | ConfigChanges.SmallestScreenSize
+        | ConfigChanges.Density
+        | ConfigChanges.FontScale
+        | ConfigChanges.ColorMode
+        | ConfigChanges.Touchscreen
+        | ConfigChanges.LayoutDirection
     )]
     public class PvZActivity : MonoGame.IMEHelper.AndroidGameActivityIME//AndroidGameActivity
     {
@@ -31,37 +48,41 @@ namespace Lawn_Android
         {
             base.OnCreate(bundle);
             Sexy.GlobalStaticVars.gPvZActivity = this;
-
-#if !DEBUG
+            //#if !DEBUG
 
             try
             {
-#endif
+                //#endif
                 _game = new Sexy.Main();
                 _view = _game.Services.GetService(typeof(View)) as View;
                 _view.SystemUiVisibility = (StatusBarVisibility)SystemUiFlags.Fullscreen;//| (StatusBarVisibility)SystemUiFlags.HideNavigation | (StatusBarVisibility)SystemUiFlags.ImmersiveSticky;
 
                 SetContentView(_view);
                 _game.Run();
-#if !DEBUG
+                //#if !DEBUG
             }
             catch (Exception err)
             {
-                var aDialog = new AlertDialog.Builder(this);
-                aDialog.SetTitle(err.GetType().ToString());
-                aDialog.SetMessage(err.Message);
-                aDialog.SetPositiveButton("Close", delegate { });
-                aDialog.Show();
+                OnException(this, err);
             }
-#endif
+            //#endif
 
+        }
+
+        protected override void OnDestroy()
+        {
+            //(_view.Parent as ViewGroup).RemoveView(_view);  // 解绑_view以便重新使用
+            Sexy.Debug.Log("Destroy...");
+            base.OnDestroy();
+            Sexy.GlobalStaticVars.gSexyAppBase.AppExit();
+            _game.Exit();
         }
 
         public void OnException(object sender, Exception err)
         {
             var aDialog = new AlertDialog.Builder(this);
             aDialog.SetTitle(err.GetType().ToString());
-            aDialog.SetMessage(err.Message);
+            aDialog.SetMessage($"{err.Message}\n{err.StackTrace}");
             aDialog.SetPositiveButton("Close", delegate { });
             aDialog.Show();
         }
@@ -73,12 +94,13 @@ namespace Lawn_Android
             string packedlibFileName = $"IronPython.StdLib.{version.Major}.{version.Minor}.{version.Build}.zip";
             string verInfoFileName = "info.txt";
             string verInfoFilePath = Path.Combine(libFolderExtPath, verInfoFileName);
-            if (File.Exists(verInfoFilePath)) 
+            if (File.Exists(verInfoFilePath))
             {
-                using (var s = new StreamReader(verInfoFilePath)) {
+                using (var s = new StreamReader(verInfoFilePath))
+                {
                     string str = s.ReadToEnd();
                     if (str.StartsWith(packedlibFileName))
-                        return libFolderExtPath; 
+                        return libFolderExtPath;
                 }
             }
 
@@ -104,7 +126,7 @@ namespace Lawn_Android
                 }
                 return libFolderExtPath;
             }
-            else 
+            else
             {
                 throw new FileNotFoundException($"{packedlibFileName} not found in ANDROID_ASSET/{libFolderPath}");
             }

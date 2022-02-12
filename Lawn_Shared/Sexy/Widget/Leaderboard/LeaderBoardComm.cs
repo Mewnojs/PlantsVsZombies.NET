@@ -300,20 +300,20 @@ namespace Sexy
 
         public static int LoadResults(LeaderboardGameMode gameMode)
         {
-            if (!SexyAppBase.UseLiveServers || LeaderBoardComm.State == LeaderBoardComm.ConnectionState.CannotConnect)
+            /*if (!SexyAppBase.UseLiveServers || LeaderBoardComm.State == LeaderBoardComm.ConnectionState.CannotConnect)
             {
                 if (LeaderBoardComm.State == LeaderBoardComm.ConnectionState.CannotConnect && (DateTime.UtcNow - LeaderBoardComm.cannotConnectSince).TotalSeconds > 2147483647.0)
                 {
                     LeaderBoardComm.State = LeaderBoardComm.ConnectionState.Connecting;
                 }
                 return -2;
-            }
+            }*/
             lock (LeaderBoardComm.LeaderboardLock)
             {
-                if (Gamer.SignedInGamers.Count == 0)
-                {
-                    return -2;
-                }
+                //if (Gamer.SignedInGamers.Count == 0)
+                //{
+                //    return -2;
+                //}
                 LeaderBoardLoader loader = LeaderBoardComm.GetLoader(gameMode);
                 loader.SendRequest();
                 LeaderBoardComm.State = LeaderBoardComm.ConnectionState.Connecting;

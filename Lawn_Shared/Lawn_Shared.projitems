@@ -392,7 +392,6 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Microsoft.Xna.Framework.XlastConfiguration" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\" />
     <Folder Include="$(MSBuildThisFileDirectory)Lawn\System\LawnMower\" />
     <Folder Include="$(MSBuildThisFileDirectory)Lawn\System\GridItem\" />
     <Folder Include="$(MSBuildThisFileDirectory)Lawn\Music\" />

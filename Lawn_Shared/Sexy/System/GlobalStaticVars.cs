@@ -66,6 +66,7 @@ namespace Sexy
 
         public static void initialize(Main main)
         {
+            initializeReusables();
             GlobalStaticVars.g = Main.graphics;
             GlobalStaticVars.g.Init();
             GlobalStaticVars.mGlobalContent = new GlobalContentManager(main);
@@ -76,6 +77,12 @@ namespace Sexy
             GlobalStaticVars.gSexyAppBase.Init();
             GlobalStaticVars.gSexyAppBase.Start();
         }
+
+        public static void initializeReusables() 
+        {
+            //LazyReusableObjectHelper<Graphics>.Initialize(20);
+            Graphics.PreAllocateMemory();
+        } 
 
         public static void shutdown()
         {

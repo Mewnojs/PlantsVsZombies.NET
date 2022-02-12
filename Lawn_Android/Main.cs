@@ -200,7 +200,7 @@ namespace Sexy
             }
             catch (Exception e)
             {
-                Sexy.GlobalStaticVars.gPvZActivity.OnException(null, e);
+                Sexy.GlobalStaticVars.gPvZActivity.OnException(this, e);
             }
 #endif
             // Window scaling

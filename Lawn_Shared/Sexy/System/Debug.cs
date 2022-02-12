@@ -60,17 +60,7 @@ namespace Sexy
 #if DEBUG
             if (!value) 
             {
-                StackTrace st = new StackTrace();
-                StackFrame sf = st.GetFrame(1);
-                MethodBase m = sf.GetMethod();
-                string tracing = ""; 
-                for (int i = 2; i < st.FrameCount; i++) 
-                {
-                    var mm = st.GetFrame(i).GetMethod();
-                    tracing += $"\n\tfrom {mm.DeclaringType}.{ mm.Name}";
-                }
-                Log(DebugType.Fatal, $"Assertion Failed at: \n{m.DeclaringType}.{m.Name}" +
-                    tracing);
+                Log(DebugType.Fatal, $"Assertion Failed\n{new StackTrace()}");
                 throw new Exception();
             }
 #endif
