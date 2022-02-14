@@ -27,7 +27,7 @@ namespace Sexy
             GraphicsState.mGraphicsDeviceManager.DeviceCreated += new EventHandler<EventArgs>(graphics_DeviceCreated);
             GraphicsState.mGraphicsDeviceManager.DeviceReset += new EventHandler<EventArgs>(graphics_DeviceReset);
             GraphicsState.mGraphicsDeviceManager.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(mGraphicsDeviceManager_PreparingDeviceSettings);
-            base.TargetElapsedTime = TimeSpan.FromSeconds(0.03333333333333333);
+            base.TargetElapsedTime = TimeSpan.FromSeconds(1/90.0);
             base.Exiting += new EventHandler<EventArgs>(Main_Exiting);
             //PhoneApplicationService.Current.UserIdleDetectionMode = 0;
             //PhoneApplicationService.Current.Launching += new EventHandler<LaunchingEventArgs>(this.Game_Launching);
@@ -151,6 +151,7 @@ namespace Sexy
                 base.Exit();
             }
             HandleInput(gameTime);
+            GlobalStaticVars.gLawnApp.gameTimePassed = gameTime.ElapsedGameTime.TotalSeconds;
             GlobalStaticVars.gSexyAppBase.UpdateApp();
             if (!Main.trialModeChecked)
             {
