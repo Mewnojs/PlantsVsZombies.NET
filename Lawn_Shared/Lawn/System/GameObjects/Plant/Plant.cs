@@ -552,6 +552,11 @@ namespace Lawn
             {
                 Die();
             }
+            //UpdateReanim();
+        }
+
+        public void UpdateTD() 
+        {
             UpdateReanim();
         }
 
@@ -4132,7 +4137,7 @@ namespace Lawn
             Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
             if (reanimation != null && reanimation.TrackExists(Reanimation.ReanimTrackId__ground))
             {
-                float num = reanimation.GetTrackVelocity(Reanimation.ReanimTrackId__ground) / 4f;
+                float num = reanimation.GetTrackVelocityT30(Reanimation.ReanimTrackId__ground) / 4f;
                 if (mSeedType == SeedType.GiantWallnut)
                 {
                     num *= 2f;

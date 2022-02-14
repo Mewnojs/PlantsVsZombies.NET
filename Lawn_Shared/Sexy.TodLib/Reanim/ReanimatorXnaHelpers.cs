@@ -228,7 +228,7 @@ namespace Sexy.TodLib
 
         public static int RENDER_GROUP_NORMAL = 0;
 
-        public static float SECONDS_PER_UPDATE = 0.033333f;
+        public static float SECONDS_PER_UPDATE = 0f;//0.033333f; // Dynamically updated by Sexy.Main.Draw()
 
         public static ReanimatorDefinition[] gReanimatorDefArray = new ReanimatorDefinition[119];
 

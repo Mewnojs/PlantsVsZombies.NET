@@ -496,6 +496,22 @@ namespace Sexy
             return true;
         }
 
+        public bool UpdateFrameT90()
+        {
+            ModalFlags theFlags = default(ModalFlags);
+            InitModalFlags(ref theFlags);
+            base.UpdateT90All(theFlags);
+            return true;
+        }
+
+        public bool UpdateFrameTD()
+        {
+            ModalFlags theFlags = default(ModalFlags);
+            InitModalFlags(ref theFlags);
+            base.UpdateTDAll(theFlags);
+            return true;
+        }
+
         public void SetPopupCommandWidget(Widget theList)
         {
             mPopupCommandWidget = theList;

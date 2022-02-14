@@ -117,7 +117,7 @@ namespace Sexy.TodLib
             }
         }
 
-        public void Update()
+        public void UpdateT90() 
         {
             foreach (TodParticleSystem todParticleSystem in mParticleHolder.mParticleSystems)
             {
@@ -126,18 +126,22 @@ namespace Sexy.TodLib
                     todParticleSystem.Update();
                 }
             }
-            foreach (Reanimation reanimation in mReanimationHolder.mReanimations)
-            {
-                if (reanimation != null && !reanimation.mIsAttachment)
-                {
-                    reanimation.Update();
-                }
-            }
             foreach (Trail trail in mTrailHolder.mTrails)
             {
                 if (!trail.mIsAttachment)
                 {
                     trail.Update();
+                }
+            }
+        }
+
+        public void UpdateTD() //动态帧率
+        {
+            foreach(Reanimation reanimation in mReanimationHolder.mReanimations)
+            {
+                if (reanimation != null && !reanimation.mIsAttachment)
+                {
+                    reanimation.Update();
                 }
             }
         }

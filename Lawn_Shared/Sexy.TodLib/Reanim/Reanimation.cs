@@ -486,7 +486,7 @@ namespace Sexy.TodLib
             }
             float fraction = theFrameTime.mFraction;
             aTransform = ReanimatorTransform.GetNewReanimatorTransform();
-            if (Reanimation.mInterpolate)
+            if (Reanimation.mInterpolate) // 插值动画帧
             {
                 aTransform.mTransX = reanimatorTransform.mTransX + fraction * (reanimatorTransform2.mTransX - reanimatorTransform.mTransX);
                 aTransform.mTransY = reanimatorTransform.mTransY + fraction * (reanimatorTransform2.mTransY - reanimatorTransform.mTransY);
@@ -748,12 +748,27 @@ namespace Sexy.TodLib
             return FindTrackIndex(theTrackName);
         }
 
-        public float GetTrackVelocity(string theTrackName)
+        public float GetTrackVelocityT30(string theTrackName)
         {
-            return GetTrackVelocity(GetTrackIndex(theTrackName));
+            return GetTrackVelocityT30(GetTrackIndex(theTrackName));
         }
 
-        public float GetTrackVelocity(int aTrackIndex)
+        public float GetTrackVelocityT30(int aTrackIndex)
+        {
+            ReanimatorFrameTime reanimatorFrameTime;
+            GetFrameTime(out reanimatorFrameTime);
+            ReanimatorTrack reanimatorTrack = mDefinition.mTracks[aTrackIndex];
+            ReanimatorTransform reanimatorTransform = reanimatorTrack.mTransforms[reanimatorFrameTime.mAnimFrameBeforeInt];
+            ReanimatorTransform reanimatorTransform2 = reanimatorTrack.mTransforms[reanimatorFrameTime.mAnimFrameAfterInt];
+            return (reanimatorTransform2.mTransX - reanimatorTransform.mTransX) * 1/30/*ReanimatorXnaHelpers.SECONDS_PER_UPDATE*/ * mAnimRate;
+        }
+
+        public float GetTrackVelocityTD(string theTrackName)
+        {
+            return GetTrackVelocityTD(GetTrackIndex(theTrackName));
+        }
+
+        public float GetTrackVelocityTD(int aTrackIndex)
         {
             ReanimatorFrameTime reanimatorFrameTime;
             GetFrameTime(out reanimatorFrameTime);

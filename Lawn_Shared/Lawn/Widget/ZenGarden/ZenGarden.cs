@@ -1610,7 +1610,7 @@ namespace Lawn
             float aDeltaX = theStinky.mPosX - theStinky.mGoalX;
             float aDeltaY = theStinky.mPosY - theStinky.mGoalY;
             float aSpeedY = 0.5f;
-            float aSpeedX = aStinkyReanim.GetTrackVelocity(Reanimation.ReanimTrackId__ground) * 5f;
+            float aSpeedX = aStinkyReanim.GetTrackVelocityT30(Reanimation.ReanimTrackId__ground) * 5f;
             if (aStinkyHighOnChocolate)
             {
                 aSpeedY = 1f;

@@ -1468,6 +1468,10 @@ namespace Lawn
             mX = (int)mPosX;
             mY = (int)mPosY;
             GlobalMembersAttachment.AttachmentUpdateAndMove(ref mAttachmentID, mPosX, mPosY);
+            //UpdateReanim();
+        }
+        public void UpdateTD() 
+        {
             UpdateReanim();
         }
 
@@ -3410,7 +3414,7 @@ namespace Lawn
                 else if (mHasGroundTrack)
                 {
                     mGroundTrackIndex = reanimation.GetTrackIndex(Reanimation.ReanimTrackId__ground);
-                    aSpeed = reanimation.GetTrackVelocity(mGroundTrackIndex) * mScaleZombie;
+                    aSpeed = reanimation.GetTrackVelocityT30(mGroundTrackIndex) * mScaleZombie;
                 }
                 else
                 {
@@ -9137,7 +9141,7 @@ namespace Lawn
             {
                 return;
             }
-            float aSpeed = aBossFireballReanim.GetTrackVelocity(Reanimation.ReanimTrackId__ground);
+            float aSpeed = aBossFireballReanim.GetTrackVelocityT30(Reanimation.ReanimTrackId__ground);
             float aBallPosX = aBossFireballReanim.mOverlayMatrix.mMatrix.M41 * Constants.IS;
             aBallPosX -= aSpeed;
             aBossFireballReanim.mOverlayMatrix.mMatrix.M41 = aBallPosX * Constants.S;

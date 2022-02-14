@@ -1722,6 +1722,36 @@ namespace Lawn
             {
                 ShowUpdateMessage();
             }
+            gameTimeAccumulated += gameTimePassed;
+            ReanimatorXnaHelpers.SECONDS_PER_UPDATE = (float)gameTimePassed;
+            double updateTimeT90 = 1 / 90.0;
+            if (GlobalStaticVars.gSlowMo) 
+            {
+                updateTimeT90 /= 0.25;
+                ReanimatorXnaHelpers.SECONDS_PER_UPDATE *= 0.25f;
+            }
+            else if (GlobalStaticVars.gFastMo)
+            {
+                updateTimeT90 /= 20.0;
+                ReanimatorXnaHelpers.SECONDS_PER_UPDATE *= 20.0f;
+            }
+            while (gameTimeAccumulated >= updateTimeT90)
+            {
+                if (countForLogicUpdate == 0) 
+                {
+                    countForLogicUpdate = 3;
+                    UpdateLogicFrames(); // T30 frames
+                    
+                }
+                countForLogicUpdate--;
+                base.UpdateFramesT90();
+                gameTimeAccumulated -= updateTimeT90;
+            }
+            base.UpdateFramesTD();
+        }
+
+        public void UpdateLogicFrames() 
+        {
             if (LoadingScreen.IsLoading)
             {
                 LoadingScreen.gLoadingScreen.Update();
@@ -1729,6 +1759,7 @@ namespace Lawn
             }
             UpdatePlayTimeStats();
             int num = 1;
+#if false
             if (GlobalStaticVars.gSlowMo)
             {
                 GlobalStaticVars.gSlowMoCounter++;
@@ -1745,6 +1776,7 @@ namespace Lawn
             {
                 num = 20;
             }
+#endif
             for (int i = 0; i < num; i++)
             {
                 mAppCounter++;
@@ -3821,7 +3853,13 @@ namespace Lawn
 
         private bool pileLoaded;
 
-        public Stack<Texture2D> mTexturesToBePremultiplied = new Stack<Texture2D>(); 
+        public Stack<Texture2D> mTexturesToBePremultiplied = new Stack<Texture2D>();
+
+        public double gameTimePassed;
+
+        private double gameTimeAccumulated;
+
+        private int countForLogicUpdate = 1;
 
         private class TableTmp
         {

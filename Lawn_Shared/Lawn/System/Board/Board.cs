@@ -3061,9 +3061,9 @@ namespace Lawn
         {
             base.Update();
             MarkDirty();
-            mCutScene.Update(false);
-            mCutScene.Update(false);
-            mCutScene.Update(true);
+            //mCutScene.UpdateT90(false);
+            //mCutScene.UpdateT90(false);
+            //mCutScene.UpdateT90(true);
             if (mApp.mGameMode == GameMode.ChallengeZenGarden)
             {
                 mApp.mZenGarden.ZenGardenUpdate(0);
@@ -3095,7 +3095,7 @@ namespace Lawn
                 mStoreButton.mDisabled = aDisabled;
                 mStoreButton.Update();
             }
-            mApp.mEffectSystem.Update();
+            //mApp.mEffectSystem.Update(); 
             mAdvice.Update();
             UpdateTutorial();
             UpdateTutorial();
@@ -3157,6 +3157,33 @@ namespace Lawn
             mPrevMouseX = mApp.mWidgetManager.mLastMouseX;
             mPrevMouseY = mApp.mWidgetManager.mLastMouseY;
         }
+
+        public override void UpdateT90()
+        {
+            base.UpdateT90();
+            mCutScene.UpdateT90(true);
+            mApp.mEffectSystem.UpdateT90();
+            GridItem gridItem = null;
+            int num = -1;
+            while (IterateGridItems(ref gridItem, ref num))
+            {
+                gridItem.UpdateT90();
+            }
+        }
+
+        public override void UpdateTD()
+        {
+            base.UpdateTD();
+            mApp.mEffectSystem.UpdateTD();
+            GridItem gridItem = null;
+            int num = -1;
+            while (IterateGridItems(ref gridItem, ref num))
+            {
+                gridItem.UpdateTD();
+            }
+            UpdateGameTD();
+        }
+
 
         public void UpdateLayers()
         {
@@ -3708,8 +3735,8 @@ namespace Lawn
             {
                 lawnMower.Update();
             }
-            mCursorPreview.Update();
-            mCursorObject.Update();
+            //mCursorPreview.Update();
+            //mCursorObject.Update();
             for (int l = 0; l < mSeedBank.mNumPackets; l++)
             {
                 SeedPacket seedPacket = mSeedBank.mSeedPackets[l];
@@ -3717,6 +3744,33 @@ namespace Lawn
                 seedPacket.Update();
                 seedPacket.Update();
             }
+        }
+
+        public void UpdateGameObjectsTD()
+        {
+            int count = mPlants.Count;
+            for (int i = 0; i < count; i++)
+            {
+                Plant plant = mPlants[i];
+                if (!plant.mDead)
+                {
+                    plant.UpdateTD();
+                }
+            }
+            count = mZombies.Count;
+            for (int j = 0; j < count; j++)
+            {
+                Zombie zombie = mZombies[j];
+                if (!zombie.mDead)
+                {
+                    zombie.UpdateTD();
+                }
+            }
+            // No Reanim for Projectiles
+            // No Reanim for Coins
+            // No Reanim for LawnMowers
+            mCursorPreview.Update();
+            mCursorObject.Update();
         }
 
         public bool MouseHitTest(int x, int y, out HitResult theHitResult, bool posScaled)
@@ -6757,7 +6811,12 @@ namespace Lawn
             UpdateProgressMeter();
         }
 
-        public void InitZombieWavesForLevel(int aForLevel)
+        public void UpdateGameTD()
+        {
+            UpdateGameObjectsTD();
+        }
+
+            public void InitZombieWavesForLevel(int aForLevel)
         {
             if (mApp.IsWhackAZombieLevel())
             {
@@ -7625,9 +7684,7 @@ namespace Lawn
                         gridItem.GridItemDie();
                     }
                 }
-                gridItem.Update(0);
-                gridItem.Update(1);
-                gridItem.Update(2);
+                gridItem.Update();
             }
         }
 

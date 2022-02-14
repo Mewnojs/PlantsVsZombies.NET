@@ -358,7 +358,7 @@ namespace Lawn
             }
         }
 
-        public void Update(bool updateDave)
+        public void UpdateT90(bool updateDave)
         {
             if (mPreUpdatingBoard)
             {

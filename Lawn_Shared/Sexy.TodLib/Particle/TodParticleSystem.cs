@@ -101,8 +101,8 @@ namespace Sexy.TodLib
             {
                 TodParticleEmitter todParticleEmitter2 = todParticleEmitter;
                 todParticleEmitter2.Update();
-                todParticleEmitter2.Update();
-                todParticleEmitter2.Update();
+                //todParticleEmitter2.Update();
+                //todParticleEmitter2.Update();
                 if (Definition.FloatTrackIsSet(ref todParticleEmitter2.mEmitterDef.mCrossFadeDuration))
                 {
                     if (todParticleEmitter2.mParticleList.Count > 0)

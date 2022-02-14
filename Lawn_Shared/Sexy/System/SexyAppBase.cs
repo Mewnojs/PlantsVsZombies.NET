@@ -335,6 +335,16 @@ namespace Sexy
             mWidgetManager.UpdateFrame();
         }
 
+        public virtual void UpdateFramesTD()
+        {
+            mWidgetManager.UpdateFrameTD();
+        }
+
+        public virtual void UpdateFramesT90()
+        {
+            mWidgetManager.UpdateFrameT90();
+        }
+
         public virtual void DrawGame(GameTime gameTime)
         {
             GlobalStaticVars.g.BeginFrame();

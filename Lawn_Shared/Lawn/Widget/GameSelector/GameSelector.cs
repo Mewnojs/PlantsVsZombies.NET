@@ -436,13 +436,19 @@ namespace Lawn
                 return;
             }
             MarkDirty();
+            //
+        }
+
+        public override void UpdateT90()
+        {
+            base.UpdateTD();
             if (mSlideCounter > 0)
             {
                 int theNewX = TodCommon.TodAnimateCurve(75, 0, mSlideCounter, mStartX, mDestX, TodCurves.EaseInOut);
                 int theNewY = TodCommon.TodAnimateCurve(75, 0, mSlideCounter, mStartY, mDestY, TodCurves.EaseInOut);
                 Move(theNewX, theNewY);
-                mSlideCounter -= 3;
-                if (mSlideCounter >= 0 && mSlideCounter < 3)
+                mSlideCounter -= 1;
+                if (mSlideCounter == 0)
                 {
                     if (mX == -Constants.MAIN_MENU_ORIGIN_X && mY == 0 && mSignState == SelectorSignState.Up)
                     {
@@ -468,13 +474,13 @@ namespace Lawn
                 }
                 mQuickplayScrollWidget.Move(mQuickplayScrollWidget.mX, theNewY2);
                 mMiniGamesScrollWidget.Move(mMiniGamesScrollWidget.mX, theNewY2);
-                mQuickplaySlideCounter -= 3;
-                if (mQuickplaySlideCounter >= 0 && mQuickplaySlideCounter < 3 && mRetractingQuickplay && (mSlideCounter == 0 || mDestX == -Constants.QUICKPLAY_ORIGIN_X))
+                mQuickplaySlideCounter -= 1;
+                if (mQuickplaySlideCounter == 0 && mRetractingQuickplay && (mSlideCounter == 0 || mDestX == -Constants.QUICKPLAY_ORIGIN_X))
                 {
                     PopulateQuickPlayWidget();
                     SlideOutQuickPlayWidget();
                 }
-                else if (mQuickplaySlideCounter >= 0 && mQuickplaySlideCounter < 3) 
+                else if (mQuickplaySlideCounter == 0)
                 {
                     mMiniGamesWidget.RecoverLastPlayedMode();
                 }
@@ -541,11 +547,17 @@ namespace Lawn
                 }
                 reanimation.SetPosition(reanimation.mOverlayMatrix.mMatrix.Translation.X, woodSignY);
             }
-            reanimation.Update();
+            //reanimation.Update();
             if (mFadeInCounter > 0)
             {
-                mFadeInCounter -= 3;
+                mFadeInCounter -= 1;
             }
+        }
+
+        public override void UpdateTD()
+        {
+            base.UpdateT90();
+            mApp.ReanimationGet(mWoodSignReanimID).Update();
         }
 
         public virtual void ButtonMouseEnter(int theId)

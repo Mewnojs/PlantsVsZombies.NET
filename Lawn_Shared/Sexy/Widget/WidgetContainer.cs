@@ -414,6 +414,64 @@ namespace Sexy
             mUpdateIteratorModified = true;
         }
 
+        public virtual void UpdateT90()
+        {
+        }
+
+        public void UpdateT90All(ModalFlags theFlags)
+        {
+            new AutoModalFlags(theFlags, mWidgetFlagsMod);
+            if ((theFlags.GetFlags() & 1) != 0)
+            {
+                UpdateT90();
+            }
+            mUpdateIterator = mWidgets.First;
+            while (mUpdateIterator?.Value != null)
+            {
+                mUpdateIteratorModified = false;
+                Widget value = mUpdateIterator.Value;
+                if (value == mWidgetManager.mBaseModalWidget)
+                {
+                    theFlags.mIsOver = true;
+                }
+                value.UpdateT90All(theFlags);
+                if (!mUpdateIteratorModified)
+                {
+                    mUpdateIterator = mUpdateIterator.Next;
+                }
+            }
+            mUpdateIteratorModified = true;
+        }
+
+        public virtual void UpdateTD()
+        {
+        }
+
+        public void UpdateTDAll(ModalFlags theFlags)
+        {
+            new AutoModalFlags(theFlags, mWidgetFlagsMod);
+            if ((theFlags.GetFlags() & 1) != 0)
+            {
+                UpdateTD();
+            }
+            mUpdateIterator = mWidgets.First;
+            while (mUpdateIterator?.Value != null)
+            {
+                mUpdateIteratorModified = false;
+                Widget value = mUpdateIterator.Value;
+                if (value == mWidgetManager.mBaseModalWidget)
+                {
+                    theFlags.mIsOver = true;
+                }
+                value.UpdateTDAll(theFlags);
+                if (!mUpdateIteratorModified)
+                {
+                    mUpdateIterator = mUpdateIterator.Next;
+                }
+            }
+            mUpdateIteratorModified = true;
+        }
+
         public virtual void Draw(Graphics g)
         {
         }

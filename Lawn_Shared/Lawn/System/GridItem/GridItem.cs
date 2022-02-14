@@ -390,18 +390,8 @@ namespace Lawn
             mApp.PlayFoley(FoleyType.Portal);
         }
 
-        public void Update(int updateCount)
+        public void Update()
         {
-            Reanimation reanimation = mApp.ReanimationTryToGet(mGridItemReanimID);
-            if (reanimation != null && updateCount == 0)
-            {
-                reanimation.Update();
-            }
-            TodParticleSystem todParticleSystem = mApp.ParticleTryToGet(mGridItemParticleID);
-            if (todParticleSystem != null)
-            {
-                todParticleSystem.Update();
-            }
             if (mGridItemType == GridItemType.PortalCircle || mGridItemType == GridItemType.PortalSquare)
             {
                 UpdatePortal();
@@ -418,6 +408,16 @@ namespace Lawn
             {
                 UpdateBrain();
             }
+        }
+
+        public void UpdateT90()
+        {
+            mApp.ParticleTryToGet(mGridItemParticleID)?.Update();
+        }
+
+        public void UpdateTD() 
+        {
+            mApp.ReanimationTryToGet(mGridItemReanimID)?.Update();
         }
 
         public void ClosePortal()
@@ -534,7 +534,7 @@ namespace Lawn
             {
                 if (mTransparentCounter < 50)
                 {
-                    mTransparentCounter++;
+                    mTransparentCounter += 3;
                 }
                 return;
             }
@@ -549,7 +549,7 @@ namespace Lawn
                     {
                         if (mTransparentCounter < 50)
                         {
-                            mTransparentCounter++;
+                            mTransparentCounter += 3;
                         }
                         return;
                     }
@@ -557,7 +557,7 @@ namespace Lawn
             }
             if (mTransparentCounter > 0)
             {
-                mTransparentCounter--;
+                mTransparentCounter -= 3;
             }
         }
 

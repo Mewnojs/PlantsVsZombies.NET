@@ -178,7 +178,7 @@ namespace Lawn
             {
                 return;
             }
-            mApp.mEffectSystem.Update();
+            //mApp.mEffectSystem.Update();
             float num5 = mCurBarWidth;
             mCurBarWidth += mBarVel;
             if (!mLoadingThreadComplete)
@@ -276,6 +276,18 @@ namespace Lawn
                     }
                 }
             }
+        }
+
+        public override void UpdateT90()
+        {
+            base.UpdateT90();
+            mApp.mEffectSystem.UpdateT90();
+        }
+
+        public override void UpdateTD()
+        {
+            base.UpdateTD();
+            mApp.mEffectSystem.UpdateTD();
         }
 
         public override void Draw(Graphics g)
