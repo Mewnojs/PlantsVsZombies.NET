@@ -11,37 +11,13 @@ namespace Sexy
             Log(DebugType.Info, msg);
         }
 
-            public static void Log(DebugType msgtype, object msg) 
+        public static void Log(DebugType msgtype, object msg)
         {
             msg = msg.ToString();
-            ConsoleColor fgColor = Console.ForegroundColor;
-            ConsoleColor bgColor = Console.BackgroundColor;
-            Action colorReset = Console.ResetColor;
-            switch (msgtype) 
-            {
-                case DebugType.Debug:
-                    break;
-                case DebugType.Info:
-                    fgColor = ConsoleColor.Cyan;
-                    break;
-                case DebugType.Warn:
-                    fgColor = ConsoleColor.Yellow;
-                    break;
-                case DebugType.Error:
-                    fgColor = ConsoleColor.Red;
-                    break;
-                case DebugType.Fatal:
-                    fgColor = ConsoleColor.White;
-                    bgColor = ConsoleColor.DarkRed;
-                    break;
-            }
-            Console.ForegroundColor = fgColor;
-            Console.BackgroundColor = bgColor;
-            Logger($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} {msgtype}] {msg}");
-            colorReset();
+            Logger($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} {msgtype}] {msg}", msgtype);
         }
 
-        public static void OutputDebug(string format, params object[] t) 
+        public static void OutputDebug(string format, params object[] t)
         {
 #if DEBUG
             Log(DebugType.Debug, string.Format(format, t));
@@ -57,17 +33,45 @@ namespace Sexy
 
         public static void ASSERT(bool value)
         {
-#if DEBUG
             if (!value) 
             {
-                Log(DebugType.Fatal, $"Assertion Failed\n{new StackTrace()}");
+                Log(DebugType.Error, $"Assertion Failed\n{new StackTrace()}");
+#if DEBUG
                 throw new Exception();
-            }
 #endif
+            }
         }
 
-        public static Action<string> Logger = Console.WriteLine;
+            private static void LoggerConsole(string s, DebugType msgtype) 
+        {
+            ConsoleColor fgColor = Console.ForegroundColor;
+            ConsoleColor bgColor = Console.BackgroundColor;
+            Action colorReset = Console.ResetColor;
+            switch (msgtype)
+            {
+            case DebugType.Debug:
+                break;
+            case DebugType.Info:
+                fgColor = ConsoleColor.Cyan;
+                break;
+            case DebugType.Warn:
+                fgColor = ConsoleColor.Yellow;
+                break;
+            case DebugType.Error:
+                fgColor = ConsoleColor.Red;
+                break;
+            case DebugType.Fatal:
+                fgColor = ConsoleColor.White;
+                bgColor = ConsoleColor.DarkRed;
+                break;
+            }
+            Console.ForegroundColor = fgColor;
+            Console.BackgroundColor = bgColor;
+            Console.WriteLine(s);
+            colorReset();
+        }
 
+        public static Action<string, DebugType> Logger = LoggerConsole;
     }
 
     public enum DebugType

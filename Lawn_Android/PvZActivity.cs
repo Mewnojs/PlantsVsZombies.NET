@@ -43,6 +43,7 @@ namespace Lawn_Android
     {
         private Sexy.Main _game;
         private View _view;
+        public static Action<Exception> ExceptionReporter = (e) => { };
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -80,6 +81,9 @@ namespace Lawn_Android
 
         public void OnException(object sender, Exception err)
         {
+#if !DEBUG
+            ExceptionReporter(err);
+#endif
             var aDialog = new AlertDialog.Builder(this);
             aDialog.SetTitle(err.GetType().ToString());
             aDialog.SetMessage($"{err.Message}\n{err.StackTrace}");
@@ -111,12 +115,13 @@ namespace Lawn_Android
                 {
                     Assets.Open(Path.Combine(libFolderPath, packedlibFileName)).CopyTo(packedlibStream);
                     packedlibStream.Position = 0;
-                    new FastZip().ExtractZip(
+                    var fastZip = new FastZip(); 
+                    fastZip.ExtractZip(
                         packedlibStream,
                         GetExternalFilesDir(libFolderPath).AbsolutePath,
                         FastZip.Overwrite.Always,
-                        (w) => { return true; },
-                        null, null, true, true
+                        null,
+                        null, null, false, true // 由于奇怪的兼容性问题(.NET 6修复)，在部分系统上无法还原时间等属性
                     );
                 };
                 using (var verInfoWriter = new StreamWriter(verInfoFilePath))

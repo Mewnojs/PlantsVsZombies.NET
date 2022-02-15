@@ -344,3 +344,5 @@ Contents
 /Lawn_Android/Assets/Content
 /IronPyInteractiveClient_Xamarin
 /.vscode
+/Lawn_Android/BuglyAppBind.cs
+/Lawn_Android/BuglyAppBindId.cs

@@ -2173,6 +2173,7 @@ namespace Lawn
                 case '7':
                 case '8':
                 case '9':
+                    RefreshSeedPacketFromCursor();
                     mSeedBank.mSeedPackets[theChar-'1'].MouseDown(0, 0, 1);
                     break;
                 }

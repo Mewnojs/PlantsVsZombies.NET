@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="net.pvz.team2508" android:versionName="0.1.2.4" android:installLocation="auto" android:versionCode="0120400">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="net.pvz.team2508" android:versionName="1.2.4.1" android:installLocation="auto" android:versionCode="0120410">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="29" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<application android:label="植物大战僵尸" android:icon="@drawable/Icon"></application>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<application android:label="植物大战僵尸" android:icon="@drawable/Icon" android:networkSecurityConfig="@xml/network_security_config"></application>
 </manifest>
