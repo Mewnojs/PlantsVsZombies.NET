@@ -1115,8 +1115,8 @@ namespace Lawn
 				//mPosX += 9.99f;
 				mPosX += 3.33f;
 				mPosY += /*3f * */mVelY;
-				mVelY *= 0.97f;
-				mVelY *= 0.97f;
+				//mVelY *= 0.97f;
+				//mVelY *= 0.97f;
 				mVelY *= 0.97f;
 				mShadowY += /*3f * */mVelY;
 			}

@@ -4738,11 +4738,11 @@ namespace Lawn
 				flag = true;
 				reanimation.mEnableExtraOverlayDraw = false;
 			}
-			if (mSeedType != SeedType.SEED_SUNFLOWER && mSeedType != SeedType.SEED_TWINSUNFLOWER && mSeedType != SeedType.SEED_SUNSHROOM && reanimation.mEnableExtraAdditiveDraw)
+			/*if (mSeedType != SeedType.SEED_SUNFLOWER && mSeedType != SeedType.SEED_TWINSUNFLOWER && mSeedType != SeedType.SEED_SUNSHROOM && reanimation.mEnableExtraAdditiveDraw)
 			{
 				flag = true;
 				reanimation.mEnableExtraAdditiveDraw = false;
-			}
+			}*/
 			if (flag)
 			{
 				reanimation.PropogateColorToAttachments();

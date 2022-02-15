@@ -1058,7 +1058,7 @@ namespace Lawn
 				if ((mApp.mGameMode != GameMode.GAMEMODE_CHALLENGE_LAST_STAND || mBoard == null || mBoard.mChallenge.mChallengeState == ChallengeState.STATECHALLENGE_LAST_STAND_ONSLAUGHT) && !IsLevelAward() && !IsPresentWithAdvice())
 				{
 					//mDisappearCounter += 3;
-					mDisappearCounter--;
+					mDisappearCounter++;
 					int disappearTime = GetDisappearTime();
 					if (mDisappearCounter >= disappearTime)
 					{

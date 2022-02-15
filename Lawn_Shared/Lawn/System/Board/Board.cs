@@ -7626,7 +7626,7 @@ namespace Lawn
 				if (mEnableGraveStones && gridItem.mGridItemType == GridItemType.GRIDITEM_GRAVESTONE && gridItem.mGridItemCounter < 100)
 				{
 					//gridItem.mGridItemCounter += 3;
-					gridItem.mGridItemCounter--;
+					gridItem.mGridItemCounter++;
 				}
 				if (gridItem.mGridItemType == GridItemType.GRIDITEM_CRATER && mApp.mGameScene == GameScenes.SCENE_PLAYING)
 				{

@@ -1958,7 +1958,6 @@ namespace Lawn
 			}
 			//mBoard.mZombieCountDown -= 3;
 			mBoard.mZombieCountDown--;
-			int num = 300;
 			//if (mBoard.mZombieCountDown >= 100 && mBoard.mZombieCountDown < 103 && mBoard.mCurrentWave > 0)
 			if (mBoard.mZombieCountDown == 100 && mBoard.mCurrentWave > 0)
 			{
@@ -1980,8 +1979,7 @@ namespace Lawn
 				mBoard.mCurrentWave++;
 				if (mBoard.mCurrentWave == mBoard.mNumWaves)
 				{
-					//mChallengeStateCounter = 300;
-					mChallengeStateCounter = 100;
+					mChallengeStateCounter = 300;
 				}
 				else
 				{
@@ -1989,14 +1987,14 @@ namespace Lawn
 					mChallengeStateCounter = 1;
 				}
 			}
-			else if (mBoard.mZombieCountDown < num)
+			else if (mBoard.mZombieCountDown < 300)
 			{
 				return;
 			}
 			//mChallengeStateCounter -= 3;
 			mChallengeStateCounter--;
 			//if (mChallengeStateCounter < 0 || mChallengeStateCounter >= 3)
-			if (mChallengeStateCounter == 0)
+			if (mChallengeStateCounter != 0)
 			{
 				return;
 			}

@@ -5006,8 +5006,10 @@ namespace Lawn
                     return;
                 }
                 ReanimatorTrack aTrack = aReanim.mDefinition.mTracks[aReanim.FindTrackIndex(Reanimation.ReanimTrackId__ground)];
-                float aDistance = aTrack.mTransforms[aReanim.mFrameStart + aReanim.mFrameCount - 1].mTransX
-                             - aTrack.mTransforms[aReanim.mFrameStart].mTransX;
+                //float aDistance = aTrack.mTransforms[aReanim.mFrameStart + aReanim.mFrameCount - 1].mTransX
+                //             - aTrack.mTransforms[aReanim.mFrameStart].mTransX;
+                float aDistance = (aTrack.mTransforms[aReanim.mFrameStart + aReanim.mFrameCount - 1].mTransX
+                                - aTrack.mTransforms[aReanim.mFrameStart].mTransX) * Constants.S;
                 if (aDistance < 1E-06f)
                 {
                     return;
