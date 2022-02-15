@@ -1037,11 +1037,12 @@ namespace Lawn
             return new TRect(mX, mY, mWidth, mHeight);
         }
 
-		public void UpdateNormalMotion()
+		public void UpdateNormalMotion()//3update
 		{
 			if (mMotionType == ProjectileMotion.MOTION_BACKWARDS)
 			{
-				mPosX -= 9.99f;
+				//mPosX -= 9.99f;
+				mPosX -= 3.33f;
 			}
 			else if (mMotionType == ProjectileMotion.MOTION_HOMING)
 			{
@@ -1060,16 +1061,16 @@ namespace Lawn
 					mVelY = sexyVector2.y;
 					mRotation = -(float)Math.Atan2(mVelY, mVelX);
 				}
-				mPosY += 3f * mVelY;
-				mPosX += 3f * mVelX;
-				mShadowY += 3f * mVelY;
+				mPosY += /*3f * */mVelY;
+				mPosX += /*3f * */mVelX;
+				mShadowY += /*3f * */mVelY;
 				mRow = mBoard.PixelToGridYKeepOnBoard((int)mPosX, (int)mPosY);
 			}
 			else if (mMotionType == ProjectileMotion.MOTION_STAR)
 			{
-				mPosY += 3f * mVelY;
-				mPosX += 3f * mVelX;
-				mShadowY += 3f * mVelY;
+				mPosY += /*3f * */mVelY;
+				mPosX += /*3f * */mVelX;
+				mShadowY += /*3f * */mVelY;
 				if (mVelY != 0f)
 				{
 					int row = mBoard.PixelToGridYKeepOnBoard((int)mPosX, (int)mPosY);
@@ -1080,53 +1081,63 @@ namespace Lawn
 			{
 				if (mProjectileAge < 60)
 				{
-					mPosY -= 1.5f;
+					//mPosY -= 1.5f;
+					mPosY -= 0.5f;
 				}
-				mPosX += 9.99f;
+				//mPosX += 9.99f;
+				mPosX += 3.33f;
 			}
 			else if (mMotionType == ProjectileMotion.MOTION_FLOAT_OVER)
 			{
 				if (mVelZ < 0f)
 				{
-					mVelZ += 0.006f;
+					//mVelZ += 0.006f;
+					mVelZ += 0.002f;
 					mVelZ = Math.Min(mVelZ, 0f);
-					mPosY += 3f * mVelZ;
+					mPosY += /*3f * */mVelZ;
 					mRotation = 0.3f + -0.70000005f * mVelZ * 3.1415927f * 0.25f;
 				}
-				mPosX += 1.2f;
+				//mPosX += 1.2f;
+				mPosX += 0.2f;
 			}
 			else if (mMotionType == ProjectileMotion.MOTION_BEE_BACKWARDS)
 			{
 				if (mProjectileAge < 60)
 				{
-					mPosY -= 1.5f;
+					//mPosY -= 1.5f;
+					mPosY -= 0.5f;
 				}
-				mPosX -= 9.99f;
+				//mPosX -= 9.99f;
+				mPosX -= 3.33f;
 			}
 			else if (mMotionType == ProjectileMotion.MOTION_THREEPEATER)
 			{
-				mPosX += 9.99f;
-				mPosY += 3f * mVelY;
+				//mPosX += 9.99f;
+				mPosX += 3.33f;
+				mPosY += /*3f * */mVelY;
+				//mVelY *= 0.97f;
+				//mVelY *= 0.97f;
 				mVelY *= 0.97f;
-				mVelY *= 0.97f;
-				mVelY *= 0.97f;
-				mShadowY += 3f * mVelY;
+				mShadowY += /*3f * */mVelY;
 			}
 			else
 			{
-				mPosX += 9.99f;
+				//mPosX += 9.99f;
+				mPosX += 3.33f;
 			}
 			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_HIGH_GRAVITY)
 			{
 				if (mMotionType == ProjectileMotion.MOTION_FLOAT_OVER)
 				{
-					mVelZ += 0.012f;
+					//mVelZ += 0.012f;
+					mVelZ += 0.004f;
 				}
 				else
 				{
-					mVelZ += 0.6f;
+					//mVelZ += 0.6f;
+					mVelZ += 0.2f;
 				}
-				mPosY += 3f * mVelZ;
+				mPosY += /*3f * */mVelZ;
 			}
 			CheckForCollision();
 			CheckForHighGround();

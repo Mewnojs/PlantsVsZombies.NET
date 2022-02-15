@@ -528,7 +528,7 @@ namespace Lawn
             g.SetColorizeImages(false);
         }
 
-        public void UpdateScaryPot()
+        public void UpdateScaryPot()//3update
         {
             if (mApp.mTodCheatKeys && mApp.mWidgetManager.mKeyDown[16])
             {
@@ -561,7 +561,7 @@ namespace Lawn
             }
         }
 
-        public void UpdatePortal()
+        public void UpdatePortal()//3update
         {
             Reanimation reanimation = mApp.ReanimationGet(mGridItemReanimID);
             if (reanimation == null)
@@ -623,7 +623,7 @@ namespace Lawn
             }
         }
 
-        public void UpdateRake()
+        public void UpdateRake()//3update
         {
             if (mGridItemState == GridItemState.RakeAttracting || mGridItemState == GridItemState.RakeWaiting)
             {
@@ -650,7 +650,8 @@ namespace Lawn
                         mApp.PlayFoley(FoleyType.Bonk);
                     }
                 }
-                mGridItemCounter -= 3;
+                //mGridItemCounter -= 3;
+                mGridItemCounter--;
                 if (mGridItemCounter <= 0)
                 {
                     GridItemDie();
@@ -705,21 +706,23 @@ namespace Lawn
             g.SetColorizeImages(false);
         }
 
-        public void UpdateBrain()
+		public void UpdateBrain()//3update
         {
-            if (mGridItemState == GridItemState.BrainSquished)
-            {
-                mGridItemCounter -= 3;
+			if (mGridItemState == GridItemState.GRIDITEM_STATE_BRAIN_SQUISHED)
+			{
+                //mGridItemCounter -= 3;
+                mGridItemCounter--;
                 if (mGridItemCounter <= 0)
-                {
-                    GridItemDie();
-                }
+				{
+					GridItemDie();
+				}
+			}
+			if (mTransparentCounter > 0)
+			{
+                //mTransparentCounter -= 3;
+                mTransparentCounter--;
             }
-            if (mTransparentCounter > 0)
-            {
-                mTransparentCounter -= 3;
-            }
-        }
+		}
 
         public void DrawStinky(Graphics g)
         {

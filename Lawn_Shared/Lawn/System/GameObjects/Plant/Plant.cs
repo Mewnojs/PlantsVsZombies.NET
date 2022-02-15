@@ -1544,7 +1544,7 @@ namespace Lawn
             }
         }
 
-		public void UpdateShooter()
+		public void UpdateShooter()//1update
 		{
 			mLaunchCounter--;
 			if (mLaunchCounter <= 0)
@@ -2366,7 +2366,7 @@ namespace Lawn
             return zombie;
         }
 
-		public void UpdateSquash()
+		public void UpdateSquash()//3update
 		{
 			Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
 			Debug.ASSERT(reanimation != null);
@@ -2595,7 +2595,7 @@ namespace Lawn
             mBoard.mFogBlownCountDown = 4000;
         }
 
-		public void UpdateGraveBuster()
+		public void UpdateGraveBuster()//3update
 		{
 			Reanimation reanimation = mApp.ReanimationGet(mBodyReanimID);
 			if (mState == PlantState.STATE_GRAVEBUSTER_LANDING)
@@ -3263,7 +3263,7 @@ namespace Lawn
             }
         }
 
-		public void UpdateDoomShroom()
+		public void UpdateDoomShroom()//3update
 		{
 			if (mIsAsleep || mState == PlantState.STATE_DOINGSPECIAL)
 			{
@@ -3282,7 +3282,7 @@ namespace Lawn
 			mApp.PlayFoley(FoleyType.FOLEY_REVERSE_EXPLOSION);
 		}
 
-		public void UpdateIceShroom()
+		public void UpdateIceShroom()//3update
 		{
 			if (mIsAsleep || mState == PlantState.STATE_DOINGSPECIAL)
 			{
@@ -3292,7 +3292,7 @@ namespace Lawn
 			mDoSpecialCountdown = 100;
 		}
 
-		public void UpdatePotato()
+		public void UpdatePotato()//3update
 		{
 			Reanimation reanimation = mApp.ReanimationGet(mBodyReanimID);
 			if (mState == PlantState.STATE_NOTREADY)
@@ -3881,7 +3881,7 @@ namespace Lawn
             TodCommon.TodDrawImageCenterScaledF(g, AtlasResources.IMAGE_PLANTSHADOW2, (theOffsetX + num2) * Constants.S, (theOffsetY + num3) * Constants.S, num4, num4);
         }
 
-		public void UpdateScaredyShroom()
+		public void UpdateScaredyShroom()//3update
 		{
 			if (mShootingCounter > 0)
 			{
@@ -4152,7 +4152,8 @@ namespace Lawn
             Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
             if (reanimation != null && reanimation.TrackExists(Reanimation.ReanimTrackId__ground))
             {
-                float num = reanimation.GetTrackVelocity(Reanimation.ReanimTrackId__ground) / 4f;
+                //float num = reanimation.GetTrackVelocity(Reanimation.ReanimTrackId__ground) / 4f;
+                float num = reanimation.GetTrackVelocity(Reanimation.ReanimTrackId__ground) * Constants.S;
                 if (mSeedType == SeedType.GiantWallnut)
                 {
                     num *= 2f;
@@ -4746,11 +4747,11 @@ namespace Lawn
 				flag = true;
 				reanimation.mEnableExtraOverlayDraw = false;
 			}
-			if (mSeedType != SeedType.SEED_SUNFLOWER && mSeedType != SeedType.SEED_TWINSUNFLOWER && mSeedType != SeedType.SEED_SUNSHROOM && reanimation.mEnableExtraAdditiveDraw)
+			/*if (mSeedType != SeedType.SEED_SUNFLOWER && mSeedType != SeedType.SEED_TWINSUNFLOWER && mSeedType != SeedType.SEED_SUNSHROOM && reanimation.mEnableExtraAdditiveDraw)
 			{
 				flag = true;
 				reanimation.mEnableExtraAdditiveDraw = false;
-			}
+			}*/
 			if (flag)
 			{
 				reanimation.PropogateColorToAttachments();

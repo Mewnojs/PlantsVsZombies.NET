@@ -933,7 +933,8 @@ namespace Lawn
             }
             //mFadeCount -= 3;
             mFadeCount--;
-            if (mFadeCount >= 0 && mFadeCount < 3)
+            //if (mFadeCount >= 0 && mFadeCount < 3)
+            if (mFadeCount == 0)
             {
                 if (mType == CoinType.Silver || mType == CoinType.Gold)
                 {
@@ -1212,7 +1213,7 @@ namespace Lawn
             }
         }
 
-		public void UpdateCollected()
+		public void UpdateCollected()//3update
 		{
 			int num;
 			int num2;
@@ -1244,7 +1245,8 @@ namespace Lawn
 			{
 				if (mType == CoinType.COIN_AWARD_PRESENT || mType == CoinType.COIN_PRESENT_PLANT)
 				{
-					mDisappearCounter += 3;
+					//mDisappearCounter += 3;
+					mDisappearCounter++;
 					if (mDisappearCounter >= 200)
 					{
 						StartFade();
@@ -1255,13 +1257,15 @@ namespace Lawn
 				{
 					if (mType == CoinType.COIN_USABLE_SEED_PACKET)
 					{
-						mDisappearCounter += 3;
+						//mDisappearCounter += 3;
+						mDisappearCounter++;
 					}
 					return;
 				}
 				num = Constants.Coin_AwardSeedpacket_Pos.X - mWidth / 2;
 				num2 = Constants.Coin_AwardSeedpacket_Pos.Y - mHeight / 2;
-				mDisappearCounter += 3;
+				//mDisappearCounter += 3;
+				mDisappearCounter++;
 			}
 			if (IsLevelAward())
 			{
@@ -1274,19 +1278,23 @@ namespace Lawn
 			float num4 = Math.Abs(mPosY - num2);
 			if (mPosX > num)
 			{
-				mPosX -= num3 / 7f;
+				//mPosX -= num3 / 7f;
+				mPosX -= num3 / 21f;
 			}
 			else if (mPosX < num)
 			{
-				mPosX += num3 / 7f;
+				//mPosX += num3 / 7f;
+				mPosX += num3 / 21f;
 			}
 			if (mPosY > num2)
 			{
-				mPosY -= num4 / 7f;
+				//mPosY -= num4 / 7f;
+				mPosY -= num4 / 21f;
 			}
 			else if (mPosY < num2)
 			{
-				mPosY += num4 / 7f;
+				//mPosY += num4 / 7f;
+				mPosY += num4 / 21f;
 			}
 			mCollectionDistance = (float)Math.Sqrt(num4 * num4 + num3 * num3);
 			if (IsPresentWithAdvice())

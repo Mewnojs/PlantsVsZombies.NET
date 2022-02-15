@@ -1028,7 +1028,7 @@ namespace Lawn
             }
         }
 
-        public void EatZombie(Zombie theZombie)
+        public void EatZombie(Zombie theZombie)//3update
         {
             theZombie.TakeDamage(GameConstants.TICKS_BETWEEN_EATS, 9U);
             StartEating();
@@ -1038,7 +1038,7 @@ namespace Lawn
             }
         }
 
-        public void EatPlant(Plant thePlant)
+        public void EatPlant(Plant thePlant)//3update
         {
             if (mZombiePhase == ZombiePhase.DancerDancingIn)
             {
@@ -1093,17 +1093,17 @@ namespace Lawn
             if (mApp.IsIZombieLevel() && thePlant.mSeedType == SeedType.Sunflower)
             {
                 int num = thePlant.mPlantHealth / 40;
-                int num2 = (thePlant.mPlantHealth - 3 * GameConstants.TICKS_BETWEEN_EATS) / 40;
+                int num2 = (thePlant.mPlantHealth - /*3 * */GameConstants.TICKS_BETWEEN_EATS) / 40;
                 if (num2 < num)
                 {
                     mBoard.AddCoin(thePlant.mX, thePlant.mY, CoinType.Sun, CoinMotion.FromPlant);
                 }
             }
-            thePlant.mPlantHealth -= 3 * GameConstants.TICKS_BETWEEN_EATS;
+            thePlant.mPlantHealth -= /*3 * */GameConstants.TICKS_BETWEEN_EATS;
             thePlant.mRecentlyEatenCountdown = 50;
             if (mApp.IsIZombieLevel() && mJustGotShotCounter < -500 && (thePlant.mSeedType == SeedType.Wallnut || thePlant.mSeedType == SeedType.Tallnut || thePlant.mSeedType == SeedType.Pumpkinshell))
             {
-                thePlant.mPlantHealth -= 3 * GameConstants.TICKS_BETWEEN_EATS;
+                thePlant.mPlantHealth -= /*3 * */GameConstants.TICKS_BETWEEN_EATS;
             }
             if (thePlant.mPlantHealth <= 0)
             {
@@ -3429,7 +3429,8 @@ namespace Lawn
                 else if (mHasGroundTrack)
                 {
                     mGroundTrackIndex = reanimation.GetTrackIndex(Reanimation.ReanimTrackId__ground);
-                    aSpeed = reanimation.GetTrackVelocity(mGroundTrackIndex) * mScaleZombie;
+                    //aSpeed = reanimation.GetTrackVelocity(mGroundTrackIndex) * mScaleZombie;
+                    aSpeed = reanimation.GetTrackVelocity(mGroundTrackIndex) * mScaleZombie * Constants.S;
                 }
                 else
                 {
@@ -3602,7 +3603,8 @@ namespace Lawn
             }
             if (mZombiePhase == ZombiePhase.BobsledSliding)
             {
-                if (mPhaseCounter >= 0 && mPhaseCounter < 3)
+                //if (mPhaseCounter >= 0 && mPhaseCounter < 3)
+                if (mPhaseCounter == 0)
                 {
                     mZombiePhase = ZombiePhase.BobsledBoarding;
                     PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_jump, ReanimLoopType.PlayOnceAndHold, 0, 20f);
@@ -3809,13 +3811,15 @@ namespace Lawn
             float aDeflection = 9f;
             mAltitude = TodCommon.TodAnimateCurveFloat(GameConstants.POGO_BOUNCE_TIME, 0, mPhaseCounter, aDeflection, aHeight + aDeflection, TodCurves.BounceSlowMiddle);
             mFrame = TodCommon.ClampInt(3 - (int)mAltitude / 3, 0, 3);
-            if (mPhaseCounter >= 8 && mPhaseCounter < 11)
+            //if (mPhaseCounter >= 8 && mPhaseCounter < 11)
+            if (mPhaseCounter == 8)
             {
                 Reanimation reanimation = mApp.ReanimationGet(mBodyReanimID);
                 reanimation.mAnimTime = 0f;
                 reanimation.mLoopType = ReanimLoopType.PlayOnceAndHold;
             }
-            if (IsOnBoard() && mPhaseCounter >= 5 && mPhaseCounter < 8)
+            //if (IsOnBoard() && mPhaseCounter >= 5 && mPhaseCounter < 8)
+            if (IsOnBoard() && mPhaseCounter == 5)
             {
                 mApp.PlayFoley(FoleyType.PogoZombie);
             }
@@ -3938,11 +3942,13 @@ namespace Lawn
                 {
                     mAltitude = TodCommon.TodAnimateCurve(30, 0, mPhaseCounter, 20, 0, TodCurves.EaseIn);
                 }
-                if (mPhaseCounter >= 30 && mPhaseCounter < 33)
+                //if (mPhaseCounter >= 30 && mPhaseCounter < 33)
+                if (mPhaseCounter == 30)
                 {
                     PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_landing, ReanimLoopType.PlayOnceAndHold, 0, 12f);
                 }
-                if (mPhaseCounter >= 0 && mPhaseCounter < 3)
+                //if (mPhaseCounter >= 0 && mPhaseCounter < 3)
+                if (mPhaseCounter == 0)
                 {
                     mZombiePhase = ZombiePhase.DiggerStunned;
                     mAltitude = 0f;
@@ -3952,11 +3958,13 @@ namespace Lawn
             }
             else if (mZombiePhase == ZombiePhase.DiggerTunnelingPauseWithoutAxe)
             {
-                if (mPhaseCounter >= 150 && mPhaseCounter < 153)
+                //if (mPhaseCounter >= 150 && mPhaseCounter < 153)
+                if (mPhaseCounter == 150)
                 {
                     AddAttachedReanim(23, 93, ReanimationType.ZombieSurprise);
                 }
-                if (mPhaseCounter >= 0 && mPhaseCounter < 3)
+                //if (mPhaseCounter >= 0 && mPhaseCounter < 3)
+                if (mPhaseCounter == 0)
                 {
                     mZombiePhase = ZombiePhase.DiggerRiseWithoutAxe;
                     mPhaseCounter = 130;
@@ -3978,11 +3986,13 @@ namespace Lawn
                 {
                     mAltitude = TodCommon.TodAnimateCurve(30, 0, mPhaseCounter, 20, 0, TodCurves.EaseIn);
                 }
-                if (mPhaseCounter >= 30 && mPhaseCounter < 33)
+                //if (mPhaseCounter >= 30 && mPhaseCounter < 33)
+                if (mPhaseCounter == 30)
                 {
                     PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_landing, ReanimLoopType.PlayOnceAndHold, 20, 12f);
                 }
-                if (mPhaseCounter >= 0 && mPhaseCounter < 3)
+                //if (mPhaseCounter >= 0 && mPhaseCounter < 3)
+                if (mPhaseCounter == 0)
                 {
                     mZombiePhase = ZombiePhase.DiggerWalkingWithoutAxe;
                     mAltitude = 0f;
@@ -4285,7 +4295,8 @@ namespace Lawn
                 num2 = 11;
                 num = 10;
             }
-            return mApp.mAppCounter * 3 % (num * num2) / num;
+            //return mApp.mAppCounter * 3 % (num * num2) / num;
+            return mBoard.mUpdateCnt % (num * num2) / num;
         }
 
         public void BungeeStealTarget()
@@ -5002,8 +5013,10 @@ namespace Lawn
                     return;
                 }
                 ReanimatorTrack aTrack = aReanim.mDefinition.mTracks[aReanim.FindTrackIndex(Reanimation.ReanimTrackId__ground)];
-                float aDistance = aTrack.mTransforms[aReanim.mFrameStart + aReanim.mFrameCount - 1].mTransX
-                             - aTrack.mTransforms[aReanim.mFrameStart].mTransX;
+                //float aDistance = aTrack.mTransforms[aReanim.mFrameStart + aReanim.mFrameCount - 1].mTransX
+                //             - aTrack.mTransforms[aReanim.mFrameStart].mTransX;
+                float aDistance = (aTrack.mTransforms[aReanim.mFrameStart + aReanim.mFrameCount - 1].mTransX
+                                - aTrack.mTransforms[aReanim.mFrameStart].mTransX) * Constants.S;
                 if (aDistance < 1E-06f)
                 {
                     return;
@@ -9955,7 +9968,8 @@ namespace Lawn
             {
                 return;
             }
-            if (mPhaseCounter >= 36 && mPhaseCounter < 39)
+            //if (mPhaseCounter >= 36 && mPhaseCounter < 39)
+            if (mPhaseCounter == 36)
             {
                 mApp.ReanimationGet(mSpecialHeadReanimID)?.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_shooting, ReanimLoopType.PlayOnceAndHold, 20, 35f);
                 return;
@@ -10274,12 +10288,14 @@ namespace Lawn
             {
                 return;
             }
-            if (mPhaseCounter >= 99 && mPhaseCounter < 102)
+            //if (mPhaseCounter >= 99 && mPhaseCounter < 102)
+            if (mPhaseCounter == 99)
             {
                 mApp.ReanimationGet(mSpecialHeadReanimID).PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_shooting, ReanimLoopType.PlayOnceAndHold, 20, 38f);
                 return;
             }
-            if ((mPhaseCounter >= 18 && mPhaseCounter < 21) || (mPhaseCounter >= 36 && mPhaseCounter < 39) || (mPhaseCounter >= 51 && mPhaseCounter < 54) || (mPhaseCounter >= 69 && mPhaseCounter < 72))
+            //if ((mPhaseCounter >= 18 && mPhaseCounter < 21) || (mPhaseCounter >= 36 && mPhaseCounter < 39) || (mPhaseCounter >= 51 && mPhaseCounter < 54) || (mPhaseCounter >= 69 && mPhaseCounter < 72))
+            if (mPhaseCounter == 18 || mPhaseCounter == 36 || mPhaseCounter == 51 || mPhaseCounter == 69)
             {
                 mApp.PlayFoley(FoleyType.Throw);
                 Reanimation reanimation_v = mApp.ReanimationGet(mBodyReanimID);
@@ -10355,7 +10371,8 @@ namespace Lawn
                 int aDestX = mBoard.GridToPixelX(mBoard.PixelToGridXKeepOnBoard(mX, mY), mRow);
                 Reanimation reanimation = mApp.ReanimationGet(mSpecialHeadReanimID);
                 reanimation.SetPosition((mPosX + aPosX + aDestX - mPosX) * Constants.S, (mPosY + aPosY + aDestY) * Constants.S);
-                if (mPhaseCounter >= 4 && mPhaseCounter < 7)
+                //if (mPhaseCounter >= 4 && mPhaseCounter < 7)
+                if (mPhaseCounter == 4)
                 {
                     SquishAllInSquare(mBoard.PixelToGridXKeepOnBoard(mX, mY), mRow, ZombieAttackType.Chew);
                 }

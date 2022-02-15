@@ -922,7 +922,7 @@ namespace Lawn
             }
         }
 
-		public void Update()
+		public void Update()//1update
 		{
 			if (mApp.IsStormyNightLevel())
 			{
@@ -1989,14 +1989,14 @@ namespace Lawn
 					mChallengeStateCounter = 1;
 				}
 			}
-			else if (mBoard.mZombieCountDown < num)
+			else if (mBoard.mZombieCountDown < 300)
 			{
 				return;
 			}
 			//mChallengeStateCounter -= 3;
 			mChallengeStateCounter--;
 			//if (mChallengeStateCounter < 0 || mChallengeStateCounter >= 3)
-			if (mChallengeStateCounter == 0)
+			if (mChallengeStateCounter != 0)
 			{
 				return;
 			}
@@ -4983,7 +4983,8 @@ namespace Lawn
                 return false;
             }
             theZombie.StartEating();
-            gridItem.mGridItemCounter -= 3;
+            //gridItem.mGridItemCounter -= 3;
+            gridItem.mGridItemCounter--;
             if (gridItem.mGridItemCounter <= 0)
             {
                 mApp.PlaySample(Resources.SOUND_GULP);
