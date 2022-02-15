@@ -6730,20 +6730,20 @@ namespace Lawn
 			if (StageHasFog() && mFogBlownCountDown > 0)
 			{
 				float num = 1065f - LeftFogColumn() * 80f + Constants.BOARD_EXTRA_ROOM;
-				if (mApp.mGameScene == GameScenes.SCENE_LEVEL_INTRO)
+				if (mApp.mGameScene == GameScenes.LevelIntro)
 				{
-					mFogOffset = TodCommon.TodAnimateCurveFloat(200, 0, mFogBlownCountDown, num, 0f, TodCurves.CURVE_EASE_OUT);
+					mFogOffset = TodCommon.TodAnimateCurveFloat(200, 0, mFogBlownCountDown, num, 0f, TodCurves.EaseOut);
 				}
 				else if (mFogBlownCountDown < 2000)
 				{
-					mFogOffset = TodCommon.TodAnimateCurveFloat(2000, 0, mFogBlownCountDown, num, 0f, TodCurves.CURVE_EASE_OUT);
+					mFogOffset = TodCommon.TodAnimateCurveFloat(2000, 0, mFogBlownCountDown, num, 0f, TodCurves.EaseOut);
 				}
 				else if (mFogOffset < num)
 				{
-					mFogOffset = TodCommon.TodAnimateCurveFloat(-5, (int)num, (int)(mFogOffset * 1.1f), 0f, num, TodCurves.CURVE_LINEAR);
+					mFogOffset = TodCommon.TodAnimateCurveFloat(-5, (int)num, (int)(mFogOffset * 1.1f), 0f, num, TodCurves.Linear);
 				}
 			}
-			if (mApp.mGameScene != GameScenes.SCENE_PLAYING && !mCutScene.ShouldRunUpsellBoard())
+			if (mApp.mGameScene != GameScenes.Playing && !mCutScene.ShouldRunUpsellBoard())
 			{
 				return;
 			}
@@ -6948,7 +6948,7 @@ namespace Lawn
 				Plant plant = mPlants[k];
 				if (!plant.mDead && !plant.NotOnGround())
 				{
-					if (plant.mSeedType == SeedType.SEED_PLANTERN)
+					if (plant.mSeedType == SeedType.Plantern)
 					{
                         ClearFogAroundPlant(plant, 4);
                     }
@@ -7551,7 +7551,7 @@ namespace Lawn
 			}
 			//mFwooshCountDown -= 3;
 			mFwooshCountDown--;
-			int num = TodCommon.TodAnimateCurve(50, 0, mFwooshCountDown, 12, 0, TodCurves.CURVE_LINEAR);
+			int num = TodCommon.TodAnimateCurve(50, 0, mFwooshCountDown, 12, 0, TodCurves.Linear);
 			for (int i = 0; i < Constants.MAX_GRIDSIZEY; i++)
 			{
 				for (int j = 0; j < 12 - num; j++)
@@ -7560,7 +7560,7 @@ namespace Lawn
 					if (reanimation != null)
 					{
 						reanimation.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_done);
-						reanimation.mLoopType = ReanimLoopType.REANIM_PLAY_ONCE_FULL_LAST_FRAME;
+						reanimation.mLoopType = ReanimLoopType.PlayOnceFullLastFrame;
 						reanimation.mAnimRate = 15f;
 					}
 					mFwooshID[i, j] = null;
@@ -7642,12 +7642,12 @@ namespace Lawn
 			GridItem gridItem = null;
 			while (IterateGridItems(ref gridItem, ref num))
 			{
-				if (mEnableGraveStones && gridItem.mGridItemType == GridItemType.GRIDITEM_GRAVESTONE && gridItem.mGridItemCounter < 100)
+				if (mEnableGraveStones && gridItem.mGridItemType == GridItemType.Gravestone && gridItem.mGridItemCounter < 100)
 				{
 					//gridItem.mGridItemCounter += 3;
 					gridItem.mGridItemCounter++;
 				}
-				if (gridItem.mGridItemType == GridItemType.GRIDITEM_CRATER && mApp.mGameScene == GameScenes.SCENE_PLAYING)
+				if (gridItem.mGridItemType == GridItemType.Crater && mApp.mGameScene == GameScenes.Playing)
 				{
 					if (gridItem.mGridItemCounter > 0)
 					{
@@ -7787,35 +7787,35 @@ namespace Lawn
 			{
 				mTutorialTimer--;
 			}
-			if (mTutorialState == TutorialState.TUTORIAL_LEVEL_1_PICK_UP_PEASHOOTER && mTutorialTimer == 0)
+			if (mTutorialState == TutorialState.Level1PickUpPeashooter && mTutorialTimer == 0)
 			{
-				DisplayAdvice("[ADVICE_CLICK_PEASHOOTER]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL1_STAY, AdviceType.ADVICE_NONE);
+				DisplayAdvice("[ADVICE_CLICK_PEASHOOTER]", MessageStyle.TutorialLevel1Stay, AdviceType.None);
 				float num = mSeedBank.mX + mSeedBank.mSeedPackets[0].mX;
 				float num2 = 0f;
 				TutorialArrowShow((int)(num + Constants.SMALL_SEEDPACKET_WIDTH / 2 - Constants.InvertAndScale(13f)), (int)num2);
 				mTutorialTimer = -1;
 			}
-			if (mTutorialState == TutorialState.TUTORIAL_LEVEL_2_PICK_UP_SUNFLOWER || mTutorialState == TutorialState.TUTORIAL_LEVEL_2_PLANT_SUNFLOWER || mTutorialState == TutorialState.TUTORIAL_LEVEL_2_REFRESH_SUNFLOWER)
+			if (mTutorialState == TutorialState.Level2PickUpSunflower || mTutorialState == TutorialState.Level2PlantSunflower || mTutorialState == TutorialState.Level2RefreshSunflower)
 			{
 				if (mTutorialTimer == 0)
 				{
-					DisplayAdvice("[ADVICE_PLANT_SUNFLOWER2]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL2, AdviceType.ADVICE_NONE);
+					DisplayAdvice("[ADVICE_PLANT_SUNFLOWER2]", MessageStyle.TutorialLevel2, AdviceType.None);
 					mTutorialTimer = -1;
 				}
 				else if (mZombieCountDown == 750 && mCurrentWave == 0)
 				{
-					DisplayAdvice("[ADVICE_PLANT_SUNFLOWER3]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LEVEL2, AdviceType.ADVICE_NONE);
+					DisplayAdvice("[ADVICE_PLANT_SUNFLOWER3]", MessageStyle.TutorialLevel2, AdviceType.None);
 				}
 			}
-			if ((mTutorialState == TutorialState.TUTORIAL_MORESUN_PICK_UP_SUNFLOWER || mTutorialState == TutorialState.TUTORIAL_MORESUN_PLANT_SUNFLOWER || mTutorialState == TutorialState.TUTORIAL_MORESUN_REFRESH_SUNFLOWER) && mTutorialTimer == 0)
+			if ((mTutorialState == TutorialState.Level2PickUpSunflower || mTutorialState == TutorialState.MoresunPlantSunflower || mTutorialState == TutorialState.MoresunRefreshSunflower) && mTutorialTimer == 0)
 			{
-				DisplayAdvice("[ADVICE_PLANT_SUNFLOWER5]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LATER, AdviceType.ADVICE_PLANT_SUNFLOWER5);
+				DisplayAdvice("[ADVICE_PLANT_SUNFLOWER5]", MessageStyle.TutorialLater, AdviceType.PlantSunflower5);
 				mTutorialTimer = -1;
 			}
-			if (mApp.IsFirstTimeAdventureMode() && mLevel >= 3 && mLevel != 5 && mLevel <= 7 && mTutorialState == TutorialState.TUTORIAL_OFF && mCurrentWave >= 5 && !Board.gShownMoreSunTutorial && mSeedBank.mSeedPackets[1].CanPickUp() && CountPlantByType(SeedType.SEED_SUNFLOWER) < 3)
+			if (mApp.IsFirstTimeAdventureMode() && mLevel >= 3 && mLevel != 5 && mLevel <= 7 && mTutorialState == TutorialState.Off && mCurrentWave >= 5 && !Board.gShownMoreSunTutorial && mSeedBank.mSeedPackets[1].CanPickUp() && CountPlantByType(SeedType.Sunflower) < 3)
 			{
 				Debug.ASSERT(!ChooseSeedsOnCurrentLevel());
-				DisplayAdvice("[ADVICE_PLANT_SUNFLOWER4]", MessageStyle.MESSAGE_STYLE_TUTORIAL_LATER_STAY, AdviceType.ADVICE_NONE);
+				DisplayAdvice("[ADVICE_PLANT_SUNFLOWER4]", MessageStyle.TutorialLaterStay, AdviceType.None);
 				GameConstants.gShownMoreSunTutorial = true;
                 SetTutorialState(TutorialState.MoresunPickUpSunflower);
                 mTutorialTimer = 500;

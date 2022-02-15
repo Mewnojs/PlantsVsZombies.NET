@@ -1039,12 +1039,12 @@ namespace Lawn
 
 		public void UpdateNormalMotion()//3update
 		{
-			if (mMotionType == ProjectileMotion.MOTION_BACKWARDS)
+			if (mMotionType == ProjectileMotion.Backwards)
 			{
 				//mPosX -= 9.99f;
 				mPosX -= 3.33f;
 			}
-			else if (mMotionType == ProjectileMotion.MOTION_HOMING)
+			else if (mMotionType == ProjectileMotion.Homing)
 			{
 				Zombie zombie = mBoard.ZombieTryToGet(mTargetZombieID);
 				if (zombie != null && zombie.EffectedByDamage((uint)mDamageRangeFlags))
@@ -1066,7 +1066,7 @@ namespace Lawn
 				mShadowY += /*3f * */mVelY;
 				mRow = mBoard.PixelToGridYKeepOnBoard((int)mPosX, (int)mPosY);
 			}
-			else if (mMotionType == ProjectileMotion.MOTION_STAR)
+			else if (mMotionType == ProjectileMotion.Star)
 			{
 				mPosY += /*3f * */mVelY;
 				mPosX += /*3f * */mVelX;
@@ -1077,7 +1077,7 @@ namespace Lawn
 					mRow = row;
 				}
 			}
-			else if (mMotionType == ProjectileMotion.MOTION_BEE)
+			else if (mMotionType == ProjectileMotion.Bee)
 			{
 				if (mProjectileAge < 60)
 				{
@@ -1087,7 +1087,7 @@ namespace Lawn
 				//mPosX += 9.99f;
 				mPosX += 3.33f;
 			}
-			else if (mMotionType == ProjectileMotion.MOTION_FLOAT_OVER)
+			else if (mMotionType == ProjectileMotion.FloatOver)
 			{
 				if (mVelZ < 0f)
 				{
@@ -1100,7 +1100,7 @@ namespace Lawn
 				//mPosX += 1.2f;
 				mPosX += 0.2f;
 			}
-			else if (mMotionType == ProjectileMotion.MOTION_BEE_BACKWARDS)
+			else if (mMotionType == ProjectileMotion.BeeBackwards)
 			{
 				if (mProjectileAge < 60)
 				{
@@ -1110,7 +1110,7 @@ namespace Lawn
 				//mPosX -= 9.99f;
 				mPosX -= 3.33f;
 			}
-			else if (mMotionType == ProjectileMotion.MOTION_THREEPEATER)
+			else if (mMotionType == ProjectileMotion.Threepeater)
 			{
 				//mPosX += 9.99f;
 				mPosX += 3.33f;
@@ -1125,9 +1125,9 @@ namespace Lawn
 				//mPosX += 9.99f;
 				mPosX += 3.33f;
 			}
-			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_HIGH_GRAVITY)
+			if (mApp.mGameMode == GameMode.ChallengeHighGravity)
 			{
-				if (mMotionType == ProjectileMotion.MOTION_FLOAT_OVER)
+				if (mMotionType == ProjectileMotion.FloatOver)
 				{
 					//mVelZ += 0.012f;
 					mVelZ += 0.004f;

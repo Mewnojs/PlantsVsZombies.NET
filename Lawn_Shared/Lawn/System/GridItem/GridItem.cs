@@ -708,7 +708,7 @@ namespace Lawn
 
 		public void UpdateBrain()//3update
         {
-			if (mGridItemState == GridItemState.GRIDITEM_STATE_BRAIN_SQUISHED)
+			if (mGridItemState == GridItemState.BrainSquished)
 			{
                 //mGridItemCounter -= 3;
                 mGridItemCounter--;

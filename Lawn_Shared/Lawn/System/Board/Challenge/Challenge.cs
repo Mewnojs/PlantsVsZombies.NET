@@ -930,18 +930,18 @@ namespace Lawn
 			}
 			if (mBoard.mPaused)
 			{
-				if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST)
+				if (mApp.mGameMode == GameMode.ChallengeBeghouledTwist)
 				{
 					mChallengeGridX = -1;
 					mChallengeGridY = -1;
 				}
 				return;
 			}
-			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RAINING_SEEDS || mApp.IsStormyNightLevel())
+			if (mApp.mGameMode == GameMode.ChallengeRainingSeeds || mApp.IsStormyNightLevel())
 			{
 				UpdateRain();
 			}
-			if (mApp.mGameScene != GameScenes.SCENE_PLAYING)
+			if (mApp.mGameScene != GameScenes.Playing)
 			{
 				return;
 			}
@@ -949,7 +949,7 @@ namespace Lawn
 			{
 				UpdateConveyorBelt();
 			}
-			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_BEGHOULED_TWIST)
+			if (mApp.mGameMode == GameMode.ChallengeBeghouled || mApp.mGameMode == GameMode.ChallengeBeghouledTwist)
 			{
 				UpdateBeghouled();
 			}
@@ -981,15 +981,15 @@ namespace Lawn
 			{
 				UpdateSlotMachine();
 			}
-			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_SPEED && speedBoardCounter++ % 3 == 0)
+			if (mApp.mGameMode == GameMode.ChallengeSpeed && speedBoardCounter++ % 3 == 0)
 			{
 				mBoard.UpdateGame();
 			}
-			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_RAINING_SEEDS)
+			if (mApp.mGameMode == GameMode.ChallengeRainingSeeds)
 			{
 				UpdateRainingSeeds();
 			}
-			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_PORTAL_COMBAT)
+			if (mApp.mGameMode == GameMode.ChallengePortalCombat)
 			{
 				UpdatePortalCombat();
 			}
@@ -997,12 +997,12 @@ namespace Lawn
 			{
 				SquirrelUpdate();
 			}
-			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ICE && mBoard.mMainCounter == 3000)
+			if (mApp.mGameMode == GameMode.ChallengeIce && mBoard.mMainCounter == 3000)
 			{
-				mApp.PlayFoley(FoleyType.FOLEY_FLOOP);
+				mApp.PlayFoley(FoleyType.Floop);
 				mApp.PlaySample(Resources.SOUND_LOSEMUSIC);
 			}
-			if (mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_LAST_STAND)
+			if (mApp.mGameMode == GameMode.ChallengeLastStand)
 			{
 				LastStandUpate();
 			}

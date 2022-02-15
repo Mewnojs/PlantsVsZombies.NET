@@ -1231,7 +1231,7 @@ namespace Lawn
 					num = 662;
 					num2 = 546;
 				}
-				else if (mApp.mCrazyDaveState != CrazyDaveState.CRAZY_DAVE_OFF || mApp.mGameMode == GameMode.GAMEMODE_CHALLENGE_ZEN_GARDEN)
+				else if (mApp.mCrazyDaveState != CrazyDaveState.Off || mApp.mGameMode == GameMode.ChallengeZenGarden)
 				{
 					num = Constants.ZenGarden_MoneyTarget_X;
 				}
@@ -1243,7 +1243,7 @@ namespace Lawn
 			}
 			else
 			{
-				if (mType == CoinType.COIN_AWARD_PRESENT || mType == CoinType.COIN_PRESENT_PLANT)
+				if (mType == CoinType.AwardPresent || mType == CoinType.PresentPlant)
 				{
 					//mDisappearCounter += 3;
 					mDisappearCounter++;
@@ -1255,7 +1255,7 @@ namespace Lawn
 				}
 				if (!IsLevelAward())
 				{
-					if (mType == CoinType.COIN_USABLE_SEED_PACKET)
+					if (mType == CoinType.UsableSeedPacket)
 					{
 						//mDisappearCounter += 3;
 						mDisappearCounter++;
@@ -1269,9 +1269,9 @@ namespace Lawn
 			}
 			if (IsLevelAward())
 			{
-				mScale = TodCommon.TodAnimateCurveFloat(0, 400, mDisappearCounter, 1.01f, 2f, TodCurves.CURVE_EASE_IN_OUT);
-				mPosX = TodCommon.TodAnimateCurveFloat(0, 350, mDisappearCounter, mCollectX, num, TodCurves.CURVE_EASE_OUT);
-				mPosY = TodCommon.TodAnimateCurveFloat(0, 350, mDisappearCounter, mCollectY, num2, TodCurves.CURVE_EASE_OUT);
+				mScale = TodCommon.TodAnimateCurveFloat(0, 400, mDisappearCounter, 1.01f, 2f, TodCurves.EaseInOut);
+				mPosX = TodCommon.TodAnimateCurveFloat(0, 350, mDisappearCounter, mCollectX, num, TodCurves.EaseOut);
+				mPosY = TodCommon.TodAnimateCurveFloat(0, 350, mDisappearCounter, mCollectY, num2, TodCurves.EaseOut);
 				return;
 			}
 			float num3 = Math.Abs(mPosX - num);
@@ -1303,18 +1303,18 @@ namespace Lawn
 				{
 					if (!mBoard.mHelpDisplayed[64])
 					{
-						if (mType == CoinType.COIN_PRESENT_MINIGAMES)
+						if (mType == CoinType.PresentMinigames)
 						{
-							mBoard.DisplayAdvice("[UNLOCKED_MINIGAMES]", MessageStyle.MESSAGE_STYLE_HINT_TALL_UNLOCKMESSAGE, AdviceType.ADVICE_UNLOCKED_MODE);
+							mBoard.DisplayAdvice("[UNLOCKED_MINIGAMES]", MessageStyle.HintTallUnlockmessage, AdviceType.UnlockedMode);
 							return;
 						}
-						if (mType == CoinType.COIN_PRESENT_PUZZLE_MODE)
+						if (mType == CoinType.PresentPuzzleMode)
 						{
-							mBoard.DisplayAdvice("[UNLOCKED_PUZZLE_MODE]", MessageStyle.MESSAGE_STYLE_HINT_TALL_UNLOCKMESSAGE, AdviceType.ADVICE_UNLOCKED_MODE);
+							mBoard.DisplayAdvice("[UNLOCKED_PUZZLE_MODE]", MessageStyle.HintTallUnlockmessage, AdviceType.UnlockedMode);
 							return;
 						}
 					}
-					else if (mBoard.mHelpIndex != AdviceType.ADVICE_UNLOCKED_MODE || !mBoard.mAdvice.IsBeingDisplayed())
+					else if (mBoard.mHelpIndex != AdviceType.UnlockedMode || !mBoard.mAdvice.IsBeingDisplayed())
 					{
 						Die();
 					}
