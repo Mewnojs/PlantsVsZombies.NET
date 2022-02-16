@@ -781,6 +781,8 @@ namespace Lawn
                 mApp.mPlayerInfo.mHasUnlockedPuzzleMode = true;
                 mApp.mPlayerInfo.mHasUnlockedSurvivalMode = true;
                 mApp.mPlayerInfo.mMiniGamesUnlocked = 19;
+                mApp.mPlayerInfo.mVasebreakerUnlocked = 10;
+                mApp.mPlayerInfo.mIZombieUnlocked = 10;
                 for (int i = 0; i < 200; i++)
                 {
                     GameMode gameMode = i + GameMode.SurvivalNormalStage1;

@@ -71,7 +71,7 @@ namespace Sexy
             GraphicsState.mGraphicsDeviceManager.DeviceCreated += new EventHandler<EventArgs>(this.graphics_DeviceCreated);
             GraphicsState.mGraphicsDeviceManager.DeviceReset += new EventHandler<EventArgs>(this.graphics_DeviceReset);
             GraphicsState.mGraphicsDeviceManager.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(this.mGraphicsDeviceManager_PreparingDeviceSettings);
-            base.TargetElapsedTime = TimeSpan.FromSeconds(1.0/30);
+            base.TargetElapsedTime = TimeSpan.FromSeconds(0.01);
             base.Exiting += new EventHandler<EventArgs>(this.Main_Exiting);
 
             //base.Window.AllowUserResizing = true;

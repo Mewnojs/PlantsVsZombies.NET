@@ -117,10 +117,12 @@ namespace Lawn
                 mTitleStateDuration = 0;
                 mTitleStateCounter = 100;
             }
-            mTitleAge += 3;
+            //mTitleAge += 3;
+            mTitleAge++;
             if (mTitleStateCounter > 0)
             {
-                mTitleStateCounter -= 3;
+                //mTitleStateCounter -= 3;
+                mTitleStateCounter--;
             }
             if (mTitleState == TitleState.PopcapLogo)
             {
