@@ -117,7 +117,7 @@ namespace Sexy.TodLib
             }
         }
 
-        public void Update()
+        public void Update()//3update
         {
             foreach (TodParticleSystem todParticleSystem in mParticleHolder.mParticleSystems)
             {

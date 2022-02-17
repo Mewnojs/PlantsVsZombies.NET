@@ -100,7 +100,7 @@ namespace Lawn
             mIcon = theIcon;
         }
 
-        public void Update()
+        public void Update()//3update
         {
             if (mApp.mBoard == null || mApp.mBoard.mPaused)
             {
@@ -108,8 +108,10 @@ namespace Lawn
             }
             if (mDuration < 10000 && mDuration > 0)
             {
-                mDuration -= 3;
-                if (mDuration >= 0 && mDuration < 3)
+                //mDuration -= 3;
+                mDuration--;
+                //if (mDuration >= 0 && mDuration < 3)
+                if (mDuration == 0)
                 {
                     mMessageStyle = MessageStyle.Off;
                     mIcon = null;
@@ -147,7 +149,8 @@ namespace Lawn
                 }
                 else
                 {
-                    if (mDuration >= mSlideOffTime && mDuration < mSlideOffTime + 3)
+                    //if (mDuration >= mSlideOffTime && mDuration < mSlideOffTime + 3)
+                    if (mDuration == mSlideOffTime)
                     {
                         reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_leave, ReanimLoopType.PlayOnceAndHold, 0, 0f);
                     }
@@ -352,10 +355,11 @@ namespace Lawn
             mIcon = null;
         }
 
-        public bool IsBeingDisplayed()
-        {
-            return mDuration < 0 || mDuration >= 3;
-        }
+		public bool IsBeingDisplayed()
+		{
+			//return mDuration < 0 || mDuration >= 3;
+			return mDuration != 0;
+		}
 
         public Font GetFont()
         {

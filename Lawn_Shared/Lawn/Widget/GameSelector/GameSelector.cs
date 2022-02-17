@@ -441,8 +441,10 @@ namespace Lawn
                 int theNewX = TodCommon.TodAnimateCurve(75, 0, mSlideCounter, mStartX, mDestX, TodCurves.EaseInOut);
                 int theNewY = TodCommon.TodAnimateCurve(75, 0, mSlideCounter, mStartY, mDestY, TodCurves.EaseInOut);
                 Move(theNewX, theNewY);
-                mSlideCounter -= 3;
-                if (mSlideCounter >= 0 && mSlideCounter < 3)
+                //mSlideCounter -= 3;
+                mSlideCounter -= 1;
+                //if (mSlideCounter >= 0 && mSlideCounter < 3)
+                if (mSlideCounter == 0)
                 {
                     if (mX == -Constants.MAIN_MENU_ORIGIN_X && mY == 0 && mSignState == SelectorSignState.Up)
                     {
@@ -468,13 +470,15 @@ namespace Lawn
                 }
                 mQuickplayScrollWidget.Move(mQuickplayScrollWidget.mX, theNewY2);
                 mMiniGamesScrollWidget.Move(mMiniGamesScrollWidget.mX, theNewY2);
-                mQuickplaySlideCounter -= 3;
+                //mQuickplaySlideCounter -= 3;
+                mQuickplaySlideCounter -= 1;
                 if (mQuickplaySlideCounter >= 0 && mQuickplaySlideCounter < 3 && mRetractingQuickplay && (mSlideCounter == 0 || mDestX == -Constants.QUICKPLAY_ORIGIN_X))
                 {
                     PopulateQuickPlayWidget();
                     SlideOutQuickPlayWidget();
                 }
-                else if (mQuickplaySlideCounter >= 0 && mQuickplaySlideCounter < 3) 
+                //else if (mQuickplaySlideCounter >= 0 && mQuickplaySlideCounter < 3) 
+                else if (mQuickplaySlideCounter == 0)
                 {
                     mMiniGamesWidget.RecoverLastPlayedMode();
                 }
@@ -544,7 +548,8 @@ namespace Lawn
             reanimation.Update();
             if (mFadeInCounter > 0)
             {
-                mFadeInCounter -= 3;
+                //mFadeInCounter -= 3;
+                mFadeInCounter -= 1;
             }
         }
 
@@ -780,6 +785,9 @@ namespace Lawn
                 mApp.mPlayerInfo.mHasUnlockedMinigames = true;
                 mApp.mPlayerInfo.mHasUnlockedPuzzleMode = true;
                 mApp.mPlayerInfo.mHasUnlockedSurvivalMode = true;
+                mApp.mPlayerInfo.mMiniGamesUnlocked = 19;
+                mApp.mPlayerInfo.mVasebreakerUnlocked = 10;
+                mApp.mPlayerInfo.mIZombieUnlocked = 10;
                 for (int i = 0; i < 200; i++)
                 {
                     GameMode gameMode = i + GameMode.SurvivalNormalStage1;

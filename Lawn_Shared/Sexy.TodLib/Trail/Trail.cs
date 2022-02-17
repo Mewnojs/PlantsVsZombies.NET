@@ -20,19 +20,19 @@ namespace Sexy.TodLib
             }
         }
 
-        public void Update()
-        {
-            mTrailAge++;
-            if (mTrailAge >= mTrailDuration)
-            {
-                if (TodCommon.TestBit((uint)mDefinition.mTrailFlags, 1))
-                {
-                    mTrailAge = 0;
-                    return;
-                }
-                mDead = true;
-            }
-        }
+		public void Update()//1update no support
+		{
+			mTrailAge++;
+			if (mTrailAge >= mTrailDuration)
+			{
+				if (TodCommon.TestBit((uint)mDefinition.mTrailFlags, 1))
+				{
+					mTrailAge = 0;
+					return;
+				}
+				mDead = true;
+			}
+		}
 
         public void Draw(Graphics g)
         {

@@ -117,7 +117,7 @@ namespace Sexy.TodLib
             Update();
         }
 
-        public void Update()
+        public void Update()//1update
         {
             if (mDead)
             {

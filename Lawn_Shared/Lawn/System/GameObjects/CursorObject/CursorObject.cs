@@ -33,7 +33,7 @@ namespace Lawn
             mHeight = 80;
         }
 
-        public void Update()
+        public void Update()//3update
         {
             if (mApp.mGameScene != GameScenes.Playing && !mBoard.mCutScene.IsInShovelTutorial())
             {

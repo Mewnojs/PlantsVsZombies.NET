@@ -16,7 +16,7 @@ namespace Lawn
             mVisible = false;
         }
 
-        public void Update()
+        public void Update()//3Update
         {
             if (mApp.mGameScene == GameScenes.Playing && mApp.mWidgetManager.mMouseIn)
             {

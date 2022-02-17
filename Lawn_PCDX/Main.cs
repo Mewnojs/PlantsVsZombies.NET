@@ -13,33 +13,33 @@ using System.Collections.Generic;
 
 namespace Sexy
 {
-    public class Main : Game
-    {
-        public Main()
-        {
-            Main.SetupTileSchedule();
-            Main.graphics = Graphics.GetNew(this);
-            Main.SetLowMem();
-            Main.graphics.IsFullScreen = false;
-            Guide.SimulateTrialMode = false;
-            Main.graphics.PreferredBackBufferWidth = 800;
-            Main.graphics.PreferredBackBufferHeight = 480;
-            GraphicsState.mGraphicsDeviceManager.SupportedOrientations = Constants.SupportedOrientations;
-            GraphicsState.mGraphicsDeviceManager.DeviceCreated += new EventHandler<EventArgs>(graphics_DeviceCreated);
-            GraphicsState.mGraphicsDeviceManager.DeviceReset += new EventHandler<EventArgs>(graphics_DeviceReset);
-            GraphicsState.mGraphicsDeviceManager.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(mGraphicsDeviceManager_PreparingDeviceSettings);
-            base.TargetElapsedTime = TimeSpan.FromSeconds(0.03333333333333333);
-            base.Exiting += new EventHandler<EventArgs>(Main_Exiting);
-            Window.AllowUserResizing = true;
-            base.Window.ClientSizeChanged += new EventHandler<EventArgs>(this.OnResize);
-            //PhoneApplicationService.Current.UserIdleDetectionMode = 0;
-            //PhoneApplicationService.Current.Launching += new EventHandler<LaunchingEventArgs>(this.Game_Launching);
-            //PhoneApplicationService.Current.Activated += new EventHandler<ActivatedEventArgs>(this.Game_Activated);
-            //PhoneApplicationService.Current.Closing += new EventHandler<ClosingEventArgs>(this.Current_Closing);
-            //PhoneApplicationService.Current.Deactivated += new EventHandler<DeactivatedEventArgs>(this.Current_Deactivated);
-            IsMouseVisible = true;
-            //IsFixedTimeStep = false;
-        }
+	public class Main : Game
+	{
+		public Main()
+		{
+			Main.SetupTileSchedule();
+			Main.graphics = Graphics.GetNew(this);
+			Main.SetLowMem();
+			Main.graphics.IsFullScreen = false;
+			Guide.SimulateTrialMode = false;
+			Main.graphics.PreferredBackBufferWidth = 800;
+			Main.graphics.PreferredBackBufferHeight = 480;
+			GraphicsState.mGraphicsDeviceManager.SupportedOrientations = Constants.SupportedOrientations;
+			GraphicsState.mGraphicsDeviceManager.DeviceCreated += new EventHandler<EventArgs>(graphics_DeviceCreated);
+			GraphicsState.mGraphicsDeviceManager.DeviceReset += new EventHandler<EventArgs>(graphics_DeviceReset);
+			GraphicsState.mGraphicsDeviceManager.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(mGraphicsDeviceManager_PreparingDeviceSettings);
+			base.TargetElapsedTime = TimeSpan.FromSeconds(0.01);
+			base.Exiting += new EventHandler<EventArgs>(Main_Exiting);
+			Window.AllowUserResizing = true;
+			base.Window.ClientSizeChanged += new EventHandler<EventArgs>(this.OnResize);
+			//PhoneApplicationService.Current.UserIdleDetectionMode = 0;
+			//PhoneApplicationService.Current.Launching += new EventHandler<LaunchingEventArgs>(this.Game_Launching);
+			//PhoneApplicationService.Current.Activated += new EventHandler<ActivatedEventArgs>(this.Game_Activated);
+			//PhoneApplicationService.Current.Closing += new EventHandler<ClosingEventArgs>(this.Current_Closing);
+			//PhoneApplicationService.Current.Deactivated += new EventHandler<DeactivatedEventArgs>(this.Current_Deactivated);
+			IsMouseVisible = true;
+			//IsFixedTimeStep = false;
+		}
 
         public void OnResize(object sender, EventArgs e)
         {

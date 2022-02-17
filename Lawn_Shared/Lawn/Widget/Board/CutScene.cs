@@ -358,13 +358,13 @@ namespace Lawn
             }
         }
 
-        public void Update(bool updateDave)
+        public void Update(/*bool updateDave*/)//1update
         {
             if (mPreUpdatingBoard)
             {
                 return;
             }
-            if (IsShowingCrazyDave() && mApp.mGameScene == GameScenes.LevelIntro && (!mBoard.mPaused || mApp.mGameMode != GameMode.Upsell) && updateDave)
+            if (IsShowingCrazyDave() && mApp.mGameScene == GameScenes.LevelIntro && (!mBoard.mPaused || mApp.mGameMode != GameMode.Upsell)/* && updateDave*/)
             {
                 mApp.UpdateCrazyDave();
             }

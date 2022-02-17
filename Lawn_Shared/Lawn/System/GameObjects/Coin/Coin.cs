@@ -442,14 +442,16 @@ namespace Lawn
             mFadeCount = 15;
         }
 
-        public void Update()
+        public void Update()//3update
         {
-            mCoinAge += 3;
+            //mCoinAge += 3;
+            mCoinAge++;
             if (mApp.mGameScene != GameScenes.Playing && mApp.mGameScene != GameScenes.Award && mBoard != null && !mBoard.mCutScene.ShouldRunUpsellBoard())
             {
                 return;
             }
-            if (mFadeCount < 0 || mFadeCount >= 3)
+            //if (mFadeCount < 0 || mFadeCount >= 3)
+            if (mFadeCount != 0)
             {
                 UpdateFade();
             }
@@ -923,14 +925,16 @@ namespace Lawn
             return 0;
         }
 
-        private void UpdateFade()
+        private void UpdateFade()//3update
         {
             if (!mApp.IsEndlessIZombie(mApp.mGameMode) && !mApp.IsEndlessScaryPotter(mApp.mGameMode) && mType != CoinType.Note && IsLevelAward())
             {
                 return;
             }
-            mFadeCount -= 1;
-            if (mFadeCount >= 0 && mFadeCount < 3)
+            //mFadeCount -= 3;
+            mFadeCount--;
+            //if (mFadeCount >= 0 && mFadeCount < 3)
+            if (mFadeCount == 0)
             {
                 if (mType == CoinType.Silver || mType == CoinType.Gold)
                 {
@@ -953,7 +957,7 @@ namespace Lawn
             }
         }
 
-        private void UpdateFall()
+        private void UpdateFall()//3update
         {
             if (IsPresentWithAdvice())
             {
@@ -965,10 +969,12 @@ namespace Lawn
             }
             if (mCoinMotion == CoinMotion.FromPresent)
             {
-                mPosX += 3f * mVelX;
-                mPosY += 3f * mVelY;
-                mVelX *= 0.857f;
-                mVelY *= 0.857f;
+                mPosX += /*3f * */mVelX;
+                mPosY += /*3f * */mVelY;
+                //mVelX *= 0.857f;
+                mVelX *= 0.95f;
+                //mVelY *= 0.857f;
+                mVelY *= 0.95f;
                 if (mCoinAge >= 80)
                 {
                     Collect();
@@ -976,16 +982,16 @@ namespace Lawn
             }
             else if (mPosY + mVelY < mGroundY)
             {
-                mPosY += 3f * mVelY;
+                mPosY += /*3f * */mVelY;
                 if (mCoinMotion == CoinMotion.FromPlant)
                 {
-                    mVelY += 3f * Constants.InvertAndScale(0.09f);
+                    mVelY += /*3f * */Constants.InvertAndScale(0.09f);
                 }
                 else if (mCoinMotion == CoinMotion.Coin || mCoinMotion == CoinMotion.FromBoss)
                 {
-                    mVelY += 3f * Constants.InvertAndScale(0.15f);
+                    mVelY += /*3f * */Constants.InvertAndScale(0.15f);
                 }
-                mPosX += 3f * mVelX;
+                mPosX += /*3f * */mVelX;
                 if (mPosX > 800 - mWidth && mCoinMotion != CoinMotion.FromBoss)
                 {
                     mPosX = 800 - mWidth;
@@ -1077,7 +1083,8 @@ namespace Lawn
                 mPosX = TodCommon.FloatRoundToInt(mPosX);
                 if ((mApp.mGameMode != GameMode.ChallengeLastStand || mBoard == null || mBoard.mChallenge.mChallengeState == ChallengeState.LastStandOnslaught) && !IsLevelAward() && !IsPresentWithAdvice())
                 {
-                    mDisappearCounter += 3;
+                    //mDisappearCounter += 3;
+                    mDisappearCounter++;
                     int disappearTime = GetDisappearTime();
                     if (mDisappearCounter >= disappearTime)
                     {
@@ -1090,7 +1097,8 @@ namespace Lawn
                 float sunScale = GetSunScale();
                 if (mScale < sunScale)
                 {
-                    mScale += 0.06f;
+                    //mScale += 0.06f;
+                    mScale += 0.02f;
                     return;
                 }
                 mScale = sunScale;
@@ -1205,120 +1213,127 @@ namespace Lawn
             }
         }
 
-        public void UpdateCollected()
-        {
-            int num;
-            int num2;
-            if (IsSun())
-            {
-                num = Constants.Board_SunCoin_CollectTarget.X;
-                num2 = Constants.Board_SunCoin_CollectTarget.Y;
-            }
-            else if (IsMoney())
-            {
-                num = 130 - Constants.Board_Offset_AspectRatio_Correction;
-                num2 = 550;
-                if (mApp.GetDialog(4) != null)
-                {
-                    num = 662;
-                    num2 = 546;
-                }
-                else if (mApp.mCrazyDaveState != CrazyDaveState.Off || mApp.mGameMode == GameMode.ChallengeZenGarden)
-                {
-                    num = Constants.ZenGarden_MoneyTarget_X;
-                }
-            }
-            else if (IsPresentWithAdvice())
-            {
-                num = 35;
-                num2 = 487;
-            }
-            else
-            {
-                if (mType == CoinType.AwardPresent || mType == CoinType.PresentPlant)
-                {
-                    mDisappearCounter += 3;
-                    if (mDisappearCounter >= 200)
-                    {
-                        StartFade();
-                    }
-                    return;
-                }
-                if (!IsLevelAward())
-                {
-                    if (mType == CoinType.UsableSeedPacket)
-                    {
-                        mDisappearCounter += 3;
-                    }
-                    return;
-                }
-                num = Constants.Coin_AwardSeedpacket_Pos.X - mWidth / 2;
-                num2 = Constants.Coin_AwardSeedpacket_Pos.Y - mHeight / 2;
-                mDisappearCounter += 3;
-            }
-            if (IsLevelAward())
-            {
-                mScale = TodCommon.TodAnimateCurveFloat(0, 400, mDisappearCounter, 1.01f, 2f, TodCurves.EaseInOut);
-                mPosX = TodCommon.TodAnimateCurveFloat(0, 350, mDisappearCounter, mCollectX, num, TodCurves.EaseOut);
-                mPosY = TodCommon.TodAnimateCurveFloat(0, 350, mDisappearCounter, mCollectY, num2, TodCurves.EaseOut);
-                return;
-            }
-            float num3 = Math.Abs(mPosX - num);
-            float num4 = Math.Abs(mPosY - num2);
-            if (mPosX > num)
-            {
-                mPosX -= num3 / 7f;
-            }
-            else if (mPosX < num)
-            {
-                mPosX += num3 / 7f;
-            }
-            if (mPosY > num2)
-            {
-                mPosY -= num4 / 7f;
-            }
-            else if (mPosY < num2)
-            {
-                mPosY += num4 / 7f;
-            }
-            mCollectionDistance = (float)Math.Sqrt(num4 * num4 + num3 * num3);
-            if (IsPresentWithAdvice())
-            {
-                if (mCollectionDistance < Constants.InvertAndScale(15f))
-                {
-                    if (!mBoard.mHelpDisplayed[64])
-                    {
-                        if (mType == CoinType.PresentMinigames)
-                        {
-                            mBoard.DisplayAdvice("[UNLOCKED_MINIGAMES]", MessageStyle.HintTallUnlockmessage, AdviceType.UnlockedMode);
-                            return;
-                        }
-                        if (mType == CoinType.PresentPuzzleMode)
-                        {
-                            mBoard.DisplayAdvice("[UNLOCKED_PUZZLE_MODE]", MessageStyle.HintTallUnlockmessage, AdviceType.UnlockedMode);
-                            return;
-                        }
-                    }
-                    else if (mBoard.mHelpIndex != AdviceType.UnlockedMode || !mBoard.mAdvice.IsBeingDisplayed())
-                    {
-                        Die();
-                    }
-                }
-                return;
-            }
-            float num5 = 8f;
-            if (IsMoney())
-            {
-                num5 = 12f;
-            }
-            if (mCollectionDistance < num5 && !mScored)
-            {
-                ScoreCoin();
-                mScored = true;
-            }
-            mScale = TodCommon.ClampFloat(mCollectionDistance * 0.05f, 0.5f, 1f);
-            mScale *= GetSunScale();
-        }
+		public void UpdateCollected()//3update
+		{
+			int num;
+			int num2;
+			if (IsSun())
+			{
+				num = Constants.Board_SunCoin_CollectTarget.X;
+				num2 = Constants.Board_SunCoin_CollectTarget.Y;
+			}
+			else if (IsMoney())
+			{
+				num = 130 - Constants.Board_Offset_AspectRatio_Correction;
+				num2 = 550;
+				if (mApp.GetDialog(4) != null)
+				{
+					num = 662;
+					num2 = 546;
+				}
+				else if (mApp.mCrazyDaveState != CrazyDaveState.Off || mApp.mGameMode == GameMode.ChallengeZenGarden)
+				{
+					num = Constants.ZenGarden_MoneyTarget_X;
+				}
+			}
+			else if (IsPresentWithAdvice())
+			{
+				num = 35;
+				num2 = 487;
+			}
+			else
+			{
+				if (mType == CoinType.AwardPresent || mType == CoinType.PresentPlant)
+				{
+					//mDisappearCounter += 3;
+					mDisappearCounter++;
+					if (mDisappearCounter >= 200)
+					{
+						StartFade();
+					}
+					return;
+				}
+				if (!IsLevelAward())
+				{
+					if (mType == CoinType.UsableSeedPacket)
+					{
+						//mDisappearCounter += 3;
+						mDisappearCounter++;
+					}
+					return;
+				}
+				num = Constants.Coin_AwardSeedpacket_Pos.X - mWidth / 2;
+				num2 = Constants.Coin_AwardSeedpacket_Pos.Y - mHeight / 2;
+				//mDisappearCounter += 3;
+				mDisappearCounter++;
+			}
+			if (IsLevelAward())
+			{
+				mScale = TodCommon.TodAnimateCurveFloat(0, 400, mDisappearCounter, 1.01f, 2f, TodCurves.EaseInOut);
+				mPosX = TodCommon.TodAnimateCurveFloat(0, 350, mDisappearCounter, mCollectX, num, TodCurves.EaseOut);
+				mPosY = TodCommon.TodAnimateCurveFloat(0, 350, mDisappearCounter, mCollectY, num2, TodCurves.EaseOut);
+				return;
+			}
+			float num3 = Math.Abs(mPosX - num);
+			float num4 = Math.Abs(mPosY - num2);
+			if (mPosX > num)
+			{
+				//mPosX -= num3 / 7f;
+				mPosX -= num3 / 21f;
+			}
+			else if (mPosX < num)
+			{
+				//mPosX += num3 / 7f;
+				mPosX += num3 / 21f;
+			}
+			if (mPosY > num2)
+			{
+				//mPosY -= num4 / 7f;
+				mPosY -= num4 / 21f;
+			}
+			else if (mPosY < num2)
+			{
+				//mPosY += num4 / 7f;
+				mPosY += num4 / 21f;
+			}
+			mCollectionDistance = (float)Math.Sqrt(num4 * num4 + num3 * num3);
+			if (IsPresentWithAdvice())
+			{
+				if (mCollectionDistance < Constants.InvertAndScale(15f))
+				{
+					if (!mBoard.mHelpDisplayed[64])
+					{
+						if (mType == CoinType.PresentMinigames)
+						{
+							mBoard.DisplayAdvice("[UNLOCKED_MINIGAMES]", MessageStyle.HintTallUnlockmessage, AdviceType.UnlockedMode);
+							return;
+						}
+						if (mType == CoinType.PresentPuzzleMode)
+						{
+							mBoard.DisplayAdvice("[UNLOCKED_PUZZLE_MODE]", MessageStyle.HintTallUnlockmessage, AdviceType.UnlockedMode);
+							return;
+						}
+					}
+					else if (mBoard.mHelpIndex != AdviceType.UnlockedMode || !mBoard.mAdvice.IsBeingDisplayed())
+					{
+						Die();
+					}
+				}
+				return;
+			}
+			float num5 = 8f;
+			if (IsMoney())
+			{
+				num5 = 12f;
+			}
+			if (mCollectionDistance < num5 && !mScored)
+			{
+				ScoreCoin();
+				mScored = true;
+			}
+			mScale = TodCommon.ClampFloat(mCollectionDistance * 0.05f, 0.5f, 1f);
+			mScale *= GetSunScale();
+		}
 
         public SexyColor GetColor()
         {
