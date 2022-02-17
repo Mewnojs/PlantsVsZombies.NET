@@ -104,7 +104,15 @@ namespace Sexy
             ReportAchievement.Initialise();
             IronPyInteractive.Serve();
             base.Initialize();
-            
+            //
+            // IME Support
+            GlobalStaticVars.gSexyAppBase.mWidgetManager.mIMEHandler = new MonoGame.IMEHelper.SdlIMEHandler(this);
+            GlobalStaticVars.gSexyAppBase.mWidgetManager.mIMEHandler.TextInput += (s, e) =>
+            {
+                Debug.OutputDebug<string>(String.Format("input:{0}", e.Character));
+                GlobalStaticVars.gSexyAppBase.mWidgetManager.KeyChar(new SexyChar(e.Character));
+            };
+
         }
 
         protected override void OnExiting(object sender, EventArgs args) 
