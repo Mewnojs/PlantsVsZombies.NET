@@ -118,11 +118,11 @@ namespace Lawn
                 mTitleStateCounter = 100;
             }
             //mTitleAge += 3;
-            mTitleAge += 1;
+            mTitleAge++;
             if (mTitleStateCounter > 0)
             {
                 //mTitleStateCounter -= 3;
-                mTitleStateCounter -= 1;
+                mTitleStateCounter--;
             }
             if (mTitleState == TitleState.PopcapLogo)
             {
