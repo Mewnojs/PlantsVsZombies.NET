@@ -10556,11 +10556,11 @@ namespace Lawn
 
         public void BungeeDropPlant()
         {
-            if (mZombiePhase != ZombiePhase.BungeeGrabbing)
+            if (mZombiePhase != ZombiePhase.BungeeGrabbing) // 当蹦极没在抓取状态时，没有执行的必要
             {
                 return;
             }
-            Plant plant = mBoard.mPlants[mBoard.mPlants.IndexOf(mTargetPlantID)];
+            Plant plant = mBoard.mPlants.Contains(mTargetPlantID) ? mTargetPlantID : null;   //原为 Plant plant = mBoard.mPlants[mBoard.mPlants.IndexOf(mTargetPlantID)] ，由于导致崩溃问题而修改逻辑
             if (plant == null)
             {
                 return;
@@ -10569,7 +10569,7 @@ namespace Lawn
             {
                 plant.mOnBungeeState = PlantOnBungeeState.NotOnBungee;
             }
-            else if (plant.mOnBungeeState == PlantOnBungeeState.RisingWithBungee)
+            else if (plant.mOnBungeeState == PlantOnBungeeState.RisingWithBungee) // 当植物已经被偷走，植物消失
             {
                 plant.Die();
             }

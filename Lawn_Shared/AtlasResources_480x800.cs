@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Sexy;
 
-internal class AtlasResources_480x800 : AtlasResources
+public/*internal*/ class AtlasResources_480x800 : AtlasResources
 {
     public override void UnpackDaveAtlasImages()
     {
@@ -58,6 +59,7 @@ internal class AtlasResources_480x800 : AtlasResources
             new UNPACK_INFO(AtlasResources.IMAGE_REANIM_CRAZYDAVE_OUTERFINGER4, 184, 413, 25, 23, 1, 1, AnimType.AnimType_None, 0, 0, 0),
             new UNPACK_INFO(AtlasResources.IMAGE_REANIM_CRAZYDAVE_EYEBROW, 635, 279, 24, 14, 1, 1, AnimType.AnimType_None, 0, 0, 0)
         };
+        mArrays["Dave"] = array;
         for (int i = 0; i < array.Length; i++)
         {
             array[i].mpImage = new Image(Resources.IMAGE_DAVE, array[i].mX, array[i].mY, array[i].mWidth, array[i].mHeight);
@@ -197,6 +199,7 @@ internal class AtlasResources_480x800 : AtlasResources
             new UNPACK_INFO(AtlasResources.IMAGE_ALMANAC_PLANTS_BOTTOMGRADIENT, 967, 68, 15, 15, 1, 1, AnimType.AnimType_None, 0, 0, 0),
             new UNPACK_INFO(AtlasResources.IMAGE_ALMANAC_PLANTS_TOPGRADIENT, 984, 68, 15, 15, 1, 1, AnimType.AnimType_None, 0, 0, 0)
         };
+        mArrays["AlmanacUI"] = array;
         for (int i = 0; i < array.Length; i++)
         {
             array[i].mpImage = new Image(Resources.IMAGE_ALMANACUI, array[i].mX, array[i].mY, array[i].mWidth, array[i].mHeight);
@@ -339,6 +342,7 @@ internal class AtlasResources_480x800 : AtlasResources
             new UNPACK_INFO(AtlasResources.IMAGE_ZOMBIE_BOSS_FIREBALL_ADDITIVEPARTICLE, 1013, 1, 9, 9, 1, 1, AnimType.AnimType_None, 0, 0, 0),
             new UNPACK_INFO(AtlasResources.IMAGE_WHITEPIXEL, 1013, 12, 2, 2, 1, 1, AnimType.AnimType_None, 0, 0, 0)
         };
+        mArrays["Particles"] = array;
         for (int i = 0; i < array.Length; i++)
         {
             array[i].mpImage = new Image(Resources.IMAGE_PARTICLES, array[i].mX, array[i].mY, array[i].mWidth, array[i].mHeight);
@@ -646,6 +650,7 @@ internal class AtlasResources_480x800 : AtlasResources
             new UNPACK_INFO(AtlasResources.IMAGE_REANIM_ZOMBIE_CHARRED_GARGANTUAR_IMPBLINK1, 2031, 177, 15, 8, 1, 1, AnimType.AnimType_None, 0, 0, 0),
             new UNPACK_INFO(AtlasResources.IMAGE_REANIM_ZOMBIE_CHARRED_GARGANTUAR_IMPBLINK2, 2031, 187, 15, 8, 1, 1, AnimType.AnimType_None, 0, 0, 0)
         };
+        mArrays["CharredZombies"] = array;
         for (int i = 0; i < array.Length; i++)
         {
             array[i].mpImage = new Image(Resources.IMAGE_CHARREDZOMBIES, array[i].mX, array[i].mY, array[i].mWidth, array[i].mHeight);
@@ -1996,6 +2001,7 @@ internal class AtlasResources_480x800 : AtlasResources
             new UNPACK_INFO(AtlasResources.IMAGE_REANIM_CACTUS_MOUTH, 2043, 14, 2, 11, 1, 1, AnimType.AnimType_None, 0, 0, 0),
             new UNPACK_INFO(AtlasResources.IMAGE_REANIM_TORCHWOOD_SPARK, 2043, 27, 4, 5, 1, 1, AnimType.AnimType_None, 0, 0, 0)
         };
+        mArrays["PlantsZombies"] = array;
         for (int i = 0; i < array.Length; i++)
         {
             array[i].mpImage = new Image(Resources.IMAGE_PLANTSZOMBIES, array[i].mX, array[i].mY, array[i].mWidth, array[i].mHeight);
@@ -4174,6 +4180,7 @@ internal class AtlasResources_480x800 : AtlasResources
             new UNPACK_INFO(AtlasResources.IMAGE_GRAD_LEFT_TO_RIGHT, 764, 369, 98, 5, 1, 1, AnimType.AnimType_None, 0, 0, 0),
             new UNPACK_INFO(AtlasResources.IMAGE_GRAD_TOP_TO_BOTTOM, 981, 106, 3, 60, 1, 1, AnimType.AnimType_None, 0, 0, 0)
         };
+        mArrays["SeedAtlas"] = array;
         for (int i = 0; i < array.Length; i++)
         {
             array[i].mpImage = new Image(Resources.IMAGE_SEEDATLAS, array[i].mX, array[i].mY, array[i].mWidth, array[i].mHeight);
@@ -4278,6 +4285,7 @@ internal class AtlasResources_480x800 : AtlasResources
             new UNPACK_INFO(AtlasResources.IMAGE_QUICKPLAY_WACK, 561, 411, 280, 205, 1, 1, AnimType.AnimType_None, 0, 0, 0),
             new UNPACK_INFO(AtlasResources.IMAGE_QUICKPLAY_ZOMBOSS, 1, 616, 280, 205, 1, 1, AnimType.AnimType_None, 0, 0, 0)
         };
+        mArrays["Quickplay"] = array;
         for (int i = 0; i < array.Length; i++)
         {
             array[i].mpImage = new Image(Resources.IMAGE_QUICKPLAY, array[i].mX, array[i].mY, array[i].mWidth, array[i].mHeight);
@@ -4322,6 +4330,7 @@ internal class AtlasResources_480x800 : AtlasResources
             new UNPACK_INFO(AtlasResources.IMAGE_REANIM_SPROUT_PETAL, 485, 51, 26, 20, 1, 1, AnimType.AnimType_None, 0, 0, 0),
             new UNPACK_INFO(AtlasResources.IMAGE_REANIM_LOAD_POTATOMINE_ROCK1, 474, 108, 15, 15, 1, 1, AnimType.AnimType_None, 0, 0, 0)
         };
+        mArrays["Loading"] = array;
         for (int i = 0; i < array.Length; i++)
         {
             array[i].mpImage = new Image(Resources.IMAGE_LOADING, array[i].mX, array[i].mY, array[i].mWidth, array[i].mHeight);
@@ -4394,6 +4403,7 @@ internal class AtlasResources_480x800 : AtlasResources
             new UNPACK_INFO(AtlasResources.IMAGE_BLANK, 971, 213, 46, 14, 1, 1, AnimType.AnimType_None, 0, 0, 0),
             new UNPACK_INFO(AtlasResources.IMAGE_SCROLL_INDICATOR, 838, 175, 17, 17, 1, 1, AnimType.AnimType_None, 0, 0, 0)
         };
+        mArrays["Dialog"] = array;
         for (int i = 0; i < array.Length; i++)
         {
             array[i].mpImage = new Image(Resources.IMAGE_DIALOG, array[i].mX, array[i].mY, array[i].mWidth, array[i].mHeight);
@@ -4560,6 +4570,7 @@ internal class AtlasResources_480x800 : AtlasResources
             new UNPACK_INFO(AtlasResources.IMAGE_CACHED_PLANT_08, 996, 1, 27, 27, 1, 1, AnimType.AnimType_None, 0, 0, 0),
             new UNPACK_INFO(AtlasResources.IMAGE_CACHED_MARIGOLD, 996, 30, 17, 27, 1, 1, AnimType.AnimType_None, 0, 0, 0)
         };
+        mArrays["Cached"] = array;
         for (int i = 0; i < array.Length; i++)
         {
             array[i].mpImage = new Image(Resources.IMAGE_CACHED, array[i].mX, array[i].mY, array[i].mWidth, array[i].mHeight);
@@ -4732,6 +4743,7 @@ internal class AtlasResources_480x800 : AtlasResources
             new UNPACK_INFO(AtlasResources.IMAGE_ZOMBIE_WORM, 855, 159, 109, 98, 1, 1, AnimType.AnimType_None, 0, 0, 0),
             new UNPACK_INFO(AtlasResources.IMAGE_GEMS_LEFT, 964, 1, 53, 59, 1, 1, AnimType.AnimType_None, 0, 0, 0)
         };
+        mArrays["Goodies"] = array;
         for (int i = 0; i < array.Length; i++)
         {
             array[i].mpImage = new Image(Resources.IMAGE_GOODIES, array[i].mX, array[i].mY, array[i].mWidth, array[i].mHeight);
@@ -4839,6 +4851,7 @@ internal class AtlasResources_480x800 : AtlasResources
             new UNPACK_INFO(AtlasResources.IMAGE_REANIM_COIN_GOLD_DOLLAR, 1080, 355, 36, 36, 1, 1, AnimType.AnimType_None, 0, 0, 0),
             new UNPACK_INFO(AtlasResources.IMAGE_REANIM_COIN_SILVER_DOLLAR, 1134, 272, 35, 32, 1, 1, AnimType.AnimType_None, 0, 0, 0)
         };
+        mArrays["Loc_en"] = array;
         for (int i = 0; i < array.Length; i++)
         {
             array[i].mpImage = new Image(Resources.IMAGE_LOC_EN, array[i].mX, array[i].mY, array[i].mWidth, array[i].mHeight);
@@ -5079,6 +5092,7 @@ internal class AtlasResources_480x800 : AtlasResources
             new UNPACK_INFO(AtlasResources.IMAGE_REANIM_ZENGARDEN_PHONOGRAPH_NEEDLE, 1011, 138, 12, 11, 1, 1, AnimType.AnimType_None, 0, 0, 0),
             new UNPACK_INFO(AtlasResources.IMAGE_REANIM_ZEN_SPROUT_BODY2, 320, 144, 9, 11, 1, 1, AnimType.AnimType_None, 0, 0, 0)
         };
+        mArrays["Zengarden"] = array;
         for (int i = 0; i < array.Length; i++)
         {
             array[i].mpImage = new Image(Resources.IMAGE_ZENGARDEN, array[i].mX, array[i].mY, array[i].mWidth, array[i].mHeight);
@@ -5270,6 +5284,7 @@ internal class AtlasResources_480x800 : AtlasResources
             new UNPACK_INFO(AtlasResources.IMAGE_PILE_DAVE_ASTRONAUT_EYEBALLS_B, 892, 200, 11, 10, 1, 1, AnimType.AnimType_None, 0, 0, 0),
             new UNPACK_INFO(AtlasResources.IMAGE_PILE_DAVE_ASTRONAUT_EYEBALLS_A, 904, 200, 11, 8, 1, 1, AnimType.AnimType_None, 0, 0, 0)
         };
+        mArrays["Pile"] = array;
         for (int i = 0; i < array.Length; i++)
         {
             array[i].mpImage = new Image(Resources.IMAGE_PILE, array[i].mX, array[i].mY, array[i].mWidth, array[i].mHeight);
@@ -5403,6 +5418,7 @@ internal class AtlasResources_480x800 : AtlasResources
             new UNPACK_INFO(AtlasResources.IMAGE_MINIGAMES_ZOMBOTANY, 931, 127, 155, 126, 1, 1, AnimType.AnimType_None, 0, 0, 0),
             new UNPACK_INFO(AtlasResources.IMAGE_MINIGAMES_ZOMBOTANY2, 1086, 127, 155, 126, 1, 1, AnimType.AnimType_None, 0, 0, 0)
         };
+        mArrays["MiniGames"] = array;
         for (int i = 0; i < array.Length; i++)
         {
             array[i].mpImage = new Image(Resources.IMAGE_MINIGAMES, array[i].mX, array[i].mY, array[i].mWidth, array[i].mHeight);
@@ -5453,4 +5469,6 @@ internal class AtlasResources_480x800 : AtlasResources
         AtlasResources.IMAGE_MINIGAMES_ZOMBOTANY2 = array[num].mpImage;
         num++;
     }
+
+    public static Dictionary<string, UNPACK_INFO[]> mArrays = new Dictionary<string, UNPACK_INFO[]>();
 }
