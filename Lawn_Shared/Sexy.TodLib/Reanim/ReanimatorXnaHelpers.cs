@@ -228,8 +228,8 @@ namespace Sexy.TodLib
 
         public static int RENDER_GROUP_NORMAL = 0;
 
-		//public static float SECONDS_PER_UPDATE = 0.033333f;
-		public static float SECONDS_PER_UPDATE = 0.01f;
+        //public static float SECONDS_PER_UPDATE = 0.033333f;
+        public static float SECONDS_PER_UPDATE = 0.01f;
 
         public static ReanimatorDefinition[] gReanimatorDefArray = new ReanimatorDefinition[119];
 
