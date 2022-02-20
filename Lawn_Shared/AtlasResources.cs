@@ -1,7 +1,7 @@
 ﻿using System;
 using Sexy;
 
-internal class AtlasResources
+public/*internal*/ class AtlasResources
 {
     public void ExtractResources()
     {

@@ -922,96 +922,96 @@ namespace Lawn
             }
         }
 
-		public void Update()//1update
-		{
-			if (mApp.IsStormyNightLevel())
-			{
-				UpdateStormyNight();
-			}
-			if (mBoard.mPaused)
-			{
-				if (mApp.mGameMode == GameMode.ChallengeBeghouledTwist)
-				{
-					mChallengeGridX = -1;
-					mChallengeGridY = -1;
-				}
-				return;
-			}
-			if (mApp.mGameMode == GameMode.ChallengeRainingSeeds || mApp.IsStormyNightLevel())
-			{
-				UpdateRain();
-			}
-			if (mApp.mGameScene != GameScenes.Playing)
-			{
-				return;
-			}
-			if (mBoard.HasConveyorBeltSeedBank())
-			{
-				UpdateConveyorBelt();
-			}
-			if (mApp.mGameMode == GameMode.ChallengeBeghouled || mApp.mGameMode == GameMode.ChallengeBeghouledTwist)
-			{
-				UpdateBeghouled();
-			}
-			if (mApp.IsScaryPotterLevel())
-			{
-				ScaryPotterUpdate();
-			}
-			if ((mApp.IsScaryPotterLevel() || mApp.IsWhackAZombieLevel()) && mBoard.mSeedBank.mX < 0)
-			{
-				int num = mBoard.mSunMoney + mBoard.CountSunBeingCollected();
-				if (num > 0 || mBoard.mSeedBank.mX > -mBoard.mSeedBank.mWidth)
-				{
-					mBoard.mSeedBank.mX += 2;
-					if (mBoard.mSeedBank.mX > 0)
-					{
-						mBoard.mSeedBank.mX = 0;
-					}
-				}
-			}
-			if (mApp.IsWhackAZombieLevel())
-			{
-				WhackAZombieUpdate();
-			}
-			if (mApp.IsIZombieLevel())
-			{
-				IZombieUpdate();
-			}
-			if (mApp.IsSlotMachineLevel())
-			{
-				UpdateSlotMachine();
-			}
-			if (mApp.mGameMode == GameMode.ChallengeSpeed && speedBoardCounter++ % 3 == 0)
-			{
-				mBoard.UpdateGame();
-			}
-			if (mApp.mGameMode == GameMode.ChallengeRainingSeeds)
-			{
-				UpdateRainingSeeds();
-			}
-			if (mApp.mGameMode == GameMode.ChallengePortalCombat)
-			{
-				UpdatePortalCombat();
-			}
-			if (mApp.IsSquirrelLevel())
-			{
-				SquirrelUpdate();
-			}
-			if (mApp.mGameMode == GameMode.ChallengeIce && mBoard.mMainCounter == 3000)
-			{
-				mApp.PlayFoley(FoleyType.Floop);
-				mApp.PlaySample(Resources.SOUND_LOSEMUSIC);
-			}
-			if (mApp.mGameMode == GameMode.ChallengeLastStand)
-			{
-				LastStandUpate();
-			}
-			Reanimation reanimation = mApp.ReanimationTryToGet(mReanimChallenge);
-			if (reanimation != null && reanimation.mIsAttachment)
-			{
-				reanimation.Update();
-			}
-		}
+        public void Update()//1update
+        {
+            if (mApp.IsStormyNightLevel())
+            {
+                UpdateStormyNight();
+            }
+            if (mBoard.mPaused)
+            {
+                if (mApp.mGameMode == GameMode.ChallengeBeghouledTwist)
+                {
+                    mChallengeGridX = -1;
+                    mChallengeGridY = -1;
+                }
+                return;
+            }
+            if (mApp.mGameMode == GameMode.ChallengeRainingSeeds || mApp.IsStormyNightLevel())
+            {
+                UpdateRain();
+            }
+            if (mApp.mGameScene != GameScenes.Playing)
+            {
+                return;
+            }
+            if (mBoard.HasConveyorBeltSeedBank())
+            {
+                UpdateConveyorBelt();
+            }
+            if (mApp.mGameMode == GameMode.ChallengeBeghouled || mApp.mGameMode == GameMode.ChallengeBeghouledTwist)
+            {
+                UpdateBeghouled();
+            }
+            if (mApp.IsScaryPotterLevel())
+            {
+                ScaryPotterUpdate();
+            }
+            if ((mApp.IsScaryPotterLevel() || mApp.IsWhackAZombieLevel()) && mBoard.mSeedBank.mX < 0)
+            {
+                int num = mBoard.mSunMoney + mBoard.CountSunBeingCollected();
+                if (num > 0 || mBoard.mSeedBank.mX > -mBoard.mSeedBank.mWidth)
+                {
+                    mBoard.mSeedBank.mX += 2;
+                    if (mBoard.mSeedBank.mX > 0)
+                    {
+                        mBoard.mSeedBank.mX = 0;
+                    }
+                }
+            }
+            if (mApp.IsWhackAZombieLevel())
+            {
+                WhackAZombieUpdate();
+            }
+            if (mApp.IsIZombieLevel())
+            {
+                IZombieUpdate();
+            }
+            if (mApp.IsSlotMachineLevel())
+            {
+                UpdateSlotMachine();
+            }
+            if (mApp.mGameMode == GameMode.ChallengeSpeed && speedBoardCounter++ % 3 == 0)
+            {
+                mBoard.UpdateGame();
+            }
+            if (mApp.mGameMode == GameMode.ChallengeRainingSeeds)
+            {
+                UpdateRainingSeeds();
+            }
+            if (mApp.mGameMode == GameMode.ChallengePortalCombat)
+            {
+                UpdatePortalCombat();
+            }
+            if (mApp.IsSquirrelLevel())
+            {
+                SquirrelUpdate();
+            }
+            if (mApp.mGameMode == GameMode.ChallengeIce && mBoard.mMainCounter == 3000)
+            {
+                mApp.PlayFoley(FoleyType.Floop);
+                mApp.PlaySample(Resources.SOUND_LOSEMUSIC);
+            }
+            if (mApp.mGameMode == GameMode.ChallengeLastStand)
+            {
+                LastStandUpate();
+            }
+            Reanimation reanimation = mApp.ReanimationTryToGet(mReanimChallenge);
+            if (reanimation != null && reanimation.mIsAttachment)
+            {
+                reanimation.Update();
+            }
+        }
 
         public void UpdateBeghouled()
         {
@@ -1950,142 +1950,142 @@ namespace Lawn
             return new TRect(Constants.Challenge_SlotMachine_Pos.X, Constants.Challenge_SlotMachine_Pos.Y, Resources.IMAGE_SLOTMACHINE_OVERLAY.mWidth, Resources.IMAGE_SLOTMACHINE_OVERLAY.mHeight);
         }
 
-		public void WhackAZombieSpawning()//3update
-		{
-			if (mBoard.mCurrentWave == mBoard.mNumWaves && mBoard.mZombieCountDown == 0)
-			{
-				return;
-			}
-			//mBoard.mZombieCountDown -= 3;
-			mBoard.mZombieCountDown--;
-			int num = 300;
-			//if (mBoard.mZombieCountDown >= 100 && mBoard.mZombieCountDown < 103 && mBoard.mCurrentWave > 0)
-			if (mBoard.mZombieCountDown == 100 && mBoard.mCurrentWave > 0)
-			{
-				int graveStoneCount = mBoard.GetGraveStoneCount();
-				int num2 = 5;
-				int theGraveCount = Math.Max(1, num2 - graveStoneCount);
-				WhackAZombiePlaceGraves(theGraveCount);
-			}
-			//if (mBoard.mZombieCountDown >= 5 && mBoard.mZombieCountDown < 8)
-			if (mBoard.mZombieCountDown == 5)
-			{
-				mBoard.NextWaveComing();
-			}
-			//if (mBoard.mZombieCountDown >= 0 && mBoard.mZombieCountDown < 3)
-			if (mBoard.mZombieCountDown == 0)
-			{
-				mBoard.mZombieCountDown = 2000;
-				mBoard.mZombieCountDownStart = mBoard.mZombieCountDown;
-				mBoard.mCurrentWave++;
-				if (mBoard.mCurrentWave == mBoard.mNumWaves)
-				{
-					//mChallengeStateCounter = 300;
-					mChallengeStateCounter = 100;
-				}
-				else
-				{
-					//mChallengeStateCounter = 3;
-					mChallengeStateCounter = 1;
-				}
-			}
-			else if (mBoard.mZombieCountDown < 300)
-			{
-				return;
-			}
-			//mChallengeStateCounter -= 3;
-			mChallengeStateCounter--;
-			//if (mChallengeStateCounter < 0 || mChallengeStateCounter >= 3)
-			if (mChallengeStateCounter != 0)
-			{
-				return;
-			}
-			int num3 = TodCommon.ClampInt((mBoard.mCurrentWave - 1) * 6 / 12, 0, 5);
-			int num4 = 1;
-			ZombieType theZombieType = ZombieType.Normal;
-			int num5 = RandomNumbers.NextNumber(100);
-			int num6 = RandomNumbers.NextNumber(100);
-			bool flag = mBoard.mCurrentWave == mBoard.mNumWaves;
-			if (flag)
-			{
-				num4 = 20;
-			}
-			else if (num5 < aTripleChance[num3])
-			{
-				num4 = 3;
-			}
-			else if (num5 < aTripleChance[num3] + aDoubleChance[num3])
-			{
-				num4 = 2;
-			}
-			if (num6 < aPailChance[num3] && num4 < 3)
-			{
-				theZombieType = ZombieType.Pail;
-			}
-			else if (num6 < aPailChance[num3] + aConeChance[num3])
-			{
-				theZombieType = ZombieType.TrafficCone;
-			}
-			int num7 = 0;
-			for (int i = 0; i < Challenge.aGridPicks.Length; i++)
-			{
-				Challenge.aGridPicks[i].Reset();
-			}
-			int num8 = -1;
-			GridItem gridItem = null;
-			while (mBoard.IterateGridItems(ref gridItem, ref num8))
-			{
-				if (gridItem.mGridItemType == GridItemType.Gravestone)
-				{
-					Plant topPlantAt = mBoard.GetTopPlantAt(gridItem.mGridX, gridItem.mGridY, TopPlant.OnlyNormalPosition);
-					if (topPlantAt == null || topPlantAt.mSeedType != SeedType.Gravebuster)
-					{
-						Challenge.aGridPickItemArray[num7] = gridItem;
-						Challenge.aGridPicks[num7].mItem = num7;
-						Challenge.aGridPicks[num7].mWeight = 1;
-						num7++;
-					}
-				}
-			}
-			float theMax = TodCommon.TodAnimateCurve(1, 12, mBoard.mCurrentWave, 1, 3, TodCurves.EaseIn);
-			if (num4 > num7)
-			{
-				num4 = num7;
-			}
-			for (int j = 0; j < num4; j++)
-			{
-				int num9 = (int)TodCommon.TodPickFromWeightedArray(Challenge.aGridPicks, num7);
-				GridItem gridItem2 = Challenge.aGridPickItemArray[num9];
-				Challenge.aGridPicks[num9].mWeight = 0;
-				if (flag)
-				{
-					ZombieType[] array = new ZombieType[]
-					{
-						ZombieType.TrafficCone,
-						ZombieType.Pail
-					};
-					theZombieType = array[RandomNumbers.NextNumber(array.Length)];
-					theMax = 2f;
-				}
-				Zombie zombie = mBoard.AddZombie(theZombieType, mBoard.mCurrentWave);
-				if (zombie == null)
-				{
-					break;
-				}
-				zombie.RiseFromGrave(gridItem2.mGridX, gridItem2.mGridY);
-				zombie.mPhaseCounter = 50;
-				zombie.mVelX = TodCommon.RandRangeFloat(0.5f, theMax);
-				zombie.UpdateAnimSpeed();
-			}
-			int theMin = TodCommon.TodAnimateCurve(1, 12, mBoard.mCurrentWave, 100, 30, TodCurves.Linear);
-			int theMax2 = TodCommon.TodAnimateCurve(1, 12, mBoard.mCurrentWave, 200, 60, TodCurves.Linear);
-			mChallengeStateCounter = TodCommon.RandRangeInt(theMin, theMax2);
-			if (flag)
-			{
-				mBoard.mZombieCountDown = 0;
-				mChallengeStateCounter = 0;
-			}
-		}
+        public void WhackAZombieSpawning()//3update
+        {
+            if (mBoard.mCurrentWave == mBoard.mNumWaves && mBoard.mZombieCountDown == 0)
+            {
+                return;
+            }
+            //mBoard.mZombieCountDown -= 3;
+            mBoard.mZombieCountDown--;
+            int num = 300;
+            //if (mBoard.mZombieCountDown >= 100 && mBoard.mZombieCountDown < 103 && mBoard.mCurrentWave > 0)
+            if (mBoard.mZombieCountDown == 100 && mBoard.mCurrentWave > 0)
+            {
+                int graveStoneCount = mBoard.GetGraveStoneCount();
+                int num2 = 5;
+                int theGraveCount = Math.Max(1, num2 - graveStoneCount);
+                WhackAZombiePlaceGraves(theGraveCount);
+            }
+            //if (mBoard.mZombieCountDown >= 5 && mBoard.mZombieCountDown < 8)
+            if (mBoard.mZombieCountDown == 5)
+            {
+                mBoard.NextWaveComing();
+            }
+            //if (mBoard.mZombieCountDown >= 0 && mBoard.mZombieCountDown < 3)
+            if (mBoard.mZombieCountDown == 0)
+            {
+                mBoard.mZombieCountDown = 2000;
+                mBoard.mZombieCountDownStart = mBoard.mZombieCountDown;
+                mBoard.mCurrentWave++;
+                if (mBoard.mCurrentWave == mBoard.mNumWaves)
+                {
+                    //mChallengeStateCounter = 300;
+                    mChallengeStateCounter = 100;
+                }
+                else
+                {
+                    //mChallengeStateCounter = 3;
+                    mChallengeStateCounter = 1;
+                }
+            }
+            else if (mBoard.mZombieCountDown < 300)
+            {
+                return;
+            }
+            //mChallengeStateCounter -= 3;
+            mChallengeStateCounter--;
+            //if (mChallengeStateCounter < 0 || mChallengeStateCounter >= 3)
+            if (mChallengeStateCounter != 0)
+            {
+                return;
+            }
+            int num3 = TodCommon.ClampInt((mBoard.mCurrentWave - 1) * 6 / 12, 0, 5);
+            int num4 = 1;
+            ZombieType theZombieType = ZombieType.Normal;
+            int num5 = RandomNumbers.NextNumber(100);
+            int num6 = RandomNumbers.NextNumber(100);
+            bool flag = mBoard.mCurrentWave == mBoard.mNumWaves;
+            if (flag)
+            {
+                num4 = 20;
+            }
+            else if (num5 < aTripleChance[num3])
+            {
+                num4 = 3;
+            }
+            else if (num5 < aTripleChance[num3] + aDoubleChance[num3])
+            {
+                num4 = 2;
+            }
+            if (num6 < aPailChance[num3] && num4 < 3)
+            {
+                theZombieType = ZombieType.Pail;
+            }
+            else if (num6 < aPailChance[num3] + aConeChance[num3])
+            {
+                theZombieType = ZombieType.TrafficCone;
+            }
+            int num7 = 0;
+            for (int i = 0; i < Challenge.aGridPicks.Length; i++)
+            {
+                Challenge.aGridPicks[i].Reset();
+            }
+            int num8 = -1;
+            GridItem gridItem = null;
+            while (mBoard.IterateGridItems(ref gridItem, ref num8))
+            {
+                if (gridItem.mGridItemType == GridItemType.Gravestone)
+                {
+                    Plant topPlantAt = mBoard.GetTopPlantAt(gridItem.mGridX, gridItem.mGridY, TopPlant.OnlyNormalPosition);
+                    if (topPlantAt == null || topPlantAt.mSeedType != SeedType.Gravebuster)
+                    {
+                        Challenge.aGridPickItemArray[num7] = gridItem;
+                        Challenge.aGridPicks[num7].mItem = num7;
+                        Challenge.aGridPicks[num7].mWeight = 1;
+                        num7++;
+                    }
+                }
+            }
+            float theMax = TodCommon.TodAnimateCurve(1, 12, mBoard.mCurrentWave, 1, 3, TodCurves.EaseIn);
+            if (num4 > num7)
+            {
+                num4 = num7;
+            }
+            for (int j = 0; j < num4; j++)
+            {
+                int num9 = (int)TodCommon.TodPickFromWeightedArray(Challenge.aGridPicks, num7);
+                GridItem gridItem2 = Challenge.aGridPickItemArray[num9];
+                Challenge.aGridPicks[num9].mWeight = 0;
+                if (flag)
+                {
+                    ZombieType[] array = new ZombieType[]
+                    {
+                        ZombieType.TrafficCone,
+                        ZombieType.Pail
+                    };
+                    theZombieType = array[RandomNumbers.NextNumber(array.Length)];
+                    theMax = 2f;
+                }
+                Zombie zombie = mBoard.AddZombie(theZombieType, mBoard.mCurrentWave);
+                if (zombie == null)
+                {
+                    break;
+                }
+                zombie.RiseFromGrave(gridItem2.mGridX, gridItem2.mGridY);
+                zombie.mPhaseCounter = 50;
+                zombie.mVelX = TodCommon.RandRangeFloat(0.5f, theMax);
+                zombie.UpdateAnimSpeed();
+            }
+            int theMin = TodCommon.TodAnimateCurve(1, 12, mBoard.mCurrentWave, 100, 30, TodCurves.Linear);
+            int theMax2 = TodCommon.TodAnimateCurve(1, 12, mBoard.mCurrentWave, 200, 60, TodCurves.Linear);
+            mChallengeStateCounter = TodCommon.RandRangeInt(theMin, theMax2);
+            if (flag)
+            {
+                mBoard.mZombieCountDown = 0;
+                mChallengeStateCounter = 0;
+            }
+        }
 
         public bool UpdateZombieSpawning()//3update
         {

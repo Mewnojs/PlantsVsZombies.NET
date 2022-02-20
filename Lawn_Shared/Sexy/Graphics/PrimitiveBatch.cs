@@ -112,27 +112,35 @@ namespace Sexy
             float x = (source.mX + (flag ? source.mWidth : 0)) / (float)img.Texture.Width;
             float x2 = (source.mX + (flag ? 0 : source.mWidth)) / (float)img.Texture.Width;
             float z = 0f;
-            vertex.Position.X = destination.mX;
-            vertex.Position.Y = destination.mY;
-            vertex.Position.Z = z;
-            vertex.TextureCoordinate.X = x;
-            vertex.TextureCoordinate.Y = y;
+            vertex.Position = new Vector3(destination.mX, destination.mY, z);
+            vertex.TextureCoordinate = new Vector2(x, y);
+            //vertex.Position.X = destination.mX;
+            //vertex.Position.Y = destination.mY;
+            //vertex.Position.Z = z;
+            //vertex.TextureCoordinate.X = x;
+            //vertex.TextureCoordinate.Y = y;
             AddVertex(ref vertex);
             short num = (short)(positionInBuffer - 1);
-            vertex.Position.X = destination.mX + destination.mWidth;
-            vertex.Position.Y = destination.mY;
-            vertex.TextureCoordinate.X = x2;
+            vertex.Position = new Vector3(destination.mX + destination.mWidth, destination.mY, z);
+            vertex.TextureCoordinate = new Vector2(x2, y);
+            //vertex.Position.X = destination.mX + destination.mWidth;
+            //vertex.Position.Y = destination.mY;
+            //vertex.TextureCoordinate.X = x2;
             AddVertex(ref vertex);
             short num2 = (short)(positionInBuffer - 1);
-            vertex.Position.X = destination.mX;
-            vertex.Position.Y = destination.mY + destination.mHeight;
-            vertex.TextureCoordinate.X = x;
-            vertex.TextureCoordinate.Y = y2;
+            vertex.Position = new Vector3(destination.mX, destination.mY + destination.mHeight, z);
+            vertex.TextureCoordinate = new Vector2(x, y2);
+            //vertex.Position.X = destination.mX;
+            //vertex.Position.Y = destination.mY + destination.mHeight;
+            //vertex.TextureCoordinate.X = x;
+            //vertex.TextureCoordinate.Y = y2;
             AddVertex(ref vertex);
             short num3 = (short)(positionInBuffer - 1);
-            vertex.Position.X = destination.mX + destination.mWidth;
-            vertex.Position.Y = destination.mY + destination.mHeight;
-            vertex.TextureCoordinate.X = x2;
+            vertex.Position = new Vector3(destination.mX + destination.mWidth, destination.mY + destination.mHeight, z);
+            vertex.TextureCoordinate = new Vector2(x2, y2);
+            //vertex.Position.X = destination.mX + destination.mWidth;
+            //vertex.Position.Y = destination.mY + destination.mHeight;
+            //vertex.TextureCoordinate.X = x2;
             AddVertex(ref vertex);
             short num4 = (short)(positionInBuffer - 1);
             if (positionInIndexBuffer + 6 >= indices.Length)
@@ -267,14 +275,35 @@ namespace Sexy
             {
                 Flush();
             }
-            vertex.Position.X = vertex.Position.X + OffsetX;
-            vertex.Position.Y = vertex.Position.Y + OffsetY;
+            /* 
+             * Due to an unprecedented BUG in armeabi architecture, the following workaround is used:
+             * Otherwise, SIGBUS(BUS_ADRALN) will happen when accessing something like <code>vertex.Position.X</code>
+             * This also changed the logic in void [this].Draw()(Image, TRect, TRect, ref Matrix?, Vector2, Color, bool, bool, PrimitiveBatchEffects).
+            */
+            // #Arch: armeabi
+            var aVertex = vertex.Position;
+            aVertex.X = aVertex.X + OffsetX;
+            aVertex.Y = aVertex.Y + OffsetY;
+            // #Arch: other
+            //vertex.Position.X = vertex.Position.X + OffsetX;
+            //vertex.Position.Y = vertex.Position.Y + OffsetY;
+            // #/Arch
             if (mHasTransform)
             {
-                Vector3.Transform(ref vertex.Position, ref Transform, out vertex.Position);
+                // #Arch: armeabi
+                Vector3.Transform(ref aVertex, ref Transform, out aVertex);
+                // #Arch: other
+                //Vector3.Transform(ref vertex.Position, ref Transform, out vertex.Position);
+                // #/Arch
             }
-            vertex.Position.X = vertex.Position.X - 0.5f;
-            vertex.Position.Y = vertex.Position.Y - 0.5f;
+            // #Arch: armeabi
+            aVertex.X -= 0.5f;
+            aVertex.Y -= 0.5f;
+            vertex.Position = aVertex;
+            // #Arch: other
+            //vertex.Position.X = vertex.Position.X - 0.5f;
+            //vertex.Position.Y = vertex.Position.Y - 0.5f;
+            // #/Arch
             if (texture == null)
             {
                 vertices[positionInBuffer].Position = vertex.Position;
@@ -426,7 +455,7 @@ namespace Sexy
 
         private SamplerState lastUsedSamplerState;
 
-        private VertexPositionColorTexture vertex;
+        private VertexPositionColorTexture vertex = new VertexPositionColorTexture(default(Vector3), default(Color), default(Vector2));
 
         private Matrix t;
 

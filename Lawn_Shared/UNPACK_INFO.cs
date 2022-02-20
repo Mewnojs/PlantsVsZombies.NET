@@ -1,7 +1,7 @@
 ﻿using System;
 using Sexy;
 
-internal class UNPACK_INFO
+public/*internal*/ class UNPACK_INFO
 {
     public UNPACK_INFO(Image pImage, int theX, int theY, int theWidth, int theHeight, int theRows, int theCols, AnimType theAnimType, int theFrameDelay, int theBeginDelay, int theEndDelay)
     {

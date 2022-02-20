@@ -1037,111 +1037,111 @@ namespace Lawn
             return new TRect(mX, mY, mWidth, mHeight);
         }
 
-		public void UpdateNormalMotion()//3update
-		{
-			if (mMotionType == ProjectileMotion.Backwards)
-			{
-				//mPosX -= 9.99f;
-				mPosX -= 3.33f;
-			}
-			else if (mMotionType == ProjectileMotion.Homing)
-			{
-				Zombie zombie = mBoard.ZombieTryToGet(mTargetZombieID);
-				if (zombie != null && zombie.EffectedByDamage((uint)mDamageRangeFlags))
-				{
-					TRect zombieRect = zombie.GetZombieRect();
-					SexyVector2 lhs = new SexyVector2(zombie.ZombieTargetLeadX(0f), zombieRect.mY + zombieRect.mHeight / 2);
-					SexyVector2 rhs = new SexyVector2(mPosX + mWidth / 2, mPosY + mHeight / 2);
-					SexyVector2 sexyVector = (lhs - rhs).Normalize();
-					SexyVector2 sexyVector2 = new SexyVector2(mVelX, mVelY);
-					sexyVector2.mVector += sexyVector.mVector * (0.001f * mProjectileAge);
-					sexyVector2 = sexyVector2.Normalize();
-					sexyVector2.mVector *= 2f;
-					mVelX = sexyVector2.x;
-					mVelY = sexyVector2.y;
-					mRotation = -(float)Math.Atan2(mVelY, mVelX);
-				}
-				mPosY += /*3f * */mVelY;
-				mPosX += /*3f * */mVelX;
-				mShadowY += /*3f * */mVelY;
-				mRow = mBoard.PixelToGridYKeepOnBoard((int)mPosX, (int)mPosY);
-			}
-			else if (mMotionType == ProjectileMotion.Star)
-			{
-				mPosY += /*3f * */mVelY;
-				mPosX += /*3f * */mVelX;
-				mShadowY += /*3f * */mVelY;
-				if (mVelY != 0f)
-				{
-					int row = mBoard.PixelToGridYKeepOnBoard((int)mPosX, (int)mPosY);
-					mRow = row;
-				}
-			}
-			else if (mMotionType == ProjectileMotion.Bee)
-			{
-				if (mProjectileAge < 60)
-				{
-					//mPosY -= 1.5f;
-					mPosY -= 0.5f;
-				}
-				//mPosX += 9.99f;
-				mPosX += 3.33f;
-			}
-			else if (mMotionType == ProjectileMotion.FloatOver)
-			{
-				if (mVelZ < 0f)
-				{
-					//mVelZ += 0.006f;
-					mVelZ += 0.002f;
-					mVelZ = Math.Min(mVelZ, 0f);
-					mPosY += /*3f * */mVelZ;
-					mRotation = 0.3f + -0.70000005f * mVelZ * 3.1415927f * 0.25f;
-				}
-				//mPosX += 1.2f;
-				mPosX += 0.2f;
-			}
-			else if (mMotionType == ProjectileMotion.BeeBackwards)
-			{
-				if (mProjectileAge < 60)
-				{
-					//mPosY -= 1.5f;
-					mPosY -= 0.5f;
-				}
-				//mPosX -= 9.99f;
-				mPosX -= 3.33f;
-			}
-			else if (mMotionType == ProjectileMotion.Threepeater)
-			{
-				//mPosX += 9.99f;
-				mPosX += 3.33f;
-				mPosY += /*3f * */mVelY;
-				//mVelY *= 0.97f;
-				//mVelY *= 0.97f;
-				mVelY *= 0.97f;
-				mShadowY += /*3f * */mVelY;
-			}
-			else
-			{
-				//mPosX += 9.99f;
-				mPosX += 3.33f;
-			}
-			if (mApp.mGameMode == GameMode.ChallengeHighGravity)
-			{
-				if (mMotionType == ProjectileMotion.FloatOver)
-				{
-					//mVelZ += 0.012f;
-					mVelZ += 0.004f;
-				}
-				else
-				{
-					//mVelZ += 0.6f;
-					mVelZ += 0.2f;
-				}
-				mPosY += /*3f * */mVelZ;
-			}
-			CheckForCollision();
-			CheckForHighGround();
-		}
+        public void UpdateNormalMotion()//3update
+        {
+            if (mMotionType == ProjectileMotion.Backwards)
+            {
+                //mPosX -= 9.99f;
+                mPosX -= 3.33f;
+            }
+            else if (mMotionType == ProjectileMotion.Homing)
+            {
+                Zombie zombie = mBoard.ZombieTryToGet(mTargetZombieID);
+                if (zombie != null && zombie.EffectedByDamage((uint)mDamageRangeFlags))
+                {
+                    TRect zombieRect = zombie.GetZombieRect();
+                    SexyVector2 lhs = new SexyVector2(zombie.ZombieTargetLeadX(0f), zombieRect.mY + zombieRect.mHeight / 2);
+                    SexyVector2 rhs = new SexyVector2(mPosX + mWidth / 2, mPosY + mHeight / 2);
+                    SexyVector2 sexyVector = (lhs - rhs).Normalize();
+                    SexyVector2 sexyVector2 = new SexyVector2(mVelX, mVelY);
+                    sexyVector2.mVector += sexyVector.mVector * (0.001f * mProjectileAge);
+                    sexyVector2 = sexyVector2.Normalize();
+                    sexyVector2.mVector *= 2f;
+                    mVelX = sexyVector2.x;
+                    mVelY = sexyVector2.y;
+                    mRotation = -(float)Math.Atan2(mVelY, mVelX);
+                }
+                mPosY += /*3f * */mVelY;
+                mPosX += /*3f * */mVelX;
+                mShadowY += /*3f * */mVelY;
+                mRow = mBoard.PixelToGridYKeepOnBoard((int)mPosX, (int)mPosY);
+            }
+            else if (mMotionType == ProjectileMotion.Star)
+            {
+                mPosY += /*3f * */mVelY;
+                mPosX += /*3f * */mVelX;
+                mShadowY += /*3f * */mVelY;
+                if (mVelY != 0f)
+                {
+                    int row = mBoard.PixelToGridYKeepOnBoard((int)mPosX, (int)mPosY);
+                    mRow = row;
+                }
+            }
+            else if (mMotionType == ProjectileMotion.Bee)
+            {
+                if (mProjectileAge < 60)
+                {
+                    //mPosY -= 1.5f;
+                    mPosY -= 0.5f;
+                }
+                //mPosX += 9.99f;
+                mPosX += 3.33f;
+            }
+            else if (mMotionType == ProjectileMotion.FloatOver)
+            {
+                if (mVelZ < 0f)
+                {
+                    //mVelZ += 0.006f;
+                    mVelZ += 0.002f;
+                    mVelZ = Math.Min(mVelZ, 0f);
+                    mPosY += /*3f * */mVelZ;
+                    mRotation = 0.3f + -0.70000005f * mVelZ * 3.1415927f * 0.25f;
+                }
+                //mPosX += 1.2f;
+                mPosX += 0.2f;
+            }
+            else if (mMotionType == ProjectileMotion.BeeBackwards)
+            {
+                if (mProjectileAge < 60)
+                {
+                    //mPosY -= 1.5f;
+                    mPosY -= 0.5f;
+                }
+                //mPosX -= 9.99f;
+                mPosX -= 3.33f;
+            }
+            else if (mMotionType == ProjectileMotion.Threepeater)
+            {
+                //mPosX += 9.99f;
+                mPosX += 3.33f;
+                mPosY += /*3f * */mVelY;
+                //mVelY *= 0.97f;
+                //mVelY *= 0.97f;
+                mVelY *= 0.97f;
+                mShadowY += /*3f * */mVelY;
+            }
+            else
+            {
+                //mPosX += 9.99f;
+                mPosX += 3.33f;
+            }
+            if (mApp.mGameMode == GameMode.ChallengeHighGravity)
+            {
+                if (mMotionType == ProjectileMotion.FloatOver)
+                {
+                    //mVelZ += 0.012f;
+                    mVelZ += 0.004f;
+                }
+                else
+                {
+                    //mVelZ += 0.6f;
+                    mVelZ += 0.2f;
+                }
+                mPosY += /*3f * */mVelZ;
+            }
+            CheckForCollision();
+            CheckForHighGround();
+        }
 
         public Plant FindCollisionTargetPlant()
         {

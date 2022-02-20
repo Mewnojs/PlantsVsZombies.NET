@@ -355,11 +355,11 @@ namespace Lawn
             mIcon = null;
         }
 
-		public bool IsBeingDisplayed()
-		{
-			//return mDuration < 0 || mDuration >= 3;
-			return mDuration != 0;
-		}
+        public bool IsBeingDisplayed()
+        {
+            //return mDuration < 0 || mDuration >= 3;
+            return mDuration != 0;
+        }
 
         public Font GetFont()
         {

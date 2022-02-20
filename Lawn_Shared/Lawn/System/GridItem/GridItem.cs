@@ -706,23 +706,23 @@ namespace Lawn
             g.SetColorizeImages(false);
         }
 
-		public void UpdateBrain()//3update
+        public void UpdateBrain()//3update
         {
-			if (mGridItemState == GridItemState.BrainSquished)
-			{
+            if (mGridItemState == GridItemState.BrainSquished)
+            {
                 //mGridItemCounter -= 3;
                 mGridItemCounter--;
                 if (mGridItemCounter <= 0)
-				{
-					GridItemDie();
-				}
-			}
-			if (mTransparentCounter > 0)
-			{
+                {
+                    GridItemDie();
+                }
+            }
+            if (mTransparentCounter > 0)
+            {
                 //mTransparentCounter -= 3;
                 mTransparentCounter--;
             }
-		}
+        }
 
         public void DrawStinky(Graphics g)
         {
