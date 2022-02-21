@@ -876,7 +876,7 @@ namespace Lawn
                     KillAllPlantsNearDoom();
                     mApp.AddTodParticle(num, num2, 400000, ParticleEffect.Doom);
                     GridItem gridItem = mBoard.AddACrater(mPlantCol, mRow);
-                    gridItem.mGridItemCounter = 18000;
+                    gridItem.mGridItemCounter = GameConstants.CRATER_TIME;
                     mBoard.ShakeBoard(3, -4);
                     mApp.Vibrate();
                     Die();
@@ -937,7 +937,7 @@ namespace Lawn
                         Plant topPlantAt = mBoard.GetTopPlantAt(mPlantCol, mRow, TopPlant.OnlyNormalPosition);
                         if (topPlantAt != null && topPlantAt.mIsAsleep)
                         {
-                            topPlantAt.mWakeUpCounter = 100;
+                            topPlantAt.mWakeUpCounter = GameConstants.WAKE_UP_TIME;
                         }
                         mState = PlantState.Doingspecial;
                         PlayBodyReanim(GlobalMembersReanimIds.ReanimTrackId_anim_crumble, ReanimLoopType.PlayOnceAndHold, 20, 22f);
@@ -2603,7 +2603,7 @@ namespace Lawn
                 if (reanimation.mLoopCount > 0)
                 {
                     PlayBodyReanim(GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.Loop, 10, 12f);
-                    mStateCountdown = 400;
+                    mStateCountdown = GameConstants.GRAVE_BUSTER_EAT_TIME;
                     mState = PlantState.GravebusterEating;
                     AddAttachedParticle(mX + 40, mY + 40, mRenderOrder + 4, ParticleEffect.GraveBuster);
                     return;
@@ -2907,7 +2907,7 @@ namespace Lawn
 
         public void DoBlink()
         {
-            mBlinkCountdown = 400 + RandomNumbers.NextNumber(400);
+            mBlinkCountdown = GameConstants.BLINK_RATE + RandomNumbers.NextNumber(GameConstants.BLINK_RATE);
             if (NotOnGround() || mShootingCounter != 0)
             {
                 return;
@@ -2936,7 +2936,7 @@ namespace Lawn
             }
             if (mSeedType == SeedType.Wallnut || mSeedType == SeedType.Tallnut || mSeedType == SeedType.ExplodeONut || mSeedType == SeedType.GiantWallnut)
             {
-                mBlinkCountdown = 1000 + RandomNumbers.NextNumber(1000);
+                mBlinkCountdown = GameConstants.BLINK_RATE_WALLNUT + RandomNumbers.NextNumber(GameConstants.BLINK_RATE_WALLNUT);
             }
             Reanimation reanimation2 = AttachBlinkAnim(reanimation);
             if (reanimation2 != null)
@@ -2993,7 +2993,7 @@ namespace Lawn
 
         public void UpdateMagnetShroom()//3update
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < GameConstants.MAX_MAGNET_ITEMS; i++)
             {
                 MagnetItem magnetItem = mMagnetItems[i];
                 if (magnetItem.mItemType != MagnetItemType.None)
@@ -3129,7 +3129,7 @@ namespace Lawn
         {
             if (mSeedType == SeedType.GoldMagnet)
             {
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < GameConstants.MAX_MAGNET_ITEMS; i++)
                 {
                     if (mMagnetItems[i].mItemType == MagnetItemType.None)
                     {
@@ -3145,7 +3145,7 @@ namespace Lawn
         {
             float num = 0f;
             float num2 = Plant.PlantDrawHeightOffset(mBoard, this, mSeedType, mPlantCol, mRow);
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < GameConstants.MAX_MAGNET_ITEMS; i++)
             {
                 MagnetItem magnetItem = mMagnetItems[i];
                 if (magnetItem.mItemType != MagnetItemType.None)
@@ -4876,7 +4876,7 @@ namespace Lawn
         {
             Reanimation reanimation = mApp.ReanimationGet(mBodyReanimID);
             bool flag = false;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < GameConstants.MAX_MAGNET_ITEMS; i++)
             {
                 MagnetItem magnetItem = mMagnetItems[i];
                 if (magnetItem.mItemType != MagnetItemType.None)
@@ -5408,7 +5408,7 @@ namespace Lawn
         {
             if (mSeedType == SeedType.GoldMagnet)
             {
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < GameConstants.MAX_MAGNET_ITEMS; i++)
                 {
                     MagnetItem magnetItem = mMagnetItems[i];
                     if (magnetItem.mItemType != MagnetItemType.None)
@@ -5420,7 +5420,7 @@ namespace Lawn
             }
             if (mSeedType == SeedType.Magnetshroom)
             {
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < GameConstants.MAX_MAGNET_ITEMS; j++)
                 {
                     MagnetItem magnetItem2 = mMagnetItems[j];
                     if (magnetItem2.mItemType != MagnetItemType.None)
@@ -5906,7 +5906,7 @@ namespace Lawn
 
         public float mShakeOffsetY;
 
-        public MagnetItem[] mMagnetItems = new MagnetItem[5];
+        public MagnetItem[] mMagnetItems = new MagnetItem[GameConstants.MAX_MAGNET_ITEMS];
 
         public Zombie mTargetZombieID;
 

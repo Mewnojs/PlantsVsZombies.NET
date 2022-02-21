@@ -187,7 +187,7 @@ namespace Lawn
 
         public void AddPottedPlant(PottedPlant thePottedPlant)
         {
-            Debug.ASSERT(mApp.mPlayerInfo.mNumPottedPlants < 200);
+            Debug.ASSERT(mApp.mPlayerInfo.mNumPottedPlants < GameConstants.MAX_POTTED_PLANTS);
             int numPottedPlants = mApp.mPlayerInfo.mNumPottedPlants;
             PottedPlant aPottedPlant = mApp.mPlayerInfo.mPottedPlant[numPottedPlants];
             aPottedPlant.mDrawVariation = thePottedPlant.mDrawVariation;
@@ -383,8 +383,7 @@ namespace Lawn
                     reanimation.SetFramesForLayer(GlobalMembersReanimIds.ReanimTrackId_anim_zengarden);
                 }
             }
-            int num = (int)seedType;
-            if (num < 0 || num >= 53)
+            if (seedType < 0 || seedType >= SeedType.SeedTypeCount)
             {
                 pottedPlant.mSeedType = SeedType.Kernelpult;
                 seedType = SeedType.Kernelpult;

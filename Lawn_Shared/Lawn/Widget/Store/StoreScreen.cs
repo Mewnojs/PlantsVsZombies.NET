@@ -919,16 +919,16 @@ namespace Lawn
             {
                 mApp.mSeedChooserScreen.UpdateAfterPurchase();
             }
-            int i;
-            for (i = 0; i < 49; i++)
+            SeedType i;
+            for (i = 0; i < SeedType.SeedsInChooserCount; i++)
             {
-                if (!mApp.HasSeedType((SeedType)i))
+                if (!mApp.HasSeedType(i))
                 {
-                    i = -1;
+                    i = SeedType.None;
                     break;
                 }
             }
-            if (i == 49 && !mApp.mPlayerInfo.mShownAchievements[1])
+            if (i == SeedType.SeedsInChooserCount && !mApp.mPlayerInfo.mShownAchievements[1])
             {
                 ReportAchievement.GiveAchievement(AchievementId.ACHIEVEMENT_MORTICULTURALIST);
                 mApp.mPlayerInfo.mShownAchievements[1] = true;

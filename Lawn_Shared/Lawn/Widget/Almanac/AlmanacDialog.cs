@@ -703,7 +703,7 @@ namespace Lawn
             new TPoint(1, 15)
         };
 
-        public static bool[] gZombieDefeated = new bool[33];
+        public static bool[] gZombieDefeated = new bool[(int)ZombieType.ZombieTypesCount];
 
         public new LawnApp mApp;
 

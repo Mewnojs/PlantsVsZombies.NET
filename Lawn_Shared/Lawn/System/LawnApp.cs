@@ -2314,11 +2314,11 @@ namespace Lawn
             Debug.ASSERT(num >= 0 && num < 122);
             if (IsSurvivalNormal(theGameMode))
             {
-                return mPlayerInfo.mChallengeRecords[num] >= 5;
+                return mPlayerInfo.mChallengeRecords[num] >= GameConstants.SURVIVAL_NORMAL_FLAGS;
             }
             if (IsSurvivalHard(theGameMode))
             {
-                return mPlayerInfo.mChallengeRecords[num] >= 10;
+                return mPlayerInfo.mChallengeRecords[num] >= GameConstants.SURVIVAL_HARD_FLAGS;
             }
             return !IsSurvivalEndless(theGameMode) && !IsEndlessScaryPotter(theGameMode) && !IsEndlessIZombie(theGameMode) && mPlayerInfo.mChallengeRecords[num] > 0;
         }
@@ -2801,12 +2801,11 @@ namespace Lawn
             mCompletedLoadingThreadTasks += 68;
             if (mPlayerInfo != null)
             {
-                for (int i = 0; i < 53; i++)
+                for (SeedType i = 0; i < SeedType.SeedTypeCount; i++)
                 {
-                    SeedType theSeedType = (SeedType)i;
-                    if (HasSeedType(theSeedType) || HasFinishedAdventure())
+                    if (HasSeedType(i) || HasFinishedAdventure())
                     {
-                        Plant.PreloadPlantResources(theSeedType);
+                        Plant.PreloadPlantResources(i);
                         if (mCompletedLoadingThreadTasks < num)
                         {
                             mCompletedLoadingThreadTasks += 68;
@@ -2822,28 +2821,21 @@ namespace Lawn
                         }
                     }
                 }
-                int j = 0;
-                while (j < 33)
+                for (ZombieType j = 0; j < ZombieType.ZombieTypesCount; j++)
                 {
-                    ZombieType zombieType = (ZombieType)j;
-                    if (HasFinishedAdventure())
+                    if (!HasFinishedAdventure())
                     {
-                        goto IL_175;
+                        ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(j);
+                        if (mPlayerInfo.mLevel < zombieDefinition.mStartingLevel)
+                        {
+                            continue;
+                        }
                     }
-                    ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(zombieType);
-                    if (mPlayerInfo.mLevel >= zombieDefinition.mStartingLevel)
+                    if (j == ZombieType.Boss || j == ZombieType.Catapult || j == ZombieType.Gargantuar || j == ZombieType.Digger || j == ZombieType.Zamboni)
                     {
-                        goto IL_175;
+                        continue;
                     }
-                    IL_1E0:
-                    j++;
-                    continue;
-                    IL_175:
-                    if (zombieType == ZombieType.Boss || zombieType == ZombieType.Catapult || zombieType == ZombieType.Gargantuar || zombieType == ZombieType.Digger || zombieType == ZombieType.Zamboni)
-                    {
-                        goto IL_1E0;
-                    }
-                    Zombie.PreloadZombieResources(zombieType);
+                    Zombie.PreloadZombieResources(j);
                     if (mCompletedLoadingThreadTasks < num)
                     {
                         mCompletedLoadingThreadTasks += 68;
@@ -2857,7 +2849,6 @@ namespace Lawn
                     {
                         return;
                     }
-                    goto IL_1E0;
                 }
             }
             if (mCompletedLoadingThreadTasks != num)
@@ -2879,37 +2870,28 @@ namespace Lawn
             int num = 10;
             if (mPlayerInfo != null)
             {
-                for (int i = 0; i < 53; i++)
+                for (SeedType i = 0; i < SeedType.SeedTypeCount; i++)
                 {
-                    SeedType theSeedType = (SeedType)i;
-                    if (HasSeedType(theSeedType) || HasFinishedAdventure())
+                    if (HasSeedType(i) || HasFinishedAdventure())
                     {
                         num++;
                     }
                 }
-                int j = 0;
-                while (j < 33)
+                for (ZombieType j = 0; j < ZombieType.ZombieTypesCount; j++)
                 {
-                    ZombieType zombieType = (ZombieType)j;
-                    if (HasFinishedAdventure())
+                    if (!HasFinishedAdventure())
                     {
-                        goto IL_5B;
+                        ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(j);
+                        if (mPlayerInfo.mLevel < zombieDefinition.mStartingLevel)
+                        {
+                            continue;
+                        }
                     }
-                    ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(zombieType);
-                    if (mPlayerInfo.mLevel >= zombieDefinition.mStartingLevel)
-                    {
-                        goto IL_5B;
-                    }
-                    IL_7D:
-                    j++;
-                    continue;
-                    IL_5B:
-                    if (zombieType != ZombieType.Boss && zombieType != ZombieType.Catapult && zombieType != ZombieType.Gargantuar && zombieType != ZombieType.Digger && zombieType != ZombieType.Zamboni)
+                    if (j != ZombieType.Boss && j != ZombieType.Catapult && j != ZombieType.Gargantuar && j != ZombieType.Digger && j != ZombieType.Zamboni)
                     {
                         num++;
-                        goto IL_7D;
+                        continue;
                     }
-                    goto IL_7D;
                 }
             }
             return num * 68;
@@ -3394,7 +3376,7 @@ namespace Lawn
             if (IsAdventureMode())
             {
                 int level = mBoard.mLevel;
-                if (level == 50)
+                if (level == GameConstants.FINAL_LEVEL)
                 {
                     if (mPlayerInfo.mIZombieUnlocked == 3 && HasBeatenChallenge(GameMode.PuzzleIZombie3))
                     {

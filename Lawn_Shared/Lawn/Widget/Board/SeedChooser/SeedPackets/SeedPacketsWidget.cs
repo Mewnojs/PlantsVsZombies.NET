@@ -85,12 +85,11 @@ namespace Lawn
                     }
                 }
             }
-            for (int j = 0; j < 49; j++)
+            for (SeedType j = 0; j < SeedType.SeedsInChooserCount; j++)
             {
-                SeedType theSeedType = (SeedType)j;
-                if (mApp.HasSeedType(theSeedType))
+                if (mApp.HasSeedType(j))
                 {
-                    ChosenSeed chosenSeed2 = mApp.mSeedChooserScreen.mChosenSeeds[j];
+                    ChosenSeed chosenSeed2 = mApp.mSeedChooserScreen.mChosenSeeds[(int)j];
                     if (chosenSeed2.mSeedState != ChosenSeedState.SEED_FLYING_TO_CHOOSER && chosenSeed2.mSeedState != ChosenSeedState.SEED_FLYING_TO_BANK && chosenSeed2.mSeedState != ChosenSeedState.SEED_PACKET_HIDDEN && chosenSeed2.mSeedState == ChosenSeedState.SEED_IN_CHOOSER)
                     {
                         bool flag = false;

@@ -8,7 +8,7 @@ namespace Lawn
     {
         public static void PreallocateMemory()
         {
-            for (int i = 0; i < 2048; i++)
+            for (int i = 0; i < GameConstants.MAX_RENDER_ITEMS; i++)
             {
                 new RenderItem().PrepareForReuse();
             }
@@ -39,7 +39,7 @@ namespace Lawn
             long num = RenderItem.nextId;
             RenderItem.nextId = num + 1L;
             id = num;
-            if (RenderItem.nextId == 9223372036854775807L)
+            if (RenderItem.nextId == Int64.MaxValue)
             {
                 RenderItem.nextId = 0L;
             }
@@ -132,6 +132,6 @@ namespace Lawn
 
         public long id;
 
-        private static Stack<RenderItem> unusedObjects = new Stack<RenderItem>(2048);
+        private static Stack<RenderItem> unusedObjects = new Stack<RenderItem>(GameConstants.MAX_RENDER_ITEMS);
     }
 }

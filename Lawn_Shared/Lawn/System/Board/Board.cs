@@ -1056,7 +1056,7 @@ namespace Lawn
             }
             mSeedBank.mNumPackets = GetNumSeedsInBank();
             mSeedBank.UpdateHeight();
-            for (int l = 0; l < 9; l++)
+            for (int l = 0; l < GameConstants.SEEDBANK_MAX; l++)
             {
                 SeedPacket seedPacket = mSeedBank.mSeedPackets[l];
                 seedPacket.mIndex = l;
@@ -1392,15 +1392,15 @@ namespace Lawn
                 Board.aZombieWeightArray[i].Reset();
             }
             int num = 0;
-            Board.aZombieWeightArray[num].mItem = 0;
+            Board.aZombieWeightArray[num].mItem = ZombieType.Normal;
             Board.aZombieWeightArray[num].mWeight = Zombie.GetZombieDefinition(ZombieType.Normal).mPickWeight;
             num++;
-            Board.aZombieWeightArray[num].mItem = 2;
+            Board.aZombieWeightArray[num].mItem = ZombieType.TrafficCone;
             Board.aZombieWeightArray[num].mWeight = Zombie.GetZombieDefinition(ZombieType.TrafficCone).mPickWeight;
             num++;
             if (!StageHasGraveStones())
             {
-                Board.aZombieWeightArray[num].mItem = 4;
+                Board.aZombieWeightArray[num].mItem = ZombieType.Pail;
                 Board.aZombieWeightArray[num].mWeight = Zombie.GetZombieDefinition(ZombieType.Pail).mPickWeight;
                 num++;
             }
@@ -1427,18 +1427,17 @@ namespace Lawn
         public ZombieType PickZombieType(int theZombiePoints, int theWaveIndex, ZombiePicker theZombiePicker)
         {
             int num = 0;
-            for (int i = 0; i < 33; i++)
+            for (ZombieType i = 0; i < ZombieType.ZombieTypesCount; i++)
             {
-                Board.aZombieWeightArray[i].Reset();
-                ZombieType zombieType = (ZombieType)i;
-                ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(zombieType);
-                if (mZombieAllowed[(int)zombieType])
+                Board.aZombieWeightArray[(int)i].Reset();
+                ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(i);
+                if (mZombieAllowed[(int)i])
                 {
-                    if (zombieType == ZombieType.Bungee && mApp.IsSurvivalEndless(mApp.mGameMode))
+                    if (i == ZombieType.Bungee && mApp.IsSurvivalEndless(mApp.mGameMode))
                     {
                         if (!IsFlagWave(theWaveIndex))
                         {
-                            goto IL_1E4;
+                            continue;
                         }
                     }
                     else if (mApp.mGameMode != GameMode.ChallengePogoParty && mApp.mGameMode != GameMode.ChallengeBobsledBonanza && mApp.mGameMode != GameMode.ChallengeAirRaid)
@@ -1452,46 +1451,46 @@ namespace Lawn
                         }
                         if (theWaveIndex + 1 < num2 || theZombiePoints < zombieDefinition.mZombieValue)
                         {
-                            goto IL_1E4;
+                            continue;
                         }
                     }
                     int aPickWeight = zombieDefinition.mPickWeight;
                     if (mApp.IsSurvivalMode())
                     {
                         int survivalFlagsCompleted2 = GetSurvivalFlagsCompleted();
-                        if (zombieType == ZombieType.Gargantuar || zombieType == ZombieType.Zamboni)
+                        if (i == ZombieType.Gargantuar || i == ZombieType.Zamboni)
                         {
                             int num4 = TodCommon.TodAnimateCurve(10, 50, survivalFlagsCompleted2, 2, 50, TodCurves.Linear);
-                            if (theZombiePicker.mZombieTypeCount[(int)zombieType] >= num4)
+                            if (theZombiePicker.mZombieTypeCount[(int)i] >= num4)
                             {
-                                goto IL_1E4;
+                                continue;
                             }
                         }
-                        if (zombieType == ZombieType.RedeyeGargantuar)
+                        if (i == ZombieType.RedeyeGargantuar)
                         {
                             if (IsFlagWave(theWaveIndex))
                             {
                                 int num5 = TodCommon.TodAnimateCurve(14, 100, survivalFlagsCompleted2, 1, 50, TodCurves.Linear);
-                                if (theZombiePicker.mZombieTypeCount[(int)zombieType] >= num5)
+                                if (theZombiePicker.mZombieTypeCount[(int)i] >= num5)
                                 {
-                                    goto IL_1E4;
+                                    continue;
                                 }
                             }
                             else
                             {
                                 int num6 = TodCommon.TodAnimateCurve(10, 110, survivalFlagsCompleted2, 1, 50, TodCurves.Linear);
-                                if (theZombiePicker.mAllWavesZombieTypeCount[(int)zombieType] >= num6)
+                                if (theZombiePicker.mAllWavesZombieTypeCount[(int)i] >= num6)
                                 {
-                                    goto IL_1E4;
+                                    continue;
                                 }
                                 aPickWeight = 1000;
                             }
                         }
-                        if (zombieType == ZombieType.Normal)
+                        if (i == ZombieType.Normal)
                         {
                             aPickWeight = TodCommon.TodAnimateCurve(10, 50, survivalFlagsCompleted2, zombieDefinition.mPickWeight, zombieDefinition.mPickWeight / 10, TodCurves.Linear);
                         }
-                        if (zombieType == ZombieType.TrafficCone)
+                        if (i == ZombieType.TrafficCone)
                         {
                             aPickWeight = TodCommon.TodAnimateCurve(10, 50, survivalFlagsCompleted2, zombieDefinition.mPickWeight, zombieDefinition.mPickWeight / 4, TodCurves.Linear);
                         }
@@ -1500,7 +1499,6 @@ namespace Lawn
                     Board.aZombieWeightArray[num].mWeight = aPickWeight;
                     num++;
                 }
-                IL_1E4:;
             }
             return (ZombieType)TodCommon.TodPickFromWeightedArray(Board.aZombieWeightArray, num);
         }
@@ -1588,7 +1586,7 @@ namespace Lawn
             }
             else
             {
-                Debug.ASSERT(mCurrentWave >= 0 && mCurrentWave < 100 && mCurrentWave < mNumWaves);
+                Debug.ASSERT(mCurrentWave >= 0 && mCurrentWave < GameConstants.MAX_ZOMBIE_WAVES && mCurrentWave < mNumWaves);
                 for (int j = 0; j < 50; j++)
                 {
                     ZombieType zombieType2 = mZombiesInWave[mCurrentWave, j];
@@ -1615,7 +1613,7 @@ namespace Lawn
             }
             if (IsFlagWave(mCurrentWave))
             {
-                mFlagRaiseCounter = 100;
+                mFlagRaiseCounter = GameConstants.FLAG_RAISE_TIME;
             }
             mCurrentWave++;
             mTotalSpawnedWaves++;
@@ -2162,7 +2160,7 @@ namespace Lawn
         {
             if (!mApp.mDebugKeysEnabled)
             {
-                switch ((char)theChar) 
+                switch ((char)theChar)
                 {
                 case '1':
                 case '2':
@@ -2174,7 +2172,7 @@ namespace Lawn
                 case '8':
                 case '9':
                     RefreshSeedPacketFromCursor();
-                    mSeedBank.mSeedPackets[theChar-'1'].MouseDown(0, 0, 1);
+                    mSeedBank.mSeedPackets[theChar - '1'].MouseDown(0, 0, 1);
                     break;
                 }
             }
@@ -3899,7 +3897,7 @@ namespace Lawn
             return false;
         }
 
-        public void MouseDownWithPlant(int x, int y, int theClickCount) 
+        public void MouseDownWithPlant(int x, int y, int theClickCount)
         {
             if (theClickCount < 0)
             {
@@ -4342,7 +4340,7 @@ namespace Lawn
             int celHeight = AtlasResources.IMAGE_FLAGMETER.GetCelHeight();
             int thePosX = num + celWidth / 2;
             int board_ProgressBarText_Pos = Constants.Board_ProgressBarText_Pos;
-            int num2 = TodCommon.TodAnimateCurve(0, 150, mProgressMeterWidth, 0, Constants.UIProgressMeterBarEnd, TodCurves.Linear);
+            int num2 = TodCommon.TodAnimateCurve(0, GameConstants.PROGRESS_METER_COUNTER, mProgressMeterWidth, 0, Constants.UIProgressMeterBarEnd, TodCurves.Linear);
             TRect theSrcRect = new TRect(celWidth - num2 - 7, celHeight, num2, celHeight);
             TRect theDestRect = new TRect(num + celWidth - num2 - 7, y, num2, celHeight);
             g.DrawImage(AtlasResources.IMAGE_FLAGMETER, theDestRect, theSrcRect);
@@ -4404,7 +4402,7 @@ namespace Lawn
             }
             if (mApp.mGameMode != GameMode.ChallengeBeghouled && mApp.mGameMode != GameMode.ChallengeBeghouledTwist && !mApp.IsSquirrelLevel() && !mApp.IsSlotMachineLevel() && !mApp.IsIZombieLevel() && !mApp.IsFinalBossLevel())
             {
-                int num6 = TodCommon.TodAnimateCurve(0, 150, mProgressMeterWidth, 0, Constants.UIProgressMeterHeadEnd, TodCurves.Linear);
+                int num6 = TodCommon.TodAnimateCurve(0, GameConstants.PROGRESS_METER_COUNTER, mProgressMeterWidth, 0, Constants.UIProgressMeterHeadEnd, TodCurves.Linear);
                 g.DrawImageCel(AtlasResources.IMAGE_FLAGMETERPARTS, num + celWidth - num6 - 20, y - 3, 0, 0);
             }
         }
@@ -4609,7 +4607,7 @@ namespace Lawn
                         }
                     }
                 }
-                IL_19D:;
+            IL_19D:;
             }
         }
 
@@ -4958,7 +4956,7 @@ namespace Lawn
                 return;
             }
             int num2 = mZombieCountDownStart - mZombieCountDown;
-            if (mZombieCountDown > 5 && num2 > 400)
+            if (mZombieCountDown > 5 && num2 > GameConstants.ZOMBIE_COUNTDOWN_MIN)
             {
                 int num3 = TotalZombiesHealthInWave(mCurrentWave - 1);
                 //if (num3 <= mZombieHealthToNextWave && mZombieCountDown > 201)
@@ -4991,12 +4989,12 @@ namespace Lawn
             if (mCurrentWave == mNumWaves && mApp.IsSurvivalMode())
             {
                 mZombieHealthToNextWave = 0;
-                mZombieCountDown = 5499;
+                mZombieCountDown = GameConstants.ZOMBIE_COUNTDOWN_BEFORE_REPICK + 1;
             }
             else if (IsFlagWave(mCurrentWave) && !flag)
             {
                 mZombieHealthToNextWave = 0;
-                mZombieCountDown = 4500;
+                mZombieCountDown = GameConstants.ZOMBIE_COUNTDOWN_BEFORE_FLAG;
             }
             else
             {
@@ -5007,7 +5005,7 @@ namespace Lawn
                 }
                 else
                 {
-                    mZombieCountDown = 2500 + RandomNumbers.NextNumber(600);
+                    mZombieCountDown = GameConstants.ZOMBIE_COUNTDOWN + RandomNumbers.NextNumber(GameConstants.ZOMBIE_COUNTDOWN_RANGE);
                 }
             }
             mZombieCountDownStart = mZombieCountDown;
@@ -5043,7 +5041,7 @@ namespace Lawn
             }
             int theX = Constants.LAWN_XMIN + RandomNumbers.NextNumber(Constants.Board_SunCoinRange);
             mNumSunsFallen++;
-            mSunCountDown = Math.Min(950, 425 + mNumSunsFallen * 10) + RandomNumbers.NextNumber(275);
+            mSunCountDown = Math.Min(GameConstants.SUN_COUNTDOWN_MAX, GameConstants.SUN_COUNTDOWN + mNumSunsFallen * 10) + RandomNumbers.NextNumber(GameConstants.SUN_COUNTDOWN_RANGE);
             CoinType theCoinType = CoinType.Sun;
             if (mApp.mGameMode == GameMode.ChallengeSunnyDay)
             {
@@ -5090,8 +5088,8 @@ namespace Lawn
 
         public int NumberZombiesInWave(int theWaveIndex)
         {
-            Debug.ASSERT(theWaveIndex >= 0 && theWaveIndex < 100 && theWaveIndex < mNumWaves);
-            for (int i = 0; i < 50; i++)
+            Debug.ASSERT(theWaveIndex >= 0 && theWaveIndex < GameConstants.MAX_ZOMBIE_WAVES && theWaveIndex < mNumWaves);
+            for (int i = 0; i < GameConstants.MAX_ZOMBIES_IN_WAVE; i++)
             {
                 ZombieType zombieType = mZombiesInWave[theWaveIndex, i];
                 if (zombieType == ZombieType.Invalid)
@@ -5536,18 +5534,18 @@ namespace Lawn
         {
             theZombiePicker.mZombieCount = 0;
             theZombiePicker.mZombiePoints = 0;
-            for (int i = 0; i < 33; i++)
+            for (ZombieType i = 0; i < ZombieType.ZombieTypesCount; i++)
             {
-                theZombiePicker.mZombieTypeCount[i] = 0;
+                theZombiePicker.mZombieTypeCount[(int)i] = 0;
             }
         }
 
         public static void ZombiePickerInit(ZombiePicker theZombiePicker)
         {
             Board.ZombiePickerInitForWave(theZombiePicker);
-            for (int i = 0; i < 33; i++)
+            for (ZombieType i = 0; i < ZombieType.ZombieTypesCount; i++)
             {
-                theZombiePicker.mAllWavesZombieTypeCount[i] = 0;
+                theZombiePicker.mAllWavesZombieTypeCount[(int)i] = 0;
             }
         }
 
@@ -5591,7 +5589,7 @@ namespace Lawn
 
         public void ShakeBoard(int theShakeAmountX, int theShakeAmountY)
         {
-            mShakeCounter = 12;
+            mShakeCounter = GameConstants.BOARD_SHAKE_TIME;
             mShakeAmountX = theShakeAmountX;
             mShakeAmountY = theShakeAmountY;
         }
@@ -5889,8 +5887,8 @@ namespace Lawn
             ZombiePicker zombiePicker = new ZombiePicker();
             Board.ZombiePickerInit(zombiePicker);
             ZombieType introducedZombieType = GetIntroducedZombieType();
-            Debug.ASSERT(mNumWaves <= 100);
-            
+            Debug.ASSERT(mNumWaves <= GameConstants.MAX_ZOMBIE_WAVES);
+
             for (int i = 0; i < mNumWaves; i++)
             {
                 Board.ZombiePickerInitForWave(zombiePicker);
@@ -6061,10 +6059,10 @@ namespace Lawn
                 Zombie bossZombie = GetBossZombie();
                 if (bossZombie != null && !bossZombie.IsDeadOrDying())
                 {
-                    mProgressMeterWidth = 150 * (bossZombie.mBodyMaxHealth - bossZombie.mBodyHealth) / bossZombie.mBodyMaxHealth;
+                    mProgressMeterWidth = GameConstants.PROGRESS_METER_COUNTER * (bossZombie.mBodyMaxHealth - bossZombie.mBodyHealth) / bossZombie.mBodyMaxHealth;
                     return;
                 }
-                mProgressMeterWidth = 150;
+                mProgressMeterWidth = GameConstants.PROGRESS_METER_COUNTER;
                 return;
             }
             else
@@ -6287,14 +6285,14 @@ namespace Lawn
             {
                 return true;
             }
-            int[] array = new int[33];
-            for (int i = 0; i < 33; i++)
+            int[] array = new int[(int)ZombieType.ZombieTypesCount];
+            for (ZombieType i = 0; i < ZombieType.ZombieTypesCount; i++)
             {
-                array[i] = 0;
+                array[(int)i] = 0;
             }
             for (int j = 0; j < mNumWaves; j++)
             {
-                for (int k = 0; k < 50; k++)
+                for (int k = 0; k < GameConstants.MAX_ZOMBIES_IN_WAVE; k++)
                 {
                     ZombieType zombieType = mZombiesInWave[j, k];
                     if (zombieType == ZombieType.Invalid)
@@ -6305,9 +6303,9 @@ namespace Lawn
                     array[(int)zombieType]++;
                 }
             }
-            for (int l = 0; l < 33; l++)
+            for (ZombieType l = 0; l < ZombieType.ZombieTypesCount; l++)
             {
-                if (l != 19 && Board.CanZombieSpawnOnLevel((ZombieType)l, mLevel) && array[l] == 0)
+                if (l != ZombieType.Yeti && Board.CanZombieSpawnOnLevel(l, mLevel) && array[(int)l] == 0)
                 {
                     return false;
                 }
@@ -6370,15 +6368,15 @@ namespace Lawn
             case GameMode.Quickplay48:
             case GameMode.Quickplay49:
             case GameMode.Quickplay50:
-                if (mLevel <= 10)
+                if (mLevel <= 1 * GameConstants.LEVELS_PER_AREA)
                 {
                     mBackground = BackgroundType.Num1Day;
                 }
-                else if (mLevel <= 20)
+                else if (mLevel <= 2 * GameConstants.LEVELS_PER_AREA)
                 {
                     mBackground = BackgroundType.Num2Night;
                 }
-                else if (mLevel <= 30)
+                else if (mLevel <= 3 * GameConstants.LEVELS_PER_AREA)
                 {
                     mBackground = BackgroundType.Num3Pool;
                 }
@@ -6386,15 +6384,15 @@ namespace Lawn
                 {
                     mBackground = BackgroundType.Num2Night;
                 }
-                else if (mLevel <= 40)
+                else if (mLevel <= 4 * GameConstants.LEVELS_PER_AREA)
                 {
                     mBackground = BackgroundType.Num4Fog;
                 }
-                else if (mLevel <= 49)
+                else if (mLevel < GameConstants.FINAL_LEVEL)
                 {
                     mBackground = BackgroundType.Num5Roof;
                 }
-                else if (mLevel == 50)
+                else if (mLevel == GameConstants.FINAL_LEVEL)
                 {
                     mBackground = BackgroundType.Num6Boss;
                 }
@@ -6673,15 +6671,15 @@ namespace Lawn
             mApp.mKilledYetiAndRestarted = false;
             if (mApp.IsFirstTimeAdventureMode() && mLevel == 2)
             {
-                mZombieCountDown = 4998;
+                mZombieCountDown = GameConstants.ZOMBIE_COUNTDOWN * 2;
             }
             else if (mApp.IsSurvivalMode() && mChallenge.mSurvivalStage > 0)
             {
-                mZombieCountDown = 600;
+                mZombieCountDown = GameConstants.ZOMBIE_COUNTDOWN_RANGE;
             }
             else
             {
-                mZombieCountDown = 1800;
+                mZombieCountDown = GameConstants.ZOMBIE_COUNTDOWN_FIRST_WAVE;
             }
             mZombieCountDownStart = mZombieCountDown;
             mZombieHealthToNextWave = -1;
@@ -6703,7 +6701,7 @@ namespace Lawn
             mApp.ShowSeedChooserScreen();
             mCutScene.StartLevelIntro();
             mSeedBank.UpdateHeight();
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < GameConstants.SEEDBANK_MAX; i++)
             {
                 SeedPacket seedPacket = mSeedBank.mSeedPackets[i];
                 seedPacket.mY = GetSeedPacketPositionY(i);
@@ -6711,7 +6709,7 @@ namespace Lawn
             }
             if (StageHasFog())
             {
-                mFogBlownCountDown = 2000;
+                mFogBlownCountDown = GameConstants.FOG_BLOW_RETURN_TIME;
             }
             for (int j = 0; j < Constants.MAX_GRIDSIZEY; j++)
             {
@@ -6800,9 +6798,9 @@ namespace Lawn
                 mChallenge.InitZombieWaves();
                 return;
             }
-            for (int i = 0; i < 33; i++)
+            for (ZombieType i = 0; i < ZombieType.ZombieTypesCount; i++)
             {
-                mZombieAllowed[i] = Board.CanZombieSpawnOnLevel((ZombieType)i, aForLevel);
+                mZombieAllowed[(int)i] = Board.CanZombieSpawnOnLevel((ZombieType)i, aForLevel);
             }
         }
 
@@ -7268,13 +7266,12 @@ namespace Lawn
             {
                 return ZombieType.Invalid;
             }
-            for (int i = 0; i < 33; i++)
+            for (ZombieType i = 0; i < ZombieType.ZombieTypesCount; i++)
             {
-                ZombieType zombieType = (ZombieType)i;
-                ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(zombieType);
-                if ((zombieType != ZombieType.Yeti || mApp.CanSpawnYetis()) && zombieDefinition.mStartingLevel == mLevel)
+                ZombieDefinition zombieDefinition = Zombie.GetZombieDefinition(i);
+                if ((i != ZombieType.Yeti || mApp.CanSpawnYetis()) && zombieDefinition.mStartingLevel == mLevel)
                 {
-                    return zombieType;
+                    return i;
                 }
             }
             return ZombieType.Invalid;
@@ -8374,10 +8371,7 @@ namespace Lawn
 
         public void PutZombieInWave(ZombieType theZombieType, int theWaveNumber, ZombiePicker theZombiePicker)
         {
-            Debug.ASSERT(theWaveNumber < 100 && theZombiePicker.mZombieCount < 50);
-            mZombiesInWave[theWaveNumber, theZombiePicker.mZombieCount] = theZombieType;
-            theZombiePicker.mZombieCount++;
-            if (theZombiePicker.mZombieCount < 50)
+            Debug.ASSERT(theWaveNumber < GameConstants.MAX_ZOMBIE_WAVES && theZombiePicker.mZombieCount < GameConstants.MAX_ZOMBIES_IN_WAVE);GameConstants.MAX_ZOMBIES_IN_WAVE)
             {
                 mZombiesInWave[theWaveNumber, theZombiePicker.mZombieCount] = ZombieType.Invalid;
             }
@@ -8389,12 +8383,11 @@ namespace Lawn
 
         public void PutInMissingZombies(int theWaveNumber, ZombiePicker theZombiePicker)
         {
-            for (int i = 0; i < 33; i++)
+            for (ZombieType i = 0; i < ZombieType.ZombieTypesCount; i++)
             {
-                ZombieType zombieType = (ZombieType)i;
-                if (theZombiePicker.mZombieTypeCount[(int)zombieType] <= 0 && zombieType != ZombieType.Yeti && Board.CanZombieSpawnOnLevel(zombieType, mLevel))
+                if (theZombiePicker.mZombieTypeCount[(int)i] <= 0 && i != ZombieType.Yeti && Board.CanZombieSpawnOnLevel(i, mLevel))
                 {
-                    PutZombieInWave(zombieType, theWaveNumber, theZombiePicker);
+                    PutZombieInWave(i, theWaveNumber, theZombiePicker);
                 }
             }
         }
@@ -8722,7 +8715,7 @@ namespace Lawn
                         }
                         mGridCelFog[num3, j] = Math.Max(mGridCelFog[num3, j] - num, 0);
                     }
-                    IL_D3:;
+                IL_D3:;
                 }
             }
         }
@@ -8960,7 +8953,7 @@ namespace Lawn
 
         public bool IsLastStandFinalStage()
         {
-            return mApp.mGameMode == GameMode.ChallengeLastStand && mChallenge.mSurvivalStage == 4;
+            return mApp.mGameMode == GameMode.ChallengeLastStand && mChallenge.mSurvivalStage == GameConstants.LAST_STAND_FLAGS - 1;
         }
 
         public int GetNumWavesPerFlag()
@@ -9342,7 +9335,7 @@ namespace Lawn
                         TodCommon.TodDrawString(g, theText, zenButtonRect.mX + Constants.ZenGardenButtonCounterOffset.X, zenButtonRect.mY + Constants.ZenGardenButtonCounterOffset.Y + num, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, DrawStringJustification.Right, 0.6f);
                     }
                 }
-                IL_63E:;
+            IL_63E:;
             }
         }
 
@@ -9856,7 +9849,7 @@ namespace Lawn
 
         private const int SAVE_CHECK_NUMBER = 777;
 
-        private RenderItem[] aRenderList = new RenderItem[2048];
+        private RenderItem[] aRenderList = new RenderItem[GameConstants.MAX_RENDER_ITEMS];
 
         public LawnApp mApp;
 
@@ -9948,9 +9941,9 @@ namespace Lawn
 
         public TodSmoothArray[] mRowPickingArray = new TodSmoothArray[Constants.MAX_GRIDSIZEY];
 
-        public ZombieType[,] mZombiesInWave = new ZombieType[100, 50];
+        public ZombieType[,] mZombiesInWave = new ZombieType[GameConstants.MAX_ZOMBIE_WAVES, GameConstants.MAX_ZOMBIES_IN_WAVE];
 
-        public bool[] mZombieAllowed = new bool[100];
+        public bool[] mZombieAllowed = new bool[GameConstants.MAX_ZOMBIE_TYPES];
 
         public int mSunCountDown;
 
@@ -10134,7 +10127,7 @@ namespace Lawn
 
         private static int mPeashootersPlanted;
 
-        public static TodWeightedArray[] aZombieWeightArray = new TodWeightedArray[33];
+        public static TodWeightedArray[] aZombieWeightArray = new TodWeightedArray[(int)ZombieType.ZombieTypesCount];
 
         public static TodWeightedArray[] aPickArray = new TodWeightedArray[Constants.MAX_GRIDSIZEY];
 

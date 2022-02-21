@@ -8,8 +8,8 @@ namespace Lawn
 
         public int mZombiePoints;
 
-        public int[] mZombieTypeCount = new int[33];
+        public int[] mZombieTypeCount = new int[(int)ZombieType.ZombieTypesCount];
 
-        public int[] mAllWavesZombieTypeCount = new int[33];
+        public int[] mAllWavesZombieTypeCount = new int[(int)ZombieType.ZombieTypesCount];
     }
 }

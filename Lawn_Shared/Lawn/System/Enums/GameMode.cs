@@ -139,16 +139,17 @@ namespace Lawn
 
         AdventureCount = 1,
         AdventureStart = Adventure,
+        
         SurvivalCount = 15,
         SurvivalStart = SurvivalNormalStage1,
-        ScaryPotterCount = 10,
+        ChallengeStart = SurvivalStart,
+        ScaryPotterCount = GameConstants.VASEBREAKER_LEVEL_COUNT,
         ScaryPotterStart = ScaryPotter1,
-        PuzzleIZombieCount = 10,
+        PuzzleIZombieCount = GameConstants.I_ZOMBIE_LEVEL_COUNT,
         PuzzleIZombieStart = PuzzleIZombie1,
-        ChallengeStart = ChallengeWarAndPeas,
-        MiniGameCount = 19,
-        MiniGameStart = ChallengeStart,
-        QuickplayCount = 50,
+        MiniGameCount = GameConstants.MINI_GAME_COUNT,
+        MiniGameStart = ChallengeWarAndPeas,
+        QuickplayCount = GameConstants.NUM_LEVELS,
         QuickplayStart = Quickplay1
     }
 }

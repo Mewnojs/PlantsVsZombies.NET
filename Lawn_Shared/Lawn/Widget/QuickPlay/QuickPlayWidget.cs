@@ -107,39 +107,39 @@ namespace Lawn
             {
                 theImage = AtlasResources.IMAGE_QUICKPLAY_BOWLING;
             }
-            else if (theLevel <= 10)
+            else if (theLevel <= 1 * GameConstants.LEVELS_PER_AREA)
             {
                 theImage = AtlasResources.IMAGE_QUICKPLAY_BACKGROUND1_THUMB;
             }
-            else if (theLevel == 15)
+            else if (theLevel == 1 * GameConstants.LEVELS_PER_AREA + 5)
             {
                 theImage = AtlasResources.IMAGE_QUICKPLAY_WACK;
             }
-            else if (theLevel <= 20)
+            else if (theLevel <= 2 * GameConstants.LEVELS_PER_AREA)
             {
                 theImage = AtlasResources.IMAGE_QUICKPLAY_BACKGROUND2_THUMB;
             }
-            else if (theLevel == 25)
+            else if (theLevel == 2 * GameConstants.LEVELS_PER_AREA + 5)
             {
                 theImage = AtlasResources.IMAGE_QUICKPLAY_LITTLE_TROUBLE;
             }
-            else if (theLevel <= 30)
+            else if (theLevel <= 3 * GameConstants.LEVELS_PER_AREA)
             {
                 theImage = AtlasResources.IMAGE_QUICKPLAY_BACKGROUND3_THUMB;
             }
-            else if (theLevel == 35)
+            else if (theLevel == 3 * GameConstants.LEVELS_PER_AREA + 5)
             {
                 theImage = AtlasResources.IMAGE_QUICKPLAY_VASES;
             }
-            else if (theLevel <= 40)
+            else if (theLevel <= 4 * GameConstants.LEVELS_PER_AREA)
             {
                 theImage = AtlasResources.IMAGE_QUICKPLAY_BACKGROUND4_THUMB;
             }
-            else if (theLevel <= 49)
+            else if (theLevel < GameConstants.FINAL_LEVEL)
             {
                 theImage = AtlasResources.IMAGE_QUICKPLAY_BACKGROUND5_THUMB;
             }
-            else if (theLevel == 50)
+            else if (theLevel == GameConstants.FINAL_LEVEL)
             {
                 theImage = AtlasResources.IMAGE_QUICKPLAY_ZOMBOSS;
             }

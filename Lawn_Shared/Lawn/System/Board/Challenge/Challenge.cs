@@ -9,7 +9,7 @@ namespace Lawn
     {
         static Challenge()
         {
-            SeedType[,] array = new SeedType[6, 9];
+            SeedType[,] array = new SeedType[GameConstants.ART_CHALLEGE_SIZE_Y, GameConstants.ART_CHALLEGE_SIZE_X];
             array[0, 0] = SeedType.None;
             array[0, 1] = SeedType.None;
             array[0, 2] = SeedType.None;
@@ -65,7 +65,7 @@ namespace Lawn
             array[5, 7] = SeedType.None;
             array[5, 8] = SeedType.None;
             Challenge.gArtChallengeWallnut = array;
-            SeedType[,] array2 = new SeedType[6, 9];
+            SeedType[,] array2 = new SeedType[GameConstants.ART_CHALLEGE_SIZE_Y, GameConstants.ART_CHALLEGE_SIZE_X];
             array2[0, 0] = SeedType.None;
             array2[0, 1] = SeedType.None;
             array2[0, 2] = SeedType.Starfruit;
@@ -121,7 +121,7 @@ namespace Lawn
             array2[5, 7] = SeedType.None;
             array2[5, 8] = SeedType.None;
             Challenge.gArtChallengeSunFlower = array2;
-            SeedType[,] array3 = new SeedType[6, 9];
+            SeedType[,] array3 = new SeedType[GameConstants.ART_CHALLEGE_SIZE_Y, GameConstants.ART_CHALLEGE_SIZE_X];
             array3[0, 0] = SeedType.None;
             array3[0, 1] = SeedType.None;
             array3[0, 2] = SeedType.None;
@@ -181,8 +181,8 @@ namespace Lawn
             Challenge.aGridPickItemArray = new GridItem[Challenge.MAX_PICKS];
             Challenge.aGridPicks = new TodWeightedArray[Challenge.MAX_PICKS];
             Challenge.aSeedPickArray = new TodWeightedArray[20];
-            Challenge.aPotArray = new TodWeightedArray[54];
-            Challenge.aGridArray = new TodWeightedGridArray[54];
+            Challenge.aPotArray = new TodWeightedArray[GameConstants.MAX_SCARY_POTS];
+            Challenge.aGridArray = new TodWeightedGridArray[GameConstants.MAX_SCARY_POTS];
             Challenge.aPicks = new TodWeightedGridArray[Constants.GRIDSIZEX * Constants.MAX_GRIDSIZEY];
             for (int i = 0; i < Challenge.aGridPickItemArray.Length; i++)
             {
@@ -388,11 +388,11 @@ namespace Lawn
                 string theAdvice = string.Empty;
                 if (mApp.IsSurvivalNormal(mApp.mGameMode))
                 {
-                    theAdvice = TodCommon.TodReplaceNumberString("[ADVICE_SURVIVE_FLAGS]", "{FLAGS}", 5);
+                    theAdvice = TodCommon.TodReplaceNumberString("[ADVICE_SURVIVE_FLAGS]", "{FLAGS}", GameConstants.SURVIVAL_NORMAL_FLAGS);
                 }
                 else if (mApp.IsSurvivalHard(mApp.mGameMode))
                 {
-                    theAdvice = TodCommon.TodReplaceNumberString("[ADVICE_SURVIVE_FLAGS]", "{FLAGS}", 10);
+                    theAdvice = TodCommon.TodReplaceNumberString("[ADVICE_SURVIVE_FLAGS]", "{FLAGS}", GameConstants.SURVIVAL_HARD_FLAGS);
                 }
                 else
                 {
@@ -402,7 +402,7 @@ namespace Lawn
             }
             if (mApp.mGameMode == GameMode.ChallengeLastStand && mSurvivalStage == 0)
             {
-                string theAdvice2 = TodCommon.TodReplaceNumberString("[ADVICE_SURVIVE_FLAGS]", "{FLAGS}", 5);
+                string theAdvice2 = TodCommon.TodReplaceNumberString("[ADVICE_SURVIVE_FLAGS]", "{FLAGS}", GameConstants.LAST_STAND_FLAGS);
                 mBoard.DisplayAdvice(theAdvice2, MessageStyle.BigMiddleFast, AdviceType.SurviveFlags);
             }
             if (mApp.mGameMode == GameMode.ChallengeArtChallenge1)
@@ -816,7 +816,7 @@ namespace Lawn
             }
             if (mApp.IsSlotMachineLevel() && theHitResult.mObjectType == GameObjectType.SlotMachineHandle && mBoard.mCursorObject.mCursorType == CursorType.Normal && mChallengeState == ChallengeState.Normal)
             {
-                if (mBoard.TakeSunMoney(25))
+                if (mBoard.TakeSunMoney(GameConstants.SLOT_MACHINE_COST))
                 {
                     for (int i = 0; i < 3; i++)
                     {
@@ -997,7 +997,7 @@ namespace Lawn
             {
                 SquirrelUpdate();
             }
-            if (mApp.mGameMode == GameMode.ChallengeIce && mBoard.mMainCounter == 3000)
+            if (mApp.mGameMode == GameMode.ChallengeIce && mBoard.mMainCounter == GameConstants.ICE_CHALLANGE_DELAY)
             {
                 mApp.PlayFoley(FoleyType.Floop);
                 mApp.PlaySample(Resources.SOUND_LOSEMUSIC);
@@ -1015,7 +1015,7 @@ namespace Lawn
 
         public void UpdateBeghouled()
         {
-            mBoard.mProgressMeterWidth = TodCommon.TodAnimateCurve(0, 75, mChallengeScore, 0, 150, TodCurves.Linear);
+            mBoard.mProgressMeterWidth = TodCommon.TodAnimateCurve(0, GameConstants.BEGHOULED_WINNING_SCORE, mChallengeScore, 0, GameConstants.PROGRESS_METER_COUNTER, TodCurves.Linear);
             bool flag = false;
             int count = mBoard.mPlants.Count;
             for (int i = 0; i < count; i++)
@@ -1240,9 +1240,9 @@ namespace Lawn
         {
             g.SetColorizeImages(true);
             g.SetColor(new SexyColor(255, 255, 255, 150));
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < GameConstants.ART_CHALLEGE_SIZE_Y; i++)
             {
-                for (int j = 0; j < 9; j++)
+                for (int j = 0; j < GameConstants.ART_CHALLEGE_SIZE_X; j++)
                 {
                     SeedType artChallengeSeed = GetArtChallengeSeed(j, i);
                     if (artChallengeSeed != SeedType.None && mBoard.GetTopPlantAt(j, i, TopPlant.OnlyNormalPosition) == null)
@@ -1272,9 +1272,9 @@ namespace Lawn
             {
                 return;
             }
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < GameConstants.ART_CHALLEGE_SIZE_Y; i++)
             {
-                for (int j = 0; j < 9; j++)
+                for (int j = 0; j < GameConstants.ART_CHALLEGE_SIZE_X; j++)
                 {
                     SeedType artChallengeSeed = GetArtChallengeSeed(j, i);
                     if (artChallengeSeed != SeedType.None)
@@ -1292,11 +1292,11 @@ namespace Lawn
 
         public SeedType GetArtChallengeSeed(int theGridX, int theGridY)
         {
-            if (theGridY >= 6)
+            if (theGridY > 6)
             {
                 return SeedType.None;
             }
-            Debug.ASSERT(theGridX >= 0 && theGridX < 9 && theGridY >= 0);
+            Debug.ASSERT(theGridX >= 0 && theGridX < GameConstants.ART_CHALLEGE_SIZE_X && theGridY >= 0);
             if (mApp.mGameMode == GameMode.ChallengeArtChallenge1)
             {
                 return Challenge.gArtChallengeWallnut[theGridY, theGridX];
@@ -1806,23 +1806,23 @@ namespace Lawn
 
         public void UpdateSlotMachine()
         {
-            int num = TodCommon.ClampInt(mBoard.mSunMoney, 0, 2000);
-            if (num >= 1900)
+            int num = TodCommon.ClampInt(mBoard.mSunMoney, 0, GameConstants.SLOT_MACHINE_WINNING_SCORE);
+            if (num >= GameConstants.SLOT_MACHINE_WINNING_SCORE - 100)
             {
                 mBoard.DisplayAdvice("[ADVICE_ALMOST_THERE]", MessageStyle.HintFast, AdviceType.AlmostThere);
             }
-            if (num >= 2000)
+            if (num >= GameConstants.SLOT_MACHINE_WINNING_SCORE)
             {
                 SpawnLevelAward(4, 2);
                 mBoard.ClearAdvice(AdviceType.None);
             }
-            mBoard.mProgressMeterWidth = TodCommon.TodAnimateCurve(0, 2000, num, 0, 150, TodCurves.Linear);
+            mBoard.mProgressMeterWidth = TodCommon.TodAnimateCurve(0, GameConstants.SLOT_MACHINE_WINNING_SCORE, num, 0, GameConstants.PROGRESS_METER_COUNTER, TodCurves.Linear);
             if (!mBoard.mAdvice.IsBeingDisplayed())
             {
-                if (slotMachineMessageCached != 2000)
+                if (slotMachineMessageCached != GameConstants.SLOT_MACHINE_WINNING_SCORE)
                 {
-                    slotMachineMessage = TodCommon.TodReplaceNumberString("[ADVICE_SLOT_MACHINE_COLLECT_SUN]", "{SCORE}", 2000);
-                    slotMachineMessageCached = 2000;
+                    slotMachineMessage = TodCommon.TodReplaceNumberString("[ADVICE_SLOT_MACHINE_COLLECT_SUN]", "{SCORE}", GameConstants.SLOT_MACHINE_WINNING_SCORE);
+                    slotMachineMessageCached = GameConstants.SLOT_MACHINE_WINNING_SCORE;
                 }
                 mBoard.DisplayAdvice(slotMachineMessage, MessageStyle.SlotMachine, AdviceType.SlotMachineCollectSun);
             }
@@ -2172,9 +2172,9 @@ namespace Lawn
         {
             if (mChallengeState == ChallengeState.StormFlash1 && mChallengeStateCounter < 300)
             {
-                if (mChallengeStateCounter > 150)
+                if (mChallengeStateCounter > GameConstants.STORM_FLASH_TIME)
                 {
-                    DrawStormFlash(g, mChallengeStateCounter - 150, 255);
+                    DrawStormFlash(g, mChallengeStateCounter - GameConstants.STORM_FLASH_TIME, 255);
                 }
                 else
                 {
@@ -2206,14 +2206,19 @@ namespace Lawn
                 {
                     return;
                 }
-                if (mChallengeStateCounter == 150 && mChallengeState == ChallengeState.StormFlash1)
+                if (mChallengeStateCounter == GameConstants.STORM_FLASH_TIME && mChallengeState == ChallengeState.StormFlash1)
                 {
                     mChallengeStateCounter = 1;
                     return;
                 }
             }
             mChallengeStateCounter--;
-            if ((mChallengeStateCounter == 300 && mChallengeState == ChallengeState.StormFlash1) || (mChallengeStateCounter == 150 && mChallengeState == ChallengeState.StormFlash1) || (mChallengeStateCounter == 300 && mChallengeState == ChallengeState.StormFlash2) || (mChallengeStateCounter == 150 && mChallengeState == ChallengeState.StormFlash3))
+            if (
+                (mChallengeStateCounter == GameConstants.STORM_FLASH_TIME * 2 && mChallengeState == ChallengeState.StormFlash1) 
+             || (mChallengeStateCounter == GameConstants.STORM_FLASH_TIME && mChallengeState == ChallengeState.StormFlash1) 
+             || (mChallengeStateCounter == GameConstants.STORM_FLASH_TIME * 2 && mChallengeState == ChallengeState.StormFlash2) 
+             || (mChallengeStateCounter == GameConstants.STORM_FLASH_TIME && mChallengeState == ChallengeState.StormFlash3)
+            )
             {
                 mApp.PlayFoley(FoleyType.Thunder);
             }
@@ -2221,7 +2226,7 @@ namespace Lawn
             {
                 if (mApp.mGameScene == GameScenes.ZombiesWon)
                 {
-                    mChallengeStateCounter = 150 + TodCommon.RandRangeInt(-50, 50);
+                    mChallengeStateCounter = GameConstants.STORM_FLASH_TIME + TodCommon.RandRangeInt(-50, 50);
                     mChallengeState = ChallengeState.StormFlash3;
                     return;
                 }
@@ -2237,7 +2242,7 @@ namespace Lawn
                     Zombie zombie = mBoard.mZombies[i];
                     if (!zombie.mDead && zombie.mZombieType == ZombieType.Yeti)
                     {
-                        mChallengeStateCounter = 150 + TodCommon.RandRangeInt(200, 300);
+                        mChallengeStateCounter = GameConstants.STORM_FLASH_TIME + TodCommon.RandRangeInt(200, 300);
                         mChallengeState = (ChallengeState)TodCommon.RandRangeInt(5, 7);
                         return;
                     }
@@ -2251,7 +2256,7 @@ namespace Lawn
                 {
                     theMax = 400;
                 }
-                mChallengeStateCounter = 150 + TodCommon.RandRangeInt(300, theMax);
+                mChallengeStateCounter = GameConstants.STORM_FLASH_TIME + TodCommon.RandRangeInt(300, theMax);
                 mChallengeState = (ChallengeState)TodCommon.RandRangeInt(5, 7);
             }
         }
@@ -2513,17 +2518,17 @@ namespace Lawn
             {
                 if (!mBoard.mAdvice.IsBeingDisplayed())
                 {
-                    string theAdvice = TodCommon.TodReplaceNumberString("[ADVICE_BEGHOULED_MATCH_3]", "{SCORE}", 75);
+                    string theAdvice = TodCommon.TodReplaceNumberString("[ADVICE_BEGHOULED_MATCH_3]", "{SCORE}", GameConstants.BEGHOULED_WINNING_SCORE);
                     mBoard.DisplayAdvice(theAdvice, MessageStyle.HintFast, AdviceType.BeghouledMatch3);
                 }
-                if (mChallengeScore >= 70)
+                if (mChallengeScore >= GameConstants.BEGHOULED_WINNING_SCORE - 5)
                 {
                     mBoard.DisplayAdvice("[ADVICE_BEGHOULED_ALMOST_THERE]", MessageStyle.HintFast, AdviceType.AlmostThere);
                 }
             }
-            if (mChallengeScore >= 75)
+            if (mChallengeScore >= GameConstants.BEGHOULED_WINNING_SCORE)
             {
-                mChallengeScore = 75;
+                mChallengeScore = GameConstants.BEGHOULED_WINNING_SCORE;
                 SpawnLevelAward(x, y);
                 mBoard.ClearAdvice(AdviceType.None);
             }
@@ -2546,11 +2551,11 @@ namespace Lawn
         public void DrawStormFlash(Graphics g, int theTime, int theMaxAmount)
         {
             RandomNumbers.Seed(mBoard.mMainCounter / 6);
-            int num = TodCommon.TodAnimateCurve(150, 0, theTime, 255 - theMaxAmount, 255, TodCurves.Linear);
+            int num = TodCommon.TodAnimateCurve(GameConstants.STORM_FLASH_TIME, 0, theTime, 255 - theMaxAmount, 255, TodCurves.Linear);
             int theAlpha = TodCommon.ClampInt((int)(num + RandomNumbers.NextNumber(64f) - 32f), 0, 255);
             g.SetColor(new SexyColor(0, 0, 0, theAlpha));
             g.FillRect(-1000, -1000, Constants.BOARD_WIDTH + 2000, Constants.BOARD_HEIGHT + 2000);
-            int theAlpha2 = TodCommon.TodAnimateCurve(150, 75, theTime, theMaxAmount, 0, TodCurves.Linear);
+            int theAlpha2 = TodCommon.TodAnimateCurve(GameConstants.STORM_FLASH_TIME, GameConstants.STORM_FLASH_TIME / 2, theTime, theMaxAmount, 0, TodCurves.Linear);
             g.SetColor(new SexyColor(255, 255, 255, theAlpha2));
             g.FillRect(-1000, -1000, Constants.BOARD_WIDTH + 2000, Constants.BOARD_HEIGHT + 2000);
         }
@@ -3555,12 +3560,12 @@ namespace Lawn
             }
             if (!mBoard.mAdvice.IsBeingDisplayed() && !mBoard.mHelpDisplayed[49])
             {
-                string theAdvice = TodCommon.TodReplaceNumberString("[ADVICE_ZOMBIQUARIUM_COLLECT_SUN]", "{SCORE}", 1000);
+                string theAdvice = TodCommon.TodReplaceNumberString("[ADVICE_ZOMBIQUARIUM_COLLECT_SUN]", "{SCORE}", GameConstants.ZOMBIQUARIUM_WINNING_SCORE);
                 mBoard.DisplayAdvice(theAdvice, MessageStyle.HintTallFast, AdviceType.ZombiquariumCollectSun);
             }
-            int num = TodCommon.ClampInt(mBoard.mSunMoney, 0, 1000);
-            mBoard.mProgressMeterWidth = TodCommon.TodAnimateCurve(0, 1000, num, 0, 150, TodCurves.Linear);
-            if (num >= 900)
+            int num = TodCommon.ClampInt(mBoard.mSunMoney, 0, GameConstants.ZOMBIQUARIUM_WINNING_SCORE);
+            mBoard.mProgressMeterWidth = TodCommon.TodAnimateCurve(0, GameConstants.ZOMBIQUARIUM_WINNING_SCORE, num, 0, GameConstants.PROGRESS_METER_COUNTER, TodCurves.Linear);
+            if (num >= GameConstants.ZOMBIQUARIUM_WINNING_SCORE - 100)
             {
                 mBoard.DisplayAdvice("[ADVICE_ALMOST_THERE]", MessageStyle.HintTallFast, AdviceType.AlmostThere);
             }
@@ -3578,7 +3583,7 @@ namespace Lawn
                 mBoard.ClearAdvice(AdviceType.ZombiquariumBuySnorkel);
                 mBoard.mTutorialState = TutorialState.Off;
             }
-            if (num >= 1000 && mBoard.mTutorialState == TutorialState.ZombiquariumBoughtSnorkel)
+            if (num >= GameConstants.ZOMBIQUARIUM_WINNING_SCORE && mBoard.mTutorialState == TutorialState.ZombiquariumBoughtSnorkel)
             {
                 mBoard.mTutorialState = TutorialState.ZombiquariumClickTrophy;
                 float num4 = mBoard.mSeedBank.mX + mBoard.mSeedBank.mSeedPackets[1].mX;
@@ -3586,7 +3591,7 @@ namespace Lawn
                 mBoard.TutorialArrowShow((int)num4, (int)num5);
                 mBoard.DisplayAdvice("[ADVICE_ZOMBIQUARIUM_CLICK_TROPHY]", MessageStyle.HintTallFast, AdviceType.ZombiquariumClickTrophy);
             }
-            else if (num < 1000 && mBoard.mTutorialState == TutorialState.ZombiquariumClickTrophy)
+            else if (num < GameConstants.ZOMBIQUARIUM_WINNING_SCORE && mBoard.mTutorialState == TutorialState.ZombiquariumClickTrophy)
             {
                 mBoard.TutorialArrowRemove();
                 mBoard.ClearAdvice(AdviceType.ZombiquariumClickTrophy);
@@ -3781,7 +3786,7 @@ namespace Lawn
                     Challenge.aPotArray[num].mItem = gridItem;
                     Challenge.aPotArray[num].mWeight = 1;
                     num++;
-                    Debug.ASSERT(num <= 54);
+                    Debug.ASSERT(num <= GameConstants.MAX_SCARY_POTS);
                 }
             }
             if (theCount > num)
@@ -3812,7 +3817,7 @@ namespace Lawn
                     Challenge.aGridArray[num].mY = k;
                     Challenge.aGridArray[num].mWeight = 1;
                     num++;
-                    Debug.ASSERT(num <= 54);
+                    Debug.ASSERT(num <= GameConstants.MAX_SCARY_POTS);
                 }
             }
             if ((mApp.IsAdventureMode() && mBoard.mLevel == 35) || mApp.mGameMode == GameMode.Quickplay35)
@@ -4707,8 +4712,8 @@ namespace Lawn
                     SquirrelUpdateOne(gridItem);
                 }
             }
-            mChallengeScore = 7 - SquirrelCountUncaught();
-            mBoard.mProgressMeterWidth = TodCommon.TodAnimateCurve(0, 7, mChallengeScore, 0, 150, TodCurves.Linear);
+            mChallengeScore = GameConstants.NUM_SQUIRRELS - SquirrelCountUncaught();
+            mBoard.mProgressMeterWidth = TodCommon.TodAnimateCurve(0, GameConstants.NUM_SQUIRRELS, mChallengeScore, 0, GameConstants.PROGRESS_METER_COUNTER, TodCurves.Linear);
         }
 
         public int SquirrelCountUncaught()
@@ -4743,7 +4748,7 @@ namespace Lawn
             }
             TodWeightedGridArray todWeightedGridArray;
             GridItem newGridItem;
-            for (int k = 0; k < 7; k++)
+            for (int k = 0; k < GameConstants.NUM_SQUIRRELS; k++)
             {
                 todWeightedGridArray = TodCommon.TodPickFromWeightedGridArray(array, num);
                 todWeightedGridArray.mWeight = 0;
@@ -5194,8 +5199,8 @@ namespace Lawn
         public void IZombieScoreBrain(GridItem theBrain)
         {
             mBoard.mChallenge.mChallengeScore++;
-            mBoard.mProgressMeterWidth = TodCommon.TodAnimateCurve(0, 5, mBoard.mChallenge.mChallengeScore, 0, 150, TodCurves.Linear);
-            if (mBoard.mChallenge.mChallengeScore == 5)
+            mBoard.mProgressMeterWidth = TodCommon.TodAnimateCurve(0, GameConstants.IZOMBIE_WINNING_SCORE, mBoard.mChallenge.mChallengeScore, 0, GameConstants.PROGRESS_METER_COUNTER, TodCurves.Linear);
+            if (mBoard.mChallenge.mChallengeScore == GameConstants.IZOMBIE_WINNING_SCORE)
             {
                 if (mApp.IsEndlessIZombie(mApp.mGameMode))
                 {
@@ -5206,7 +5211,7 @@ namespace Lawn
                     mBoard.mChallenge.SpawnLevelAward(0, theBrain.mGridY);
                 }
             }
-            if (mBoard.mChallenge.mChallengeScore != 5 || !PuzzleIsAwardStage())
+            if (mBoard.mChallenge.mChallengeScore != GameConstants.IZOMBIE_WINNING_SCORE || !PuzzleIsAwardStage())
             {
                 mBoard.DropLootPiece((int)theBrain.mPosX + 40, (int)theBrain.mPosY - 50, 12);
             }

@@ -438,9 +438,9 @@ namespace Lawn
                 mApp.DoBackToMain();
             }
             int num = theId - 200;
-            if (num >= 0 && num < 122)
+            if (num >= 0 && num < GameConstants.NUM_CHALLENGE_MODES)
             {
-                GameMode theGameMode = num + GameMode.SurvivalNormalStage1;
+                GameMode theGameMode = num + GameMode.ChallengeStart;
                 mApp.KillChallengeScreen();
                 mApp.PreNewGame(theGameMode, true);
             }
@@ -575,7 +575,7 @@ namespace Lawn
 
         public ButtonWidget[] mPageButton = new ButtonWidget[4];
 
-        public ButtonWidget[] mChallengeButton = new ButtonWidget[122];
+        public ButtonWidget[] mChallengeButton = new ButtonWidget[GameConstants.NUM_CHALLENGE_MODES];
 
         public LawnApp mApp;
 

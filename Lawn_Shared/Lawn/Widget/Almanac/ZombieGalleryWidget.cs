@@ -23,7 +23,7 @@ namespace Lawn
 
         public ZombieType GetZombieType(int theIndex)
         {
-            if (theIndex >= 33)
+            if (theIndex >= (int)ZombieType.ZombieTypesCount)
             {
                 return ZombieType.Invalid;
             }
@@ -34,7 +34,7 @@ namespace Lawn
         {
             for (int i = 0; i < GameConstants.NUM_ALMANAC_ZOMBIES; i++)
             {
-                if (i < 33)
+                if (i < (int)ZombieType.ZombieTypesCount)
                 {
                     ZombieType zombieType = GetZombieType(i);
                     if (zombieType != ZombieType.Invalid && ZombieIsShown(zombieType))

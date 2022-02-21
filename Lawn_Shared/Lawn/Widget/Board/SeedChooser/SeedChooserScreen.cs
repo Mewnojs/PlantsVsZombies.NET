@@ -122,12 +122,11 @@ namespace Lawn
                 mStoreButton.mBtnNoDraw = true;
                 mStoreButton.mDisabled = true;
             }
-            for (int i = 0; i < 49; i++)
+            for (SeedType i = 0; i < SeedType.SeedsInChooserCount; i++)
             {
-                SeedType seedType = (SeedType)i;
                 ChosenSeed chosenSeed = new ChosenSeed();
-                chosenSeed.mSeedType = seedType;
-                GetSeedPositionInChooser(i, ref chosenSeed.mX, ref chosenSeed.mY);
+                chosenSeed.mSeedType = i;
+                GetSeedPositionInChooser((int)i, ref chosenSeed.mX, ref chosenSeed.mY);
                 chosenSeed.mTimeStartMotion = 0;
                 chosenSeed.mTimeEndMotion = 0;
                 chosenSeed.mStartX = chosenSeed.mX;
@@ -140,11 +139,11 @@ namespace Lawn
                 chosenSeed.mRefreshing = false;
                 chosenSeed.mImitaterType = SeedType.None;
                 chosenSeed.mCrazyDavePicked = false;
-                if (i == 48)
+                if (i == SeedType.Imitater)
                 {
                     chosenSeed.mSeedState = ChosenSeedState.SEED_PACKET_HIDDEN;
                 }
-                mChosenSeeds[i] = chosenSeed;
+                mChosenSeeds[(int)i] = chosenSeed;
             }
             if (mBoard.mCutScene.IsSurvivalRepick())
             {
@@ -200,12 +199,11 @@ namespace Lawn
             mLastMouseX = mApp.mWidgetManager.mLastMouseX;
             mLastMouseY = mApp.mWidgetManager.mLastMouseY;
             mSeedChooserAge += 3;
-            for (int i = 0; i < 49; i++)
+            for (SeedType i = 0; i < SeedType.SeedsInChooserCount; i++)
             {
-                SeedType theSeedType = (SeedType)i;
-                if (mApp.HasSeedType(theSeedType))
+                if (mApp.HasSeedType(i))
                 {
-                    ChosenSeed chosenSeed = mChosenSeeds[i];
+                    ChosenSeed chosenSeed = mChosenSeeds[(int)i];
                     if (chosenSeed.mSeedState == ChosenSeedState.SEED_FLYING_TO_BANK || chosenSeed.mSeedState == ChosenSeedState.SEED_FLYING_TO_CHOOSER)
                     {
                         chosenSeed.mX = TodCommon.TodAnimateCurve(chosenSeed.mTimeStartMotion, chosenSeed.mTimeEndMotion, mSeedChooserAge, chosenSeed.mStartX, chosenSeed.mEndX, TodCurves.EaseInOut);
@@ -311,12 +309,11 @@ namespace Lawn
             }
             g.SetColorizeImages(false);
             bool flag = false;
-            for (int i = 0; i < 49; i++)
+            for (SeedType i = 0; i < SeedType.SeedsInChooserCount; i++)
             {
-                SeedType theSeedType = (SeedType)i;
-                if (mApp.HasSeedType(theSeedType))
+                if (mApp.HasSeedType(i))
                 {
-                    ChosenSeed chosenSeed = mChosenSeeds[i];
+                    ChosenSeed chosenSeed = mChosenSeeds[(int)i];
                     if (chosenSeed.mSeedState == ChosenSeedState.SEED_FLYING_TO_BANK)
                     {
                         g.SetClipRect(0, 0, mWidth, mHeight);
@@ -410,9 +407,9 @@ namespace Lawn
             base.MouseDown(x, y, theClickCount);
             if (mSeedsInFlight > 0)
             {
-                for (int i = 0; i < 49; i++)
+                for (SeedType i = 0; i < SeedType.SeedsInChooserCount; i++)
                 {
-                    ChosenSeed chosenSeed = mChosenSeeds[i];
+                    ChosenSeed chosenSeed = mChosenSeeds[(int)i];
                     LandFlyingSeed(ref chosenSeed);
                 }
             }
@@ -458,9 +455,9 @@ namespace Lawn
             }
             if (!mImitaterButton.IsMouseOver())
             {
-                for (int j = 0; j < 49; j++)
+                for (SeedType j = 0; j < SeedType.SeedsInChooserCount; j++)
                 {
-                    ChosenSeed chosenSeed2 = mApp.mSeedChooserScreen.mChosenSeeds[j];
+                    ChosenSeed chosenSeed2 = mApp.mSeedChooserScreen.mChosenSeeds[(int)j];
                     if (chosenSeed2.mSeedState == ChosenSeedState.SEED_IN_BANK && x >= chosenSeed2.mX && y >= chosenSeed2.mY && x < chosenSeed2.mX + Constants.SMALL_SEEDPACKET_WIDTH && y < chosenSeed2.mY + Constants.SMALL_SEEDPACKET_HEIGHT)
                     {
                         ClickedSeedInBank(ref chosenSeed2);
@@ -628,15 +625,14 @@ namespace Lawn
 
         public SeedType FindSeedInBank(int theIndexInBank)
         {
-            for (int i = 0; i < 49; i++)
+            for (SeedType i = 0; i < SeedType.SeedsInChooserCount; i++)
             {
-                SeedType seedType = (SeedType)i;
-                if (mApp.HasSeedType(seedType))
+                if (mApp.HasSeedType(i))
                 {
-                    ChosenSeed chosenSeed = mChosenSeeds[i];
+                    ChosenSeed chosenSeed = mChosenSeeds[(int)i];
                     if (chosenSeed.mSeedState == ChosenSeedState.SEED_IN_BANK && chosenSeed.mSeedIndexInBank == theIndexInBank)
                     {
-                        return seedType;
+                        return i;
                     }
                 }
             }
@@ -691,9 +687,9 @@ namespace Lawn
 
         public bool PickedPlantType(SeedType theSeedType)
         {
-            for (int i = 0; i < 49; i++)
+            for (SeedType i = 0; i < SeedType.SeedsInChooserCount; i++)
             {
-                ChosenSeed chosenSeed = mChosenSeeds[i];
+                ChosenSeed chosenSeed = mChosenSeeds[(int)i];
                 if (chosenSeed.mSeedState == ChosenSeedState.SEED_IN_BANK)
                 {
                     if (chosenSeed.mSeedType == theSeedType)
@@ -906,9 +902,9 @@ namespace Lawn
 
         public void UpdateAfterPurchase()
         {
-            for (int i = 0; i < 49; i++)
+            for (SeedType i = 0; i < SeedType.SeedsInChooserCount; i++)
             {
-                ChosenSeed chosenSeed = mChosenSeeds[i];
+                ChosenSeed chosenSeed = mChosenSeeds[(int)i];
                 if (chosenSeed.mSeedState == ChosenSeedState.SEED_IN_BANK)
                 {
                     GetSeedPositionInBank(chosenSeed.mSeedIndexInBank, ref chosenSeed.mX, ref chosenSeed.mY);
@@ -961,10 +957,10 @@ namespace Lawn
             {
                 SeedChooserScreen.aSeedArray[i].Reset();
             }
-            for (int j = 0; j < 49; j++)
+            for (SeedType j = 0; j < SeedType.SeedsInChooserCount; j++)
             {
                 SeedType seedType = (SeedType)j;
-                SeedChooserScreen.aSeedArray[j].mItem = (int)seedType;
+                SeedChooserScreen.aSeedArray[(int)j].mItem = (int)seedType;
                 uint num = SeedNotRecommendedToPick(seedType);
                 if (!mApp.HasSeedType(seedType) || num != 0U || SeedNotAllowedToPick(seedType) || Plant.IsUpgrade(seedType) || seedType == SeedType.Imitater || seedType == SeedType.Umbrella || seedType == SeedType.Blover)
                 {
@@ -991,7 +987,7 @@ namespace Lawn
             RandomNumbers.Seed(levelRandSeed);
             for (int k = 0; k < 3; k++)
             {
-                SeedType seedType2 = (SeedType)PickFromWeightedArrayUsingSpecialRandSeed(SeedChooserScreen.aSeedArray, 49);
+                SeedType seedType2 = (SeedType)PickFromWeightedArrayUsingSpecialRandSeed(SeedChooserScreen.aSeedArray, (int)SeedType.SeedsInChooserCount);
                 SeedChooserScreen.aSeedArray[(int)seedType2].mWeight = 0;
                 ChosenSeed chosenSeed = mChosenSeeds[(int)seedType2];
                 chosenSeed.mY = mBoard.GetSeedPacketPositionY(k);
@@ -1072,9 +1068,9 @@ namespace Lawn
                 chosenSeed.mSeedIndexInBank = i;
                 mSeedsInBank++;
             }
-            for (int j = 0; j < 49; j++)
+            for (SeedType j = 0; j < SeedType.SeedsInChooserCount; j++)
             {
-                ChosenSeed chosenSeed2 = mChosenSeeds[j];
+                ChosenSeed chosenSeed2 = mChosenSeeds[(int)j];
                 LandFlyingSeed(ref chosenSeed2);
             }
             CloseSeedChooser();
@@ -1150,7 +1146,7 @@ namespace Lawn
 
         public ScrollWidget mScrollWidget;
 
-        public ChosenSeed[] mChosenSeeds = new ChosenSeed[53];
+        public ChosenSeed[] mChosenSeeds = new ChosenSeed[(int)SeedType.SeedTypeCount];
 
         public LawnApp mApp;
 
@@ -1178,6 +1174,6 @@ namespace Lawn
 
         public int mPendingWarningId;
 
-        private static TodWeightedArray[] aSeedArray = new TodWeightedArray[53];
+        private static TodWeightedArray[] aSeedArray = new TodWeightedArray[(int)SeedType.SeedTypeCount];
     }
 }

@@ -290,7 +290,7 @@ namespace Lawn
         public void UpdateConveyorBelt()
         {
             mConveyorBeltCounter++;
-            if (mConveyorBeltCounter % 4 == 0)
+            if (mConveyorBeltCounter % GameConstants.CONVEYOR_SPEED == 0)
             {
                 for (int i = 0; i < mNumPackets; i++)
                 {
@@ -335,7 +335,7 @@ namespace Lawn
 
         public int mNumPackets;
 
-        public SeedPacket[] mSeedPackets = new SeedPacket[9];
+        public SeedPacket[] mSeedPackets = new SeedPacket[GameConstants.SEEDBANK_MAX];
 
         public int mCutSceneDarken;
 

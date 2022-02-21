@@ -50,21 +50,21 @@ namespace Lawn
             mLevel = 1;
             mCoins = 0;
             mFinishedAdventure = 0;
-            mPottedPlant = new PottedPlant[200];
+            mPottedPlant = new PottedPlant[GameConstants.MAX_POTTED_PLANTS];
             for (int i = 0; i < mPottedPlant.Length; i++)
             {
                 mPottedPlant[i] = new PottedPlant();
             }
             mShownAchievements = new bool[18];
             mEarnedAchievements = new bool[18];
-            mPlantTypesUsed = new bool[49];
-            mChallengeRecords = new int[200];
-            for (int j = 0; j < 200; j++)
+            mPlantTypesUsed = new bool[(int)SeedType.SeedsInChooserCount];
+            mChallengeRecords = new int[GameConstants.MAX_CHALLENGE_MODES];
+            for (int j = 0; j < GameConstants.MAX_CHALLENGE_MODES; j++)
             {
                 mChallengeRecords[j] = 0;
             }
-            mPurchases = new int[80];
-            for (int k = 0; k < 80; k++)
+            mPurchases = new int[GameConstants.MAX_PURCHASES];
+            for (int k = 0; k < GameConstants.MAX_PURCHASES; k++)
             {
                 mPurchases[k] = 0;
             }
@@ -93,7 +93,7 @@ namespace Lawn
             mHasSeenUpsell = false;
             mLastSeenMoreGames = default(DateTime);
             mPlaceHolderPlayerStats = new int[1];
-            for (int l = 0; l < 1; l++)
+            for (int l = 0; l < GameConstants.NUM_PLACEHOLDER_INTS; l++)
             {
                 mPlaceHolderPlayerStats[l] = 0;
             }

@@ -688,13 +688,13 @@ namespace Lawn
                 return;
             }
             int num = 0;
-            int[] array = new int[33];
+            int[] array = new int[(int)ZombieType.ZombieTypesCount];
             int num2 = 0;
-            for (int i = 0; i < 33; i++)
+            for (int i = 0; i < (int)ZombieType.ZombieTypesCount; i++)
             {
                 array[i] = 0;
             }
-            Debug.ASSERT(mBoard.mNumWaves <= 100);
+            Debug.ASSERT(mBoard.mNumWaves <= GameConstants.MAX_ZOMBIE_WAVES);
             for (int j = 0; j < mBoard.mNumWaves; j++)
             {
                 for (int k = 0; k < 50; k++)
@@ -719,11 +719,11 @@ namespace Lawn
             }
             if (mApp.mGameMode == GameMode.ChallengeLastStand)
             {
-                for (int l = 0; l < 33; l++)
+                for (ZombieType l = 0; l < ZombieType.ZombieTypesCount; l++)
                 {
-                    if (l != 19 && mBoard.mZombieAllowed[l])
+                    if (l != ZombieType.Yeti && mBoard.mZombieAllowed[(int)l])
                     {
-                        array[l] = Math.Max(array[l], 1);
+                        array[(int)l] = Math.Max(array[(int)l], 1);
                     }
                 }
             }
@@ -753,22 +753,22 @@ namespace Lawn
                 num3 = 18;
             }
             Debug.ASSERT(num3 <= 18);
-            for (int num4 = 0; num4 < 33; num4++)
+            for (ZombieType num4 = 0; num4 < ZombieType.ZombieTypesCount; num4++)
             {
-                if (array[num4] != 0 && (Is2x2Zombie((ZombieType)num4) || num4 == 12))
+                if (array[(int)num4] != 0 && (Is2x2Zombie(num4) || num4 == ZombieType.Zamboni))
                 {
-                    FindAndPlaceZombie((ZombieType)num4, array2);
+                    FindAndPlaceZombie(num4, array2);
                 }
             }
-            for (int num5 = 0; num5 < 33; num5++)
+            for (ZombieType num5 = 0; num5 < ZombieType.ZombieTypesCount; num5++)
             {
-                if (array[num5] != 0 && !Is2x2Zombie((ZombieType)num5) && num5 != 12)
+                if (array[(int)num5] != 0 && !Is2x2Zombie(num5) && num5 != ZombieType.Zamboni)
                 {
-                    int num6 = array[num5] * num3 / num;
-                    num6 = TodCommon.ClampInt(num6, 1, array[num5]);
+                    int num6 = array[(int)num5] * num3 / num;
+                    num6 = TodCommon.ClampInt(num6, 1, array[(int)num5]);
                     for (int num7 = 0; num7 < num6; num7++)
                     {
-                        FindAndPlaceZombie((ZombieType)num5, array2);
+                        FindAndPlaceZombie(num5, array2);
                     }
                 }
             }
@@ -1241,12 +1241,11 @@ namespace Lawn
                     Zombie.PreloadZombieResources(zombieType);
                 }
             }
-            for (int k = 0; k < 53; k++)
+            for (SeedType k = 0; k < SeedType.SeedTypeCount; k++)
             {
-                SeedType theSeedType = (SeedType)k;
-                if (mApp.HasSeedType(theSeedType))
+                if (mApp.HasSeedType(k))
                 {
-                    Plant.PreloadPlantResources(theSeedType);
+                    Plant.PreloadPlantResources(k);
                 }
             }
             if (mApp.IsFirstTimeAdventureMode() && mBoard.mLevel <= 50)

@@ -26,41 +26,13 @@ namespace Lawn
             };
             GameConstants.gLawnDialogColors = new int[,]
             {
-                {
-                    255,
-                    255,
-                    255
-                },
-                {
-                    255,
-                    255,
-                    0
-                },
-                {
-                    255,
-                    255,
-                    255
-                },
-                {
-                    255,
-                    255,
-                    255
-                },
-                {
-                    255,
-                    255,
-                    255
-                },
-                {
-                    80,
-                    80,
-                    80
-                },
-                {
-                    255,
-                    255,
-                    255
-                }
+                { 255,255,255 },
+                { 255,255,0   },
+                { 255,255,255 },
+                { 255,255,255 },
+                { 255,255,255 },
+                { 80, 80, 80  },
+                { 255,255,255 }
             };
             GameConstants.gLawnParticleArray = new ParticleParams[]
             {
@@ -386,1332 +358,262 @@ namespace Lawn
         // Note: this type is marked as 'beforefieldinit'.
         static GameConstants()
         {
-            ZombieAllowedLevels[] array = new ZombieAllowedLevels[33];
-            array[0] = new ZombieAllowedLevels(ZombieType.Normal, new int[]
+            // 冒险关卡出怪
+            GameConstants.gZombieAllowedLevels = new ZombieAllowedLevels[(int)ZombieType.ZombieTypesCount]
             {
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1
-            });
-            array[1] = new ZombieAllowedLevels(ZombieType.Flag, new int[]
+                /*                    | ZombieType 枚举值 | 允许的关卡(1为允许、0为不允许) | */
+                new ZombieAllowedLevels(ZombieType.Normal, new int[NUM_LEVELS]
+                {
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                }),
+                new ZombieAllowedLevels(ZombieType.Flag, new int[NUM_LEVELS]
+                {
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                }),
+                new ZombieAllowedLevels(ZombieType.TrafficCone, new int[NUM_LEVELS]
+                {
+                    0, 0, 1, 1, 1, 1, 1, 1, 1, 1,
+                    0, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                }),
+                new ZombieAllowedLevels(ZombieType.Polevaulter, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, 0, 0, 1, 1, 0, 1, 1,
+                    0, 0, 0, 1, 1, 0, 0, 0, 0, 0,
+                    0, 0, 0, 1, 0, 0, 0, 0, 1, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+                }),
+                new ZombieAllowedLevels(ZombieType.Pail, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+                    0, 1, 0, 0, 1, 0, 0, 0, 0, 0,
+                    0, 1, 0, 1, 0, 0, 1, 0, 1, 1,
+                    0, 0, 0, 0, 0, 0, 1, 0, 1, 1,
+                    0, 1, 0, 0, 1, 0, 0, 0, 1, 1,
+                }),
+                new ZombieAllowedLevels(ZombieType.Newspaper, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    1, 1, 0, 0, 1, 0, 0, 0, 0, 0,
+                    0, 1, 0, 1, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                }),
+                new ZombieAllowedLevels(ZombieType.Door, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 1, 1, 0, 0, 1, 0, 1, 1,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                }),
+                new ZombieAllowedLevels(ZombieType.Football, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 1, 1, 0, 0, 1,
+                    0, 1, 0, 0, 1, 0, 0, 0, 0, 0,
+                    0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+                }),
+                new ZombieAllowedLevels(ZombieType.Dancer, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                }),
+                new ZombieAllowedLevels(ZombieType.BackupDancer, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+                }),
+                new ZombieAllowedLevels(ZombieType.DuckyTube, new int[NUM_LEVELS]),
+                new ZombieAllowedLevels(ZombieType.Snorkel, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 1, 1, 1, 0, 1, 0, 0, 1,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                }),
+                new ZombieAllowedLevels(ZombieType.Zamboni, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 1, 1, 0, 1, 1,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                }),
+                new ZombieAllowedLevels(ZombieType.Bobsled, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 1, 1, 0, 1, 1,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                }),
+                new ZombieAllowedLevels(ZombieType.DolphinRider, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+                    0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                }),
+                new ZombieAllowedLevels(ZombieType.JackInTheBox, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    1, 1, 0, 0, 0, 0, 1, 0, 0, 1,
+                    0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
+                }),
+                new ZombieAllowedLevels(ZombieType.Balloon, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 1, 1, 0, 0, 0, 0, 1, 1,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                }),
+                new ZombieAllowedLevels(ZombieType.Digger, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 1, 1, 0, 0, 1,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                }),
+                new ZombieAllowedLevels(ZombieType.Pogo, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+                    0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+                }),
+                new ZombieAllowedLevels(ZombieType.Yeti, new int[NUM_LEVELS]),
+                new ZombieAllowedLevels(ZombieType.Bungee, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    1, 1, 0, 0, 0, 0, 1, 0, 1, 1,
+                }),
+                new ZombieAllowedLevels(ZombieType.Ladder, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 1, 1, 1, 0, 1, 0, 1, 1,
+                }),
+                new ZombieAllowedLevels(ZombieType.Catapult, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 1, 1, 0, 1, 1,
+                }),
+                new ZombieAllowedLevels(ZombieType.Gargantuar, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+                }),
+                new ZombieAllowedLevels(ZombieType.Imp, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+                }),
+                new ZombieAllowedLevels(ZombieType.Boss, new int[NUM_LEVELS]),
+                new ZombieAllowedLevels(ZombieType.PeaHead, new int[NUM_LEVELS]),
+                new ZombieAllowedLevels(ZombieType.WallnutHead, new int[NUM_LEVELS]),
+                new ZombieAllowedLevels(ZombieType.JalapenoHead, new int[NUM_LEVELS]),
+                new ZombieAllowedLevels(ZombieType.GatlingHead, new int[NUM_LEVELS]),
+                new ZombieAllowedLevels(ZombieType.SquashHead, new int[NUM_LEVELS]),
+                new ZombieAllowedLevels(ZombieType.TallnutHead, new int[NUM_LEVELS]),
+                new ZombieAllowedLevels(ZombieType.RedeyeGargantuar, new int[NUM_LEVELS]),
+            };
+            // 植物常量定义
+            GameConstants.gPlantDefs = new PlantDefinition[(int)SeedType.SeedTypeCount]
             {
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1
-            });
-            array[2] = new ZombieAllowedLevels(ZombieType.TrafficCone, new int[]
-            {
-                0,
-                0,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                0,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1
-            });
-            array[3] = new ZombieAllowedLevels(ZombieType.Polevaulter, new int[]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                0,
-                1,
-                1,
-                0,
-                0,
-                0,
-                1,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                0,
-                0,
-                0,
-                0,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            });
-            array[4] = new ZombieAllowedLevels(ZombieType.Pail, new int[]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                1,
-                0,
-                1,
-                0,
-                0,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                0,
-                1,
-                0,
-                0,
-                1,
-                0,
-                1,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                0,
-                1,
-                1,
-                0,
-                1,
-                0,
-                0,
-                1,
-                0,
-                0,
-                0,
-                1,
-                1
-            });
-            array[5] = new ZombieAllowedLevels(ZombieType.Newspaper, new int[]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                0,
-                0,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                0,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            });
-            array[6] = new ZombieAllowedLevels(ZombieType.Door, new int[]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                0,
-                0,
-                1,
-                0,
-                1,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            });
-            array[7] = new ZombieAllowedLevels(ZombieType.Football, new int[]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                0,
-                0,
-                1,
-                0,
-                1,
-                0,
-                0,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            });
-            array[8] = new ZombieAllowedLevels(ZombieType.Dancer, new int[]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            });
-            array[9] = new ZombieAllowedLevels(ZombieType.BackupDancer, new int[]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            });
-            ZombieAllowedLevels[] array2 = array;
-            int num = 10;
-            ZombieType aZombieType = ZombieType.DuckyTube;
-            int[] levels = new int[50];
-            array2[num] = new ZombieAllowedLevels(aZombieType, levels);
-            array[11] = new ZombieAllowedLevels(ZombieType.Snorkel, new int[]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                1,
-                0,
-                1,
-                0,
-                0,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            });
-            array[12] = new ZombieAllowedLevels(ZombieType.Zamboni, new int[]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                0,
-                1,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            });
-            array[13] = new ZombieAllowedLevels(ZombieType.Bobsled, new int[]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                0,
-                1,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            });
-            array[14] = new ZombieAllowedLevels(ZombieType.DolphinRider, new int[]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                1,
-                0,
-                0,
-                0,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            });
-            array[15] = new ZombieAllowedLevels(ZombieType.JackInTheBox, new int[]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                0,
-                0,
-                0,
-                0,
-                1,
-                0,
-                0,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1
-            });
-            array[16] = new ZombieAllowedLevels(ZombieType.Balloon, new int[]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            });
-            array[17] = new ZombieAllowedLevels(ZombieType.Digger, new int[]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                0,
-                0,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            });
-            array[18] = new ZombieAllowedLevels(ZombieType.Pogo, new int[]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                1,
-                0,
-                0,
-                0,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            });
-            ZombieAllowedLevels[] array3 = array;
-            int num2 = 19;
-            ZombieType aZombieType2 = ZombieType.Yeti;
-            int[] levels2 = new int[50];
-            array3[num2] = new ZombieAllowedLevels(aZombieType2, levels2);
-            array[20] = new ZombieAllowedLevels(ZombieType.Bungee, new int[]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                0,
-                0,
-                0,
-                0,
-                1,
-                0,
-                1,
-                1
-            });
-            array[21] = new ZombieAllowedLevels(ZombieType.Ladder, new int[]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                1,
-                0,
-                1,
-                0,
-                1,
-                1
-            });
-            array[22] = new ZombieAllowedLevels(ZombieType.Catapult, new int[]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                0,
-                1,
-                1
-            });
-            array[23] = new ZombieAllowedLevels(ZombieType.Gargantuar, new int[]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                1
-            });
-            array[24] = new ZombieAllowedLevels(ZombieType.Imp, new int[]
-            {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1,
-                1,
-                1
-            });
-            ZombieAllowedLevels[] array4 = array;
-            int num3 = 25;
-            ZombieType aZombieType3 = ZombieType.Boss;
-            int[] levels3 = new int[50];
-            array4[num3] = new ZombieAllowedLevels(aZombieType3, levels3);
-            ZombieAllowedLevels[] array5 = array;
-            int num4 = 26;
-            ZombieType aZombieType4 = ZombieType.PeaHead;
-            int[] levels4 = new int[50];
-            array5[num4] = new ZombieAllowedLevels(aZombieType4, levels4);
-            ZombieAllowedLevels[] array6 = array;
-            int num5 = 27;
-            ZombieType aZombieType5 = ZombieType.WallnutHead;
-            int[] levels5 = new int[50];
-            array6[num5] = new ZombieAllowedLevels(aZombieType5, levels5);
-            ZombieAllowedLevels[] array7 = array;
-            int num6 = 28;
-            ZombieType aZombieType6 = ZombieType.JalapenoHead;
-            int[] levels6 = new int[50];
-            array7[num6] = new ZombieAllowedLevels(aZombieType6, levels6);
-            ZombieAllowedLevels[] array8 = array;
-            int num7 = 29;
-            ZombieType aZombieType7 = ZombieType.GatlingHead;
-            int[] levels7 = new int[50];
-            array8[num7] = new ZombieAllowedLevels(aZombieType7, levels7);
-            ZombieAllowedLevels[] array9 = array;
-            int num8 = 30;
-            ZombieType aZombieType8 = ZombieType.SquashHead;
-            int[] levels8 = new int[50];
-            array9[num8] = new ZombieAllowedLevels(aZombieType8, levels8);
-            ZombieAllowedLevels[] array10 = array;
-            int num9 = 31;
-            ZombieType aZombieType9 = ZombieType.TallnutHead;
-            int[] levels9 = new int[50];
-            array10[num9] = new ZombieAllowedLevels(aZombieType9, levels9);
-            ZombieAllowedLevels[] array11 = array;
-            int num10 = 32;
-            ZombieType aZombieType10 = ZombieType.RedeyeGargantuar;
-            int[] levels10 = new int[50];
-            array11[num10] = new ZombieAllowedLevels(aZombieType10, levels10);
-            GameConstants.gZombieAllowedLevels = array;
-            GameConstants.gPlantDefs = new PlantDefinition[]
-            {
-                new PlantDefinition(SeedType.Peashooter, null, ReanimationType.Peashooter, 0, 100, 750, PlantSubClass.Shooter, 150, "PEASHOOTER"),
-                new PlantDefinition(SeedType.Sunflower, null, ReanimationType.Sunflower, 1, 50, 750, PlantSubClass.Normal, 2500, "SUNFLOWER"),
-                new PlantDefinition(SeedType.Cherrybomb, null, ReanimationType.Cherrybomb, 3, 150, 5000, PlantSubClass.Normal, 0, "CHERRY_BOMB"),
-                new PlantDefinition(SeedType.Wallnut, null, ReanimationType.Wallnut, 2, 50, 3000, PlantSubClass.Normal, 0, "WALL_NUT"),
-                new PlantDefinition(SeedType.Potatomine, null, ReanimationType.Potatomine, 37, 25, 3000, PlantSubClass.Normal, 0, "POTATO_MINE"),
-                new PlantDefinition(SeedType.Snowpea, null, ReanimationType.Snowpea, 4, 175, 750, PlantSubClass.Shooter, 150, "SNOW_PEA"),
-                new PlantDefinition(SeedType.Chomper, null, ReanimationType.Chomper, 31, 150, 750, PlantSubClass.Normal, 0, "CHOMPER"),
-                new PlantDefinition(SeedType.Repeater, null, ReanimationType.Repeater, 5, 200, 750, PlantSubClass.Shooter, 150, "REPEATER"),
-                new PlantDefinition(SeedType.Puffshroom, null, ReanimationType.Puffshroom, 6, 0, 750, PlantSubClass.Shooter, 150, "PUFF_SHROOM"),
-                new PlantDefinition(SeedType.Sunshroom, null, ReanimationType.Sunshroom, 7, 25, 750, PlantSubClass.Normal, 2500, "SUN_SHROOM"),
-                new PlantDefinition(SeedType.Fumeshroom, null, ReanimationType.Fumeshroom, 9, 75, 750, PlantSubClass.Shooter, 150, "FUME_SHROOM"),
-                new PlantDefinition(SeedType.Gravebuster, null, ReanimationType.GraveBuster, 40, 75, 750, PlantSubClass.Normal, 0, "GRAVE_BUSTER"),
-                new PlantDefinition(SeedType.Hypnoshroom, null, ReanimationType.Hypnoshroom, 10, 75, 3000, PlantSubClass.Normal, 0, "HYPNO_SHROOM"),
-                new PlantDefinition(SeedType.Scaredyshroom, null, ReanimationType.Scrareyshroom, 33, 25, 750, PlantSubClass.Shooter, 150, "SCAREDY_SHROOM"),
-                new PlantDefinition(SeedType.Iceshroom, null, ReanimationType.Iceshroom, 36, 75, 5000, PlantSubClass.Normal, 0, "ICE_SHROOM"),
-                new PlantDefinition(SeedType.Doomshroom, null, ReanimationType.Doomshroom, 20, 125, 5000, PlantSubClass.Normal, 0, "DOOM_SHROOM"),
-                new PlantDefinition(SeedType.Lilypad, null, ReanimationType.Lilypad, 19, 25, 750, PlantSubClass.Normal, 0, "LILY_PAD"),
-                new PlantDefinition(SeedType.Squash, null, ReanimationType.Squash, 21, 50, 3000, PlantSubClass.Normal, 0, "SQUASH"),
-                new PlantDefinition(SeedType.Threepeater, null, ReanimationType.Threepeater, 12, 325, 750, PlantSubClass.Shooter, 150, "THREEPEATER"),
-                new PlantDefinition(SeedType.Tanglekelp, null, ReanimationType.Tanglekelp, 17, 25, 3000, PlantSubClass.Normal, 0, "TANGLE_KELP"),
-                new PlantDefinition(SeedType.Jalapeno, null, ReanimationType.Jalapeno, 11, 125, 5000, PlantSubClass.Normal, 0, "JALAPENO"),
-                new PlantDefinition(SeedType.Spikeweed, null, ReanimationType.Spikeweed, 22, 100, 750, PlantSubClass.Normal, 0, "SPIKEWEED"),
-                new PlantDefinition(SeedType.Torchwood, null, ReanimationType.Torchwood, 29, 175, 750, PlantSubClass.Normal, 0, "TORCHWOOD"),
-                new PlantDefinition(SeedType.Tallnut, null, ReanimationType.Tallnut, 28, 125, 3000, PlantSubClass.Normal, 0, "TALL_NUT"),
-                new PlantDefinition(SeedType.Seashroom, null, ReanimationType.Seashroom, 39, 0, 3000, PlantSubClass.Shooter, 150, "SEA_SHROOM"),
-                new PlantDefinition(SeedType.Plantern, null, ReanimationType.Plantern, 38, 25, 3000, PlantSubClass.Normal, 2500, "PLANTERN"),
-                new PlantDefinition(SeedType.Cactus, null, ReanimationType.Cactus, 15, 125, 750, PlantSubClass.Shooter, 150, "CACTUS"),
-                new PlantDefinition(SeedType.Blover, null, ReanimationType.Blover, 18, 100, 750, PlantSubClass.Normal, 0, "BLOVER"),
-                new PlantDefinition(SeedType.Splitpea, null, ReanimationType.Splitpea, 32, 125, 750, PlantSubClass.Shooter, 150, "SPLIT_PEA"),
-                new PlantDefinition(SeedType.Starfruit, null, ReanimationType.Starfruit, 30, 125, 750, PlantSubClass.Shooter, 150, "STARFRUIT"),
-                new PlantDefinition(SeedType.Pumpkinshell, null, ReanimationType.Pumpkin, 25, 125, 3000, PlantSubClass.Normal, 0, "PUMPKIN"),
-                new PlantDefinition(SeedType.Magnetshroom, null, ReanimationType.Magnetshroom, 35, 100, 750, PlantSubClass.Normal, 0, "MAGNET_SHROOM"),
-                new PlantDefinition(SeedType.Cabbagepult, null, ReanimationType.Cabbagepult, 13, 100, 750, PlantSubClass.Shooter, 300, "CABBAGE_PULT"),
-                new PlantDefinition(SeedType.Flowerpot, null, ReanimationType.FlowerPot, 33, 25, 750, PlantSubClass.Normal, 0, "FLOWER_POT"),
-                new PlantDefinition(SeedType.Kernelpult, null, ReanimationType.Kernelpult, 13, 100, 750, PlantSubClass.Shooter, 300, "KERNEL_PULT"),
-                new PlantDefinition(SeedType.InstantCoffee, null, ReanimationType.Coffeebean, 33, 75, 750, PlantSubClass.Normal, 0, "COFFEE_BEAN"),
-                new PlantDefinition(SeedType.Garlic, null, ReanimationType.Garlic, 8, 50, 750, PlantSubClass.Normal, 0, "GARLIC"),
-                new PlantDefinition(SeedType.Umbrella, null, ReanimationType.Umbrellaleaf, 23, 100, 750, PlantSubClass.Normal, 0, "UMBRELLA_LEAF"),
-                new PlantDefinition(SeedType.Marigold, null, ReanimationType.Marigold, 24, 50, 3000, PlantSubClass.Normal, 2500, "MARIGOLD"),
-                new PlantDefinition(SeedType.Melonpult, null, ReanimationType.Melonpult, 14, 300, 750, PlantSubClass.Shooter, 300, "MELON_PULT"),
-                new PlantDefinition(SeedType.Gatlingpea, null, ReanimationType.Gatlingpea, 5, 250, 5000, PlantSubClass.Shooter, 150, "GATLING_PEA"),
-                new PlantDefinition(SeedType.Twinsunflower, null, ReanimationType.TwinSunflower, 1, 150, 5000, PlantSubClass.Normal, 2500, "TWIN_SUNFLOWER"),
-                new PlantDefinition(SeedType.Gloomshroom, null, ReanimationType.Gloomshroom, 27, 150, 5000, PlantSubClass.Shooter, 200, "GLOOM_SHROOM"),
-                new PlantDefinition(SeedType.Cattail, null, ReanimationType.Cattail, 27, 225, 5000, PlantSubClass.Shooter, 150, "CATTAIL"),
-                new PlantDefinition(SeedType.Wintermelon, null, ReanimationType.WinterMelon, 27, 200, 5000, PlantSubClass.Shooter, 300, "WINTER_MELON"),
-                new PlantDefinition(SeedType.GoldMagnet, null, ReanimationType.GoldMagnet, 27, 50, 5000, PlantSubClass.Normal, 0, "GOLD_MAGNET"),
-                new PlantDefinition(SeedType.Spikerock, null, ReanimationType.Spikerock, 27, 125, 5000, PlantSubClass.Normal, 0, "SPIKEROCK"),
-                new PlantDefinition(SeedType.Cobcannon, null, ReanimationType.Cobcannon, 16, 500, 5000, PlantSubClass.Normal, 600, "COB_CANNON"),
-                new PlantDefinition(SeedType.Imitater, null, ReanimationType.Imitater, 33, 0, 750, PlantSubClass.Normal, 0, "IMITATER"),
-                new PlantDefinition(SeedType.ExplodeONut, null, ReanimationType.Wallnut, 2, 0, 3000, PlantSubClass.Normal, 0, "EXPLODE_O_NUT"),
-                new PlantDefinition(SeedType.GiantWallnut, null, ReanimationType.Wallnut, 2, 0, 3000, PlantSubClass.Normal, 0, "GIANT_WALLNUT"),
-                new PlantDefinition(SeedType.Sprout, null, ReanimationType.None, 33, 0, 3000, PlantSubClass.Normal, 0, "SPROUT"),
-                new PlantDefinition(SeedType.Leftpeater, null, ReanimationType.Repeater, 5, 200, 750, PlantSubClass.Shooter, 150, "REPEATER")
+                /*                | SeedType 枚举值   | 植物图像 |动画轨道类型           |选卡序号|价格|冷却|子类                  |发射速率|名称| */
+                new PlantDefinition(SeedType.Peashooter,    null, ReanimationType.Peashooter,   0,  100,750, PlantSubClass.Shooter, 150, "PEASHOOTER"),
+                new PlantDefinition(SeedType.Sunflower,     null, ReanimationType.Sunflower,    1,  50, 750, PlantSubClass.Normal,  2500, "SUNFLOWER"),
+                new PlantDefinition(SeedType.Cherrybomb,    null, ReanimationType.Cherrybomb,   3,  150,5000,PlantSubClass.Normal,  0, "CHERRY_BOMB"),
+                new PlantDefinition(SeedType.Wallnut,       null, ReanimationType.Wallnut,      2,  50, 3000,PlantSubClass.Normal,  0, "WALL_NUT"),
+                new PlantDefinition(SeedType.Potatomine,    null, ReanimationType.Potatomine,   37, 25, 3000,PlantSubClass.Normal,  0, "POTATO_MINE"),
+                new PlantDefinition(SeedType.Snowpea,       null, ReanimationType.Snowpea,      4,  175,750, PlantSubClass.Shooter, 150, "SNOW_PEA"),
+                new PlantDefinition(SeedType.Chomper,       null, ReanimationType.Chomper,      31, 150,750, PlantSubClass.Normal,  0, "CHOMPER"),
+                new PlantDefinition(SeedType.Repeater,      null, ReanimationType.Repeater,     5,  200,750, PlantSubClass.Shooter, 150, "REPEATER"),
+                new PlantDefinition(SeedType.Puffshroom,    null, ReanimationType.Puffshroom,   6,  0,  750, PlantSubClass.Shooter, 150, "PUFF_SHROOM"),
+                new PlantDefinition(SeedType.Sunshroom,     null, ReanimationType.Sunshroom,    7,  25, 750, PlantSubClass.Normal,  2500, "SUN_SHROOM"),
+                new PlantDefinition(SeedType.Fumeshroom,    null, ReanimationType.Fumeshroom,   9,  75, 750, PlantSubClass.Shooter, 150, "FUME_SHROOM"),
+                new PlantDefinition(SeedType.Gravebuster,   null, ReanimationType.GraveBuster,  40, 75, 750, PlantSubClass.Normal,  0, "GRAVE_BUSTER"),
+                new PlantDefinition(SeedType.Hypnoshroom,   null, ReanimationType.Hypnoshroom,  10, 75, 3000,PlantSubClass.Normal,  0, "HYPNO_SHROOM"),
+                new PlantDefinition(SeedType.Scaredyshroom, null, ReanimationType.Scrareyshroom,33, 25, 750, PlantSubClass.Shooter, 150, "SCAREDY_SHROOM"),
+                new PlantDefinition(SeedType.Iceshroom,     null, ReanimationType.Iceshroom,    36, 75, 5000,PlantSubClass.Normal,  0, "ICE_SHROOM"),
+                new PlantDefinition(SeedType.Doomshroom,    null, ReanimationType.Doomshroom,   20, 125,5000,PlantSubClass.Normal,  0, "DOOM_SHROOM"),
+                new PlantDefinition(SeedType.Lilypad,       null, ReanimationType.Lilypad,      19, 25, 750, PlantSubClass.Normal,  0, "LILY_PAD"),
+                new PlantDefinition(SeedType.Squash,        null, ReanimationType.Squash,       21, 50, 3000,PlantSubClass.Normal,  0, "SQUASH"),
+                new PlantDefinition(SeedType.Threepeater,   null, ReanimationType.Threepeater,  12, 325,750, PlantSubClass.Shooter, 150, "THREEPEATER"),
+                new PlantDefinition(SeedType.Tanglekelp,    null, ReanimationType.Tanglekelp,   17, 25, 3000,PlantSubClass.Normal,  0, "TANGLE_KELP"),
+                new PlantDefinition(SeedType.Jalapeno,      null, ReanimationType.Jalapeno,     11, 125,5000,PlantSubClass.Normal,  0, "JALAPENO"),
+                new PlantDefinition(SeedType.Spikeweed,     null, ReanimationType.Spikeweed,    22, 100,750, PlantSubClass.Normal,  0, "SPIKEWEED"),
+                new PlantDefinition(SeedType.Torchwood,     null, ReanimationType.Torchwood,    29, 175,750, PlantSubClass.Normal,  0, "TORCHWOOD"),
+                new PlantDefinition(SeedType.Tallnut,       null, ReanimationType.Tallnut,      28, 125,3000,PlantSubClass.Normal,  0, "TALL_NUT"),
+                new PlantDefinition(SeedType.Seashroom,     null, ReanimationType.Seashroom,    39, 0,  3000,PlantSubClass.Shooter, 150, "SEA_SHROOM"),
+                new PlantDefinition(SeedType.Plantern,      null, ReanimationType.Plantern,     38, 25, 3000,PlantSubClass.Normal,  2500, "PLANTERN"),
+                new PlantDefinition(SeedType.Cactus,        null, ReanimationType.Cactus,       15, 125,750, PlantSubClass.Shooter, 150, "CACTUS"),
+                new PlantDefinition(SeedType.Blover,        null, ReanimationType.Blover,       18, 100,750, PlantSubClass.Normal,  0, "BLOVER"),
+                new PlantDefinition(SeedType.Splitpea,      null, ReanimationType.Splitpea,     32, 125,750, PlantSubClass.Shooter, 150, "SPLIT_PEA"),
+                new PlantDefinition(SeedType.Starfruit,     null, ReanimationType.Starfruit,    30, 125,750, PlantSubClass.Shooter, 150, "STARFRUIT"),
+                new PlantDefinition(SeedType.Pumpkinshell,  null, ReanimationType.Pumpkin,      25, 125,3000,PlantSubClass.Normal,  0, "PUMPKIN"),
+                new PlantDefinition(SeedType.Magnetshroom,  null, ReanimationType.Magnetshroom, 35, 100,750, PlantSubClass.Normal,  0, "MAGNET_SHROOM"),
+                new PlantDefinition(SeedType.Cabbagepult,   null, ReanimationType.Cabbagepult,  13, 100,750, PlantSubClass.Shooter, 300, "CABBAGE_PULT"),
+                new PlantDefinition(SeedType.Flowerpot,     null, ReanimationType.FlowerPot,    33, 25, 750, PlantSubClass.Normal,  0, "FLOWER_POT"),
+                new PlantDefinition(SeedType.Kernelpult,    null, ReanimationType.Kernelpult,   13, 100,750, PlantSubClass.Shooter, 300, "KERNEL_PULT"),
+                new PlantDefinition(SeedType.InstantCoffee, null, ReanimationType.Coffeebean,   33, 75, 750, PlantSubClass.Normal,  0, "COFFEE_BEAN"),
+                new PlantDefinition(SeedType.Garlic,        null, ReanimationType.Garlic,       8,  50, 750, PlantSubClass.Normal,  0, "GARLIC"),
+                new PlantDefinition(SeedType.Umbrella,      null, ReanimationType.Umbrellaleaf, 23, 100,750, PlantSubClass.Normal,  0, "UMBRELLA_LEAF"),
+                new PlantDefinition(SeedType.Marigold,      null, ReanimationType.Marigold,     24, 50, 3000,PlantSubClass.Normal,  2500, "MARIGOLD"),
+                new PlantDefinition(SeedType.Melonpult,     null, ReanimationType.Melonpult,    14, 300,750, PlantSubClass.Shooter, 300, "MELON_PULT"),
+                new PlantDefinition(SeedType.Gatlingpea,    null, ReanimationType.Gatlingpea,   5,  250,5000,PlantSubClass.Shooter, 150, "GATLING_PEA"),
+                new PlantDefinition(SeedType.Twinsunflower, null, ReanimationType.TwinSunflower,1,  150,5000,PlantSubClass.Normal,  2500, "TWIN_SUNFLOWER"),
+                new PlantDefinition(SeedType.Gloomshroom,   null, ReanimationType.Gloomshroom,  27, 150,5000,PlantSubClass.Shooter, 200, "GLOOM_SHROOM"),
+                new PlantDefinition(SeedType.Cattail,       null, ReanimationType.Cattail,      27, 225,5000,PlantSubClass.Shooter, 150, "CATTAIL"),
+                new PlantDefinition(SeedType.Wintermelon,   null, ReanimationType.WinterMelon,  27, 200,5000,PlantSubClass.Shooter, 300, "WINTER_MELON"),
+                new PlantDefinition(SeedType.GoldMagnet,    null, ReanimationType.GoldMagnet,   27, 50, 5000,PlantSubClass.Normal,  0, "GOLD_MAGNET"),
+                new PlantDefinition(SeedType.Spikerock,     null, ReanimationType.Spikerock,    27, 125,5000,PlantSubClass.Normal,  0, "SPIKEROCK"),
+                new PlantDefinition(SeedType.Cobcannon,     null, ReanimationType.Cobcannon,    16, 500,5000,PlantSubClass.Normal,  600, "COB_CANNON"),
+                new PlantDefinition(SeedType.Imitater,      null, ReanimationType.Imitater,     33, 0,  750, PlantSubClass.Normal,  0, "IMITATER"),
+                new PlantDefinition(SeedType.ExplodeONut,   null, ReanimationType.Wallnut,      2,  0,  3000,PlantSubClass.Normal,  0, "EXPLODE_O_NUT"),
+                new PlantDefinition(SeedType.GiantWallnut,  null, ReanimationType.Wallnut,      2,  0,  3000,PlantSubClass.Normal,  0, "GIANT_WALLNUT"),
+                new PlantDefinition(SeedType.Sprout,        null, ReanimationType.None,         33, 0,  3000,PlantSubClass.Normal,  0, "SPROUT"),
+                new PlantDefinition(SeedType.Leftpeater,    null, ReanimationType.Repeater,     5,  200,750, PlantSubClass.Shooter, 150, "REPEATER")
             };
             GameConstants.NUM_BACKUP_DANCERS = 4;
             GameConstants.MAX_ZOMBIE_FOLLOWERS = 4;
@@ -1747,42 +649,45 @@ namespace Lawn
             GameConstants.YUCKI_HOLD_TIME = GameConstants.YUCKI_PAUSE_TIME + 99;
             GameConstants.YUCKI_WALK_TIME = GameConstants.YUCKI_HOLD_TIME + 99;
             GameConstants.BOSS_BALL_OFFSET_Y = -90f;
-            GameConstants.gZombieDefs = new ZombieDefinition[]
+            // 僵尸常量定义
+            GameConstants.gZombieDefs = new ZombieDefinition[(int)ZombieType.ZombieTypesCount]
             {
-                new ZombieDefinition(ZombieType.Normal, ReanimationType.Zombie, 1, 1, 1, 4000, "ZOMBIE"),
-                new ZombieDefinition(ZombieType.Flag, ReanimationType.Zombie, 1, 1, 1, 0, "FLAG_ZOMBIE"),
-                new ZombieDefinition(ZombieType.TrafficCone, ReanimationType.Zombie, 2, 3, 1, 4000, "CONEHEAD_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Polevaulter, ReanimationType.Polevaulter, 2, 6, 5, 2000, "POLE_VAULTING_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Pail, ReanimationType.Zombie, 4, 8, 1, 3000, "BUCKETHEAD_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Newspaper, ReanimationType.ZombieNewspaper, 2, 11, 1, 1000, "NEWSPAPER_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Door, ReanimationType.Zombie, 4, 13, 5, 3500, "SCREEN_DOOR_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Football, ReanimationType.ZombieFootball, 7, 16, 5, 2000, "FOOTBALL_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Dancer, ReanimationType.Disco, 5, 18, 5, 1000, "DANCING_ZOMBIE"),
-                new ZombieDefinition(ZombieType.BackupDancer, ReanimationType.BackupDancer, 1, 18, 1, 0, "BACKUP_DANCER"),
-                new ZombieDefinition(ZombieType.DuckyTube, ReanimationType.Zombie, 1, 21, 5, 0, "DUCKY_TUBE_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Snorkel, ReanimationType.Snorkel, 3, 23, 10, 2000, "SNORKEL_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Zamboni, ReanimationType.ZombieZamboni, 7, 26, 10, 2000, "ZOMBONI"),
-                new ZombieDefinition(ZombieType.Bobsled, ReanimationType.Bobsled, 3, 26, 10, 2000, "ZOMBIE_BOBSLED_TEAM"),
-                new ZombieDefinition(ZombieType.DolphinRider, ReanimationType.ZombieDolphinrider, 3, 28, 10, 1500, "DOLPHIN_RIDER_ZOMBIE"),
-                new ZombieDefinition(ZombieType.JackInTheBox, ReanimationType.Jackinthebox, 3, 31, 10, 1000, "JACK_IN_THE_BOX_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Balloon, ReanimationType.Balloon, 2, 33, 10, 2000, "BALLOON_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Digger, ReanimationType.Digger, 4, 36, 10, 1000, "DIGGER_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Pogo, ReanimationType.Pogo, 4, 38, 10, 1000, "POGO_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Yeti, ReanimationType.Yeti, 4, 40, 1, 1, "ZOMBIE_YETI"),
-                new ZombieDefinition(ZombieType.Bungee, ReanimationType.Bungee, 3, 41, 10, 1000, "BUNGEE_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Ladder, ReanimationType.Ladder, 4, 43, 10, 1000, "LADDER_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Catapult, ReanimationType.Catapult, 5, 46, 10, 1500, "CATAPULT_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Gargantuar, ReanimationType.Gargantuar, 10, 48, 15, 1500, "GARGANTUAR"),
-                new ZombieDefinition(ZombieType.Imp, ReanimationType.Imp, 10, 48, 1, 0, "IMP"),
-                new ZombieDefinition(ZombieType.Boss, ReanimationType.Boss, 10, 50, 1, 0, "BOSS"),
-                new ZombieDefinition(ZombieType.PeaHead, ReanimationType.Zombie, 1, 99, 1, 4000, "ZOMBIE"),
-                new ZombieDefinition(ZombieType.WallnutHead, ReanimationType.Zombie, 4, 99, 1, 3000, "ZOMBIE"),
-                new ZombieDefinition(ZombieType.JalapenoHead, ReanimationType.Zombie, 3, 99, 10, 1000, "ZOMBIE"),
-                new ZombieDefinition(ZombieType.GatlingHead, ReanimationType.Zombie, 3, 99, 10, 2000, "ZOMBIE"),
-                new ZombieDefinition(ZombieType.SquashHead, ReanimationType.Zombie, 3, 99, 10, 2000, "ZOMBIE"),
-                new ZombieDefinition(ZombieType.TallnutHead, ReanimationType.Zombie, 4, 99, 10, 2000, "ZOMBIE"),
-                new ZombieDefinition(ZombieType.RedeyeGargantuar, ReanimationType.Gargantuar, 10, 48, 15, 6000, "REDEYED_GARGANTUAR")
+                /*                 | ZombieType 枚举值        | 动画轨道类型               |价值|首现关|首现波|权重|名称| */
+                new ZombieDefinition(ZombieType.Normal,         ReanimationType.Zombie,         1,  1,  1,  4000, "ZOMBIE"),
+                new ZombieDefinition(ZombieType.Flag,           ReanimationType.Zombie,         1,  1,  1,  0, "FLAG_ZOMBIE"),
+                new ZombieDefinition(ZombieType.TrafficCone,    ReanimationType.Zombie,         2,  3,  1,  4000, "CONEHEAD_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Polevaulter,    ReanimationType.Polevaulter,    2,  6,  5,  2000, "POLE_VAULTING_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Pail,           ReanimationType.Zombie,         4,  8,  1,  3000, "BUCKETHEAD_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Newspaper,      ReanimationType.ZombieNewspaper,2,  11, 1,  1000, "NEWSPAPER_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Door,           ReanimationType.Zombie,         4,  13, 5,  3500, "SCREEN_DOOR_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Football,       ReanimationType.ZombieFootball, 7,  16, 5,  2000, "FOOTBALL_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Dancer,         ReanimationType.Disco,          5,  18, 5,  1000, "DANCING_ZOMBIE"),
+                new ZombieDefinition(ZombieType.BackupDancer,   ReanimationType.BackupDancer,   1,  18, 1,  0, "BACKUP_DANCER"),
+                new ZombieDefinition(ZombieType.DuckyTube,      ReanimationType.Zombie,         1,  21, 5,  0, "DUCKY_TUBE_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Snorkel,        ReanimationType.Snorkel,        3,  23, 10, 2000, "SNORKEL_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Zamboni,        ReanimationType.ZombieZamboni,  7,  26, 10, 2000, "ZOMBONI"),
+                new ZombieDefinition(ZombieType.Bobsled,        ReanimationType.Bobsled,        3,  26, 10, 2000, "ZOMBIE_BOBSLED_TEAM"),
+                new ZombieDefinition(ZombieType.DolphinRider, ReanimationType.ZombieDolphinrider,3, 28, 10, 1500, "DOLPHIN_RIDER_ZOMBIE"),
+                new ZombieDefinition(ZombieType.JackInTheBox,   ReanimationType.Jackinthebox,   3,  31, 10, 1000, "JACK_IN_THE_BOX_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Balloon,        ReanimationType.Balloon,        2,  33, 10, 2000, "BALLOON_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Digger,         ReanimationType.Digger,         4,  36, 10, 1000, "DIGGER_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Pogo,           ReanimationType.Pogo,           4,  38, 10, 1000, "POGO_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Yeti,           ReanimationType.Yeti,           4,  40, 1,  1, "ZOMBIE_YETI"),
+                new ZombieDefinition(ZombieType.Bungee,         ReanimationType.Bungee,         3,  41, 10, 1000, "BUNGEE_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Ladder,         ReanimationType.Ladder,         4,  43, 10, 1000, "LADDER_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Catapult,       ReanimationType.Catapult,       5,  46, 10, 1500, "CATAPULT_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Gargantuar,     ReanimationType.Gargantuar,     10, 48, 15, 1500, "GARGANTUAR"),
+                new ZombieDefinition(ZombieType.Imp,            ReanimationType.Imp,            10, 48, 1,  0, "IMP"),
+                new ZombieDefinition(ZombieType.Boss,           ReanimationType.Boss,           10, 50, 1,  0, "BOSS"),
+                new ZombieDefinition(ZombieType.PeaHead,        ReanimationType.Zombie,         1,  99, 1,  4000, "ZOMBIE"),
+                new ZombieDefinition(ZombieType.WallnutHead,    ReanimationType.Zombie,         4,  99, 1,  3000, "ZOMBIE"),
+                new ZombieDefinition(ZombieType.JalapenoHead,   ReanimationType.Zombie,         3,  99, 10, 1000, "ZOMBIE"),
+                new ZombieDefinition(ZombieType.GatlingHead,    ReanimationType.Zombie,         3,  99, 10, 2000, "ZOMBIE"),
+                new ZombieDefinition(ZombieType.SquashHead,     ReanimationType.Zombie,         3,  99, 10, 2000, "ZOMBIE"),
+                new ZombieDefinition(ZombieType.TallnutHead,    ReanimationType.Zombie,         4,  99, 10, 2000, "ZOMBIE"),
+                new ZombieDefinition(ZombieType.RedeyeGargantuar,ReanimationType.Gargantuar,    10, 48, 15, 6000, "REDEYED_GARGANTUAR")
             };
+            // 僵王召唤的僵尸类型
             GameConstants.gBossZombieList = new ZombieType[]
             {
                 ZombieType.TrafficCone,
@@ -1822,23 +727,25 @@ namespace Lawn
             GameConstants.gUserVersionTilJan09 = 10;
             GameConstants.gUserVersionTilApr09 = 11;
             GameConstants.gUserVersion = 13;
-            GameConstants.gProjectileDefinition = new ProjectileDefinition[]
+            // 子弹定义
+            GameConstants.gProjectileDefinition = new ProjectileDefinition[(int)ProjectileType.ProjectilesCount]
             {
-                new ProjectileDefinition(ProjectileType.Pea, 0, 20),
-                new ProjectileDefinition(ProjectileType.Snowpea, 0, 20),
-                new ProjectileDefinition(ProjectileType.Cabbage, 0, 40),
-                new ProjectileDefinition(ProjectileType.Melon, 0, 80),
-                new ProjectileDefinition(ProjectileType.Puff, 0, 20),
-                new ProjectileDefinition(ProjectileType.Wintermelon, 0, 80),
-                new ProjectileDefinition(ProjectileType.Fireball, 0, 40),
-                new ProjectileDefinition(ProjectileType.Star, 0, 20),
-                new ProjectileDefinition(ProjectileType.Spike, 0, 20),
-                new ProjectileDefinition(ProjectileType.Basketball, 0, 75),
-                new ProjectileDefinition(ProjectileType.Kernel, 0, 20),
-                new ProjectileDefinition(ProjectileType.Cobbig, 0, 300),
-                new ProjectileDefinition(ProjectileType.Butter, 0, 40),
-                new ProjectileDefinition(ProjectileType.ZombiePea, 0, 20),
-                new ProjectileDefinition(ProjectileType.ZombiePeaMindControl, 0, 20)
+                /*                     | ProjectileType 枚举值 | ImageRow | 伤害值 |*/
+                new ProjectileDefinition(ProjectileType.Pea,            0,  20  ),
+                new ProjectileDefinition(ProjectileType.Snowpea,        0,  20  ),
+                new ProjectileDefinition(ProjectileType.Cabbage,        0,  40  ),
+                new ProjectileDefinition(ProjectileType.Melon,          0,  80  ),
+                new ProjectileDefinition(ProjectileType.Puff,           0,  20  ),
+                new ProjectileDefinition(ProjectileType.Wintermelon,    0,  80  ),
+                new ProjectileDefinition(ProjectileType.Fireball,       0,  40  ),
+                new ProjectileDefinition(ProjectileType.Star,           0,  20  ),
+                new ProjectileDefinition(ProjectileType.Spike,          0,  20  ),
+                new ProjectileDefinition(ProjectileType.Basketball,     0,  75  ),
+                new ProjectileDefinition(ProjectileType.Kernel,         0,  20  ),
+                new ProjectileDefinition(ProjectileType.Cobbig,         0,  300 ),
+                new ProjectileDefinition(ProjectileType.Butter,         0,  40  ),
+                new ProjectileDefinition(ProjectileType.ZombiePea,      0,  20  ),
+                new ProjectileDefinition(ProjectileType.ZombiePeaMindControl, 0, 20),
             };
             GameConstants.SEED_BANK_OFFSET_X = 0;
             GameConstants.SEED_BANK_OFFSET_X_END = 0;
@@ -1922,17 +829,17 @@ namespace Lawn
 
         public const int SUN_COUNTDOWN_MAX = 950;
 
-        public const int LAWN_MOWER_COIN_START = 200;
+        public const int LAWN_MOWER_COIN_START = 200;//?
 
-        public const int LAWN_MOWER_COIN_DELAY = 40;
+        public const int LAWN_MOWER_COIN_DELAY = 40;//?
 
-        public const int LAWN_MOWER_COIN_END = 150;
+        public const int LAWN_MOWER_COIN_END = 150;//?
 
         public const int MAX_RENDER_ITEMS = 2048;
 
-        public const int ROOF_SLOPE_PER_ROW = 20;
+        public const int ROOF_SLOPE_PER_ROW = 20;//?
 
-        public const int ROOF_SLOPE_PER_ROW_OFF = 10;
+        public const int ROOF_SLOPE_PER_ROW_OFF = 10;//?
 
         public const int BLINK_RATE = 400;
 
@@ -1944,7 +851,7 @@ namespace Lawn
 
         public const int MAX_MAGNET_ITEMS = 5;
 
-        public const int RENDER_GROUP_PUMPKIN_BACK = 1;
+        public const int RENDER_GROUP_PUMPKIN_BACK = 1;//?
 
         public const int WAKE_UP_TIME = 100;
 
@@ -1954,67 +861,67 @@ namespace Lawn
 
         public const int CONVEYOR_SPEED = 4;
 
-        public const int CONVEYOR_PACKET_OFFSET_Y = 35;
+        public const int CONVEYOR_PACKET_OFFSET_Y = 35;//?
 
-        public const int CONVEYOR_PACKET_MIN_OFFSET = 40;
+        public const int CONVEYOR_PACKET_MIN_OFFSET = 40;//?
 
-        public const int TICKS_PER_SECOND = 100;
+        public const int TICKS_PER_SECOND = 100;//?
 
-        public const int REANIMATOR_LOAD_TASK_FACTOR = 0;
+        public const int REANIMATOR_LOAD_TASK_FACTOR = 0;//?
 
-        public const int TAP_TAP_TO_PLANT = 1;
+        public const int TAP_TAP_TO_PLANT = 1;//?
 
-        public const int PARTNER_PREVIEW_MAX_DRIFT = 300;
+        public const int PARTNER_PREVIEW_MAX_DRIFT = 300;//?
 
-        public const int NO_IMAGE_ID = 999999;
+        public const int NO_IMAGE_ID = 999999;//?
 
-        public const int PRESENT_OFFSET_Y = 60;
+        public const int PRESENT_OFFSET_Y = 60;//?
 
-        public const int MAX_CREDIT_SECTIONS = 57;
+        public const int MAX_CREDIT_SECTIONS = 57;//?
 
-        public const int NUM_CLOUDS = 6;
+        public const int NUM_CLOUDS = 6;//?
 
-        public const int NUM_FLOWERS = 3;
+        public const int NUM_FLOWERS = 3;//?
 
-        public const int CLOUD_MOVE_TIME = 6000;
+        public const int CLOUD_MOVE_TIME = 6000;//?
 
-        public const int CLOUD_WAIT_TIME = 2000;
+        public const int CLOUD_WAIT_TIME = 2000;//?
 
-        public const int LEAF_WAIT_TIME = 200;
+        public const int LEAF_WAIT_TIME = 200;//?
 
-        public const int QUICKPLAY_SLIDE_COUNT = 30;
+        public const int QUICKPLAY_SLIDE_COUNT = 30;//?
 
-        public const int SLIDE_COUNT = 75;
+        public const int SLIDE_COUNT = 75;//?
 
-        public const int MORE_GAMES_LIST_OFFSET = 52;
+        public const int MORE_GAMES_LIST_OFFSET = 52;//?
 
-        public const int NUM_MOTION_TRAIL_FRAMES = 12;
+        public const int NUM_MOTION_TRAIL_FRAMES = 12;//?
 
-        public const int CHOMP_TIME = 50;
+        public const int CHOMP_TIME = 50;//?
 
-        public const int MAX_MESSAGE_LENGTH = 128;
+        public const int MAX_MESSAGE_LENGTH = 128;//?
 
-        public const int SLIDE_OFF_TIME = 100;
+        public const int SLIDE_OFF_TIME = 100;//?
 
-        public const int MIN_MESSAGE_TIME = 100;
+        public const int MIN_MESSAGE_TIME = 100;//?
 
-        public const int MUSIC_ROW_FACTOR = 4;
+        public const int MUSIC_ROW_FACTOR = 4;//?
 
-        public const int BURST_FADE_IN_TIME = 400;
+        public const int BURST_FADE_IN_TIME = 400;//?
 
-        public const int BURST_TIME_AFTER_START_TO_QUEUE_DRUMS = 300;
+        public const int BURST_TIME_AFTER_START_TO_QUEUE_DRUMS = 300;//?
 
-        public const int BURST_MIN_TIME = 800;
+        public const int BURST_MIN_TIME = 800;//?
 
-        public const int BURST_FADE_OUT_TIME = 800;
+        public const int BURST_FADE_OUT_TIME = 800;//?
 
-        public const int BURST_FOG_FADE_OUT_DELAY = 300;
+        public const int BURST_FOG_FADE_OUT_DELAY = 300;//?
 
-        public const int DRUMS_FOG_FADE_OUT_TIME = 800;
+        public const int DRUMS_FOG_FADE_OUT_TIME = 800;//?
 
-        public const int DRUMS_FADE_OUT_TIME = 50;
+        public const int DRUMS_FADE_OUT_TIME = 50;//?
 
-        public const int LAWN_SONG_AVE_MS_TO_LOAD = 3500;
+        public const int LAWN_SONG_AVE_MS_TO_LOAD = 3500;//?
 
         public const int MAX_CHALLENGE_MODES = 200;
 
@@ -2024,13 +931,13 @@ namespace Lawn
 
         public const int MAX_POTTED_PLANTS = 200;
 
-        public const int ITEM_GAP = 10;
+        public const int ITEM_GAP = 10;//?
 
-        public const int MENU_BUTTON_TOP_OFFSET = 2;
+        public const int MENU_BUTTON_TOP_OFFSET = 2;//?
 
-        public const int STREET_GRID_SIZE_X = 5;
+        public const int STREET_GRID_SIZE_X = 5;//?
 
-        public const int STREET_GRID_SIZE_Y = 5;
+        public const int STREET_GRID_SIZE_Y = 5;//?
 
         public const int BEGHOULED_WINNING_SCORE = 75;
 
@@ -2042,7 +949,7 @@ namespace Lawn
 
         public const int IZOMBIE_WINNING_SCORE = 5;
 
-        public const int NUM_TREE_CLOUDS = 6;
+        public const int NUM_TREE_CLOUDS = 6;//?
 
         public const int SLOT_MACHINE_COST = 25;
 
@@ -2060,23 +967,23 @@ namespace Lawn
 
         public const int MAX_SCARY_POTS = 54;
 
-        public const int RENDER_GROUP_TREE_BACKGROUND = 1;
+        public const int RENDER_GROUP_TREE_BACKGROUND = 1;//?
 
-        public const int RENDER_GROUP_TREE_TRUNK = 2;
+        public const int RENDER_GROUP_TREE_TRUNK = 2;//?
 
-        public const int RENDER_GROUP_TREE_GRASS = 3;
+        public const int RENDER_GROUP_TREE_GRASS = 3;//?
 
-        public const int RENDER_GROUP_TREE_TOP = 4;
+        public const int RENDER_GROUP_TREE_TOP = 4;//?
 
-        public const int TREE_CLOUD_MOVE_TIME = 6000;
+        public const int TREE_CLOUD_MOVE_TIME = 6000;//?
 
-        public const int TREE_CLOUD_WAIT_TIME = 2000;
+        public const int TREE_CLOUD_WAIT_TIME = 2000;//?
 
-        public const int ZEN_GARDEN_FADE_DELAY = 3000;
+        public const int ZEN_GARDEN_FADE_DELAY = 3000;//?
 
-        public const int STINKY_RENDER_ORDER_OFFSET = 30;
+        public const int STINKY_RENDER_ORDER_OFFSET = 30;//?
 
-        public const float STINKY_COIN_OFFSET_Y = 30f;
+        public const float STINKY_COIN_OFFSET_Y = 30f;//?
 
         public static Achievement[] AchievementInfo;
 
@@ -2104,58 +1011,14 @@ namespace Lawn
 
         public static TodStringListFormat[] gLawnStringFormats;
 
+        // 冒险模式中每关的僵尸波数
         public static int[] gZombieWaves = new int[]
         {
-            4,
-            6,
-            8,
-            10,
-            8,
-            10,
-            20,
-            10,
-            20,
-            20,
-            10,
-            20,
-            10,
-            20,
-            10,
-            10,
-            20,
-            10,
-            20,
-            20,
-            10,
-            20,
-            20,
-            30,
-            20,
-            20,
-            30,
-            20,
-            30,
-            30,
-            10,
-            20,
-            10,
-            20,
-            20,
-            10,
-            20,
-            10,
-            20,
-            20,
-            10,
-            20,
-            20,
-            30,
-            20,
-            20,
-            30,
-            20,
-            30,
-            30
+            4,  6,  8,  10, 8,  10, 20, 10, 20, 20,
+            10, 20, 10, 20, 10, 10, 20, 10, 20, 20,
+            10, 20, 20, 30, 20, 20, 30, 20, 30, 30,
+            10, 20, 10, 20, 20, 10, 20, 10, 20, 20,
+            10, 20, 20, 30, 20, 20, 30, 20, 30, 30,
         };
 
         public static ZombieAllowedLevels[] gZombieAllowedLevels;

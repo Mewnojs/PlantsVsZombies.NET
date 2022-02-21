@@ -651,7 +651,7 @@ namespace Lawn
 
         public void SlotMachineStart()
         {
-            mSlotMachineCountDown = 400;
+            mSlotMachineCountDown = GameConstants.SLOT_MACHINE_TIME;
             mSlotMachiningPosition = 0f;
             PickNextSlotMachineSeed();
         }
