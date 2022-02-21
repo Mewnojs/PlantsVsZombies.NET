@@ -196,7 +196,7 @@ namespace Lawn
                     mZombiesInWave[num13, num14] = (ZombieType)b.ReadLong();
                 }
             }
-            if (b.ReadLong() != 777)
+            if (b.ReadLong() != SAVE_CHECK_NUMBER)
             {
                 throw new Exception("Check number mismatch while loading.");
             }
@@ -9834,7 +9834,7 @@ namespace Lawn
                         b.WriteLong((int)mZombiesInWave[num4, num5]);
                     }
                 }
-                b.WriteLong(777);
+                b.WriteLong(SAVE_CHECK_NUMBER);
             }
             catch (Exception ex)
             {

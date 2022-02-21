@@ -31,23 +31,23 @@ namespace Lawn
             switch (mMode)
             {
             case MiniGameMode.Games:
-                if (mApp.mPlayerInfo.mMiniGamesUnlocked < 19)
+                if (mApp.mPlayerInfo.mMiniGamesUnlocked < (int)GameMode.MiniGameCount)
                 {
                     return mApp.mPlayerInfo.mMiniGamesUnlocked;
                 }
-                return 19;
+                return (int)GameMode.MiniGameCount;
             case MiniGameMode.IZombie:
-                if (mApp.mPlayerInfo.mIZombieUnlocked < 10)
+                if (mApp.mPlayerInfo.mIZombieUnlocked < (int)GameMode.PuzzleIZombieCount)
                 {
                     return mApp.mPlayerInfo.mIZombieUnlocked;
                 }
-                return 10;
+                return (int)GameMode.PuzzleIZombieCount;
             case MiniGameMode.Vasebreaker:
-                if (mApp.mPlayerInfo.mVasebreakerUnlocked < 10)
+                if (mApp.mPlayerInfo.mVasebreakerUnlocked < (int)GameMode.ScaryPotterCount)
                 {
                     return mApp.mPlayerInfo.mVasebreakerUnlocked;
                 }
-                return 10;
+                return (int)GameMode.ScaryPotterCount;
             default:
                 return -1;
             }
@@ -62,19 +62,19 @@ namespace Lawn
             switch (mMode)
             {
             case MiniGameMode.Games:
-                if (mApp.mPlayerInfo.mMiniGamesUnlocked != 19)
+                if (mApp.mPlayerInfo.mMiniGamesUnlocked != (int)GameMode.MiniGameCount)
                 {
                     return true;
                 }
                 break;
             case MiniGameMode.IZombie:
-                if (mApp.mPlayerInfo.mIZombieUnlocked != 10)
+                if (mApp.mPlayerInfo.mIZombieUnlocked != (int)GameMode.PuzzleIZombieCount)
                 {
                     return true;
                 }
                 break;
             case MiniGameMode.Vasebreaker:
-                if (mApp.mPlayerInfo.mVasebreakerUnlocked != 10)
+                if (mApp.mPlayerInfo.mVasebreakerUnlocked != (int)GameMode.ScaryPotterCount)
                 {
                     return true;
                 }

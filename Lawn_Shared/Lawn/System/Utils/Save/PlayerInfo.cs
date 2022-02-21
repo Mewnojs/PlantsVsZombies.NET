@@ -220,7 +220,7 @@ namespace Lawn
                     {
                         mPottedPlant[i].Load(buffer);
                     }
-                    if (buffer.ReadLong() != 666)
+                    if (buffer.ReadLong() != saveCheckNumber)
                     {
                         throw new Exception("User profile: Save check number mismatch");
                     }
@@ -343,7 +343,7 @@ namespace Lawn
                 {
                     mPottedPlant[i].Save(buffer);
                 }
-                buffer.WriteLong(666);
+                buffer.WriteLong(saveCheckNumber);
                 GlobalStaticVars.gSexyAppBase.WriteBufferToFile(saveFileName, buffer);
             }
             catch (Exception ex)
