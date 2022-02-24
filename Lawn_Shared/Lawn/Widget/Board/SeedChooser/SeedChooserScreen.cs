@@ -915,7 +915,7 @@ namespace Lawn
                 }
                 else if (chosenSeed.mSeedState == ChosenSeedState.SEED_IN_CHOOSER)
                 {
-                    GetSeedPositionInChooser(i, ref chosenSeed.mX, ref chosenSeed.mY);
+                    GetSeedPositionInChooser((int)i, ref chosenSeed.mX, ref chosenSeed.mY);
                     chosenSeed.mStartX = chosenSeed.mX;
                     chosenSeed.mStartY = chosenSeed.mY;
                     chosenSeed.mEndX = chosenSeed.mX;
@@ -964,11 +964,11 @@ namespace Lawn
                 uint num = SeedNotRecommendedToPick(seedType);
                 if (!mApp.HasSeedType(seedType) || num != 0U || SeedNotAllowedToPick(seedType) || Plant.IsUpgrade(seedType) || seedType == SeedType.Imitater || seedType == SeedType.Umbrella || seedType == SeedType.Blover)
                 {
-                    SeedChooserScreen.aSeedArray[j].mWeight = 0;
+                    SeedChooserScreen.aSeedArray[(int)j].mWeight = 0;
                 }
                 else
                 {
-                    SeedChooserScreen.aSeedArray[j].mWeight = 1;
+                    SeedChooserScreen.aSeedArray[(int)j].mWeight = 1;
                 }
             }
             if (mBoard.mZombieAllowed[22] || mBoard.mZombieAllowed[20])

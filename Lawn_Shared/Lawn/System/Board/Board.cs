@@ -8371,7 +8371,10 @@ namespace Lawn
 
         public void PutZombieInWave(ZombieType theZombieType, int theWaveNumber, ZombiePicker theZombiePicker)
         {
-            Debug.ASSERT(theWaveNumber < GameConstants.MAX_ZOMBIE_WAVES && theZombiePicker.mZombieCount < GameConstants.MAX_ZOMBIES_IN_WAVE);GameConstants.MAX_ZOMBIES_IN_WAVE)
+            Debug.ASSERT(theWaveNumber < GameConstants.MAX_ZOMBIE_WAVES && theZombiePicker.mZombieCount < GameConstants.MAX_ZOMBIES_IN_WAVE);
+            mZombiesInWave[theWaveNumber, theZombiePicker.mZombieCount] = theZombieType;
+            theZombiePicker.mZombieCount++;
+            if (theZombiePicker.mZombieCount < GameConstants.MAX_ZOMBIES_IN_WAVE)
             {
                 mZombiesInWave[theWaveNumber, theZombiePicker.mZombieCount] = ZombieType.Invalid;
             }
