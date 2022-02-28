@@ -1,0 +1,51 @@
+﻿using System;
+
+namespace Sexy.PIL
+{
+	public enum FE
+	{
+		FE_First_Entry = 3000,
+		FE_FLife = 3000,
+		FE_FNumber,
+		FE_FVelocity,
+		FE_FWeight,
+		FE_FSpin,
+		FE_FMotionRand,
+		FE_FBounce,
+		FE_FZoom,
+		FE_FLifeVariation,
+		FE_SizeVariation,
+		FE_SizeYVariation,
+		FE_FVelocityVariation,
+		FE_FWeightVariation,
+		FE_FSpinVariation,
+		FE_FMotionRandVariation,
+		FE_FBounceVariation,
+		FE_FZoomVariation,
+		FE_NumberOverLife,
+		FE_SizeOverLife,
+		FE_SizeYOverLife,
+		FE_FVelocityOverLife,
+		FE_FWeightOverLife,
+		FE_FSpinOverLife,
+		FE_FMotionRandOverLife,
+		FE_FBounceOverLife,
+		FE_FZoomOverLife,
+		FE_Life,
+		FE_Number,
+		FE_Size,
+		FE_SizeY,
+		FE_Velocity,
+		FE_Weight,
+		FE_Spin,
+		FE_MotionRand,
+		FE_Bounce,
+		FE_Zoom,
+		FE_Visibility,
+		FE_ColorBlend,
+		FE_TintStrength,
+		FE_EmissionAngle,
+		FE_EmissionRange,
+		Max_FE_Entries303
+	}
+}

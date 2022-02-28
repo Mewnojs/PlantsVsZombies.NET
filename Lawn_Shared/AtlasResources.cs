@@ -1,5 +1,6 @@
 ﻿using System;
 using Sexy;
+using Sexy.GraphicsLib;
 
 public/*internal*/ class AtlasResources
 {

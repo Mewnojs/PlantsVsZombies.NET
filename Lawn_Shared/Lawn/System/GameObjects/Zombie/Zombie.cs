@@ -90,8 +90,8 @@ namespace Lawn
             mTargetCol = 0;
             mAltitude = 0f;
             mHitUmbrella = false;
-            mZombieRect = default(TRect);
-            mZombieAttackRect = default(TRect);
+            mZombieRect = default(Rect);
+            mZombieAttackRect = default(Rect);
             mChilledCounter = 0;
             mButteredCounter = 0;
             mIceTrapCounter = 0;
@@ -205,8 +205,8 @@ namespace Lawn
             mHitUmbrella = false;
             mDroppedLoot = false;
             mRelatedZombieID = null;
-            mZombieRect = new TRect(36, 0, 42, 115);
-            mZombieAttackRect = new TRect(50, 0, 20, 115);
+            mZombieRect = new Rect(36, 0, 42, 115);
+            mZombieAttackRect = new Rect(50, 0, 20, 115);
             mPlayingSong = false;
             mZombieFade = -1;
             mFlatTires = false;
@@ -285,14 +285,14 @@ namespace Lawn
                 mBodyHealth = 1350;
                 mPhaseCounter = TodCommon.RandRangeInt(1500, 2000);
                 mHasObject = true;
-                mZombieAttackRect = new TRect(20, 0, 50, 115);
+                mZombieAttackRect = new Rect(20, 0, 50, 115);
                 mPosX += 60f;
                 break;
             case ZombieType.Ladder:
                 mBodyHealth = 500;
                 mShieldType = ShieldType.Ladder;
                 mShieldHealth = 500;
-                mZombieAttackRect = new TRect(10, 0, 50, 115);
+                mZombieAttackRect = new Rect(10, 0, 50, 115);
                 if (IsOnBoard())
                 {
                     mZombiePhase = ZombiePhase.LadderCarrying;
@@ -329,14 +329,14 @@ namespace Lawn
                 aBodyReanim.SetTruncateDisappearingFrames(string.Empty, false);
                 aRenderLayer = RenderLayer.GraveStone;
                 aRenderOffset = 7;
-                mZombieRect = new TRect(-20, 22, 110, 94);
-                mZombieAttackRect = new TRect(0, 0, 0, 0);
+                mZombieRect = new Rect(-20, 22, 110, 94);
+                mZombieAttackRect = new Rect(0, 0, 0, 0);
                 mVariant = false;
                 break;
             }
 
             case ZombieType.Football:
-                mZombieRect = new TRect(50, 0, 57, 115);
+                mZombieRect = new Rect(50, 0, 57, 115);
                 ReanimShowPrefix("anim_hair", -1);
                 mHelmType = HelmType.Football;
                 mHelmHealth = 1400;
@@ -349,7 +349,7 @@ namespace Lawn
                 mHelmHealth = 100;
                 mVariant = false;
                 mHasObject = true;
-                mZombieRect = new TRect(50, 0, 28, 115);
+                mZombieRect = new Rect(50, 0, 28, 115);
                 Reanimation aBodyReanim = mApp.ReanimationGet(mBodyReanimID);
                 aBodyReanim.SetTruncateDisappearingFrames(string.Empty, false);
                 if (!IsOnBoard())
@@ -382,11 +382,11 @@ namespace Lawn
                 }
                 if (mApp.IsWallnutBowlingLevel())
                 {
-                    mZombieAttackRect = new TRect(-229, 0, 270, 115);
+                    mZombieAttackRect = new Rect(-229, 0, 270, 115);
                 }
                 else
                 {
-                    mZombieAttackRect = new TRect(-29, 0, 70, 115);
+                    mZombieAttackRect = new Rect(-29, 0, 70, 115);
                 }
                 break;
             case ZombieType.DolphinRider:
@@ -411,8 +411,8 @@ namespace Lawn
                 mWidth = 180;
                 mHeight = 180;
                 mPosX = Constants.WIDE_BOARD_WIDTH + 45 + RandomNumbers.NextNumber(10);
-                mZombieRect = new TRect(-17, -38, 125, 154);
-                mZombieAttackRect = new TRect(-30, -38, 89, 154);
+                mZombieRect = new Rect(-17, -38, 125, 154);
+                mZombieAttackRect = new Rect(-30, -38, 89, 154);
                 mVariant = false;
                 aRenderOffset = 8;
                 mHasObject = true;
@@ -459,8 +459,8 @@ namespace Lawn
                 mPosX = Constants.WIDE_BOARD_WIDTH + RandomNumbers.NextNumber(10) + 20;
                 aRenderOffset = 8;
                 PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_drive, ReanimLoopType.Loop, 0, 12f);
-                mZombieRect = new TRect(0, -13, 153, 140);
-                mZombieAttackRect = new TRect(10, -13, 133, 140);
+                mZombieRect = new Rect(0, -13, 153, 140);
+                mZombieAttackRect = new Rect(10, -13, 133, 140);
                 mVariant = false;
                 break;
             case ZombieType.Catapult:
@@ -475,13 +475,13 @@ namespace Lawn
                 {
                     PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_idle, ReanimLoopType.Loop, 0, 8f);
                 }
-                mZombieRect = new TRect(0, -13, 153, 140);
-                mZombieAttackRect = new TRect(10, -13, 133, 140);
+                mZombieRect = new Rect(0, -13, 153, 140);
+                mZombieAttackRect = new Rect(10, -13, 133, 140);
                 mVariant = false;
                 break;
             case ZombieType.Snorkel:
-                mZombieRect = new TRect(12, 0, 62, 115);
-                mZombieAttackRect = new TRect(-5, 0, 55, 115);
+                mZombieRect = new Rect(12, 0, 62, 115);
+                mZombieAttackRect = new Rect(-5, 0, 55, 115);
                 SetupWaterTrack(ref GlobalMembersReanimIds.ReanimTrackId_zombie_snorkle_whitewater);
                 SetupWaterTrack(ref GlobalMembersReanimIds.ReanimTrackId_zombie_snorkle_whitewater2);
                 mVariant = false;
@@ -497,7 +497,7 @@ namespace Lawn
                     num3 /= 3;
                 }
                 mPhaseCounter = (int)(num3 / mVelX) * GameConstants.ZOMBIE_LIMP_SPEED_FACTOR;
-                mZombieAttackRect = new TRect(20, 0, 50, 115);
+                mZombieAttackRect = new Rect(20, 0, 50, 115);
                 if (mApp.IsScaryPotterLevel())
                 {
                     mPhaseCounter = 10;
@@ -546,7 +546,7 @@ namespace Lawn
                     mAltitude = -10f;
                     mHelmType = HelmType.Bobsled;
                     mHelmHealth = 300;
-                    mZombieRect = new TRect(-50, 0, 275, 115);
+                    mZombieRect = new Rect(-50, 0, 275, 115);
                 }
                 mVelX = 0.6f;
                 mZombiePhase = ZombiePhase.BobsledSliding;
@@ -589,7 +589,7 @@ namespace Lawn
                 mPhaseCounter = RandomNumbers.NextNumber(GameConstants.POGO_BOUNCE_TIME) + 1;
                 mHasObject = true;
                 mBodyHealth = 500;
-                mZombieAttackRect = new TRect(10, 0, 30, 115);
+                mZombieAttackRect = new Rect(10, 0, 30, 115);
                 PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_pogo, ReanimLoopType.PlayOnceAndHold, 0, 40f);
                 mApp.ReanimationGet(mBodyReanimID)
                     .mAnimTime = 1f;
@@ -597,7 +597,7 @@ namespace Lawn
             }
 
             case ZombieType.Newspaper:
-                mZombieAttackRect = new TRect(20, 0, 50, 115);
+                mZombieAttackRect = new Rect(20, 0, 50, 115);
                 mZombiePhase = ZombiePhase.NewspaperReading;
                 mShieldType = ShieldType.Newspaper;
                 mShieldHealth = 150;
@@ -624,8 +624,8 @@ namespace Lawn
                 aBodyReanim.mLoopType = ReanimLoopType.LoopFullLastFrame;
                 aBodyReanim.AttachToAnotherReanimation(ref reanimation8, GlobalMembersReanimIds.ReanimTrackId_hat);
                 mFlyingHealth = 20;
-                mZombieRect = new TRect(36, 30, 42, 115);
-                mZombieAttackRect = new TRect(20, 30, 50, 115);
+                mZombieRect = new Rect(36, 30, 42, 115);
+                mZombieAttackRect = new Rect(20, 30, 50, 115);
                 mVariant = false;
                 break;
             }
@@ -667,7 +667,7 @@ namespace Lawn
             case ZombieType.Boss:
                 mPosX = Constants.BOARD_EXTRA_ROOM;
                 mPosY = 0f;
-                mZombieRect = new TRect(700, 80, 90, 430);
+                mZombieRect = new Rect(700, 80, 90, 430);
                 mZombieAttackRect = default;
                 aRenderLayer = RenderLayer.Top;
                 if (mApp.IsAdventureMode() || mApp.IsQuickPlayMode())
@@ -1118,7 +1118,7 @@ namespace Lawn
             }
         }
 
-        public override bool SaveToFile(Sexy.Buffer b)
+        public override bool SaveToFile(SexyBuffer b)
         {
             base.SaveToFile(b);
             b.WriteLong((int)mZombieType);
@@ -1205,7 +1205,7 @@ namespace Lawn
             return true;
         }
 
-        public override bool LoadFromFile(Sexy.Buffer b)
+        public override bool LoadFromFile(SexyBuffer b)
         {
             base.LoadFromFile(b);
             mZombieType = (ZombieType)b.ReadLong();
@@ -1706,8 +1706,8 @@ namespace Lawn
             {
                 num = -num;
             }
-            TRect theSrcRect = new TRect(theFrame * celWidth, theRow * celHeight, celWidth, (int)num3);
-            TRect theDestRect = new TRect((int)num, (int)num2, celWidth, (int)num3);
+            Rect theSrcRect = new Rect(theFrame * celWidth, theRow * celHeight, celWidth, (int)num3);
+            Rect theDestRect = new Rect((int)num, (int)num2, celWidth, (int)num3);
             if (mZombiePhase == ZombiePhase.ZombieBurned)
             {
                 if (mMindControlled)
@@ -1773,7 +1773,7 @@ namespace Lawn
                 }
                 if (mTargetCol > bossZombie.mTargetCol)
                 {
-                    g.SetClipRect(new TRect(-g.mTransX, (int)(aClipAmount * Constants.S) - g.mTransY, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT));
+                    g.SetClipRect(new Rect(-g.mTransX, (int)(aClipAmount * Constants.S) - g.mTransY, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT));
                     aSetClip = true;
                 }
             }
@@ -2193,7 +2193,7 @@ namespace Lawn
                 {
                     mX = (int)mPosX;
                     mZombiePhase = ZombiePhase.PolevaulterPostVault;
-                    mZombieAttackRect = new TRect(50, 0, 20, 115);
+                    mZombieAttackRect = new Rect(50, 0, 20, 115);
                     StartWalkAnim(0);
                     return;
                 }
@@ -2236,7 +2236,7 @@ namespace Lawn
                     mZombiePhase = ZombiePhase.DolphinRiding;
                     mInPool = true;
                     mPosX -= 70f;
-                    mZombieAttackRect = new TRect(-29, 0, 70, 115);
+                    mZombieAttackRect = new Rect(-29, 0, 70, 115);
                     PlayZombieReanim(ref GlobalMembersReanimIds.ReanimTrackId_anim_ride, ReanimLoopType.LoopFullLastFrame, 0, 12f);
                 }
             }
@@ -2301,8 +2301,8 @@ namespace Lawn
                 if (flag2)
                 {
                     mZombiePhase = ZombiePhase.DolphinWalkingInPool;
-                    mZombieAttackRect = new TRect(30, 0, 30, 115);
-                    mZombieRect = new TRect(20, 0, 42, 115);
+                    mZombieAttackRect = new Rect(30, 0, 30, 115);
+                    mZombieRect = new Rect(20, 0, 42, 115);
                     StartWalkAnim(0);
                 }
             }
@@ -2409,13 +2409,13 @@ namespace Lawn
 
         public Plant FindPlantTarget(ZombieAttackType theAttackType)
         {
-            TRect aAttackRect = GetZombieAttackRect();
+            Rect aAttackRect = GetZombieAttackRect();
             for (int i = 0; i < mBoard.mPlants.Count; i++)
             {
                 Plant aPlant = mBoard.mPlants[i];
                 if (!aPlant.mDead && mRow == aPlant.mRow)
                 {
-                    TRect aPlantRect = aPlant.GetPlantRect();
+                    Rect aPlantRect = aPlant.GetPlantRect();
                     int rectOverlap = GameConstants.GetRectOverlap(aAttackRect, aPlantRect);
                     if (rectOverlap >= ((mZombieType == ZombieType.Digger) ? 5 : 20) && CanTargetPlant(aPlant, theAttackType))
                     {
@@ -2428,14 +2428,14 @@ namespace Lawn
 
         public void CheckSquish(ZombieAttackType theAttackType)//3update
         {
-            TRect aAttackRect = GetZombieAttackRect();
+            Rect aAttackRect = GetZombieAttackRect();
             int count = mBoard.mPlants.Count;
             for (int i = 0; i < count; i++)
             {
                 Plant aPlant = mBoard.mPlants[i];
                 if (!aPlant.mDead && mRow == aPlant.mRow)
                 {
-                    TRect aPlantRect = aPlant.GetPlantRect();
+                    Rect aPlantRect = aPlant.GetPlantRect();
                     int rectOverlap = GameConstants.GetRectOverlap(aAttackRect, aPlantRect);
                     if (rectOverlap >= 20 && CanTargetPlant(aPlant, theAttackType) && !aPlant.IsSpiky())
                     {
@@ -3032,7 +3032,7 @@ namespace Lawn
             {
                 return;
             }
-            TRect zombieRect = GetZombieRect();
+            Rect zombieRect = GetZombieRect();
             int num = zombieRect.mX + zombieRect.mWidth / 2;
             int num2 = zombieRect.mY + zombieRect.mHeight / 4;
             if (mZombieType == ZombieType.Yeti)
@@ -3100,7 +3100,7 @@ namespace Lawn
             }
             mBoard.mLevelAwardSpawned = true;
             mApp.mBoardResult = BoardResult.Won;
-            TRect aZombieRect = GetZombieRect();
+            Rect aZombieRect = GetZombieRect();
             int aCenterX = aZombieRect.mX + aZombieRect.mWidth / 2;
             int aCenterY = aZombieRect.mY + aZombieRect.mHeight / 2;
             if (!mBoard.IsSurvivalStageWithRepick())
@@ -3359,7 +3359,7 @@ namespace Lawn
             }
         }
 
-        public TRect GetZombieRect()
+        public Rect GetZombieRect()
         {
             if (cachedZombieRectUpToDate)
             {
@@ -3381,12 +3381,12 @@ namespace Lawn
             return cachedZombieRect;
         }
 
-        public TRect GetZombieAttackRect()
+        public Rect GetZombieAttackRect()
         {
-            TRect result = mZombieAttackRect;
+            Rect result = mZombieAttackRect;
             if (mZombiePhase == ZombiePhase.PolevaulterInVault || mZombiePhase == ZombiePhase.DolphinInJump)
             {
-                result = new TRect(-40, 0, 100, 115);
+                result = new Rect(-40, 0, 100, 115);
             }
             if (IsWalkingBackwards())
             {
@@ -3640,7 +3640,7 @@ namespace Lawn
             mZombiePhase = ZombiePhase.BobsledCrashing;
             mPhaseCounter = GameConstants.BOBSLED_CRASH_TIME;
             mAltitude = 0f;
-            mZombieRect = new TRect(36, 0, 42, 115);
+            mZombieRect = new Rect(36, 0, 42, 115);
             StartWalkAnim(0);
             Reanimation aFirstZombieReanim = mApp.ReanimationGet(mBodyReanimID);
             for (int i = 0; i < 3; i++)
@@ -3667,14 +3667,14 @@ namespace Lawn
             {
                 return null;
             }
-            TRect zombieRect = GetZombieRect();
+            Rect zombieRect = GetZombieRect();
             int count = mBoard.mPlants.Count;
             for (int i = 0; i < count; i++)
             {
                 Plant plant = mBoard.mPlants[i];
                 if (!plant.mDead && mRow == plant.mRow && plant.IsSpiky() && !plant.NotOnGround() && (!mOnHighGround || plant.IsOnHighGround()))
                 {
-                    TRect plantAttackRect = plant.GetPlantAttackRect(PlantWeapon.Primary);
+                    Rect plantAttackRect = plant.GetPlantAttackRect(PlantWeapon.Primary);
                     int rectOverlap = GameConstants.GetRectOverlap(plantAttackRect, zombieRect);
                     if (rectOverlap > 0)
                     {
@@ -4075,8 +4075,8 @@ namespace Lawn
             mZombieHeight = ZombieHeight.Falling;
             mZombiePhase = ZombiePhase.ZombieNormal;
             StartWalkAnim(0);
-            mZombieRect = new TRect(36, 17, 42, 115);
-            mZombieAttackRect = new TRect(20, 17, 50, 115);
+            mZombieRect = new Rect(36, 17, 42, 115);
+            mZombieAttackRect = new Rect(20, 17, 50, 115);
             mShieldHealth = 0;
             mShieldType = ShieldType.None;
             mHasObject = false;
@@ -4899,7 +4899,7 @@ namespace Lawn
             mY = (int)mPosY;
             mZombieType = ZombieType.Normal;
             mZombiePhase = ZombiePhase.ZombieNormal;
-            mZombieAttackRect = new TRect(50, 0, 20, 115);
+            mZombieAttackRect = new Rect(50, 0, 20, 115);
             mAnimFrames = 12;
             mAnimTicksPerFrame = 12;
             mPhaseCounter = 0;
@@ -6101,7 +6101,7 @@ namespace Lawn
 
         public void LoadPlainZombieReanim()
         {
-            mZombieAttackRect = new TRect(20, 0, 50, 115);
+            mZombieAttackRect = new Rect(20, 0, 50, 115);
             Reanimation reanimation = mApp.ReanimationTryToGet(mBodyReanimID);
             if (reanimation == null)
             {
@@ -7004,14 +7004,14 @@ namespace Lawn
             {
                 return null;
             }
-            TRect aAttackRect = GetZombieAttackRect();
+            Rect aAttackRect = GetZombieAttackRect();
             int count = mBoard.mZombies.Count;
             for (int i = 0; i < count; i++)
             {
                 Zombie aZombie = mBoard.mZombies[i];
                 if (!aZombie.mDead && mMindControlled != aZombie.mMindControlled && !aZombie.IsFlying() && aZombie.mZombiePhase != ZombiePhase.DiggerTunneling && aZombie.mZombiePhase != ZombiePhase.BungeeDiving && aZombie.mZombiePhase != ZombiePhase.BungeeDivingScreaming && aZombie.mZombiePhase != ZombiePhase.BungeeRising && aZombie.mZombieHeight != ZombieHeight.GettingBungeeDropped && !aZombie.IsDeadOrDying() && aZombie.mRow == mRow)
                 {
-                    TRect aZombieRect = aZombie.GetZombieRect();
+                    Rect aZombieRect = aZombie.GetZombieRect();
                     int rectOverlap = GameConstants.GetRectOverlap(aAttackRect, aZombieRect);
                     if (rectOverlap >= 20 || (rectOverlap >= 0 && aZombie.mIsEating))
                     {
@@ -7413,7 +7413,7 @@ namespace Lawn
                 num = 0f;
             }
             float num2 = num * theTime;
-            TRect zombieRect = GetZombieRect();
+            Rect zombieRect = GetZombieRect();
             int num3 = zombieRect.mX + zombieRect.mWidth / 2;
             return num3 - num2;
         }
@@ -10058,7 +10058,7 @@ namespace Lawn
                     Plant aPlant = mBoard.mPlants[i];
                     if (!aPlant.mDead)
                     {
-                        TRect aPlantRect = aPlant.GetPlantRect();
+                        Rect aPlantRect = aPlant.GetPlantRect();
                         if (mRow == aPlant.mRow && !aPlant.NotOnGround())
                         {
                             mBoard.mPlantsEaten++;
@@ -10814,9 +10814,9 @@ namespace Lawn
 
         public bool mHitUmbrella;
 
-        public TRect mZombieRect = default(TRect);
+        public Rect mZombieRect = default(Rect);
 
-        public TRect mZombieAttackRect = default(TRect);
+        public Rect mZombieAttackRect = default(Rect);
 
         public int mChilledCounter;
 
@@ -10942,7 +10942,7 @@ namespace Lawn
 
         public bool cachedZombieRectUpToDate;
 
-        private TRect cachedZombieRect;
+        private Rect cachedZombieRect;
 
         public int mYuckyToRow;
 

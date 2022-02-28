@@ -325,7 +325,7 @@ namespace Lawn
         public override void Draw(Graphics g)
         {
             g.SetLinearBlend(true);
-            LawnCommon.DrawImageBox(g, new TRect(0, 0, mWidth, mHeight), AtlasResources.IMAGE_ALMANAC_ROUNDED_OUTLINE);
+            LawnCommon.DrawImageBox(g, new Rect(0, 0, mWidth, mHeight), AtlasResources.IMAGE_ALMANAC_ROUNDED_OUTLINE);
             if (mPageIndex == ChallengePage.Survival)
             {
                 TodCommon.TodDrawString(g, "[PICK_AREA]", 400, 22, Resources.FONT_DWARVENTODCRAFT15, new SexyColor(220, 220, 220), DrawStringJustification.Center);

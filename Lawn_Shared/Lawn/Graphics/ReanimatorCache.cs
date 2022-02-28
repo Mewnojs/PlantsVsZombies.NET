@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sexy;
+using Sexy.GraphicsLib;
+using Sexy.Misc;
 using Sexy.TodLib;
 
 namespace Lawn
@@ -73,7 +75,7 @@ namespace Lawn
                     return;
                 }
             }
-            TRect drawRect = GetPlantImageSize(theSeedType);
+            Rect drawRect = GetPlantImageSize(theSeedType);
             if (!mApp.Is3DAccelerated())
             {
                 if (g.mScaleX == 1f && g.mScaleY == 1f)
@@ -113,9 +115,9 @@ namespace Lawn
             
         }
 
-        public TRect GetPlantImageSize(SeedType seedtype)
+        public Rect GetPlantImageSize(SeedType seedtype)
         {
-            TRect result = new TRect(-20, -20, 120, 120);
+            Rect result = new Rect(-20, -20, 120, 120);
             switch (seedtype)
             {
                 case SeedType.Tallnut:
@@ -240,7 +242,7 @@ namespace Lawn
                     return result;
                 }
             }
-            TRect drawRect = GetPlantImageSize(seedType);
+            Rect drawRect = GetPlantImageSize(seedType);
             result = MakeBlankCanvasImage((int)(Constants.S * drawRect.mWidth), (int)(Constants.S * drawRect.mHeight));
             lock (ResourceManager.DrawLocker)
             {

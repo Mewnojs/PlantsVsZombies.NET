@@ -1,5 +1,7 @@
 ﻿using System;
 using Sexy;
+using Sexy.GraphicsLib;
+using Sexy.WidgetsLib;
 
 namespace Lawn
 {

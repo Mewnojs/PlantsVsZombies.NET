@@ -351,7 +351,7 @@ namespace Lawn
                     case ZombiePileObjectType.Blackhole:
                     {
                         Matrix world = Matrix.Identity;
-                        new TRect(0, 0, Resources.IMAGE_BLACKHOLE.mWidth, Resources.IMAGE_BLACKHOLE.mHeight);
+                        new Rect(0, 0, Resources.IMAGE_BLACKHOLE.mWidth, Resources.IMAGE_BLACKHOLE.mHeight);
                         int num = (int)(g.mTransY / 0.4f * 1.6f);
                         blackHoleView = Matrix.CreateLookAt(new Vector3(0f, (float)(-num), -1000f), Vector3.Zero, Vector3.UnitY);
                         blackHoleVerts[0].Position.Y = (float)(-Resources.IMAGE_BLACKHOLE.mHeight) / 4f - num;
@@ -365,7 +365,7 @@ namespace Lawn
                         break;
                     }
                     case ZombiePileObjectType.Arrow:
-                        g.DrawImageRotatedScaled(AtlasResources.IMAGE_DOWNARROW, 160f, zombiePileObject.mY + (int)zombiePileObject.mOffsetY + transY + 50, 3.141592653589793, AtlasResources.IMAGE_DOWNARROW.mWidth / 2, AtlasResources.IMAGE_DOWNARROW.mHeight / 2, new TRect?(new TRect(0, 0, AtlasResources.IMAGE_DOWNARROW.mWidth, AtlasResources.IMAGE_DOWNARROW.mHeight)), 10, 10);
+                        g.DrawImageRotatedScaled(AtlasResources.IMAGE_DOWNARROW, 160f, zombiePileObject.mY + (int)zombiePileObject.mOffsetY + transY + 50, 3.141592653589793, AtlasResources.IMAGE_DOWNARROW.mWidth / 2, AtlasResources.IMAGE_DOWNARROW.mHeight / 2, new Rect?(new Rect(0, 0, AtlasResources.IMAGE_DOWNARROW.mWidth, AtlasResources.IMAGE_DOWNARROW.mHeight)), 10, 10);
                         break;
                     case ZombiePileObjectType.Gem0:
                     case ZombiePileObjectType.Gem1:
@@ -377,7 +377,7 @@ namespace Lawn
                     {
                         float num2 = Math.Abs(zombiePileObject.gemSpeedX / 5f);
                         num2 = 1f / num2;
-                        g.DrawImageRotatedScaled(zombiePileObject.gemImage, (int)zombiePileObject.mOffsetX + g.mTransX, zombiePileObject.mY + (int)zombiePileObject.mOffsetY + g.mTransY, zombiePileObject.mCounter, (int)(zombiePileObject.gemImage.mWidth / num2), (int)(zombiePileObject.gemImage.mHeight / num2), new TRect?(new TRect(0, 0, zombiePileObject.gemImage.mWidth, zombiePileObject.gemImage.mHeight)), (int)(num2 * zombiePileObject.gemImage.mWidth), (int)(num2 * zombiePileObject.gemImage.mHeight));
+                        g.DrawImageRotatedScaled(zombiePileObject.gemImage, (int)zombiePileObject.mOffsetX + g.mTransX, zombiePileObject.mY + (int)zombiePileObject.mOffsetY + g.mTransY, zombiePileObject.mCounter, (int)(zombiePileObject.gemImage.mWidth / num2), (int)(zombiePileObject.gemImage.mHeight / num2), new Rect?(new Rect(0, 0, zombiePileObject.gemImage.mWidth, zombiePileObject.gemImage.mHeight)), (int)(num2 * zombiePileObject.gemImage.mWidth), (int)(num2 * zombiePileObject.gemImage.mHeight));
                         break;
                     }
                     }

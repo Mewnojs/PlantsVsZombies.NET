@@ -25,7 +25,7 @@ namespace Lawn
             float num4 = TodCommon.TodAnimateCurveFloatTime(0f, mTotalBarWidth, mCurBarWidth, 1f, 0.5f, TodCurves.Linear);
             SexyTransform2D sexyTransform2D = default(SexyTransform2D);
             TodCommon.TodScaleRotateTransformMatrix(ref sexyTransform2D.mMatrix, num + Constants.InvertAndScale(11f) + num3, num2 - Constants.InvertAndScale(3f) - Constants.InvertAndScale(35f) * num4 + Constants.InvertAndScale(35f), rad, num4, num4);
-            TRect theSrcRect = new TRect(0, 0, AtlasResources.IMAGE_REANIM_LOAD_SODROLLCAP.mWidth, AtlasResources.IMAGE_REANIM_LOAD_SODROLLCAP.mHeight);
+            Rect theSrcRect = new Rect(0, 0, AtlasResources.IMAGE_REANIM_LOAD_SODROLLCAP.mWidth, AtlasResources.IMAGE_REANIM_LOAD_SODROLLCAP.mHeight);
             TodCommon.TodBltMatrix(g, AtlasResources.IMAGE_REANIM_LOAD_SODROLLCAP, sexyTransform2D.mMatrix, ref g.mClipRect, SexyColor.White, g.mDrawMode, theSrcRect);
             @new.PrepareForReuse();
         }

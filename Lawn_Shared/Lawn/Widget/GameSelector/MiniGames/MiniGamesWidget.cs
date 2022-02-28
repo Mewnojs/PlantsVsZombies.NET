@@ -111,7 +111,7 @@ namespace Lawn
                 g.SetColor(Color.White);
                 var aClipRect = g.mClipRect;
                 g.ClearClipRect();
-                g.WriteWordWrapped(new TRect(num + 15, AtlasResources.IMAGE_MINI_GAME_FRAME.mHeight, AtlasResources.IMAGE_MINI_GAME_FRAME.mWidth - 30, 100), levelName, 5, 0);
+                g.WriteWordWrapped(new Rect(num + 15, AtlasResources.IMAGE_MINI_GAME_FRAME.mHeight, AtlasResources.IMAGE_MINI_GAME_FRAME.mWidth - 30, 100), levelName, 5, 0);
                 g.mClipRect = aClipRect;
                 num += AtlasResources.IMAGE_MINI_GAME_FRAME.mWidth + 10;
             }

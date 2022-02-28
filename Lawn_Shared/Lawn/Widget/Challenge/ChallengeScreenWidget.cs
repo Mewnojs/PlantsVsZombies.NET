@@ -129,7 +129,7 @@ namespace Lawn
                         else if (mApp.IsEndlessScaryPotter(challengeDefinition.mChallengeMode) || mApp.IsEndlessIZombie(challengeDefinition.mChallengeMode))
                         {
                             string theText3 = TodCommon.TodReplaceNumberString("[LONGEST_STREAK]", "{STREAK}", num10);
-                            TRect theRect = new TRect(num, num2 + 15, 96, 200);
+                            Rect theRect = new Rect(num, num2 + 15, 96, 200);
                             TodStringFile.TodDrawStringWrapped(g, theText3, theRect, Resources.FONT_CONTINUUMBOLD14OUTLINE, new SexyColor(255, 255, 255), DrawStringJustification.Center);
                             TodStringFile.TodDrawStringWrapped(g, theText3, theRect, Resources.FONT_CONTINUUMBOLD14, new SexyColor(255, 0, 0), DrawStringJustification.Center);
                         }

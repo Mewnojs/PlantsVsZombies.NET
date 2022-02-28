@@ -1105,7 +1105,7 @@ namespace Lawn
             }
         }
 
-        public override bool SaveToFile(Sexy.Buffer b)
+        public override bool SaveToFile(SexyBuffer b)
         {
             try
             {
@@ -1145,7 +1145,7 @@ namespace Lawn
             return true;
         }
 
-        public override bool LoadFromFile(Sexy.Buffer b)
+        public override bool LoadFromFile(SexyBuffer b)
         {
             try
             {

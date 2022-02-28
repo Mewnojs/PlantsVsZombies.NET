@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sexy;
+using Sexy.GraphicsLib;
+using Sexy.Misc;
 using Sexy.TodLib;
+using Sexy.WidgetsLib;
 
 namespace Lawn
 {
     public/*internal*/ class Board : Widget, ButtonListener
     {
-        public bool LoadFromFile(Sexy.Buffer b)
+        public bool LoadFromFile(SexyBuffer b)
         {
             this.doAddGraveStones = false;
             this.mLevel = b.ReadLong();
@@ -252,7 +255,7 @@ namespace Lawn
 
         private void SetFullRect()
         {
-            FullRect = new TRect(-Constants.Board_Offset_AspectRatio_Correction, mY, mWidth, mHeight);
+            FullRect = new Rect(-Constants.Board_Offset_AspectRatio_Correction, mY, mWidth, mHeight);
         }
 
         public override void Move(int theNewX, int theNewY)
@@ -267,7 +270,7 @@ namespace Lawn
             SetFullRect();
         }
 
-        public override void Resize(TRect theRect)
+        public override void Resize(Rect theRect)
         {
             base.Resize(theRect);
             SetFullRect();
@@ -1915,8 +1918,8 @@ namespace Lawn
             mLastToolY = y;
             if (mIgnoreNextMouseUp)
             {
-                TRect trect = new TRect(Constants.ZEN_XMIN, Constants.ZEN_YMIN, Constants.ZEN_XMAX - Constants.ZEN_XMIN, Constants.ZEN_YMAX - Constants.ZEN_YMIN);
-                if (trect.Contains(mApp.mBoard.mLastToolX, mApp.mBoard.mLastToolY))
+                Rect Rect = new Rect(Constants.ZEN_XMIN, Constants.ZEN_YMIN, Constants.ZEN_XMAX - Constants.ZEN_XMIN, Constants.ZEN_YMAX - Constants.ZEN_YMIN);
+                if (Rect.Contains(mApp.mBoard.mLastToolX, mApp.mBoard.mLastToolY))
                 {
                     mIgnoreNextMouseUp = false;
                 }
@@ -3253,7 +3256,7 @@ namespace Lawn
             {
                 g.DrawImage(Resources.IMAGE_BACKGROUND1UNSODDED, -(Constants.BOARD_OFFSET * Constants.S), 0f);
                 int theWidth = TodCommon.TodAnimateCurve(0, 950, mSodPosition, 0, AtlasResources.IMAGE_SOD1ROW.GetWidth(), TodCurves.Linear);
-                TRect theSrcRect = new TRect(0, 0, theWidth, AtlasResources.IMAGE_SOD1ROW.GetHeight());
+                Rect theSrcRect = new Rect(0, 0, theWidth, AtlasResources.IMAGE_SOD1ROW.GetHeight());
                 g.DrawImage(AtlasResources.IMAGE_SOD1ROW, (int)((float)(-(float)Constants.BOARD_OFFSET + 239) * Constants.S), (int)(265f * Constants.S), theSrcRect);
             }
             else if (((mLevel == 2 || mLevel == 3) && mApp.IsFirstTimeAdventureMode()) || mApp.mGameMode == GameMode.ChallengeResodded)
@@ -3261,7 +3264,7 @@ namespace Lawn
                 g.DrawImage(Resources.IMAGE_BACKGROUND1UNSODDED, (float)(-Constants.BOARD_OFFSET) * Constants.S, 0f);
                 g.DrawImage(AtlasResources.IMAGE_SOD1ROW, (float)(-(float)Constants.BOARD_OFFSET + 239) * Constants.S, 265f * Constants.S);
                 int theWidth2 = TodCommon.TodAnimateCurve(0, 950, mSodPosition, 0, AtlasResources.IMAGE_SOD3ROW.GetWidth(), TodCurves.Linear);
-                TRect theSrcRect2 = new TRect(0, 0, theWidth2, AtlasResources.IMAGE_SOD3ROW.GetHeight());
+                Rect theSrcRect2 = new Rect(0, 0, theWidth2, AtlasResources.IMAGE_SOD3ROW.GetHeight());
                 g.DrawImage(AtlasResources.IMAGE_SOD3ROW, (int)((float)(-(float)Constants.BOARD_OFFSET + 235) * Constants.S), (int)(149f * Constants.S), theSrcRect2);
             }
             else if (mLevel == 4 && mApp.IsFirstTimeAdventureMode())
@@ -3269,7 +3272,7 @@ namespace Lawn
                 g.DrawImage(Resources.IMAGE_BACKGROUND1UNSODDED, (float)(-Constants.BOARD_OFFSET) * Constants.S, 0f);
                 g.DrawImage(AtlasResources.IMAGE_SOD3ROW, (float)(-(float)Constants.BOARD_OFFSET + 235) * Constants.S, 149f * Constants.S);
                 int num = TodCommon.TodAnimateCurve(0, 950, mSodPosition, 0, 773, TodCurves.Linear);
-                TRect theSrcRect3 = new TRect((int)(232f * Constants.S), 0, (int)(num * Constants.S), Resources.IMAGE_BACKGROUND1.GetHeight());
+                Rect theSrcRect3 = new Rect((int)(232f * Constants.S), 0, (int)(num * Constants.S), Resources.IMAGE_BACKGROUND1.GetHeight());
                 g.DrawImage(Resources.IMAGE_BACKGROUND1, (int)((float)(-(float)Constants.BOARD_OFFSET + 232) * Constants.S), 0, theSrcRect3);
             }
             else if (image != null)
@@ -3754,7 +3757,7 @@ namespace Lawn
                 theHitResult.mObjectType = GameObjectType.StoreButton;
                 return true;
             }
-            TRect shovelButtonRect = GetShovelButtonRect();
+            Rect shovelButtonRect = GetShovelButtonRect();
             x = (int)(x * Constants.S);
             y = (int)(y * Constants.S);
             if (mSeedBank.MouseHitTest(x, y, out theHitResult))
@@ -3814,8 +3817,8 @@ namespace Lawn
                 GridItem stinky = mApp.mZenGarden.GetStinky();
                 if (flag && stinky != null)
                 {
-                    TRect trect = new TRect((int)(Constants.S * (stinky.mPosX - 6f)), (int)(Constants.S * (stinky.mPosY - 10f)), (int)(Constants.S * 84f), (int)(Constants.S * 90f));
-                    if (trect.Contains(x, y))
+                    Rect Rect = new Rect((int)(Constants.S * (stinky.mPosX - 6f)), (int)(Constants.S * (stinky.mPosY - 10f)), (int)(Constants.S * 84f), (int)(Constants.S * 90f));
+                    if (Rect.Contains(x, y))
                     {
                         theHitResult.mObjectType = GameObjectType.Stinky;
                         return true;
@@ -3844,8 +3847,8 @@ namespace Lawn
             }
             if (mApp.IsSlotMachineLevel() && mCursorObject.mCursorType != CursorType.Shovel)
             {
-                TRect trect2 = mChallenge.SlotMachineGetHandleRect();
-                TRect trect3 = mChallenge.SlotMachineRect();
+                Rect trect2 = mChallenge.SlotMachineGetHandleRect();
+                Rect trect3 = mChallenge.SlotMachineRect();
                 int num = (int)(Constants.S * 50f);
                 trect2.mX -= num;
                 trect2.mWidth += num * 2;
@@ -3879,8 +3882,8 @@ namespace Lawn
             }
             if (mApp.IsSlotMachineLevel() && mCursorObject.mCursorType == CursorType.Shovel)
             {
-                TRect trect4 = mChallenge.SlotMachineGetHandleRect();
-                TRect trect5 = mChallenge.SlotMachineRect();
+                Rect trect4 = mChallenge.SlotMachineGetHandleRect();
+                Rect trect5 = mChallenge.SlotMachineRect();
                 int num2 = (int)(Constants.S * 50f);
                 trect4.mX -= num2;
                 trect4.mWidth += num2 * 2;
@@ -4341,8 +4344,8 @@ namespace Lawn
             int thePosX = num + celWidth / 2;
             int board_ProgressBarText_Pos = Constants.Board_ProgressBarText_Pos;
             int num2 = TodCommon.TodAnimateCurve(0, GameConstants.PROGRESS_METER_COUNTER, mProgressMeterWidth, 0, Constants.UIProgressMeterBarEnd, TodCurves.Linear);
-            TRect theSrcRect = new TRect(celWidth - num2 - 7, celHeight, num2, celHeight);
-            TRect theDestRect = new TRect(num + celWidth - num2 - 7, y, num2, celHeight);
+            Rect theSrcRect = new Rect(celWidth - num2 - 7, celHeight, num2, celHeight);
+            Rect theDestRect = new Rect(num + celWidth - num2 - 7, y, num2, celHeight);
             g.DrawImage(AtlasResources.IMAGE_FLAGMETER, theDestRect, theSrcRect);
             SexyColor theColor = new SexyColor(224, 187, 98);
             if (mApp.mGameMode == GameMode.ChallengeBeghouled || mApp.mGameMode == GameMode.ChallengeBeghouledTwist)
@@ -4837,7 +4840,7 @@ namespace Lawn
         {
             if (mApp.mGameMode != GameMode.ChallengeZenGarden && mApp.mGameMode != GameMode.TreeOfWisdom && mShowShovel)
             {
-                TRect shovelButtonRect = GetShovelButtonRect();
+                Rect shovelButtonRect = GetShovelButtonRect();
                 g.DrawImage(AtlasResources.IMAGE_SHOVELBANK, shovelButtonRect.mX, shovelButtonRect.mY);
                 if (mCursorObject.mCursorType != CursorType.Shovel)
                 {
@@ -5382,8 +5385,8 @@ namespace Lawn
                 {
                     num5 = width;
                 }
-                TRect theSrcRect = new TRect(width - num5, 0, num5, height);
-                TRect theDestRect = new TRect(i, theY, num5, height);
+                Rect theSrcRect = new Rect(width - num5, 0, num5, height);
+                Rect theDestRect = new Rect(i, theY, num5, height);
                 g.DrawImage(AtlasResources.IMAGE_ICE, theDestRect, theSrcRect);
             }
             g.DrawImage(AtlasResources.IMAGE_ICE_CAP, num2, theY);
@@ -5411,7 +5414,7 @@ namespace Lawn
             celPosition[3].mX = (int)(celPosition[3].mX * Constants.S);
             celPosition[3].mY = (int)(celPosition[3].mY * Constants.S);
             g.SetColorizeImages(true);
-            g.FillRect(new TRect(Board.mCelPoints[0].mX, Board.mCelPoints[0].mY, Board.mCelPoints[2].mX - Board.mCelPoints[0].mX, Board.mCelPoints[2].mY - Board.mCelPoints[0].mY));
+            g.FillRect(new Rect(Board.mCelPoints[0].mX, Board.mCelPoints[0].mY, Board.mCelPoints[2].mX - Board.mCelPoints[0].mX, Board.mCelPoints[2].mY - Board.mCelPoints[0].mY));
             g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
         }
 
@@ -6221,7 +6224,7 @@ namespace Lawn
                 Plant plant = mPlants[i];
                 if (!plant.mDead)
                 {
-                    TRect plantRect = plant.GetPlantRect();
+                    Rect plantRect = plant.GetPlantRect();
                     if (GameConstants.GetCircleRectOverlap(theX, theY, theRadius, plantRect))
                     {
                         mPlantsEaten++;
@@ -7943,7 +7946,7 @@ namespace Lawn
                 Zombie zombie = mZombies[i];
                 if (!zombie.mDead && zombie.EffectedByDamage((uint)theDamageRangeFlags))
                 {
-                    TRect zombieRect = zombie.GetZombieRect();
+                    Rect zombieRect = zombie.GetZombieRect();
                     int num2 = zombie.mRow - theRow;
                     if (zombie.mZombieType == ZombieType.Boss)
                     {
@@ -8395,9 +8398,9 @@ namespace Lawn
             }
         }
 
-        public TRect GetShovelButtonRect()
+        public Rect GetShovelButtonRect()
         {
-            TRect result = new TRect(Constants.UIShovelButtonPosition.X - Constants.Board_Offset_AspectRatio_Correction, Constants.UIShovelButtonPosition.Y, AtlasResources.IMAGE_SHOVELBANK.mWidth, AtlasResources.IMAGE_SHOVELBANK.mHeight);
+            Rect result = new Rect(Constants.UIShovelButtonPosition.X - Constants.Board_Offset_AspectRatio_Correction, Constants.UIShovelButtonPosition.Y, AtlasResources.IMAGE_SHOVELBANK.mWidth, AtlasResources.IMAGE_SHOVELBANK.mHeight);
             if (mApp.IsSquirrelLevel())
             {
                 result.mX = 600;
@@ -8405,9 +8408,9 @@ namespace Lawn
             return result;
         }
 
-        public TRect GetZenShovelButtonRect()
+        public Rect GetZenShovelButtonRect()
         {
-            TRect result = new TRect(Constants.ZenGardenTopButtonStart, Constants.UIShovelButtonPosition.Y, AtlasResources.IMAGE_SHOVELBANK_ZEN.mWidth, AtlasResources.IMAGE_SHOVELBANK_ZEN.mHeight);
+            Rect result = new Rect(Constants.ZenGardenTopButtonStart, Constants.UIShovelButtonPosition.Y, AtlasResources.IMAGE_SHOVELBANK_ZEN.mWidth, AtlasResources.IMAGE_SHOVELBANK_ZEN.mHeight);
             if (mApp.IsSlotMachineLevel() || mApp.IsSquirrelLevel())
             {
                 result.mX = 600;
@@ -8415,9 +8418,9 @@ namespace Lawn
             return result;
         }
 
-        public TRect GetZenButtonRect(GameObjectType theObjectType)
+        public Rect GetZenButtonRect(GameObjectType theObjectType)
         {
-            TRect zenShovelButtonRect = GetZenShovelButtonRect();
+            Rect zenShovelButtonRect = GetZenShovelButtonRect();
             if (theObjectType == GameObjectType.NextGarden)
             {
                 zenShovelButtonRect.mX = Constants.ZenGarden_NextGarden_Pos.X;
@@ -9182,7 +9185,7 @@ namespace Lawn
 
         public void DrawZenWheelBarrowButton(Graphics g, int theOffsetY)
         {
-            TRect zenButtonRect = GetZenButtonRect(GameObjectType.Wheelbarrow);
+            Rect zenButtonRect = GetZenButtonRect(GameObjectType.Wheelbarrow);
             PottedPlant pottedPlantInWheelbarrow = mApp.mZenGarden.GetPottedPlantInWheelbarrow();
             if (pottedPlantInWheelbarrow != null && mCursorObject.mCursorType != CursorType.PlantFromWheelBarrow)
             {
@@ -9216,7 +9219,7 @@ namespace Lawn
                 GameObjectType gameObjectType = (GameObjectType)i;
                 if (CanUseGameObject(gameObjectType))
                 {
-                    TRect zenButtonRect = GetZenButtonRect(gameObjectType);
+                    Rect zenButtonRect = GetZenButtonRect(gameObjectType);
                     if (gameObjectType != GameObjectType.NextGarden && (mApp.mPlayerInfo.mZenGardenTutorialComplete || gameObjectType != GameObjectType.MoneySign))
                     {
                         g.DrawImage(AtlasResources.IMAGE_SHOVELBANK_ZEN, zenButtonRect.mX, zenButtonRect.mY + num);
@@ -9673,7 +9676,7 @@ namespace Lawn
             return true;
         }
 
-        public bool SaveToFile(Sexy.Buffer b)
+        public bool SaveToFile(SexyBuffer b)
         {
             LeaderBoardComm.RecordResult(LeaderboardGameMode.Adventure, (int)mApp.mPlayerInfo.mZombiesKilled);
             try

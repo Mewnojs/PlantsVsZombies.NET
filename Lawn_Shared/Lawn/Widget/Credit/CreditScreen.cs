@@ -10,13 +10,13 @@ namespace Lawn
     {
         internal static int DrawLeftText(Graphics g, string theText, int theY)
         {
-            TRect theRect = new TRect(Constants.CreditScreen_LeftText_X, theY, Constants.CreditScreen_LeftRight_Text_Width, Constants.BOARD_HEIGHT);
+            Rect theRect = new Rect(Constants.CreditScreen_LeftText_X, theY, Constants.CreditScreen_LeftRight_Text_Width, Constants.BOARD_HEIGHT);
             return TodStringFile.TodDrawStringWrapped(g, theText, theRect, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, DrawStringJustification.Right);
         }
 
         internal static int DrawRightText(Graphics g, string theText, int theY)
         {
-            TRect theRect = new TRect(Constants.CreditScreen_RightText_X, theY, Constants.CreditScreen_LeftRight_Text_Width, Constants.BOARD_HEIGHT);
+            Rect theRect = new Rect(Constants.CreditScreen_RightText_X, theY, Constants.CreditScreen_LeftRight_Text_Width, Constants.BOARD_HEIGHT);
             return TodStringFile.TodDrawStringWrapped(g, theText, theRect, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, DrawStringJustification.Left, ',');
         }
 

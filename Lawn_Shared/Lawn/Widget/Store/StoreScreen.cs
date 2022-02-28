@@ -420,8 +420,8 @@ namespace Lawn
                     int theX = 0;
                     int theY = 0;
                     GetStorePosition(i, ref theX, ref theY);
-                    TRect trect = new TRect(theX, theY, Constants.StoreScreen_MouseRegion.X, Constants.StoreScreen_MouseRegion.Y);
-                    if (trect.Contains(x, y))
+                    Rect Rect = new Rect(theX, theY, Constants.StoreScreen_MouseRegion.X, Constants.StoreScreen_MouseRegion.Y);
+                    if (Rect.Contains(x, y))
                     {
                         if (IsItemSoldOut(storeItemType) || IsItemUnavailable(storeItemType) || IsComingSoon(storeItemType))
                         {

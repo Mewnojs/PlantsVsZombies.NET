@@ -382,8 +382,8 @@ namespace Sexy.TodLib
             Debug.ASSERT(theCelRow >= 0 && theCelRow < theImageStrip.mNumRows);
             int celWidth = theImageStrip.GetCelWidth();
             int celHeight = theImageStrip.GetCelHeight();
-            TRect theSrcRect = new TRect(celWidth * theCelCol, celHeight * theCelRow, celWidth, celHeight);
-            TRect theDestRect = new TRect(thePosX, thePosY, TodCommon.FloatRoundToInt(celWidth * theScaleX), TodCommon.FloatRoundToInt(celHeight * theScaleY));
+            Rect theSrcRect = new Rect(celWidth * theCelCol, celHeight * theCelRow, celWidth, celHeight);
+            Rect theDestRect = new Rect(thePosX, thePosY, TodCommon.FloatRoundToInt(celWidth * theScaleX), TodCommon.FloatRoundToInt(celHeight * theScaleY));
             g.DrawImage(theImageStrip, theDestRect, theSrcRect);
         }
 
@@ -393,7 +393,7 @@ namespace Sexy.TodLib
             Debug.ASSERT(theCelRow >= 0 && theCelRow < theImageStrip.mNumRows);
             int celWidth = theImageStrip.GetCelWidth();
             int celHeight = theImageStrip.GetCelHeight();
-            TRect theSrcRect = new TRect(celWidth * theCelCol, celHeight * theCelRow, celWidth, celHeight);
+            Rect theSrcRect = new Rect(celWidth * theCelCol, celHeight * theCelRow, celWidth, celHeight);
             g.DrawImageF(theImageStrip, thePosX, thePosY, theSrcRect);
         }
 
@@ -402,7 +402,7 @@ namespace Sexy.TodLib
             Debug.ASSERT(theCelCol >= 0 && theCelCol < theImageStrip.mNumCols);
             int celWidth = theImageStrip.GetCelWidth();
             int celHeight = theImageStrip.GetCelHeight();
-            TRect theSrcRect = new TRect(celWidth * theCelCol, celHeight * theCelRow, celWidth, celHeight);
+            Rect theSrcRect = new Rect(celWidth * theCelCol, celHeight * theCelRow, celWidth, celHeight);
             if (theScaleX == 1f && theScaleY == 1f)
             {
                 g.DrawImageF(theImageStrip, thePosX, thePosY, theSrcRect);
@@ -422,7 +422,7 @@ namespace Sexy.TodLib
             Debug.ASSERT(theCelCol >= 0 && theCelCol < theImageStrip.mNumCols);
             int celWidth = theImageStrip.GetCelWidth();
             int celHeight = theImageStrip.GetCelHeight();
-            TRect theSrcRect = new TRect(celWidth * theCelCol, 0, celWidth, celHeight);
+            Rect theSrcRect = new Rect(celWidth * theCelCol, 0, celWidth, celHeight);
             if (theScaleX == 1f && theScaleY == 1f)
             {
                 g.DrawImageF(theImageStrip, thePosX, thePosY, theSrcRect);
@@ -444,7 +444,7 @@ namespace Sexy.TodLib
                 g.DrawImageF(theImage, thePosX, thePosY);
                 return;
             }
-            TRect theSrcRect = new TRect(0, 0, theImage.mWidth, theImage.mHeight);
+            Rect theSrcRect = new Rect(0, 0, theImage.mWidth, theImage.mHeight);
             Matrix identity = Matrix.Identity;
             identity.M41 = theImage.mWidth * 0.5f * theScaleX + thePosX + g.mTransX;
             identity.M42 = theImage.mHeight * 0.5f * theScaleY + thePosY + g.mTransY;
@@ -466,7 +466,7 @@ namespace Sexy.TodLib
                 g.DrawImageCel(theImage, (int)thePosX, (int)thePosY, cel);
                 return;
             }
-            TRect celRect = theImage.GetCelRect(cel);
+            Rect celRect = theImage.GetCelRect(cel);
             if (doTexelOffset)
             {
                 celRect.mX++;
@@ -483,7 +483,7 @@ namespace Sexy.TodLib
             g.DrawImageTransformed(theImage, ref identity, true, aColor, celRect, false);
         }
 
-        public static void TodBltMatrix(Graphics g, Image theImage, ref Matrix theTransform, TRect theClipRect, SexyColor theColor, Graphics.DrawMode theDrawMode, TRect theSrcRect, bool clip)
+        public static void TodBltMatrix(Graphics g, Image theImage, ref Matrix theTransform, Rect theClipRect, SexyColor theColor, Graphics.DrawMode theDrawMode, Rect theSrcRect, bool clip)
         {
             if (g.mDrawMode != theDrawMode)
             {
@@ -501,7 +501,7 @@ namespace Sexy.TodLib
             g.DrawImageTransformed(theImage, ref theTransform, true, theColor, theSrcRect, clip);
         }
 
-        public static void TodBltMatrix(Graphics g, Image theImage, Matrix theTransform, ref TRect theClipRect, SexyColor theColor, Graphics.DrawMode theDrawMode, TRect theSrcRect)
+        public static void TodBltMatrix(Graphics g, Image theImage, Matrix theTransform, ref Rect theClipRect, SexyColor theColor, Graphics.DrawMode theDrawMode, Rect theSrcRect)
         {
             TodCommon.TodBltMatrix(g, theImage, ref theTransform, theClipRect, theColor, theDrawMode, theSrcRect, false);
         }

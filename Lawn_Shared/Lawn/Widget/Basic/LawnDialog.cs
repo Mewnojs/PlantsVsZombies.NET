@@ -310,7 +310,7 @@ namespace Lawn
             g.SetFont(mLinesFont);
             g.SetColor(mColors[1]);
             int theWidth4 = mWidth - mContentInsets.mLeft - mContentInsets.mRight - mBackgroundInsets.mLeft - mBackgroundInsets.mRight - (int)Constants.InvertAndScale(4f);
-            TRect theRect = new TRect(mBackgroundInsets.mLeft + mContentInsets.mLeft + (int)Constants.InvertAndScale(2f), num4, theWidth4, 0);
+            Rect theRect = new Rect(mBackgroundInsets.mLeft + mContentInsets.mLeft + (int)Constants.InvertAndScale(2f), num4, theWidth4, 0);
             if (mVerticalCenterText)
             {
                 int wordWrappedHeight = GetWordWrappedHeight(g, theWidth4, mDialogLines, mLinesFont.GetLineSpacing() + mLineSpacingOffset);
@@ -324,7 +324,7 @@ namespace Lawn
             num4 += WriteWordWrapped(g, theRect, mDialogLines, mLineSpacingOffset, mTextAlign);
         }
 
-        public override int WriteWordWrapped(Graphics g, TRect theRect, string theLine, int theLineSpacing, int theJustification)
+        public override int WriteWordWrapped(Graphics g, Rect theRect, string theLine, int theLineSpacing, int theJustification)
         {
             bool writeColoredString = g.mWriteColoredString;
             g.mWriteColoredString = Widget.mWriteColoredString;
@@ -387,7 +387,7 @@ namespace Lawn
 
         public override int GetWordWrappedHeight(Graphics g, int theWidth, string theLine, int aLineSpacing)
         {
-            return TodStringFile.TodDrawStringWrappedHeight(g, theLine, new TRect(0, 0, theWidth, 0), g.GetFont(), g.mColor, DrawStringJustification.Left);
+            return TodStringFile.TodDrawStringWrappedHeight(g, theLine, new Rect(0, 0, theWidth, 0), g.GetFont(), g.mColor, DrawStringJustification.Left);
         }
 
         public LawnApp mApp;

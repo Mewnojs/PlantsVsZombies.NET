@@ -1943,7 +1943,7 @@ namespace Lawn
             if (mCutsceneTime > CutScene.TimeIntro_LogoStart && mCutsceneTime <= CutScene.TimeIntro_PanRightEnd)
             {
                 float num2 = TodCommon.TodAnimateCurveFloat(CutScene.TimeIntro_LogoStart, CutScene.TimeIntro_LogoEnd, mCutsceneTime, 5f, 1f, TodCurves.EaseOut);
-                TRect theRect = new TRect(Constants.BOARD_WIDTH / 2 - mBoard.mX - (int)(Constants.BOARD_WIDTH * 0.5f * num2), Constants.BOARD_HEIGHT / 2 - mBoard.mY - (int)(75f * num2), (int)(Constants.BOARD_WIDTH * num2), (int)(Constants.CutScene_LogoBackRect_Height * num2));
+                Rect theRect = new Rect(Constants.BOARD_WIDTH / 2 - mBoard.mX - (int)(Constants.BOARD_WIDTH * 0.5f * num2), Constants.BOARD_HEIGHT / 2 - mBoard.mY - (int)(75f * num2), (int)(Constants.BOARD_WIDTH * num2), (int)(Constants.CutScene_LogoBackRect_Height * num2));
                 g.SetColor(new SexyColor(0, 0, 0, 128));
                 g.SetColorizeImages(true);
                 g.FillRect(theRect);

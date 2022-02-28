@@ -157,17 +157,17 @@ namespace Sexy.TodLib
             {
                 num2 = image.mNumRows - 1;
             }
-            TRect trect = new TRect(celWidth * num, celHeight * num2, celWidth, celHeight);
+            Rect Rect = new Rect(celWidth * num, celHeight * num2, celWidth, celHeight);
             float num3 = Definition.FloatTrackEvaluate(ref emitterDef.mClipTop, theParticle.mParticleTimeValue, theParticle.mParticleInterp[11]);
             float num4 = Definition.FloatTrackEvaluate(ref emitterDef.mClipBottom, theParticle.mParticleTimeValue, theParticle.mParticleInterp[12]);
             float num5 = Definition.FloatTrackEvaluate(ref emitterDef.mClipLeft, theParticle.mParticleTimeValue, theParticle.mParticleInterp[13]);
             float num6 = Definition.FloatTrackEvaluate(ref emitterDef.mClipRight, theParticle.mParticleTimeValue, theParticle.mParticleInterp[14]);
             theParams.mPosX += num5 * celWidth;
             theParams.mPosY += num3 * celHeight;
-            trect.mX += TodCommon.FloatRoundToInt(num5 * celWidth);
-            trect.mY += TodCommon.FloatRoundToInt(num3 * celHeight);
-            trect.mWidth -= TodCommon.FloatRoundToInt((num5 + num6) * celWidth);
-            trect.mHeight -= TodCommon.FloatRoundToInt((num3 + num4) * celHeight);
+            Rect.mX += TodCommon.FloatRoundToInt(num5 * celWidth);
+            Rect.mY += TodCommon.FloatRoundToInt(num3 * celHeight);
+            Rect.mWidth -= TodCommon.FloatRoundToInt((num5 + num6) * celWidth);
+            Rect.mHeight -= TodCommon.FloatRoundToInt((num3 + num4) * celHeight);
             if (TodCommon.TestBit((uint)emitterDef.mParticleFlags, 2))
             {
                 theParams.mPosX = TodCommon.FloatRoundToInt(theParams.mPosX);
@@ -189,16 +189,16 @@ namespace Sexy.TodLib
                 g.SetDrawMode(drawMode2);
                 return;
             }
-            trect.mX += image.mS;
-            trect.mY += image.mT;
-            int trectWidth = trect.mWidth;
-            int trectHeight = trect.mHeight;
+            Rect.mX += image.mS;
+            Rect.mY += image.mT;
+            int trectWidth = Rect.mWidth;
+            int trectHeight = Rect.mHeight;
             g.SetDrawMode(drawMode);
-            g.DrawImageRotatedScaled(image, new TRect((int)theParams.mPosX, (int)theParams.mPosY, trect.mWidth, trect.mHeight), new TRect(trect.mX, trect.mY, trect.mWidth, trect.mHeight), particleEmitter.mExtraAdditiveDrawOverride ? SexyColor.White : theColor, theParams.mSpinPosition, new Vector2(theParams.mParticleScale, theParams.mParticleScale * theParams.mParticleStretch), new Vector2(trect.mWidth / 2, trect.mHeight / 2));
+            g.DrawImageRotatedScaled(image, new Rect((int)theParams.mPosX, (int)theParams.mPosY, Rect.mWidth, Rect.mHeight), new Rect(Rect.mX, Rect.mY, Rect.mWidth, Rect.mHeight), particleEmitter.mExtraAdditiveDrawOverride ? SexyColor.White : theColor, theParams.mSpinPosition, new Vector2(theParams.mParticleScale, theParams.mParticleScale * theParams.mParticleStretch), new Vector2(Rect.mWidth / 2, Rect.mHeight / 2));
             if (particleEmitter.mExtraAdditiveDrawOverride)
             {
                 g.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
-                g.DrawImageRotatedScaled(image, new TRect((int)theParams.mPosX, (int)theParams.mPosY, trect.mWidth, trect.mHeight), new TRect(trect.mX, trect.mY, trect.mWidth, trect.mHeight), theColor, theParams.mSpinPosition, new Vector2(theParams.mParticleScale, theParams.mParticleScale * theParams.mParticleStretch), new Vector2(trect.mWidth / 2, trect.mHeight / 2));
+                g.DrawImageRotatedScaled(image, new Rect((int)theParams.mPosX, (int)theParams.mPosY, Rect.mWidth, Rect.mHeight), new Rect(Rect.mX, Rect.mY, Rect.mWidth, Rect.mHeight), theColor, theParams.mSpinPosition, new Vector2(theParams.mParticleScale, theParams.mParticleScale * theParams.mParticleStretch), new Vector2(Rect.mWidth / 2, Rect.mHeight / 2));
             }
         }
 

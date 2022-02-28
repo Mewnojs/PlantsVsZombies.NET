@@ -1,0 +1,12 @@
+﻿using System;
+
+namespace Sexy
+{
+	public enum UPDATESTATE
+	{
+		UPDATESTATE_MESSAGES,
+		UPDATESTATE_PROCESS_1,
+		UPDATESTATE_PROCESS_2,
+		UPDATESTATE_PROCESS_DONE
+	}
+}

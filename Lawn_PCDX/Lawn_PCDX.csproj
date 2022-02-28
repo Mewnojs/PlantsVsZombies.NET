@@ -38,4 +38,5 @@
   <Import Project="..\MonoGame.Framework.Net\MonoGame.Framework.Net.projitems" Label="Shared" />
   <Import Project="..\IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems" Label="Shared" />
   <Import Project="..\LawnModExtension\LawnModExtension.projitems" Label="Shared" />
+  <Import Project="..\SexyFramework\SexyFramework.projitems" Label="Shared" />
 </Project>

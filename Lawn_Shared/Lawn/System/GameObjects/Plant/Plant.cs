@@ -54,8 +54,8 @@ namespace Lawn
             mStateCountdown = 0;
             mLaunchCounter = 0;
             mLaunchRate = 0;
-            mPlantRect = default(TRect);
-            mPlantAttackRect = default(TRect);
+            mPlantRect = default(Rect);
+            mPlantAttackRect = default(Rect);
             mTargetX = 0;
             mTargetY = 0;
             mStartRow = 0;
@@ -1208,7 +1208,7 @@ namespace Lawn
                 float num13;
                 if (theTargetZombie != null)
                 {
-                    TRect zombieRect = theTargetZombie.GetZombieRect();
+                    Rect zombieRect = theTargetZombie.GetZombieRect();
                     float num11 = theTargetZombie.ZombieTargetLeadX(50f);
                     num12 = num11 - num - 30f;
                     num13 = zombieRect.mY - num2;
@@ -1305,7 +1305,7 @@ namespace Lawn
         public Zombie FindTargetZombie(int theRow, PlantWeapon thePlantWeapon)
         {
             int damageRangeFlags = GetDamageRangeFlags(thePlantWeapon);
-            TRect plantAttackRect = GetPlantAttackRect(thePlantWeapon);
+            Rect plantAttackRect = GetPlantAttackRect(thePlantWeapon);
             int distanceMax = 0;
             Zombie result = null;
             for (int i = 0; i < mBoard.mZombies.Count; i++)
@@ -1395,7 +1395,7 @@ namespace Lawn
                             }
                             if ((mSeedType != SeedType.ExplodeONut || theZombieItem.mZombiePhase != ZombiePhase.PolevaulterInVault) && (mSeedType != SeedType.Tanglekelp || theZombieItem.mInPool))
                             {
-                                TRect zombieRect = theZombieItem.GetZombieRect();
+                                Rect zombieRect = theZombieItem.GetZombieRect();
                                 if (!isPortalCheckNeeded)
                                 {
                                     int theXOverlap = GameConstants.GetRectOverlap(plantAttackRect, zombieRect);
@@ -2095,7 +2095,7 @@ namespace Lawn
         public void DoRowAreaDamage(int theDamage, uint theDamageFlags)
         {
             int damageRangeFlags = GetDamageRangeFlags(PlantWeapon.Primary);
-            TRect plantAttackRect = GetPlantAttackRect(PlantWeapon.Primary);
+            Rect plantAttackRect = GetPlantAttackRect(PlantWeapon.Primary);
             int count = mBoard.mZombies.Count;
             for (int i = 0; i < count; i++)
             {
@@ -2124,7 +2124,7 @@ namespace Lawn
                     }
                     if (zombie.mOnHighGround == IsOnHighGround() && zombie.EffectedByDamage((uint)damageRangeFlags))
                     {
-                        TRect zombieRect = zombie.GetZombieRect();
+                        Rect zombieRect = zombie.GetZombieRect();
                         int rectOverlap = GameConstants.GetRectOverlap(plantAttackRect, zombieRect);
                         if (rectOverlap > 0)
                         {
@@ -2198,38 +2198,38 @@ namespace Lawn
             }
         }
 
-        public TRect GetPlantRect()
+        public Rect GetPlantRect()
         {
-            TRect result = default(TRect);
+            Rect result = default(Rect);
             if (mSeedType == SeedType.Tallnut)
             {
-                result = new TRect(mX + 10, mY, mWidth, mHeight);
+                result = new Rect(mX + 10, mY, mWidth, mHeight);
             }
             else if (mSeedType == SeedType.Pumpkinshell)
             {
-                result = new TRect(mX, mY, mWidth - 20, mHeight);
+                result = new Rect(mX, mY, mWidth - 20, mHeight);
             }
             else if (mSeedType == SeedType.Cobcannon)
             {
-                result = new TRect(mX, mY, 140, 80);
+                result = new Rect(mX, mY, 140, 80);
             }
             else
             {
-                result = new TRect(mX + 10, mY, mWidth - 20, mHeight);
+                result = new Rect(mX + 10, mY, mWidth - 20, mHeight);
             }
             return result;
         }
 
-        public TRect GetPlantAttackRect(PlantWeapon thePlantWeapon)
+        public Rect GetPlantAttackRect(PlantWeapon thePlantWeapon)
         {
-            TRect result = default(TRect);
+            Rect result = default(Rect);
             if (mApp.IsWallnutBowlingLevel())
             {
-                result = new TRect(mX, mY, mWidth - 20, mHeight);
+                result = new Rect(mX, mY, mWidth - 20, mHeight);
             }
             else if (thePlantWeapon == PlantWeapon.Secondary && mSeedType == SeedType.Splitpea)
             {
-                result = new TRect(0, mY, mX + 16, mHeight);
+                result = new Rect(0, mY, mX + 16, mHeight);
             }
             else
             {
@@ -2239,37 +2239,37 @@ namespace Lawn
                     switch (seedType)
                     {
                     case SeedType.Potatomine:
-                        result = new TRect(mX, mY, mWidth - 25, mHeight);
+                        result = new Rect(mX, mY, mWidth - 25, mHeight);
                         return result;
                     case SeedType.Snowpea:
                     case SeedType.Repeater:
                     case SeedType.Sunshroom:
                         goto IL_27E;
                     case SeedType.Chomper:
-                        result = new TRect(mX + 80, mY, 40, mHeight);
+                        result = new Rect(mX + 80, mY, 40, mHeight);
                         return result;
                     case SeedType.Puffshroom:
                         break;
                     case SeedType.Fumeshroom:
-                        result = new TRect(mX + 60, mY, 340, mHeight);
+                        result = new Rect(mX + 60, mY, 340, mHeight);
                         return result;
                     default:
                         switch (seedType)
                         {
                         case SeedType.Squash:
-                            result = new TRect(mX + 20, mY, mWidth - 35, mHeight);
+                            result = new Rect(mX + 20, mY, mWidth - 35, mHeight);
                             return result;
                         case SeedType.Threepeater:
                         case SeedType.Jalapeno:
                         case SeedType.Tallnut:
                             goto IL_27E;
                         case SeedType.Tanglekelp:
-                            result = new TRect(mX, mY, mWidth, mHeight);
+                            result = new Rect(mX, mY, mWidth, mHeight);
                             return result;
                         case SeedType.Spikeweed:
                             goto IL_15B;
                         case SeedType.Torchwood:
-                            result = new TRect(mX + 50, mY, 30, mHeight);
+                            result = new Rect(mX + 50, mY, 30, mHeight);
                             return result;
                         case SeedType.Seashroom:
                             break;
@@ -2278,16 +2278,16 @@ namespace Lawn
                         }
                         break;
                     }
-                    result = new TRect(mX + 60, mY, 230, mHeight);
+                    result = new Rect(mX + 60, mY, 230, mHeight);
                     return result;
                 }
                 switch (seedType)
                 {
                 case SeedType.Gloomshroom:
-                    result = new TRect(mX - 80, mY - 80, 240, 240);
+                    result = new Rect(mX - 80, mY - 80, 240, 240);
                     return result;
                 case SeedType.Cattail:
-                    result = new TRect(-800, -600, 1600, 1200);
+                    result = new Rect(-800, -600, 1600, 1200);
                     return result;
                 case SeedType.Wintermelon:
                 case SeedType.GoldMagnet:
@@ -2297,16 +2297,16 @@ namespace Lawn
                 default:
                     if (seedType == SeedType.Leftpeater)
                     {
-                        result = new TRect(0, mY, mX, mHeight);
+                        result = new Rect(0, mY, mX, mHeight);
                         return result;
                     }
                     goto IL_27E;
                 }
                 IL_15B:
-                result = new TRect(mX + 20, mY, mWidth - 50, mHeight);
+                result = new Rect(mX + 20, mY, mWidth - 50, mHeight);
                 return result;
                 IL_27E:
-                result = new TRect(mX + 60, mY, 800, mHeight);
+                result = new Rect(mX + 60, mY, 800, mHeight);
             }
             return result;
         }
@@ -2314,7 +2314,7 @@ namespace Lawn
         public Zombie FindSquashTarget()
         {
             int damageRangeFlags = GetDamageRangeFlags(PlantWeapon.Primary);
-            TRect plantAttackRect = GetPlantAttackRect(PlantWeapon.Primary);
+            Rect plantAttackRect = GetPlantAttackRect(PlantWeapon.Primary);
             int num = 0;
             Zombie zombie = null;
             int count = mBoard.mZombies.Count;
@@ -2330,7 +2330,7 @@ namespace Lawn
                     }
                     if (num2 == 0 && zombie2.mHasHead && !zombie2.IsTangleKelpTarget() && zombie2.EffectedByDamage((uint)damageRangeFlags) && !zombie2.IsSquashTarget(this))
                     {
-                        TRect zombieRect = zombie2.GetZombieRect();
+                        Rect zombieRect = zombie2.GetZombieRect();
                         if ((zombie2.mZombiePhase == ZombiePhase.PolevaulterPreVault && zombieRect.mX < mX + 20) || (zombie2.mZombiePhase != ZombiePhase.PolevaulterPreVault && zombie2.mZombiePhase != ZombiePhase.PolevaulterInVault && zombie2.mZombiePhase != ZombiePhase.SnorkelIntoPool && zombie2.mZombiePhase != ZombiePhase.DolphinIntoPool && zombie2.mZombiePhase != ZombiePhase.DolphinRiding && zombie2.mZombiePhase != ZombiePhase.DolphinInJump && !zombie2.IsBobsledTeamWithSled()))
                         {
                             int num3 = 70;
@@ -2482,7 +2482,7 @@ namespace Lawn
         public void DoSquashDamage()
         {
             int damageRangeFlags = GetDamageRangeFlags(PlantWeapon.Primary);
-            TRect plantAttackRect = GetPlantAttackRect(PlantWeapon.Primary);
+            Rect plantAttackRect = GetPlantAttackRect(PlantWeapon.Primary);
             int num = 0;
             int count = mBoard.mZombies.Count;
             for (int i = 0; i < count; i++)
@@ -2497,7 +2497,7 @@ namespace Lawn
                     }
                     if (num2 == 0 && zombie.EffectedByDamage((uint)damageRangeFlags))
                     {
-                        TRect zombieRect = zombie.GetZombieRect();
+                        Rect zombieRect = zombie.GetZombieRect();
                         int rectOverlap = GameConstants.GetRectOverlap(plantAttackRect, zombieRect);
                         int num3 = 0;
                         if (zombie.mZombieType == ZombieType.Football)
@@ -2710,14 +2710,14 @@ namespace Lawn
 
         public void UpdateTorchwood()//3update
         {
-            TRect plantAttackRect = GetPlantAttackRect(PlantWeapon.Primary);
+            Rect plantAttackRect = GetPlantAttackRect(PlantWeapon.Primary);
             int num = -1;
             Projectile projectile = null;
             while (mBoard.IterateProjectiles(ref projectile, ref num))
             {
                 if (projectile.mRow == mRow && (projectile.mProjectileType == ProjectileType.Pea || projectile.mProjectileType == ProjectileType.Snowpea))
                 {
-                    TRect projectileRect = projectile.GetProjectileRect();
+                    Rect projectileRect = projectile.GetProjectileRect();
                     int rectOverlap = GameConstants.GetRectOverlap(plantAttackRect, projectileRect);
                     if (rectOverlap >= 1)
                     {
@@ -2759,7 +2759,7 @@ namespace Lawn
                 Zombie zombie = mBoard.mZombies[i];
                 if (!zombie.mDead)
                 {
-                    TRect zombieRect = zombie.GetZombieRect();
+                    Rect zombieRect = zombie.GetZombieRect();
                     if (zombie.EffectedByDamage((uint)damageRangeFlags))
                     {
                         if (zombie.mZombieType == ZombieType.Boss && mPlantCol >= 5)
@@ -3047,7 +3047,7 @@ namespace Lawn
                 Zombie zombie2 = mBoard.mZombies[j];
                 if (!zombie2.mDead)
                 {
-                    TRect zombieRect = zombie2.GetZombieRect();
+                    Rect zombieRect = zombie2.GetZombieRect();
                     int num3 = zombie2.mRow - mRow;
                     if (!zombie2.mMindControlled && zombie2.mHasHead && zombie2.mZombieHeight == ZombieHeight.ZombieNormal && zombie2.mZombiePhase != ZombiePhase.RisingFromGrave && !zombie2.IsDeadOrDying() && zombieRect.mX <= Constants.WIDE_BOARD_WIDTH && num3 <= 2 && num3 >= -2)
                     {
@@ -3894,7 +3894,7 @@ namespace Lawn
                 Zombie zombie = mBoard.mZombies[i];
                 if (!zombie.mDead)
                 {
-                    TRect zombieRect = zombie.GetZombieRect();
+                    Rect zombieRect = zombie.GetZombieRect();
                     int num = zombie.mRow - mRow;
                     if (zombie.mZombieType == ZombieType.Boss)
                     {
@@ -3948,7 +3948,7 @@ namespace Lawn
         public int DistanceToClosestZombie()
         {
             int damageRangeFlags = GetDamageRangeFlags(PlantWeapon.Primary);
-            TRect plantAttackRect = GetPlantAttackRect(PlantWeapon.Primary);
+            Rect plantAttackRect = GetPlantAttackRect(PlantWeapon.Primary);
             int num = 1000;
             int count = mBoard.mZombies.Count;
             for (int i = 0; i < count; i++)
@@ -3956,7 +3956,7 @@ namespace Lawn
                 Zombie zombie = mBoard.mZombies[i];
                 if (!zombie.mDead && zombie.mRow == mRow && zombie.EffectedByDamage((uint)damageRangeFlags))
                 {
-                    TRect zombieRect = zombie.GetZombieRect();
+                    Rect zombieRect = zombie.GetZombieRect();
                     int rectOverlap = GameConstants.GetRectOverlap(plantAttackRect, zombieRect);
                     if (num > -rectOverlap)
                     {
@@ -5492,7 +5492,7 @@ namespace Lawn
             return GameConstants.gPlantDefs[(int)theSeedtype];
         }
 
-        public override bool SaveToFile(Sexy.Buffer b)
+        public override bool SaveToFile(SexyBuffer b)
         {
             base.SaveToFile(b);
             b.WriteString(lastPlayedBodyReanim_Name);
@@ -5550,7 +5550,7 @@ namespace Lawn
             return true;
         }
 
-        public override bool LoadFromFile(Sexy.Buffer b)
+        public override bool LoadFromFile(SexyBuffer b)
         {
             base.LoadFromFile(b);
             lastPlayedBodyReanim_Name = b.ReadString();
@@ -5866,9 +5866,9 @@ namespace Lawn
 
         public int mLaunchRate;
 
-        public TRect mPlantRect = default(TRect);
+        public Rect mPlantRect = default(Rect);
 
-        public TRect mPlantAttackRect = default(TRect);
+        public Rect mPlantAttackRect = default(Rect);
 
         public int mTargetX;
 

@@ -25,7 +25,7 @@ namespace Lawn
             mPosScaled = false;
         }
 
-        public override bool SaveToFile(Sexy.Buffer b)
+        public override bool SaveToFile(SexyBuffer b)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace Lawn
             return true;
         }
 
-        public override bool LoadFromFile(Sexy.Buffer b)
+        public override bool LoadFromFile(SexyBuffer b)
         {
             try
             {
@@ -137,8 +137,8 @@ namespace Lawn
             }
             if (mApp.IsSlotMachineLevel())
             {
-                TRect trect = mApp.mBoard.mChallenge.SlotMachineRect();
-                int num2 = trect.mY + Constants.Challenge_SlotMachine_Y_Offset;
+                Rect Rect = mApp.mBoard.mChallenge.SlotMachineRect();
+                int num2 = Rect.mY + Constants.Challenge_SlotMachine_Y_Offset;
                 float num3 = 0.9f;
                 int challenge_SlotMachine_ClipHeight = Constants.Challenge_SlotMachine_ClipHeight;
                 float num4 = AtlasResources.IMAGE_SEEDPACKETS.GetCelWidth() * num3;
@@ -147,7 +147,7 @@ namespace Lawn
                 @new.mTransY = 0;
                 @new.mTransX = mBoard.mX;
                 int challenge_SlotMachine_Gap = Constants.Challenge_SlotMachine_Gap;
-                int num6 = trect.mX + Constants.Challenge_SlotMachine_Offset + mIndex * TodCommon.FloatRoundToInt(challenge_SlotMachine_Gap + num4);
+                int num6 = Rect.mX + Constants.Challenge_SlotMachine_Offset + mIndex * TodCommon.FloatRoundToInt(challenge_SlotMachine_Gap + num4);
                 int challenge_SlotMachine_Shadow_Offset = Constants.Challenge_SlotMachine_Shadow_Offset;
                 @new.ClipRect(num6, num2, (int)num4, challenge_SlotMachine_ClipHeight);
                 @new.HardwareClip();

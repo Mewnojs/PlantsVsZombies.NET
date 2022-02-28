@@ -29,7 +29,7 @@ namespace Lawn
             CalculateTextScale();
         }
 
-        public override void Resize(TRect theRect)
+        public override void Resize(Rect theRect)
         {
             base.Resize(theRect);
             CalculateTextScale();

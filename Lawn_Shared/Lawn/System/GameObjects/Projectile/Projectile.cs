@@ -35,7 +35,7 @@ namespace Lawn
             Projectile.unusedObjects.Push(this);
         }
 
-        public override bool SaveToFile(Sexy.Buffer b)
+        public override bool SaveToFile(SexyBuffer b)
         {
             base.SaveToFile(b);
             b.WriteFloat(mAccZ);
@@ -67,7 +67,7 @@ namespace Lawn
             return true;
         }
 
-        public override bool LoadFromFile(Sexy.Buffer b)
+        public override bool LoadFromFile(SexyBuffer b)
         {
             base.LoadFromFile(b);
             mAccZ = b.ReadFloat();
@@ -383,7 +383,7 @@ namespace Lawn
                 Debug.ASSERT(mFrame < image.mNumCols);
                 int celWidth = image.GetCelWidth();
                 int celHeight = image.GetCelHeight();
-                TRect theSrcRect = new TRect(celWidth * mFrame, celHeight * projectileDef.mImageRow, celWidth, celHeight);
+                Rect theSrcRect = new Rect(celWidth * mFrame, celHeight * projectileDef.mImageRow, celWidth, celHeight);
                 if (TodCommon.FloatApproxEqual(mRotation, 0f) && TodCommon.FloatApproxEqual(num, 1f))
                 {
                     g.DrawImageMirror(image, 0, 0, theSrcRect, mirror);
@@ -646,7 +646,7 @@ namespace Lawn
 
         private Zombie FindCollisionMindControlledTarget()
         {
-            TRect projectileRect = GetProjectileRect();
+            Rect projectileRect = GetProjectileRect();
             Zombie zombie = null;
             int num = 0;
             for (int i = 0; i < mBoard.mZombies.Count; i++)
@@ -654,7 +654,7 @@ namespace Lawn
                 Zombie zombie2 = mBoard.mZombies[i];
                 if (!zombie2.mDead && zombie2.mRow - mRow == 0 && zombie2.mMindControlled)
                 {
-                    TRect zombieRect = zombie2.GetZombieRect();
+                    Rect zombieRect = zombie2.GetZombieRect();
                     int rectOverlap = GameConstants.GetRectOverlap(projectileRect, zombieRect);
                     if (rectOverlap >= 0 && (zombie != null || zombie2.mX > num))
                     {
@@ -684,8 +684,8 @@ namespace Lawn
                 zombie = mBoard.ZombieTryToGet(mTargetZombieID);
                 if (zombie != null && zombie.EffectedByDamage((uint)mDamageRangeFlags))
                 {
-                    TRect projectileRect = GetProjectileRect();
-                    TRect zombieRect = zombie.GetZombieRect();
+                    Rect projectileRect = GetProjectileRect();
+                    Rect zombieRect = zombie.GetZombieRect();
                     int rectOverlap = GameConstants.GetRectOverlap(projectileRect, zombieRect);
                     if (rectOverlap >= 0 && mPosY > zombieRect.mY && mPosY < zombieRect.mY + zombieRect.mHeight)
                     {
@@ -747,7 +747,7 @@ namespace Lawn
             {
                 return null;
             }
-            TRect projectileRect = GetProjectileRect();
+            Rect projectileRect = GetProjectileRect();
             Zombie zombie = null;
             int num = 0;
             int count = mBoard.mZombies.Count;
@@ -763,7 +763,7 @@ namespace Lawn
                     }
                     if (num2 == 0)
                     {
-                        TRect zombieRect = zombie2.GetZombieRect();
+                        Rect zombieRect = zombie2.GetZombieRect();
                         int rectOverlap = GameConstants.GetRectOverlap(projectileRect, zombieRect);
                         if (rectOverlap >= 0 && (zombie == null || zombie2.mX < num))
                         {
@@ -1011,30 +1011,30 @@ namespace Lawn
             return result;
         }
 
-        public TRect GetProjectileRect()
+        public Rect GetProjectileRect()
         {
             if (mProjectileType == ProjectileType.Pea || mProjectileType == ProjectileType.Snowpea || mProjectileType == ProjectileType.ZombiePea || mProjectileType == ProjectileType.ZombiePeaMindControl)
             {
-                return new TRect(mX - 15, mY, mWidth + 15, mHeight);
+                return new Rect(mX - 15, mY, mWidth + 15, mHeight);
             }
             if (mProjectileType == ProjectileType.Cobbig)
             {
                 int num = 115;
-                return new TRect(mX + mWidth / 2 - num, mY + mHeight / 2 - num, num * 2, num * 2);
+                return new Rect(mX + mWidth / 2 - num, mY + mHeight / 2 - num, num * 2, num * 2);
             }
             if (mProjectileType == ProjectileType.Melon || mProjectileType == ProjectileType.Wintermelon)
             {
-                return new TRect(mX + 20, mY, 60, mHeight);
+                return new Rect(mX + 20, mY, 60, mHeight);
             }
             if (mProjectileType == ProjectileType.Fireball)
             {
-                return new TRect(mX, mY, mWidth - 10, mHeight);
+                return new Rect(mX, mY, mWidth - 10, mHeight);
             }
             if (mProjectileType == ProjectileType.Spike)
             {
-                return new TRect(mX - 25, mY, mWidth + 25, mHeight);
+                return new Rect(mX - 25, mY, mWidth + 25, mHeight);
             }
-            return new TRect(mX, mY, mWidth, mHeight);
+            return new Rect(mX, mY, mWidth, mHeight);
         }
 
         public void UpdateNormalMotion()//3update
@@ -1049,7 +1049,7 @@ namespace Lawn
                 Zombie zombie = mBoard.ZombieTryToGet(mTargetZombieID);
                 if (zombie != null && zombie.EffectedByDamage((uint)mDamageRangeFlags))
                 {
-                    TRect zombieRect = zombie.GetZombieRect();
+                    Rect zombieRect = zombie.GetZombieRect();
                     SexyVector2 lhs = new SexyVector2(zombie.ZombieTargetLeadX(0f), zombieRect.mY + zombieRect.mHeight / 2);
                     SexyVector2 rhs = new SexyVector2(mPosX + mWidth / 2, mPosY + mHeight / 2);
                     SexyVector2 sexyVector = (lhs - rhs).Normalize();
@@ -1145,14 +1145,14 @@ namespace Lawn
 
         public Plant FindCollisionTargetPlant()
         {
-            TRect projectileRect = GetProjectileRect();
+            Rect projectileRect = GetProjectileRect();
             int count = mBoard.mPlants.Count;
             for (int i = 0; i < count; i++)
             {
                 Plant plant = mBoard.mPlants[i];
                 if (!plant.mDead && mRow == plant.mRow && (mProjectileType != ProjectileType.ZombiePea || (plant.mSeedType != SeedType.Puffshroom && plant.mSeedType != SeedType.Sunshroom && plant.mSeedType != SeedType.Potatomine && plant.mSeedType != SeedType.Spikeweed && plant.mSeedType != SeedType.Spikerock && plant.mSeedType != SeedType.Lilypad)))
                 {
-                    TRect plantRect = plant.GetPlantRect();
+                    Rect plantRect = plant.GetPlantRect();
                     int rectOverlap = GameConstants.GetRectOverlap(projectileRect, plantRect);
                     if (rectOverlap > 8)
                     {
@@ -1279,13 +1279,13 @@ namespace Lawn
 
         public bool IsZombieHitBySplash(Zombie theZombie)
         {
-            TRect projectileRect = GetProjectileRect();
+            Rect projectileRect = GetProjectileRect();
             if (mProjectileType == ProjectileType.Fireball)
             {
                 projectileRect.mWidth = 100;
             }
             int num = theZombie.mRow - mRow;
-            TRect zombieRect = theZombie.GetZombieRect();
+            Rect zombieRect = theZombie.GetZombieRect();
             if (theZombie.IsFireResistant() && mProjectileType == ProjectileType.Fireball)
             {
                 return false;
@@ -1329,8 +1329,8 @@ namespace Lawn
                 Plant plant = mBoard.mPlants[i];
                 if (!plant.mDead && plant.mSeedType == SeedType.Torchwood && plant.mRow == mRow && !plant.NotOnGround() && mHitTorchwoodGridX != plant.mPlantCol)
                 {
-                    TRect plantAttackRect = plant.GetPlantAttackRect(PlantWeapon.Primary);
-                    TRect projectileRect = GetProjectileRect();
+                    Rect plantAttackRect = plant.GetPlantAttackRect(PlantWeapon.Primary);
+                    Rect projectileRect = GetProjectileRect();
                     projectileRect.mX += 40;
                     int rectOverlap = GameConstants.GetRectOverlap(plantAttackRect, projectileRect);
                     if (rectOverlap > 10)

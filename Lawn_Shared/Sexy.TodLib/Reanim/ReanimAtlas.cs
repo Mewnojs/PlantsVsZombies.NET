@@ -26,7 +26,7 @@ namespace Sexy.TodLib
             return -1;
         }
 
-        public bool ImageFits(int theImageCount, TRect rectTest, int theMaxWidth)
+        public bool ImageFits(int theImageCount, Rect rectTest, int theMaxWidth)
         {
             return true;
         }

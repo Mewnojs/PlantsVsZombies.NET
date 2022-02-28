@@ -10,7 +10,7 @@ namespace Lawn
         {
             try
             {
-                Sexy.Buffer b = new Sexy.Buffer();
+                SexyBuffer b = new SexyBuffer();
                 GlobalStaticVars.gSexyAppBase.ReadBufferFromFile(theFilePath, ref b, false);
                 mBoard.LoadFromFile(b);
             }
@@ -36,7 +36,7 @@ namespace Lawn
             }
             try
             {
-                Sexy.Buffer buffer = new Sexy.Buffer();
+                SexyBuffer buffer = new SexyBuffer();
                 mBoard.SaveToFile(buffer);
                 GlobalStaticVars.gSexyAppBase.WriteBufferToFile(theFilePath, buffer);
             }
@@ -104,7 +104,7 @@ namespace Lawn
             {
             }
 
-            public Sexy.Buffer mBuffer = new Sexy.Buffer();
+            public SexyBuffer mBuffer = new SexyBuffer();
 
             public bool mFailed;
 

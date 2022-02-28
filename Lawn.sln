@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.0.32014.148
+VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Lawn_Shared", "Lawn_Shared\Lawn_Shared.shproj", "{1A95301D-4238-4CCD-9B56-38537E891B16}"
 EndProject
@@ -26,13 +26,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IronPyInteractiveClient_Xam
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lawn_PCDX", "Lawn_PCDX\Lawn_PCDX.csproj", "{E6CA38E1-6F00-4F17-8A57-18CB759F06AD}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SexyFramework", "SexyFramework\SexyFramework.shproj", "{3420C886-3EC0-4BAC-B0A0-53EDD14E912A}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Lawn_Shared\Lawn_Shared.projitems*{1a95301d-4238-4ccd-9b56-38537e891b16}*SharedItemsImports = 13
+		SexyFramework\SexyFramework.projitems*{3420c886-3ec0-4bac-b0a0-53edd14e912a}*SharedItemsImports = 13
 		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{3a153e0c-2f08-4f96-a1a3-5e2ca3176dcc}*SharedItemsImports = 4
 		LawnModExtension\LawnModExtension.projitems*{3a153e0c-2f08-4f96-a1a3-5e2ca3176dcc}*SharedItemsImports = 4
 		Lawn_Shared\Lawn_Shared.projitems*{3a153e0c-2f08-4f96-a1a3-5e2ca3176dcc}*SharedItemsImports = 4
 		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{3a153e0c-2f08-4f96-a1a3-5e2ca3176dcc}*SharedItemsImports = 4
+		SexyFramework\SexyFramework.projitems*{3a153e0c-2f08-4f96-a1a3-5e2ca3176dcc}*SharedItemsImports = 4
 		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{92b2cf6b-95e0-4c32-a227-8abf36e7546b}*SharedItemsImports = 5
 		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{a0cdbd0e-3a41-42b7-9425-a838bc2c7383}*SharedItemsImports = 13
 		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{a281b17d-21a9-40de-a199-191686a2e6c4}*SharedItemsImports = 4
@@ -41,10 +45,12 @@ Global
 		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{c6266476-dedf-4955-8218-61f10b130cd1}*SharedItemsImports = 5
 		Lawn_Shared\Lawn_Shared.projitems*{c6266476-dedf-4955-8218-61f10b130cd1}*SharedItemsImports = 5
 		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{c6266476-dedf-4955-8218-61f10b130cd1}*SharedItemsImports = 5
+		SexyFramework\SexyFramework.projitems*{c6266476-dedf-4955-8218-61f10b130cd1}*SharedItemsImports = 5
 		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
 		LawnModExtension\LawnModExtension.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
 		Lawn_Shared\Lawn_Shared.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
 		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
+		SexyFramework\SexyFramework.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

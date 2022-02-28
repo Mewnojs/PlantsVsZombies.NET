@@ -225,7 +225,7 @@ namespace Lawn
         public void DrawIndex(Graphics g)
         {
             g.SetClipRect(0, 0, Constants.BackBufferSize.Y, Constants.BackBufferSize.X);
-            LawnCommon.DrawImageBox(g, new TRect(0, 0, mWidth, mHeight), AtlasResources.IMAGE_ALMANAC_ROUNDED_OUTLINE);
+            LawnCommon.DrawImageBox(g, new Rect(0, 0, mWidth, mHeight), AtlasResources.IMAGE_ALMANAC_ROUNDED_OUTLINE);
             g.DrawImage(AtlasResources.IMAGE_ALMANAC_INDEX_HEADER, mWidth / 2 - AtlasResources.IMAGE_ALMANAC_INDEX_HEADER.mWidth / 2, Constants.AlmanacHeaderY);
             float almanac_Text_Scale = Constants.Almanac_Text_Scale;
             if (mPlant != null)
@@ -304,7 +304,7 @@ namespace Lawn
 
         public void DrawZombies(Graphics g)
         {
-            LawnCommon.DrawImageBox(g, new TRect(0, 0, mWidth, mHeight), AtlasResources.IMAGE_ALMANAC_ROUNDED_OUTLINE);
+            LawnCommon.DrawImageBox(g, new Rect(0, 0, mWidth, mHeight), AtlasResources.IMAGE_ALMANAC_ROUNDED_OUTLINE);
             g.DrawImage(AtlasResources.IMAGE_ALMANAC_ZOMBIES_HEADER, Constants.Almanac_ZombieHeader_Pos.X, Constants.Almanac_ZombieHeader_Pos.Y);
             LawnCommon.DrawImageBox(g, Constants.Almanac_ZombieStoneRect, AtlasResources.IMAGE_ALMANAC_STONE_TABLET);
             int x = Constants.Almanac_BackgroundPosition.X;
@@ -378,14 +378,14 @@ namespace Lawn
                 theText = Common.StrFormat_("[{0}]", zombieDefinition.mZombieName);
             }
             TodCommon.TodDrawString(g, theText, Constants.Almanac_NamePosition.X, Constants.Almanac_NamePosition.Y, Resources.FONT_DWARVENTODCRAFT15, new SexyColor(0, 196, 0), Constants.Almanac_ItemName_MaxWidth, DrawStringJustification.Center);
-            TRect rect = mDescriptionScrollWidget.GetRect();
+            Rect rect = mDescriptionScrollWidget.GetRect();
             rect.Inflate((int)Constants.InvertAndScale(6f), (int)Constants.InvertAndScale(6f));
             DrawPaper(g, rect, new SexyColor(171, 159, 207));
         }
 
         public void DrawPlants(Graphics g)
         {
-            LawnCommon.DrawImageBox(g, new TRect(0, 0, mWidth, mHeight), AtlasResources.IMAGE_ALMANAC_ROUNDED_OUTLINE);
+            LawnCommon.DrawImageBox(g, new Rect(0, 0, mWidth, mHeight), AtlasResources.IMAGE_ALMANAC_ROUNDED_OUTLINE);
             g.DrawImage(AtlasResources.IMAGE_ALMANAC_PLANTS_HEADER, Constants.Almanac_PlantsHeader_Pos.X, Constants.Almanac_PlantsHeader_Pos.Y);
             LawnCommon.DrawImageBox(g, Constants.Almanac_ClayRect, AtlasResources.IMAGE_ALMANAC_CLAY_TABLET);
             int x = Constants.Almanac_BackgroundPosition.X;
@@ -421,7 +421,7 @@ namespace Lawn
             LawnCommon.DrawImageBox(g, Constants.Almanac_BrownRect, AtlasResources.IMAGE_ALMANAC_BROWN_RECT, false);
             string nameString = Plant.GetNameString(mSelectedSeed, SeedType.None);
             TodCommon.TodDrawString(g, nameString, Constants.Almanac_NamePosition.X, Constants.Almanac_NamePosition.Y, Resources.FONT_DWARVENTODCRAFT15, new SexyColor(213, 159, 43), Constants.Almanac_ItemName_MaxWidth, DrawStringJustification.Center);
-            TRect rect = mDescriptionScrollWidget.GetRect();
+            Rect rect = mDescriptionScrollWidget.GetRect();
             rect.Inflate((int)Constants.InvertAndScale(6f), (int)Constants.InvertAndScale(6f));
             DrawPaper(g, rect, new SexyColor(253, 186, 117));
         }
@@ -645,7 +645,7 @@ namespace Lawn
             return level > zombieDefinition.mStartingLevel;
         }
 
-        public void DrawPaper(Graphics g, TRect theRect, SexyColor theColor)
+        public void DrawPaper(Graphics g, Rect theRect, SexyColor theColor)
         {
             g.SetColorizeImages(true);
             g.SetColor(theColor);
@@ -707,9 +707,9 @@ namespace Lawn
 
         public new LawnApp mApp;
 
-        public TRect mViewPlantsRect = default(TRect);
+        public Rect mViewPlantsRect = default(Rect);
 
-        public TRect mViewZombiesRect = default(TRect);
+        public Rect mViewZombiesRect = default(Rect);
 
         public ScrollWidget mPlantsScrollWidget;
 

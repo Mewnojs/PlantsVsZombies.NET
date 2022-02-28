@@ -50,25 +50,25 @@ namespace Sexy.TodLib
             return TodStringFile.gStringProperties.ContainsKey(text);
         }
 
-        public static int TodDrawStringWrapped(Graphics g, string theText, TRect theRect, Font theFont, SexyColor theColor, DrawStringJustification theJustification)
+        public static int TodDrawStringWrapped(Graphics g, string theText, Rect theRect, Font theFont, SexyColor theColor, DrawStringJustification theJustification)
         {
             return TodStringFile.TodDrawStringWrapped(g, theText, theRect, theFont, theColor, theJustification, '\n');
         }
 
-        public static int TodDrawStringWrapped(Graphics g, string theText, TRect theRect, Font theFont, SexyColor theColor, DrawStringJustification theJustification, char lineBreakChar)
+        public static int TodDrawStringWrapped(Graphics g, string theText, Rect theRect, Font theFont, SexyColor theColor, DrawStringJustification theJustification, char lineBreakChar)
         {
             return TodStringFile.TodDrawStringWrapped(g, theText, theRect, theFont, theColor, theJustification, false, lineBreakChar);
         }
 
-        public static int TodDrawStringWrappedHeight(Graphics g, string theText, TRect theRect, Font theFont, SexyColor theColor, DrawStringJustification theJustification)
+        public static int TodDrawStringWrappedHeight(Graphics g, string theText, Rect theRect, Font theFont, SexyColor theColor, DrawStringJustification theJustification)
         {
             return TodStringFile.TodDrawStringWrappedHeight(g, theText, theRect, theFont, theColor, theJustification, false);
         }
 
-        public static int TodDrawStringWrappedHeight(Graphics g, string theText, TRect theRect, Font theFont, SexyColor theColor, DrawStringJustification theJustification, bool widowSupression)
+        public static int TodDrawStringWrappedHeight(Graphics g, string theText, Rect theRect, Font theFont, SexyColor theColor, DrawStringJustification theJustification, bool widowSupression)
         {
             string theText2 = TodStringFile.TodStringTranslate(theText);
-            TRect theRect2 = theRect;
+            Rect theRect2 = theRect;
             if (theJustification == DrawStringJustification.LeftVerticalMiddle || theJustification == DrawStringJustification.RightVerticalMiddle || theJustification == DrawStringJustification.CenterVerticalMiddle)
             {
                 int num = TodStringFile.TodDrawStringWrappedHelper(g, theText2, theRect2, theFont, theColor, theJustification, false, widowSupression);
@@ -77,15 +77,15 @@ namespace Sexy.TodLib
             return TodStringFile.TodDrawStringWrappedHelper(g, theText2, theRect2, theFont, theColor, theJustification, false, widowSupression);
         }
 
-        public static int TodDrawStringWrapped(Graphics g, string theText, TRect theRect, Font theFont, SexyColor theColor, DrawStringJustification theJustification, bool widowSupression)
+        public static int TodDrawStringWrapped(Graphics g, string theText, Rect theRect, Font theFont, SexyColor theColor, DrawStringJustification theJustification, bool widowSupression)
         {
             return TodStringFile.TodDrawStringWrapped(g, theText, theRect, theFont, theColor, theJustification, widowSupression, '\n');
         }
 
-        public static int TodDrawStringWrapped(Graphics g, string theText, TRect theRect, Font theFont, SexyColor theColor, DrawStringJustification theJustification, bool widowSupression, char lineBreakChar)
+        public static int TodDrawStringWrapped(Graphics g, string theText, Rect theRect, Font theFont, SexyColor theColor, DrawStringJustification theJustification, bool widowSupression, char lineBreakChar)
         {
             string theText2 = TodStringFile.TodStringTranslate(theText);
-            TRect theRect2 = theRect;
+            Rect theRect2 = theRect;
             if (theJustification == DrawStringJustification.LeftVerticalMiddle || theJustification == DrawStringJustification.RightVerticalMiddle || theJustification == DrawStringJustification.CenterVerticalMiddle)
             {
                 int num = TodStringFile.TodDrawStringWrappedHelper(g, theText2, theRect2, theFont, theColor, theJustification, false, widowSupression);
@@ -373,12 +373,12 @@ namespace Sexy.TodLib
             theStartPos = num - num2 + 1;
         }
 
-        internal static int TodDrawStringWrappedHelper(Graphics g, string theText, TRect theRect, Font theFont, SexyColor theColor, DrawStringJustification theJustification, bool drawString, bool widowSuppression)
+        internal static int TodDrawStringWrappedHelper(Graphics g, string theText, Rect theRect, Font theFont, SexyColor theColor, DrawStringJustification theJustification, bool drawString, bool widowSuppression)
         {
             return TodStringFile.TodDrawStringWrappedHelper(g, theText, theRect, theFont, theColor, theJustification, drawString, widowSuppression, '\n');
         }
 
-        internal static int TodDrawStringWrappedHelper(Graphics g, string theText, TRect theRect, Font theFont, SexyColor theColor, DrawStringJustification theJustification, bool drawString, bool widowSuppression, char lineBreakChar)
+        internal static int TodDrawStringWrappedHelper(Graphics g, string theText, Rect theRect, Font theFont, SexyColor theColor, DrawStringJustification theJustification, bool drawString, bool widowSuppression, char lineBreakChar)
         {
             int theMaxChars = theText.length();
             TodStringFile.aCurrentFormat.Reset();

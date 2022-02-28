@@ -540,7 +540,7 @@ namespace Lawn
 
         public void DrawAchievements(Graphics g)
         {
-            LawnCommon.DrawImageBox(g, new TRect(0, 0, mWidth, mHeight), AtlasResources.IMAGE_ALMANAC_ROUNDED_OUTLINE);
+            LawnCommon.DrawImageBox(g, new Rect(0, 0, mWidth, mHeight), AtlasResources.IMAGE_ALMANAC_ROUNDED_OUTLINE);
             for (int i = 0; i < mAchievementItems.Count; i++)
             {
                 AchievementItem achievementItem = Achievements.GetAchievementItem(mAchievementItems[i].mId);
@@ -551,34 +551,34 @@ namespace Lawn
                 g.DrawString(theString, Constants.AwardScreen_AchievementName_Pos.X, mAchievementItems[i].mY + Constants.AwardScreen_AchievementName_Pos.Y);
                 g.SetFont(Resources.FONT_DWARVENTODCRAFT12);
                 g.SetColor(new SexyColor(255, 255, 255));
-                TRect theRect = new TRect(Constants.AwardScreen_AchievementDescription_Rect.X, mAchievementItems[i].mY + Constants.AwardScreen_AchievementDescription_Rect.Y, Constants.AwardScreen_AchievementDescription_Rect.Width, Constants.AwardScreen_AchievementDescription_Rect.Height);
+                Rect theRect = new Rect(Constants.AwardScreen_AchievementDescription_Rect.X, mAchievementItems[i].mY + Constants.AwardScreen_AchievementDescription_Rect.Y, Constants.AwardScreen_AchievementDescription_Rect.Width, Constants.AwardScreen_AchievementDescription_Rect.Height);
                 g.WriteWordWrapped(theRect, mApp.GetAchievementDescription(mAchievementItems[i].mId), 0, -1, true);
             }
         }
 
         public void DrawBottom(Graphics g, string theTitle, string theAward, string theMessage)
         {
-            LawnCommon.DrawImageBox(g, new TRect(0, 0, mWidth, mHeight), AtlasResources.IMAGE_ALMANAC_ROUNDED_OUTLINE);
+            LawnCommon.DrawImageBox(g, new Rect(0, 0, mWidth, mHeight), AtlasResources.IMAGE_ALMANAC_ROUNDED_OUTLINE);
             LawnCommon.DrawImageBox(g, Constants.AwardScreen_ClayTablet, AtlasResources.IMAGE_ALMANAC_CLAY_TABLET);
             TodCommon.TodDrawString(g, theTitle, Constants.AwardScreen_TitlePos.X, Constants.AwardScreen_TitlePos.Y, Resources.FONT_DWARVENTODCRAFT18, Constants.GreenFontColour, Constants.BOARD_WIDTH - 60, DrawStringJustification.Center);
-            TRect trect = default(TRect);
+            Rect Rect = default(Rect);
             if (!theAward.empty())
             {
                 g.DrawImage(AtlasResources.IMAGE_ALMANAC_GROUNDDAY, Constants.AwardScreen_GroundDay_Pos.X, Constants.AwardScreen_GroundDay_Pos.Y);
                 LawnCommon.DrawImageBox(g, Constants.AwardScreen_BrownRect, AtlasResources.IMAGE_ALMANAC_BROWN_RECT, false);
                 TodCommon.TodDrawString(g, theAward, Constants.AwardScreen_BottomMessage_Pos.X, Constants.AwardScreen_BottomMessage_Pos.Y, Resources.FONT_DWARVENTODCRAFT18, Constants.YellowFontColour, DrawStringJustification.Center);
-                trect = Constants.AwardScreen_BottomText_Rect_Text;
+                Rect = Constants.AwardScreen_BottomText_Rect_Text;
             }
             else
             {
-                trect = Constants.AwardScreen_BottomText_Rect_NoText;
+                Rect = Constants.AwardScreen_BottomText_Rect_NoText;
             }
             g.SetColorizeImages(true);
             g.SetColor(new SexyColor(253, 186, 117));
-            LawnCommon.DrawImageBox(g, trect, AtlasResources.IMAGE_ALMANAC_PAPER);
+            LawnCommon.DrawImageBox(g, Rect, AtlasResources.IMAGE_ALMANAC_PAPER);
             g.SetColorizeImages(false);
-            trect.Inflate((int)Constants.InvertAndScale(-6f), (int)Constants.InvertAndScale(-6f));
-            TodStringFile.TodDrawStringWrapped(g, theMessage, trect, Resources.FONT_BRIANNETOD16, new SexyColor(40, 50, 90), DrawStringJustification.CenterVerticalMiddle, true);
+            Rect.Inflate((int)Constants.InvertAndScale(-6f), (int)Constants.InvertAndScale(-6f));
+            TodStringFile.TodDrawStringWrapped(g, theMessage, Rect, Resources.FONT_BRIANNETOD16, new SexyColor(40, 50, 90), DrawStringJustification.CenterVerticalMiddle, true);
         }
 
         public void StartButtonPressed()

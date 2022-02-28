@@ -885,7 +885,7 @@ namespace Lawn
             {
                 if (mBoard.CanUseGameObject(GameObjectType.Wheelbarrow))
                 {
-                    TRect zenButtonRect = mBoard.GetZenButtonRect(GameObjectType.Wheelbarrow);
+                    Rect zenButtonRect = mBoard.GetZenButtonRect(GameObjectType.Wheelbarrow);
                     PottedPlant pottedPlantInWheelbarrow = GetPottedPlantInWheelbarrow();
                     if (zenButtonRect.Contains(x, y) && pottedPlantInWheelbarrow != null)
                     {
@@ -901,7 +901,7 @@ namespace Lawn
             {
                 if (mBoard.CanUseGameObject(GameObjectType.Wheelbarrow))
                 {
-                    TRect zenButtonRect2 = mBoard.GetZenButtonRect(GameObjectType.Wheelbarrow);
+                    Rect zenButtonRect2 = mBoard.GetZenButtonRect(GameObjectType.Wheelbarrow);
                     Plant plant = mBoard.mPlants[mBoard.mPlants.IndexOf(mBoard.mCursorObject.mGlovePlantID)];
                     if (plant != null && zenButtonRect2.Contains(x, y) && GetPottedPlantInWheelbarrow() == null)
                     {
@@ -1277,7 +1277,7 @@ namespace Lawn
 
         public void ShowTutorialArrowOnWateringCan()
         {
-            TRect aZenButtonRect = mBoard.GetZenButtonRect(GameObjectType.WateringCan);
+            Rect aZenButtonRect = mBoard.GetZenButtonRect(GameObjectType.WateringCan);
             mBoard.TutorialArrowShow(aZenButtonRect.mX + Constants.ZenGarden_TutorialArrow_Offset, (int)(aZenButtonRect.mY + Constants.S * 10f));
             mBoard.DisplayAdvice("[ADVICE_ZEN_GARDEN_PICK_UP_WATER]", MessageStyle.ZenGardenLong, AdviceType.None);
             mBoard.mTutorialState = TutorialState.ZenGardenPickupWater;

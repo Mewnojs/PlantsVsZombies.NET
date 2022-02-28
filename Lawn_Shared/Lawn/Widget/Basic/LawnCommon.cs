@@ -17,7 +17,7 @@ namespace Lawn
 
         public static void DrawEditBox(Graphics g, EditWidget theWidget)
         {
-            TRect theDest = new TRect(theWidget.mX - (int)Constants.InvertAndScale(5f), theWidget.mY - (int)Constants.InvertAndScale(6f), theWidget.mWidth + (int)Constants.InvertAndScale(10f), theWidget.mHeight + (int)Constants.InvertAndScale(12f));
+            Rect theDest = new Rect(theWidget.mX - (int)Constants.InvertAndScale(5f), theWidget.mY - (int)Constants.InvertAndScale(6f), theWidget.mWidth + (int)Constants.InvertAndScale(10f), theWidget.mHeight + (int)Constants.InvertAndScale(12f));
             g.DrawImageBox(theDest, AtlasResources.IMAGE_EDITBOX);
         }
 
@@ -59,31 +59,31 @@ namespace Lawn
             return (int)today.Subtract(dateTime).TotalDays;
         }
 
-        public static void DrawImageBox(Graphics g, TRect theDest, Image theComponentImage)
+        public static void DrawImageBox(Graphics g, Rect theDest, Image theComponentImage)
         {
             LawnCommon.DrawImageBox(g, theDest, theComponentImage, true);
         }
 
-        public static void DrawImageBox(Graphics g, TRect theDest, Image theComponentImage, bool theDrawCenter)
+        public static void DrawImageBox(Graphics g, Rect theDest, Image theComponentImage, bool theDrawCenter)
         {
-            TRect trect = new TRect(0, 0, theComponentImage.mWidth, theComponentImage.mHeight);
-            int num = trect.mWidth / 3;
-            int num2 = trect.mHeight / 3;
-            int x = trect.mX;
-            int y = trect.mY;
-            int num3 = trect.mWidth - num * 2;
-            int num4 = trect.mHeight - num2 * 2;
-            g.DrawImage(theComponentImage, theDest.mX, theDest.mY, new TRect(x, y, num, num2));
-            g.DrawImage(theComponentImage, theDest.mX + theDest.mWidth - num, theDest.mY, new TRect(x + num + num3, y, num, num2));
-            g.DrawImage(theComponentImage, theDest.mX, theDest.mY + theDest.mHeight - num2, new TRect(x, y + num2 + num4, num, num2));
-            g.DrawImage(theComponentImage, theDest.mX + theDest.mWidth - num, theDest.mY + theDest.mHeight - num2, new TRect(x + num + num3, y + num2 + num4, num, num2));
-            g.DrawImage(theComponentImage, new TRect(theDest.mX, theDest.mY + num2, num, theDest.mHeight - num2 * 2), new TRect(x, y + num2, num, num4));
-            g.DrawImage(theComponentImage, new TRect(theDest.mX + theDest.mWidth - num, theDest.mY + num2, num, theDest.mHeight - num2 * 2), new TRect(x + num + num3, y + num2, num, num4));
-            g.DrawImage(theComponentImage, new TRect(theDest.mX + num, theDest.mY, theDest.mWidth - num * 2, num2), new TRect(x + num, y, num3, num2));
-            g.DrawImage(theComponentImage, new TRect(theDest.mX + num, theDest.mY + theDest.mHeight - num2, theDest.mWidth - num * 2, num2), new TRect(x + num, y + num2 + num4, num3, num2));
+            Rect Rect = new Rect(0, 0, theComponentImage.mWidth, theComponentImage.mHeight);
+            int num = Rect.mWidth / 3;
+            int num2 = Rect.mHeight / 3;
+            int x = Rect.mX;
+            int y = Rect.mY;
+            int num3 = Rect.mWidth - num * 2;
+            int num4 = Rect.mHeight - num2 * 2;
+            g.DrawImage(theComponentImage, theDest.mX, theDest.mY, new Rect(x, y, num, num2));
+            g.DrawImage(theComponentImage, theDest.mX + theDest.mWidth - num, theDest.mY, new Rect(x + num + num3, y, num, num2));
+            g.DrawImage(theComponentImage, theDest.mX, theDest.mY + theDest.mHeight - num2, new Rect(x, y + num2 + num4, num, num2));
+            g.DrawImage(theComponentImage, theDest.mX + theDest.mWidth - num, theDest.mY + theDest.mHeight - num2, new Rect(x + num + num3, y + num2 + num4, num, num2));
+            g.DrawImage(theComponentImage, new Rect(theDest.mX, theDest.mY + num2, num, theDest.mHeight - num2 * 2), new Rect(x, y + num2, num, num4));
+            g.DrawImage(theComponentImage, new Rect(theDest.mX + theDest.mWidth - num, theDest.mY + num2, num, theDest.mHeight - num2 * 2), new Rect(x + num + num3, y + num2, num, num4));
+            g.DrawImage(theComponentImage, new Rect(theDest.mX + num, theDest.mY, theDest.mWidth - num * 2, num2), new Rect(x + num, y, num3, num2));
+            g.DrawImage(theComponentImage, new Rect(theDest.mX + num, theDest.mY + theDest.mHeight - num2, theDest.mWidth - num * 2, num2), new Rect(x + num, y + num2 + num4, num3, num2));
             if (theDrawCenter)
             {
-                g.DrawImage(theComponentImage, new TRect(theDest.mX + num, theDest.mY + num2, theDest.mWidth - 2 * num, theDest.mHeight - 2 * num2), new TRect(x + num, y + num2, num3, num4));
+                g.DrawImage(theComponentImage, new Rect(theDest.mX + num, theDest.mY + num2, theDest.mWidth - 2 * num, theDest.mHeight - 2 * num2), new Rect(x + num, y + num2, num3, num4));
             }
         }
 
@@ -92,7 +92,7 @@ namespace Lawn
             while (theWidth > 0)
             {
                 int theWidth2 = Math.Min(theWidth, theImage.mWidth);
-                g.DrawImage(theImage, x, y, new TRect(0, 0, theWidth2, theImage.mHeight));
+                g.DrawImage(theImage, x, y, new Rect(0, 0, theWidth2, theImage.mHeight));
                 x += theImage.mWidth;
                 theWidth -= theImage.mWidth;
             }
@@ -108,7 +108,7 @@ namespace Lawn
             for (int i = 0; i < width; i += theImage.mWidth)
             {
                 int num = Math.Min(width - i, theImage.mWidth);
-                g.DrawImage(theImage, x, y, new TRect(0, 0, num, theImage.mHeight));
+                g.DrawImage(theImage, x, y, new Rect(0, 0, num, theImage.mHeight));
                 x += num;
             }
         }
@@ -118,7 +118,7 @@ namespace Lawn
             for (int i = 0; i < height; i += theImage.mHeight)
             {
                 int num = Math.Min(height - i, theImage.mHeight);
-                g.DrawImage(theImage, x, y, new TRect(0, 0, theImage.mWidth, num));
+                g.DrawImage(theImage, x, y, new Rect(0, 0, theImage.mWidth, num));
                 y += num;
             }
         }

@@ -1,6 +1,9 @@
 ﻿using System;
 using Sexy;
+using Sexy.GraphicsLib;
+using Sexy.Misc;
 using Sexy.TodLib;
+using Sexy.WidgetsLib;
 
 namespace Lawn
 {
@@ -40,7 +43,7 @@ namespace Lawn
             mNeedShowRegisterBox = false;
             mLoadingThreadComplete = false;
             mNeedToInit = true;
-            mQuickLoadKey = KeyCode.Unknown;
+            mQuickLoadKey = KeyCode.KEYCODE_UNKNOWN;
             mTitleState = TitleState.WaitingForFirstDraw;
             mTitleStateDuration = 0;
             mTitleStateCounter = 0;
@@ -111,7 +114,7 @@ namespace Lawn
                 mTitleStateDuration = 200;
                 mTitleStateCounter = mTitleStateDuration;
             }
-            if (mQuickLoadKey != KeyCode.Unknown && mTitleState != TitleState.Screen)
+            if (mQuickLoadKey != KeyCode.KEYCODE_UNKNOWN && mTitleState != TitleState.Screen)
             {
                 mTitleState = TitleState.Screen;
                 mTitleStateDuration = 0;
@@ -350,7 +353,7 @@ namespace Lawn
                 float num4 = TodCommon.TodAnimateCurveFloatTime(0f, mTotalBarWidth, mCurBarWidth, 1f, 0.5f, TodCurves.Linear);
                 SexyTransform2D sexyTransform2D = default(SexyTransform2D);
                 TodCommon.TodScaleRotateTransformMatrix(ref sexyTransform2D.mMatrix, grassX + Constants.InvertAndScale(11f) + num3, grassY - Constants.InvertAndScale(3f) - Constants.InvertAndScale(35f) * num4 + Constants.InvertAndScale(35f), rad, num4, num4);
-                TRect theSrcRect = new TRect(0, 0, AtlasResources.IMAGE_REANIM_LOAD_SODROLLCAP.mWidth, AtlasResources.IMAGE_REANIM_LOAD_SODROLLCAP.mHeight);
+                Rect theSrcRect = new Rect(0, 0, AtlasResources.IMAGE_REANIM_LOAD_SODROLLCAP.mWidth, AtlasResources.IMAGE_REANIM_LOAD_SODROLLCAP.mHeight);
                 TodCommon.TodBltMatrix(g, AtlasResources.IMAGE_REANIM_LOAD_SODROLLCAP, sexyTransform2D.mMatrix, ref g.mClipRect, SexyColor.White, g.mDrawMode, theSrcRect);
                 @new.PrepareForReuse();
             }
@@ -438,7 +441,7 @@ namespace Lawn
         {
             if (mNextImageIndex < TitleScreen.PreflightImages.Length && TitleScreen.PreflightImages[mNextImageIndex] != null)
             {
-                g.DrawImage(TitleScreen.PreflightImages[mNextImageIndex], 0, 0, new TRect(0, 0, 1, 1));
+                g.DrawImage(TitleScreen.PreflightImages[mNextImageIndex], 0, 0, new Rect(0, 0, 1, 1));
                 mNextImageIndex++;
             }
         }

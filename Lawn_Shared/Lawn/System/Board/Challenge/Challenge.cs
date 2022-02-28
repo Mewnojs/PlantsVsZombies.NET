@@ -254,9 +254,9 @@ namespace Lawn
             }
             if (mApp.IsSlotMachineLevel())
             {
-                TRect trect = SlotMachineGetHandleRect();
+                Rect Rect = SlotMachineGetHandleRect();
                 ReanimatorXnaHelpers.ReanimatorEnsureDefinitionLoaded(ReanimationType.SlotMachineHandle, true);
-                Reanimation reanimation = mApp.AddReanimation(trect.mX - 243f, trect.mY + 50f, 0, ReanimationType.SlotMachineHandle);
+                Reanimation reanimation = mApp.AddReanimation(Rect.mX - 243f, Rect.mY + 50f, 0, ReanimationType.SlotMachineHandle);
                 reanimation.mIsAttachment = true;
                 reanimation.mAnimRate = 0f;
                 mReanimChallenge = mApp.ReanimationGetID(reanimation);
@@ -281,7 +281,7 @@ namespace Lawn
             }
         }
 
-        public bool SaveToFile(Sexy.Buffer b)
+        public bool SaveToFile(SexyBuffer b)
         {
             b.WriteBoolean2DArray(mBeghouledEated);
             b.WriteLong(mBeghouledMatchesThisMove);
@@ -306,7 +306,7 @@ namespace Lawn
             return true;
         }
 
-        public bool LoadFromFile(Sexy.Buffer b)
+        public bool LoadFromFile(SexyBuffer b)
         {
             mApp = GlobalStaticVars.gLawnApp;
             mBoard = mApp.mBoard;
@@ -1923,8 +1923,8 @@ namespace Lawn
             Graphics @new = Graphics.GetNew(g);
             @new.mTransX = mBoard.mX;
             @new.mTransY = mBoard.mY;
-            TRect trect = SlotMachineRect();
-            @new.DrawImage(Resources.IMAGE_SLOTMACHINE_OVERLAY, trect.mX, trect.mY);
+            Rect Rect = SlotMachineRect();
+            @new.DrawImage(Resources.IMAGE_SLOTMACHINE_OVERLAY, Rect.mX, Rect.mY);
             Reanimation reanimation = mApp.ReanimationGet(mReanimChallenge);
             reanimation.Draw(@new);
             if (mSlotMachineRollCount < 3 && mBoard.mCursorObject.mCursorType == CursorType.Normal && mChallengeState != ChallengeState.SlotMachineRolling && !mBoard.HasLevelAwardDropped())
@@ -1934,20 +1934,20 @@ namespace Lawn
                 @new.SetColorizeImages(true);
                 @new.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
                 @new.SetColor(aColor);
-                @new.DrawImage(Resources.IMAGE_SLOTMACHINE_OVERLAY, trect.mX, trect.mY);
+                @new.DrawImage(Resources.IMAGE_SLOTMACHINE_OVERLAY, Rect.mX, Rect.mY);
                 reanimation.Draw(@new);
             }
             @new.PrepareForReuse();
         }
 
-        public TRect SlotMachineGetHandleRect()
+        public Rect SlotMachineGetHandleRect()
         {
-            return new TRect(Constants.Challenge_SlotMachineHandle_Pos.mX, Constants.Challenge_SlotMachineHandle_Pos.mY, Constants.Challenge_SlotMachineHandle_Pos.mWidth, Constants.Challenge_SlotMachineHandle_Pos.mHeight);
+            return new Rect(Constants.Challenge_SlotMachineHandle_Pos.mX, Constants.Challenge_SlotMachineHandle_Pos.mY, Constants.Challenge_SlotMachineHandle_Pos.mWidth, Constants.Challenge_SlotMachineHandle_Pos.mHeight);
         }
 
-        public TRect SlotMachineRect()
+        public Rect SlotMachineRect()
         {
-            return new TRect(Constants.Challenge_SlotMachine_Pos.X, Constants.Challenge_SlotMachine_Pos.Y, Resources.IMAGE_SLOTMACHINE_OVERLAY.mWidth, Resources.IMAGE_SLOTMACHINE_OVERLAY.mHeight);
+            return new Rect(Constants.Challenge_SlotMachine_Pos.X, Constants.Challenge_SlotMachine_Pos.Y, Resources.IMAGE_SLOTMACHINE_OVERLAY.mWidth, Resources.IMAGE_SLOTMACHINE_OVERLAY.mHeight);
         }
 
         public void WhackAZombieSpawning()//3update
@@ -2133,7 +2133,7 @@ namespace Lawn
                 Zombie zombie2 = mBoard.mZombies[i];
                 if (!zombie2.mDead && !zombie2.IsDeadOrDying())
                 {
-                    TRect zombieRect = zombie2.GetZombieRect();
+                    Rect zombieRect = zombie2.GetZombieRect();
                     zombieRect.mHeight -= 50;
                     if (GameConstants.GetCircleRectOverlap(x, y - 20, 45, zombieRect) && (zombie == null || zombie2.mRenderOrder >= zombie.mRenderOrder))
                     {
@@ -3084,7 +3084,7 @@ namespace Lawn
                 Zombie zombie = mBoard.mZombies[i];
                 if (!zombie.mDead && zombie.mRow == thePortal.mGridY && zombie.mLastPortalX != thePortal.mGridX)
                 {
-                    TRect zombieRect = zombie.GetZombieRect();
+                    Rect zombieRect = zombie.GetZombieRect();
                     int num = zombieRect.mX + zombieRect.mWidth / 2;
                     int num2 = thePortal.mGridX * 80 + 25;
                     int num3 = Math.Abs(num - num2);
@@ -3116,7 +3116,7 @@ namespace Lawn
             {
                 if (projectile.mMotionType == ProjectileMotion.Straight && projectile.mRow == thePortal.mGridY && projectile.mLastPortalX != thePortal.mGridX)
                 {
-                    TRect projectileRect = projectile.GetProjectileRect();
+                    Rect projectileRect = projectile.GetProjectileRect();
                     int num6 = projectileRect.mX + projectileRect.mWidth / 2;
                     int num7 = thePortal.mGridX * 80 + 55;
                     int num8 = Math.Abs(num6 - num7);
@@ -5013,10 +5013,10 @@ namespace Lawn
             {
                 return null;
             }
-            TRect zombieAttackRect = theZombie.GetZombieAttackRect();
+            Rect zombieAttackRect = theZombie.GetZombieAttackRect();
             if (theZombie.mZombiePhase == ZombiePhase.PolevaulterPreVault)
             {
-                zombieAttackRect = new TRect(50 + theZombie.mX, 0, 20, 115);
+                zombieAttackRect = new Rect(50 + theZombie.mX, 0, 20, 115);
             }
             if (theZombie.mZombieType == ZombieType.Balloon)
             {
@@ -5665,7 +5665,7 @@ namespace Lawn
                     num3 = 52;
                 }
                 string theText = Common.StrFormat_("[TREE_OF_WISDOM_%d]", mTreeOfWisdomTalkIndex);
-                TRect theRect = new TRect((int)((num2 + 25) * Constants.S), (int)((num3 + 6) * Constants.S), 233, 144);
+                Rect theRect = new Rect((int)((num2 + 25) * Constants.S), (int)((num3 + 6) * Constants.S), 233, 144);
                 TodStringFile.TodDrawStringWrapped(g, theText, theRect, Resources.FONT_BRIANNETOD16, SexyColor.Black, DrawStringJustification.CenterVerticalMiddle);
             }
             int num4 = num;

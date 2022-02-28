@@ -152,7 +152,7 @@ namespace Lawn
             {
                 return;
             }
-            TRect lawnMowerAttackRect = GetLawnMowerAttackRect();
+            Rect lawnMowerAttackRect = GetLawnMowerAttackRect();
             int count = mBoard.mZombies.Count;
             for (int i = 0; i < count; i++)
             {
@@ -162,7 +162,7 @@ namespace Lawn
                     int theDamageRangeFlags = 127;
                     if (zombie.EffectedByDamage((uint)theDamageRangeFlags))
                     {
-                        TRect zombieRect = zombie.GetZombieRect();
+                        Rect zombieRect = zombie.GetZombieRect();
                         int rectOverlap = GameConstants.GetRectOverlap(lawnMowerAttackRect, zombieRect);
                         int num = 0;
                         if (zombie.mZombieType == ZombieType.Balloon)
@@ -329,9 +329,9 @@ namespace Lawn
             }
         }
 
-        public TRect GetLawnMowerAttackRect()
+        public Rect GetLawnMowerAttackRect()
         {
-            return new TRect((int)mPosX, (int)mPosY, 50, 80);
+            return new Rect((int)mPosX, (int)mPosY, 50, 80);
         }
 
         public void UpdatePool()//3update
@@ -388,7 +388,7 @@ namespace Lawn
             }
         }
 
-        public bool SaveToFile(Sexy.Buffer b)
+        public bool SaveToFile(SexyBuffer b)
         {
             b.WriteLong(mRow);
             b.WriteFloat(mAltitude);
@@ -408,7 +408,7 @@ namespace Lawn
             return true;
         }
 
-        public bool LoadFromFile(Sexy.Buffer b)
+        public bool LoadFromFile(SexyBuffer b)
         {
             int theRow = b.ReadLong();
             LawnMowerInitialize(theRow);

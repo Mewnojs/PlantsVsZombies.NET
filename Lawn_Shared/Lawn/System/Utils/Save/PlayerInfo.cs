@@ -154,7 +154,7 @@ namespace Lawn
             try
             {
                 string saveFileName = GetSaveFileName();
-                Sexy.Buffer buffer = new Sexy.Buffer();
+                SexyBuffer buffer = new SexyBuffer();
                 if (!GlobalStaticVars.gSexyAppBase.ReadBufferFromFile(saveFileName, ref buffer, false))
                 {
                     result = false;
@@ -284,7 +284,7 @@ namespace Lawn
             try
             {
                 string saveFileName = GetSaveFileName();
-                Sexy.Buffer buffer = new Sexy.Buffer();
+                SexyBuffer buffer = new SexyBuffer();
                 buffer.WriteBoolean(FirstRun);
                 buffer.WriteLong(mMoneySpent);
                 buffer.WriteDateTime(mLastStinkyChocolateTime);

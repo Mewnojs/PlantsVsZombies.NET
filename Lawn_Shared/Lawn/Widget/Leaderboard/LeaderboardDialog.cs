@@ -98,10 +98,10 @@ namespace Lawn
 
         public override void Draw(Graphics g)
         {
-            TRect clipRect = g.mClipRect;
-            g.SetClipRect(new TRect(-g.mTransX, -g.mTransY, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT));
+            Rect clipRect = g.mClipRect;
+            g.SetClipRect(new Rect(-g.mTransX, -g.mTransY, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT));
             g.SetColor(new Color(0, 0, 0, 150));
-            g.FillRect(new TRect(-g.mTransX, -g.mTransY, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT));
+            g.FillRect(new Rect(-g.mTransX, -g.mTransY, Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT));
             g.mClipRect = clipRect;
             g.SetColor(SexyColor.White);
             base.Draw(g);

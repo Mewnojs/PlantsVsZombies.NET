@@ -27,14 +27,14 @@ namespace Lawn
         public override void Draw(Graphics g)
         {
             base.Draw(g);
-            TRect trect = Constants.ConfirmPurchaseDialog_Background;
+            Rect Rect = Constants.ConfirmPurchaseDialog_Background;
             g.SetColor(new SexyColor(171, 159, 207));
             g.SetColorizeImages(true);
-            LawnCommon.DrawImageBox(g, trect, AtlasResources.IMAGE_ALMANAC_PAPER);
+            LawnCommon.DrawImageBox(g, Rect, AtlasResources.IMAGE_ALMANAC_PAPER);
             g.SetColorizeImages(false);
             GlobalMembersStoreScreen.DrawStoreItem(g, Constants.ConfirmPurchaseDialog_Item_Pos.X, Constants.ConfirmPurchaseDialog_Item_Pos.Y, mItemType, false, false, mQuantity, mCost);
-            trect = Constants.ConfirmPurchaseDialog_Text;
-            TodStringFile.TodDrawStringWrapped(g, mDesc, trect, Resources.FONT_BRIANNETOD12, new SexyColor(40, 50, 90), DrawStringJustification.CenterVerticalMiddle);
+            Rect = Constants.ConfirmPurchaseDialog_Text;
+            TodStringFile.TodDrawStringWrapped(g, mDesc, Rect, Resources.FONT_BRIANNETOD12, new SexyColor(40, 50, 90), DrawStringJustification.CenterVerticalMiddle);
         }
 
         public StoreItem mItemType;

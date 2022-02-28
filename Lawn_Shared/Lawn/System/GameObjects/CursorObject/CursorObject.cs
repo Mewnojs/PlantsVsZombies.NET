@@ -55,7 +55,7 @@ namespace Lawn
             mY = mBoard.mLastToolY;
         }
 
-        public override bool LoadFromFile(Sexy.Buffer b)
+        public override bool LoadFromFile(SexyBuffer b)
         {
             base.LoadFromFile(b);
             mCursorType = (CursorType)b.ReadLong();
@@ -66,7 +66,7 @@ namespace Lawn
             return true;
         }
 
-        public override bool SaveToFile(Sexy.Buffer b)
+        public override bool SaveToFile(SexyBuffer b)
         {
             base.SaveToFile(b);
             b.WriteLong((int)mCursorType);
@@ -139,7 +139,7 @@ namespace Lawn
             bool flag = mBoard.HasConveyorBeltSeedBank();
             if (flag)
             {
-                g.SetClipRect(new TRect(-mX - Constants.Board_Offset_AspectRatio_Correction + (int)(Constants.New.SeedBank_Width), -mY, short.MaxValue, short.MaxValue));
+                g.SetClipRect(new Rect(-mX - Constants.Board_Offset_AspectRatio_Correction + (int)(Constants.New.SeedBank_Width), -mY, short.MaxValue, short.MaxValue));
                 g.HardwareClip();
             }
             switch (mCursorType)
@@ -174,8 +174,8 @@ namespace Lawn
             case CursorType.WateringCan:
                 if (mApp.mPlayerInfo.mPurchases[13] > 0)
                 {
-                    TRect trect = new TRect(Constants.ZEN_XMIN, Constants.ZEN_YMIN, Constants.ZEN_XMAX - Constants.ZEN_XMIN, Constants.ZEN_YMAX - Constants.ZEN_YMIN);
-                    if (trect.Contains(mApp.mBoard.mLastToolX, mApp.mBoard.mLastToolY))
+                    Rect Rect = new Rect(Constants.ZEN_XMIN, Constants.ZEN_YMIN, Constants.ZEN_XMAX - Constants.ZEN_XMIN, Constants.ZEN_YMAX - Constants.ZEN_YMIN);
+                    if (Rect.Contains(mApp.mBoard.mLastToolX, mApp.mBoard.mLastToolY))
                     {
                         int imgGoldToolReticleWidth = AtlasResources.IMAGE_ZEN_GOLDTOOLRETICLE.mWidth;
                         int imgGoldToolReticleHeight = AtlasResources.IMAGE_ZEN_GOLDTOOLRETICLE.mHeight;

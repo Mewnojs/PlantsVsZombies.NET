@@ -58,7 +58,7 @@ namespace Lawn
             mMotionTrailCount = 0;
         }
 
-        public bool SaveToFile(Sexy.Buffer b)
+        public bool SaveToFile(SexyBuffer b)
         {
             try
             {
@@ -93,7 +93,7 @@ namespace Lawn
             return true;
         }
 
-        public bool LoadFromFile(Sexy.Buffer b)
+        public bool LoadFromFile(SexyBuffer b)
         {
             try
             {
@@ -255,14 +255,14 @@ namespace Lawn
             {
                 num11 = TodCommon.TodAnimateCurve(400, 0, topPlantAt.mStateCountdown, 10, 40, TodCurves.Linear);
             }
-            TRect theSrcRect = new TRect((int)(num4 * num6 * Constants.S), (int)((num5 * num7 + num11) * Constants.S), (int)(num4 * Constants.S), (int)((num8 - num9 - num11) * Constants.S));
+            Rect theSrcRect = new Rect((int)(num4 * num6 * Constants.S), (int)((num5 * num7 + num11) * Constants.S), (int)(num4 * Constants.S), (int)((num8 - num9 - num11) * Constants.S));
             int num12 = mBoard.GridToPixelX(mGridX, mGridY) - 4 + num2;
             int num13 = mBoard.GridToPixelY(mGridX, mGridY) + num5 + num3;
             g.DrawImage(AtlasResources.IMAGE_TOMBSTONES, (int)(num12 * Constants.S), (int)((num13 - num8 + num11) * Constants.S + 0.5), theSrcRect);
             int num14 = (int)(num10 * Constants.S);
             if (num14 >= (int)Constants.InvertAndScale(34f))
             {
-                TRect theSrcRect2 = new TRect(AtlasResources.IMAGE_TOMBSTONE_MOUNDS.GetCelWidth() * num6, AtlasResources.IMAGE_TOMBSTONE_MOUNDS.GetCelHeight() * num7, AtlasResources.IMAGE_TOMBSTONE_MOUNDS.GetCelWidth(), (int)(num10 * Constants.S) - (int)Constants.InvertAndScale(34f));
+                Rect theSrcRect2 = new Rect(AtlasResources.IMAGE_TOMBSTONE_MOUNDS.GetCelWidth() * num6, AtlasResources.IMAGE_TOMBSTONE_MOUNDS.GetCelHeight() * num7, AtlasResources.IMAGE_TOMBSTONE_MOUNDS.GetCelWidth(), (int)(num10 * Constants.S) - (int)Constants.InvertAndScale(34f));
                 g.DrawImage(AtlasResources.IMAGE_TOMBSTONE_MOUNDS, (int)(num12 * Constants.S), (int)((num13 - num10) * Constants.S) + (int)Constants.InvertAndScale(34f), theSrcRect2);
             }
         }
@@ -661,14 +661,14 @@ namespace Lawn
 
         public Zombie RakeFindZombie()
         {
-            TRect rect = new TRect((int)mPosX, (int)mPosY, 63, 80);
+            Rect rect = new Rect((int)mPosX, (int)mPosY, 63, 80);
             int count = mBoard.mZombies.Count;
             for (int i = 0; i < count; i++)
             {
                 Zombie zombie = mBoard.mZombies[i];
                 if (!zombie.mDead && !zombie.IsDeadOrDying() && !zombie.IsBobsledTeamWithSled() && zombie.mRow - mGridY == 0 && zombie.EffectedByDamage(1U))
                 {
-                    TRect zombieRect = zombie.GetZombieRect();
+                    Rect zombieRect = zombie.GetZombieRect();
                     int rectOverlap = GameConstants.GetRectOverlap(rect, zombieRect);
                     if (rectOverlap >= 0)
                     {

@@ -2679,8 +2679,8 @@ namespace Lawn
                     num2 += Constants.RetardedDave_Bubble_Offset_Shop.Y;
                     theWidth = (int)Constants.InvertAndScale(150f);
                     int num3 = (int)Constants.InvertAndScale(105f);
-                    g.DrawImage(image_STORE_SPEECHBUBBLE, num, num2, new TRect(0, 0, (int)Constants.InvertAndScale(64f), image_STORE_SPEECHBUBBLE.mHeight));
-                    g.DrawImage(image_STORE_SPEECHBUBBLE, num + (int)Constants.InvertAndScale(64f), num2, new TRect(image_STORE_SPEECHBUBBLE.mWidth - num3, 0, num3, image_STORE_SPEECHBUBBLE.mHeight));
+                    g.DrawImage(image_STORE_SPEECHBUBBLE, num, num2, new Rect(0, 0, (int)Constants.InvertAndScale(64f), image_STORE_SPEECHBUBBLE.mHeight));
+                    g.DrawImage(image_STORE_SPEECHBUBBLE, num + (int)Constants.InvertAndScale(64f), num2, new Rect(image_STORE_SPEECHBUBBLE.mWidth - num3, 0, num3, image_STORE_SPEECHBUBBLE.mHeight));
                 }
                 else if (mGameMode == GameMode.ChallengeZenGarden)
                 {
@@ -2696,7 +2696,7 @@ namespace Lawn
                 }
                 g.DrawImage(AtlasResources.IMAGE_STORE_SPEECHBUBBLE_TIP, num + (int)Constants.InvertAndScale(30f), num2 - Constants.RetardedDave_Bubble_Tip_Offset + image_STORE_SPEECHBUBBLE.mHeight);
                 string text = mCrazyDaveMessageText;
-                TRect theRect = new TRect(num + Constants.RetardedDave_Bubble_Rect.mX, num2 + Constants.RetardedDave_Bubble_Rect.mY, theWidth, Constants.RetardedDave_Bubble_Rect.mHeight);
+                Rect theRect = new Rect(num + Constants.RetardedDave_Bubble_Rect.mX, num2 + Constants.RetardedDave_Bubble_Rect.mY, theWidth, Constants.RetardedDave_Bubble_Rect.mHeight);
                 int x = theRect.mX;
                 if (text.IndexOf("{SHAKE}") != -1)
                 {

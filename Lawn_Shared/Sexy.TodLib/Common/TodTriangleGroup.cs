@@ -57,7 +57,7 @@ namespace Sexy.TodLib
             TodTriangleGroup.gTodTriangleDrawAdditive = false;
         }
 
-        public void AddTriangle(Graphics g, Image theImage, ReanimatorTransform theTransform, TRect theClipRect, SexyColor theColor, Graphics.DrawMode theDrawMode, TRect theSrcRect)
+        public void AddTriangle(Graphics g, Image theImage, ReanimatorTransform theTransform, Rect theClipRect, SexyColor theColor, Graphics.DrawMode theDrawMode, Rect theSrcRect)
         {
             if (mTriangleCount > 0 && (mDrawMode != theDrawMode || mImage != theImage))
             {

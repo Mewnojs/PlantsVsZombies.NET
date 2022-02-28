@@ -283,7 +283,7 @@ namespace Lawn
             GameConstants.gLawnStringFormatCount = GameConstants.gLawnStringFormats.Length;
         }
 
-        public static int GetRectOverlap(TRect rect1, TRect rect2)
+        public static int GetRectOverlap(Rect rect1, Rect rect2)
         {
             int num;
             int aX2;
@@ -313,7 +313,7 @@ namespace Lawn
             return num2 - aX2;
         }
 
-        public static bool GetCircleRectOverlap(int theCircleX, int theCircleY, int theRadius, TRect theRect)
+        public static bool GetCircleRectOverlap(int theCircleX, int theCircleY, int theRadius, Rect theRect)
         {
             bool flag = false;
             bool flag2 = false;

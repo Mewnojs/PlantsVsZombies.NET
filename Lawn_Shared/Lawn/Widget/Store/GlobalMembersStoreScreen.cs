@@ -23,7 +23,7 @@ namespace Lawn
                     text = TodCommon.TodReplaceNumberString("[STORE_UPGRADE_SLOTS]", "{SLOTS}", aQuantity);
                     GlobalMembersStoreScreen.seedNumberUpgradeCache.Add(aQuantity, text);
                 }
-                TRect theRect = new TRect(aPosX, aPosY + Constants.StoreScreen_PacketUpgrade_Text_Size.Y, Constants.StoreScreen_PacketUpgrade_Text_Size.Width, Constants.StoreScreen_PacketUpgrade_Text_Size.Height);
+                Rect theRect = new Rect(aPosX, aPosY + Constants.StoreScreen_PacketUpgrade_Text_Size.Y, Constants.StoreScreen_PacketUpgrade_Text_Size.Width, Constants.StoreScreen_PacketUpgrade_Text_Size.Height);
                 TodStringFile.TodDrawStringWrapped(g, text, theRect, Resources.FONT_HOUSEOFTERROR16, SexyColor.White, DrawStringJustification.CenterVerticalMiddle);
                 return;
             }
@@ -123,7 +123,7 @@ namespace Lawn
             TodCommon.TodDrawString(g, moneyString, aPosX + Constants.StoreScreen_PriceTag_Text_Offset_X, aPosY + Constants.StoreScreen_PriceTag_Text_Offset_Y, Resources.FONT_BRIANNETOD12, new SexyColor(0, 0, 0), DrawStringJustification.Center);
             if (isComingSoon)
             {
-                TRect theRect = new TRect(aPosX - (int)(Constants.S * 12f), aPosY, Constants.StoreScreen_ComingSoon_X, Constants.StoreScreen_ComingSoon_Y);
+                Rect theRect = new Rect(aPosX - (int)(Constants.S * 12f), aPosY, Constants.StoreScreen_ComingSoon_X, Constants.StoreScreen_ComingSoon_Y);
                 if (theItemType == StoreItem.STORE_ITEM_PLANT_TWINSUNFLOWER || theItemType == StoreItem.STORE_ITEM_PACKET_UPGRADE)
                 {
                     theRect.mX -= (int)(Constants.S * 4f);
@@ -133,7 +133,7 @@ namespace Lawn
             }
             if (isSoldOut)
             {
-                TRect theRect2 = new TRect(aPosX, aPosY + Constants.StoreScreen_SoldOut_Y, Constants.StoreScreen_SoldOut_Width, Constants.StoreScreen_SoldOut_Height);
+                Rect theRect2 = new Rect(aPosX, aPosY + Constants.StoreScreen_SoldOut_Y, Constants.StoreScreen_SoldOut_Width, Constants.StoreScreen_SoldOut_Height);
                 TodStringFile.TodDrawStringWrapped(g, "[SOLD_OUT]", theRect2, Resources.FONT_HOUSEOFTERROR16, new SexyColor(255, 0, 0), DrawStringJustification.CenterVerticalMiddle);
             }
         }

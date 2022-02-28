@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Sexy.GraphicsLib;
+using Sexy.Misc;
 
 namespace Sexy.TodLib
 {
@@ -365,11 +367,11 @@ namespace Sexy.TodLib
                 }
                 flag = true;
             }
-            TRect trect = g.mClipRect;
+            Rect Rect = g.mClipRect;
             Reanimation.didClipIgnore = false;
             if (reanimatorTrackInstance.mIgnoreClipRect)
             {
-                trect = new TRect(0, 0, 800, 600);
+                Rect = new Rect(0, 0, 800, 600);
                 Reanimation.didClipIgnore = true;
             }
             float num7 = reanimatorTransform.mSkewXCos * reanimatorTransform.mScaleX;
@@ -418,11 +420,11 @@ namespace Sexy.TodLib
                     int num14 = 0;
                     int celWidth = image.GetCelWidth();
                     int celHeight = image.GetCelHeight();
-                    TRect theSrcRect = new TRect(celWidth * i, celHeight * num14, celWidth, celHeight);
-                    ReanimBltMatrix(g, image, ref Reanimation.tempMatrix, ref trect, trackColor, Graphics.DrawMode.DRAWMODE_NORMAL, theSrcRect, isHardwareClipRequired);
+                    Rect theSrcRect = new Rect(celWidth * i, celHeight * num14, celWidth, celHeight);
+                    ReanimBltMatrix(g, image, ref Reanimation.tempMatrix, ref Rect, trackColor, Graphics.DrawMode.DRAWMODE_NORMAL, theSrcRect, isHardwareClipRequired);
                     if (mEnableExtraAdditiveDraw)
                     {
-                        ReanimBltMatrix(g, image, ref Reanimation.tempMatrix, ref trect, theColor, Graphics.DrawMode.DRAWMODE_ADDITIVE, theSrcRect, isHardwareClipRequired);
+                        ReanimBltMatrix(g, image, ref Reanimation.tempMatrix, ref Rect, theColor, Graphics.DrawMode.DRAWMODE_ADDITIVE, theSrcRect, isHardwareClipRequired);
                     }
                     TodCommon.OffsetForGraphicsTranslation = true;
                 }
@@ -1287,7 +1289,7 @@ namespace Sexy.TodLib
             mFrameBasePose = num;
         }
 
-        public void ReanimBltMatrix(Graphics g, Image theImage, ref Matrix theTransform, ref TRect theClipRect, SexyColor theColor, Graphics.DrawMode theDrawMode, TRect theSrcRect, bool isHardwareClipRequired)
+        public void ReanimBltMatrix(Graphics g, Image theImage, ref Matrix theTransform, ref Rect theClipRect, SexyColor theColor, Graphics.DrawMode theDrawMode, Rect theSrcRect, bool isHardwareClipRequired)
         {
             ReanimationParams reanimationParams = ReanimatorXnaHelpers.gReanimationParamArray[(int)mReanimationType];
             if (!GlobalStaticVars.gSexyAppBase.Is3DAccelerated() && TodCommon.TestBit((uint)reanimationParams.mReanimParamFlags, 1) && TodCommon.FloatApproxEqual(theTransform.M12, 0f) && TodCommon.FloatApproxEqual(theTransform.M21, 0f) && theTransform.M11 > 0f && theTransform.M22 > 0f && theColor == SexyColor.White)
@@ -1298,7 +1300,7 @@ namespace Sexy.TodLib
                 int theY = TodCommon.FloatRoundToInt(theTransform.M42 - m2 * theSrcRect.mHeight * 0.5f);
                 Graphics.DrawMode drawMode = g.GetDrawMode();
                 g.SetDrawMode(theDrawMode);
-                TRect clipRect = g.mClipRect;
+                Rect clipRect = g.mClipRect;
                 g.SetClipRect(ref theClipRect);
                 if (TodCommon.FloatApproxEqual(m, 1f) && TodCommon.FloatApproxEqual(m2, 1f))
                 {
@@ -1308,7 +1310,7 @@ namespace Sexy.TodLib
                 {
                     int theWidth = TodCommon.FloatRoundToInt(m * theSrcRect.mWidth);
                     int theHeight = TodCommon.FloatRoundToInt(m2 * theSrcRect.mHeight);
-                    TRect theDestRect = new TRect(theX, theY, theWidth, theHeight);
+                    Rect theDestRect = new Rect(theX, theY, theWidth, theHeight);
                     g.DrawImage(theImage, theDestRect, theSrcRect);
                 }
                 g.SetDrawMode(drawMode);

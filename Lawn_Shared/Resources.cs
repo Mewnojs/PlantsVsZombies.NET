@@ -1,5 +1,7 @@
 ﻿using System;
 using Sexy;
+using Sexy.GraphicsLib;
+using Sexy.Resource;
 
 public/*internal*/ static class Resources
 {

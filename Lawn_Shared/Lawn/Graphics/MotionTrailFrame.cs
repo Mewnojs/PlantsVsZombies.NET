@@ -1,18 +1,18 @@
 ﻿using System;
-using Sexy;
+using Sexy.Misc;
 
 namespace Lawn
 {
     public/*internal*/ class MotionTrailFrame
     {
-        public void SaveToFile(Sexy.Buffer b)
+        public void SaveToFile(SexyBuffer b)
         {
             b.WriteFloat(mPosX);
             b.WriteFloat(mPosY);
             b.WriteFloat(mAnimTime);
         }
 
-        public void LoadFromFile(Sexy.Buffer b)
+        public void LoadFromFile(SexyBuffer b)
         {
             mPosX = b.ReadFloat();
             mPosY = b.ReadFloat();

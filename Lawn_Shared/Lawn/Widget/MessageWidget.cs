@@ -275,7 +275,7 @@ namespace Lawn
             if (num4 > 0)
             {
                 num2 -= (int)Constants.InvertAndScale(30f);
-                TRect theRect = new TRect(-mApp.mBoard.mX, num2, Constants.BOARD_WIDTH, num4);
+                Rect theRect = new Rect(-mApp.mBoard.mX, num2, Constants.BOARD_WIDTH, num4);
                 g.SetColor(new SexyColor(0, 0, 0, 128));
                 g.SetColorizeImages(true);
                 g.FillRect(theRect);
@@ -285,7 +285,7 @@ namespace Lawn
             }
             else
             {
-                TRect theRect2 = new TRect(num - mApp.mWidth / 2 - mApp.mBoard.mX, num2 + font.GetAscent(), mApp.mWidth, mApp.mHeight);
+                Rect theRect2 = new Rect(num - mApp.mWidth / 2 - mApp.mBoard.mX, num2 + font.GetAscent(), mApp.mWidth, mApp.mHeight);
                 if (font2 != null)
                 {
                     TodStringFile.TodDrawStringWrapped(g, mLabel, theRect2, font2, theColor2, DrawStringJustification.Center);

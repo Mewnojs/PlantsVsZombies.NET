@@ -65,12 +65,12 @@ namespace Lawn
             }
         }
 
-        public bool HaveButtonImage(Image theImage, TRect theRect)
+        public bool HaveButtonImage(Image theImage, Rect theRect)
         {
             return theImage != null || theRect.mWidth != 0;
         }
 
-        public void DrawButtonImage(Graphics g, Image theImage, TRect theRect, int x, int y)
+        public void DrawButtonImage(Graphics g, Image theImage, Rect theRect, int x, int y)
         {
             if (theRect.mWidth != 0)
             {
@@ -432,13 +432,13 @@ namespace Lawn
 
         public Image mOverOverlayImage;
 
-        public TRect mNormalRect = default(TRect);
+        public Rect mNormalRect = default(Rect);
 
-        public TRect mOverRect = default(TRect);
+        public Rect mOverRect = default(Rect);
 
-        public TRect mDownRect = default(TRect);
+        public Rect mDownRect = default(Rect);
 
-        public TRect mDisabledRect = default(TRect);
+        public Rect mDisabledRect = default(Rect);
 
         public bool mInverted;
 

@@ -23,15 +23,15 @@ namespace Lawn
                 theY += Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight;
             }
             int num3 = 0x10;
-            g.DrawImage(AtlasResources.IMAGE_PIPE, Constants.AchievementWidget_Pipe_Offset.X, (num3 * AtlasResources.IMAGE_PIPE.mHeight) + Constants.AchievementWidget_Pipe_Offset.Y, new TRect(0, 0, AtlasResources.IMAGE_PIPE.mWidth, Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight - 1));
+            g.DrawImage(AtlasResources.IMAGE_PIPE, Constants.AchievementWidget_Pipe_Offset.X, (num3 * AtlasResources.IMAGE_PIPE.mHeight) + Constants.AchievementWidget_Pipe_Offset.Y, new Rect(0, 0, AtlasResources.IMAGE_PIPE.mWidth, Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight - 1));
             int num4 = 0x15;
-            g.DrawImage(AtlasResources.IMAGE_WORM, Constants.AchievementWidget_Worm_Offset.X, (num4 * Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight) + Constants.AchievementWidget_Worm_Offset.Y, new TRect(0, 0, AtlasResources.IMAGE_WORM.mWidth - 1, AtlasResources.IMAGE_WORM.mHeight - 1));
+            g.DrawImage(AtlasResources.IMAGE_WORM, Constants.AchievementWidget_Worm_Offset.X, (num4 * Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight) + Constants.AchievementWidget_Worm_Offset.Y, new Rect(0, 0, AtlasResources.IMAGE_WORM.mWidth - 1, AtlasResources.IMAGE_WORM.mHeight - 1));
             g.DrawImage(AtlasResources.IMAGE_ZOMBIE_WORM, Constants.AchievementWidget_ZombieWorm_Offset.X, (num4 * Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight) + Constants.AchievementWidget_ZombieWorm_Offset.Y);
             int num5 = 0x35;
             g.DrawImage(AtlasResources.IMAGE_GEMS_LEFT, Constants.AchievementWidget_GemLeft_Offset.X, (num5 * Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight) + Constants.AchievementWidget_GemLeft_Offset.Y);
             g.DrawImage(AtlasResources.IMAGE_GEMS_RIGHT, Constants.AchievementWidget_GemRight_Offset.X, (num5 * Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight) + Constants.AchievementWidget_GemRight_Offset.Y);
             int num6 = 90;
-            g.DrawImage(AtlasResources.IMAGE_FOSSIL, Constants.AchievementWidget_Fossile_Offset.X, (num6 * Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight) + Constants.AchievementWidget_Fossile_Offset.Y, new TRect(0, 0, AtlasResources.IMAGE_FOSSIL.mWidth - 1, AtlasResources.IMAGE_FOSSIL.mHeight - 1));
+            g.DrawImage(AtlasResources.IMAGE_FOSSIL, Constants.AchievementWidget_Fossile_Offset.X, (num6 * Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight) + Constants.AchievementWidget_Fossile_Offset.Y, new Rect(0, 0, AtlasResources.IMAGE_FOSSIL.mWidth - 1, AtlasResources.IMAGE_FOSSIL.mHeight - 1));
             g.DrawImage(Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE_CHINA, 0, theY);
             g.DrawImage(Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_TOP_BACKGROUND, 0, 0);
             Image theImage = (!base.mIsDown || !BackButtonRect.Contains(new TPoint(base.mWidgetManager.mLastMouseX, base.mWidgetManager.mLastMouseY))) ? AtlasResources.IMAGE_REANIM_SELECTORSCREEN_ACHIEVEMENTS_BACK_BUTTON : AtlasResources.IMAGE_REANIM_SELECTORSCREEN_ACHIEVEMENTS_BACK_HIGHLIGHT;
@@ -56,7 +56,7 @@ namespace Lawn
                 g.DrawString(theString, Constants.AchievementWidget_Name_Pos.X, destY + Constants.AchievementWidget_Name_Pos.Y);
                 g.SetFont(Resources.FONT_DWARVENTODCRAFT12);
                 g.SetColor(new SexyColor(255, 255, 255));
-                TRect theRect = new TRect(Constants.AchievementWidget_Description_Box.X, destY + Constants.AchievementWidget_Description_Box.Y, Constants.AchievementWidget_Description_Box.Width, Constants.AchievementWidget_Description_Box.Height);
+                Rect theRect = new Rect(Constants.AchievementWidget_Description_Box.X, destY + Constants.AchievementWidget_Description_Box.Y, Constants.AchievementWidget_Description_Box.Width, Constants.AchievementWidget_Description_Box.Height);
                 g.WriteWordWrapped(theRect, mApp.GetAchievementDescription((AchievementId)i), 0, -1, false);
             }
             /*//original version
@@ -67,15 +67,15 @@ namespace Lawn
                 num += Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight;
             }
             int num2 = 16;
-            g.DrawImage(AtlasResources.IMAGE_PIPE, Constants.AchievementWidget_Pipe_Offset.X, num2 * AtlasResources.IMAGE_PIPE.mHeight + Constants.AchievementWidget_Pipe_Offset.Y, new TRect(0, 0, AtlasResources.IMAGE_PIPE.mWidth, Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight - 1));
+            g.DrawImage(AtlasResources.IMAGE_PIPE, Constants.AchievementWidget_Pipe_Offset.X, num2 * AtlasResources.IMAGE_PIPE.mHeight + Constants.AchievementWidget_Pipe_Offset.Y, new Rect(0, 0, AtlasResources.IMAGE_PIPE.mWidth, Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight - 1));
             int num3 = 21;
-            g.DrawImage(AtlasResources.IMAGE_WORM, Constants.AchievementWidget_Worm_Offset.X, num3 * Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight + Constants.AchievementWidget_Worm_Offset.Y, new TRect(0, 0, AtlasResources.IMAGE_WORM.mWidth - 1, AtlasResources.IMAGE_WORM.mHeight - 1));
+            g.DrawImage(AtlasResources.IMAGE_WORM, Constants.AchievementWidget_Worm_Offset.X, num3 * Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight + Constants.AchievementWidget_Worm_Offset.Y, new Rect(0, 0, AtlasResources.IMAGE_WORM.mWidth - 1, AtlasResources.IMAGE_WORM.mHeight - 1));
             g.DrawImage(AtlasResources.IMAGE_ZOMBIE_WORM, Constants.AchievementWidget_ZombieWorm_Offset.X, num3 * Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight + Constants.AchievementWidget_ZombieWorm_Offset.Y);
             int num4 = 53;
             g.DrawImage(AtlasResources.IMAGE_GEMS_LEFT, Constants.AchievementWidget_GemLeft_Offset.X, num4 * Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight + Constants.AchievementWidget_GemLeft_Offset.Y);
             g.DrawImage(AtlasResources.IMAGE_GEMS_RIGHT, Constants.AchievementWidget_GemRight_Offset.X, num4 * Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight + Constants.AchievementWidget_GemRight_Offset.Y);
             int num5 = 90;
-            g.DrawImage(AtlasResources.IMAGE_FOSSIL, Constants.AchievementWidget_Fossile_Offset.X, num5 * Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight + Constants.AchievementWidget_Fossile_Offset.Y, new TRect(0, 0, AtlasResources.IMAGE_FOSSIL.mWidth - 1, AtlasResources.IMAGE_FOSSIL.mHeight - 1));
+            g.DrawImage(AtlasResources.IMAGE_FOSSIL, Constants.AchievementWidget_Fossile_Offset.X, num5 * Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight + Constants.AchievementWidget_Fossile_Offset.Y, new Rect(0, 0, AtlasResources.IMAGE_FOSSIL.mWidth - 1, AtlasResources.IMAGE_FOSSIL.mHeight - 1));
             g.DrawImage(Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE_CHINA, 0, num);
             g.DrawImage(Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_TOP_BACKGROUND, 0, 0);
             Image theImage;
@@ -124,7 +124,7 @@ namespace Lawn
             {
                 for (int n = 0; n < 18; n++)
                 {
-                    TRect theRect = new TRect(Constants.AchievementWidget_Description_Box.X, num + Constants.AchievementWidget_Description_Box.Y, Constants.AchievementWidget_Description_Box.Width, Constants.AchievementWidget_Description_Box.Height);
+                    Rect theRect = new Rect(Constants.AchievementWidget_Description_Box.X, num + Constants.AchievementWidget_Description_Box.Y, Constants.AchievementWidget_Description_Box.Width, Constants.AchievementWidget_Description_Box.Height);
                     AchievementItem achievementItem3 = Achievements.GetAchievementItem((AchievementId)n);
                     g.WriteWordWrappedLayer(theRect, achievementItem3.Description, 0, -1, m, true);
                     num += Constants.AchievementWidget_ROW_HEIGHT;
@@ -169,6 +169,6 @@ namespace Lawn
 
         public LawnApp mApp;
 
-        public static TRect BackButtonRect = Constants.AchievementWidget_BackButton_Rect;
+        public static Rect BackButtonRect = Constants.AchievementWidget_BackButton_Rect;
     }
 }

@@ -10,6 +10,8 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using System.Threading;
 using System.Collections.Generic;
+using Sexy.GraphicsLib;
+using Sexy.WidgetsLib;
 
 namespace Sexy
 {
@@ -458,7 +460,7 @@ namespace Sexy
             throw new Exception("Unsupported Resolution");
         }
 
-        private static SexyTransform2D orientationTransform;
+        private static Misc.SexyTransform2D orientationTransform;
 
         private static UI_ORIENTATION orientationUsed;
 

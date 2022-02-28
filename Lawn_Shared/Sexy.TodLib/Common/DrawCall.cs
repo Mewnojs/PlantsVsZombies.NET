@@ -12,11 +12,11 @@ namespace Sexy.TodLib
             mScale = new Vector2(transform.mScaleX, transform.mScaleY);
         }
 
-        public TRect mClipRect;
+        public Rect mClipRect;
 
         public SexyColor mColor;
 
-        public TRect mSrcRect;
+        public Rect mSrcRect;
 
         public Vector2 mPosition;
 
