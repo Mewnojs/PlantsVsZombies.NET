@@ -1719,6 +1719,8 @@ namespace Lawn
 
         public override void UpdateFrames()
         {
+            //var perfTimer = new System.Diagnostics.Stopwatch();
+            //perfTimer.Start();
             if (wantToShowUpdateMessage)
             {
                 ShowUpdateMessage();
@@ -1760,6 +1762,7 @@ namespace Lawn
                 }
                 CheckForGameEnd();
             }
+            //Console.WriteLine(perfTimer.Elapsed.TotalMilliseconds);
         }
 
         public bool IsAdventureMode()
@@ -2725,7 +2728,7 @@ namespace Lawn
                     TodCommon.TodDrawString(g, "[TAP_TO_CONTINUE]", x + theRect.mWidth / 2, num2 + Constants.RetardedDave_Bubble_TapToContinue_Y, Resources.FONT_PICO129, SexyColor.Black, DrawStringJustification.Center);
                 }
             }
-            reanimation.Draw(g, false);
+            reanimation.Draw(g);
         }
 
         public void CrazyDaveDie()
@@ -3576,11 +3579,18 @@ namespace Lawn
         }
         public override void DrawGame(GameTime gameTime)
         {
+#if DEBUG
+            var perfTimer = new System.Diagnostics.Stopwatch();
+            perfTimer.Start();
+#endif
             GlobalStaticVars.g.BeginFrame();
             this.mWidgetManager.DrawScreen();
             if (mDebugScreenEnabled)
                 DrawDebugInfo(gameTime);
             GlobalStaticVars.g.EndFrame();
+#if DEBUG
+            Console.WriteLine(perfTimer.Elapsed.TotalMilliseconds);
+#endif
         }
         public void DrawDebugInfo(GameTime gameTime)
         {

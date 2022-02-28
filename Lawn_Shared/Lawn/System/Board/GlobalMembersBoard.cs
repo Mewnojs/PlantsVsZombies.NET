@@ -7,7 +7,7 @@ namespace Lawn
     {
         public static void AddGameObjectRenderItem(RenderItem[] theRenderList, ref int theCurRenderItem, RenderObjectType theRenderObjectType, GameObject theGameObject)
         {
-            Debug.ASSERT(theCurRenderItem < 2048);
+            Debug.ASSERT(theCurRenderItem < GameConstants.MAX_RENDER_ITEMS);
             RenderItem renderItem = theRenderList[theCurRenderItem];
             renderItem.mRenderObjectType = theRenderObjectType;
             renderItem.mZPos = theGameObject.mRenderOrder;
@@ -18,7 +18,7 @@ namespace Lawn
 
         public static void AddGameObjectRenderItemCursorPreview(RenderItem[] theRenderList, ref int theCurRenderItem, RenderObjectType theRenderObjectType, GameObject theGameObject)
         {
-            Debug.ASSERT(theCurRenderItem < 2048);
+            Debug.ASSERT(theCurRenderItem < GameConstants.MAX_RENDER_ITEMS);
             RenderItem renderItem = theRenderList[theCurRenderItem];
             renderItem.mRenderObjectType = theRenderObjectType;
             renderItem.mZPos = theGameObject.mRenderOrder;
@@ -30,7 +30,7 @@ namespace Lawn
 
         public static void AddGameObjectRenderItemPlant(RenderItem[] theRenderList, ref int theCurRenderItem, RenderObjectType theRenderObjectType, GameObject theGameObject)
         {
-            Debug.ASSERT(theCurRenderItem < 2048);
+            Debug.ASSERT(theCurRenderItem < GameConstants.MAX_RENDER_ITEMS);
             RenderItem renderItem = theRenderList[theCurRenderItem];
             renderItem.mRenderObjectType = theRenderObjectType;
             renderItem.mZPos = theGameObject.mRenderOrder;
@@ -42,7 +42,7 @@ namespace Lawn
 
         public static void AddGameObjectRenderItemZombie(RenderItem[] theRenderList, ref int theCurRenderItem, RenderObjectType theRenderObjectType, GameObject theGameObject)
         {
-            Debug.ASSERT(theCurRenderItem < 2048);
+            Debug.ASSERT(theCurRenderItem < GameConstants.MAX_RENDER_ITEMS);
             RenderItem renderItem = theRenderList[theCurRenderItem];
             renderItem.mRenderObjectType = theRenderObjectType;
             renderItem.mZPos = theGameObject.mRenderOrder;
@@ -54,7 +54,7 @@ namespace Lawn
 
         public static void AddGameObjectRenderItemProjectile(RenderItem[] theRenderList, ref int theCurRenderItem, RenderObjectType theRenderObjectType, GameObject theGameObject)
         {
-            Debug.ASSERT(theCurRenderItem < 2048);
+            Debug.ASSERT(theCurRenderItem < GameConstants.MAX_RENDER_ITEMS);
             RenderItem renderItem = theRenderList[theCurRenderItem];
             renderItem.mRenderObjectType = theRenderObjectType;
             renderItem.mZPos = theGameObject.mRenderOrder;
@@ -66,7 +66,7 @@ namespace Lawn
 
         public static void AddGameObjectRenderItemCoin(RenderItem[] theRenderList, ref int theCurRenderItem, RenderObjectType theRenderObjectType, GameObject theGameObject)
         {
-            Debug.ASSERT(theCurRenderItem < 2048);
+            Debug.ASSERT(theCurRenderItem < GameConstants.MAX_RENDER_ITEMS);
             RenderItem renderItem = theRenderList[theCurRenderItem];
             renderItem.mRenderObjectType = theRenderObjectType;
             renderItem.mZPos = theGameObject.mRenderOrder;
@@ -78,7 +78,7 @@ namespace Lawn
 
         public static void AddUIRenderItem(RenderItem[] theRenderList, ref int theCurRenderItem, RenderObjectType theRenderObjectType, int thePosZ)
         {
-            Debug.ASSERT(theCurRenderItem < 2048);
+            Debug.ASSERT(theCurRenderItem < GameConstants.MAX_RENDER_ITEMS);
             RenderItem renderItem = theRenderList[theCurRenderItem];
             renderItem.mRenderObjectType = theRenderObjectType;
             renderItem.mZPos = thePosZ;
