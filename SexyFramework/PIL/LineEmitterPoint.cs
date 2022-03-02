@@ -10,12 +10,12 @@ namespace Sexy.PIL
 		{
 			b.WriteFloat(this.mCurX);
 			b.WriteFloat(this.mCurY);
-			b.WriteLong((long)this.mKeyFramePoints.Count);
+			b.WriteLong(this.mKeyFramePoints.Count);
 			for (int i = 0; i < this.mKeyFramePoints.Count; i++)
 			{
-				b.WriteLong((long)this.mKeyFramePoints[i].first);
-				b.WriteLong((long)this.mKeyFramePoints[i].second.mX);
-				b.WriteLong((long)this.mKeyFramePoints[i].second.mY);
+				b.WriteLong(this.mKeyFramePoints[i].first);
+				b.WriteLong(this.mKeyFramePoints[i].second.mX);
+				b.WriteLong(this.mKeyFramePoints[i].second.mY);
 			}
 		}
 

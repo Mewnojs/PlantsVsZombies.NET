@@ -91,10 +91,10 @@ namespace Sexy.PIL
 		{
 			this.mSettingsTimeLine.Serialize(b);
 			this.mVarTimeLine.Serialize(b);
-			b.WriteLong((long)this.mSameColorKeyCount);
-			b.WriteLong((long)this.mLastColorKeyIndex);
+			b.WriteLong(this.mSameColorKeyCount);
+			b.WriteLong(this.mLastColorKeyIndex);
 			b.WriteBoolean(this.mImageSetByPINLoader);
-			b.WriteLong((long)this.mLifePctSettings.Count);
+			b.WriteLong(this.mLifePctSettings.Count);
 			for (int i = 0; i < this.mLifePctSettings.Count; i++)
 			{
 				b.WriteFloat(this.mLifePctSettings[i].first);
@@ -103,10 +103,10 @@ namespace Sexy.PIL
 			b.WriteBoolean(this.mImage != null);
 			if (this.mImage != null)
 			{
-				b.WriteLong((long)f(this.mImage));
+				b.WriteLong(f(this.mImage));
 			}
-			b.WriteString(this.mImageName);
-			b.WriteString(this.mName);
+			b.WriteStringWithEncoding(this.mImageName);
+			b.WriteStringWithEncoding(this.mName);
 			this.mColorKeyManager.Serialize(b);
 			this.mAlphaKeyManager.Serialize(b);
 			b.WriteBoolean(this.mLockSizeAspect);
@@ -121,17 +121,17 @@ namespace Sexy.PIL
 			b.WriteFloat(this.mInitAngle);
 			b.WriteFloat(this.mAngleRange);
 			b.WriteFloat(this.mEmitterAttachPct);
-			b.WriteLong((long)this.mNumSameColorKeyInRow);
-			b.WriteLong((long)this.mNumCreated);
-			b.WriteLong((long)this.mRefXOff);
-			b.WriteLong((long)this.mRefYOff);
-			b.WriteLong((long)this.mImageRate);
-			b.WriteLong((long)this.mSerialIndex);
+			b.WriteLong(this.mNumSameColorKeyInRow);
+			b.WriteLong(this.mNumCreated);
+			b.WriteLong(this.mRefXOff);
+			b.WriteLong(this.mRefYOff);
+			b.WriteLong(this.mImageRate);
+			b.WriteLong(this.mSerialIndex);
 			b.WriteFloat(this.mInitAngleStep);
 			b.WriteFloat(this.mLastSpawnAngle);
 			b.WriteBoolean(this.mRandomStartCel);
-			b.WriteLong((long)this.mXOff);
-			b.WriteLong((long)this.mYOff);
+			b.WriteLong(this.mXOff);
+			b.WriteLong(this.mYOff);
 		}
 
 		public void Deserialize(SexyBuffer b, GlobalMembers.GetImageByIdFunc f)
@@ -154,8 +154,8 @@ namespace Sexy.PIL
 			{
 				this.mImage = f((int)b.ReadLong());
 			}
-			this.mImageName = b.ReadString();
-			this.mName = b.ReadString();
+			this.mImageName = b.ReadStringWithEncoding();
+			this.mName = b.ReadStringWithEncoding();
 			this.mColorKeyManager.Deserialize(b);
 			this.mAlphaKeyManager.Deserialize(b);
 			this.mLockSizeAspect = b.ReadBoolean();

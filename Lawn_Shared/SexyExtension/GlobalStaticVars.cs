@@ -140,19 +140,5 @@ namespace Sexy
 
             public float y;
         }
-
-        public enum Phase
-        {
-            TOUCH_BEGAN,
-            TOUCH_MOVED,
-            TOUCH_STATIONARY,
-            TOUCH_ENDED,
-            TOUCH_CANCELLED
-        }
-
-        public struct Touch
-        {
-            public GlobalStaticVars.CGPoint location;
-        }
     }
 }

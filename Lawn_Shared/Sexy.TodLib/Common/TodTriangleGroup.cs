@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Sexy.GraphicsLib;
+using Sexy.Misc;
+using System;
 using System.Collections.Generic;
 
 namespace Sexy.TodLib
@@ -29,7 +31,7 @@ namespace Sexy.TodLib
         {
             mImage = null;
             mTriangleCount = 0;
-            mDrawMode = Graphics.DrawMode.DRAWMODE_NORMAL;
+            mDrawMode = Graphics.DrawMode.Normal;
         }
 
         public void DrawGroup(Graphics g)
@@ -42,7 +44,7 @@ namespace Sexy.TodLib
             {
                 return;
             }
-            if (!GlobalStaticVars.gSexyAppBase.Is3DAccelerated() && mDrawMode == Graphics.DrawMode.DRAWMODE_ADDITIVE)
+            if (!GlobalStaticVars.gSexyAppBase.Is3DAccelerated() && mDrawMode == Graphics.DrawMode.Additive)
             {
                 TodTriangleGroup.gTodTriangleDrawAdditive = true;
             }

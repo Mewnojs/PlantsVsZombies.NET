@@ -227,7 +227,7 @@ namespace Lawn
                 return;
             }
             float num = 14f;
-            g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+            g.SetDrawMode(Graphics.DrawMode.Normal);
             if (mMowerHeight != MowerHeight.UpToLand && mMowerHeight != MowerHeight.DownToPool && mMowerHeight != MowerHeight.InPool && mMowerState != LawnMowerState.Squished)
             {
                 int num2 = 0;

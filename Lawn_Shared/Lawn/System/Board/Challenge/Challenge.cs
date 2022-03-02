@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Sexy;
+using Sexy.GraphicsLib;
+using Sexy.Misc;
 using Sexy.TodLib;
 
 namespace Lawn
@@ -1247,7 +1249,7 @@ namespace Lawn
                     SeedType artChallengeSeed = GetArtChallengeSeed(j, i);
                     if (artChallengeSeed != SeedType.None && mBoard.GetTopPlantAt(j, i, TopPlant.OnlyNormalPosition) == null)
                     {
-                        TPoint[] celPosition = mBoard.GetCelPosition(j, i);
+                        SexyPoint[] celPosition = mBoard.GetCelPosition(j, i);
                         celPosition[0].mX = (int)(celPosition[0].mX * Constants.S);
                         celPosition[0].mY = (int)(celPosition[0].mY * Constants.S);
                         celPosition[1].mX = (int)(celPosition[1].mX * Constants.S);
@@ -1932,7 +1934,7 @@ namespace Lawn
                 byte b = (byte)(150.0 * Math.Sin(mBoard.mMainCounter % 150.0 / 150.0 * 3.1415927410125732));
                 SexyColor aColor = new SexyColor(b, b, b, 255);
                 @new.SetColorizeImages(true);
-                @new.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
+                @new.SetDrawMode(Graphics.DrawMode.Additive);
                 @new.SetColor(aColor);
                 @new.DrawImage(Resources.IMAGE_SLOTMACHINE_OVERLAY, Rect.mX, Rect.mY);
                 reanimation.Draw(@new);
@@ -4339,7 +4341,7 @@ namespace Lawn
 
         public void IZombieDrawPlant(Graphics g, Plant thePlant)
         {
-            g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+            g.SetDrawMode(Graphics.DrawMode.Normal);
             Reanimation reanimation = mApp.ReanimationTryToGet(thePlant.mBodyReanimID);
             if (reanimation == null)
             {
@@ -4366,7 +4368,7 @@ namespace Lawn
             IZombieSetPlantFilterEffect(thePlant, FilterEffectType.None);
             reanimation.DrawRenderGroup(g, 0);
             IZombieSetPlantFilterEffect(thePlant, FilterEffectType.None);
-            g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+            g.SetDrawMode(Graphics.DrawMode.Normal);
             g.SetColorizeImages(false);
         }
 

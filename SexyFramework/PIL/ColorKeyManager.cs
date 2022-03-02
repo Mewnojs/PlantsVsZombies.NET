@@ -44,18 +44,18 @@ namespace Sexy.PIL
 
 		public void Serialize(SexyBuffer b)
 		{
-			b.WriteLong((long)this.mColorMode);
-			b.WriteLong((long)this.mLife);
-			b.WriteLong((long)this.mUpdateCount);
-			b.WriteLong((long)this.mCurrentColor.ToInt());
-			b.WriteLong((long)this.mTimeline.Count);
+			b.WriteLong(this.mColorMode);
+			b.WriteLong(this.mLife);
+			b.WriteLong(this.mUpdateCount);
+			b.WriteLong(this.mCurrentColor.ToInt());
+			b.WriteLong(this.mTimeline.Count);
 			for (int i = 0; i < this.mTimeline.Count; i++)
 			{
 				b.WriteFloat(this.mTimeline[i].first);
 				this.mTimeline[i].second.Serialize(b);
 			}
-			b.WriteString(this.mImgFileName);
-			b.WriteString(this.mImgVariant);
+			b.WriteStringWithEncoding(this.mImgFileName);
+			b.WriteStringWithEncoding(this.mImgVariant);
 		}
 
 		public void Deserialize(SexyBuffer b)
@@ -74,8 +74,8 @@ namespace Sexy.PIL
 				colorKey.Deserialize(b);
 				this.mTimeline.Add(new ColorKeyTimeEntry(pt, colorKey));
 			}
-			this.mImgFileName = b.ReadString();
-			this.mImgVariant = b.ReadString();
+			this.mImgFileName = b.ReadStringWithEncoding();
+			this.mImgVariant = b.ReadStringWithEncoding();
 			if (this.mImgFileName.Length > 0)
 			{
 				bool flag = false;

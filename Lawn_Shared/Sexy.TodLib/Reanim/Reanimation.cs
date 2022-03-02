@@ -421,10 +421,10 @@ namespace Sexy.TodLib
                     int celWidth = image.GetCelWidth();
                     int celHeight = image.GetCelHeight();
                     Rect theSrcRect = new Rect(celWidth * i, celHeight * num14, celWidth, celHeight);
-                    ReanimBltMatrix(g, image, ref Reanimation.tempMatrix, ref Rect, trackColor, Graphics.DrawMode.DRAWMODE_NORMAL, theSrcRect, isHardwareClipRequired);
+                    ReanimBltMatrix(g, image, ref Reanimation.tempMatrix, ref Rect, trackColor, Graphics.DrawMode.Normal, theSrcRect, isHardwareClipRequired);
                     if (mEnableExtraAdditiveDraw)
                     {
-                        ReanimBltMatrix(g, image, ref Reanimation.tempMatrix, ref Rect, theColor, Graphics.DrawMode.DRAWMODE_ADDITIVE, theSrcRect, isHardwareClipRequired);
+                        ReanimBltMatrix(g, image, ref Reanimation.tempMatrix, ref Rect, theColor, Graphics.DrawMode.Additive, theSrcRect, isHardwareClipRequired);
                     }
                     TodCommon.OffsetForGraphicsTranslation = true;
                 }
@@ -434,7 +434,7 @@ namespace Sexy.TodLib
                     if (mEnableExtraAdditiveDraw)
                     {
                         Graphics.DrawMode drawMode = g.mDrawMode;
-                        g.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
+                        g.SetDrawMode(Graphics.DrawMode.Additive);
                         TodCommon.TodDrawStringMatrix(g, reanimatorTransform.mFont, Reanimation.tempMatrix, reanimatorTransform.mText, theColor);
                         g.SetDrawMode(drawMode);
                     }

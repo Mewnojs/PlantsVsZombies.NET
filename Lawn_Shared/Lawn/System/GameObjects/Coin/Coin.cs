@@ -1,5 +1,7 @@
 ﻿using System;
 using Sexy;
+using Sexy.GraphicsLib;
+using Sexy.Misc;
 using Sexy.TodLib;
 
 namespace Lawn
@@ -665,7 +667,7 @@ namespace Lawn
                             }
                         }
                         g.SetColorizeImages(true);
-                        if (g.mDrawMode == Graphics.DrawMode.DRAWMODE_ADDITIVE)
+                        if (g.mDrawMode == (int)Graphics.DrawMode.Additive)
                         {
                             int num4 = 0;
                             num4++;

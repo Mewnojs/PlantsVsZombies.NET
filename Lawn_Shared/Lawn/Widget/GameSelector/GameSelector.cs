@@ -775,7 +775,7 @@ namespace Lawn
             }
         }
 
-        public override void KeyChar(SexyChar theChar)
+        public override void KeyChar(char theChar)
         {
             if (theChar.value_type == 'u' && mApp.mPlayerInfo != null)
             {

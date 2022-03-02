@@ -408,12 +408,12 @@ namespace Sexy.GraphicsLib
 			return this.mColor;
 		}
 
-		public void SetDrawMode(int theDrawMode)
+		public void SetDrawMode(DrawMode theDrawMode)
 		{
 			this.mDrawMode = theDrawMode;
 		}
 
-		public int GetDrawMode()
+		public DrawMode GetDrawMode()
 		{
 			return this.mDrawMode;
 		}
@@ -578,7 +578,12 @@ namespace Sexy.GraphicsLib
 			throw new NotSupportedException();
 		}
 
-		public void DrawImage(Image theImage, int theX, int theY)
+        public void DrawImage(Image theImage, float theX, float theY)
+        {
+            DrawImage(theImage, (int)theX, (int)theY);
+        }
+
+        public void DrawImage(Image theImage, int theX, int theY)
 		{
 			if (this.mScaleX != 1f || this.mScaleY != 1f)
 			{
@@ -599,7 +604,7 @@ namespace Sexy.GraphicsLib
 			if (this.mSrcRect.mWidth > 0 && this.mSrcRect.mHeight > 0)
 			{
 				this.SetAsCurrentContext();
-				this.mRenderDevice.Blt(theImage, rect.mX, rect.mY, this.mSrcRect, this.GetImageColor(), this.mDrawMode);
+				this.mRenderDevice.Blt(theImage, rect.mX, rect.mY, this.mSrcRect, this.GetImageColor(), (int)this.mDrawMode);
 			}
 		}
 

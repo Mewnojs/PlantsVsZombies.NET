@@ -241,7 +241,7 @@ namespace Sexy.Drivers.Profile
 
 		protected bool WriteState(SexyBuffer data)
 		{
-			data.WriteLong((long)((ulong)GlobalMembers.gSexyAppBase.mProfileManager.GetProfileVersion()));
+			data.WriteLong(((ulong)GlobalMembers.gSexyAppBase.mProfileManager.GetProfileVersion()));
 			data.WriteShort((short)this.mProfileMap.Count);
 			foreach (UserProfile userProfile in this.mProfileMap.Values)
 			{

@@ -1,5 +1,6 @@
 ﻿using System;
 using Sexy;
+using Sexy.Misc;
 using Sexy.TodLib;
 
 namespace Lawn
@@ -219,7 +220,7 @@ namespace Lawn
             {
                 seedType = SeedType.Sprout;
             }
-            g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+            g.SetDrawMode(Graphics.DrawMode.Normal);
             g.SetColor(new SexyColor(255, 255, 255, 255));
             if (theGrayness != 255)
             {

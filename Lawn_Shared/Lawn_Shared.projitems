@@ -210,11 +210,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)Sexy.TodLib\Trail\TrailReader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy.TodLib\Trail\TrailTracks.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy.TodLib\Trail\TrailType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SexyExtension\Achievements.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SexyExtension\Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SexyExtension\Debug.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SexyExtension\EditListener.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SexyExtension\EditWidget.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SexyExtension\FrameCounter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SexyExtension\FrameworkConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SexyExtension\GlobalStaticVars.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SexyExtension\HyperlinkWidget.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SexyExtension\ReportAchievement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SexyExtension\ScreenScales.cs" />
     <Compile Include="..\Lawn_Shared\Lawn\System\GameObjects\Plant\TopPlant.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PlantRowType.cs" />

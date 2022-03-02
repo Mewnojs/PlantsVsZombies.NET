@@ -43,7 +43,7 @@ namespace Lawn
             mNeedShowRegisterBox = false;
             mLoadingThreadComplete = false;
             mNeedToInit = true;
-            mQuickLoadKey = KeyCode.KEYCODE_UNKNOWN;
+            mQuickLoadKey = KeyCode.Unknown;
             mTitleState = TitleState.WaitingForFirstDraw;
             mTitleStateDuration = 0;
             mTitleStateCounter = 0;
@@ -114,7 +114,7 @@ namespace Lawn
                 mTitleStateDuration = 200;
                 mTitleStateCounter = mTitleStateDuration;
             }
-            if (mQuickLoadKey != KeyCode.KEYCODE_UNKNOWN && mTitleState != TitleState.Screen)
+            if (mQuickLoadKey != KeyCode.Unknown && mTitleState != TitleState.Screen)
             {
                 mTitleState = TitleState.Screen;
                 mTitleStateDuration = 0;

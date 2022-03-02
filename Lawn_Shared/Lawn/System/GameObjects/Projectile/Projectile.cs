@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sexy;
+using Sexy.GraphicsLib;
+using Sexy.Misc;
 using Sexy.TodLib;
 
 namespace Lawn
@@ -300,7 +302,7 @@ namespace Lawn
         public void Draw(Graphics g)
         {
             ProjectileDefinition projectileDef = GetProjectileDef();
-            g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+            g.SetDrawMode(Graphics.DrawMode.Normal);
             Image image = null;
             float num = 1f;
             if (mProjectileType == ProjectileType.Cobbig)

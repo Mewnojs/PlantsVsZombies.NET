@@ -84,12 +84,12 @@ namespace Sexy.PIL
 
 		public virtual void Serialize(SexyBuffer b)
 		{
-			b.WriteLong((long)this.mNumInts);
-			b.WriteLong((long)this.mNumFloats);
-			b.WriteLong((long)this.mNumBools);
+			b.WriteLong(this.mNumInts);
+			b.WriteLong(this.mNumFloats);
+			b.WriteLong(this.mNumBools);
 			for (int i = 0; i < this.mNumInts; i++)
 			{
-				b.WriteLong((long)this.mIntData[i]);
+				b.WriteLong(this.mIntData[i]);
 			}
 			for (int j = 0; j < this.mNumFloats; j++)
 			{

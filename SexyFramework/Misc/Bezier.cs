@@ -244,9 +244,9 @@ namespace Sexy.Misc
 		public void Serialize(SexyBuffer b)
 		{
 			b.WriteFloat(this.mTotalLength);
-			b.WriteLong((long)this.mCount);
-			b.WriteLong((long)this.mCurveDetail);
-			b.WriteLong((long)this.mCurveColor.ToInt());
+			b.WriteLong(this.mCount);
+			b.WriteLong(this.mCurveDetail);
+			b.WriteLong(this.mCurveColor.ToInt());
 			for (int i = 0; i < this.mCount; i++)
 			{
 				b.WriteFloat(this.mTimes[i]);

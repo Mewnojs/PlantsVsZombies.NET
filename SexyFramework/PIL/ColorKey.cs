@@ -45,7 +45,7 @@ namespace Sexy.PIL
 
 		public void Serialize(SexyBuffer b)
 		{
-			b.WriteLong((long)this.mColor.ToInt());
+			b.WriteLong(this.mColor.ToInt());
 		}
 
 		public void Deserialize(SexyBuffer b)

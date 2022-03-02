@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Sexy;
+using Sexy.GraphicsLib;
+using Sexy.Misc;
 using Sexy.TodLib;
 
 namespace Lawn
@@ -628,7 +630,7 @@ namespace Lawn
 
         public void Draw(Graphics g)
         {
-            g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+            g.SetDrawMode(Graphics.DrawMode.Normal);
             int theCelRow = 0;
             float num = 0f;
             float num2 = Plant.PlantDrawHeightOffset(mBoard, this, mSeedType, mPlantCol, mRow);
@@ -787,19 +789,19 @@ namespace Lawn
                 g.SetColorizeImages(false);
                 if (mHighlighted)
                 {
-                    g.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
+                    g.SetDrawMode(Graphics.DrawMode.Additive);
                     g.SetColorizeImages(true);
                     g.SetColor(new SexyColor(255, 255, 255, 196));
                     if (image != null)
                     {
                         TodCommon.TodDrawImageCelF(g, image, num, num2, theCelCol, theCelRow);
                     }
-                    g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+                    g.SetDrawMode(Graphics.DrawMode.Normal);
                     g.SetColorizeImages(false);
                 }
                 else if (mEatenFlashCountdown > 0)
                 {
-                    g.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
+                    g.SetDrawMode(Graphics.DrawMode.Additive);
                     g.SetColorizeImages(true);
                     int theAlpha = TodCommon.ClampInt(mEatenFlashCountdown * 3, 0, 255);
                     g.SetColor(new SexyColor(255, 255, 255, theAlpha));
@@ -807,7 +809,7 @@ namespace Lawn
                     {
                         TodCommon.TodDrawImageCelF(g, image, num, num2, theCelCol, theCelRow);
                     }
-                    g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+                    g.SetDrawMode(Graphics.DrawMode.Normal);
                     g.SetColorizeImages(false);
                 }
             }

@@ -104,7 +104,7 @@ namespace Lawn
             mLevelAwardSpawned = b.ReadBoolean();
             mLevelComplete = b.ReadBoolean();
             mLevelFadeCount = b.ReadLong();
-            mLevelStr = b.ReadString();
+            mLevelStr = b.ReadStringWithEncoding();
             mMainCounter = b.ReadLong();
             mMaxSunPlants = b.ReadLong();
             mMinFPS = b.ReadFloat();
@@ -2159,7 +2159,7 @@ namespace Lawn
             }
         }
 
-        public override void KeyChar(SexyChar theChar)
+        public override void KeyChar(char theChar)
         {
             if (!mApp.mDebugKeysEnabled)
             {
@@ -3209,7 +3209,7 @@ namespace Lawn
             }
             mDrawCount++;
             DrawGameObjects(g);
-            g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+            g.SetDrawMode(Graphics.DrawMode.Normal);
         }
 
         public void DrawBackdrop(Graphics g)
@@ -5124,7 +5124,7 @@ namespace Lawn
 
         public void DrawUICoinBank(Graphics g)
         {
-            g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+            g.SetDrawMode(Graphics.DrawMode.Normal);
             if (mApp.mGameScene != GameScenes.Playing && mApp.mCrazyDaveState == CrazyDaveState.Off)
             {
                 return;
@@ -5399,12 +5399,12 @@ namespace Lawn
             {
                 return;
             }
-            g.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
+            g.SetDrawMode(Graphics.DrawMode.Additive);
             SexyColor aColor = default(SexyColor);
             aColor.mAlpha = 0;
             aColor.mRed = (aColor.mGreen = (aColor.mBlue = 50));
             g.SetColor(aColor);
-            TPoint[] celPosition = GetCelPosition(theCol, theRow);
+            SexyPoint[] celPosition = GetCelPosition(theCol, theRow);
             celPosition[0].mX = (int)(celPosition[0].mX * Constants.S);
             celPosition[0].mY = (int)(celPosition[0].mY * Constants.S);
             celPosition[1].mX = (int)(celPosition[1].mX * Constants.S);
@@ -5415,10 +5415,10 @@ namespace Lawn
             celPosition[3].mY = (int)(celPosition[3].mY * Constants.S);
             g.SetColorizeImages(true);
             g.FillRect(new Rect(Board.mCelPoints[0].mX, Board.mCelPoints[0].mY, Board.mCelPoints[2].mX - Board.mCelPoints[0].mX, Board.mCelPoints[2].mY - Board.mCelPoints[0].mY));
-            g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+            g.SetDrawMode(Graphics.DrawMode.Normal);
         }
 
-        public TPoint[] GetCelPosition(int theCol, int theRow)
+        public SexyPoint[] GetCelPosition(int theCol, int theRow)
         {
             int num = StageHas6Rows() ? 6 : 5;
             if (StageHasPool())
@@ -6880,7 +6880,7 @@ namespace Lawn
         public void DrawFog(Graphics g)
         {
             Image image_FOG = Resources.IMAGE_FOG;
-            g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+            g.SetDrawMode(Graphics.DrawMode.Normal);
             for (int i = 0; i < Constants.GRIDSIZEX; i++)
             {
                 for (int j = 0; j < 7; j++)
@@ -9761,7 +9761,7 @@ namespace Lawn
                 b.WriteBoolean(mLevelAwardSpawned);
                 b.WriteBoolean(mLevelComplete);
                 b.WriteLong(mLevelFadeCount);
-                b.WriteString(mLevelStr);
+                b.WriteStringWithEncoding(mLevelStr);
                 b.WriteLong(mMainCounter);
                 b.WriteLong(mMaxSunPlants);
                 b.WriteFloat(mMinFPS);
@@ -10153,7 +10153,7 @@ namespace Lawn
 
         private int levelStrVal = -1;
 
-        private static TPoint[] mCelPoints = new TPoint[4];
+        private static SexyPoint[] mCelPoints = new SexyPoint[4];
 
         private static Dictionary<int, string> cachedChargesStringsFertilizer = new Dictionary<int, string>();
 

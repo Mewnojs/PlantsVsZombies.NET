@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sexy;
+using Sexy.GraphicsLib;
 using Sexy.TodLib;
 
 namespace Lawn
@@ -296,7 +297,7 @@ namespace Lawn
 
         public void DrawGridItem(Graphics g)
         {
-            g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+            g.SetDrawMode(Graphics.DrawMode.Normal);
             switch (mGridItemType)
             {
             case GridItemType.Gravestone:
@@ -516,14 +517,14 @@ namespace Lawn
             g.DrawImageCel(Resources.IMAGE_SCARY_POT, (int)(num2 * Constants.S), (int)(num3 * Constants.S), num, 1);
             if (mHighlighted)
             {
-                g.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
+                g.SetDrawMode(Graphics.DrawMode.Additive);
                 g.SetColorizeImages(true);
                 if (mTransparentCounter == 0)
                 {
                     g.SetColor(new SexyColor(255, 255, 255, 196));
                 }
                 g.DrawImageCel(Resources.IMAGE_SCARY_POT, (int)(num2 * Constants.S), (int)(num3 * Constants.S), num, 1);
-                g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+                g.SetDrawMode(Graphics.DrawMode.Normal);
             }
             g.SetColorizeImages(false);
         }
@@ -695,12 +696,12 @@ namespace Lawn
             g.DrawImageF(AtlasResources.IMAGE_BRAIN, mPosX * Constants.S, mPosY * Constants.S);
             if (mTransparentCounter > 0)
             {
-                g.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
+                g.SetDrawMode(Graphics.DrawMode.Additive);
                 g.SetColorizeImages(true);
                 int theAlpha = TodCommon.ClampInt(mTransparentCounter * 3, 0, 255);
                 g.SetColor(new SexyColor(255, 255, 255, theAlpha));
                 g.DrawImageF(AtlasResources.IMAGE_BRAIN, mPosX * Constants.S, mPosY * Constants.S);
-                g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+                g.SetDrawMode(Graphics.DrawMode.Normal);
                 g.SetColorizeImages(false);
             }
             g.SetColorizeImages(false);

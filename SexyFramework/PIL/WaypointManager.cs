@@ -61,11 +61,11 @@ namespace Sexy.PIL
 		{
 			this.mCurve.Serialize(b);
 			b.WriteFloat(this.mTotalTime);
-			b.WriteLong((long)this.mTotalFrames);
+			b.WriteLong(this.mTotalFrames);
 			b.WriteBoolean(this.mLastFrameWasEnd);
 			b.WriteFloat(this.mLastPoint.X);
 			b.WriteFloat(this.mLastPoint.Y);
-			b.WriteLong((long)this.mWaypoints.Count);
+			b.WriteLong(this.mWaypoints.Count);
 			for (int i = 0; i < this.mWaypoints.Count; i++)
 			{
 				this.mWaypoints[i].Serialize(b);

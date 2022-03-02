@@ -172,12 +172,12 @@ namespace Lawn
 
         public override void MouseUp(int x, int y, int theClickCount)
         {
-            if (mOpenPage == AlmanacPage.Index && mViewPlantsRect.Contains(new TPoint(x, y)))
+            if (mOpenPage == AlmanacPage.Index && mViewPlantsRect.Contains(new SexyPoint(x, y)))
             {
                 SetPage(AlmanacPage.Plants);
                 return;
             }
-            if (mOpenPage == AlmanacPage.Index && mViewZombiesRect.Contains(new TPoint(x, y)))
+            if (mOpenPage == AlmanacPage.Index && mViewZombiesRect.Contains(new SexyPoint(x, y)))
             {
                 mApp.PlaySample(Resources.SOUND_GRAVEBUTTON);
                 SetPage(AlmanacPage.Zombies);
@@ -202,11 +202,11 @@ namespace Lawn
         {
             mCloseButton.Update();
             mIndexButton.Update();
-            if ((mOpenPage == AlmanacPage.Index && mViewPlantsRect.Contains(new TPoint(x, y))) || mCloseButton.IsMouseOver() || mIndexButton.IsMouseOver())
+            if ((mOpenPage == AlmanacPage.Index && mViewPlantsRect.Contains(new SexyPoint(x, y))) || mCloseButton.IsMouseOver() || mIndexButton.IsMouseOver())
             {
                 mApp.PlaySample(Resources.SOUND_TAP);
             }
-            if (mOpenPage == AlmanacPage.Index && mViewZombiesRect.Contains(new TPoint(x, y)))
+            if (mOpenPage == AlmanacPage.Index && mViewZombiesRect.Contains(new SexyPoint(x, y)))
             {
                 mApp.PlaySample(Resources.SOUND_GRAVEBUTTON);
             }
@@ -673,34 +673,34 @@ namespace Lawn
             }
         }
 
-        public static TPoint[] ZombieOffsets = new TPoint[]
+        public static SexyPoint[] ZombieOffsets = new SexyPoint[]
         {
-            new TPoint(20, 11),
-            new TPoint(13, 15),
-            new TPoint(22, 14),
-            new TPoint(3, 13),
-            new TPoint(20, 13),
-            new TPoint(18, 13),
-            new TPoint(19, 13),
-            new TPoint(4, 11),
-            new TPoint(14, 13),
-            new TPoint(19, 12),
-            new TPoint(20, 13),
-            new TPoint(16, 10),
-            new TPoint(1, 11),
-            new TPoint(16, 10),
-            new TPoint(16, 15),
-            new TPoint(14, 10),
-            new TPoint(13, 12),
-            new TPoint(10, 13),
-            new TPoint(20, 12),
-            new TPoint(11, 12),
-            new TPoint(0, 9),
-            new TPoint(15, 14),
-            new TPoint(4, 12),
-            new TPoint(18, 10),
-            new TPoint(23, 27),
-            new TPoint(1, 15)
+            new SexyPoint(20, 11),
+            new SexyPoint(13, 15),
+            new SexyPoint(22, 14),
+            new SexyPoint(3, 13),
+            new SexyPoint(20, 13),
+            new SexyPoint(18, 13),
+            new SexyPoint(19, 13),
+            new SexyPoint(4, 11),
+            new SexyPoint(14, 13),
+            new SexyPoint(19, 12),
+            new SexyPoint(20, 13),
+            new SexyPoint(16, 10),
+            new SexyPoint(1, 11),
+            new SexyPoint(16, 10),
+            new SexyPoint(16, 15),
+            new SexyPoint(14, 10),
+            new SexyPoint(13, 12),
+            new SexyPoint(10, 13),
+            new SexyPoint(20, 12),
+            new SexyPoint(11, 12),
+            new SexyPoint(0, 9),
+            new SexyPoint(15, 14),
+            new SexyPoint(4, 12),
+            new SexyPoint(18, 10),
+            new SexyPoint(23, 27),
+            new SexyPoint(1, 15)
         };
 
         public static bool[] gZombieDefeated = new bool[(int)ZombieType.ZombieTypesCount];

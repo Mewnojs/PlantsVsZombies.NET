@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Sexy;
+using Sexy.GraphicsLib;
+using Sexy.Misc;
 using Sexy.TodLib;
 
 namespace Lawn
@@ -1533,7 +1535,7 @@ namespace Lawn
 
         public void Draw(Graphics g)
         {
-            g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+            g.SetDrawMode(Graphics.DrawMode.Normal);
             if (mZombieHeight == ZombieHeight.GettingBungeeDropped)
             {
                 return;
@@ -1726,18 +1728,18 @@ namespace Lawn
                 zombie_MINDCONTROLLED_COLOR.mAlpha = num4;
                 g.SetColor(zombie_MINDCONTROLLED_COLOR);
                 g.DrawImageMirror(theImage, theDestRect, theSrcRect, flag);
-                g.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
+                g.SetDrawMode(Graphics.DrawMode.Additive);
                 g.DrawImageMirror(theImage, theDestRect, theSrcRect, flag);
-                g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+                g.SetDrawMode(Graphics.DrawMode.Normal);
             }
             else if (mChilledCounter > 0 || mIceTrapCounter > 0)
             {
                 g.SetColorizeImages(true);
                 g.SetColor(new SexyColor(75, 75, 255, num4));
                 g.DrawImageMirror(theImage, theDestRect, theSrcRect, flag);
-                g.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
+                g.SetDrawMode(Graphics.DrawMode.Additive);
                 g.DrawImageMirror(theImage, theDestRect, theSrcRect, flag);
-                g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+                g.SetDrawMode(Graphics.DrawMode.Normal);
             }
             else
             {
@@ -1745,12 +1747,12 @@ namespace Lawn
             }
             if (mJustGotShotCounter > 0)
             {
-                g.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
+                g.SetDrawMode(Graphics.DrawMode.Additive);
                 g.SetColorizeImages(true);
                 int num5 = mJustGotShotCounter * 10;
                 g.SetColor(new SexyColor(num5, num5, num5, 255));
                 g.DrawImageMirror(theImage, theDestRect, theSrcRect, flag);
-                g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+                g.SetDrawMode(Graphics.DrawMode.Normal);
             }
             g.SetColorizeImages(false);
         }
@@ -4539,7 +4541,7 @@ namespace Lawn
             {
                 return;
             }
-            g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+            g.SetDrawMode(Graphics.DrawMode.Normal);
             float anImageOffsetX = theDrawPos.mImageOffsetX;
             float anImageOffsetY = theDrawPos.mImageOffsetY + theDrawPos.mBodyY;
             switch (mZombieType)
@@ -7634,7 +7636,7 @@ namespace Lawn
             }
             if (aZombieLeader.mJustGotShotCounter > 0)
             {
-                g.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
+                g.SetDrawMode(Graphics.DrawMode.Additive);
                 g.SetColorizeImages(true);
                 int num5 = aZombieLeader.mJustGotShotCounter * 10;
                 g.SetColor(new SexyColor(num5, num5, num5, 255));
@@ -7646,7 +7648,7 @@ namespace Lawn
                 {
                     g.DrawImageF(aImage, aOffsetX, aOffsetY);
                 }
-                g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+                g.SetDrawMode(Graphics.DrawMode.Normal);
             }
             g.SetColorizeImages(false);
         }
@@ -7974,7 +7976,7 @@ namespace Lawn
             {
                 return;
             }
-            g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+            g.SetDrawMode(Graphics.DrawMode.Normal);
             ZombieDrawPosition aDrawPos = default(ZombieDrawPosition);
             GetDrawPos(ref aDrawPos);
             float aTargetX = mX + Constants.Zombie_Bungee_Target_Offset.X;
@@ -9956,9 +9958,9 @@ namespace Lawn
                 return;
             }
             reanimation.DrawRenderGroup(g, 0);
-            g.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
+            g.SetDrawMode(Graphics.DrawMode.Additive);
             reanimation.DrawRenderGroup(g, GameConstants.RENDER_GROUP_BOSS_FIREBALL_ADDITIVE);
-            g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+            g.SetDrawMode(Graphics.DrawMode.Normal);
             reanimation.DrawRenderGroup(g, GameConstants.RENDER_GROUP_BOSS_FIREBALL_TOP);
         }
 

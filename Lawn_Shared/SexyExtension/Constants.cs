@@ -1,6 +1,8 @@
 ﻿using System;
 using Lawn;
 using Microsoft.Xna.Framework;
+using Sexy.GraphicsLib;
+using Sexy.Misc;
 
 namespace Sexy
 {

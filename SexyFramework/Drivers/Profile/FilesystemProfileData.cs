@@ -126,7 +126,7 @@ namespace Sexy.Drivers.Profile
 
 		public bool ReadSummary(SexyBuffer data)
 		{
-			this.mName = data.ReadString();
+			this.mName = data.ReadStringWithEncoding();
 			this.mId = (int)data.ReadLong();
 			this.mUseSeq = (int)data.ReadLong();
 			return true;
@@ -134,9 +134,9 @@ namespace Sexy.Drivers.Profile
 
 		public bool WriteSummary(SexyBuffer data)
 		{
-			data.WriteString(this.mName);
-			data.WriteLong((long)this.mId);
-			data.WriteLong((long)this.mUseSeq);
+			data.WriteStringWithEncoding(this.mName);
+			data.WriteLong(this.mId);
+			data.WriteLong(this.mUseSeq);
 			return true;
 		}
 

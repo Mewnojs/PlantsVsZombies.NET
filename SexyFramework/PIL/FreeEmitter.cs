@@ -180,8 +180,8 @@ namespace Sexy.PIL
 			this.mSettingsTimeLine.Serialize(b);
 			this.mVarianceTimeLine.Serialize(b);
 			b.WriteBoolean(this.mAspectLocked);
-			b.WriteLong((long)this.mSerialIndex);
-			b.WriteLong((long)this.mLifePctSettings.Count);
+			b.WriteLong(this.mSerialIndex);
+			b.WriteLong(this.mLifePctSettings.Count);
 			for (int i = 0; i < this.mLifePctSettings.Count; i++)
 			{
 				b.WriteFloat(this.mLifePctSettings[i].first);

@@ -1,5 +1,6 @@
 ﻿using System;
 using Sexy;
+using Sexy.WidgetsLib;
 
 namespace Lawn
 {
@@ -64,7 +65,7 @@ namespace Lawn
             mApp.ButtonDepress(2000 + mId + theId);
         }
 
-        public virtual bool AllowChar(int theId, SexyChar theChar)
+        public virtual bool AllowChar(int theId, char theChar)
         {
             return true;
         }

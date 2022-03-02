@@ -80,10 +80,10 @@ namespace Sexy.PIL
 		{
 			b.WriteBoolean(this.mLoop);
 			this.mCurrentSettings.Serialize(b);
-			b.WriteLong((long)this.mKeyFrames.Count);
+			b.WriteLong(this.mKeyFrames.Count);
 			for (int i = 0; i < this.mKeyFrames.Count; i++)
 			{
-				b.WriteLong((long)this.mKeyFrames[i].first);
+				b.WriteLong(this.mKeyFrames[i].first);
 				this.mKeyFrames[i].second.Serialize(b);
 			}
 		}

@@ -176,7 +176,7 @@ namespace Sexy.TodLib
             Graphics.DrawMode drawMode = g.mDrawMode;
             if (TodCommon.TestBit((uint)emitterDef.mParticleFlags, 8))
             {
-                drawMode = Graphics.DrawMode.DRAWMODE_ADDITIVE;
+                drawMode = Graphics.DrawMode.Additive;
             }
             if (TodCommon.TestBit((uint)emitterDef.mParticleFlags, 9))
             {
@@ -197,7 +197,7 @@ namespace Sexy.TodLib
             g.DrawImageRotatedScaled(image, new Rect((int)theParams.mPosX, (int)theParams.mPosY, Rect.mWidth, Rect.mHeight), new Rect(Rect.mX, Rect.mY, Rect.mWidth, Rect.mHeight), particleEmitter.mExtraAdditiveDrawOverride ? SexyColor.White : theColor, theParams.mSpinPosition, new Vector2(theParams.mParticleScale, theParams.mParticleScale * theParams.mParticleStretch), new Vector2(Rect.mWidth / 2, Rect.mHeight / 2));
             if (particleEmitter.mExtraAdditiveDrawOverride)
             {
-                g.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
+                g.SetDrawMode(Graphics.DrawMode.Additive);
                 g.DrawImageRotatedScaled(image, new Rect((int)theParams.mPosX, (int)theParams.mPosY, Rect.mWidth, Rect.mHeight), new Rect(Rect.mX, Rect.mY, Rect.mWidth, Rect.mHeight), theColor, theParams.mSpinPosition, new Vector2(theParams.mParticleScale, theParams.mParticleScale * theParams.mParticleStretch), new Vector2(Rect.mWidth / 2, Rect.mHeight / 2));
             }
         }

@@ -20,7 +20,7 @@ namespace Sexy.PIL
 		{
 			b.WriteBoolean(this.mLinear);
 			b.WriteFloat(this.mTime);
-			b.WriteLong((long)this.mFrame);
+			b.WriteLong(this.mFrame);
 			b.WriteFloat(this.mControl1.X);
 			b.WriteFloat(this.mControl1.Y);
 			b.WriteFloat(this.mControl2.X);

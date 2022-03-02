@@ -1,5 +1,6 @@
 ﻿using System;
 using Sexy;
+using Sexy.WidgetsLib;
 
 namespace Lawn
 {
@@ -20,7 +21,7 @@ namespace Lawn
             }
         }
 
-        public override void KeyChar(SexyChar theChar)
+        public override void KeyChar(char theChar)
         {
             if (mAutoCapFirstLetter && char.IsLetter(theChar.value_type))
             {

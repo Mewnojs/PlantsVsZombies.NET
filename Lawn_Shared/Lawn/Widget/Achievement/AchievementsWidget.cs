@@ -1,6 +1,9 @@
 ﻿using System;
 using Sexy;
+using Sexy.GraphicsLib;
+using Sexy.Misc;
 using Sexy.TodLib;
+using Sexy.WidgetsLib;
 
 namespace Lawn
 {
@@ -34,7 +37,7 @@ namespace Lawn
             g.DrawImage(AtlasResources.IMAGE_FOSSIL, Constants.AchievementWidget_Fossile_Offset.X, (num6 * Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE.mHeight) + Constants.AchievementWidget_Fossile_Offset.Y, new Rect(0, 0, AtlasResources.IMAGE_FOSSIL.mWidth - 1, AtlasResources.IMAGE_FOSSIL.mHeight - 1));
             g.DrawImage(Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE_CHINA, 0, theY);
             g.DrawImage(Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_TOP_BACKGROUND, 0, 0);
-            Image theImage = (!base.mIsDown || !BackButtonRect.Contains(new TPoint(base.mWidgetManager.mLastMouseX, base.mWidgetManager.mLastMouseY))) ? AtlasResources.IMAGE_REANIM_SELECTORSCREEN_ACHIEVEMENTS_BACK_BUTTON : AtlasResources.IMAGE_REANIM_SELECTORSCREEN_ACHIEVEMENTS_BACK_HIGHLIGHT;
+            Image theImage = (!base.mIsDown || !BackButtonRect.Contains(new SexyPoint(base.mWidgetManager.mLastMouseX, base.mWidgetManager.mLastMouseY))) ? AtlasResources.IMAGE_REANIM_SELECTORSCREEN_ACHIEVEMENTS_BACK_BUTTON : AtlasResources.IMAGE_REANIM_SELECTORSCREEN_ACHIEVEMENTS_BACK_HIGHLIGHT;
             g.DrawImage(theImage, Constants.AchievementWidget_BackButton_X, Constants.AchievementWidget_BackButton_Y);
             g.SetScale(1f);
 
@@ -79,7 +82,7 @@ namespace Lawn
             g.DrawImage(Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_HOLE_CHINA, 0, num);
             g.DrawImage(Resources.IMAGE_SELECTORSCREEN_ACHIEVEMENTS_TOP_BACKGROUND, 0, 0);
             Image theImage;
-            if (this.mIsDown && AchievementsWidget.BackButtonRect.Contains(new TPoint(this.mWidgetManager.mLastMouseX, this.mWidgetManager.mLastMouseY)))
+            if (this.mIsDown && AchievementsWidget.BackButtonRect.Contains(new SexyPoint(this.mWidgetManager.mLastMouseX, this.mWidgetManager.mLastMouseY)))
             {
                 theImage = AtlasResources.IMAGE_REANIM_SELECTORSCREEN_ACHIEVEMENTS_BACK_HIGHLIGHT;
             }

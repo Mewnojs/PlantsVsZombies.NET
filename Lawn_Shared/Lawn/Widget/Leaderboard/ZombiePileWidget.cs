@@ -4,7 +4,10 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Sexy;
+using Sexy.GraphicsLib;
+using Sexy.Misc;
 using Sexy.TodLib;
+using Sexy.WidgetsLib;
 
 namespace Lawn
 {
@@ -91,9 +94,9 @@ namespace Lawn
             }
         }
 
-        public override bool DoScroll(_Touch touch)
+        public override bool DoScroll(SexyAppBase.Touch touch)
         {
-            CGPoint absPos = GetAbsPos();
+            SexyPoint absPos = GetAbsPos();
             int theX = (int)(touch.location.x - absPos.x);
             int theY = (int)(touch.location.y - absPos.y);
             return !mBackButton.Contains(theX, theY) && !mIZombieButton.Contains(theX, theY) && !mZombiesKilledButton.Contains(theX, theY) && !mVasebreakerButton.Contains(theX, theY);
@@ -208,12 +211,12 @@ namespace Lawn
         public override void Draw(Graphics g)
         {
             g.DrawImage(Resources.IMAGE_LEADERBOARDSCREEN_BACKGROUND, 0, mScreenTop);
-            g.DrawTriangle(skyBottomLeft, skyColor, skyBottomRight, skyColor, transferBottomLeft, skyColor, Graphics.DrawMode.DRAWMODE_NORMAL);
-            g.DrawTriangle(skyBottomRight, skyColor, transferBottomRight, skyColor, transferBottomLeft, skyColor, Graphics.DrawMode.DRAWMODE_NORMAL);
-            g.DrawTriangle(transferBottomLeft, skyColor, transferBottomRight, skyColor, spaceBottomLeft, skyColor, Graphics.DrawMode.DRAWMODE_NORMAL);
-            g.DrawTriangle(transferBottomRight, skyColor, spaceBottomRight, skyColor, spaceBottomLeft, skyColor, Graphics.DrawMode.DRAWMODE_NORMAL);
-            g.DrawTriangle(spaceBottomLeft, spaceColor, spaceBottomRight, spaceColor, spaceTopLeft, spaceColor, Graphics.DrawMode.DRAWMODE_NORMAL);
-            g.DrawTriangle(spaceBottomRight, spaceColor, spaceTopRight, spaceColor, spaceTopLeft, spaceColor, Graphics.DrawMode.DRAWMODE_NORMAL);
+            g.DrawTriangle(skyBottomLeft, skyColor, skyBottomRight, skyColor, transferBottomLeft, skyColor, Graphics.DrawMode.Normal);
+            g.DrawTriangle(skyBottomRight, skyColor, transferBottomRight, skyColor, transferBottomLeft, skyColor, Graphics.DrawMode.Normal);
+            g.DrawTriangle(transferBottomLeft, skyColor, transferBottomRight, skyColor, spaceBottomLeft, skyColor, Graphics.DrawMode.Normal);
+            g.DrawTriangle(transferBottomRight, skyColor, spaceBottomRight, skyColor, spaceBottomLeft, skyColor, Graphics.DrawMode.Normal);
+            g.DrawTriangle(spaceBottomLeft, spaceColor, spaceBottomRight, spaceColor, spaceTopLeft, spaceColor, Graphics.DrawMode.Normal);
+            g.DrawTriangle(spaceBottomRight, spaceColor, spaceTopRight, spaceColor, spaceTopLeft, spaceColor, Graphics.DrawMode.Normal);
             g.DrawImage(Resources.IMAGE_EDGE_OF_SPACE, 0, (int)spaceBottomLeft.y - Resources.IMAGE_EDGE_OF_SPACE.mHeight / 2, Constants.BOARD_WIDTH, Resources.IMAGE_EDGE_OF_SPACE.mHeight);
             float y = spaceBottomRight.y;
             int board_HEIGHT = Constants.BOARD_HEIGHT;

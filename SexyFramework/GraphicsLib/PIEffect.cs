@@ -465,8 +465,8 @@ namespace Sexy.GraphicsLib
 		{
 			theBuffer.WriteFloat(theParticleDefInstance.mNumberAcc);
 			theBuffer.WriteFloat(theParticleDefInstance.mCurNumberVariation);
-			theBuffer.WriteLong((long)theParticleDefInstance.mParticlesEmitted);
-			theBuffer.WriteLong((long)theParticleDefInstance.mTicks);
+			theBuffer.WriteLong(theParticleDefInstance.mParticlesEmitted);
+			theBuffer.WriteLong(theParticleDefInstance.mTicks);
 		}
 
 		public void SaveParticle(SexyBuffer theBuffer, PILayer theLayer, PIParticleInstance theParticle)
@@ -2520,7 +2520,7 @@ namespace Sexy.GraphicsLib
 			int num3 = (int)theBuffer.ReadShort();
 			if (!shortened)
 			{
-				string theFileName = theBuffer.ReadString();
+				string theFileName = theBuffer.ReadStringWithEncoding();
 				if (!this.mLoaded)
 				{
 					this.LoadEffect(theFileName);
@@ -2535,7 +2535,7 @@ namespace Sexy.GraphicsLib
 			this.mFrameNum = theBuffer.ReadFloat();
 			if (!shortened)
 			{
-				this.mRand.SRand(theBuffer.ReadString());
+				this.mRand.SRand(theBuffer.ReadStringWithEncoding());
 				this.mWantsSRand = false;
 			}
 			if (!shortened)
@@ -2682,13 +2682,13 @@ namespace Sexy.GraphicsLib
 			theBuffer.WriteShort(1);
 			if (!shortened)
 			{
-				theBuffer.WriteString(this.mSrcFileName);
-				theBuffer.WriteLong((long)this.mFileChecksum);
+				theBuffer.WriteStringWithEncoding(this.mSrcFileName);
+				theBuffer.WriteLong(this.mFileChecksum);
 			}
 			theBuffer.WriteFloat(this.mFrameNum);
 			if (!shortened)
 			{
-				theBuffer.WriteString(this.mRand.Serialize());
+				theBuffer.WriteStringWithEncoding(this.mRand.Serialize());
 				theBuffer.WriteBoolean(this.mEmitAfterTimeline);
 				theBuffer.WriteTransform2D(this.mEmitterTransform);
 				theBuffer.WriteTransform2D(this.mDrawTransform);
@@ -2759,7 +2759,7 @@ namespace Sexy.GraphicsLib
 							dictionary2[piemitter2] = l;
 						}
 						PIFreeEmitterInstance pifreeEmitterInstance = (PIFreeEmitterInstance)piemitterInstance.mSuperEmitterGroup.mHead;
-						theBuffer.WriteLong((long)this.CountParticles(pifreeEmitterInstance));
+						theBuffer.WriteLong(this.CountParticles(pifreeEmitterInstance));
 						while (pifreeEmitterInstance != null)
 						{
 							theBuffer.WriteShort((short)dictionary2[pifreeEmitterInstance.mEmitterSrc]);
@@ -2771,7 +2771,7 @@ namespace Sexy.GraphicsLib
 								this.SaveParticleDefInstance(theBuffer, theParticleDefInstance3);
 							}
 							PIParticleInstance piparticleInstance = pifreeEmitterInstance.mEmitter.mParticleGroup.mHead;
-							theBuffer.WriteLong((long)this.CountParticles(piparticleInstance));
+							theBuffer.WriteLong(this.CountParticles(piparticleInstance));
 							while (piparticleInstance != null)
 							{
 								theBuffer.WriteShort((short)dictionary[piparticleInstance.mEmitterSrc][piparticleInstance.mParticleDef]);
@@ -2782,7 +2782,7 @@ namespace Sexy.GraphicsLib
 						}
 						PIParticleInstance piparticleInstance2 = piemitterInstance.mParticleGroup.mHead;
 						int num2 = this.CountParticles(piparticleInstance2);
-						theBuffer.WriteLong((long)num2);
+						theBuffer.WriteLong(num2);
 						while (piparticleInstance2 != null)
 						{
 							short theShort = (short)dictionary[piparticleInstance2.mEmitterSrc][piparticleInstance2.mParticleDef];
@@ -2796,7 +2796,7 @@ namespace Sexy.GraphicsLib
 			int num3 = theBuffer.mWriteBitPos / 8 - num - 4;
 			int mWriteBitPos = theBuffer.mWriteBitPos;
 			theBuffer.mWriteBitPos = num;
-			theBuffer.WriteLong((long)num3);
+			theBuffer.WriteLong(num3);
 			theBuffer.mWriteBitPos = mWriteBitPos;
 			return true;
 		}

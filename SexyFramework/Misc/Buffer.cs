@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using Microsoft.Xna.Framework;
 
 namespace Sexy.Misc
@@ -74,7 +76,7 @@ namespace Sexy.Misc
 		{
 			if (this.mWriteBitPos % 8 == 0)
 			{
-				this.mData.Add(theByte);
+				this.mData.WriteByte(theByte);
 			}
 			else
 			{
@@ -136,13 +138,37 @@ namespace Sexy.Misc
 			this.WriteByte((byte)(theBool ? 1 : 0));
 		}
 
-		public void WriteShort(short theShort)
+        public void WriteBooleanArray(bool[] theBool)
+        {
+            WriteLong(theBool.Length);
+            for (int i = 0; i < theBool.Length; i++)
+            {
+                WriteBoolean(theBool[i]);
+            }
+        }
+
+        public void WriteBoolean2DArray(bool[,] theBool)
+        {
+            int length = theBool.GetLength(0);
+            int length2 = theBool.GetLength(1);
+            WriteLong(length);
+            WriteLong(length2);
+            for (int i = 0; i < length; i++)
+            {
+                for (int j = 0; j < length2; j++)
+                {
+                    WriteBoolean(theBool[i, j]);
+                }
+            }
+        }
+
+        public void WriteShort(short theShort)
 		{
 			this.WriteByte((byte)theShort);
 			this.WriteByte((byte)(theShort >> 8));
 		}
 
-		public void WriteLong(long theLong)
+		public void WriteLong(int/*long*/ theLong)
 		{
 			this.WriteByte((byte)theLong);
 			this.WriteByte((byte)(theLong >> 8));
@@ -150,7 +176,51 @@ namespace Sexy.Misc
 			this.WriteByte((byte)(theLong >> 24));
 		}
 
-		public void WriteFloat(float theFloat)
+        public void WriteLongArray(int[] theLong)
+        {
+            WriteLong(theLong.Length);
+            for (int i = 0; i < theLong.Length; i++)
+            {
+                WriteLong(theLong[i]);
+            }
+        }
+
+        public void WriteLong2DArray(int[,] theLong)
+        {
+            int length = theLong.GetLength(0);
+            int length2 = theLong.GetLength(1);
+            WriteLong(length);
+            WriteLong(length2);
+            for (int i = 0; i < length; i++)
+            {
+                for (int j = 0; j < length2; j++)
+                {
+                    WriteLong(theLong[i, j]);
+                }
+            }
+        }
+
+        public void WriteLong3DArray(int[,,] theLong)
+        {
+            int length = theLong.GetLength(0);
+            int length2 = theLong.GetLength(1);
+            int length3 = theLong.GetLength(2);
+            WriteLong(length);
+            WriteLong(length2);
+            WriteLong(length3);
+            for (int i = 0; i < length; i++)
+            {
+                for (int j = 0; j < length2; j++)
+                {
+                    for (int k = 0; k < length3; k++)
+                    {
+                        WriteLong(theLong[i, j, k]);
+                    }
+                }
+            }
+        }
+
+        public void WriteFloat(float theFloat)
 		{
 			byte[] bytes = BitConverter.GetBytes(theFloat);
 			this.WriteBytes(bytes, 4);
@@ -162,7 +232,30 @@ namespace Sexy.Misc
 			this.WriteBytes(bytes, 8);
 		}
 
-		public void WriteInt8(int theInt8)
+        public void WriteDateTime(DateTime theTime)
+        {
+            WriteLong(theTime.Millisecond);
+            WriteLong(theTime.Second);
+            WriteLong(theTime.Minute);
+            WriteLong(theTime.Hour);
+            WriteLong(theTime.Day);
+            WriteLong(theTime.Month);
+            WriteLong(theTime.Year);
+        }
+
+        public DateTime ReadDateTime()
+        {
+            int num = ReadLong();
+            int num2 = ReadLong();
+            int num3 = ReadLong();
+            int num4 = ReadLong();
+            int num5 = ReadLong();
+            int num6 = ReadLong();
+            int num7 = ReadLong();
+            return new DateTime(num7, num6, num5, num4, num3, num2, num, 0);
+        }
+
+        public void WriteInt8(int theInt8)
 		{
 			this.WriteByte((byte)theInt8);
 		}
@@ -221,7 +314,27 @@ namespace Sexy.Misc
 			}
 		}
 
-		public void WriteUTF8String(string theString)
+        public void WriteStringWithEncoding(string theString)
+        {
+            WriteLong(theString.Length);
+            byte[] bytes = encoding.GetBytes(theString);
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                WriteByte(bytes[i]);
+            }
+        }
+
+        public void WriteStringArray(string[] theString)
+        {
+            WriteLong(theString.Length);
+            for (int i = 0; i < theString.Length; i++)
+            {
+                WriteString(theString[i]);
+            }
+        }
+
+
+        public void WriteUTF8String(string theString)
 		{
 			throw new NotSupportedException();
 		}
@@ -238,7 +351,7 @@ namespace Sexy.Misc
 
 		public void WriteBuffer(List<byte> theBuffer)
 		{
-			this.WriteLong((long)theBuffer.Count);
+			this.WriteLong(theBuffer.Count);
 			for (int i = 0; i < theBuffer.Count; i++)
 			{
 				this.WriteByte(theBuffer[i]);
@@ -421,7 +534,26 @@ namespace Sexy.Misc
 			return text;
 		}
 
-		public string ReadUTF8String()
+        public string ReadStringWithEncoding()
+        {
+            int num = ReadLong();
+            byte[] array = new byte[num];
+            mData.Read(array, 0, num);
+            return encoding.GetString(array, 0, num);
+        }
+
+        public string[] ReadStringArray()
+        {
+            int num = ReadLong();
+            string[] array = new string[num];
+            for (int i = 0; i < num; i++)
+            {
+                array[i] = ReadStringWithEncoding();
+            }
+            return array;
+        }
+
+        public string ReadUTF8String()
 		{
 			if ((this.mReadBitPos & 7) != 0)
 			{
@@ -642,8 +774,39 @@ namespace Sexy.Misc
 
 		public int mWriteBitPos;
 
-		public List<byte> mData;
+		public ListLikeMemoryStream mData;
+
+        public class ListLikeMemoryStream : MemoryStream 
+        {
+            public void Add(byte b) 
+            {
+                base.Seek(0, SeekOrigin.End);
+                base.WriteByte(b);
+            }
+
+            public void Resize(int capacityNew) => base.Capacity = capacityNew;
+
+            public void AddRange(byte[] array) => base.Write(array, (int)base.Length, array.Length);
+
+            public void Clear() => base.SetLength(0);
+
+            public byte this[int key] 
+            {
+                get
+                {
+                    base.Seek(key, SeekOrigin.Begin);
+                    return (byte)base.ReadByte();
+                }
+                set 
+                {
+                    base.Seek(key, SeekOrigin.Begin);
+                    base.WriteByte(value);
+                }
+            }
+        }
 
 		private static ushort[] aMaskData = new ushort[] { 192, 224, 240, 248, 252 };
-	}
+
+        private static UTF8Encoding encoding = new UTF8Encoding();
+    }
 }

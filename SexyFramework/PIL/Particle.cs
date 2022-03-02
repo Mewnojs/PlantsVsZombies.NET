@@ -210,13 +210,13 @@ namespace Sexy.PIL
 			base.Serialize(b);
 			b.WriteFloat(this.mOriginalXSize);
 			b.WriteFloat(this.mOriginalYSize);
-			b.WriteLong((long)this.mImageCel);
-			b.WriteLong((long)this.mParentType.mSerialIndex);
+			b.WriteLong(this.mImageCel);
+			b.WriteLong(this.mParentType.mSerialIndex);
 			this.mColorKeyManager.Serialize(b);
 			this.mAlphaKeyManager.Serialize(b);
-			b.WriteLong((long)this.mImageRate);
-			b.WriteLong((long)this.mRefXOff);
-			b.WriteLong((long)this.mRefYOff);
+			b.WriteLong(this.mImageRate);
+			b.WriteLong(this.mRefXOff);
+			b.WriteLong(this.mRefYOff);
 			b.WriteBoolean(this.mAdditive);
 			b.WriteBoolean(this.mAdditiveWithNormal);
 			b.WriteBoolean(this.mLockSizeAspect);

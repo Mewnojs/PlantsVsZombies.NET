@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sexy.GraphicsLib;
+using System;
 using System.Collections.Generic;
 
 namespace Sexy.TodLib
@@ -123,7 +124,7 @@ namespace Sexy.TodLib
 
         public void Draw(Graphics g, bool doScale)
         {
-            g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+            g.SetDrawMode(Graphics.DrawMode.Normal);
             foreach (TodParticleEmitter todParticleEmitter in mEmitterList)
             {
                 todParticleEmitter.Draw(g, doScale);

@@ -1,6 +1,7 @@
 ﻿using System;
 using Sexy;
 using Sexy.TodLib;
+using Sexy.WidgetsLib;
 
 namespace Lawn
 {
@@ -509,7 +510,7 @@ namespace Lawn
             }
         }
 
-        public override void KeyChar(SexyChar theChar)
+        public override void KeyChar(char theChar)
         {
             if (mChooseState == SeedChooserState.ViewLawn && (theChar.value_type == ' ' || theChar.value_type == '\r' || theChar.value_type == '\u001b'))
             {

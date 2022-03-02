@@ -1,7 +1,10 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Sexy;
+using Sexy.GraphicsLib;
+using Sexy.Misc;
 using Sexy.TodLib;
+using Sexy.WidgetsLib;
 
 namespace Lawn
 {
@@ -160,9 +163,9 @@ namespace Lawn
                 g.SetScale(1f);
                 if (flag2 && mOverOverlayImage != null)
                 {
-                    g.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
+                    g.SetDrawMode(Graphics.DrawMode.Additive);
                     DrawButtonImage(g, mOverOverlayImage, mNormalRect, 0, 0);
-                    g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+                    g.SetDrawMode(Graphics.DrawMode.Normal);
                 }
             }
             else
@@ -190,9 +193,9 @@ namespace Lawn
                 g.SetScale(1f);
                 if (flag2 && mOverOverlayImage != null)
                 {
-                    g.SetDrawMode(Graphics.DrawMode.DRAWMODE_ADDITIVE);
+                    g.SetDrawMode(Graphics.DrawMode.Additive);
                     DrawButtonImage(g, mOverOverlayImage, mNormalRect, 0, 0);
-                    g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+                    g.SetDrawMode(Graphics.DrawMode.Normal);
                 }
             }
             g.mTransX -= mX;

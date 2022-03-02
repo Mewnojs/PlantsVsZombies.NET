@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Sexy;
+using Sexy.GraphicsLib;
 using Sexy.TodLib;
 
 namespace Lawn
@@ -319,7 +320,7 @@ namespace Lawn
                 g.DrawImage(mIcon, 10, num2 - 10);
             }
             g.SetColor(SexyColor.White);
-            g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+            g.SetDrawMode(Graphics.DrawMode.Normal);
         }
 
         public void ClearReanim()

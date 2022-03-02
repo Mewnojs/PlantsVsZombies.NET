@@ -87,7 +87,7 @@ namespace Sexy.PIL
 
 		public virtual void Serialize(SexyBuffer b)
 		{
-			b.WriteLong((long)this.mKeyFrameIndex);
+			b.WriteLong(this.mKeyFrameIndex);
 			b.WriteFloat(this.mOriginalWeight);
 			b.WriteFloat(this.mOriginalBounce);
 			b.WriteFloat(this.mMotionRandAccum);
@@ -96,8 +96,8 @@ namespace Sexy.PIL
 			b.WriteFloat(this.mX);
 			b.WriteFloat(this.mY);
 			b.WriteBoolean(this.mInitialized);
-			b.WriteLong((long)this.mUpdateCount);
-			b.WriteLong((long)this.mLife);
+			b.WriteLong(this.mUpdateCount);
+			b.WriteLong(this.mLife);
 			b.WriteFloat(this.mVX);
 			b.WriteFloat(this.mVY);
 			b.WriteFloat(this.mMotionRand);
@@ -106,17 +106,17 @@ namespace Sexy.PIL
 			b.WriteFloat(this.mSpin);
 			b.WriteFloat(this.mBounce);
 			this.mCurrentLifetimeSettings.Serialize(b);
-			b.WriteLong((long)this.mLifetimeKeyFrames.Count);
+			b.WriteLong(this.mLifetimeKeyFrames.Count);
 			for (int i = 0; i < this.mLifetimeKeyFrames.Count; i++)
 			{
-				b.WriteLong((long)this.mLifetimeKeyFrames[i].first);
+				b.WriteLong(this.mLifetimeKeyFrames[i].first);
 				this.mLifetimeKeyFrames[i].second.Serialize(b);
 			}
-			b.WriteLong((long)this.mDeflectorCollMap.Count);
+			b.WriteLong(this.mDeflectorCollMap.Count);
 			foreach (KeyValuePair<Deflector, DeflectorCollInfo> keyValuePair in this.mDeflectorCollMap)
 			{
-				b.WriteLong((long)keyValuePair.Key.mSerialIndex);
-				b.WriteLong((long)keyValuePair.Value.mLastCollFrame);
+				b.WriteLong(keyValuePair.Key.mSerialIndex);
+				b.WriteLong(keyValuePair.Value.mLastCollFrame);
 				b.WriteBoolean(keyValuePair.Value.mIgnoresDeflector);
 			}
 		}

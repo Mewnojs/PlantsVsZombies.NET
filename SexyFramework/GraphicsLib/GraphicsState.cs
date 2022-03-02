@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sexy.Misc;
+using static Sexy.GraphicsLib.Graphics;
 
 namespace Sexy.GraphicsLib
 {

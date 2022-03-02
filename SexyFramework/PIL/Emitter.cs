@@ -10,103 +10,103 @@ namespace Sexy.PIL
 		public void Serialize(SexyBuffer b, GlobalMembers.GetIdByImageFunc f)
 		{
 			base.Serialize(b);
-			b.WriteLong((long)this.mHandle);
+			b.WriteLong(this.mHandle);
 			b.WriteBoolean(this.mDisableQuadRep);
 			b.WriteBoolean(this.mUseAlternateCalcMethod);
 			b.WriteFloat(this.mNumSpawnAccumulator);
-			b.WriteLong((long)this.mStartFrame);
+			b.WriteLong(this.mStartFrame);
 			b.WriteBoolean(this.mParticlesMustHaveBeenVisible);
-			b.WriteLong((long)this.mLineEmitterPoints.Count);
+			b.WriteLong(this.mLineEmitterPoints.Count);
 			for (int i = 0; i < this.mLineEmitterPoints.Count; i++)
 			{
 				this.mLineEmitterPoints[i].Serialize(b);
 			}
 			this.mScaleTimeLine.Serialize(b);
 			this.mSettingsTimeLine.Serialize(b);
-			b.WriteLong((long)this.mParticleTypeInfo.Count);
+			b.WriteLong(this.mParticleTypeInfo.Count);
 			for (int j = 0; j < this.mParticleTypeInfo.Count; j++)
 			{
 				this.mParticleTypeInfo[j].first.Serialize(b, f);
-				b.WriteLong((long)this.mParticleTypeInfo[j].second);
+				b.WriteLong(this.mParticleTypeInfo[j].second);
 			}
-			b.WriteLong((long)this.mParticles.Count);
+			b.WriteLong(this.mParticles.Count);
 			for (int k = 0; k < this.mParticles.Count; k++)
 			{
 				this.mParticles[k].Serialize(b);
 			}
-			b.WriteLong((long)this.mFreeEmitterInfo.Count);
+			b.WriteLong(this.mFreeEmitterInfo.Count);
 			for (int l = 0; l < this.mFreeEmitterInfo.Count; l++)
 			{
 				this.mFreeEmitterInfo[l].first.Serialize(b, f);
-				b.WriteLong((long)this.mFreeEmitterInfo[l].second);
+				b.WriteLong(this.mFreeEmitterInfo[l].second);
 			}
-			b.WriteLong((long)this.mEmitters.Count);
+			b.WriteLong(this.mEmitters.Count);
 			for (int m = 0; m < this.mEmitters.Count; m++)
 			{
 				this.mEmitters[m].Serialize(b, f);
 			}
-			b.WriteLong((long)this.mLastPTFrameSetting.Count);
+			b.WriteLong(this.mLastPTFrameSetting.Count);
 			foreach (KeyValuePair<int, ParticleSettings> keyValuePair in this.mLastPTFrameSetting)
 			{
-				b.WriteLong((long)keyValuePair.Key);
+				b.WriteLong(keyValuePair.Key);
 				keyValuePair.Value.Serialize(b);
 			}
-			b.WriteLong((long)this.mLastFEFrameSetting.Count);
+			b.WriteLong(this.mLastFEFrameSetting.Count);
 			foreach (KeyValuePair<FreeEmitter, FreeEmitterSettings> keyValuePair2 in this.mLastFEFrameSetting)
 			{
-				b.WriteLong((long)keyValuePair2.Key.mSerialIndex);
+				b.WriteLong(keyValuePair2.Key.mSerialIndex);
 				keyValuePair2.Value.Serialize(b);
 			}
 			this.mLastSettings.Serialize(b);
 			this.mLastScale.Serialize(b);
 			if (this.mAreaMask != null)
 			{
-				b.WriteLong((long)f(this.mAreaMask));
+				b.WriteLong(f(this.mAreaMask));
 			}
 			else
 			{
 				b.WriteLong(-1L);
 			}
 			b.WriteBoolean(this.mInvertAreaMask);
-			b.WriteLong((long)this.mFrameOffset);
-			b.WriteLong((long)this.mEmitterType);
-			b.WriteLong((long)this.mLastEmitAtX);
-			b.WriteLong((long)this.mLastEmitAtY);
+			b.WriteLong(this.mFrameOffset);
+			b.WriteLong(this.mEmitterType);
+			b.WriteLong(this.mLastEmitAtX);
+			b.WriteLong(this.mLastEmitAtY);
 			this.mWaypointManager.Serialize(b);
-			b.WriteLong((long)this.mCullingRect.mX);
-			b.WriteLong((long)this.mCullingRect.mY);
-			b.WriteLong((long)this.mCullingRect.mWidth);
-			b.WriteLong((long)this.mCullingRect.mHeight);
-			b.WriteLong((long)this.mClipRect.mX);
-			b.WriteLong((long)this.mClipRect.mY);
-			b.WriteLong((long)this.mClipRect.mWidth);
-			b.WriteLong((long)this.mClipRect.mHeight);
-			b.WriteString(this.mName);
+			b.WriteLong(this.mCullingRect.mX);
+			b.WriteLong(this.mCullingRect.mY);
+			b.WriteLong(this.mCullingRect.mWidth);
+			b.WriteLong(this.mCullingRect.mHeight);
+			b.WriteLong(this.mClipRect.mX);
+			b.WriteLong(this.mClipRect.mY);
+			b.WriteLong(this.mClipRect.mWidth);
+			b.WriteLong(this.mClipRect.mHeight);
+			b.WriteStringWithEncoding(this.mName);
 			b.WriteBoolean(this.mDrawNewestFirst);
 			b.WriteBoolean(this.mWaitForParticles);
 			b.WriteBoolean(this.mDeleteInvisParticles);
 			b.WriteBoolean(this.mEmissionCoordsAreOffsets);
-			b.WriteLong((long)this.mPreloadFrames);
-			b.WriteLong((long)this.mEmitDir);
-			b.WriteLong((long)this.mEmitAtXPoints);
-			b.WriteLong((long)this.mEmitAtYPoints);
-			b.WriteLong((long)this.mSerialIndex);
+			b.WriteLong(this.mPreloadFrames);
+			b.WriteLong(this.mEmitDir);
+			b.WriteLong(this.mEmitAtXPoints);
+			b.WriteLong(this.mEmitAtYPoints);
+			b.WriteLong(this.mSerialIndex);
 			b.WriteBoolean(this.mLinearEmitAtPoints);
-			b.WriteLong((long)this.mTintColor.ToInt());
+			b.WriteLong(this.mTintColor.ToInt());
 			if (this.mParentEmitter == null)
 			{
 				b.WriteLong(-1L);
 			}
 			else
 			{
-				b.WriteLong((long)this.mParentEmitter.mSerialIndex);
+				b.WriteLong(this.mParentEmitter.mSerialIndex);
 			}
 			if (this.mSuperEmitter == null)
 			{
 				b.WriteLong(-1L);
 				return;
 			}
-			b.WriteLong((long)this.mSuperEmitter.mSerialIndex);
+			b.WriteLong(this.mSuperEmitter.mSerialIndex);
 		}
 
 		public void Deserialize(SexyBuffer b, Dictionary<int, Deflector> deflector_ptr_map, Dictionary<int, FreeEmitter> fe_ptr_map, GlobalMembers.GetImageByIdFunc f)
@@ -207,7 +207,7 @@ namespace Sexy.PIL
 			this.mClipRect.mY = (int)b.ReadLong();
 			this.mClipRect.mWidth = (int)b.ReadLong();
 			this.mClipRect.mHeight = (int)b.ReadLong();
-			this.mName = b.ReadString();
+			this.mName = b.ReadStringWithEncoding();
 			this.mDrawNewestFirst = b.ReadBoolean();
 			this.mWaitForParticles = b.ReadBoolean();
 			this.mDeleteInvisParticles = b.ReadBoolean();

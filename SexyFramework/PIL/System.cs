@@ -531,7 +531,7 @@ namespace Sexy.PIL
 				{
 					Dictionary<int, EmitterSettings> dictionary2 = new Dictionary<int, EmitterSettings>();
 					Dictionary<int, EmitterScale> dictionary3 = new Dictionary<int, EmitterScale>();
-					string mName = buffer.ReadString().Trim();
+					string mName = buffer.ReadStringWithEncoding().Trim();
 					bool flag = buffer.ReadBoolean();
 					Emitter emitter3;
 					if (flag)
@@ -562,14 +562,14 @@ namespace Sexy.PIL
 							{
 								break;
 							}
-							int num4 = Common.StrToInt(buffer.ReadString());
-							float num5 = Common.StrToFloat(buffer.ReadString());
+							int num4 = Common.StrToInt(buffer.ReadStringWithEncoding());
+							float num5 = Common.StrToFloat(buffer.ReadStringWithEncoding());
 							buffer.ReadBoolean();
 							buffer.ReadBoolean();
-							Common.StrToFloat(buffer.ReadString());
-							Common.StrToFloat(buffer.ReadString());
-							Common.StrToFloat(buffer.ReadString());
-							Common.StrToFloat(buffer.ReadString());
+							Common.StrToFloat(buffer.ReadStringWithEncoding());
+							Common.StrToFloat(buffer.ReadStringWithEncoding());
+							Common.StrToFloat(buffer.ReadStringWithEncoding());
+							Common.StrToFloat(buffer.ReadStringWithEncoding());
 							if (num3 >= PINCommon.EM_FIRST_SCALE && num3 <= PINCommon.EM_LAST_SCALE)
 							{
 								EmitterScale emitterScale = new EmitterScale();
@@ -670,7 +670,7 @@ namespace Sexy.PIL
 					Dictionary<int, EmitterSettings> dictionary6 = new Dictionary<int, EmitterSettings>();
 					Dictionary<int, EmitterScale> dictionary7 = new Dictionary<int, EmitterScale>();
 					emitter = new Emitter();
-					emitter.mName = buffer.ReadString().Trim();
+					emitter.mName = buffer.ReadStringWithEncoding().Trim();
 					buffer.ReadInt32();
 					buffer.ReadBoolean();
 					bool flag3 = false;
@@ -683,14 +683,14 @@ namespace Sexy.PIL
 							{
 								break;
 							}
-							float num7 = Common.StrToFloat(buffer.ReadString());
-							float num8 = Common.StrToFloat(buffer.ReadString());
+							float num7 = Common.StrToFloat(buffer.ReadStringWithEncoding());
+							float num8 = Common.StrToFloat(buffer.ReadStringWithEncoding());
 							buffer.ReadBoolean();
 							buffer.ReadBoolean();
-							Common.StrToFloat(buffer.ReadString());
-							Common.StrToFloat(buffer.ReadString());
-							Common.StrToFloat(buffer.ReadString());
-							Common.StrToFloat(buffer.ReadString());
+							Common.StrToFloat(buffer.ReadStringWithEncoding());
+							Common.StrToFloat(buffer.ReadStringWithEncoding());
+							Common.StrToFloat(buffer.ReadStringWithEncoding());
+							Common.StrToFloat(buffer.ReadStringWithEncoding());
 							if (num6 >= PINCommon.FIRST_FE_SETTING && num6 <= PINCommon.LAST_FE_SETTING)
 							{
 								FreeEmitterSettings freeEmitterSettings = new FreeEmitterSettings();
@@ -906,7 +906,7 @@ namespace Sexy.PIL
 				else if (num == (long)PINCommon.SECTION_PARTICLE_TYPE)
 				{
 					ParticleType particleType = new ParticleType();
-					particleType.mName = buffer.ReadString().Trim();
+					particleType.mName = buffer.ReadStringWithEncoding().Trim();
 					particleType.mColorKeyManager.SetColorMode(1);
 					particleType.mAlphaKeyManager.SetColorMode(1);
 					bool flag4 = false;
@@ -927,12 +927,12 @@ namespace Sexy.PIL
 							}
 							if (num9 == PINCommon.MISC_PT_PROP_REF_PT)
 							{
-								particleType.mRefXOff = Common.StrToInt(buffer.ReadString());
-								particleType.mRefYOff = Common.StrToInt(buffer.ReadString());
+								particleType.mRefXOff = Common.StrToInt(buffer.ReadStringWithEncoding());
+								particleType.mRefYOff = Common.StrToInt(buffer.ReadStringWithEncoding());
 							}
 							else if (num9 == PINCommon.MISC_PT_PROP_SHAPE_NAME)
 							{
-								string text = buffer.ReadString().Trim();
+								string text = buffer.ReadStringWithEncoding().Trim();
 								if (image_names != null)
 								{
 									bool flag9 = false;
@@ -958,7 +958,7 @@ namespace Sexy.PIL
 							}
 							else if (num9 == PINCommon.MISC_PT_PROP_COLOR_GRADIENT)
 							{
-								float pct = Common.StrToFloat(buffer.ReadString());
+								float pct = Common.StrToFloat(buffer.ReadStringWithEncoding());
 								int theRed2 = buffer.ReadInt32();
 								int theGreen2 = buffer.ReadInt32();
 								int theBlue2 = buffer.ReadInt32();
@@ -966,7 +966,7 @@ namespace Sexy.PIL
 							}
 							else if (num9 == PINCommon.MISC_PT_PROP_ALPHA_GRADIENT)
 							{
-								float pct2 = Common.StrToFloat(buffer.ReadString());
+								float pct2 = Common.StrToFloat(buffer.ReadStringWithEncoding());
 								int alpha = buffer.ReadInt32();
 								particleType.mAlphaKeyManager.AddAlphaKey(pct2, alpha);
 							}
@@ -1049,7 +1049,7 @@ namespace Sexy.PIL
 							}
 							else if (num9 == 1012)
 							{
-								particleType.mEmitterAttachPct = Common.StrToFloat(buffer.ReadString());
+								particleType.mEmitterAttachPct = Common.StrToFloat(buffer.ReadStringWithEncoding());
 							}
 							else if (num9 == 1013)
 							{
@@ -1135,25 +1135,25 @@ namespace Sexy.PIL
 							}
 							else if (num9 == 2010 || num9 == 2011 || num9 == 2012)
 							{
-								buffer.ReadString();
-								buffer.ReadString();
+								buffer.ReadStringWithEncoding();
+								buffer.ReadStringWithEncoding();
 								buffer.ReadBoolean();
 								buffer.ReadBoolean();
-								buffer.ReadString();
-								buffer.ReadString();
-								buffer.ReadString();
-								buffer.ReadString();
+								buffer.ReadStringWithEncoding();
+								buffer.ReadStringWithEncoding();
+								buffer.ReadStringWithEncoding();
+								buffer.ReadStringWithEncoding();
 							}
 							else if (num9 >= 2000 && num9 <= 2029)
 							{
-								float num12 = Common.StrToFloat(buffer.ReadString());
-								float num13 = Common.StrToFloat(buffer.ReadString());
+								float num12 = Common.StrToFloat(buffer.ReadStringWithEncoding());
+								float num13 = Common.StrToFloat(buffer.ReadStringWithEncoding());
 								buffer.ReadBoolean();
 								buffer.ReadBoolean();
-								Common.StrToFloat(buffer.ReadString());
-								Common.StrToFloat(buffer.ReadString());
-								Common.StrToFloat(buffer.ReadString());
-								Common.StrToFloat(buffer.ReadString());
+								Common.StrToFloat(buffer.ReadStringWithEncoding());
+								Common.StrToFloat(buffer.ReadStringWithEncoding());
+								Common.StrToFloat(buffer.ReadStringWithEncoding());
+								Common.StrToFloat(buffer.ReadStringWithEncoding());
 								if (num9 >= PINCommon.PT_FIRST_SETTING && num9 <= PINCommon.PT_LAST_SETTING)
 								{
 									ParticleSettings particleSettings = new ParticleSettings();
@@ -1323,45 +1323,45 @@ namespace Sexy.PIL
 
 		public void Serialize(SexyBuffer b, GlobalMembers.GetIdByImageFunc f)
 		{
-			b.WriteLong((long)this.mParticlePoolGrowAmt);
-			b.WriteLong((long)this.mStartingParticlePoolSize);
+			b.WriteLong(this.mParticlePoolGrowAmt);
+			b.WriteLong(this.mStartingParticlePoolSize);
 			b.WriteFloat(this.mParticleScale2D);
-			b.WriteLong((long)this.mEmitterIteratorIndex);
-			b.WriteLong((long)this.mForceIteratorIndex);
-			b.WriteLong((long)this.mDeflectorIteratorIndex);
-			b.WriteLong((long)this.mUpdateCount);
-			b.WriteLong((long)this.mLife);
-			b.WriteLong((long)this.mMinSpawnFrame);
-			b.WriteLong((long)this.mMaxParticleCount);
+			b.WriteLong(this.mEmitterIteratorIndex);
+			b.WriteLong(this.mForceIteratorIndex);
+			b.WriteLong(this.mDeflectorIteratorIndex);
+			b.WriteLong(this.mUpdateCount);
+			b.WriteLong(this.mLife);
+			b.WriteLong(this.mMinSpawnFrame);
+			b.WriteLong(this.mMaxParticleCount);
 			b.WriteFloat(this.mLastX);
 			b.WriteFloat(this.mLastY);
 			b.WriteBoolean(this.mWaitForEmitters);
 			b.WriteBoolean(this.mForceStopEmitting);
 			b.WriteFloat(this.mAlphaPct);
 			b.WriteFloat(this.mScale);
-			b.WriteLong((long)this.mLastEmitterHandle);
-			b.WriteLong((long)this.mForces.Count);
+			b.WriteLong(this.mLastEmitterHandle);
+			b.WriteLong(this.mForces.Count);
 			for (int i = 0; i < this.mForces.Count; i++)
 			{
 				this.mForces[i].Serialize(b);
 			}
-			b.WriteLong((long)this.mDeflectors.Count);
+			b.WriteLong(this.mDeflectors.Count);
 			for (int j = 0; j < this.mDeflectors.Count; j++)
 			{
 				this.mDeflectors[j].Serialize(b);
 			}
-			b.WriteLong((long)this.mEmitters.Count);
+			b.WriteLong(this.mEmitters.Count);
 			for (int k = 0; k < this.mEmitters.Count; k++)
 			{
 				this.mEmitters[k].emitter.Serialize(b, f);
-				b.WriteLong((long)this.mEmitters[k].value);
+				b.WriteLong(this.mEmitters[k].value);
 				bool flag = false;
 				foreach (KeyValuePair<int, Emitter> keyValuePair in this.mEmitterHandleMap)
 				{
 					if (keyValuePair.Value.Equals(this.mEmitters[k].emitter))
 					{
 						flag = true;
-						b.WriteLong((long)keyValuePair.Key);
+						b.WriteLong(keyValuePair.Key);
 						break;
 					}
 				}

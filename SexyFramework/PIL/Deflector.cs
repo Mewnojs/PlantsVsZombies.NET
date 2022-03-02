@@ -155,26 +155,26 @@ namespace Sexy.PIL
 		{
 			this.mTimeLine.Serialize(b);
 			this.mLastSettings.Serialize(b);
-			b.WriteLong((long)this.mUnrotatedRect.mX);
-			b.WriteLong((long)this.mUnrotatedRect.mY);
-			b.WriteLong((long)this.mUnrotatedRect.mWidth);
-			b.WriteLong((long)this.mUnrotatedRect.mHeight);
+			b.WriteLong(this.mUnrotatedRect.mX);
+			b.WriteLong(this.mUnrotatedRect.mY);
+			b.WriteLong(this.mUnrotatedRect.mWidth);
+			b.WriteLong(this.mUnrotatedRect.mHeight);
 			for (int i = 0; i < 4; i++)
 			{
-				b.WriteLong((long)this.mRotatedPoints[i].mX);
-				b.WriteLong((long)this.mRotatedPoints[i].mY);
+				b.WriteLong(this.mRotatedPoints[i].mX);
+				b.WriteLong(this.mRotatedPoints[i].mY);
 			}
 			b.WriteFloat(this.mRotX1);
 			b.WriteFloat(this.mRotX2);
 			b.WriteFloat(this.mRotY1);
 			b.WriteFloat(this.mRotY2);
 			b.WriteFloat(this.mBaseAngle);
-			b.WriteLong((long)this.mLastFrame);
+			b.WriteLong(this.mLastFrame);
 			b.WriteFloat(this.mX1Off);
 			b.WriteFloat(this.mY1Off);
 			b.WriteFloat(this.mX2Off);
 			b.WriteFloat(this.mY2Off);
-			b.WriteLong((long)this.mSerialIndex);
+			b.WriteLong(this.mSerialIndex);
 			b.WriteFloat(this.mX1);
 			b.WriteFloat(this.mY1);
 			b.WriteFloat(this.mX2);

@@ -227,10 +227,10 @@ namespace Sexy.WidgetsLib
 			Dictionary<int, PAObjectPos> dictionary = new Dictionary<int, PAObjectPos>();
 			if (this.mVersion >= 4)
 			{
-				this.mMainAnimDef.mObjectNamePool.AddLast(theBuffer.ReadString());
+				this.mMainAnimDef.mObjectNamePool.AddLast(theBuffer.ReadStringWithEncoding());
 				theSpriteDef.mName = this.mMainAnimDef.mObjectNamePool.Last.Value;
 				theSpriteDef.mAnimRate = (float)theBuffer.ReadLong() / 65536f;
-				this.mCRCBuffer.WriteString(theSpriteDef.mName);
+				this.mCRCBuffer.WriteStringWithEncoding(theSpriteDef.mName);
 			}
 			else
 			{
@@ -307,7 +307,7 @@ namespace Sexy.WidgetsLib
 						}
 						if ((num5 & 4096) != 0)
 						{
-							this.mMainAnimDef.mObjectNamePool.AddLast(theBuffer.ReadString());
+							this.mMainAnimDef.mObjectNamePool.AddLast(theBuffer.ReadStringWithEncoding());
 							paobjectPos.mName = this.mMainAnimDef.mObjectNamePool.Last.Value;
 						}
 						if ((num5 & 2048) != 0)
@@ -397,7 +397,7 @@ namespace Sexy.WidgetsLib
 				}
 				if (((int)b & PopAnim.FRAMEFLAGS_HAS_FRAME_NAME) != 0)
 				{
-					string text = theBuffer.ReadString();
+					string text = theBuffer.ReadStringWithEncoding();
 					text = this.Remap(text).ToUpper();
 					theSpriteDef.mLabels.Add(text, i);
 				}
@@ -411,8 +411,8 @@ namespace Sexy.WidgetsLib
 					paframe.mCommandVector.Resize(num12);
 					for (int m = 0; m < num12; m++)
 					{
-						paframe.mCommandVector[m].mCommand = this.Remap(theBuffer.ReadString());
-						paframe.mCommandVector[m].mParam = this.Remap(theBuffer.ReadString());
+						paframe.mCommandVector[m].mCommand = this.Remap(theBuffer.ReadStringWithEncoding());
+						paframe.mCommandVector[m].mParam = this.Remap(theBuffer.ReadStringWithEncoding());
 					}
 				}
 				paframe.mFrameObjectPosVector.Resize(dictionary.Count);
@@ -1189,20 +1189,20 @@ namespace Sexy.WidgetsLib
 
 		public void SaveStateSpriteInst(ref SexyBuffer theBuffer, PASpriteInst theSpriteInst)
 		{
-			theBuffer.WriteLong((long)(theSpriteInst.mFrameNum * 65536f));
-			theBuffer.WriteLong((long)theSpriteInst.mDelayFrames);
-			theBuffer.WriteLong((long)theSpriteInst.mLastUpdated);
+			theBuffer.WriteLong((theSpriteInst.mFrameNum * 65536f));
+			theBuffer.WriteLong(theSpriteInst.mDelayFrames);
+			theBuffer.WriteLong(theSpriteInst.mLastUpdated);
 			theBuffer.WriteShort((short)theSpriteInst.mParticleEffectVector.Count);
 			for (int i = 0; i < theSpriteInst.mParticleEffectVector.Count; i++)
 			{
 				PAParticleEffect paparticleEffect = theSpriteInst.mParticleEffectVector[i];
 				paparticleEffect.mEffect.SaveState(theBuffer);
-				theBuffer.WriteString(paparticleEffect.mName);
+				theBuffer.WriteStringWithEncoding(paparticleEffect.mName);
 				theBuffer.WriteBoolean(paparticleEffect.mBehind);
 				theBuffer.WriteBoolean(paparticleEffect.mAttachEmitter);
 				theBuffer.WriteBoolean(paparticleEffect.mTransform);
-				theBuffer.WriteLong((long)((int)(paparticleEffect.mXOfs * 65536.0)));
-				theBuffer.WriteLong((long)((int)(paparticleEffect.mYOfs * 65536.0)));
+				theBuffer.WriteLong(((int)(paparticleEffect.mXOfs * 65536.0)));
+				theBuffer.WriteLong(((int)(paparticleEffect.mYOfs * 65536.0)));
 			}
 			for (int j = 0; j < theSpriteInst.mChildren.Count; j++)
 			{
@@ -1226,7 +1226,7 @@ namespace Sexy.WidgetsLib
 			{
 				PAParticleEffect paparticleEffect = new PAParticleEffect();
 				paparticleEffect.mEffect.LoadState(theBuffer);
-				paparticleEffect.mName = theBuffer.ReadString();
+				paparticleEffect.mName = theBuffer.ReadStringWithEncoding();
 				paparticleEffect.mBehind = theBuffer.ReadBoolean();
 				paparticleEffect.mAttachEmitter = theBuffer.ReadBoolean();
 				paparticleEffect.mTransform = theBuffer.ReadBoolean();
@@ -1600,7 +1600,7 @@ namespace Sexy.WidgetsLib
 			{
 				PAImage paimage = this.mImageVector[i];
 				paimage.mDrawMode = 0;
-				string theString = buffer.ReadString();
+				string theString = buffer.ReadStringWithEncoding();
 				string text = this.Remap(theString);
 				string text2 = "";
 				int num3 = text.IndexOf('(');
@@ -1976,7 +1976,7 @@ namespace Sexy.WidgetsLib
 			bool flag = theBuffer.ReadBoolean();
 			if (flag)
 			{
-				string theFileName = theBuffer.ReadString();
+				string theFileName = theBuffer.ReadStringWithEncoding();
 				int num4 = (int)theBuffer.ReadLong();
 				this.mMirror = theBuffer.ReadBoolean();
 				if (!this.mLoaded)
@@ -1996,7 +1996,7 @@ namespace Sexy.WidgetsLib
 					theBuffer.mReadBitPos = num2 * 8;
 					return false;
 				}
-				string theName = theBuffer.ReadString();
+				string theName = theBuffer.ReadStringWithEncoding();
 				this.SetupSpriteInst(theName);
 				this.LoadStateSpriteInst(theBuffer, this.mMainSpriteInst);
 				if (num3 >= 1)
@@ -2004,7 +2004,7 @@ namespace Sexy.WidgetsLib
 					this.mRandUsed = theBuffer.ReadBoolean();
 					if (this.mRandUsed)
 					{
-						this.mRand.SRand(theBuffer.ReadString());
+						this.mRand.SRand(theBuffer.ReadStringWithEncoding());
 					}
 				}
 			}
@@ -2020,18 +2020,18 @@ namespace Sexy.WidgetsLib
 			theBuffer.WriteBoolean(this.mLoaded);
 			if (this.mLoaded)
 			{
-				theBuffer.WriteString(this.mLoadedPamFile);
-				theBuffer.WriteLong((long)this.mCRCBuffer.GetCRC32(0UL));
+				theBuffer.WriteStringWithEncoding(this.mLoadedPamFile);
+				theBuffer.WriteLong(this.mCRCBuffer.GetCRC32(0UL));
 				theBuffer.WriteBoolean(this.mMirror);
 				theBuffer.WriteBoolean(this.mAnimRunning);
 				theBuffer.WriteBoolean(this.mPaused);
 				this.SetupSpriteInst();
-				theBuffer.WriteString((this.mMainSpriteInst.mDef.mName != null) ? this.mMainSpriteInst.mDef.mName : "");
+				theBuffer.WriteStringWithEncoding((this.mMainSpriteInst.mDef.mName != null) ? this.mMainSpriteInst.mDef.mName : "");
 				this.SaveStateSpriteInst(ref theBuffer, this.mMainSpriteInst);
 				theBuffer.WriteBoolean(this.mRandUsed);
 				if (this.mRandUsed)
 				{
-					theBuffer.WriteString(this.mRand.Serialize());
+					theBuffer.WriteStringWithEncoding(this.mRand.Serialize());
 				}
 			}
 			int num2 = theBuffer.mWriteBitPos / 8 - num - 4;
