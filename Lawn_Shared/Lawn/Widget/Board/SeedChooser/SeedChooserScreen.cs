@@ -198,7 +198,8 @@ namespace Lawn
             base.Update();
             mLastMouseX = mApp.mWidgetManager.mLastMouseX;
             mLastMouseY = mApp.mWidgetManager.mLastMouseY;
-            mSeedChooserAge += 3;
+            //mSeedChooserAge += 3;
+            mSeedChooserAge++;
             for (SeedType i = 0; i < SeedType.SeedsInChooserCount; i++)
             {
                 if (mApp.HasSeedType(i))

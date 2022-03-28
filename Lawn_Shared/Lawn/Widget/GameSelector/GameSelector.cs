@@ -30,7 +30,7 @@ namespace Lawn
             mZenGardenButton.mClip = false;
             mOptionsButton = GameButton.MakeNewButton(109, this, "", null, AtlasResources.IMAGE_SELECTORSCREEN_OPTIONS1, AtlasResources.IMAGE_SELECTORSCREEN_OPTIONS2, AtlasResources.IMAGE_SELECTORSCREEN_OPTIONS2);
             mOptionsButton.Resize(Constants.MAIN_MENU_ORIGIN_X + Constants.GameSelector_OptionsButton_X, Constants.GameSelector_OptionsButton_Y, AtlasResources.IMAGE_SELECTORSCREEN_OPTIONS1.mWidth, AtlasResources.IMAGE_SELECTORSCREEN_OPTIONS1.mHeight + 25);
-            mUserDialogButton = GameButton.MakeNewButton(113, this, string.Empty, null, AtlasResources.IMAGE_BLANK, AtlasResources.IMAGE_BLANK, AtlasResources.IMAGE_BLANK);
+            mUserDialogButton = GameButton.MakeNewButton((int)GameSelectorButtons.ChangeUser, this, string.Empty, null, AtlasResources.IMAGE_BLANK, AtlasResources.IMAGE_BLANK, AtlasResources.IMAGE_BLANK);
             mUserDialogButton.Resize(Constants.MAIN_MENU_ORIGIN_X, (int)Constants.InvertAndScale(100f), (int)Constants.InvertAndScale(210f), (int)Constants.InvertAndScale(30f));
             mStoreButton = GameButton.MakeNewButton(112, this, "", null, AtlasResources.IMAGE_SELECTORSCREEN_STORE, AtlasResources.IMAGE_SELECTORSCREEN_STOREHIGHLIGHT, AtlasResources.IMAGE_SELECTORSCREEN_STOREHIGHLIGHT);
             mStoreButton.Resize(Constants.MAIN_MENU_ORIGIN_X + Constants.GameSelector_StoreButton_X, Constants.GameSelector_StoreButton_Y, AtlasResources.IMAGE_SELECTORSCREEN_STORE.mWidth, AtlasResources.IMAGE_SELECTORSCREEN_STORE.mHeight);
@@ -62,19 +62,19 @@ namespace Lawn
             ToggleGameButton(mSelectedQuickplayButtonId);
             mMoreGamesListWidget = new MoreGamesListWidget(mApp);
 
-            //this.mUserButton = /*GameButton.MakeButton(29, this, "[GAMESELECTOR_SWITCH_USER]");*/new NewLawnButton(null,29,this);
-            //this.mUserButton.mDoFinger = true;
-            //this.mUserButton.mLabel = "[GAMESELECTOR_SWITCH_USER]";
-            //this.mUserButton.mFont = Resources.FONT_HOUSEOFTERROR16;
-            ////this.mUserButton.mButtonImage = AtlasResources.IMAGE_STORE_MAINMENUBUTTON;
-            ////this.mUserButton.mDownImage = AtlasResources.IMAGE_STORE_MAINMENUBUTTONDOWN;
-            //this.mUserButton.mColors[0] = new SexyColor(255, 240, 0);
-            //this.mUserButton.mColors[1] = new SexyColor(200, 200, 255);
+            //mUserButton = /*GameButton.MakeButton(29, this, "[GAMESELECTOR_SWITCH_USER]");*/new NewLawnButton(null,29,this);
+            //mUserButton.mDoFinger = true;
+            //mUserButton.mLabel = "[GAMESELECTOR_SWITCH_USER]";
+            //mUserButton.mFont = Resources.FONT_HOUSEOFTERROR16;
+            ////mUserButton.mButtonImage = AtlasResources.IMAGE_STORE_MAINMENUBUTTON;
+            ////mUserButton.mDownImage = AtlasResources.IMAGE_STORE_MAINMENUBUTTONDOWN;
+            //mUserButton.mColors[0] = new SexyColor(255, 240, 0);
+            //mUserButton.mColors[1] = new SexyColor(200, 200, 255);
             //mUserButton.Resize(Constants.MAIN_MENU_ORIGIN_X + (int)Constants.InvertAndScale(20f), (int)Constants.InvertAndScale(90f), (int)Constants.InvertAndScale(120f), (int)Constants.InvertAndScale(30f));
             float limboBtnOffset = 190;
-            mChallengePageSurvivalButton = GameButton.MakeButton(126/*(int)GameSelectorButtons.ChallengePageSurvival*/, this, "[GAMESELECTOR_SURVIVAL]");
+            mChallengePageSurvivalButton = GameButton.MakeButton((int)GameSelectorButtons.ChallengePageSurvival, this, "[GAMESELECTOR_SURVIVAL]");
             mChallengePageSurvivalButton.Resize(Constants.QUICKPLAY_ORIGIN_X + (int)Constants.InvertAndScale(20f), (int)Constants.InvertAndScale(limboBtnOffset), (int)Constants.InvertAndScale(100f), (int)Constants.InvertAndScale(30f));
-            mChallengePageLimboButton = GameButton.MakeButton(127/*(int)GameSelectorButtons.ChallengePageLimbo*/, this, "[GAMESELECTOR_LIMBO]");
+            mChallengePageLimboButton = GameButton.MakeButton((int)GameSelectorButtons.ChallengePageLimbo, this, "[GAMESELECTOR_LIMBO]");
             mChallengePageLimboButton.Resize(Constants.QUICKPLAY_ORIGIN_X + (int)Constants.InvertAndScale(20f), (int)Constants.InvertAndScale(limboBtnOffset + 30f), (int)Constants.InvertAndScale(100f), (int)Constants.InvertAndScale(30f));
 
 
@@ -160,10 +160,10 @@ namespace Lawn
                 mWoodSignReanimID.AssignRenderGroupToPrefix("short rope2", -1);
                 return;
             //}
-            //this.mWoodSignReanimID.AssignRenderGroupToPrefix("long rope1", -1);
-            //this.mWoodSignReanimID.AssignRenderGroupToPrefix("long rope2", -1);
-            //this.mWoodSignReanimID.AssignRenderGroupToPrefix("click here", -1);
-            //this.mWoodSignReanimID.AssignRenderGroupToPrefix("broken", -1);
+            //mWoodSignReanimID.AssignRenderGroupToPrefix("long rope1", -1);
+            //mWoodSignReanimID.AssignRenderGroupToPrefix("long rope2", -1);
+            //mWoodSignReanimID.AssignRenderGroupToPrefix("click here", -1);
+            //mWoodSignReanimID.AssignRenderGroupToPrefix("broken", -1);
         }
 
         public override void Dispose()
@@ -592,25 +592,25 @@ namespace Lawn
                 return;
             }
             state = GameSelector.GameSelectorScreenState.Main;
-            switch (theId)
+            switch ((GameSelectorButtons)theId)
             {
-            case 100:
+            case GameSelectorButtons.Adventure:
                 mApp.KillGameSelector();
                 ClickedAdventure();
                 return;
-            case 101:
+            case GameSelectorButtons.Quickplay:
                 mQuickplayWidget.Clear();
                 mQuickplayWidget.SizeToFit();
                 SlideTo(-Constants.QUICKPLAY_ORIGIN_X - 30, 0);
                 SlideOutQuickPlayWidget();
                 state = GameSelector.GameSelectorScreenState.QuickPlay;
                 return;
-            case 102:
-            case 103:
-            case 104:
-            case 105:
-            case 106:
-            case 107:
+            case GameSelectorButtons.QuickplayDay:
+            case GameSelectorButtons.QuickplayNight:
+            case GameSelectorButtons.QuickplayPool:
+            case GameSelectorButtons.QuickplayFog:
+            case GameSelectorButtons.QuickplayRoof:
+            case GameSelectorButtons.QuickplayBonus:
                 if (theId != mSelectedQuickplayButtonId)
                 {
                     ToggleGameButton(mSelectedQuickplayButtonId);
@@ -620,33 +620,32 @@ namespace Lawn
                     return;
                 }
                 break;
-            case 108:
+            case GameSelectorButtons.QuickplayBack:
                 RetractQuickPlayWidget();
                 SlideTo(-Constants.MAIN_MENU_ORIGIN_X, 0);
                 state = GameSelector.GameSelectorScreenState.Main;
                 return;
-            case 109:
+            case GameSelectorButtons.Options:
                 mApp.DoNewOptions(true);
                 return;
-            case 110:
+            case GameSelectorButtons.Help:
                 mApp.KillGameSelector();
                 mApp.ShowAwardScreen(AwardType.HelpZombieNote, false);
                 return;
-            case 111:
+            case GameSelectorButtons.Quit:
                 mApp.ConfirmQuit();
                 return;
-            case 112:
+            case GameSelectorButtons.Store:
                 mDoNewGameAfterStore = false;
                 mApp.ShowStoreScreen(this);
                 return;
-            case 113:
-                //mApp.BuyGame();
-                mApp.DoUserDialog();
+            case GameSelectorButtons.UnlockGame:
+                mApp.BuyGame();
                 return;
-            case 114:
+            case GameSelectorButtons.Almanac:
                 mApp.DoAlmanacDialog(SeedType.None, ZombieType.Invalid, this);
                 return;
-            case 115:
+            case GameSelectorButtons.MoreGames:
                 mMoreGamesButton.mVisible = false;
                 mMoreGamesButton.mDisabled = true;
                 mMoreGamesBackButton.mVisible = true;
@@ -660,7 +659,7 @@ namespace Lawn
                 SlideTo(0, 0);
                 state = GameSelector.GameSelectorScreenState.MoreGames;
                 return;
-            case 116:
+            case GameSelectorButtons.MoreGamesBack:
                 mMoreGamesBackButton.mVisible = false;
                 mMoreGamesBackButton.mDisabled = true;
                 mMoreGamesButton.mVisible = true;
@@ -668,13 +667,13 @@ namespace Lawn
                 SlideTo(-Constants.MAIN_MENU_ORIGIN_X, 0);
                 state = GameSelector.GameSelectorScreenState.Main;
                 return;
-            case 117:
+            case GameSelectorButtons.Achievements:
                 mAchievementsScrollWidget.ScrollToMin(false);
                 SlideTo(-Constants.ACHIEVEMENTS_ORIGIN_X, -Constants.BOARD_HEIGHT);
                 mAchievementsScrollWidget.SetDisabled(false);
                 state = GameSelector.GameSelectorScreenState.Achievements;
                 return;
-            case 118:
+            case GameSelectorButtons.AchievementsBack:
                 if (mAchievementsScrollWidget.GetScrollOffset().y != 0f)
                 {
                     mAchievementsScrollWidget.ScrollToMin(true);
@@ -685,15 +684,15 @@ namespace Lawn
                 state = GameSelector.GameSelectorScreenState.Main;
                 mAchievementsScrollWidget.SetDisabled(true);
                 return;
-            case 119:
+            case GameSelectorButtons.UpdateAvailable:
                 break;
-            case 120:
+            case GameSelectorButtons.Leaderboards:
                 mApp.KillGameSelector();
                 mApp.ShowLeaderboardScreen();
                 return;
-            case 121:
-            case 122:
-            case 123:
+            case GameSelectorButtons.MiniGames:
+            case GameSelectorButtons.Vasebreaker:
+            case GameSelectorButtons.IZombie:
                 if (theId != mSelectedQuickplayButtonId)
                 {
                     ToggleGameButton(mSelectedQuickplayButtonId);
@@ -703,9 +702,20 @@ namespace Lawn
                 }
                 state = GameSelector.GameSelectorScreenState.MoreGames;
                 break;
-            case 124:
+            case GameSelectorButtons.ZenGarden:
                 mApp.KillGameSelector();
                 mApp.PreNewGame(GameMode.ChallengeZenGarden, false);
+                return;
+            case GameSelectorButtons.ChangeUser:
+                mApp.DoUserDialog();
+                return;
+            case GameSelectorButtons.ChallengePageSurvival:
+                mApp.KillGameSelector();
+                mApp.ShowChallengeScreen(ChallengePage.Survival);
+                return;
+            case GameSelectorButtons.ChallengePageLimbo:
+                mApp.KillGameSelector();
+                mApp.ShowChallengeScreen(ChallengePage.Limbo);
                 return;
             default:
                 return;
