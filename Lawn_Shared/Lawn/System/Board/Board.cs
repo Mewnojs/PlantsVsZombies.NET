@@ -507,7 +507,7 @@ namespace Lawn
 
         public static void BoardInitForPlayer()
         {
-            GameConstants.gShownMoreSunTutorial = false;
+            Board.gShownMoreSunTutorial = false;
         }
 
         public int CountSunBeingCollected()
@@ -1587,7 +1587,7 @@ namespace Lawn
             else
             {
                 Debug.ASSERT(mCurrentWave >= 0 && mCurrentWave < GameConstants.MAX_ZOMBIE_WAVES && mCurrentWave < mNumWaves);
-                for (int j = 0; j < 50; j++)
+                for (int j = 0; j < GameConstants.MAX_ZOMBIES_IN_WAVE; j++)
                 {
                     ZombieType zombieType2 = mZombiesInWave[mCurrentWave, j];
                     if (zombieType2 == ZombieType.Invalid)
@@ -1596,7 +1596,7 @@ namespace Lawn
                     }
                     if (zombieType2 == ZombieType.Bobsled && !CanAddBobSled())
                     {
-                        for (int k = 0; k < 4; k++)
+                        for (int k = 0; k < GameConstants.MAX_ZOMBIE_FOLLOWERS; k++)
                         {
                             AddZombie(ZombieType.Normal, mCurrentWave);
                         }
@@ -7813,7 +7813,7 @@ namespace Lawn
             {
                 Debug.ASSERT(!ChooseSeedsOnCurrentLevel());
                 DisplayAdvice("[ADVICE_PLANT_SUNFLOWER4]", MessageStyle.TutorialLaterStay, AdviceType.None);
-                GameConstants.gShownMoreSunTutorial = true;
+                Board.gShownMoreSunTutorial = true;
                 SetTutorialState(TutorialState.MoresunPickUpSunflower);
                 mTutorialTimer = 500;
             }

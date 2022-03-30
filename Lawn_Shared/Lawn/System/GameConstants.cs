@@ -987,8 +987,6 @@ namespace Lawn
 
         public static Achievement[] AchievementInfo;
 
-        public static bool gShownMoreSunTutorial = false;
-
         internal static int[,] gLawnDialogColors;
 
         public static SexyColor[] gGameButtonColors = new SexyColor[]

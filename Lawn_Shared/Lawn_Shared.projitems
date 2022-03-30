@@ -136,14 +136,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PlantID.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\Enums\PlantingReason.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PlantOnBungeeState.cs" />
-    <Compile Include="..\Lawn_Shared\Lawn\System\GameObjects\Plant\TopPlant.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\TopPlant.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PlantRowType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PlantsOnLawn.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PlantState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PlantSubClass.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PlantWeapon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PlantLayer.cs" />
-    <Compile Include="..\Lawn_Shared\Lawn\System\GameObjects\Plant\PlantOrder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\GameObjects\Plant\PlantOrder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\Utils\Save\PlayerInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\PottedPlant\PottedPlant.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\PottedPlant\PottedPlantAge.cs" />
