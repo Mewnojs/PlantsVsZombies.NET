@@ -4295,8 +4295,8 @@ namespace Lawn
                 num2 = 11;
                 num = 10;
             }
-            //return mApp.mAppCounter * 3 % (num * num2) / num;
-            return mBoard.mUpdateCnt % (num * num2) / num;
+            //return mApp.mAppCounter % (num * num2) / num;     
+            return mBoard.mMainCounter % (num * num2) / num;    // 修复女仆秘籍问题
         }
 
         public void BungeeStealTarget()
