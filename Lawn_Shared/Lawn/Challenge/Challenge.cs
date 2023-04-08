@@ -2378,6 +2378,10 @@ namespace Lawn
         public void GraveDangerSpawnRandomGrave()
         {
             TodWeightedGridArray[] array = new TodWeightedGridArray[Constants.GRIDSIZEX * Constants.MAX_GRIDSIZEY];
+            for (int i = 0; i < array.Length; i++)  // fixed 2023-4-8
+            {
+                array[i] = TodWeightedGridArray.GetNewTodWeightedGridArray();
+            }
             int num = 0;
             for (int i = 4; i < Constants.GRIDSIZEX; i++)
             {
