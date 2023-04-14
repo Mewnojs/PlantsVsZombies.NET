@@ -6656,6 +6656,7 @@ namespace Lawn
         public void InitZombieWaves()
         {
             Debug.ASSERT(true);
+            Array.Clear(mZombieAllowed); // 2023-4-14 [Fix] infinite loop in SE after f=5
             if (mApp.IsAdventureMode() || mApp.IsQuickPlayMode())
             {
                 InitZombieWavesForLevel(mLevel);
