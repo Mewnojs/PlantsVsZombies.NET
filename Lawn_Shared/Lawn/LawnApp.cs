@@ -1703,7 +1703,7 @@ namespace Lawn
                 KillDialog(theId - 3000);
                 FinishLawnDialogMessageBox(false);
                 return;
-                IL_47F:
+            IL_47F:
                 KillDialog(theId - 3000);
             }
         }
@@ -3553,13 +3553,13 @@ namespace Lawn
             return base.FileExists(savedGameName);
         }
 
-        public void Vibrate()
+        public void Vibrate(TimeSpan? vibrationTime = null)
         {
             if (mPlayerInfo == null || !mPlayerInfo.mDoVibration)
             {
                 return;
             }
-            base.DoVibration();
+            base.DoVibration(vibrationTime ?? TimeSpan.FromMilliseconds(500.0));
         }
 
         public override void MoviePlayerContentPreloadDidFinish(bool succeeded)

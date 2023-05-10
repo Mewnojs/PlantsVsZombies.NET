@@ -406,10 +406,13 @@ namespace Sexy.TodLib
             {
                 if (image != null)
                 {
-                    image = FilterEffect.FilterEffectGetImage(image, mFilterEffect);
                     if (reanimatorTrackInstance.mImageOverride != null)
                     {
                         image = reanimatorTrackInstance.mImageOverride;
+                    }
+                    if (mFilterEffect != FilterEffectType.None)
+                    {
+                        image = FilterEffect.FilterEffectGetImage(image, mFilterEffect);
                     }
                     while (i >= image.mNumCols)
                     {
@@ -1316,15 +1319,19 @@ namespace Sexy.TodLib
                 return;
             }
             bool formerHardwareClip;
-            if (isHardwareClipRequired) // 2021-7-19	Solving the malfunction of SPRITES on the BOARD.
-            {
+            if (/*isHardwareClipRequired*/ false) // 2021-7-19	Solving the malfunction of SPRITES on the BOARD.
+            {   // 2023-4-27 serious performance overheads, abolishing it
                 formerHardwareClip = g.IsHardWareClipping();
-                g.HardwareClip();   //	Enable HardwareClip
+                if (!formerHardwareClip) 
+                {
+                    //g.HardwareClip(); 
+                }   //	Enable HardwareClip
+                //theClipRect = theClipRect.Intersection(new TRect(0, 0, 800, 480));
                 TodCommon.TodBltMatrix(g, theImage, ref theTransform, theClipRect, theColor, theDrawMode, theSrcRect, this.mClip);
                 if (formerHardwareClip == false)
                 {
-                    g.EndHardwareClip();
-                }   //	Disable HardwareClip
+                    //g.EndHardwareClip();
+                }   //	Disable HardwareClip*/
 
             }
             else // No hardware clip

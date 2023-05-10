@@ -7,25 +7,25 @@ namespace Sexy {
 
         public void Init(int screenWidth, int screenHeight, int virtualWidth, int virtualHeight) 
         {
-            int W, H;
+            double W, H;
             if ((screenHeight * virtualWidth) >= (screenWidth * virtualHeight))
             {
                 W = screenWidth;
-                H = (int)(virtualHeight * screenWidth / virtualWidth);
+                H = (virtualHeight * screenWidth / virtualWidth);
                 mTransX = 0;
-                mTransY = (screenHeight - H) / 2;
+                mTransY = (int)((screenHeight - H) / 2);
                 mScaleFactor = (float)(W) / virtualWidth;
             }
             else
             {
-                W = (int)(virtualWidth * screenHeight / virtualHeight);
+                W = (virtualWidth * screenHeight / virtualHeight);
                 H = screenHeight;
-                mTransX = (screenWidth - W) / 2;
+                mTransX = (int)((screenWidth - W) / 2);
                 mTransY = 0;
                 mScaleFactor = (float)(H) / virtualHeight;
             }
-            mWidth = W;
-            mHeight = H;
+            mWidth = (int)W;
+            mHeight = (int)H;
         }
         public void Init(int screenWidth, int screenHeight, int virtualWidth, int virtualHeight, int transX, int transY)
         {
@@ -83,14 +83,29 @@ namespace Sexy {
 
         public void Scale(ref TRect inRect) 
         {
-            inRect.mX = (int)(ScaleRatioMin * inRect.mX + TranslationX);
-            inRect.mY = (int)(ScaleRatioMin * inRect.mY + TranslationY);
-            inRect.mWidth = (int)(ScaleRatioMin * inRect.mWidth);
-            inRect.mHeight = (int)(ScaleRatioMin * inRect.mHeight);
+            inRect.mX = (int)Math.Round(ScaleRatioMin * inRect.mX + TranslationX);
+            inRect.mY = (int)Math.Round(ScaleRatioMin * inRect.mY + TranslationY);
+            inRect.mWidth = (int)Math.Round(ScaleRatioMin * inRect.mWidth);
+            inRect.mHeight = (int)Math.Round(ScaleRatioMin * inRect.mHeight);
         }
+
         public TRect Scale(TRect inRect)
         {
             this.Scale(ref inRect);
+            return inRect;
+        }
+
+        public void InvScale(ref TRect inRect)
+        {
+            inRect.mX = (int)Math.Round((inRect.mX - TranslationX) / ScaleRatioMin);
+            inRect.mY = (int)Math.Round((inRect.mY - TranslationY) / ScaleRatioMin);
+            inRect.mWidth = (int)Math.Round(inRect.mWidth / ScaleRatioMin);
+            inRect.mHeight = (int)Math.Round(inRect.mHeight / ScaleRatioMin);
+        }
+
+        public TRect InvScale(TRect inRect)
+        {
+            this.InvScale(ref inRect);
             return inRect;
         }
 

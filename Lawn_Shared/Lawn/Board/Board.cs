@@ -6148,6 +6148,40 @@ namespace Lawn
 
         public void DrawUITop(Graphics g)
         {
+            // Draw screen black overlay
+            if (mApp.mScreenScales.TranslationX > 0)
+            {
+                g.SetColor(SexyColor.Black);
+                var clipRect = mApp.mScreenScales.InvScale(new TRect(0, 0, g.mScreenWidth, g.mScreenHeight));
+                clipRect.mWidth += 1;
+                g.mClipRect = clipRect;
+                var mat = mApp.mScreenScales.InvScale(new TRect(mApp.mScreenScales.mWidth + mApp.mScreenScales.mTransX, 0, g.mScreenWidth - mApp.mScreenScales.mWidth - mApp.mScreenScales.mTransX, mApp.mScreenScales.mHeight));
+                mat.mX -= g.mTransX;
+                mat.mY -= g.mTransY;
+                g.FillRect(mat);
+                mat = mApp.mScreenScales.InvScale(new TRect(0, 0, mApp.mScreenScales.mTransX, mApp.mScreenScales.mHeight));
+                mat.mX -= g.mTransX;
+                mat.mY -= g.mTransY;
+                g.FillRect(mat);
+                g.ClearClipRect();
+            }
+            if (mApp.mScreenScales.TranslationY > 0)
+            {
+                g.SetColor(SexyColor.Black);
+                var clipRect = mApp.mScreenScales.InvScale(new TRect(0, 0, g.mScreenWidth, g.mScreenHeight));
+                clipRect.mHeight += 1;
+                g.mClipRect = clipRect;
+                var mat = mApp.mScreenScales.InvScale(new TRect(0, mApp.mScreenScales.mHeight + mApp.mScreenScales.mTransY, mApp.mScreenScales.mWidth, g.mScreenHeight - mApp.mScreenScales.mHeight - mApp.mScreenScales.mTransY));
+                mat.mX -= g.mTransX;
+                mat.mY -= g.mTransY;
+                g.FillRect(mat);
+                mat = mApp.mScreenScales.InvScale(new TRect(0, 0, mApp.mScreenScales.mWidth, mApp.mScreenScales.mTransY));
+                mat.mX -= g.mTransX;
+                mat.mY -= g.mTransY;
+                g.FillRect(mat);
+                g.ClearClipRect();
+            }
+            // others
             if (mApp.mGameScene != GameScenes.ZombiesWon && mSeedBank.BeginDraw(g))
             {
                 mSeedBank.Draw(g);
@@ -6656,7 +6690,7 @@ namespace Lawn
         public void InitZombieWaves()
         {
             Debug.ASSERT(true);
-            Array.Clear(mZombieAllowed); // 2023-4-14 [Fix] infinite loop in SE after f=5
+            Array.Clear(mZombieAllowed, 0, mZombieAllowed.Length); // 2023-4-14 [Fix] infinite loop in SE after f=5
             if (mApp.IsAdventureMode() || mApp.IsQuickPlayMode())
             {
                 InitZombieWavesForLevel(mLevel);
