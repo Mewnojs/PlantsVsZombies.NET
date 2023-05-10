@@ -12,7 +12,6 @@ using Microsoft.Xna.Framework.Input.Touch;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-
 namespace Sexy
 {
     public class Main : Game
@@ -195,7 +194,9 @@ namespace Sexy
             try
             {
 #endif
-                LawnMod.IronPyInteractive.Serve();
+
+            LawnMod.DynamicHelper.SetPrivateFieldStatic(typeof(OperatingSystem), "s_osPlatformName", "Linux"); // a hack to deceive IronPython and MonoMod believing that it's running Linux (actually it is, sort of)
+            LawnMod.IronPyInteractive.Serve();
 #if !DEBUG
             }
             catch (Exception e)
@@ -222,7 +223,6 @@ namespace Sexy
                     GlobalStaticVars.gSexyAppBase.mWidgetManager.KeyUp((KeyCode)e.Key);
                 }
             };
-
         }
 
         protected override void LoadContent()

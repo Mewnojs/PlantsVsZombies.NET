@@ -1,9 +1,11 @@
 ﻿using System;
 
-public static class GlobalMembersDialogButton
+namespace Sexy
 {
-    internal static int[,] gDialogButtonColors = new int[,]
+    public static class GlobalMembersDialogButton
     {
+        internal static int[,] gDialogButtonColors = new int[,]
+        {
         {
             255,
             255,
@@ -39,5 +41,6 @@ public static class GlobalMembersDialogButton
             255,
             255
         }
-    };
+        };
+    }
 }

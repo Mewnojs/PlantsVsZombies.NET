@@ -344,6 +344,7 @@ Contents
 /Lawn_Android/Assets/Content
 /IronPyInteractiveClient_Xamarin
 /.vscode
-/Lawn_Android/BuglyAppBind.cs
-/Lawn_Android/BuglyAppBindId.cs
+/Lawn_Android/Com.Tencent.Bugly/BuglyAppBindId.cs
 /SexyOld
+/Lawn_Android.backup
+/Lawn_Android/AutoSign

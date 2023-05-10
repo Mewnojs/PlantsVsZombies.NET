@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lawn_PCGL", "Lawn_PCGL\Lawn_PCGL.csproj", "{C6266476-DEDF-4955-8218-61F10B130CD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lawn_Android", "Lawn_Android\Lawn_Android.csproj", "{3A153E0C-2F08-4F96-A1A3-5E2CA3176DCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lawn_Android", "Lawn_Android\Lawn_Android.csproj", "{12FE76D6-7870-4491-AC70-97708BEF66EA}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "LawnModExtension", "LawnModExtension\LawnModExtension.shproj", "{C1DD562E-4506-4D33-92F3-6AE5CFEFE16E}"
 EndProject
@@ -27,25 +27,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lawn_PCDX", "Lawn_PCDX\Lawn_PCDX.csproj", "{E6CA38E1-6F00-4F17-8A57-18CB759F06AD}"
 EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Lawn_Shared\Lawn_Shared.projitems*{1a95301d-4238-4ccd-9b56-38537e891b16}*SharedItemsImports = 13
-		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{3a153e0c-2f08-4f96-a1a3-5e2ca3176dcc}*SharedItemsImports = 4
-		LawnModExtension\LawnModExtension.projitems*{3a153e0c-2f08-4f96-a1a3-5e2ca3176dcc}*SharedItemsImports = 4
-		Lawn_Shared\Lawn_Shared.projitems*{3a153e0c-2f08-4f96-a1a3-5e2ca3176dcc}*SharedItemsImports = 4
-		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{3a153e0c-2f08-4f96-a1a3-5e2ca3176dcc}*SharedItemsImports = 4
-		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{92b2cf6b-95e0-4c32-a227-8abf36e7546b}*SharedItemsImports = 5
-		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{a0cdbd0e-3a41-42b7-9425-a838bc2c7383}*SharedItemsImports = 13
-		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{a281b17d-21a9-40de-a199-191686a2e6c4}*SharedItemsImports = 4
-		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{b98f5710-197f-420e-82eb-5a7750239ceb}*SharedItemsImports = 13
-		LawnModExtension\LawnModExtension.projitems*{c1dd562e-4506-4d33-92f3-6ae5cfefe16e}*SharedItemsImports = 13
-		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{c6266476-dedf-4955-8218-61f10b130cd1}*SharedItemsImports = 5
-		Lawn_Shared\Lawn_Shared.projitems*{c6266476-dedf-4955-8218-61f10b130cd1}*SharedItemsImports = 5
-		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{c6266476-dedf-4955-8218-61f10b130cd1}*SharedItemsImports = 5
-		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
-		LawnModExtension\LawnModExtension.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
-		Lawn_Shared\Lawn_Shared.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
-		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -59,12 +40,12 @@ Global
 		{C6266476-DEDF-4955-8218-61F10B130CD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6266476-DEDF-4955-8218-61F10B130CD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6266476-DEDF-4955-8218-61F10B130CD1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3A153E0C-2F08-4F96-A1A3-5E2CA3176DCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3A153E0C-2F08-4F96-A1A3-5E2CA3176DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3A153E0C-2F08-4F96-A1A3-5E2CA3176DCC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{3A153E0C-2F08-4F96-A1A3-5E2CA3176DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3A153E0C-2F08-4F96-A1A3-5E2CA3176DCC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3A153E0C-2F08-4F96-A1A3-5E2CA3176DCC}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{12FE76D6-7870-4491-AC70-97708BEF66EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12FE76D6-7870-4491-AC70-97708BEF66EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12FE76D6-7870-4491-AC70-97708BEF66EA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{12FE76D6-7870-4491-AC70-97708BEF66EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12FE76D6-7870-4491-AC70-97708BEF66EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12FE76D6-7870-4491-AC70-97708BEF66EA}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{A281B17D-21A9-40DE-A199-191686A2E6C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A281B17D-21A9-40DE-A199-191686A2E6C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A281B17D-21A9-40DE-A199-191686A2E6C4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -81,5 +62,24 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {12C65044-2A42-4A09-A748-A0E3D95D5804}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{12fe76d6-7870-4491-ac70-97708bef66ea}*SharedItemsImports = 5
+		LawnModExtension\LawnModExtension.projitems*{12fe76d6-7870-4491-ac70-97708bef66ea}*SharedItemsImports = 5
+		Lawn_Shared\Lawn_Shared.projitems*{12fe76d6-7870-4491-ac70-97708bef66ea}*SharedItemsImports = 5
+		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{12fe76d6-7870-4491-ac70-97708bef66ea}*SharedItemsImports = 5
+		Lawn_Shared\Lawn_Shared.projitems*{1a95301d-4238-4ccd-9b56-38537e891b16}*SharedItemsImports = 13
+		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{92b2cf6b-95e0-4c32-a227-8abf36e7546b}*SharedItemsImports = 5
+		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{a0cdbd0e-3a41-42b7-9425-a838bc2c7383}*SharedItemsImports = 13
+		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{a281b17d-21a9-40de-a199-191686a2e6c4}*SharedItemsImports = 4
+		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{b98f5710-197f-420e-82eb-5a7750239ceb}*SharedItemsImports = 13
+		LawnModExtension\LawnModExtension.projitems*{c1dd562e-4506-4d33-92f3-6ae5cfefe16e}*SharedItemsImports = 13
+		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{c6266476-dedf-4955-8218-61f10b130cd1}*SharedItemsImports = 5
+		Lawn_Shared\Lawn_Shared.projitems*{c6266476-dedf-4955-8218-61f10b130cd1}*SharedItemsImports = 5
+		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{c6266476-dedf-4955-8218-61f10b130cd1}*SharedItemsImports = 5
+		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
+		LawnModExtension\LawnModExtension.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
+		Lawn_Shared\Lawn_Shared.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
+		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

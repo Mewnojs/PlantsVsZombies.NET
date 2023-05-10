@@ -583,5 +583,64 @@ namespace LawnMod
             PropertyInfo field = type.GetProperty(propertyname, flag);
             return (T)field.GetValue(instance, null);
         }
+
+        public static void SetPrivateField(this object instance, string fieldname, object value)
+        {
+            BindingFlags flag = BindingFlags.Instance | BindingFlags.NonPublic;
+            Type type = instance.GetType();
+            FieldInfo field = type.GetField(fieldname, flag);
+            field.SetValue(instance, value);
+        }
+
+        public static void SetPrivateProperty(this object instance, string propertyname, object value)
+        {
+            BindingFlags flag = BindingFlags.Instance | BindingFlags.NonPublic;
+            Type type = instance.GetType();
+            PropertyInfo field = type.GetProperty(propertyname, flag);
+            field.SetValue(instance, value, null);
+        }
+
+        public static T CallPrivateMethod<T>(this object instance, string name, params object[] param)
+        {
+            BindingFlags flag = BindingFlags.Instance | BindingFlags.NonPublic;
+            Type type = instance.GetType();
+            MethodInfo method = type.GetMethod(name, flag);
+            return (T)method.Invoke(instance, param);
+        }
+
+        public static T GetPrivateFieldStatic<T>(Type type, string fieldname)
+        {
+            BindingFlags flag = BindingFlags.Static | BindingFlags.NonPublic;
+            FieldInfo field = type.GetField(fieldname, flag);
+            return (T)field.GetValue(null);
+        }
+
+        public static T GetPrivatePropertyStatic<T>(Type type, string propertyname)
+        {
+            BindingFlags flag = BindingFlags.Static | BindingFlags.NonPublic;
+            PropertyInfo field = type.GetProperty(propertyname, flag);
+            return (T)field.GetValue(null, null);
+        }
+
+        public static void SetPrivateFieldStatic(Type type, string fieldname, object value)
+        {
+            BindingFlags flag = BindingFlags.Static | BindingFlags.NonPublic;
+            FieldInfo field = type.GetField(fieldname, flag);
+            field.SetValue(null, value);
+        }
+
+        public static void SetPrivatePropertyStatic(Type type, string propertyname, object value)
+        {
+            BindingFlags flag = BindingFlags.Static | BindingFlags.NonPublic;
+            PropertyInfo field = type.GetProperty(propertyname, flag);
+            field.SetValue(null, value, null);
+        }
+
+        public static T CallPrivateMethodStatic<T>(Type type, string name, params object[] param)
+        {
+            BindingFlags flag = BindingFlags.Static | BindingFlags.NonPublic;
+            MethodInfo method = type.GetMethod(name, flag);
+            return (T)method.Invoke(null, param);
+        }
     }
 }

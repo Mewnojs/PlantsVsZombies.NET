@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <PublishReadyToRun>false</PublishReadyToRun>
     <TieredCompilation>false</TieredCompilation>
   </PropertyGroup>
   <PropertyGroup>
-    <VersionPrefix>0.12.5</VersionPrefix>
+    <VersionPrefix>0.13.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
   </PropertyGroup>
   <PropertyGroup>
@@ -20,13 +20,13 @@
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="IronPython" Version="2.7.11" />
+    <PackageReference Include="IronPython" Version="3.4.0" />
     <PackageReference Include="Lidgren.Network.Core2" Version="1.0.0" />
     <PackageReference Include="MLEM.Data" Version="5.2.0" />
-    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
     <PackageReference Include="MonoGame.IMEHelper.DesktopGL" Version="0.10.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="WebSocketSharp.NetCore" Version="1.0.0" />
+    <PackageReference Include="WebSocketSharp.NetCore" Version="1.0.1-alpha.4" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Icon.png">

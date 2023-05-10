@@ -258,7 +258,7 @@ namespace Lawn
                 new ReanimationParams(ReanimationType.LoadbarZombiehead, "reanim/LoadBar_Zombiehead", 1)
             };
             ReanimatorXnaHelpers.ReanimatorLoadDefinitions(ref array, array.Length);
-            TodStringFile.TodStringListLoad("Content/"+"LawnStrings_" + Constants.LanguageSubDir + ".txt");
+            TodStringFile.TodStringListLoad("Content/" + "LawnStrings_" + Constants.LanguageSubDir + ".txt");
             mTitleScreen.mLoaderScreenIsLoaded = true;
             mNumLoadingThreadTasks += mResourceManager.GetNumResources("LoadingFonts") * 54;
             mNumLoadingThreadTasks += mResourceManager.GetNumResources("LoadingImages") * 9;
@@ -2099,7 +2099,7 @@ namespace Lawn
         {
             if (theReanimID == null || !theReanimID.mActive)
             {
-                return null;
+                return mEffectSystem.mReanimationHolder.DUMMY;   // 2023-4-16 for compatibility to PvZ PC styled coding (calling RemoveReanimation multiple times)
             }
             return theReanimID;
         }
@@ -2285,11 +2285,11 @@ namespace Lawn
 
         public string GetCrazyDaveText(int theMessageIndex)
         {
-            string theText = Common.StrFormat_("[CRAZY_DAVE_{0}]", theMessageIndex);
-            theText = TodCommon.TodReplaceString(theText, "{PLAYER_NAME}", mPlayerInfo.mName);
-            theText = TodCommon.TodReplaceString(theText, "{MONEY}", LawnApp.GetMoneyString(mPlayerInfo.mCoins));
+            string theText = Common.StrFormat_(PLACEHOLDER_CRAZYDAVE_0, theMessageIndex);
+            theText = TodCommon.TodReplaceString(theText, PLACEHOLDER_PLAYER, mPlayerInfo.mName);
+            theText = TodCommon.TodReplaceString(theText, PLACEHOLDER_MONEY, LawnApp.GetMoneyString(mPlayerInfo.mCoins));
             int itemCost = StoreScreen.GetItemCost(StoreItem.STORE_ITEM_PACKET_UPGRADE);
-            return TodCommon.TodReplaceString(theText, "{UPGRADE_COST}", LawnApp.GetMoneyString(itemCost));
+            return TodCommon.TodReplaceString(theText, PLACEHOLDER_UPGRADECOST, LawnApp.GetMoneyString(itemCost));
         }
 
         public bool CanShowAlmanac()
@@ -3589,7 +3589,7 @@ namespace Lawn
                 DrawDebugInfo(gameTime);
             GlobalStaticVars.g.EndFrame();
 #if DEBUG
-            Console.WriteLine(perfTimer.Elapsed.TotalMilliseconds);
+            //Console.WriteLine(perfTimer.Elapsed.TotalMilliseconds);
 #endif
         }
         public void DrawDebugInfo(GameTime gameTime)
@@ -3636,7 +3636,7 @@ namespace Lawn
 
         private const string PLACEHOLDER_CRAZYDAVE_0 = "[CRAZY_DAVE_{0}]";
 
-        public static string AppVersionNumber = "0.12.5";
+        public static string AppVersionNumber = "0.13.0";
 
         public Board mBoard;
 

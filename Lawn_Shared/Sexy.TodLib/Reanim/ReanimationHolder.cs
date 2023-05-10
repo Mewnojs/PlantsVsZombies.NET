@@ -7,10 +7,15 @@ namespace Sexy.TodLib
     {
         public void InitializeHolder()
         {
+            DUMMY = Reanimation.GetNewReanimation();
+            DUMMY.mDefinition = new ReanimatorDefinition();
         }
 
         public void DisposeHolder()
         {
+            DUMMY.ReanimationDie();
+            DUMMY.ReanimationDelete();
+            DUMMY = null;
         }
 
         public Reanimation AllocReanimation(float theX, float theY, int theRenderOrder, ReanimationType theReanimationType)
@@ -25,5 +30,7 @@ namespace Sexy.TodLib
         }
 
         public List<Reanimation> mReanimations = new List<Reanimation>();
+
+        public Reanimation DUMMY;
     }
 }

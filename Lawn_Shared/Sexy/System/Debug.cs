@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace Sexy
 {
@@ -19,14 +20,14 @@ namespace Sexy
 
         public static void OutputDebug(string format, params object[] t)
         {
-#if DEBUG
+#if DEBUG || ANDROID
             Log(DebugType.Debug, string.Format(format, t));
 #endif
         }
 
         public static void OutputDebug<T>(T t)
         {
-#if DEBUG
+#if DEBUG || ANDROID
             Log(DebugType.Debug, $"{t}");
 #endif
         }
@@ -42,33 +43,44 @@ namespace Sexy
             }
         }
 
-            private static void LoggerConsole(string s, DebugType msgtype) 
+        private static void LoggerConsole(string s, DebugType msgtype) 
         {
-            ConsoleColor fgColor = Console.ForegroundColor;
-            ConsoleColor bgColor = Console.BackgroundColor;
-            Action colorReset = Console.ResetColor;
-            switch (msgtype)
-            {
-            case DebugType.Debug:
-                break;
-            case DebugType.Info:
-                fgColor = ConsoleColor.Cyan;
-                break;
-            case DebugType.Warn:
-                fgColor = ConsoleColor.Yellow;
-                break;
-            case DebugType.Error:
-                fgColor = ConsoleColor.Red;
-                break;
-            case DebugType.Fatal:
-                fgColor = ConsoleColor.White;
-                bgColor = ConsoleColor.DarkRed;
-                break;
+#if NET5_0_OR_GREATER
+            if (OperatingSystem.IsAndroid() || OperatingSystem.IsBrowser() || OperatingSystem.IsIOS() || OperatingSystem.IsTvOS())
+            { /* Unsupported, see https://github.com/dotnet/dotnet-api-docs/blob/main/xml/System/Console.xml */
+                Console.WriteLine(s);
             }
-            Console.ForegroundColor = fgColor;
-            Console.BackgroundColor = bgColor;
-            Console.WriteLine(s);
-            colorReset();
+            else
+            {
+#endif
+                ConsoleColor fgColor = Console.ForegroundColor;
+                ConsoleColor bgColor = Console.BackgroundColor;
+                Action colorReset = Console.ResetColor;
+                switch (msgtype)
+                {
+                case DebugType.Debug:
+                    break;
+                case DebugType.Info:
+                    fgColor = ConsoleColor.Cyan;
+                    break;
+                case DebugType.Warn:
+                    fgColor = ConsoleColor.Yellow;
+                    break;
+                case DebugType.Error:
+                    fgColor = ConsoleColor.Red;
+                    break;
+                case DebugType.Fatal:
+                    fgColor = ConsoleColor.White;
+                    bgColor = ConsoleColor.DarkRed;
+                    break;
+                }
+                Console.ForegroundColor = fgColor;
+                Console.BackgroundColor = bgColor;
+                Console.WriteLine(s);
+                colorReset();
+#if NET5_0_OR_GREATER
+            }
+#endif
         }
 
         public static Action<string, DebugType> Logger = LoggerConsole;

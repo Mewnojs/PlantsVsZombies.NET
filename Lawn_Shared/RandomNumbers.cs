@@ -1,43 +1,46 @@
 ﻿using System;
 
-public/*internal*/ static class RandomNumbers
+namespace Sexy
 {
-    public/*internal*/ static int NextNumber()
+    public/*internal*/ static class RandomNumbers
     {
-        if (RandomNumbers.r == null)
+        public/*internal*/ static int NextNumber()
         {
-            RandomNumbers.Seed();
+            if (RandomNumbers.r == null)
+            {
+                RandomNumbers.Seed();
+            }
+            return RandomNumbers.r.Next();
         }
-        return RandomNumbers.r.Next();
-    }
 
-    public/*internal*/ static int NextNumber(int ceiling)
-    {
-        if (RandomNumbers.r == null)
+        public/*internal*/ static int NextNumber(int ceiling)
         {
-            RandomNumbers.Seed();
+            if (RandomNumbers.r == null)
+            {
+                RandomNumbers.Seed();
+            }
+            return RandomNumbers.r.Next(ceiling);
         }
-        return RandomNumbers.r.Next(ceiling);
-    }
 
-    public/*internal*/ static float NextNumber(float ceiling)
-    {
-        if (RandomNumbers.r == null)
+        public/*internal*/ static float NextNumber(float ceiling)
         {
-            RandomNumbers.Seed();
+            if (RandomNumbers.r == null)
+            {
+                RandomNumbers.Seed();
+            }
+            return (float)RandomNumbers.r.NextDouble() * ceiling;
         }
-        return (float)RandomNumbers.r.NextDouble() * ceiling;
-    }
 
-    public/*internal*/ static void Seed()
-    {
-        RandomNumbers.r = new Random();
-    }
+        public/*internal*/ static void Seed()
+        {
+            RandomNumbers.r = new Random();
+        }
 
-    public/*internal*/ static void Seed(int seed)
-    {
-        RandomNumbers.r = new Random(seed);
-    }
+        public/*internal*/ static void Seed(int seed)
+        {
+            RandomNumbers.r = new Random(seed);
+        }
 
-    private static Random r;
+        private static Random r;
+    }
 }

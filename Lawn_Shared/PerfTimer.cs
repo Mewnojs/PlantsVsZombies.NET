@@ -1,42 +1,45 @@
 ﻿using System;
 
-public struct PerfTimer
+namespace Sexy
 {
-    private void CalcDuration()
+    public struct PerfTimer
     {
-        mEnd = Environment.TickCount;
-        mDuration = mEnd - mStart;
-    }
-
-    public void Start()
-    {
-        mRunning = true;
-        mStart = Environment.TickCount;
-    }
-
-    public void Stop()
-    {
-        if (mRunning)
+        private void CalcDuration()
         {
-            CalcDuration();
-            mRunning = false;
+            mEnd = Environment.TickCount;
+            mDuration = mEnd - mStart;
         }
-    }
 
-    public double GetDuration()
-    {
-        if (mRunning)
+        public void Start()
         {
-            CalcDuration();
+            mRunning = true;
+            mStart = Environment.TickCount;
         }
-        return mDuration;
+
+        public void Stop()
+        {
+            if (mRunning)
+            {
+                CalcDuration();
+                mRunning = false;
+            }
+        }
+
+        public double GetDuration()
+        {
+            if (mRunning)
+            {
+                CalcDuration();
+            }
+            return mDuration;
+        }
+
+        private bool mRunning;
+
+        private int mStart;
+
+        private int mEnd;
+
+        private int mDuration;
     }
-
-    private bool mRunning;
-
-    private int mStart;
-
-    private int mEnd;
-
-    private int mDuration;
 }
