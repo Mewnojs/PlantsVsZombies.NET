@@ -12,7 +12,6 @@
     <Assembly Name="SharpDX.XAudio2" Dynamic="Required All"/>
     <Assembly Name="SharpDX.XInput" Dynamic="Required All"/>
     <Assembly Name="SharpDX.Direct2D1" Dynamic="Required All"/>
-    <Assembly Name="System.Windows.Forms" Dynamic="Required All"/>
     <Assembly Name="mscorlib" />
   </Application>
 </Directives>
