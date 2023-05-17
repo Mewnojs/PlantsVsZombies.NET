@@ -14,7 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Sexy.TodLib\**" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Lawn\Strings.resources" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Strings.resources" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Microsoft.Xna.Framework.RuntimeProfile" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Microsoft.Xna.Framework.XlastConfiguration" />
   </ItemGroup>

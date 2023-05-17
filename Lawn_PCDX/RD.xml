@@ -1,9 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Directives>
-	<Application>
-    <Assembly Name="MonoGame.Framework">
+  <Application>
+    <Assembly Name="MonoGame.Framework" Dynamic="Required All">
       <Type Name="Microsoft.Xna.Framework.Content.ListReader`1[[System.Char,mscorlib]]" Dynamic="Required All" />
     </Assembly>
-	<Assembly Name="mscorlib" />
+    <Assembly Name="LAWN" Dynamic="Required All" />
+    <Assembly Name="SharpDX" Dynamic="Required All"/>
+    <Assembly Name="SharpDX.Direct3D11" Dynamic="Required All"/>
+    <Assembly Name="SharpDX.DXGI" Dynamic="Required All"/>
+    <Assembly Name="SharpDX.MediaFoundation" Dynamic="Required All"/>
+    <Assembly Name="SharpDX.XAudio2" Dynamic="Required All"/>
+    <Assembly Name="SharpDX.XInput" Dynamic="Required All"/>
+    <Assembly Name="SharpDX.Direct2D1" Dynamic="Required All"/>
+    <Assembly Name="System.Windows.Forms" Dynamic="Required All"/>
+    <Assembly Name="mscorlib" />
   </Application>
 </Directives>

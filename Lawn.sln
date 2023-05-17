@@ -77,8 +77,6 @@ Global
 		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{c6266476-dedf-4955-8218-61f10b130cd1}*SharedItemsImports = 5
 		Lawn_Shared\Lawn_Shared.projitems*{c6266476-dedf-4955-8218-61f10b130cd1}*SharedItemsImports = 5
 		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{c6266476-dedf-4955-8218-61f10b130cd1}*SharedItemsImports = 5
-		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
-		LawnModExtension\LawnModExtension.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
 		Lawn_Shared\Lawn_Shared.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
 		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
 	EndGlobalSection
