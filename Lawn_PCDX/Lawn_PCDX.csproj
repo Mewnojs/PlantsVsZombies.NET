@@ -7,11 +7,15 @@
     <UseWindowsForms>false</UseWindowsForms>
   </PropertyGroup>
   <PropertyGroup>
+    <VersionPrefix>0.13.0</VersionPrefix>
+    <VersionSuffix>alpha</VersionSuffix>
+  </PropertyGroup>
+  <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
     <AssemblyName>LAWN</AssemblyName>
     <StartupObject>LAWN.PlantsVsZombies</StartupObject>
-    <Version>0.1.2.4</Version>
+    <Version>0.13.0</Version>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
@@ -25,10 +29,9 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.DotNet.ILCompiler" Version="6.0.0-*" />
 	</ItemGroup>
-  <ItemGroup>
     <PackageReference Include="MLEM.Data" Version="5.2.0" />
     <PackageReference Include="Mono.Cecil" Version="0.11.4" />
-    <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.0.1641" />
+    <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.1.303" />
     <PackageReference Include="MonoGame.IMEHelper.WindowsDX" Version="0.10.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>

@@ -756,9 +756,39 @@ namespace Sexy
         {
         }
 
-        public void DoVibration()
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Warning", "CA1416")]
+        public void DoVibration(TimeSpan vibrationTime)
         {
-            Debug.OutputDebug<NotImplementedException>(new NotImplementedException("DoVibration: no vibrator in this platform"));
+            try
+            {
+#if ANDROID
+                if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.S)
+                {
+                    var vibratorManager = (Android.OS.VibratorManager)Android.App.Application.Context.GetSystemService(Android.Content.Context.VibratorManagerService);
+                    var vibrator = vibratorManager.DefaultVibrator;
+                    vibrator.Vibrate(Android.OS.VibrationEffect.CreateOneShot((long)vibrationTime.TotalMilliseconds, Android.OS.VibrationEffect.DefaultAmplitude));
+                }
+#pragma warning disable CS0618
+                else if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.O)
+                {
+                    var vibrator = (Android.OS.Vibrator)Android.App.Application.Context.GetSystemService(Android.Content.Context.VibratorService);
+                    vibrator.Vibrate(Android.OS.VibrationEffect.CreateOneShot((long)vibrationTime.TotalMilliseconds, Android.OS.VibrationEffect.DefaultAmplitude));
+                }
+                else
+                {
+                    // API < 26
+                    var vibrator = (Android.OS.Vibrator)Android.App.Application.Context.GetSystemService(Android.Content.Context.VibratorService);
+                    vibrator.Vibrate((long)vibrationTime.TotalMilliseconds);
+                }
+#pragma warning restore CS0618
+#else
+                throw new NotImplementedException("DoVibration: no vibrator in this platform");
+#endif
+            }
+            catch (Exception e) 
+            {
+                Debug.OutputDebug(e);
+            }
             //VibrateController @default = VibrateController.Default;
             //@default.Start(TimeSpan.FromMilliseconds(500.0));
         }

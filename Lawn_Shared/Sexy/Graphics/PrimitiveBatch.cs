@@ -22,14 +22,14 @@ namespace Sexy
         public void SetupMatrices()
         {
             ScreenScales s = GlobalStaticVars.gSexyAppBase.mScreenScales;
-            float offsetX1 = s.mTransX
-                * 480f / (float)device.PresentationParameters.BackBufferHeight;
-            float offsetY1 = s.mTransY
-                * 800f / (float)device.PresentationParameters.BackBufferWidth;
-            float offsetX2 = (float)device.PresentationParameters.BackBufferWidth / s.mScaleFactor - 800
-                - (s.mTransX) * 480f / (float)device.PresentationParameters.BackBufferHeight;
-            float offsetY2 = (float)device.PresentationParameters.BackBufferHeight / s.mScaleFactor-480 
-                - (s.mTransY) * 800f / (float)device.PresentationParameters.BackBufferWidth;
+            float offsetX1 = (s.mTransX
+                * 480f / device.PresentationParameters.BackBufferHeight);
+            float offsetY1 = (s.mTransY
+                * 800f / device.PresentationParameters.BackBufferWidth);
+            float offsetX2 = (device.PresentationParameters.BackBufferWidth / s.mScaleFactor) - 800
+                - offsetX1;
+            float offsetY2 = (device.PresentationParameters.BackBufferHeight / s.mScaleFactor) - 480 
+                - offsetY1;
             basicEffect.View = Matrix.CreateOrthographicOffCenter(0f - offsetX1,
                 800 + offsetX2/*(float)this.device.PresentationParameters.BackBufferWidth*/,
                 480 + offsetY2/*(float)this.device.PresentationParameters.BackBufferHeight*/,
