@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\**" />
+	<Compile Remove="$(MSBuildThisFileDirectory)Lawn\Strings.resources" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy\**" />
     <Compile Include="$(MSBuildThisFileDirectory)Sexy.TodLib\**" />
   </ItemGroup>
