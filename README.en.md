@@ -1,5 +1,9 @@
 # PlantsVsZombies.net
 
+[¡úÖÐÎÄ°æ±¾¡û](./README.md)
+
+[Wiki(Chinese)](https://github.com/Mewnojs/PlantsVsZombies.NET/wiki)
+
 #### Description
 An opensource cross-platform Plants Vs Zombies remake, written in C#, originated from codes in an olde-mobile version.
 
@@ -31,5 +35,6 @@ The whole project comprises of three parts, which are *Lawn*, *Sexy*, and *Sexy.
 
 #### About Project
 
-Porting Author: MnJS(2508)
-(OICQ)GroupID: 884792079
+- Porting Author: MnJS(2508)
+- (OICQ)GroupID: 884792079
+- Discord Link£º[discord.gg/uXz6g6Adnm](https://discord.gg/uXz6g6Adnm) 

@@ -1,5 +1,9 @@
 # PlantsVsZombies.net
 
+[→English Version←](./README.en.md)
+
+[中文Wiki](https://github.com/Mewnojs/PlantsVsZombies.NET/wiki)
+
 #### 介绍
 C#写就的植物大战僵尸手机版，现移植至PC端并作为开源项目提交
 
@@ -34,3 +38,4 @@ Sexy.TodLib则负责各种渲染工作，包括动画、粒子、过渡曲线等
 
 - 移植作者：2508大帝
 - 项目交流群：884792079
+- Discord Link：[discord.gg/uXz6g6Adnm](https://discord.gg/uXz6g6Adnm) 
