@@ -25,7 +25,7 @@ namespace Sexy.TodLib
             mTrailAge++;
             if (mTrailAge >= mTrailDuration)
             {
-                if (TodCommon.TestBit((uint)mDefinition.mTrailFlags, 1))
+                if (TodCommon.TestBit((uint)mDefinition.mTrailFlags, (int)TrailFlags.Loops))
                 {
                     mTrailAge = 0;
                     return;
@@ -46,7 +46,7 @@ namespace Sexy.TodLib
             }
             float theTimeValue = mTrailAge / (float)(mTrailDuration - 1);
             int theNumTriangles = (mNumTrailPoints - 1) * 2;
-            TriVertex[,] array = new TriVertex[38, 3];
+            TriVertex[,] array = new TriVertex[TodLibConstants.MAX_TRAIL_TRIANGLES, 3];
             bool flag = false;
             SexyVector2 sexyVector = default(SexyVector2);
             int i = 0;
@@ -140,7 +140,7 @@ namespace Sexy.TodLib
 
         public void AddPoint(float x, float y)
         {
-            int num = TodCommon.ClampInt(mDefinition.mMaxPoints, 2, 20);
+            int num = TodCommon.ClampInt(mDefinition.mMaxPoints, 2, TodLibConstants.MAX_TRAIL_POINTS);
             if (mNumTrailPoints > 0)
             {
                 TrailPoint trailPoint = mTrailPoints[mNumTrailPoints - 1];
@@ -193,7 +193,7 @@ namespace Sexy.TodLib
             return true;
         }
 
-        public TrailPoint[] mTrailPoints = new TrailPoint[20];
+        public TrailPoint[] mTrailPoints = new TrailPoint[TodLibConstants.MAX_TRAIL_POINTS];
 
         public int mNumTrailPoints;
 

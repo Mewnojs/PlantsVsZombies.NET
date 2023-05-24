@@ -41,13 +41,13 @@ namespace Sexy.TodLib
         public FoleyTypeData()
         {
             mLastVariationPlayed = -1;
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < TodLibConstants.MAX_FOLEY_INSTANCES; i++)
             {
                 mFoleyInstances[i] = new FoleyInstance();
             }
         }
 
-        public FoleyInstance[] mFoleyInstances = new FoleyInstance[8];
+        public FoleyInstance[] mFoleyInstances = new FoleyInstance[TodLibConstants.MAX_FOLEY_INSTANCES];
 
         public int mLastVariationPlayed;
     }
@@ -66,7 +66,7 @@ namespace Sexy.TodLib
 
         public float mPitchRange;
 
-        public int[] mSfxID = new int[10];
+        public int[] mSfxID = new int[TodLibConstants.MAX_FOLEY_VARIATIONS];
 
         public uint mFoleyFlags;
     }
@@ -75,7 +75,7 @@ namespace Sexy.TodLib
     {
         public TodFoley()
         {
-            for (int i = 0; i < 110; i++)
+            for (int i = 0; i < TodLibConstants.MAX_FOLEY_TYPES; i++)
             {
                 mFoleyTypeData[i] = new FoleyTypeData();
             }
@@ -121,10 +121,10 @@ namespace Sexy.TodLib
             for (int i = 0; i < TodFoley.gFoleyParamArraySize; i++)
             {
                 FoleyParams foleyParams = TodFoley.LookupFoley((FoleyType)i);
-                if (TodCommon.TestBit(foleyParams.mFoleyFlags, 2))
+                if (TodCommon.TestBit(foleyParams.mFoleyFlags, (int)FoleyFlags.MuteOnPause))
                 {
                     FoleyTypeData foleyTypeData = mFoleyTypeData[i];
-                    for (int j = 0; j < 8; j++)
+                    for (int j = 0; j < TodLibConstants.MAX_FOLEY_INSTANCES; j++)
                     {
                         FoleyInstance foleyInstance = foleyTypeData.mFoleyInstances[j];
                         if (foleyInstance.mRefCount != 0)
@@ -137,7 +137,7 @@ namespace Sexy.TodLib
                             else if (foleyInstance.mPaused)
                             {
                                 foleyInstance.mPaused = false;
-                                bool looping = TodCommon.TestBit(foleyParams.mFoleyFlags, 0);
+                                bool looping = TodCommon.TestBit(foleyParams.mFoleyFlags, (int)FoleyFlags.Loop);
                                 foleyInstance.mInstance.Play(looping);
                             }
                         }
@@ -154,7 +154,7 @@ namespace Sexy.TodLib
             {
                 return;
             }
-            if (TodCommon.TestBit(foleyParams.mFoleyFlags, 1))
+            if (TodCommon.TestBit(foleyParams.mFoleyFlags, (int)FoleyFlags.OneAtATime))
             {
                 FoleyInstance foleyInstance = TodFoley.SoundSystemFindInstance(this, theFoleyType);
                 if (foleyInstance != null)
@@ -196,11 +196,11 @@ namespace Sexy.TodLib
             {
                 soundInstance.AdjustPitch(aPitch / 10f);
             }
-            if (TodCommon.TestBit(foleyParams.mFoleyFlags, 3))
+            if (TodCommon.TestBit(foleyParams.mFoleyFlags, (int)FoleyFlags.UsesMusicVolume))
             {
                 ApplyMusicVolume(foleyInstance2);
             }
-            bool looping = TodCommon.TestBit(foleyParams.mFoleyFlags, 0);
+            bool looping = TodCommon.TestBit(foleyParams.mFoleyFlags, (int)FoleyFlags.Loop);
             soundInstance.Play(looping);
         }
 
@@ -210,7 +210,7 @@ namespace Sexy.TodLib
             for (int i = 0; i < TodFoley.gFoleyParamArraySize; i++)
             {
                 FoleyTypeData foleyTypeData = mFoleyTypeData[i];
-                for (int j = 0; j < 8; j++)
+                for (int j = 0; j < TodLibConstants.MAX_FOLEY_INSTANCES; j++)
                 {
                     FoleyInstance foleyInstance = foleyTypeData.mFoleyInstances[j];
                     if (foleyInstance.mRefCount != 0 && foleyInstance.mPaused)
@@ -240,10 +240,10 @@ namespace Sexy.TodLib
             for (int i = 0; i < TodFoley.gFoleyParamArraySize; i++)
             {
                 FoleyParams foleyParams = TodFoley.LookupFoley((FoleyType)i);
-                if (TodCommon.TestBit(foleyParams.mFoleyFlags, 3))
+                if (TodCommon.TestBit(foleyParams.mFoleyFlags, (int)FoleyFlags.UsesMusicVolume))
                 {
                     FoleyTypeData foleyTypeData = mFoleyTypeData[i];
-                    for (int j = 0; j < 8; j++)
+                    for (int j = 0; j < TodLibConstants.MAX_FOLEY_INSTANCES; j++)
                     {
                         FoleyInstance foleyInstance = foleyTypeData.mFoleyInstances[j];
                         if (foleyInstance.mRefCount != 0)
@@ -741,7 +741,7 @@ namespace Sexy.TodLib
                 FoleyTypeData foleyTypeData = theSoundSystem.mFoleyTypeData[i];
                 if (foleyTypeData != null)
                 {
-                    for (int j = 0; j < 8; j++)
+                    for (int j = 0; j < TodLibConstants.MAX_FOLEY_INSTANCES; j++)
                     {
                         FoleyInstance foleyInstance = foleyTypeData.mFoleyInstances[j];
                         if (foleyInstance.mRefCount != 0 && !foleyInstance.mPaused && !foleyInstance.mInstance.IsPlaying())
@@ -758,7 +758,7 @@ namespace Sexy.TodLib
         public static FoleyInstance SoundSystemFindInstance(TodFoley theSoundSystem, FoleyType theFoleyType)
         {
             FoleyTypeData foleyTypeData = theSoundSystem.mFoleyTypeData[(int)theFoleyType];
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < TodLibConstants.MAX_FOLEY_INSTANCES; i++)
             {
                 FoleyInstance foleyInstance = foleyTypeData.mFoleyInstances[i];
                 if (foleyInstance.mRefCount > 0)
@@ -774,7 +774,7 @@ namespace Sexy.TodLib
             FoleyTypeData foleyTypeData = theSoundSystem.mFoleyTypeData[(int)theFoleyType];
             if (foleyTypeData != null)
             {
-                for (int i = 0; i < 8; i++)
+                for (int i = 0; i < TodLibConstants.MAX_FOLEY_INSTANCES; i++)
                 {
                     FoleyInstance foleyInstance = foleyTypeData.mFoleyInstances[i];
                     if (foleyInstance.mRefCount != 0)
@@ -795,7 +795,7 @@ namespace Sexy.TodLib
             FoleyTypeData foleyTypeData = theSoundSystem.mFoleyTypeData[(int)theFoleyType];
             if (foleyTypeData != null)
             {
-                for (int i = 0; i < 8; i++)
+                for (int i = 0; i < TodLibConstants.MAX_FOLEY_INSTANCES; i++)
                 {
                     FoleyInstance foleyInstance = foleyTypeData.mFoleyInstances[i];
                     if (foleyInstance.mRefCount == 0)
@@ -807,9 +807,9 @@ namespace Sexy.TodLib
             return null;
         }
 
-        public FoleyTypeData[] mFoleyTypeData = new FoleyTypeData[110];
+        public FoleyTypeData[] mFoleyTypeData = new FoleyTypeData[TodLibConstants.MAX_FOLEY_TYPES];
 
-        private int[] aVariationsArray = new int[10];
+        private int[] aVariationsArray = new int[TodLibConstants.MAX_FOLEY_VARIATIONS];
 
         public static FoleyParams[] gFoleyParamArray;
 

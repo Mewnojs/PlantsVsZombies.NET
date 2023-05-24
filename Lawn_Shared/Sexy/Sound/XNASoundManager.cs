@@ -135,7 +135,7 @@ namespace Sexy
 
         public override SoundInstance GetSoundInstance(uint theSfxID)
         {
-            if (mInstances.Count >= 16)
+            if (mInstances.Count >= ACTIVE_SOUNDS_LIMIT)
             {
                 return null;
             }
@@ -164,7 +164,7 @@ namespace Sexy
 
         public override void SetMasterVolume(double theVolume)
         {
-            SoundEffect.MasterVolume = (float)theVolume * 0.65f;
+            SoundEffect.MasterVolume = (float)theVolume * SOUND_LIMIT;
         }
 
         public override void Flush()

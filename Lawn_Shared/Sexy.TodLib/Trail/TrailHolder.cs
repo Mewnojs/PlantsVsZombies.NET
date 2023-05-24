@@ -12,7 +12,7 @@ namespace Sexy.TodLib
 
         public void InitializeHolder()
         {
-            mTrails.Capacity = 128;
+            mTrails.Capacity = TodCommon.MAX_GLOBAL_ALLOCATORS;
         }
 
         public void DisposeHolder()
