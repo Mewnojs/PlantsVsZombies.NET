@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Lawn;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.IsolatedStorage;
 
 namespace Sexy
 {
@@ -447,13 +447,15 @@ namespace Sexy
 
         public static bool FileExists(string theFileName)
         {
-            return File.Exists(theFileName);
+            string applicationStoragePath = GlobalStaticVars.gSexyAppBase.applicationStoragePath;
+            return File.Exists(Path.Combine(applicationStoragePath, theFileName));
         }
 
         public static long GetFileDate(string theFileName)
         {
             Debug.ASSERT(Common.FileExists(theFileName));
-            return File.GetLastWriteTime(theFileName).ToFileTime();
+            string applicationStoragePath = GlobalStaticVars.gSexyAppBase.applicationStoragePath;
+            return File.GetLastWriteTime(Path.Combine(applicationStoragePath, theFileName)).ToFileTime();
         }
 
         public static void Sleep(uint inTime)
@@ -463,27 +465,32 @@ namespace Sexy
         public static void MkDir(string theDir)
         {
             int num = 0;
-            IsolatedStorageFile userStoreForApplication;
+            //IsolatedStorageFile userStoreForApplication;  // Storage location prmanantly moved to LawnApp.applicationStoragePath
+            string applicationStoragePath = GlobalStaticVars.gSexyAppBase.applicationStoragePath;  
             for (; ; )
             {
                 int num2 = theDir.IndexOf('/', num);
-                userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
+                //userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
                 if (num2 == -1)
                 {
                     break;
                 }
                 num = num2 + 1;
                 theDir.Substring(0, num2);
-                userStoreForApplication.CreateDirectory(theDir);
+                //userStoreForApplication.CreateDirectory(theDir);
+                Directory.CreateDirectory(Path.Combine(applicationStoragePath, theDir));
             }
-            userStoreForApplication.CreateDirectory(theDir);
+            //userStoreForApplication.CreateDirectory(theDir);
+            Directory.CreateDirectory(Path.Combine(applicationStoragePath, theDir));
         }
 
         public static bool Deltree(string thePath)
         {
-            if (Directory.Exists(thePath))
+            string applicationStoragePath = GlobalStaticVars.gSexyAppBase.applicationStoragePath;
+            string aPathCombined = Path.Combine(applicationStoragePath, thePath);
+            if (Directory.Exists(aPathCombined))
             {
-                Directory.Delete(thePath, true);
+                Directory.Delete(aPathCombined, true);
                 return true;
             }
             return false;
@@ -491,10 +498,14 @@ namespace Sexy
 
         public static bool DeleteFile(string lpFileName)
         {
-            IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
-            if (userStoreForApplication.FileExists(lpFileName))
+            //IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
+            string applicationStoragePath = GlobalStaticVars.gSexyAppBase.applicationStoragePath;
+            //if (userStoreForApplication.FileExists(lpFileName))
+            string aFileNameCombined = Path.Combine(applicationStoragePath, lpFileName);
+            if (File.Exists(aFileNameCombined))
             {
-                userStoreForApplication.DeleteFile(lpFileName);
+                //userStoreForApplication.DeleteFile(lpFileName);
+                File.Delete(aFileNameCombined);
                 return true;
             }
             return false;

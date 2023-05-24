@@ -112,6 +112,11 @@ namespace Sexy
             GlobalStaticVars.gSexyAppBase.AppExit();
         }
 
+        internal string FetchApplicationStoragePath()
+        {
+            return applicationStoragePath ?? AppContext.BaseDirectory;
+        }
+
         internal static string FetchIronPythonStdLib(Version version)
         {
             return $"./IronPython.StdLib.{version.Major}.{version.Minor}.{version.Build}.zip";
@@ -127,7 +132,7 @@ namespace Sexy
             Main.GamerServicesComp = new GamerServicesComponent(this);
             base.Components.Add(Main.GamerServicesComp);
             ReportAchievement.Initialise();
-            LawnMod.IronPyInteractive.Serve();
+            Debug.Log(DebugType.Info, $"WS server started at: Port {LawnMod.IronPyInteractive.Serve()}"); 
             base.Initialize();
             // Window Scaling
             var f = new SharpDX.Direct2D1.Factory();
@@ -483,5 +488,9 @@ namespace Sexy
         private KeyboardState previousKeyboardState;
 
         private WidgetManager mWidgetManager;
+
+        public string applicationStoragePath;
+
+        public int ironPythonPort;
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Threading;
 //using Microsoft.Devices;
@@ -131,6 +130,7 @@ namespace Sexy
             mMusicInterface.SetDefaultFadeOut(0.006f);
             mMusicVolume = 0.85;
             mSfxVolume = 0.85;
+            applicationStoragePath = m.FetchApplicationStoragePath();
         }
 
         ~SexyAppBase()
@@ -154,11 +154,11 @@ namespace Sexy
             bool result;
             try
             {
-                IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
-                if (userStoreForApplication.FileExists(theFileName))
+                //IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
+                if (Common.FileExists(theFileName))
                 {
-                    userStoreForApplication.DeleteFile(theFileName);
-                    if (userStoreForApplication.FileExists(theFileName))
+                    Common.DeleteFile(theFileName);
+                    if (Common.FileExists(theFileName))
                     {
                         result = false;
                     }
@@ -266,8 +266,8 @@ namespace Sexy
 
         public bool FileExists(string filename)
         {
-            IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
-            return userStoreForApplication.FileExists(filename);
+            //IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
+            return Common.FileExists(filename);
         }
 
         public void UpdateInput()
@@ -564,55 +564,56 @@ namespace Sexy
 
         public bool WriteBufferToFile(string theFileName, Buffer theBuffer)
         {
-            try
+            lock (saveStateLock)
             {
-                using (IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication())
+                try
                 {
-                    string directoryName = Path.GetDirectoryName(theFileName);
-                    if (!userStoreForApplication.DirectoryExists(directoryName))
+                    string directoryCombined = Path.Combine(applicationStoragePath, Path.GetDirectoryName(theFileName));
+                    if (!Directory.Exists(directoryCombined))
                     {
-                        userStoreForApplication.CreateDirectory(directoryName);
+                        Directory.CreateDirectory(directoryCombined);
                     }
-                    using (IsolatedStorageFileStream isolatedStorageFileStream = new IsolatedStorageFileStream(theFileName, FileMode.OpenOrCreate, userStoreForApplication))
+                    using (var fileStream = File.OpenWrite(Path.Combine(applicationStoragePath, theFileName)))
                     {
-                        isolatedStorageFileStream.Write(theBuffer.Data, 0, theBuffer.Data.Length);
-                        isolatedStorageFileStream.Close();
+                        fileStream.Write(theBuffer.Data, 0, theBuffer.Data.Length);
+                        fileStream.Close();
                     }
                 }
+                catch (Exception ex)
+                {
+                    string message = ex.Message;
+                    return false;
+                }
+                return true;
             }
-            catch (Exception ex)
-            {
-                string message = ex.Message;
-                return false;
-            }
-            return true;
         }
 
         public bool ReadBufferFromFile(string theFileName, ref Buffer theBuffer, bool dontWriteToDemo)
         {
-            try
+            lock (saveStateLock)
             {
-                using (IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication())
+                try
                 {
-                    if (!userStoreForApplication.FileExists(theFileName))
+                    string fileNameCombined = Path.Combine(applicationStoragePath, theFileName);
+                    if (!File.Exists(fileNameCombined))
                     {
                         return false;
                     }
-                    using (IsolatedStorageFileStream isolatedStorageFileStream = userStoreForApplication.OpenFile(theFileName, FileMode.OpenOrCreate))
+                    using (var fileStream = File.OpenRead(fileNameCombined))
                     {
-                        byte[] array = new byte[isolatedStorageFileStream.Length];
-                        isolatedStorageFileStream.Read(array, 0, (int)isolatedStorageFileStream.Length);
+                        byte[] array = new byte[fileStream.Length];
+                        fileStream.Read(array, 0, (int)fileStream.Length);
                         theBuffer.Data = array;
-                        isolatedStorageFileStream.Close();
+                        fileStream.Close();
                     }
                 }
+                catch (Exception ex)
+                {
+                    string message = ex.Message;
+                    return false;
+                }
+                return true;
             }
-            catch (Exception ex)
-            {
-                string message = ex.Message;
-                return false;
-            }
-            return true;
         }
 
         private void TransformTouch(_Touch touch)
@@ -992,6 +993,10 @@ namespace Sexy
         private IEnumerator<bool> mLoadingThreadAfterWorksEnumerator;
 
         public ScreenScales mScreenScales = new ScreenScales();
+
+        public readonly string applicationStoragePath;
+
+        public object saveStateLock = new object();
     }
 
     public enum UI_ORIENTATION

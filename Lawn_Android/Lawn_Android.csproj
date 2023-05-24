@@ -5,7 +5,7 @@
     <OutputType>Exe</OutputType>
     <ApplicationId>net.pvz.team2508</ApplicationId>
     <ApplicationVersion>00130000</ApplicationVersion>
-    <ApplicationDisplayVersion>0.13.0</ApplicationDisplayVersion>
+    <ApplicationDisplayVersion>0.13.1</ApplicationDisplayVersion>
     <AssemblyName>Lawn</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

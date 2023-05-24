@@ -13,6 +13,7 @@ using WebSocketSharp.NetCore;
 using static IronPyInteractiveDef_Shared.WSEvents;
 using Microsoft.Scripting.Utils;
 using System.Text;
+using System.Net.Sockets;
 
 namespace LawnMod
 {
@@ -333,17 +334,38 @@ namespace LawnMod
         }
 
 
-
-
-        public static void Serve()
+        private static int FindAvailablePort() 
         {
-            int port = 8080;
+            int port = defaultPort;
+            while (true)
+            {
+                try
+                {
+                    TcpListener l = new TcpListener(IPAddress.Any, port);
+                    l.Start();
+                    l.Stop();
+                    return port;
+                }
+                catch (SocketException)
+                {
+                    port++;
+                }
+            }
+
+        }
+
+        public static int Serve()
+        {
+            return Serve(FindAvailablePort());
+        }
+
+        public static int Serve(int port)
+        {
             mWS = new WebSocketServer(IPAddress.Any, port);
-            Console.WriteLine($"WS server started at: Port {port}");
             mWS.AddWebSocketService<PyHub>("/Py");
             PyHub.Initialize();
             mWS.Start();
-
+            return mWS.Port;
         }
 
         public static void Stop()
@@ -351,16 +373,12 @@ namespace LawnMod
             //mWS.Stop();
         }
 
-        /// <summary>
-        /// Defines the entry point of the application.
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-
-
         private static WebSocketServer mWS;
         private static readonly JsonSerializer mSerializer = new JsonSerializer()
         {
             ReferenceLoopHandling = ReferenceLoopHandling.Serialize
         };
+
+        public static int defaultPort = 8080;
     }
 }

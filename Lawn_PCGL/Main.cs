@@ -96,6 +96,11 @@ namespace Sexy
             GlobalStaticVars.gSexyAppBase.AppExit();
         }
 
+        internal string FetchApplicationStoragePath()
+        {
+            return AppContext.BaseDirectory;
+        }
+
         protected override void Initialize()
         {
             base.Window.OrientationChanged += new EventHandler<EventArgs>(Window_OrientationChanged);

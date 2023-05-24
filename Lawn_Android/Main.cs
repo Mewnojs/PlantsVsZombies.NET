@@ -11,6 +11,9 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Android.Widget;
+using Lawn_Android;
+using System.Threading;
 
 namespace Sexy
 {
@@ -81,6 +84,11 @@ namespace Sexy
             //PhoneApplicationService.Current.Activated += new EventHandler<ActivatedEventArgs>(this.Game_Activated);
             //PhoneApplicationService.Current.Closing += new EventHandler<ClosingEventArgs>(this.Current_Closing);
             //PhoneApplicationService.Current.Deactivated += new EventHandler<DeactivatedEventArgs>(this.Current_Deactivated);
+        }
+
+        internal string FetchApplicationStoragePath()
+        {
+            return GlobalStaticVars.gPvZActivity.GetExternalFilesDir("").AbsolutePath;
         }
 
         internal static string FetchIronPythonStdLib(Version version)
@@ -196,7 +204,8 @@ namespace Sexy
 #endif
 
             LawnMod.DynamicHelper.SetPrivateFieldStatic(typeof(OperatingSystem), "s_osPlatformName", "Linux"); // a hack to deceive IronPython and MonoMod believing that it's running Linux (actually it is, sort of)
-            LawnMod.IronPyInteractive.Serve();
+            int port = LawnMod.IronPyInteractive.Serve();
+            Toast.MakeText(Activity, $"WebSocket server started at port {port}.", ToastLength.Long).Show();
 #if !DEBUG
             }
             catch (Exception e)
@@ -232,6 +241,18 @@ namespace Sexy
             GlobalStaticVars.initialize(this);
             GlobalStaticVars.mGlobalContent.LoadSplashScreen();
             GlobalStaticVars.gSexyAppBase.StartLoadingThread();
+            // Detect SaveStates from old path and transfer
+            var oldSaveStateType = SaveStateTransferHelper.DetectOldSaveStates();
+            if (oldSaveStateType != SaveStateTransferHelper.OldSaveStateType.None)
+            {
+                Task.Run(() => {
+                    lock (GlobalStaticVars.gSexyAppBase.saveStateLock)  // Blocks Savestate reading and writing, may freeze the game thread
+                    {
+                        SaveStateTransferHelper.OnTransfer(GlobalStaticVars.gPvZActivity, oldSaveStateType);
+                    }
+                });
+            }
+            //
         }
 
         protected override void UnloadContent()
