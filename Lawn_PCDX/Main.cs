@@ -128,6 +128,7 @@ namespace Sexy
 
         protected override void Initialize()
         {
+            //Window.TextInput
             base.Window.OrientationChanged += new EventHandler<EventArgs>(Window_OrientationChanged);
             Main.GamerServicesComp = new GamerServicesComponent(this);
             base.Components.Add(Main.GamerServicesComp);

@@ -344,6 +344,7 @@ namespace Sexy
         {
             int x = (int)touch.location.X;
             int y = (int)touch.location.Y;
+            MouseMove(x, y);    // Fix default Touch logic so that ListWidget is accessible via touching
             MouseDown(x, y, 1);
         }
 

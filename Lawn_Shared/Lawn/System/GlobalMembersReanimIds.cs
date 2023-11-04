@@ -3,7 +3,7 @@ using Sexy.TodLib;
 
 namespace Lawn
 {
-    internal static class GlobalMembersReanimIds
+    public/*internal*/ static class GlobalMembersReanimIds
     {
         public static string ReanimTrackId_zombie_gargantuar_telephonepole = ReanimatorXnaHelpers.ReanimatorTrackNameToId("Zombie_gargantuar_telephonepole");
 

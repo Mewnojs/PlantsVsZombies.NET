@@ -772,24 +772,6 @@ namespace Sexy
 
         public void TouchBegan(_Touch touch)
         {
-            if (mIMEHandler.Enabled && (!mIMEHotWidget?.mIMEHotArea.Contains((int)touch.location.x, (int)touch.location.y) ?? false))
-            {
-                mIMEHotWidget.Resize(mIMEHotWidget.mX, 
-                    (int)(mIMEHandler.VirtualKeyboardHeight == 0 ? mIMEHotWidget.mY : mIMEHotWidget.mOldY),
-                    mIMEHotWidget.mWidth, mIMEHotWidget.mHeight);
-                mIMEHotWidget.mIMEEnabled = false;
-                mIMEHandler.StopTextComposition();
-            }
-            else if (mIMEHotWidget?.mIMEHotArea.Contains((int)touch.location.x, (int)touch.location.y) ?? false)
-            {
-                mIMEHotWidget.mOldY = mIMEHotWidget.mY;
-                mIMEHotWidget.Resize(mIMEHotWidget.mX,
-                    (int)(mIMEHandler.VirtualKeyboardHeight == 0 ? mIMEHotWidget.mY : 120),
-                    mIMEHotWidget.mWidth, mIMEHotWidget.mHeight);
-                mIMEHotWidget.mIMEEnabled = true;
-                mIMEHandler.StartTextComposition();
-            }
-
             mLastInputUpdateCnt = mUpdateCnt;
             mActualDownButtons |= 1;
             MousePosition(touch.location.X, touch.location.Y);
@@ -849,8 +831,30 @@ namespace Sexy
             }
         }
 
+        private void HandleGlobalIME(_Touch touch) 
+        {
+            if (mIMEHandler.Enabled && (!mIMEHotWidget?.mIMEHotArea.Contains((int)touch.location.x, (int)touch.location.y) ?? false))
+            {
+                mIMEHotWidget.Resize(mIMEHotWidget.mX,
+                    (int)(mIMEHandler.VirtualKeyboardHeight == 0 ? mIMEHotWidget.mY : mIMEHotWidget.mOldY),
+                    mIMEHotWidget.mWidth, mIMEHotWidget.mHeight);
+                mIMEHotWidget.mIMEEnabled = false;
+                mIMEHandler.StopTextComposition();
+            }
+            else if (!mIMEHandler.Enabled && (mIMEHotWidget?.mIMEHotArea.Contains((int)touch.location.x, (int)touch.location.y) ?? false))
+            {
+                mIMEHotWidget.mOldY = mIMEHotWidget.mY;
+                mIMEHotWidget.Resize(mIMEHotWidget.mX,
+                    (int)(mIMEHandler.VirtualKeyboardHeight == 0 ? mIMEHotWidget.mY : 120),
+                    mIMEHotWidget.mWidth, mIMEHotWidget.mHeight);
+                mIMEHotWidget.mIMEEnabled = true;
+                mIMEHandler.StartTextComposition();
+            }
+        }
+
         public void TouchEnded(_Touch touch)
         {
+            HandleGlobalIME(touch); // Update to fix an IME interaction bug
             mLastInputUpdateCnt = mUpdateCnt;
             int num = 1;
             mActualDownButtons &= ~num;

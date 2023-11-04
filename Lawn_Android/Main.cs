@@ -437,10 +437,27 @@ namespace Sexy
                     GlobalStaticVars.gSexyAppBase.TouchesCanceled();
                 }
             }
-            
+
+            List<string> keynames = new List<string>();
+            KeyboardState keys = Keyboard.GetState();
+            foreach (Keys it in keys.GetPressedKeys())
+            {
+                if (previousKeyboardState.IsKeyUp(it))
+                {
+                    GlobalStaticVars.gSexyAppBase.mWidgetManager.KeyDown((KeyCode)it);
+                    keynames.Add(it.ToString());
+                }
+            }
+            foreach (Keys it in previousKeyboardState.GetPressedKeys())
+            {
+                if (keys.IsKeyUp(it))
+                {
+                    GlobalStaticVars.gSexyAppBase.mWidgetManager.KeyUp((KeyCode)it);
+                }
+            }
 
             this.previousGamepadState = state;
-            
+            previousKeyboardState = keys;
         }
         
 
