@@ -107,39 +107,81 @@ namespace Lawn_Android
                         return libFolderExtPath;
                 }
             }
+            
+            string result = ExtractZipFromAsset(libFolderPath, packedlibFileName, libFolderExtPath);
+            
+            using (var verInfoWriter = new StreamWriter(verInfoFilePath))
+            {
+                verInfoWriter.WriteLine(packedlibFileName);
+                verInfoWriter.Flush();
+            }
+            return result;
+        }
 
-            int index = Array.IndexOf(Assets.List(libFolderPath), packedlibFileName);
+        private string ExtractZipFromAsset(string assetPathDir, string assetPathFileName, string extDestPathDir) 
+        {
+            int index = Array.IndexOf(Assets.List(assetPathDir), assetPathFileName);
             if (index != -1)
             {
                 using (var packedlibStream = new MemoryStream())
                 {
-                    Assets.Open(Path.Combine(libFolderPath, packedlibFileName)).CopyTo(packedlibStream);
+                    Assets.Open(Path.Combine(assetPathDir, assetPathFileName)).CopyTo(packedlibStream);
                     packedlibStream.Position = 0;
-                    var fastZip = new FastZip(); 
+                    var fastZip = new FastZip();
                     fastZip.ExtractZip(
                         packedlibStream,
-                        GetExternalFilesDir(libFolderPath).AbsolutePath,
+                        extDestPathDir,
                         FastZip.Overwrite.Always,
                         null,
                         null, null, false, true // 由于奇怪的兼容性问题(.NET 6修复)，在部分系统上无法还原时间等属性
                     );
                 };
-                using (var verInfoWriter = new StreamWriter(verInfoFilePath))
-                {
-                    verInfoWriter.WriteLine(packedlibFileName);
-                    verInfoWriter.Flush();
-                }
-                return libFolderExtPath;
+                return extDestPathDir;
             }
             else
             {
-                throw new FileNotFoundException($"{packedlibFileName} not found in ANDROID_ASSET/{libFolderPath}");
+                throw new FileNotFoundException($"{assetPathFileName} not found in ANDROID_ASSET/{assetPathDir}");
             }
         }
 
         internal void ConfigureWorkDirAsLocalData()
         {
             Directory.SetCurrentDirectory(GetExternalFilesDir("").AbsolutePath);
+        }
+
+        internal void ExtractCustoms()
+        {
+            string custFolderPath = "cust";
+            string custFolderExtPath = GetExternalFilesDir(custFolderPath).AbsolutePath;
+            string verInfoFileName = "info.txt";
+            string verInfoFilePath = Path.Combine(custFolderExtPath, verInfoFileName);
+            if (Directory.Exists(custFolderExtPath)) 
+            {
+                if (File.Exists(verInfoFilePath))
+                {
+                    using (var s = new StreamReader(verInfoFilePath))
+                    {
+                        string str = s.ReadToEnd();
+                        if (str.StartsWith(Lawn.LawnApp.AppVersionNumber))
+                            return;
+                    }
+                }
+                else 
+                {
+                    // Give space for new cust 
+                    Directory.Delete(custFolderExtPath, true);
+                }
+            }
+            Directory.CreateDirectory(custFolderExtPath);
+
+            string result = ExtractZipFromAsset(custFolderPath, "cust.zip", custFolderExtPath);
+            
+            using (var verInfoWriter = new StreamWriter(verInfoFilePath))
+            {
+                verInfoWriter.WriteLine(Lawn.LawnApp.AppVersionNumber);
+                verInfoWriter.Flush();
+            }
+            return;
         }
     }
 }

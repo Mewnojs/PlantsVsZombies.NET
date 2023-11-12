@@ -93,6 +93,7 @@ namespace LawnMod
                 DebugExec($"__import__('clr').AddReference('{Assembly.GetExecutingAssembly().GetName().Name}')");
                 //DebugExec($"import y");
 
+                RunAllCustModules();
                 RunAllModules();
             }
 
@@ -121,9 +122,14 @@ namespace LawnMod
             {
                 Main.IronPythonConfigureWorkDir();
             }
-            private static void RunAllModules() 
+
+            private static void RunAllCustModules(string CustModDirName = "cust/mods") 
             {
-                string ModuleDirName = "mods";
+                RunAllModules(CustModDirName);
+            }
+
+            private static void RunAllModules(string ModuleDirName = "mods") 
+            {
                 if (Directory.Exists(ModuleDirName))
                 {
                     foreach (string path in Directory.EnumerateFiles(ModuleDirName))

@@ -99,6 +99,7 @@ namespace Sexy
 
         internal static void IronPythonConfigureWorkDir()
         {
+            GlobalStaticVars.gPvZActivity.ExtractCustoms();
             GlobalStaticVars.gPvZActivity.ConfigureWorkDirAsLocalData();
 
         }
