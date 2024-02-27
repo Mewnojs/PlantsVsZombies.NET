@@ -171,7 +171,14 @@ namespace Lawn_Android
             }
             Directory.CreateDirectory(custFolderExtPath);
 
-            string result = ExtractZipFromAsset(custFolderPath, "cust.zip", custFolderExtPath);
+            try
+            {
+                string result = ExtractZipFromAsset(custFolderPath, "cust.zip", custFolderExtPath);
+            }
+            catch (FileNotFoundException) 
+            {
+                ; // This version does not have `cust.zip`. Do nothing.
+            }
             
             using (var verInfoWriter = new StreamWriter(verInfoFilePath))
             {
