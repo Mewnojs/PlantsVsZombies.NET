@@ -11,7 +11,7 @@ namespace LawnMod
     /// 各种辅助MonoMod以及使用IronPython进行动态Hook的工具，
     /// 例如将Python函数转为MonoMod.RuntimeDetour.DynamicHookGen可用的形式
     /// </summary>
-    public static class MonoModUtils
+    public static partial class MonoModUtils
     {
         /// <summary>
         /// 脱掉Python为函数方法加的壳，获取真正的MethodInfo
@@ -300,15 +300,26 @@ namespace LawnMod
             Type[] generics2 = new Type[generics.Length + 1];
             generics.CopyTo(generics2, 0);
             generics2[^1] = typeof(void);
-            Type[] rdgenerics = MakeRuntimeDetourGenerics(generics2);
-            return (hookerDynScriptFunc) =>
+            try
             {
-                Type helper = typeof(MethodToDelegateHelper);
-                return (Delegate)helper
-                    .GetMethod("A", rdgenerics.Length, new Type[] { typeof(object) })
-                    .MakeGenericMethod(rdgenerics)
-                    .Invoke(helper, new object[] { hookerDynScriptFunc });
-            };
+                Type[] rdgenerics = MakeRuntimeDetourGenerics(generics2);
+                return (hookerDynScriptFunc) =>
+                {
+                    Type helper = typeof(MethodToDelegateHelper);
+                    return (Delegate)helper
+                        .GetMethod("A", rdgenerics.Length, new Type[] { typeof(object) })
+                        .MakeGenericMethod(rdgenerics)
+                        .Invoke(helper, new object[] { hookerDynScriptFunc });
+                };
+            }
+            catch (Exception ex)
+            {
+                return (hookerDynScriptFunc) =>
+                {
+                    Type helper = typeof(MethodToDelegateHelper);
+                    return new MethodToDelegateHelper.MyDel_Outer(hookerDynScriptFunc);//typeof(MethodToDelegateHelper.MyDel_Outer);
+                };
+            }
         }
 
         public static DynamicHookGen On = DynamicHookGen.On;
@@ -378,174 +389,6 @@ namespace LawnMod
             readonly Delegate mHookDelegate;
             readonly string mMethodName;
             readonly DynamicHookGen mParentalNode;
-        }
-
-        public static class MethodToDelegateHelper
-        {
-            public static Delegate F<TResult>(dynamic theInputMethod)
-            {
-                return new Func<TResult>((Func<TResult>)theInputMethod);
-            }
-
-            public static Delegate F<T1, TResult>(dynamic theInputMethod)
-            {
-                return new Func<T1, TResult>((Func<T1, TResult>)theInputMethod);
-            }
-
-            public static Delegate F<T1, T2, TResult>(dynamic theInputMethod)
-            {
-                return new Func<T1, T2, TResult>((Func<T1, T2, TResult>)theInputMethod);
-            }
-
-            public static Delegate F<T1, T2, T3, TResult>(dynamic theInputMethod)
-            {
-                return new Func<T1, T2, T3, TResult>((Func<T1, T2, T3, TResult>)theInputMethod);
-            }
-
-            public static Delegate F<T1, T2, T3, T4, TResult>(dynamic theInputMethod)
-            {
-                return new Func<T1, T2, T3, T4, TResult>((Func<T1, T2, T3, T4, TResult>)theInputMethod);
-            }
-
-            public static Delegate F<T1, T2, T3, T4, T5, TResult>(dynamic theInputMethod)
-            {
-                return new Func<T1, T2, T3, T4, T5, TResult>((Func<T1, T2, T3, T4, T5, TResult>)theInputMethod);
-            }
-
-            public static Delegate F<T1, T2, T3, T4, T5, T6, TResult>(dynamic theInputMethod)
-            {
-                return new Func<T1, T2, T3, T4, T5, T6, TResult>((Func<T1, T2, T3, T4, T5, T6, TResult>)theInputMethod);
-            }
-
-            public static Delegate F<T1, T2, T3, T4, T5, T6, T7, TResult>(dynamic theInputMethod)
-            {
-                return new Func<T1, T2, T3, T4, T5, T6, T7, TResult>((Func<T1, T2, T3, T4, T5, T6, T7, TResult>)theInputMethod);
-            }
-
-            public static Delegate F<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(dynamic theInputMethod)
-            {
-                return new Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>((Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>)theInputMethod);
-            }
-
-            public static Delegate F<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(dynamic theInputMethod)
-            {
-                return new Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>)theInputMethod);
-            }
-
-            public static Delegate F<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(dynamic theInputMethod)
-            {
-                return new Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>)theInputMethod);
-            }
-
-            public static Delegate F<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(dynamic theInputMethod)
-            {
-                return new Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>)theInputMethod);
-            }
-
-            public static Delegate F<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(dynamic theInputMethod)
-            {
-                return new Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>)theInputMethod);
-            }
-
-            public static Delegate F<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(dynamic theInputMethod)
-            {
-                return new Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>)theInputMethod);
-            }
-
-            public static Delegate F<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(dynamic theInputMethod)
-            {
-                return new Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>)theInputMethod);
-            }
-
-            public static Delegate F<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(dynamic theInputMethod)
-            {
-                return new Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>)theInputMethod);
-            }
-
-            public static Delegate F<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(dynamic theInputMethod)
-            {
-                return new Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>((Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>)theInputMethod);
-            }
-
-            public static Delegate A<T1>(dynamic theInputMethod)
-            {
-                return new Action<T1>((Action<T1>)theInputMethod);
-            }
-
-            public static Delegate A<T1, T2>(dynamic theInputMethod)
-            {
-                return new Action<T1, T2>((Action<T1, T2>)theInputMethod);
-            }
-
-            public static Delegate A<T1, T2, T3>(dynamic theInputMethod)
-            {
-                return new Action<T1, T2, T3>((Action<T1, T2, T3>)theInputMethod);
-            }
-
-            public static Delegate A<T1, T2, T3, T4>(dynamic theInputMethod)
-            {
-                return new Action<T1, T2, T3, T4>((Action<T1, T2, T3, T4>)theInputMethod);
-            }
-
-            public static Delegate A<T1, T2, T3, T4, T5>(dynamic theInputMethod)
-            {
-                return new Action<T1, T2, T3, T4, T5>((Action<T1, T2, T3, T4, T5>)theInputMethod);
-            }
-
-            public static Delegate A<T1, T2, T3, T4, T5, T6>(dynamic theInputMethod)
-            {
-                return new Action<T1, T2, T3, T4, T5, T6>((Action<T1, T2, T3, T4, T5, T6>)theInputMethod);
-            }
-
-            public static Delegate A<T1, T2, T3, T4, T5, T6, T7>(dynamic theInputMethod)
-            {
-                return new Action<T1, T2, T3, T4, T5, T6, T7>((Action<T1, T2, T3, T4, T5, T6, T7>)theInputMethod);
-            }
-
-            public static Delegate A<T1, T2, T3, T4, T5, T6, T7, T8>(dynamic theInputMethod)
-            {
-                return new Action<T1, T2, T3, T4, T5, T6, T7, T8>((Action<T1, T2, T3, T4, T5, T6, T7, T8>)theInputMethod);
-            }
-
-            public static Delegate A<T1, T2, T3, T4, T5, T6, T7, T8, T9>(dynamic theInputMethod)
-            {
-                return new Action<T1, T2, T3, T4, T5, T6, T7, T8, T9>((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9>)theInputMethod);
-            }
-
-            public static Delegate A<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(dynamic theInputMethod)
-            {
-                return new Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>)theInputMethod);
-            }
-
-            public static Delegate A<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(dynamic theInputMethod)
-            {
-                return new Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>)theInputMethod);
-            }
-
-            public static Delegate A<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(dynamic theInputMethod)
-            {
-                return new Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>)theInputMethod);
-            }
-
-            public static Delegate A<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(dynamic theInputMethod)
-            {
-                return new Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>)theInputMethod);
-            }
-
-            public static Delegate A<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(dynamic theInputMethod)
-            {
-                return new Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>)theInputMethod);
-            }
-
-            public static Delegate A<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(dynamic theInputMethod)
-            {
-                return new Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>)theInputMethod);
-            }
-
-            public static Delegate A<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(dynamic theInputMethod)
-            {
-                return new Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>((Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>)theInputMethod);
-            }
         }
     }
 

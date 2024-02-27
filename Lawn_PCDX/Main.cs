@@ -43,8 +43,8 @@ namespace Sexy
 
         public void OnResize(object sender, EventArgs e)
         {
-            int DefaultW = 800;
-            int DefaultH = 480;
+            int DefaultW = Constants.BackBufferSize.Y;
+            int DefaultH = Constants.BackBufferSize.X;
             Rectangle bounds = Window.ClientBounds;
             if (GlobalStaticVars.gSexyAppBase != null)
             {
@@ -137,9 +137,9 @@ namespace Sexy
             base.Initialize();
             // Window Scaling
             var f = new SharpDX.Direct2D1.Factory();
-            var ww = (int)(f.DesktopDpi.Width  / 96 * 800);
-            var wh = (int)(f.DesktopDpi.Height / 96 * 480);
-            GlobalStaticVars.gSexyAppBase.mScreenScales.Init(ww, wh, 800, 480);
+            var ww = (int)(f.DesktopDpi.Width  / 96 * Constants.BackBufferSize.Y);
+            var wh = (int)(f.DesktopDpi.Height / 96 * Constants.BackBufferSize.X);
+            GlobalStaticVars.gSexyAppBase.mScreenScales.Init(ww, wh, Constants.BackBufferSize.Y, Constants.BackBufferSize.X);
             Main.graphics.PreferredBackBufferWidth = ww;
             Main.graphics.PreferredBackBufferHeight = wh;
             GraphicsState.mGraphicsDeviceManager.ApplyChanges();
@@ -457,8 +457,9 @@ namespace Sexy
             }
             //if ((Main.graphics.GraphicsDevice.PresentationParameters.BackBufferWidth == 480 && Main.graphics.GraphicsDevice.PresentationParameters.BackBufferHeight == 800) || (Main.graphics.GraphicsDevice.PresentationParameters.BackBufferWidth == 800 && Main.graphics.GraphicsDevice.PresentationParameters.BackBufferHeight == 480))
             //{
-                AtlasResources.mAtlasResources = new AtlasResources_480x800();
-                Constants.Load480x800();
+            AtlasResources.mAtlasResources = new AtlasResources_480x800();
+            Constants.Load480x800();
+            //Constants.Load600x1000();
                 return;
             //}
             throw new Exception("Unsupported Resolution");

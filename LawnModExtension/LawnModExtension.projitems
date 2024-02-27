@@ -11,5 +11,6 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)IronPyInteractive.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MonoModUtils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MonoModUtils\MethodToDelegateHelper.cs" />
   </ItemGroup>
 </Project>

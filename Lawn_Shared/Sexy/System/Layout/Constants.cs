@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace Sexy
 {
-    internal class Constants : FrameworkConstants
+    public /*internal*/ class Constants : FrameworkConstants
     {
         public static void Load320x480()
         {
@@ -1145,7 +1145,7 @@ namespace Sexy
             }
             Constants.Loaded = true;
             Constants.BackBufferSize = new Point(600, 1000);
-            Constants.ImageSubPath = "\\480x800\\";
+            Constants.ImageSubPath = "\\600x1000\\";
             Constants.BOARD_WIDTH = 1000;
             Constants.BOARD_HEIGHT = 600;
             Constants.BOARD_EDGE = 50;

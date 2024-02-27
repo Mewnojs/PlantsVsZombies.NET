@@ -102,7 +102,7 @@ namespace LawnMod
             /// </summary>
             private static void Preinitialize()
             {
-                var aRuntime = Python.CreateRuntime();
+                var aRuntime = Python.CreateRuntime(/*new Dictionary<string, object> { {"PrivateBinding", true } }*/);
                 aRuntime.IO.SetOutput(mStdoutStream, mStdoutWriter);  // a workaround, see Issue #1625 in IronPython3 repo
                 aRuntime.IO.SetErrorOutput(mStderrStream, mStderrWriter);
                 aRuntime.IO.SetInput(mStdinStream, Encoding.Default);
@@ -154,9 +154,10 @@ namespace LawnMod
                             {
                                 var assembly = Assembly.LoadFrom(path);
 
-                                aModName = assembly.ManifestModule.ScopeName;
+                                aModName = assembly.GetName().Name;//ManifestModule.ScopeName;
                                 mPyEnj.Runtime.LoadAssembly(assembly);
 
+                                //var aModule = mPyEnj.Runtime.GetBuiltinModule().GetVariable("__import__")(aModName);
                                 aModScope = mPyEnj.Runtime.ImportModule(aModName);
                                 Debug.Log(DebugType.Info, $"Successfully loaded precompiled \"{aModName}\" from <{path}>");
                             }

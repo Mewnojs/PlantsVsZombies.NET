@@ -166,11 +166,8 @@ namespace Lawn_Android
                             return;
                     }
                 }
-                else 
-                {
-                    // Give space for new cust 
-                    Directory.Delete(custFolderExtPath, true);
-                }
+                // Give space for new cust 
+                Directory.Delete(custFolderExtPath, true);
             }
             Directory.CreateDirectory(custFolderExtPath);
 
