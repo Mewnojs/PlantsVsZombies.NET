@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using FontStashSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -498,23 +499,27 @@ namespace Sexy
             fontRes.mFont = null;
             foreach (KeyValuePair<string, string> keyValuePair in theElement.mAttributes)
             {
-                Dictionary<string, string>.Enumerator enumerator = theElement.mAttributes.GetEnumerator();
                 if (keyValuePair.Key == "tags")
                 {
                     FontRes fontRes3 = fontRes;
-                    KeyValuePair<string, string> keyValuePair2 = enumerator.Current;
-                    fontRes3.mTags = keyValuePair2.Value;
+                    //KeyValuePair<string, string> keyValuePair2 = enumerator.Current;
+                    fontRes3.mTags = keyValuePair.Value;
                 }
-                KeyValuePair<string, string> keyValuePair3 = enumerator.Current;
-                if (keyValuePair3.Key == "isDefault")
+                //KeyValuePair<string, string> keyValuePair3 = enumerator.Current;
+                if (keyValuePair.Key == "isDefault")
                 {
                     fontRes.mDefault = true;
                 }
+                if (keyValuePair.Key == "truetype") 
+                {
+                    fontRes.mTrueType = true;
+                }
             }
-            if (fontRes.mPath.Substring(0, 5) == "!sys:")
-            {
-                fontRes.mSysFont = true;
+            fontRes.mSysFont = fontRes.mPath.Substring(0, 5) == "!sys:";
+            if (fontRes.mSysFont)
                 fontRes.mPath = fontRes.mPath.Substring(5);
+            if (fontRes.mSysFont || fontRes.mTrueType)
+            {
                 Dictionary<string, string>.Enumerator enumerator = theElement.mAttributes.GetEnumerator();
                 fontRes.mSize = -1;
                 fontRes.mBold = false;
@@ -542,21 +547,29 @@ namespace Sexy
                             KeyValuePair<string, string> keyValuePair7 = enumerator.Current;
                             if (keyValuePair7.Key == "italic")
                             {
-                                fontRes.mBold = true;
+                                fontRes.mItalic = true;
                             }
                             else
                             {
                                 KeyValuePair<string, string> keyValuePair8 = enumerator.Current;
                                 if (keyValuePair8.Key == "shadow")
                                 {
-                                    fontRes.mBold = true;
+                                    fontRes.mShadow = true;
                                 }
                                 else
                                 {
                                     KeyValuePair<string, string> keyValuePair9 = enumerator.Current;
                                     if (keyValuePair9.Key == "underline")
                                     {
-                                        fontRes.mBold = true;
+                                        fontRes.mUnderline = true;
+                                    }
+                                    else
+                                    {
+                                        KeyValuePair<string, string> keyValuePair10 = enumerator.Current;
+                                        if (keyValuePair10.Key == "stroked")
+                                        {
+                                            int.TryParse(keyValuePair10.Value, out fontRes.mStroke);
+                                        }
                                     }
                                 }
                             }
@@ -1484,7 +1497,7 @@ namespace Sexy
 
         private bool DoLoadFont(FontRes fontRes)
         {
-            Font font = new Font();
+            XNAFont font = new XNAFont();
             if (fontRes.mSysFont)
             {
                 return Fail("SysFont not supported");
@@ -1495,100 +1508,126 @@ namespace Sexy
                 fontRes.mFont = font;
                 return true;
             }
-            XmlReader xmlReader = XmlReader.Create(TitleContainer.OpenStream(fontRes.mPath));
-            xmlReader.Read();
-            while (xmlReader.Read())
+            if (fontRes.mTrueType)
             {
-                if (xmlReader.NodeType == XmlNodeType.Element)
+                StashFont ttfont = new StashFont();
+#if ANDROID
+                using (var st = GlobalStaticVars.gPvZActivity.Assets.Open(fontRes.mPath))
                 {
-                    if (xmlReader.Name == "Offsets")
+                    ttfont.mSystem.AddFont(st);
+                }
+#else
+                ttfont.mSystem.AddFont(TitleContainer.OpenStream(fontRes.mPath));
+#endif
+                var fontbase1 = ttfont.mSystem.GetFont(fontRes.mSize * 4 / 3f/* - fontRes.mStroke * 2*/); // 1.33333...f, the magic number of font size to pixels
+                ttfont.AddLayer(fontbase1);
+                fontRes.mFont = ttfont;
+                //if (fontbase1 is DynamicSpriteFont dynfont1) 
+                {
+                    ttfont.mHeight = -(int)(fontbase1.MeasureString("ABCD").Y);
+                    ttfont.mAscent = -(int)(fontRes.mSize * 4 / 3f);
+                    if (fontRes.mStroke > 0)
+                        ttfont.mEffects = new Tuple<FontSystemEffect, int>(FontSystemEffect.Stroked, fontRes.mStroke);
+                }
+                return true;
+            }
+            else
+            {
+                XmlReader xmlReader = XmlReader.Create(TitleContainer.OpenStream(fontRes.mPath));
+                xmlReader.Read();
+                while (xmlReader.Read())
+                {
+                    if (xmlReader.NodeType == XmlNodeType.Element)
                     {
-                        Vector2 zero = Vector2.Zero;
-                        while (xmlReader.NodeType != XmlNodeType.EndElement || !(xmlReader.Name == "Offsets"))
+                        if (xmlReader.Name == "Offsets")
                         {
-                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "Offset")
+                            Vector2 zero = Vector2.Zero;
+                            while (xmlReader.NodeType != XmlNodeType.EndElement || !(xmlReader.Name == "Offsets"))
                             {
-                                string text = xmlReader["offsetX"];
-                                string text2 = xmlReader["offsetY"];
-                                char c = xmlReader["character"].ToCharArray()[0];
-                                if (!string.IsNullOrEmpty(text))
+                                if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "Offset")
                                 {
-                                    zero.X = Convert.ToInt32(text);
-                                }
-                                if (!string.IsNullOrEmpty(text2))
-                                {
-                                    zero.Y = Convert.ToInt32(text2);
-                                }
-                                font.AddCharacterOffset(c, zero);
-                            }
-                            xmlReader.Read();
-                        }
-                    }
-                    if (xmlReader.Name == "Layers")
-                    {
-                        string text3 = xmlReader["magic"];
-                        if (!string.IsNullOrEmpty(text3))
-                        {
-                            font.characterOffsetMagic = Convert.ToInt32(text3);
-                        }
-                        else
-                        {
-                            font.characterOffsetMagic = 0;
-                        }
-                        Vector2 zero2 = Vector2.Zero;
-                        while (xmlReader.NodeType != XmlNodeType.EndElement || !(xmlReader.Name == "Layers"))
-                        {
-                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "Layer")
-                            {
-                                if (!xmlReader.HasAttributes)
-                                {
-                                    zero2 = Vector2.Zero;
-                                }
-                                else
-                                {
-                                    string text4 = xmlReader["xOffset"];
-                                    string text5 = xmlReader["yOffset"];
-                                    if (!string.IsNullOrEmpty(text4))
+                                    string text = xmlReader["offsetX"];
+                                    string text2 = xmlReader["offsetY"];
+                                    char c = xmlReader["character"].ToCharArray()[0];
+                                    if (!string.IsNullOrEmpty(text))
                                     {
-                                        zero2.X = Convert.ToInt32(text4);
+                                        zero.X = Convert.ToInt32(text);
                                     }
-                                    if (!string.IsNullOrEmpty(text5))
+                                    if (!string.IsNullOrEmpty(text2))
                                     {
-                                        zero2.Y = Convert.ToInt32(text5);
+                                        zero.Y = Convert.ToInt32(text2);
+                                    }
+                                    font.AddCharacterOffset(c, zero);
+                                }
+                                xmlReader.Read();
+                            }
+                        }
+                        if (xmlReader.Name == "Layers")
+                        {
+                            string text3 = xmlReader["magic"];
+                            if (!string.IsNullOrEmpty(text3))
+                            {
+                                font.characterOffsetMagic = Convert.ToInt32(text3);
+                            }
+                            else
+                            {
+                                font.characterOffsetMagic = 0;
+                            }
+                            Vector2 zero2 = Vector2.Zero;
+                            while (xmlReader.NodeType != XmlNodeType.EndElement || !(xmlReader.Name == "Layers"))
+                            {
+                                if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "Layer")
+                                {
+                                    if (!xmlReader.HasAttributes)
+                                    {
+                                        zero2 = Vector2.Zero;
+                                    }
+                                    else
+                                    {
+                                        string text4 = xmlReader["xOffset"];
+                                        string text5 = xmlReader["yOffset"];
+                                        if (!string.IsNullOrEmpty(text4))
+                                        {
+                                            zero2.X = Convert.ToInt32(text4);
+                                        }
+                                        if (!string.IsNullOrEmpty(text5))
+                                        {
+                                            zero2.Y = Convert.ToInt32(text5);
+                                        }
                                     }
                                 }
+                                if (xmlReader.NodeType == XmlNodeType.Text)
+                                {
+                                    string value = xmlReader.Value;
+                                    font.AddLayer(mContentManager.Load<SpriteFont>(value), zero2);
+                                }
+                                xmlReader.Read();
                             }
-                            if (xmlReader.NodeType == XmlNodeType.Text)
-                            {
-                                string value = xmlReader.Value;
-                                font.AddLayer(mContentManager.Load<SpriteFont>(value), zero2);
-                            }
-                            xmlReader.Read();
                         }
-                    }
-                    if (xmlReader.Name == "Ascent")
-                    {
-                        xmlReader.Read();
-                        font.mAscent = -1 * Convert.ToInt32(xmlReader.Value);
-                    }
-                    if (xmlReader.Name == "Height")
-                    {
-                        xmlReader.Read();
-                        font.mHeight = -1 * Convert.ToInt32(xmlReader.Value);
-                    }
-                    if (xmlReader.Name == "SpaceChar")
-                    {
-                        xmlReader.Read();
-                        font.SpaceChar = xmlReader.Value;
-                    }
-                    if (xmlReader.Name == "StringWidthCachingEnabled")
-                    {
-                        xmlReader.Read();
-                        font.StringWidthCachingEnabled = Convert.ToBoolean(xmlReader.Value);
+                        if (xmlReader.Name == "Ascent")
+                        {
+                            xmlReader.Read();
+                            font.mAscent = -1 * Convert.ToInt32(xmlReader.Value);
+                        }
+                        if (xmlReader.Name == "Height")
+                        {
+                            xmlReader.Read();
+                            font.mHeight = -1 * Convert.ToInt32(xmlReader.Value);
+                        }
+                        if (xmlReader.Name == "SpaceChar")
+                        {
+                            xmlReader.Read();
+                            font.SpaceChar = xmlReader.Value;
+                        }
+                        if (xmlReader.Name == "StringWidthCachingEnabled")
+                        {
+                            xmlReader.Read();
+                            font.StringWidthCachingEnabled = Convert.ToBoolean(xmlReader.Value);
+                        }
                     }
                 }
+                fontRes.mFont = font;
             }
-            fontRes.mFont = font;
             ResourceLoadedHook(fontRes);
             return true;
         }
@@ -1964,6 +2003,10 @@ namespace Sexy
             public bool mShadow;
 
             public int mSize;
+
+            public bool mTrueType;
+
+            public int mStroke;
         }
 
         internal class LevelRes : BaseRes

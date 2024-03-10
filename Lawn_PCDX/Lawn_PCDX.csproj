@@ -8,7 +8,7 @@
     <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
   </PropertyGroup>
   <PropertyGroup>
-    <VersionPrefix>0.13.0</VersionPrefix>
+    <VersionPrefix>0.14.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
   </PropertyGroup>
   <PropertyGroup>
@@ -23,7 +23,7 @@
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FreeTypeSharp" Version="2.0.0.12-ci" />
+    <PackageReference Include="FontStashSharp.MonoGame" Version="1.3.6" />
     <PackageReference Include="Microsoft.NETCore.Targets" Version="5.0.0" ExcludeAssets="all" PrivateAssets="all" />
     <PackageReference Include="IronPython" Version="3.4.0" />
     <PackageReference Include="IronPython.StdLib" Version="3.4.0" />

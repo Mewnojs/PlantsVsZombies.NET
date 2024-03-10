@@ -4,8 +4,8 @@
     <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
     <OutputType>Exe</OutputType>
     <ApplicationId>net.pvz.team2508</ApplicationId>
-    <ApplicationVersion>00130000</ApplicationVersion>
-    <ApplicationDisplayVersion>0.13.1</ApplicationDisplayVersion>
+    <ApplicationVersion>00140000</ApplicationVersion>
+    <ApplicationDisplayVersion>0.14.0</ApplicationDisplayVersion>
     <AssemblyName>Lawn</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -40,6 +40,7 @@
     <None Remove="Resources\Xml\network_security_config.xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FontStashSharp.MonoGame" Version="1.3.6" />
     <PackageReference Include="IronPython" Version="3.4.0" />
     <PackageReference Include="MonoGame.Framework.Android" Version="3.8.1.303" />
     <PackageReference Include="MonoGame.IMEHelper.Common" Version="0.9.0" />

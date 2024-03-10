@@ -369,8 +369,8 @@ namespace Lawn
             g.SetFont(theFont);
             g.SetScale(fontScale);
             g.SetColor(new SexyColor(21, 175, 0));
-            num += (theWidth - theFont.StringWidth(theLabel)) / 2 + 1;
-            num2 += (theHeight + theFont.GetAscent()) / 2;
+            num += (int)(theWidth - theFont.StringWidth(theLabel)) / 2 + 1;
+            num2 += (int)(theHeight + theFont.GetAscent()) / 2 - (int)Constants.InvertAndScale(4);
             g.DrawString(theLabel, num, num2);
             g.SetColor(SexyColor.White);
             g.SetScale(1f);

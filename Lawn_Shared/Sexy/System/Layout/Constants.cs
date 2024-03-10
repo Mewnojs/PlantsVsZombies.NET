@@ -2631,7 +2631,8 @@ namespace Sexy
             fr,
             de,
             es,
-            it
+            it,
+            zh_cn,
         }
         public static class New 
         {

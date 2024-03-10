@@ -42,6 +42,10 @@ namespace Sexy
             {
                 Constants.Language = Constants.LanguageIndex.it;
             }
+            else if (Strings.Culture.TwoLetterISOLanguageName == "zh" && new RegionInfo(Strings.Culture.Name).TwoLetterISORegionName == "CN")
+            {
+                Constants.Language = Constants.LanguageIndex.zh_cn;
+            }
             else
             {
                 Constants.Language = Constants.LanguageIndex.en;

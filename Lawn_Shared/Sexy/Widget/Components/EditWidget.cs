@@ -47,7 +47,7 @@ namespace Sexy
             mDescription = TodStringFile.TodStringTranslate(description);
             mEditing = false;
             mAcceptsEmptyText = false;
-            mFont = new Font();
+            mFont = new XNAFont();
             SetColors(EditWidget.gEditWidgetColors, 5);
             mString = "";
         }
@@ -584,7 +584,7 @@ namespace Sexy
                 {
                     aClipG.SetColor(mColors[(int)Colors.HiliteText]);
                 }
-                aClipG.DrawString(aString.Substring(mLeftPos), 4, -4/*(int)( (mHeight + mFont.GetHeight()) / 2 - mFont.GetAscent())*/);
+                aClipG.DrawString(aString.Substring(mLeftPos), 4, 0/*(int)( (mHeight + mFont.GetHeight()) / 2 - mFont.GetAscent())*/);
 
                 if (aClipG != null)
                 {

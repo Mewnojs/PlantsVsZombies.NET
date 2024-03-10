@@ -3637,7 +3637,7 @@ namespace Lawn
 
         private const string PLACEHOLDER_CRAZYDAVE_0 = "[CRAZY_DAVE_{0}]";
 
-        public static string AppVersionNumber = "0.13.1";
+        public static string AppVersionNumber = "0.14.0";
 
         public Board mBoard;
 
