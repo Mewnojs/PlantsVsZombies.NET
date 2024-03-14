@@ -240,8 +240,9 @@ namespace Sexy
 
         public void WriteString(string theString)
         {
-            WriteLong(theString.Length);
+            //WriteLong(theString.Length);  // Let's write the number of bytes of string to make the r/w behavior consistent
             byte[] bytes = encoding.GetBytes(theString);
+            WriteLong(bytes.Length);
             for (int i = 0; i < bytes.Length; i++)
             {
                 WriteByte(bytes[i]);
