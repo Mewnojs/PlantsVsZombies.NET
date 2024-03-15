@@ -3588,10 +3588,55 @@ namespace Lawn
             this.mWidgetManager.DrawScreen();
             if (mDebugScreenEnabled)
                 DrawDebugInfo(gameTime);
+            if (!mBoard?.mVisible ?? true)
+                DrawBlackFrame(GlobalStaticVars.g);
             GlobalStaticVars.g.EndFrame();
 #if DEBUG
             //Console.WriteLine(perfTimer.Elapsed.TotalMilliseconds);
 #endif
+        }
+
+        public void DrawBlackFrame(Graphics g)
+        {
+            var drawMode = g.GetDrawMode();
+            g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
+            var color = g.GetColor();
+            g.SetColor(SexyColor.Black);
+            // Draw screen black overlay
+            if (mScreenScales.TranslationX > 0)
+            {
+                var clipRect = mScreenScales.InvScale(new TRect(0, 0, g.mScreenWidth, g.mScreenHeight));
+                clipRect.mWidth += 1;
+                g.mClipRect = clipRect;
+                var mat = mScreenScales.InvScale(new TRect(mScreenScales.mWidth + mScreenScales.mTransX, 0, g.mScreenWidth - mScreenScales.mWidth - mScreenScales.mTransX, mScreenScales.mHeight));
+                mat.mX -= g.mTransX;
+                mat.mY -= g.mTransY;
+                mat.mWidth = (int)Math.Ceiling((g.mScreenWidth - mScreenScales.mWidth - mScreenScales.mTransX) / mScreenScales.ScaleRatioMin);
+                g.FillRect(mat);
+                mat = mScreenScales.InvScale(new TRect(0, 0, mScreenScales.mTransX, mScreenScales.mHeight));
+                mat.mX -= g.mTransX;
+                mat.mY -= g.mTransY;
+                g.FillRect(mat);
+                g.ClearClipRect();
+            }
+            if (mScreenScales.TranslationY > 0)
+            {
+                var clipRect = mScreenScales.InvScale(new TRect(0, 0, g.mScreenWidth, g.mScreenHeight));
+                clipRect.mHeight += 1;
+                g.mClipRect = clipRect;
+                var mat = mScreenScales.InvScale(new TRect(0, mScreenScales.mHeight + mScreenScales.mTransY, mScreenScales.mWidth, g.mScreenHeight - mScreenScales.mHeight - mScreenScales.mTransY));
+                mat.mX -= g.mTransX;
+                mat.mY -= g.mTransY;
+                mat.mHeight = (int)Math.Ceiling((g.mScreenHeight - mScreenScales.mHeight - mScreenScales.mTransY) / mScreenScales.ScaleRatioMin);
+                g.FillRect(mat);
+                mat = mScreenScales.InvScale(new TRect(0, 0, mScreenScales.mWidth, mScreenScales.mTransY));
+                mat.mX -= g.mTransX;
+                mat.mY -= g.mTransY;
+                g.FillRect(mat);
+                g.ClearClipRect();
+            }
+            g.SetColor(color);
+            g.SetDrawMode(drawMode);
         }
         public void DrawDebugInfo(GameTime gameTime)
         {

@@ -30,7 +30,7 @@ namespace Lawn
         {
             base.Resize(theX, theY, theWidth, theHeight);
             mNameEditWidget.Resize(mContentInsets.mLeft
-                + (int)Constants.InvertAndScale(12f), (int)Constants.InvertAndScale(mIsRename ? 143 : 170), mWidth - mContentInsets.mLeft - mContentInsets.mRight - (int)Constants.InvertAndScale(24f), (int)Constants.InvertAndScale(28f));
+                + (int)Constants.InvertAndScale(12f), (int)Constants.InvertAndScale(mIsRename ? 143 : 143 /*170 // TODO: Find out why here is a magic number */), mWidth - mContentInsets.mLeft - mContentInsets.mRight - (int)Constants.InvertAndScale(24f), (int)Constants.InvertAndScale(28f));
         }
 
         public override void AddedToManager(WidgetManager theWidgetManager)

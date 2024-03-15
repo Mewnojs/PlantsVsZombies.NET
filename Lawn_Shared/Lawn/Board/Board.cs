@@ -6148,39 +6148,7 @@ namespace Lawn
 
         public void DrawUITop(Graphics g)
         {
-            // Draw screen black overlay
-            if (mApp.mScreenScales.TranslationX > 0)
-            {
-                g.SetColor(SexyColor.Black);
-                var clipRect = mApp.mScreenScales.InvScale(new TRect(0, 0, g.mScreenWidth, g.mScreenHeight));
-                clipRect.mWidth += 1;
-                g.mClipRect = clipRect;
-                var mat = mApp.mScreenScales.InvScale(new TRect(mApp.mScreenScales.mWidth + mApp.mScreenScales.mTransX, 0, g.mScreenWidth - mApp.mScreenScales.mWidth - mApp.mScreenScales.mTransX, mApp.mScreenScales.mHeight));
-                mat.mX -= g.mTransX;
-                mat.mY -= g.mTransY;
-                g.FillRect(mat);
-                mat = mApp.mScreenScales.InvScale(new TRect(0, 0, mApp.mScreenScales.mTransX, mApp.mScreenScales.mHeight));
-                mat.mX -= g.mTransX;
-                mat.mY -= g.mTransY;
-                g.FillRect(mat);
-                g.ClearClipRect();
-            }
-            if (mApp.mScreenScales.TranslationY > 0)
-            {
-                g.SetColor(SexyColor.Black);
-                var clipRect = mApp.mScreenScales.InvScale(new TRect(0, 0, g.mScreenWidth, g.mScreenHeight));
-                clipRect.mHeight += 1;
-                g.mClipRect = clipRect;
-                var mat = mApp.mScreenScales.InvScale(new TRect(0, mApp.mScreenScales.mHeight + mApp.mScreenScales.mTransY, mApp.mScreenScales.mWidth, g.mScreenHeight - mApp.mScreenScales.mHeight - mApp.mScreenScales.mTransY));
-                mat.mX -= g.mTransX;
-                mat.mY -= g.mTransY;
-                g.FillRect(mat);
-                mat = mApp.mScreenScales.InvScale(new TRect(0, 0, mApp.mScreenScales.mWidth, mApp.mScreenScales.mTransY));
-                mat.mX -= g.mTransX;
-                mat.mY -= g.mTransY;
-                g.FillRect(mat);
-                g.ClearClipRect();
-            }
+            mApp.DrawBlackFrame(g);
             // others
             if (mApp.mGameScene != GameScenes.ZombiesWon && mSeedBank.BeginDraw(g))
             {
@@ -8527,6 +8495,19 @@ namespace Lawn
 
         public bool IsFinalSurvivalStage()
         {
+            if (!mApp.IsSurvivalMode())
+                return false;
+
+            int aFlags = GetNumWavesPerSurvivalStage() * (mChallenge.mSurvivalStage + 1) / GetNumWavesPerFlag();
+            if (mApp.IsSurvivalNormal(mApp.mGameMode))
+            {
+                return aFlags >= 5;
+            }
+            if (mApp.IsSurvivalHard(mApp.mGameMode))
+            {
+                return aFlags >= 10;
+            }
+
             return false;
         }
 
