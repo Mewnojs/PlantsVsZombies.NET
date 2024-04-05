@@ -861,7 +861,7 @@ namespace Lawn
                     int num3 = mBoard.KillAllZombiesInRadius(mRow, num, num2, 115, 1, true, damageRangeFlags);
                     if (num3 >= 10 && !mApp.IsLittleTroubleLevel())
                     {
-                        mBoard.GrantAchievement(AchievementId.ACHIEVEMENT_EXPLODONATOR, true);
+                        mBoard.GrantAchievement(AchievementId.Explodonator, true);
                     }
                     mApp.AddTodParticle(num, num2, 400000, ParticleEffect.Powie);
                     mApp.Vibrate();
@@ -930,6 +930,10 @@ namespace Lawn
                         mBoard.ShakeBoard(3, -4);
                         mApp.Vibrate();
                         Die();
+                        if (!mApp.IsIZombieLevel())
+                        {
+                            mBoard.GrantAchievement(AchievementId.Spudow, true);
+                        }
                         return;
                     }
                     if (mSeedType == SeedType.InstantCoffee)
@@ -2141,7 +2145,7 @@ namespace Lawn
                                     Die();
                                 }
                             }
-                            zombie.TakeDamage(theDamage2, theDamageFlags);
+                            zombie.TakeDamage(theDamage2, theDamageFlags, false);
                             mApp.PlayFoley(FoleyType.Splat);
                         }
                     }
@@ -2506,11 +2510,15 @@ namespace Lawn
                         }
                         if (rectOverlap > num3)
                         {
-                            zombie.TakeDamage(1800, 18U);
+                            zombie.TakeDamage(1800, 18U, false);
                             num++;
                         }
                     }
                 }
+            }
+            if (num >= 5 && !mApp.IsIZombieLevel())
+            {
+                mBoard.GrantAchievement(AchievementId.MonsterMash, true);
             }
         }
 
@@ -2530,6 +2538,10 @@ namespace Lawn
                     }
                     if (num == 0 && zombie.EffectedByDamage((uint)damageRangeFlags))
                     {
+                        if (zombie.mZombieType == ZombieType.Bobsled && zombie.IsBobsledTeamWithSled() && ++mBoard.mBobsledKilled >= 3)
+                        {
+                            mBoard.GrantAchievement(AchievementId.ChillOut, true);
+                        }
                         zombie.RemoveColdEffects();
                         zombie.ApplyBurn();
                     }
@@ -2562,6 +2574,10 @@ namespace Lawn
                 {
                     num++;
                 }
+            }
+            if (num >= 20 && !mApp.IsLittleTroubleLevel())
+            {
+                mBoard.GrantAchievement(AchievementId.Num20BelowZero, true);
             }
             mBoard.mIceTrapCounter = 300;
             TodParticleSystem todParticleSystem = mApp.ParticleTryToGet(mBoard.mPoolSparklyParticleID);
@@ -2861,7 +2877,7 @@ namespace Lawn
                     if (flag)
                     {
                         mApp.PlayFoley(FoleyType.Splat);
-                        zombie2.TakeDamage(40, 0U);
+                        zombie2.TakeDamage(40, 0U, false);
                         mState = PlantState.ChomperBitingMissed;
                         return;
                     }
@@ -4207,11 +4223,11 @@ namespace Lawn
                 mBoard.ShakeBoard(1, -2);
                 if (mSeedType == SeedType.GiantWallnut)
                 {
-                    zombie.TakeDamage(1800, 0U);
+                    zombie.TakeDamage(1800, 0U, true);
                 }
                 else if (zombie.mShieldType == ShieldType.Door && mState != PlantState.Notready)
                 {
-                    zombie.TakeDamage(1800, 0U);
+                    zombie.TakeDamage(1800, 0U, false);
                 }
                 else if (zombie.mShieldType != ShieldType.None)
                 {
@@ -4231,7 +4247,7 @@ namespace Lawn
                 }
                 else
                 {
-                    zombie.TakeDamage(1800, 0U);
+                    zombie.TakeDamage(1800, 0U, false);
                 }
                 if ((!mApp.IsFirstTimeAdventureMode() || mBoard.mLevel > 10) && mSeedType == SeedType.Wallnut)
                 {
@@ -4258,7 +4274,7 @@ namespace Lawn
                     {
                         mApp.PlayFoley(FoleyType.SpawnSun);
                         mBoard.AddCoin(num4, num5, CoinType.Gold, CoinMotion.Coin);
-                        mBoard.GrantAchievement(AchievementId.ACHIEVEMENT_ROLL_SOME_HEADS, true);
+                        mBoard.GrantAchievement(AchievementId.RollSomeHeads, true);
                     }
                 }
                 if (mSeedType != SeedType.GiantWallnut)
@@ -5446,11 +5462,19 @@ namespace Lawn
             }
             if (mSeedType == SeedType.Twinsunflower)
             {
-                mBoard.CountPlantByType(mSeedType);
+                int count = mBoard.CountPlantByType(mSeedType);
+                if (count >= 10)
+                {
+                    mBoard.GrantAchievement(AchievementId.FlowerPower, true);
+                }
             }
             if (mSeedType == SeedType.Cobcannon)
             {
-                mBoard.CountPlantByType(mSeedType);
+                int count = mBoard.CountPlantByType(mSeedType);
+                if (count >= 5)
+                {
+                    mBoard.GrantAchievement(AchievementId.Defcorn5, true);
+                }
             }
             if (mSeedType >= SeedType.Peashooter && mSeedType < SeedType.ExplodeONut)
             {
@@ -5465,7 +5489,7 @@ namespace Lawn
             {
                 mBoard.mPlanternOrBloverUsed = true;
             }
-            if (mBoard.StageIsNight() && (mSeedType == SeedType.Wallnut || mSeedType == SeedType.Tallnut))
+            if (mSeedType == SeedType.Wallnut || mSeedType == SeedType.Tallnut || mSeedType == SeedType.Pumpkinshell)
             {
                 mBoard.mNutsUsed = true;
             }
@@ -5481,7 +5505,40 @@ namespace Lawn
                         TodCommon.SetBit(ref num2, plant.mRow, 1);
                     }
                 }
-                mBoard.StageHas6Rows();
+                if (mBoard.StageHas6Rows())
+                {
+                    if (num2 == 63)
+                    {
+                        mBoard.GrantAchievement(AchievementId.MelonYLane, true);
+                    }
+                }
+                else
+                {
+                    if (num2 == 31)
+                    {
+                        mBoard.GrantAchievement(AchievementId.MelonYLane, true);
+                    }
+                }
+            }
+            if (mBoard.StageHasPool()
+                 && (mSeedType == SeedType.Lilypad
+                 || mSeedType == SeedType.Tanglekelp
+                 || mSeedType == SeedType.Seashroom
+                 || mSeedType == SeedType.Cattail))
+            {
+                mBoard.mPoolPlantsUsed = true;
+            }
+            if (mSeedType == SeedType.Jalapeno)
+            {
+                mBoard.mJalapenoUsed = true;
+            }
+            if (mSeedType == SeedType.Tallnut)
+            {
+                mBoard.mTallNutUsed = true;
+            }
+            if (mSeedType == SeedType.Magnetshroom)
+            {
+                mBoard.mMagnetShroomUsed = true;
             }
         }
 

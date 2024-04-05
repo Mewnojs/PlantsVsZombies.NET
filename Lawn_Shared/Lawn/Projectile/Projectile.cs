@@ -508,7 +508,7 @@ namespace Lawn
                 uint damageFlags = GetDamageFlags(theZombie);
                 int aDamage = projectileDef.mDamage;
                 ProjectileType projectileType = mProjectileType;
-                theZombie.TakeDamage(projectileDef.mDamage, damageFlags);
+                theZombie.TakeDamage(projectileDef.mDamage, damageFlags, false);
             }
             int aRenderOrder = mRenderOrder + 1;
             float num = mPosX - mVelX;
@@ -896,7 +896,7 @@ namespace Lawn
                 mBoard.mGargantuarsKillsByCornCob += liveGargantuarCount - liveGargantuarCount2;
                 if (mBoard.mGargantuarsKillsByCornCob >= 2)
                 {
-                    mBoard.GrantAchievement(AchievementId.ACHIEVEMENT_POPCORN_PARTY, true);
+                    mBoard.GrantAchievement(AchievementId.PopcornParty, true);
                 }
                 DoImpact(null);
                 return;
@@ -972,11 +972,11 @@ namespace Lawn
                     uint damageFlags = GetDamageFlags(zombie);
                     if (theZombie == zombie)
                     {
-                        zombie.TakeDamage(damage, damageFlags);
+                        zombie.TakeDamage(damage, damageFlags, false);
                     }
                     else
                     {
-                        zombie.TakeDamage(num3, damageFlags);
+                        zombie.TakeDamage(num3, damageFlags, false);
                     }
                 }
             }

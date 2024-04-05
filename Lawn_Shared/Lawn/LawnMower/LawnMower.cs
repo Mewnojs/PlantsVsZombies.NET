@@ -64,6 +64,7 @@ namespace Lawn
             mRollingInCounter = 0;
             mSquishedCounter = 0;
             mLastPortalX = -1;
+            mKilledZombies = 0;
             ReanimationType theReanimationType;
             if (mBoard.StageHasRoof())
             {
@@ -465,6 +466,12 @@ namespace Lawn
             }
             mApp.PlayFoley(FoleyType.Splat);
             theZombie.MowDown();
+            mKilledZombies++;
+            mBoard.mPyromaniacKillZombiesOnly = false;
+            if (mKilledZombies >= 10)
+            {
+                mBoard.GrantAchievement(AchievementId.LawnMowerMan, true);
+            }
         }
 
         public void SquishMower()
@@ -522,6 +529,8 @@ namespace Lawn
         public MowerHeight mMowerHeight;
 
         public int mLastPortalX;
+
+        public int mKilledZombies;
 
         private static Stack<LawnMower> unusedObjects = new Stack<LawnMower>();
     }

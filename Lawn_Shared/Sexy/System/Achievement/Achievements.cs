@@ -194,24 +194,59 @@ namespace Sexy
 
     public/*internal*/ enum AchievementId
     {
-        ACHIEVEMENT_HOME_SECURITY,
-        ACHIEVEMENT_MORTICULTURALIST,
-        BetterOffDead,
-        ChinaShop,
+        HomeLawnSecurity,
+        Spudow,
+        Explodonator,
+        Morticulturalist,
+        DontPeaInThePool,
+        RollSomeHeads,
+        Grounded,
+        Zombologist,
+        PennyPincher,
+        SunnyDays,
+        GoodMorning,
+        NoFungusAmongUs,
+        LastMownStanding,
+        Num20BelowZero,
+        FlowerPower,
+        Pyromaniac,
+        LawnMowerMan,
+        ChillOut,
+        Defcorn5,
+        MonsterMash,
+        BlindFaith,
+        PoolsClosed,
+        MelonYLane,
+        SecondLife,
+        LuckySpin,
+        ChilliFree,
+        Enlightened, // 未实现
+        DiamondBeghouler,
+        Greenfingers, // 未实现
+        WallNotAttack,
         BeyondTheGrave,
+        PekingExpress, // 未实现
+        ShootingStar,
+        SolInvictus,
+        SproingSproing,
+        BetterOffDead,
+        IWin,
+        WhereTheSunDontShine,
+        UndeadSpace, // 未实现
+        DiscoIsUndead,
+        ChinaShop,
+        Smashing,
+        Gotcha,
+        StillStanding, // 未实现
+        TheStuffOfLegends, // 未实现
+        HammerTime, // 未实现
+        // 之后的成就是free没有的
         CrashoftheTitan,
         SoilYourPlants,
-        ACHIEVEMENT_EXPLODONATOR,
         CloseShave,
         Shopaholic,
         NomNomNom,
-        NoFungusAmongUs,
-        DontPeainthePool,
-        Grounded,
-        GoodMorning,
-        ACHIEVEMENT_POPCORN_PARTY,
-        ACHIEVEMENT_ROLL_SOME_HEADS,
-        DiscoisUndead,
+        PopcornParty,
         MAX_ACHIEVEMENTS
     }
 }

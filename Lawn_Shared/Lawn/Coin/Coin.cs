@@ -1205,6 +1205,14 @@ namespace Lawn
                 if (mBoard != null)
                 {
                     mBoard.mCoinsCollected += coinValue;
+                    if (mType == CoinType.Silver || mType == CoinType.Gold)
+                    {
+                        mBoard.mCollectedCoinStreak++;
+                        if (mBoard.mCollectedCoinStreak == 30 && mApp.mGameMode != GameMode.ChallengeZenGarden)
+                        {
+                            mBoard.GrantAchievement(AchievementId.PennyPincher, true);
+                        }
+                    }
                 }
             }
             if (mType == CoinType.Diamond && mBoard != null)

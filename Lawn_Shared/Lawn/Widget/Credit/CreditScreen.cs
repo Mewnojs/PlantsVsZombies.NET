@@ -81,7 +81,7 @@ namespace Lawn
             mNumSections = 0;
             for (;;)
             {
-                Debug.ASSERT(mNumSections < 57);
+                //Debug.ASSERT(mNumSections < 57);
                 string theString = Common.StrFormat_("[CREDITS_ROLES{0}]", mNumSections + 1);
                 if (!TodStringFile.TodStringListExists(theString))
                 {
@@ -99,6 +99,14 @@ namespace Lawn
                     mNames[mNumSections] = " ";
                 }
                 mNumSections++;
+            }
+            {
+                var oldRoles = mRoles;
+                mRoles = new string[mNumSections];
+                Array.Copy(oldRoles, mRoles, mNumSections);
+                var oldNames = mNames;
+                mNames = new string[mNumSections];
+                Array.Copy(oldNames, mNames, mNumSections);
             }
             mCreditsHeight = GetCreditsHeight();
             RestartScroll();
@@ -361,9 +369,9 @@ namespace Lawn
 
         public bool mNeedToStartPlaying;
 
-        public string[] mRoles = new string[57];
+        public string[] mRoles = new string[100];
 
-        public string[] mNames = new string[57];
+        public string[] mNames = new string[100];
 
         public int mNumSections;
 

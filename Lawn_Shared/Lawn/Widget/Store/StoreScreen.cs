@@ -930,7 +930,7 @@ namespace Lawn
             }
             if (i == SeedType.SeedsInChooserCount && !mApp.mPlayerInfo.mShownAchievements[1])
             {
-                ReportAchievement.GiveAchievement(AchievementId.ACHIEVEMENT_MORTICULTURALIST);
+                ReportAchievement.GiveAchievement(AchievementId.Morticulturalist);
                 mApp.mPlayerInfo.mShownAchievements[1] = true;
                 SetBubbleText(4000, 150, false);
                 mBubbleAutoAdvance = true;

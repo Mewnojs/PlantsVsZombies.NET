@@ -1301,7 +1301,7 @@ namespace Lawn
                     }
                     else
                     {
-                        GrantAchievement(AchievementId.SoilYourPlants);
+                        GrantAchievement(AchievementId.SoilYourPlants, true);
                     }
                 }
             }
@@ -2593,7 +2593,7 @@ namespace Lawn
                         }
                         if (value_type == 'd')
                         {
-                            bossZombie.TakeDamage(10000, 0U);
+                            bossZombie.TakeDamage(10000, 0U, false);
                             return;
                         }
                     }
@@ -3340,6 +3340,10 @@ namespace Lawn
             if (mSunMoney > 9990)
             {
                 mSunMoney = 9990;
+            }
+            if (mSunMoney >= 8000 && mApp != null && mApp.mGameMode != GameMode.ChallengeZombiquarium)
+            {
+                GrantAchievement(AchievementId.SunnyDays, true);
             }
         }
 
@@ -5165,43 +5169,21 @@ namespace Lawn
         {
             if (mApp.IsScaryPotterLevel())
             {
-                if (mApp.mGameMode == GameMode.ScaryPotterEndless && mChallenge.mSurvivalStage >= 14)
-                {
-                    GrantAchievement(AchievementId.ChinaShop);
-                }
+
             }
             else if (mApp.IsIZombieLevel())
             {
-                if (mApp.mGameMode == GameMode.PuzzleIZombieEndless && mChallenge.mSurvivalStage >= 9)
-                {
-                    GrantAchievement(AchievementId.BetterOffDead);
-                }
+
             }
             else if (!mApp.IsQuickPlayMode() && !HasConveyorBeltSeedBank() && !mApp.IsWhackAZombieLevel())
             {
                 if (AwardCloseShave())
                 {
-                    GrantAchievement(AchievementId.CloseShave);
+                    GrantAchievement(AchievementId.CloseShave, true);
                 }
                 if (mNomNomNomAchievementTracker)
                 {
-                    GrantAchievement(AchievementId.NomNomNom);
-                }
-                if (StageIsNight() && mNoFungusAmongUsAchievementTracker)
-                {
-                    GrantAchievement(AchievementId.NoFungusAmongUs);
-                }
-                if (StageHasPool() && !mPeaShooterUsed)
-                {
-                    GrantAchievement(AchievementId.DontPeainthePool);
-                }
-                if (StageHasRoof() && !mCatapultPlantsUsed)
-                {
-                    GrantAchievement(AchievementId.Grounded);
-                }
-                if (StageIsDayWithoutPool() && mMushroomAndCoffeeBeansOnly)
-                {
-                    GrantAchievement(AchievementId.GoodMorning);
+                    GrantAchievement(AchievementId.NomNomNom, true);
                 }
             }
             if (mLevel >= 3)
@@ -7169,12 +7151,26 @@ namespace Lawn
                     {
                         mChallenge.PuzzleNextStageClear();
                         mChallenge.ScaryPotterPopulate();
+                        if (mApp.IsEndlessScaryPotter(mApp.mGameMode))
+                        {
+                            if (mApp.mPlayerInfo.mChallengeRecords[mApp.mGameMode - GameMode.SurvivalNormalStage1] >= 15)
+                            {
+                                GrantAchievement(AchievementId.ChinaShop, true);
+                            }
+                        }
                         return;
                     }
                     if (mApp.IsEndlessIZombie(mApp.mGameMode))
                     {
                         mChallenge.PuzzleNextStageClear();
                         mChallenge.IZombieInitLevel();
+                        if (mApp.IsEndlessScaryPotter(mApp.mGameMode))
+                        {
+                            if (mApp.mPlayerInfo.mChallengeRecords[mApp.mGameMode - GameMode.SurvivalNormalStage1] >= 10)
+                            {
+                                GrantAchievement(AchievementId.BetterOffDead, true);
+                            }
+                        }
                         return;
                     }
                     if (mApp.mGameMode == GameMode.ChallengeLastStand)
@@ -7961,7 +7957,7 @@ namespace Lawn
                         }
                         else
                         {
-                            zombie.TakeDamage(1800, 18U);
+                            zombie.TakeDamage(1800, 18U, true);
                         }
                         if (!flag && zombie.IsDeadOrDying())
                         {
@@ -9619,19 +9615,121 @@ namespace Lawn
 
         public bool GrantAchievement(AchievementId theAchievement, bool show)
         {
+            Debug.Log(DebugType.Info, $"Finish Achievement: {theAchievement}");
             return ReportAchievement.GiveAchievement(theAchievement);
         }
 
         public bool CheckForPostGameAchievements()
         {
-            if (mApp.IsWhackAZombieLevel() || mApp.IsScaryPotterLevel() || mApp.IsWallnutBowlingLevel())
-            {
-                return false;
-            }
             bool flag = false;
-            if (mApp.IsAdventureMode() && mLevel == 50 && mApp.mPlayerInfo.mFinishedAdventure < 1)
+            if (mApp.IsChallengeMode())
             {
-                flag = (GrantAchievement(AchievementId.ACHIEVEMENT_HOME_SECURITY, false) || flag);
+                if (mApp.GetNumTrophies(ChallengePage.Challenge) >= (int)GameMode.MiniGameCount - 1 && mApp.mPlayerInfo.mChallengeRecords[mApp.mGameMode - GameMode.SurvivalNormalStage1] == 0)
+                {
+                    flag |= GrantAchievement(AchievementId.BeyondTheGrave, false);
+                }
+            }
+            if (mApp.IsWhackAZombieLevel() || mApp.IsWallnutBowlingLevel() || mApp.mGameMode == GameMode.ChallengeZombiquarium || mApp.mGameMode == GameMode.ChallengeSeeingStars)
+            {
+                return flag;
+            }
+            if (mApp.IsAdventureMode() && mLevel == 50)
+            {
+                if (mApp.mPlayerInfo.mFinishedAdventure < 1)
+                {
+                    flag |= GrantAchievement(AchievementId.HomeLawnSecurity, false);
+                }
+                else
+                {
+                    flag |= GrantAchievement(AchievementId.SecondLife, false);
+                }
+            }
+            if (mBackground == BackgroundType.Num3Pool)
+            {
+                if (!mPeaShooterUsed)
+                {
+                    flag |= GrantAchievement(AchievementId.DontPeaInThePool, false);
+                }
+            }
+            else if (mBackground == BackgroundType.Num5Roof)
+            {
+                if (!HasConveyorBeltSeedBank() && !mCatapultPlantsUsed)
+                {
+                    flag |= GrantAchievement(AchievementId.Grounded, false);
+                }
+            }
+            if (StageHasFog() && mLevel >= 37 && mLevel != 50 && !mPlanternOrBloverUsed)
+            {
+                flag |= GrantAchievement(AchievementId.BlindFaith, false);
+            }
+            if (StageIsNight())
+            {
+                if (!mMushroomsUsed && mApp.mGameMode != GameMode.ChallengePortalCombat && mApp.mGameMode != GameMode.ChallengeBeghouled && mApp.mGameMode != GameMode.ChallengeBeghouledTwist && mApp.mGameMode != GameMode.Quickplay35 && !mApp.IsIZombieLevel() && !mApp.IsScaryPotterLevel() && mLevel != 15)
+                {
+                    flag |= GrantAchievement(AchievementId.NoFungusAmongUs, false);
+                }
+            }
+            else if (mMushroomAndCoffeeBeansOnly && mLevel != 15)
+            {
+                flag |= GrantAchievement(AchievementId.GoodMorning, false);
+            }
+            if (mPyromaniacKillZombiesOnly && mLevel != 15 && !mApp.IsIZombieLevel())
+            {
+                flag |= GrantAchievement(AchievementId.Pyromaniac, false);
+            }
+            if (StageHasPool() && !mPoolPlantsUsed)
+            {
+                flag |= GrantAchievement(AchievementId.PoolsClosed, false);
+            }
+            if (mApp.mGameMode == GameMode.ChallengeLastStand && mSunMoney >= 2000)
+            {
+                flag |= GrantAchievement(AchievementId.SolInvictus, false);
+            }
+            if (mApp.mGameMode == GameMode.ChallengeColumn && !mJalapenoUsed)
+            {
+                flag |= GrantAchievement(AchievementId.ChilliFree, false);
+            }
+            if (mApp.mGameMode == GameMode.ChallengeWarAndPeas && !mNutsUsed)
+            {
+                flag |= GrantAchievement(AchievementId.WallNotAttack, false);
+            }
+            if (mApp.mGameMode == GameMode.ChallengePogoParty && !mTallNutUsed && !mMagnetShroomUsed)
+            {
+                flag |= GrantAchievement(AchievementId.SproingSproing, false);
+            }
+            if (mApp.mGameMode >= GameMode.PuzzleIZombie1 && mApp.mGameMode <= GameMode.PuzzleIZombie9)
+            {
+                int count = 0;
+                for (GameMode i = GameMode.PuzzleIZombie1; i <= GameMode.PuzzleIZombie9; i++)
+                {
+                    if (mApp.HasBeatenChallenge(i))
+                    {
+                        count++;
+                    }
+                }
+                if (count >= (int)GameMode.PuzzleIZombieCount - 2 && mApp.mPlayerInfo.mChallengeRecords[mApp.mGameMode - GameMode.SurvivalNormalStage1] == 0)
+                {
+                    flag |= GrantAchievement(AchievementId.IWin, false);
+                }
+            }
+            if (mApp.mGameMode == GameMode.PuzzleIZombie1 && mSunMoney >= 1000)
+            {
+                flag |= GrantAchievement(AchievementId.WhereTheSunDontShine, false);
+            }
+            if (mApp.mGameMode >= GameMode.ScaryPotter1 && mApp.mGameMode <= GameMode.ScaryPotter9)
+            {
+                int count = 0;
+                for (GameMode i = GameMode.ScaryPotter1; i <= GameMode.ScaryPotter9; i++)
+                {
+                    if (mApp.HasBeatenChallenge(i))
+                    {
+                        count++;
+                    }
+                }
+                if (count >= (int)GameMode.ScaryPotterCount - 2 && mApp.mPlayerInfo.mChallengeRecords[mApp.mGameMode - GameMode.SurvivalNormalStage1] == 0)
+                {
+                    flag |= GrantAchievement(AchievementId.Smashing, false);
+                }
             }
             return flag;
         }
@@ -10143,6 +10241,18 @@ namespace Lawn
         public bool mNomNomNomAchievementTracker;
 
         public bool mNoFungusAmongUsAchievementTracker;
+
+        public bool mPyromaniacKillZombiesOnly;
+
+        public bool mPoolPlantsUsed;
+
+        public bool mJalapenoUsed;
+
+        public int mBobsledKilled;
+
+        public bool mTallNutUsed;
+
+        public bool mMagnetShroomUsed;
 
         private static int mPeashootersPlanted;
 

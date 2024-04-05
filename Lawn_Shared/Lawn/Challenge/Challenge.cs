@@ -1287,6 +1287,22 @@ namespace Lawn
                     }
                 }
             }
+            if (mApp.mGameMode == GameMode.ChallengeSeeingStars)
+            {
+                bool dontGetAchievement = false;
+                if (!mBoard.IsFlagWave(mBoard.mCurrentWave) || mBoard.mHugeWaveCountDown > 0)
+                {
+                    dontGetAchievement = true;
+                    if (mBoard.mZombieCountDown > 0)
+                    {
+                        dontGetAchievement = mBoard.mCurrentWave >= mBoard.GetNumWavesPerFlag();
+                    }
+                }
+                if (!dontGetAchievement)
+                {
+                    mBoard.GrantAchievement(AchievementId.ShootingStar, true);
+                }
+            }
             SpawnLevelAward(theGridX, theGridY);
         }
 
@@ -1927,6 +1943,7 @@ namespace Lawn
                     int theX2 = 320 + j * 60 / num3;
                     mBoard.AddCoin(theX2, 85, CoinType.Diamond, CoinMotion.Coin);
                 }
+                mBoard.GrantAchievement(AchievementId.LuckySpin, true);
                 return;
             }
             if (aPacketType == SeedType.SlotMachineSun)
@@ -2501,7 +2518,7 @@ namespace Lawn
                     Zombie zombie = mBoard.mZombies[i];
                     if (!zombie.mDead && !zombie.IsDeadOrDying())
                     {
-                        zombie.TakeDamage(1800, 0U);
+                        zombie.TakeDamage(1800, 0U, false);
                     }
                 }
             }
@@ -3459,6 +3476,22 @@ namespace Lawn
                 BeghouledStartFalling(ChallengeState.BeghouledFalling);
             }
             mBoard.TakeSunMoney(currentPlantCost);
+            if (mApp.mGameMode == GameMode.ChallengeBeghouled)
+            {
+                bool finish = true;
+                for (int i = 0; i < 3; i++)
+                {
+                    if (!mBoard.mChallenge.mBeghouledPurcasedUpgrade[i])
+                    {
+                        finish = false;
+                        break;
+                    }
+                }
+                if (finish)
+                {
+                    mBoard.GrantAchievement(AchievementId.DiamondBeghouler, true);
+                }
+            }
         }
 
         public void BeghouledShuffle()

@@ -1030,7 +1030,7 @@ namespace Lawn
 
         public void EatZombie(Zombie theZombie)//3update
         {
-            theZombie.TakeDamage(GameConstants.TICKS_BETWEEN_EATS, 9U);
+            theZombie.TakeDamage(GameConstants.TICKS_BETWEEN_EATS, 9U, false);
             StartEating();
             if (theZombie.mBodyHealth <= 0)
             {
@@ -1062,10 +1062,6 @@ namespace Lawn
             StartEating();
             if ((thePlant.mSeedType == SeedType.Jalapeno || thePlant.mSeedType == SeedType.Cherrybomb || thePlant.mSeedType == SeedType.Doomshroom || thePlant.mSeedType == SeedType.Iceshroom || thePlant.mSeedType == SeedType.Hypnoshroom || thePlant.mState == PlantState.FlowerpotInvulnerable || thePlant.mState == PlantState.LilypadInvulnerable || thePlant.mState == PlantState.SquashLook || thePlant.mState == PlantState.SquashPreLaunch) && !thePlant.mIsAsleep)
             {
-                if (mZombieType == ZombieType.Dancer && thePlant.mSeedType == SeedType.Hypnoshroom)
-                {
-                    mBoard.GrantAchievement(AchievementId.DiscoisUndead);
-                }
                 return;
             }
             if (thePlant.mSeedType == SeedType.Potatomine && thePlant.mState != PlantState.Notready)
@@ -1351,8 +1347,8 @@ namespace Lawn
                 TakeFlyingDamage(0, 0U);
             }
             TakeShieldDamage(0, 0U);
-            TakeBodyDamage(0, 0U);
-            TakeDamage(0, 0U);
+            TakeBodyDamage(0, 0U, false);
+            TakeDamage(0, 0U, false);
             UpdateDamageStates(0U);
             mJustGotShotCounter = num;
             if (mZombieType == ZombieType.Boss)
@@ -1507,7 +1503,7 @@ namespace Lawn
             }
             if (giveAchievements && mZombieType == ZombieType.Gargantuar && mBoard != null)
             {
-                mBoard.GrantAchievement(AchievementId.CrashoftheTitan);
+                mBoard.GrantAchievement(AchievementId.CrashoftheTitan, true);
             }
             if (mLeaderZombie != null && mLeaderZombie.mFollowerZombieID != null)
             {
@@ -1799,7 +1795,7 @@ namespace Lawn
             }
         }
 
-        public void TakeDamage(int theDamage, uint theDamageFlags)
+        public void TakeDamage(int theDamage, uint theDamageFlags, bool isPyromaniac)
         {
             if (mZombiePhase == ZombiePhase.JackInTheBoxPopping)
             {
@@ -1828,7 +1824,7 @@ namespace Lawn
             }
             if (num > 0)
             {
-                TakeBodyDamage(num, theDamageFlags);
+                TakeBodyDamage(num, theDamageFlags, isPyromaniac);
             }
         }
 
@@ -3631,7 +3627,7 @@ namespace Lawn
             mBoard.mIceTimer[mRow] = Math.Max(500, mBoard.mIceTimer[mRow]);
             if (mPosX + 10f < mBoard.mIceMinX[mRow] && GetBobsledPosition() == 0)
             {
-                TakeDamage(6, 8U);
+                TakeDamage(6, 8U, false);
             }
         }
 
@@ -4501,7 +4497,7 @@ namespace Lawn
             {
                 mBoard.RemoveParticleByType(ParticleEffect.ZombieBossFireball);
             }
-            TakeDamage(20, 1U);
+            TakeDamage(20, 1U, false);
             UpdateAnimSpeed();
             return true;
         }
@@ -4873,7 +4869,7 @@ namespace Lawn
                     }
                     if (RandomNumbers.NextNumber(5) == 0)
                     {
-                        TakeDamage(theDamage, 9U);
+                        TakeDamage(theDamage, 9U, false);
                     }
                 }
             }
@@ -5773,7 +5769,7 @@ namespace Lawn
             return aDamageRemaining;
         }
 
-        public void TakeBodyDamage(int theDamage, uint theDamageFlags)
+        public void TakeBodyDamage(int theDamage, uint theDamageFlags, bool isPyromaniac)
         {
             if (!TodCommon.TestBit(theDamageFlags, 3))
             {
@@ -5900,6 +5896,10 @@ namespace Lawn
                 mBodyHealth = 0;
                 PlayDeathAnim(theDamageFlags);
                 DropLoot();
+                if (!isPyromaniac && mBoard.mPyromaniacKillZombiesOnly)
+                {
+                    mBoard.mPyromaniacKillZombiesOnly = false;
+                }
             }
         }
 
@@ -6177,6 +6177,7 @@ namespace Lawn
             mLastPortalX = -1;
             if (mZombieType == ZombieType.Dancer)
             {
+                mBoard.GrantAchievement(AchievementId.DiscoIsUndead, true);
                 for (int i = 0; i < GameConstants.NUM_BACKUP_DANCERS; i++)
                 {
                     mFollowerZombieID[i] = null;
@@ -6650,7 +6651,7 @@ namespace Lawn
                     plant = FindPlantTarget(ZombieAttackType.Chew);
                     if (plant != null && plant.mSeedType == SeedType.Spikerock)
                     {
-                        TakeDamage(20, 32U);
+                        TakeDamage(20, 32U, false);
                         plant.SpikeRockTakeDamage();
                         if (plant.mPlantHealth <= 0)
                         {
@@ -6811,7 +6812,7 @@ namespace Lawn
             }
             if (mBodyHealth >= 1800 || mZombieType == ZombieType.Boss)
             {
-                TakeDamage(1800, 18U);
+                TakeDamage(1800, 18U, true);
                 return;
             }
             if (mZombieType == ZombieType.SquashHead && !mHasHead)
@@ -7756,7 +7757,7 @@ namespace Lawn
             {
                 if (!mHasHead)
                 {
-                    TakeDamage(1800, 9U);
+                    TakeDamage(1800, 9U, false);
                 }
                 else if (mX <= 140 && !flag)
                 {
@@ -9636,7 +9637,7 @@ namespace Lawn
             }
             if (mX <= board_EDGE + 70 && !mHasHead)
             {
-                TakeDamage(1800, 9U);
+                TakeDamage(1800, 9U, false);
             }
         }
 
@@ -9645,6 +9646,10 @@ namespace Lawn
             if (mMindControlled || !mHasHead || IsDeadOrDying())
             {
                 return;
+            }
+            if (IsOnBoard() && mX < 800)
+            {
+                mBoard.GrantAchievement(AchievementId.Zombologist, true);
             }
             if (mZombiePhase == ZombiePhase.ZombieNormal && mPhaseCounter <= 0)
             {
@@ -9713,6 +9718,10 @@ namespace Lawn
                 mApp.AddTodParticle(mPosX + 80f, mPosY + 60f, mRenderOrder + 1, ParticleEffect.CatapultExplosion);
                 mApp.PlayFoley(FoleyType.Explosion);
                 DieWithLoot();
+                if (!mBoard.AreEnemyZombiesOnScreen() && mBoard.mCurrentWave == mBoard.mNumWaves && (mApp.mGameMode != GameMode.ChallengeWhackAZombie || mApp.mBoard.mChallenge.mChallengeState == ChallengeState.Normal))
+                {
+                    mBoard.GrantAchievement(AchievementId.LastMownStanding, true);
+                }
                 return;
             }
             if (mZombieType == ZombieType.Zamboni)
@@ -10217,7 +10226,7 @@ namespace Lawn
                 }
                 if (mZombieAge % 100 == 0)
                 {
-                    TakeDamage(10, 8U);
+                    TakeDamage(10, 8U, false);
                     if (IsDeadOrDying())
                     {
                         mApp.PlaySample(Resources.SOUND_ZOMBAQUARIUM_DIE);
@@ -10389,7 +10398,7 @@ namespace Lawn
                 Reanimation aSpecialHeadReanim = mApp.ReanimationGet(mSpecialHeadReanimID);
                 aSpecialHeadReanim.ReanimationDie();
                 mSpecialHeadReanimID = null;
-                TakeDamage(1800, 9U);
+                TakeDamage(1800, 9U, false);
             }
         }
 

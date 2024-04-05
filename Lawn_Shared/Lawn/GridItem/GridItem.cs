@@ -538,6 +538,10 @@ namespace Lawn
                 }
                 return;
             }
+            if (mScaryPotType == ScaryPotType.Zombie && (mZombieType == ZombieType.Gargantuar || mZombieType == ZombieType.RedeyeGargantuar) && mTransparentCounter > 0)
+            {
+                mBoard.GrantAchievement(AchievementId.Gotcha, true);
+            }
             int count = mBoard.mPlants.Count;
             for (int i = 0; i < count; i++)
             {
@@ -646,7 +650,7 @@ namespace Lawn
                     Zombie zombie2 = RakeFindZombie();
                     if (zombie2 != null)
                     {
-                        zombie2.TakeDamage(1800, 0U);
+                        zombie2.TakeDamage(1800, 0U, false);
                         mApp.PlayFoley(FoleyType.Bonk);
                     }
                 }

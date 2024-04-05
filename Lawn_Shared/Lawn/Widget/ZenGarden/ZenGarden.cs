@@ -594,6 +594,8 @@ namespace Lawn
                 }
             }
             UpdatePlantNeeds();
+            CheckForEnlightenment();
+            CheckForGreenFingerment();
             int count = mBoard.mPlants.Count;
             for (int i = 0; i < count; i++)
             {
@@ -2381,6 +2383,16 @@ namespace Lawn
                 mApp.mPlayerInfo.mZenTutorialMessage = 26;
             }
             AddStinky();
+        }
+
+        public void CheckForEnlightenment()
+        {
+
+        }
+
+        public void CheckForGreenFingerment()
+        {
+
         }
 
         private static ZenGarden.PottedPlantOffset[] POTTED_PLANT_DRAW_OFFSETS = new ZenGarden.PottedPlantOffset[]

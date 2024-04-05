@@ -3510,10 +3510,6 @@ namespace Lawn
                 }
             }
             int numTrophies3 = GetNumTrophies(ChallengePage.Challenge);
-            if (numTrophies3 == (int)GameMode.MiniGameCount)
-            {
-                ReportAchievement.GiveAchievement(AchievementId.BeyondTheGrave);
-            }
             WriteCurrentUserConfig();
             return flag;
         }
