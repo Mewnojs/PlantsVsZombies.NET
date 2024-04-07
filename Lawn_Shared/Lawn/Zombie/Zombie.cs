@@ -1094,7 +1094,7 @@ namespace Lawn
             {
                 int num = thePlant.mPlantHealth / 40;
                 int num2 = (thePlant.mPlantHealth - /*3 * */GameConstants.TICKS_BETWEEN_EATS) / 40;
-                if (num2 < num)
+                if (num2 < num || /*<new>*/ thePlant.mPlantHealth - /*3 * */GameConstants.TICKS_BETWEEN_EATS <= 0 /* </new>*/)
                 {
                     mBoard.AddCoin(thePlant.mX, thePlant.mY, CoinType.Sun, CoinMotion.FromPlant);
                 }

@@ -4863,7 +4863,7 @@ namespace Lawn
         {
             Debug.ASSERT(mState == PlantState.CobcannonReady);
             mState = PlantState.CobcannonFiring;
-            mShootingCounter = 184;
+            mShootingCounter = 206;//184;  // Fixed to match the corresponding reanimation (under 100fps)
             PlayBodyReanim(GlobalMembersReanimIds.ReanimTrackId_anim_shooting, ReanimLoopType.PlayOnceAndHold, 20, 12f);
             mTargetX = theTargetX - 47;
             mTargetY = theTargetY;
