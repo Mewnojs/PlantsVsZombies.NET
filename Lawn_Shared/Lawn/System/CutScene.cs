@@ -556,20 +556,20 @@ namespace Lawn
                     mApp.PlayFoley(FoleyType.Digger);
                     if (mBoard.mLevel == 1)
                     {
-                        mApp.AddReanimation(Constants.BOARD_EDGE, 0f, 400000, ReanimationType.Sodroll, false);
+                        mApp.AddReanimation(/*Constants.BOARD_EDGE*/Constants.BOARD_EXTRA_ROOM * Constants.S, 0f, 400000, ReanimationType.Sodroll, false);
                         mApp.AddTodParticle(Constants.CutScene_ExtraRoom_1_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM, Constants.CutScene_ExtraRoom_1_Particle_Pos.Y, 400001, ParticleEffect.SodRoll);
                     }
                     else if (mBoard.mLevel == 2)
                     {
-                        mApp.AddReanimation(Constants.BOARD_EDGE - 10f, Constants.CutScene_SodRoll_1_Pos * Constants.S, 400000, ReanimationType.Sodroll, false);
-                        mApp.AddReanimation(Constants.BOARD_EDGE - 10f, Constants.CutScene_SodRoll_2_Pos * Constants.S, 400000, ReanimationType.Sodroll, false);
+                        mApp.AddReanimation(/*Constants.BOARD_EDGE - 10f*/Constants.BOARD_EXTRA_ROOM * Constants.S, Constants.CutScene_SodRoll_1_Pos * Constants.S, 400000, ReanimationType.Sodroll, false);
+                        mApp.AddReanimation(/*Constants.BOARD_EDGE - 10f*/Constants.BOARD_EXTRA_ROOM * Constants.S, Constants.CutScene_SodRoll_2_Pos * Constants.S, 400000, ReanimationType.Sodroll, false);
                         mApp.AddTodParticle(Constants.CutScene_ExtraRoom_2_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM, Constants.CutScene_ExtraRoom_2_Particle_Pos.Y, 400001, ParticleEffect.SodRoll);
                         mApp.AddTodParticle(Constants.CutScene_ExtraRoom_3_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM, Constants.CutScene_ExtraRoom_3_Particle_Pos.Y, 400001, ParticleEffect.SodRoll);
                     }
                     else if (mBoard.mLevel == 4)
                     {
-                        mApp.AddReanimation(Constants.CutScene_SodRoll_3_Pos.X + Constants.BOARD_EDGE + 10f, Constants.CutScene_SodRoll_3_Pos.Y * Constants.S, 400000, ReanimationType.Sodroll, false);
-                        mApp.AddReanimation(Constants.CutScene_SodRoll_4_Pos.X + Constants.BOARD_EDGE + 10f, Constants.CutScene_SodRoll_4_Pos.Y * Constants.S, 400000, ReanimationType.Sodroll, false);
+                        mApp.AddReanimation((Constants.CutScene_SodRoll_3_Pos.X + Constants.BOARD_EXTRA_ROOM) * Constants.S/* + Constants.BOARD_EDGE + 10f*/, Constants.CutScene_SodRoll_3_Pos.Y * Constants.S, 400000, ReanimationType.Sodroll, false);
+                        mApp.AddReanimation((Constants.CutScene_SodRoll_4_Pos.X + Constants.BOARD_EXTRA_ROOM) * Constants.S/* + Constants.BOARD_EDGE + 10f*/, Constants.CutScene_SodRoll_4_Pos.Y * Constants.S, 400000, ReanimationType.Sodroll, false);
                         mApp.AddTodParticle(Constants.CutScene_ExtraRoom_4_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM, Constants.CutScene_ExtraRoom_4_Particle_Pos.Y, 400001, ParticleEffect.SodRoll);
                         mApp.AddTodParticle(Constants.CutScene_ExtraRoom_5_Particle_Pos.X + Constants.BOARD_EXTRA_ROOM, Constants.CutScene_ExtraRoom_5_Particle_Pos.Y, 400001, ParticleEffect.SodRoll);
                     }
