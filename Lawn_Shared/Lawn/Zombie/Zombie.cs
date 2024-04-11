@@ -1377,8 +1377,8 @@ namespace Lawn
                     ApplyBossSmokeParticles(true);
                 }
             }
-            Update();
-            Update();
+            //Update();
+            //Update(); //3update compensation
             doLoot = true;
             doParticle = true;
             justLoaded = false;

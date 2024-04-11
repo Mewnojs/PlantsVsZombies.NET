@@ -5628,8 +5628,8 @@ namespace Lawn
                 mIsAsleep = true;
                 SetSleeping(false);
             }
-            UpdateReanim();
-            UpdateReanim();
+            //UpdateReanim();
+            //UpdateReanim(); //3update compensation
             float anAnimTime = mBodyReanimID.mAnimTime;
             if (!string.IsNullOrEmpty(lastPlayedBodyReanim_Name))
             {
