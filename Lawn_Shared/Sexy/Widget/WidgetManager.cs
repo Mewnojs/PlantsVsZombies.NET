@@ -1,6 +1,7 @@
 ﻿using MonoGame.IMEHelper;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Sexy
 {
@@ -844,11 +845,16 @@ namespace Sexy
             else if (!mIMEHandler.Enabled && (mIMEHotWidget?.mIMEHotArea.Contains((int)touch.location.x, (int)touch.location.y) ?? false))
             {
                 mIMEHotWidget.mOldY = mIMEHotWidget.mY;
-                mIMEHotWidget.Resize(mIMEHotWidget.mX,
-                    (int)(mIMEHandler.VirtualKeyboardHeight == 0 ? mIMEHotWidget.mY : 120),
-                    mIMEHotWidget.mWidth, mIMEHotWidget.mHeight);
                 mIMEHotWidget.mIMEEnabled = true;
                 mIMEHandler.StartTextComposition();
+                Task.Run(() =>
+                {
+                    Task.Delay(300).Wait();
+                    mIMEHotWidget.Resize(mIMEHotWidget.mX,
+                    -mIMEHotWidget.mIMEHotArea.mY + mIMEHotWidget.mY + (int)(mIMEHandler.VirtualKeyboardHeight == 0 ? 120 : (-mIMEHotWidget.mHeight + GlobalStaticVars.gSexyAppBase.mScreenScales.InvMapTouchY(mIMEHandler.VirtualKeyboardHeight))),
+                    mIMEHotWidget.mWidth, mIMEHotWidget.mHeight);
+                }
+                );
             }
         }
 

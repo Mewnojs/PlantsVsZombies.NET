@@ -9,11 +9,11 @@ namespace Sexy
     public class IMECompatibleWidget : Widget 
     {
         public bool mIMEEnabled;
-        public TRect mIMEHotArea 
+        public virtual TRect mIMEHotArea
         {
-            get 
+            get
             {
-                return new TRect(mX, mY + mHeight, mWidth, mHeight);
+                return new TRect(mX, mY, mWidth, mHeight);
             }
         }
 
@@ -852,6 +852,22 @@ namespace Sexy
         public int mUndoHilitePos;
         public int mLastModifyIdx;
 
+        public override TRect mIMEHotArea
+        {
+            get
+            {
+                var x = mX;
+                var y = mY;
+                var parent = mParent;
+                while (parent is not null)
+                {
+                    x += parent.mX;
+                    y += parent.mY;
+                    parent = parent.mParent;
+                }
+                return new TRect(x, y, mWidth, mHeight);
+            }
+        }
 
         public enum Colors
         {
