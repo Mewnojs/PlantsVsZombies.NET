@@ -34,11 +34,11 @@ namespace Sexy
                         {
                             //if (theWidgetX != 0)
                             //{ //修复首次按下鼠标时坐标为(0, 0)的问题
-                                theWidgetX = x - value.mX;
+                            theWidgetX = x - value.mX;
                             //}
                             //if (theWidgetY != 0)
                             //{
-                                theWidgetY = y - value.mY;
+                            theWidgetY = y - value.mY;
                             //}
                             return value;
                         }
@@ -92,15 +92,21 @@ namespace Sexy
                         anItr = anItr.Next;
                         continue;
                     }
-                    if ((anItr.Value == mWidgets.First.Value) || (anItr.Value.mZOrder <= theWidget.mZOrder))
+                    if (/*(anItr.Value == mWidgets.First.Value) ||*/ (anItr.Value.mZOrder <= theWidget.mZOrder))
                     {
                         mWidgets.AddAfter(anItr, theWidget);
                         return;
                     }
                 }
+                else
+                {
+                    //anItr = mWidgets.Last;  // equivalent to C++ .at(indexof(end()) -1)
+                    mWidgets.AddLast(theWidget);
+                    return;
+                }
                 while ((anItr != null) && (anItr.Value != mWidgets.First.Value))
                 {
-                    anItr = anItr.Previous;
+                    anItr = anItr.Previous ?? anItr;
                     if (anItr.Value.mZOrder <= theWidget.mZOrder)
                     {
                         anItr = anItr.Next;
@@ -108,10 +114,46 @@ namespace Sexy
                         return;
                     }
                 }
-                mWidgets.AddLast(theWidget);
+                mWidgets.AddFirst(theWidget);
                 return;
             }
-        }
+        }/*
+        public void InsertWidgetHelper(LinkedListNode<Widget> where, Widget theWidget)
+        {
+            LinkedListNode<Widget> linkedListNode;
+            for (linkedListNode = where; linkedListNode != null; linkedListNode = linkedListNode.Next)
+            {
+                Widget value = linkedListNode.Value;
+                if (value.mZOrder >= theWidget.mZOrder)
+                {
+                    if (/*linkedListNode != mWidgets.First/true)
+                    {
+                        value = linkedListNode.Value;
+                        if (value.mZOrder > theWidget.mZOrder)
+                        {
+                            break;
+                        }
+                    }
+                    mWidgets.AddAfter(linkedListNode, theWidget);
+                    return;
+                }
+            }
+            if (linkedListNode == null)
+            {
+                linkedListNode = mWidgets.Last;
+            }
+            while (linkedListNode != null)
+            {
+                Widget value2 = linkedListNode.Value;
+                if (value2.mZOrder <= theWidget.mZOrder)
+                {
+                    mWidgets.AddAfter(linkedListNode, theWidget);
+                    return;
+                }
+                linkedListNode = linkedListNode.Previous;
+            }
+            mWidgets.AddFirst(theWidget);
+        }*/
 
         public WidgetContainer()
         {
@@ -151,7 +193,7 @@ namespace Sexy
         {
             if (!mWidgets.Contains(theWidget))
             {
-                InsertWidgetHelper(mWidgets.Last, theWidget);
+                InsertWidgetHelper(/*mWidgets.Last*/null, theWidget);
                 theWidget.mWidgetManager = mWidgetManager;
                 theWidget.mParent = this;
                 if (mWidgetManager != null)
@@ -242,7 +284,7 @@ namespace Sexy
                     mUpdateIteratorModified = true;
                 }
                 mWidgets.Remove(linkedListNode);
-                InsertWidgetHelper(mWidgets.Last, theWidget);
+                InsertWidgetHelper(/*mWidgets.Last*/null, theWidget);
                 theWidget.OrderInManagerChanged();
             }
         }
