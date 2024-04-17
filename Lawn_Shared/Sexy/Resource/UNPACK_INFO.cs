@@ -18,6 +18,10 @@ namespace Sexy
             mFrameDelay = theFrameDelay;
             mBeginDelay = theBeginDelay;
             mEndDelay = theEndDelay;
+            mX = (int)(mX * 1.25f);
+            mY = (int)(mY * 1.25f);
+            mWidth = (int)(mWidth * 1.25f);
+            mHeight = (int)(mHeight * 1.25f);
         }
 
         public Image mpImage;
