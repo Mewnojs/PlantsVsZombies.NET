@@ -233,7 +233,7 @@ namespace Lawn
             seedPacket.mRefreshTime = 0;
             seedPacket.mRefreshing = false;
             seedPacket.mActive = true;
-            seedPacket.mOffsetY = (int)Constants.InvertAndScale(400f) - 35 * numSeedsOnConveyorBelt;
+            seedPacket.mOffsetY = Constants.SeedPacket_Offset_Y - Constants.SeedPacket_ConveyorPacket_Offset_Y * numSeedsOnConveyorBelt;//(int)Constants.InvertAndScale(400f) - 35 * numSeedsOnConveyorBelt;
             if (numSeedsOnConveyorBelt > 0)
             {
                 SeedPacket seedPacket2 = mSeedPackets[numSeedsOnConveyorBelt - 1];
@@ -264,7 +264,7 @@ namespace Lawn
                 {
                     SeedPacket seedPacket2 = mSeedPackets[i + 1];
                     seedPacket.mPacketType = seedPacket2.mPacketType;
-                    seedPacket.mOffsetY = seedPacket2.mOffsetY + Constants.SMALL_SEEDPACKET_HEIGHT;
+                    seedPacket.mOffsetY = seedPacket2.mOffsetY + Constants.SeedPacket_ConveyorPacket_Offset_Y;
                 }
                 seedPacket.mRefreshCounter = 0;
                 seedPacket.mRefreshTime = 0;
@@ -290,7 +290,7 @@ namespace Lawn
         public void UpdateConveyorBelt()
         {
             mConveyorBeltCounter++;
-            if (mConveyorBeltCounter % GameConstants.CONVEYOR_SPEED == 0)
+            if (mConveyorBeltCounter % Constants.SeedPacket_ConveyorBelt_Speed == 0)
             {
                 for (int i = 0; i < mNumPackets; i++)
                 {

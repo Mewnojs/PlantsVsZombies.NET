@@ -115,6 +115,9 @@ namespace Sexy
             Constants.SeedChooserScreen_Background_Bottom = new Point(58, 251);
             Constants.SeedChooserScreen_Gradient_Top = new Rectangle(0, 24, 222, 12);
             Constants.SeedChooserScreen_Gradient_Bottom = new Rectangle(-1, 246, 223, 12);
+            Constants.SeedPacket_ConveyorBelt_Speed = 4;
+            Constants.SeedPacket_Offset_Y = 400;
+            Constants.SeedPacket_ConveyorPacket_Offset_Y = 35;
             Constants.SeedPacket_Cost = new Point(29, 18);
             Constants.SeedPacket_Cost_IZombie = new Point(31, 18);
             Constants.SeedPacket_CostText_Pos = new Point(51, 15);
@@ -691,6 +694,9 @@ namespace Sexy
             Constants.SeedChooserScreen_Background_Bottom = new Point(Constants.SeedChooserScreen_Background_Top.X, Constants.SeedChooserScreen_Background_Middle.Y + Constants.SeedChooserScreen_Background_Middle_Height);
             Constants.SeedChooserScreen_Gradient_Top = new Rectangle(0, 40, 336, 22);
             Constants.SeedChooserScreen_Gradient_Bottom = new Rectangle(0, 362, 336, 22);
+            Constants.SeedPacket_ConveyorBelt_Speed = 4;
+            Constants.SeedPacket_Offset_Y = 600;
+            Constants.SeedPacket_ConveyorPacket_Offset_Y = 53;
             Constants.SeedPacket_Cost = new Point(42, 26);
             Constants.SeedPacket_Cost_IZombie = new Point(41, 27);
             Constants.SeedPacket_CostText_Pos = new Point(74, 22);
@@ -1253,6 +1259,9 @@ namespace Sexy
             Constants.SeedChooserScreen_Background_Bottom = new Point(Constants.SeedChooserScreen_Background_Top.X, Constants.SeedChooserScreen_Background_Middle.Y + Constants.SeedChooserScreen_Background_Middle_Height);
             Constants.SeedChooserScreen_Gradient_Top = new Rectangle(0, 50, 420, 28);
             Constants.SeedChooserScreen_Gradient_Bottom = new Rectangle(0, 453, 420, 28);
+            Constants.SeedPacket_ConveyorBelt_Speed = 3;
+            Constants.SeedPacket_Offset_Y = 750;
+            Constants.SeedPacket_ConveyorPacket_Offset_Y = 66;
             Constants.SeedPacket_Cost = new Point(53, 33);
             Constants.SeedPacket_Cost_IZombie = new Point(51, 34);
             Constants.SeedPacket_CostText_Pos = new Point(93, 28);
@@ -1926,6 +1935,12 @@ namespace Sexy
         public static Rectangle SeedChooserScreen_Gradient_Bottom;
 
         public static Color SeedChooserScreen_BackColour = new Color(66, 32, 0);
+
+        public static int SeedPacket_ConveyorBelt_Speed;
+
+        public static int SeedPacket_Offset_Y;
+
+        public static int SeedPacket_ConveyorPacket_Offset_Y;
 
         public static Point SeedPacket_Cost;
 
