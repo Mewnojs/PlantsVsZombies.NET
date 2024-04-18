@@ -5473,5 +5473,10 @@ namespace Sexy
         }
 
         public static Dictionary<string, UNPACK_INFO[]> mArrays = new Dictionary<string, UNPACK_INFO[]>();
+
+        public AtlasResources_600x1000()
+        {
+            UNPACK_INFO.Scale = true;
+        }
     }
 }

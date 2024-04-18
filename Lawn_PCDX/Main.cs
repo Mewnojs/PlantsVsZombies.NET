@@ -22,8 +22,8 @@ namespace Sexy
 			Main.SetLowMem();
 			Main.graphics.IsFullScreen = false;
 			Guide.SimulateTrialMode = false;
-			Main.graphics.PreferredBackBufferWidth = 1000;
-			Main.graphics.PreferredBackBufferHeight = 600;
+			Main.graphics.PreferredBackBufferWidth = 800;
+			Main.graphics.PreferredBackBufferHeight = 480;
 			GraphicsState.mGraphicsDeviceManager.SupportedOrientations = Constants.SupportedOrientations;
 			GraphicsState.mGraphicsDeviceManager.DeviceCreated += new EventHandler<EventArgs>(graphics_DeviceCreated);
 			GraphicsState.mGraphicsDeviceManager.DeviceReset += new EventHandler<EventArgs>(graphics_DeviceReset);
@@ -459,14 +459,15 @@ namespace Sexy
             {
                 Constants.Language = Constants.LanguageIndex.en;
             }
-            //if ((Main.graphics.GraphicsDevice.PresentationParameters.BackBufferWidth == 480 && Main.graphics.GraphicsDevice.PresentationParameters.BackBufferHeight == 800) || (Main.graphics.GraphicsDevice.PresentationParameters.BackBufferWidth == 800 && Main.graphics.GraphicsDevice.PresentationParameters.BackBufferHeight == 480))
-            //{
-            AtlasResources.mAtlasResources = new AtlasResources_600x1000();
-            //Constants.Load480x800();
-            Constants.Load600x1000();
+            if ((Main.graphics.GraphicsDevice.PresentationParameters.BackBufferWidth == 480 && Main.graphics.GraphicsDevice.PresentationParameters.BackBufferHeight == 800) || (Main.graphics.GraphicsDevice.PresentationParameters.BackBufferWidth == 800 && Main.graphics.GraphicsDevice.PresentationParameters.BackBufferHeight == 480))
+            {
+                AtlasResources.mAtlasResources = new AtlasResources_480x800();
+                Constants.Load480x800();
                 return;
-            //}
-            throw new Exception("Unsupported Resolution");
+            }
+            AtlasResources.mAtlasResources = new AtlasResources_600x1000();
+            Constants.Load600x1000();
+            //throw new Exception("Unsupported Resolution");
         }
 
         private static SexyTransform2D orientationTransform;
