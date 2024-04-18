@@ -3425,8 +3425,7 @@ namespace Lawn
                 else if (mHasGroundTrack)
                 {
                     mGroundTrackIndex = reanimation.GetTrackIndex(Reanimation.ReanimTrackId__ground);
-                    //aSpeed = reanimation.GetTrackVelocity(mGroundTrackIndex) * mScaleZombie;
-                    aSpeed = reanimation.GetTrackVelocity(mGroundTrackIndex) * mScaleZombie * Constants.S;
+                    aSpeed = reanimation.GetTrackVelocity(mGroundTrackIndex) * mScaleZombie;
                 }
                 else
                 {
@@ -5009,10 +5008,8 @@ namespace Lawn
                     return;
                 }
                 ReanimatorTrack aTrack = aReanim.mDefinition.mTracks[aReanim.FindTrackIndex(Reanimation.ReanimTrackId__ground)];
-                //float aDistance = aTrack.mTransforms[aReanim.mFrameStart + aReanim.mFrameCount - 1].mTransX
-                //             - aTrack.mTransforms[aReanim.mFrameStart].mTransX;
-                float aDistance = (aTrack.mTransforms[aReanim.mFrameStart + aReanim.mFrameCount - 1].mTransX
-                                - aTrack.mTransforms[aReanim.mFrameStart].mTransX) * Constants.S;
+                float aDistance = aTrack.mTransforms[aReanim.mFrameStart + aReanim.mFrameCount - 1].mTransX
+                             - aTrack.mTransforms[aReanim.mFrameStart].mTransX;
                 if (aDistance < 1E-06f)
                 {
                     return;

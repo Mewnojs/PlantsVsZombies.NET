@@ -27,10 +27,11 @@ namespace Sexy.TodLib
             string name = input.ReadString();
             int transformCount = input.ReadInt32();
             track = new ReanimatorTrack(name, transformCount);
+            bool isGround = ReanimatorXnaHelpers.ReanimatorTrackNameToId(name) == Reanimation.ReanimTrackId__ground;
             for (int i = 0; i < track.mTransformCount; i++)
             {
                 ReanimatorTransform reanimatorTransform;
-                ReadReanimTransform(input, doScale, out reanimatorTransform);
+                ReadReanimTransform(input, doScale, isGround, out reanimatorTransform);
                 track.mTransforms[i] = reanimatorTransform;
             }
         }
@@ -56,7 +57,7 @@ namespace Sexy.TodLib
             return newReanimatorTransform;
         }
 
-        private void ReadReanimTransform(CustomContentReader input, ReanimScaleType doScale, out ReanimatorTransform transform)
+        private void ReadReanimTransform(CustomContentReader input, ReanimScaleType doScale, bool isGround, out ReanimatorTransform transform)
         {
             ReanimReader.ReanimOptimisationType reanimOptimisationType = (ReanimReader.ReanimOptimisationType)input.ReadByte();
             if (reanimOptimisationType == ReanimReader.ReanimOptimisationType.Placeholder)
@@ -82,7 +83,12 @@ namespace Sexy.TodLib
                 transform.mSkewY = input.ReadSingle();
                 float num = input.ReadSingle();
                 float num2 = input.ReadSingle();
-                if (doScale == ReanimScaleType.InvertAndScale)
+                if (isGround)
+                {
+                    transform.mTransX = num;
+                    transform.mTransY = num2;
+                }
+                else if (doScale == ReanimScaleType.InvertAndScale)
                 {
                     transform.mTransX = ((num == ReanimatorXnaHelpers.DEFAULT_FIELD_PLACEHOLDER) ? num : Constants.InvertAndScale(num));
                     transform.mTransY = ((num2 == ReanimatorXnaHelpers.DEFAULT_FIELD_PLACEHOLDER) ? num2 : Constants.InvertAndScale(num2));
