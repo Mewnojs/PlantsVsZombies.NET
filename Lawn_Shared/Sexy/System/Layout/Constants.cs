@@ -1174,7 +1174,7 @@ namespace Sexy
             Constants.SEED_PACKET_HORIZ_GAP = (int)Constants.InvertAndScale(2f);
             Constants.SEED_PACKET_VERT_GAP = (int)Constants.InvertAndScale(1f);
             Constants.SeedPacket_Selector_Pos = new Point(-6, 3);
-            Constants.TitleScreen_ReanimStart_X = 130;
+            Constants.TitleScreen_ReanimStart_X = 163;
             Constants.GameSelector_Width = 2935;
             Constants.GameSelector_Height = (int)Constants.InvertAndScale(640f);
             Constants.GameSelector_AdventureButton_X = 538;

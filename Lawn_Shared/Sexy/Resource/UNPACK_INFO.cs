@@ -5,8 +5,6 @@ namespace Sexy
 {
     public/*internal*/ class UNPACK_INFO
     {
-        public static bool Scale = false;
-
         public UNPACK_INFO(Image pImage, int theX, int theY, int theWidth, int theHeight, int theRows, int theCols, AnimType theAnimType, int theFrameDelay, int theBeginDelay, int theEndDelay)
         {
             mpImage = pImage;
@@ -20,13 +18,6 @@ namespace Sexy
             mFrameDelay = theFrameDelay;
             mBeginDelay = theBeginDelay;
             mEndDelay = theEndDelay;
-            if (Scale)
-            {
-                mX = (int)(mX * 1.25f);
-                mY = (int)(mY * 1.25f);
-                mWidth = (int)(mWidth * 1.25f);
-                mHeight = (int)(mHeight * 1.25f);
-            }
         }
 
         public Image mpImage;
