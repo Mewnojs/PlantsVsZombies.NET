@@ -1583,7 +1583,7 @@ namespace Sexy
             Constants.Plant_Squished_Offset = new Point(5, 20);
             Constants.IZombieBrainPosition = 140;
             Constants.IZombie_SeedOffset = new Point(4, 2);
-            Constants.IZombie_ClipOffset = new Rectangle(0, 0, 80, 50);
+            Constants.IZombie_ClipOffset = new Rectangle(0, 0, 100, 63);
             Constants.ZombieOffsets = new Point[]
             {
                 new Point(20, 11),
@@ -1619,12 +1619,12 @@ namespace Sexy
             Constants.JackInTheBoxZombieRadius = 192;
             Constants.ZenGardenGreenhouseMultiplierX = 1.125f;
             Constants.ZenGardenGreenhouseMultiplierY = 1.182f;
-            Constants.ZenGardenGreenhouseOffset = new Point(-30, 30);
-            Constants.ZenGardenMushroomGardenOffset = new Point(10, 30);
-            Constants.ZenGardenStoreButtonX = 628;
-            Constants.ZenGardenStoreButtonY = 45;
+            Constants.ZenGardenGreenhouseOffset = new Point(-8, 35); // Changed
+            Constants.ZenGardenMushroomGardenOffset = new Point(32, 30); // Changed
+            Constants.ZenGardenStoreButtonX = 805; // Changed
+            Constants.ZenGardenStoreButtonY = 56; // Changed
             Constants.ZenGardenTopButtonStart = -77;
-            Constants.ZenGardenButtonCounterOffset = new Point(60, 45);
+            Constants.ZenGardenButtonCounterOffset = new Point(75, 56); // Changed
             Constants.ZenGardenButton_GoldenWateringCan_Offset = new Point(3, 5);
             Constants.ZenGardenButton_NormalWateringCan_Offset = new Point(3, 5);
             Constants.ZenGardenButton_Fertiliser_Offset = new Point(9, 4);
@@ -1639,7 +1639,7 @@ namespace Sexy
             Constants.ZenGardenButton_Wheelbarrow_Facing_Offset = 43f;
             Constants.ZenGarden_Backdrop_X = 95;
             Constants.ZenGarden_SellDialog_Offset = new Point(214, 90);
-            Constants.ZenGarden_NextGarden_Pos = new Point(500, 0);
+            Constants.ZenGarden_NextGarden_Pos = new Point(650, 0); // Changed
             Constants.ZenGarden_RetardedDaveBubble_Pos = new Point(-250, -120);
             Constants.ZenGarden_WaterDrop_Pos = new Point(65, 6);
             Constants.ZenGarden_Fertiliser_Pos = new Point(60, 7);
@@ -1651,10 +1651,10 @@ namespace Sexy
             Constants.ZenGarden_Chocolate_Pos = new Point(65, -8);
             Constants.ZenGarden_MoneyTarget_X = 477;
             Constants.ZenGarden_TutorialArrow_Offset = 98;
-            Constants.ZEN_XMIN = -50;
-            Constants.ZEN_YMIN = 75;
-            Constants.ZEN_XMAX = 700;
-            Constants.ZEN_YMAX = 500;
+            Constants.ZEN_XMIN = -63; // Changed
+            Constants.ZEN_YMIN = 94; // Changed
+            Constants.ZEN_XMAX = 875; // Changed
+            Constants.ZEN_YMAX = 625; // Changed
             Constants.ZenGarden_GoldenWater_Size = new Rectangle(-100, -100, 100, 100);
             Constants.STINKY_SLEEP_POS_Y = 540;
             Constants.gMushroomGridPlacement = new SpecialGridPlacement[]
