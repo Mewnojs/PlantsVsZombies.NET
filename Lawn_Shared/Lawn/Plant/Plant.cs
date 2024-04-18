@@ -4153,7 +4153,7 @@ namespace Lawn
             if (reanimation != null && reanimation.TrackExists(Reanimation.ReanimTrackId__ground))
             {
                 //float num = reanimation.GetTrackVelocity(Reanimation.ReanimTrackId__ground) / 4f;
-                float num = reanimation.GetTrackVelocity(Reanimation.ReanimTrackId__ground) * Constants.S;
+                float num = reanimation.GetTrackVelocity(Reanimation.ReanimTrackId__ground);
                 if (mSeedType == SeedType.GiantWallnut)
                 {
                     num *= 2f;
