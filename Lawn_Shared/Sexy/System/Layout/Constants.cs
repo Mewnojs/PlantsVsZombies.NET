@@ -513,7 +513,7 @@ namespace Sexy
             };
             Constants.ZenGarden_Marigold_Sprout_Offset = new Point(24, 30);
             Constants.ZenGarden_Aquarium_ShadowOffset = new Point(35, 0);
-            Constants.Challenge_SeeingStars_StarfruitPreview_Offset_Y = 8;
+            Constants.Challenge_SeeingStars_StarfruitPreview_Offset_Y = -5;
             Constants.Challenge_SlotMachine_Pos = new Point(100, 200);
             Constants.Challenge_SlotMachineHandle_Pos = new TRect(473, 0, 55, 80);
             Constants.Challenge_SlotMachine_Gap = 9;
@@ -1105,7 +1105,7 @@ namespace Sexy
             };
             Constants.ZenGarden_Marigold_Sprout_Offset = new Point(24, 30);
             Constants.ZenGarden_Aquarium_ShadowOffset = new Point(35, 0);
-            Constants.Challenge_SeeingStars_StarfruitPreview_Offset_Y = 14;
+            Constants.Challenge_SeeingStars_StarfruitPreview_Offset_Y = -9;
             Constants.Challenge_SlotMachine_Pos = new Point(210, 425);
             Constants.Challenge_SlotMachineHandle_Pos = new TRect(672, 425, 100, 80);
             Constants.Challenge_SlotMachine_Gap = 13;
@@ -1670,15 +1670,15 @@ namespace Sexy
             };
             Constants.ZenGarden_Marigold_Sprout_Offset = new Point(24, 30);
             Constants.ZenGarden_Aquarium_ShadowOffset = new Point(35, 0);
-            Constants.Challenge_SeeingStars_StarfruitPreview_Offset_Y = 14;
-            Constants.Challenge_SlotMachine_Pos = new Point(210, 425);
-            Constants.Challenge_SlotMachineHandle_Pos = new TRect(672, 425, 100, 80);
-            Constants.Challenge_SlotMachine_Gap = 13;
-            Constants.Challenge_SlotMachine_Offset = 92;
+            Constants.Challenge_SeeingStars_StarfruitPreview_Offset_Y = -10; // Changed
+            Constants.Challenge_SlotMachine_Pos = new Point(263, 531); // Changed
+            Constants.Challenge_SlotMachineHandle_Pos = new TRect(840, 531, 125, 100); // Changed
+            Constants.Challenge_SlotMachine_Gap = 16; // Changed
+            Constants.Challenge_SlotMachine_Offset = 115; // Changed
             Constants.Challenge_SlotMachine_Shadow_Offset = 3;
-            Constants.Challenge_SlotMachine_Y_Offset = 7;
+            Constants.Challenge_SlotMachine_Y_Offset = 9; // Changed
             Constants.Challenge_SlotMachine_Y_Pos = 3;
-            Constants.Challenge_SlotMachine_ClipHeight = 40;
+            Constants.Challenge_SlotMachine_ClipHeight = 50; // Changed
             Constants.Challenge_BeghouldedTwist_Offset = new Point(50, 50);
             Constants.GridItem_ScaryPot_SeedPacket_Offset = new Point(-2, 35);
             Constants.GridItem_ScaryPot_Zombie_Offset = new Point(23, 30);
