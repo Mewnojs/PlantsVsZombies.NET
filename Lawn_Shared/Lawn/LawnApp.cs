@@ -247,7 +247,7 @@ namespace Lawn
             GameConstants.Init();
             if (!TodCommon.TodLoadResources("LoaderBar") || !TodCommon.TodLoadResources("LoaderBarFont"))
             {
-                throw new Exception();//return;
+                throw new Exception(mResourceManager.Error);//return;
             }
             Resources.ExtractLoaderBarFontResources(mResourceManager);
             Resources.ExtractLoaderBarResources(mResourceManager);

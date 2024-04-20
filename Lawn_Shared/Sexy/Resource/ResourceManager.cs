@@ -1790,6 +1790,8 @@ namespace Sexy
 
         protected string mError;
 
+        public string Error { get { return mError; } }
+
         protected bool mHasFailed;
 
         protected SexyAppBase mApp;
