@@ -6094,7 +6094,7 @@ namespace Lawn
             }
             int theTrackIndex = reanimation_v.FindTrackIndex(theTrackName);
             SexyTransform2D aSexyTransform2D = default(SexyTransform2D);
-            reanimation_v.GetTrackTranslationMatrix(theTrackIndex, ref aSexyTransform2D);
+            reanimation_v.GetTrackMatrix(theTrackIndex, ref aSexyTransform2D);
             thePosX = aSexyTransform2D.mMatrix.M41 * Constants.IS + mPosX;
             thePosY = aSexyTransform2D.mMatrix.M42 * Constants.IS + mPosY;
         }
