@@ -4386,20 +4386,21 @@ namespace Lawn
             {
                 return;
             }
+            IZombieSetPlantFilterEffect(thePlant, FilterEffectType.White);
             float num = g.mTransX;
             float num2 = g.mTransY;
             g.SetColorizeImages(true);
             g.mTransX = (int)(num + Constants.S * 4f);
             g.mTransY = (int)(num2 + Constants.S * 4f);
-            g.SetColor(SexyColor.Black);
+            g.SetColor(new SexyColor(122, 86, 58));
             reanimation.DrawRenderGroup(g, 0);
             g.mTransX = (int)(num + Constants.S * 2f);
             g.mTransY = (int)(num2 + Constants.S * 2f);
-            g.SetColor(SexyColor.Black);
+            g.SetColor(new SexyColor(171, 135, 107));
             reanimation.DrawRenderGroup(g, 0);
             g.mTransX = (int)(num - Constants.S * 2f);
             g.mTransY = (int)(num2 - Constants.S * 2f);
-            g.SetColor(SexyColor.Black);
+            g.SetColor(new SexyColor(171, 135, 107));
             reanimation.DrawRenderGroup(g, 0);
             g.mTransX = (int)num;
             g.mTransY = (int)num2;
