@@ -89,7 +89,7 @@ namespace Lawn
         public void DrawCachedZombie(Graphics g, float thePosX, float thePosY, ZombieType theZombieType)
         {
             Debug.ASSERT(theZombieType >= ZombieType.Normal && theZombieType < ZombieType.CachedZombieTypesCount);
-            Image imageInAtlasById = AtlasResources.GetImageInAtlasById((int)(10349 + theZombieType));
+            Image imageInAtlasById = AtlasResources.GetImageInAtlasById((int)((int)AtlasResources.AtlasImageId.IMAGE_CACHED_ZOMBIE_00_ID + theZombieType));
             TodCommon.TodDrawImageScaledF(g, imageInAtlasById, thePosX, thePosY, g.mScaleX, g.mScaleY);
         }
         public void DrawCachedZombieNew(Graphics g, float thePosX, float thePosY, ZombieType theZombieType)
