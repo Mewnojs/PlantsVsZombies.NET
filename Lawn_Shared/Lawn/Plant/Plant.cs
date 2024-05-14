@@ -5462,7 +5462,7 @@ namespace Lawn
             }
             if (mSeedType == SeedType.Twinsunflower)
             {
-                int count = mBoard.CountPlantByType(mSeedType);
+                int count = mBoard.CountPlantByType(mSeedType) + 1;
                 if (count >= 10)
                 {
                     mBoard.GrantAchievement(AchievementId.FlowerPower, true);
@@ -5470,7 +5470,7 @@ namespace Lawn
             }
             if (mSeedType == SeedType.Cobcannon)
             {
-                int count = mBoard.CountPlantByType(mSeedType);
+                int count = mBoard.CountPlantByType(mSeedType) + 1;
                 if (count >= 5)
                 {
                     mBoard.GrantAchievement(AchievementId.Defcorn5, true);
@@ -5505,6 +5505,7 @@ namespace Lawn
                         TodCommon.SetBit(ref num2, plant.mRow, 1);
                     }
                 }
+                TodCommon.SetBit(ref num2, mRow, 1);
                 if (mBoard.StageHas6Rows())
                 {
                     if (num2 == 63)

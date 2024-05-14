@@ -9726,6 +9726,10 @@ namespace Lawn
                 mApp.AddTodParticle(mPosX + 80f, mPosY + 60f, mRenderOrder + 1, ParticleEffect.ZamboniExplosion);
                 mApp.PlayFoley(FoleyType.Explosion);
                 DieWithLoot();
+                if (!mBoard.AreEnemyZombiesOnScreen() && mBoard.mCurrentWave == mBoard.mNumWaves && (mApp.mGameMode != GameMode.ChallengeWhackAZombie || mApp.mBoard.mChallenge.mChallengeState == ChallengeState.Normal))
+                {
+                    mBoard.GrantAchievement(AchievementId.LastMownStanding, true);
+                }
                 return;
             }
             if (mZombiePhase == ZombiePhase.ZombieDying || mZombiePhase == ZombiePhase.PolevaulterInVault || mZombiePhase == ZombiePhase.RisingFromGrave || mZombiePhase == ZombiePhase.DancerRising || mZombiePhase == ZombiePhase.SnorkelIntoPool || mZombiePhase == ZombiePhase.ZombieBurned || mZombieType == ZombieType.Gargantuar || mZombieType == ZombieType.RedeyeGargantuar || mZombieType == ZombieType.Bungee || mZombieType == ZombieType.Digger || mZombieType == ZombieType.Imp || mZombieType == ZombieType.Yeti || mZombieType == ZombieType.DolphinRider || IsBobsledTeamWithSled() || IsFlying() || mInPool)
@@ -9741,6 +9745,10 @@ namespace Lawn
                     DropShield(0U);
                 }
                 DieWithLoot();
+                if (!mBoard.AreEnemyZombiesOnScreen() && mBoard.mCurrentWave == mBoard.mNumWaves && (mApp.mGameMode != GameMode.ChallengeWhackAZombie || mApp.mBoard.mChallenge.mChallengeState == ChallengeState.Normal))
+                {
+                    mBoard.GrantAchievement(AchievementId.LastMownStanding, true);
+                }
                 return;
             }
             if (mIceTrapCounter > 0)
@@ -9777,7 +9785,10 @@ namespace Lawn
             mMoweredReanimID = mApp.ReanimationGetID(reanimation2);
             mZombiePhase = ZombiePhase.ZombieMowered;
             DropLoot();
-            mBoard.AreEnemyZombiesOnScreen();
+            if (!mBoard.AreEnemyZombiesOnScreen() && mBoard.mCurrentWave == mBoard.mNumWaves && (mApp.mGameMode != GameMode.ChallengeWhackAZombie || mApp.mBoard.mChallenge.mChallengeState == ChallengeState.Normal))
+            {
+                mBoard.GrantAchievement(AchievementId.LastMownStanding, true);
+            }
         }
 
         public void UpdateMowered()//3update

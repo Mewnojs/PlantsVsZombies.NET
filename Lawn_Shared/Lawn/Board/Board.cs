@@ -7164,12 +7164,9 @@ namespace Lawn
                     {
                         mChallenge.PuzzleNextStageClear();
                         mChallenge.IZombieInitLevel();
-                        if (mApp.IsEndlessScaryPotter(mApp.mGameMode))
+                        if (mApp.mPlayerInfo.mChallengeRecords[mApp.mGameMode - GameMode.SurvivalNormalStage1] >= 10)
                         {
-                            if (mApp.mPlayerInfo.mChallengeRecords[mApp.mGameMode - GameMode.SurvivalNormalStage1] >= 10)
-                            {
-                                GrantAchievement(AchievementId.BetterOffDead, true);
-                            }
+                            GrantAchievement(AchievementId.BetterOffDead, true);
                         }
                         return;
                     }
