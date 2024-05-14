@@ -51,6 +51,19 @@ namespace Sexy
             mSystem = new();
         }
 
+        public StashFont(FontSystemSettings settings)
+        {
+            FontId = Font.nextId++;
+            drawStringBuilder.Append("A");
+            mAscent = 0;
+            mHeight = 0;
+            mAscentPadding = 0;
+            mLineSpacingOffset = 0;
+            mFonts = new List<SpriteFontBase>();
+            mOffsets = new List<Vector2>();
+            mSystem = new(settings);
+        }
+
         public Font.CachedStringInfo GetWordWrappedSubStrings(string theLine, TRect theRect)
         {
             Dictionary<string, Font.CachedStringInfo> dictionary;

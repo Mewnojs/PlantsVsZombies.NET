@@ -88,6 +88,11 @@ namespace Sexy
             //PhoneApplicationService.Current.Activated += new EventHandler<ActivatedEventArgs>(this.Game_Activated);
             //PhoneApplicationService.Current.Closing += new EventHandler<ClosingEventArgs>(this.Current_Closing);
             //PhoneApplicationService.Current.Deactivated += new EventHandler<DeactivatedEventArgs>(this.Current_Deactivated);
+
+            // To remove the ugly hack effect of MonoGame on calculating client bounds.
+            // `ResetClientBounds`
+            graphics.PreferredBackBufferHeight = Window.ClientBounds.Height; 
+            graphics.PreferredBackBufferWidth = Window.ClientBounds.Width;
         }
 
         internal string FetchApplicationStoragePath()
@@ -146,16 +151,32 @@ namespace Sexy
                 W = (int)(DefaultW * bounds.Height / DefaultH);
                 H = bounds.Height;
             }
+            
+            var newWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            var newHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            if (bounds.Width == newWidth && bounds.Height == newHeight) 
+            {
+                //return;
+            }
             if (GlobalStaticVars.gSexyAppBase != null)
             {
-                GlobalStaticVars.gSexyAppBase.mScreenScales.Init(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height, DefaultW, DefaultH);
+                GlobalStaticVars.gSexyAppBase.mScreenScales.Init(newWidth, newHeight, DefaultW, DefaultH);
                 Graphics.Resized();
             }
+            
+            GraphicsState.mGraphicsDeviceManager.PreferredBackBufferWidth = newWidth;
+            GraphicsState.mGraphicsDeviceManager.PreferredBackBufferHeight = newHeight;
 
-            GraphicsState.mGraphicsDeviceManager.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            GraphicsState.mGraphicsDeviceManager.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             GraphicsState.mGraphicsDeviceManager.ApplyChanges();
+            {   // = GraphicsState.mGraphicsDeviceManager.UpdateTouchPanel();
+                GraphicsState.mGraphicsDeviceManager.GraphicsDevice.PresentationParameters.BackBufferWidth = newWidth;
+                GraphicsState.mGraphicsDeviceManager.GraphicsDevice.PresentationParameters.BackBufferHeight = newHeight;
+                //TouchPanel.DisplayWidth = newWidth;
+                //TouchPanel.DisplayHeight = newHeight;
+                touchPanelNeedsUpdate = true;
+            }
         }
+        private bool touchPanelNeedsUpdate = false;
 
         public static bool RunWhenLocked
         {
@@ -396,6 +417,12 @@ namespace Sexy
             if (LoadingScreen.IsLoading)
             {
                 return;
+            }
+            if (touchPanelNeedsUpdate) 
+            {
+                TouchPanel.DisplayWidth = GraphicsState.mGraphicsDeviceManager.GraphicsDevice.PresentationParameters.BackBufferWidth;
+                TouchPanel.DisplayHeight = GraphicsState.mGraphicsDeviceManager.GraphicsDevice.PresentationParameters.BackBufferHeight;
+                touchPanelNeedsUpdate = false;
             }
             GamePadState state = GamePad.GetState(PlayerIndex.One);
             if (state.Buttons.Back == ButtonState.Pressed && this.previousGamepadState.Buttons.Back == ButtonState.Released)

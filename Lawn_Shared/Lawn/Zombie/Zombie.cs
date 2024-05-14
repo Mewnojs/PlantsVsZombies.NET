@@ -1090,7 +1090,7 @@ namespace Lawn
             {
                 int num = thePlant.mPlantHealth / 40;
                 int num2 = (thePlant.mPlantHealth - /*3 * */GameConstants.TICKS_BETWEEN_EATS) / 40;
-                if (num2 < num)
+                if (num2 < num || /*<new>*/ thePlant.mPlantHealth - /*3 * */GameConstants.TICKS_BETWEEN_EATS <= 0 /* </new>*/)
                 {
                     mBoard.AddCoin(thePlant.mX, thePlant.mY, CoinType.Sun, CoinMotion.FromPlant);
                 }
@@ -1373,8 +1373,8 @@ namespace Lawn
                     ApplyBossSmokeParticles(true);
                 }
             }
-            Update();
-            Update();
+            //Update();
+            //Update(); //3update compensation
             doLoot = true;
             doParticle = true;
             justLoaded = false;
@@ -6091,7 +6091,7 @@ namespace Lawn
             }
             int theTrackIndex = reanimation_v.FindTrackIndex(theTrackName);
             SexyTransform2D aSexyTransform2D = default(SexyTransform2D);
-            reanimation_v.GetTrackTranslationMatrix(theTrackIndex, ref aSexyTransform2D);
+            reanimation_v.GetTrackMatrix(theTrackIndex, ref aSexyTransform2D);
             thePosX = aSexyTransform2D.mMatrix.M41 * Constants.IS + mPosX;
             thePosY = aSexyTransform2D.mMatrix.M42 * Constants.IS + mPosY;
         }

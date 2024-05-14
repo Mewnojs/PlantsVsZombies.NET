@@ -4879,7 +4879,7 @@ namespace Lawn
         {
             Debug.ASSERT(mState == PlantState.CobcannonReady);
             mState = PlantState.CobcannonFiring;
-            mShootingCounter = 184;
+            mShootingCounter = 206;//184;  // Fixed to match the corresponding reanimation (under 100fps)
             PlayBodyReanim(GlobalMembersReanimIds.ReanimTrackId_anim_shooting, ReanimLoopType.PlayOnceAndHold, 20, 12f);
             mTargetX = theTargetX - 47;
             mTargetY = theTargetY;
@@ -5686,8 +5686,8 @@ namespace Lawn
                 mIsAsleep = true;
                 SetSleeping(false);
             }
-            UpdateReanim();
-            UpdateReanim();
+            //UpdateReanim();
+            //UpdateReanim(); //3update compensation
             float anAnimTime = mBodyReanimID.mAnimTime;
             if (!string.IsNullOrEmpty(lastPlayedBodyReanim_Name))
             {

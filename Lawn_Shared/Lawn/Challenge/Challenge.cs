@@ -1247,17 +1247,18 @@ namespace Lawn
                     SeedType artChallengeSeed = GetArtChallengeSeed(j, i);
                     if (artChallengeSeed != SeedType.None && mBoard.GetTopPlantAt(j, i, TopPlant.OnlyNormalPosition) == null)
                     {
-                        TPoint[] celPosition = mBoard.GetCelPosition(j, i);
-                        celPosition[0].mX = (int)(celPosition[0].mX * Constants.S);
-                        celPosition[0].mY = (int)(celPosition[0].mY * Constants.S);
-                        celPosition[1].mX = (int)(celPosition[1].mX * Constants.S);
-                        celPosition[1].mY = (int)(celPosition[1].mY * Constants.S);
-                        celPosition[2].mX = (int)(celPosition[2].mX * Constants.S);
-                        celPosition[2].mY = (int)(celPosition[2].mY * Constants.S);
-                        celPosition[3].mX = (int)(celPosition[3].mX * Constants.S);
-                        celPosition[3].mY = (int)(celPosition[3].mY * Constants.S);
-                        float thePosX = celPosition[0].x; //+ (celPosition[2].x - celPosition[0].x) / 2;
-                        float thePosY = celPosition[0].y - Constants.Challenge_SeeingStars_StarfruitPreview_Offset_Y;
+                        //TPoint[] celPosition = mBoard.GetCelPosition(j, i);
+                        //celPosition[0].mX = (int)(celPosition[0].mX * Constants.S);
+                        //celPosition[0].mY = (int)(celPosition[0].mY * Constants.S);
+                        //celPosition[1].mX = (int)(celPosition[1].mX * Constants.S);
+                        //celPosition[1].mY = (int)(celPosition[1].mY * Constants.S);
+                        //celPosition[2].mX = (int)(celPosition[2].mX * Constants.S);
+                        //celPosition[2].mY = (int)(celPosition[2].mY * Constants.S);
+                        //celPosition[3].mX = (int)(celPosition[3].mX * Constants.S);
+                        //celPosition[3].mY = (int)(celPosition[3].mY * Constants.S);
+                        float thePosX = mBoard.GridToPixelX(j, i); //celPosition[0].x; //+ (celPosition[2].x - celPosition[0].x) / 2;
+                        float thePosY = mBoard.GridToPixelY(j, i); //celPosition[0].y; //- Constants.Challenge_SeeingStars_StarfruitPreview_Offset_Y;
+                        thePosY += Plant.PlantDrawHeightOffset(mBoard, null, artChallengeSeed, j, i);
                         Plant.DrawSeedType(g, artChallengeSeed, SeedType.None, DrawVariation.Normal, thePosX, thePosY);
                     }
                 }

@@ -478,7 +478,7 @@ namespace Lawn
 
         public LawnApp mApp;
 
-        public class CachedPlantVariation
+        public struct CachedPlantVariation
         {
             public SeedType mSeedType;
 

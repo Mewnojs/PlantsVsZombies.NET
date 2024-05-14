@@ -644,10 +644,14 @@ namespace Lawn
             GameConstants.BOSS_FLASH_HEALTH_FRACTION = 10;
             GameConstants.ZOMBIE_WALK_IN_FRONT_DOOR_Y = 290f;
             GameConstants.BOBSLED_CRASH_TIME = 150;
-            GameConstants.YUCKI_PAUSE_TIME = 69;
-            GameConstants.YUCKI_SHORT_PAUSE_TIME = 21;
-            GameConstants.YUCKI_HOLD_TIME = GameConstants.YUCKI_PAUSE_TIME + 99;
-            GameConstants.YUCKI_WALK_TIME = GameConstants.YUCKI_HOLD_TIME + 99;
+            //GameConstants.YUCKI_PAUSE_TIME = 69;
+            GameConstants.YUCKI_PAUSE_TIME = 70;
+            //GameConstants.YUCKI_SHORT_PAUSE_TIME = 21;
+            GameConstants.YUCKI_SHORT_PAUSE_TIME = 20;
+            //GameConstants.YUCKI_HOLD_TIME = GameConstants.YUCKI_PAUSE_TIME + 99;
+            //GameConstants.YUCKI_WALK_TIME = GameConstants.YUCKI_HOLD_TIME + 99;
+            GameConstants.YUCKI_HOLD_TIME = GameConstants.YUCKI_PAUSE_TIME + 100;
+            GameConstants.YUCKI_WALK_TIME = GameConstants.YUCKI_HOLD_TIME + 100;
             GameConstants.BOSS_BALL_OFFSET_Y = -90f;
             // 僵尸常量定义
             GameConstants.gZombieDefs = new ZombieDefinition[(int)ZombieType.ZombieTypesCount]

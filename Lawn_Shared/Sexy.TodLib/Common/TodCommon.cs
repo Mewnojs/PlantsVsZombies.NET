@@ -524,9 +524,21 @@ namespace Sexy.TodLib
             m.Translation += new Vector3(x, y, 0f);
         }
 
+        /// <summary>
+        /// Multiplies two matrices `l` and `r` using SexyMatrix rules, and then store the result in `ref m`.
+        /// SexyMatrix in SexyAppFramework is different than Matrix in XNA/MonoGame 
+        /// (XNA Matrix is the transpose of SexyMatrix with an extra z dimension)
+        /// So the multiplication of SexyMatrix `l * r` is equivalent to
+        /// `T(T(l)*T(r))` for XNA Matrices. (where T(X) is the transpose of matrix X)
+        /// </summary>
+        /// <param name="m">Reference of result</param>
+        /// <param name="l">Left operand.</param>
+        /// <param name="r">Right operand.</param>
         public static void SexyMatrix3Multiply(ref Matrix m, Matrix l, Matrix r)
         {
-            m = l * r;
+            // m = Matrix.Transpose(Matrix.Transpose(l) * Matrix.Transpose(r));
+            // Note that T(l)*T(r) = T(r*l)
+            m = r * l;
         }
 
         public static void TodScaleTransformMatrix(ref Matrix m, float x, float y, float theScaleX, float theScaleY)

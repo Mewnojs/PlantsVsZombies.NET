@@ -836,42 +836,6 @@ namespace Sexy.TodLib
             reanimatorTransform.PrepareForReuse();
         }
 
-        public void GetTrackTranslationMatrix(int theTrackIndex, ref SexyTransform2D theMatrix)
-        {
-            ReanimatorTrackInstance reanimatorTrackInstance = mTrackInstances[theTrackIndex];
-            mGetFrameTime = true;
-            ReanimatorTransform reanimatorTransform;
-            GetCurrentTransform(theTrackIndex, out reanimatorTransform, false);
-            int num = TodCommon.FloatRoundToInt(reanimatorTransform.mFrame);
-            Image image = reanimatorTransform.mImage;
-            if (mDefinition.mReanimAtlas != null && image != null)
-            {
-                ReanimAtlasImage encodedReanimAtlas = mDefinition.mReanimAtlas.GetEncodedReanimAtlas(image);
-                if (encodedReanimAtlas != null)
-                {
-                    image = encodedReanimAtlas.mOriginalImage;
-                }
-            }
-            theMatrix.LoadIdentity();
-            Reanimation.tempMatrix = Matrix.Identity;
-            if (image != null && num >= 0)
-            {
-                int celWidth = image.GetCelWidth();
-                int celHeight = image.GetCelHeight();
-                Matrix.CreateTranslation(celWidth * 0.5f, celHeight * 0.5f, 0f, out Reanimation.tempMatrix);
-            }
-            else if (reanimatorTransform.mFont != null && !string.IsNullOrEmpty(reanimatorTransform.mText))
-            {
-                Matrix.CreateTranslation(0f, reanimatorTransform.mFont.mAscent, 0f, out Reanimation.tempMatrix);
-            }
-            SexyTransform2D sexyTransform2D = default(SexyTransform2D);
-            Reanimation.MatrixFromTransform(reanimatorTransform, out sexyTransform2D.mMatrix);
-            Reanimation.tempMatrix.M41 = sexyTransform2D.mMatrix.M41 + mOverlayMatrix.mMatrix.M41 + reanimatorTrackInstance.mShakeX - 0.5f;
-            Reanimation.tempMatrix.M42 = sexyTransform2D.mMatrix.M42 + mOverlayMatrix.mMatrix.M42 + reanimatorTrackInstance.mShakeY - 0.5f;
-            theMatrix.mMatrix = Reanimation.tempMatrix;
-            reanimatorTransform.PrepareForReuse();
-        }
-
         public void AssignRenderGroupToTrack(string theTrackName, int theRenderGroup)
         {
             string text = Reanimation.ToLower(theTrackName);
