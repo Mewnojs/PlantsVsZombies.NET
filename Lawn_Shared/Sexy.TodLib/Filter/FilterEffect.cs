@@ -54,23 +54,6 @@ namespace Sexy.TodLib
                 GraphicsDevice graphicsDevice = GlobalStaticVars.g.GraphicsDevice;
                 graphicsDevice.SetRenderTarget(memoryImage.RenderTarget);
                 SpriteBatch spriteBatch = new SpriteBatch(graphicsDevice);
-
-                BlendState imageLoadBlendAlpha = new BlendState
-                {
-                    ColorWriteChannels = ColorWriteChannels.Alpha,
-                    AlphaDestinationBlend = Blend.Zero,
-                    ColorDestinationBlend = Blend.Zero,
-                    AlphaSourceBlend = Blend.One,
-                    ColorSourceBlend = Blend.One
-                };
-
-                BlendState blendColorLoadState = new BlendState
-                {
-                    AlphaDestinationBlend = Blend.Zero,
-                    ColorDestinationBlend = Blend.Zero,
-                    AlphaSourceBlend = Blend.SourceAlpha,
-                    ColorSourceBlend = Blend.SourceAlpha
-                };
                 graphicsDevice.Clear(Color.Transparent);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
                 spriteBatch.Draw(theTexture, theTexture.Bounds, Color.White);
@@ -80,6 +63,7 @@ namespace Sexy.TodLib
                 //spriteBatch.End();
                 graphicsDevice.SetRenderTarget(null);
             }
+
             switch (theFilterEffect)
             {
             case FilterEffectType.WashedOut:
@@ -114,7 +98,9 @@ namespace Sexy.TodLib
             {
                 for (int j = 0; j < theImage.mWidth; j++)
                 {
-                    array[j + i * theImage.mWidth] |= 16777215;
+                    //array[j + i * theImage.mWidth] |= 16777215;
+                    char c = (char)(array[j + i * theImage.mWidth] >> 24);
+                    array[j + i * theImage.mWidth] = (c << 0) | (c << 8) | (c << 16) | (c << 24);   // RGB: 1.0 * Alpha; Alpha: unchanged
                 }
             }
             theImage.Texture.SetData<int>(array);
