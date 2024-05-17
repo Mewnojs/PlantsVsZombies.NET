@@ -360,7 +360,7 @@ namespace Lawn
 
         public void OpenPortal()
         {
-            float num = mGridX * 80f - 6f;
+            float num = mGridX * 80f - 6f + Constants.BOARD_EXTRA_ROOM;
             float num2 = mBoard.GridToPixelY(0, mGridY) - 65f;
             Reanimation reanimation = mApp.ReanimationTryToGet(mGridItemReanimID);
             if (reanimation == null)
@@ -580,7 +580,7 @@ namespace Lawn
             {
                 reanimation.PlayReanim(GlobalMembersReanimIds.ReanimTrackId_anim_pulse, ReanimLoopType.Loop, 0, 12f);
                 ParticleEffect theEffect = ParticleEffect.PortalCircle;
-                float num = mGridX * 80f + 13f;
+                float num = mGridX * 80f + 13f + Constants.BOARD_EXTRA_ROOM;
                 float num2 = mBoard.GridToPixelY(0, mGridY) - 39f;
                 if (mGridItemType == GridItemType.PortalSquare)
                 {

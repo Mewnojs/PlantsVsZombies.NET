@@ -3127,7 +3127,7 @@ namespace Lawn
                 {
                     TRect zombieRect = zombie.GetZombieRect();
                     int num = zombieRect.mX + zombieRect.mWidth / 2;
-                    int num2 = thePortal.mGridX * 80 + 25;
+                    int num2 = thePortal.mGridX * 80 + 25 + Constants.BOARD_EXTRA_ROOM;
                     int num3 = Math.Abs(num - num2);
                     if (num3 <= 45)
                     {
@@ -3141,7 +3141,7 @@ namespace Lawn
                                 num4 -= 60;
                             }
                             zombie.mLastPortalX = otherPortal.mGridX;
-                            zombie.mX = otherPortal.mGridX * 80 - num4;
+                            zombie.mX = otherPortal.mGridX * 80 - num4 + Constants.BOARD_EXTRA_ROOM;
                             zombie.mPosX = zombie.mX;
                             zombie.SetRow(otherPortal.mGridY);
                             zombie.mY = (int)zombie.GetPosYBasedOnRow(otherPortal.mGridY);
@@ -3159,7 +3159,7 @@ namespace Lawn
                 {
                     TRect projectileRect = projectile.GetProjectileRect();
                     int num6 = projectileRect.mX + projectileRect.mWidth / 2;
-                    int num7 = thePortal.mGridX * 80 + 55;
+                    int num7 = thePortal.mGridX * 80 + 55 + Constants.BOARD_EXTRA_ROOM;
                     int num8 = Math.Abs(num6 - num7);
                     if (num8 <= 40)
                     {
@@ -3169,7 +3169,7 @@ namespace Lawn
                             int num9 = num6 - projectile.mX;
                             int num10 = otherPortal2.mGridY - thePortal.mGridY;
                             int num11 = num10 * 100;
-                            projectile.mX = otherPortal2.mGridX * 80 - num9 + 90;
+                            projectile.mX = otherPortal2.mGridX * 80 - num9 + 60 + Constants.BOARD_EXTRA_ROOM;
                             projectile.mPosX = projectile.mX;
                             projectile.mRow = otherPortal2.mGridY;
                             projectile.mY += num11;
@@ -3186,7 +3186,7 @@ namespace Lawn
             {
                 if (lawnMower.mMowerState == LawnMowerState.Triggered && lawnMower.mRow == thePortal.mGridY && lawnMower.mLastPortalX != thePortal.mGridX)
                 {
-                    int num12 = thePortal.mGridX * 80 + 25;
+                    int num12 = thePortal.mGridX * 80 + 25 + Constants.BOARD_EXTRA_ROOM;
                     int num13 = (int)lawnMower.mPosX + 45;
                     int num14 = Math.Abs(num13 - num12);
                     if (num14 <= 20)
@@ -3196,7 +3196,7 @@ namespace Lawn
                         {
                             int num15 = otherPortal3.mGridY - thePortal.mGridY;
                             int num16 = num15 * 100;
-                            lawnMower.mPosX = otherPortal3.mGridX * 80 + 25;
+                            lawnMower.mPosX = otherPortal3.mGridX * 80 + 25 + Constants.BOARD_EXTRA_ROOM;
                             lawnMower.mRow = otherPortal3.mGridY;
                             lawnMower.mPosY = num16;
                             lawnMower.mLastPortalX = otherPortal3.mGridX;
