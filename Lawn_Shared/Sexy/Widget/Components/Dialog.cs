@@ -316,23 +316,28 @@ namespace Sexy
         {
             if (mDragging)
             {
+                var ss = GlobalStaticVars.gSexyAppBase.mScreenScales;
+                int edgeX1 = (int)(ss.mTransX / ss.mScaleFactor);
+                int edgeX2 = (int)(ss.mWidth / ss.mScaleFactor) - mWidgetManager.mWidth - edgeX1;
+                int edgeY1 = (int)(ss.mTransY / ss.mScaleFactor);
+                int edgeY2 = (int)(ss.mHeight / ss.mScaleFactor) - mWidgetManager.mHeight - edgeY1;
                 int num = mX + x - mDragMouseX;
                 int num2 = mY + y - mDragMouseY;
-                if (num < -8)
+                if (num < -8 - edgeX1)
                 {
-                    num = -8;
+                    num = -8 - edgeX1;
                 }
-                else if (num + mWidth > mWidgetManager.mWidth + 8)
+                else if (num + mWidth > mWidgetManager.mWidth + 8 + edgeX2)
                 {
-                    num = mWidgetManager.mWidth - mWidth + 8;
+                    num = mWidgetManager.mWidth - mWidth + 8 + edgeX2;
                 }
-                if (num2 < -8)
+                if (num2 < -8 - edgeY1)
                 {
-                    num2 = -8;
+                    num2 = -8 - edgeY1;
                 }
-                else if (num2 + mHeight > mWidgetManager.mHeight + 8)
+                else if (num2 + mHeight > mWidgetManager.mHeight + 8 + edgeY2)
                 {
-                    num2 = mWidgetManager.mHeight - mHeight + 8;
+                    num2 = mWidgetManager.mHeight - mHeight + 8 + edgeY2;
                 }
                 mDragMouseX = mX + x - num;
                 mDragMouseY = mY + y - num2;

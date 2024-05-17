@@ -55,6 +55,15 @@ namespace Lawn
             mApp.FinishInGameRestartConfirmDialog(true);
         }
 
+        public override void MouseDrag(int x, int y)
+        {
+            base.MouseDrag(x, y);
+            if (mMenuButton != null)
+            {
+                mMenuButton.Resize(Constants.UIMenuButtonPosition.X - mX + Constants.Board_Offset_AspectRatio_Correction, Constants.UIMenuButtonPosition.Y - mY, Constants.UIMenuButtonWidth, AtlasResources.IMAGE_BUTTON_LEFT.mHeight);
+            }
+        }
+
         public override void AddedToManager(WidgetManager theWidgetManager)
         {
             base.AddedToManager(theWidgetManager);

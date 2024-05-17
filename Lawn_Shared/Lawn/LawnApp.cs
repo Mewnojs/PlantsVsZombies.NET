@@ -474,6 +474,8 @@ namespace Lawn
             KillDialog(30);
             var v2 = new NewUserDialog(this, !isOnlyUser);
             v2.Resize((800 - v2.mWidth) / 2, (600 - v2.mHeight) / 2, v2.mWidth, v2.mHeight);
+            // ensure the dialog is at center after letting all dialogs draggable
+            LawnApp.CenterDialog(v2, v2.mWidth, v2.mHeight);
             AddDialog(30, v2);
             //FinishCreateUserDialog(true);
         }
@@ -1077,6 +1079,8 @@ namespace Lawn
             lawnDialog.mLawnYesButton.mLabel = TodStringFile.TodStringTranslate("[LEAVE_BUTTON]");
             lawnDialog.mLawnNoButton.mLabel = TodStringFile.TodStringTranslate("[DIALOG_BUTTON_CANCEL]");
             lawnDialog.CalcSize(0, 0);
+            // ensure the dialog is at center after letting all dialogs draggable
+            LawnApp.CenterDialog(lawnDialog, lawnDialog.mWidth, lawnDialog.mHeight);
         }
 
         public void DoNewOptions(bool theFromGameSelector)
@@ -2915,6 +2919,8 @@ namespace Lawn
                 lawnDialog.mLawnNoButton.mLabel = TodStringFile.TodStringTranslate(theButton2Name);
             }
             lawnDialog.CalcSize(0, 0, (int)Constants.InvertAndScale(400f));
+            // ensure the dialog is at center after letting all dialogs draggable
+            LawnApp.CenterDialog(lawnDialog, lawnDialog.mWidth, lawnDialog.mHeight);
             mWidgetManager.SetFocus(lawnDialog);
         }
 

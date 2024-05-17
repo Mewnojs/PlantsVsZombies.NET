@@ -24,8 +24,8 @@ namespace Sexy {
                 mTransY = 0;
                 mScaleFactor = (float)(H) / virtualHeight;
             }
-            mWidth = (int)W;
-            mHeight = (int)H;
+            mWidth = screenWidth;
+            mHeight = screenHeight;
         }
         public void Init(int screenWidth, int screenHeight, int virtualWidth, int virtualHeight, int transX, int transY)
         {
@@ -64,7 +64,13 @@ namespace Sexy {
 
         public int mTransX = 0;
         public int mTransY = 0;
+        /// <summary>
+        /// original screen width.
+        /// </summary>
         public int mWidth;
+        /// <summary>
+        /// original screen height.
+        /// </summary>
         public int mHeight;
         public float mScaleFactor = 1.0f;
         public CGPoint InvMapTouch(CGPoint cGPoint)

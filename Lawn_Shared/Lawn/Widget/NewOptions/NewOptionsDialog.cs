@@ -124,6 +124,10 @@ namespace Lawn
         public override void Resize(int theX, int theY, int theWidth, int theHeight)
         {
             base.Resize(theX, theY, theWidth, theHeight);
+            // TODO: Making NewOptionDialog fully inside the window bound so that it can be movable
+            mX = mApp.mWidth / 2 - mWidth / 2;
+            mY = mApp.mHeight / 2 - mHeight / 2;
+            //
             int btnHeight = AtlasResources.IMAGE_BUTTON_LEFT.mHeight;
             int theX2 = (int)Constants.InvertAndScale(244f);
             mMusicVolumeSlider.Resize(theX2, (int)Constants.InvertAndScale(66f), (int)Constants.InvertAndScale(135f), (int)Constants.InvertAndScale(40f));
@@ -338,6 +342,8 @@ namespace Lawn
                 lawnDialog2.mMinWidth = (int)Constants.InvertAndScale(350f);
                 lawnDialog2.mLawnYesButton.mLabel = TodStringFile.TodStringTranslate("[BACK]");
                 lawnDialog2.CalcSize(0, 0);
+                // ensure the dialog is at center after letting all dialogs draggable
+                LawnApp.CenterDialog(lawnDialog2, lawnDialog2.mWidth, lawnDialog2.mHeight);
                 return;
             }
             case 10:

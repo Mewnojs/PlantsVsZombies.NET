@@ -91,12 +91,16 @@ namespace Lawn
                     lawnDialog.mMinWidth = (int)Constants.InvertAndScale(350f);
                     lawnDialog.mLawnYesButton.mLabel = TodStringFile.TodStringTranslate("[RESTART_BUTTON]");
                     lawnDialog.CalcSize(0, 0);
+                    // ensure the dialog is at center after letting all dialogs draggable
+                    LawnApp.CenterDialog(lawnDialog, lawnDialog.mWidth, lawnDialog.mHeight);
                     return;
                 }
                 LawnDialog lawnDialog2 = mApp.DoDialog(39, true, "[NEW_GAME_HEADER]", "[NEW_GAME]", "", 2);
                 lawnDialog2.mMinWidth = (int)Constants.InvertAndScale(250f);
                 lawnDialog2.mLawnYesButton.mLabel = TodStringFile.TodStringTranslate("[NEW_GAME_BUTTON]");
                 lawnDialog2.CalcSize(0, 0);
+                // ensure the dialog is at center after letting all dialogs draggable
+                LawnApp.CenterDialog(lawnDialog2, lawnDialog2.mWidth, lawnDialog2.mHeight);
                 return;
             }
             else

@@ -878,6 +878,8 @@ namespace Lawn
                 string theDialogLines = Common.StrFormat_(TodStringFile.TodStringTranslate("[NOW_YOU_CAN_CHOOSE_X_SEEDS]"), 6 + mApp.mPlayerInfo.mPurchases[21]);
                 LawnDialog lawnDialog = mApp.DoDialog(26, true, "[MORE_SLOTS]", theDialogLines, "[DIALOG_BUTTON_OK]", 3);
                 lawnDialog.CalcSize(0, 0);
+                // ensure the dialog is at center after letting all dialogs draggable
+                LawnApp.CenterDialog(lawnDialog, lawnDialog.mWidth, lawnDialog.mHeight);
                 if (mApp.mBoard != null)
                 {
                     mApp.mBoard.mSeedBank.UpdateHeight();

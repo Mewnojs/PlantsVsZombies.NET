@@ -254,8 +254,8 @@ namespace Lawn
             {
                 mReanimation.Resize((int)mReanimation.mPosX, (int)(Constants.DIALOG_HEADER_OFFSET + mReanimation.mPosY), mReanimation.mWidth, mReanimation.mHeight);
             }
-            mX = mApp.mWidth / 2 - mWidth / 2;
-            mY = mApp.mHeight / 2 - mHeight / 2;
+            //mX = mApp.mWidth / 2 - mWidth / 2;
+            //mY = mApp.mHeight / 2 - mHeight / 2;
         }
 
         public override void Draw(Graphics g)
@@ -297,7 +297,17 @@ namespace Lawn
             g.DrawImage(image, 0, num);
             LawnCommon.TileImageHorizontally(g, image2, image.mWidth, num, theWidth3);
             g.DrawImage(image3, mWidth - image3.mWidth, num);
+            // Dragging highlight color
+            if (mDragging)
+            {
+                g.SetColorizeImages(true);
+                g.SetColor(new SexyColor(0xD0, 0xFF, 0x90, 0xFF));
+            }
             g.DrawImage(AtlasResources.IMAGE_DIALOG_HEADER, (mWidth - AtlasResources.IMAGE_DIALOG_HEADER.mWidth) / 2, 0);
+            if (mDragging)
+            {
+                g.SetColorizeImages(false);
+            }
             int num4 = Constants.DIALOG_HEADER_OFFSET + mContentInsets.mTop + mBackgroundInsets.mTop;
             if (mDialogHeader.Length > 0)
             {
@@ -333,8 +343,15 @@ namespace Lawn
             return result;
         }
 
+        public override void MouseDown(int x, int y, int clickCount)
+        {
+            if (new TRect((mWidth - AtlasResources.IMAGE_DIALOG_HEADER.mWidth) / 2, 0, (AtlasResources.IMAGE_DIALOG_HEADER.mWidth), AtlasResources.IMAGE_DIALOG_HEADER.mHeight).Contains(x, y))
+                base.MouseDown(x, y, clickCount);
+        }
+
         public override void MouseDrag(int x, int y)
         {
+            base.MouseDrag(x, y);
         }
 
         public void CalcSize(int theExtraX, int theExtraY)
