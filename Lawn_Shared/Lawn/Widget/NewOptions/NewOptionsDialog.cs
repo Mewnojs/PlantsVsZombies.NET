@@ -316,6 +316,7 @@ namespace Lawn
                     lawnDialog.mSpaceAfterHeader = (int)Constants.InvertAndScale(20f);
                     lawnDialog.mMinWidth = (int)Constants.InvertAndScale(350f);
                     lawnDialog.CalcSize(0, 0);
+                    LawnApp.CenterDialog(lawnDialog, lawnDialog.mWidth, lawnDialog.mHeight);
                     return;
                 }
                 break;
