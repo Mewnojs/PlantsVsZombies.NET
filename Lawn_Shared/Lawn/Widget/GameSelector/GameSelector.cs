@@ -224,6 +224,8 @@ namespace Lawn
         {
             if (mApp.GetDialog(Dialogs.DIALOG_STORE) != null || mApp.GetDialog(Dialogs.DIALOG_ALMANAC) != null)
             {
+                // draw black overlay before store and almanac, TODO: to be removed
+                base.DeferOverlay();
                 return;
             }
             DrawMoreGamesArea(g);
@@ -236,12 +238,14 @@ namespace Lawn
         {
             if (mApp.GetDialog(Dialogs.DIALOG_STORE) != null || mApp.GetDialog(Dialogs.DIALOG_ALMANAC) != null)
             {
+                mApp.DrawBlackFrame(g);
                 return;
             }
             g.SetLinearBlend(true);
             g.DrawImage(AtlasResources.IMAGE_REANIM_SELECTORSCREEN_LEAVES, Constants.MAIN_MENU_ORIGIN_X, Constants.InvertAndScale(287f));
             if (mApp.mPlayerInfo == null)
             {
+                mApp.DrawBlackFrame(g);
                 return;
             }
             if (!mApp.IsIceDemo() && !mShowStartButton)
@@ -329,6 +333,7 @@ namespace Lawn
             }
             g.SetColorizeImages(false);
             g.Translate(-(Constants.QUICKPLAY_ORIGIN_X + mX), 0);
+            mApp.DrawBlackFrame(g);
         }
 
         private string GetWelcomeString()

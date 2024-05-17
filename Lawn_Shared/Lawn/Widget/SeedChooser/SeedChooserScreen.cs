@@ -294,6 +294,9 @@ namespace Lawn
             @new.mTransY -= mY;
             mMenuButton.Draw(@new);
             @new.PrepareForReuse();
+            //
+            mApp.DrawBlackFrame(g);
+            //
         }
 
         public override void DrawOverlay(Graphics g)

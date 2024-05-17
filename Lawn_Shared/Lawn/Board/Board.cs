@@ -6148,13 +6148,14 @@ namespace Lawn
 
         public void DrawUITop(Graphics g)
         {
-            mApp.DrawBlackFrame(g);
+            //mApp.DrawBlackFrame(g);
             // others
             if (mApp.mGameScene != GameScenes.ZombiesWon && mSeedBank.BeginDraw(g))
             {
                 mSeedBank.Draw(g);
                 mSeedBank.EndDraw(g);
             }
+            mApp.DrawBlackFrame(g);
             if (StageHasFog())
             {
                 DrawTopRightUI(g);

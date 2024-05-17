@@ -1131,7 +1131,10 @@ namespace Sexy
             else
             {
                 ScreenScales s = GlobalStaticVars.gSexyAppBase.mScreenScales;
-                aClipRect = new TRect(0, 0, GlobalStaticVars.gSexyAppBase.mWidth, GlobalStaticVars.gSexyAppBase.mHeight);
+                aClipRect = new TRect(0 - (int)(s.mTransX / s.mScaleFactor), 0 - (int)(s.mTransY / s.mScaleFactor),
+                    (int)(s.mWidth / s.mScaleFactor), (int)(s.mHeight / s.mScaleFactor)
+                    );
+                //aClipRect = new TRect(0, 0, GlobalStaticVars.gSexyAppBase.mWidth, GlobalStaticVars.gSexyAppBase.mHeight);
             }
             mClipRect = aClipRect;
         }

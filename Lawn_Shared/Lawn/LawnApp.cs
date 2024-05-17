@@ -3594,8 +3594,6 @@ namespace Lawn
             this.mWidgetManager.DrawScreen();
             if (mDebugScreenEnabled)
                 DrawDebugInfo(gameTime);
-            if (!mBoard?.mVisible ?? true)
-                DrawBlackFrame(GlobalStaticVars.g);
             GlobalStaticVars.g.EndFrame();
 #if DEBUG
             //Console.WriteLine(perfTimer.Elapsed.TotalMilliseconds);
@@ -3614,12 +3612,17 @@ namespace Lawn
                 var clipRect = mScreenScales.InvScale(new TRect(0, 0, g.mScreenWidth, g.mScreenHeight));
                 clipRect.mWidth += 1;
                 g.mClipRect = clipRect;
-                var mat = mScreenScales.InvScale(new TRect(mScreenScales.mWidth + mScreenScales.mTransX, 0, g.mScreenWidth - mScreenScales.mWidth - mScreenScales.mTransX, mScreenScales.mHeight));
+                var mat = new TRect(
+                    mWidgetManager.mWidth,
+                    0,
+                    (int)Math.Ceiling((g.mScreenWidth - mScreenScales.mTransX) / mScreenScales.mScaleFactor) - mWidgetManager.mWidth,
+                    (int)(g.mScreenHeight / mScreenScales.mScaleFactor)
+                );
                 mat.mX -= g.mTransX;
                 mat.mY -= g.mTransY;
-                mat.mWidth = (int)Math.Ceiling((g.mScreenWidth - mScreenScales.mWidth - mScreenScales.mTransX) / mScreenScales.ScaleRatioMin);
                 g.FillRect(mat);
-                mat = mScreenScales.InvScale(new TRect(0, 0, mScreenScales.mTransX, mScreenScales.mHeight));
+                mat = mScreenScales.InvScale(new TRect(0, 0, mScreenScales.mTransX, 0));
+                mat.mHeight = mWidgetManager.mHeight;
                 mat.mX -= g.mTransX;
                 mat.mY -= g.mTransY;
                 g.FillRect(mat);
@@ -3630,12 +3633,17 @@ namespace Lawn
                 var clipRect = mScreenScales.InvScale(new TRect(0, 0, g.mScreenWidth, g.mScreenHeight));
                 clipRect.mHeight += 1;
                 g.mClipRect = clipRect;
-                var mat = mScreenScales.InvScale(new TRect(0, mScreenScales.mHeight + mScreenScales.mTransY, mScreenScales.mWidth, g.mScreenHeight - mScreenScales.mHeight - mScreenScales.mTransY));
+                var mat = new TRect(
+                    0,
+                    mWidgetManager.mHeight,
+                    (int)(g.mScreenWidth / mScreenScales.mScaleFactor),
+                    (int)Math.Ceiling((g.mScreenHeight - mScreenScales.mTransY) / mScreenScales.mScaleFactor) - mWidgetManager.mHeight
+                );
                 mat.mX -= g.mTransX;
                 mat.mY -= g.mTransY;
-                mat.mHeight = (int)Math.Ceiling((g.mScreenHeight - mScreenScales.mHeight - mScreenScales.mTransY) / mScreenScales.ScaleRatioMin);
                 g.FillRect(mat);
-                mat = mScreenScales.InvScale(new TRect(0, 0, mScreenScales.mWidth, mScreenScales.mTransY));
+                mat = mScreenScales.InvScale(new TRect(0, 0, 0, mScreenScales.mTransY));
+                mat.mWidth = mWidgetManager.mWidth;
                 mat.mX -= g.mTransX;
                 mat.mY -= g.mTransY;
                 g.FillRect(mat);
