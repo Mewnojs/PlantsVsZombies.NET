@@ -1467,6 +1467,7 @@ namespace Sexy
                 {
                     text = Path.GetDirectoryName(theRes.mPath) + Constants.ImageSubPath + Path.GetFileName(theRes.mPath);
                 }
+                theRes.mLoadedPath = text;
                 if (theRes.mFormat == ImageRes.TextureFormat.Content)
                 {
                     texture2D = GetContentManager(theRes).Load<Texture2D>(text);
@@ -1886,13 +1887,24 @@ namespace Sexy
 
             public override void DeleteResource()
             {
+                if (mFormat == ImageRes.TextureFormat.Content)
+                {
+                    ContentManager manager = GlobalStaticVars.gLawnApp.mContentManager;
+                    if (mUnloadGroup > 0)
+                    {
+                        manager = ResourceManager.mUnloadContentManager[mUnloadGroup]; 
+                    }
+                    manager.UnloadAsset(mLoadedPath.Replace('\\', '/'));
+                    mImage = null;
+                    return;
+                }
                 if (mImage != null)
                 {
                     mImage.Dispose();
-                    if (mFormat == ImageRes.TextureFormat.Content && mUnloadGroup > 0)
-                    {
-                        ResourceManager.mUnloadContentManager[mUnloadGroup].Unload();
-                    }
+                    //if (mFormat == ImageRes.TextureFormat.Content && mUnloadGroup > 0)
+                    //{
+                    //    ResourceManager.mUnloadContentManager[mUnloadGroup].Unload();
+                    //} wtf is this?
                     mImage = null;
                 }
                 base.DeleteResource();
@@ -1937,6 +1949,8 @@ namespace Sexy
             public bool mLanguageSpecific;
 
             public ImageRes.TextureFormat mFormat = ImageRes.TextureFormat.Png;
+
+            public string mLoadedPath;
 
             public enum TextureFormat
             {
