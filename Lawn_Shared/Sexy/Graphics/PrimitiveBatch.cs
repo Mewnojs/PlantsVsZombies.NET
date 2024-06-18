@@ -23,16 +23,16 @@ namespace Sexy
         {
             ScreenScales s = GlobalStaticVars.gSexyAppBase.mScreenScales;
             float offsetX1 = (s.mTransX
-                * 480f / device.PresentationParameters.BackBufferHeight);
+                * (float)Constants.BackBufferSize.X / device.PresentationParameters.BackBufferHeight);
             float offsetY1 = (s.mTransY
-                * 800f / device.PresentationParameters.BackBufferWidth);
-            float offsetX2 = (device.PresentationParameters.BackBufferWidth / s.mScaleFactor) - 800
+                * (float)Constants.BackBufferSize.Y / device.PresentationParameters.BackBufferWidth);
+            float offsetX2 = (device.PresentationParameters.BackBufferWidth / s.mScaleFactor) - Constants.BackBufferSize.Y
                 - offsetX1;
-            float offsetY2 = (device.PresentationParameters.BackBufferHeight / s.mScaleFactor) - 480 
+            float offsetY2 = (device.PresentationParameters.BackBufferHeight / s.mScaleFactor) - Constants.BackBufferSize.X
                 - offsetY1;
             basicEffect.View = Matrix.CreateOrthographicOffCenter(0f - offsetX1,
-                800 + offsetX2/*(float)this.device.PresentationParameters.BackBufferWidth*/,
-                480 + offsetY2/*(float)this.device.PresentationParameters.BackBufferHeight*/,
+                Constants.BackBufferSize.Y + offsetX2/*(float)this.device.PresentationParameters.BackBufferWidth*/,
+                Constants.BackBufferSize.X + offsetY2/*(float)this.device.PresentationParameters.BackBufferHeight*/,
                 0f - offsetY1, 0f, 1f);
             screenWidth = device.PresentationParameters.BackBufferWidth;
             screenHeight = device.PresentationParameters.BackBufferHeight;
