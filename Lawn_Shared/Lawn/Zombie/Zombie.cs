@@ -10741,7 +10741,7 @@ namespace Lawn
 
         public static bool ZombieTypeCanGoInPool(ZombieType theZombieType)
         {
-            return theZombieType == ZombieType.Normal || theZombieType == ZombieType.TrafficCone || theZombieType == ZombieType.Pail || theZombieType == ZombieType.Flag || theZombieType == ZombieType.Snorkel || theZombieType == ZombieType.DolphinRider || theZombieType == ZombieType.PeaHead || theZombieType == ZombieType.WallnutHead || theZombieType == ZombieType.JalapenoHead || theZombieType == ZombieType.GatlingHead || theZombieType == ZombieType.TallnutHead;
+            return theZombieType == ZombieType.Normal || theZombieType == ZombieType.TrafficCone || theZombieType == ZombieType.Pail || theZombieType == ZombieType.Flag || theZombieType == ZombieType.Snorkel || theZombieType == ZombieType.DolphinRider || theZombieType == ZombieType.PeaHead || theZombieType == ZombieType.WallnutHead || theZombieType == ZombieType.JalapenoHead || theZombieType == ZombieType.GatlingHead || theZombieType == ZombieType.TallnutHead || theZombieType == ZombieType.Balloon;
         }
 
         public static bool ZombieTypeCanGoOnHighGround(ZombieType theZombieType)
