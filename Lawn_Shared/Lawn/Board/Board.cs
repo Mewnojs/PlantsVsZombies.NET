@@ -2949,14 +2949,14 @@ namespace Lawn
                                         if (!CanAddBobSled())
                                         {
                                             int num12 = RandomNumbers.NextNumber(5);
-                                            int num13 = 400;
+                                            int num13 = 400 + Constants.BOARD_EXTRA_ROOM;
                                             if (StageHasPool())
                                             {
                                                 num12 = RandomNumbers.NextNumber(2);
                                             }
                                             else if (StageHasRoof())
                                             {
-                                                num13 = 500;
+                                                num13 = 500 + Constants.BOARD_EXTRA_ROOM;
                                             }
                                             mIceTimer[num12] = 3000;
                                             mIceMinX[num12] = num13;

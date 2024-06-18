@@ -353,7 +353,7 @@ namespace Lawn
                 {
                     if (mBoard.mPlantRow[i] != PlantRowType.Pool)
                     {
-                        mBoard.mIceMinX[i] = 400;
+                        mBoard.mIceMinX[i] = 400 + Constants.BOARD_EXTRA_ROOM;
                         mBoard.mIceTimer[i] = int.MaxValue;
                     }
                 }
