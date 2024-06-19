@@ -448,7 +448,7 @@ namespace Sexy
                 TouchLocation touchLocation2;
                 if (touchLocation.TryGetPreviousLocation(out touchLocation2))
                 {
-                    touch.previousLocation = new CGPoint(touchLocation2.Position.X, touchLocation2.Position.Y);
+                    touch.previousLocation = s.InvMapTouch(new CGPoint(touchLocation2.Position.X, touchLocation2.Position.Y));
                 }
                 else
                 {

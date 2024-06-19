@@ -29,12 +29,26 @@ namespace Sexy
             GraphicsState.mGraphicsDeviceManager.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(mGraphicsDeviceManager_PreparingDeviceSettings);
             base.TargetElapsedTime = TimeSpan.FromSeconds(0.01);
             base.Exiting += new EventHandler<EventArgs>(Main_Exiting);
+            Window.AllowUserResizing = true;
+            base.Window.ClientSizeChanged += new EventHandler<EventArgs>(this.OnResize);
             //PhoneApplicationService.Current.UserIdleDetectionMode = 0;
             //PhoneApplicationService.Current.Launching += new EventHandler<LaunchingEventArgs>(this.Game_Launching);
             //PhoneApplicationService.Current.Activated += new EventHandler<ActivatedEventArgs>(this.Game_Activated);
             //PhoneApplicationService.Current.Closing += new EventHandler<ClosingEventArgs>(this.Current_Closing);
             //PhoneApplicationService.Current.Deactivated += new EventHandler<DeactivatedEventArgs>(this.Current_Deactivated);
             IsMouseVisible = true;
+        }
+
+        public void OnResize(object sender, EventArgs e)
+        {
+            int DefaultW = Constants.BackBufferSize.Y;
+            int DefaultH = Constants.BackBufferSize.X;
+            Rectangle bounds = Window.ClientBounds;
+            if (GlobalStaticVars.gSexyAppBase != null)
+            {
+                GlobalStaticVars.gSexyAppBase.mScreenScales.Init(bounds.Width, bounds.Height, DefaultW, DefaultH);
+                Graphics.Resized();
+            }
         }
 
         /*private void Current_Deactivated(object sender, DeactivatedEventArgs e)
@@ -111,6 +125,13 @@ namespace Sexy
             IronPyInteractive.Serve();
 #endif
             base.Initialize();
+            // Window initialization
+            int ww = Constants.BackBufferSize.Y;
+            int wh = Constants.BackBufferSize.X;
+            GlobalStaticVars.gSexyAppBase.mScreenScales.Init(ww, wh, Constants.BackBufferSize.Y, Constants.BackBufferSize.X);
+            Main.graphics.PreferredBackBufferWidth = ww;
+            Main.graphics.PreferredBackBufferHeight = wh;
+            GraphicsState.mGraphicsDeviceManager.ApplyChanges();
             //
             // IME Support
             GlobalStaticVars.gSexyAppBase.mWidgetManager.mIMEHandler = new MonoGame.IMEHelper.SdlIMEHandler(this);
@@ -272,19 +293,36 @@ namespace Sexy
             }
             MouseState msstate = Mouse.GetState();
             _Touch mstouch = default(_Touch);
-            mstouch.location = new CGPoint(msstate.Position.X, msstate.Position.Y);
+            //mstouch.location = new CGPoint(msstate.Position.X, msstate.Position.Y);
+            ScreenScales s = GlobalStaticVars.gSexyAppBase.mScreenScales;
+            mstouch.location = s.InvMapTouch(new CGPoint(msstate.Position.X, msstate.Position.Y));
             if (msstate.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
             {
-                GlobalStaticVars.gSexyAppBase.TouchBegan(mstouch);
-            }
-            else if (msstate.LeftButton == ButtonState.Pressed && previousMouseState.Position != msstate.Position)
-            {
-                GlobalStaticVars.gSexyAppBase.TouchMoved(mstouch);
+                GlobalStaticVars.gSexyAppBase.mWidgetManager.MouseDown((int)mstouch.location.x, (int)mstouch.location.y, 1);
             }
             else if (msstate.LeftButton == ButtonState.Released && previousMouseState.LeftButton == ButtonState.Pressed)
             {
-                GlobalStaticVars.gSexyAppBase.TouchEnded(mstouch);
+                GlobalStaticVars.gSexyAppBase.mWidgetManager.MouseUp((int)mstouch.location.x, (int)mstouch.location.y, 1);
             }
+            if (msstate.RightButton == ButtonState.Pressed && previousMouseState.RightButton == ButtonState.Released)
+            {
+                GlobalStaticVars.gSexyAppBase.mWidgetManager.MouseDown((int)mstouch.location.x, (int)mstouch.location.y, -1);
+            }
+            else if (msstate.RightButton == ButtonState.Released && previousMouseState.LeftButton == ButtonState.Pressed)
+            {
+                GlobalStaticVars.gSexyAppBase.mWidgetManager.MouseUp((int)mstouch.location.x, (int)mstouch.location.y, -1);
+            }
+            if (msstate.ScrollWheelValue != previousMouseState.ScrollWheelValue)
+            {
+                GlobalStaticVars.gSexyAppBase.mWidgetManager.MouseWheel(msstate.ScrollWheelValue - previousMouseState.ScrollWheelValue);
+            }
+
+            if (previousMouseState.Position != msstate.Position)
+            {
+                GlobalStaticVars.gSexyAppBase.mWidgetManager.MouseMove((int)mstouch.location.x, (int)mstouch.location.y);
+            }
+
+
 
             GamePadState state = GamePad.GetState(PlayerIndex.One);
             if (state.Buttons.Back == ButtonState.Pressed && previousGamepadState.Buttons.Back == ButtonState.Released)
@@ -296,12 +334,14 @@ namespace Sexy
             foreach (TouchLocation touchLocation in state2)
             {
                 _Touch touch = default(_Touch);
-                touch.location.mX = touchLocation.Position.X;
-                touch.location.mY = touchLocation.Position.Y;
+                //touch.location.mX = touchLocation.Position.X;
+                //touch.location.mY = touchLocation.Position.Y;
+                touch.location.mX = s.InvMapTouchX(touchLocation.Position.X);
+                touch.location.mY = s.InvMapTouchY(touchLocation.Position.Y);
                 TouchLocation touchLocation2;
                 if (touchLocation.TryGetPreviousLocation(out touchLocation2))
                 {
-                    touch.previousLocation = new CGPoint(touchLocation2.Position.X, touchLocation2.Position.Y);
+                    touch.previousLocation = s.InvMapTouch(new CGPoint(touchLocation2.Position.X, touchLocation2.Position.Y));
                 }
                 else
                 {

@@ -136,7 +136,7 @@ namespace Sexy
             base.Components.Add(Main.GamerServicesComp);
             ReportAchievement.Initialise();
 #if LAWNMOD
-            Debug.Log(DebugType.Info, $"WS server started at: Port {LawnMod.IronPyInteractive.Serve()}"); 
+            Debug.Log(DebugType.Info, $"WS server started at: Port {LawnMod.IronPyInteractive.Serve()}");
 #endif
             base.Initialize();
             // Window Scaling
@@ -159,7 +159,7 @@ namespace Sexy
         protected override void OnExiting(object sender, EventArgs args) 
         {
 #if LAWNMOD
-            LawnMod.IronPyInteractive.Stop();		
+            LawnMod.IronPyInteractive.Stop();
 #endif
         }
 
@@ -352,7 +352,7 @@ namespace Sexy
                 TouchLocation touchLocation2;
                 if (touchLocation.TryGetPreviousLocation(out touchLocation2))
                 {
-                    touch.previousLocation = new CGPoint(touchLocation2.Position.X, touchLocation2.Position.Y);
+                    touch.previousLocation = s.InvMapTouch(new CGPoint(touchLocation2.Position.X, touchLocation2.Position.Y));
                 }
                 else
                 {
