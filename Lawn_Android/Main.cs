@@ -100,6 +100,7 @@ namespace Sexy
             return GlobalStaticVars.gPvZActivity.GetExternalFilesDir("").AbsolutePath;
         }
 
+#if LAWNMOD
         internal static string FetchIronPythonStdLib(Version version)
         {
             return GlobalStaticVars.gPvZActivity.GetIronPythonStdLibPath(version);
@@ -112,6 +113,7 @@ namespace Sexy
             GlobalStaticVars.gPvZActivity.ConfigureWorkDirAsLocalData();
 
         }
+#endif
 
         //private void Current_Deactivated(object sender, DeactivatedEventArgs e)
         //{
@@ -224,6 +226,7 @@ namespace Sexy
             base.Window.OrientationChanged += new EventHandler<EventArgs>(this.Window_OrientationChanged);
             ReportAchievement.Initialise();
             base.Initialize();
+#if LAWNMOD
 #if !DEBUG
             try
             {
@@ -238,6 +241,7 @@ namespace Sexy
             {
                 Sexy.GlobalStaticVars.gPvZActivity.OnException(this, e);
             }
+#endif
 #endif
             // Window scaling
             GlobalStaticVars.gSexyAppBase.mScreenScales.Init(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height, 800, 480);

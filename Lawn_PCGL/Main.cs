@@ -107,7 +107,9 @@ namespace Sexy
             Main.GamerServicesComp = new GamerServicesComponent(this);
             base.Components.Add(Main.GamerServicesComp);
             ReportAchievement.Initialise();
+#if LAWNMOD
             IronPyInteractive.Serve();
+#endif
             base.Initialize();
             //
             // IME Support
@@ -122,7 +124,9 @@ namespace Sexy
 
         protected override void OnExiting(object sender, EventArgs args) 
         {
+#if LAWNMOD
             IronPyInteractive.Stop();		
+#endif
         }
 
         protected override void LoadContent()

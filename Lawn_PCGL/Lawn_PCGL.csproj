@@ -2,6 +2,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
+		<DefineConstants></DefineConstants>
     <PublishReadyToRun>false</PublishReadyToRun>
     <TieredCompilation>false</TieredCompilation>
   </PropertyGroup>
@@ -21,7 +22,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FontStashSharp.MonoGame" Version="1.3.6" />
-    <PackageReference Include="IronPython" Version="3.4.0" />
     <PackageReference Include="Lidgren.Network.Core2" Version="1.0.0" />
     <PackageReference Include="MLEM.Data" Version="5.2.0" />
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
@@ -29,6 +29,10 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="WebSocketSharp.NetCore" Version="1.0.1-alpha.4" />
   </ItemGroup>
+	<ItemGroup Condition="$(DefineConstants.Contains('LAWNMOD'))">
+		<PackageReference Include="IronPython" Version="3.4.0" />
+		<PackageReference Include="WebSocketSharp.NetCore" Version="1.0.1-alpha.4" />
+	</ItemGroup>
   <ItemGroup>
     <None Update="Icon.png">
       <Pack>True</Pack>
@@ -37,5 +41,5 @@
   </ItemGroup>
   <Import Project="..\Lawn_Shared\Lawn_Shared.projitems" Label="Shared" />
   <Import Project="..\MonoGame.Framework.Net\MonoGame.Framework.Net.projitems" Label="Shared" />
-  <Import Project="..\IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems" Label="Shared" />
+  <Import Project="..\IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems" Label="Shared" Condition="$(DefineConstants.Contains('LAWNMOD'))" />
 </Project>

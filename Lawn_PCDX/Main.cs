@@ -117,6 +117,7 @@ namespace Sexy
             return applicationStoragePath ?? AppContext.BaseDirectory;
         }
 
+#if LAWNMOD
         internal static string FetchIronPythonStdLib(Version version)
         {
             return $"./IronPython.StdLib.{version.Major}.{version.Minor}.{version.Build}.zip";
@@ -125,6 +126,7 @@ namespace Sexy
         internal static void IronPythonConfigureWorkDir()
         {
         }
+#endif
 
         protected override void Initialize()
         {
@@ -133,7 +135,9 @@ namespace Sexy
             Main.GamerServicesComp = new GamerServicesComponent(this);
             base.Components.Add(Main.GamerServicesComp);
             ReportAchievement.Initialise();
+#if LAWNMOD
             Debug.Log(DebugType.Info, $"WS server started at: Port {LawnMod.IronPyInteractive.Serve()}"); 
+#endif
             base.Initialize();
             // Window Scaling
             var f = new SharpDX.Direct2D1.Factory();
@@ -154,7 +158,9 @@ namespace Sexy
 
         protected override void OnExiting(object sender, EventArgs args) 
         {
+#if LAWNMOD
             LawnMod.IronPyInteractive.Stop();		
+#endif
         }
 
         protected override void LoadContent()

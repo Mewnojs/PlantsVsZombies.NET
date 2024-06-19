@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if LAWNMOD
+using System;
 using System.IO;
 using IronPython.Hosting;
 using Microsoft.Scripting.Hosting;
@@ -152,3 +153,4 @@ namespace Lawn
         };
     }
 }
+#endif
