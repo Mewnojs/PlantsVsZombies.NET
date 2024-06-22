@@ -3916,7 +3916,7 @@ namespace Lawn
         {
             if (mZombiePhase == ZombiePhase.DiggerTunneling)
             {
-                if (mPosX < 90f)
+                if (mPosX < 10.0f + Constants.BOARD_EXTRA_ROOM)
                 {
                     mZombiePhase = ZombiePhase.DiggerRising;
                     mPhaseCounter = 130;
