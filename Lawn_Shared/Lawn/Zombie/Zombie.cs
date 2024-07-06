@@ -151,6 +151,9 @@ namespace Lawn
             mHasHead = true;
             mHasHelm = true;
             mHasShield = true;
+            mIsButterShowing = false;
+            mYuckyToRow = 0;
+            mYuckySwitchRowsLate = false;
         }
 
         int IComparable.CompareTo(object toCompare)
