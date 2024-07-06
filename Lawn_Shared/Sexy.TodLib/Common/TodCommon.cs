@@ -485,7 +485,9 @@ namespace Sexy.TodLib
 
         public static void TodBltMatrix(Graphics g, Image theImage, ref Matrix theTransform, TRect theClipRect, SexyColor theColor, Graphics.DrawMode theDrawMode, TRect theSrcRect, bool clip)
         {
-            if (g.mDrawMode != theDrawMode)
+            bool flag = g.mDrawMode != theDrawMode;
+            Graphics.DrawMode aDrawMode = g.mDrawMode;
+            if (flag)
             {
                 g.SetDrawMode(theDrawMode);
             }
@@ -499,6 +501,10 @@ namespace Sexy.TodLib
                 g.HardwareClipRect(theClipRect);
             }
             g.DrawImageTransformed(theImage, ref theTransform, true, theColor, theSrcRect, clip);
+            if (flag) 
+            {
+                g.SetDrawMode(aDrawMode);
+            }
         }
 
         public static void TodBltMatrix(Graphics g, Image theImage, Matrix theTransform, ref TRect theClipRect, SexyColor theColor, Graphics.DrawMode theDrawMode, TRect theSrcRect)
