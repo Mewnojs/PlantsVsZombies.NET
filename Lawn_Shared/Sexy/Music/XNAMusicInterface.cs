@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Media;
+using SexyMediaPlayer = Microsoft.Xna.Framework.Media.MediaPlayer;
 
 namespace Sexy
 {
@@ -13,7 +14,7 @@ namespace Sexy
     {
         public XNAMusicInterface(SexyAppBase theApp)
         {
-            MusicInterface.USER_MUSIC_PLAYING = !MediaPlayer.GameHasControl;
+            MusicInterface.USER_MUSIC_PLAYING = !SexyMediaPlayer.GameHasControl;
             mEnabled = false;
             mContent = theApp.mContentManager;
             mCurrentSong = -1;
@@ -47,7 +48,7 @@ namespace Sexy
             {
                 if (!MusicInterface.USER_MUSIC_PLAYING)
                 {
-                    if (theSongid != mCurrentSong || MediaPlayer.State != MediaState.Playing)
+                    if (theSongid != mCurrentSong || SexyMediaPlayer.State != MediaState.Playing)
                     {
                         isStopped = false;
                         if (theSongid >= 0)
@@ -56,13 +57,13 @@ namespace Sexy
                             Song song = mSongs[theSongid];
                             if (!(song == null))
                             {
-                                MediaPlayer.Play(song);
+                                SexyMediaPlayer.Play(song);
                                 if (!mHasPlayed)
                                 {
                                     mHasPlayed = true;
                                     SetVolume(mFirstPlayVolume);
                                 }
-                                MediaPlayer.IsRepeating = loop;
+                                SexyMediaPlayer.IsRepeating = loop;
                             }
                         }
                     }
@@ -83,7 +84,7 @@ namespace Sexy
             mCurrentSong = -1;
             try
             {
-                MediaPlayer.Stop();
+                SexyMediaPlayer.Stop();
                 isStopped = true;
             }
             catch (Exception)
@@ -97,7 +98,7 @@ namespace Sexy
             {
                 if (!MusicInterface.USER_MUSIC_PLAYING)
                 {
-                    MediaPlayer.Pause();
+                    SexyMediaPlayer.Pause();
                 }
             }
             catch (Exception)
@@ -116,7 +117,7 @@ namespace Sexy
             {
                 if (!isStopped)
                 {
-                    MediaPlayer.Resume();
+                    SexyMediaPlayer.Resume();
                 }
             }
             catch (Exception)
@@ -163,7 +164,7 @@ namespace Sexy
             bool flag = false;
             try
             {
-                flag = (MediaPlayer.State == MediaState.Playing || MediaPlayer.State == MediaState.Paused);
+                flag = (SexyMediaPlayer.State == MediaState.Playing || SexyMediaPlayer.State == MediaState.Paused);
             }
             catch (Exception)
             {
@@ -180,7 +181,7 @@ namespace Sexy
             }
             try
             {
-                maxVolume = (MediaPlayer.Volume = theVolume * 0.5f);
+                maxVolume = (SexyMediaPlayer.Volume = theVolume * 0.5f);
             }
             catch (Exception)
             {

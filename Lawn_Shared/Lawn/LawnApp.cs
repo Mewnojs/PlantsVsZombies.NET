@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using Sexy;
 using Sexy.TodLib;
+using SexyMediaPlayer = Microsoft.Xna.Framework.Media.MediaPlayer;
 
 namespace Lawn
 {
@@ -1311,9 +1312,9 @@ namespace Lawn
             }
             try
             {
-                if (MediaPlayer.GameHasControl)
+                if (SexyMediaPlayer.GameHasControl)
                 {
-                    MediaPlayer.Play(mContentManager.Load<Song>(GlobalStaticVars.GetResourceDir() + "music/crazydave"));
+                    SexyMediaPlayer.Play(mContentManager.Load<Song>(GlobalStaticVars.GetResourceDir() + "music/crazydave"));
                 }
             }
             catch (Exception)
@@ -1322,9 +1323,9 @@ namespace Lawn
             if (mPlayerInfo == null)
             {
                 PlayerInfo anyProfile = mProfileMgr.GetAnyProfile();
-                if (!MediaPlayer.GameHasControl)
+                if (!SexyMediaPlayer.GameHasControl)
                 {
-                    anyProfile.mMusicVolume = MediaPlayer.Volume;
+                    anyProfile.mMusicVolume = SexyMediaPlayer.Volume;
                 }
                 mPlayerInfo = anyProfile;
             }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework.Media;
 using Sexy;
 using Sexy.TodLib;
+using SexyMediaPlayer = Microsoft.Xna.Framework.Media.MediaPlayer;
 
 namespace Lawn
 {
@@ -314,7 +315,7 @@ namespace Lawn
             mMainMenuButton.SetVisible(true);
             if (MusicInterface.USER_MUSIC_PLAYING)
             {
-                MediaPlayer.Resume();
+                SexyMediaPlayer.Resume();
             }
             else
             {
