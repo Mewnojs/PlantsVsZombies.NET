@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>UIRequiredDeviceCapabilities</key>
+    <dict>
+        <key>arm64</key>
+        <true/>
+        <key>opengles-3</key>
+        <true/>
+    </dict>
+    <key>artistName</key>
+    <string>team2508</string>
+    <key>bundleDisplayName</key>
+    <string>植物大战僵尸</string>
+    <key>bundleShortVersionString</key>
+    <string>0.14</string>
+    <key>bundleVersion</key>
+    <string>0.14.0</string>
+    <key>copyright</key>
+    <string>© 2024 team2508, Inc.</string>
+    <key>drmVersionNumber</key>
+    <integer>0</integer>
+    <key>fileExtension</key>
+    <string>.app</string>
+    <key>gameCenterEnabled</key>
+    <false/>
+    <key>gameCenterEverEnabled</key>
+    <false/>
+    <key>genre</key>
+    <string>Games</string>
+    <key>genreId</key>
+    <integer>6014</integer>
+    <key>itemName</key>
+    <string>植物大战僵尸</string>
+    <key>kind</key>
+    <string>software</string>
+    <key>playlistArtistName</key>
+    <string>team2508</string>
+    <key>playlistName</key>
+    <string>植物大战僵尸</string>
+    <key>releaseDate</key>
+    <string>2023-11-18T03:23:10Z</string>
+    <key>s</key>
+    <integer>143441</integer>
+    <key>softwareIconNeedsShine</key>
+    <false/>
+    <key>softwareSupportedDeviceIds</key>
+    <array>
+        <integer>9</integer>
+    </array>
+    <key>softwareVersionBundleId</key>
+    <string>net.team2508.pvz</string>
+    <key>subgenres</key>
+    <array>
+        <dict>
+            <key>genre</key>
+            <string>Puzzle</string>
+            <key>genreId</key>
+            <integer>7012</integer>
+        </dict>
+    </array>
+    <key>versionRestrictions</key>
+    <integer>16843008</integer>
+</dict>
+</plist>

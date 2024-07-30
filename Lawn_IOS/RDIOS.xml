@@ -1,0 +1,49 @@
+﻿<linker>
+	<assembly fullname="MonoGame.Framework">
+		<type fullname="Microsoft.Xna.Framework.Content.ByteReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.SByteReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.DateTimeReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.DecimalReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.BoundingSphereReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.BoundingFrustumReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.RayReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.ListReader`1[[System.Char,mscorlib]]" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.ListReader`1[[Microsoft.Xna.Framework.Rectangle,MonoGame.Framework]]" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.ArrayReader`1[[Microsoft.Xna.Framework.Rectangle,MonoGame.Framework]]" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.ListReader`1[[Microsoft.Xna.Framework.Vector3,MonoGame.Framework]]" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.ListReader`1[[Microsoft.Xna.Framework.Content.StringReader,MonoGame.Framework]]" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.ListReader`1[[System.Int32,mscorlib]]" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.SpriteFontReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.Texture2DReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.CharReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.RectangleReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.StringReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.Vector2Reader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.Vector3Reader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.Vector4Reader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.CurveReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.IndexBufferReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.BoundingBoxReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.MatrixReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.BasicEffectReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.VertexBufferReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.AlphaTestEffectReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.EnumReader`1[[Microsoft.Xna.Framework.Graphics.SpriteEffects,MonoGame.Framework]]" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.ArrayReader`1[[System.Single,mscorlib]]" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.ArrayReader`1[[Microsoft.Xna.Framework.Vector2,MonoGame.Framework]]" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.ListReader`1[[Microsoft.Xna.Framework.Vector2,MonoGame.Framework]]" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.ArrayReader`1[[Microsoft.Xna.Framework.Matrix,MonoGame.Framework]]" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.EnumReader`1[[Microsoft.Xna.Framework.Graphics.Blend,MonoGame.Framework]]" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.NullableReader`1[[Microsoft.Xna.Framework.Rectangle,MonoGame.Framework]]" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.EffectMaterialReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.ExternalReferenceReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.SoundEffectReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.SongReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.ModelReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.Int32Reader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.EffectReader" preserve="all"/>
+		<type fullname="Microsoft.Xna.Framework.Content.SingleReader" preserve="all"/>
+	</assembly>
+	<assembly fullname="LAWN" preserve="all" />
+	<assembly fullname="mscorlib" />
+</linker>

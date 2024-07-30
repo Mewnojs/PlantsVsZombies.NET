@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Directives>
+  <Application>
+    <Assembly Name="MonoGame.Framework">
+      <Type Name="Microsoft.Xna.Framework.Content.ByteReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.SByteReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.DateTimeReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.DecimalReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.BoundingSphereReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.BoundingFrustumReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.RayReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.ListReader`1[[System.Char,System.Private.CoreLib]]" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.ListReader`1[[Microsoft.Xna.Framework.Rectangle,MonoGame.Framework]]" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.ArrayReader`1[[Microsoft.Xna.Framework.Rectangle,MonoGame.Framework]]" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.ListReader`1[[Microsoft.Xna.Framework.Vector3,MonoGame.Framework]]" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.ListReader`1[[Microsoft.Xna.Framework.Content.StringReader,MonoGame.Framework]]" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.ListReader`1[[System.Int32,System.Private.CoreLib]]" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.SpriteFontReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.Texture2DReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.CharReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.RectangleReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.StringReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.Vector2Reader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.Vector3Reader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.Vector4Reader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.CurveReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.IndexBufferReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.BoundingBoxReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.MatrixReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.BasicEffectReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.VertexBufferReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.AlphaTestEffectReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.EnumReader`1[[Microsoft.Xna.Framework.Graphics.SpriteEffects,MonoGame.Framework]]" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.ArrayReader`1[[System.Single,System.Private.CoreLib]]" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.ArrayReader`1[[Microsoft.Xna.Framework.Vector2,MonoGame.Framework]]" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.ListReader`1[[Microsoft.Xna.Framework.Vector2,MonoGame.Framework]]" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.ArrayReader`1[[Microsoft.Xna.Framework.Matrix,MonoGame.Framework]]" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.EnumReader`1[[Microsoft.Xna.Framework.Graphics.Blend,MonoGame.Framework]]" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.NullableReader`1[[Microsoft.Xna.Framework.Rectangle,MonoGame.Framework]]" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.EffectMaterialReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.ExternalReferenceReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.SoundEffectReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.SongReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.ModelReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.Int32Reader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.EffectReader" Dynamic="Required All"/>
+      <Type Name="Microsoft.Xna.Framework.Content.SingleReader" Dynamic="Required All"/>
+    </Assembly>
+    <Assembly Name="LAWN" Dynamic="Required All" />
+    <Assembly Name="mscorlib" />
+  </Application>
+</Directives>
