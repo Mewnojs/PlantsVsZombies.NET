@@ -9,7 +9,7 @@
 		<string>GameThumbnail.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>net.team2508.pvz</string>
+	<string>net.pvz.team2508</string>
 	<key>MinimumOSVersion</key>
 	<string>11.2</string>
 	<key>UISupportedInterfaceOrientations</key>
