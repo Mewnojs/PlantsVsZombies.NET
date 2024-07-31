@@ -9,11 +9,6 @@
     <PublishAot>true</PublishAot>
     <IpaMetadata>iTunesMetadata.plist</IpaMetadata>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <BuildIpa>True</BuildIpa>
-    <IpaIncludeArtwork>True</IpaIncludeArtwork>
-    <IpaPackageName>植物大战僵尸</IpaPackageName>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <BuildIpa>True</BuildIpa>
     <IpaIncludeArtwork>True</IpaIncludeArtwork>
@@ -21,10 +16,6 @@
   </PropertyGroup>
   <ItemGroup>
     <BundleResource Include="Content\**\*" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="iTunesArtwork" />
-    <None Remove="iTunesArtwork%402x" />
   </ItemGroup>
   <ItemGroup>
     <iTunesArtwork Include="iTunesArtwork" />
