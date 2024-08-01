@@ -13,7 +13,7 @@ namespace Sexy.TodLib
             for (int i = 0; i < GlobalMembersTrail.gTrailParamArraySize; i++)
             {
                 TrailParams trailParams = theTrailParamArray[i];
-                TrailDefinition trailDefinition = GlobalMembersTrail.gTrailDefArray[i];
+                ref TrailDefinition trailDefinition = ref GlobalMembersTrail.gTrailDefArray[i];
                 if (!GlobalMembersTrail.TrailLoadADef(ref trailDefinition, trailParams.mTrailFileName))
                 {
                     new string(new char[256]);

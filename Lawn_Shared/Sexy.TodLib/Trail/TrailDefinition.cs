@@ -12,6 +12,14 @@ namespace Sexy.TodLib
             mImage = null;
         }
 
+        public void ExtractImages()
+        {
+            if (!string.IsNullOrEmpty(mImageName))
+            {
+                mImage = AtlasResources.GetImageInAtlasById(AtlasResources.GetAtlasIdByStringId(mImageName));
+            }
+        }
+
         public void Dispose()
         {
         }

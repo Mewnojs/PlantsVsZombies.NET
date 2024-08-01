@@ -38,6 +38,6 @@ namespace Sexy.TodLib
 
         public const int MAX_TRAIL_POINTS = 20;
 
-        public const int MAX_TRAIL_TRIANGLES = 38;
+        public const int MAX_TRAIL_TRIANGLES = (MAX_TRAIL_POINTS - 1) * 2;
     }
 }

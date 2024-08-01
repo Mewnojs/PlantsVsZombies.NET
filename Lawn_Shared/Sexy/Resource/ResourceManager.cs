@@ -104,6 +104,7 @@ namespace Sexy
         public bool LoadTrail(string filename, ref TrailDefinition def)
         {
             def = mContentManager.Load<TrailDefinition>(filename);
+            def.ExtractImages();
             return true;
         }
 

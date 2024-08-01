@@ -2,8 +2,12 @@
 
 namespace Sexy.TodLib
 {
-    public/*internal*/ class TrailPoint
+    public/*internal*/ struct TrailPoint
     {
         public SexyVector2 aPos = default(SexyVector2);
+
+        public TrailPoint()
+        {
+        }
     }
 }

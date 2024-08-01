@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Sexy.TodLib
 {
@@ -25,7 +26,7 @@ namespace Sexy.TodLib
             mTrailAge++;
             if (mTrailAge >= mTrailDuration)
             {
-                if (TodCommon.TestBit((uint)mDefinition.mTrailFlags, (int)TrailFlags.Loops))
+                if (TodCommon.TestBit((uint)mDefinition.mTrailFlags, /*(int)TrailFlags.Loops*/0))
                 {
                     mTrailAge = 0;
                     return;
@@ -49,22 +50,20 @@ namespace Sexy.TodLib
             TriVertex[,] array = new TriVertex[TodLibConstants.MAX_TRAIL_TRIANGLES, 3];
             bool flag = false;
             SexyVector2 sexyVector = default(SexyVector2);
-            int i = 0;
-            while (i < mNumTrailPoints - 1)
+            
+            for (int i = 0; i < mNumTrailPoints - 1; i++)
             {
-                if (flag)
+                if (!flag)
                 {
-                    goto IL_5F;
+                    if (GetNormalAtPoint(i, ref sexyVector))
+                    {
+                        flag = true;
+                    }
+                    else 
+                    {
+                        continue;
+                    }
                 }
-                if (GetNormalAtPoint(i, ref sexyVector))
-                {
-                    flag = true;
-                    goto IL_5F;
-                }
-                IL_669:
-                i++;
-                continue;
-                IL_5F:
                 SexyVector2 sexyVector2 = sexyVector;
                 SexyVector2 sexyVector3 = default(SexyVector2);
                 if (!GetNormalAtPoint(i + 1, ref sexyVector3))
@@ -94,14 +93,14 @@ namespace Sexy.TodLib
                 aColor.mAlpha = colorAlpha;
                 aColor2.mAlpha = color2Alpha;
                 SexyVector2[] array2 = new SexyVector2[4];
-                array2[0].x = mTrailCenter.x + trailPoint.aPos.x + sexyVector2.x * num3 * num5;
-                array2[0].y = mTrailCenter.y + trailPoint.aPos.y + sexyVector2.y * num3 * num5;
-                array2[1].x = mTrailCenter.x + trailPoint.aPos.x + -sexyVector2.x * num3 * num5;
-                array2[1].y = mTrailCenter.y + trailPoint.aPos.y + -sexyVector2.y * num3 * num5;
-                array2[2].x = mTrailCenter.x + trailPoint2.aPos.x + sexyVector3.x * num4 * num6;
-                array2[2].y = mTrailCenter.y + trailPoint2.aPos.y + sexyVector3.y * num4 * num6;
-                array2[3].x = mTrailCenter.x + trailPoint2.aPos.x + -sexyVector3.x * num4 * num6;
-                array2[3].y = mTrailCenter.y + trailPoint2.aPos.y + -sexyVector3.y * num4 * num6;
+                array2[0].x = (mTrailCenter.x + trailPoint.aPos.x + sexyVector2.x * num3 * num5) * Constants.S;
+                array2[0].y = (mTrailCenter.y + trailPoint.aPos.y + sexyVector2.y * num3 * num5) * Constants.S;
+                array2[1].x = (mTrailCenter.x + trailPoint.aPos.x + -sexyVector2.x * num3 * num5) * Constants.S;
+                array2[1].y = (mTrailCenter.y + trailPoint.aPos.y + -sexyVector2.y * num3 * num5) * Constants.S;
+                array2[2].x = (mTrailCenter.x + trailPoint2.aPos.x + sexyVector3.x * num4 * num6) * Constants.S;
+                array2[2].y = (mTrailCenter.y + trailPoint2.aPos.y + sexyVector3.y * num4 * num6) * Constants.S;
+                array2[3].x = (mTrailCenter.x + trailPoint2.aPos.x + -sexyVector3.x * num4 * num6) * Constants.S;
+                array2[3].y = (mTrailCenter.y + trailPoint2.aPos.y + -sexyVector3.y * num4 * num6) * Constants.S;
                 int num11 = i * 2;
                 array[num11, 0].x = array2[0].x;
                 array[num11, 0].y = array2[0].y;
@@ -133,14 +132,13 @@ namespace Sexy.TodLib
                 array[num11 + 1, 2].u = num2;
                 array[num11 + 1, 2].v = 0f;
                 array[num11 + 1, 2].color = aColor2;
-                goto IL_669;
             }
             g.DrawTrianglesTex(mDefinition.mImage, array, theNumTriangles);
         }
 
         public void AddPoint(float x, float y)
         {
-            int num = TodCommon.ClampInt(mDefinition.mMaxPoints, 2, TodLibConstants.MAX_TRAIL_POINTS);
+            int aMaxPoints = TodCommon.ClampInt(mDefinition.mMaxPoints, 2, TodLibConstants.MAX_TRAIL_POINTS);
             if (mNumTrailPoints > 0)
             {
                 TrailPoint trailPoint = mTrailPoints[mNumTrailPoints - 1];
@@ -150,8 +148,15 @@ namespace Sexy.TodLib
                     return;
                 }
             }
-            int num3 = mNumTrailPoints;
-            TrailPoint trailPoint2 = mTrailPoints[mNumTrailPoints];
+            
+            if (mNumTrailPoints == aMaxPoints)
+            {
+                //memmove(mTrailPoints, mTrailPoints + 1, (mNumTrailPoints - 1) * sizeof(TrailPoint));
+                Array.Copy(mTrailPoints, 1, mTrailPoints, 0, mNumTrailPoints - 1);
+                //
+                mNumTrailPoints--;
+            }
+            ref TrailPoint trailPoint2 = ref mTrailPoints[mNumTrailPoints];
             trailPoint2.aPos.x = x;
             trailPoint2.aPos.y = y;
             mNumTrailPoints++;

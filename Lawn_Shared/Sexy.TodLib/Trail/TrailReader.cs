@@ -24,6 +24,11 @@ namespace Sexy.TodLib
         {
             value = new FloatParameterTrack();
             value.mCountNodes = input.ReadInt32();
+            if (value.mCountNodes == 0)
+            {
+                value.mNodes = null;
+                return;
+            }
             value.mNodes = new FloatParameterTrackNode[value.mCountNodes];
             for (int i = 0; i < value.mCountNodes; i++)
             {
