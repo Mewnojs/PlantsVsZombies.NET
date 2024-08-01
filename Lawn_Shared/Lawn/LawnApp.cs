@@ -280,7 +280,7 @@ namespace Lawn
             mResourceManager.LoadAllResources();
             Resources.ExtractResources(mResourceManager, AtlasResources.mAtlasResources);
             AtlasResources.mAtlasResources.ExtractResources();
-            ReanimatorXnaHelpers.ReanimatorLoadDefinitions(ref GameConstants.gLawnReanimationArray, 119);
+            ReanimatorXnaHelpers.ReanimatorLoadDefinitions(ref GameConstants.gLawnReanimationArray, (int)ReanimationType.NumReanims);
             TodStringFile.TodStringListSetColors(GameConstants.gLawnStringFormats, GameConstants.gLawnStringFormatCount);
             if (mLoadingFailed || mShutdown || mCloseRequest)
             {
@@ -290,9 +290,9 @@ namespace Lawn
             mZenGarden = new ZenGarden();
             mReanimatorCache = new ReanimatorCache();
             mReanimatorCache.ReanimatorCacheInitialize();
-            TodFoley.TodFoleyInitialize(null, 103);
-            GlobalMembersTrail.TrailLoadDefinitions(GameConstants.gLawnTrailArray, 1);
-            TodParticleGlobal.TodParticleLoadDefinitions(ref GameConstants.gLawnParticleArray, 102);
+            TodFoley.TodFoleyInitialize(null, (int)FoleyType.FoleyCount);
+            GlobalMembersTrail.TrailLoadDefinitions(GameConstants.gLawnTrailArray, (int)TrailType.NumTrails);
+            TodParticleGlobal.TodParticleLoadDefinitions(ref GameConstants.gLawnParticleArray, (int)ParticleEffect.ParticleCount);
             PreloadForUser();
             if (!mLoadingFailed && !mShutdown)
             {
@@ -3208,9 +3208,9 @@ namespace Lawn
                 if (Main.LOW_MEMORY_DEVICE)
                 {
                     ResourceManager.mReanimContentManager.Unload();
-                    ReanimatorXnaHelpers.ReanimatorLoadDefinitions(ref GameConstants.gLawnReanimationArray, 119);
+                    ReanimatorXnaHelpers.ReanimatorLoadDefinitions(ref GameConstants.gLawnReanimationArray, (int)ReanimationType.NumReanims);
                     ResourceManager.mParticleContentManager.Unload();
-                    TodParticleGlobal.TodParticleLoadDefinitions(ref GameConstants.gLawnParticleArray, 102);
+                    TodParticleGlobal.TodParticleLoadDefinitions(ref GameConstants.gLawnParticleArray, (int)ParticleEffect.ParticleCount);
                 }
             }
             else if (gamePlayLoaded && !doLoad)
@@ -3253,9 +3253,9 @@ namespace Lawn
                 if (Main.LOW_MEMORY_DEVICE)
                 {
                     ResourceManager.mReanimContentManager.Unload();
-                    ReanimatorXnaHelpers.ReanimatorLoadDefinitions(ref GameConstants.gLawnReanimationArray, 119);
+                    ReanimatorXnaHelpers.ReanimatorLoadDefinitions(ref GameConstants.gLawnReanimationArray, (int)ReanimationType.NumReanims);
                     ResourceManager.mParticleContentManager.Unload();
-                    TodParticleGlobal.TodParticleLoadDefinitions(ref GameConstants.gLawnParticleArray, 102);
+                    TodParticleGlobal.TodParticleLoadDefinitions(ref GameConstants.gLawnParticleArray, (int)ParticleEffect.ParticleCount);
                 }
             }
             else if (zenGardenLoaded && !doLoad)

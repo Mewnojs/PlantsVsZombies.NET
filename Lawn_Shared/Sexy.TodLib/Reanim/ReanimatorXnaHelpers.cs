@@ -231,7 +231,7 @@ namespace Sexy.TodLib
         //public static float SECONDS_PER_UPDATE = 0.033333f;
         public static float SECONDS_PER_UPDATE = 0.01f;
 
-        public static ReanimatorDefinition[] gReanimatorDefArray = new ReanimatorDefinition[119];
+        public static ReanimatorDefinition[] gReanimatorDefArray = new ReanimatorDefinition[(int)ReanimationType.NumReanims];
 
         public static ReanimationParams[] gReanimationParamArray = null;
 
@@ -243,7 +243,7 @@ namespace Sexy.TodLib
 
         public static double mLoadingProgress;
 
-        public static int mTotalResources = 118;
+        public static int mTotalResources = (int)ReanimationType.NumReanims - 1;
 
         public static int mLoadedResources;
     }

@@ -257,7 +257,7 @@ namespace Sexy.TodLib
 
         public static void TodFoleyInitialize(FoleyParams[] theFoleyParamArray, int theFoleyParamArraySize)
         {
-            TodFoley.gFoleyParamArray = new FoleyParams[]
+            TodFoley.gFoleyParamArray = new FoleyParams[(int)FoleyType.FoleyCount]
             {
                 new FoleyParams(FoleyType.Sun, 10f, new int[]
                 {
