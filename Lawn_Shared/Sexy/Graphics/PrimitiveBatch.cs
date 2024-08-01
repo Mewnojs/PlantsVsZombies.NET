@@ -228,8 +228,8 @@ namespace Sexy
                     }
                     AddVertex(ref vertices[i, j].mVert);
                     indices[positionInIndexBuffer++] = (short)(positionInBuffer - 1);
-                    primitiveCount++;
                 }
+                primitiveCount++;
             }
         }
 
