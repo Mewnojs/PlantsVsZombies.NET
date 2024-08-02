@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <SupportedOSPlatformVersion>11.2</SupportedOSPlatformVersion>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <AssemblyName>Lawn</AssemblyName>
+    <AssemblyName>LAWN</AssemblyName>
     <ProvisioningType>manual</ProvisioningType>
     <PublishAot>true</PublishAot>
     <IpaMetadata>iTunesMetadata.plist</IpaMetadata>
