@@ -658,6 +658,6 @@ namespace Sexy.TodLib
 
         private static Stack<Attachment> unusedObjects = new Stack<Attachment>();
 
-        private bool reused;
+        public bool reused;
     }
 }

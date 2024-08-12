@@ -2,11 +2,51 @@
 using System.Collections.Generic;
 using Sexy;
 using Sexy.TodLib;
+using static Lawn.GlobalMembersSaveGame;
 
 namespace Lawn
 {
     public/*internal*/ class Projectile : GameObject
     {
+        internal override void Sync(SaveGameContext theContext)
+        {
+            base.Sync(theContext);
+            theContext.SyncInt(ref mFrame);
+            theContext.SyncInt(ref mNumFrames);
+            theContext.SyncInt(ref mAnimCounter);
+            theContext.SyncFloat(ref mPosX);
+            theContext.SyncFloat(ref mPosY);
+            theContext.SyncFloat(ref mPosZ);
+            theContext.SyncFloat(ref mVelX);
+            theContext.SyncFloat(ref mVelY);
+            theContext.SyncFloat(ref mVelZ);
+            theContext.SyncFloat(ref mAccZ);
+            theContext.SyncFloat(ref mShadowY);
+            theContext.SyncBool(ref mDead);
+            theContext.SyncInt(ref mAnimTicksPerFrame);
+            theContext.SyncEnum(ref mMotionType, theContext.aProjectileMotionSaver);
+            theContext.SyncEnum(ref mProjectileType, theContext.aProjectileTypeSaver);
+            theContext.SyncInt(ref mProjectileAge);
+            theContext.SyncInt(ref mClickBackoffCounter);
+            theContext.SyncFloat(ref mRotation);
+            theContext.SyncFloat(ref mRotationSpeed);
+            theContext.SyncBool(ref mOnHighGround);
+            theContext.SyncInt(ref mDamageRangeFlags);
+            theContext.SyncInt(ref mHitTorchwoodGridX);
+            theContext.SyncInt(ref mAttachmentID_Save);
+            theContext.SyncFloat(ref mCobTargetX);
+            theContext.SyncInt(ref mCobTargetRow);
+            theContext.SyncInt(ref mTargetZombieID_Save);
+            theContext.SyncInt(ref mLastPortalX);
+        }
+
+        internal override void SyncObj(SaveGameContext theContext)
+        {
+            base.SyncObj(theContext);
+            TodLibObjSyncer.SyncObjFromList(ref mAttachmentID_Save, ref mAttachmentID, mApp.mEffectSystem.mAttachmentHolder.mAttachments, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mTargetZombieID_Save, ref mTargetZombieID, mBoard.mZombies, theContext.mReading);
+        }
+
         public static void PreallocateMemory()
         {
             for (int i = 0; i < 200; i++)
@@ -1388,11 +1428,15 @@ namespace Lawn
 
         public Attachment mAttachmentID;
 
+        public int mAttachmentID_Save;
+
         public float mCobTargetX;
 
         public int mCobTargetRow;
 
         public Zombie mTargetZombieID;
+
+        public int mTargetZombieID_Save;
 
         private int mTargetZombieIDSaved;
 

@@ -2,11 +2,42 @@
 using System.Collections.Generic;
 using Sexy;
 using Sexy.TodLib;
+using static Lawn.GlobalMembersSaveGame;
 
 namespace Lawn
 {
     public/*internal*/ class LawnMower
     {
+        internal void Sync(SaveGameContext theContext)
+        {
+            theContext.SyncFloat(ref mPosX);
+            theContext.SyncFloat(ref mPosY);
+            theContext.SyncInt(ref mRenderOrder);
+            theContext.SyncInt(ref mRow);
+            theContext.SyncInt(ref mAnimTicksPerFrame);
+            theContext.SyncInt(ref mReanimID_Save);
+            theContext.SyncInt(ref mChompCounter);
+            theContext.SyncInt(ref mRollingInCounter);
+            theContext.SyncInt(ref mSquishedCounter);
+            theContext.SyncEnum(ref mMowerState, theContext.aLawnMowerStateSaver);
+            theContext.SyncBool(ref mDead);
+            theContext.SyncBool(ref mVisible);
+            theContext.SyncEnum(ref mMowerType, theContext.aLawnMowerTypeSaver);
+            theContext.SyncFloat(ref mAltitude);
+            theContext.SyncEnum(ref mMowerHeight, theContext.aMowerHeightSaver);
+            theContext.SyncInt(ref mLastPortalX);
+        }
+
+        internal void SyncObj(SaveGameContext theContext)
+        {
+            if (theContext.mReading)
+            {
+                mApp = GlobalStaticVars.gLawnApp;
+                mBoard = mApp.mBoard;
+            }
+            TodLibObjSyncer.SyncObjFromList(ref mReanimID_Save, ref mReanimID, mApp.mEffectSystem.mReanimationHolder.mReanimations, theContext.mReading);
+        }
+
         public static LawnMower GetNewLawnMower()
         {
             if (LawnMower.unusedObjects.Count > 0)
@@ -502,6 +533,8 @@ namespace Lawn
         public int mAnimTicksPerFrame;
 
         public Reanimation mReanimID;
+
+        public int mReanimID_Save;
 
         public int mChompCounter;
 

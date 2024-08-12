@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Buffers.Binary;
+using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -803,5 +805,229 @@ namespace Sexy
         public int mWriteBitPos;
 
         private UTF8Encoding encoding = new UTF8Encoding();
+    }
+
+    public class BufferNew
+    {
+        private const int BUFFER_SIZE = 256;
+        public readonly MemoryStream InnerStream;
+        private static readonly byte[] _buffer = new byte[BUFFER_SIZE];
+
+        public BufferNew()
+        {
+            InnerStream = new MemoryStream();
+        }
+
+        public BufferNew(MemoryStream stream)
+        {
+            InnerStream = stream;
+        }
+
+        public BufferNew(byte[] buffer)
+        {
+            InnerStream = new MemoryStream(buffer);
+        }
+
+        public bool ReadBoolean()
+        {
+            InnerStream.Read(_buffer, 0, 1);
+            return (_buffer[0] & 1) != 0;
+        }
+
+        public void WriteBoolean(bool value)
+        {
+            _buffer[0] = value ? (byte)1 : (byte)0;
+            InnerStream.Write(_buffer, 0, 1);
+        }
+
+        public sbyte ReadInt8()
+        {
+            InnerStream.Read(_buffer, 0, 1);
+            return (sbyte)_buffer[0];
+        }
+
+        public void WriteInt8(sbyte value)
+        {
+            _buffer[0] = (byte)value;
+            InnerStream.Write(_buffer, 0, 1);
+        }
+
+        public byte ReadUInt8()
+        {
+            InnerStream.Read(_buffer, 0, 1);
+            return _buffer[0];
+        }
+
+        public void WriteUInt8(byte value)
+        {
+            _buffer[0] = value;
+            InnerStream.Write(_buffer, 0, 1);
+        }
+
+        public short ReadInt16LE()
+        {
+            InnerStream.Read(_buffer, 0, 2);
+            return BinaryPrimitives.ReadInt16LittleEndian(_buffer);
+        }
+
+        public void WriteInt16LE(short value)
+        {
+            BinaryPrimitives.WriteInt16LittleEndian(_buffer, value);
+            InnerStream.Write(_buffer, 0, 2);
+        }
+
+        public ushort ReadUInt16LE()
+        {
+            InnerStream.Read(_buffer, 0, 2);
+            return BinaryPrimitives.ReadUInt16LittleEndian(_buffer);
+        }
+
+        public void WriteUInt16LE(ushort value)
+        {
+            BinaryPrimitives.WriteUInt16LittleEndian(_buffer, value);
+            InnerStream.Write(_buffer, 0, 2);
+        }
+
+        public int ReadInt32LE()
+        {
+            InnerStream.Read(_buffer, 0, 4);
+            return BinaryPrimitives.ReadInt32LittleEndian(_buffer);
+        }
+
+        public void WriteInt32LE(int value)
+        {
+            BinaryPrimitives.WriteInt32LittleEndian(_buffer, value);
+            InnerStream.Write(_buffer, 0, 4);
+        }
+
+        public uint ReadUInt32LE()
+        {
+            InnerStream.Read(_buffer, 0, 4);
+            return BinaryPrimitives.ReadUInt32LittleEndian(_buffer);
+        }
+
+        public void WriteUInt32LE(uint value)
+        {
+            BinaryPrimitives.WriteUInt32LittleEndian(_buffer, value);
+            InnerStream.Write(_buffer, 0, 4);
+        }
+
+        public long ReadInt64LE()
+        {
+            InnerStream.Read(_buffer, 0, 8);
+            return BinaryPrimitives.ReadInt64LittleEndian(_buffer);
+        }
+
+        public void WriteInt64LE(long value)
+        {
+            BinaryPrimitives.WriteInt64LittleEndian(_buffer, value);
+            InnerStream.Write(_buffer, 0, 8);
+        }
+
+        public ulong ReadUInt64LE()
+        {
+            InnerStream.Read(_buffer, 0, 8);
+            return BinaryPrimitives.ReadUInt64LittleEndian(_buffer);
+        }
+
+        public void WriteUInt64LE(ulong value)
+        {
+            BinaryPrimitives.WriteUInt64LittleEndian(_buffer, value);
+            InnerStream.Write(_buffer, 0, 8);
+        }
+
+        public float ReadFloat32LE()
+        {
+            InnerStream.Read(_buffer, 0, 4);
+            return BinaryPrimitives.ReadSingleLittleEndian(_buffer);
+        }
+
+        public void WriteFloat32LE(float value)
+        {
+            BinaryPrimitives.WriteSingleLittleEndian(_buffer, value);
+            InnerStream.Write(_buffer, 0, 4);
+        }
+
+        public double ReadFloat64LE()
+        {
+            InnerStream.Read(_buffer, 0, 8);
+            return BinaryPrimitives.ReadDoubleLittleEndian(_buffer);
+        }
+
+        public void WriteFloat64LE(double value)
+        {
+            BinaryPrimitives.WriteDoubleLittleEndian(_buffer, value);
+            InnerStream.Write(_buffer, 0, 8);
+        }
+
+        public string ReadString()
+        {
+            int size = ReadInt32LE();
+            if (size < 0)
+            {
+                return null;
+            }
+            if (size == 0)
+            {
+                return string.Empty;
+            }
+            if (size <= BUFFER_SIZE)
+            {
+                InnerStream.Read(_buffer, 0, size);
+                return Encoding.Unicode.GetString(_buffer, 0, size);
+            }
+            byte[] stringBuffer = null;
+            try
+            {
+                stringBuffer = ArrayPool<byte>.Shared.Rent(size);
+                InnerStream.Read(stringBuffer, 0, size);
+                return Encoding.Unicode.GetString(stringBuffer, 0, size);
+            }
+            finally
+            {
+                if (stringBuffer != null)
+                {
+                    ArrayPool<byte>.Shared.Return(stringBuffer);
+                }
+            }
+        }
+
+        public void WriteString(string value)
+        {
+            if (value == null)
+            {
+                WriteInt32LE(-1);
+                return;
+            }
+            if (value.Length <= 0)
+            {
+                WriteInt32LE(0);
+                return;
+            }
+            int maxBytes = Encoding.Unicode.GetMaxByteCount(value.Length);
+            if (maxBytes <= (BUFFER_SIZE - 4))
+            {
+                int size = Encoding.Unicode.GetBytes(value, 0, value.Length, _buffer, 4);
+                WriteInt32LE(size);
+                InnerStream.Write(_buffer, 4, size);
+                return;
+            }
+            byte[] stringBuffer = null;
+            try
+            {
+                stringBuffer = ArrayPool<byte>.Shared.Rent(maxBytes);
+                int size = Encoding.Unicode.GetBytes(value, 0, value.Length, stringBuffer, 0);
+                WriteInt32LE(size);
+                InnerStream.Write(stringBuffer, 0, size);
+                return;
+            }
+            finally
+            {
+                if (stringBuffer != null)
+                {
+                    ArrayPool<byte>.Shared.Return(stringBuffer);
+                }
+            }
+        }
     }
 }

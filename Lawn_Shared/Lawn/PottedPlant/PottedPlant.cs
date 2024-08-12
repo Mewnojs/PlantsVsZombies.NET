@@ -1,11 +1,31 @@
 ﻿using System;
 using Sexy;
 using Sexy.TodLib;
+using static Lawn.GlobalMembersSaveGame;
 
 namespace Lawn
 {
     public class PottedPlant
     {
+        internal void Sync(SaveGameContext theContext)
+        {
+            theContext.SyncEnum(ref mSeedType, theContext.aSeedTypeSaver);
+            theContext.SyncEnum(ref mWhichZenGarden, theContext.aGardenTypeSaver);
+            theContext.SyncInt(ref mX);
+            theContext.SyncInt(ref mY);
+            theContext.SyncEnum(ref mFacing, theContext.aFacingDirectionSaver);
+            theContext.SyncDateTime(ref mLastWateredTime);
+            theContext.SyncEnum(ref mDrawVariation, theContext.aDrawVariationSaver);
+            theContext.SyncEnum(ref mPlantAge, theContext.aPottedPlantAgeSaver);
+            theContext.SyncInt(ref mTimesFed);
+            theContext.SyncInt(ref mFeedingsPerGrow);
+            theContext.SyncEnum(ref mPlantNeed, theContext.aPottedPlantNeedSaver);
+            theContext.SyncDateTime(ref mLastNeedFulfilledTime);
+            theContext.SyncDateTime(ref mLastFertilizedTime);
+            theContext.SyncDateTime(ref mLastChocolateTime);
+            theContext.SyncInt(ref mFutureAttribute[0]);
+        }
+
         public void InitializePottedPlant(SeedType theSeedType)
         {
             mSeedType = theSeedType;

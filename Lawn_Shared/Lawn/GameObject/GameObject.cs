@@ -1,10 +1,34 @@
 ﻿using System;
 using Sexy;
+using static Lawn.GlobalMembersSaveGame;
 
 namespace Lawn
 {
     public/*internal*/ abstract class GameObject
     {
+        internal virtual void Sync(SaveGameContext theContext)
+        {
+            theContext.SyncInt(ref mX);
+            theContext.SyncInt(ref mY);
+            theContext.SyncInt(ref mWidth);
+            theContext.SyncInt(ref mHeight);
+            theContext.SyncBool(ref mVisible);
+            theContext.SyncInt(ref mRow);
+            theContext.SyncInt(ref mRenderOrder);
+            theContext.SyncFloat(ref mPrevTransX);
+            theContext.SyncFloat(ref mPrevTransY);
+            theContext.SyncBool(ref mPosScaled);
+        }
+
+        internal virtual void SyncObj(SaveGameContext theContext)
+        {
+            if (theContext.mReading)
+            {
+                mApp = GlobalStaticVars.gLawnApp;
+                mBoard = mApp.mBoard;
+            }
+        }
+
         public virtual void PrepareForReuse()
         {
             Reset();

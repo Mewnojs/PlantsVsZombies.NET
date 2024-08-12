@@ -75,6 +75,8 @@ namespace Sexy.TodLib
 
         public Attachment mAttachmentID;
 
+        public int mAttachmentID_Save;
+
         public Image mImageOverride;
 
         public int mRenderGroup;

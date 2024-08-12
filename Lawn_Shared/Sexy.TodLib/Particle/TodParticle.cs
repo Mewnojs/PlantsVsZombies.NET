@@ -67,6 +67,8 @@ namespace Sexy.TodLib
 
         public TodParticleEmitter mParticleEmitter;
 
+        public int mParticleEmitter_Save;
+
         public int mParticleDuration;
 
         public int mParticleAge;
@@ -88,6 +90,8 @@ namespace Sexy.TodLib
         public float mSpinVelocity;
 
         public TodParticle mCrossFadeParticleID;
+
+        public int mCrossFadeParticleID_Save;
 
         public int mCrossFadeDuration;
 

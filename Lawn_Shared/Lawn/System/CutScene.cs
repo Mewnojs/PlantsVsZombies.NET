@@ -1,11 +1,35 @@
 ﻿using System;
 using Sexy;
 using Sexy.TodLib;
+using static Lawn.GlobalMembersSaveGame;
 
 namespace Lawn
 {
     public/*internal*/ class CutScene
     {
+        internal void Sync(SaveGameContext theContext)
+        {
+            theContext.SyncInt(ref mCutsceneTime);
+            theContext.SyncInt(ref mSodTime);
+            theContext.SyncInt(ref mGraveStoneTime);
+            theContext.SyncInt(ref mReadySetPlantTime);
+            theContext.SyncInt(ref mFogTime);
+            theContext.SyncInt(ref mBossTime);
+            theContext.SyncInt(ref mCrazyDaveTime);
+            theContext.SyncInt(ref mLawnMowerTime);
+            theContext.SyncInt(ref mCrazyDaveDialogStart);
+            theContext.SyncBool(ref mSeedChoosing);
+            theContext.SyncInt(ref mZombiesWonReanimID_Save);
+            theContext.SyncBool(ref mPreloaded);
+            theContext.SyncBool(ref mPlacedZombies);
+            theContext.SyncBool(ref mPlacedLawnItems);
+            theContext.SyncInt(ref mCrazyDaveCountDown);
+            theContext.SyncInt(ref mCrazyDaveLastTalkIndex);
+            theContext.SyncBool(ref mUpsellHideBoard);
+            // mUpsellChallengeScreen
+            theContext.SyncBool(ref mPreUpdatingBoard);
+        }
+
         static CutScene()
         {
             for (int i = 0; i < CutScene.aPicks.Length; i++)
@@ -2119,6 +2143,8 @@ namespace Lawn
         public bool mSeedChoosing;
 
         public Reanimation mZombiesWonReanimID;
+
+        public int mZombiesWonReanimID_Save;
 
         public bool mPreloaded;
 

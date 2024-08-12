@@ -1,11 +1,53 @@
 ﻿using System;
 using Sexy;
 using Sexy.TodLib;
+using static Lawn.GlobalMembersSaveGame;
 
 namespace Lawn
 {
     public/*internal*/ class Coin : GameObject
     {
+        internal override void Sync(SaveGameContext theContext)
+        {
+            base.Sync(theContext);
+            theContext.SyncFloat(ref mPosX);
+            theContext.SyncFloat(ref mPosY);
+            theContext.SyncFloat(ref mVelX);
+            theContext.SyncFloat(ref mVelY);
+            theContext.SyncFloat(ref mScale);
+            theContext.SyncBool(ref mDead);
+            theContext.SyncInt(ref mFadeCount);
+            theContext.SyncFloat(ref mCollectX);
+            theContext.SyncFloat(ref mCollectY);
+            theContext.SyncInt(ref mGroundY);
+            theContext.SyncInt(ref mCoinAge);
+            theContext.SyncBool(ref mIsBeingCollected);
+            theContext.SyncInt(ref mDisappearCounter);
+            theContext.SyncEnum(ref mType, theContext.aCoinTypeSaver);
+            theContext.SyncEnum(ref mCoinMotion, theContext.aCoinMotionSaver);
+            theContext.SyncInt(ref mAttachmentID_Save);
+            theContext.SyncFloat(ref mCollectionDistance);
+            theContext.SyncEnum(ref mUsableSeedType, theContext.aSeedTypeSaver);
+            bool hasPottedPlant = mPottedPlantSpec != null;
+            theContext.SyncBool(ref hasPottedPlant);
+            if (hasPottedPlant)
+            {
+                mPottedPlantSpec ??= new PottedPlant();
+                mPottedPlantSpec.Sync(theContext);
+            }
+            theContext.SyncBool(ref mNeedsBouncyArrow);
+            theContext.SyncBool(ref mHasBouncyArrow);
+            theContext.SyncBool(ref mHitGround);
+            theContext.SyncInt(ref mTimesDropped);
+            theContext.SyncBool(ref mScored);
+        }
+
+        internal override void SyncObj(SaveGameContext theContext)
+        {
+            base.SyncObj(theContext);
+            TodLibObjSyncer.SyncObjFromList(ref mAttachmentID_Save, ref mAttachmentID, mApp.mEffectSystem.mAttachmentHolder.mAttachments, theContext.mReading);
+        }
+
         internal static void LoadSeedPacketImage(SeedType theSeedType)
         {
             Coin.LoadedSeedType = theSeedType;
@@ -1569,6 +1611,8 @@ namespace Lawn
         public CoinMotion mCoinMotion;
 
         private Attachment mAttachmentID;
+
+        private int mAttachmentID_Save;
 
         public float mCollectionDistance;
 

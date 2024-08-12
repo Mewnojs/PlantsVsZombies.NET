@@ -1,10 +1,20 @@
 ﻿using System;
 using Sexy;
+using static Lawn.GlobalMembersSaveGame;
 
 namespace Lawn
 {
     public/*internal*/ class MagnetItem
     {
+        internal void Sync(SaveGameContext theContext)
+        {
+            theContext.SyncFloat(ref mPosX);
+            theContext.SyncFloat(ref mPosY);
+            theContext.SyncFloat(ref mDestOffsetX);
+            theContext.SyncFloat(ref mDestOffsetY);
+            theContext.SyncEnum(ref mItemType, theContext.aMagnetItemTypeSaver);
+        }
+
         public void Reset()
         {
             mPosX = (mPosY = (mDestOffsetX = (mDestOffsetY = 0f)));

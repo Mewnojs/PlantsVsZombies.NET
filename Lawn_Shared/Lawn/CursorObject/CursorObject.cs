@@ -1,11 +1,37 @@
 ﻿using System;
 using Sexy;
 using Sexy.TodLib;
+using static Lawn.GlobalMembersSaveGame;
 
 namespace Lawn
 {
     public/*internal*/ class CursorObject : GameObject
     {
+        internal override void Sync(SaveGameContext theContext)
+        {
+            base.Sync(theContext);
+            theContext.SyncInt(ref mSeedBankIndex);
+            theContext.SyncEnum(ref mType, theContext.aSeedTypeSaver);
+            theContext.SyncEnum(ref mImitaterType, theContext.aSeedTypeSaver);
+            theContext.SyncEnum(ref mCursorType, theContext.aCursorTypeSaver);
+            theContext.SyncInt(ref mCoinID_Save);
+            theContext.SyncInt(ref mGlovePlantID_Save);
+            theContext.SyncInt(ref mDuplicatorPlantID_Save);
+            theContext.SyncInt(ref mCobCannonPlantID_Save);
+            theContext.SyncInt(ref mHammerDownCounter);
+            theContext.SyncInt(ref mReanimCursorID_Save);
+        }
+
+        internal override void SyncObj(SaveGameContext theContext)
+        {
+            base.SyncObj(theContext);
+            TodLibObjSyncer.SyncObjFromList(ref mCoinID_Save, ref mCoinID, mBoard.mCoins, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mGlovePlantID_Save, ref mGlovePlantID, mBoard.mPlants, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mDuplicatorPlantID_Save, ref mDuplicatorPlantID, mBoard.mPlants, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mCobCannonPlantID_Save, ref mCobCannonPlantID, mBoard.mPlants, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mReanimCursorID_Save, ref mReanimCursorID, mApp.mEffectSystem.mReanimationHolder.mReanimations, theContext.mReading);
+        }
+
         public CursorObject()
         {
             mType = SeedType.None;
@@ -263,14 +289,24 @@ namespace Lawn
 
         public Coin mCoinID;
 
+        public int mCoinID_Save;
+
         public Plant mGlovePlantID;
+
+        public int mGlovePlantID_Save;
 
         public Plant mDuplicatorPlantID;
 
+        public int mDuplicatorPlantID_Save;
+
         public Plant mCobCannonPlantID;
+
+        public int mCobCannonPlantID_Save;
 
         public int mHammerDownCounter;
 
         public Reanimation mReanimCursorID;
+
+        public int mReanimCursorID_Save;
     }
 }

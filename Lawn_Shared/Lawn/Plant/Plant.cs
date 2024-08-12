@@ -3,11 +3,90 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Sexy;
 using Sexy.TodLib;
+using static Lawn.GlobalMembersSaveGame;
 
 namespace Lawn
 {
     public/*internal*/ class Plant : GameObject
     {
+        internal override void Sync(SaveGameContext theContext)
+        {
+            base.Sync(theContext);
+            theContext.SyncEnum(ref mSeedType, theContext.aSeedTypeSaver);
+            theContext.SyncInt(ref mPlantCol);
+            theContext.SyncInt(ref mAnimCounter);
+            theContext.SyncInt(ref mFrame);
+            theContext.SyncInt(ref mFrameLength);
+            theContext.SyncInt(ref mNumFrames);
+            theContext.SyncEnum(ref mState, theContext.aPlantStateSaver);
+            theContext.SyncInt(ref mPlantHealth);
+            theContext.SyncInt(ref mPlantMaxHealth);
+            theContext.SyncInt(ref mSubclass);
+            theContext.SyncInt(ref mDisappearCountdown);
+            theContext.SyncInt(ref mDoSpecialCountdown);
+            theContext.SyncInt(ref mStateCountdown);
+            theContext.SyncInt(ref mLaunchCounter);
+            theContext.SyncInt(ref mLaunchRate);
+            theContext.SyncTRect(ref mPlantRect);
+            theContext.SyncTRect(ref mPlantAttackRect);
+            theContext.SyncInt(ref mTargetX);
+            theContext.SyncInt(ref mTargetY);
+            theContext.SyncInt(ref mStartRow);
+            theContext.SyncInt(ref mParticleID_Save);
+            theContext.SyncInt(ref mShootingCounter);
+            theContext.SyncInt(ref mBodyReanimID_Save);
+            theContext.SyncInt(ref mHeadReanimID_Save);
+            theContext.SyncInt(ref mHeadReanimID2_Save);
+            theContext.SyncInt(ref mHeadReanimID3_Save);
+            theContext.SyncInt(ref mBlinkReanimID_Save);
+            theContext.SyncInt(ref mLightReanimID_Save);
+            theContext.SyncInt(ref mSleepingReanimID_Save);
+            theContext.SyncInt(ref mBlinkCountdown);
+            theContext.SyncInt(ref mRecentlyEatenCountdown);
+            theContext.SyncInt(ref mEatenFlashCountdown);
+            theContext.SyncInt(ref mBeghouledFlashCountdown);
+            theContext.SyncFloat(ref mShakeOffsetX);
+            theContext.SyncFloat(ref mShakeOffsetY);
+            // mMagnetItems
+            for (int i = 0; i < 5; i++)
+            {
+                bool hasMagnet = mMagnetItems[i] != null;
+                theContext.SyncBool(ref hasMagnet);
+                if (hasMagnet)
+                {
+                    mMagnetItems[i] ??= new MagnetItem();
+                    mMagnetItems[i].Sync(theContext);
+                }
+            }
+            theContext.SyncInt(ref mTargetZombieID_Save);
+            theContext.SyncInt(ref mWakeUpCounter);
+            theContext.SyncEnum(ref mOnBungeeState, theContext.aPlantOnBungeeStateSaver);
+            theContext.SyncEnum(ref mImitaterType, theContext.aSeedTypeSaver);
+            theContext.SyncInt(ref mPottedPlantIndex);
+            theContext.SyncBool(ref mAnimPing);
+            theContext.SyncBool(ref mDead);
+            theContext.SyncBool(ref mSquished);
+            theContext.SyncBool(ref mIsAsleep);
+            theContext.SyncBool(ref mIsOnBoard);
+            theContext.SyncBool(ref mHighlighted);
+            theContext.SyncBool(ref mInFlowerPot);
+            theContext.SyncBool(ref mGloveGrabbed);
+        }
+
+        internal override void SyncObj(SaveGameContext theContext)
+        {
+            base.SyncObj(theContext);
+            TodLibObjSyncer.SyncObjFromList(ref mParticleID_Save, ref mParticleID, mApp.mEffectSystem.mParticleHolder.mParticleSystems, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mBodyReanimID_Save, ref mBodyReanimID, mApp.mEffectSystem.mReanimationHolder.mReanimations, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mHeadReanimID_Save, ref mHeadReanimID, mApp.mEffectSystem.mReanimationHolder.mReanimations, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mHeadReanimID2_Save, ref mHeadReanimID2, mApp.mEffectSystem.mReanimationHolder.mReanimations, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mHeadReanimID3_Save, ref mHeadReanimID3, mApp.mEffectSystem.mReanimationHolder.mReanimations, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mBlinkReanimID_Save, ref mBlinkReanimID, mApp.mEffectSystem.mReanimationHolder.mReanimations, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mLightReanimID_Save, ref mLightReanimID, mApp.mEffectSystem.mReanimationHolder.mReanimations, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mSleepingReanimID_Save, ref mSleepingReanimID, mApp.mEffectSystem.mReanimationHolder.mReanimations, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mTargetZombieID_Save, ref mTargetZombieID, mBoard.mZombies, theContext.mReading);
+        }
+
         public static void PreallocateMemory()
         {
             for (int i = 0; i < 100; i++)
@@ -5878,21 +5957,37 @@ namespace Lawn
 
         public TodParticleSystem mParticleID;
 
+        public int mParticleID_Save;
+
         public int mShootingCounter;
 
         public Reanimation mBodyReanimID;
 
+        public int mBodyReanimID_Save;
+
         public Reanimation mHeadReanimID;
+
+        public int mHeadReanimID_Save;
 
         public Reanimation mHeadReanimID2;
 
+        public int mHeadReanimID2_Save;
+
         public Reanimation mHeadReanimID3;
+
+        public int mHeadReanimID3_Save;
 
         public Reanimation mBlinkReanimID;
 
+        public int mBlinkReanimID_Save;
+
         public Reanimation mLightReanimID;
 
+        public int mLightReanimID_Save;
+
         public Reanimation mSleepingReanimID;
+
+        public int mSleepingReanimID_Save;
 
         public int mBlinkCountdown;
 
@@ -5909,6 +6004,8 @@ namespace Lawn
         public MagnetItem[] mMagnetItems = new MagnetItem[GameConstants.MAX_MAGNET_ITEMS];
 
         public Zombie mTargetZombieID;
+
+        public int mTargetZombieID_Save;
 
         private int mTargetZombieIDSaved;
 

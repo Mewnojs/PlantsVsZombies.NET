@@ -1378,11 +1378,11 @@ namespace Sexy.TodLib
 
         public bool mActive;
 
-        private bool mGetFrameTime = true;
+        public bool mGetFrameTime = true;
 
-        private ReanimatorFrameTime mFrameTime;
+        public ReanimatorFrameTime mFrameTime;
 
-        private SexyTransform2D aOverlayMatrix;
+        public SexyTransform2D aOverlayMatrix;
 
         public static string ReanimTrackId_fullscreen = ReanimatorXnaHelpers.ReanimatorTrackNameToId("fullscreen");
 
@@ -1402,11 +1402,11 @@ namespace Sexy.TodLib
 
         private static bool didClipIgnore = false;
 
-        private Matrix aBasePoseMatrix = default(Matrix);
+        public Matrix aBasePoseMatrix = default(Matrix);
 
-        private Matrix tempOverlayMatrix = default(Matrix);
+        public Matrix tempOverlayMatrix = default(Matrix);
 
-        private SexyTransform2D basePose;
+        public SexyTransform2D basePose;
 
         private static readonly SexyTransform2D identity = new SexyTransform2D(true);
     }

@@ -1,10 +1,18 @@
 ﻿using System;
 using Sexy;
+using static Lawn.GlobalMembersSaveGame;
 
 namespace Lawn
 {
     public/*internal*/ class CursorPreview : GameObject
     {
+        internal override void Sync(SaveGameContext theContext)
+        {
+            base.Sync(theContext);
+            theContext.SyncInt(ref mGridX);
+            theContext.SyncInt(ref mGridY);
+        }
+
         public CursorPreview()
         {
             mX = 0;

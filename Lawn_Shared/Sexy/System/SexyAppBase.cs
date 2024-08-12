@@ -616,6 +616,59 @@ namespace Sexy
             }
         }
 
+        public bool WriteBufferNewToFile(string theFileName, BufferNew theBuffer)
+        {
+            lock (saveStateLock)
+            {
+                try
+                {
+                    string directoryCombined = Path.Combine(applicationStoragePath, Path.GetDirectoryName(theFileName));
+                    if (!Directory.Exists(directoryCombined))
+                    {
+                        Directory.CreateDirectory(directoryCombined);
+                    }
+                    using (var fileStream = File.Create(Path.Combine(applicationStoragePath, theFileName)))
+                    {
+                        MemoryStream ms = theBuffer.InnerStream;
+                        long pos = ms.Position;
+                        ms.Seek(0, SeekOrigin.Begin);
+                        ms.CopyTo(fileStream);
+                        ms.Seek(pos, SeekOrigin.Begin);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string message = ex.Message;
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        public BufferNew ReadBufferNewFromFile(string theFileName, bool dontWriteToDemo)
+        {
+            lock (saveStateLock)
+            {
+                try
+                {
+                    string fileNameCombined = Path.Combine(applicationStoragePath, theFileName);
+                    if (File.Exists(fileNameCombined))
+                    {
+                        using (var fileStream = File.OpenRead(fileNameCombined))
+                        {
+                            byte[] array = new byte[fileStream.Length];
+                            fileStream.Read(array, 0, (int)fileStream.Length);
+                            return new BufferNew(array);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                }
+                return null;
+            }
+        }
+
         private void TransformTouch(_Touch touch)
         {
         }

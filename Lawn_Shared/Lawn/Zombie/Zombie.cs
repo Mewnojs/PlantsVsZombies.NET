@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Sexy;
 using Sexy.TodLib;
+using static Lawn.GlobalMembersSaveGame;
 
 namespace Lawn
 {
@@ -15,6 +16,122 @@ namespace Lawn
     }
     public/*internal*/ class Zombie : GameObject, IComparable
     {
+        internal override void Sync(SaveGameContext theContext)
+        {
+            base.Sync(theContext);
+            theContext.SyncEnum(ref mZombieType, theContext.aZombieTypeSaver);
+            theContext.SyncEnum(ref mZombiePhase, theContext.aZombiePhaseSaver);
+            theContext.SyncFloat(ref mPosX);
+            theContext.SyncFloat(ref mPosY);
+            theContext.SyncFloat(ref mVelX);
+            theContext.SyncInt(ref mAnimCounter);
+            theContext.SyncInt(ref mGroanCounter);
+            theContext.SyncInt(ref mAnimTicksPerFrame);
+            theContext.SyncInt(ref mAnimFrames);
+            theContext.SyncInt(ref mFrame);
+            theContext.SyncInt(ref mPrevFrame);
+            theContext.SyncBool(ref mVariant);
+            theContext.SyncBool(ref mIsEating);
+            theContext.SyncInt(ref mJustGotShotCounter);
+            theContext.SyncInt(ref mShieldJustGotShotCounter);
+            theContext.SyncInt(ref mShieldRecoilCounter);
+            theContext.SyncInt(ref mZombieAge);
+            theContext.SyncEnum(ref mZombieHeight, theContext.aZombieHeightSaver);
+            theContext.SyncInt(ref mPhaseCounter);
+            theContext.SyncInt(ref mFromWave);
+            theContext.SyncBool(ref mDroppedLoot);
+            theContext.SyncInt(ref mZombieFade);
+            theContext.SyncBool(ref mFlatTires);
+            theContext.SyncInt(ref mUseLadderCol);
+            theContext.SyncInt(ref mTargetCol);
+            theContext.SyncFloat(ref mAltitude);
+            theContext.SyncBool(ref mHitUmbrella);
+            theContext.SyncTRect(ref mZombieRect);
+            theContext.SyncTRect(ref mZombieAttackRect);
+            theContext.SyncInt(ref mChilledCounter);
+            theContext.SyncInt(ref mButteredCounter);
+            theContext.SyncInt(ref mIceTrapCounter);
+            theContext.SyncBool(ref mMindControlled);
+            theContext.SyncBool(ref mBlowingAway);
+            theContext.SyncBool(ref mHasHead);
+            theContext.SyncBool(ref mHasArm);
+            theContext.SyncBool(ref mHasObject);
+            theContext.SyncBool(ref mInPool);
+            theContext.SyncBool(ref mOnHighGround);
+            theContext.SyncBool(ref mYuckyFace);
+            theContext.SyncInt(ref mYuckyFaceCounter);
+            theContext.SyncEnum(ref mHelmType, theContext.aHelmTypeSaver);
+            theContext.SyncInt(ref mBodyHealth);
+            theContext.SyncInt(ref mBodyMaxHealth);
+            theContext.SyncInt(ref mHelmHealth);
+            theContext.SyncInt(ref mHelmMaxHealth);
+            theContext.SyncEnum(ref mShieldType, theContext.aShieldTypeSaver);
+            theContext.SyncInt(ref mShieldHealth);
+            theContext.SyncInt(ref mShieldMaxHealth);
+            theContext.SyncInt(ref mFlyingHealth);
+            theContext.SyncInt(ref mFlyingMaxHealth);
+            theContext.SyncBool(ref mDead);
+            theContext.SyncInt(ref mRelatedZombieID_Save);
+            for (int i = 0; i < 4; i++)
+            {
+                theContext.SyncInt(ref mFollowerZombieID_Save[i]);
+            }
+            theContext.SyncInt(ref mLeaderZombie_Save);
+            theContext.SyncBool(ref mPlayingSong);
+            theContext.SyncInt(ref mParticleOffsetX);
+            theContext.SyncInt(ref mParticleOffsetY);
+            theContext.SyncInt(ref mAttachmentID_Save);
+            theContext.SyncInt(ref mSummonCounter);
+            theContext.SyncInt(ref mBodyReanimID_Save);
+            theContext.SyncFloat(ref mScaleZombie);
+            theContext.SyncFloat(ref mVelZ);
+            theContext.SyncFloat(ref mOrginalAnimRate);
+            theContext.SyncInt(ref mTargetPlantID_Save);
+            theContext.SyncInt(ref mBossMode);
+            theContext.SyncInt(ref mTargetRow);
+            theContext.SyncInt(ref mBossBungeeCounter);
+            theContext.SyncInt(ref mBossStompCounter);
+            theContext.SyncInt(ref mBossHeadCounter);
+            theContext.SyncInt(ref mBossFireBallReanimID_Save);
+            theContext.SyncInt(ref mSpecialHeadReanimID_Save);
+            theContext.SyncInt(ref mFireballRow);
+            theContext.SyncBool(ref mIsFireBall);
+            theContext.SyncInt(ref mMoweredReanimID_Save);
+            theContext.SyncInt(ref mLastPortalX);
+            theContext.SyncBool(ref mHasGroundTrack);
+            theContext.SyncBool(ref mSummonedDancers);
+            theContext.SyncBool(ref mSurprised);
+            theContext.SyncInt(ref mGroundTrackIndex);
+            theContext.SyncBool(ref mUsesClipping);
+            theContext.SyncBool(ref doLoot);
+            theContext.SyncBool(ref doParticle);
+            theContext.SyncBool(ref mIsButterShowing);
+            theContext.SyncBool(ref cachedZombieRectUpToDate);
+            theContext.SyncTRect(ref cachedZombieRect);
+            theContext.SyncInt(ref mYuckyToRow);
+            theContext.SyncBool(ref mYuckySwitchRowsLate);
+            theContext.SyncBool(ref draggedByTangleKelp);
+            theContext.SyncBool(ref mHasHelm);
+            theContext.SyncBool(ref mHasShield);
+        }
+
+        internal override void SyncObj(SaveGameContext theContext)
+        {
+            base.SyncObj(theContext);
+            TodLibObjSyncer.SyncObjFromList(ref mRelatedZombieID_Save, ref mRelatedZombieID, mBoard.mZombies, theContext.mReading);
+            for (int i = 0; i < GameConstants.MAX_ZOMBIE_FOLLOWERS; i++)
+            {
+                TodLibObjSyncer.SyncObjFromList(ref mFollowerZombieID_Save[i], ref mFollowerZombieID[i], mBoard.mZombies, theContext.mReading);
+            }
+            TodLibObjSyncer.SyncObjFromList(ref mLeaderZombie_Save, ref mLeaderZombie, mBoard.mZombies, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mAttachmentID_Save, ref mAttachmentID, mApp.mEffectSystem.mAttachmentHolder.mAttachments, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mBodyReanimID_Save, ref mBodyReanimID, mApp.mEffectSystem.mReanimationHolder.mReanimations, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mTargetPlantID_Save, ref mTargetPlantID, mBoard.mPlants, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mBossFireBallReanimID_Save, ref mBossFireBallReanimID, mApp.mEffectSystem.mReanimationHolder.mReanimations, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mSpecialHeadReanimID_Save, ref mSpecialHeadReanimID, mApp.mEffectSystem.mReanimationHolder.mReanimations, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mMoweredReanimID_Save, ref mMoweredReanimID, mApp.mEffectSystem.mReanimationHolder.mReanimations, theContext.mReading);
+        }
+
         public static void PreallocateMemory()
         {
             for (int i = 0; i < 200; i++)
@@ -10866,13 +10983,19 @@ namespace Lawn
 
         public Zombie mRelatedZombieID;
 
+        public int mRelatedZombieID_Save;
+
         private int mRelatedZombieIDSaved;
 
         public Zombie[] mFollowerZombieID = new Zombie[GameConstants.MAX_ZOMBIE_FOLLOWERS];
 
+        public int[] mFollowerZombieID_Save = new int[GameConstants.MAX_ZOMBIE_FOLLOWERS];
+
         private int[] mFollowerZombieIDSaved = new int[GameConstants.MAX_ZOMBIE_FOLLOWERS];
 
         public Zombie mLeaderZombie;
+
+        public int mLeaderZombie_Save;
 
         private int mLeaderZombieIDSaved = -1;
 
@@ -10884,9 +11007,13 @@ namespace Lawn
 
         public Attachment mAttachmentID;
 
+        public int mAttachmentID_Save;
+
         public int mSummonCounter;
 
         public Reanimation mBodyReanimID;
+
+        public int mBodyReanimID_Save;
 
         public float mScaleZombie;
 
@@ -10895,6 +11022,8 @@ namespace Lawn
         public float mOrginalAnimRate;
 
         public Plant mTargetPlantID;
+
+        public int mTargetPlantID_Save;
 
         private int mTargetPlantIDSaved;
 
@@ -10910,13 +11039,19 @@ namespace Lawn
 
         public Reanimation mBossFireBallReanimID;
 
+        public int mBossFireBallReanimID_Save;
+
         public Reanimation mSpecialHeadReanimID;
+
+        public int mSpecialHeadReanimID_Save;
 
         public int mFireballRow;
 
         public bool mIsFireBall;
 
         public Reanimation mMoweredReanimID;
+
+        public int mMoweredReanimID_Save;
 
         public int mLastPortalX;
 

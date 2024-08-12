@@ -2,11 +2,412 @@
 using System.Collections.Generic;
 using Sexy;
 using Sexy.TodLib;
+using static Lawn.GlobalMembersSaveGame;
 
 namespace Lawn
 {
     public/*internal*/ class Board : Widget, ButtonListener
     {
+        internal void Sync(SaveGameContext theContext)
+        {
+            // 僵尸数组需要单独处理下，因为AddToZombieList本身会Add一次
+            int zombieCount = mZombies.Count;
+            theContext.SyncListLength(ref zombieCount);
+            if (theContext.mReading)
+            {
+                mZombies.Clear();
+                for (int i = 0; i < zombieCount; i++)
+                {
+                    Zombie zombie = Zombie.GetNewZombie();
+                    zombie.Sync(theContext);
+                    AddToZombieList(zombie);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < zombieCount; i++)
+                {
+                    mZombies[i].Sync(theContext);
+                }
+            }
+            int plantCount = mPlants.Count;
+            theContext.SyncListLength(ref plantCount);
+            if (theContext.mReading)
+            {
+                mPlants.Clear();
+                for (int i = 0; i < plantCount; i++)
+                {
+                    mPlants.Add(Plant.GetNewPlant());
+                }
+            }
+            for (int i = 0; i < plantCount; i++)
+            {
+                mPlants[i].Sync(theContext);
+            }
+            int projectileCount = mProjectiles.Count;
+            theContext.SyncListLength(ref projectileCount);
+            if (theContext.mReading)
+            {
+                mProjectiles.Clear();
+                for (int i = 0; i < projectileCount; i++)
+                {
+                    mProjectiles.Add(Projectile.GetNewProjectile());
+                }
+            }
+            for (int i = 0; i < projectileCount; i++)
+            {
+                mProjectiles[i].Sync(theContext);
+            }
+            int coinCount = mCoins.Count;
+            theContext.SyncListLength(ref coinCount);
+            if (theContext.mReading)
+            {
+                mCoins.Clear();
+                for (int i = 0; i < coinCount; i++)
+                {
+                    mCoins.Add(new Coin());
+                }
+            }
+            for (int i = 0; i < coinCount; i++)
+            {
+                mCoins[i].Sync(theContext);
+            }
+            int lawnMowerCount = mLawnMowers.Count;
+            theContext.SyncListLength(ref lawnMowerCount);
+            if (theContext.mReading)
+            {
+                mLawnMowers.Clear();
+                for (int i = 0; i < lawnMowerCount; i++)
+                {
+                    mLawnMowers.Add(LawnMower.GetNewLawnMower());
+                }
+            }
+            for (int i = 0; i < lawnMowerCount; i++)
+            {
+                mLawnMowers[i].Sync(theContext);
+            }
+            int gridItemCount = mGridItems.Count;
+            theContext.SyncListLength(ref gridItemCount);
+            if (theContext.mReading)
+            {
+                mGridItems.Clear();
+                for (int i = 0; i < gridItemCount; i++)
+                {
+                    mGridItems.Add(GridItem.GetNewGridItem());
+                }
+            }
+            for (int i = 0; i < gridItemCount; i++)
+            {
+                mGridItems[i].Sync(theContext);
+            }
+            mCursorObject.Sync(theContext);
+            mCursorPreview.Sync(theContext);
+            // mAdvice
+            mSeedBank ??= new SeedBank();
+            mSeedBank.Sync(theContext);
+            // mMenuButton
+            // mNextWaveButton
+            // mStoreButton
+            // mViewZombieButton
+            theContext.SyncBool(ref mIgnoreMouseUp);
+            theContext.SyncBool(ref mIgnoreNextMouseUp);
+            theContext.SyncBool(ref mIgnoreNextMouseUpSeedPacket);
+            theContext.SyncInt(ref mLastToolX);
+            theContext.SyncInt(ref mLastToolY);
+            mCutScene.Sync(theContext);
+            mChallenge.Sync(theContext);
+            theContext.SyncBool(ref mPaused);
+            for (int x = 0; x < 9; x++)
+            {
+                for (int y = 0; y < 6; y++)
+                {
+                    theContext.SyncEnum(ref mGridSquareType[x, y], theContext.aGridSquareTypeSaver);
+                }
+            }
+            for (int x = 0; x < 9; x++)
+            {
+                for (int y = 0; y < 6; y++)
+                {
+                    theContext.SyncInt(ref mGridCelLook[x, y]);
+                }
+            }
+            for (int x = 0; x < 9; x++)
+            {
+                for (int y = 0; y < 6; y++)
+                {
+                    for (int z = 0; z < 2; z++)
+                    {
+                        theContext.SyncInt(ref mGridCelOffset[x, y, z]);
+                    }
+                }
+            }
+            for (int x = 0; x < 9; x++)
+            {
+                for (int y = 0; y < 7; y++)
+                {
+                    theContext.SyncInt(ref mGridCelFog[x, y]);
+                }
+            }
+            theContext.SyncBool(ref mEnableGraveStones);
+            theContext.SyncInt(ref mSpecialGraveStoneX);
+            theContext.SyncInt(ref mSpecialGraveStoneY);
+            theContext.SyncFloat(ref mFogOffset);
+            theContext.SyncInt(ref mFogBlownCountDown);
+            for (int i = 0; i < 6; i++)
+            {
+                theContext.SyncEnum(ref mPlantRow[i], theContext.aPlantRowTypeSaver);
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                theContext.SyncInt(ref mWaveRowGotLawnMowered[i]);
+            }
+            theContext.SyncInt(ref mBonusLawnMowersRemaining);
+            for (int i = 0; i < 6; i++)
+            {
+                theContext.SyncInt(ref mIceMinX[i]);
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                theContext.SyncInt(ref mIceTimer[i]);
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                mRowPickingArray[i] ??= new TodSmoothArray();
+                theContext.SyncInt(ref mRowPickingArray[i].mItem);
+                theContext.SyncFloat(ref mRowPickingArray[i].mWeight);
+                theContext.SyncFloat(ref mRowPickingArray[i].mLastPicked);
+                theContext.SyncFloat(ref mRowPickingArray[i].mSecondLastPicked);
+            }
+            for (int i = 0; i < 100; i++)
+            {
+                for (int j = 0; j < 50; j++)
+                {
+                    theContext.SyncEnum(ref mZombiesInWave[i, j], theContext.aZombieTypeSaver);
+                }
+            }
+            for (int i = 0; i < 100; i++)
+            {
+                theContext.SyncBool(ref mZombieAllowed[i]);
+            }
+            theContext.SyncInt(ref mSunCountDown);
+            theContext.SyncInt(ref mNumSunsFallen);
+            theContext.SyncInt(ref mShakeCounter);
+            theContext.SyncInt(ref mShakeAmountX);
+            theContext.SyncInt(ref mShakeAmountY);
+            theContext.SyncEnum(ref mBackground, theContext.aBackgroundTypeSaver);
+            theContext.SyncInt(ref mLevel);
+            theContext.SyncInt(ref mSodPosition);
+            theContext.SyncInt(ref mPrevMouseX);
+            theContext.SyncInt(ref mPrevMouseY);
+            theContext.SyncInt(ref mSunMoney);
+            theContext.SyncInt(ref mNumWaves);
+            theContext.SyncInt(ref mMainCounter);
+            theContext.SyncInt(ref mEffectCounter);
+            theContext.SyncInt(ref mDrawCount);
+            theContext.SyncInt(ref mRiseFromGraveCounter);
+            theContext.SyncInt(ref mOutOfMoneyCounter);
+            theContext.SyncInt(ref mCurrentWave);
+            theContext.SyncInt(ref mTotalSpawnedWaves);
+            theContext.SyncEnum(ref mTutorialState, theContext.aTutorialStateSaver);
+            theContext.SyncInt(ref mTutorialParticleID_Save);
+            theContext.SyncInt(ref mLastBungeeWave);
+            theContext.SyncInt(ref mZombieHealthToNextWave);
+            theContext.SyncInt(ref mZombieHealthWaveStart);
+            theContext.SyncInt(ref mZombieCountDown);
+            theContext.SyncInt(ref mZombieCountDownStart);
+            theContext.SyncInt(ref mHugeWaveCountDown);
+            for (int i = 0; i < 67; i++)
+            {
+                theContext.SyncBool(ref mHelpDisplayed[i]);
+            }
+            theContext.SyncEnum(ref mHelpIndex, theContext.aAdviceTypeSaver);
+            theContext.SyncBool(ref mFinalBossKilled);
+            theContext.SyncBool(ref mShowShovel);
+            theContext.SyncInt(ref mCoinBankFadeCount);
+            theContext.SyncInt(ref mLevelFadeCount);
+            // mDebugTextMode
+            theContext.SyncBool(ref mLevelComplete);
+            theContext.SyncInt(ref mBoardFadeOutCounter);
+            theContext.SyncInt(ref mNextSurvivalStageCounter);
+            theContext.SyncInt(ref mScoreNextMowerCounter);
+            theContext.SyncBool(ref mLevelAwardSpawned);
+            theContext.SyncInt(ref mProgressMeterWidth);
+            theContext.SyncInt(ref mFlagRaiseCounter);
+            theContext.SyncInt(ref mIceTrapCounter);
+            theContext.SyncInt(ref mBoardRandSeed);
+            theContext.SyncInt(ref mPoolSparklyParticleID_Save);
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 12; j++)
+                {
+                    theContext.SyncInt(ref mFwooshID_Save[i, j]);
+                }
+            }
+            theContext.SyncInt(ref mFwooshCountDown);
+            theContext.SyncInt(ref mTimeStopCounter);
+            theContext.SyncBool(ref mDroppedFirstCoin);
+            theContext.SyncInt(ref mFinalWaveSoundCounter);
+            theContext.SyncInt(ref mCobCannonCursorDelayCounter);
+            theContext.SyncInt(ref mCobCannonMouseX);
+            theContext.SyncInt(ref mCobCannonMouseY);
+            theContext.SyncBool(ref mKilledYeti);
+            theContext.SyncBool(ref mMustacheMode);
+            theContext.SyncBool(ref mSuperMowerMode);
+            theContext.SyncBool(ref mFutureMode);
+            theContext.SyncBool(ref mPinataMode);
+            theContext.SyncBool(ref mDanceMode);
+            theContext.SyncBool(ref mDaisyMode);
+            theContext.SyncBool(ref mSukhbirMode);
+            // mPrevBoardResult
+            theContext.SyncInt(ref mTriggeredLawnMowers);
+            theContext.SyncInt(ref mPlayTimeActiveLevel);
+            theContext.SyncInt(ref mPlayTimeInactiveLevel);
+            theContext.SyncInt(ref mMaxSunPlants);
+            theContext.SyncInt(ref mStartDrawTime);
+            theContext.SyncInt(ref mIntervalDrawTime);
+            theContext.SyncInt(ref mIntervalDrawCountStart);
+            theContext.SyncFloat(ref mMinFPS);
+            theContext.SyncInt(ref mPreloadTime);
+            theContext.SyncInt(ref mGameID);
+            theContext.SyncInt(ref mGravesCleared);
+            theContext.SyncInt(ref mPlantsEaten);
+            theContext.SyncInt(ref mPlantsShoveled);
+            theContext.SyncInt(ref mCoinsCollected);
+            theContext.SyncInt(ref mDiamondsCollected);
+            theContext.SyncInt(ref mPottedPlantsCollected);
+            theContext.SyncInt(ref mChocolateCollected);
+            theContext.SyncBool(ref mPeaShooterUsed);
+            theContext.SyncBool(ref mCatapultPlantsUsed);
+            theContext.SyncInt(ref mCollectedCoinStreak);
+            theContext.SyncInt(ref mGargantuarsKillsByCornCob);
+            theContext.SyncBool(ref mMushroomAndCoffeeBeansOnly);
+            theContext.SyncBool(ref mMushroomsUsed);
+            theContext.SyncInt(ref mDoomsUsed);
+            theContext.SyncBool(ref mPlanternOrBloverUsed);
+            theContext.SyncBool(ref mNutsUsed);
+            theContext.SyncBool(ref mNomNomNomAchievementTracker);
+            theContext.SyncBool(ref mNoFungusAmongUsAchievementTracker);
+            if (theContext.mVersion <= 0)
+            {
+                int aShovelType = 0;
+                theContext.SyncInt(ref aShovelType);
+                bool aAutoCollect = false;
+                theContext.SyncBool(ref aAutoCollect);
+            }
+            theContext.SyncInt(ref mPeashootersPlanted);
+            theContext.SyncString(ref mLevelStr);
+        }
+
+        internal void SyncObj(SaveGameContext theContext)
+        {
+            TodLibObjSyncer.SyncObjFromList(ref mCutScene.mZombiesWonReanimID_Save, ref mCutScene.mZombiesWonReanimID, mApp.mEffectSystem.mReanimationHolder.mReanimations, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mChallenge.mReanimChallenge_Save, ref mChallenge.mReanimChallenge, mApp.mEffectSystem.mReanimationHolder.mReanimations, theContext.mReading);
+            for (int i = 0; i < mChallenge.mReanimCloud.Length; i++)
+            {
+                TodLibObjSyncer.SyncObjFromList(ref mChallenge.mReanimCloud_Save[i], ref mChallenge.mReanimCloud[i], mApp.mEffectSystem.mReanimationHolder.mReanimations, theContext.mReading);
+            }
+            TodLibObjSyncer.SyncObjFromList(ref mTutorialParticleID_Save, ref mTutorialParticleID, mApp.mEffectSystem.mParticleHolder.mParticleSystems, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mPoolSparklyParticleID_Save, ref mPoolSparklyParticleID, mApp.mEffectSystem.mParticleHolder.mParticleSystems, theContext.mReading);
+            for (int i = 0; i < mFwooshID.GetLength(0); i++)
+            {
+                for (int j = 0; j < mFwooshID.GetLength(1); j++)
+                {
+                    TodLibObjSyncer.SyncObjFromList(ref mFwooshID_Save[i, j], ref mFwooshID[i, j], mApp.mEffectSystem.mReanimationHolder.mReanimations, theContext.mReading);
+                }
+            }
+            for (int i = 0; i < mCoins.Count; i++)
+            {
+                mCoins[i].SyncObj(theContext);
+            }
+            mCursorObject.SyncObj(theContext);
+            mCursorPreview.SyncObj(theContext);
+            for (int i = 0; i < mGridItems.Count; i++)
+            {
+                mGridItems[i].SyncObj(theContext);
+            }
+            for (int i = 0; i < mLawnMowers.Count; i++)
+            {
+                mLawnMowers[i].SyncObj(theContext);
+            }
+            for (int i = 0; i < mPlants.Count; i++)
+            {
+                mPlants[i].SyncObj(theContext);
+            }
+            for (int i = 0; i < mProjectiles.Count; i++)
+            {
+                mProjectiles[i].SyncObj(theContext);
+            }
+            mSeedBank.SyncObj(theContext);
+            for (int i = 0; i < mZombies.Count; i++)
+            {
+                mZombies[i].SyncObj(theContext);
+            }
+        }
+
+        internal void ClearObj()
+        {
+            for (int i = 0; i < mCoins.Count; i++)
+            {
+                mCoins[i].PrepareForReuse();
+            }
+            mCoins.Clear();
+            for (int i = 0; i < mPlants.Count; i++)
+            {
+                mPlants[i].PrepareForReuse();
+            }
+            mPlants.Clear();
+            for (int i = 0; i < mZombies.Count; i++)
+            {
+                mZombies[i].PrepareForReuse();
+            }
+            mZombies.Clear();
+            for (int i = 0; i < mZombiesRow1.Count; i++)
+            {
+                mZombiesRow1[i].PrepareForReuse();
+            }
+            mZombiesRow1.Clear();
+            for (int i = 0; i < mZombiesRow2.Count; i++)
+            {
+                mZombiesRow2[i].PrepareForReuse();
+            }
+            mZombiesRow2.Clear();
+            for (int i = 0; i < mZombiesRow3.Count; i++)
+            {
+                mZombiesRow3[i].PrepareForReuse();
+            }
+            mZombiesRow3.Clear();
+            for (int i = 0; i < mZombiesRow4.Count; i++)
+            {
+                mZombiesRow4[i].PrepareForReuse();
+            }
+            mZombiesRow4.Clear();
+            for (int i = 0; i < mZombiesRow5.Count; i++)
+            {
+                mZombiesRow5[i].PrepareForReuse();
+            }
+            mZombiesRow5.Clear();
+            for (int i = 0; i < mZombiesRow6.Count; i++)
+            {
+                mZombiesRow6[i].PrepareForReuse();
+            }
+            mZombiesRow6.Clear();
+            for (int i = 0; i < mLawnMowers.Count; i++)
+            {
+                mLawnMowers[i].PrepareForReuse();
+            }
+            mLawnMowers.Clear();
+            for (int i = 0; i < mGridItems.Count; i++)
+            {
+                mGridItems[i].PrepareForReuse();
+            }
+            mGridItems.Clear();
+            for (int i = 0; i < mProjectiles.Count; i++)
+            {
+                mProjectiles[i].PrepareForReuse();
+            }
+            mProjectiles.Clear();
+        }
+
         public bool LoadFromFile(Sexy.Buffer b)
         {
             this.doAddGraveStones = false;
@@ -10007,6 +10408,8 @@ namespace Lawn
 
         public TodParticleSystem mTutorialParticleID;
 
+        public int mTutorialParticleID_Save;
+
         public int mTutorialTimer;
 
         public int mLastBungeeWave;
@@ -10055,7 +10458,11 @@ namespace Lawn
 
         public TodParticleSystem mPoolSparklyParticleID;
 
+        public int mPoolSparklyParticleID_Save;
+
         public Reanimation[,] mFwooshID = new Reanimation[Constants.MAX_GRIDSIZEY, 12];
+
+        public int[,] mFwooshID_Save = new int[Constants.MAX_GRIDSIZEY, 12];
 
         public int mFwooshCountDown;
 

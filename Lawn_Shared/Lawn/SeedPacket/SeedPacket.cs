@@ -1,11 +1,29 @@
 ﻿using System;
 using Sexy;
 using Sexy.TodLib;
+using static Lawn.GlobalMembersSaveGame;
 
 namespace Lawn
 {
     public/*internal*/ class SeedPacket : GameObject
     {
+        internal override void Sync(SaveGameContext theContext)
+        {
+            base.Sync(theContext);
+            theContext.SyncInt(ref mRefreshCounter);
+            theContext.SyncInt(ref mRefreshTime);
+            theContext.SyncInt(ref mIndex);
+            theContext.SyncInt(ref mOffsetY);
+            theContext.SyncEnum(ref mPacketType, theContext.aSeedTypeSaver);
+            theContext.SyncEnum(ref mImitaterType, theContext.aSeedTypeSaver);
+            theContext.SyncInt(ref mSlotMachineCountDown);
+            theContext.SyncEnum(ref mSlotMachiningNextSeed, theContext.aSeedTypeSaver);
+            theContext.SyncFloat(ref mSlotMachiningPosition);
+            theContext.SyncBool(ref mActive);
+            theContext.SyncBool(ref mRefreshing);
+            theContext.SyncInt(ref mTimesUsed);
+        }
+
         public SeedPacket()
         {
             mPacketType = SeedType.None;

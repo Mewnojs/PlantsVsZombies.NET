@@ -2,11 +2,53 @@
 using Microsoft.Xna.Framework;
 using Sexy;
 using Sexy.TodLib;
+using static Lawn.GlobalMembersSaveGame;
 
 namespace Lawn
 {
     public/*internal*/ class Challenge : StoreListener
     {
+        internal void Sync(SaveGameContext theContext)
+        {
+            theContext.SyncBool(ref mBeghouledMouseCapture);
+            theContext.SyncInt(ref mBeghouledMouseDownX);
+            theContext.SyncInt(ref mBeghouledMouseDownY);
+            for (int x = 0; x < 9; x++)
+            {
+                for (int y = 0; y < 6; y++)
+                {
+                    theContext.SyncBool(ref mBeghouledEated[x, y]);
+                }
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                theContext.SyncBool(ref mBeghouledPurcasedUpgrade[i]);
+            }
+            theContext.SyncInt(ref mBeghouledMatchesThisMove);
+            theContext.SyncEnum(ref mChallengeState, theContext.aChallengeStateSaver);
+            theContext.SyncInt(ref mChallengeStateCounter);
+            theContext.SyncInt(ref mConveyorBeltCounter);
+            theContext.SyncInt(ref mChallengeScore);
+            theContext.SyncBool(ref mShowBowlingLine);
+            theContext.SyncEnum(ref mLastConveyorSeedType, theContext.aSeedTypeSaver);
+            theContext.SyncInt(ref mSurvivalStage);
+            theContext.SyncInt(ref mSlotMachineRollCount);
+            theContext.SyncInt(ref mReanimChallenge_Save);
+            for (int i = 0; i < 6; i++)
+            {
+                theContext.SyncInt(ref mReanimCloud_Save[i]);
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                theContext.SyncInt(ref mCloudCounter[i]);
+            }
+            theContext.SyncInt(ref mChallengeGridX);
+            theContext.SyncInt(ref mChallengeGridY);
+            theContext.SyncInt(ref mScaryPotterPots);
+            theContext.SyncInt(ref mRainCounter);
+            theContext.SyncInt(ref mTreeOfWisdomTalkIndex);
+        }
+
         static Challenge()
         {
             SeedType[,] array = new SeedType[GameConstants.ART_CHALLEGE_SIZE_Y, GameConstants.ART_CHALLEGE_SIZE_X];
@@ -5858,7 +5900,11 @@ namespace Lawn
 
         public Reanimation mReanimChallenge;
 
+        public int mReanimChallenge_Save;
+
         public Reanimation[] mReanimCloud = new Reanimation[6];
+
+        public int[] mReanimCloud_Save = new int[6];
 
         public int[] mCloudCounter = new int[6];
 

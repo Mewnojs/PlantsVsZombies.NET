@@ -868,7 +868,11 @@ namespace Sexy.TodLib
 
         public TodEmitterDefinition mEmitterDef;
 
+        public int mEmitterDef_Save;
+
         public TodParticleSystem mParticleSystem;
+
+        public int mParticleSystem_Save;
 
         public List<TodParticle> mParticleList = new List<TodParticle>();
 
@@ -897,6 +901,8 @@ namespace Sexy.TodLib
         public Image mImageOverride;
 
         public TodParticleEmitter mCrossFadeEmitterID;
+
+        public int mCrossFadeEmitterID_Save;
 
         public int mEmitterCrossFadeCountDown;
 

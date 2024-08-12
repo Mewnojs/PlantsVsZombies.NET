@@ -36,6 +36,8 @@ namespace Sexy.TodLib
 
         public object mEffectID;
 
+        public int mEffectID_Save;
+
         public EffectType mEffectType;
 
         public SexyTransform2D mOffset = default(SexyTransform2D);

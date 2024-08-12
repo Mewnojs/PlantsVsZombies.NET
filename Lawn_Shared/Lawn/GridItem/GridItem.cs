@@ -2,11 +2,57 @@
 using System.Collections.Generic;
 using Sexy;
 using Sexy.TodLib;
+using static Lawn.GlobalMembersSaveGame;
 
 namespace Lawn
 {
     public/*internal*/ class GridItem
     {
+        internal void Sync(SaveGameContext theContext)
+        {
+            theContext.SyncEnum(ref mGridItemType, theContext.aGridItemTypeSaver);
+            theContext.SyncEnum(ref mGridItemState, theContext.aGridItemStateSaver);
+            theContext.SyncInt(ref mGridX);
+            theContext.SyncInt(ref mGridY);
+            theContext.SyncInt(ref mGridItemCounter);
+            theContext.SyncInt(ref mRenderOrder);
+            theContext.SyncBool(ref mDead);
+            theContext.SyncFloat(ref mPosX);
+            theContext.SyncFloat(ref mPosY);
+            theContext.SyncFloat(ref mGoalX);
+            theContext.SyncFloat(ref mGoalY);
+            theContext.SyncInt(ref mGridItemReanimID_Save);
+            theContext.SyncInt(ref mGridItemParticleID_Save);
+            theContext.SyncEnum(ref mZombieType, theContext.aZombieTypeSaver);
+            theContext.SyncEnum(ref mSeedType, theContext.aSeedTypeSaver);
+            theContext.SyncEnum(ref mScaryPotType, theContext.aScaryPotTypeSaver);
+            theContext.SyncBool(ref mHighlighted);
+            theContext.SyncInt(ref mTransparentCounter);
+            theContext.SyncInt(ref mSunCount);
+            theContext.SyncInt(ref mMotionTrailCount);
+            for (int i = 0; i < 12; i++)
+            {
+                bool hasMotionTrailFrames = mMotionTrailFrames[i] != null;
+                theContext.SyncBool(ref hasMotionTrailFrames);
+                if (hasMotionTrailFrames)
+                {
+                    mMotionTrailFrames[i] ??= new MotionTrailFrame();
+                    mMotionTrailFrames[i].Sync(theContext);
+                }
+            }
+        }
+
+        internal void SyncObj(SaveGameContext theContext)
+        {
+            if (theContext.mReading)
+            {
+                mApp = GlobalStaticVars.gLawnApp;
+                mBoard = mApp.mBoard;
+            }
+            TodLibObjSyncer.SyncObjFromList(ref mGridItemReanimID_Save, ref mGridItemReanimID, mApp.mEffectSystem.mReanimationHolder.mReanimations, theContext.mReading);
+            TodLibObjSyncer.SyncObjFromList(ref mGridItemParticleID_Save, ref mGridItemParticleID, mApp.mEffectSystem.mParticleHolder.mParticleSystems, theContext.mReading);
+        }
+
         public static GridItem GetNewGridItem()
         {
             if (GridItem.unusedObjects.Count > 0)
@@ -788,7 +834,11 @@ namespace Lawn
 
         public Reanimation mGridItemReanimID;
 
+        public int mGridItemReanimID_Save;
+
         public TodParticleSystem mGridItemParticleID;
+
+        public int mGridItemParticleID_Save;
 
         public ZombieType mZombieType;
 

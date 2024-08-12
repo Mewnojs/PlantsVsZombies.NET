@@ -1,11 +1,30 @@
 ﻿using System;
 using Sexy;
 using Sexy.TodLib;
+using static Lawn.GlobalMembersSaveGame;
 
 namespace Lawn
 {
     public/*internal*/ class SeedBank : GameObject
     {
+        internal override void Sync(SaveGameContext theContext)
+        {
+            base.Sync(theContext);
+            theContext.SyncInt(ref mNumPackets);
+            for (int i = 0; i < 9; i++)
+            {
+                bool hasSeedPacket = mSeedPackets[i] != null;
+                theContext.SyncBool(ref hasSeedPacket);
+                if (hasSeedPacket)
+                {
+                    mSeedPackets[i] ??= new SeedPacket();
+                    mSeedPackets[i].Sync(theContext);
+                }
+            }
+            theContext.SyncInt(ref mCutSceneDarken);
+            theContext.SyncInt(ref mConveyorBeltCounter);
+        }
+
         public SeedBank()
         {
             mWidth = Constants.New.SeedBank_Width;
