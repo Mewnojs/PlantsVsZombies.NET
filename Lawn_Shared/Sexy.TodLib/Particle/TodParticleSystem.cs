@@ -82,6 +82,7 @@ namespace Sexy.TodLib
             for (int i = 0; i < mEmitterList.Count; i++)
             {
                 TodParticleEmitter todParticleEmitter = mEmitterList[i];
+                todParticleEmitter.mParticleSystem = this;
                 todParticleEmitter.DeleteAll();
                 todParticleEmitter.PrepareForReuse();
                 mParticleHolder.mEmitters.Remove(todParticleEmitter);

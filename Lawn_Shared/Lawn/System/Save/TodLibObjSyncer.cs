@@ -35,21 +35,16 @@ namespace Lawn
 
         public static void ClearObj(this EffectSystem theEffectSystem)
         {
-            for (int i = 0; i < theEffectSystem.mParticleHolder.mParticles.Count; i++)
-            {
-                theEffectSystem.mParticleHolder.mParticles[i].PrepareForReuse();
-            }
-            theEffectSystem.mParticleHolder.mParticles.Clear();
             for (int i = 0; i < theEffectSystem.mParticleHolder.mParticleSystems.Count; i++)
             {
-                theEffectSystem.mParticleHolder.mParticleSystems[i].PrepareForReuse();
+                TodParticleSystem particleSystem = theEffectSystem.mParticleHolder.mParticleSystems[i];
+                particleSystem.mParticleHolder = theEffectSystem.mParticleHolder;
+                particleSystem.ParticleSystemDie();
+                particleSystem.PrepareForReuse();
             }
             theEffectSystem.mParticleHolder.mParticleSystems.Clear();
-            for (int i = 0; i < theEffectSystem.mParticleHolder.mEmitters.Count; i++)
-            {
-                theEffectSystem.mParticleHolder.mEmitters[i].PrepareForReuse();
-            }
             theEffectSystem.mParticleHolder.mEmitters.Clear();
+            theEffectSystem.mParticleHolder.mParticles.Clear();
             for (int i = 0; i < theEffectSystem.mReanimationHolder.mReanimations.Count; i++)
             {
                 theEffectSystem.mReanimationHolder.mReanimations[i].PrepareForReuse();
