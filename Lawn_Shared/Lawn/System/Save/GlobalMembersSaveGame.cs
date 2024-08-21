@@ -9,6 +9,7 @@ namespace Lawn
     internal static class GlobalMembersSaveGame
     {
         public const int SAVE_FILE_GAME_MAGIC_NUMBER = 14372508;
+        public const int SAVE_FILE_PLAYER_MAGIC_NUMBER = 99810000;
         public const int SAVE_FILE_WP_RAW = 20200000;
         public const int SAVE_FILE_CHECK = 777;
 

@@ -1,23 +1,12 @@
 ﻿using System;
 using Microsoft.Xna.Framework.GamerServices;
 using Sexy;
+using static Lawn.GlobalMembersSaveGame;
 
 namespace Lawn
 {
     public/*internal*/ class PlayerInfo
     {
-        public int mLevel
-        {
-            get
-            {
-                return _level;
-            }
-            private set
-            {
-                _level = value;
-            }
-        }
-
         public bool FirstRun
         {
             get
@@ -148,7 +137,7 @@ namespace Lawn
             }
         }
 
-        public bool LoadDetails()
+        public bool LoadDetailsOld()
         {
             bool result;
             try
@@ -191,7 +180,6 @@ namespace Lawn
                     mId = (uint)buffer.ReadLong();
                     mLevel = buffer.ReadLong();
                     mName = buffer.ReadString();
-                    SignedInGamer.SignedIn += new EventHandler<SignedInEventArgs>(GamerSignedInCallback);
                     mNeedsGrayedPlantWarning = buffer.ReadBoolean();
                     mNeedsMagicBaconReward = buffer.ReadBoolean();
                     mNeedsTrialLevelReset = buffer.ReadBoolean();
@@ -231,11 +219,59 @@ namespace Lawn
             catch (Exception ex)
             {
                 string message = ex.Message;
-                Reset();
-                mId = ProfileMgr.GetNewProfileId();
                 result = false;
             }
             return result;
+        }
+
+        public bool LoadDetails()
+        {
+            string saveFileName = GetSaveFileName();
+            BufferNew b = GlobalStaticVars.gSexyAppBase.ReadBufferNewFromFile(saveFileName, false);
+            if (b == null)
+            {
+                return false;
+            }
+            SaveGameContext saveGameContext = new SaveGameContext();
+            saveGameContext.mBuffer = b;
+            saveGameContext.mReading = true;
+            int version = -1;
+            try
+            {
+                int magic = 0;
+                saveGameContext.SyncInt(ref magic);
+                saveGameContext.SyncInt(ref saveGameContext.mVersion);
+                saveGameContext.SyncInt(ref saveGameContext.mVersionType);
+                if (magic != SAVE_FILE_PLAYER_MAGIC_NUMBER)
+                {
+                    throw new Exception();
+                }
+                if (saveGameContext.mVersionType != SAVE_FILE_WP_RAW)
+                {
+                    throw new Exception();
+                }
+                saveGameContext.InitializePlayerEnum();
+                SyncPlayer(saveGameContext);
+                version = saveGameContext.mVersion;
+            }
+            catch (Exception)
+            {
+                Reset();
+                if (!LoadDetailsOld())
+                {
+                    Reset();
+                    mId = ProfileMgr.GetNewProfileId();
+                    return false;
+                }
+            }
+            HandleAfterLoading(version);
+            return true;
+        }
+
+        public void HandleAfterLoading(int version)
+        {
+            SignedInGamer.SignedIn += new EventHandler<SignedInEventArgs>(GamerSignedInCallback);
+            Main.RunWhenLocked = mRunWhileLocked;
         }
 
         public void GamerSignedInCallback(object sender, SignedInEventArgs args)
@@ -281,75 +317,129 @@ namespace Lawn
 
         public void SaveDetails()
         {
+            string saveFileName = GetSaveFileName();
+            SaveGameContext saveGameContext = new SaveGameContext();
+            saveGameContext.mBuffer = new BufferNew();
+            saveGameContext.mReading = false;
+            int magic = SAVE_FILE_PLAYER_MAGIC_NUMBER;
+            saveGameContext.mVersion = 0;
+            saveGameContext.mVersionType = SAVE_FILE_WP_RAW;
             try
             {
-                string saveFileName = GetSaveFileName();
-                Sexy.Buffer buffer = new Sexy.Buffer();
-                buffer.WriteBoolean(FirstRun);
-                buffer.WriteLong(mMoneySpent);
-                buffer.WriteDateTime(mLastStinkyChocolateTime);
-                buffer.WriteDouble(mSoundVolume);
-                buffer.WriteDouble(mMusicVolume);
-                buffer.WriteBoolean(mZenGardenTutorialComplete);
-                buffer.WriteBoolean(mIsDaveTalkingZenTutorial);
-                buffer.WriteBoolean(mIsInZenTutorial);
-                buffer.WriteLong(mZenTutorialMessage);
-                buffer.WriteLongArray(mChallengeRecords);
-                buffer.WriteLong(mCoins);
-                buffer.WriteLong(mDidntPurchasePacketUpgrade);
-                buffer.WriteBoolean(mDoVibration);
-                buffer.WriteBoolean(mRunWhileLocked);
-                buffer.WriteLong(mFinishedAdventure);
-                buffer.WriteBoolean(mHasNewIZombie);
-                buffer.WriteBoolean(mHasNewMiniGame);
-                buffer.WriteBoolean(mHasNewSurvival);
-                buffer.WriteBoolean(mHasNewVasebreaker);
-                buffer.WriteBoolean(mHasSeenStinky);
-                buffer.WriteBoolean(mHasSeenUpsell);
-                buffer.WriteBoolean(mHasUnlockedMinigames);
-                buffer.WriteBoolean(mHasUnlockedPuzzleMode);
-                buffer.WriteBoolean(mHasUnlockedSurvivalMode);
-                buffer.WriteBoolean(mHasUsedCheatKeys);
-                buffer.WriteBoolean(mHasWokenStinky);
-                buffer.WriteBoolean(mHasFinishedTutorial);
-                buffer.WriteLong((int)mId);
-                buffer.WriteLong(mLevel);
-                buffer.WriteString(mName);
-                buffer.WriteBoolean(mNeedsGrayedPlantWarning);
-                buffer.WriteBoolean(mNeedsMagicBaconReward);
-                buffer.WriteBoolean(mNeedsTrialLevelReset);
-                buffer.WriteBoolean(mNeedsMagicTacoReward);
-                buffer.WriteBoolean(mNeedsMessageOnGameSelector);
-                buffer.WriteLongArray(mPlaceHolderPlayerStats);
-                buffer.WriteBooleanArray(mPlantTypesUsed);
-                buffer.WriteLong(mPlayTimeActivePlayer);
-                buffer.WriteLong(mPlayTimeInactivePlayer);
-                buffer.WriteLongArray(mPurchases);
-                buffer.WriteBooleanArray(mShownAchievements);
-                buffer.WriteLong(mStinkyPosX);
-                buffer.WriteLong(mStinkyPosY);
-                buffer.WriteLong((int)mUseSeq);
-                buffer.WriteLong((int)mZombiesKilled);
-                buffer.WriteLong((int)mVasebreakerScore);
-                buffer.WriteLong((int)mIZombieScore);
-                buffer.WriteLong(mMiniGamesUnlocked);
-                buffer.WriteLong(mMiniGamesUnlockable);
-                buffer.WriteLong(mVasebreakerUnlocked);
-                buffer.WriteLong(mIZombieUnlocked);
-                buffer.WriteBoolean(mSeenLeaderboardArrow);
-                buffer.WriteBoolean(mHasSeenAchievementDialog);
-                buffer.WriteLong(mNumPottedPlants);
-                for (int i = 0; i < mNumPottedPlants; i++)
-                {
-                    mPottedPlant[i].Save(buffer);
-                }
-                buffer.WriteLong(saveCheckNumber);
-                GlobalStaticVars.gSexyAppBase.WriteBufferToFile(saveFileName, buffer);
+                saveGameContext.SyncInt(ref magic);
+                saveGameContext.SyncInt(ref saveGameContext.mVersion);
+                saveGameContext.SyncInt(ref saveGameContext.mVersionType);
+                saveGameContext.InitializePlayerEnum();
+                SyncPlayer(saveGameContext);
+                GlobalStaticVars.gLawnApp.WriteBufferNewToFile(saveFileName, saveGameContext.mBuffer);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                string message = ex.Message;
+
             }
+        }
+
+        internal void SyncPlayer(SaveGameContext theContext)
+        {
+            Sync(theContext);
+            int check = SAVE_FILE_CHECK;
+            theContext.SyncInt(ref check);
+            if (check != SAVE_FILE_CHECK)
+            {
+                throw new Exception("Check error");
+            }
+        }
+
+        internal void Sync(SaveGameContext theContext)
+        {
+            theContext.SyncString(ref mName);
+            theContext.SyncUint(ref mUseSeq);
+            theContext.SyncUint(ref mId);
+            theContext.SyncInt(ref mLevel);
+            theContext.SyncInt(ref mCoins);
+            theContext.SyncInt(ref mFinishedAdventure);
+            for (int i = 0; i < 200; i++)
+            {
+                theContext.SyncInt(ref mChallengeRecords[i]);
+            }
+            for (int i = 0; i < 80; i++)
+            {
+                theContext.SyncInt(ref mPurchases[i]);
+            }
+            theContext.SyncInt(ref mPlayTimeActivePlayer);
+            theContext.SyncInt(ref mPlayTimeInactivePlayer);
+            theContext.SyncBool(ref mHasUsedCheatKeys);
+            theContext.SyncBool(ref mHasWokenStinky);
+            theContext.SyncInt(ref mDidntPurchasePacketUpgrade);
+            theContext.SyncDateTime(ref mLastStinkyChocolateTime);
+            theContext.SyncInt(ref mStinkyPosX);
+            theContext.SyncInt(ref mStinkyPosY);
+            theContext.SyncBool(ref mHasUnlockedMinigames);
+            theContext.SyncBool(ref mHasUnlockedPuzzleMode);
+            theContext.SyncBool(ref mHasNewMiniGame);
+            theContext.SyncBool(ref mHasNewVasebreaker);
+            theContext.SyncBool(ref mHasNewIZombie);
+            theContext.SyncBool(ref mHasNewSurvival);
+            theContext.SyncBool(ref mHasUnlockedSurvivalMode);
+            theContext.SyncBool(ref mNeedsMessageOnGameSelector);
+            theContext.SyncBool(ref mNeedsMagicTacoReward);
+            theContext.SyncBool(ref mNeedsMagicBaconReward);
+            theContext.SyncBool(ref mNeedsTrialLevelReset);
+            theContext.SyncBool(ref mHasSeenStinky);
+            theContext.SyncBool(ref mHasSeenUpsell);
+            for (int i = 0; i < 1; i++)
+            {
+                theContext.SyncInt(ref mPlaceHolderPlayerStats[i]);
+            }
+            theContext.SyncInt(ref mNumPottedPlants);
+            for (int i = 0; i < 200; i++)
+            {
+                bool hasPottedPlant = mPottedPlant[i] != null;
+                theContext.SyncBool(ref hasPottedPlant);
+                if (hasPottedPlant)
+                {
+                    mPottedPlant[i] ??= new PottedPlant();
+                    mPottedPlant[i].Sync(theContext);
+                }
+                else
+                {
+                    mPottedPlant[i] = null;
+                }
+            }
+            for (int i = 0; i < 18; i++)
+            {
+                theContext.SyncBool(ref mShownAchievements[i]);
+            }
+            for (int i = 0; i < 18; i++)
+            {
+                theContext.SyncBool(ref mEarnedAchievements[i]);
+            }
+            theContext.SyncBool(ref mDoVibration);
+            theContext.SyncBool(ref mRunWhileLocked);
+            theContext.SyncDateTime(ref mLastSeenMoreGames);
+            theContext.SyncBool(ref mNeedsGrayedPlantWarning);
+            for (int i = 0; i < 49; i++)
+            {
+                theContext.SyncBool(ref mPlantTypesUsed[i]);
+            }
+            theContext.SyncBool(ref mZenGardenTutorialComplete);
+            theContext.SyncBool(ref mIsDaveTalkingZenTutorial);
+            theContext.SyncBool(ref mIsInZenTutorial);
+            theContext.SyncInt(ref mZenTutorialMessage);
+            theContext.SyncBool(ref mHasFinishedTutorial);
+            theContext.SyncLong(ref mZombiesKilled);
+            theContext.SyncLong(ref mVasebreakerScore);
+            theContext.SyncLong(ref mIZombieScore);
+            theContext.SyncInt(ref mMiniGamesUnlocked);
+            theContext.SyncInt(ref mMiniGamesUnlockable);
+            theContext.SyncInt(ref mVasebreakerUnlocked);
+            theContext.SyncInt(ref mIZombieUnlocked);
+            theContext.SyncBool(ref mSeenLeaderboardArrow);
+            theContext.SyncBool(ref mHasSeenAchievementDialog);
+            theContext.SyncDouble(ref mSoundVolume);
+            theContext.SyncDouble(ref mMusicVolume);
+            theContext.SyncInt(ref mMoneySpent);
+            theContext.SyncBool(ref mFirstRun);
         }
 
         public int GetLevel()
@@ -377,7 +467,7 @@ namespace Lawn
 
         public uint mId;
 
-        private int _level;
+        public int mLevel;
 
         public int mCoins;
 
