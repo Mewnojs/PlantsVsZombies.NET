@@ -10110,8 +10110,6 @@ namespace Lawn
             {
                 return;
             }
-            float num = mVelZ;
-            float num2 = mVelX;
             Reanimation reanimation = mApp.ReanimationGet(mBodyReanimID);
             if (mZombiePhase == ZombiePhase.ZombiquariumBite)
             {
@@ -10125,38 +10123,38 @@ namespace Lawn
             }
             else if (!ZombiquariumFindClosestBrain() && mPhaseCounter == 0)
             {
-                int num3 = RandomNumbers.NextNumber(7);
-                if (num3 <= 4)
+                int aRnd = RandomNumbers.NextNumber(7);
+                if (aRnd <= 4)
                 {
                     mZombiePhase = ZombiePhase.ZombiquariumAccel;
-                    num = TodCommon.RandRangeFloat(0f, 6.2831855f);
+                    mVelZ = TodCommon.RandRangeFloat(0f, GlobalMembersSexyMath.SEXYMATH_2PI);
                     mPhaseCounter = TodCommon.RandRangeInt(300, 1000);
                     reanimation.mAnimRate = TodCommon.RandRangeFloat(15f, 20f);
                 }
-                else if (num3 == 4)
+                else if (aRnd == 4)
                 {
                     mZombiePhase = ZombiePhase.ZombiquariumDrift;
-                    num = 4.712389f;
+                    mVelZ = GlobalMembersSexyMath.SEXYMATH_PI * 1.5f;
                     mPhaseCounter = TodCommon.RandRangeInt(300, 1000);
                     reanimation.mAnimRate = TodCommon.RandRangeFloat(8f, 10f);
                 }
-                else if (num3 == 5)
+                else if (aRnd == 5)
                 {
                     mZombiePhase = ZombiePhase.ZombiquariumBackAndForth;
-                    num = 0f;
+                    mVelZ = 0f;
                     mPhaseCounter = TodCommon.RandRangeInt(300, 1000);
                     reanimation.mAnimRate = TodCommon.RandRangeFloat(15f, 20f);
                 }
                 else
                 {
                     mZombiePhase = ZombiePhase.ZombiquariumBackAndForth;
-                    num = 3.1415927f;
+                    mVelZ = GlobalMembersSexyMath.SEXYMATH_PI;
                     mPhaseCounter = TodCommon.RandRangeInt(300, 1000);
                     reanimation.mAnimRate = TodCommon.RandRangeFloat(15f, 20f);
                 }
             }
-            float aVelX = (float)Math.Cos(num);
-            float aVelY = (float)Math.Sin(num);
+            float aVelX = (float)Math.Cos(mVelZ);
+            float aVelY = (float)Math.Sin(mVelZ);
             bool flag = false;
             if (mPosX < 0f && aVelX < 0f)
             {
@@ -10177,7 +10175,7 @@ namespace Lawn
             float aMaxSpeed = 0.5f;
             if (flag)
             {
-                aMaxSpeed = num2 * 0.3f;
+                aMaxSpeed = mVelX * 0.3f;
                 mPhaseCounter = Math.Min(100, mPhaseCounter);
             }
             else if (mZombiePhase == ZombiePhase.ZombiquariumAccel)
@@ -10186,11 +10184,13 @@ namespace Lawn
             }
             else if (mZombiePhase == ZombiePhase.ZombiquariumBackAndForth)
             {
-                if (mPosX >= 200f || aVelX < 0f)
+                if (mPosX < 200f && aVelX < 0f)
                 {
+                    mVelZ = 0.0f;
                 }
-                if (mPosX <= 550f || aVelX > 0f)
+                if (mPosX > 550f && aVelX > 0f)
                 {
+                    mVelZ = 3.1416f;
                 }
                 aMaxSpeed = 0.3f;
             }
@@ -10198,9 +10198,9 @@ namespace Lawn
             {
                 aMaxSpeed = 0.05f;
             }
-            num2 = Math.Min(aMaxSpeed, num2 + 0.01f);
-            aVelX *= num2;
-            aVelY *= num2;
+            mVelX = Math.Min(aMaxSpeed, mVelX + 0.01f);
+            aVelX *= mVelX;
+            aVelY *= mVelX;
             mPosX += aVelX;
             mPosY += aVelY;
             if (!mBoard.HasLevelAwardDropped())
@@ -10215,7 +10215,7 @@ namespace Lawn
                         mSummonCounter = TodCommon.RandRangeInt(1000, 1500);
                     }
                 }
-                if (mZombieAge % 100 == 0)
+                if ((mZombieAge % 100) == 0)
                 {
                     TakeDamage(10, 8U);
                     if (IsDeadOrDying())
