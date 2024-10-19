@@ -1545,6 +1545,13 @@ namespace Lawn
 
         public void InitZombieWaves()
         {
+#if LAWNSCRIPT
+            {
+                using var @__event = LawnScript.Events.ChallengeEvents.InitZombieWavesEvent.GetNew(this);
+                bool __return = true;
+                if (@__event.Fire())
+                    ((Action)(() => {
+#endif
             if (mApp.IsSurvivalMode())
             {
                 if (mSurvivalStage == 0 && mApp.IsSurvivalNormal(mApp.mGameMode))
@@ -1839,6 +1846,14 @@ namespace Lawn
             {
                 mBoard.mZombieAllowed[19] = true;
             }
+#if LAWNSCRIPT
+                        __return = false;
+                    })).Invoke();
+                using var __post_event = LawnScript.Events.ChallengeEvents.AfterInitZombieWavesEvent.GetNew(this);
+                __post_event.Fire();
+                if (__return) return;
+            }
+#endif
         }
 
         public void UpdateSlotMachine()
@@ -2300,6 +2315,13 @@ namespace Lawn
 
         public void InitLevel()
         {
+#if LAWNSCRIPT
+            {
+                using var @__event = LawnScript.Events.ChallengeEvents.InitLevelEvent.GetNew(this);
+                bool __return = true;
+                if (@__event.Fire())
+                    ((Action)(() => {
+#endif
             if (mApp.mGameMode == GameMode.ChallengeRainingSeeds)
             {
                 mChallengeStateCounter = 100;
@@ -2359,6 +2381,13 @@ namespace Lawn
                 mChallengeGridX = -1;
                 mChallengeGridY = -1;
             }
+#if LAWNSCRIPT
+                    __return = false; })).Invoke();
+                using var __post_event = LawnScript.Events.ChallengeEvents.AfterInitLevelEvent.GetNew(this);
+                __post_event.Fire();
+                if (__return) return;
+            }
+#endif
         }
 
         public void SpawnZombieWave()

@@ -188,6 +188,13 @@ namespace Lawn
             mHeight = 40;
             mAnimTicksPerFrame = 0;
             bool flag = false;
+#if LAWNSCRIPT
+            {
+                using var @__event = LawnScript.Events.ProjectileEvents.InitializeTypeEvent.GetNew(this);
+                bool __return = true;
+                if (@__event.Fire())
+                    ((Action)(() => {
+#endif
             if (mProjectileType == ProjectileType.Cabbage || mProjectileType == ProjectileType.Butter)
             {
                 mRotation = -0.87964594f;
@@ -248,6 +255,14 @@ namespace Lawn
                     mDamageRangeFlags = 1;
                 }
             }
+#if LAWNSCRIPT
+                        __return = false;
+                    })).Invoke();
+                using var __post_event = LawnScript.Events.ProjectileEvents.AfterInitializeTypeEvent.GetNew(this);
+                __post_event.Fire();
+                if (__return) return;
+            }
+#endif
             if (flag)
             {
                 mAnimCounter = TodCommon.RandRangeInt(0, mNumFrames * mAnimTicksPerFrame);

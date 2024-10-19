@@ -210,6 +210,13 @@ namespace Lawn
             {
                 mLaunchCounter = 0;
             }
+#if LAWNSCRIPT
+            {
+                using var @__event = LawnScript.Events.PlantEvents.InitializeTypeEvent.GetNew(this);
+                bool __return = true;
+                if (@__event.Fire())
+                    ((Action)(() => {
+#endif
             if (theSeedType == SeedType.Blover)
             {
                 mDoSpecialCountdown = 50;
@@ -493,6 +500,14 @@ namespace Lawn
                     }
                 }
             }
+#if LAWNSCRIPT
+                        __return = false;
+                    })).Invoke();
+                using var __post_event = LawnScript.Events.PlantEvents.AfterInitializeEvent.GetNew(this);
+                __post_event.Fire();
+                if (__return) return;
+            }
+#endif
             if (mApp.mGameMode == GameMode.ChallengeBigTime && (mSeedType == SeedType.Wallnut || mSeedType == SeedType.Sunflower || mSeedType == SeedType.Marigold))
             {
                 mPlantHealth *= 2;
@@ -542,10 +557,22 @@ namespace Lawn
 
         public void Update()//3update
         {
+#if LAWNSCRIPT
+            {
+                using var @__event = LawnScript.Events.PlantEvents.UpdateEvent.GetNew(this);
+                bool __return = true;
+                if (@__event.Fire((__ev) => {
+                    __ev.IsCancelled = true;
+#endif
             if ((!IsOnBoard() || mApp.mGameScene != GameScenes.LevelIntro || !mApp.IsWallnutBowlingLevel()) && (!IsOnBoard() || mApp.mGameMode != GameMode.ChallengeZenGarden) && (!IsOnBoard() || !mBoard.mCutScene.ShouldRunUpsellBoard()) && IsOnBoard() && mApp.mGameScene != GameScenes.Playing)
             {
                 return;
             }
+#if LAWNSCRIPT
+                    __ev.IsCancelled = false;
+                }))
+                    ((Action)(() => {
+#endif
             UpdateAbilities();
             Animate();
             if (mPlantHealth < 0)
@@ -553,10 +580,24 @@ namespace Lawn
                 Die();
             }
             UpdateReanim();
+#if LAWNSCRIPT
+                    __return = false; })).Invoke();
+                using var __post_event = LawnScript.Events.PlantEvents.AfterUpdateEvent.GetNew(this);
+                __post_event.Fire();
+                if (__return) return;
+            }
+#endif
         }
 
         public void Animate()//3update
         {
+#if LAWNSCRIPT
+            {
+                using var @__event = LawnScript.Events.PlantEvents.AnimateEvent.GetNew(this);
+                bool __return = true;
+                if (@__event.Fire())
+                    ((Action)(() => {
+#endif
             if ((mSeedType == SeedType.Cherrybomb || mSeedType == SeedType.Jalapeno) && mApp.mGameMode != GameMode.ChallengeZenGarden)
             {
                 mShakeOffsetX = TodCommon.RandRangeFloat(0f, 2f) - 1f;
@@ -624,6 +665,14 @@ namespace Lawn
                 mAnimCounter += mFrameLength;
             }
             mFrame = mAnimCounter / mFrameLength;
+#if LAWNSCRIPT
+                        __return = false;
+                    })).Invoke();
+                using var __post_event = LawnScript.Events.PlantEvents.AfterAnimateEvent.GetNew(this);
+                __post_event.Fire();
+                if (__return) return;
+            }
+#endif
         }
 
         public void Draw(Graphics g)
@@ -950,6 +999,13 @@ namespace Lawn
 
         public void Fire(Zombie theTargetZombie, int theRow, PlantWeapon thePlantWeapon)
         {
+#if LAWNSCRIPT
+            {
+                using var @__event = LawnScript.Events.PlantEvents.FireEvent.GetNew(this);
+                bool __return = true;
+                if (@__event.Fire())
+                    ((Action)(() => {
+#endif
             if (mSeedType == SeedType.Fumeshroom)
             {
                 DoRowAreaDamage(20, 2U);
@@ -1300,6 +1356,13 @@ namespace Lawn
                     projectile.mCobTargetRow = mBoard.PixelToGridYKeepOnBoard(mTargetX, mTargetY);
                 }
             }
+#if LAWNSCRIPT
+                    __return = false; })).Invoke();
+                using var __post_event = LawnScript.Events.PlantEvents.AfterFireEvent.GetNew(this);
+                __post_event.Fire();
+                if (__return) return;
+            }
+#endif
         }
 
         public Zombie FindTargetZombie(int theRow, PlantWeapon thePlantWeapon)
@@ -3533,6 +3596,13 @@ namespace Lawn
 
         public void UpdateShooting()//3update
         {
+#if LAWNSCRIPT
+            {
+                using var __event = LawnScript.Events.PlantEvents.UpdateShootingEvent.GetNew(this);
+                if (!__event.Fire((__ev) =>
+                {
+                    __ev.IsCancelled = true;
+#endif
             if (NotOnGround())
             {
                 return;
@@ -3541,6 +3611,12 @@ namespace Lawn
             {
                 return;
             }
+#if LAWNSCRIPT
+                    __ev.IsCancelled = false;
+                }))
+                 return;
+            }
+#endif
             //mShootingCounter -= 3;
             mShootingCounter--;
             //if (mSeedType == SeedType.Fumeshroom && mShootingCounter >= 15 && mShootingCounter < 18)
@@ -3653,7 +3729,14 @@ namespace Lawn
             {
                 return;
             }
-            reanimation6 = mApp.ReanimationTryToGet(mBodyReanimID);
+#if LAWNSCRIPT
+            {
+                using var @__event = LawnScript.Events.PlantEvents.ShootingEvent.GetNew(this);
+                bool __return = true;
+                if (@__event.Fire())
+                    ((Action)(() => {
+#endif
+                        reanimation6 = mApp.ReanimationTryToGet(mBodyReanimID);
             reanimation4 = mApp.ReanimationTryToGet(mHeadReanimID);
             if (mSeedType == SeedType.Threepeater)
             {
@@ -3750,6 +3833,13 @@ namespace Lawn
                     return;
                 }
             }
+#if LAWNSCRIPT
+                    __return = false; })).Invoke();
+                using var __post_event = LawnScript.Events.PlantEvents.AfterShootingEvent.GetNew(this);
+                __post_event.Fire();
+                if (__return) return;
+            }
+#endif
             mShootingCounter = 1;//3;
         }
 
@@ -4760,6 +4850,13 @@ namespace Lawn
 
         public bool IsUpgradableTo(SeedType aUpdatedType)
         {
+#if LAWNSCRIPT
+            {
+                using var @__event = LawnScript.Events.PlantEvents.UpgradableEvent.GetNew(this);
+                bool __result;
+                @__event.Fire();
+                __result = ((Func<bool>)(() => {
+#endif
             if (aUpdatedType == SeedType.Gatlingpea && mSeedType == SeedType.Repeater)
             {
                 return true;
@@ -4803,6 +4900,11 @@ namespace Lawn
                 }
             }
             return false;
+#if LAWNSCRIPT
+                    })).Invoke();
+                return __result;
+            }
+#endif
         }
 
         public bool IsPartOfUpgradableTo(SeedType aUpdatedType)

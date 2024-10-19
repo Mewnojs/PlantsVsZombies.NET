@@ -984,6 +984,13 @@ namespace Lawn
 
         public void InitLevel()
         {
+#if LAWNSCRIPT
+            {
+                using var @__event = LawnScript.Events.BoardEvents.InitLevelEvent.GetNew(this);
+                bool __return = true;
+                if (@__event.Fire())
+                    ((Action)(() => {
+#endif
             mMainCounter = 0;
             mEnableGraveStones = false;
             mSodPosition = 0;
@@ -997,6 +1004,13 @@ namespace Lawn
             mPeaShooterUsed = false;
             mCatapultPlantsUsed = false;
             mMushroomAndCoffeeBeansOnly = true;
+#if LAWNSCRIPT
+            {
+                using var @__event = LawnScript.Events.BoardEvents.InitLevelNumberStrEvent.GetNew(this);
+                bool __return = true;
+                if (@__event.Fire())
+                    ((Action)(() => {
+#endif
             if (mApp.IsAdventureMode())
             {
                 mLevel = mApp.mPlayerInfo.GetLevel();
@@ -1010,9 +1024,23 @@ namespace Lawn
                 mLevel = 0;
             }
             mLevelStr = TodStringFile.TodStringTranslate("[LEVEL]") + " " + mApp.GetStageString(mLevel);
+#if LAWNSCRIPT
+                    __return = false; })).Invoke();
+                using var __post_event = LawnScript.Events.BoardEvents.AfterInitLevelNumberStrEvent.GetNew(this);
+                __post_event.Fire();
+                if (__return) return;
+            }
+#endif
             PickBackground();
             mCurrentWave = 0;
             InitZombieWaves();
+#if LAWNSCRIPT
+            {
+                using var @__event = LawnScript.Events.BoardEvents.InitLevelSunMoneyEvent.GetNew(this);
+                bool __return = true;
+                if (@__event.Fire())
+                    ((Action)(() => {
+#endif
             if (mApp.mGameMode == GameMode.ChallengeBeghouled || mApp.mGameMode == GameMode.ChallengeBeghouledTwist || mApp.IsScaryPotterLevel() || mApp.IsWhackAZombieLevel())
             {
                 mSunMoney = 0;
@@ -1033,6 +1061,13 @@ namespace Lawn
             {
                 mSunMoney = 50;
             }
+#if LAWNSCRIPT
+                    __return = false; })).Invoke();
+                using var __post_event = LawnScript.Events.BoardEvents.AfterInitLevelSunMoneyEvent.GetNew(this);
+                __post_event.Fire();
+                if (__return) return;
+            }
+#endif
             for (int i = 0; i < mRowPickingArray.Length; i++)
             {
                 mRowPickingArray[i] = new TodSmoothArray();
@@ -1054,6 +1089,13 @@ namespace Lawn
             {
                 mHelpDisplayed[k] = false;
             }
+#if LAWNSCRIPT
+            {
+                using var @__event = LawnScript.Events.BoardEvents.InitLevelSeedBankEvent.GetNew(this);
+                bool __return = true;
+                if (@__event.Fire())
+                    ((Action)(() => {
+#endif
             mSeedBank.mNumPackets = GetNumSeedsInBank();
             mSeedBank.UpdateHeight();
             for (int l = 0; l < GameConstants.SEEDBANK_MAX; l++)
@@ -1196,6 +1238,13 @@ namespace Lawn
                     seedPacket2.SetPacketType((SeedType)m, SeedType.None);
                 }
             }
+#if LAWNSCRIPT
+                    __return = false; })).Invoke();
+                using var __post_event = LawnScript.Events.BoardEvents.AfterInitLevelSeedBankEvent.GetNew(this);
+                __post_event.Fire();
+                if (__return) return;
+            }
+#endif
             mWidgetManager.MarkAllDirty();
             mPaused = false;
             mOutOfMoneyCounter = 0;
@@ -1207,6 +1256,13 @@ namespace Lawn
             mChallenge.InitLevel();
             SetupRenderItems();
             Board.needToSortRenderList = true;
+#if LAWNSCRIPT
+                    __return = false; })).Invoke();
+                using var __post_event = LawnScript.Events.BoardEvents.AfterInitLevelEvent.GetNew(this);
+                __post_event.Fire();
+                if (__return) return;
+            }
+#endif
         }
 
         private void SetupRenderItems()
@@ -6318,6 +6374,13 @@ namespace Lawn
 
         public void PickBackground()
         {
+#if LAWNSCRIPT
+            {
+                using var @__event = LawnScript.Events.BoardEvents.AfterPickBackgroundTypeEvent.GetNew(this);
+                bool __return = true;
+                if (@__event.Fire())
+                    ((Action)(() => {
+#endif
             switch (mApp.mGameMode)
             {
             case GameMode.Adventure:
@@ -6498,7 +6561,22 @@ namespace Lawn
                 Debug.ASSERT(false);
                 break;
             }
+#if LAWNSCRIPT
+                        __return = false;
+                    })).Invoke();
+                using var __post_event = LawnScript.Events.BoardEvents.AfterPickBackgroundTypeEvent.GetNew(this);
+                __post_event.Fire();
+                if (__return) return;
+            }
+#endif
             LoadBackgroundImages();
+#if LAWNSCRIPT
+            {
+                using var @__event = LawnScript.Events.BoardEvents.PickPlantRowEvent.GetNew(this);
+                bool __return = true;
+                if (@__event.Fire())
+                    ((Action)(() => {
+#endif
             if (mBackground == BackgroundType.Num1Day || mBackground == BackgroundType.Greenhouse || mBackground == BackgroundType.TreeOfWisdom)
             {
                 mPlantRow[0] = PlantRowType.Normal;
@@ -6568,6 +6646,21 @@ namespace Lawn
             {
                 Debug.ASSERT(false);
             }
+#if LAWNSCRIPT
+                        __return = false;
+                    })).Invoke();
+                using var __post_event = LawnScript.Events.BoardEvents.AfterPickPlantRowEvent.GetNew(this);
+                __post_event.Fire();
+                if (__return) return;
+            }
+#endif
+#if LAWNSCRIPT
+            {
+                using var @__event = LawnScript.Events.BoardEvents.PickGridSquareEvent.GetNew(this);
+                bool __return = true;
+                if (@__event.Fire())
+                    ((Action)(() => {
+#endif
             for (int i = 0; i < Constants.GRIDSIZEX; i++)
             {
                 for (int j = 0; j < Constants.MAX_GRIDSIZEY; j++)
@@ -6586,6 +6679,21 @@ namespace Lawn
                     }
                 }
             }
+#if LAWNSCRIPT
+                        __return = false;
+                    })).Invoke();
+                using var __post_event = LawnScript.Events.BoardEvents.AfterPickGridSquareEvent.GetNew(this);
+                __post_event.Fire();
+                if (__return) return;
+            }
+#endif
+#if LAWNSCRIPT
+            {
+                using var @__event = LawnScript.Events.BoardEvents.PickGraveStoneEvent.GetNew(this);
+                bool __return = true;
+                if (@__event.Fire())
+                    ((Action)(() => {
+#endif
             int levelRandSeed = GetLevelRandSeed();
             RandomNumbers.Seed(levelRandSeed);
             if (StageHasGraveStones())
@@ -6654,10 +6762,25 @@ namespace Lawn
                 }
             }
             PickSpecialGraveStone();
+#if LAWNSCRIPT
+                        __return = false;
+                    })).Invoke();
+                using var __post_event = LawnScript.Events.BoardEvents.AfterPickGraveStoneEvent.GetNew(this);
+                __post_event.Fire();
+                if (__return) return;
+            }
+#endif   
         }
 
         public void InitZombieWaves()
         {
+#if LAWNSCRIPT
+            {
+                using var @__event = LawnScript.Events.BoardEvents.InitZombieWavesEvent.GetNew(this);
+                bool __return = true;
+                if (@__event.Fire())
+                    ((Action)(() => {
+#endif
             Debug.ASSERT(true);
             Array.Clear(mZombieAllowed, 0, mZombieAllowed.Length); // 2023-4-14 [Fix] infinite loop in SE after f=5
             if (mApp.IsAdventureMode() || mApp.IsQuickPlayMode())
@@ -6692,6 +6815,14 @@ namespace Lawn
             mProgressMeterWidth = 0;
             mHugeWaveCountDown = 0;
             mLevelAwardSpawned = false;
+#if LAWNSCRIPT
+                        __return = false;
+                    })).Invoke();
+                using var __post_event = LawnScript.Events.BoardEvents.AfterInitZombieWavesEvent.GetNew(this);
+                __post_event.Fire();
+                if (__return) return;
+            }
+#endif
         }
 
         public void InitSurvivalStage()

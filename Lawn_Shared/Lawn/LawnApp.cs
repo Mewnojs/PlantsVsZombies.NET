@@ -242,8 +242,80 @@ namespace Lawn
             base.WriteToRegistry();
         }
 
+#if LAWNSCRIPT
+        public List<LawnScript.ContentPack> mLoadedContentPacks = new();
+
+        private void ReadContentPacks(string ModuleDirName = "plugins", bool CreateDirectory = true) 
+        {
+            if (Directory.Exists(ModuleDirName))
+            {
+                var loader = new LawnScript.ContentPackLoader();
+                var loaders = new Dictionary<LawnScript.Content.PluginTechnique, LawnScript.ContentLoader<LawnScript.Content>> { { LawnScript.Content.PluginTechnique.JsPlugin, new LawnScript.JsPluginLoader(ScriptEngine) } };
+                
+                foreach (string path in Directory.EnumerateFiles(ModuleDirName))
+                {
+                    Debug.Log(DebugType.Info, $"Loading <{path}>");
+                    string aModName;
+                    try
+                    {
+                        if (Path.GetExtension(path).ToLower() == ".lawnpack")
+                        {
+                            // mPyEnj.ExecuteFile(path); // use more proper mod loading strategy
+                            aModName = Path.GetFileNameWithoutExtension(path);
+                            LawnScript.ContentPack c = loader.LoadFromZip(new FileStream("plugins/mod.lawnpack", FileMode.Open), loaders);
+                            aModName = c?.Info?.Name ?? aModName;
+                            c.Enable();
+                            mLoadedContentPacks.Add(c);
+                            Debug.Log(DebugType.Info, $"Successfully loaded \"{aModName}\" from <{path}>");
+                        }
+                        else
+                        {
+                            Debug.Log(DebugType.Info, $"Skipped <{path}> as it's not a supported script.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.Log(DebugType.Error, $"{ex.GetType()}: {ex.Message}");
+                    }
+                }
+            }
+            else
+            {
+                if (CreateDirectory)
+                    Directory.CreateDirectory(ModuleDirName);
+            }
+        }
+#endif
+
         public override void LoadingThreadProc()
         {
+#if LAWNSCRIPT
+            //ScriptEngine = new Jint.Engine(/*(Jint.Options cfg) => Jint.OptionsExtensions.AllowClr(cfg, typeof(System.Console).Assembly)*/);
+            /*var jo = new Jint.Native.JsObject(ScriptEngine);
+            jo.Set("Console", Jint.Runtime.Interop.TypeReference.CreateTypeReference(ScriptEngine, typeof(Console)));
+            ScriptEngine.SetValue("System", jo);
+
+            ScriptEngine.Execute(@"
+    function hello() { 
+        System.Console.WriteLine('Hello World');
+//log('e');
+    };
+ 
+    hello();
+");*/
+            ScriptEngine = new Jint.Engine((Jint.Options cfg) => Jint.OptionsExtensions.AllowClr(cfg, typeof(Lawn.LawnApp).Assembly, typeof(System.Console).Assembly, typeof(LawnScript.JsPlugin).Assembly));
+            /*var js = ScriptEngine.Execute(@"
+               function d () { E.Actor.mBodyHealth -= 1;
+                if (E.Actor.mBodyHealth < 1)
+                E.Actor.mBodyHealth = 1;}
+").GetValue("d");*/
+            /*LawnScript.Events.ZombieEvents.AgeEvent.Handlers.Subscribe(new LawnScript.Events.EventHandler<LawnScript.Events.ZombieEvents.AgeEvent>((e) => {
+                ScriptEngine.SetValue("E", Jint.Runtime.Interop.TypeReference.FromObject(ScriptEngine, e));
+                ScriptEngine.Call(js);
+                return true; }, new LawnScript.JsPlugin()));*/
+            ReadContentPacks("plugins", true);
+            ReadContentPacks("cust/plugins", false);
+#endif
             GameConstants.Init();
             if (!TodCommon.TodLoadResources("LoaderBar") || !TodCommon.TodLoadResources("LoaderBarFont"))
             {
@@ -3875,6 +3947,10 @@ namespace Lawn
         private bool pileLoaded;
 
         public Stack<Texture2D> mTexturesToBePremultiplied = new Stack<Texture2D>();
+
+#if LAWNSCRIPT
+        public Jint.Engine ScriptEngine;
+#endif
 
         private class TableTmp
         {

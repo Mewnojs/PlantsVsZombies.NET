@@ -26,6 +26,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IronPyInteractiveClient_Xam
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lawn_PCDX", "Lawn_PCDX\Lawn_PCDX.csproj", "{E6CA38E1-6F00-4F17-8A57-18CB759F06AD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawnScript", "LawnScript\LawnScript.csproj", "{28222231-75C3-45DC-919C-764E7BD0A7A0}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "LawnScriptExtension", "LawnScriptExtension\LawnScriptExtension.shproj", "{E1C80604-3F21-4212-B963-7A6A76BC0136}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +60,10 @@ Global
 		{E6CA38E1-6F00-4F17-8A57-18CB759F06AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6CA38E1-6F00-4F17-8A57-18CB759F06AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6CA38E1-6F00-4F17-8A57-18CB759F06AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28222231-75C3-45DC-919C-764E7BD0A7A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28222231-75C3-45DC-919C-764E7BD0A7A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28222231-75C3-45DC-919C-764E7BD0A7A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28222231-75C3-45DC-919C-764E7BD0A7A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,11 +82,10 @@ Global
 		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{a281b17d-21a9-40de-a199-191686a2e6c4}*SharedItemsImports = 4
 		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{b98f5710-197f-420e-82eb-5a7750239ceb}*SharedItemsImports = 13
 		LawnModExtension\LawnModExtension.projitems*{c1dd562e-4506-4d33-92f3-6ae5cfefe16e}*SharedItemsImports = 13
-		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{c6266476-dedf-4955-8218-61f10b130cd1}*SharedItemsImports = 5
-		Lawn_Shared\Lawn_Shared.projitems*{c6266476-dedf-4955-8218-61f10b130cd1}*SharedItemsImports = 5
-		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{c6266476-dedf-4955-8218-61f10b130cd1}*SharedItemsImports = 5
+		LawnScriptExtension\LawnScriptExtension.projitems*{e1c80604-3f21-4212-b963-7a6a76bc0136}*SharedItemsImports = 13
 		IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
 		LawnModExtension\LawnModExtension.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
+		LawnScriptExtension\LawnScriptExtension.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
 		Lawn_Shared\Lawn_Shared.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
 		MonoGame.Framework.Net\MonoGame.Framework.Net.projitems*{e6ca38e1-6f00-4f17-8a57-18cb759f06ad}*SharedItemsImports = 5
 	EndGlobalSection

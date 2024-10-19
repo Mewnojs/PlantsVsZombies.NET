@@ -255,6 +255,13 @@ namespace Lawn
             {
                 LoadReanim(aZombieDef.mReanimationType);
             }
+#if LAWNSCRIPT
+            {
+                using var @__event = LawnScript.Events.ZombieEvents.InitializeTypeEvent.GetNew(this);
+                bool __return = true;
+                if (@__event.Fire())
+                    ((Action)(() => {
+#endif
             switch (mZombieType)
             {
             case ZombieType.Normal:
@@ -837,6 +844,14 @@ namespace Lawn
                 break;
             }
             }
+#if LAWNSCRIPT
+                        __return = false;
+                    })).Invoke();
+                using var __post_event = LawnScript.Events.PlantEvents.AfterInitializeTypeEvent.GetNew(this);
+                __post_event.Fire();
+                if (__return) return;
+            }
+#endif
             if (mApp.IsLittleTroubleLevel() && (IsOnBoard() || theFromWave == GameConstants.ZOMBIE_WAVE_CUTSCENE))
             {
                 mScaleZombie = 0.5f;
@@ -1408,12 +1423,32 @@ namespace Lawn
             cachedZombieRectUpToDate = false;
             Debug.ASSERT(!mDead);
             //mZombieAge += 3;
+#if LAWNSCRIPT
+            {
+            using var @__event = LawnScript.Events.ZombieEvents.AgeEvent.GetNew(this);
+            if (@__event.Fire())
+#endif
             mZombieAge++;
+#if LAWNSCRIPT
+            }
+#endif
             bool flag = mSurprised;
+#if LAWNSCRIPT
+            {
+                using var @__event = LawnScript.Events.ZombieEvents.UpdateEvent.GetNew(this);
+                bool __return = true;
+                if (@__event.Fire((__ev) => {
+                    __ev.IsCancelled = true;
+#endif
             if ((mApp.mGameScene != GameScenes.LevelIntro || mZombieType != ZombieType.Boss) && (!IsOnBoard() || !mBoard.mCutScene.ShouldRunUpsellBoard()) && mApp.mGameScene != GameScenes.Playing && IsOnBoard() && mFromWave != GameConstants.ZOMBIE_WAVE_WINNER)
             {
                 return;
             }
+#if LAWNSCRIPT
+                    __ev.IsCancelled = false;
+                }))
+                    ((Action)(() => {
+#endif
             if (mZombiePhase == ZombiePhase.ZombieBurned)
             {
                 UpdateBurn();
@@ -1481,6 +1516,13 @@ namespace Lawn
             mY = (int)mPosY;
             GlobalMembersAttachment.AttachmentUpdateAndMove(ref mAttachmentID, mPosX, mPosY);
             UpdateReanim();
+#if LAWNSCRIPT
+                    __return = false; })).Invoke();
+                using var __post_event = LawnScript.Events.ZombieEvents.AfterUpdateEvent.GetNew(this);
+                __post_event.Fire();
+                if (__return) return;
+            }
+#endif
         }
 
         public void DieNoLoot(bool giveAchievements)
