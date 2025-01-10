@@ -527,34 +527,6 @@ namespace Sexy
             Constants.GridItem_ScaryPot_Sun_Offset = new Point(42, 62);
         }
 
-        public static Constants.LanguageIndex Language
-        {
-            get
-            {
-                return Constants.mLanguage;
-            }
-            set
-            {
-                Constants.mLanguage = value;
-                Constants.LanguageSubDir = Constants.mLanguage.ToString();
-            }
-        }
-
-        public static float InvertLowResValue(float x)
-        {
-            return 1.875f * x;
-        }
-
-        public static float InvertAndScale(float x)
-        {
-            return Constants.InvertLowResValue(x) * Constants.S;
-        }
-
-        public static float ScaleFrom480(float x)
-        {
-            return FrameworkConstants.Font_Scale * x;
-        }
-
         public static void Load480x800()
         {
             Constants.S = 0.8f;
@@ -1683,33 +1655,11 @@ namespace Sexy
 
         public const int PC_BOARD_HEIGHT = 600;
 
-        public static bool Loaded;
-
-        public static string ImageSubPath;
-
-        public static DisplayOrientation SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeRight;
-
-        private static Constants.LanguageIndex mLanguage;
-
-        public static string LanguageSubDir;
-
         public static SexyColor YellowFontColour = new SexyColor(227, 173, 57);
 
         public static SexyColor GreenFontColour = new SexyColor(0, 203, 0);
 
         public static SexyColor Almanac_Paper_Colour = new SexyColor(242, 182, 123);
-
-        public static Point BackBufferSize;
-
-        public static int BOARD_WIDTH;
-
-        public static int BOARD_HEIGHT;
-
-        public static int BOARD_EDGE;
-
-        public static int BOARD_OFFSET;
-
-        public static int BOARD_EXTRA_ROOM;
 
         public static int HIGH_GROUND_HEIGHT;
 
@@ -1756,10 +1706,6 @@ namespace Sexy
         public static int SEED_PACKET_VERT_GAP = 1;
 
         public static Point SeedPacket_Selector_Pos;
-
-        public static float S;
-
-        public static float IS;
 
         public static int ReanimTextCenterOffsetX;
 
@@ -2625,15 +2571,6 @@ namespace Sexy
 
         public static Point GridItem_ScaryPot_Sun_Offset;
 
-        public enum LanguageIndex
-        {
-            en = 1,
-            fr,
-            de,
-            es,
-            it,
-            zh_cn,
-        }
         public static class New 
         {
             public static void Load() 

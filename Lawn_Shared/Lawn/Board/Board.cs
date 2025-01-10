@@ -2174,6 +2174,18 @@ namespace Lawn
                     RefreshSeedPacketFromCursor();
                     mSeedBank.mSeedPackets[theChar - '1'].MouseDown(0, 0, 1);
                     break;
+                case 'q':
+                {
+                    if (mCursorObject.mSeedBankIndex >= 0) 
+                    {
+                        var packet = mSeedBank.mSeedPackets[mCursorObject.mSeedBankIndex];
+                        var c = AddCoin(mCursorObject.mX, mCursorObject.mY, CoinType.UsableSeedPacket, CoinMotion.Coin);
+                        c.mUsableSeedType = packet.mPacketType;
+                        packet.WasPlanted();
+                        ClearCursor();
+                    }
+                    break;
+                }
                 }
             }
             else

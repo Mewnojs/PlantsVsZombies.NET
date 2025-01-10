@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Sexy;
 
-namespace LAWN
+namespace Lawn
 {
     class PlantsVsZombies
     {

@@ -793,7 +793,7 @@ namespace Lawn
             return false;
         }
 
-        internal override void NewGame()
+        public/*internal*/ override void NewGame()
         {
             mFirstTimeGameSelector = false;
             MakeNewBoard();
@@ -1311,10 +1311,10 @@ namespace Lawn
             }
             try
             {
-                if (MediaPlayer.GameHasControl)
+                /*if (MediaPlayer.GameHasControl)
                 {
                     MediaPlayer.Play(mContentManager.Load<Song>(GlobalStaticVars.GetResourceDir() + "music/crazydave"));
-                }
+                }*/
             }
             catch (Exception)
             {
@@ -1322,10 +1322,10 @@ namespace Lawn
             if (mPlayerInfo == null)
             {
                 PlayerInfo anyProfile = mProfileMgr.GetAnyProfile();
-                if (!MediaPlayer.GameHasControl)
+                /*if (!MediaPlayer.GameHasControl)
                 {
                     anyProfile.mMusicVolume = MediaPlayer.Volume;
-                }
+                }*/
                 mPlayerInfo = anyProfile;
             }
             mMaxExecutions = base.GetInteger("MaxExecutions", 0);
@@ -3028,17 +3028,6 @@ namespace Lawn
             return text;
         }
 
-        public static string ToString(int i)
-        {
-            string text;
-            if (!LawnApp.cachedIntToString.TryGetValue(i, out text))
-            {
-                text = i.ToString();
-                LawnApp.cachedIntToString.Add(i, text);
-            }
-            return text;
-        }
-
         public bool AdvanceCrazyDaveText()
         {
             int num = mCrazyDaveMessageIndex + 1;
@@ -3860,8 +3849,6 @@ namespace Lawn
 
         private static Dictionary<int, string> moneyStrings = new Dictionary<int, string>();
 
-        private static Dictionary<int, string> cachedIntToString = new Dictionary<int, string>();
-
         private bool leaderboardLoaded;
 
         private bool gamePlayLoaded;
@@ -3873,8 +3860,6 @@ namespace Lawn
         private bool mainMenuLoaded;
 
         private bool pileLoaded;
-
-        public Stack<Texture2D> mTexturesToBePremultiplied = new Stack<Texture2D>();
 
         private class TableTmp
         {

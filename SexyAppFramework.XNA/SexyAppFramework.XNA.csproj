@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>LAWN</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+		<PackageReference Include="FontStashSharp.MonoGame" Version="1.3.6" />
+		<PackageReference Include="MonoGame.IMEHelper.Common" Version="0.9.0" />
+  </ItemGroup>
+  <Import Project="..\MonoGame.Framework.Net\MonoGame.Framework.Net.projitems" Label="Shared" />
+</Project>

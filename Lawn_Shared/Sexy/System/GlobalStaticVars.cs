@@ -3,7 +3,7 @@ using Lawn;
 
 namespace Sexy
 {
-    public /*internal*/ static partial class GlobalStaticVars
+    public /*internal*/ partial class GlobalStaticVars : SexyGlobal
     {
         public static LawnApp gLawnApp
         {
@@ -95,25 +95,12 @@ namespace Sexy
             return "";
         }
 
-        internal static string CommaSeperate_(int theDispPoints)
-        {
-            if (theDispPoints == 0)
-            {
-                return "0";
-            }
-            return string.Format("{0:#,#}", theDispPoints);
-        }
-
         internal static string GetDocumentsDir()
         {
             return "docs/";
         }
 
-        public static Graphics g;
-
         public static GlobalContentManager mGlobalContent;
-
-        public static SexyAppBase gSexyAppBase;
 
         internal static int gProfileVersion = 14;
 

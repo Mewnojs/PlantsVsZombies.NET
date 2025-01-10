@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 namespace Sexy
 {
-	public class Main : Game
+	public class Main : IMain
 	{
 		public Main()
 		{
@@ -112,7 +112,7 @@ namespace Sexy
             GlobalStaticVars.gSexyAppBase.AppExit();
         }
 
-        internal string FetchApplicationStoragePath()
+        public override string FetchApplicationStoragePath()
         {
             return applicationStoragePath ?? AppContext.BaseDirectory;
         }
@@ -183,14 +183,12 @@ namespace Sexy
             base.BeginRun();
         }
 
-        public void CompensateForSlowUpdate()
+        public override void CompensateForSlowUpdate()
         {
-            //base.ResetElapsedTime();
+            base.ResetElapsedTime();
         }
 
         public static bool LOW_MEMORY_DEVICE { get; private set; }
-
-        public static bool DO_LOW_MEMORY_OPTIONS { get; private set; }
 
         protected override void Update(GameTime gameTime)
         {
@@ -247,26 +245,6 @@ namespace Sexy
             Main.wantToSuppressDraw = true;
         }
 
-        public static SignedInGamer GetGamer()
-        {
-            if (Gamer.SignedInGamers.Count == 0)
-            {
-                return null;
-            }
-            return Gamer.SignedInGamers[PlayerIndex.One];
-        }
-
-        public static void NeedToSetUpOrientationMatrix(UI_ORIENTATION orientation)
-        {
-            Main.orientationUsed = orientation;
-            Main.newOrientation = true;
-        }
-
-        private static void SetupOrientationMatrix(UI_ORIENTATION orientation)
-        {
-            Main.newOrientation = false;
-        }
-
         private void Window_OrientationChanged(object sender, EventArgs e)
         {
             SetupInterfaceOrientation();
@@ -287,9 +265,9 @@ namespace Sexy
 
         protected override void Draw(GameTime gameTime)
         {
-            if (Main.newOrientation)
+            if (newOrientation)
             {
-                Main.SetupOrientationMatrix(Main.orientationUsed);
+                SetupOrientationMatrix(orientationUsed);
             }
             lock (ResourceManager.DrawLocker)
             {
@@ -426,14 +404,6 @@ namespace Sexy
             base.OnDeactivated(sender, args);
         }
 
-        public static bool IsInTrialMode
-        {
-            get
-            {
-                return Main.trialModeCachedValue;
-            }
-        }
-
         private void GameSpecificCheatInputCheck()
         {
         }
@@ -474,18 +444,6 @@ namespace Sexy
             //}
             throw new Exception("Unsupported Resolution");
         }
-
-        private static SexyTransform2D orientationTransform;
-
-        private static UI_ORIENTATION orientationUsed;
-
-        private static bool newOrientation;
-
-        public static GamerServicesComponent GamerServicesComp;
-
-        public static bool trialModeChecked = false;
-
-        private static bool trialModeCachedValue = true;
 
         internal static Graphics graphics;
 
