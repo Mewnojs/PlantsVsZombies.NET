@@ -749,6 +749,12 @@ namespace Lawn
             KillSeedChooserScreen();
             if (mBoard != null)
             {
+                if (mBoard.mLevelComplete || (mGameScene == GameScenes.ZombiesWon && mBoardResult == BoardResult.Lost || mBoardResult == BoardResult.Won) || mBoardResult == BoardResult.Cheat)
+                {
+                    var savedGameName = LawnCommon.GetSavedGameName(mGameMode, (int)mPlayerInfo.mId);
+                    Debug.Log(DebugType.Info, $"{this.GetType()}: Erasing {savedGameName} as the level {mGameMode} has {mBoardResult}.");
+                    base.EraseFile(savedGameName);
+                }
                 mBoard.DisposeBoard();
                 mWidgetManager.RemoveWidget(mBoard);
                 base.SafeDeleteWidget(mBoard);
@@ -1215,6 +1221,7 @@ namespace Lawn
             {
                 mWidgetManager.mFocusWidget = lawnDialog;
             }
+            Debug.Log(DebugType.Debug, $"{lawnDialog.GetType()}: DoDialog");
             return lawnDialog;
         }
 

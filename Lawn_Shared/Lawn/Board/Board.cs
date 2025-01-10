@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sexy;
 using Sexy.TodLib;
 
@@ -974,11 +975,13 @@ namespace Lawn
         {
             if (!GlobalMembersSaveGame.LawnLoadGame(this, theFilePath))
             {
+                Debug.Log(DebugType.Warn, $"{this.GetType()}: Loading of gamemode {mApp?.mGameMode}:\"{TodStringFile.TodStringTranslate(mLevelStr ?? string.Empty)}\" ({(int)mApp?.mGameMode}:{mLevel}) from path {theFilePath} has been failed. Creating a backup and clear...");
                 return false;
             }
             LoadBackgroundImages();
             ResetFPSStats();
             UpdateLayers();
+            Debug.Log(DebugType.Info, $"{this.GetType()}: Loaded gamemode {mApp?.mGameMode}:\"{TodStringFile.TodStringTranslate(mLevelStr ?? string.Empty)}\" ({(int)mApp?.mGameMode}:{mLevel})");
             return true;
         }
 
@@ -1010,6 +1013,7 @@ namespace Lawn
                 mLevel = 0;
             }
             mLevelStr = TodStringFile.TodStringTranslate("[LEVEL]") + " " + mApp.GetStageString(mLevel);
+            Debug.Log(DebugType.Info, $"{this.GetType()}: Enter gamemode {mApp?.mGameMode}:\"{TodStringFile.TodStringTranslate(mLevelStr ?? string.Empty)}\" ({(int)mApp?.mGameMode}:{mLevel})");
             PickBackground();
             mCurrentWave = 0;
             InitZombieWaves();
@@ -1615,6 +1619,7 @@ namespace Lawn
             {
                 mFlagRaiseCounter = GameConstants.FLAG_RAISE_TIME;
             }
+            Debug.Log(DebugType.Info, $"{GetType()} SpawnZombieWave: Zombies in wave {mCurrentWave} {{{string.Join(", ", Enumerable.Range(0, GameConstants.MAX_ZOMBIES_IN_WAVE).Select((i) => mZombiesInWave[mCurrentWave, i]).TakeWhile((t) => t != ZombieType.Invalid))}}}");
             mCurrentWave++;
             mTotalSpawnedWaves++;
         }
@@ -3395,6 +3400,7 @@ namespace Lawn
             string savedGameName = LawnCommon.GetSavedGameName(mApp.mGameMode, (int)mApp.mPlayerInfo.mId);
             if (NeedSaveGame())
             {
+                Debug.Log(DebugType.Info, $"{this.GetType()}: Saving gamemode {mApp?.mGameMode}:\"{TodStringFile.TodStringTranslate(mLevelStr ?? string.Empty)}\" ({(int)mApp?.mGameMode}:{mLevel})");
                 if (mBoardFadeOutCounter >= 0)
                 {
                     CompleteEndLevelSequenceForSaving();
@@ -6668,6 +6674,7 @@ namespace Lawn
             {
                 mChallenge.InitZombieWaves();
             }
+            Debug.Log(DebugType.Info, $"{GetType()}: InitZombieWaves: Zombies allowed {{{string.Join(", ", mZombieAllowed.Select((t, i) => t ? ((ZombieType)i).ToString() : null).Where((t) => t is not null))}}}");
             PickZombieWaves();
             Debug.ASSERT(IsZombieWaveDistributionOk());
             mCurrentWave = 0;

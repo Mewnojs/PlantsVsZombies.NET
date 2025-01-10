@@ -418,6 +418,7 @@ namespace Sexy
             if (mDialogMap.ContainsKey(theDialogId))
             {
                 Dialog dialog = mDialogMap[theDialogId];
+                Debug.Log(DebugType.Debug, $"{GetType()}: KillDialog : {dialog.GetType()}");
                 mDialogList.Remove(dialog);
                 mDialogMap.Remove(theDialogId);
                 if (removeWidget || deleteWidget)
@@ -472,6 +473,7 @@ namespace Sexy
         public void AddDialog(int theDialogId, Dialog theDialog)
         {
             KillDialog(theDialogId);
+            Debug.Log(DebugType.Debug, $"{GetType()}: AddDialog : {theDialog.GetType()}");
             if (theDialog.mWidth == 0)
             {
                 int num = mWidth / 2;

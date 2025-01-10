@@ -247,11 +247,13 @@ namespace Sexy
 
         public virtual void GotFocus()
         {
+            Debug.Log(DebugType.Debug, $"{GetType()}: GotFocus");
             mHasFocus = true;
         }
 
         public virtual void LostFocus()
         {
+            Debug.Log(DebugType.Debug, $"{GetType()}: LostFocus");
             mHasFocus = false;
         }
 
