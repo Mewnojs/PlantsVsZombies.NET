@@ -9,6 +9,7 @@ namespace Sexy.TodLib
     {
         public static void FilterEffectInitForApp()
         {
+            gFilterMap = new List<Dictionary<Texture2D, Texture2D>>();
             for (int i = 0; i < (int)FilterEffectType.FilterEffectCount; i++) 
             {
                 gFilterMap.Add(new Dictionary<Texture2D, Texture2D>());
@@ -227,7 +228,7 @@ namespace Sexy.TodLib
             }
         }
 
-        public static List<Dictionary<Texture2D, Texture2D>> gFilterMap = new List<Dictionary<Texture2D, Texture2D>>();
+        public static List<Dictionary<Texture2D, Texture2D>> gFilterMap;
     }
 
     public enum FilterEffectType
