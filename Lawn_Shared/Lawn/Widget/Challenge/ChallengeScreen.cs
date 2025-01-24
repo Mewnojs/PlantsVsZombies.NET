@@ -30,7 +30,7 @@ namespace Lawn
             mScrollWidget.EnableIndicators(AtlasResources.IMAGE_SCROLL_INDICATOR);
             mScrollWidget.Resize(base.M(0), base.M1(65), base.M2(800), base.M3(415));
             AddWidget(mScrollWidget);
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < (int)ChallengePage.MaxChallengePages; i++)
             {
                 mPageButton[i] = new ButtonWidget(300 + i, this);
                 mPageButton[i].mDoFinger = true;
@@ -405,7 +405,7 @@ namespace Lawn
             {
                 mChallengeScreenWidget.AddWidget(mChallengeButton[i]);
             }
-            for (int j = 0; j < 4; j++)
+            for (int j = 0; j < (int)ChallengePage.MaxChallengePages; j++)
             {
                 AddWidget(mPageButton[j]);
             }
@@ -415,11 +415,11 @@ namespace Lawn
         {
             base.RemovedFromManager(theWidgetManager);
             RemoveWidget(mBackButton);
-            for (int i = 0; i < 122; i++)
+            for (int i = 0; i < ChallengeScreen.gChallengeDefs.Length; i++)
             {
                 RemoveWidget(mChallengeButton[i]);
             }
-            for (int j = 0; j < 4; j++)
+            for (int j = 0; j < (int)ChallengePage.MaxChallengePages; j++)
             {
                 RemoveWidget(mPageButton[j]);
             }
@@ -573,7 +573,7 @@ namespace Lawn
 
         public NewLawnButton mBackButton;
 
-        public ButtonWidget[] mPageButton = new ButtonWidget[4];
+        public ButtonWidget[] mPageButton = new ButtonWidget[(int)ChallengePage.MaxChallengePages];
 
         public ButtonWidget[] mChallengeButton = new ButtonWidget[GameConstants.NUM_CHALLENGE_MODES];
 
