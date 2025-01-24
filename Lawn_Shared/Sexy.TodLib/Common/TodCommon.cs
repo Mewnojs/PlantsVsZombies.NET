@@ -92,7 +92,7 @@ namespace Sexy.TodLib
                 theNumber |= 1U << theBitIndex;
                 return;
             }
-            theNumber &= 1U << theBitIndex;
+            theNumber &= ~(1U << theBitIndex);
         }
 
         public static bool TestBit(uint theNumber, int theBitIndex)
