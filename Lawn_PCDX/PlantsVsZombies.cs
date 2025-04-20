@@ -15,7 +15,7 @@ namespace LAWN
             ("PlantsVsZombies.Net v{0}", Lawn.LawnApp.AppVersionNumber);
             game.mGameConfig = new();
             game.mGameConfig.mStoragePath = (string)(args[(int)CommandLineArgumentType.Storage] ?? null);
-            game.mGameConfig.mIronpythonPort = (short)(args[(short)CommandLineArgumentType.IronPyInteractivePort] ?? 8080);
+            game.mGameConfig.mIronpythonPort = (short)(args[(int)CommandLineArgumentType.IronPyInteractivePort] ?? (short)8080);
             game.Run();
         }
 
@@ -33,7 +33,7 @@ namespace LAWN
                         args[(int)CommandLineArgumentType.Storage] = arg[1];
                         break;
                     case "-ironpyport":
-                        args[(int)CommandLineArgumentType.IronPyInteractivePort] = int.Parse(arg[1]);
+                        args[(int)CommandLineArgumentType.IronPyInteractivePort] = short.Parse(arg[1]);
                         break;
                     case "-help":
                     default:
