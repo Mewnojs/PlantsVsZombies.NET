@@ -567,6 +567,7 @@ namespace Sexy
 
         private Stopwatch _gameTimer = new Stopwatch();
 
+        public LawnGameConfig mGameConfig = new();  // a stub
     }
 }
 namespace Sexy

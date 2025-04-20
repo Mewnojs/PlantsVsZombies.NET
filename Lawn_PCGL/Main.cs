@@ -9,6 +9,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using System.Threading;
+using System.Text.Json;
+using System.IO;
+using System.Collections.Generic;
 
 namespace Sexy
 {
@@ -49,7 +52,43 @@ namespace Sexy
                 GlobalStaticVars.gSexyAppBase.mScreenScales.Init(bounds.Width, bounds.Height, DefaultW, DefaultH);
                 Graphics.Resized();
             }
+            if (!Main.graphics.GraphicsDeviceManager.IsFullScreen && (!mGameConfig.mFullscreen! ?? true))
+                mGameConfig.mScreenSize = new TPoint(bounds.Width, bounds.Height);
         }
+
+        public Rectangle? _formerClientBounds = null;
+
+        public void ToggleFullscreen()
+        {
+            if (!Main.graphics.GraphicsDeviceManager.IsFullScreen)
+            {
+                mGameConfig.mScreenSize = new TPoint(GlobalStaticVars.gSexyAppBase.mScreenScales.mWidth, GlobalStaticVars.gSexyAppBase.mScreenScales.mHeight);
+                _formerClientBounds = Window.ClientBounds;
+                int ww = Microsoft.Xna.Framework.Graphics.GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                int wh = Microsoft.Xna.Framework.Graphics.GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                Main.graphics.PreferredBackBufferWidth = ww;
+                Main.graphics.PreferredBackBufferHeight = wh;
+                GraphicsState.mGraphicsDeviceManager.ApplyChanges();
+                Main.graphics.GraphicsDeviceManager.ToggleFullScreen();
+                GlobalStaticVars.gSexyAppBase.mScreenScales.Init(ww, wh, Constants.BackBufferSize.Y, Constants.BackBufferSize.X);
+                Graphics.Resized();
+            }
+            else
+            {
+                Main.graphics.GraphicsDeviceManager.ToggleFullScreen();
+                int ww = SexyAppBase.XnaGame.mGameConfig.mScreenSize?.x ?? Constants.BackBufferSize.Y;
+                int wh = SexyAppBase.XnaGame.mGameConfig.mScreenSize?.y ?? Constants.BackBufferSize.X;
+                Main.graphics.PreferredBackBufferWidth = ww;
+                Main.graphics.PreferredBackBufferHeight = wh;
+                GraphicsState.mGraphicsDeviceManager.ApplyChanges();
+                GlobalStaticVars.gSexyAppBase.mScreenScales.Init(ww, wh, Constants.BackBufferSize.Y, Constants.BackBufferSize.X);
+                Graphics.Resized();
+                Window.Position = new Point(_formerClientBounds?.X ?? GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2 - ww / 2,
+                 _formerClientBounds?.Y ?? GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2 - wh / 2);
+            }
+            SexyAppBase.XnaGame.mGameConfig.mFullscreen = Main.graphics.GraphicsDeviceManager.IsFullScreen;
+        }
+
 
         /*private void Current_Deactivated(object sender, DeactivatedEventArgs e)
         {
@@ -112,7 +151,7 @@ namespace Sexy
 
         internal string FetchApplicationStoragePath()
         {
-            return AppContext.BaseDirectory;
+            return applicationStoragePath ?? AppContext.BaseDirectory;
         }
 
 #if LAWNMOD
@@ -128,17 +167,47 @@ namespace Sexy
 
         protected override void Initialize()
         {
+            if (mGameConfig.mStoragePath is not null)
+            {
+                string path = Environment.ExpandEnvironmentVariables(mGameConfig.mStoragePath!);
+                bool flag = true;
+                if (!Directory.Exists(path))
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(path);
+                        flag = true;
+                    }
+                    catch (Exception)
+                    {
+                        mGameConfig.mStoragePath = null;
+                        flag = false;
+                    }
+                }
+                if (flag)
+                    Directory.SetCurrentDirectory(path);
+            }
             base.Window.OrientationChanged += new EventHandler<EventArgs>(Window_OrientationChanged);
             Main.GamerServicesComp = new GamerServicesComponent(this);
             base.Components.Add(Main.GamerServicesComp);
             ReportAchievement.Initialise();
 #if LAWNMOD
-            LawnMod.IronPyInteractive.Serve();
+            if (mGameConfig.mIronpythonEnabled! ?? true == true)
+            {
+                LawnMod.IronPyInteractive.Serve();
+            }
 #endif
             base.Initialize();
             // Window initialization
-            int ww = Constants.BackBufferSize.Y;
-            int wh = Constants.BackBufferSize.X;
+            var screenSize = mGameConfig.mScreenSize!;
+            int ww = screenSize?.x ?? Constants.BackBufferSize.Y;
+            int wh = screenSize?.y ?? Constants.BackBufferSize.X;
+            if (mGameConfig.mFullscreen! ?? false)
+            {
+                Main.graphics.GraphicsDeviceManager.ToggleFullScreen();
+                ww = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                wh = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            }
             GlobalStaticVars.gSexyAppBase.mScreenScales.Init(ww, wh, Constants.BackBufferSize.Y, Constants.BackBufferSize.X);
             Main.graphics.PreferredBackBufferWidth = ww;
             Main.graphics.PreferredBackBufferHeight = wh;
@@ -159,12 +228,110 @@ namespace Sexy
 #if LAWNMOD
             LawnMod.IronPyInteractive.Stop();
 #endif
+            SaveGameConfiguration();
+        }
+
+        private void SaveGameConfiguration()
+        {
+            if (mGameConfig.mCustomConfigPath is not null)
+                SyncGameConfigFromJson(mGameConfig - new LawnGameConfig() { mCustomConfigPath = "" }, Environment.ExpandEnvironmentVariables(mGameConfig.mCustomConfigPath), true);
+            else
+                SyncGameConfigFromJson(mGameConfig, Path.Join(AppDomain.CurrentDomain.BaseDirectory, "config.json"), true);
+        }
+
+        public class CustomNamingPolicy : JsonNamingPolicy
+        {
+            public override string ConvertName(string name)
+            {
+                if (string.IsNullOrEmpty(name))
+                {
+                    return name;
+                }
+
+                // Use StringBuilder for efficient string manipulation
+                var snakeCaseBuilder = new System.Text.StringBuilder();
+
+                // Check for "m" prefix followed by an uppercase letter
+                int startIndex = 0;
+                if (name.Length >= 2 && name[0] == 'm' && char.IsUpper(name[1]))
+                {
+                    startIndex = 1; // Skip the "m" prefix
+                }
+
+                bool previousWasUpper = false;
+                for (int i = startIndex; i < name.Length; i++)
+                {
+                    char current = name[i];
+
+                    if (char.IsUpper(current))
+                    {
+                        // Insert an underscore if it's not the first character and the previous character wasn't uppercase
+                        if (i > startIndex && !previousWasUpper)
+                        {
+                            snakeCaseBuilder.Append('_');
+                        }
+                        snakeCaseBuilder.Append(char.ToLower(current));
+                        previousWasUpper = true;
+                    }
+                    else
+                    {
+                        snakeCaseBuilder.Append(current);
+                        previousWasUpper = false;
+                    }
+                }
+
+                return snakeCaseBuilder.ToString();
+            }
+        }
+
+        public LawnGameConfig SyncGameConfigFromJson(in LawnGameConfig config, string path, bool isWriting)
+        {
+            var options = new JsonSerializerOptions
+            {
+                //PropertyNameCaseInsensitive = true, // Allows matching regardless of case
+                IncludeFields = true,
+                PropertyNamingPolicy = new CustomNamingPolicy(),        // Uses exact property names as in class
+                DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
+                WriteIndented = true,
+                Converters =
+                {
+                    new System.Text.Json.Serialization.JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
+                },
+                AllowTrailingCommas = true,
+                ReadCommentHandling = JsonCommentHandling.Skip,
+            };
+            if (!isWriting)
+            {
+                string json;
+                try
+                {
+                    json = File.ReadAllText(path);
+                }
+                catch (Exception)
+                {
+                    return new Lawn.LawnGameConfig();
+                }
+                return JsonSerializer.Deserialize<Lawn.LawnGameConfig>(json, options);
+            }
+            else
+            {
+                string json = JsonSerializer.Serialize<Lawn.LawnGameConfig>(config, options);
+                try
+                {
+                    File.WriteAllText(path, json);
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+                return config;
+            }
         }
 
         protected override void LoadContent()
         {
             GraphicsState.Init();
-            Main.SetupForResolution();
+            SetupForResolution();
             GlobalStaticVars.initialize(this);
             GlobalStaticVars.mGlobalContent.LoadSplashScreen();
             GlobalStaticVars.gSexyAppBase.StartLoadingThread();
@@ -438,7 +605,7 @@ namespace Sexy
         {
         }
 
-        private static void SetupForResolution()
+        private void SetupForResolution()
         {
             Strings.Culture = CultureInfo.CurrentCulture;
             if (Strings.Culture.TwoLetterISOLanguageName == "fr")
@@ -457,13 +624,22 @@ namespace Sexy
             {
                 Constants.Language = Constants.LanguageIndex.it;
             }
+            else if (Strings.Culture.TwoLetterISOLanguageName == "zh")
+            {
+                Constants.Language = Constants.LanguageIndex.zh_cn;
+            }
             else
             {
                 Constants.Language = Constants.LanguageIndex.en;
             }
+            // overrides language by explicit config
+            if (mGameConfig.mLocale != null)
+            {
+                Constants.Language = mGameConfig.mLocale.Value;
+            }
             //if ((Main.graphics.GraphicsDevice.PresentationParameters.BackBufferWidth == 480 && Main.graphics.GraphicsDevice.PresentationParameters.BackBufferHeight == 800) || (Main.graphics.GraphicsDevice.PresentationParameters.BackBufferWidth == 800 && Main.graphics.GraphicsDevice.PresentationParameters.BackBufferHeight == 480))
             //{
-                AtlasResources.mAtlasResources = new AtlasResources_480x800();
+            AtlasResources.mAtlasResources = new AtlasResources_480x800();
                 Constants.Load480x800();
                 return;
             //}
@@ -492,5 +668,11 @@ namespace Sexy
 
         private GamePadState previousGamepadState = default(GamePadState);
         private MouseState previousMouseState = default(MouseState);
+        private KeyboardState previousKeyboardState;
+        public string applicationStoragePath => mGameConfig.mStoragePath is not null ? Environment.ExpandEnvironmentVariables(mGameConfig.mStoragePath) : null;
+
+        public int ironPythonPort => mGameConfig.mIronpythonPort ?? 8080;
+
+        public LawnGameConfig mGameConfig;
     }
 }

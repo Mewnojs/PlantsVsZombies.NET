@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 using Microsoft.Xna.Framework;
 
 namespace Sexy
 {
     public struct TPoint
     {
+        [JsonIgnore]
         public Point Point
         {
             get
@@ -29,6 +31,7 @@ namespace Sexy
             }
         }
 
+        [JsonIgnore]
         public int x
         {
             get
@@ -53,6 +56,7 @@ namespace Sexy
             }
         }
 
+        [JsonIgnore]
         public int y
         {
             get

@@ -53,6 +53,11 @@ namespace Sexy
             }
         }
 
+        public void ToggleFullscreen()
+        {
+            throw new NotImplementedException(); // TODO: implement fullscreen for PCDX
+        }
+
         /*private void Current_Deactivated(object sender, DeactivatedEventArgs e)
         {
             GlobalStaticVars.gSexyAppBase.Tombstoned();
