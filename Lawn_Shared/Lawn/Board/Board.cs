@@ -2176,8 +2176,22 @@ namespace Lawn
                 case '7':
                 case '8':
                 case '9':
+                {
+                    int index = theChar - '1';
+                    if (mSeedBank.mSeedPackets[index].CenterY() > Constants.BOARD_HEIGHT)
+                        return;
+                    bool flag = mCursorObject.mSeedBankIndex != index;
                     RefreshSeedPacketFromCursor();
-                    mSeedBank.mSeedPackets[theChar - '1'].MouseDown(0, 0, 1);
+                    if (flag)
+                        mSeedBank.mSeedPackets[index].MouseDown(0, 0, 1);
+                    break;
+                }
+                case '`':
+                    if (mShowShovel)
+                    {
+                        RefreshSeedPacketFromCursor();
+                        PickUpTool(GameObjectType.Shovel);
+                    }
                     break;
                 }
             }
