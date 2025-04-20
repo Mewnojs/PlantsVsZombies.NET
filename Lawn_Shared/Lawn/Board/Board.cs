@@ -3082,6 +3082,7 @@ namespace Lawn
             //mCutScene.Update(false);
             //mCutScene.Update(false);
             mCutScene.Update(/*true*/);
+            UpdateMousePosition();
             if (mApp.mGameMode == GameMode.ChallengeZenGarden)
             {
                 //mApp.mZenGarden.ZenGardenUpdate(0);
@@ -3180,6 +3181,143 @@ namespace Lawn
             UpdateLevelEndSequence();
             mPrevMouseX = mApp.mWidgetManager.mLastMouseX;
             mPrevMouseY = mApp.mWidgetManager.mLastMouseY;
+        }
+
+        public void UpdateMousePosition()
+        {
+            UpdateCursor();
+            //UpdateToolTip();
+            Plant aPlant = null;
+            int num = -1;
+            while (IteratePlants(ref aPlant, ref num))
+            {
+                aPlant.mHighlighted = false;
+            }
+
+            SeedType aCursorSeedType = GetSeedTypeInCursor();
+            int aMouseX = mApp.mWidgetManager.mLastMouseX - mX;
+            int aMouseY = mApp.mWidgetManager.mLastMouseY - mY;
+
+            // In the Scary Potter level, detect and highlight the pot under the mouse
+            if (mApp.IsScaryPotterLevel())
+            {
+                GridItem aGridItem = null;
+                int num2 = -1;
+                while (IterateGridItems(ref aGridItem, ref num2))
+                {
+                    if (aGridItem.mGridItemType == GridItemType.ScaryPot)
+                    {
+                        aGridItem.mHighlighted = false;
+                    }
+                }
+
+                HitResult aHitResult = new HitResult();
+                MouseHitTest(aMouseX, aMouseY, out aHitResult, false);
+                if (aHitResult.mObjectType == GameObjectType.ScaryPot)
+                {
+                    GridItem aScaryPot = (GridItem)aHitResult.mObject;
+                    aScaryPot.mHighlighted = true;
+                    return;
+                }
+            }
+            // Zen Garden, set the highlight for the Stinky
+            if (mApp.mGameMode == GameMode.ChallengeZenGarden)
+            {
+                GridItem aStinky = mApp.mZenGarden.GetStinky();
+                if (aStinky != null)
+                {
+                    MouseHitTest(aMouseX, aMouseY, out HitResult aHitResult, false);
+                    aStinky.mHighlighted = aHitResult.mObjectType == GameObjectType.Stinky;
+                }
+            }
+
+            // Highlight plants when holding a shovel or garden tool
+            if (mCursorObject.mCursorType == CursorType.Shovel ||
+                mCursorObject.mCursorType == CursorType.WateringCan ||
+                mCursorObject.mCursorType == CursorType.Fertilizer ||
+                mCursorObject.mCursorType == CursorType.BugSpray ||
+                mCursorObject.mCursorType == CursorType.Phonograph ||
+                mCursorObject.mCursorType == CursorType.Chocolate ||
+                mCursorObject.mCursorType == CursorType.Glove ||
+                mCursorObject.mCursorType == CursorType.MoneySign ||
+                (mCursorObject.mCursorType == CursorType.Wheeelbarrow && mApp.mZenGarden.GetPottedPlantInWheelbarrow() == null))
+            {
+                HighlightPlantsForMouse(aMouseX, aMouseY);
+                return;
+            }
+
+            // Coffee bean and nut wrapping technique
+            if (aCursorSeedType == SeedType.InstantCoffee)
+            {
+                int aGridX = PlantingPixelToGridX(mApp.mWidgetManager.mLastMouseX, mApp.mWidgetManager.mLastMouseY, aCursorSeedType);
+                int aGridY = PlantingPixelToGridY(mApp.mWidgetManager.mLastMouseX, mApp.mWidgetManager.mLastMouseY, aCursorSeedType);
+
+                aPlant = GetTopPlantAt(aGridX, aGridY, TopPlant.OnlyNormalPosition);
+                if (aPlant != null && aPlant.mIsAsleep && CanPlantAt(aGridX, aGridY, SeedType.InstantCoffee) == PlantingReason.Ok)
+                {
+                    aPlant.mHighlighted = true;
+                }
+            }
+            else if (aCursorSeedType == SeedType.Wallnut || aCursorSeedType == SeedType.Tallnut)
+            {
+                int aGridX = PlantingPixelToGridX(mApp.mWidgetManager.mLastMouseX, mApp.mWidgetManager.mLastMouseY, aCursorSeedType);
+                int aGridY = PlantingPixelToGridY(mApp.mWidgetManager.mLastMouseX, mApp.mWidgetManager.mLastMouseY, aCursorSeedType);
+
+                aPlant = GetTopPlantAt(aGridX, aGridY, TopPlant.OnlyPumpkin);
+                if (aPlant != null && aPlant.mSeedType == aCursorSeedType && CanPlantAt(aGridX, aGridY, aCursorSeedType) == PlantingReason.Ok)
+                {
+                    aPlant.mHighlighted = true;
+                }
+            }
+            else if (aCursorSeedType == SeedType.Pumpkinshell)
+            {
+                int aGridX = PlantingPixelToGridX(mApp.mWidgetManager.mLastMouseX, mApp.mWidgetManager.mLastMouseY, aCursorSeedType);
+                int aGridY = PlantingPixelToGridY(mApp.mWidgetManager.mLastMouseX, mApp.mWidgetManager.mLastMouseY, aCursorSeedType);
+
+                aPlant = GetTopPlantAt(aGridX, aGridY, TopPlant.OnlyNormalPosition);
+                if (aPlant != null && aPlant.mSeedType == SeedType.Pumpkinshell && CanPlantAt(aGridX, aGridY, SeedType.Pumpkinshell) == PlantingReason.Ok)
+                {
+                    aPlant.mHighlighted = true;
+                }
+            }
+        }
+
+        public void HighlightPlantsForMouse(int theMouseX, int theMouseY)
+        {
+            if (mCursorObject.mCursorType == CursorType.WateringCan && mApp.mPlayerInfo.mPurchases[(int)StoreItem.STORE_ITEM_GOLD_WATERINGCAN] != 0)
+            {
+                Plant aPlant = null;
+                int index = -1;
+                while (IteratePlants(ref aPlant, ref index))
+                {
+                    if (IsPlantInGoldWateringCanRange(theMouseX, theMouseY, aPlant))
+                    {
+                        aPlant.mHighlighted = true;
+                        Plant aFlowerPot = GetTopPlantAt(aPlant.mPlantCol, aPlant.mRow, TopPlant.OnlyUnderPlant);
+                        if (aFlowerPot != null)
+                        {
+                            aFlowerPot.mHighlighted = true;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                var hitResult = ToolHitTest(theMouseX, theMouseY, false);
+                if (hitResult.mObjectType == GameObjectType.Plant)
+                {
+                    Plant aPlant = (Plant)hitResult.mObject;
+                    aPlant.mHighlighted = true;
+                    if (mApp.mGameMode == GameMode.ChallengeZenGarden)
+                    {
+                        Plant aFlowerPot = GetTopPlantAt(aPlant.mPlantCol, aPlant.mRow, TopPlant.OnlyUnderPlant);
+                        if (aFlowerPot != null)
+                        {
+                            aFlowerPot.mHighlighted = true;
+                        }
+                    }
+                }
+            }
         }
 
         public void UpdateLayers()//3update
