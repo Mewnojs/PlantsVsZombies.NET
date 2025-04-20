@@ -1912,26 +1912,44 @@ namespace Lawn
         public override void MouseDrag(int x, int y)
         {
             base.MouseDrag(x, y);
-            if (mIgnoreMouseUp && mCursorObject.mCursorType == CursorType.PlantFromUsableCoin)
-            {
-                mIgnoreMouseUp = false;
-            }
+            MouseDragInternal(x, y, false);
+        }
+
+        private void MouseDragInternal(int x, int y, bool isTouch) 
+        {
+            if (isTouch)
+                if (mIgnoreMouseUp && mCursorObject.mCursorType == CursorType.PlantFromUsableCoin)
+                {
+                    mIgnoreMouseUp = false;
+                }
             mLastToolX = x;
             mLastToolY = y;
-            if (mIgnoreNextMouseUp)
-            {
-                TRect trect = new TRect(Constants.ZEN_XMIN, Constants.ZEN_YMIN, Constants.ZEN_XMAX - Constants.ZEN_XMIN, Constants.ZEN_YMAX - Constants.ZEN_YMIN);
-                if (trect.Contains(mApp.mBoard.mLastToolX, mApp.mBoard.mLastToolY))
+            if (isTouch)
+                if (mIgnoreNextMouseUp)
                 {
-                    mIgnoreNextMouseUp = false;
+                    TRect trect = new TRect(Constants.ZEN_XMIN, Constants.ZEN_YMIN, Constants.ZEN_XMAX - Constants.ZEN_XMIN, Constants.ZEN_YMAX - Constants.ZEN_YMIN);
+                    if (trect.Contains(mApp.mBoard.mLastToolX, mApp.mBoard.mLastToolY))
+                    {
+                        mIgnoreNextMouseUp = false;
+                    }
                 }
-            }
             mChallenge.MouseMove(x, y);
+        }
+
+        public override void TouchMoved(_Touch touch)
+        {
+            (int x, int y, int theClickCount) = ((int)touch.location.X, (int)touch.location.y, 1);
+            MouseDragInternal(x, y, true);
         }
 
         public override void MouseDown(int x, int y, int theClickCount)
         {
             base.MouseDown(x, y, theClickCount);
+            MouseDownInternal(x, y, theClickCount, false);
+        }
+
+        public void MouseDownInternal(int x, int y, int theClickCount, bool isTouch)
+        {
             mLastToolX = x;
             mLastToolY = y;
             mMenuButton.Update();
@@ -1989,28 +2007,54 @@ namespace Lawn
                     }
                 }
             }
-            if (theHitResult.mObjectType == GameObjectType.Coin && theClickCount >= 0)
+            if (!isTouch && theHitResult.mObjectType == GameObjectType.None)
+            {
+                if (mLastToolX >= Constants.LAWN_XMIN * Constants.S && mLastToolY >= Constants.LAWN_YMIN * Constants.S && mCursorObject.mCursorType == CursorType.CobcannonTarget)
+                {
+                    MouseDownCobcannonFire(mLastToolX, mLastToolY, theClickCount);
+                    mLastToolX = (mLastToolY = short.MinValue);
+                    return;
+                }
+            }
+            else if (theHitResult.mObjectType == GameObjectType.Coin && theClickCount >= 0 /* new for compatibility with touch */&& (isTouch || (mCursorObject.mCursorType == CursorType.Hammer || mCursorObject.mCursorType == CursorType.Normal)))
             {
                 Coin coin = (Coin)theHitResult.mObject;
                 coin.MouseDown(x, y, theClickCount);
-                mIgnoreMouseUp = true;
+                if (isTouch)
+                    mIgnoreMouseUp = true;
+                UpdateCursor();
                 return;
             }
-            if (mCursorObject.mCursorType == CursorType.WateringCan || mCursorObject.mCursorType == CursorType.Fertilizer || mCursorObject.mCursorType == CursorType.BugSpray || mCursorObject.mCursorType == CursorType.Phonograph || mCursorObject.mCursorType == CursorType.Chocolate || mCursorObject.mCursorType == CursorType.Glove || mCursorObject.mCursorType == CursorType.MoneySign || mCursorObject.mCursorType == CursorType.Wheeelbarrow || mCursorObject.mCursorType == CursorType.TreeFood)
+            if ((!isTouch && mCursorObject.mCursorType == CursorType.Shovel) || mCursorObject.mCursorType == CursorType.WateringCan || mCursorObject.mCursorType == CursorType.Fertilizer || mCursorObject.mCursorType == CursorType.BugSpray || mCursorObject.mCursorType == CursorType.Phonograph || mCursorObject.mCursorType == CursorType.Chocolate || mCursorObject.mCursorType == CursorType.Glove || mCursorObject.mCursorType == CursorType.MoneySign || mCursorObject.mCursorType == CursorType.Wheeelbarrow || mCursorObject.mCursorType == CursorType.TreeFood)
             {
                 MouseDownWithTool(x, y, theClickCount, mCursorObject.mCursorType, false);
                 return;
             }
-            if (IsPlantInCursor())
+            if (mApp.mGameMode == GameMode.ChallengeZombiquarium)
             {
-                MouseDownWithPlant(x, y, theClickCount);
-                return;
+                mChallenge.ZombiquariumMouseDown(x, y);
             }
             if (theHitResult.mObjectType == GameObjectType.Seedpacket)
             {
-                RefreshSeedPacketFromCursor();
                 SeedPacket seedPacket = (SeedPacket)theHitResult.mObject;
+                int aSeedBankIndex = mCursorObject.mSeedBankIndex;
+                RefreshSeedPacketFromCursor();
+                if (aSeedBankIndex == seedPacket.mIndex)
+                {
+                    theHitResult.mObjectType = GameObjectType.None;
+                    return;
+                }
+                //
+                RefreshSeedPacketFromCursor();
                 seedPacket.MouseDown(x, y, theClickCount);
+                return;
+            }
+            if (IsPlantInCursor())
+            {
+                if (isTouch)
+                    MouseDownWithPlant(x, y, theClickCount);
+                else
+                    MouseUpWithPlant(x, y, theClickCount);
                 return;
             }
             if (theHitResult.mObjectType == GameObjectType.NextGarden)
@@ -2040,37 +2084,61 @@ namespace Lawn
                 Plant plant = (Plant)theHitResult.mObject;
                 plant.MouseDown(x, y, theClickCount);
             }
+            UpdateCursor();
+        }
+
+        public override void TouchBegan(_Touch touch)
+        {
+            (int x, int y, int theClickCount) = ((int)touch.location.X, (int)touch.location.y, 1);
+            MouseDownInternal(x, y, theClickCount, true);
         }
 
         public override void MouseUp(int x, int y, int theClickCount)
         {
             base.MouseUp(x, y, theClickCount);
+            MouseUpInternal(x, y, theClickCount, false);
+        }
+
+        public void MouseUpInternal(int x, int y, int theClickCount, bool isTouch)
+        {
             if (mIgnoreMouseUp)
             {
-                mLastToolX = (mLastToolY = short.MinValue);
-                mLastToolX = 0;
-                return;
-            }
-            if (mIgnoreNextMouseUp)
-            {
-                mIgnoreNextMouseUp = false;
-                return;
-            }
-            if (mIgnoreNextMouseUpSeedPacket)
-            {
-                HitResult hitResult;
-                MouseHitTest(x, y, out hitResult, false);
-                //mIgnoreNextMouseUpSeedPacket = false;
-                if (hitResult.mObjectType == GameObjectType.Coin)
+                if (!isTouch)
                 {
-                    Coin coin = (Coin)hitResult.mObject;
-                    if (coin.mType == CoinType.UsableSeedPacket)
+                    mIgnoreMouseUp = false;
+                    return;
+                }
+                else
+                {
+                    mLastToolX = (mLastToolY = short.MinValue);
+                    mLastToolX = 0;
+                    return;
+                }
+            }
+            if (isTouch)
+            {
+                if (mIgnoreNextMouseUp)
+                {
+                    mIgnoreNextMouseUp = false;
+                    return;
+                }
+                if (mIgnoreNextMouseUpSeedPacket)
+                {
+                    HitResult hitResult;
+                    MouseHitTest(x, y, out hitResult, false);
+                    //mIgnoreNextMouseUpSeedPacket = false;
+                    if (hitResult.mObjectType == GameObjectType.Coin)
                     {
-                        mLastToolX = (mLastToolY = short.MinValue);
-                        return;
+                        Coin coin = (Coin)hitResult.mObject;
+                        if (coin.mType == CoinType.UsableSeedPacket)
+                        {
+                            mLastToolX = (mLastToolY = short.MinValue);
+                            return;
+                        }
                     }
                 }
             }
+
             if (mMenuButton.IsMouseOver() && CanInteractWithBoardButtons() && theClickCount > 0)
             {
                 RefreshSeedPacketFromCursor();
@@ -2081,6 +2149,8 @@ namespace Lawn
                 mMenuButton.mIsOver = false;
                 mMenuButton.mIsDown = false;
                 UpdateCursor();
+                if (!isTouch)
+                    ClearCursor();
                 if (mTutorialState == TutorialState.ZenGardenCompleted)
                 {
                     mApp.FinishZenGardenTutorial();
@@ -2106,30 +2176,33 @@ namespace Lawn
             }
             else
             {
-                if ((mLastToolX >= Constants.LAWN_XMIN * Constants.S || mApp.mGameMode == GameMode.ChallengeZenGarden) && IsPlantInCursor())
-                {
-                    if (mCursorObject.mCursorType == CursorType.PlantFromGlove && mCursorObject.mGlovePlantID != null)
+                if (isTouch) {
+                    if ((mLastToolX >= Constants.LAWN_XMIN * Constants.S || mApp.mGameMode == GameMode.ChallengeZenGarden) && IsPlantInCursor())
                     {
-                        mCursorObject.mGlovePlantID.mGloveGrabbed = false;
+                        if (mCursorObject.mCursorType == CursorType.PlantFromGlove && mCursorObject.mGlovePlantID != null)
+                        {
+                            mCursorObject.mGlovePlantID.mGloveGrabbed = false;
+                        }
+                        MouseUpWithPlant(mLastToolX, mLastToolY, theClickCount);
+                        mIgnoreMouseUp = true;
+                        return;
                     }
-                    MouseUpWithPlant(mLastToolX, mLastToolY, theClickCount);
-                    return;
-                }
-                if ((mLastToolX < Constants.LAWN_XMIN * Constants.S || mLastToolY >= Constants.LAWN_YMIN * Constants.S) && mCursorObject.mCursorType == CursorType.Shovel)
-                {
-                    MouseDownWithTool(mLastToolX, mLastToolY, theClickCount, mCursorObject.mCursorType, false);
-                    return;
-                }
-                if (mLastToolX >= Constants.LAWN_XMIN * Constants.S && mLastToolY >= Constants.LAWN_YMIN * Constants.S && mCursorObject.mCursorType == CursorType.CobcannonTarget)
-                {
-                    MouseDownCobcannonFire(mLastToolX, mLastToolY, theClickCount);
-                    mLastToolX = (mLastToolY = short.MinValue);
-                    return;
-                }
-                if ((mCursorObject.mCursorType == CursorType.Fertilizer || mCursorObject.mCursorType == CursorType.BugSpray || mCursorObject.mCursorType == CursorType.Phonograph || mCursorObject.mCursorType == CursorType.Chocolate || mCursorObject.mCursorType == CursorType.Glove || mCursorObject.mCursorType == CursorType.MoneySign || mCursorObject.mCursorType == CursorType.Wheeelbarrow || mCursorObject.mCursorType == CursorType.TreeFood || mCursorObject.mCursorType == CursorType.WateringCan) && mLastToolY >= Constants.ZEN_YMIN * Constants.S)
-                {
-                    MouseDownWithTool(x, y, theClickCount, mCursorObject.mCursorType, false);
-                    return;
+                    if ((mLastToolX < Constants.LAWN_XMIN * Constants.S || mLastToolY >= Constants.LAWN_YMIN * Constants.S) && mCursorObject.mCursorType == CursorType.Shovel)
+                    {
+                        MouseDownWithTool(mLastToolX, mLastToolY, theClickCount, mCursorObject.mCursorType, false);
+                        return;
+                    }
+                    if (mLastToolX >= Constants.LAWN_XMIN * Constants.S && mLastToolY >= Constants.LAWN_YMIN * Constants.S && mCursorObject.mCursorType == CursorType.CobcannonTarget)
+                    {
+                        MouseDownCobcannonFire(mLastToolX, mLastToolY, theClickCount);
+                        mLastToolX = (mLastToolY = short.MinValue);
+                        return;
+                    }
+                    if ((mCursorObject.mCursorType == CursorType.Fertilizer || mCursorObject.mCursorType == CursorType.BugSpray || mCursorObject.mCursorType == CursorType.Phonograph || mCursorObject.mCursorType == CursorType.Chocolate || mCursorObject.mCursorType == CursorType.Glove || mCursorObject.mCursorType == CursorType.MoneySign || mCursorObject.mCursorType == CursorType.Wheeelbarrow || mCursorObject.mCursorType == CursorType.TreeFood || mCursorObject.mCursorType == CursorType.WateringCan) && mLastToolY >= Constants.ZEN_YMIN * Constants.S)
+                    {
+                        MouseDownWithTool(x, y, theClickCount, mCursorObject.mCursorType, false);
+                        return;
+                    }
                 }
                 if (mChallenge.MouseUp(mLastToolX, mLastToolY) && theClickCount > 0)
                 {
@@ -2156,9 +2229,16 @@ namespace Lawn
                         mApp.DoBackToMain();
                     }
                 }
-                mLastToolX = (mLastToolY = short.MinValue);
+                if (isTouch)
+                    mLastToolX = (mLastToolY = short.MinValue);
                 return;
             }
+        }
+
+        public override void TouchEnded(_Touch touch)
+        {
+            (int x, int y, int theClickCount) = ((int)touch.location.X, (int)touch.location.y, 1);
+            MouseUpInternal(x, y, theClickCount, true);
         }
 
         public override void KeyChar(SexyChar theChar)
@@ -3882,7 +3962,7 @@ namespace Lawn
             }
         }
 
-        public bool MouseHitTest(int x, int y, out HitResult theHitResult, bool posScaled)
+        public bool MouseHitTest(int x, int y, out HitResult theHitResult, bool posScaled, bool isTouch = false)
         {
             if (!posScaled)
             {
@@ -3919,13 +3999,16 @@ namespace Lawn
             {
                 if (mCursorObject.mCursorType == CursorType.PlantFromBank)
                 {
-                    SeedPacket seedPacket = (SeedPacket)theHitResult.mObject;
-                    int aSeedBankIndex = mCursorObject.mSeedBankIndex;
-                    RefreshSeedPacketFromCursor();
-                    if (aSeedBankIndex == seedPacket.mIndex)
+                    if (isTouch)
                     {
-                        theHitResult.mObjectType = GameObjectType.None;
-                        return true;
+                        SeedPacket seedPacket = (SeedPacket)theHitResult.mObject;
+                        int aSeedBankIndex = mCursorObject.mSeedBankIndex;
+                        RefreshSeedPacketFromCursor();
+                        if (aSeedBankIndex == seedPacket.mIndex)
+                        {
+                            theHitResult.mObjectType = GameObjectType.None;
+                            return true;
+                        }
                     }
                     return true;
                 }
@@ -3939,24 +4022,28 @@ namespace Lawn
                 theHitResult.mObjectType = GameObjectType.Shovel;
                 return true;
             }
-            Coin coin = null;
-            Coin coin2 = null;
-            while (IterateCoins(ref coin2))
+            // in Touch, there is no condition.
+            //if (!isTouch && (mCursorObject.mCursorType == CursorType.Normal || mCursorObject.mCursorType == CursorType.Hammer)) 
             {
-                HitResult hitResult;
-                if (coin2.MouseHitTest(x, y, out hitResult))
+                Coin coin = null;
+                Coin coin2 = null;
+                while (IterateCoins(ref coin2))
                 {
-                    Coin coin3 = (Coin)hitResult.mObject;
-                    if (coin == null || coin3.mRenderOrder >= coin.mRenderOrder)
+                    HitResult hitResult;
+                    if (coin2.MouseHitTest(x, y, out hitResult))
                     {
-                        theHitResult = hitResult;
-                        coin = coin3;
+                        Coin coin3 = (Coin)hitResult.mObject;
+                        if (coin == null || coin3.mRenderOrder >= coin.mRenderOrder)
+                        {
+                            theHitResult = hitResult;
+                            coin = coin3;
+                        }
                     }
                 }
-            }
-            if (coin != null)
-            {
-                return true;
+                if (coin != null)
+                {
+                    return true;
+                }
             }
             if (mApp.mGameMode == GameMode.ChallengeZenGarden)
             {
@@ -4067,6 +4154,12 @@ namespace Lawn
 
         public void MouseUpWithPlant(int x, int y, int theClickCount)
         {
+            if (theClickCount < 0)
+            {
+                RefreshSeedPacketFromCursor();
+                mApp.PlayFoley(FoleyType.Drop);
+                return;
+            }
             if (mApp.IsIZombieLevel())
             {
                 mChallenge.IZombieMouseDownWithZombie(x, y, theClickCount);
