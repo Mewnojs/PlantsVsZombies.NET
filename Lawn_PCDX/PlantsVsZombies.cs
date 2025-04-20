@@ -10,11 +10,12 @@ namespace LAWN
         static void Main()
         {
             var args = ParseCommandLineArguments();
-            Game game = new Main();
+            Main game = new Main();
             game.Window.Title = String.Format
             ("PlantsVsZombies.Net v{0}", Lawn.LawnApp.AppVersionNumber);
-            (game as Main).applicationStoragePath = (string)(args[(int)CommandLineArgumentType.Storage] ?? null);
-            (game as Main).ironPythonPort = (int)(args[(int)CommandLineArgumentType.IronPyInteractivePort] ?? 8080);
+            game.mGameConfig = new();
+            game.mGameConfig.mStoragePath = (string)(args[(int)CommandLineArgumentType.Storage] ?? null);
+            game.mGameConfig.mIronpythonPort = (short)(args[(short)CommandLineArgumentType.IronPyInteractivePort] ?? 8080);
             game.Run();
         }
 

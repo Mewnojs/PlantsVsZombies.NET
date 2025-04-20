@@ -506,8 +506,10 @@ namespace Sexy
 
         private WidgetManager mWidgetManager;
 
-        public string applicationStoragePath;
+        public string applicationStoragePath => mGameConfig.mStoragePath is not null ? Environment.ExpandEnvironmentVariables(mGameConfig.mStoragePath) : null;
 
-        public int ironPythonPort;
+        public int ironPythonPort => mGameConfig.mIronpythonPort ?? 8080;
+
+        public LawnGameConfig mGameConfig;
     }
 }

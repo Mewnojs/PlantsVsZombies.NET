@@ -18,7 +18,6 @@
     <AssemblyName>LAWN</AssemblyName>
     <StartupObject>LAWN.PlantsVsZombies</StartupObject>
     <Version>0.13.0</Version>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
