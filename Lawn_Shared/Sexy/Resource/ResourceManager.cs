@@ -1719,7 +1719,11 @@ namespace Sexy
                 if (mXMLParser == null)
                 {
                     mError = theErrorText;
+#if DEBUG
+                    throw new Exception(mError);
+#else
                     return false;
+#endif
                 }
                 int currentLineNum = mXMLParser.GetCurrentLineNum();
                 mError = theErrorText;
@@ -1732,7 +1736,11 @@ namespace Sexy
                     mError = mError + " in File '" + mXMLParser.GetFileName() + "'";
                 }
             }
+#if DEBUG
+            throw new Exception(mError);
+#else
             return false;
+#endif
         }
 
         public bool TodLoadResources(string theGroup)
