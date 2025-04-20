@@ -125,10 +125,10 @@ namespace LawnMod
 
             private static void RunAllCustModules(string CustModDirName = "cust/mods") 
             {
-                RunAllModules(CustModDirName);
+                RunAllModules(CustModDirName, false);
             }
 
-            private static void RunAllModules(string ModuleDirName = "mods") 
+            private static void RunAllModules(string ModuleDirName = "mods", bool doCreate = true)
             {
                 if (Directory.Exists(ModuleDirName))
                 {
@@ -174,7 +174,8 @@ namespace LawnMod
                 }
                 else 
                 {
-                    Directory.CreateDirectory(ModuleDirName);
+                    if (doCreate)
+                        Directory.CreateDirectory(ModuleDirName);
                 }
             }
 
