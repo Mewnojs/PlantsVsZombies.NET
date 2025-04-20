@@ -43,9 +43,13 @@ namespace Sexy
                 KeyCode keyCode = (KeyCode)obj;
                 return false;
             }
-            if (obj is char || obj is uint) 
+            if (obj is char cobj)
             {
-                return value_type.Equals(obj);
+                return value_type.Equals(cobj);
+            }
+            else if (obj is uint cobj2)
+            {
+                return value_type.Equals((char)cobj2);
             }
             return false;
         }
