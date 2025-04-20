@@ -1312,7 +1312,7 @@ namespace Lawn
             perfTimer.Start();
             mProfileMgr.Load();
             string empty = string.Empty;
-            if (mPlayerInfo == null && RegistryReadString("CurUser", empty) != null)
+            if (mPlayerInfo == null && (RegistryReadString("CurUser", empty) != null || !string.IsNullOrEmpty(empty = XnaGame.mGameConfig.mCurrentUser ?? string.Empty)))
             {
                 mPlayerInfo = mProfileMgr.GetProfile(empty);
             }
