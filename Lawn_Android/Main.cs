@@ -233,8 +233,16 @@ namespace Sexy
 #endif
 
             LawnMod.DynamicHelper.SetPrivateFieldStatic(typeof(OperatingSystem), "s_osPlatformName", "Linux"); // a hack to deceive IronPython and MonoMod believing that it's running Linux (actually it is, sort of)
-            int port = LawnMod.IronPyInteractive.Serve();
-            Toast.MakeText(Activity, $"WebSocket server started at port {port}.", ToastLength.Long).Show();
+            LawnMod.IronPyInteractive.PyHub.CustRoot = GlobalStaticVars.gPvZActivity.CustRoot;
+            if (mGameConfig.mIronpythonEnabled! ?? true == true)
+            {
+                int port = LawnMod.IronPyInteractive.Serve();
+                Toast.MakeText(Activity, $"WebSocket server started at port {port}.", ToastLength.Long).Show();
+            }
+            else
+            {
+                LawnMod.IronPyInteractive.PyHub.Initialize(false);
+            }
 #if !DEBUG
             }
             catch (Exception e)

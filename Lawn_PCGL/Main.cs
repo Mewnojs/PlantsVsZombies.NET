@@ -192,9 +192,14 @@ namespace Sexy
             base.Components.Add(Main.GamerServicesComp);
             ReportAchievement.Initialise();
 #if LAWNMOD
+            LawnMod.IronPyInteractive.PyHub.CustRoot = AppDomain.CurrentDomain.BaseDirectory;
             if (mGameConfig.mIronpythonEnabled! ?? true == true)
             {
                 LawnMod.IronPyInteractive.Serve();
+            }
+            else 
+            {
+                LawnMod.IronPyInteractive.PyHub.Initialize(false);
             }
 #endif
             base.Initialize();

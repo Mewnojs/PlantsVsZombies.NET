@@ -149,10 +149,12 @@ namespace Lawn_Android
             Directory.SetCurrentDirectory(GetExternalFilesDir("").AbsolutePath);
         }
 
+        public string CustRoot => System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
+
         internal void ExtractCustoms()
         {
             string custFolderPath = "cust";
-            string custFolderExtPath = GetExternalFilesDir(custFolderPath).AbsolutePath;
+            string custFolderExtPath = Path.Join(CustRoot, custFolderPath);
             string verInfoFileName = "info.txt";
             string verInfoFilePath = Path.Combine(custFolderExtPath, verInfoFileName);
             if (Directory.Exists(custFolderExtPath)) 
@@ -169,17 +171,17 @@ namespace Lawn_Android
                 // Give space for new cust 
                 Directory.Delete(custFolderExtPath, true);
             }
-            Directory.CreateDirectory(custFolderExtPath);
-
             try
             {
                 string result = ExtractZipFromAsset(custFolderPath, "cust.zip", custFolderExtPath);
             }
-            catch (FileNotFoundException) 
+            catch (FileNotFoundException)
             {
-                ; // This version does not have `cust.zip`. Do nothing.
+                return; // This version does not have `cust.zip`. Do nothing.
             }
-            
+
+            Directory.CreateDirectory(custFolderExtPath);
+
             using (var verInfoWriter = new StreamWriter(verInfoFilePath))
             {
                 verInfoWriter.WriteLine(Lawn.LawnApp.AppVersionNumber);

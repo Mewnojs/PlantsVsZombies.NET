@@ -141,7 +141,15 @@ namespace Sexy
             base.Components.Add(Main.GamerServicesComp);
             ReportAchievement.Initialise();
 #if LAWNMOD
-            Debug.Log(DebugType.Info, $"WS server started at: Port {LawnMod.IronPyInteractive.Serve()}");
+            LawnMod.IronPyInteractive.PyHub.CustRoot = AppDomain.CurrentDomain.BaseDirectory;
+            if (mGameConfig.mIronpythonEnabled! ?? true == true)
+            {
+                Debug.Log(DebugType.Info, $"WS server started at: Port {LawnMod.IronPyInteractive.Serve()}");
+            }
+            else
+            {
+                LawnMod.IronPyInteractive.PyHub.Initialize(false);
+            }   
 #endif
             base.Initialize();
             // Window Scaling

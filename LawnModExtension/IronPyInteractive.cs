@@ -78,7 +78,7 @@ namespace LawnMod
                 );
             }
 
-            public static void Initialize()
+            public static void Initialize(bool runModules = true)
             {
                 Preinitialize();
                 ConfigureWorkDir();  
@@ -93,8 +93,23 @@ namespace LawnMod
                 DebugExec($"__import__('clr').AddReference('{Assembly.GetExecutingAssembly().GetName().Name}')");
                 //DebugExec($"import y");
 
-                RunAllCustModules();
-                RunAllModules();
+                if (!string.IsNullOrEmpty(mCustRoot))
+                    RunAllCustModules(Path.Join(mCustRoot, "cust/mods"));
+                else
+                    RunAllCustModules();
+                if (runModules)
+                    RunAllModules();
+            }
+
+            private static string mCustRoot;
+
+            public static string CustRoot
+            {
+                get { return mCustRoot; }
+                set
+                {
+                    mCustRoot = value;;
+                }
             }
 
             /// <summary>
