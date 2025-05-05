@@ -491,7 +491,7 @@ namespace Sexy
             {
                 GlobalStaticVars.gSexyAppBase.mWidgetManager.MouseDown((int)mstouch.location.x, (int)mstouch.location.y, -1);
             }
-            else if (msstate.RightButton == ButtonState.Released && previousMouseState.LeftButton == ButtonState.Pressed)
+            else if (msstate.RightButton == ButtonState.Released && previousMouseState.RightButton == ButtonState.Pressed)
             {
                 GlobalStaticVars.gSexyAppBase.mWidgetManager.MouseUp((int)mstouch.location.x, (int)mstouch.location.y, -1);
             }
