@@ -7143,7 +7143,7 @@ namespace Lawn
                     {
                         int num2 = mGridCelLook[i, j % Constants.MAX_GRIDSIZEY];
                         int theCelCol = num2 % 8;
-                        float num3 = i * 80 + mFogOffset - 15f;
+                        float num3 = i * 80 + mFogOffset - 15f + Constants.BOARD_EXTRA_ROOM;
                         float num4 = j * 85 + 20f;
                         int num5 = (int)(255f - num2 * 1.5f);
                         int num6 = 255 - num2;
