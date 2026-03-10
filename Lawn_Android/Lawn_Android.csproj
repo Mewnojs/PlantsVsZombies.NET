@@ -50,7 +50,7 @@
   </ItemGroup>
 	<ItemGroup Condition="$(DefineConstants.Contains('LAWNMOD'))">
 		<PackageReference Include="IronPython" Version="3.4.0" />
-		<PackageReference Include="MonoMod.RuntimeDetour" Version="22.7.31.1" />
+		<PackageReference Include="MonoMod.RuntimeDetour" Version="25.3.4" />
 		<PackageReference Include="WebSocketSharp.NetCore" Version="1.0.1-alpha.4" />
 	</ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
