@@ -16,9 +16,12 @@ The whole project comprises of three parts, which are *Lawn*, *Sexy*, and *Sexy.
 
 #### Installation
 
-1.  Clone into local;
-2.	Open the solution with VS2022; (VSCode works too, but make sure don't compile with absolute project file path)
-3.	For PCDX/PCGL, Complie and extract game contents (not included in this repo, see [contacts](####Contacts)) into the path of the compiled executable; For Android, extract game contents into `Lawn_Android\Assets\` first, then compile and deploy;
+1.  Clone into local, use VS2026 with .NET SDK 10 to open the slnx file;
+2.	Extract game contents (not included in this repo, see [contacts](####Contacts)) into the content directory;
+	- For PCDX/PCGL version: extract into `Lawn_PCGL/Content` or `Lawn_PCDX/Content`
+	- For Android version: extract into `Lawn_Android/Assets/Content`
+3.  (Optional) Download the Chinese content pack and overwrite the content directory to get Chinese support;
+4.	Choose a startup project (the version you have chosen) and compile the main program;
 4.	Enjoy!
 
 #### Notice
@@ -30,7 +33,8 @@ The whole project comprises of three parts, which are *Lawn*, *Sexy*, and *Sexy.
 There are two ways to mod the game, each has its own pros and cons:
 1. Fork this repo and modify the source code or resources directly, then publish your own version;
 2. Make IronPython3 scripts to modify the game. This method doesn't require modifying the source code, and is compatible with different versions of PvZ (derived from this project), but the content you can modify is limited, and you need to have a certain understanding of Hooking techniques.
-For the second method, you can refer to the examples in the LawnMod API document in the Wiki. The script files are placed in `.\mods\`, and the game will load them automatically when it starts.
+(Android support for IronPython3 scripts are unavailable for now)
+1. For the second method, you can refer to the examples in the LawnMod API document in the Wiki. The script files are placed in `.\mods\`, and the game will load them automatically when it starts.
 
 
 #### Contacts
