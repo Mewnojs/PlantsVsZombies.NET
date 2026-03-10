@@ -29,7 +29,7 @@ namespace Sexy
 			GraphicsState.mGraphicsDeviceManager.DeviceReset += new EventHandler<EventArgs>(graphics_DeviceReset);
 			GraphicsState.mGraphicsDeviceManager.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(mGraphicsDeviceManager_PreparingDeviceSettings);
 			base.TargetElapsedTime = TimeSpan.FromSeconds(0.01);
-			base.Exiting += new EventHandler<EventArgs>(Main_Exiting);
+			base.Exiting += new EventHandler<ExitingEventArgs>(Main_Exiting);
 			Window.AllowUserResizing = true;
 			base.Window.ClientSizeChanged += new EventHandler<EventArgs>(this.OnResize);
 			//PhoneApplicationService.Current.UserIdleDetectionMode = 0;
@@ -112,7 +112,7 @@ namespace Sexy
             base.GraphicsDevice.PresentationParameters.PresentationInterval = PresentInterval.Immediate;
         }
 
-        private void Main_Exiting(object sender, EventArgs e)
+        private void Main_Exiting(object sender, ExitingEventArgs e)
         {
             GlobalStaticVars.gSexyAppBase.AppExit();
         }
@@ -169,7 +169,7 @@ namespace Sexy
             };
         }
 
-        protected override void OnExiting(object sender, EventArgs args) 
+        protected override void OnExiting(object sender, ExitingEventArgs args) 
         {
 #if LAWNMOD
             LawnMod.IronPyInteractive.Stop();

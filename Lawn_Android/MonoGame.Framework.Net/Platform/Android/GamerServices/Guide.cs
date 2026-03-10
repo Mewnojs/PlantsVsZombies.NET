@@ -101,7 +101,7 @@ namespace Microsoft.Xna.Framework.GamerServices
                 }
                 if (usePasswordMode)
                 {
-                    input.InputType = Android.Text.InputTypes.ClassText | Android.Text.InputTypes.TextVariationPassword;
+                    input.InputType = global::Android.Text.InputTypes.ClassText | global::Android.Text.InputTypes.TextVariationPassword;
                 }
                 alert.SetView(input);
 
@@ -270,14 +270,14 @@ namespace Microsoft.Xna.Framework.GamerServices
             try
             {
                 Intent intent = new Intent(Intent.ActionView);
-                intent.SetData(Android.Net.Uri.Parse("market://details?id=" + packageName));
+                intent.SetData(global::Android.Net.Uri.Parse("market://details?id=" + packageName));
                 intent.SetFlags(ActivityFlags.NewTask);
                 Game.Activity.StartActivity(intent);
             }
             catch (ActivityNotFoundException)
             {
                 Intent intent = new Intent(Intent.ActionView);
-                intent.SetData(Android.Net.Uri.Parse("http://play.google.com/store/apps/details?id=" + packageName));
+                intent.SetData(global::Android.Net.Uri.Parse("http://play.google.com/store/apps/details?id=" + packageName));
                 intent.SetFlags(ActivityFlags.NewTask);
                 Game.Activity.StartActivity(intent);
             }

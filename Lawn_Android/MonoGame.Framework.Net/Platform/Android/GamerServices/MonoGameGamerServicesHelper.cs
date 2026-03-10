@@ -134,7 +134,7 @@ namespace Microsoft.Xna.Framework.GamerServices
                 string name = "androiduser";
                 try
                 {
-                    Android.Accounts.AccountManager mgr = (Android.Accounts.AccountManager)Android.App.Application.Context.GetSystemService(Android.App.Activity.AccountService);
+                    global::Android.Accounts.AccountManager mgr = (global::Android.Accounts.AccountManager)global::Android.App.Application.Context.GetSystemService(global::Android.App.Activity.AccountService);
                     if (mgr != null)
                     {
                         var accounts = mgr.GetAccounts();

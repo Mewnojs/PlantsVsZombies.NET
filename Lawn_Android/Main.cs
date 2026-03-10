@@ -78,7 +78,7 @@ namespace Sexy
             GraphicsState.mGraphicsDeviceManager.DeviceReset += new EventHandler<EventArgs>(this.graphics_DeviceReset);
             GraphicsState.mGraphicsDeviceManager.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(this.mGraphicsDeviceManager_PreparingDeviceSettings);
             base.TargetElapsedTime = TimeSpan.FromSeconds(0.01);
-            base.Exiting += new EventHandler<EventArgs>(this.Main_Exiting);
+            base.Exiting += new EventHandler<ExitingEventArgs>(this.Main_Exiting);
 
             //base.Window.AllowUserResizing = true;
             base.Window.ClientSizeChanged += new EventHandler<EventArgs>(this.OnResize);
@@ -215,7 +215,7 @@ namespace Sexy
             base.GraphicsDevice.PresentationParameters.PresentationInterval = PresentInterval.Immediate;
         }
 
-        private void Main_Exiting(object sender, EventArgs e)
+        private void Main_Exiting(object sender, ExitingEventArgs e)
         {
             GlobalStaticVars.gSexyAppBase.AppExit();
         }
@@ -231,8 +231,6 @@ namespace Sexy
             try
             {
 #endif
-
-            LawnMod.DynamicHelper.SetPrivateFieldStatic(typeof(OperatingSystem), "s_osPlatformName", "Linux"); // a hack to deceive IronPython and MonoMod believing that it's running Linux (actually it is, sort of)
             LawnMod.IronPyInteractive.PyHub.CustRoot = GlobalStaticVars.gPvZActivity.CustRoot;
             if (mGameConfig.mIronpythonEnabled! ?? true == true)
             {
