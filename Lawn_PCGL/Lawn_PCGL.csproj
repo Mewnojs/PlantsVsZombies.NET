@@ -25,7 +25,7 @@
 		<PackageReference Include="Lidgren.Network.Core2" Version="1.0.0" />
 		<PackageReference Include="MLEM.Data" Version="5.2.0" />
 		<PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
-		<PackageReference Include="MonoGame.IMEHelper.DesktopGL" Version="0.10.0" />
+		<PackageReference Include="MonoGame.IMEHelper.Common" Version="0.9.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
 	<ItemGroup Condition="$(DefineConstants.Contains('LAWNMOD'))">

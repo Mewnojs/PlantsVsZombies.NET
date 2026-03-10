@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>MonoGame.IMEHelper</AssemblyName>
+    <RootNamespace>MonoGame.IMEHelper</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DESKTOPGL</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>TRACE;DESKTOPGL</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+     <PackageReference Include="MonoGame.Framework.DesktopGL.Core" Version="3.8.0.2">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+     <PackageReference Include="MonoGame.IMEHelper.Common" Version="0.9.0" />
+  </ItemGroup>
+
+</Project>

@@ -27,7 +27,7 @@
     <PackageReference Include="Microsoft.NETCore.Targets" Version="5.0.0" ExcludeAssets="all" PrivateAssets="all" />
     <PackageReference Include="MLEM.Data" Version="5.2.0" />
     <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.1.303" />
-    <PackageReference Include="MonoGame.IMEHelper.WindowsDX" Version="0.10.0" />
+    <PackageReference Include="MonoGame.IMEHelper.Common" Version="0.9.0"/>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 	<ItemGroup Condition="$(DefineConstants.Contains('LAWNMOD'))">
