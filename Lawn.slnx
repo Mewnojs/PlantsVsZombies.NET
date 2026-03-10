@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="IronPyInteractiveClient_WPF/IronPyInteractiveClient_WPF.csproj" />
+  <Project Path="IronPyInteractiveDef_Shared/IronPyInteractiveDef_Shared.shproj" />
+  <Project Path="LawnModExtension/LawnModExtension.shproj" />
+  <Project Path="Lawn_Android/Lawn_Android.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="Lawn_PCDX/Lawn_PCDX.csproj" />
+  <Project Path="Lawn_PCGL/Lawn_PCGL.csproj" />
+  <Project Path="Lawn_Shared/Lawn_Shared.shproj" />
+  <Project Path="MonoGame.Framework.Net/MonoGame.Framework.Net.shproj" />
+</Solution>
