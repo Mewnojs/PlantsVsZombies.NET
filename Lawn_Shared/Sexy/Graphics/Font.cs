@@ -83,7 +83,7 @@ namespace Sexy
         public int GetDescent()
         {
             int num = GetHeight();
-            return num + mAscent;
+            return num - mAscent;
         }
 
         public int GetHeight()

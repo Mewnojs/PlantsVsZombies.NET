@@ -164,13 +164,13 @@ namespace Sexy
 
         public int GetDescent()
         {
-            int num = -1 * mHeight;//GetHeight();
-            return num + mAscent;
+            int num = mHeight;//GetHeight();
+            return num - mAscent;
         }
 
         public int GetHeight()
         {
-            return -1 * mHeight - GetDescent();//(int)this.mFonts[0].FontSize;//StringHeight("1");
+            return mHeight;//(int)this.mFonts[0].FontSize;//StringHeight("1");
         }
 
         public int GetLineSpacingOffset()
@@ -345,16 +345,18 @@ namespace Sexy
                 FontSystemEffect effect = mEffects?.Item1 ?? FontSystemEffect.None;
                 int effectAmount = mEffects?.Item2 ?? 0;
                 Vector2 position = value2;
-                //position.Y -= fontbase.MeasureString(theString).Y;
-                //position.Y += fontbase.LineHeight / 6f;
-                //position.Y -= GetDescent();
                 if (effect == FontSystemEffect.Stroked) 
                 {
                     position.Y -= effectAmount;
                     position.X -= effectAmount;
                 }
-                position.Y -= GetDescent();
+                if (AtlasResources.IMAGE_BLANK != null) {
+                Graphics.spriteBatch.Draw(AtlasResources.IMAGE_BLANK, new Rectangle((int)position.X, (int)position.Y, 100, 2), Color.Aqua);
+                position.Y -= mAscent;
                 fontbase.DrawText(Graphics.spriteBatch, theString, position, theColor, 0f, Vector2.Zero, scale, effect: effect, layerDepth: 1f - layer / (float)mFonts.Count, effectAmount: effectAmount);
+                Graphics.spriteBatch.Draw(AtlasResources.IMAGE_BLANK, new Rectangle((int)position.X, (int)position.Y, 100, 2),
+            Color.Chocolate);
+                    }
             }
             /*else if (mFonts[layer] is SpriteFont font)
             {
@@ -417,7 +419,7 @@ namespace Sexy
                             position.Y -= effectAmount;
                             position.X -= effectAmount;
                         }
-                        position.Y -= GetDescent();
+                        position.Y -= mAscent;
                         fontbase.DrawText(Graphics.spriteBatch, theString, position, theColor, 0f, Vector2.Zero, scale, effect: effect, layerDepth: 1f - i / (float)mFonts.Count, effectAmount: effectAmount);
                     }
                     /*else if (mFonts[i] is SpriteFont font)

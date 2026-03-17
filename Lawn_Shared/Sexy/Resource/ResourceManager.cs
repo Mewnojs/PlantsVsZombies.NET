@@ -1497,6 +1497,12 @@ namespace Sexy
             return true;
         }
 
+        static class FontSystemAccessors
+        {
+            [System.Runtime.CompilerServices.UnsafeAccessor(System.Runtime.CompilerServices.UnsafeAccessorKind.Method, Name = "get_FontSources")]
+            public extern static List<FontStashSharp.Interfaces.IFontSource> FontSources(FontSystem obj);
+        }
+
         private bool DoLoadFont(FontRes fontRes)
         {
             XNAFont font = new XNAFont();
@@ -1526,8 +1532,13 @@ namespace Sexy
                 fontRes.mFont = ttfont;
                 //if (fontbase1 is DynamicSpriteFont dynfont1) 
                 {
-                    ttfont.mHeight = -(int)(fontbase1.MeasureString("ABCD").Y);
-                    ttfont.mAscent = -(int)(fontRes.mSize * 4 / 3f);
+                    var fl = FontSystemAccessors.FontSources(fontbase1.FontSystem);
+                    fl[0].GetMetricsForSize(fontRes.mSize * 4 / 3f, out var ascent, out var _, out var lineHeight);
+
+                    ttfont.mAscent = ascent;
+                    ttfont.mHeight = lineHeight;
+                    //ttfont.mHeight = -(int)(fontbase1.MeasureString("ABCD").Y);
+                    //ttfont.mAscent = -(int)(fontRes.mSize * 4 / 3f);
                     if (fontRes.mStroke > 0)
                         ttfont.mEffects = new Tuple<FontSystemEffect, int>(FontSystemEffect.Stroked, fontRes.mStroke);
                 }
@@ -1609,12 +1620,12 @@ namespace Sexy
                         if (xmlReader.Name == "Ascent")
                         {
                             xmlReader.Read();
-                            font.mAscent = -1 * Convert.ToInt32(xmlReader.Value);
+                            font.mAscent = 1 * Convert.ToInt32(xmlReader.Value);
                         }
                         if (xmlReader.Name == "Height")
                         {
                             xmlReader.Read();
-                            font.mHeight = -1 * Convert.ToInt32(xmlReader.Value);
+                            font.mHeight = 1 * Convert.ToInt32(xmlReader.Value);
                         }
                         if (xmlReader.Name == "SpaceChar")
                         {
